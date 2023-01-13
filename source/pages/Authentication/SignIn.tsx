@@ -17,7 +17,7 @@ const CoverSignIn = () => {
                             <Col lg={12}>
                                 <Card className="overflow-hidden">
                                     <Row className="g-0">
-                                        <AuthSlider />
+                                        <AuthSlider bg='auth-bg-image-3' />
 
                                         <Col lg={6}>
                                             <div className="p-lg-5 p-4">

@@ -126,7 +126,7 @@ const CoverSignUp = () => {
                                                 </div>
 
                                                 <div className="mt-5 text-center">
-                                                    <p className="mb-0">Você já tem uma conta ? <Link href="/auth-signin-cover" className="fw-semibold text-primary text-decoration-underline"> Signin</Link> </p>
+                                                    <p className="mb-0">Você já tem uma conta ? <Link href="/sign-in" className="fw-semibold text-primary text-decoration-underline"> Signin</Link> </p>
                                                 </div>
                                             </div>
                                         </Col>

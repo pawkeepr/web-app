@@ -1,6 +1,13 @@
-import React from 'react';
+'use client'
 
-const ParticlesAuth = ({ children }) => {
+import React from 'react';
+import FooterAuth from '~/Components/organism/footer-auth';
+
+type ParticlesAuthProps = {
+    children: React.ReactNode;
+}
+
+const ParticlesAuth = ({ children }: ParticlesAuthProps) => {
     return (
         <React.Fragment>
             <div className="auth-page-wrapper pt-5">
@@ -18,17 +25,7 @@ const ParticlesAuth = ({ children }) => {
                 {/* pass the children */}
                 {children}
 
-                <footer className="footer">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <div className="text-center">
-                                    <p className="mb-0 text-muted">&copy; {new Date().getFullYear()} Velzon. Crafted with <i className="mdi mdi-heart text-danger"></i> by Themesbrand</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
+                <FooterAuth />
             </div>
         </React.Fragment>
     );

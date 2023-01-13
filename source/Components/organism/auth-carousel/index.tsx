@@ -9,7 +9,7 @@ import Image from "next/image";
 import logoLight from "~/assets/images/logo-light.png";
 
 type AuthSliderProps = {
-    bg?: 'auth-bg-image' | 'auth-bg-image-2';
+    bg?: 'auth-bg-image' | 'auth-bg-image-2' | 'auth-bg-image-3';
 };
 
 const AuthSlider = ({ bg = 'auth-bg-image' }: AuthSliderProps) => {
