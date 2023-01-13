@@ -1,6 +1,6 @@
 'use client'
 
-import LoginPage from '~/pages/Authentication/Login'
+import LoginPage from '~/pages/Authentication/SingIn'
 
 const LoginPageNext = () => {
     return (

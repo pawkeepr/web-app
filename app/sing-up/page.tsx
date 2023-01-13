@@ -1,6 +1,5 @@
-import React from 'react'
 
-import SingUpPage from '~/pages/Authentication/Register'
+import SingUpPage from '~/pages/Authentication/SingUp'
 
 const SingUpPageNext = () => {
     return (

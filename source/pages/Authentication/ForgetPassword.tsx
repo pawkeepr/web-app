@@ -17,6 +17,7 @@ import { userForgetPassword } from "~/store/actions";
 
 // import images
 // import profile from "../../assets/images/bg.png";
+import Image from "next/image";
 import logoLight from "~/assets/images/logo-light.png";
 import ParticlesAuth from "../AuthenticationInner/ParticlesAuth";
 
@@ -53,7 +54,7 @@ const ForgetPasswordPage = (props: { history: any; }) => {
               <div className="text-center mt-sm-5 mb-4 text-white-50">
                 <div>
                   <Link href="/" className="d-inline-block auth-logo">
-                    <img src={logoLight} alt="" height="20" />
+                    <Image src={logoLight} alt="" height="20" />
                   </Link>
                 </div>
                 <p className="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>

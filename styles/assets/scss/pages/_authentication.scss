@@ -3,50 +3,60 @@
 //
 
 
-.auth-page-wrapper{
-    .auth-page-content{
+.auth-page-wrapper {
+    .auth-page-content {
         padding-bottom: $footer-height;
         position: relative;
         z-index: 2;
         width: 100%;
     }
-    .footer{
+
+    .footer {
         left: 0;
         background-color: transparent;
         color: var(--#{$prefix}body-color);
     }
 }
 
-.auth-one-bg-position{
+.auth-one-bg-position {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     width: 100%;
     height: 380px;
-    
+
     @media (max-width: 575.98px) {
         height: 280px;
     }
 }
 
-.auth-one-bg{
-    background-image: url("../../images/auth-one-bg.jpg");
+.auth-bg-image {
+    background-image: url("../../images/auth-bg.webp") !important;
+}
+
+.auth-bg-image-2 {
+    background-image: url("../../images/bg-auth.webp") !important;
+}
+
+.auth-one-bg {
+    background-image: url("../../images/auth-bg.webp");
     background-position: center;
     background-size: cover;
 
-    .bg-overlay{
+    .bg-overlay {
         background: linear-gradient(to right, darken($primary, 6%), $primary);
-        opacity: 0.9;
+        opacity: 0.5;
     }
 
-    .shape{
+    .shape {
         position: absolute;
         bottom: 0;
         right: 0;
         left: 0;
         z-index: 1;
         pointer-events: none;
+
         >svg {
             width: 100%;
             height: auto;
@@ -57,23 +67,24 @@
 
 // auth-pass-inputgroup
 
-.auth-pass-inputgroup{
-    input[type="text"] + .btn .ri-eye-fill{
-        &:before{
+.auth-pass-inputgroup {
+    input[type="text"]+.btn .ri-eye-fill {
+        &:before {
             content: "\ecb6";
         }
     }
 }
 
-.particles-js-canvas-el{
+.particles-js-canvas-el {
     position: relative;
 }
 
 // signin card title
 
-.signin-other-title{
+.signin-other-title {
     position: relative;
-    &:after{
+
+    &:after {
         content: "";
         position: absolute;
         width: 100%;
@@ -84,7 +95,7 @@
         top: 10px;
     }
 
-    .title{
+    .title {
         display: inline-block;
         position: relative;
         z-index: 9;
@@ -95,10 +106,10 @@
 
 // Auth cover
 
-.auth-bg-cover{
+.auth-bg-cover {
     background: $auth-bg-cover;
 
-    > .bg-overlay{
+    >.bg-overlay {
         background-image: url("../../images/cover-pattern.png");
         background-position: center;
         background-size: cover;
@@ -106,7 +117,7 @@
         background-color: transparent;
     }
 
-    .footer{
+    .footer {
         color: rgba($white, .5);
     }
 }
