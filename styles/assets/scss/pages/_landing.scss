@@ -4,7 +4,7 @@
 
 .layout-wrapper {
     &.landing {
-        background-color: var(--#{$prefix}card-bg-custom);
+        background-color: var(--#{$prefix}--#{$prefix}card-bg-custom);
         font-size: 15px;
     }
 }
@@ -40,10 +40,15 @@
 .navbar-landing {
     padding: 10px 0px;
     transition: all 0.5s ease;
+
     @media (max-width: 991.98px) {
         background-color: var(--#{$prefix}card-bg-custom);
         box-shadow: 0 1px 16px -2px rgba(56, 65, 74, 0.15);
         padding: 10px 8px;
+    }
+
+    &:hover {
+        background-color: rgba($dark, 0.05);
     }
 
     .navbar-nav {
@@ -63,12 +68,13 @@
                 &:hover,
                 &.active,
                 &:focus {
-                    color: $success !important;
+                    color: $secondary !important;
                 }
             }
+
             &.active {
                 .nav-link {
-                    color: $success !important;
+                    color: $secondary !important;
                 }
             }
         }
@@ -78,19 +84,22 @@
         background-color: var(--#{$prefix}card-bg-custom);
         box-shadow: 0 1px 16px -2px rgba(56, 65, 74, 0.15);
     }
+
+
 }
 
 //navbar-light
-.navbar-light{
+.navbar-light {
     .navbar-brand {
         .card-logo-dark {
             display: none;
         }
-    
+
         .card-logo-light {
             display: block;
         }
     }
+
     .navbar-nav {
         .nav-item {
             .nav-link {
@@ -98,6 +107,7 @@
             }
         }
     }
+
     &.is-sticky {
         .navbar-nav {
             .nav-item {
@@ -106,11 +116,12 @@
                 }
             }
         }
+
         .navbar-brand {
             .card-logo-dark {
                 display: block;
             }
-        
+
             .card-logo-light {
                 display: none;
             }
@@ -250,13 +261,13 @@
     }
 
     //navbar-light
-    .navbar-light{
-        &.is-sticky { 
+    .navbar-light {
+        &.is-sticky {
             .navbar-brand {
                 .card-logo-dark {
                     display: none;
                 }
-        
+
                 .card-logo-light {
                     display: block;
                 }

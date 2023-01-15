@@ -1,17 +1,18 @@
 'use client'
 
 import React, { useEffect } from 'react';
-import CTA from './CTA';
-import Connect from './Connect';
-import Home from "./Home";
-import Products from "./Products";
+import NavbarLanding from '~/Components/molecules/nav-bar-landing';
+import Contact from './contact';
 import FAQ from "./faq";
-import Features from './features';
 import Footer from "./footer";
-import Navbar from "./navbar";
+import Home from "./home";
+import Plans from './plans';
+import Reviews from './reviews';
 import Teams from "./team";
+import WorkProcess from './workProcess';
 
-const HomePage = () => {
+
+const LandingPage = () => {
 
     useEffect(() => {
         window.onscroll = function () {
@@ -38,16 +39,16 @@ const HomePage = () => {
     return (
         <React.Fragment>
             <div className="layout-wrapper landing">
-                <Navbar />
+                <NavbarLanding />
                 <Home />
-                <Connect />
-                <Products />
-                <Features />
-                <CTA />
+                <WorkProcess />
+                <Plans />
+                <Reviews />
                 <Teams />
                 <FAQ />
+                <Contact />
                 <Footer />
-                <button onClick={() => toTop()} className="btn btn-danger btn-icon landing-back-top" id="back-to-top">
+                <button onClick={() => toTop()} className="btn btn-secondary btn-icon landing-back-top" id="back-to-top">
                     <i className="ri-arrow-up-line"></i>
                 </button>
             </div>
@@ -55,4 +56,4 @@ const HomePage = () => {
     );
 };
 
-export default HomePage;
+export default LandingPage;

@@ -4,7 +4,7 @@ import { Col, Container, Form, Row } from 'reactstrap';
 const Contact = () => {
     return (
         <React.Fragment>
-            <section className="section" id="contact">
+            <section className="section bg-primary" id="contact">
                 <Container>
                     <Row className="justify-content-center">
                         <Col lg={8}>

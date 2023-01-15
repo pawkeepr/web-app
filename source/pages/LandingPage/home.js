@@ -12,8 +12,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 
 // Import Images
-import imgpattern from "~/assets/images/landing/img-pattern.png";
+import imgPattern from "~/assets/images/landing/img-pattern.png";
 
+import Image from 'next/image';
 import creativeDemo from "~/assets/images/demos/creative.png";
 import defaultDemo from "~/assets/images/demos/default.png";
 import interactiveDemo from "~/assets/images/demos/interactive.png";
@@ -26,28 +27,28 @@ import saasDemo from "~/assets/images/demos/saas.png";
 const Home = () => {
     return (
         <React.Fragment>
-            <section className="section pb-0 hero-section" id="hero">
+            <section className="section pb-0 hero-section bg-primary" id="hero">
                 <div className="bg-overlay bg-overlay-pattern"></div>
                 <Container>
                     <Row className="justify-content-center">
                         <Col lg={8} sm={10}>
                             <div className="text-center mt-lg-5 pt-5">
-                                <h1 className="display-6 fw-bold mb-3 lh-base">The better way to manage your website with <span
-                                    className="text-success">Velzon </span></h1>
-                                <p className="lead text-muted lh-base">Velzon is a fully responsive, multipurpose and premium Bootstrap 5 Admin & Dashboard Template built in multiple frameworks.</p>
+                                <h3 className="display-10 fw-bold mb-3 lh-base">A melhor maneira de gerenciar sua Clinica Veterinária</h3>
+                                <h1 className="display-6 fw-bold mb-3 lh-base text-secondary">PawKeepr</h1>
+                                <p className="lead text-muted lh-base">Lorem Ipsum</p>
 
                                 <div className="d-flex gap-2 justify-content-center mt-4">
-                                    <Link href="/register" className="btn btn-primary">Get Started <i className="ri-arrow-right-line align-middle ms-1"></i></Link>
-                                    <Link href="/pages-pricing" className="btn btn-danger">View Plans <i className="ri-eye-line align-middle ms-1"></i></Link>
+                                    <Link href="/register" className="btn btn-primary">Entrar <i className="ri-arrow-right-line align-middle ms-1"></i></Link>
+                                    <Link href="/pages-pricing" className="btn btn-danger">Ver Planos <i className="ri-eye-line align-middle ms-1"></i></Link>
                                 </div>
                             </div>
 
                             <div className='mt-4 mt-sm-5 pt-sm-5 mb-sm-n5 demo-carousel'>
                                 <div className="demo-img-patten-top d-none d-sm-block">
-                                    <img src={imgpattern} className="d-block img-fluid" alt="..." />
+                                    <Image src={imgPattern} className="d-block img-fluid" alt="..." />
                                 </div>
                                 <div className="demo-img-patten-bottom d-none d-sm-block">
-                                    <img src={imgpattern} className="d-block img-fluid" alt="..." />
+                                    <Image src={imgPattern} className="d-block img-fluid" alt="..." />
                                 </div>
                                 <Swiper
                                     spaceBetween={30}
@@ -61,25 +62,25 @@ const Home = () => {
                                     className="mySwiper" >
 
                                     <SwiperSlide className="carousel-inner shadow-lg p-2 bg-white rounded">
-                                        <img src={defaultDemo} className="d-block w-100" alt="..." />
+                                        <Image src={defaultDemo} className="d-block w-100" alt="..." />
                                     </SwiperSlide>
                                     <SwiperSlide className="carousel-inner shadow-lg p-2 bg-white rounded">
-                                        <img src={saasDemo} className="d-block w-100" alt="..." />
+                                        <Image src={saasDemo} className="d-block w-100" alt="..." />
                                     </SwiperSlide>
                                     <SwiperSlide className="carousel-inner shadow-lg p-2 bg-white rounded">
-                                        <img src={materialDemo} className="d-block w-100" alt="..." />
+                                        <Image src={materialDemo} className="d-block w-100" alt="..." />
                                     </SwiperSlide>
                                     <SwiperSlide className="carousel-inner shadow-lg p-2 bg-white rounded">
-                                        <img src={minimalDemo} className="d-block w-100" alt="..." />
+                                        <Image src={minimalDemo} className="d-block w-100" alt="..." />
                                     </SwiperSlide>
                                     <SwiperSlide className="carousel-inner shadow-lg p-2 bg-white rounded">
-                                        <img src={creativeDemo} className="d-block w-100" alt="..." />
+                                        <Image src={creativeDemo} className="d-block w-100" alt="..." />
                                     </SwiperSlide>
                                     <SwiperSlide className="carousel-inner shadow-lg p-2 bg-white rounded">
-                                        <img src={modernDemo} className="d-block w-100" alt="..." />
+                                        <Image src={modernDemo} className="d-block w-100" alt="..." />
                                     </SwiperSlide>
                                     <SwiperSlide className="carousel-inner shadow-lg p-2 bg-white rounded">
-                                        <img src={interactiveDemo} className="d-block w-100" alt="..." />
+                                        <Image src={interactiveDemo} className="d-block w-100" alt="..." />
                                     </SwiperSlide>
                                 </Swiper>
                             </div>

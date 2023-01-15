@@ -1,5 +1,5 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 
 const Plans = () => {
@@ -129,7 +129,7 @@ const Plans = () => {
                                             </li>
                                         </ul>
                                         <div className="mt-4">
-                                            <Link to="#" className="btn btn-soft-success w-100">Get
+                                            <Link href="#" className="btn btn-soft-success w-100">Get
                                                 Started</Link>
                                         </div>
                                     </div>
@@ -234,7 +234,7 @@ const Plans = () => {
                                             </li>
                                         </ul>
                                         <div className="mt-4">
-                                            <Link to="#" className="btn btn-soft-success w-100">Get
+                                            <Link href="#" className="btn btn-soft-success w-100">Get
                                                 Started</Link>
                                         </div>
                                     </div>
@@ -337,7 +337,7 @@ const Plans = () => {
                                             </li>
                                         </ul>
                                         <div className="mt-4">
-                                            <Link to="#" className="btn btn-soft-success w-100">Get
+                                            <Link href="#" className="btn btn-soft-success w-100">Get
                                                 Started</Link>
                                         </div>
                                     </div>

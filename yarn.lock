@@ -463,6 +463,13 @@
     hoist-non-react-statics "^3.3.0"
     redux "^4.0.0"
 
+"@types/react-scrollspy@^3.3.5":
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/@types/react-scrollspy/-/react-scrollspy-3.3.5.tgz#1fd8817fbc4d616a9df90bc71f0736d0910dfcc0"
+  integrity sha512-cC08B1cRyWA7FLyTTE1AtKwYIjvbRsGtxWaOoppMoEidusKR1TFlZXCwnSCQF1m0oxYNeeNqr3jxF0tU2PU2Ug==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@18.0.25":
   version "18.0.25"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.25.tgz#8b1dcd7e56fe7315535a4af25435e0bb55c8ae44"
