@@ -221,6 +221,7 @@ $colors: (
 // scss-docs-start theme-color-variables
 $primary: $munsell-green;
 $secondary: $orange-yellow;
+$third: $gray-600;
 $success: $green;
 $info: $cyan;
 $warning: $yellow;
@@ -233,6 +234,7 @@ $dark: $black;
 $theme-colors: (
   "primary": $primary,
   "secondary": $secondary,
+  "third": $third,
   "success": $success,
   "info": $info,
   "warning": $warning,
@@ -325,15 +327,15 @@ $yellow-700: shade-color($yellow, 40%);
 $yellow-800: shade-color($yellow, 60%);
 $yellow-900: shade-color($yellow, 80%);
 
-$green-100: tint-color($green, 80%);
-$green-200: tint-color($green, 60%);
-$green-300: tint-color($green, 40%);
-$green-400: tint-color($green, 20%);
+$green-100: tint-color($munsell-green, 80%);
+$green-200: tint-color($munsell-green, 60%);
+$green-300: tint-color($munsell-green, 40%);
+$green-400: tint-color($munsell-green, 20%);
 $green-500: $green;
-$green-600: shade-color($green, 20%);
-$green-700: shade-color($green, 40%);
-$green-800: shade-color($green, 60%);
-$green-900: shade-color($green, 80%);
+$green-600: shade-color($munsell-green, 20%);
+$green-700: shade-color($munsell-green, 40%);
+$green-800: shade-color($munsell-green, 60%);
+$green-900: shade-color($munsell-green, 80%);
 
 $teal-100: tint-color($teal, 80%);
 $teal-200: tint-color($teal, 60%);
@@ -354,6 +356,17 @@ $cyan-600: shade-color($cyan, 20%);
 $cyan-700: shade-color($cyan, 40%);
 $cyan-800: shade-color($cyan, 60%);
 $cyan-900: shade-color($cyan, 80%);
+
+$orange-yellow-100: tint-color($orange-yellow, 80%);
+$orange-yellow-200: tint-color($orange-yellow, 60%);
+$orange-yellow-300: tint-color($orange-yellow, 40%);
+$orange-yellow-400: tint-color($orange-yellow, 20%);
+$orange-yellow-500: $orange-yellow;
+$orange-yellow-600: shade-color($orange-yellow, 20%);
+$orange-yellow-700: shade-color($orange-yellow, 40%);
+$orange-yellow-800: shade-color($orange-yellow, 60%);
+$orange-yellow-900: shade-color($orange-yellow, 80%);
+
 $blues: (
   "blue-100": $blue-100,
   "blue-200": $blue-200,
@@ -473,6 +486,19 @@ $cyans: (
   "cyan-800": $cyan-800,
   "cyan-900": $cyan-900
 );
+
+$orange-yellow: (
+  "orange-yellow-100": $orange-yellow-100,
+  "orange-yellow-200": $orange-yellow-200,
+  "orange-yellow-300": $orange-yellow-300,
+  "orange-yellow-400": $orange-yellow-400,
+  "orange-yellow-500": $orange-yellow-500,
+  "orange-yellow-600": $orange-yellow-600,
+  "orange-yellow-700": $orange-yellow-700,
+  "orange-yellow-800": $orange-yellow-800,
+  "orange-yellow-900": $orange-yellow-900
+);
+
 // fusv-enable
 
 // Characters which are escaped by the escape-svg function

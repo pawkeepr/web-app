@@ -2,10 +2,9 @@ import { all, fork } from "redux-saga/effects";
 //layout
 import LayoutSaga from "./layouts/saga";
 //Auth
-import AccountSaga from "./auth/register/saga";
-import AuthSaga from "./auth/login/saga";
 import ForgetSaga from "./auth/forgetpwd/saga";
 import ProfileSaga from "./auth/profile/saga";
+import AccountSaga from "./auth/register/saga";
 
 //calendar
 import calendarSaga from "./calendar/saga";
@@ -55,14 +54,13 @@ import teamSaga from "./team/saga";
 import fileManager from "./fileManager/saga";
 
 // To do
-import todos from "./todos/saga"
+import todos from "./todos/saga";
 
 export default function* rootSaga() {
   yield all([
     //public
     fork(LayoutSaga),
     fork(AccountSaga),
-    fork(AuthSaga),
     fork(ForgetSaga),
     fork(ProfileSaga),
     fork(chatSaga),

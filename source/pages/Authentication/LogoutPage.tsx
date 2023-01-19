@@ -1,12 +1,20 @@
 'use client';
 
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, Col, Container, Row } from 'reactstrap';
 
 import AuthSlider from '~/Components/organism/auth-carousel';
+import { logoutUser } from '~/store/auth/loginV2/slice';
+import { useAppDispatch } from '~/store/hooks';
 
 const LogoutPage = () => {
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(logoutUser());
+    }, [dispatch]);
+
     return (
         <React.Fragment>
             <div className="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center min-vh-100">

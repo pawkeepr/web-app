@@ -1,25 +1,25 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { setCookie, parseCookies } from 'nookies'
-import Router from 'next/router'
+import { useRouter } from 'next/navigation';
+import { parseCookies } from 'nookies';
+import { createContext, useContext, useEffect } from "react";
 
-import { api } from "../services/api";
 
-import cookies from '~/constants/cookies'
-
-type User = {
-    name: string;
-    email: string;
-    avatar_url: string;
-}
+import cookies from '~/constants/cookies';
+import LOADING from '~/constants/loading';
+import { LoginState, recover_user_by_token, sign_in_user } from '~/store/auth/loginV2/slice';
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
 
 type SignInData = {
-    email: string;
+    username: string;
     password: string;
 }
 
 type AuthContextType = {
     isAuthenticated: boolean;
-    user: User | null;
+    user: any;
+    password: string;
+    username: string;
+    visiblePassword: boolean;
+    isLoading: LOADING;
     signIn: (data: SignInData) => Promise<void>
 }
 
@@ -30,40 +30,49 @@ type AuthProviderProps = {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-    const [user, setUser] = useState<User | null>(null)
 
-    const isAuthenticated = !!user;
+    const dispatch = useAppDispatch()
+    const {
+        user,
+        isAuthenticated,
+        isLoading,
+        password,
+        username,
+        visiblePassword
+    } = useAppSelector(state => state.Login as LoginState)
+    const router = useRouter()
 
     useEffect(() => {
         const listAllCookies = parseCookies()
-        const token = listAllCookies[cookies.token]
-        if (token) {
-            // recoverUserInformation().then(response => {
-            //     setUser(response.user)
-            // })
+        const token = listAllCookies[cookies.token.name]
+
+        if (!token) {
+            router.prefetch('/sign-in')
+            return
         }
-    }, [])
 
-    async function signIn({ email, password }: SignInData) {
-        // const { token, user } = await signInRequest({
-        //     email,
-        //     password,
-        // })
-        const token = 'token'
-
-        setCookie(undefined, cookies.token, token, {
-            maxAge: 60 * 60 * 1, // 1 hour
+        dispatch(recover_user_by_token({ token })).then(() => {
+            router.prefetch('/dashboard')
         })
 
-        api.defaults.headers['Authorization'] = `Bearer ${token}`;
+    }, [dispatch, router])
 
-        setUser(user)
-
-        Router.push('/dashboard');
+    async function signIn({ username, password }: SignInData) {
+        dispatch(sign_in_user({ username, password })).then(() => {
+            router.push('/dashboard')
+        })
     }
 
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated, signIn }}>
+        <AuthContext.Provider value={{
+            user,
+            isAuthenticated,
+            signIn,
+            isLoading,
+            password,
+            username,
+            visiblePassword
+        }}>
             {children}
         </AuthContext.Provider>
     )

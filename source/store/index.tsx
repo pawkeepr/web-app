@@ -8,13 +8,13 @@ import rootReducer from "./reducers";
 
 import rootSaga from "./sagas";
 
-export const configureDefaultStore = (initialState = {}) => {
+const configureDefaultStore = (initialState = {}) => {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [sagaMiddleware];
 
   const store = configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ thunk: false }).concat(middlewares),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares),
     preloadedState: initialState,
     devTools: process.env.NODE_ENV !== 'production',
   })
@@ -24,13 +24,15 @@ export const configureDefaultStore = (initialState = {}) => {
   return store;
 }
 
+const store = configureDefaultStore();
+
 type ProviderClientProps = {
   children: React.ReactNode
 }
 
 const ProviderClient = ({ children }: ProviderClientProps) => {
   return (
-    <Provider store={configureDefaultStore()}>
+    <Provider store={store}>
       {children}
     </Provider>
   );

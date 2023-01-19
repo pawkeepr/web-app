@@ -1,16 +1,25 @@
+require('dotenv').config()
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-  experimental: {
-    appDir: true
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
+const nextConfig = (phase) => {
+  const isProduction = phase === 'production'
+
+  const _currentURL = isProduction ? process.env.API_URL : 'http://localhost:8000/api/v1/'
+
+  return {
+
+    reactStrictMode: true,
+    swcMinify: true,
+    eslint: {
+      ignoreDuringBuilds: true,
+    },
+    typescript: {
+      ignoreBuildErrors: true,
+    },
+    env: {
+      API_URL: _currentURL,
+    },
   }
 }
 
-module.exports = nextConfig
+module.exports = nextConfig(process.env.NODE_ENV)

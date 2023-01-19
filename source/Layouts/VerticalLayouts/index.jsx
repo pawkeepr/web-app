@@ -1,9 +1,5 @@
-'use client'
-
-
-import { usePathname } from 'next/navigation';
-
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import PropTypes from "prop-types";
 import React, { useEffect } from 'react';
 import { Collapse } from 'reactstrap';
@@ -13,21 +9,13 @@ import navdata from "../LayoutMenuData";
 //i18n
 import { withTranslation } from "react-i18next";
 
-type VerticalLayoutProps = {
-    children: React.ReactNode,
-    location?: any,
-    layoutType?: string,
-    t?: any
-}
-
-const VerticalLayout = (props: VerticalLayoutProps) => {
+const VerticalLayout = (props) => {
     const navData = navdata().props.children;
-    const pathnameDefault = usePathname()
-
+    const pathnameNext = usePathname();
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         const initMenu = () => {
-            const pathName = process.env.PUBLIC_URL + (pathnameDefault as string);
+            const pathName = process.env.PUBLIC_URL + pathnameNext;
             const ul = document.getElementById("navbar-nav");
             const items = ul.getElementsByTagName("a");
             let itemsArray = [...items]; // converts NodeList to Array
@@ -42,7 +30,7 @@ const VerticalLayout = (props: VerticalLayoutProps) => {
         if (props.layoutType === "vertical") {
             initMenu();
         }
-    }, [pathnameDefault, props.layoutType]);
+    }, [pathnameNext, props.layoutType]);
 
     function activateParentDropdown(item) {
 
@@ -213,4 +201,4 @@ VerticalLayout.propTypes = {
     t: PropTypes.any,
 };
 
-export default withTranslation()(VerticalLayout);
+export default withTranslation()(VerticalLayout)

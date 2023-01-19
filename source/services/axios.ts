@@ -8,6 +8,8 @@ export function getAPIClient(ctx?: any) {
         baseURL: process.env.API_URL,
     })
 
+    api.defaults.headers['Content-Type'] = 'application/json';
+
     if (token) {
         api.defaults.headers['Authorization'] = `Bearer ${token}`;
     }

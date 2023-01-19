@@ -89,12 +89,12 @@ const NavbarLanding = () => {
                         </ScrollSpy>
 
                         <div className="">
-                            <Link href="/sing-in" className="btn btn-link text-dark">
+                            <Link href="/sign-in" className="btn btn-link text-dark">
                                 <span className="m-1 fw-semibold">Entrar</span>
                                 {/* icon de seta a direita circular na porta */}
                                 <i className="mdi mdi-arrow-right-circle"></i>
                             </Link>
-                            <Link href="/sing-up" className="btn btn-secondary text-dark ">
+                            <Link href="/sign-up" className="btn btn-secondary text-dark ">
                                 <span className="m-1 fw-semibold">Cadastre-se</span>
                                 {/* icon de cadastro */}
                                 <i className="mdi mdi-account-plus"></i>

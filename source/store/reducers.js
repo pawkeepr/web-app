@@ -5,7 +5,7 @@ import Layout from "./layouts/reducer";
 
 // Authentication
 import ForgetPassword from "./auth/forgetpwd/reducer";
-import Login from "./auth/login/reducer";
+import Login from "./auth/loginV2/slice";
 import Profile from "./auth/profile/reducer";
 import Account from "./auth/register/reducer";
 

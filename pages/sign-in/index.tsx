@@ -1,12 +1,14 @@
-import getServerSidePropsPagesPublics from '~/helpers/get-server-side-props-pages-publics'
-import LadingPage from '~/pages/LandingPage'
+'use client'
 
-const LadingPagePage = () => {
+import getServerSidePropsPagesPublics from '~/helpers/get-server-side-props-pages-publics'
+import SignInPage from '~/pages/Authentication/SignIn'
+
+const SignInPageNext = () => {
     return (
-        <LadingPage />
+        <SignInPage />
     )
 }
 
-export default LadingPagePage
+export default SignInPageNext
 
 export const getServerSideProps = getServerSidePropsPagesPublics
