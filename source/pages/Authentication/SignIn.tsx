@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent } from 'react';
 import { Button, Card, Col, Container, Input, Label, Row } from 'reactstrap';
 import AuthSlider from '~/Components/organism/auth-carousel';
 import FooterAuth from '~/Components/organism/footer-auth';
@@ -7,45 +7,37 @@ import FooterAuth from '~/Components/organism/footer-auth';
 import HeaderTitle from '~/Components/atoms/header-title';
 import LOADING from '~/constants/loading';
 import { useAuth } from '~/contexts/auth-context';
-import { onChangePassword, onChangeUsername, onToggleVisiblePassword } from '~/store/auth/loginV2/slice';
+import { onChangePassword, onChangeUsername } from '~/store/auth/loginV2/slice';
 import { useAppDispatch } from '~/store/hooks';
 
 const CoverSignIn = () => {
 
     const dispatch = useAppDispatch()
 
-    const [remember, setRemember] = useState(false);
-
     const {
         signIn,
         isLoading,
         password,
         username,
+        onToggleRememberMe,
+        onToggleVisiblePassword,
+        rememberMe,
         visiblePassword
     } = useAuth()
 
-
-
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        //const encryptVar = encrypt(password)
+        //console.log({ encryptVar, decrypt: decrypt(encryptVar) })
         signIn({
             username,
-            password
+            password,
         })
-    }
-
-    const toggleVisiblePassword = () => {
-        dispatch(onToggleVisiblePassword())
     }
 
     const extractTargetValue = (callback: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(callback(e.target.value))
     }
-
-    const toggleRemember = () => {
-        setRemember(!remember)
-    }
-
 
     const disabled = isLoading === LOADING.PENDING
 
@@ -105,7 +97,7 @@ const CoverSignIn = () => {
                                                                     className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
                                                                     type="button"
                                                                     id="password-addon"
-                                                                    onClick={toggleVisiblePassword}
+                                                                    onClick={onToggleVisiblePassword}
                                                                 >
                                                                     {
                                                                         visiblePassword ?
@@ -121,8 +113,8 @@ const CoverSignIn = () => {
                                                                 className="form-check-input"
                                                                 type="checkbox"
                                                                 value=""
-                                                                checked={remember}
-                                                                onChange={toggleRemember}
+                                                                checked={rememberMe}
+                                                                onChange={onToggleRememberMe}
                                                                 id="auth-remember-check"
                                                             />
                                                             <Label className="form-check-label" htmlFor="auth-remember-check">Lembrar-me</Label>

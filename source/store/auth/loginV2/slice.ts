@@ -14,6 +14,7 @@ import { LoginState, name } from './types';
 
 const initialState: LoginState = {
   isAuthenticated: false,
+  rememberMe: false,
   token: '',
   user: null,
   error: null,
@@ -35,6 +36,12 @@ const loginSlice = createSlice({
     },
     onToggleVisiblePassword: (state) => {
       state.visiblePassword = !state.visiblePassword;
+    },
+    onChangeRememberMe: (state) => {
+      state.rememberMe = !state.rememberMe;
+    },
+    onSetRememberMe: (state, action) => {
+      state.rememberMe = action.payload;
     },
     logoutUser: (state) => {
       destroyCookie(null, cookies.token.name);
@@ -62,7 +69,9 @@ export default loginSlice.reducer;
 export const {
   onToggleVisiblePassword,
   onChangePassword,
+  onChangeRememberMe,
   onChangeUsername,
+  onSetRememberMe,
   logoutUser,
 } = loginSlice.actions;
 

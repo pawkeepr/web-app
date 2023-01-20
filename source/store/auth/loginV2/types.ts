@@ -4,6 +4,7 @@ export const name = 'Auth/Login'
 
 export type LoginState = {
     isAuthenticated: boolean;
+    rememberMe: boolean;
     user: {
         id: number,
         username: string,
@@ -13,6 +14,8 @@ export type LoginState = {
         autenticado: boolean,
         ativo: boolean,
         data_cadastro: string,
+        nome?: string,
+        sobrenome?: string
     } | null;
     token: string;
     error?: string | null;
