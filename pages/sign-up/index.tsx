@@ -10,4 +10,4 @@ const SignUpPageNext = () => {
 
 export default SignUpPageNext
 
-export const getServerSideProps = getServerSidePropsPagesPublics
+export const getServerSideProps = getServerSidePropsPagesPublics()

@@ -4,16 +4,16 @@ import optionsCookies from "~/constants/cookies"
 import type { GetServerSideProps, GetServerSidePropsContext, PreviewData } from "next"
 import type { ParsedUrlQuery } from "querystring"
 
-const getServerSidePropsPagesPublics =
+const getServerSidePropsPagesPrivates =
     (callback?: GetServerSideProps) =>
         async (ctx: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
             const cookies = parseCookies(ctx)
             const token = cookies[optionsCookies.token.name]
 
-            if (token) {
+            if (!token) {
                 return {
                     redirect: {
-                        destination: '/dashboard',
+                        destination: '/sign-in',
                         permanent: false,
                     }
                 }
@@ -28,4 +28,4 @@ const getServerSidePropsPagesPublics =
             }
         }
 
-export default getServerSidePropsPagesPublics
+export default getServerSidePropsPagesPrivates

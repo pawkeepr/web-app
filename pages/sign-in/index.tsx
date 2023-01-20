@@ -11,4 +11,4 @@ const SignInPageNext = () => {
 
 export default SignInPageNext
 
-export const getServerSideProps = getServerSidePropsPagesPublics
+export const getServerSideProps = getServerSidePropsPagesPublics()
