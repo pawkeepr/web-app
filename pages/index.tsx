@@ -9,4 +9,4 @@ const LadingPagePage = () => {
 
 export default LadingPagePage
 
-export const getServerSideProps = getServerSidePropsPagesPublics
+export const getServerSideProps = getServerSidePropsPagesPublics()

@@ -10,4 +10,4 @@ const ForgetPasswordPageNext = () => {
 
 export default ForgetPasswordPageNext
 
-export const getServerSideProps = getServerSidePropsPagesPublics
+export const getServerSideProps = getServerSidePropsPagesPublics()

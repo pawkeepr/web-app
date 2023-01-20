@@ -3,6 +3,10 @@ const optionsCookies = {
         name: 'pawkeepr.token',
         expires: 60 * 60 * 1, // 1 hour
     },
+    remember: {
+        name: 'pawkeepr.remember',
+        expires: 60 * 60 * 24 * 30 * 12 * 10, // 10 years
+    }
 }
 
 export default optionsCookies

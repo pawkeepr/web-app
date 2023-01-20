@@ -19,7 +19,11 @@ export const recover_user_by_token = createAsyncThunk(
         const { data: user } = await getUser(token);
 
         return {
-            user,
+            user: {
+                ...user,
+                nome: 'Murilo',
+                sobrenome: 'Montino'
+            },
             access_token: token
         };
     }
@@ -36,7 +40,6 @@ export const BuilderRecoverUser = (builder: Builder) => {
         api.defaults.headers['Authorization'] = `Bearer ${action.payload.access_token}`;
         state.user = action.payload.user;
         state.isAuthenticated = true;
-        state.isUserLogout = false;
         state.error = null;
         state.isLoading = LOADING.SUCCESS;
     });

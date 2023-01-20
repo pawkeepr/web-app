@@ -1,9 +1,7 @@
 
 import DashboardPage from '~/pages/DashboardPage'
 
-import type { GetServerSideProps } from 'next'
-import { parseCookies } from 'nookies'
-import optionsCookies from '~/constants/cookies'
+import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
 
 const DashboardPageNext = () => {
     return (
@@ -13,21 +11,4 @@ const DashboardPageNext = () => {
 
 export default DashboardPageNext
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const cookies = parseCookies(ctx)
-    const token = cookies[optionsCookies.token.name]
-
-    if (!token) {
-        return {
-            redirect: {
-                destination: '/sign-in',
-                permanent: false,
-            }
-        }
-    }
-
-
-    return {
-        props: {}
-    }
-}
+export const getServerSideProps = getServerSidePropsPagesPrivates()
