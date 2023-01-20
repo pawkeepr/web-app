@@ -1,43 +1,19 @@
 import Link from 'next/link';
-import React, { FormEvent } from 'react';
-import { Button, Card, Col, Container, Input, Label, Row } from 'reactstrap';
+import React from 'react';
+import { Card, Col, Container, Row } from 'reactstrap';
 import AuthSlider from '~/Components/organism/auth-carousel';
 import FooterAuth from '~/Components/organism/footer-auth';
 
 import HeaderTitle from '~/Components/atoms/header-title';
 import LOADING from '~/constants/loading';
 import { useAuth } from '~/contexts/auth-context';
-import { onChangePassword, onChangeUsername } from '~/store/auth/loginV2/slice';
-import { useAppDispatch } from '~/store/hooks';
+import ColAuth from './components/organism/col-auth';
 
 const CoverSignIn = () => {
 
-    const dispatch = useAppDispatch()
-
     const {
-        signIn,
         isLoading,
-        password,
-        username,
-        onToggleRememberMe,
-        onToggleVisiblePassword,
-        rememberMe,
-        visiblePassword
     } = useAuth()
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        //const encryptVar = encrypt(password)
-        //console.log({ encryptVar, decrypt: decrypt(encryptVar) })
-        signIn({
-            username,
-            password,
-        })
-    }
-
-    const extractTargetValue = (callback: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(callback(e.target.value))
-    }
 
     const disabled = isLoading === LOADING.PENDING
 
@@ -61,81 +37,20 @@ const CoverSignIn = () => {
                                                     <h5 className="text-primary">Bem Vindo!</h5>
                                                     <p className="text-muted">Entre para ter acesso a todas as funcionalidades.</p>
                                                 </div>
+                                                <div className="mt-4" >
 
-                                                <div className="mt-4">
-                                                    <form onSubmit={handleSubmit} >
+                                                    {!disabled && <ColAuth />}
 
-                                                        <div className="mb-3">
-                                                            <Label htmlFor="username" className="form-label">Nome do Usuário:</Label>
-                                                            <Input
-                                                                type="text"
-                                                                className="form-control"
-                                                                id="username"
-                                                                placeholder="Digite seu nome de usuário"
-                                                                required
-                                                                value={username}
-                                                                onChange={extractTargetValue(onChangeUsername)}
-                                                            />
-                                                        </div>
-
-                                                        <div className="mb-3">
-                                                            <div className="float-end">
-                                                                <Link href="/forget-password" className="text-muted">Esqueceu a Senha?</Link>
-                                                            </div>
-                                                            <Label className="form-label" htmlFor="password-input">Senha</Label>
-                                                            <div className="position-relative auth-pass-inputgroup mb-3">
-                                                                <Input
-                                                                    type={visiblePassword ? "text" : "password"}
-                                                                    className="form-control pe-5 password-input"
-                                                                    placeholder="Digite sua senha"
-                                                                    id="password-input"
-                                                                    required
-                                                                    value={password}
-                                                                    onChange={extractTargetValue(onChangePassword)}
-                                                                />
-                                                                <button
-                                                                    className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
-                                                                    type="button"
-                                                                    id="password-addon"
-                                                                    onClick={onToggleVisiblePassword}
-                                                                >
-                                                                    {
-                                                                        visiblePassword ?
-                                                                            <i className="ri-eye-off-fill align-middle"></i> :
-                                                                            <i className="ri-eye-fill align-middle"></i>
-                                                                    }
-                                                                </button>
+                                                    {disabled && (
+                                                        <div className="d-flex justify-content-center">
+                                                            <div className="spinner-border text-primary" role="status" style={{
+                                                                width: '5rem',
+                                                                height: '5rem'
+                                                            }}>
+                                                                <span className="visually-hidden">Loading...</span>
                                                             </div>
                                                         </div>
-
-                                                        <div className="form-check">
-                                                            <Input
-                                                                className="form-check-input"
-                                                                type="checkbox"
-                                                                value=""
-                                                                checked={rememberMe}
-                                                                onChange={onToggleRememberMe}
-                                                                id="auth-remember-check"
-                                                            />
-                                                            <Label className="form-check-label" htmlFor="auth-remember-check">Lembrar-me</Label>
-                                                        </div>
-
-                                                        <div className="mt-4">
-                                                            <Button color="success" className="w-100" type="submit" disabled={disabled}>Entrar</Button>
-                                                        </div>
-
-                                                        <div className="mt-4 text-center">
-                                                            <div className="signin-other-title">
-                                                                <h5 className="fs-14 mb-4 title">Logar Com:</h5>
-                                                            </div>
-
-                                                            <div>
-                                                                {/* <Button color="primary" className="btn-icon me-1"><i className="ri-facebook-fill fs-16"></i></Button> */}
-                                                                <Button color="danger" className="btn-icon me-1"><i className="ri-google-fill fs-16"></i></Button>
-                                                            </div>
-                                                        </div>
-
-                                                    </form>
+                                                    )}
                                                 </div>
 
                                                 <div className="mt-5 text-center">
