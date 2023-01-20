@@ -18,6 +18,7 @@ const nextConfig = (phase) => {
     },
     env: {
       API_URL: _currentURL,
+      SECRET_KEY: process.env.SECRET_KEY
     },
   }
 }

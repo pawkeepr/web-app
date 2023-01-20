@@ -12,6 +12,7 @@
     "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.2.0",
     "bootstrap": "5.2.1",
+    "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "formik": "^2.2.9",
     "i18next": "^21.6.11",
@@ -41,6 +42,7 @@
   },
   "devDependencies": {
     "@types/cookie": "^0.5.1",
+    "@types/crypto-js": "^4.1.1",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
