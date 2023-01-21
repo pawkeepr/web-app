@@ -69,22 +69,19 @@ const NavbarLanding = () => {
                                 <a className="nav-link fs-15 fw-semibold text-secondary" href="#hero">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link fs-15 fw-semibold text-light" href="#services">Services</a>
+                                <a className="nav-link fs-15 fw-semibold text-light" href="#services">Serviços</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link fs-15 fw-semibold text-light" href="#features">Features</a>
+                                <a className="nav-link fs-15 fw-semibold text-light" href="#plans">Planos</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link fs-15 fw-semibold text-light" href="#plans">Plans</a>
+                                <a className="nav-link fs-15 fw-semibold text-light" href="#reviews">Clientes</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link fs-15 fw-semibold text-light" href="#reviews">Reviews</a>
+                                <a className="nav-link fs-15 fw-semibold text-light" href="#team">Equipe</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link fs-15 fw-semibold text-light" href="#team">Team</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link fs-15 fw-semibold text-light" href="#contact">Contact</a>
+                                <a className="nav-link fs-15 fw-semibold text-light" href="#contact">Contato</a>
                             </li>
                         </ScrollSpy>
 

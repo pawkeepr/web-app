@@ -12,10 +12,11 @@ const WorkProcess = () => {
                     <Row className="justify-content-center">
                         <Col lg={8}>
                             <div className="text-center mb-5">
-                                <h3 className="mb-3 fw-semibold">Our Work Process</h3>
-                                <p className="text-muted mb-4 ff-secondary">In an ideal world this website wouldn’t exist, a client would
-                                    acknowledge the importance of having web copy before the Proin vitae ipsum vel ex
-                                    finibus semper design starts.</p>
+                                <h3 className="mb-3 fw-semibold">Mais tranquilidade para você, mais saúde
+                                para o seu bichinho.</h3>
+                                <p className="text-muted mb-4 ff-secondary">PawKeepr te dá
+                                a tranquilidade de saber que todos os cuidados do seu amigo estão
+                                em dia.</p>
                             </div>
                         </Col>
                     </Row>

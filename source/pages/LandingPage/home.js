@@ -35,10 +35,12 @@ const Home = () => {
                             <div className="text-center mt-lg-5 pt-5">
                                 <h3 className="display-10 fw-bold mb-3 lh-base">A melhor maneira de gerenciar sua Clinica Veterinária</h3>
                                 <h1 className="display-6 fw-bold mb-3 lh-base text-secondary">PawKeepr</h1>
-                                <p className="lead text-muted lh-base">Lorem Ipsum</p>
+                                <h2 className="display-6 fw-bold mb-3 lh-base">Com PawKeepr você resolve
+                                    todas as necessidades do seu pet:
+                                    da higiene até a alimentação.</h2>
 
                                 <div className="d-flex gap-2 justify-content-center mt-4">
-                                    <Link href="/register" className="btn btn-primary">Entrar <i className="ri-arrow-right-line align-middle ms-1"></i></Link>
+                                    <Link href="/sign-in" className="btn btn-primary">Entrar <i className="ri-arrow-right-line align-middle ms-1"></i></Link>
                                     <Link href="/pages-pricing" className="btn btn-danger">Ver Planos <i className="ri-eye-line align-middle ms-1"></i></Link>
                                 </div>
                             </div>

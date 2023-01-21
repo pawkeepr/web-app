@@ -13,9 +13,12 @@ const Plans = () => {
                     <Row className="justify-content-center">
                         <Col lg={8}>
                             <div className="text-center mb-5">
-                                <h3 className="mb-3 fw-semibold">Choose the plan that's right for you</h3>
-                                <p className="text-muted mb-4">Simple pricing. No hidden fees. Advanced features for you
-                                    business.</p>
+                                <h3 className="mb-3 fw-semibold">
+                                Escolha o plano ideal para você
+                                </h3>
+                                <p className="text-muted mb-4">
+                                Preços simples. Sem taxas escondidas. Sempre pensando em você e no seu Pet.
+                                </p>
 
                                 <div className="d-flex justify-content-center align-items-center">
                                     <div>

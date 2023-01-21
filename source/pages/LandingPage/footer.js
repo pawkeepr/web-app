@@ -27,34 +27,30 @@ const Footer = () => {
                         <Col lg={7} className="ms-lg-auto">
                             <Row>
                                 <Col sm={4} className="mt-4">
-                                    <h5 className="text-white mb-0">Company</h5>
+                                    <h5 className="text-white mb-0">Institucional</h5>
                                     <div className="text-muted mt-3">
                                         <ul className="list-unstyled ff-secondary footer-list fs-15">
-                                            <li><Link href="/pages-profile">About Us</Link></li>
-                                            <li><Link href="/pages-gallery">Gallery</Link></li>
-                                            <li><Link href="/apps-projects-overview">Projects</Link></li>
-                                            <li><Link href="/pages-timeline">Timeline</Link></li>
+                                            <li><Link href="/pages-profile">Sobre a PawKeepr</Link></li>
+                                            <li><Link href="/pages-gallery">Equipe</Link></li>
+                                            <li><Link href="/apps-projects-overview">Clientes</Link></li>
                                         </ul>
                                     </div>
                                 </Col>
                                 <Col sm={4} className="mt-4">
-                                    <h5 className="text-white mb-0">Apps Pages</h5>
+                                    <h5 className="text-white mb-0">Páginas</h5>
                                     <div className="text-muted mt-3">
                                         <ul className="list-unstyled ff-secondary footer-list fs-15">
                                             <li><Link href="/pages-pricing">Calendar</Link></li>
                                             <li><Link href="/apps-mailbox">Mailbox</Link></li>
                                             <li><Link href="/apps-chat">Chat</Link></li>
-                                            <li><Link href="/apps-crm-deals">Deals</Link></li>
-                                            <li><Link href="#">Kanban Board</Link></li>
                                         </ul>
                                     </div>
                                 </Col>
                                 <Col sm={4} className="mt-4">
-                                    <h5 className="text-white mb-0">Support</h5>
+                                    <h5 className="text-white mb-0">Atendimento</h5>
                                     <div className="text-muted mt-3">
                                         <ul className="list-unstyled ff-secondary footer-list fs-15">
-                                            <li><Link href="/pages-faqs">FAQ</Link></li>
-                                            <li><Link href="/pages-faqs">Contact</Link></li>
+                                            <li><Link href="/pages-faqs">Contato</Link></li>
                                         </ul>
                                     </div>
                                 </Col>
@@ -68,7 +64,7 @@ const Footer = () => {
 
                             <div>
                                 <p className="copy-rights mb-0">
-                                    {new Date().getFullYear()} © Velzon - Themesbrand
+                                    {new Date().getFullYear()} © PawKeepr - Todos os direitos reservados.
                                 </p>
                             </div>
                         </Col>
@@ -100,13 +96,6 @@ const Footer = () => {
                                         <Link href="#" className="avatar-xs d-block">
                                             <div className="avatar-title rounded-circle">
                                                 <i className="ri-google-fill"></i>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <Link href="#" className="avatar-xs d-block">
-                                            <div className="avatar-title rounded-circle">
-                                                <i className="ri-dribbble-line"></i>
                                             </div>
                                         </Link>
                                     </li>
