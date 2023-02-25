@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "target": "es2021",
+    "types": [
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ],
     "lib": [
       "dom",
       "dom.iterable",
