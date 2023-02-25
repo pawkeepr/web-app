@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2021",
     "lib": [
       "dom",
       "dom.iterable",
@@ -22,8 +22,8 @@
     "paths": {
       "~/*": [
         "source/*",
-        "app/*",
-        "styles/*"
+        "styles/*",
+        "pages/*",
       ]
     },
     "plugins": [
