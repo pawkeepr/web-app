@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FooterAuth > renders 1`] = `
+<body>
+  <div>
+    <footer
+      class="footer"
+    >
+      <div
+        class="container"
+      >
+        <div
+          class="row"
+        >
+          <div
+            class="col-lg-12"
+          >
+            <div
+              class="text-center"
+            >
+              <p
+                class="mb-0"
+              >
+                © 
+                2023
+                 PawKeeprs. 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+`;
