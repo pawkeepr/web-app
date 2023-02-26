@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "test": "cross-env NODE_ENV=test vitest --ui --watch --t Unit",
     "prepare": "husky install",
     "commit": "git-cz",
     "dev": "next dev",
@@ -62,6 +63,7 @@
     "@vitest/ui": "^0.29.1",
     "axios-mock-adapter": "^1.21.2",
     "commitizen": "^4.3.0",
+    "cross-env": "^7.0.3",
     "cz-emoji-conventional": "^1.0.1",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
