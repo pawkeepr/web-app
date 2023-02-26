@@ -18,6 +18,7 @@ export default defineConfig({
 		})
 	],
 	test: {
+		setupFiles: './setupTests.ts',
 		globals: true,
 		environment: 'jsdom',  // <==
 		coverage: {
