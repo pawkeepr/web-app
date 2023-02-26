@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`FooterAuth > should render snap footer auth (Unit) 1`] = `
+exports[`Test FooterAuth component > should render snap footer auth (Unit) 1`] = `
 <DocumentFragment>
   <footer
     class="footer"
