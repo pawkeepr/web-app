@@ -23,6 +23,8 @@ export default defineConfig({
 		environment: 'jsdom',  // <==
 		coverage: {
 			provider: 'istanbul', // or 'c8'
+			include: ['source/**/*.{ts,tsx}'],
+			all: true,
 		},
 		reporters: ['html', 'default'],
 		testTimeout: 5000000,

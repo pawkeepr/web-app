@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "test": "cross-env NODE_ENV=test vitest --ui --watch --t Unit",
+    "coverage": "vitest run --coverage",
     "prepare": "husky install",
     "commit": "git-cz",
     "dev": "next dev",
