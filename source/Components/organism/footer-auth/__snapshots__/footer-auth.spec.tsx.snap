@@ -1,35 +1,31 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`FooterAuth > renders 1`] = `
-<body>
-  <div>
-    <footer
-      class="footer"
+exports[`FooterAuth > should render snap footer auth (Unit) 1`] = `
+<DocumentFragment>
+  <footer
+    class="footer"
+  >
+    <div
+      class="container"
     >
       <div
-        class="container"
+        class="row"
       >
         <div
-          class="row"
+          class="col-lg-12"
         >
           <div
-            class="col-lg-12"
+            class="text-center"
           >
-            <div
-              class="text-center"
+            <p
+              class="mb-0"
             >
-              <p
-                class="mb-0"
-              >
-                © 
-                2023
-                 PawKeeprs. 
-              </p>
-            </div>
+              © 2023 PawKeeprs. 
+            </p>
           </div>
         </div>
       </div>
-    </footer>
-  </div>
-</body>
+    </div>
+  </footer>
+</DocumentFragment>
 `;
