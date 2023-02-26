@@ -32,9 +32,9 @@ const Home = () => {
                 <Container>
                     <Row className="justify-content-center">
                         <Col lg={8} sm={10}>
-                            <div className="text-center mt-lg-5 pt-5">
-                                <h3 className="display-10 fw-bold mb-3 lh-base">A melhor maneira de gerenciar sua Clinica Veterinária</h3>
-                                <h1 className="display-6 fw-bold mb-3 lh-base text-secondary">PawKeepr</h1>
+                            <div className="text-center mt-lg-5 pt-5">                                
+                                <h1 className="display-6 fw-bold mb-3 lh-base text-secondary">Pawkeepr: smartcare</h1>
+                                <h3 className="display-10 fw-bold mb-3 lh-base">Uma plataforma para facilitar os cuidados com seu pet.</h3>
                                 <h2 className="display-6 fw-bold mb-3 lh-base">Com PawKeepr você resolve
                                     todas as necessidades do seu pet:
                                     da higiene até a alimentação.</h2>

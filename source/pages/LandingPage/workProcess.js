@@ -34,8 +34,10 @@ const WorkProcess = () => {
                                     </div>
                                 </div>
 
-                                <h5>Tell us what you need</h5>
-                                <p className="text-muted ff-secondary">The profession and the employer and your desire to make your mark.</p>
+                                <h5>Gerenciamento do seu Pet</h5>
+                                <p className="text-muted ff-secondary">
+                                    Possibilitar a todos os donos de pets possuírem uma base de dados única sobre seus animais.
+                                </p>
                             </div>
                         </Col>
 
@@ -50,8 +52,12 @@ const WorkProcess = () => {
                                     </div>
                                 </div>
 
-                                <h5>Get free quotes</h5>
-                                <p className="text-muted ff-secondary">The most important aspect of beauty was, therefore, an inherent part.</p>
+                                <h5>Inteligência Artificial</h5>
+                                <p className="text-muted ff-secondary">
+                                    Com todas as informações em um mesmo lugar, 
+                                    a Inteligência artificial da plataforma poderá auxiliar os médicos
+                                    e donos de pets no cuidado dos seus pets.
+                                </p>
                             </div>
                         </Col>
 
@@ -63,8 +69,11 @@ const WorkProcess = () => {
                                     </div>
                                 </div>
 
-                                <h5>Deliver high quality product</h5>
-                                <p className="text-muted ff-secondary">We quickly learn to fear and thus automatically avoid potentially.</p>
+                                <h5>Pet Shop Delivery</h5>
+                                <p className="text-muted ff-secondary">
+                                    Os Pets shops poderão disponibilizar todos os seus produtos para venda 
+                                    via delivery.
+                                </p>
                             </div>
                         </Col>
 
