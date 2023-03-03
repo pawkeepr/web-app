@@ -24,6 +24,7 @@ export type InitialStateSignUp = {
     email: string,
     username: string,
     document: string,
+    termsOfUse: boolean,
 }
 
 
@@ -40,6 +41,7 @@ const validationSchema = Yup.object({
         .matches(RegExp('(.*[A-Z].*)'), 'É necessário pelo menos uma letra maiúscula')
         .matches(RegExp('(.*[0-9].*)'), 'É necessário pelo menos um número')
         .required("Este campo é obrigatório"),
+    termsOfUse: Yup.boolean().oneOf([true], 'Você deve aceitar os termos de uso'),
 })
 
 const CoverSignUp = () => {
@@ -55,6 +57,7 @@ const CoverSignUp = () => {
         email: "",
         username: "",
         document: "",
+        termsOfUse: false,
     };
 
     const Tabs = [
@@ -129,7 +132,7 @@ const CoverSignUp = () => {
                                                             ))
                                                         }
                                                         <div className="p-2 text-center">
-                                                            <p className="mb-0">Você já tem uma conta ? <Link href="/sign-in" className="fw-semibold text-primary text-decoration-underline"> Entrar!</Link> </p>
+                                                            <p className="list-group-item fs-12 mb-4">Você já tem uma conta ? <Link href="/sign-in" className="fw-semibold text-primary text-decoration-underline"> Entrar!</Link> </p>
                                                         </div>
                                                     </TabContainer>
                                                 </Form>
