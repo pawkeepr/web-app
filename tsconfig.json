@@ -3,7 +3,8 @@
     "target": "es2021",
     "types": [
       "vitest/globals",
-      "@testing-library/jest-dom"
+      "@testing-library/jest-dom",
+      "cypress"
     ],
     "lib": [
       "dom",
