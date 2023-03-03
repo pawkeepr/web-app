@@ -10,15 +10,15 @@ exports[`tsx-control-statements > should render Choose (Unit) 1`] = `
 
 exports[`tsx-control-statements > should render For (Unit) 1`] = `
 <DocumentFragment>
-  <div>
+  <li>
     1
-  </div>
-  <div>
+  </li>
+  <li>
     2
-  </div>
-  <div>
+  </li>
+  <li>
     3
-  </div>
+  </li>
 </DocumentFragment>
 `;
 
