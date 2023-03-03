@@ -1,22 +1,13 @@
 
-import { ErrorMessage } from 'formik';
-import Form from 'react-bootstrap/Form';
 
 type ErrMessageProps = {
-    name: string;
+    message: string;
 }
 
-const ErrMessage = ({ name }: ErrMessageProps) => {
-
-    const render = (msg: string) => {
-        return (
-            <Form.Control.Feedback type="invalid">{msg}</Form.Control.Feedback>
-        )
-    }
+const ErrMessage = ({ message }: ErrMessageProps) => {
 
     return (
-        <ErrorMessage name={name} render={render} />
-
+        <p className="font-bold text-danger fs-6 text-center">{message}</p>
     )
 }
 
