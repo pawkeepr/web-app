@@ -22,13 +22,15 @@
 > qual isso é útil é verificar se um elemento não é renderizado na
 > página.
 
-_Dica: só use query_ variantes para fazer asserções de quando um elemento não deve ser encontrado.*
 
-<p style="color: red; font-weight: bold; font-size: 10px; text-align: center;">
-Aviso: get_variantes lançam um erro, impedindo o teste, para verificar ausência de elementos sempre use query_ variantes.
-</p>
 
-</ hr >
+<div align="center" color="red">
+
+**_Dica: só use query_ variantes para fazer asserções de quando um elemento não deve ser encontrado.**
+   
+**Aviso: get_variantes lançam um erro, impedindo o teste, para verificar ausência de elementos sempre use query_ variantes.**
+   
+</div>
 
 ## Links
 
