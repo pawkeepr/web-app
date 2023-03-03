@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`tsx-control-statements > should render Choose (Unit) 1`] = `
+<DocumentFragment>
+  <div>
+    test
+  </div>
+</DocumentFragment>
+`;
+
+exports[`tsx-control-statements > should render For (Unit) 1`] = `
+<DocumentFragment>
+  <div>
+    1
+  </div>
+  <div>
+    2
+  </div>
+  <div>
+    3
+  </div>
+</DocumentFragment>
+`;
+
+exports[`tsx-control-statements > should render If (Unit) 1`] = `
+<DocumentFragment>
+  <div>
+    test
+  </div>
+</DocumentFragment>
+`;
