@@ -1,6 +1,6 @@
 
 import getServerSidePropsPagesPublics from '~/helpers/get-server-side-props-pages-publics'
-import SignUpPage from '~/pages/Authentication/sign-up'
+import SignUpPage from '~/pages/Authentication/SignUp'
 
 const SignUpPageNext = () => {
     return (

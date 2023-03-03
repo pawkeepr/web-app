@@ -1,26 +1,39 @@
 'use client'
 
 import React, { useState } from 'react';
-import { TabContent, TabPane } from 'reactstrap';
 
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-
+import TabContainer from 'react-bootstrap/TabContainer';
+import TabContent from 'react-bootstrap/TabContent';
+import TabPane from 'react-bootstrap/TabPane';
 //formik
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import Link from 'next/link';
 import * as Yup from 'yup';
 import HeaderTitle from '~/Components/atoms/header-title';
 import AuthSlider from '~/Components/organism/auth-carousel';
 import FooterAuth from '~/Components/organism/footer-auth';
-import StepSignUp01 from './steps/step-01';
-import StepSignUp02 from './steps/step-02';
-import { InitialStateSignUp } from './types';
+import StepSignUp01 from './components/organism/steps/step-01';
+import StepSignUp02 from './components/organism/steps/step-02';
+
+export type InitialStateSignUp = {
+    password: string,
+    email: string,
+    username: string,
+    document: string,
+}
 
 
 const validationSchema = Yup.object({
+    email: Yup.string()
+        .email("Digite um email válido")
+        .required("Este campo é obrigatório"),
+    username: Yup.string()
+        .min(3, 'O nome de usuário deve ter pelo menos 3 caracteres')
+        .required("Este campo é obrigatório"),
     password: Yup.string()
         .min(8, 'A senha deve ter pelo menos 8 caracteres')
         .matches(RegExp('(.*[a-z].*)'), 'É necessário pelo menos uma letra minúscula')
@@ -101,23 +114,25 @@ const CoverSignUp = () => {
                                         <Row className="justify-content-center g-0">
                                             <AuthSlider bg='auth-bg-image-2' />
                                             <Col lg={6}>
-                                                <form className="needs-validation" noValidate action="index">
-                                                    <TabContent activeTab={tab} className="text-muted">
+                                                <Form className="needs-validation" action="index">
+                                                    <TabContainer activeKey={tab}  >
                                                         {
                                                             Tabs.map((tab, index) => (
-                                                                <TabPane key={index} tabId={tab.id}>
-                                                                    {tab.component({
-                                                                        prevStep: onChangePrevStep,
-                                                                        nextStep: onChangeNextStep,
-                                                                    })}
-                                                                </TabPane>
+                                                                <TabContent key={index}>
+                                                                    <TabPane eventKey={tab.id}>
+                                                                        {tab.component({
+                                                                            prevStep: onChangePrevStep,
+                                                                            nextStep: onChangeNextStep,
+                                                                        })}
+                                                                    </TabPane>
+                                                                </TabContent>
                                                             ))
                                                         }
                                                         <div className="p-2 text-center">
                                                             <p className="mb-0">Você já tem uma conta ? <Link href="/sign-in" className="fw-semibold text-primary text-decoration-underline"> Entrar!</Link> </p>
                                                         </div>
-                                                    </TabContent>
-                                                </form>
+                                                    </TabContainer>
+                                                </Form>
                                             </Col>
                                         </Row>
                                     </Card>
