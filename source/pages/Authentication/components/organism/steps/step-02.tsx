@@ -1,4 +1,12 @@
 
+
+import type { InitialStateSignUp } from '../../../SignUp';
+
+import { useFormikContext } from 'formik';
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import FieldControl from '~/Components/molecules/field-control';
+
 type StepProps = {
     [key: string]: any;
     nextStep: () => void;
@@ -6,6 +14,9 @@ type StepProps = {
 }
 
 const StepSignUp02 = ({ nextStep, prevStep, ...rest }: StepProps) => {
+
+    const { values, handleChange, handleBlur } = useFormikContext<InitialStateSignUp>()
+
     return (
         <div className="p-lg-5 p-4">
             <div>
@@ -15,30 +26,36 @@ const StepSignUp02 = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
             <div className="mt-4">
 
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Nome <span className="text-danger">*</span></label>
-                    <input type="text" className="form-control" id="name" placeholder="Digite seu nome" required />
-                    <div className="invalid-feedback">
-                        Escreva seu Nome Corretamente
+
+                <Card className="d-flex flex-column shadow-none">
+
+                    <FieldControl
+                        label='Nome Completo'
+                        name="firstName"
+                        aria-label="firstName"
+                        placeholder="Nome"
+                        required
+                        disabledError
+                    >
+
+                        <Form.Control
+                            type="text"
+                            name="lastName"
+                            aria-label="lastName"
+                            placeholder="Sobrenome"
+                            required
+                            className='ms-1 w-50'
+
+                        />
+
+                    </FieldControl>
+                    <div className="mt-4 d-flex justify-content-center">
+                        <button className="btn btn-success w-40 m-1" type="button" onClick={prevStep}>Anterior</button>
+                        <button className="btn btn-success w-40 m-1" type="button" onClick={nextStep}>Próximo</button>
                     </div>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="lastname" className="form-label">Sobrenome <span className="text-danger">*</span></label>
-                    <input type="text" className="form-control" id="lastname" placeholder="Digite seu sobrenome" required />
-                    <div className="invalid-feedback">
-                        Escreva seu sobrenome
-                    </div>
-                </div>
+                </Card>
 
 
-                {/* <div className="mb-4">
-                    <p className="mb-0 fs-12 text-muted fst-italic">Você se registrando aceita os termos de uso da plataforma <Link href="#" className="text-primary text-decoration-underline fst-normal fw-medium">Termos de Uso</Link></p>
-                </div> */}
-
-                <div className="mt-4 d-flex justify-content-center">
-                    <button className="btn btn-success w-40 m-1" type="button" onClick={prevStep}>Anterior</button>
-                    <button className="btn btn-success w-40 m-1" type="button" onClick={nextStep}>Próximo</button>
-                </div>
 
                 {/* <div className="mt-4">
                         <button className="btn btn-success w-100" type="submit">Criar Conta</button>
