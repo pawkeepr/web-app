@@ -4,10 +4,12 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FieldControl from '~/Components/molecules/field-control';
-
 import type { InitialStateSignUp } from '../../../SignUp';
+import PasswordRules from '../../molecules/password-rules';
 
 type StepProps = {
     [key: string]: any;
@@ -18,14 +20,14 @@ type StepProps = {
 const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const [passwordShow, setPasswordShow] = useState(false);
 
-    const { values, handleChange, handleBlur, errors, touched } = useFormikContext<InitialStateSignUp>()
+    const { values, handleChange, handleBlur } = useFormikContext<InitialStateSignUp>()
 
     const onToggleVisiblePassword = () => {
         setPasswordShow(state => !state)
     }
 
     return (
-        <div className="p-lg-5 p-4">
+        <Container className="p-lg-5 p-4">
             <div>
                 <h5 className="text-primary">Criar Conta</h5>
                 <p className="text-muted">Crie uma conta PawKeeprs gratuita agora e aproveite.</p>
@@ -33,7 +35,7 @@ const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
             <div className="mt-4">
 
-                <Card className="d-flex flex-column">
+                <Card className="d-flex flex-column shadow-none">
 
                     <FieldControl
                         label="Email"
@@ -66,6 +68,7 @@ const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
                         placeholder="Digite sua senha"
                         aria-label="password"
                         onBlur={handleBlur}
+                        disabledError
                     >
                         <InputGroup.Text className="bg-transparent border-start-0">
                             <i onClick={onToggleVisiblePassword} className={passwordShow ? 'ri-eye-fill' : 'ri-eye-off-fill'} ></i>
@@ -74,16 +77,22 @@ const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
                 </Card>
 
-                <div className="p-3 bg-light mb-2 rounded">
-                    <h5 className="fs-13">Senha deve conter:</h5>
-                    <p id="pass-length" className="invalid fs-12 mb-2">Mínimo <b>8 caracteres</b></p>
-                    <p id="pass-lower" className="invalid fs-12 mb-2">Uma letra <b>minúscula</b> (a-z)</p>
-                    <p id="pass-upper" className="invalid fs-12 mb-2">Uma letra <b>maiúscula</b> (A-Z)</p>
-                    <p id="pass-number" className="invalid fs-12 mb-0">Um <b>número</b> (0-9)</p>
-                </div>
+                <PasswordRules value={values.password} />
 
                 <div className="mb-4">
-                    <p className="mb-0 fs-12 text-muted fst-italic">Você se registrando aceita os termos de uso da plataforma <Link href="#" className="text-primary text-decoration-underline fst-normal fw-medium">Termos de Uso</Link></p>
+                    <Form.Check
+                        type="checkbox"
+                        className="w-100"
+                        name="termsOfUse"
+                        id="termsOfUse"
+                        onChange={handleChange}
+                        value={values.termsOfUse}
+                        label={
+                            <p className="mb-0 fs-12 text-muted fst-italic">
+                                {"Você se registrando aceita os termos de uso da plataforma: "}
+                                <Link href="#" className="text-primary text-decoration-underline fst-normal fw-medium">Termos de Uso</Link>
+                            </p>
+                        } />
                 </div>
 
                 <div className="mt-4 d-flex justify-content-center">
@@ -103,7 +112,7 @@ const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     </div>
                 </div> */}
             </div>
-        </div>
+        </Container>
     )
 }
 
