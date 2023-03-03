@@ -11,13 +11,14 @@ type InputControlProps = {
     name: string
     label?: string
     required?: boolean
+    disabledError?: boolean
     component?: JSX.Element
     startChildren?: React.ReactNode | React.ReactNode[] | JSX.Element | JSX.Element[]
     children?: React.ReactNode | React.ReactNode[] | JSX.Element | JSX.Element[]
 
 }
 
-const FieldControl = ({ label, children, required = false, component, startChildren, ...props }: InputControlProps) => {
+const FieldControl = ({ label, children, required = false, component, startChildren, disabledError = false, ...props }: InputControlProps) => {
 
     const [inputProps, meta] = useField(props)
     const id = props.name || props.id
@@ -29,7 +30,7 @@ const FieldControl = ({ label, children, required = false, component, startChild
         // <div className="mb-2 position-relative" style={{ height: '92px', maxHeight: '92px' }}>
         <>
             <If condition={!!label}>
-                <Form.Label htmlFor={id}>
+                <Form.Label htmlFor={id} className="mb-0 list-group-item fs-12">
                     {label}
                     <If condition={required}>
                         <span className="text-danger">*</span>
@@ -50,7 +51,7 @@ const FieldControl = ({ label, children, required = false, component, startChild
                 {children}
 
             </InputGroup>
-            <If condition={meta.touched && !!meta.error}>
+            <If condition={!disabledError && meta.touched && !!meta.error}>
                 <ErrMessage message={meta.error?.toString() as string} />
             </If>
         </>
@@ -59,7 +60,7 @@ const FieldControl = ({ label, children, required = false, component, startChild
 }
 
 FieldControl.defaultProps = {
-    component: 'input'
+    component: Form.Control
 }
 
 export default FieldControl
