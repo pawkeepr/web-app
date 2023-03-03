@@ -1,19 +1,3 @@
-import { Col, Container, Row } from "reactstrap"
+import FooterAuth from "./footer-auth";
 
-const FooterAuth = () => {
-    return (
-        <footer className="footer">
-            <Container>
-                <Row>
-                    <Col lg={12}>
-                        <div className="text-center">
-                            <p className="mb-0">&copy; {new Date().getFullYear()} PewKeepers. </p>
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
-        </footer>
-    )
-}
-
-export default FooterAuth
+export default FooterAuth;
