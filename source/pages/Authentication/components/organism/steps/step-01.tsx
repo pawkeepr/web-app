@@ -86,7 +86,7 @@ const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
                         name="termsOfUse"
                         id="termsOfUse"
                         onChange={handleChange}
-                        value={values.termsOfUse}
+                        checked={values.termsOfUse}
                         label={
                             <p className="mb-0 fs-12 text-muted fst-italic">
                                 {"Você se registrando aceita os termos de uso da plataforma: "}
