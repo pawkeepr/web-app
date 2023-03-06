@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import { Card, Col, Container, Row } from 'reactstrap';
 
 import AuthSlider from '~/Components/organism/auth-carousel';
-import { logoutUser } from '~/store/auth/loginV2/slice';
+import { logoutUser } from '~/store/auth/login/slice';
 import { useAppDispatch } from '~/store/hooks';
 
 const LogoutPage = () => {

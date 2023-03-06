@@ -1,16 +1,14 @@
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import LOADING from '~/constants/loading';
 
 import { destroyCookie } from 'nookies';
 import cookies from '~/constants/cookies';
-import {
-  BuilderLogin,
-  BuilderRecoverUser,
-  recover_user_by_token,
-  sign_in_user
-} from './thunks';
-import { LoginState, name } from './types';
+
+
+import { IUser, LoginState, name } from './types';
+
+import { watchAuth } from './sagas';
 
 const initialState: LoginState = {
   isAuthenticated: false,
@@ -53,13 +51,36 @@ const loginSlice = createSlice({
       state.password = '';
       state.visiblePassword = false;
       state.isLoading = LOADING.IDLE;
-    }
+    },
+    signInUser: (state, action: PayloadAction<{ username: string; password: string }>) => {
+      state.isLoading = LOADING.PENDING;
+    },
+    signInSuccess: (state, action: PayloadAction<{ user: IUser, token: string }>) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isAuthenticated = true;
+      state.isLoading = LOADING.SUCCESS;
+    },
+    signInFailed: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+      state.isLoading = LOADING.FAILED;
+    },
+    recoverUserByToken: (state, action: PayloadAction<string>) => {
+      state.isLoading = LOADING.PENDING;
+    },
+    recoverUserByTokenSuccess: (state, action: PayloadAction<{ user: IUser, access_token: string }>) => {
+      state.user = action.payload.user;
+      state.token = action.payload.access_token;
+      state.isAuthenticated = true;
+      state.isLoading = LOADING.SUCCESS;
+    },
+    recoverUserByTokenFailed: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+      state.isLoading = LOADING.FAILED;
+    },
   },
   initialState,
-  extraReducers: (builder) => {
-    BuilderLogin(builder);
-    BuilderRecoverUser(builder);
-  },
+
 })
 
 
@@ -73,14 +94,20 @@ export const {
   onChangeUsername,
   onSetRememberMe,
   logoutUser,
+  recoverUserByToken,
+  recoverUserByTokenFailed,
+  recoverUserByTokenSuccess,
+  signInFailed,
+  signInSuccess,
+  signInUser
 } = loginSlice.actions;
 
 export {
-  name,
-  sign_in_user,
-  recover_user_by_token,
+  name
 };
 export type {
-  LoginState,
+  LoginState
 };
+
+export { watchAuth };
 
