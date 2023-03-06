@@ -8,6 +8,9 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FieldControl from '~/Components/molecules/field-control';
+import validateEmail from '~/validations/email';
+import validatePassword from '~/validations/password';
+import validateUsername from '~/validations/username';
 import type { InitialStateSignUp } from '../../../SignUp';
 import PasswordRules from '../../molecules/password-rules';
 
@@ -19,11 +22,26 @@ type StepProps = {
 
 const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const [passwordShow, setPasswordShow] = useState(false);
+    const [passwordConfirmShow, setPasswordConfirmShow] = useState(false);
 
     const { values, handleChange, handleBlur } = useFormikContext<InitialStateSignUp>()
 
+    const requiredFieldsFilled = (): boolean => {
+        const { email, username, password, termsOfUse } = values;
+        return (
+            validatePassword.isValidSync(password) &&
+            validateUsername.isValidSync(username) &&
+            validateEmail.isValidSync(email) &&
+            termsOfUse
+        );
+    }
+
     const onToggleVisiblePassword = () => {
         setPasswordShow(state => !state)
+    }
+
+    const onToggleVisiblePasswordConfirm = () => {
+        setPasswordConfirmShow(state => !state)
     }
 
     return (
@@ -75,6 +93,21 @@ const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
                         </InputGroup.Text>
                     </FieldControl>
 
+                    <FieldControl
+                        required
+                        label='Repita a senha'
+                        name="passwordConfirm"
+                        type={passwordConfirmShow ? "text" : "password"}
+                        className="form-control border-end-0"
+                        placeholder="Repita a senha"
+                        aria-label="password-confirm"
+                        onBlur={handleBlur}
+                        disabledError
+                    >
+                        <InputGroup.Text className="bg-transparent border-start-0">
+                            <i onClick={onToggleVisiblePasswordConfirm} className={passwordConfirmShow ? 'ri-eye-fill' : 'ri-eye-off-fill'} ></i>
+                        </InputGroup.Text>
+                    </FieldControl>
                 </Card>
 
                 <PasswordRules value={values.password} />
@@ -96,21 +129,9 @@ const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 </div>
 
                 <div className="mt-4 d-flex justify-content-center">
-                    <button className="btn btn-success w-40 m-1" type="button" onClick={nextStep}>Próximo</button>
+                    <button className="btn btn-success w-40 m-1 next" type="button" onClick={nextStep} disabled={!requiredFieldsFilled()}>Próximo</button>
                 </div>
 
-                {/* <div className="mt-4 text-center">
-                    <div className="signin-other-title">
-                        <h5 className="fs-13 mb-4 title text-muted">Criar conta com:</h5>
-                    </div>
-
-                    <div>
-                        <button type="button" className="btn btn-primary btn-icon waves-effect waves-light me-1"><i className="ri-facebook-fill fs-16"></i></button>
-                        <button type="button" className="btn btn-danger btn-icon waves-effect waves-light me-1"><i className="ri-google-fill fs-16"></i></button>
-                        <button type="button" className="btn btn-dark btn-icon waves-effect waves-light me-1"><i className="ri-github-fill fs-16"></i></button>
-                        <button type="button" className="btn btn-info btn-icon waves-effect waves-light"><i className="ri-twitter-fill fs-16"></i></button>
-                    </div>
-                </div> */}
             </div>
         </Container>
     )
