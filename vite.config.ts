@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 import check from 'vite-plugin-checker'
 
 import { config } from 'dotenv'
-import path from 'path'
+import { fileURLToPath, URL } from 'node:url'
 
 config()
 
@@ -18,7 +18,7 @@ export default defineConfig({
 		})
 	],
 	test: {
-		setupFiles: './setupTests.ts',
+		setupFiles: ['./setupTests.ts'],
 		globals: true,
 		environment: 'jsdom',  // <==
 		coverage: {
@@ -36,7 +36,7 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			'~/': path.resolve(__dirname, 'source')
+			'~': fileURLToPath(new URL('./source', import.meta.url))
 		},
 	},
 })
