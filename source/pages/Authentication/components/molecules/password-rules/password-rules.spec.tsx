@@ -21,6 +21,8 @@ describe('PasswordRules component', () => {
         expect(passUpper).toBeInTheDocument();
         const passNumber = screen.getByText(/Um número/i);
         expect(passNumber).toBeInTheDocument();
+        const passSpecial = screen.getByText(/Um caractere especial/i);
+        expect(passSpecial).toBeInTheDocument();
     });
 
     it('validates password length (Unit)', () => {
@@ -47,8 +49,14 @@ describe('PasswordRules component', () => {
         expect(passNumber).toHaveClass('text-danger');
     });
 
-    it('validates password meets all requirements (Unit)', () => {
+    it('validates special characters in password (Unit)', () => {
         render(<PasswordRules value="testTEST1234" />);
+        const passSpecial = screen.getByText(/Um caractere especial/i);
+        expect(passSpecial).toHaveClass('text-danger');
+    });
+
+    it('validates password meets all requirements (Unit)', () => {
+        render(<PasswordRules value="testTEST1234@" />);
         const passLength = screen.getByText(/Mínimo 8 caracteres/i);
         expect(passLength).toHaveClass('text-success');
         const passLower = screen.getByText(/Uma letra minúscula/i);
@@ -57,6 +65,8 @@ describe('PasswordRules component', () => {
         expect(passUpper).toHaveClass('text-success');
         const passNumber = screen.getByText(/Um número/i);
         expect(passNumber).toHaveClass('text-success');
+        const passSpecial = screen.getByText(/Um caractere especial/i);
+        expect(passSpecial).toHaveClass('text-success');
     });
 
     it('should render correctly (Unit)', () => {
@@ -72,17 +82,21 @@ describe('PasswordRules component', () => {
         const passLower = screen.getByTestId(/pass-lower/);
         const passUpper = screen.getByTestId(/pass-upper/);
         const passNumber = screen.getByTestId(/pass-number/);
+        const passSpecial = screen.getByTestId(/pass-special/);
 
         expect(passLength).toHaveClass('text-danger');
         expect(passLower).toHaveClass('text-danger');
         expect(passUpper).toHaveClass('text-danger');
         expect(passNumber).toHaveClass('text-danger');
+        expect(passSpecial).toHaveClass('text-danger');
 
-        rerender(<PasswordRules value="senhaValida1" />);
+        rerender(<PasswordRules value="senhaValida1@" />);
 
         expect(screen.getByText('Mínimo 8 caracteres')).toHaveClass('text-success');
         expect(screen.getByText('Uma letra minúscula (a-z)')).toHaveClass('text-success');
         expect(screen.getByText('Uma letra maiúscula (A-Z)')).toHaveClass('text-success');
         expect(screen.getByText('Um número (0-9)')).toHaveClass('text-success');
+        expect(screen.getByText('Um caractere especial (!@#$%^&*()_+)')).toHaveClass('text-success');
+
     });
 });
