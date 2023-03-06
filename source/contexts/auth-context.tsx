@@ -1,12 +1,8 @@
 import { useRouter } from 'next/navigation';
-import { parseCookies, setCookie } from 'nookies';
-import { createContext, useContext, useEffect } from "react";
-
-
+import { createContext, useCallback, useContext, useEffect } from "react";
 import cookies from '~/constants/cookies';
 import LOADING from '~/constants/loading';
 import { decrypt, encrypt } from '~/helpers/encrypt-and-decrypt';
-import { setProfile } from '~/store/actions';
 import {
     LoginState,
     onChangePassword,
@@ -14,17 +10,18 @@ import {
     onChangeUsername,
     onSetRememberMe,
     onToggleVisiblePassword as onToggleVisiblePasswordAction,
-    recover_user_by_token,
-    sign_in_user
-} from '~/store/auth/loginV2/slice';
+    recoverUserByToken,
+    signInUser
+} from '~/store/auth/login/slice';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
+import { getCookie, setCookie } from '~/utils/cookies-utils';
 
-type SignInData = {
+interface SignInData {
     username: string;
     password: string;
 }
 
-type AuthContextType = {
+interface AuthContextType {
     isAuthenticated: boolean;
     user: any;
     password: string;
@@ -34,18 +31,17 @@ type AuthContextType = {
     rememberMe: boolean;
     onToggleVisiblePassword: () => void;
     onToggleRememberMe: () => void;
-    signIn: (data: SignInData) => Promise<void>
+    signIn: (data: SignInData) => Promise<void>;
 }
 
-export const AuthContext = createContext({} as AuthContextType)
+export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
-type AuthProviderProps = {
+interface AuthProviderProps {
     children: React.ReactNode;
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
     const {
         user,
         isAuthenticated,
@@ -53,94 +49,77 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password,
         rememberMe,
         username,
-        visiblePassword
-    } = useAppSelector(state => state.Login as LoginState)
-    const router = useRouter()
+        visiblePassword,
+    } = useAppSelector(state => state.Login as LoginState);
+    const router = useRouter();
 
     useEffect(() => {
-        const listAllCookies = parseCookies()
-        const token = listAllCookies[cookies.token.name]
+        dispatch(recoverUserByToken(getCookie(cookies.token.name)));
+    }, [dispatch]);
 
-        if (!token) {
-            router.prefetch('/sign-in')
-            return
-        }
 
-        dispatch(recover_user_by_token({ token })).then((data) => {
-            if (data.type === 'success') {
-                console.log({ data })
-                dispatch(setProfile(data.payload))
-                router.prefetch('/dashboard')
-            }
-        })
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    useEffect(() => {
-        getRememberInfo()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    async function signIn({ username, password }: SignInData) {
-        await setRememberInfo()
-        dispatch(sign_in_user({ username, password })).then(() => {
-            router.push('/dashboard')
-        })
-    }
-
-    async function setRememberInfo() {
-        const JSON_REMEMBER = JSON.stringify({ username, password: encrypt(password) })
+    const handleRememberInfo = useCallback(async (username?: string, password?: string, rememberMe?: boolean) => {
+        const JSON_REMEMBER = JSON.stringify({ username, password: encrypt(password as string) });
 
         if (rememberMe) {
-            setCookie(null, cookies.remember.name, JSON_REMEMBER, {
-                maxAge: cookies.remember.expires,
-            })
+            setCookie(cookies.remember.name, JSON_REMEMBER, cookies.remember.expires);
+        } else {
+            setCookie(cookies.remember.name, '', -1);
         }
-    }
-
-    async function getRememberInfo() {
-        const listAllCookies = parseCookies()
-        const rememberInfo = listAllCookies[cookies.remember.name]
-
+        const rememberInfo = getCookie(cookies.remember.name);
         if (!rememberInfo) {
-            return
+            return;
+        }
+        const { username: rememberUsername, password: rememberPassword } = JSON.parse(rememberInfo);
+        dispatch(onSetRememberMe(true));
+        dispatch(onChangeUsername(rememberUsername));
+        dispatch(onChangePassword(decrypt(rememberPassword)));
+    }, [dispatch]);
+
+    useEffect(() => {
+        handleRememberInfo()
+    }, [handleRememberInfo]);
+
+    const signIn = useCallback(async ({ username, password }: SignInData) => {
+        await handleRememberInfo(username, password, rememberMe);
+        dispatch(signInUser({ username, password }));
+    }, [dispatch, handleRememberInfo, rememberMe]);
+
+    const onToggleRememberMe = useCallback(() => {
+        dispatch(onChangeRememberMe());
+    }, [dispatch]);
+
+    const onToggleVisiblePassword = useCallback(() => {
+        dispatch(onToggleVisiblePasswordAction());
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            return router.push('/dashboard');
         }
 
-        const { username, password } = JSON.parse(rememberInfo)
+        return router.push('/sign-in');
 
-        dispatch(onSetRememberMe(true))
-        dispatch(onChangeUsername(username))
-        dispatch(onChangePassword(decrypt(password)))
-
-    }
-
-    const onToggleRememberMe = () => {
-        dispatch(onChangeRememberMe())
-    }
-
-    const onToggleVisiblePassword = () => {
-        dispatch(onToggleVisiblePasswordAction())
-    }
+    }, [router, isAuthenticated]);
 
     return (
-        <AuthContext.Provider value={{
-            user,
-            isAuthenticated,
-            rememberMe,
-            isLoading,
-            password,
-            username,
-            visiblePassword,
-            onToggleRememberMe,
-            onToggleVisiblePassword,
-            signIn,
-        }}>
+        <AuthContext.Provider
+            value={{
+                user,
+                isAuthenticated,
+                rememberMe,
+                isLoading,
+                password,
+                username,
+                visiblePassword,
+                onToggleRememberMe,
+                onToggleVisiblePassword,
+                signIn,
+            }}
+        >
             {children}
         </AuthContext.Provider>
-    )
+    );
 }
 
-export const useAuth = () => {
-    return useContext(AuthContext)
-}
+export const useAuth = () => useContext(AuthContext);
