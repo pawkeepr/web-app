@@ -10,7 +10,7 @@ const rulePassLength = RegExp('(.{8,})')
 const rulePassLower = RegExp('(.*[a-z].*)')
 const rulePassUpper = RegExp('(.*[A-Z].*)')
 const rulePassNumber = RegExp('(.*[0-9].*)')
-
+const rulePassSpecial = RegExp('(.*[!@#$%^&*()_+].*)')
 
 const PasswordRules = ({ value }: PasswordRulesProps) => {
 
@@ -18,12 +18,14 @@ const PasswordRules = ({ value }: PasswordRulesProps) => {
     const [passLower, setPassLower] = useState(false)
     const [passUpper, setPassUpper] = useState(false)
     const [passNumber, setPassNumber] = useState(false)
+    const [passSpecial, setPassSpecial] = useState(false)
 
     useEffect(() => {
         setPassLength(rulePassLength.test(value.trim()))
         setPassLower(rulePassLower.test(value.trim()))
         setPassUpper(rulePassUpper.test(value.trim()))
         setPassNumber(rulePassNumber.test(value.trim()))
+        setPassSpecial(rulePassSpecial.test(value.trim()))
     }, [value])
 
     return (
@@ -35,6 +37,7 @@ const PasswordRules = ({ value }: PasswordRulesProps) => {
                 <ItemListChecked name="pass-lower" condition={passLower} text="Uma letra minúscula (a-z)" />
                 <ItemListChecked name="pass-upper" condition={passUpper} text="Uma letra maiúscula (A-Z)" />
                 <ItemListChecked name="pass-number" condition={passNumber} text="Um número (0-9)" />
+                <ItemListChecked name="pass-special" condition={passSpecial} text="Um caractere especial (!@#$%^&*()_+)" />
             </ul>
         </div>
 
