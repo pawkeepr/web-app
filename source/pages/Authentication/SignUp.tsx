@@ -16,33 +16,49 @@ import * as Yup from 'yup';
 import HeaderTitle from '~/Components/atoms/header-title';
 import AuthSlider from '~/Components/organism/auth-carousel';
 import FooterAuth from '~/Components/organism/footer-auth';
+
+import validateAddress from '~/validations/address';
+import validateDocument from '~/validations/document';
+import validateEmail from '~/validations/email';
+import validatePassword from '~/validations/password';
+import validateUsername from '~/validations/username';
+
 import StepSignUp01 from './components/organism/steps/step-01';
 import StepSignUp02 from './components/organism/steps/step-02';
 
 export type InitialStateSignUp = {
-    password: string,
-    email: string,
-    username: string,
+    email: string;
+    username: string;
+    password: string;
+    passwordConfirm: string;
+    termsOfUse: boolean;
     document: string,
-    termsOfUse: boolean,
-}
+    address: {
+        street: string;
+        number: string;
+        complement: string;
+        neighborhood: string;
+        city: string;
+        state: string;
+        zipCode: string;
+    };
+};
 
 
 const validationSchema = Yup.object({
-    email: Yup.string()
-        .email("Digite um email válido")
-        .required("Este campo é obrigatório"),
-    username: Yup.string()
-        .min(3, 'O nome de usuário deve ter pelo menos 3 caracteres')
-        .required("Este campo é obrigatório"),
-    password: Yup.string()
-        .min(8, 'A senha deve ter pelo menos 8 caracteres')
-        .matches(RegExp('(.*[a-z].*)'), 'É necessário pelo menos uma letra minúscula')
-        .matches(RegExp('(.*[A-Z].*)'), 'É necessário pelo menos uma letra maiúscula')
-        .matches(RegExp('(.*[0-9].*)'), 'É necessário pelo menos um número')
-        .required("Este campo é obrigatório"),
-    termsOfUse: Yup.boolean().oneOf([true], 'Você deve aceitar os termos de uso'),
-})
+    email: validateEmail,
+    username: validateUsername,
+    password: validatePassword,
+    passwordConfirm: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'As senhas não coincidem')
+        .required('Este campo é obrigatório'),
+    termsOfUse: Yup.boolean().oneOf(
+        [true],
+        'Você deve aceitar os termos de uso'
+    ),
+    document: validateDocument,
+    address: validateAddress,
+});
 
 const CoverSignUp = () => {
     const [tab, setTab] = useState('1')
@@ -53,12 +69,23 @@ const CoverSignUp = () => {
     }
 
     const initialValues: InitialStateSignUp = {
-        password: "",
-        email: "",
-        username: "",
-        document: "",
+        email: '',
+        username: '',
+        password: '',
+        passwordConfirm: '',
         termsOfUse: false,
+        document: '',
+        address: {
+            street: '',
+            number: '',
+            complement: '',
+            neighborhood: '',
+            city: '',
+            state: '',
+            zipCode: '',
+        },
     };
+
 
     const Tabs = [
         {
@@ -122,7 +149,10 @@ const CoverSignUp = () => {
                                                         {
                                                             Tabs.map((tab, index) => (
                                                                 <TabContent key={index}>
-                                                                    <TabPane eventKey={tab.id}>
+                                                                    <TabPane
+                                                                        eventKey={tab.id}
+                                                                        data-testid={`step-${tab.id.padStart(2, 0)}`}
+                                                                    >
                                                                         {tab.component({
                                                                             prevStep: onChangePrevStep,
                                                                             nextStep: onChangeNextStep,
@@ -132,7 +162,11 @@ const CoverSignUp = () => {
                                                             ))
                                                         }
                                                         <div className="p-2 text-center">
-                                                            <p className="list-group-item fs-12 mb-4">Você já tem uma conta ? <Link href="/sign-in" className="fw-semibold text-primary text-decoration-underline"> Entrar!</Link> </p>
+                                                            <p className="list-group-item fs-12 mb-4">Você já tem uma conta ?
+                                                                <Link href="/sign-in" className="fw-semibold text-primary text-decoration-underline">
+                                                                    Entrar!
+                                                                </Link>
+                                                            </p>
                                                         </div>
                                                     </TabContainer>
                                                 </Form>
