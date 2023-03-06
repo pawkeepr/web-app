@@ -9,6 +9,8 @@ import {
     signInSuccess,
 } from './actions';
 
+import { name } from './types';
+
 import { SignInCredentials, getUser, postJwtLogin } from '~/services/helpers/auth';
 
 export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
@@ -16,7 +18,7 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
         const { data: token } = yield call(postJwtLogin, action.payload);
         const { data: user } = yield call(getUser, token.access_token);
 
-        yield put(signInSuccess({ user, token }));
+        yield put(signInSuccess({ user, ...token }));
         yield setCookie(undefined, cookies.token.name, token.access_token, {
             maxAge: cookies.token.expires,
         });
@@ -36,7 +38,10 @@ export function* recoverUserByTokenSaga(action: PayloadAction<string>) {
     }
 }
 
-export function* watchAuth() {
-    yield takeLatest('login/signInUser', signInUserSaga);
-    yield takeLatest('login/recoverUserByToken', recoverUserByTokenSaga);
+export function* LoginSaga() {
+    yield takeLatest(`${name}/signInUser`, signInUserSaga);
+    yield takeLatest(`${name}/recoverUserByToken`, recoverUserByTokenSaga);
 }
+
+
+export default LoginSaga;

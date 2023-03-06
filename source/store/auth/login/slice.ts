@@ -6,9 +6,8 @@ import { destroyCookie } from 'nookies';
 import cookies from '~/constants/cookies';
 
 
+import { api } from '~/services/api';
 import { IUser, LoginState, name } from './types';
-
-import { watchAuth } from './sagas';
 
 const initialState: LoginState = {
   isAuthenticated: false,
@@ -56,6 +55,7 @@ const loginSlice = createSlice({
       state.isLoading = LOADING.PENDING;
     },
     signInSuccess: (state, action: PayloadAction<{ user: IUser, token: string }>) => {
+      api.defaults.headers['Authorization'] = `Bearer ${action.payload.token}`;
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isAuthenticated = true;
@@ -109,5 +109,4 @@ export type {
   LoginState
 };
 
-export { watchAuth };
 
