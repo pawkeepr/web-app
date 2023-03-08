@@ -1,12 +1,9 @@
-import '~/__mocks__/auth-helpers';
-import '~/__mocks__/next-navigations';
-
 import { renderHook } from '@testing-library/react-hooks';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import RouterProvider from '~/__mocks__/next-router';
+import useAuth from '~/hooks/use-auth';
 import Provider from "~/store";
-import { AuthProvider, useAuth } from './auth-context';
-
+import { AuthProvider } from './auth-context';
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => {
     return (

@@ -6,7 +6,7 @@ import FooterAuth from '~/Components/organism/footer-auth';
 
 import HeaderTitle from '~/Components/atoms/header-title';
 import LOADING from '~/constants/loading';
-import { useAuth } from '~/contexts/auth-context';
+import useAuth from '~/hooks/use-auth';
 import ColAuth from './components/organism/col-auth';
 
 const CoverSignIn = () => {
