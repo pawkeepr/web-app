@@ -25,7 +25,7 @@ const validationSchema = Yup.object({
     password: Yup.string().required('Este campo é obrigatório'),
 })
 
-const ColAuth = () => {
+const Auth = () => {
     const dispatch = useAppDispatch();
 
     const {
@@ -143,4 +143,4 @@ const ColAuth = () => {
     );
 };
 
-export default ColAuth;
+export default Auth;

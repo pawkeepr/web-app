@@ -5,19 +5,19 @@ import { describe, expect, it, vi } from 'vitest';
 import RouterProvider from '~/__mocks__/next-router';
 import { AuthProvider } from '~/contexts/auth-context';
 import ProviderClient from '~/store';
-import ColAuth from './col-auth';
+import Auth from './auth';
 
 const Wrapper = () => (
     <RouterProvider>
         <ProviderClient>
             <AuthProvider>
-                <ColAuth />
+                <Auth />
             </AuthProvider>
         </ProviderClient>
     </RouterProvider>
 )
 
-describe('ColAuth Unit (Unit)', () => {
+describe('Auth Unit (Unit)', () => {
 
     afterEach(() => {
         vi.clearAllMocks()

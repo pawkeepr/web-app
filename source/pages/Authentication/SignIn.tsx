@@ -7,7 +7,7 @@ import FooterAuth from '~/Components/organism/footer-auth';
 import HeaderTitle from '~/Components/atoms/header-title';
 import LOADING from '~/constants/loading';
 import useAuth from '~/hooks/use-auth';
-import ColAuth from './components/organism/col-auth';
+import Auth from './components/organism/auth';
 
 const CoverSignIn = () => {
 
@@ -39,7 +39,7 @@ const CoverSignIn = () => {
                                                 </div>
                                                 <div className="mt-4" >
 
-                                                    {!disabled && <ColAuth />}
+                                                    {!disabled && <Auth />}
 
                                                     {disabled && (
                                                         <div className="d-flex justify-content-center">
