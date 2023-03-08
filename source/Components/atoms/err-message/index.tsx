@@ -2,12 +2,12 @@
 
 type ErrMessageProps = {
     message: string;
-}
+} & React.HTMLAttributes<HTMLLabelElement>
 
-const ErrMessage = ({ message }: ErrMessageProps) => {
+const ErrMessage = ({ message, ...rest }: ErrMessageProps) => {
 
     return (
-        <p className="font-bold list-group-item text-danger fs-11 text-center">{message}</p>
+        <label className="font-bold list-group-item text-danger fs-11 text-center" {...rest}>{message}</label>
     )
 }
 
