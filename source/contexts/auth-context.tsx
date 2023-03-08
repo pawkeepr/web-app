@@ -1,5 +1,6 @@
-import { useRouter } from 'next/navigation';
-import { createContext, useCallback, useContext, useEffect } from "react";
+import getConfig from 'next/config';
+import { usePathname, useRouter } from 'next/navigation';
+import { createContext, useCallback, useEffect } from "react";
 import cookies from '~/constants/cookies';
 import LOADING from '~/constants/loading';
 import { decrypt, encrypt } from '~/helpers/encrypt-and-decrypt';
@@ -15,7 +16,6 @@ import {
 } from '~/store/auth/login/slice';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
 import { getCookie, setCookie } from '~/utils/cookies-utils';
-
 interface SignInData {
     username: string;
     password: string;
@@ -52,6 +52,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         visiblePassword,
     } = useAppSelector(state => state.Login as LoginState);
     const router = useRouter();
+    const pathname = usePathname()
+    const { publicRuntimeConfig } = getConfig();
 
     useEffect(() => {
         dispatch(recoverUserByToken(getCookie(cookies.token.name)));
@@ -94,13 +96,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }, [dispatch]);
 
     useEffect(() => {
-        if (isAuthenticated) {
-            return router.push('/dashboard');
+        if (!isAuthenticated && !publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
+            router.push('/sign-in');
         }
 
-        return router.push('/sign-in');
-
-    }, [router, isAuthenticated]);
+        if (isAuthenticated && publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
+            router.push('/dashboard');
+        }
+    }, [router, isAuthenticated, publicRuntimeConfig?.publicRoutes, pathname]);
 
     return (
         <AuthContext.Provider
@@ -122,4 +125,3 @@ export function AuthProvider({ children }: AuthProviderProps) {
     );
 }
 
-export const useAuth = () => useContext(AuthContext);
