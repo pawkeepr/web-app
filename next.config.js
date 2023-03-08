@@ -7,7 +7,9 @@ const nextConfig = ((phase) => {
   const _currentURL = isProduction ? process.env.API_URL : 'http://localhost:8000/api/v1/'
 
   return {
-
+    publicRuntimeConfig: {
+      publicRoutes: ['/sign-in', '/sign-up', '/forgot-password', '/reset-password', '/'],
+    },
     reactStrictMode: true,
     swcMinify: true,
     eslint: {
