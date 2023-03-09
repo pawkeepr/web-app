@@ -1,4 +1,4 @@
-import { useField } from 'formik';
+import { FieldHookConfig, useField } from 'formik';
 import Form from 'react-bootstrap/Form';
 import { If } from '~/utils/tsx-control-statements';
 
@@ -6,7 +6,7 @@ import React from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import ErrMessage from '~/Components/atoms/err-message';
 
-type InputControlProps = {
+type InputControlProps = FieldHookConfig<string> & {
     [key: string]: any
     name: string
     label?: string
@@ -18,7 +18,7 @@ type InputControlProps = {
 
 }
 
-const FieldControl = ({ label, children, required = false, component, startChildren, disabledError = false, ...props }: InputControlProps) => {
+const FieldControl = ({ label, children, required = false, component, startChildren, disabledError = false, className, ...props }: InputControlProps) => {
 
     const [inputProps, meta] = useField(props)
     const id = props.name || props.id
@@ -45,6 +45,9 @@ const FieldControl = ({ label, children, required = false, component, startChild
                     id={id}
                     required={required}
                     data-testid={`input-${id}`}
+                    className={`
+                    ${className}
+                    `}
                     {...inputProps}
                     {...props}
                 />
@@ -65,7 +68,7 @@ const FieldControl = ({ label, children, required = false, component, startChild
 }
 
 FieldControl.defaultProps = {
-    component: Form.Control
+    component: 'input'
 }
 
 export default FieldControl
