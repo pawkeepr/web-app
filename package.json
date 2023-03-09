@@ -60,6 +60,7 @@
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
     "@types/react-facebook-login": "^4.1.5",
+    "@types/react-input-mask": "^3.0.2",
     "@types/react-redux": "^7.1.24",
     "@types/react-scrollspy": "^3.3.5",
     "@types/redux": "^3.6.31",
