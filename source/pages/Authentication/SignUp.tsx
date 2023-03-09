@@ -163,6 +163,7 @@ const CoverSignUp = () => {
                                                         }
                                                         <div className="p-2 text-center">
                                                             <p className="list-group-item fs-12 mb-4">Você já tem uma conta ?
+                                                                <br />
                                                                 <Link href="/sign-in" className="fw-semibold text-primary text-decoration-underline">
                                                                     Entrar!
                                                                 </Link>
