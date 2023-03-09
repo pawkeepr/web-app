@@ -54,7 +54,7 @@ const CoverSignIn = () => {
                                                 </div>
 
                                                 <div className="mt-5 text-center">
-                                                    <p className="mb-0">Você não tem uma conta ? <Link href="/sign-up" className="fw-bold text-primary text-decoration-underline"> Registre-se</Link> </p>
+                                                    <p className="mb-0">Você não tem uma conta ? <br /> <Link href="/sign-up" className="fw-bold text-primary text-decoration-underline"> Registre-se</Link> </p>
                                                 </div>
                                             </div>
                                         </Col>
