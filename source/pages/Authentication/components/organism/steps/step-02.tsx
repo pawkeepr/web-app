@@ -3,9 +3,11 @@
 import type { InitialStateSignUp } from '../../../SignUp';
 
 import { useFormikContext } from 'formik';
-import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import FieldControl from '~/Components/molecules/field-control';
+import Address from '../../molecules/address/address';
+import FieldDocument from '../../molecules/field-document';
 
 type StepProps = {
     [key: string]: any;
@@ -27,12 +29,13 @@ const StepSignUp02 = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <div className="mt-4">
 
 
-                <Card className="d-flex flex-column shadow-none">
+                <Container className="d-flex flex-column">
 
                     <FieldControl
                         label='Nome Completo'
                         name="firstName"
                         aria-label="firstName"
+                        className="form-control"
                         placeholder="Nome"
                         required
                         disabledError
@@ -49,11 +52,23 @@ const StepSignUp02 = ({ nextStep, prevStep, ...rest }: StepProps) => {
                         />
 
                     </FieldControl>
+
+                    <FieldDocument
+                        label='CPF/CNPJ'
+                        name="document"
+                        aria-label="document"
+                        className="form-control"
+                        placeholder="CPF/CNPJ"
+                        required
+                    />
+
+                    <Address />
+
                     <div className="mt-4 d-flex justify-content-center">
                         <button className="btn btn-success w-40 m-1" type="button" onClick={prevStep}>Anterior</button>
                         <button className="btn btn-success w-40 m-1" type="button" onClick={nextStep}>Próximo</button>
                     </div>
-                </Card>
+                </Container>
 
 
 
