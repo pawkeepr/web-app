@@ -13,6 +13,7 @@ import FieldControl from '~/Components/molecules/field-control';
 import { Formik } from 'formik';
 import { SignInCredentials } from '~/services/helpers/auth';
 
+import cn from 'classnames';
 import * as Yup from 'yup';
 
 const initialValues: SignInCredentials = {
@@ -66,11 +67,11 @@ const Auth = () => {
                             <FieldControl
                                 label='Nome do Usuário:'
                                 type="text"
+                                pattern="[^\s]+" // no spaces
                                 className="form-control"
                                 name="username"
                                 placeholder="Digite seu nome de usuário"
                                 data-testid="username-input"
-                                required
                                 value={username}
                                 onChange={handleChangeUsername}
                                 disabledError
@@ -78,37 +79,43 @@ const Auth = () => {
                         </div>
 
                         <div className="mb-3">
-                            <div className="float-end">
-                                <Link href="/forget-password" className="text-muted">
-                                    Esqueceu a Senha?
-                                </Link>
-                            </div>
-                            <Form.Label className="form-label" htmlFor="password-input">
-                                Senha
-                            </Form.Label>
+
+
                             <div className="position-relative auth-pass-inputgroup mb-3">
                                 <FieldControl
                                     type={visiblePassword ? 'text' : 'password'}
+                                    label="Senha"
                                     className="form-control pe-5 password-input border-end-0"
                                     placeholder="Digite sua senha"
                                     name="password"
                                     data-testid="password-input"
-                                    required
+
                                     value={password}
                                     onChange={handleChangePassword}
                                     disabledError
                                 >
-                                    <InputGroup.Text className="bg-transparent border-start-0" >
+                                    <InputGroup.Text className="bg-transparent border-start-0 cursor-pointer" >
                                         <i
                                             onClick={onToggleVisiblePassword}
                                             data-testid="toggle-password"
                                             className={
-                                                visiblePassword ? 'ri-eye-off-fill' : 'ri-eye-fill'
+                                                cn({
+                                                    'ri-eye-fill': !visiblePassword,
+                                                    'ri-eye-off-fill': visiblePassword,
+                                                    'cursor-pointer': true,
+                                                })
                                             }
                                         ></i>
                                     </InputGroup.Text>
                                 </FieldControl>
                             </div>
+
+                            <div className="w-100 float-end">
+                                <Link href="/forget-password" className="text-muted cursor-pointer text-center mt-2">
+                                    Esqueceu a Senha?
+                                </Link>
+                            </div>
+
                         </div>
 
                         <Form.Check
@@ -134,6 +141,7 @@ const Auth = () => {
                             >
                                 Entrar
                             </Button>
+
                         </div>
                     </>
                 )
