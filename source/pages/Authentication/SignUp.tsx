@@ -10,30 +10,41 @@ import TabContainer from 'react-bootstrap/TabContainer';
 import TabContent from 'react-bootstrap/TabContent';
 import TabPane from 'react-bootstrap/TabPane';
 //formik
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import Link from 'next/link';
 import * as Yup from 'yup';
 import HeaderTitle from '~/Components/atoms/header-title';
 import AuthSlider from '~/Components/organism/auth-carousel';
 import FooterAuth from '~/Components/organism/footer-auth';
 
+
 import validateAddress from '~/validations/address';
 import validateDocument from '~/validations/document';
 import validateEmail from '~/validations/email';
 import validatePassword from '~/validations/password';
-import validateUsername from '~/validations/username';
+import validatePerson from '~/validations/person';
 
-import StepSignUp01 from './components/organism/steps/step-01';
-import StepSignUp02 from './components/organism/steps/step-02';
+import StepAddress from './components/organism/steps/step-address';
+import StepSignUp01 from './components/organism/steps/step-basic-auth';
+import StepSignUp02 from './components/organism/steps/step-person';
+import StepSignUpTermsOfUse from './components/organism/steps/step-terms-of-use';
+
 
 export type InitialStateSignUp = {
     email: string;
-    username: string;
     password: string;
     passwordConfirm: string;
     termsOfUse: boolean;
-    document: string,
+    person: {
+        firstName: string,
+        lastName: string,
+        crmv: string,
+        document: string,
+        company: string | null,
+        phoneNumber: string,
+    },
     address: {
+        country: string;
         street: string;
         number: string;
         complement: string;
@@ -47,7 +58,6 @@ export type InitialStateSignUp = {
 
 const validationSchema = Yup.object({
     email: validateEmail,
-    username: validateUsername,
     password: validatePassword,
     passwordConfirm: Yup.string()
         .oneOf([Yup.ref('password'), null], 'As senhas não coincidem')
@@ -56,6 +66,7 @@ const validationSchema = Yup.object({
         [true],
         'Você deve aceitar os termos de uso'
     ),
+    person: validatePerson,
     document: validateDocument,
     address: validateAddress,
 });
@@ -63,19 +74,25 @@ const validationSchema = Yup.object({
 const CoverSignUp = () => {
     const [tab, setTab] = useState('1')
 
-
-    const onSubmit = async (values, helper) => {
-
+    const onSubmit = async (values: InitialStateSignUp, helper: FormikHelpers<InitialStateSignUp>) => {
+        console.log(values)
     }
 
     const initialValues: InitialStateSignUp = {
         email: '',
-        username: '',
         password: '',
         passwordConfirm: '',
         termsOfUse: false,
-        document: '',
+        person: {
+            crmv: '',
+            document: '',
+            firstName: '',
+            lastName: '',
+            company: null,
+            phoneNumber: '',
+        },
         address: {
+            country: '',
             street: '',
             number: '',
             complement: '',
@@ -95,6 +112,14 @@ const CoverSignUp = () => {
         {
             id: '2',
             component: (props: any) => <StepSignUp02 {...props} />
+        },
+        {
+            id: '3',
+            component: (props: any) => <StepAddress {...props} />
+        },
+        {
+            id: '4',
+            component: (props: any) => <StepSignUpTermsOfUse {...props} />
         },
     ]
 
@@ -151,7 +176,7 @@ const CoverSignUp = () => {
                                                                 <TabContent key={index}>
                                                                     <TabPane
                                                                         eventKey={tab.id}
-                                                                        data-testid={`step-${tab.id.padStart(2, 0)}`}
+                                                                        data-testid={`step-${tab.id.padStart(2, '0')}`}
                                                                     >
                                                                         {tab.component({
                                                                             prevStep: onChangePrevStep,
