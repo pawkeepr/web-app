@@ -1,40 +1,32 @@
 
 import { useFormikContext } from 'formik';
-import Link from 'next/link';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FieldControl from '~/Components/molecules/field-control';
 import validateEmail from '~/validations/email';
 import validatePassword from '~/validations/password';
-import validateUsername from '~/validations/username';
 import type { InitialStateSignUp } from '../../../SignUp';
 import PasswordRules from '../../molecules/password-rules';
 
-type StepProps = {
-    [key: string]: any;
-    nextStep: () => void;
-    prevStep: () => void;
-}
+import { StepProps } from './types';
+
 
 const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const [passwordShow, setPasswordShow] = useState(false);
     const [passwordConfirmShow, setPasswordConfirmShow] = useState(false);
 
-    const { values, handleChange, handleBlur } = useFormikContext<InitialStateSignUp>()
+    const { values, handleBlur } = useFormikContext<InitialStateSignUp>()
+    const { email, password } = values;
 
-    const requiredFieldsFilled = (): boolean => {
-        const { email, username, password, termsOfUse } = values;
+    const requiredFieldsFilled = useMemo(() => {
         return (
             validatePassword.isValidSync(password) &&
-            validateUsername.isValidSync(username) &&
-            validateEmail.isValidSync(email) &&
-            termsOfUse
+            validateEmail.isValidSync(email)
         );
-    }
+    }, [email, password])
 
     const onToggleVisiblePassword = () => {
         setPasswordShow(state => !state)
@@ -64,18 +56,6 @@ const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
                         placeholder="Digite seu email"
                         required
                     />
-
-                    <FieldControl
-                        label="Usuário"
-                        name="username"
-                        className="form-control"
-                        type="text"
-                        aria-label="username"
-                        startChildren={<InputGroup.Text id="basic-addon1">@</InputGroup.Text>}
-                        placeholder="Digite o nome de usuário"
-                        required
-                    />
-
 
                     <FieldControl
                         required
@@ -112,24 +92,9 @@ const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
                 <PasswordRules value={values.password} />
 
-                <div className="mb-4">
-                    <Form.Check
-                        type="checkbox"
-                        className="w-100"
-                        name="termsOfUse"
-                        id="termsOfUse"
-                        onChange={handleChange}
-                        checked={values.termsOfUse}
-                        label={
-                            <p className="mb-0 fs-12 text-muted fst-italic">
-                                {"Você se registrando aceita os termos de uso da plataforma: "}
-                                <Link href="#" className="text-primary text-decoration-underline fst-normal fw-medium">Termos de Uso</Link>
-                            </p>
-                        } />
-                </div>
 
                 <div className="mt-4 d-flex justify-content-center">
-                    <button className="btn btn-success w-40 m-1 next" type="button" onClick={nextStep} disabled={!requiredFieldsFilled()}>Próximo</button>
+                    <button className="btn btn-success w-40 m-1 next" type="button" onClick={nextStep} disabled={!requiredFieldsFilled}>Próximo</button>
                 </div>
 
             </div>
