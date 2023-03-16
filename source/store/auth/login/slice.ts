@@ -55,7 +55,11 @@ const loginSlice = createSlice({
       state.isLoading = LOADING.PENDING;
     },
     signInSuccess: (state, action: PayloadAction<{ user: IUser, token: string }>) => {
-      api.defaults.headers['Authorization'] = `Bearer ${action.payload.token}`;
+
+      if (api.defaults.headers['Authorization']) {
+        api.defaults.headers['Authorization'] = `Bearer ${action.payload.token}`;
+      }
+
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isAuthenticated = true;

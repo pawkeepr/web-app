@@ -38,14 +38,14 @@ const Auth = () => {
         visiblePassword,
     } = useAuth();
 
-    const handleSubmit = ({ password, username }: SignInCredentials) => {
+    const handleSubmit = () => {
         signIn({
             username,
             password,
         });
     };
 
-    const isValid = useMemo(() => {
+    const isValid: boolean = useMemo(() => {
         return validationSchema.isValidSync({ password, username })
     }, [password, username])
 
