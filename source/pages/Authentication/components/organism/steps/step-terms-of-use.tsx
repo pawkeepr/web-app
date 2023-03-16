@@ -12,7 +12,54 @@ const StepTermsOfUse = ({ prevStep }: StepProps) => {
 
     return (
         <Container className="p-lg-5 p-4">
+            <div className="mt-4">
+                <h4>Informações pessoais</h4>
+                <ul className="list-unstyled">
+                    <li>
+                        <strong>Nome:</strong> {values.person.firstName} {values.person.lastName}
+                    </li>
+                    <li>
+                        <strong>CRMV:</strong> {values.person.crmv}
+                    </li>
+                    <li>
+                        <strong>Documento:</strong> {values.person.document}
+                    </li>
+                    <li>
+                        <strong>Empresa:</strong> {values.person.company || "Não informado"}
+                    </li>
+                    <li>
+                        <strong>Telefone:</strong> {values.person.phoneNumber}
+                    </li>
+                </ul>
 
+                <h4>Endereço</h4>
+                <ul className="list-unstyled">
+                    <li>
+                        <strong>País:</strong> {values.address.country}
+                    </li>
+                    <li>
+                        <strong>Rua:</strong> {values.address.street}
+                    </li>
+                    <li>
+                        <strong>Número:</strong> {values.address.number}
+                    </li>
+                    <li>
+                        <strong>Complemento:</strong> {values.address.complement || "Não informado"}
+                    </li>
+                    <li>
+                        <strong>Bairro:</strong> {values.address.neighborhood}
+                    </li>
+                    <li>
+                        <strong>Cidade:</strong> {values.address.city}
+                    </li>
+                    <li>
+                        <strong>Estado:</strong> {values.address.state}
+                    </li>
+                    <li>
+                        <strong>CEP:</strong> {values.address.zipCode}
+                    </li>
+                </ul>
+            </div>
             <div className="mb-4">
                 <Form.Check
                     type="checkbox"

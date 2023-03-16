@@ -2,13 +2,12 @@
 
 import type { InitialStateSignUp } from '../../../SignUp';
 
-import { cpf } from 'cpf-cnpj-validator';
+import { cnpj, cpf } from 'cpf-cnpj-validator';
 import { useFormikContext } from 'formik';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import FieldControl from '~/Components/molecules/field-control';
 
-import { cnpj } from 'cpf-cnpj-validator';
 import { useMemo } from 'react';
 import MaskedInput from 'react-input-mask';
 
@@ -122,7 +121,7 @@ const StepSignUp02 = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     />
                     <div className="mt-4 d-flex justify-content-center">
                         <button className="btn btn-success w-40 m-1" type="button" onClick={prevStep}>Anterior</button>
-                        <button className="btn btn-success w-40 m-1" type="button" onClick={nextStep} disabled={!requiredFieldsFilled}>Próximo</button>
+                        <button className="btn btn-success w-40 m-1 next" type="button" onClick={nextStep} disabled={!requiredFieldsFilled}>Próximo</button>
                     </div>
                 </Container>
 

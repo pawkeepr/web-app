@@ -22,12 +22,15 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     const [disabledInputs, setDisabledInputs] = useState({ state: false, city: false, neighborhood: false, street: false, complement: false })
 
-    const { values, setFieldValue, setFieldError } = useFormikContext<InitialStateSignUp>()
+    const { values, setFieldValue } = useFormikContext<InitialStateSignUp>()
     const { address } = values
     const { zipCode } = address
 
     const updateAddressFields = useCallback(
-        ({ uf, localidade, bairro, logradouro, complemento }: IAddress) => {
+        (params: IAddress) => {
+            if (!params) return
+
+            const { uf, localidade, bairro, logradouro, complemento } = params
             setFieldValue('address.state', uf || '')
 
             setFieldValue('address.city', localidade || '')
@@ -79,7 +82,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <div className="mt-4 d-flex justify-content-center">
                     <button className="btn btn-success w-40 m-1" type="button" onClick={prevStep}>Anterior</button>
                     <button
-                        className="btn btn-success w-40 m-1"
+                        className="btn btn-success w-40 m-1 next"
                         type="button"
                         onClick={nextStep}
                         disabled={!requiredFieldsFilled || loading}
