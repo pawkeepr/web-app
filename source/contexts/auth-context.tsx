@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import getConfig from 'next/config';
 import { usePathname, useRouter } from 'next/navigation';
 import { createContext, useCallback, useEffect } from "react";
@@ -41,6 +42,7 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
+
     const dispatch = useAppDispatch();
     const {
         user,
@@ -96,14 +98,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }, [dispatch]);
 
     useEffect(() => {
-        if (!isAuthenticated && !publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
-            router.push('/sign-in');
+        if (isAuthenticated && !publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
+            return;
+        }
+
+        if (!isAuthenticated && publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
+            return;
         }
 
         if (isAuthenticated && publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
-            router.push('/dashboard');
+            return router.push('/dashboard');
         }
-    }, [router, isAuthenticated, publicRuntimeConfig?.publicRoutes, pathname]);
+
+        if (!isAuthenticated && !publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
+            return router.push('/sign-in');
+        }
+
+    }, [isAuthenticated]);
 
     return (
         <AuthContext.Provider
