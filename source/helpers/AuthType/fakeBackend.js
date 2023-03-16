@@ -77,9 +77,9 @@ import {
 let users = [
   {
     uid: 1,
-    email: "murilomontinojr@hotmai.com",
+    email: "murilomontinojr@hotmail.com",
     role: "admin",
-    password: "123456",
+    password: "senha123",
     firstName: 'Murilo',
     lastName: 'Montino',
     crmv: 'AA0000',
@@ -102,34 +102,39 @@ const fakeBackend = () => {
     });
   });
 
-  mock.onGet("/get-jwt-user").reply(config => {
-
+  mock.onGet("/get-user-jwt-token").reply(config => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        return resolve([200, { data: users[0] }]);
+      })
+    })
   })
 
   mock.onPost("/post-jwt-login").reply(config => {
     const user = JSON.parse(config["data"]);
+
     const validUser = users.filter(
-      usr => usr.email === user.email && usr.password === user.password
+      usr => usr.email === user.username && usr.password === user.password
     );
 
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (validUser["length"] === 1) {
+        if (validUser.length === 1) {
           // You have to generate AccessToken by jwt. but this is fakeBackend so, right now its dummy
-          const token = accessToken;
+          const token = nodeApiToken;
 
           // JWT AccessToken
-          const tokenObj = { accessToken: token }; // Token Obj
+          const tokenObj = { access_token: token }; // Token Obj
           const validUserObj = { ...validUser[0], ...tokenObj }; // validUser Obj
 
-          resolve([200, validUserObj]);
+          resolve([200, { data: validUserObj }]);
         } else {
           reject([
             400,
             "Username and password are invalid. Please enter correct username and password",
           ]);
         }
-      });
+      }, 1000);
     });
   });
 
