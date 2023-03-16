@@ -31,7 +31,7 @@ export * from "./fileManager/action";
 export * from './formAdvanced/action';
 //invoice
 export * from "./invoice/action";
-export * from "./layouts/action";
+export * from "./layouts/actions";
 //mailbox
 export * from "./mailbox/action";
 //project

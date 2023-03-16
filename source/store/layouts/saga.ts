@@ -2,33 +2,50 @@
 import { all, call, fork, takeEvery } from "redux-saga/effects";
 
 import {
-    CHANGE_LAYOUT,
-    CHANGE_SIDEBAR_THEME,
-    CHANGE_LAYOUT_MODE,
-    CHANGE_LAYOUT_WIDTH,
-    CHANGE_LAYOUT_POSITION,
-    CHANGE_TOPBAR_THEME,
-    CHANGE_SIDEBAR_SIZE_TYPE,
-    CHANGE_SIDEBAR_VIEW,
-    CHANGE_SIDEBAR_IMAGE_TYPE,
-    CHANGE_PRELOADER
-} from './actionType';
+    changeLayoutMode as actionChangeLayoutMode,
+    changeLayoutPosition as actionChangeLayoutPosition,
+    changeLayoutWidth as actionChangeLayoutWidth,
+    changePreloader as actionChangePreloader,
+    changeSidebarImageType as actionChangeSidebarImageType,
+    changeTopbarTheme as actionChangeTopbarTheme,
+    changeLayout,
+    changeSidebarSizeType,
+    changeSidebarTheme,
+    changeSidebarView,
+} from './actions';
+
+import {
+    layoutModeTypes,
+    layoutPositionTypes,
+    layoutTypes,
+    layoutWidthTypes,
+    leftSideBarSizeTypes,
+    leftSidebarImageTypes,
+    leftSidebarTypes,
+    leftSidebarViewTypes,
+    preloaderTypes,
+    topbarThemeTypes
+} from "../../Components/constants/layout";
 
 /**
  * Changes the body attribute
  */
-function changeHTMLAttribute(attribute, value) {
+function changeHTMLAttribute(attribute: any, value: any) {
     if (document.documentElement) document.documentElement.setAttribute(attribute, value);
     return true;
+}
+
+interface GenericPayload<T> {
+    payload: T;
 }
 
 /**
  * Changes the layout type
  * @param {*} param0
  */
-function* changeLayoutTheme({ payload: layout }) {
+function* changeLayoutTheme({ payload: layout }: GenericPayload<layoutTypes>) {
     try {
-        if (layout === "twocolumn") {
+        if (layout === "two_column") {
             document.documentElement.removeAttribute("data-layout-width");
         } else if (layout === "horizontal") {
             document.documentElement.removeAttribute("data-sidebar-size");
@@ -44,7 +61,7 @@ function* changeLayoutTheme({ payload: layout }) {
  * Changes the layout mode
  * @param {*} param0
  */
-function* changeLayoutMode({ payload: mode }) {
+function* changeLayoutMode({ payload: mode }: GenericPayload<layoutModeTypes>) {
     try {
         yield call(changeHTMLAttribute, "data-layout-mode", mode);
     } catch (error) {
@@ -56,7 +73,7 @@ function* changeLayoutMode({ payload: mode }) {
  * Changes the left sidebar theme
  * @param {*} param0
  */
-function* changeLeftSidebarTheme({ payload: theme }) {   
+function* changeLeftSidebarTheme({ payload: theme }: GenericPayload<leftSidebarTypes>) {
     try {
         yield call(changeHTMLAttribute, "data-sidebar", theme);
     } catch (error) {
@@ -68,7 +85,7 @@ function* changeLeftSidebarTheme({ payload: theme }) {
  * Changes the layout width
  * @param {*} param0
  */
-function* changeLayoutWidth({ payload: layoutWidth }) {
+function* changeLayoutWidth({ payload: layoutWidth }: GenericPayload<layoutWidthTypes>) {
     try {
         if (layoutWidth === 'lg') {
             yield call(changeHTMLAttribute, "data-layout-width", "fluid");
@@ -85,9 +102,9 @@ function* changeLayoutWidth({ payload: layoutWidth }) {
  * Changes the layout position
  * @param {*} param0
  */
-function* changeLayoutPosition({ payload: layoutposition }) {
+function* changeLayoutPosition({ payload: layoutPosition }: GenericPayload<layoutPositionTypes>) {
     try {
-        yield call(changeHTMLAttribute, "data-layout-position", layoutposition);
+        yield call(changeHTMLAttribute, "data-layout-position", layoutPosition);
     } catch (error) {
         // console.log(error);
     }
@@ -97,7 +114,7 @@ function* changeLayoutPosition({ payload: layoutposition }) {
  * Changes the topbar themes
  * @param {*} param0
  */
-function* changeTopbarTheme({ payload: topbarTheme }) {
+function* changeTopbarTheme({ payload: topbarTheme }: GenericPayload<topbarThemeTypes>) {
     try {
         yield call(changeHTMLAttribute, "data-topbar", topbarTheme);
     } catch (error) {
@@ -109,9 +126,9 @@ function* changeTopbarTheme({ payload: topbarTheme }) {
  * Changes the topbar themes
  * @param {*} param0
  */
- function* changeSidebarImageType({ payload: leftsidebarImagetype }) {
+function* changeSidebarImageType({ payload: leftSideBarImageType }: GenericPayload<leftSidebarImageTypes>) {
     try {
-        yield call(changeHTMLAttribute, "data-sidebar-image", leftsidebarImagetype);
+        yield call(changeHTMLAttribute, "data-sidebar-image", leftSideBarImageType);
     } catch (error) {
         // console.log(error);
     }
@@ -121,7 +138,7 @@ function* changeTopbarTheme({ payload: topbarTheme }) {
  * Changes the Preloader
  * @param {*} param0
  */
- function* changePreloader({ payload: preloaderTypes }) {
+function* changePreloader({ payload: preloaderTypes }: GenericPayload<preloaderTypes>) {
     try {
         yield call(changeHTMLAttribute, "data-preloader", preloaderTypes);
     } catch (error) {
@@ -134,9 +151,9 @@ function* changeTopbarTheme({ payload: topbarTheme }) {
  * Changes the topbar themes
  * @param {*} param0
  */
-function* changeLeftsidebarSizeType({ payload: leftsidebarSizetype }) {
+function* changeLeftSideBarSizeType({ payload: leftSideBarSizeType }: GenericPayload<leftSideBarSizeTypes>) {
     try {
-        switch (leftsidebarSizetype) {
+        switch (leftSideBarSizeType) {
             case 'lg':
                 yield call(changeHTMLAttribute, "data-sidebar-size", "lg");
                 break;
@@ -161,9 +178,9 @@ function* changeLeftsidebarSizeType({ payload: leftsidebarSizetype }) {
  * Changes the topbar themes
  * @param {*} param0
  */
-function* changeLeftSidebarViewType({ payload: leftsidebarViewtype }) {
+function* changeLeftSidebarViewType({ payload: leftSideBarViewType }: GenericPayload<leftSidebarViewTypes>) {
     try {
-        yield call(changeHTMLAttribute, "data-layout-style", leftsidebarViewtype);
+        yield call(changeHTMLAttribute, "data-layout-style", leftSideBarViewType);
     } catch (error) {
         // console.log(error);
     }
@@ -173,34 +190,34 @@ function* changeLeftSidebarViewType({ payload: leftsidebarViewtype }) {
  * Watchers
  */
 export function* watchChangeLayoutType() {
-    yield takeEvery(CHANGE_LAYOUT, changeLayoutTheme);
+    yield takeEvery(changeLayout, changeLayoutTheme);
 }
 export function* watchChangeLayoutMode() {
-    yield takeEvery(CHANGE_LAYOUT_MODE, changeLayoutMode);
+    yield takeEvery(actionChangeLayoutMode, changeLayoutMode);
 }
 export function* watchChangeLeftSidebarTheme() {
-    yield takeEvery(CHANGE_SIDEBAR_THEME, changeLeftSidebarTheme);
+    yield takeEvery(changeSidebarTheme, changeLeftSidebarTheme);
 }
 export function* watchChangeLayoutWidth() {
-    yield takeEvery(CHANGE_LAYOUT_WIDTH, changeLayoutWidth);
+    yield takeEvery(actionChangeLayoutWidth, changeLayoutWidth);
 }
 export function* watchChangeLayoutPosition() {
-    yield takeEvery(CHANGE_LAYOUT_POSITION, changeLayoutPosition);
+    yield takeEvery(actionChangeLayoutPosition, changeLayoutPosition);
 }
 export function* watchChangeTopbarTheme() {
-    yield takeEvery(CHANGE_TOPBAR_THEME, changeTopbarTheme);
+    yield takeEvery(actionChangeTopbarTheme, changeTopbarTheme);
 }
-export function* watchChangeLeftsidebarSizeType() {
-    yield takeEvery(CHANGE_SIDEBAR_SIZE_TYPE, changeLeftsidebarSizeType);
+export function* watchChangeLeftSideBarSizeType() {
+    yield takeEvery(changeSidebarSizeType, changeLeftSideBarSizeType);
 }
 export function* watchChangeLeftSidebarViewType() {
-    yield takeEvery(CHANGE_SIDEBAR_VIEW, changeLeftSidebarViewType);
+    yield takeEvery(changeSidebarView, changeLeftSidebarViewType);
 }
 export function* watchChangeSidebarImageType() {
-    yield takeEvery(CHANGE_SIDEBAR_IMAGE_TYPE, changeSidebarImageType);
+    yield takeEvery(actionChangeSidebarImageType, changeSidebarImageType);
 }
-export function* watchchangePreloader() {
-    yield takeEvery(CHANGE_PRELOADER, changePreloader);
+export function* watchChangePreloader() {
+    yield takeEvery(actionChangePreloader, changePreloader);
 }
 
 
@@ -212,10 +229,10 @@ function* LayoutSaga() {
         fork(watchChangeLayoutWidth),
         fork(watchChangeLayoutPosition),
         fork(watchChangeTopbarTheme),
-        fork(watchChangeLeftsidebarSizeType),
+        fork(watchChangeLeftSideBarSizeType),
         fork(watchChangeLeftSidebarViewType),
         fork(watchChangeSidebarImageType),
-        fork(watchchangePreloader),
+        fork(watchChangePreloader),
     ]);
 }
 

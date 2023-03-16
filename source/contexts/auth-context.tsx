@@ -42,8 +42,10 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
+    const router = useRouter();
+    const pathname = usePathname()
+    const { publicRuntimeConfig } = getConfig();
 
-    const dispatch = useAppDispatch();
     const {
         user,
         isAuthenticated,
@@ -53,9 +55,26 @@ export function AuthProvider({ children }: AuthProviderProps) {
         username,
         visiblePassword,
     } = useAppSelector(state => state.Login as LoginState);
-    const router = useRouter();
-    const pathname = usePathname()
-    const { publicRuntimeConfig } = getConfig();
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (isAuthenticated && !publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
+            return;
+        }
+
+        if (!isAuthenticated && publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
+            return;
+        }
+
+        if (isAuthenticated && publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
+            return router.push('/dashboard');
+        }
+
+        if (!isAuthenticated && !publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
+            return router.push('/sign-in');
+        }
+
+    }, [isAuthenticated]);
 
     useEffect(() => {
         dispatch(recoverUserByToken(getCookie(cookies.token.name)));
@@ -96,25 +115,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const onToggleVisiblePassword = useCallback(() => {
         dispatch(onToggleVisiblePasswordAction());
     }, [dispatch]);
-
-    useEffect(() => {
-        if (isAuthenticated && !publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
-            return;
-        }
-
-        if (!isAuthenticated && publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
-            return;
-        }
-
-        if (isAuthenticated && publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
-            return router.push('/dashboard');
-        }
-
-        if (!isAuthenticated && !publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
-            return router.push('/sign-in');
-        }
-
-    }, [isAuthenticated]);
 
     return (
         <AuthContext.Provider

@@ -1,7 +1,7 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
 // Front
-import Layout from "./layouts/reducer";
+import Layout from "./layouts/slice";
 
 // Authentication
 import ForgetPassword from "./auth/forgetpwd/reducer";

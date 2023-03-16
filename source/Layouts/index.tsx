@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 //import Components
 import Footer from './Footer';
 import Header from './Header';
-import Sidebar from './Sidebar';
 
 //import actions
 import {
@@ -14,20 +13,25 @@ import {
     changeLayoutMode,
     changeLayoutPosition,
     changeLayoutWidth,
-    changeLeftsidebarSizeType,
-    changeLeftsidebarViewType,
+    changeSideBarSizeType,
+    changeSideBarView,
     changeSidebarImageType,
     changeSidebarTheme,
     changeTopbarTheme
-} from "../store/actions";
+} from "../store/layouts/slice";
 
 //redux
-import { useDispatch, useSelector } from "react-redux";
+import { layoutModeTypes } from "~/Components/constants/layout";
+import { useAppDispatch, useAppSelector } from "~/store/hooks";
 
 
-const Layout = (props) => {
+type LayoutProps = {
+    children: React.ReactNode;
+}
 
-    const dispatch = useDispatch();
+const Layout = ({ children }: LayoutProps) => {
+
+    const dispatch = useAppDispatch();
     const {
         layoutType,
         leftSidebarType,
@@ -35,17 +39,17 @@ const Layout = (props) => {
         layoutWidthType,
         layoutPositionType,
         topbarThemeType,
-        leftsidbarSizeType,
+        leftSideBarSizeType,
         leftSidebarViewType,
         leftSidebarImageType
-    } = useSelector(state => ({
+    } = useAppSelector(state => ({
         layoutType: state.Layout.layoutType,
         leftSidebarType: state.Layout.leftSidebarType,
         layoutModeType: state.Layout.layoutModeType,
         layoutWidthType: state.Layout.layoutWidthType,
         layoutPositionType: state.Layout.layoutPositionType,
         topbarThemeType: state.Layout.topbarThemeType,
-        leftsidbarSizeType: state.Layout.leftsidbarSizeType,
+        leftSideBarSizeType: state.Layout.leftSideBarSizeType,
         leftSidebarViewType: state.Layout.leftSidebarViewType,
         leftSidebarImageType: state.Layout.leftSidebarImageType,
     }));
@@ -61,12 +65,12 @@ const Layout = (props) => {
             layoutWidthType ||
             layoutPositionType ||
             topbarThemeType ||
-            leftsidbarSizeType ||
+            leftSideBarSizeType ||
             leftSidebarViewType ||
             leftSidebarImageType
         ) {
-            dispatch(changeLeftsidebarViewType(leftSidebarViewType));
-            dispatch(changeLeftsidebarSizeType(leftsidbarSizeType));
+            dispatch(changeSideBarView(leftSidebarViewType));
+            dispatch(changeSideBarSizeType(leftSideBarSizeType));
             dispatch(changeSidebarTheme(leftSidebarType));
             dispatch(changeLayoutMode(layoutModeType));
             dispatch(changeLayoutWidth(layoutWidthType));
@@ -81,14 +85,14 @@ const Layout = (props) => {
         layoutWidthType,
         layoutPositionType,
         topbarThemeType,
-        leftsidbarSizeType,
+        leftSideBarSizeType,
         leftSidebarViewType,
         leftSidebarImageType,
         dispatch]);
     /*
     call dark/light mode
     */
-    const onChangeLayoutMode = (value) => {
+    const onChangeLayoutMode = (value: layoutModeTypes) => {
         if (changeLayoutMode) {
             dispatch(changeLayoutMode(value));
         }
@@ -100,8 +104,8 @@ const Layout = (props) => {
         window.addEventListener("scroll", scrollNavigation, true);
     });
     function scrollNavigation() {
-        var scrollup = document.documentElement.scrollTop;
-        if (scrollup > 50) {
+        const scrollUp = document.documentElement.scrollTop;
+        if (scrollUp > 50) {
             setHeaderClass("topbar-shadow");
         } else {
             setHeaderClass("");
@@ -115,9 +119,9 @@ const Layout = (props) => {
                     headerClass={headerClass}
                     layoutModeType={layoutModeType}
                     onChangeLayoutMode={onChangeLayoutMode} />
-                <Sidebar layoutType={layoutType} />
+                {/* <Sidebar layoutType={layoutType} /> */}
                 <div className="main-content">
-                    {props.children}
+                    {children}
                     <Footer />
                 </div>
             </div>

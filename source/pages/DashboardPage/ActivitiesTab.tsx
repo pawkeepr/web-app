@@ -1,19 +1,19 @@
+import Link from 'next/link';
 import React from 'react';
 import { Card, CardBody, Col, Row } from 'reactstrap';
-import Link from 'next/link';
 
 //import images
-import avatar1 from "~/assets/images/users/avatar-1.jpg";
-import avatar4 from "~/assets/images/users/avatar-4.jpg";
-import avatar3 from "~/assets/images/users/avatar-3.jpg";
-import avatar2 from "~/assets/images/users/avatar-2.jpg";
-import avatar6 from "~/assets/images/users/avatar-6.jpg";
-import avatar7 from "~/assets/images/users/avatar-7.jpg";
-import avatar8 from "~/assets/images/users/avatar-8.jpg";
+import Image from 'next/image';
 import image2 from "~/assets/images/small/img-2.jpg";
 import image3 from "~/assets/images/small/img-3.jpg";
 import image4 from "~/assets/images/small/img-4.jpg";
-import Image from 'next/image';
+import avatar1 from "~/assets/images/users/avatar-1.jpg";
+import avatar2 from "~/assets/images/users/avatar-2.jpg";
+import avatar3 from "~/assets/images/users/avatar-3.jpg";
+import avatar4 from "~/assets/images/users/avatar-4.jpg";
+import avatar6 from "~/assets/images/users/avatar-6.jpg";
+import avatar7 from "~/assets/images/users/avatar-7.jpg";
+import avatar8 from "~/assets/images/users/avatar-8.jpg";
 
 const ActivitiesTab = () => {
     return (
@@ -21,10 +21,10 @@ const ActivitiesTab = () => {
             <Card>
                 <CardBody>
                     <h5 className="card-title">Activities</h5>
-                    <div className="acitivity-timeline py-3">
-                        <div className="acitivity-item d-flex">
+                    <div className="activity-timeline py-3">
+                        <div className="activity-item d-flex">
                             <div className="flex-shrink-0">
-                                <Image src={avatar1} alt="" className="avatar-xs rounded-circle acitivity-avatar" />
+                                <Image src={avatar1} alt="" className="avatar-xs rounded-circle activity-avatar" />
                             </div>
                             <div className="flex-grow-1 ms-3">
                                 <h6 className="mb-1">Oliver Phillips <span className="badge bg-soft-primary text-primary align-middle">New</span></h6>
@@ -32,8 +32,8 @@ const ActivitiesTab = () => {
                                 <small className="mb-0 text-muted">Today</small>
                             </div>
                         </div>
-                        <div className="acitivity-item py-3 d-flex">
-                            <div className="flex-shrink-0 avatar-xs acitivity-avatar">
+                        <div className="activity-item py-3 d-flex">
+                            <div className="flex-shrink-0 avatar-xs activity-avatar">
                                 <div className="avatar-title bg-soft-success text-success rounded-circle">
                                     N
                                 </div>
@@ -66,7 +66,7 @@ const ActivitiesTab = () => {
                                 <small className="mb-0 text-muted">Yesterday</small>
                             </div>
                         </div>
-                        <div className="acitivity-item py-3 d-flex">
+                        <div className="activity-item py-3 d-flex">
                             <div className="flex-shrink-0">
                                 <Image src={avatar2} alt="" className="avatar-xs rounded-circle acitivity-avatar" />
                             </div>
@@ -91,9 +91,9 @@ const ActivitiesTab = () => {
                                 <small className="mb-0 text-muted">25 Nov</small>
                             </div>
                         </div>
-                        <div className="acitivity-item py-3 d-flex">
+                        <div className="activity-item py-3 d-flex">
                             <div className="flex-shrink-0">
-                                <Image src={avatar6} alt="" className="avatar-xs rounded-circle acitivity-avatar" />
+                                <Image src={avatar6} alt="" className="avatar-xs rounded-circle activity-avatar" />
                             </div>
                             <div className="flex-grow-1 ms-3">
                                 <h6 className="mb-1">Bethany Johnson</h6>
@@ -101,9 +101,9 @@ const ActivitiesTab = () => {
                                 <small className="mb-0 text-muted">19 Nov</small>
                             </div>
                         </div>
-                        <div className="acitivity-item py-3 d-flex">
+                        <div className="activity-item py-3 d-flex">
                             <div className="flex-shrink-0">
-                                <div className="avatar-xs acitivity-avatar">
+                                <div className="avatar-xs activity-avatar">
                                     <div className="avatar-title rounded-circle bg-soft-danger text-danger">
                                         <i className="ri-shopping-bag-line"></i>
                                     </div>
@@ -115,9 +115,9 @@ const ActivitiesTab = () => {
                                 <small className="mb-0 text-muted">16 Nov</small>
                             </div>
                         </div>
-                        <div className="acitivity-item py-3 d-flex">
+                        <div className="activity-item py-3 d-flex">
                             <div className="flex-shrink-0">
-                                <Image src={avatar7} alt="" className="avatar-xs rounded-circle acitivity-avatar" />
+                                <Image src={avatar7} alt="" className="avatar-xs rounded-circle activity-avatar" />
                             </div>
                             <div className="flex-grow-1 ms-3">
                                 <h6 className="mb-1">Lewis Pratt</h6>
@@ -125,9 +125,9 @@ const ActivitiesTab = () => {
                                 <small className="mb-0 text-muted">22 Oct</small>
                             </div>
                         </div>
-                        <div className="acitivity-item py-3 d-flex">
+                        <div className="activity-item py-3 d-flex">
                             <div className="flex-shrink-0">
-                                <div className="avatar-xs acitivity-avatar">
+                                <div className="avatar-xs activity-avatar">
                                     <div className="avatar-title rounded-circle bg-soft-info text-info">
                                         <i className="ri-line-chart-line"></i>
                                     </div>
@@ -140,9 +140,9 @@ const ActivitiesTab = () => {
                                 <small className="mb-0 text-muted">15 Oct</small>
                             </div>
                         </div>
-                        <div className="acitivity-item d-flex">
+                        <div className="activity-item d-flex">
                             <div className="flex-shrink-0">
-                                <Image src={avatar8} alt="" className="avatar-xs rounded-circle acitivity-avatar" />
+                                <Image src={avatar8} alt="" className="avatar-xs rounded-circle activity-avatar" />
                             </div>
                             <div className="flex-grow-1 ms-3">
                                 <h6 className="mb-1">New ticket received <span className="badge bg-soft-success text-success align-middle">Completed</span></h6>

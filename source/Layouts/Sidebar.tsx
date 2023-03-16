@@ -1,19 +1,24 @@
-import React, { useEffect } from "react";
 import Link from "next/link";
+import React, { useEffect } from "react";
 import SimpleBar from "simplebar-react";
 //import logo
-import logoSm from "~/assets/images/logo-sm.png";
 import logoDark from "~/assets/images/logo-dark.png";
 import logoLight from "~/assets/images/logo-light.png";
+import logoSm from "~/assets/images/logo-sm.png";
 
 //Import Components
-import VerticalLayout from "./VerticalLayouts/index";
-import TwoColumnLayout from "./TwoColumnLayout";
-import { Container } from "reactstrap";
-import HorizontalLayout from "./HorizontalLayout";
 import Image from "next/image";
+import { Container } from "reactstrap";
+import { layoutTypes } from "~/Components/constants/layout";
+import HorizontalLayout from "./HorizontalLayout";
+import TwoColumnLayout from "./TwoColumnLayout";
+import VerticalLayout from "./VerticalLayouts/index";
 
-const Sidebar = ({ layoutType }) => {
+type SidebarProps = {
+  layoutType: layoutTypes
+}
+
+const Sidebar = ({ layoutType }: SidebarProps) => {
 
   useEffect(() => {
     var verticalOverlay = document.getElementsByClassName("vertical-overlay");
@@ -65,7 +70,8 @@ const Sidebar = ({ layoutType }) => {
             <i className="ri-record-circle-line"></i>
           </button>
         </div>
-        {layoutType === "horizontal" ? (
+
+        {layoutType === layoutTypes.HORIZONTAL && (
           <div id="scrollbar">
             <Container fluid>
               <div id="two-column-menu"></div>
@@ -74,24 +80,29 @@ const Sidebar = ({ layoutType }) => {
               </ul>
             </Container>
           </div>
-        ) : layoutType === 'twocolumn' ? (
+        )}
+
+        {layoutType === layoutTypes.TWO_COLUMN && (
           <React.Fragment>
             <TwoColumnLayout layoutType={layoutType} />
             <div className="sidebar-background"></div>
           </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <SimpleBar id="scrollbar" className="h-100">
-              <Container fluid>
-                <div id="two-column-menu"></div>
-                <ul className="navbar-nav" id="navbar-nav">
-                  <VerticalLayout layoutType={layoutType} />
-                </ul>
-              </Container>
-            </SimpleBar>
-            <div className="sidebar-background"></div>
-          </React.Fragment>
         )}
+
+        {
+          layoutType === layoutTypes.VERTICAL && (
+            <React.Fragment>
+              <SimpleBar id="scrollbar" className="h-100">
+                <Container fluid>
+                  <div id="two-column-menu"></div>
+                  <ul className="navbar-nav" id="navbar-nav">
+                    <VerticalLayout layoutType={layoutType} />
+                  </ul>
+                </Container>
+              </SimpleBar>
+              <div className="sidebar-background"></div>
+            </React.Fragment>
+          )}
       </div>
       <div className="vertical-overlay"></div>
     </React.Fragment>
