@@ -21,7 +21,6 @@ import {
 } from "../store/layouts/slice";
 
 //redux
-import { layoutModeTypes } from "~/Components/constants/layout";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 
 
@@ -79,7 +78,8 @@ const Layout = ({ children }: LayoutProps) => {
             dispatch(changeLayout(layoutType));
             dispatch(changeSidebarImageType(leftSidebarImageType))
         }
-    }, [layoutType,
+    }, [
+        layoutType,
         leftSidebarType,
         layoutModeType,
         layoutWidthType,
@@ -88,21 +88,15 @@ const Layout = ({ children }: LayoutProps) => {
         leftSideBarSizeType,
         leftSidebarViewType,
         leftSidebarImageType,
-        dispatch]);
-    /*
-    call dark/light mode
-    */
-    const onChangeLayoutMode = (value: layoutModeTypes) => {
-        if (changeLayoutMode) {
-            dispatch(changeLayoutMode(value));
-        }
-    };
+        dispatch
+    ]);
 
     const [headerClass, setHeaderClass] = useState("");
     // class add remove in header
     useEffect(() => {
         window.addEventListener("scroll", scrollNavigation, true);
     });
+
     function scrollNavigation() {
         const scrollUp = document.documentElement.scrollTop;
         if (scrollUp > 50) {
@@ -115,10 +109,7 @@ const Layout = ({ children }: LayoutProps) => {
     return (
         <React.Fragment>
             <div id="layout-wrapper">
-                <Header
-                    headerClass={headerClass}
-                    layoutModeType={layoutModeType}
-                    onChangeLayoutMode={onChangeLayoutMode} />
+                <Header headerClass={headerClass} />
                 {/* <Sidebar layoutType={layoutType} /> */}
                 <div className="main-content">
                     {children}

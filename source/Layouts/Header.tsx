@@ -1,10 +1,5 @@
 import Link from 'next/link';
-import { useState } from 'react';
 
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownMenu from 'react-bootstrap/DropdownMenu';
-import DropdownToggle from 'react-bootstrap/DropdownToggle';
-import Form from 'react-bootstrap/Form';
 
 //import images
 import logoDark from "~/assets/images/logo-dark.png";
@@ -19,17 +14,10 @@ import ProfileDropdown from '../Components/Common/ProfileDropdown';
 import SearchOption from '../Components/Common/SearchOption';
 
 type HeaderProps = {
-    onChangeLayoutMode: (value: any) => void;
-    layoutModeType: string;
     headerClass: string;
 }
 
-const Header = ({ onChangeLayoutMode, layoutModeType, headerClass }: HeaderProps) => {
-
-    const [search, setSearch] = useState(false);
-    const toggleSearch = () => {
-        setSearch(!search);
-    };
+const Header = ({ headerClass }: HeaderProps) => {
 
     const toggleMenuBtn = () => {
         var windowSize = document.documentElement.clientWidth;
@@ -63,7 +51,7 @@ const Header = ({ onChangeLayoutMode, layoutModeType, headerClass }: HeaderProps
     };
 
     return (
-        <header id="page-topbar" >
+        <header id="page-topbar" className={headerClass}>
             <div className="layout-width">
                 <div className="navbar-header">
                     <div className="d-flex">
@@ -106,24 +94,6 @@ const Header = ({ onChangeLayoutMode, layoutModeType, headerClass }: HeaderProps
 
                     <div className="d-flex align-items-center">
 
-                        <Dropdown isOpen={search} toggle={toggleSearch} className="d-md-none topbar-head-dropdown header-item">
-                            <DropdownToggle type="button" tag="button" className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle">
-                                <i className="bx bx-search fs-22"></i>
-                            </DropdownToggle>
-                            <DropdownMenu className="dropdown-menu-lg dropdown-menu-end p-0">
-                                <Form className="p-3">
-                                    <div className="form-group m-0">
-                                        <div className="input-group">
-                                            <input type="text" className="form-control" placeholder="Search ..."
-                                                aria-label="Recipient's username" />
-                                            <button className="btn btn-primary" type="submit"><i
-                                                className="mdi mdi-magnify"></i></button>
-                                        </div>
-                                    </div>
-                                </Form>
-                            </DropdownMenu>
-                        </Dropdown>
-
                         {/* LanguageDropdown */}
                         {/* <LanguageDropdown /> */}
 
@@ -137,10 +107,7 @@ const Header = ({ onChangeLayoutMode, layoutModeType, headerClass }: HeaderProps
                         <FullScreenDropdown />
 
                         {/* Dark/Light Mode set */}
-                        <LightDark
-                            layoutMode={layoutModeType}
-                            onChangeLayoutMode={onChangeLayoutMode}
-                        />
+                        <LightDark />
 
                         {/* NotificationDropdown */}
                         {/* <NotificationDropdown /> */}
