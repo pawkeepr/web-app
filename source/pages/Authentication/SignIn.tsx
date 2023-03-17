@@ -9,8 +9,9 @@ import LOADING from '~/constants/loading';
 import useAuth from '~/hooks/use-auth';
 import AuthInputs from './components/organism/auth-inputs';
 
-const CoverSignIn = () => {
+import LogoSimple from '~/Components/atoms/logo-simple';
 
+const CoverSignIn = () => {
     const {
         isLoading,
     } = useAuth()
@@ -32,7 +33,8 @@ const CoverSignIn = () => {
                                         <AuthSlider bg='auth-bg-image-3' />
 
                                         <Col lg={6}>
-                                            <div className="p-lg-5 p-4">
+                                            <div className="p-lg-5 p-4 items-center d-flex flex-col justify-center h-100">
+                                                <LogoSimple />
                                                 <div>
                                                     <h5 className="text-primary">Bem Vindo!</h5>
                                                     <p className="text-muted">Entre para ter acesso a todas as funcionalidades.</p>
