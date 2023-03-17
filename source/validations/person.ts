@@ -24,7 +24,18 @@ const validate = Yup.object().shape({
         otherwise: Yup.string().nullable(),
     }),
     // age: Yup.number().positive().integer().required(),
-    phoneNumber: Yup.string().matches(/^[\d()-\s]+$/).required(),
+    phoneNumber: Yup.string().matches(/^[\d()-\s]+$/)
+        .test('valid-phone-number', 'Número de telefone inválido', (value) => {
+            if (!value) {
+                return false;
+            }
+
+            // Removendo caracteres não numéricos do número de telefone
+            const numericValue = value.replace(/\D/g, '');
+
+            // Verificando se o número de telefone tem pelo menos 10 dígitos
+            return numericValue.length >= 10;
+        }).required(),
     document: Yup.string()
         .required('Este campo é obrigatório')
         .transform(value => value.replace(/[^\d]/g, ''))
