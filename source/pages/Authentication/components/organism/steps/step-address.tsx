@@ -58,14 +58,14 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
     }, [address, cepInvalid])
 
     return (
-        <div className="p-lg-5 p-4">
+        <div className="container p-lg-5 p-4 h-screen">
             <div>
                 <h5 className="text-primary">Criar Conta</h5>
                 <p className="text-muted">Crie uma conta PawKeeprs gratuita agora e aproveite.</p>
             </div>
 
             <Container className="d-flex flex-column mt-4">
-                <CountrySelect />
+                <CountrySelect className="mb-2" />
                 <FieldControl
                     className="form-control"
                     type="text"
@@ -80,9 +80,15 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <Address loading={loading} disabledInputs={disabledInputs} />
 
                 <div className="mt-4 d-flex justify-content-center">
-                    <button className="btn btn-success w-40 m-1" type="button" onClick={prevStep}>Anterior</button>
                     <button
-                        className="btn btn-success w-40 m-1 next"
+                        className="btn btn-danger bg-red-500 w-40 m-1"
+                        type="button"
+                        onClick={prevStep}
+                    >
+                        Anterior
+                    </button>
+                    <button
+                        className="btn btn-success bg-green-600 w-40 m-1 next"
                         type="button"
                         onClick={nextStep}
                         disabled={!requiredFieldsFilled || loading}

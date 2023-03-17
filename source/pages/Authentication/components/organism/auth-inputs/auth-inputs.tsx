@@ -121,7 +121,7 @@ const Auth = () => {
 
                     <Form.Check
                         type="checkbox"
-                        className="w-100"
+                        className="w-full"
                         name="rememberMe"
                         id="rememberMe"
                         onChange={onToggleRememberMe}
@@ -134,8 +134,8 @@ const Auth = () => {
 
                     <div className="mt-4">
                         <Button
-                            color="success"
-                            className="w-100"
+                            color="primary"
+                            className="w-full bg-green-600"
                             type="submit"
                             data-testid="submit-button"
                             disabled={!isValid}

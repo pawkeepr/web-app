@@ -5,21 +5,18 @@ import Form from "react-bootstrap/Form"
 import { AccountSignUp } from "~/store/auth/register/types"
 import { StepProps } from "./types"
 
-const StepTermsOfUse = ({ prevStep }: StepProps) => {
+const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
 
-    const { values, handleChange, handleSubmit, errors, isValid } = useFormikContext<AccountSignUp>()
+    const { values, handleChange, isValid } = useFormikContext<AccountSignUp>()
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        console.log('chega aki')
-        console.log(values)
-        console.log(errors)
-        handleSubmit()
+        nextStep()
     }
 
 
     return (
-        <Container className="p-lg-5 p-4">
+        <Container className="p-lg-5 p-4 h-screen">
             <div className="mt-4">
                 <h4>Informações pessoais</h4>
                 <ul className="list-unstyled">
@@ -84,16 +81,18 @@ const StepTermsOfUse = ({ prevStep }: StepProps) => {
                     } />
             </div>
             <div className="mt-4 d-flex justify-content-center">
-                <button className="btn btn-danger w-40 m-1" type="button" onClick={prevStep}>Anterior</button>
+                <button className="btn btn-danger w-40 m-1 bg-red-500" type="button" onClick={prevStep}>Anterior</button>
             </div>
-            <button
-                className="btn btn-success w-40 m-1 align-self-center"
-                type="submit"
-                onClick={handleClick}
-                disabled={!isValid}
-            >
-                Cadastrar
-            </button>
+            <div className="d-flex justify-content-center align-items-center">
+                <button
+                    className="btn btn-success bg-green-600 w-40 m-1 align-self-center"
+                    type="submit"
+                    onClick={handleClick}
+                    disabled={!isValid}
+                >
+                    Cadastrar
+                </button>
+            </div>
         </Container>
     )
 }

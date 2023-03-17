@@ -43,7 +43,7 @@ const StepSignUp02 = ({ nextStep, prevStep, ...rest }: StepProps) => {
     }, [document])
 
     return (
-        <div className="p-lg-5 p-4">
+        <div className="container p-lg-5 p-4 h-screen">
             <div>
                 <h5 className="text-primary">Criar Conta</h5>
                 <p className="text-muted">Crie uma conta PawKeeprs gratuita agora e aproveite.</p>
@@ -120,8 +120,21 @@ const StepSignUp02 = ({ nextStep, prevStep, ...rest }: StepProps) => {
                         required
                     />
                     <div className="mt-4 d-flex justify-content-center">
-                        <button className="btn btn-success w-40 m-1" type="button" onClick={prevStep}>Anterior</button>
-                        <button className="btn btn-success w-40 m-1 next" type="button" onClick={nextStep} disabled={!requiredFieldsFilled}>Próximo</button>
+                        <button
+                            className="btn btn-danger bg-red-500 w-40 m-1"
+                            type="button"
+                            onClick={prevStep}
+                        >
+                            Anterior
+                        </button>
+                        <button
+                            className="btn btn-success bg-green-600 w-40 m-1 next"
+                            type="button"
+                            onClick={nextStep}
+                            disabled={!requiredFieldsFilled}
+                        >
+                            Próximo
+                        </button>
                     </div>
                 </Container>
 

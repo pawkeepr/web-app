@@ -14,19 +14,20 @@ import { AccountSignUp } from '~/store/auth/register/types';
 import { StepProps } from './types';
 
 
-const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
+const StepSignUpBasicAuth = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const [passwordShow, setPasswordShow] = useState(false);
     const [passwordConfirmShow, setPasswordConfirmShow] = useState(false);
 
     const { values, handleBlur } = useFormikContext<AccountSignUp>()
-    const { email, password } = values;
+    const { email, password, passwordConfirm } = values;
 
     const requiredFieldsFilled = useMemo(() => {
         return (
             validatePassword.isValidSync(password) &&
-            validateEmail.isValidSync(email)
+            validateEmail.isValidSync(email) &&
+            password === passwordConfirm
         );
-    }, [email, password])
+    }, [email, password, passwordConfirm])
 
     const onToggleVisiblePassword = () => {
         setPasswordShow(state => !state)
@@ -37,7 +38,7 @@ const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
     }
 
     return (
-        <Container className="p-lg-5 p-4">
+        <Container className="p-lg-5 p-4 h-screen">
             <div>
                 <h5 className="text-primary">Criar Conta</h5>
                 <p className="text-muted">Crie uma conta PawKeeprs gratuita agora e aproveite.</p>
@@ -94,7 +95,18 @@ const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
 
                 <div className="mt-4 d-flex justify-content-center">
-                    <button className="btn btn-success w-40 m-1 next" type="button" onClick={nextStep} disabled={!requiredFieldsFilled}>Próximo</button>
+                    <button className="
+                    btn 
+                    btn-success 
+                    bg-green-600 
+                    w-40
+                    m-1 
+                    next
+                    "
+                        type="button"
+                        onClick={nextStep}
+                        disabled={!requiredFieldsFilled}
+                    >Próximo</button>
                 </div>
 
             </div>
@@ -102,4 +114,4 @@ const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
     )
 }
 
-export default StepSignUp01
+export default StepSignUpBasicAuth

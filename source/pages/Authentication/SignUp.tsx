@@ -26,9 +26,11 @@ import validatePerson from '~/validations/person';
 import { registerUser } from '~/store/auth/register/slice';
 import { AccountSignUp } from '~/store/auth/register/types';
 import { useAppDispatch } from '~/store/hooks';
-import StepAddress from './components/organism/steps/step-address';
-import StepSignUp01 from './components/organism/steps/step-basic-auth';
-import StepSignUp02 from './components/organism/steps/step-person';
+
+import StepSignUpAddress from './components/organism/steps/step-address';
+import StepSignUpBasicAuth from './components/organism/steps/step-basic-auth';
+import StepSignUpLoading from './components/organism/steps/step-loading';
+import StepSignUpPerson from './components/organism/steps/step-person';
 import StepSignUpTermsOfUse from './components/organism/steps/step-terms-of-use';
 
 
@@ -84,20 +86,24 @@ const CoverSignUp = () => {
     const Tabs = [
         {
             id: '1',
-            component: (props: any) => <StepSignUp01 {...props} />
+            component: (props: any) => <StepSignUpBasicAuth {...props} />
         },
         {
             id: '2',
-            component: (props: any) => <StepSignUp02 {...props} />
+            component: (props: any) => <StepSignUpPerson {...props} />
         },
         {
             id: '3',
-            component: (props: any) => <StepAddress {...props} />
+            component: (props: any) => <StepSignUpAddress {...props} />
         },
         {
             id: '4',
             component: (props: any) => <StepSignUpTermsOfUse {...props} />
         },
+        {
+            id: '5',
+            component: (props: any) => <StepSignUpLoading {...props} />
+        }
     ]
 
     const onChangeNextStep = () => {
@@ -160,7 +166,7 @@ const CoverSignUp = () => {
                                                     </TabContent>
                                                 ))
                                             }
-                                            <div className="p-2 text-center">
+                                            <div className="p-2 text-center mt-4">
                                                 <p className="list-group-item fs-12 mb-4">Você já tem uma conta ?
                                                     <br />
                                                     <Link href="/sign-in" className="fw-semibold text-primary text-decoration-underline">
