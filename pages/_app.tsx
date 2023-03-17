@@ -1,6 +1,8 @@
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Está ordem importa, pois o bootstrap sobrescreve o tailwind
+
 import '~/globals.scss';
+import '~/tailwind.css';
 
 import Provider from "~/store";
 
