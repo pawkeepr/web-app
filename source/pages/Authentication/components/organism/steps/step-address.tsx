@@ -2,7 +2,7 @@
 
 
 import { useFormikContext } from 'formik';
-import Container from 'react-bootstrap/Container';
+
 import Address from '../../molecules/address/address';
 
 import { useCallback, useMemo, useState } from 'react';
@@ -16,7 +16,11 @@ import FieldControl from '~/Components/molecules/field-control/field-control';
 import { IAddress } from '~/helpers/fetch-address-by-cep';
 import useFetchAddress from '~/hooks/use-fetch-address';
 import { AccountSignUp } from '~/store/auth/register/types';
+import BtnCancel from '../../../../../Components/atoms/btn/btn-cancel';
+import BtnSuccess from '../../../../../Components/atoms/btn/btn-success';
+import Container from '../../template/container';
 import { StepProps } from './types';
+
 
 const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
@@ -58,13 +62,9 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
     }, [address, cepInvalid])
 
     return (
-        <div className="container p-lg-5 p-4 h-screen">
-            <div>
-                <h5 className="text-primary">Criar Conta</h5>
-                <p className="text-muted">Crie uma conta PawKeeprs gratuita agora e aproveite.</p>
-            </div>
+        <Container>
 
-            <Container className="d-flex flex-column mt-4">
+            <div className="container d-flex flex-column mt-4">
                 <CountrySelect className="mb-2" />
                 <FieldControl
                     className="form-control"
@@ -80,25 +80,12 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <Address loading={loading} disabledInputs={disabledInputs} />
 
                 <div className="mt-4 d-flex justify-content-center">
-                    <button
-                        className="btn btn-danger bg-red-500 w-40 m-1"
-                        type="button"
-                        onClick={prevStep}
-                    >
-                        Anterior
-                    </button>
-                    <button
-                        className="btn btn-success bg-green-600 w-40 m-1 next"
-                        type="button"
-                        onClick={nextStep}
-                        disabled={!requiredFieldsFilled || loading}
-                    >
-                        Próximo
-                    </button>
+                    <BtnCancel onClick={prevStep} label="Anterior" className="m-1" />
+                    <BtnSuccess label="Próximo" className="m-1" onClick={nextStep} disabled={!requiredFieldsFilled || loading} />
                 </div>
-            </Container>
+            </div>
 
-        </div>
+        </Container>
     )
 }
 

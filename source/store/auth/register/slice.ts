@@ -6,7 +6,7 @@ import { registerUser, resetRegisterFlag } from './actions';
 
 const initialState: AccountState = {
   message: null,
-  loading: false,
+  loading: true,
   success: false,
   error: false
 };

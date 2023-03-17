@@ -94,7 +94,7 @@ const fakeBackend = () => {
 
   mock.onPost(url.POST_FAKE_REGISTER).reply(config => {
     const user = JSON.parse(config["data"]);
-    console.log("fakebackend", user)
+
     const validUser = users.filter(
       usr => usr.document === user.document || usr.email === user.email
     );
@@ -105,6 +105,8 @@ const fakeBackend = () => {
         if (validUser.length !== 0) {
           reject([400, "Documento já cadastrado"]);
         }
+
+        users.push(user);
 
         resolve([200, user]);
       }, 5000);
@@ -121,7 +123,7 @@ const fakeBackend = () => {
 
   mock.onPost(url.POST_FAKE_JWT_LOGIN).reply(config => {
     const user = JSON.parse(config["data"]);
-
+    console.log(users)
     const validUser = users.filter(
       usr => usr.email === user.username && usr.password === user.password
     );
