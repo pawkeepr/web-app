@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -23,7 +23,7 @@ import validateEmail from '~/validations/email';
 import validatePassword from '~/validations/password';
 import validatePerson from '~/validations/person';
 
-import { registerUser } from '~/store/auth/register/slice';
+import { registerUser, resetRegisterFlag } from '~/store/actions';
 import { AccountSignUp } from '~/store/auth/register/types';
 import { useAppDispatch } from '~/store/hooks';
 
@@ -56,6 +56,10 @@ const CoverSignUp = () => {
     const onSubmit = async (values: AccountSignUp, helper: FormikHelpers<AccountSignUp>) => {
         dispatch(registerUser(values))
     }
+
+    useEffect(() => {
+        dispatch(resetRegisterFlag())
+    }, [dispatch])
 
     const initialValues: AccountSignUp = {
         email: '',
@@ -149,7 +153,8 @@ const CoverSignUp = () => {
                             <Card className="overflow-hidden m-0">
                                 <Row className="justify-content-center g-0">
                                     <AuthSlider bg='auth-bg-image-2' />
-                                    <Col lg={6}>
+                                    <Col lg={6} className="items-center flex-col justify-center h-fit">
+
                                         <TabContainer activeKey={tab}  >
                                             {
                                                 Tabs.map((tab, index) => (
@@ -166,15 +171,16 @@ const CoverSignUp = () => {
                                                     </TabContent>
                                                 ))
                                             }
-                                            <div className="p-2 text-center mt-4">
-                                                <p className="list-group-item fs-12 mb-4">Você já tem uma conta ?
-                                                    <br />
-                                                    <Link href="/sign-in" className="fw-semibold text-primary text-decoration-underline">
-                                                        Entrar!
-                                                    </Link>
-                                                </p>
-                                            </div>
                                         </TabContainer>
+                                        <div className="text-center pt-24">
+                                            <p className="list-group-item fs-12 mb-4">Você já tem uma conta ?
+                                                <br />
+                                                <Link href="/sign-in" className="fw-semibold text-primary text-decoration-underline">
+                                                    Entrar!
+                                                </Link>
+                                            </p>
+                                        </div>
+
                                     </Col>
                                 </Row>
                             </Card>
