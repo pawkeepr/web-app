@@ -9,7 +9,6 @@ const nextConfig = ((phase) => {
   return {
     publicRuntimeConfig: {
       publicRoutes: ['/sign-in', '/sign-up', '/forget-password', '/reset-password', '/'],
-
     },
     reactStrictMode: true,
     swcMinify: true,

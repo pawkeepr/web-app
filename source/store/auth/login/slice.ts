@@ -55,7 +55,6 @@ const loginSlice = createSlice({
       state.isLoading = LOADING.PENDING;
     },
     signInSuccess: (state, action: PayloadAction<{ user: IUser, token: string }>) => {
-
       if (api.defaults.headers['Authorization']) {
         api.defaults.headers['Authorization'] = `Bearer ${action.payload.token}`;
       }

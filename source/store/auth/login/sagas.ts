@@ -38,6 +38,7 @@ export function* recoverUserByTokenSaga(action: PayloadAction<string>) {
 
         yield put(recoverUserByTokenSuccess({ user, access_token }));
     } catch (error) {
+        console.log(error)
         yield put(recoverUserByTokenFailed((error as any).message));
     }
 }
@@ -45,6 +46,7 @@ export function* recoverUserByTokenSaga(action: PayloadAction<string>) {
 export function* LoginSaga() {
     yield takeLatest(`${name}/signInUser`, signInUserSaga);
     yield takeLatest(`${name}/recoverUserByToken`, recoverUserByTokenSaga);
+
 }
 
 

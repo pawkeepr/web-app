@@ -44,7 +44,8 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
     const router = useRouter();
     const pathname = usePathname()
-    const { publicRuntimeConfig } = getConfig();
+    const config = getConfig();
+    const { publicRuntimeConfig: { publicRoutes } } = config;
 
     const {
         user,
@@ -58,23 +59,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (isAuthenticated && !publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
-            return;
-        }
-
-        if (!isAuthenticated && publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
-            return;
-        }
-
-        if (isAuthenticated && publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
+        if (isAuthenticated && publicRoutes?.includes?.(pathname)) {
             return router.push('/dashboard');
         }
 
-        if (!isAuthenticated && !publicRuntimeConfig?.publicRoutes?.includes?.(pathname)) {
+        if (!isAuthenticated && !publicRoutes?.includes?.(pathname)) {
             return router.push('/sign-in');
         }
 
-    }, [isAuthenticated]);
+    }, [isAuthenticated, publicRoutes]);
 
     useEffect(() => {
         dispatch(recoverUserByToken(getCookie(cookies.token.name)));
@@ -106,6 +99,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const signIn = useCallback(async ({ username, password }: SignInData) => {
         await handleRememberInfo(username, password, rememberMe);
         dispatch(signInUser({ username, password }));
+        router.push('/dashboard');
+
     }, [dispatch, handleRememberInfo, rememberMe]);
 
     const onToggleRememberMe = useCallback(() => {
