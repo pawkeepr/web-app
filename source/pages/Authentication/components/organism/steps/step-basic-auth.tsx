@@ -8,9 +8,9 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FieldControl from '~/Components/molecules/field-control';
 import validateEmail from '~/validations/email';
 import validatePassword from '~/validations/password';
-import type { InitialStateSignUp } from '../../../SignUp';
 import PasswordRules from '../../molecules/password-rules';
 
+import { AccountSignUp } from '~/store/auth/register/types';
 import { StepProps } from './types';
 
 
@@ -18,7 +18,7 @@ const StepSignUp01 = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const [passwordShow, setPasswordShow] = useState(false);
     const [passwordConfirmShow, setPasswordConfirmShow] = useState(false);
 
-    const { values, handleBlur } = useFormikContext<InitialStateSignUp>()
+    const { values, handleBlur } = useFormikContext<AccountSignUp>()
     const { email, password } = values;
 
     const requiredFieldsFilled = useMemo(() => {

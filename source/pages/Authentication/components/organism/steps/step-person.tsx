@@ -1,6 +1,5 @@
 
 
-import type { InitialStateSignUp } from '../../../SignUp';
 
 import { cnpj, cpf } from 'cpf-cnpj-validator';
 import { useFormikContext } from 'formik';
@@ -11,12 +10,13 @@ import FieldControl from '~/Components/molecules/field-control';
 import { useMemo } from 'react';
 import MaskedInput from 'react-input-mask';
 
+import { AccountSignUp } from '~/store/auth/register/types';
 import validatePerson from '~/validations/person';
 import { StepProps } from './types';
 
 const StepSignUp02 = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
-    const { values, setFieldValue } = useFormikContext<InitialStateSignUp>()
+    const { values, setFieldValue } = useFormikContext<AccountSignUp>()
     const { person } = values
     const { document } = person
 

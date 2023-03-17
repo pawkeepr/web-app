@@ -1,6 +1,5 @@
 
 
-import type { InitialStateSignUp } from '../../../SignUp';
 
 import { useFormikContext } from 'formik';
 import Container from 'react-bootstrap/Container';
@@ -16,13 +15,14 @@ import CountrySelect from '~/Components/molecules/country-select';
 import FieldControl from '~/Components/molecules/field-control/field-control';
 import { IAddress } from '~/helpers/fetch-address-by-cep';
 import useFetchAddress from '~/hooks/use-fetch-address';
+import { AccountSignUp } from '~/store/auth/register/types';
 import { StepProps } from './types';
 
 const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     const [disabledInputs, setDisabledInputs] = useState({ state: false, city: false, neighborhood: false, street: false, complement: false })
 
-    const { values, setFieldValue } = useFormikContext<InitialStateSignUp>()
+    const { values, setFieldValue } = useFormikContext<AccountSignUp>()
     const { address } = values
     const { zipCode } = address
 

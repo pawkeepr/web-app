@@ -2,12 +2,20 @@ import { useFormikContext } from "formik"
 import Link from "next/link"
 import Container from 'react-bootstrap/Container'
 import Form from "react-bootstrap/Form"
-import { InitialStateSignUp } from "~/pages/Authentication/SignUp"
+import { AccountSignUp } from "~/store/auth/register/types"
 import { StepProps } from "./types"
 
 const StepTermsOfUse = ({ prevStep }: StepProps) => {
 
-    const { values, handleChange, handleSubmit } = useFormikContext<InitialStateSignUp>()
+    const { values, handleChange, handleSubmit, errors, isValid } = useFormikContext<AccountSignUp>()
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        console.log('chega aki')
+        console.log(values)
+        console.log(errors)
+        handleSubmit()
+    }
 
 
     return (
@@ -76,9 +84,16 @@ const StepTermsOfUse = ({ prevStep }: StepProps) => {
                     } />
             </div>
             <div className="mt-4 d-flex justify-content-center">
-                <button className="btn btn-success w-40 m-1" type="button" onClick={prevStep}>Anterior</button>
-                <button className="btn btn-success w-40 m-1" type="submit" onClick={handleSubmit}>Próximo</button>
+                <button className="btn btn-danger w-40 m-1" type="button" onClick={prevStep}>Anterior</button>
             </div>
+            <button
+                className="btn btn-success w-40 m-1 align-self-center"
+                type="submit"
+                onClick={handleClick}
+                disabled={!isValid}
+            >
+                Cadastrar
+            </button>
         </Container>
     )
 }
