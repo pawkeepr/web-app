@@ -11,7 +11,6 @@ import Image from 'next/image';
 import FullScreenDropdown from '../Components/Common/FullScreenDropdown';
 import LightDark from '../Components/Common/LightDark';
 import ProfileDropdown from '../Components/Common/ProfileDropdown';
-import SearchOption from '../Components/Common/SearchOption';
 
 type HeaderProps = {
     headerClass: string;
@@ -59,19 +58,19 @@ const Header = ({ headerClass }: HeaderProps) => {
                         <div className="navbar-brand-box horizontal-logo">
                             <Link href="/" className="logo logo-dark">
                                 <span className="logo-sm">
-                                    <Image src={logoSm} alt="" height="22" />
+                                    <Image src={logoSm} alt="Logo Pawkeepr Mode Dark" height="44" />
                                 </span>
                                 <span className="logo-lg">
-                                    <Image src={logoDark} alt="" height="17" />
+                                    <Image src={logoDark} alt="Logo Pawkeepr Mode Dark" height="34" />
                                 </span>
                             </Link>
 
                             <Link href="/" className="logo logo-light">
                                 <span className="logo-sm">
-                                    <Image src={logoSm} alt="" height="22" />
+                                    <Image src={logoSm} alt="Logo Pawkeepr Mode Light" height="44" />
                                 </span>
                                 <span className="logo-lg">
-                                    <Image src={logoLight} alt="" height="17" />
+                                    <Image src={logoLight} alt="Logo Pawkeepr Mode Light" height="34" />
                                 </span>
                             </Link>
                         </div>
@@ -89,7 +88,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                         </button>
 
 
-                        <SearchOption />
+                        {/* <SearchOption /> */}
                     </div>
 
                     <div className="d-flex align-items-center">
