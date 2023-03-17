@@ -5,7 +5,7 @@ import LayoutSaga from "./layouts/saga";
 //Auth
 import ForgetSaga from "./auth/forgetpwd/saga";
 import ProfileSaga from "./auth/profile/saga";
-import AccountSaga from "./auth/register/saga";
+import AccountSaga from "./auth/register/sagas";
 
 //calendar
 import calendarSaga from "./calendar/saga";
