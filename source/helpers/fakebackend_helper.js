@@ -16,9 +16,6 @@ export const isUserAuthenticated = () => {
   return getLoggedInUser() !== null;
 };
 
-// Register Method
-export const postFakeRegister = data => api.create(url.POST_FAKE_REGISTER, data);
-
 // Login Method
 export const postFakeLogin = data => api.create(url.POST_FAKE_LOGIN, data);
 
@@ -31,8 +28,8 @@ export const postJwtProfile = data => api.create(url.POST_EDIT_JWT_PROFILE, data
 export const postFakeProfile = (data) => api.update(url.POST_EDIT_PROFILE + '/' + data.idx, data);
 
 // Register Method
-export const postJwtRegister = (url, data) => {
-  return api.create(url, data)
+export const postJwtRegister = (data) => {
+  return api.create(url.POST_FAKE_REGISTER, data)
     .catch(err => {
       var message;
       if (err.response && err.response.status) {

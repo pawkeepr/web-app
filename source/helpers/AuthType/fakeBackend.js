@@ -77,13 +77,14 @@ import {
 let users = [
   {
     uid: 1,
-    email: "murilomontinojr@hotmail.com",
+    email: "murilomontino@hotmail.com",
     role: "admin",
     password: "senha123",
     firstName: 'Murilo',
     lastName: 'Montino',
     crmv: 'AA0000',
     phone: '11999999999',
+    document: '00000000000',
   },
 ];
 
@@ -91,14 +92,22 @@ const fakeBackend = () => {
   // This sets the mock adapter on the default instance
   const mock = new MockAdapter(axios, { onNoMatch: "passthrough" });
 
-  mock.onPost("/post-jwt-register").reply(config => {
+  mock.onPost(url.POST_FAKE_REGISTER).reply(config => {
     const user = JSON.parse(config["data"]);
-    users.push(user);
+    console.log("fakebackend", user)
+    const validUser = users.filter(
+      usr => usr.document === user.document || usr.email === user.email
+    );
 
     return new Promise((resolve, reject) => {
       setTimeout(() => {
+
+        if (validUser.length !== 0) {
+          reject([400, "Documento já cadastrado"]);
+        }
+
         resolve([200, user]);
-      });
+      }, 5000);
     });
   });
 
@@ -110,7 +119,7 @@ const fakeBackend = () => {
     })
   })
 
-  mock.onPost("/post-jwt-login").reply(config => {
+  mock.onPost(url.POST_FAKE_JWT_LOGIN).reply(config => {
     const user = JSON.parse(config["data"]);
 
     const validUser = users.filter(
@@ -119,21 +128,21 @@ const fakeBackend = () => {
 
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (validUser.length === 1) {
-          // You have to generate AccessToken by jwt. but this is fakeBackend so, right now its dummy
-          const token = nodeApiToken;
-
-          // JWT AccessToken
-          const tokenObj = { access_token: token }; // Token Obj
-          const validUserObj = { ...validUser[0], ...tokenObj }; // validUser Obj
-
-          resolve([200, { data: validUserObj }]);
-        } else {
+        if (validUser.length !== 1) {
           reject([
             400,
             "Username and password are invalid. Please enter correct username and password",
           ]);
         }
+        // You have to generate AccessToken by jwt. but this is fakeBackend so, right now its dummy
+        const token = nodeApiToken;
+
+        // JWT AccessToken
+        const tokenObj = { access_token: token }; // Token Obj
+        const validUserObj = { ...validUser[0], ...tokenObj }; // validUser Obj
+
+        resolve([200, { data: validUserObj }]);
+
       }, 1000);
     });
   });
