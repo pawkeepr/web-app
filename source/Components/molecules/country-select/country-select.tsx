@@ -20,6 +20,7 @@ const CountrySelect = ({ onChangeCountry, onChangeValueCountry }: CountrySelectP
 
     const getCountries = async () => {
         const countries = await axios.get('https://restcountries.com/v3.1/all');
+
         return (countries as unknown as country[])
             .sort((a: country, b: country) => {
                 const nameA = a.translations?.['por']?.common.toUpperCase();
@@ -82,7 +83,11 @@ const CountrySelect = ({ onChangeCountry, onChangeValueCountry }: CountrySelectP
     };
 
     if (countries.error) {
-        return <div>Erro ao carregar países</div>;
+        return (
+            <select className="form-select" disabled>
+                <option value="">🇧🇷 Brasil</option>
+            </select>
+        );
     }
 
     if (!countries.data) {
