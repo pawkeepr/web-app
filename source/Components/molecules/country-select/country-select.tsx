@@ -6,7 +6,7 @@ import { country } from './types';
 type CountrySelectProps = {
     onChangeCountry?: (country: country) => void;
     onChangeValueCountry?: (country: string) => void;
-}
+} & React.InputHTMLAttributes<HTMLDivElement>;
 
 type MemoCountries = {
     promise: Promise<country[]>;
@@ -14,7 +14,7 @@ type MemoCountries = {
     error: Error | undefined;
 }
 
-const CountrySelect = ({ onChangeCountry, onChangeValueCountry }: CountrySelectProps) => {
+const CountrySelect = ({ onChangeCountry, onChangeValueCountry, className, ...rest }: CountrySelectProps) => {
 
     const [selectedCountry, setSelectedCountry] = useState<string>('');
 
@@ -84,22 +84,26 @@ const CountrySelect = ({ onChangeCountry, onChangeValueCountry }: CountrySelectP
 
     if (countries.error) {
         return (
+            <div {...rest} className={`${className}`}>
             <select className="form-select" disabled>
                 <option value="">🇧🇷 Brasil</option>
             </select>
+            </div>
         );
     }
 
     if (!countries.data) {
         return (
+            <div {...rest} className={`${className}`}>
             <select className="form-select" disabled>
                 <option value="">Carregando...</option>
             </select>
+            </div>
         );
     }
 
     return (
-        <div className="form-group">
+        <div className={`form-group ${className}`} {...rest} >
             <label htmlFor="country">País:</label>
             <select id="country" name="country" className="form-select" value={selectedCountry} onChange={handleCountryChange} disabled>
                 <option value="">Selecione um país...</option>
