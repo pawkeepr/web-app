@@ -3,7 +3,7 @@ import { all, fork } from "redux-saga/effects";
 import LoginSagas from "./auth/login/sagas";
 import LayoutSaga from "./layouts/saga";
 //Auth
-import ForgetSaga from "./auth/forgetpwd/saga";
+import ForgetSaga from "./auth/forget-pwd/saga";
 import ProfileSaga from "./auth/profile/saga";
 import AccountSaga from "./auth/register/sagas";
 
@@ -17,7 +17,7 @@ import taskSaga from "./tasks/saga";
 // Crypto
 
 //crm
-import crmSaga from "./tutor/saga";
+import crmSaga from "./tutor/sagas";
 
 // Pages > Team
 import teamSaga from "./team/saga";

@@ -4,7 +4,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import Layout from "./layouts/slice";
 
 // Authentication
-import ForgetPassword from "./auth/forgetpwd/reducer";
+import ForgetPassword from "./auth/forget-pwd/reducer";
 import Login from "./auth/login/slice";
 import Profile from "./auth/profile/reducer";
 import Account from "./auth/register/slice";
@@ -17,8 +17,8 @@ import chat from "./chat/reducer";
 // Tasks
 import Tasks from "./tasks/reducer";
 
-//Crm
-import Crm from "./tutor/reducer";
+//Tutor
+import Tutor from "./tutor/slice";
 
 // Pages > Team
 import Team from "./team/reducer";
@@ -34,7 +34,7 @@ const rootReducer = combineReducers({
     Calendar,
     chat,
     Tasks,
-    Crm,
+    Tutor,
     Team,
 });
 

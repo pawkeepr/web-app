@@ -1,5 +1,5 @@
 // Layout
-export * from "./auth/forgetpwd/actions";
+export * from "./auth/forget-pwd/actions";
 export * from './auth/login/actions';
 export * from "./auth/profile/actions";
 // Authentication module
@@ -9,7 +9,7 @@ export * from "./calendar/actions";
 //chat
 export * from "./chat/action";
 //crm
-export * from "./tutor/action";
+export * from "./tutor/actions";
 
 export * from "./layouts/actions";
 
