@@ -1,5 +1,6 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
+import { getCookie, setCookie } from '~/utils/cookies-utils';
 import { accessToken, nodeApiToken } from "../jwt-token-access/accessToken";
 import * as url from "../url_helper";
 
@@ -88,6 +89,22 @@ let users = [
   },
 ];
 
+const getUsers = () => {
+  let cookie;
+
+  try {
+    cookie = getCookie('users-mock')
+    cookie = cookie && JSON.parse(cookie)
+  } catch (error) {
+    console.log(error)
+  }
+
+
+  const usersCookies = cookie || users
+
+  return usersCookies as Array<any>
+}
+
 const fakeBackend = () => {
   // This sets the mock adapter on the default instance
   const mock = new MockAdapter(axios, { onNoMatch: "passthrough" });
@@ -95,7 +112,9 @@ const fakeBackend = () => {
   mock.onPost(url.POST_FAKE_REGISTER).reply(config => {
     const user = JSON.parse(config["data"]);
 
-    const validUser = users.filter(
+    const usersCookies = getUsers()
+
+    const validUser = usersCookies.filter(
       usr => usr.document === user.document || usr.email === user.email
     );
 
@@ -106,7 +125,16 @@ const fakeBackend = () => {
           reject([400, "Documento já cadastrado"]);
         }
 
-        users.push(user);
+        usersCookies.push(user);
+
+        try {
+          const maxAge = 60 * 60 * 24 * 30
+          setCookie('users-mock', JSON.stringify(usersCookies), maxAge)
+
+        } catch (error) {
+          console.log(error)
+        }
+
 
         resolve([200, user]);
       }, 5000);
@@ -123,8 +151,10 @@ const fakeBackend = () => {
 
   mock.onPost(url.POST_FAKE_JWT_LOGIN).reply(config => {
     const user = JSON.parse(config["data"]);
-    console.log(users)
-    const validUser = users.filter(
+
+    const usersCookies = getUsers()
+
+    const validUser = usersCookies.filter(
       usr => usr.email === user.username && usr.password === user.password
     );
 
