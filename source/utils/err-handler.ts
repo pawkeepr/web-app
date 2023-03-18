@@ -7,7 +7,7 @@
  * @param {Promise<T>} promise
  * @returns {Promise<MyTuple>}
  */
-export async function promiseErrorHandler(promise) {
+export async function promiseErrorHandler(promise: any) {
   try {
     const data = await promise;
     return [null, data];

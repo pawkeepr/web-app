@@ -8,6 +8,10 @@ export default defineConfig({
     },
 
   },
+  video: false,
+  videoCompression: 32,
+  videosFolder: "./cypress/videos",
+  videoUploadOnPasses: true,
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here

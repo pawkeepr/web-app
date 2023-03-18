@@ -1,21 +1,33 @@
 import Link from 'next/link';
-import React from 'react';
-import { Card, Col, Container, Row } from 'reactstrap';
+import React, { useEffect } from 'react';
+
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
 import AuthSlider from '~/Components/organism/auth-carousel';
 import FooterAuth from '~/Components/organism/footer-auth';
 
 import HeaderTitle from '~/Components/atoms/header-title';
 import LOADING from '~/constants/loading';
-import { useAuth } from '~/contexts/auth-context';
-import ColAuth from './components/organism/col-auth';
+import AuthInputs from './components/organism/auth-inputs';
+
+import { useRouter } from 'next/navigation';
+import LogoSimple from '~/Components/atoms/logo-simple';
+import { useAppSelector } from '~/store/hooks';
 
 const CoverSignIn = () => {
-
-    const {
-        isLoading,
-    } = useAuth()
+    const router = useRouter()
+    const { isAuthenticated, isLoading } = useAppSelector(state => state.Login)
 
     const disabled = isLoading === LOADING.PENDING
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            router.push('/dashboard')
+        }
+    }, [isAuthenticated, router])
 
     return (
         <React.Fragment>
@@ -32,16 +44,16 @@ const CoverSignIn = () => {
                                         <AuthSlider bg='auth-bg-image-3' />
 
                                         <Col lg={6}>
-                                            <div className="p-lg-5 p-4">
-                                                <div>
-                                                    <h5 className="text-primary">Bem Vindo!</h5>
-                                                    <p className="text-muted">Entre para ter acesso a todas as funcionalidades.</p>
+                                            <div className="p-lg-5 p-4 items-center flex-col justify-center h-100">
+                                                <div className='flex flex-col items-center justify-center'>
+                                                    <LogoSimple />
+                                                    <div className="text-center">
+                                                        <h5 className="text-primary">Seja bem Vindo!</h5>
+                                                        <p className="text-muted">Entre para ter acesso a todas as funcionalidades.</p>
+                                                    </div>
                                                 </div>
                                                 <div className="mt-4" >
-
-                                                    {!disabled && <ColAuth />}
-
-                                                    {disabled && (
+                                                    {(disabled || isAuthenticated) && (
                                                         <div className="d-flex justify-content-center">
                                                             <div className="spinner-border text-primary" role="status" style={{
                                                                 width: '5rem',
@@ -51,10 +63,13 @@ const CoverSignIn = () => {
                                                             </div>
                                                         </div>
                                                     )}
+
+                                                    {(!disabled && !isAuthenticated) && <AuthInputs />}
+
                                                 </div>
 
                                                 <div className="mt-5 text-center">
-                                                    <p className="mb-0">Você não tem uma conta ? <Link href="/sign-up" className="fw-bold text-primary text-decoration-underline"> Registre-se</Link> </p>
+                                                    <p className="mb-0">Você não tem uma conta ? <br /> <Link href="/sign-up" className="fw-bold text-primary text-decoration-underline"> Registre-se</Link> </p>
                                                 </div>
                                             </div>
                                         </Col>

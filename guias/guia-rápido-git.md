@@ -1,4 +1,6 @@
-# Git push: enviando alterações locais para o remoto
+# Git
+
+Git push: enviando alterações locais para o remoto
 
 Vamos imaginar um cenário que já existe um projeto no GitHub  e você precisa cloná-lo, então, o primeiro comando será:
 

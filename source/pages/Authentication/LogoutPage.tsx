@@ -2,18 +2,37 @@
 
 import Link from 'next/link';
 import React, { useEffect } from 'react';
-import { Card, Col, Container, Row } from 'reactstrap';
+
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
 
 import AuthSlider from '~/Components/organism/auth-carousel';
-import { logoutUser } from '~/store/auth/loginV2/slice';
-import { useAppDispatch } from '~/store/hooks';
+import { signOutUser } from '~/store/actions';
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
+
+import { useRouter } from 'next/navigation';
+
 
 const LogoutPage = () => {
     const dispatch = useAppDispatch();
+    const { isAuthenticated } = useAppSelector(state => state.Login)
+    const router = useRouter()
 
     useEffect(() => {
-        dispatch(logoutUser());
-    }, [dispatch]);
+        if (!isAuthenticated) {
+            router.push('/sign-in')
+        }
+
+        if (isAuthenticated) {
+            dispatch(signOutUser());
+            setTimeout(() => {
+                router.push('/sign-in')
+            }, 1000);
+        }
+    }, [dispatch, isAuthenticated, router]);
 
     return (
         <React.Fragment>
@@ -34,7 +53,7 @@ const LogoutPage = () => {
                                                     <h4>Você acabou de sair 😭</h4>
                                                     <p className="text-muted">Obrigado por usar <span className="fw-bold">PawKeeprs</span>, não esqueça de voltar</p>
                                                     <div className="mt-4">
-                                                        <Link href="/sign-in" className="btn btn-success w-100">Entrar</Link>
+                                                        <Link href="/sign-in" className="btn btn-success bg-green-600 w-100">Entrar</Link>
                                                     </div>
                                                 </div>
                                             </div>

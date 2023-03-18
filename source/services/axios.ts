@@ -1,8 +1,8 @@
 import axios from "axios";
-import { parseCookies } from "nookies";
+import { getCookie } from "~/utils/cookies-utils";
 
 export function getAPIClient(ctx?: any) {
-    const { 'pawkeepr.token': token } = parseCookies(ctx)
+    const token = getCookie('pawkeepr.token', ctx)
 
     const api = axios.create({
         baseURL: process.env.API_URL,

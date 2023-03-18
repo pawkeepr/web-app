@@ -1,13 +1,15 @@
 require('dotenv').config()
 
-/** @type {import('next').NextConfig} */
-const nextConfig = (phase) => {
+/**@type {import('next').NextConfig} */
+const nextConfig = ((phase) => {
   const isProduction = phase === 'production'
 
   const _currentURL = isProduction ? process.env.API_URL : 'http://localhost:8000/api/v1/'
 
   return {
-
+    publicRuntimeConfig: {
+      publicRoutes: ['/sign-in', '/sign-up', '/forget-password', '/reset-password', '/'],
+    },
     reactStrictMode: true,
     swcMinify: true,
     eslint: {
@@ -21,6 +23,6 @@ const nextConfig = (phase) => {
       SECRET_KEY: process.env.SECRET_KEY
     },
   }
-}
+})(process.env.NODE_ENV)
 
-module.exports = nextConfig(process.env.NODE_ENV)
+module.exports = nextConfig
