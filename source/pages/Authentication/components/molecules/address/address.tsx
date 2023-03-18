@@ -26,6 +26,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
         <>
 
             <FieldControl
+                divClassName='my-1'
                 className="form-control"
                 type="text"
                 label="Estado"
@@ -35,6 +36,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                 required
             />
             <FieldControl
+                divClassName='my-1'
                 className="form-control"
                 type="text"
                 label="Cidade"
@@ -44,6 +46,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                 required
             />
             <FieldControl
+                divClassName='my-1'
                 className="form-control"
                 type="text"
                 label="Bairro"
@@ -54,6 +57,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
             />
 
             <FieldControl
+                divClassName='my-1'
                 label='Rua'
                 name="address.street"
                 aria-label="street"
@@ -78,6 +82,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
             </FieldControl>
 
             <FieldControl
+                divClassName='my-1'
                 className="form-control"
                 type="text"
                 label="Complemento"

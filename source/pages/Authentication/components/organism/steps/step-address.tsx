@@ -3,7 +3,7 @@
 
 import { useFormikContext } from 'formik';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import MaskedInput from 'react-input-mask';
 import validateAddress from '~/validations/address';
@@ -21,15 +21,11 @@ import { AccountSignUp } from '~/store/auth/register/types';
 import Address from '../../molecules/address/address';
 import Container from '../../template/container';
 
-import useDebounce from '~/hooks/use-debounce';
-import useThrottle from '~/hooks/use-throttle';
+import useNextStep from '~/hooks/use-next-step';
 import { StepProps } from './types';
 
 
 const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
-    const [step, setStep] = useState(true)
-    const debounce = useDebounce()
-
     const [disabledInputs, setDisabledInputs] = useState({ state: false, city: false, neighborhood: false, street: false, complement: false })
 
     const { values, setFieldValue } = useFormikContext<AccountSignUp>()
@@ -61,29 +57,16 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
         },
         [setFieldValue],
     )
+
     const { cepInvalid, loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode })
 
-    const requiredFieldsFilled = useMemo((): boolean => {
+    const requiredValid = useMemo((): boolean => {
         const isValid = validateAddress.isValidSync(address) && !cepInvalid
-
-        if (isValid) {
-            setStep(true)
-        }
 
         return isValid
     }, [address, cepInvalid])
 
-    const nextStepThrottle = useThrottle(nextStep, 1000)
-
-    useEffect(() => {
-        if (requiredFieldsFilled && step) {
-            debounce(() => nextStepThrottle(), 1000)
-        }
-
-        return () => {
-            setStep(false)
-        }
-    }, [requiredFieldsFilled, nextStepThrottle, step, debounce])
+    useNextStep(nextStep, requiredValid, 1000)
 
     return (
         <Container>
@@ -91,8 +74,10 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <div className="container d-flex flex-column mt-4">
                 <CountrySelect className="mb-2" />
                 <FieldControl
+                    divClassName='my-1'
                     className="form-control"
                     type="text"
+                    initialFocus
                     label="CEP"
                     name="address.zipCode"
                     placeholder="Digite o CEP"
@@ -105,7 +90,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
                 <div className="mt-4 d-flex justify-content-center">
                     <BtnCancel onClick={prevStep} label="Anterior" className="m-1" />
-                    <BtnSuccess label="Próximo" className="m-1" onClick={nextStep} disabled={!requiredFieldsFilled || loading} />
+                    <BtnSuccess label="Próximo" className="m-1" onClick={nextStep} disabled={!requiredValid || loading} />
                 </div>
             </div>
 

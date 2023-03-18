@@ -6,7 +6,7 @@ import { useFormikContext } from 'formik';
 
 import Form from 'react-bootstrap/Form';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import MaskedInput from 'react-input-mask';
 
 import BtnCancel from '~/Components/atoms/btn/btn-cancel';
@@ -15,18 +15,12 @@ import FieldControl from '~/Components/molecules/field-control';
 import { AccountSignUp } from '~/store/auth/register/types';
 import validatePerson from '~/validations/person';
 
-import useDebounce from '~/hooks/use-debounce';
-import useThrottle from '~/hooks/use-throttle';
-
 import Container from '../../template/container';
 
-
+import useNextStep from '~/hooks/use-next-step';
 import { StepProps } from './types';
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
-    const [step, setStep] = useState(true)
-
-    const debounce = useDebounce()
 
     const { values, setFieldValue } = useFormikContext<AccountSignUp>()
     const { person } = values
@@ -34,27 +28,13 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     const isValidCnpj = useMemo(() => cnpj.isValid(document), [document])
 
-    const nextStepThrottle = useThrottle(nextStep, 100)
-
-    const requiredFieldsFilled = useMemo((): boolean => {
+    const requiredValid = useMemo((): boolean => {
         const isValid = validatePerson.isValidSync(person);
-
-        if (isValid) {
-            setStep(true)
-        }
 
         return isValid
     }, [person])
 
-    useEffect(() => {
-        if (requiredFieldsFilled && step) {
-            debounce(() => nextStepThrottle(), 100)
-        }
-
-        return () => {
-            setStep(false)
-        }
-    }, [requiredFieldsFilled, nextStepThrottle, step, debounce])
+    useNextStep(nextStep, requiredValid)
 
     const onChangeLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target
@@ -78,6 +58,8 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <div className="container d-flex flex-column">
 
                 <FieldControl
+                    initialFocus
+                    divClassName='my-1'
                     label='Nome Completo'
                     name="person.firstName"
                     aria-label="firstName"
@@ -102,6 +84,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
                 <FieldControl
                     label='CPF/CNPJ'
+                    divClassName='my-1'
                     name="person.document"
                     aria-label="document"
                     className="form-control"
@@ -113,6 +96,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 {isValidCnpj &&
                     (<FieldControl
                         label='Companhia'
+                        divClassName='my-1'
                         name="person.company"
                         aria-label="company"
                         className="form-control"
@@ -121,11 +105,12 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                         disabledError
                     />)}
                 <FieldControl
-                    className="form-control"
                     type="text"
+                    divClassName='my-1'
                     label="CRMV"
                     name="person.crmv"
                     placeholder="Digite o seu CRMV"
+                    className="form-control"
                     component={MaskedInput as any}
                     mask={"aa999999"}
                     maskChar={null}
@@ -133,6 +118,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 />
                 <FieldControl
                     className="form-control"
+                    divClassName='my-1'
                     type="text"
                     label="Telefone/Celular"
                     name="person.phoneNumber"
@@ -144,7 +130,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 />
                 <div className="mt-4 d-flex justify-content-center">
                     <BtnCancel onClick={prevStep} label="Anterior" className="m-1" />
-                    <BtnSuccess label="Próximo" className="m-1" onClick={nextStep} disabled={!requiredFieldsFilled} />
+                    <BtnSuccess label="Próximo" className="m-1" onClick={nextStep} disabled={!requiredValid} />
                 </div>
             </div>
 
