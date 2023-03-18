@@ -55,7 +55,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                 <div className="navbar-header">
                     <div className="d-flex">
 
-                        <div className="navbar-brand-box horizontal-logo">
+                        <div className="navbar-brand-box horizontal-logo flex items-center">
                             <Link href="/" className="logo logo-dark">
                                 <span className="logo-sm">
                                     <Image src={logoSm} alt="Logo Pawkeepr Mode Dark" height="44" />
@@ -75,7 +75,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                             </Link>
                         </div>
 
-                        <button
+                        {/* <button
                             onClick={toggleMenuBtn}
                             type="button"
                             className="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
@@ -85,7 +85,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                                 <span></span>
                                 <span></span>
                             </span>
-                        </button>
+                        </button> */}
 
 
                         {/* <SearchOption /> */}
