@@ -1,20 +1,27 @@
 
 import { useFormikContext } from 'formik';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import InputGroup from 'react-bootstrap/InputGroup';
+
+import BtnSuccess from '~/Components/atoms/btn/btn-success';
 import FieldControl from '~/Components/molecules/field-control';
+import useDebounce from '~/hooks/use-debounce';
+import { AccountSignUp } from '~/store/auth/register/types';
 import validateEmail from '~/validations/email';
 import validatePassword from '~/validations/password';
-import PasswordRules from '../../molecules/password-rules';
 
-import { AccountSignUp } from '~/store/auth/register/types';
-import BtnSuccess from '../../../../../Components/atoms/btn/btn-success';
+
+import PasswordRules from '../../molecules/password-rules';
 import Container from '../../template/container';
+
+import useThrottle from '~/hooks/use-throttle';
 import { StepProps } from './types';
 
+const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
+    const [step, setStep] = useState(true)
+    const debounce = useDebounce()
 
-const StepSignUpBasicAuth = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const [passwordShow, setPasswordShow] = useState(false);
     const [passwordConfirmShow, setPasswordConfirmShow] = useState(false);
 
@@ -22,12 +29,33 @@ const StepSignUpBasicAuth = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const { email, password, passwordConfirm } = values;
 
     const requiredFieldsFilled = useMemo(() => {
-        return (
+        const isValid = (
             validatePassword.isValidSync(password) &&
             validateEmail.isValidSync(email) &&
             password === passwordConfirm
-        );
+        )
+
+        if (isValid) {
+            setStep(true)
+        }
+
+        return isValid
+
     }, [email, password, passwordConfirm])
+
+    const nextStepThrottle = useThrottle(nextStep, 100)
+
+    useEffect(() => {
+        if (requiredFieldsFilled && step) {
+            debounce(() => {
+                nextStepThrottle()
+            }, 100)
+        }
+
+        return () => {
+            setStep(false)
+        }
+    }, [requiredFieldsFilled, nextStepThrottle, step, debounce])
 
     const onToggleVisiblePassword = () => {
         setPasswordShow(state => !state)

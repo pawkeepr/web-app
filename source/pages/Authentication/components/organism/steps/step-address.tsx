@@ -3,26 +3,32 @@
 
 import { useFormikContext } from 'formik';
 
-import Address from '../../molecules/address/address';
-
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import MaskedInput from 'react-input-mask';
 import validateAddress from '~/validations/address';
 
+import BtnCancel from '~/Components/atoms/btn/btn-cancel';
+import BtnSuccess from '~/Components/atoms/btn/btn-success';
 import ErrMessage from '~/Components/atoms/err-message';
 import CountrySelect from '~/Components/molecules/country-select';
 import FieldControl from '~/Components/molecules/field-control/field-control';
 import { IAddress } from '~/helpers/fetch-address-by-cep';
 import useFetchAddress from '~/hooks/use-fetch-address';
 import { AccountSignUp } from '~/store/auth/register/types';
-import BtnCancel from '../../../../../Components/atoms/btn/btn-cancel';
-import BtnSuccess from '../../../../../Components/atoms/btn/btn-success';
+
+
+import Address from '../../molecules/address/address';
 import Container from '../../template/container';
+
+import useDebounce from '~/hooks/use-debounce';
+import useThrottle from '~/hooks/use-throttle';
 import { StepProps } from './types';
 
 
 const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
+    const [step, setStep] = useState(true)
+    const debounce = useDebounce()
 
     const [disabledInputs, setDisabledInputs] = useState({ state: false, city: false, neighborhood: false, street: false, complement: false })
 
@@ -58,8 +64,26 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const { cepInvalid, loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode })
 
     const requiredFieldsFilled = useMemo((): boolean => {
-        return validateAddress.isValidSync(address) && !cepInvalid
+        const isValid = validateAddress.isValidSync(address) && !cepInvalid
+
+        if (isValid) {
+            setStep(true)
+        }
+
+        return isValid
     }, [address, cepInvalid])
+
+    const nextStepThrottle = useThrottle(nextStep, 1000)
+
+    useEffect(() => {
+        if (requiredFieldsFilled && step) {
+            debounce(() => nextStepThrottle(), 1000)
+        }
+
+        return () => {
+            setStep(false)
+        }
+    }, [requiredFieldsFilled, nextStepThrottle, step, debounce])
 
     return (
         <Container>

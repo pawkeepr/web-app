@@ -3,20 +3,30 @@
 
 import { cnpj, cpf } from 'cpf-cnpj-validator';
 import { useFormikContext } from 'formik';
-import Form from 'react-bootstrap/Form';
-import FieldControl from '~/Components/molecules/field-control';
 
-import { useMemo } from 'react';
+import Form from 'react-bootstrap/Form';
+
+import { useEffect, useMemo, useState } from 'react';
 import MaskedInput from 'react-input-mask';
 
 import BtnCancel from '~/Components/atoms/btn/btn-cancel';
 import BtnSuccess from '~/Components/atoms/btn/btn-success';
+import FieldControl from '~/Components/molecules/field-control';
 import { AccountSignUp } from '~/store/auth/register/types';
 import validatePerson from '~/validations/person';
+
+import useDebounce from '~/hooks/use-debounce';
+import useThrottle from '~/hooks/use-throttle';
+
 import Container from '../../template/container';
+
+
 import { StepProps } from './types';
 
-const StepSignUp02 = ({ nextStep, prevStep, ...rest }: StepProps) => {
+const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
+    const [step, setStep] = useState(true)
+
+    const debounce = useDebounce()
 
     const { values, setFieldValue } = useFormikContext<AccountSignUp>()
     const { person } = values
@@ -24,10 +34,27 @@ const StepSignUp02 = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     const isValidCnpj = useMemo(() => cnpj.isValid(document), [document])
 
+    const nextStepThrottle = useThrottle(nextStep, 100)
+
     const requiredFieldsFilled = useMemo((): boolean => {
         const isValid = validatePerson.isValidSync(person);
+
+        if (isValid) {
+            setStep(true)
+        }
+
         return isValid
     }, [person])
+
+    useEffect(() => {
+        if (requiredFieldsFilled && step) {
+            debounce(() => nextStepThrottle(), 100)
+        }
+
+        return () => {
+            setStep(false)
+        }
+    }, [requiredFieldsFilled, nextStepThrottle, step, debounce])
 
     const onChangeLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target
@@ -43,6 +70,8 @@ const StepSignUp02 = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
         return numbers.length >= 11 ? '99.999.999/9999-99' : '999.999.999-99'
     }, [document])
+
+
 
     return (
         <Container>
@@ -123,4 +152,4 @@ const StepSignUp02 = ({ nextStep, prevStep, ...rest }: StepProps) => {
     )
 }
 
-export default StepSignUp02
+export default StepSignUpPerson
