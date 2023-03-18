@@ -2,8 +2,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import LOADING from '~/constants/loading';
 
-import { destroyCookie } from 'nookies';
-import cookies from '~/constants/cookies';
 
 
 import { api } from '~/services/api';
@@ -40,8 +38,11 @@ const loginSlice = createSlice({
     onSetRememberMe: (state, action) => {
       state.rememberMe = action.payload;
     },
-    logoutUser: (state) => {
-      destroyCookie(null, cookies.token.name);
+
+    signOutUser: (state) => {
+      state.isLoading = LOADING.IDLE;
+    },
+    signOutUserSuccess: (state) => {
       state.isAuthenticated = false;
       state.token = '';
       state.user = null;
@@ -49,8 +50,13 @@ const loginSlice = createSlice({
       state.username = '';
       state.password = '';
       state.visiblePassword = false;
-      state.isLoading = LOADING.IDLE;
+      state.isLoading = LOADING.SUCCESS;
     },
+    signOutUserFailed: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+      state.isLoading = LOADING.SUCCESS
+    },
+
     signInUser: (state, action: PayloadAction<{ username: string; password: string }>) => {
       state.isLoading = LOADING.PENDING;
     },
@@ -96,13 +102,6 @@ export const {
   onChangeRememberMe,
   onChangeUsername,
   onSetRememberMe,
-  logoutUser,
-  recoverUserByToken,
-  recoverUserByTokenFailed,
-  recoverUserByTokenSuccess,
-  signInFailed,
-  signInSuccess,
-  signInUser
 } = loginSlice.actions;
 
 export {

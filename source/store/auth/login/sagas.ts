@@ -1,12 +1,15 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { setCookie } from 'nookies';
+import { destroyCookie, setCookie } from 'nookies';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import cookies from '~/constants/cookies';
+
 import {
     recoverUserByTokenFailed,
     recoverUserByTokenSuccess,
     signInFailed,
     signInSuccess,
+    signOutUserFailed,
+    signOutUserSuccess,
 } from './actions';
 
 import { name } from './types';
@@ -43,10 +46,20 @@ export function* recoverUserByTokenSaga(action: PayloadAction<string>) {
     }
 }
 
+export function* signOutUserSaga() {
+    try {
+        yield destroyCookie(null, cookies.token.name);
+        yield put(signOutUserSuccess());
+    } catch (error) {
+        console.log(error)
+        yield put(signOutUserFailed((error as any).message));
+    }
+}
+
 export function* LoginSaga() {
     yield takeLatest(`${name}/signInUser`, signInUserSaga);
     yield takeLatest(`${name}/recoverUserByToken`, recoverUserByTokenSaga);
-
+    yield takeLatest(`${name}/signOutUser`, signOutUserSaga);
 }
 
 
