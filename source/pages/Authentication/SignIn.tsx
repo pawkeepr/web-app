@@ -24,10 +24,12 @@ const CoverSignIn = () => {
     const disabled = isLoading === LOADING.PENDING
 
     useEffect(() => {
+
         if (isAuthenticated) {
             router.push('/dashboard')
         }
-    }, [isAuthenticated, router])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isAuthenticated])
 
     return (
         <React.Fragment>
