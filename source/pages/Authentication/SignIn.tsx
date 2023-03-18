@@ -53,7 +53,7 @@ const CoverSignIn = () => {
                                                     </div>
                                                 </div>
                                                 <div className="mt-4" >
-                                                    {(disabled || isAuthenticated) && (
+                                                    {disabled && (
                                                         <div className="d-flex justify-content-center">
                                                             <div className="spinner-border text-primary" role="status" style={{
                                                                 width: '5rem',
@@ -64,7 +64,7 @@ const CoverSignIn = () => {
                                                         </div>
                                                     )}
 
-                                                    {(!disabled && !isAuthenticated) && <AuthInputs />}
+                                                    {!disabled && <AuthInputs />}
 
                                                 </div>
 
