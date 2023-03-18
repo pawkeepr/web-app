@@ -1,12 +1,12 @@
 
 import { BtnProps } from './btn-cancel'
 
-const BtnSuccess = ({ onCLick, label = 'Cancelar', className, ...rest }: BtnProps) => {
+const BtnSuccess = ({ onClick, label = 'Cancelar', className, ...rest }: BtnProps) => {
 	return (
 		<button
-			className={`btn btn-success bg-green-600 w-40 m-1 next ${className}`}
+			className={`btn btn-success bg-primary-500 w-40 m-1 next ${className}`}
 			type="button"
-			onClick={onCLick}
+			onClick={onClick}
 			{...rest}
 		>
 			{label}
