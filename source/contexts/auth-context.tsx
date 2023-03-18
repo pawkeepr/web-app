@@ -1,10 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import getConfig from 'next/config';
+'use client'
+
 import { usePathname, useRouter } from 'next/navigation';
 import { createContext, useCallback, useEffect } from "react";
 import cookies from '~/constants/cookies';
 import LOADING from '~/constants/loading';
 import { decrypt, encrypt } from '~/helpers/encrypt-and-decrypt';
+import {
+    recoverUserByToken,
+    signInUser
+} from '~/store/actions';
 import {
     LoginState,
     onChangePassword,
@@ -12,11 +16,10 @@ import {
     onChangeUsername,
     onSetRememberMe,
     onToggleVisiblePassword as onToggleVisiblePasswordAction,
-    recoverUserByToken,
-    signInUser
 } from '~/store/auth/login/slice';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
 import { getCookie, setCookie } from '~/utils/cookies-utils';
+
 interface SignInData {
     username: string;
     password: string;
@@ -41,11 +44,12 @@ interface AuthProviderProps {
     children: React.ReactNode;
 }
 
+
+const publicRoutes = ['/sign-in', '/sign-up', '/forget-password', '/reset-password', '/', '/404', '/500', '']
+
 export function AuthProvider({ children }: AuthProviderProps) {
     const router = useRouter();
     const pathname = usePathname()
-    const config = getConfig();
-    const { publicRuntimeConfig: { publicRoutes } } = config;
 
     const {
         user,
@@ -57,17 +61,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         visiblePassword,
     } = useAppSelector(state => state.Login as LoginState);
     const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        if (isAuthenticated && publicRoutes?.includes?.(pathname)) {
-            return router.push('/dashboard');
-        }
-
-        if (!isAuthenticated && !publicRoutes?.includes?.(pathname)) {
-            return router.push('/sign-in');
-        }
-
-    }, [isAuthenticated, publicRoutes]);
 
     useEffect(() => {
         dispatch(recoverUserByToken(getCookie(cookies.token.name)));
@@ -101,6 +94,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         dispatch(signInUser({ username, password }));
         router.push('/dashboard');
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, handleRememberInfo, rememberMe]);
 
     const onToggleRememberMe = useCallback(() => {
