@@ -77,7 +77,7 @@ import {
 
 let users = [
   {
-    uid: 1,
+    id: 1,
     email: "murilomontino@hotmail.com",
     role: "admin",
     password: "senha123",
@@ -87,6 +87,17 @@ let users = [
     phone: '11999999999',
     document: '00000000000',
   },
+  {
+    id: 2,
+    email: 'testuser@gmail.com',
+    role: 'user',
+    password: 'testpassword',
+    firstName: 'Test',
+    lastName: 'User',
+    crmv: 'AA0000',
+    phone: '11999999999',
+    document: '00000000000',
+  }
 ];
 
 const getUsers = () => {
