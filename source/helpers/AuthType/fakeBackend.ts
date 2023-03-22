@@ -75,10 +75,13 @@ import {
   yearRevenueData
 } from "../../common/data";
 
+import { faker } from '@faker-js/faker';
+
 let users = [
   {
     id: 1,
     email: "murilomontino@hotmail.com",
+    company: faker.company.name(),
     role: "admin",
     password: "senha123",
     firstName: 'Murilo',
@@ -86,17 +89,24 @@ let users = [
     crmv: 'AA0000',
     phone: '11999999999',
     document: '00000000000',
+    avatar: faker.image.avatar(), // TODO: fix this
+    about: faker.lorem.lines(7),
+    created_at: faker.date.past().toLocaleString(),
   },
   {
     id: 2,
     email: 'testuser@gmail.com',
     role: 'user',
+    company: faker.company.name(),
     password: 'testpassword',
     firstName: 'Test',
     lastName: 'User',
     crmv: 'AA0000',
     phone: '11999999999',
     document: '00000000000',
+    avatar: faker.image.avatar(), // TODO: fix this
+    about: faker.lorem.lines(7),
+    created_at: faker.date.past().toLocaleString(),
   }
 ];
 
