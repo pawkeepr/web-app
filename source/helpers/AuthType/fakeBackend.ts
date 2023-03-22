@@ -136,7 +136,7 @@ const fakeBackend = () => {
           reject([400, "Documento já cadastrado"]);
         }
 
-        usersCookies.push(user);
+        usersCookies.push({ ...user, created_at: Date.now().toLocaleString() });
 
         try {
           const maxAge = 60 * 60 * 24 * 30
