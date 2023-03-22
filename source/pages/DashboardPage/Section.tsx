@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState } from 'react';
+import Image from 'next/image';
+import React, { useMemo, useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -13,21 +14,29 @@ import TabContent from 'react-bootstrap/TabContent';
 import TabPane from 'react-bootstrap/TabPane';
 
 //import images
-import Image from 'next/image';
 import slack from '~/assets/images/brands/slack.png';
-import ActivitiesTab from './ActivitiesTab';
-import OverviewTab from './OverviewTab';
-import TeamTab from './TeamTab';
+
+import { useAppSelector } from '~/store/hooks';
+import OverviewTab from './components/organisms/tabs/OverviewTab';
+import PetsTab from './components/organisms/tabs/PetsTab';
+import TutorsTab from './components/organisms/tabs/TutorsTab';
+import VeterinaryAppointmentsTab from './components/organisms/tabs/VeterinaryAppointmentsTab';
 
 const Section = () => {
     //Tab 
     const [activeTab, setActiveTab] = useState('1');
+
+    const profile = useAppSelector(state => state.Profile.user)
 
     const toggleTab = (tab: '1' | '2' | '3' | '4') => () => {
         if (activeTab !== tab) {
             setActiveTab(tab);
         }
     };
+
+    const name = useMemo(() => {
+        return profile?.company || profile?.firstName + " " + profile?.lastName
+    }, [profile]);
 
     return (
         <React.Fragment>
@@ -48,16 +57,11 @@ const Section = () => {
                                             </div>
                                             <div className="col-md">
                                                 <div>
-                                                    <h4 className="fw-bold">Velzon - Admin & Dashboard</h4>
+                                                    <h4 className="fw-bold">{name}</h4>
                                                     <div className="hstack gap-3 flex-wrap">
-                                                        <div><i className="ri-building-line align-bottom me-1"></i> Themesbrand</div>
+                                                        <div><i className="ri-building-line align-bottom me-1"></i>{profile?.company}</div>
                                                         <div className="vr"></div>
-                                                        <div>Criado : <span className="fw-medium">15 Sep, 2021</span></div>
-                                                        <div className="vr"></div>
-                                                        {/* <div>Due Date : <span className="fw-medium">29 Dec, 2021</span></div>
-                                                        <div className="vr"></div>
-                                                        <div className="badge rounded-pill bg-info fs-12">New</div>
-                                                        <div className="badge rounded-pill bg-danger fs-12">High</div> */}
+                                                        <div>Criado : <span className="fw-medium">{profile?.created_at}</span></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -75,30 +79,31 @@ const Section = () => {
                                             Principal
                                         </NavLink>
                                     </NavItem>
-                                    {/* <NavItem>
+                                    <NavItem>
                                         <NavLink
                                             className="fw-bold"
                                             onClick={toggleTab('2')}
-                                            href="#">
-                                            Documents
+                                            href="#Consultas">
+                                            Consultas
                                         </NavLink>
-                                    </NavItem> */}
+                                    </NavItem>
                                     <NavItem>
                                         <NavLink
                                             className="fw-bold"
                                             onClick={toggleTab('3')}
-                                            href="#Atividades">
-                                            Atividades
+                                            href="#Pets">
+                                            Pets
                                         </NavLink>
                                     </NavItem>
                                     <NavItem>
                                         <NavLink
                                             className="fw-bold"
                                             onClick={toggleTab('4')}
-                                            href="#Time">
-                                            Time
+                                            href="#Tutors">
+                                            Tutores
                                         </NavLink>
                                     </NavItem>
+
                                 </Nav>
                             </Card>
                         </div>
@@ -112,14 +117,14 @@ const Section = () => {
                             <TabPane eventKey="1">
                                 <OverviewTab />
                             </TabPane>
-                            {/* <TabPane tabId="2">
-                            <DocumentsTab />
-                        </TabPane> */}
+                            <TabPane eventKey="2">
+                                <VeterinaryAppointmentsTab />
+                            </TabPane>
                             <TabPane eventKey="3">
-                                <ActivitiesTab />
+                                <PetsTab />
                             </TabPane>
                             <TabPane eventKey="4">
-                                <TeamTab />
+                                <TutorsTab />
                             </TabPane>
                         </TabContent>
                     </TabContainer>
