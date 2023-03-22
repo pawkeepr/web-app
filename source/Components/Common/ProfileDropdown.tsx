@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import { StaticImageData } from 'next/image';
+import React, { useState } from 'react';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownItem from 'react-bootstrap/DropdownItem';
@@ -7,33 +7,30 @@ import DropdownMenu from 'react-bootstrap/DropdownMenu';
 import DropdownToggle from 'react-bootstrap/DropdownToggle';
 
 //import images
-import avatar1 from "~/assets/images/users/avatar-1.jpg";
 import { useAppSelector } from '~/store/hooks';
 
-const CustomToggle = ({ onClick }) => (
-    <span className="btn d-flex align-items-center" onClick={onClick}>
-        <Image className="rounded-circle header-profile-user" src={avatar1} alt="Header Avatar" />
+import MyImage from '../atoms/my-image/my-image';
+
+type CustomToggleProps = {
+    onClick: () => void;
+    name: string;
+    avatar: string | StaticImageData;
+}
+
+const CustomToggle = ({ onClick, name, avatar }: CustomToggleProps) => (
+    <div className="btn d-flex items-center" onClick={onClick}>
+
+        <MyImage className="rounded-circle header-profile-user" src={avatar} alt="Header Avatar" height={48} width={48} />
+
         <span className="text-start ms-xl-2">
-            <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{"Admin"}</span>
+            <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{name}</span>
         </span>
-    </span>
+    </div>
 )
 
 const ProfileDropdown = () => {
 
-    const { user } = useAppSelector(state => ({
-        user: state.Profile.user,
-    }));
-
-    const [userName, setUserName] = useState("Admin");
-
-    useEffect(() => {
-        if (sessionStorage.getItem("authUser")) {
-            const obj = JSON.parse(sessionStorage.getItem("authUser") || '');
-            setUserName(user.first_name || obj.data.first_name || "Admin");
-        }
-    }, [userName, user]);
-
+    const profile = useAppSelector(state => state.Profile.user);
 
     //Dropdown Toggle
     const [isProfileDropdown, setIsProfileDropdown] = useState(false);
@@ -41,7 +38,13 @@ const ProfileDropdown = () => {
         setIsProfileDropdown(!isProfileDropdown);
     };
 
-    const DropdownToggleButton = () => <CustomToggle onClick={toggleProfileDropdown} />;
+    const DropdownToggleButton = () => (
+        <CustomToggle
+            onClick={toggleProfileDropdown}
+            name={profile?.firstName as any}
+            avatar={profile?.avatar as any}
+        />
+    );
 
     return (
         <React.Fragment>
@@ -50,9 +53,10 @@ const ProfileDropdown = () => {
 
                 <DropdownMenu className="dropdown-menu-end">
 
-                    <h6 className="dropdown-header">Welcome {userName}!</h6>
+                    <h6 className="dropdown-header">Bem Vindo, {profile?.firstName}!</h6>
                     <DropdownItem href="/profile"><i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>
-                        <span className="align-middle">Profile</span></DropdownItem>
+                        <span className="align-middle">Perfil</span>
+                    </DropdownItem>
                     {/* <DropdownItem href="/apps-chat"><i
                         className="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span
                             className="align-middle">Messages</span></DropdownItem>
