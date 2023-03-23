@@ -36,7 +36,7 @@ const validate = Yup.object().shape({
             const numericValue = value.replace(/\D/g, '');
 
             // Verificando se o número de telefone tem pelo menos 10 dígitos
-            return numericValue.length >= 10;
+            return numericValue.length === 11;
         }).required(),
     document: Yup.string()
         .required('Este campo é obrigatório')

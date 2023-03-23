@@ -17,7 +17,8 @@ const useFetchAddress = ({ zipCode, onChangeAddress }: TUseFetchCep) => {
             setLoading(true)
             fetchAddressByCep(zipCode)
                 .then((data) => {
-                    setCepInvalid(Boolean(!data || data?.erro))
+                    // existem CEP's válidos que a API não devolve resultado
+                    // setCepInvalid(Boolean(!data || data?.erro)) 
                     onChangeAddress(data as IAddress)
                 })
                 .catch(err => {
