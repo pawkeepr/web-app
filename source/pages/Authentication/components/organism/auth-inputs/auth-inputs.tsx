@@ -36,6 +36,7 @@ const Auth = () => {
         onToggleVisiblePassword,
         rememberMe,
         visiblePassword,
+        isAuthenticated,
     } = useAuth();
 
     const handleSubmit = () => {
@@ -135,10 +136,10 @@ const Auth = () => {
                     <div className="mt-4">
                         <Button
                             color="primary"
-                            className="w-full bg-green-600"
+                            className="w-full bg-primary-500"
                             type="submit"
                             data-testid="submit-button"
-                            disabled={!isValid}
+                            disabled={!isValid || isAuthenticated}
                         >
                             Entrar
                         </Button>

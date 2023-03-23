@@ -17,7 +17,9 @@ const validate = Yup.object().shape({
         .min(2, 'O sobrenome deve ter pelo menos 2 caracteres')
         .max(155, 'O sobrenome deve ter no máximo 50 caracteres')
         .required('O campo de sobrenome é obrigatório'),
-    crmv: Yup.string().matches(/^[A-Z]{2}\d{4,6}$/).required(),
+    crmv: Yup.string().matches(/^[A-Z]{2}\d{4,6}$/,
+        'CRMV inválido. Exemplo: SP12345'
+    ).required('O Campo CRMV é obrigatório'),
     company: Yup.string().when('document', {
         is: (value: string) => cnpj.isValid(value),
         then: Yup.string().transform(transformTrim).required('Este campo é obrigatório'),
@@ -34,7 +36,7 @@ const validate = Yup.object().shape({
             const numericValue = value.replace(/\D/g, '');
 
             // Verificando se o número de telefone tem pelo menos 10 dígitos
-            return numericValue.length >= 10;
+            return numericValue.length === 11;
         }).required(),
     document: Yup.string()
         .required('Este campo é obrigatório')

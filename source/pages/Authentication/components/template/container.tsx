@@ -16,7 +16,6 @@ const Container = ({ children }: ContainerProps) => {
             <div className="my-2">
                 {children}
             </div>
-
         </div>
     )
 }

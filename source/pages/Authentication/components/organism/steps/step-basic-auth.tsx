@@ -3,31 +3,37 @@ import { useFormikContext } from 'formik';
 import { useMemo, useState } from 'react';
 
 import InputGroup from 'react-bootstrap/InputGroup';
+
+import BtnSuccess from '~/Components/atoms/btn/btn-success';
 import FieldControl from '~/Components/molecules/field-control';
+import { AccountSignUp } from '~/store/auth/register/types';
 import validateEmail from '~/validations/email';
 import validatePassword from '~/validations/password';
-import PasswordRules from '../../molecules/password-rules';
 
-import { AccountSignUp } from '~/store/auth/register/types';
-import BtnSuccess from '../../../../../Components/atoms/btn/btn-success';
+
+import PasswordRules from '../../molecules/password-rules';
 import Container from '../../template/container';
+
+import useNextStep from '~/hooks/use-next-step';
 import { StepProps } from './types';
 
+const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
 
-const StepSignUpBasicAuth = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const [passwordShow, setPasswordShow] = useState(false);
     const [passwordConfirmShow, setPasswordConfirmShow] = useState(false);
 
     const { values, handleBlur } = useFormikContext<AccountSignUp>()
     const { email, password, passwordConfirm } = values;
 
-    const requiredFieldsFilled = useMemo(() => {
+    const requiredValid = useMemo(() => {
         return (
             validatePassword.isValidSync(password) &&
             validateEmail.isValidSync(email) &&
             password === passwordConfirm
-        );
+        )
     }, [email, password, passwordConfirm])
+
+    useNextStep(nextStep, requiredValid)
 
     const onToggleVisiblePassword = () => {
         setPasswordShow(state => !state)
@@ -41,7 +47,9 @@ const StepSignUpBasicAuth = ({ nextStep, prevStep, ...rest }: StepProps) => {
         <Container>
 
             <FieldControl
+                divClassName='my-1'
                 label="Email"
+                initialFocus
                 name="email"
                 type="email"
                 className="form-control"
@@ -51,6 +59,7 @@ const StepSignUpBasicAuth = ({ nextStep, prevStep, ...rest }: StepProps) => {
             />
 
             <FieldControl
+                divClassName='my-1'
                 required
                 label='Senha'
                 name="password"
@@ -68,6 +77,7 @@ const StepSignUpBasicAuth = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
             <FieldControl
                 required
+                divClassName='my-1'
                 label='Repita a senha'
                 name="passwordConfirm"
                 type={passwordConfirmShow ? "text" : "password"}
@@ -87,7 +97,7 @@ const StepSignUpBasicAuth = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
 
             <div className="mt-4 d-flex justify-content-center">
-                <BtnSuccess label="Próximo" className="m-1" onClick={nextStep} disabled={!requiredFieldsFilled} />
+                <BtnSuccess label="Próximo" className="m-1" onClick={nextStep} disabled={!requiredValid} />
             </div>
 
         </Container>

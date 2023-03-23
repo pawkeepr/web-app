@@ -1,0 +1,125 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Auth Unit (Unit) > should render without errors 1`] = `
+<body>
+  <div>
+    <form
+      class=""
+    >
+      <div
+        class="mb-3"
+      >
+        <div>
+          <label
+            class="mb-0 list-group-item fs-12 form-label"
+            data-testid="label-username"
+            for="username"
+          >
+            Email:
+          </label>
+          <div
+            class="position-relative mb-2 input-group"
+          >
+            <input
+              class="
+                    form-control
+                    "
+              data-testid="email-input"
+              id="username"
+              name="username"
+              pattern="[^\\\\s]+"
+              placeholder="Digite seu email"
+              type="text"
+              value=""
+            />
+          </div>
+          <label
+            class="font-bold list-group-item text-danger fs-11 text-center"
+            data-testid="err-username"
+            style="display: none;"
+          />
+        </div>
+      </div>
+      <div
+        class="mb-3"
+      >
+        <div
+          class="position-relative auth-pass-inputgroup mb-3"
+        >
+          <div>
+            <label
+              class="mb-0 list-group-item fs-12 form-label"
+              data-testid="label-password"
+              for="password"
+            >
+              Senha
+            </label>
+            <div
+              class="position-relative mb-2 input-group"
+            >
+              <input
+                class="
+                    form-control pe-5 password-input border-end-0
+                    "
+                data-testid="password-input"
+                id="password"
+                name="password"
+                placeholder="Digite sua senha"
+                type="password"
+                value=""
+              />
+              <span
+                class="bg-transparent border-start-0 cursor-pointer input-group-text"
+              >
+                <i
+                  class="ri-eye-fill cursor-pointer"
+                  data-testid="toggle-password"
+                />
+              </span>
+            </div>
+            <label
+              class="font-bold list-group-item text-danger fs-11 text-center"
+              data-testid="err-password"
+              style="display: none;"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="w-full form-check"
+      >
+        <input
+          class="form-check-input"
+          id="rememberMe"
+          name="rememberMe"
+          type="checkbox"
+        />
+        <label
+          class="form-check-label"
+          for="rememberMe"
+          title=""
+        >
+          <p
+            class="mb-0 fs-12 text-muted fst-italic"
+          >
+            Lembrar-me
+          </p>
+        </label>
+      </div>
+      <div
+        class="mt-4"
+      >
+        <button
+          class="w-full bg-primary-500 btn btn-primary"
+          color="primary"
+          data-testid="submit-button"
+          disabled=""
+          type="submit"
+        >
+          Entrar
+        </button>
+      </div>
+    </form>
+  </div>
+</body>
+`;

@@ -3,27 +3,29 @@
 
 import { useFormikContext } from 'formik';
 
-import Address from '../../molecules/address/address';
-
 import { useCallback, useMemo, useState } from 'react';
 
 import MaskedInput from 'react-input-mask';
 import validateAddress from '~/validations/address';
 
+import BtnCancel from '~/Components/atoms/btn/btn-cancel';
+import BtnSuccess from '~/Components/atoms/btn/btn-success';
 import ErrMessage from '~/Components/atoms/err-message';
 import CountrySelect from '~/Components/molecules/country-select';
 import FieldControl from '~/Components/molecules/field-control/field-control';
 import { IAddress } from '~/helpers/fetch-address-by-cep';
 import useFetchAddress from '~/hooks/use-fetch-address';
 import { AccountSignUp } from '~/store/auth/register/types';
-import BtnCancel from '../../../../../Components/atoms/btn/btn-cancel';
-import BtnSuccess from '../../../../../Components/atoms/btn/btn-success';
+
+
+import Address from '../../molecules/address/address';
 import Container from '../../template/container';
+
+import useNextStep from '~/hooks/use-next-step';
 import { StepProps } from './types';
 
 
 const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
-
     const [disabledInputs, setDisabledInputs] = useState({ state: false, city: false, neighborhood: false, street: false, complement: false })
 
     const { values, setFieldValue } = useFormikContext<AccountSignUp>()
@@ -55,11 +57,16 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
         },
         [setFieldValue],
     )
+
     const { cepInvalid, loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode })
 
-    const requiredFieldsFilled = useMemo((): boolean => {
-        return validateAddress.isValidSync(address) && !cepInvalid
+    const requiredValid = useMemo((): boolean => {
+        const isValid = validateAddress.isValidSync(address) && !cepInvalid
+
+        return isValid
     }, [address, cepInvalid])
+
+    useNextStep(nextStep, requiredValid, 1000)
 
     return (
         <Container>
@@ -67,8 +74,10 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <div className="container d-flex flex-column mt-4">
                 <CountrySelect className="mb-2" />
                 <FieldControl
+                    divClassName='my-1'
                     className="form-control"
                     type="text"
+                    initialFocus
                     label="CEP"
                     name="address.zipCode"
                     placeholder="Digite o CEP"
@@ -81,7 +90,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
                 <div className="mt-4 d-flex justify-content-center">
                     <BtnCancel onClick={prevStep} label="Anterior" className="m-1" />
-                    <BtnSuccess label="Próximo" className="m-1" onClick={nextStep} disabled={!requiredFieldsFilled || loading} />
+                    <BtnSuccess label="Próximo" className="m-1" onClick={nextStep} disabled={!requiredValid || loading} />
                 </div>
             </div>
 
