@@ -5,6 +5,7 @@ import CardTutors from '~/Components/molecules/card-tutors';
 
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
 
+import SearchInput from '~/Components/molecules/search-input/search-input';
 import { getTutors } from '~/store/actions';
 
 const TutorsTab = () => {
@@ -19,12 +20,7 @@ const TutorsTab = () => {
         <React.Fragment>
             <Row className="g-4 mb-3">
                 <div className="col-sm">
-                    <div className="d-flex">
-                        <div className="search-box me-2">
-                            <input type="text" className="form-control" placeholder="Search member..." />
-                            <i className="ri-search-line search-icon"></i>
-                        </div>
-                    </div>
+                    <SearchInput className="form-control" placeholder='Busque o Tutor...' />
                 </div>
                 <div className="col-sm-auto">
                     <ModalAddTutor />
