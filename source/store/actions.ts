@@ -9,6 +9,7 @@ export * from "./calendar/actions";
 //chat
 export * from "./chat/action";
 //crm
+export * from './pets/actions';
 export * from "./tutor/actions";
 
 export * from "./layouts/actions";
