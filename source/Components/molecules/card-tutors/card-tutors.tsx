@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import {
@@ -11,19 +10,20 @@ import {
     Row,
     UncontrolledDropdown
 } from 'reactstrap';
+import MyImage from '~/Components/atoms/my-image/my-image';
 
-import avatar2 from "~/assets/images/users/avatar-2.jpg";
+import { Tutor } from '~/store/tutor/types';
 
 type CardTutorsProps = {
-    tutor: {
-        id: number;
-        name: string;
-        email: string;
-        avatar: string;
-    }
+    tutor: Tutor
 }
 
-const CardTutors = () => {
+const CardTutors = ({ tutor }: CardTutorsProps) => {
+
+    if (!tutor) {
+        return null;
+    }
+
     return (
         <Card className="team-box">
             <CardBody className="px-4">
@@ -52,11 +52,11 @@ const CardTutors = () => {
                     <Col lg={4}>
                         <div className="team-profile-img">
                             <div className="avatar-lg img-thumbnail rounded-circle">
-                                <Image src={avatar2} alt="" className="img-fluid d-block rounded-circle" />
+                                <MyImage src={tutor?.avatar} alt={`Foto de Perfil de ${tutor?.name}`} className="img-fluid d-block rounded-circle" fill />
                             </div>
                             <div className="team-content">
-                                <Link href="#" className="d-block"><h5 className="fs-16 mb-1">Nancy Martino</h5></Link>
-                                <p className="text-muted mb-0">Team Leader & HR</p>
+                                <Link href="#" className="d-block"><h5 className="fs-16 mb-1">{tutor?.name}</h5></Link>
+                                <p className="text-muted mb-0">{tutor?.phone}</p>
                             </div>
                         </div>
                     </Col>
@@ -74,7 +74,7 @@ const CardTutors = () => {
                     </Col>
                     <Col lg={2} className="col">
                         <div className="text-end">
-                            <Link href="/pages-profile" className="btn btn-light view-btn">View Profile</Link>
+                            <Link href="/pages-profile" className="btn btn-light view-btn">Ver Perfil</Link>
                         </div>
                     </Col>
 

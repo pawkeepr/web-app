@@ -1,58 +1,60 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { TutorInitialState, name } from './types';
+import { Tutor, TutorInitialState, name } from './types';
 
 const initialState: TutorInitialState = {
     tutors: [],
     error: {},
-    isContactCreated: false,
-    isContactSuccess: false,
+    isTutorCreated: false,
+    isTutorSuccess: false,
 };
 
-export const contactSlice = createSlice({
+export const tutorSlice = createSlice({
     name,
     initialState,
     reducers: {
-        apiResponseSuccess: (state, action: PayloadAction<{ data: any, actionType: string }>) => {
-            if (action.payload.actionType === 'GET_CONTACTS') {
-                state.tutors = action.payload.data;
-                state.isContactCreated = false;
-                state.isContactSuccess = true;
-            }
+        apiResponseSuccess: (state, action: PayloadAction<Tutor[]>) => {
+            state.tutors = action.payload;
+            state.isTutorCreated = false;
+            state.isTutorSuccess = true;
         },
-        apiResponseError: (state, action: PayloadAction<{ error: any, actionType: string }>) => {
-            if (action.payload.actionType === 'GET_CONTACTS') {
-                state.error = action.payload.error;
-                state.isContactCreated = false;
-                state.isContactSuccess = false;
-            }
+        apiResponseError: (state, action: PayloadAction<{ error: any }>) => {
+            state.error = action.payload.error;
+            state.isTutorCreated = false;
+            state.isTutorSuccess = false;
         },
-        addContactSuccess: (state, action: PayloadAction<{ data: any }>) => {
-            state.isContactCreated = true;
+        addTutorSuccess: (state, action: PayloadAction<{ data: any }>) => {
+            state.isTutorCreated = true;
             state.tutors.push(action.payload.data);
         },
-        addContactFail: (state, action) => {
+        addTutorFail: (state, action) => {
             state.error = action.payload;
         },
-        updateContactSuccess: (state, action: PayloadAction<{ data: any }>) => {
-            state.tutors = state.tutors.map(contact =>
-                contact._id.toString() === action.payload.data._id.toString()
-                    ? { ...contact, ...action.payload.data }
-                    : contact
+        updateTutorSuccess: (state, action: PayloadAction<{ data: any }>) => {
+            state.tutors = state.tutors.map(tutor =>
+                tutor.id.toString() === action.payload.data._id.toString()
+                    ? { ...tutor, ...action.payload.data }
+                    : tutor
             );
         },
-        updateContactFail: (state, action) => {
+        updateTutorFail: (state, action) => {
             state.error = action.payload;
         },
-        deleteContactSuccess: (state, action: PayloadAction<{ contact: any }>) => {
+        deleteTutorSuccess: (state, action: PayloadAction<{ tutor: any }>) => {
             state.tutors = state.tutors.filter(
-                contact => contact._id.toString() !== action.payload.contact.toString()
+                tutor => tutor._id.toString() !== action.payload.tutor.toString()
             );
         },
-        deleteContactFail: (state, action) => {
+        deleteTutorFail: (state, action) => {
             state.error = action.payload;
         },
     },
 });
 
-export default contactSlice.reducer;
+
+export const {
+    apiResponseSuccess,
+    apiResponseError
+} = tutorSlice.actions;
+
+export default tutorSlice.reducer;

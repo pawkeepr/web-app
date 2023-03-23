@@ -76,6 +76,7 @@ import {
 } from "../../common/data";
 
 import { faker } from '@faker-js/faker';
+import factoryTutors from "../mocks/tutors";
 
 let users = [
   {
@@ -111,24 +112,22 @@ let users = [
 ];
 
 const getUsers = () => {
-  let cookie;
 
   try {
-    cookie = getCookie('users-mock')
-    cookie = cookie && JSON.parse(cookie)
+    const cookie = getCookie('users-mock')
+    return (cookie || users) as Array<any>
   } catch (error) {
     console.log(error)
+    return users
   }
 
-
-  const usersCookies = cookie || users
-
-  return usersCookies as Array<any>
 }
 
 const fakeBackend = () => {
   // This sets the mock adapter on the default instance
   const mock = new MockAdapter(axios, { onNoMatch: "passthrough" });
+
+  factoryTutors(mock);
 
   mock.onPost(url.POST_FAKE_REGISTER).reply(config => {
     const user = JSON.parse(config["data"]);

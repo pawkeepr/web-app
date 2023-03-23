@@ -98,7 +98,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             return
         }
 
-        const { username, password } = JSON.parse(rememberInfo)
+        const { username, password } = rememberInfo
 
         dispatch(onSetRememberMe(true))
         dispatch(onChangeUsername(username))

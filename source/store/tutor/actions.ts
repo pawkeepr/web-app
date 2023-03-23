@@ -1,30 +1,30 @@
 import { createAction } from '@reduxjs/toolkit';
 
 import {
-    ADD_CONTACT_FAIL,
-    ADD_CONTACT_SUCCESS,
-    ADD_NEW_CONTACT,
+    ADD_NEW_TUTOR,
+    ADD_TUTOR_FAIL,
+    ADD_TUTOR_SUCCESS,
     CRM_API_RESPONSE_ERROR,
     CRM_API_RESPONSE_SUCCESS,
-    DELETE_CONTACT,
-    DELETE_CONTACT_FAIL,
-    DELETE_CONTACT_SUCCESS,
-    GET_CONTACTS,
-    UPDATE_CONTACT,
-    UPDATE_CONTACT_FAIL,
-    UPDATE_CONTACT_SUCCESS
+    DELETE_TUTOR,
+    DELETE_TUTOR_FAIL,
+    DELETE_TUTOR_SUCCESS,
+    GET_TUTORS,
+    UPDATE_TUTOR,
+    UPDATE_TUTOR_FAIL,
+    UPDATE_TUTOR_SUCCESS
 } from './types';
 
-export const getContacts = createAction(GET_CONTACTS);
-export const updateContact = createAction<{ [key: string]: any }>(UPDATE_CONTACT);
-export const updateContactSuccess = createAction<{ [key: string]: any }>(UPDATE_CONTACT_SUCCESS);
-export const updateContactFail = createAction<string>(UPDATE_CONTACT_FAIL);
-export const addNewContact = createAction<{ [key: string]: any }>(ADD_NEW_CONTACT);
-export const addContactSuccess = createAction<{ [key: string]: any }>(ADD_CONTACT_SUCCESS);
-export const addContactFail = createAction<string>(ADD_CONTACT_FAIL);
-export const deleteContact = createAction<{ [key: string]: any }>(DELETE_CONTACT);
-export const deleteContactSuccess = createAction<{ [key: string]: any }>(DELETE_CONTACT_SUCCESS);
-export const deleteContactFail = createAction<string>(DELETE_CONTACT_FAIL);
+export const getTutors = createAction(GET_TUTORS);
+export const updateTutor = createAction<{ [key: string]: any }>(UPDATE_TUTOR);
+export const updateTutorSuccess = createAction<{ [key: string]: any }>(UPDATE_TUTOR_SUCCESS);
+export const updateTutorFail = createAction<string>(UPDATE_TUTOR_FAIL);
+export const addNewTutor = createAction<{ [key: string]: any }>(ADD_NEW_TUTOR);
+export const addTutorSuccess = createAction<{ [key: string]: any }>(ADD_TUTOR_SUCCESS);
+export const addTutorFail = createAction<string>(ADD_TUTOR_FAIL);
+export const deleteTutor = createAction<{ [key: string]: any }>(DELETE_TUTOR);
+export const deleteTutorSuccess = createAction<{ [key: string]: any }>(DELETE_TUTOR_SUCCESS);
+export const deleteTutorFail = createAction<string>(DELETE_TUTOR_FAIL);
 
-export const crmApiResponseSuccess = createAction<{ [key: string]: any }>(CRM_API_RESPONSE_SUCCESS);
-export const crmApiResponseError = createAction<string>(CRM_API_RESPONSE_ERROR);
+export const apiResponseSuccess = createAction<{ [key: string]: any }>(CRM_API_RESPONSE_SUCCESS);
+export const apiResponseError = createAction<string>(CRM_API_RESPONSE_ERROR);

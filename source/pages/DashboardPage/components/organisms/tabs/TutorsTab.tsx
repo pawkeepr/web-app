@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
 import ModalAddTutor from '~/Components/modals/modal-add-tutor/modal-add-tutor';
 import CardTutors from '~/Components/molecules/card-tutors/card-tutors';
 
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
+
+import { getTutors } from '~/store/actions';
+
 const TutorsTab = () => {
+    const dispatch = useAppDispatch();
+    const tutors = useAppSelector((state) => state.Tutor.tutors);
+
+    useEffect(() => {
+        dispatch(getTutors());
+    }, [dispatch]);
 
     return (
         <React.Fragment>
@@ -21,7 +31,9 @@ const TutorsTab = () => {
                 </div>
             </Row>
             <div className="team-list list-view-filter">
-                <CardTutors />
+                {
+                    tutors?.map(tutor => (<CardTutors key={tutor.id} tutor={tutor} />))
+                }
             </div>
 
         </React.Fragment>

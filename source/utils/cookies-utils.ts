@@ -5,5 +5,16 @@ export function setCookie(name: string, value: string, maxAge?: number) {
 }
 
 export function getCookie(name: string, ctx: any = null) {
-    return parseCookies(ctx)[name];
+    const cookie = parseCookies(ctx)[name];
+
+    if (!cookie) {
+        return null;
+    }
+
+    try {
+        return JSON.parse(cookie);
+    } catch (e) {
+        return cookie;
+    }
+
 }

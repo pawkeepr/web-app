@@ -11,9 +11,10 @@ import ModalHeader from 'react-bootstrap/ModalHeader';
 import Row from 'react-bootstrap/Row';
 //Import actions
 import {
-    getTutors as onGetTutors
+    getContacts as onGetContacts
 } from "~/store/actions";
 //redux
+import { useDispatch } from "react-redux";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,13 +23,12 @@ import { Formik } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
 import FieldControl from "~/Components/molecules/field-control/field-control";
-import { useAppDispatch, useAppSelector } from "~/store/hooks";
-import { Tutor } from "~/store/tutor/types";
+import { useAppSelector } from "~/store/hooks";
 
-const ModalAddTutor = () => {
+const ModalAddPet = () => {
 
-    const dispatch = useAppDispatch();
-    const [tutor, setTutor] = useState<Tutor>(null);
+    const dispatch = useDispatch();
+    const [contact, setContact] = useState<any[]>([]);
     const [modal, setModal] = useState(false);
 
     const { tutors } = useAppSelector((state) => ({
@@ -41,14 +41,14 @@ const ModalAddTutor = () => {
 
     useEffect(() => {
         if (tutors && !tutors.length) {
-            dispatch(onGetTutors());
+            dispatch(onGetContacts());
         }
     }, [dispatch, tutors]);
 
     const toggle = useCallback(() => {
         if (modal) {
             setModal(false);
-            setTutor([]);
+            setContact([]);
         } else {
             setModal(true);
         }
@@ -56,11 +56,14 @@ const ModalAddTutor = () => {
 
     // validation
     const validation = {
+        // enableReinitialize : use this flag when initial values needs to be changed
+        enableReinitialize: true,
+
         initialValues: {
-            avatar: tutor?.avatar || '',
-            name: tutor?.name || '',
-            email: tutor?.email || '',
-            phone: tutor?.phone || '',
+            // img: (contact && contact.img) || '',
+            name: (contact && contact.name) || '',
+            email: (contact && contact.email) || '',
+            phone: (contact && contact.phone) || '',
         },
         validationSchema: Yup.object({
             name: Yup.string().required("Please Enter Name"),
@@ -168,4 +171,4 @@ const ModalAddTutor = () => {
     )
 }
 
-export default ModalAddTutor
+export default ModalAddPet
