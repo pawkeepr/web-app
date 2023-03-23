@@ -1,0 +1,3 @@
+.emoji::before {
+    content: attr(data-emoji);
+}

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
-import ModalAddTutor from '~/Components/modals/modal-add-tutor/modal-add-tutor';
-import CardTutors from '~/Components/molecules/card-tutors/card-tutors';
+import ModalAddTutor from '~/Components/modals/modal-add-tutor';
+import CardTutors from '~/Components/molecules/card-tutors';
 
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
 

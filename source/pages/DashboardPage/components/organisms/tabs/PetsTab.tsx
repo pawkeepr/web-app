@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
-import ModalAddTutor from '~/Components/modals/modal-add-tutor/modal-add-tutor';
-import CardTutors from '~/Components/molecules/card-tutors/card-tutors';
+import ModalAddPet from '~/Components/modals/modal-add-pet';
+import CardPets from '~/Components/molecules/card-pets';
+import { getPets } from '~/store/actions';
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
 
 const PetsTab = () => {
+
+    const dispatch = useAppDispatch();
+    const pets = useAppSelector((state) => state.Pets.pets);
+
+    useEffect(() => {
+        dispatch(getPets());
+    }, [dispatch]);
 
     return (
         <React.Fragment>
@@ -17,11 +26,13 @@ const PetsTab = () => {
                     </div>
                 </div>
                 <div className="col-sm-auto">
-                    <ModalAddTutor />
+                    <ModalAddPet />
                 </div>
             </Row>
             <div className="team-list list-view-filter">
-                <CardTutors />
+                {
+                    pets?.map(pet => (<CardPets key={pet.id} pet={pet} />))
+                }
             </div>
 
         </React.Fragment>

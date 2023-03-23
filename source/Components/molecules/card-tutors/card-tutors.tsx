@@ -52,7 +52,13 @@ const CardTutors = ({ tutor }: CardTutorsProps) => {
                     <Col lg={4}>
                         <div className="team-profile-img">
                             <div className="avatar-lg img-thumbnail rounded-circle">
-                                <MyImage src={tutor?.avatar} alt={`Foto de Perfil de ${tutor?.name}`} className="img-fluid d-block rounded-circle" fill />
+                                <MyImage
+                                    src={tutor?.avatar}
+                                    alt={`Foto de Perfil de ${tutor?.name}`}
+                                    className="img-fluid d-block rounded-circle"
+                                    width={100}
+                                    height={100}
+                                />
                             </div>
                             <div className="team-content">
                                 <Link href="#" className="d-block"><h5 className="fs-16 mb-1">{tutor?.name}</h5></Link>
@@ -63,20 +69,24 @@ const CardTutors = ({ tutor }: CardTutorsProps) => {
                     <Col lg={4}>
                         <Row className="text-muted text-center">
                             <Col xs={6} className="border-end border-end-dashed">
-                                <h5 className="mb-1">225</h5>
-                                <p className="text-muted mb-0">Projects</p>
+                                <h5 className="mb-1">0</h5>
+                                <p className="text-muted mb-0">Consultas</p>
                             </Col>
                             <Col xs={6}>
-                                <h5 className="mb-1">197</h5>
-                                <p className="text-muted mb-0">Tasks</p>
+                                <i className="emoji" data-emoji="🐱"></i>
+                                <i className="emoji" data-emoji="🐶"></i>
+                                <i className="emoji" data-emoji="🐰"></i>
+                                <i className="emoji" data-emoji="🐹"></i>
+                                <i className="emoji" data-emoji="🐠"></i>
+                                <p className="text-muted mb-0">Pets</p>
                             </Col>
                         </Row>
                     </Col>
-                    <Col lg={2} className="col">
+                    {/* <Col lg={2} className="col">
                         <div className="text-end">
                             <Link href="/pages-profile" className="btn btn-light view-btn">Ver Perfil</Link>
                         </div>
-                    </Col>
+                    </Col> */}
 
                 </Row>
             </CardBody>
