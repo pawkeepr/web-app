@@ -1,7 +1,7 @@
 import { useFormikContext } from 'formik';
 import Form from 'react-bootstrap/Form';
 import FieldControl from '~/Components/molecules/field-control/field-control';
-import { InitialStateSignUp } from '~/pages/Authentication/SignUp';
+import { AccountSignUp } from '~/store/auth/register/types';
 
 type AddressProps = {
     loading: boolean
@@ -15,7 +15,7 @@ type AddressProps = {
 }
 const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
 
-    const { setFieldValue } = useFormikContext<InitialStateSignUp>()
+    const { setFieldValue } = useFormikContext<AccountSignUp>()
 
     const onChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target
@@ -71,7 +71,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                     type="text"
                     name="address.number"
                     aria-label="number"
-                    placeholder="N"
+                    placeholder="N°"
                     required
                     onChange={onChangeNumber}
                     className='ms-1 w-20'

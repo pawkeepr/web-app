@@ -17,58 +17,100 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
         nextStep()
     }
 
-
     return (
         <Container>
-            <div className="mt-4">
-                <h4>Informações pessoais</h4>
-                <ul className="list-unstyled">
-                    <li>
-                        <strong>Nome:</strong> {values.person.firstName} {values.person.lastName}
+            <div className="my-4">
+                <h4 className="h4 my-3 text-center text-capitalize text-primary">Informações pessoais</h4>
+
+                <ul className="list-group">
+                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600">
+                        <strong>Nome:</strong> 
+                        <span className="text-capitalize ">
+                            {values.person.firstName} {values.person.lastName}
+                        </span>
                     </li>
-                    <li>
-                        <strong>CRMV:</strong> {values.person.crmv}
+                    <li className="list-group-item fw-bold d-flex gap-2 text-gray-600">
+                        <strong>CRMV:</strong> 
+                        <span className="">
+                            {values.person.crmv}
+                        </span>
                     </li>
-                    <li>
-                        <strong>Documento:</strong> {values.person.document}
+                    <li className="list-group-item fw-bold d-flex gap-2 text-gray-600">
+                        <strong>Documento:</strong> 
+                        <span className="">
+                            {values.person.document}
+                        </span>
                     </li>
-                    <li>
-                        <strong>Empresa:</strong> {values.person.company || "Não informado"}
+                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600">
+                        <strong>Empresa:</strong> 
+                        <span className="text-capitalize ">
+                            {values.person.company || "Não informado"}
+                        </span>
                     </li>
-                    <li>
-                        <strong>Telefone:</strong> {values.person.phoneNumber}
+                    <li className="list-group-item fw-bold d-flex gap-2 text-gray-600">
+                        <strong>Telefone:</strong> 
+                        <span className="">
+                            {values.person.phoneNumber}
+                        </span> 
+                       
                     </li>
                 </ul>
 
-                <h4>Endereço</h4>
-                <ul className="list-unstyled">
-                    <li>
-                        <strong>País:</strong> {values.address.country}
+                <h4 className="h4 text-center my-2 text-capitalize text-primary">Endereço</h4>
+
+                <ul className="list-group">
+                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
+                        <strong>País:</strong> 
+                        <span className="text-capitalize ">
+                            {values.address.country}
+                        </span> 
                     </li>
-                    <li>
-                        <strong>Rua:</strong> {values.address.street}
+                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
+                        <strong>Rua:</strong> 
+                        <span className="text-capitalize ">
+                            {values.address.street}
+                        </span>
+                    </li >
+                    <li className="list-group-item fw-bold d-flex gap-2 text-gray-600" >
+                        <strong>Número:</strong> 
+                        <span className="">
+                            {values.address.number}
+                        </span>
                     </li>
-                    <li>
-                        <strong>Número:</strong> {values.address.number}
+                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
+                        <strong>Complemento:</strong> 
+                        <span className="text-capitalize ">
+                            {values.address.complement || "Não informado"}
+                        </span>
                     </li>
-                    <li>
-                        <strong>Complemento:</strong> {values.address.complement || "Não informado"}
+                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
+                        <strong>Bairro:</strong> 
+                        <span className="text-capitalize ">
+                            {values.address.neighborhood}
+                        </span>
                     </li>
-                    <li>
-                        <strong>Bairro:</strong> {values.address.neighborhood}
+                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
+                        <strong>Cidade:</strong> 
+                        <span className="text-capitalize ">
+                            {values.address.city}
+                        </span>
                     </li>
-                    <li>
-                        <strong>Cidade:</strong> {values.address.city}
+                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
+                        <strong>Estado:</strong> 
+                        <span className="text-capitalize ">
+                            {values.address.state}
+                        </span>
                     </li>
-                    <li>
-                        <strong>Estado:</strong> {values.address.state}
-                    </li>
-                    <li>
-                        <strong>CEP:</strong> {values.address.zipCode}
+                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
+                        <strong>CEP:</strong> 
+                        <span className="">
+                            {values.address.zipCode}
+                        </span>
                     </li>
                 </ul>
             </div>
-            <div className="mb-4">
+
+            <div>
                 <Form.Check
                     type="checkbox"
                     className="w-100"
@@ -77,23 +119,27 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
                     onChange={handleChange}
                     checked={values.termsOfUse}
                     label={
-                        <p className="mb-0 fs-12 text-muted fst-italic">
+                        <p className="mb-4 fs-12 fst-italic">
                             {"Você se registrando aceita os termos de uso da plataforma: "}
                             <Link href="#" className="text-primary text-decoration-underline fst-normal fw-medium">Termos de Uso</Link>
                         </p>
-                    } />
-            </div>
-            <div className="mt-4 d-flex justify-content-center">
-                <BtnCancel onClick={prevStep} label="Anterior" className="m-1" />
-            </div>
-            <div className="d-flex justify-content-center align-items-center">
-                <BtnSuccess
-                    label="Cadastrar"
-                    type="submit"
-                    onClick={handleClick}
-                    disabled={!isValid}
-                    className=" align-self-center"
+                    } 
                 />
+            </div>
+    
+            <div className="d-flex justify-content-evenly align-items-center">
+                <div>
+                    <BtnCancel onClick={prevStep} label="Anterior" className="m-1" />
+                </div>
+                <div>
+                    <BtnSuccess
+                        label="Finalizar cadastro"
+                        type="submit"
+                        onClick={handleClick}
+                        disabled={!isValid}
+                        className="align-self-center"
+                    />
+                </div>
             </div>
         </Container>
     )
