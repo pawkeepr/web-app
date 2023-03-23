@@ -1,12 +1,19 @@
 //REGISTER
 export const POST_FAKE_REGISTER = "/post-jwt-register";
 
-// TUTOS
+// TUTORS
 
 export const GET_TUTORS = "/tutors";
 export const ADD_TUTORS = "/add/tutors";
 export const UPDATE_TUTORS = "/update/tutors";
 export const DELETE_TUTORS = "/delete/tutors";
+
+// PETS
+
+export const GET_PETS = "/pets";
+export const ADD_PETS = "/add/pets";
+export const UPDATE_PETS = "/update/pets";
+export const DELETE_PETS = "/delete/pets";
 
 //LOGIN
 export const POST_FAKE_LOGIN = "/auth/signin";
