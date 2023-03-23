@@ -1,26 +1,33 @@
 export const name = "Tutor"
 
-export const GET_CONTACTS = `${name}/getContacts`;
-export const UPDATE_CONTACT = `${name}/updateContact`;
-export const UPDATE_CONTACT_SUCCESS = `${name}/updateContactSuccess`;
-export const UPDATE_CONTACT_FAIL = `${name}/updateContactFail`;
-export const ADD_NEW_CONTACT = `${name}/addNewContact`;
-export const ADD_CONTACT_SUCCESS = `${name}/addContactSuccess`;
-export const ADD_CONTACT_FAIL = `${name}/addContactFail`;
-export const DELETE_CONTACT = `${name}/deleteContact`;
-export const DELETE_CONTACT_SUCCESS = `${name}/deleteContactSuccess`;
-export const DELETE_CONTACT_FAIL = `${name}/deleteContactFail`;
-export const CRM_API_RESPONSE_SUCCESS = `${name}/crmApiResponseSuccess`;
-export const CRM_API_RESPONSE_ERROR = `${name}/crmApiResponseError`;
+export const GET_TUTORS = `${name}/getTutors`;
+export const UPDATE_TUTOR = `${name}/updateTutor`;
+export const UPDATE_TUTOR_SUCCESS = `${name}/updateTutorSuccess`;
+export const UPDATE_TUTOR_FAIL = `${name}/updateTutorFail`;
+export const ADD_NEW_TUTOR = `${name}/addNewTutor`;
+export const ADD_TUTOR_SUCCESS = `${name}/addTutorSuccess`;
+export const ADD_TUTOR_FAIL = `${name}/addTutorFail`;
+export const DELETE_TUTOR = `${name}/deleteTutor`;
+export const DELETE_TUTOR_SUCCESS = `${name}/deleteTutorSuccess`;
+export const DELETE_TUTOR_FAIL = `${name}/deleteTutorFail`;
+export const CRM_API_RESPONSE_SUCCESS = `${name}/apiResponseSuccess`;
+export const CRM_API_RESPONSE_ERROR = `${name}/apiResponseError`;
 
 
-type Tutor = {
-    _id: string,
+export type Tutor = {
+    id: string;
+    name: string;
+    email: string;
+    document: string;
+    created_at: string;
+    updated_at: string;
+    avatar: string;
+    phone: string;
 }
 
 export type TutorInitialState = {
     tutors: Array<Tutor>,
     error: any,
-    isContactCreated: boolean,
-    isContactSuccess: boolean,
+    isTutorCreated: boolean,
+    isTutorSuccess: boolean,
 };

@@ -75,10 +75,14 @@ import {
   yearRevenueData
 } from "../../common/data";
 
+import { faker } from '@faker-js/faker';
+import factoryTutors from "../mocks/tutors";
+
 let users = [
   {
-    uid: 1,
+    id: 1,
     email: "murilomontino@hotmail.com",
+    company: faker.company.name(),
     role: "admin",
     password: "senha123",
     firstName: 'Murilo',
@@ -86,28 +90,44 @@ let users = [
     crmv: 'AA0000',
     phone: '11999999999',
     document: '00000000000',
+    avatar: faker.image.avatar(), // TODO: fix this
+    about: faker.lorem.lines(7),
+    created_at: faker.date.past().toLocaleString(),
   },
+  {
+    id: 2,
+    email: 'testuser@gmail.com',
+    role: 'user',
+    company: faker.company.name(),
+    password: 'testpassword',
+    firstName: 'Test',
+    lastName: 'User',
+    crmv: 'AA0000',
+    phone: '11999999999',
+    document: '00000000000',
+    avatar: faker.image.avatar(), // TODO: fix this
+    about: faker.lorem.lines(7),
+    created_at: faker.date.past().toLocaleString(),
+  }
 ];
 
 const getUsers = () => {
-  let cookie;
 
   try {
-    cookie = getCookie('users-mock')
-    cookie = cookie && JSON.parse(cookie)
+    const cookie = getCookie('users-mock')
+    return (cookie || users) as Array<any>
   } catch (error) {
     console.log(error)
+    return users
   }
 
-
-  const usersCookies = cookie || users
-
-  return usersCookies as Array<any>
 }
 
 const fakeBackend = () => {
   // This sets the mock adapter on the default instance
   const mock = new MockAdapter(axios, { onNoMatch: "passthrough" });
+
+  factoryTutors(mock);
 
   mock.onPost(url.POST_FAKE_REGISTER).reply(config => {
     const user = JSON.parse(config["data"]);
@@ -125,7 +145,7 @@ const fakeBackend = () => {
           reject([400, "Documento já cadastrado"]);
         }
 
-        usersCookies.push(user);
+        usersCookies.push({ ...user, created_at: Date.now().toLocaleString() });
 
         try {
           const maxAge = 60 * 60 * 24 * 30

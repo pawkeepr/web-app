@@ -20,6 +20,8 @@ import {
 
 import { getUser, postJwtLogin } from '~/helpers/fakebackend_helper';
 
+import { resetProfileFlag, setProfile } from '../profile/actions';
+
 export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
     try {
         const { data: token } = yield call(postJwtLogin, action.payload);
@@ -27,6 +29,7 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
         yield setCookie(undefined, cookies.token.name, token.access_token, {
             maxAge: cookies.token.expires,
         });
+        yield put(setProfile(user));
         yield put(signInSuccess({ user, ...token }));
     } catch (error) {
         console.log(error)
@@ -38,7 +41,7 @@ export function* recoverUserByTokenSaga(action: PayloadAction<string>) {
     try {
         const { data: user } = yield call(getUser, action.payload);
         const access_token = action.payload;
-
+        yield put(setProfile(user));
         yield put(recoverUserByTokenSuccess({ user, access_token }));
     } catch (error) {
         console.log(error)
@@ -49,6 +52,7 @@ export function* recoverUserByTokenSaga(action: PayloadAction<string>) {
 export function* signOutUserSaga() {
     try {
         yield destroyCookie(null, cookies.token.name);
+        yield put(resetProfileFlag());
         yield put(signOutUserSuccess());
     } catch (error) {
         console.log(error)

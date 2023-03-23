@@ -4,96 +4,96 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import {
-  addContactFail,
-  addContactSuccess,
-  crmApiResponseError,
-  crmApiResponseSuccess,
-  deleteContactFail,
-  deleteContactSuccess,
-  updateContactFail,
-  updateContactSuccess,
+  addTutorFail,
+  addTutorSuccess,
+  deleteTutorFail,
+  deleteTutorSuccess,
+  updateTutorFail,
+  updateTutorSuccess,
 } from "./actions";
 
 import {
-  ADD_NEW_CONTACT,
-  DELETE_CONTACT,
-  GET_CONTACTS,
-  UPDATE_CONTACT,
+  ADD_NEW_TUTOR,
+  DELETE_TUTOR,
+  GET_TUTORS,
+  UPDATE_TUTOR,
 } from './types';
 
 //Include Both Helper File with needed methods
 import { PayloadAction } from "@reduxjs/toolkit";
 import {
-  addNewContact,
-  deleteContact,
-  getContacts as getContactsApi,
-  updateContact,
+  deleteTutor,
+  getTutors as getTutorsApi,
+  postTutor,
+  updateTutor,
 } from "../../helpers/fakebackend_helper";
 
-export function* getContacts() {
+import { apiResponseError, apiResponseSuccess } from './slice';
+
+export function* getTutors() {
   try {
-    const { data: contacts } = yield call(getContactsApi);
-    yield put(crmApiResponseSuccess(contacts));
+    const { data: tutors } = yield call(getTutorsApi);
+    yield put(apiResponseSuccess(tutors));
   } catch (error) {
-    yield put(crmApiResponseError((error as Error).message));
+    yield put(apiResponseError(error as any));
   }
 }
 
-export function* onUpdateContact({ payload: contact }: PayloadAction<{ [key: string]: any }>) {
+export function* onUpdateTutor({ payload: tutor }: PayloadAction<{ [key: string]: any }>) {
   try {
-    const { data } = yield call(updateContact, contact);
-    yield put(updateContactSuccess(data));
-    toast.success("Contact Update Successfully", { autoClose: 3000 });
+    const { data } = yield call(updateTutor, tutor);
+    yield put(updateTutorSuccess(data));
+    toast.success("Tutor Update Successfully", { autoClose: 3000 });
   } catch (error) {
-    yield put(updateContactFail((error as Error).message));
-    toast.error("Contact Update Failed", { autoClose: 3000 });
+    yield put(updateTutorFail((error as Error).message));
+    toast.error("Tutor Update Failed", { autoClose: 3000 });
   }
 }
 
-export function* onDeleteContact({ payload: contact }: PayloadAction<{ [key: string]: any }>) {
+export function* onDeleteTutor({ payload: tutor }: PayloadAction<{ [key: string]: any }>) {
   try {
-    const { data } = yield call(deleteContact, contact);
-    yield put(deleteContactSuccess({ contact, ...data }));
-    toast.success("Contact Delete Successfully", { autoClose: 3000 });
+    const { data } = yield call(deleteTutor, tutor);
+    yield put(deleteTutorSuccess({ tutor, ...data }));
+    toast.success("Tutor Delete Successfully", { autoClose: 3000 });
   } catch (error) {
-    yield put(deleteContactFail((error as Error).message));
-    toast.error("Contact Delete Failed", { autoClose: 3000 });
+    yield put(deleteTutorFail((error as Error).message));
+    toast.error("Tutor Delete Failed", { autoClose: 3000 });
   }
 }
 
-export function* onAddNewContact({ payload: contact }: PayloadAction<{ [key: string]: any }>) {
+export function* onAddNewTutor({ payload: tutor }: PayloadAction<{ [key: string]: any }>) {
   try {
-    const { data } = yield call(addNewContact, contact);
-    yield put(addContactSuccess(data));
-    toast.success("Contact Added Successfully", { autoClose: 3000 });
+    const { data } = yield call(postTutor, tutor);
+    yield put(addTutorSuccess(data));
+    toast.success("Tutor Added Successfully", { autoClose: 3000 });
   } catch (error) {
-    yield put(addContactFail((error as Error).message));
-    toast.error("Contact Added Failed", { autoClose: 3000 });
+    yield put(addTutorFail((error as Error).message));
+    toast.error("Tutor Added Failed", { autoClose: 3000 });
   }
 }
 
-export function* watchGetContacts() {
-  yield takeEvery(GET_CONTACTS, getContacts);
+export function* watchGetTutors() {
+  yield takeEvery(GET_TUTORS, getTutors);
 }
 
-export function* watchUpdateContact() {
-  yield takeEvery(UPDATE_CONTACT, onUpdateContact);
+export function* watchUpdateTutor() {
+  yield takeEvery(UPDATE_TUTOR, onUpdateTutor);
 }
 
-export function* watchDeleteContact() {
-  yield takeEvery(DELETE_CONTACT, onDeleteContact);
+export function* watchDeleteTutor() {
+  yield takeEvery(DELETE_TUTOR, onDeleteTutor);
 }
 
-export function* watchAddNewContact() {
-  yield takeEvery(ADD_NEW_CONTACT, onAddNewContact);
+export function* watchAddNewTutor() {
+  yield takeEvery(ADD_NEW_TUTOR, onAddNewTutor);
 }
 
 function* crmSaga() {
   yield all([
-    fork(watchGetContacts),
-    fork(watchDeleteContact),
-    fork(watchUpdateContact),
-    fork(watchAddNewContact),
+    fork(watchGetTutors),
+    fork(watchDeleteTutor),
+    fork(watchUpdateTutor),
+    fork(watchAddNewTutor),
   ]);
 }
 

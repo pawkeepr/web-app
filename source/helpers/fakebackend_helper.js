@@ -16,6 +16,13 @@ export const isUserAuthenticated = () => {
   return getLoggedInUser() !== null;
 };
 
+// Tutors methods 
+
+export const getTutors = () => api.get(url.GET_TUTORS);
+export const postTutor = (data) => api.create(url.POST_TUTOR, data);
+export const updateTutor = (data) => api.update(url.UPDATE_TUTOR + '/' + data.id, data);
+export const deleteTutor = (id) => api.delete(url.DELETE_TUTOR + '/' + id);
+
 // Login Method
 export const postFakeLogin = data => api.create(url.POST_FAKE_LOGIN, data);
 

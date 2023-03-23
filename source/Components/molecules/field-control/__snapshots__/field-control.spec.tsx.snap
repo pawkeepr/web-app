@@ -2,28 +2,32 @@
 
 exports[`FieldControl component (Unit) > FieldControl matches snapshot 1`] = `
 <div>
-  <label
-    class="mb-0 list-group-item fs-12 form-label"
-    data-testid="label-test"
-    for="test"
-  >
-    Test Label
-  </label>
-  <div
-    class="position-relative mb-2 input-group"
-  >
-    <input
-      class="form-control"
-      data-testid="input-test"
-      id="test"
-      name="test"
-      value=""
+  <div>
+    <label
+      class="mb-0 list-group-item fs-12 form-label"
+      data-testid="label-test"
+      for="test"
+    >
+      Test Label
+    </label>
+    <div
+      class="position-relative mb-2 input-group"
+    >
+      <input
+        class="
+                    undefined
+                    "
+        data-testid="input-test"
+        id="test"
+        name="test"
+        value=""
+      />
+    </div>
+    <label
+      class="font-bold list-group-item text-danger fs-11 text-center"
+      data-testid="err-test"
+      style="display: none;"
     />
   </div>
-  <label
-    class="font-bold list-group-item text-danger fs-11 text-center"
-    data-testid="err-test"
-    style="display: none;"
-  />
 </div>
 `;

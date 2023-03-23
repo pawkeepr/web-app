@@ -6,7 +6,7 @@ import Layout from "./layouts/slice";
 // Authentication
 import ForgetPassword from "./auth/forget-pwd/reducer";
 import Login from "./auth/login/slice";
-import Profile from "./auth/profile/reducer";
+import Profile from "./auth/profile/slice";
 import Account from "./auth/register/slice";
 
 //Calendar

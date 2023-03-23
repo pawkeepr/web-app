@@ -10,6 +10,9 @@ const nextConfig = ((phase) => {
     publicRuntimeConfig: {
       publicRoutes: ['/sign-in', '/sign-up', '/forget-password', '/reset-password', '/'],
     },
+    images: {
+      domains: ['localhost', 'cloudflare-ipfs.com'],
+    },
     reactStrictMode: true,
     swcMinify: true,
     eslint: {

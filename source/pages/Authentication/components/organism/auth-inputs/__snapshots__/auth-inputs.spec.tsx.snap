@@ -110,7 +110,7 @@ exports[`Auth Unit (Unit) > should render without errors 1`] = `
         class="mt-4"
       >
         <button
-          class="w-full bg-green-600 btn btn-primary"
+          class="w-full bg-primary-500 btn btn-primary"
           color="primary"
           data-testid="submit-button"
           disabled=""
