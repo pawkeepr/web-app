@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { sample } from 'lodash';
 import {
     Card,
     CardBody,
@@ -12,17 +13,15 @@ import {
 } from 'reactstrap';
 import MyImage from '~/Components/atoms/my-image/my-image';
 
-import { sample } from 'lodash';
+import { Pet } from '~/store/pets/types';
 
-import { Tutor } from '~/store/tutor/types';
-
-type CardTutorsProps = {
-    tutor: Tutor
+type CardPetsProps = {
+    pet: Pet
 }
 
-const CardTutors = ({ tutor }: CardTutorsProps) => {
+const CardPets = ({ pet }: CardPetsProps) => {
 
-    if (!tutor) {
+    if (!pet) {
         return null;
     }
 
@@ -55,16 +54,19 @@ const CardTutors = ({ tutor }: CardTutorsProps) => {
                         <div className="team-profile-img">
                             <div className="avatar-lg img-thumbnail rounded-circle">
                                 <MyImage
-                                    src={tutor?.avatar}
-                                    alt={`Foto de Perfil de ${tutor?.name}`}
+                                    src={pet?.avatar}
+                                    alt={`Foto de Perfil de ${pet?.name}`}
                                     className="img-fluid d-block rounded-circle"
-                                    width={100}
-                                    height={100}
+                                    width={200}
+                                    height={200}
                                 />
                             </div>
                             <div className="team-content">
-                                <Link href="#" className="d-block"><h5 className="fs-16 mb-1">{tutor?.name}</h5></Link>
-                                <p className="text-muted mb-0">{tutor?.phone}</p>
+                                <Link href="#" className="d-block"><h5 className="fs-16 mb-1">{pet?.name}</h5></Link>
+                                <p className="text-muted mb-0">
+                                    <strong>Tutor: </strong> {pet?.ownerEmergencyContact.name}
+                                </p>
+                                <p className="text-muted mb-0">{pet?.ownerEmergencyContact.phone}</p>
                             </div>
                         </div>
                     </Col>
@@ -77,12 +79,8 @@ const CardTutors = ({ tutor }: CardTutorsProps) => {
                                 <p className="text-muted mb-0">Consultas</p>
                             </Col>
                             <Col xs={6}>
-                                <i className="emoji" data-emoji="🐱"></i>
-                                <i className="emoji" data-emoji="🐶"></i>
-                                <i className="emoji" data-emoji="🐰"></i>
-                                <i className="emoji" data-emoji="🐹"></i>
-                                <i className="emoji" data-emoji="🐠"></i>
-                                <p className="text-muted mb-0">Pets</p>
+                                <p className="text-muted mb-0">{pet.species}</p>
+                                <p className="text-muted mb-0">{pet.breed}</p>
                             </Col>
                         </Row>
                     </Col>
@@ -98,4 +96,4 @@ const CardTutors = ({ tutor }: CardTutorsProps) => {
     )
 }
 
-export default CardTutors
+export default CardPets

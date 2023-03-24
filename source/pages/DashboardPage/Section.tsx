@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image';
 import React, { useMemo, useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
@@ -14,8 +13,8 @@ import TabContent from 'react-bootstrap/TabContent';
 import TabPane from 'react-bootstrap/TabPane';
 
 //import images
-import slack from '~/assets/images/brands/slack.png';
 
+import MyImage from '~/Components/atoms/my-image/my-image';
 import { useAppSelector } from '~/store/hooks';
 import OverviewTab from './components/organisms/tabs/OverviewTab';
 import PetsTab from './components/organisms/tabs/PetsTab';
@@ -35,7 +34,7 @@ const Section = () => {
     };
 
     const name = useMemo(() => {
-        return profile?.company || profile?.firstName + " " + profile?.lastName
+        return profile?.firstName + " " + profile?.lastName
     }, [profile]);
 
     return (
@@ -51,7 +50,12 @@ const Section = () => {
                                             <div className="col-md-auto">
                                                 <div className="avatar-md">
                                                     <div className="avatar-title bg-white rounded-circle">
-                                                        <Image src={slack} alt="" className="avatar-xs" />
+                                                        <MyImage
+                                                            src={profile?.avatar}
+                                                            alt={`Avatar de ${name}`}
+                                                            className="avatar-xs rounded-full"
+                                                            fill
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

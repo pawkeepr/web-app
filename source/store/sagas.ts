@@ -12,6 +12,9 @@ import calendarSaga from "./calendar/saga";
 //chat
 import chatSaga from "./chat/saga";
 
+import PetsSagas from './pets/sagas';
+import TutorsSagas from './tutor/sagas';
+import VeterinaryAppointmentsSagas from './veterinary-appointments/sagas';
 // Task
 import taskSaga from "./tasks/saga";
 // Crypto
@@ -33,6 +36,9 @@ export default function* rootSaga() {
     fork(chatSaga),
     fork(taskSaga),
 
+    fork(TutorsSagas),
+    fork(PetsSagas),
+    fork(VeterinaryAppointmentsSagas),
     fork(calendarSaga),
     fork(crmSaga),
 

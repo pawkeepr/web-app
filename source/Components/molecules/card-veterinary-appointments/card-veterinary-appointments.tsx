@@ -12,17 +12,15 @@ import {
 } from 'reactstrap';
 import MyImage from '~/Components/atoms/my-image/my-image';
 
-import { sample } from 'lodash';
+import { VeterinaryAppointment } from '~/store/veterinary-appointments/types';
 
-import { Tutor } from '~/store/tutor/types';
-
-type CardTutorsProps = {
-    tutor: Tutor
+type CardVeterinaryAppointmentsProps = {
+    veterinaryAppointments: VeterinaryAppointment
 }
 
-const CardTutors = ({ tutor }: CardTutorsProps) => {
+const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAppointmentsProps) => {
 
-    if (!tutor) {
+    if (!veterinaryAppointments) {
         return null;
     }
 
@@ -55,34 +53,44 @@ const CardTutors = ({ tutor }: CardTutorsProps) => {
                         <div className="team-profile-img">
                             <div className="avatar-lg img-thumbnail rounded-circle">
                                 <MyImage
-                                    src={tutor?.avatar}
-                                    alt={`Foto de Perfil de ${tutor?.name}`}
+                                    src={veterinaryAppointments?.pet.avatar}
+                                    alt={`Foto de Perfil de ${veterinaryAppointments?.pet.name}`}
                                     className="img-fluid d-block rounded-circle"
-                                    width={100}
-                                    height={100}
+                                    width={200}
+                                    height={200}
                                 />
                             </div>
                             <div className="team-content">
-                                <Link href="#" className="d-block"><h5 className="fs-16 mb-1">{tutor?.name}</h5></Link>
-                                <p className="text-muted mb-0">{tutor?.phone}</p>
+                                <Link href="#" className="d-block"><h5 className="fs-16 mb-1">{veterinaryAppointments?.pet.name}</h5></Link>
+                                <p className="text-muted mb-0">
+                                    <strong>Tutor: </strong>
+                                    {veterinaryAppointments?.tutor.name}
+                                </p>
+                                <p className="text-muted mb-0">{veterinaryAppointments?.tutor.phone}</p>
                             </div>
                         </div>
                     </Col>
                     <Col lg={4}>
                         <Row className="text-muted text-center">
                             <Col xs={6} className="border-end border-end-dashed">
-                                <h5 className="mb-1">{
-                                    sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
-                                }</h5>
-                                <p className="text-muted mb-0">Consultas</p>
+                                {
+                                    veterinaryAppointments?.diseases.map((disease, index) => {
+                                        return (
+                                            <h5 key={index} className="mb-0">{disease.name}</h5>
+                                        )
+                                    })
+                                }
+                                <p className="text-muted mb-0">Doenças</p>
                             </Col>
                             <Col xs={6}>
-                                <i className="emoji" data-emoji="🐱"></i>
-                                <i className="emoji" data-emoji="🐶"></i>
-                                <i className="emoji" data-emoji="🐰"></i>
-                                <i className="emoji" data-emoji="🐹"></i>
-                                <i className="emoji" data-emoji="🐠"></i>
-                                <p className="text-muted mb-0">Pets</p>
+                                {
+                                    veterinaryAppointments?.treatments.map((treatment, index) => {
+                                        return (
+                                            <h5 key={index} className="mb-0">{treatment.medicine}</h5>
+                                        )
+                                    })
+                                }
+                                <p className="text-muted mb-0">Tratamento</p>
                             </Col>
                         </Row>
                     </Col>
@@ -98,4 +106,4 @@ const CardTutors = ({ tutor }: CardTutorsProps) => {
     )
 }
 
-export default CardTutors
+export default CardVeterinaryAppointments

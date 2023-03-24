@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 // Import Images
 import dummyImg from "~/assets/images/users/user-dummy-img.jpg";
@@ -10,6 +10,9 @@ import ModalFooter from 'react-bootstrap/ModalFooter';
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import Row from 'react-bootstrap/Row';
 //Import actions
+import {
+    getTutors as onGetTutors
+} from "~/store/actions";
 //redux
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,20 +24,33 @@ import * as Yup from "yup";
 import BtnCancel from "~/Components/atoms/btn/btn-cancel";
 import BtnSuccess from "~/Components/atoms/btn/btn-success";
 import FieldControl from "~/Components/molecules/field-control/field-control";
+import { useAppDispatch, useAppSelector } from "~/store/hooks";
+import { Tutor } from "~/store/tutor/types";
 
-const ModalAddPet = () => {
+const ModalAddTutor = () => {
 
+    const dispatch = useAppDispatch();
+    const [tutor, setTutor] = useState({} as Tutor);
     const [modal, setModal] = useState(false);
 
+    const { tutors } = useAppSelector((state) => ({
+        tutors: state.Tutor.tutors
+    }));
 
     const openModal = useCallback(() => {
         setModal(true);
     }, []);
 
+    useEffect(() => {
+        if (tutors && !tutors.length) {
+            dispatch(onGetTutors());
+        }
+    }, [dispatch, tutors]);
 
     const toggle = useCallback(() => {
         if (modal) {
             setModal(false);
+            setTutor([]);
         } else {
             setModal(true);
         }
@@ -42,14 +58,11 @@ const ModalAddPet = () => {
 
     // validation
     const validation = {
-        // enableReinitialize : use this flag when initial values needs to be changed
-        enableReinitialize: true,
-
         initialValues: {
-            // img: (contact && contact.img) || '',
-            name: '',
-            email: '',
-            phone: '',
+            avatar: tutor?.avatar || '',
+            name: tutor?.name || '',
+            email: tutor?.email || '',
+            phone: tutor?.phone || '',
         },
         validationSchema: Yup.object({
             name: Yup.string().required("Please Enter Name"),
@@ -63,11 +76,11 @@ const ModalAddPet = () => {
     return (
         <>
             <div>
-                <BtnSuccess onClick={openModal} label="Adicionar Pet" />
+                <BtnSuccess onClick={openModal} label="Adicionar Consulta" />
             </div>
             <Modal id="showModal" show={modal} toggle={toggle} centered >
                 <ModalHeader className="bg-soft-info p-3">
-                    {"Adicionar Pet"}
+                    {"Adicionar Consulta"}
                 </ModalHeader>
 
                 <Formik
@@ -159,4 +172,4 @@ const ModalAddPet = () => {
     )
 }
 
-export default ModalAddPet
+export default ModalAddTutor

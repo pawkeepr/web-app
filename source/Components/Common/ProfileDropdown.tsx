@@ -52,7 +52,7 @@ const ProfileDropdown = () => {
                 <DropdownToggle variant="link" id="dropdown-basic" className="btn" as={DropdownToggleButton} />
 
                 <DropdownMenu className="dropdown-menu-end">
-
+                    <CustomToggle onClick={() => { }} name={profile?.firstName as any} avatar={profile?.avatar as any} />
                     <h6 className="dropdown-header">Bem Vindo, {profile?.firstName}!</h6>
                     <DropdownItem href="/profile"><i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>
                         <span className="align-middle">Perfil</span>

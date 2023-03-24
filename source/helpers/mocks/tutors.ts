@@ -23,7 +23,7 @@ const tutors: Array<Tutor> = [
 const getTutors = () => {
 
     try {
-        const cookie = getCookie('tutos-mock')
+        const cookie = getCookie('tutors-mock')
         return (cookie || tutors) as Array<any>
     } catch (error) {
         console.log(error)
@@ -65,7 +65,7 @@ function factoryTutors(adapter: MockAdapter) {
 
             try {
                 const maxAge = 60 * 60 * 24 * 30
-                setCookie('users-mock', JSON.stringify(tutors), maxAge)
+                setCookie('tutors-mock', JSON.stringify(tutors), maxAge)
 
             } catch (error) {
                 console.log(error)

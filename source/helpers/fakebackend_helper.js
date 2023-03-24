@@ -23,6 +23,20 @@ export const postTutor = (data) => api.create(url.POST_TUTOR, data);
 export const updateTutor = (data) => api.update(url.UPDATE_TUTOR + '/' + data.id, data);
 export const deleteTutor = (id) => api.delete(url.DELETE_TUTOR + '/' + id);
 
+// Veterinary Appointment methods
+
+export const getVeterinaryAppointment = () => api.get(url.GET_VETERINARY_APPOINTMENTS);
+export const postVeterinaryAppointment = (data) => api.create(url.POST_VETERINARY_APPOINTMENTS, data);
+export const updateVeterinaryAppointment = (data) => api.update(url.UPDATE_VETERINARY_APPOINTMENTS + '/' + data.id, data);
+export const deleteVeterinaryAppointment = (id) => api.delete(url.DELETE_VETERINARY_APPOINTMENTS + '/' + id);
+
+// perspectiveOrigin:  methods 
+
+export const getPets = () => api.get(url.GET_PETS);
+export const postPet = (data) => api.create(url.POST_PET, data);
+export const updatePet = (data) => api.update(url.UPDATE_PET + '/' + data.id, data);
+export const deletePet = (id) => api.delete(url.DELETE_PET + '/' + id);
+
 // Login Method
 export const postFakeLogin = data => api.create(url.POST_FAKE_LOGIN, data);
 
