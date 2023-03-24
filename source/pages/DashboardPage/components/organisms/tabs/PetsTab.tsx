@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import Row from 'react-bootstrap/Row';
+import React, { useCallback, useEffect } from 'react';
 import ModalAddPet from '~/Components/modals/modal-add-pet';
 import CardPets from '~/Components/molecules/card-pets';
-import SearchInput from '~/Components/molecules/search-input/search-input';
 import { getPets } from '~/store/actions';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
+import { Pet } from '~/store/pets/types';
+import ListTab from '../templates/ListTab';
 
 const PetsTab = () => {
 
@@ -15,21 +15,26 @@ const PetsTab = () => {
         dispatch(getPets());
     }, [dispatch]);
 
+    const Modal = () => <ModalAddPet />
+    const cards = (pets: Pet[]) => pets?.map(pet => (<CardPets key={pet.id} pet={pet} />))
+
+    const filter = useCallback((deferredPets: Pet[], search: string) => {
+
+        if (!search.trim()) return pets;
+
+        return deferredPets.filter(pet => {
+            const lowerSearch = search.toLowerCase();
+            return pet.name.toLowerCase().includes(lowerSearch)
+                || pet.breed.toLowerCase().includes(lowerSearch)
+                || pet.ownerEmergencyContact.name.toLowerCase().includes(lowerSearch)
+                || pet.ownerEmergencyContact.phone.toLowerCase().includes(lowerSearch)
+                || pet.ownerEmergencyContact.address.toLowerCase().includes(lowerSearch)
+        })
+    }, [pets])
+
     return (
         <React.Fragment>
-            <Row className="g-4 mb-3">
-                <div className="col-sm">
-                    <SearchInput className="form-control" placeholder='Busque o Pet...' />
-                </div>
-                <div className="col-sm-auto">
-                    <ModalAddPet />
-                </div>
-            </Row>
-            <div className="team-list list-view-filter">
-                {
-                    pets?.map(pet => (<CardPets key={pet.id} pet={pet} />))
-                }
-            </div>
+            <ListTab items={pets} Modal={Modal} cards={cards} filter={filter} />
         </React.Fragment>
     );
 };

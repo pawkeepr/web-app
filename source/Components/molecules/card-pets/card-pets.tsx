@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { sample } from 'lodash';
 import {
     Card,
     CardBody,
@@ -63,7 +64,7 @@ const CardPets = ({ pet }: CardPetsProps) => {
                             <div className="team-content">
                                 <Link href="#" className="d-block"><h5 className="fs-16 mb-1">{pet?.name}</h5></Link>
                                 <p className="text-muted mb-0">
-                                    <strong>Tutor</strong> {pet?.ownerEmergencyContact.name}
+                                    <strong>Tutor: </strong> {pet?.ownerEmergencyContact.name}
                                 </p>
                                 <p className="text-muted mb-0">{pet?.ownerEmergencyContact.phone}</p>
                             </div>
@@ -72,7 +73,9 @@ const CardPets = ({ pet }: CardPetsProps) => {
                     <Col lg={4}>
                         <Row className="text-muted text-center">
                             <Col xs={6} className="border-end border-end-dashed">
-                                <h5 className="mb-1">0</h5>
+                                <h5 className="mb-1">{
+                                    sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+                                }</h5>
                                 <p className="text-muted mb-0">Consultas</p>
                             </Col>
                             <Col xs={6}>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 // Import Images
 import dummyImg from "~/assets/images/users/user-dummy-img.jpg";
@@ -10,11 +10,7 @@ import ModalFooter from 'react-bootstrap/ModalFooter';
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import Row from 'react-bootstrap/Row';
 //Import actions
-import {
-    getContacts as onGetContacts
-} from "~/store/actions";
 //redux
-import { useDispatch } from "react-redux";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,33 +18,23 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Formik } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
+import BtnCancel from "~/Components/atoms/btn/btn-cancel";
+import BtnSuccess from "~/Components/atoms/btn/btn-success";
 import FieldControl from "~/Components/molecules/field-control/field-control";
-import { useAppSelector } from "~/store/hooks";
 
 const ModalAddPet = () => {
 
-    const dispatch = useDispatch();
-    const [contact, setContact] = useState<any[]>([]);
     const [modal, setModal] = useState(false);
 
-    const { tutors } = useAppSelector((state) => ({
-        tutors: state.Tutor.tutors
-    }));
 
     const openModal = useCallback(() => {
         setModal(true);
     }, []);
 
-    useEffect(() => {
-        if (tutors && !tutors.length) {
-            dispatch(onGetContacts());
-        }
-    }, [dispatch, tutors]);
 
     const toggle = useCallback(() => {
         if (modal) {
             setModal(false);
-            setContact([]);
         } else {
             setModal(true);
         }
@@ -61,9 +47,9 @@ const ModalAddPet = () => {
 
         initialValues: {
             // img: (contact && contact.img) || '',
-            name: (contact && contact.name) || '',
-            email: (contact && contact.email) || '',
-            phone: (contact && contact.phone) || '',
+            name: '',
+            email: '',
+            phone: '',
         },
         validationSchema: Yup.object({
             name: Yup.string().required("Please Enter Name"),
@@ -77,14 +63,11 @@ const ModalAddPet = () => {
     return (
         <>
             <div>
-                <button type="button" className="btn btn-secondary bg-secondary-500" onClick={openModal}>
-                    {/* <i className="ri-add-line me-1 align-bottom"></i>  */}
-                    Adicionar Tutor
-                </button>
+                <BtnSuccess onClick={openModal} label="Adicionar Pet" />
             </div>
             <Modal id="showModal" show={modal} toggle={toggle} centered >
                 <ModalHeader className="bg-soft-info p-3">
-                    {"Adicionar Tutor"}
+                    {"Adicionar Pet"}
                 </ModalHeader>
 
                 <Formik
@@ -160,8 +143,13 @@ const ModalAddPet = () => {
                         </ModalBody>
                         <ModalFooter>
                             <div className="hstack gap-2 justify-content-end">
-                                <button type="button" className="btn btn-light" onClick={() => { setModal(false); }} > Close </button>
-                                <button type="submit" className="btn btn-success" id="add-btn" > {"Adicionar"} </button>
+                                <BtnCancel onClick={() => { setModal(false); }} />
+                                <BtnSuccess
+                                    onClick={() => { }}
+                                    type="submit"
+                                    id="add-btn"
+                                    label="Adicionar"
+                                />
                             </div>
                         </ModalFooter>
                     </>

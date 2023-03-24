@@ -21,6 +21,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Formik } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
+import BtnCancel from "~/Components/atoms/btn/btn-cancel";
+import BtnSuccess from "~/Components/atoms/btn/btn-success";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import { Tutor } from "~/store/tutor/types";
@@ -28,7 +30,7 @@ import { Tutor } from "~/store/tutor/types";
 const ModalAddTutor = () => {
 
     const dispatch = useAppDispatch();
-    const [tutor, setTutor] = useState<Tutor>(null);
+    const [tutor, setTutor] = useState({} as Tutor);
     const [modal, setModal] = useState(false);
 
     const { tutors } = useAppSelector((state) => ({
@@ -74,14 +76,11 @@ const ModalAddTutor = () => {
     return (
         <>
             <div>
-                <button type="button" className="btn btn-secondary bg-secondary-500" onClick={openModal}>
-                    {/* <i className="ri-add-line me-1 align-bottom"></i>  */}
-                    Adicionar Consulta
-                </button>
+                <BtnSuccess onClick={openModal} label="Adicionar Consulta" />
             </div>
             <Modal id="showModal" show={modal} toggle={toggle} centered >
                 <ModalHeader className="bg-soft-info p-3">
-                    {"Adicionar Tutor"}
+                    {"Adicionar Consulta"}
                 </ModalHeader>
 
                 <Formik
@@ -157,8 +156,13 @@ const ModalAddTutor = () => {
                         </ModalBody>
                         <ModalFooter>
                             <div className="hstack gap-2 justify-content-end">
-                                <button type="button" className="btn btn-light" onClick={() => { setModal(false); }} > Close </button>
-                                <button type="submit" className="btn btn-success" id="add-btn" > {"Adicionar"} </button>
+                                <BtnCancel onClick={() => { setModal(false); }} />
+                                <BtnSuccess
+                                    onClick={() => { }}
+                                    type="submit"
+                                    id="add-btn"
+                                    label="Adicionar"
+                                />
                             </div>
                         </ModalFooter>
                     </>

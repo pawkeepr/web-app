@@ -15,6 +15,13 @@ export const ADD_PETS = "/add/pets";
 export const UPDATE_PETS = "/update/pets";
 export const DELETE_PETS = "/delete/pets";
 
+// VETERINARY_APPOINTMENT
+
+export const GET_VETERINARY_APPOINTMENTS = "/veterinary-appointment";
+export const ADD_VETERINARY_APPOINTMENTS = "/add/veterinary-appointment";
+export const UPDATE_VETERINARY_APPOINTMENTS = "/update/veterinary-appointment";
+export const DELETE_VETERINARY_APPOINTMENTS = "/delete/veterinary-appointment";
+
 //LOGIN
 export const POST_FAKE_LOGIN = "/auth/signin";
 export const POST_FAKE_JWT_LOGIN = "/post-jwt-login";

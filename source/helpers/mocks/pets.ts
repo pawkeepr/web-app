@@ -7,9 +7,9 @@ import * as url from '../url_helper';
 
 const factoryPet = (): Pet => ({
     id: faker.datatype.uuid(),
-    name: faker.name.fullName(),
-    species: faker.animal.type(),
-    breed: faker.animal.dog(),
+    name: faker.name.middleName(),
+    species: "Felino",
+    breed: faker.animal.cat(),
     gender: 'male',
     dateOfBirth: faker.date.past().toLocaleString(),
     color: faker.color.human(),
@@ -30,7 +30,7 @@ const factoryPet = (): Pet => ({
     created_at: Date.now().toLocaleString(),
     updated_at: Date.now().toLocaleString(),
     activityLevel: 'Ativo',
-    avatar: faker.image.animals(1234, 1234, true),
+    avatar: faker.image.cats(1234, 1234, true),
     tutor_id: faker.datatype.uuid(),
     specialPhysicalFeatures: [],
     behavior: faker.lorem.paragraph(),

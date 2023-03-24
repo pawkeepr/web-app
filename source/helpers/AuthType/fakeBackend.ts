@@ -78,6 +78,7 @@ import {
 import { faker } from '@faker-js/faker';
 import factoryMockPets from "../mocks/pets";
 import factoryTutors from "../mocks/tutors";
+import factoryMockVeterinaryAppointments from "../mocks/veterinary-appointments";
 
 let users = [
   {
@@ -130,7 +131,8 @@ const fakeBackend = () => {
 
   factoryTutors(mock);
   factoryMockPets(mock)
-
+  factoryMockVeterinaryAppointments(mock)
+  
   mock.onPost(url.POST_FAKE_REGISTER).reply(config => {
     const user = JSON.parse(config["data"]);
 

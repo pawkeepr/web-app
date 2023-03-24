@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import Row from 'react-bootstrap/Row';
+import React, { useCallback, useEffect } from 'react';
 import ModalAddTutor from '~/Components/modals/modal-add-tutor';
 import CardTutors from '~/Components/molecules/card-tutors';
 
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
 
-import SearchInput from '~/Components/molecules/search-input/search-input';
 import { getTutors } from '~/store/actions';
+import { Tutor } from '~/store/tutor/types';
+import ListTab from '../templates/ListTab';
 
 const TutorsTab = () => {
     const dispatch = useAppDispatch();
@@ -16,22 +16,25 @@ const TutorsTab = () => {
         dispatch(getTutors());
     }, [dispatch]);
 
+    const Modal = () => <ModalAddTutor />
+    const cards = (tutors: Tutor[]) => tutors?.map(tutor => (<CardTutors key={tutor.id} tutor={tutor} />))
+
+    const filter = useCallback((deferredTutors: Tutor[], search: string) => {
+
+        if (!search.trim()) return tutors;
+
+        return deferredTutors.filter(tutor => {
+            const lowerSearch = search.toLowerCase();
+            return tutor.name.toLowerCase().includes(lowerSearch)
+                || tutor.phone.toLowerCase().includes(lowerSearch)
+                || tutor.document.toLowerCase().includes(lowerSearch)
+                || tutor.email.toLowerCase().includes(lowerSearch)
+        })
+    }, [tutors])
+
     return (
         <React.Fragment>
-            <Row className="g-4 mb-3">
-                <div className="col-sm">
-                    <SearchInput className="form-control" placeholder='Busque o Tutor...' />
-                </div>
-                <div className="col-sm-auto">
-                    <ModalAddTutor />
-                </div>
-            </Row>
-            <div className="team-list list-view-filter">
-                {
-                    tutors?.map(tutor => (<CardTutors key={tutor.id} tutor={tutor} />))
-                }
-            </div>
-
+            <ListTab Modal={Modal} cards={cards} filter={filter} items={tutors} />
         </React.Fragment>
     );
 };

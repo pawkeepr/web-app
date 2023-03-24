@@ -34,7 +34,7 @@ const Section = () => {
     };
 
     const name = useMemo(() => {
-        return profile?.company || profile?.firstName + " " + profile?.lastName
+        return profile?.firstName + " " + profile?.lastName
     }, [profile]);
 
     return (
@@ -52,7 +52,7 @@ const Section = () => {
                                                     <div className="avatar-title bg-white rounded-circle">
                                                         <MyImage
                                                             src={profile?.avatar}
-                                                            alt={`Avatar de ${profile?.firstName}`}
+                                                            alt={`Avatar de ${name}`}
                                                             className="avatar-xs rounded-full"
                                                             fill
                                                         />

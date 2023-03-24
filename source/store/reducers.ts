@@ -23,6 +23,8 @@ import Tutor from "./tutor/slice";
 // Pets
 import Pets from "./pets/slice";
 
+import VeterinaryAppointments from "./veterinary-appointments/slice";
+
 // Pages > Team
 import Team from "./team/reducer";
 
@@ -33,6 +35,7 @@ const rootReducer = combineReducers({
     Login,
     Account,
     ForgetPassword,
+    VeterinaryAppointments,
     Profile,
     Calendar,
     chat,

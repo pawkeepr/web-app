@@ -1,6 +1,6 @@
 
 type SearchInputProps = {
-
+    value?: string
 } & React.HTMLAttributes<HTMLInputElement>
 
 const SearchInput = ({ ...rest }: SearchInputProps) => {
