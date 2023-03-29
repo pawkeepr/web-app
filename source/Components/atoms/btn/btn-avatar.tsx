@@ -1,0 +1,29 @@
+
+import dummyImg from "~/assets/images/users/user-dummy-img.jpg";
+import MyImage from '../my-image/my-image';
+
+const BtnAvatar = () => {
+    return (
+        <div className="text-center">
+            <div className="relative inline-block">
+                <div className="absolute bottom-0 end-0">
+                    <label htmlFor="customer-image-input" className="block mb-0 cursor-pointer">
+                        <div className="avatar-xs">
+                            <div className="avatar-title bg-light border rounded-circle text-muted">
+                                <i className="ri-image-fill"></i>
+                            </div>
+                        </div>
+                    </label>
+                    <input id="customer-image-input" className="hidden" type="file" accept="image/png, image/gif, image/jpeg" />
+                </div>
+                <div className="avatar-lg p-1">
+                    <div className="avatar-title bg-light rounded-circle">
+                        <MyImage src={dummyImg} alt="dummyImg" id="customer-img" className="avatar-md rounded-circle object-cover" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default BtnAvatar

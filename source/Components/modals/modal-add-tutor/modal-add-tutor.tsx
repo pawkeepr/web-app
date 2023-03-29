@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
 // Import Images
-import dummyImg from "~/assets/images/users/user-dummy-img.jpg";
 
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
@@ -19,8 +18,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Formik
 import { Formik } from "formik";
-import Image from "next/image";
 import * as Yup from "yup";
+import BtnAvatar from "~/Components/atoms/btn/btn-avatar";
 import BtnCancel from "~/Components/atoms/btn/btn-cancel";
 import BtnSuccess from "~/Components/atoms/btn/btn-success";
 import FieldControl from "~/Components/molecules/field-control/field-control";
@@ -94,25 +93,7 @@ const ModalAddTutor = () => {
 
                             <Row className="g-3">
                                 <Col lg={12}>
-                                    <div className="text-center">
-                                        <div className="relative inline-block">
-                                            <div className="absolute bottom-0 end-0">
-                                                <label htmlFor="customer-image-input" className="block mb-0 cursor-pointer">
-                                                    <div className="avatar-xs">
-                                                        <div className="avatar-title bg-light border rounded-circle text-muted">
-                                                            <i className="ri-image-fill"></i>
-                                                        </div>
-                                                    </div>
-                                                </label>
-                                                <input id="customer-image-input" className="hidden" type="file" accept="image/png, image/gif, image/jpeg" />
-                                            </div>
-                                            <div className="avatar-lg p-1">
-                                                <div className="avatar-title bg-light rounded-circle">
-                                                    <Image src={dummyImg} alt="dummyImg" id="customer-img" className="avatar-md rounded-circle object-cover" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <BtnAvatar />
 
 
                                     <div>
