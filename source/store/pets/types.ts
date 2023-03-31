@@ -1,3 +1,15 @@
+import {
+    BloodType
+} from './bloodType';
+
+import {
+    Species
+} from './speciesType';
+
+import {
+    Breed
+} from './breedType';
+
 export const name = "Pet"
 
 export const GET_PETS = `${name}/getPets`;
@@ -14,17 +26,23 @@ export const CRM_API_RESPONSE_SUCCESS = `${name}/apiResponseSuccess`;
 export const CRM_API_RESPONSE_ERROR = `${name}/apiResponseError`;
 
 
+export type GenderPet = 'male' | 'female' | 'neutral';
+
 export type Pet = {
     id: string;
     name: string;
-    species: string;
-    breed: string;
-    gender: 'male' | 'female' | 'neutral';
+    species: Species;
+    breed: Breed;
+    gender: GenderPet;
     dateOfBirth: string;
+    bloodType: BloodType;
     color: string;
     allergies: string[];
     preexistingConditions: string[];
     medicationsInUse: string[];
+    castrated: boolean;
+    dateOfCastration: string;
+    dateOfAdoption: string;
     healthHistory: string[];
     diet: {
         foodType: string;
