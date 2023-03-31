@@ -1,8 +1,20 @@
+import { ChangeEvent, useState } from 'react';
+
 
 import dummyImg from "~/assets/images/users/user-dummy-img.jpg";
 import MyImage from '../my-image/my-image';
 
 const BtnAvatar = () => {
+    const [image, setImage] = useState<File | null>(null);
+
+    function handleImageChange(event: ChangeEvent<HTMLInputElement>): void {
+        const file = event.target.files?.[0];
+
+        if (file) {
+            setImage(file);
+        }
+    }
+    
     return (
         <div className="text-center">
             <div className="relative inline-block">
@@ -14,11 +26,11 @@ const BtnAvatar = () => {
                             </div>
                         </div>
                     </label>
-                    <input id="customer-image-input" className="hidden" type="file" accept="image/png, image/gif, image/jpeg" />
+                    <input id="customer-image-input" className="hidden" type="file" accept="image/png, image/gif, image/jpeg" onChange={handleImageChange}/>
                 </div>
                 <div className="avatar-lg p-1">
                     <div className="avatar-title bg-light rounded-circle">
-                        <MyImage src={dummyImg} alt="dummyImg" id="customer-img" className="avatar-md rounded-circle object-cover" />
+                        <MyImage src={image && URL.createObjectURL(image) || dummyImg} width={300} height={300} alt="dummyImg" id="customer-img" className="avatar-md rounded-circle object-cover"/>
                     </div>
                 </div>
             </div>
