@@ -9,13 +9,23 @@ import {
 } from './bloodType';
 import {
     BirdBreed,
+    CatBreed,
     DogBreed,
     FishBreed,
     HorseBreed,
-    ReptileBreed
+    RabbitBreed,
+    ReptileBreed,
 } from './breedType';
 
-export type Species = 'dog' | 'cat' | 'horse' | 'rabbit' | 'bird' | 'fish' | 'reptile';
+export enum Species {
+    'dog' = 'Cachorro',
+    'cat' = 'Gato',
+    'horse' = 'Cavalo',
+    'rabbit' = 'Coelho',
+    'bird' = 'Pássaro',
+    'fish' = 'Peixe',
+    'reptile' = 'Réptil',
+}
 
 export const dog = {
     name: 'Cachorro',
@@ -36,6 +46,10 @@ export const cat = {
     bloodType: Object.values(CatBloodType).map((bloodType) => ({
         name: bloodType,
         value: bloodType,
+    })),
+    breedType: Object.values(CatBreed).map((breedType) => ({
+        name: breedType,
+        value: breedType,
     })),
 }
 
@@ -58,6 +72,10 @@ export const rabbit = {
     bloodType: Object.values(RabbitBloodType).map((bloodType) => ({
         name: bloodType,
         value: bloodType,
+    })),
+    breedType: Object.values(RabbitBreed).map((breedType) => ({
+        name: breedType,
+        value: breedType,
     })),
 }
 
@@ -100,9 +118,7 @@ export const reptile = {
     })),
 }
 
-
-
-
+export type SpeciesType = typeof dog | typeof cat | typeof horse | typeof rabbit | typeof bird | typeof fish | typeof reptile;
 
 export const species = [
     dog,

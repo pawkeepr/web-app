@@ -22,7 +22,7 @@ export enum DogBreed {
     // ...
 }
 
-enum CatBreed {
+export enum CatBreed {
     ViraLata = 'Vira-Lata',
     Persa = 'Persa',
     Siames = 'Siamês',
@@ -82,4 +82,32 @@ export enum BirdBreed {
     // ...
 }
 
-export type Breed = DogBreed | CatBreed | HorseBreed | FishBreed | ReptileBreed | BirdBreed
+export enum RabbitBreed {
+    AngoraIngles = "Angorá Inglês",
+    AngoraFrances = "Angorá Francês",
+    AngoraGigante = "Angorá Gigante",
+    Argente = "Argente",
+    BelgianHare = "Belgian Hare",
+    Californiano = "Californiano",
+    CabeçaDeLeão = "Cabeça de Leão",
+    CastorRex = "Castor Rex",
+    Chinchila = "Chinchila",
+    CoelhoHolandes = "Coelho Holandês",
+    CoelhoLebreBelga = "Coelho Lebre Belga",
+    CoelhoLebreEuropeu = "Coelho Lebre Europeu",
+    FlemishGiant = "Flemish Giant",
+    Hotot = "Hotot",
+    LopIngles = "Lop Inglês",
+    LopFrances = "Lop Francês",
+    LopHolland = "Lop Holland",
+    MiniLop = "Mini Lop",
+    MiniRex = "Mini Rex",
+    NetherlandDwarf = "Netherland Dwarf",
+    NovaZelandia = "Nova Zelândia",
+    Polish = "Polish",
+    Silver = "Silver",
+    SilverFox = "Silver Fox",
+    Outros = 'Não Informado',
+}
+
+export type Breed = DogBreed | CatBreed | HorseBreed | FishBreed | ReptileBreed | BirdBreed | RabbitBreed;

@@ -26,7 +26,11 @@ export const CRM_API_RESPONSE_SUCCESS = `${name}/apiResponseSuccess`;
 export const CRM_API_RESPONSE_ERROR = `${name}/apiResponseError`;
 
 
-export type GenderPet = 'male' | 'female' | 'neutral';
+export enum GenderPet {
+    male = 'Macho',
+    female = 'Fêmea',
+    unknown = 'Desconhecido'
+};
 
 export type Pet = {
     id: string;
@@ -51,13 +55,14 @@ export type Pet = {
     };
     specialPhysicalFeatures: string[];
     behavior: string;
-    tutor_id: string;
     activityLevel: string;
     ownerEmergencyContact: {
-        name: string;
-        phone: string;
-        address: string;
+        name?: string;
+        phone?: string;
+        email?: string;
+        document: string;
     };
+    address?: string;
     avatar: string;
     created_at: string;
     updated_at: string;
@@ -69,3 +74,8 @@ export type PetInitialState = {
     isPetCreated: boolean,
     isPetSuccess: boolean,
 };
+
+export type {
+    BloodType, Breed, Species
+};
+
