@@ -1,162 +1,144 @@
 import { useCallback, useState } from "react";
 
 // Import Images
-import dummyImg from "~/assets/images/users/user-dummy-img.jpg";
 
-import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
 import ModalBody from 'react-bootstrap/ModalBody';
 import ModalFooter from 'react-bootstrap/ModalFooter';
 import ModalHeader from 'react-bootstrap/ModalHeader';
-import Row from 'react-bootstrap/Row';
 //Import actions
 //redux
 
 import 'react-toastify/dist/ReactToastify.css';
 
 // Formik
-import { Formik } from "formik";
-import Image from "next/image";
-import * as Yup from "yup";
-import BtnCancel from "~/Components/atoms/btn/btn-cancel";
-import BtnSuccess from "~/Components/atoms/btn/btn-success";
+import { Formik, FormikHelpers } from "formik";
+import BtnAvatar from "~/Components/atoms/btn/btn-avatar";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
-const ModalAddPet = () => {
+import { BtnSuccess } from "~/Components/atoms/btn";
+import BoxButtons from "~/Components/molecules/box-buttons";
+import FieldDocument from "~/Components/molecules/field-document";
+import { useAppDispatch } from '~/store/hooks';
+import { addNewPet } from '~/store/pets/actions';
+import { GenderPet, Pet } from '~/store/pets/types';
+import ComboBoxFields from "./components/organisms/combo-box-fields/combo-box-fields";
+
+type InitialValues = Partial<Nullable<Pet>>
+
+import RadioGroupCustom from "~/Components/molecules/radio-group/radio-group";
+import validationPet from '~/validations/pet';
+
+const ModalAddNewPet = () => {
 
     const [modal, setModal] = useState(false);
-
+    const dispatch = useAppDispatch();
 
     const openModal = useCallback(() => {
         setModal(true);
     }, []);
 
+    const closeModal = useCallback(() => {
+        setModal(false);
+    }, [])
 
     const toggle = useCallback(() => {
-        if (modal) {
-            setModal(false);
-        } else {
-            setModal(true);
-        }
-    }, [modal]);
+        setModal(state => !state);
+    }, []);
 
-    // validation
-    const validation = {
-        // enableReinitialize : use this flag when initial values needs to be changed
-        enableReinitialize: true,
+    const onSubmit = (
+        values: InitialValues,
+        { resetForm }: FormikHelpers<InitialValues>
+    ) => {
+        dispatch(addNewPet(values));
+        resetForm()
+        closeModal();
+    }
 
-        initialValues: {
-            // img: (contact && contact.img) || '',
-            name: '',
-            email: '',
-            phone: '',
+    const initialValues: InitialValues = {
+        name: '',
+        species: '' as any,
+        breed: '' as any,
+        castrated: false,
+        avatar: null,
+        dateOfBirth: null,
+        ownerEmergencyContact: {
+            document: '',
         },
-        validationSchema: Yup.object({
-            name: Yup.string().required("Please Enter Name"),
-            email: Yup.string().required("Please Enter Email"),
-            phone: Yup.string().required("Please Enter Phone"),
-        }),
-        onSubmit: (values) => {
-        },
-    };
+        gender: GenderPet.unknown,
+        bloodType: '' as any,
+    }
 
     return (
         <>
             <div>
                 <BtnSuccess onClick={openModal} label="Adicionar Pet" />
             </div>
-            <Modal id="showModal" show={modal} toggle={toggle} centered >
+            <Modal id="showModal" show={modal} toggle={toggle} centered size="lg">
                 <ModalHeader className="bg-soft-info p-3">
-                    {"Adicionar Pet"}
+                    <h1 className="text-base font-bold text-white">Adicionar Pet</h1>
                 </ModalHeader>
 
                 <Formik
-                    initialValues={validation.initialValues}
-                    validationSchema={validation.validationSchema}
-                    onSubmit={validation.onSubmit}
+                    initialValues={initialValues}
+                    validationSchema={validationPet}
+                    onSubmit={onSubmit}
                     enableReinitialize
                 >
-                    <>
-                        <ModalBody>
-
-                            <Row className="g-3">
-                                <Col lg={12}>
-                                    <div className="text-center">
-                                        <div className="relative inline-block">
-                                            <div className="absolute bottom-0 end-0">
-                                                <label htmlFor="customer-image-input" className="block mb-0 cursor-pointer">
-                                                    <div className="avatar-xs">
-                                                        <div className="avatar-title bg-light border rounded-circle text-muted">
-                                                            <i className="ri-image-fill"></i>
-                                                        </div>
-                                                    </div>
-                                                </label>
-                                                <input id="customer-image-input" className="hidden" type="file" accept="image/png, image/gif, image/jpeg" />
-                                            </div>
-                                            <div className="avatar-lg p-1">
-                                                <div className="avatar-title bg-light rounded-circle">
-                                                    <Image src={dummyImg} alt="dummyImg" id="customer-img" className="avatar-md rounded-circle object-cover" />
-                                                </div>
-                                            </div>
+                    {
+                        ({ isValid, handleSubmit }) => (
+                            <>
+                                <ModalBody>
+                                    <BtnAvatar />
+                                    <div className="flex flex-wrap -mx-3 mt-2">
+                                        <div className="w-full lg:w-1/2 px-3 mb-6">
+                                            <FieldControl
+                                                label="Nome"
+                                                name="name"
+                                                required
+                                                className="form-control"
+                                                placeholder="Qual o nome do seu pet?"
+                                                type="text"
+                                            />
                                         </div>
+                                        <div className="w-full lg:w-1/2 px-3 mb-6">
+                                            <FieldDocument
+                                                onlyCPF
+                                                label="CPF"
+                                                required
+                                                name="ownerEmergencyContact.document"
+                                                className="form-control"
+                                                placeholder="CPF do tutor"
+                                                type="text"
+                                            />
+                                        </div>
+                                        <ComboBoxFields />
+                                        <div className="w-full lg:w-1/3 px-3 mb-6">
+                                            <FieldControl
+                                                label="Data de Nascimento"
+                                                name="dateOfBirth"
+                                                className="form-control"
+                                                placeholder="Escreva a data de nascimento"
+                                                type="date"
+                                            />
+                                        </div>
+                                        <div className="w-full lg:w-1/3 px-3 mb-6">
+                                            <RadioGroupCustom />
+                                        </div>
+                                        {/* Add other fields here */}
                                     </div>
+                                </ModalBody>
+                                <ModalFooter>
+                                    <BoxButtons onClickCancel={closeModal} onClickSuccess={handleSubmit} isValid={isValid} />
+                                </ModalFooter>
+                            </>
+                        )
+                    }
 
-
-                                    <div>
-
-                                        <FieldControl
-                                            label="Nome"
-                                            name="name"
-                                            className="form-control"
-                                            placeholder="Enter Name"
-                                            type="text"
-                                        />
-
-
-                                    </div>
-                                </Col>
-                                <Col lg={12}>
-                                    <div>
-                                        <FieldControl
-                                            label="Email"
-                                            name="email"
-                                            className="form-control"
-                                            placeholder="Enter Email"
-                                            type="text"
-                                        />
-                                    </div>
-                                </Col>
-                                <Col lg={6}>
-                                    <div>
-                                        <FieldControl
-                                            label="Telefone/Celular"
-                                            name="phone"
-                                            className="form-control"
-                                            placeholder="Enter number Phone"
-                                            type="text"
-                                        />
-
-                                    </div>
-                                </Col>
-
-                            </Row>
-                        </ModalBody>
-                        <ModalFooter>
-                            <div className="hstack gap-2 justify-content-end">
-                                <BtnCancel onClick={() => { setModal(false); }} />
-                                <BtnSuccess
-                                    onClick={() => { }}
-                                    type="submit"
-                                    id="add-btn"
-                                    label="Adicionar"
-                                />
-                            </div>
-                        </ModalFooter>
-                    </>
                 </Formik>
             </Modal>
         </>
     )
 }
 
-export default ModalAddPet
+export default ModalAddNewPet
