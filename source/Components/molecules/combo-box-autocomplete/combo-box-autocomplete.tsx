@@ -15,10 +15,12 @@ type Item = {
 
 type ComboBoxAutocompleteProps<T> = {
     items: Array<Item & T>
+    option?: Item & T
+    onChangeOption?: (item: Item & T) => void
 } & InputControlProps
 
-const ComboBoxAutocomplete = <T,>({ name, items = [], ...rest }: ComboBoxAutocompleteProps<T>) => {
-    const [selected, setSelected] = useState<Item>()
+const ComboBoxAutocomplete = <T,>({ name, items = [], option, onChangeOption, ...rest }: ComboBoxAutocompleteProps<T>) => {
+    const [selected, setSelected] = useState<Item & T>(option || {} as Item & T)
     const [query, setQuery] = useState('')
 
     const { setFieldValue, values } = useFormikContext<{ [key in string]: any }>()
@@ -28,19 +30,19 @@ const ComboBoxAutocomplete = <T,>({ name, items = [], ...rest }: ComboBoxAutocom
         setQuery(queryValue)
     }, [queryValue])
 
-    const onChangeValue = (item: Item) => {
+    const onChangeValue = (item: Item & T) => {
+        onChangeOption?.(item)
         setSelected(item)
         setFieldValue(name, item.name)
     }
 
     const filteredPeople =
-        query === ''
+        query === '' || query === undefined || query === null
             ? items
             : items.filter((item) =>
-                item.name
-                    .toLowerCase()
+                item.name?.toLowerCase()
                     .replace(/\s+/g, '')
-                    .includes(query.toLowerCase().replace(/\s+/g, ''))
+                    .includes(query?.toLowerCase().replace(/\s+/g, ''))
             )
 
     return (
@@ -49,6 +51,7 @@ const ComboBoxAutocomplete = <T,>({ name, items = [], ...rest }: ComboBoxAutocom
                 <div className="relative">
                     <FieldControl
                         name={name}
+                        disabled={true}
                         component={Combobox.Input as any}
                         displayValue={(item: Item) => item.name}
                         {...rest}
