@@ -3,9 +3,9 @@ import { useEffect } from 'react'
 
 import { useAppDispatch, useAppSelector } from "~/store/hooks"
 
-import LoaderError from "../../molecules/loaders/loader-error"
-import LoaderPending from "../../molecules/loaders/loader-pending"
-import LoaderSuccess from "../../molecules/loaders/loader-success"
+import LoaderError from "~/Components/molecules/loaders/loader-error"
+import LoaderPending from "~/Components/molecules/loaders/loader-pending"
+import LoaderSuccess from "~/Components/molecules/loaders/loader-success"
 import Container from "../../template/container"
 
 const StepLoading = () => {
