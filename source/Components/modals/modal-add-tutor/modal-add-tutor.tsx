@@ -25,11 +25,12 @@ import BtnSuccess from "~/Components/atoms/btn/btn-success";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import { Tutor } from "~/store/tutor/types";
+import MaskedInput from 'react-input-mask';
 
 const ModalAddTutor = () => {
 
     const dispatch = useAppDispatch();
-    const [tutor, setTutor] = useState<Tutor>(null);
+    const [tutor, setTutor] = useState<Tutor | null>(null);
     const [modal, setModal] = useState(false);
 
     const { tutors } = useAppSelector((state) => ({
@@ -68,7 +69,7 @@ const ModalAddTutor = () => {
             email: Yup.string().required("Please Enter Email"),
             phone: Yup.string().required("Please Enter Phone"),
         }),
-        onSubmit: (values) => {
+        onSubmit: (values: any) => {
         },
     };
 
@@ -93,8 +94,7 @@ const ModalAddTutor = () => {
 
                             <Row className="g-3">
                                 <Col lg={12}>
-                                    <BtnAvatar />
-
+                                    <BtnAvatar src="" alt="" />
 
                                     <div>
 
@@ -120,7 +120,7 @@ const ModalAddTutor = () => {
                                         />
                                     </div>
                                 </Col>
-                                <Col lg={6}>
+                                <Col lg={12}>
                                     <div>
                                         <FieldControl
                                             label="Telefone/Celular"
@@ -128,6 +128,9 @@ const ModalAddTutor = () => {
                                             className="form-control"
                                             placeholder="Enter number Phone"
                                             type="text"
+                                            component={MaskedInput as any}
+                                            mask={"(99) 99999-9999"}
+                                            maskChar={null}
                                         />
 
                                     </div>

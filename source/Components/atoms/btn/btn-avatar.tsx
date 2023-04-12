@@ -1,11 +1,18 @@
+import type { ImageProps, StaticImageData } from 'next/image'
 import { ChangeEvent, useState } from 'react';
 
+type AvatarImageProps = {
+    src: string | StaticImageData;
+    alt?: string;
+} & ImageProps;
 
 import dummyImg from "~/assets/images/users/user-dummy-img.jpg";
 import MyImage from '../my-image/my-image';
 
-const BtnAvatar = () => {
+const BtnAvatar = ({ src, alt }: AvatarImageProps) => {
     const [image, setImage] = useState<File | null>(null);
+
+    const sourceImage = src || dummyImg;
 
     function handleImageChange(event: ChangeEvent<HTMLInputElement>): void {
         const file = event.target.files?.[0];
@@ -30,7 +37,7 @@ const BtnAvatar = () => {
                 </div>
                 <div className="avatar-lg p-1">
                     <div className="avatar-title bg-light rounded-circle">
-                        <MyImage src={image && URL.createObjectURL(image) || dummyImg} width={300} height={300} alt="dummyImg" id="customer-img" className="avatar-md rounded-circle object-cover"/>
+                        <MyImage src={image && URL.createObjectURL(image) || sourceImage} width={300} height={300} alt={alt || "dummyImg"} id="customer-img" className="avatar-md rounded-circle object-cover"/>
                     </div>
                 </div>
             </div>
