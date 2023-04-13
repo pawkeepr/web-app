@@ -15,10 +15,13 @@ import {
 
 import cn from "classnames";
 import { useState } from "react";
+
 import StepAddress from "../organisms/steps/step-address";
+import StepAnamnese from "../organisms/steps/step-anamnese";
+import StepPayment from "../organisms/steps/step-payment";
 import StepPet from "../organisms/steps/step-pet";
+import StepTreatment from "../organisms/steps/step-treatment";
 import StepTutor from '../organisms/steps/step-tutor';
-import StepVaccines from '../organisms/steps/step-vaccines';
 
 type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
@@ -43,30 +46,36 @@ const VerticalTabs = () => {
         },
         {
             id: 2,
-            title: "Consulta",
-            href: "#Appointment",
-            Component: StepTutor
+            title: "Anamnese",
+            href: "#Anamnese",
+            Component: StepAnamnese
         },
         {
             id: 3,
+            title: "Tratamento",
+            href: "#Treatment",
+            Component: StepTreatment
+        },
+        {
+            id: 4,
             title: "Tutor",
             href: "#Tutor",
             Component: StepTutor
         },
         {
-            id: 4,
+            id: 5,
             title: "Endereço",
             href: "#Address",
             Component: StepAddress
         },
         {
-            id: 5,
+            id: 6,
             title: "Pagamento",
             href: "#Payment",
-            Component: StepVaccines
+            Component: StepPayment
         },
         {
-            id: 6,
+            id: 7,
             title: "Finalizar",
             href: "#Finish",
             Component: () => (

@@ -59,6 +59,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
             setFieldValue('tutor.phone', tutor?.phone || '')
             setFieldValue('tutor.name', tutor?.name || '')
             setFieldValue('tutor.email', tutor?.email || '')
+            setFieldValue('tutor.avatar', tutor?.avatar || '')
             tutor?.address && setFieldValue('tutor.address', tutor?.address)
         })
 
@@ -68,6 +69,17 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
 
     }, [values.tutor?.document, tutors, pets, setFieldValue])
 
+    const onChangePet = (pet: Pet) => {
+        startTransition(() => {
+            setFieldValue('pet.id', pet.id)
+            setFieldValue('pet.avatar', pet.avatar)
+            setFieldValue('pet.breed', pet.breed)
+            setFieldValue('pet.species', pet.species)
+            setFieldValue('pet.bloodType', pet.bloodType)
+            setFieldValue('pet.gender', pet.gender)
+            setFieldValue('pet.dateOfBirth', pet.dateOfBirth)
+        })
+    }
 
     return (
         <>
@@ -80,7 +92,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
 
             <div>
                 <Row className="g-3">
-                    <BtnAvatar />
+                    <BtnAvatar alt='Avatar do Pet' name="pet.avatar" />
 
                     <Col sm={6}>
                         <FieldDocument
@@ -121,11 +133,12 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             required
                             label="Qual é o nome do pet?"
                             placeholder={isPending ? 'Carregando...' : "Digite o nome do pet: Doguinho"}
+                            onChangeOption={onChangePet}
                         />
                     </Col>
 
                     <Row className="mt-2">
-                        <ComboBoxFields />
+                        <ComboBoxFields name="pet" />
                     </Row>
                 </Row>
             </div>

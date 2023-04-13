@@ -26,7 +26,7 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
 
                 <Row className="g-3">
 
-                    <BtnAvatar />
+                    <BtnAvatar alt='Avatar de Tutor' name="tutor.avatar" disabled />
 
                     <Col sm={6}>
                         <FieldDocument
