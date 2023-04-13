@@ -9,7 +9,11 @@ type AuxSpeciesFormikProps = {
     bloodType: string
 }
 
-const ComboBoxFields = () => {
+type ComboBoxFieldsProps = {
+    name?: string
+}
+
+const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
 
     const [specie, setSpecie] = useState<SpeciesType>({} as SpeciesType)
 
@@ -25,6 +29,10 @@ const ComboBoxFields = () => {
         })
     }
 
+    const memoNameSpecies = !name ? 'species' : `${name}.species`
+    const memoNameBreed = !name ? 'breed' : `${name}.breed`
+    const memoNameBloodType = !name ? 'bloodType' : `${name}.bloodType`
+
     return (
         <>
             <div className="w-full lg:w-1/3 px-3 mb-6">
@@ -33,7 +41,7 @@ const ComboBoxFields = () => {
                     option={specie}
                     required
                     onChangeOption={onChangeSpecie}
-                    name="species"
+                    name={memoNameSpecies}
                     placeholder="Ex: Cachorro, Gato, etc..."
                     label="Espécie"
                     className="form-control"
@@ -45,7 +53,7 @@ const ComboBoxFields = () => {
                     items={(specie.breedType || []) as any}
                     disabled={!specie.breedType || isPending}
                     required
-                    name="breed"
+                    name={memoNameBreed}
                     label="Raça"
                     placeholder="Ex: Vira-lata, Poodle, etc..."
                     className="form-control"
@@ -57,7 +65,7 @@ const ComboBoxFields = () => {
                 <ComboBoxAutocomplete
                     items={(specie.bloodType || []) as any}
                     disabled={!specie.bloodType || isPending}
-                    name="bloodType"
+                    name={memoNameBloodType}
                     label="Tipo Sanguíneo"
                     placeholder="Ex: A, B, etc..."
                     className="form-control"
