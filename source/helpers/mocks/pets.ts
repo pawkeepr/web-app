@@ -8,7 +8,7 @@ import { Species } from "~/store/pets/speciesType";
 import { GenderPet, Pet } from "~/store/pets/types";
 import * as url from '../url_helper';
 
-const factoryPet = (): Pet => ({
+const factoryPet = (document?: string, name?: string): Pet => ({
     id: faker.datatype.uuid(),
     name: faker.name.middleName(),
     species: Species.cat,
@@ -21,9 +21,23 @@ const factoryPet = (): Pet => ({
     medicationsInUse: [],
     healthHistory: [],
     ownerEmergencyContact: {
-        name: faker.name.fullName(),
+        id: faker.datatype.uuid(),
+        name: name || faker.name.fullName(),
         phone: faker.phone.number('## 9 ####-####'),
-        document: faker.datatype.number(99999999999).toString(),
+        document: document || faker.datatype.number(99999999999).toString(),
+        avatar: faker.image.avatar(),
+        email: faker.internet.email(),
+        created_at: Date.now().toLocaleString(),
+        updated_at: Date.now().toLocaleString(),
+        address: {
+            street: faker.address.streetName(),
+            number: faker.datatype.number(9999).toString(),
+            complement: faker.address.secondaryAddress(),
+            neighborhood: faker.address.cityName(),
+            city: faker.address.cityName(),
+            state: faker.address.state(),
+            zipCode: faker.address.zipCode('###########'),
+        }
     },
     diet: {
         foodType: 'Ração Premium',
@@ -44,6 +58,7 @@ const factoryPet = (): Pet => ({
 
 const pets: Array<Pet> = [
     ...Array(10).fill(0).map(() => factoryPet()),
+    ...Array(3).fill(0).map(() => factoryPet('00000000000', 'Murilo Montino')),
 ]
 
 const getPets = () => {

@@ -6,6 +6,7 @@ import {
     Species
 } from './speciesType';
 
+import { Tutor } from '../tutor/types';
 import {
     Breed
 } from './breedType';
@@ -32,6 +33,12 @@ export enum GenderPet {
     unknown = 'Desconhecido'
 };
 
+export type Diet = {
+    foodType: string;
+    dailyAmount: number;
+    dietaryRestrictions: string[];
+}
+
 export type Pet = {
     id: string;
     name: string;
@@ -48,20 +55,11 @@ export type Pet = {
     dateOfCastration: string;
     dateOfAdoption: string;
     healthHistory: string[];
-    diet: {
-        foodType: string;
-        dailyAmount: number;
-        dietaryRestrictions: string[];
-    };
+    diet: Diet;
     specialPhysicalFeatures: string[];
     behavior: string;
     activityLevel: string;
-    ownerEmergencyContact: {
-        name?: string;
-        phone?: string;
-        email?: string;
-        document: string;
-    };
+    ownerEmergencyContact: Tutor;
     address?: string;
     avatar: string;
     created_at: string;
