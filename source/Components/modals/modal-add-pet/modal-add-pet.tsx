@@ -9,6 +9,9 @@ import ModalHeader from 'react-bootstrap/ModalHeader';
 //Import actions
 //redux
 
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 // Formik
@@ -28,6 +31,21 @@ type InitialValues = Partial<Nullable<Pet>>
 
 import RadioGroupCustom from "~/Components/molecules/radio-group/radio-group";
 import validationPet from '~/validations/pet';
+
+const genders = [
+    {
+        name: 'Macho',
+        value: GenderPet.male
+    },
+    {
+        name: 'Fêmea',
+        value: GenderPet.female
+    },
+    {
+        name: 'Indefinido',
+        value: GenderPet.unknown
+    }
+]
 
 const ModalAddNewPet = () => {
 
@@ -89,9 +107,12 @@ const ModalAddNewPet = () => {
                         ({ isValid, handleSubmit }) => (
                             <>
                                 <ModalBody>
-                                    <BtnAvatar />
-                                    <div className="flex flex-wrap -mx-3 mt-2">
-                                        <div className="w-full lg:w-1/2 px-3 mb-6">
+
+
+                                    <BtnAvatar alt="Foto do Pet" name="avatar" />
+
+                                    <Row className="g-3">
+                                        <Col sm={6}>
                                             <FieldControl
                                                 label="Nome"
                                                 name="name"
@@ -100,8 +121,8 @@ const ModalAddNewPet = () => {
                                                 placeholder="Qual o nome do seu pet?"
                                                 type="text"
                                             />
-                                        </div>
-                                        <div className="w-full lg:w-1/2 px-3 mb-6">
+                                        </Col>
+                                        <Col sm={6}>
                                             <FieldDocument
                                                 onlyCPF
                                                 label="CPF"
@@ -111,9 +132,12 @@ const ModalAddNewPet = () => {
                                                 placeholder="CPF do tutor"
                                                 type="text"
                                             />
-                                        </div>
-                                        <ComboBoxFields />
-                                        <div className="w-full lg:w-1/3 px-3 mb-6">
+                                        </Col>
+                                        <Col sm={12} className="flex">
+                                            <ComboBoxFields />
+                                        </Col>
+
+                                        <Col sm={4}>
                                             <FieldControl
                                                 label="Data de Nascimento"
                                                 name="dateOfBirth"
@@ -121,12 +145,13 @@ const ModalAddNewPet = () => {
                                                 placeholder="Escreva a data de nascimento"
                                                 type="date"
                                             />
-                                        </div>
-                                        <div className="w-full lg:w-1/3 px-3 mb-6">
-                                            <RadioGroupCustom />
-                                        </div>
+                                        </Col>
+                                        <Col sm={6} className="justify-center items-center flex">
+                                            <RadioGroupCustom items={genders} name="gender" />
+                                        </Col>
                                         {/* Add other fields here */}
-                                    </div>
+                                    </Row>
+
                                 </ModalBody>
                                 <ModalFooter>
                                     <BoxButtons onClickCancel={closeModal} onClickSuccess={handleSubmit} isValid={isValid} />
