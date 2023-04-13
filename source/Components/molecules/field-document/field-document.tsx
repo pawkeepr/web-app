@@ -11,7 +11,7 @@ type InputDocumentProps = InputControlProps & {
     onlyCNPJ?: boolean
 }
 
-const FieldDocument = ({ onlyCPF = false, onlyCNPJ = false, ...props }: InputControlProps) => {
+const FieldDocument = ({ onlyCPF = false, onlyCNPJ = false, ...props }: InputDocumentProps) => {
     const { values } = useFormikContext()
 
     const document = (values as any)[props.name]
