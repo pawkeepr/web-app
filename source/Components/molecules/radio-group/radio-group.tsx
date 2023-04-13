@@ -1,53 +1,45 @@
-import { useState } from 'react'
+
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+
+import {
+    Input,
+    Label
+} from 'reactstrap'
 
 
-const plans = [
-    {
-        name: 'Macho',
-        value: 'male'
-    },
-    {
-        name: 'Fêmea',
-        value: 'female'
-    },
-    {
-        name: 'Indefinido',
-        value: 'unknown'
-    }
-]
-
-export default function Example() {
-    const [selected, setSelected] = useState(plans[0])
-
-    return (
-        <div className="w-full">
-            <div className="mx-auto w-full relative">
-                {
-                    plans.map((plan, planIdx) => (
-                        <div className="form-check form-radio-outline form-radio-dark" key={planIdx}>
-                            <input className="form-check-input" type="radio" name="formradiocolor15" id="formradioRight19" defaultChecked />
-                            <label className="form-check-label" htmlFor="formradioRight19">
-                                {plan.name}
-                            </label>
-                        </div>
-                    ))
-                }
-            </div>
-        </div>
-    )
+type RadioGroupProps<T> = {
+    items: (T & { name: string, value: string })[]
+    name: string
 }
 
-function CheckIcon(props) {
+export default function RadioGroup<T>({ items = [], name }: RadioGroupProps<T>) {
+
     return (
-        <svg viewBox="0 0 24 24" fill="none" {...props}>
-            <circle cx={12} cy={12} r={12} fill="#fff" opacity="0.2" />
-            <path
-                d="M7 13l3 3 7-7"
-                stroke="#fff"
-                strokeWidth={1.5}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
+        <Row className="w-full">
+            <Col sm={12}>
+                <div className="mx-auto w-full relative">
+                    {
+                        items.map((item, index) => (
+                            <div className="form-check form-check-inline" key={index}>
+                                <Input
+                                    id={item.name}
+                                    name={name}
+                                    type="radio"
+                                    className="form-check-input"
+                                    required
+                                />
+                                <Label
+                                    className="form-check-label"
+                                    htmlFor="credit"
+                                >
+                                    {item.name}
+                                </Label>
+                            </div>
+                        ))
+                    }
+                </div>
+            </Col>
+        </Row>
     )
 }
