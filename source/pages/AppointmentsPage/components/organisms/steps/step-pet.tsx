@@ -1,94 +1,132 @@
-import {
-    Col,
-    Input,
-    Label,
-    Row
-} from "reactstrap";
-//Import images
 
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
+import MaskedInput from 'react-input-mask';
+
+import FieldDocument from "~/Components/molecules/field-document/field-document";
+
+import { useFormikContext } from 'formik';
+import { useEffect, useState, useTransition } from 'react';
+import { BtnAvatar } from '~/Components/atoms/btn';
+import ComboBoxFields from '~/Components/modals/modal-add-pet/components/organisms/combo-box-fields/combo-box-fields';
+import ComboBoxAutocomplete from '~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete';
 import { StepProps } from './types';
 
+import { InitialValues } from '../../../Appointments';
+
+import FieldControl from '~/Components/molecules/field-control/field-control';
+import { useAppSelector } from '~/store/hooks';
+import { Pet } from '~/store/pets/types';
+
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
+
+
+    const [petsOptions, setPetsOptions] = useState<(Pet & { value: string })[]>([])
+    const [isPending, startTransition] = useTransition()
+    const { values, setFieldValue } = useFormikContext<InitialValues>()
+
+
+    const { pets, tutors } = useAppSelector(state => ({
+        pets: state.Pets.pets,
+        tutors: state.Tutor.tutors
+    })
+    )
+
+    useEffect(() => {
+        const document = values.tutor?.document
+        const documentNumber = document?.replace(/\D/g, '')
+
+        if (!documentNumber || documentNumber.length < 11) {
+            return
+        }
+
+        const tutor = tutors.find(tutor => tutor.document === documentNumber)
+        const petsOptions = pets
+            .filter(pet => pet.ownerEmergencyContact.document === documentNumber)
+            .map(pet => ({
+                ...pet,
+                value: pet.id,
+            }))
+
+        if (!tutor) {
+            // setar erro de cliente não está cadastrado
+        }
+
+        startTransition(() => {
+            setPetsOptions(petsOptions)
+            setFieldValue('tutor.id', tutor?.id || '')
+            setFieldValue('tutor.phone', tutor?.phone || '')
+            setFieldValue('tutor.name', tutor?.name || '')
+            setFieldValue('tutor.email', tutor?.email || '')
+            tutor?.address && setFieldValue('tutor.address', tutor?.address)
+        })
+
+
+        // setar tutor
+
+
+    }, [values.tutor?.document, tutors, pets, setFieldValue])
+
+
     return (
         <>
             <div>
-                <h5>Billing Info</h5>
+                <h5>Pet</h5>
                 <p className="text-muted">
-                    Fill all information below
+                    Todas as Informações sobre o PET
                 </p>
             </div>
 
             <div>
                 <Row className="g-3">
-                    <Col sm={6}>
-                        <Label
-                            htmlFor="firstName"
-                            className="form-label"
-                        >
-                            First name
-                        </Label>
-                        <Input
-                            type="text"
-                            className="form-control"
-                            id="firstName"
-                            placeholder="Enter First Name"
-                            defaultValue=""
-                        />
-                    </Col>
+                    <BtnAvatar />
 
                     <Col sm={6}>
-                        <Label
-                            htmlFor="lastName"
-                            className="form-label"
-                        >
-                            Last name
-                        </Label>
-                        <Input
+                        <FieldDocument
+                            label='CPF'
+                            divClassName='my-1'
+                            name="tutor.document"
+                            aria-label="document"
+                            className="form-control"
+                            onlyCPF
+                            placeholder="CPF"
+                            component={MaskedInput as any}
+                            required
+                        />
+                    </Col>
+
+                    <Col sm={6}>
+                        <FieldControl
+                            className="form-control"
+                            divClassName='my-1'
                             type="text"
-                            className="form-control"
-                            id="lastName"
-                            placeholder="Enter Last Name"
-                            defaultValue=""
+                            label="Telefone/Celular"
+                            name="tutor.phone"
+                            disabled={isPending}
+                            placeholder={isPending ? 'Carregando...' : "Digite o seu Número de Telefone"}
+                            component={MaskedInput as any}
+                            mask={"(99) 99999-9999"}
+                            maskChar={null}
+                            required
                         />
                     </Col>
 
-                    <Col xs={12}>
-                        <Label
-                            htmlFor="username"
-                            className="form-label"
-                        >
-                            Username
-                        </Label>
-                        <div className="input-group">
-                            <span className="input-group-text">
-                                @
-                            </span>
-                            <Input
-                                type="text"
-                                className="form-control"
-                                id="username"
-                                placeholder="Username"
-                            />
-                        </div>
-                    </Col>
-
-                    <Col xs={12}>
-                        <Label
-                            htmlFor="email"
-                            className="form-label"
-                        >
-                            Email{" "}
-                            <span className="text-muted">
-                                (Optional)
-                            </span>
-                        </Label>
-                        <Input
-                            type="email"
+                    <Col sm={12}>
+                        <ComboBoxAutocomplete
+                            items={petsOptions}
+                            name='pet.name'
                             className="form-control"
-                            id="email"
-                            placeholder="Enter Email"
+                            disabled={isPending}
+                            required
+                            label="Qual é o nome do pet?"
+                            placeholder={isPending ? 'Carregando...' : "Digite o nome do pet: Doguinho"}
                         />
                     </Col>
+
+                    <Row className="mt-2">
+                        <ComboBoxFields />
+                    </Row>
                 </Row>
             </div>
 

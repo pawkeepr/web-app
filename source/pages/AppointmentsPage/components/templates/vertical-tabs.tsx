@@ -17,6 +17,7 @@ import cn from "classnames";
 import { useState } from "react";
 import StepAddress from "../organisms/steps/step-address";
 import StepPet from "../organisms/steps/step-pet";
+import StepTutor from '../organisms/steps/step-tutor';
 import StepVaccines from '../organisms/steps/step-vaccines';
 
 type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
@@ -36,25 +37,37 @@ const VerticalTabs = () => {
     const items: TabItem[] = [
         {
             id: 1,
-            title: "Pessoa",
-            href: "#Person",
+            title: "Pet",
+            href: "#Pet",
             Component: StepPet
         },
         {
             id: 2,
-            title: "Address",
+            title: "Consulta",
+            href: "#Appointment",
+            Component: StepTutor
+        },
+        {
+            id: 3,
+            title: "Tutor",
+            href: "#Tutor",
+            Component: StepTutor
+        },
+        {
+            id: 4,
+            title: "Endereço",
             href: "#Address",
             Component: StepAddress
         },
         {
-            id: 3,
-            title: "Payment",
+            id: 5,
+            title: "Pagamento",
             href: "#Payment",
             Component: StepVaccines
         },
         {
-            id: 4,
-            title: "Finish",
+            id: 6,
+            title: "Finalizar",
             href: "#Finish",
             Component: () => (
                 <div className="text-center pt-4 pb-2">
