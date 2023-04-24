@@ -17,7 +17,7 @@ const AuthSlider = ({ bg = 'auth-bg-image' }: AuthSliderProps) => {
         <React.Fragment>
 
             <Col lg={6}>
-                <div className={`p-lg-5 p-4 auth-one-bg h-100 ${bg}`}>
+                <div className={`p-lg-5 p-4 auth-one-bg ${bg} h-100`}>
                     <div className="bg-overlay"></div>
                     <div className="position-relative h-100 d-flex flex-column">
                         <div className="mb-4">
@@ -33,7 +33,9 @@ const AuthSlider = ({ bg = 'auth-bg-image' }: AuthSliderProps) => {
                             <Carousel showThumbs={false} autoPlay={true} showArrows={false} showStatus={false} infiniteLoop={true} className="carousel slide" id="qoutescarouselIndicators" >
                                 <div className="carousel-inner text-center text-white pb-5">
                                     <div className="item">
-                                        <p className="fs-15 fst-italic">" Fique despreocupado, cuidamos do seu animalzinho por você! "</p>
+                                        <p className="fs-15 fst-italic">
+                                            {"Fique despreocupado, cuidamos do seu animalzinho por você!"}
+                                        </p>
                                     </div>
                                 </div>
                                 {/* <div className="carousel-inner text-center text-white pb-5">

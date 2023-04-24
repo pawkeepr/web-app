@@ -4,7 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import ScrollSpy from "react-scrollspy";
-import { Collapse, Container, NavbarToggler } from "reactstrap";
+
+import Collapse from 'react-bootstrap/Collapse';
+import Container from 'react-bootstrap/Container';
+import NavbarToggler from 'react-bootstrap/NavbarToggle';
+
 
 // Import Images
 import logoLight from "~/assets/images/logo-dark.png";
@@ -45,58 +49,65 @@ const NavbarLanding = () => {
                         <i className="mdi mdi-menu"></i>
                     </NavbarToggler>
 
-                    <Collapse
-                        isOpen={isOpenMenu}
+                    <Collapse in={isOpenMenu}
                         className="navbar-collapse"
                         id="navbarSupportedContent"
                     >
-                        <ScrollSpy
-                            offset={-18}
-                            items={[
-                                "hero",
-                                "services",
-                                "features",
-                                "plans",
-                                "reviews",
-                                "team",
-                                "contact",
-                            ]}
-                            currentClassName="active"
-                            className="navbar-nav mx-auto mt-2 mt-lg-0"
-                            id="navbar-example"
-                        >
-                            <li className="nav-item">
-                                <a className="nav-link fs-15 fw-semibold text-secondary" href="#hero">Home</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link fs-15 fw-semibold text-light" href="#services">Serviços</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link fs-15 fw-semibold text-light" href="#plans">Planos</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link fs-15 fw-semibold text-light" href="#reviews">Clientes</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link fs-15 fw-semibold text-light" href="#team">Equipe</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link fs-15 fw-semibold text-light" href="#contact">Contato</a>
-                            </li>
-                        </ScrollSpy>
+                        <>
+                            <ScrollSpy
+                                offset={0}
+                                items={[
+                                    "hero",
+                                    "services",
+                                    "features",
+                                    "plans",
+                                    "reviews",
+                                    "team",
+                                    "contact",
+                                ]}
+                                currentClassName="active"
+                                className="navbar-nav mx-auto mt-2 mt-lg-0 items-center justify-center w-fit"
+                                id="navbar-example"
+                            >
+                                <li className="nav-item">
+                                    <a className="nav-link fs-15 fw-semibold text-secondary" href="#hero">Home</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link fs-15 fw-semibold text-light" href="#services">Services</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link fs-15 fw-semibold text-light" href="#features">Features</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link fs-15 fw-semibold text-light" href="#plans">Plans</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link fs-15 fw-semibold text-light" href="#reviews">Reviews</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link fs-15 fw-semibold text-light" href="#team">Team</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link fs-15 fw-semibold text-light" href="#contact">Contact</a>
+                                </li>
 
-                        <div className="">
-                            <Link href="/sign-in" className="btn btn-link text-dark">
-                                <span className="m-1 fw-semibold">Entrar</span>
-                                {/* icon de seta a direita circular na porta */}
-                                <i className="mdi mdi-arrow-right-circle"></i>
-                            </Link>
-                            <Link href="/sign-up" className="btn btn-secondary text-dark ">
-                                <span className="m-1 fw-semibold">Cadastre-se</span>
-                                {/* icon de cadastro */}
-                                <i className="mdi mdi-account-plus"></i>
-                            </Link>
-                        </div>
+
+                            </ScrollSpy>
+                            <div className="z-50">
+                                <Link href="/sign-in" className="btn btn-link text-dark cursor-pointer">
+                                    <span className="m-1 fw-semibold">Entrar</span>
+                                    {/* icon de seta a direita circular na porta */}
+                                    <i className="mdi mdi-arrow-right-circle"></i>
+                                </Link>
+                                <Link href="/sign-up" className="btn btn-secondary text-dark cursor-pointer">
+                                    <span className="m-1 fw-semibold">Cadastre-se</span>
+                                    {/* icon de cadastro */}
+                                    <i className="mdi mdi-account-plus"></i>
+                                </Link>
+                            </div>
+
+                        </>
+
                     </Collapse>
                 </Container>
             </nav>

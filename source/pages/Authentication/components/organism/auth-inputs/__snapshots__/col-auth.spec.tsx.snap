@@ -1,0 +1,127 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ColAuth Unit (Unit) > should render without errors 1`] = `
+<body>
+  <div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="mb-0 list-group-item fs-12 form-label"
+        data-testid="label-username"
+        for="username"
+      >
+        Nome do Usuário:
+        <span
+          class="text-danger"
+        >
+          *
+        </span>
+      </label>
+      <div
+        class="position-relative mb-2 input-group"
+      >
+        <input
+          class="form-control form-control"
+          data-testid="username-input"
+          id="username"
+          name="username"
+          placeholder="Digite seu nome de usuário"
+          required=""
+          type="text"
+          value=""
+        />
+      </div>
+      <label
+        class="font-bold list-group-item text-danger fs-11 text-center"
+        data-testid="err-username"
+        style="display: none;"
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <div
+        class="float-end"
+      >
+        <a
+          class="text-muted"
+          href="/forget-password"
+        >
+          Esqueceu a Senha?
+        </a>
+      </div>
+      <label
+        class="form-label form-label"
+        for="password-input"
+      >
+        Senha
+      </label>
+      <div
+        class="position-relative auth-pass-inputgroup mb-3"
+      >
+        <div
+          class="position-relative mb-2 input-group"
+        >
+          <input
+            class="form-control pe-5 password-input border-end-0 form-control"
+            data-testid="password-input"
+            id="password"
+            name="password"
+            placeholder="Digite sua senha"
+            required=""
+            type="password"
+            value=""
+          />
+          <span
+            class="bg-transparent border-start-0 input-group-text"
+          >
+            <i
+              class="ri-eye-fill"
+              data-testid="toggle-password"
+            />
+          </span>
+        </div>
+        <label
+          class="font-bold list-group-item text-danger fs-11 text-center"
+          data-testid="err-password"
+          style="display: none;"
+        />
+      </div>
+    </div>
+    <div
+      class="w-100 form-check"
+    >
+      <input
+        class="form-check-input"
+        id="rememberMe"
+        name="rememberMe"
+        type="checkbox"
+      />
+      <label
+        class="form-check-label"
+        for="rememberMe"
+        title=""
+      >
+        <p
+          class="mb-0 fs-12 text-muted fst-italic"
+        >
+          Lembrar-me
+        </p>
+      </label>
+    </div>
+    <div
+      class="mt-4"
+    >
+      <button
+        class="w-100 btn btn-primary"
+        color="success"
+        data-testid="submit-button"
+        type="submit"
+      >
+        Entrar
+      </button>
+    </div>
+  </div>
+</body>
+`;

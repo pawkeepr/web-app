@@ -16,8 +16,26 @@ export const isUserAuthenticated = () => {
   return getLoggedInUser() !== null;
 };
 
-// Register Method
-export const postFakeRegister = data => api.create(url.POST_FAKE_REGISTER, data);
+// Tutors methods 
+
+export const getTutors = () => api.get(url.GET_TUTORS);
+export const postTutor = (data) => api.create(url.POST_TUTOR, data);
+export const updateTutor = (data) => api.update(url.UPDATE_TUTOR + '/' + data.id, data);
+export const deleteTutor = (id) => api.delete(url.DELETE_TUTOR + '/' + id);
+
+// Veterinary Appointment methods
+
+export const getVeterinaryAppointment = () => api.get(url.GET_VETERINARY_APPOINTMENTS);
+export const postVeterinaryAppointment = (data) => api.create(url.POST_VETERINARY_APPOINTMENTS, data);
+export const updateVeterinaryAppointment = (data) => api.update(url.UPDATE_VETERINARY_APPOINTMENTS + '/' + data.id, data);
+export const deleteVeterinaryAppointment = (id) => api.delete(url.DELETE_VETERINARY_APPOINTMENTS + '/' + id);
+
+// perspectiveOrigin:  methods 
+
+export const getPets = () => api.get(url.GET_PETS);
+export const postPet = (data) => api.create(url.POST_PET, data);
+export const updatePet = (data) => api.update(url.UPDATE_PET + '/' + data.id, data);
+export const deletePet = (id) => api.delete(url.DELETE_PET + '/' + id);
 
 // Login Method
 export const postFakeLogin = data => api.create(url.POST_FAKE_LOGIN, data);
@@ -31,8 +49,8 @@ export const postJwtProfile = data => api.create(url.POST_EDIT_JWT_PROFILE, data
 export const postFakeProfile = (data) => api.update(url.POST_EDIT_PROFILE + '/' + data.idx, data);
 
 // Register Method
-export const postJwtRegister = (url, data) => {
-  return api.create(url, data)
+export const postJwtRegister = (data) => {
+  return api.create(url.POST_FAKE_REGISTER, data)
     .catch(err => {
       var message;
       if (err.response && err.response.status) {
@@ -57,6 +75,9 @@ export const postJwtRegister = (url, data) => {
 
 // Login Method
 export const postJwtLogin = data => api.create(url.POST_FAKE_JWT_LOGIN, data);
+
+// Get user Token Method
+export const getUser = (token) => api.get(url.GET_USER_JWT_TOKEN);
 
 // postForgetPwd
 export const postJwtForgetPwd = data => api.create(url.POST_FAKE_JWT_PASSWORD_FORGET, data);

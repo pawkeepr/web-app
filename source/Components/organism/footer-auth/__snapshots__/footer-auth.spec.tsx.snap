@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Test FooterAuth component > should render snap footer auth (Unit) 1`] = `
+<DocumentFragment>
+  <footer
+    class="footer"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="row"
+      >
+        <div
+          class="col-lg-12"
+        >
+          <div
+            class="text-center"
+          >
+            <p
+              class="mb-0"
+            >
+              © 2023 PawKeeprs. 
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</DocumentFragment>
+`;
