@@ -8,7 +8,7 @@ import FieldDocument from "~/Components/molecules/field-document/field-document"
 
 import { useFormikContext } from 'formik';
 import { useEffect, useState, useTransition } from 'react';
-import { BtnAvatar } from '~/Components/atoms/btn';
+import { BtnAvatar, BtnSuccess } from '~/Components/atoms/btn';
 import ComboBoxFields from '~/Components/modals/modal-add-pet/components/organisms/combo-box-fields/combo-box-fields';
 import ComboBoxAutocomplete from '~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete';
 import { StepProps } from './types';
@@ -144,16 +144,17 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
             </div>
 
             <div className="d-flex align-items-start gap-3 mt-4">
-                <button
+                <BtnSuccess
                     type="button"
-                    className="btn btn-success btn-label right ms-auto nexttab nexttab"
+                    className="btn-label right ms-auto nexttab nexttab"
+                    label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}
                 >
                     <i className="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
-                    Go to Shipping
-                </button>
+                    Próximo
+                </BtnSuccess>
             </div>
         </>
     )

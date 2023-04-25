@@ -22,8 +22,6 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
 
             <div>
 
-
-
                 <Row className="g-3">
 
                     <BtnAvatar alt='Avatar de Tutor' name="tutor.avatar" disabled />

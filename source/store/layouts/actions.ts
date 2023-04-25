@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import { name } from './types';
+import { DivSize, name } from './types';
 
 import {
     layoutModeTypes,
@@ -25,3 +25,4 @@ export const changeSidebarSizeType = createAction<leftSideBarSizeTypes>(`${name}
 export const changeSidebarView = createAction<leftSidebarViewTypes>(`${name}/changeSidebarView`);
 export const changeSidebarImageType = createAction<leftSidebarImageTypes>(`${name}/changeSidebarImageType`);
 export const changePreloader = createAction<preloaderTypes>(`${name}/changePreloader`);
+export const changeHeaderSize = createAction<DivSize>(`${name}/changeHeaderSize`);

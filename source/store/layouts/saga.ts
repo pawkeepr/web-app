@@ -8,6 +8,7 @@ import {
     changePreloader as actionChangePreloader,
     changeSidebarImageType as actionChangeSidebarImageType,
     changeTopbarTheme as actionChangeTopbarTheme,
+    changeHeaderSize,
     changeLayout,
     changeSidebarSizeType,
     changeSidebarTheme,
@@ -26,12 +27,22 @@ import {
     preloaderTypes,
     topbarThemeTypes
 } from "../../Components/constants/layout";
+import { DivSize } from "./types";
 
 /**
  * Changes the body attribute
  */
 function changeHTMLAttribute(attribute: any, value: any) {
     if (document.documentElement) document.documentElement.setAttribute(attribute, value);
+    return true;
+}
+
+function changeModeHTMLAttribute(value: any) {
+    if (document.documentElement) {
+        const root = document.documentElement;
+        if (value === layoutModeTypes.DARK_MODE) root.classList.add("dark");
+        else root.classList.remove("dark");
+    }
     return true;
 }
 
@@ -64,6 +75,7 @@ function* changeLayoutTheme({ payload: layout }: GenericPayload<layoutTypes>) {
 function* changeLayoutMode({ payload: mode }: GenericPayload<layoutModeTypes>) {
     try {
         yield call(changeHTMLAttribute, "data-layout-mode", mode);
+        yield call(changeModeHTMLAttribute, mode);
     } catch (error) {
         // console.log(error);
     }
@@ -146,6 +158,14 @@ function* changePreloader({ payload: preloaderTypes }: GenericPayload<preloaderT
     }
 }
 
+function* changeHeaderSizeSaga({ payload: headerSize }: GenericPayload<DivSize>) {
+    try {
+        yield call(changeHeaderSize, headerSize);
+    } catch (error) {
+        // console.log(error);
+    }
+}
+
 
 /**
  * Changes the topbar themes
@@ -220,6 +240,10 @@ export function* watchChangePreloader() {
     yield takeEvery(actionChangePreloader, changePreloader);
 }
 
+export function* watchChangeHeaderSize() {
+    yield takeEvery(changeHeaderSize, changeHeaderSizeSaga);
+}
+
 
 function* LayoutSaga() {
     yield all([
@@ -233,6 +257,7 @@ function* LayoutSaga() {
         fork(watchChangeLeftSidebarViewType),
         fork(watchChangeSidebarImageType),
         fork(watchChangePreloader),
+        fork(watchChangeHeaderSize)
     ]);
 }
 

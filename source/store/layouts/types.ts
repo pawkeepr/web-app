@@ -11,6 +11,11 @@ import {
     topbarThemeTypes
 } from "../../Components/constants/layout";
 
+export type DivSize = {
+    height: number;
+    width: number;
+}
+
 export type LayoutState = {
     layoutType: layoutTypes;
     leftSidebarType: leftSidebarTypes;
@@ -22,6 +27,7 @@ export type LayoutState = {
     leftSidebarViewType: leftSidebarViewTypes;
     leftSidebarImageType: leftSidebarImageTypes;
     preloader: preloaderTypes;
+    headerSize: DivSize;
 };
 
 export const name = 'layout';

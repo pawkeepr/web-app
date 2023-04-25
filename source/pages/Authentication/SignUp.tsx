@@ -145,7 +145,7 @@ const CoverSignUp = () => {
                 initialValues={initialValues}
                 onSubmit={onSubmit}
             >
-                <div className="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center min-vh-100">
+                <div className="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center">
                     <div className="bg-overlay"></div>
                     <div className="auth-page-content overflow-hidden pt-lg-5">
                         <Container>
@@ -153,7 +153,7 @@ const CoverSignUp = () => {
                             <Card className="overflow-hidden m-0">
                                 <Row className="justify-content-center g-0">
                                     <AuthSlider bg='auth-bg-image-2' />
-                                    <Col lg={6} className="items-center flex-col justify-center h-fit">
+                                    <Col lg={6} className="items-center flex-col justify-center">
 
                                         <TabContainer activeKey={tab}  >
                                             {

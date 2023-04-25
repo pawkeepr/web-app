@@ -7,6 +7,10 @@ import BtnSuccess from "../../../../../Components/atoms/btn/btn-success"
 import Container from "../../template/container"
 import { StepProps } from "./types"
 
+const listItem = 'flex gap-2 fw-bold text-gray-500 p-1 text-center w-full'
+const strongText = 'text-gray-700 mr-2'
+const pStyle = 'text-center w-full text-sm'
+
 const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
 
     const { values, handleChange, isValid, handleSubmit } = useFormikContext<AccountSignUp>()
@@ -17,95 +21,121 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
         nextStep()
     }
 
+
     return (
         <Container>
             <div className="my-4">
-                <h4 className="h4 my-3 text-center text-capitalize text-primary">Informações pessoais</h4>
+                <h4 className="h4 my-4 text-center text-capitalize text-primary">Informações pessoais</h4>
 
-                <ul className="list-group">
-                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600">
-                        <strong>Nome:</strong> 
-                        <span className="text-capitalize ">
-                            {values.person.firstName} {values.person.lastName}
-                        </span>
+                <ul className="grid grid-cols-2">
+                    <li className={listItem}>
+                        <p className={pStyle}>
+                            <strong className={strongText}>Nome:</strong>
+                            <span className="text-capitalize ">
+                                {values.person.firstName} {values.person.lastName}
+                            </span>
+                        </p>
                     </li>
-                    <li className="list-group-item fw-bold d-flex gap-2 text-gray-600">
-                        <strong>CRMV:</strong> 
-                        <span className="">
-                            {values.person.crmv}
-                        </span>
+                    <li className={listItem}>
+                        <p className={pStyle}>
+                            <strong className={strongText}>CRMV:</strong>
+                            <span className="">
+                                {values.person.crmv}
+                            </span>
+                        </p>
                     </li>
-                    <li className="list-group-item fw-bold d-flex gap-2 text-gray-600">
-                        <strong>Documento:</strong> 
-                        <span className="">
-                            {values.person.document}
-                        </span>
+                    <li className={listItem}>
+                        <p className={pStyle}>
+                            <strong className={strongText}>Documento:</strong>
+                            <span className="">
+                                {values.person.document}
+                            </span>
+                        </p>
                     </li>
-                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600">
-                        <strong>Empresa:</strong> 
-                        <span className="text-capitalize ">
-                            {values.person.company || "Não informado"}
-                        </span>
+                    <li className={listItem}>
+                        <p className={pStyle}>
+                            <strong className={strongText}>Empresa:</strong>
+                            <span className="text-capitalize ">
+                                {values.person.company || "Não informado"}
+                            </span>
+                        </p>
                     </li>
-                    <li className="list-group-item fw-bold d-flex gap-2 text-gray-600">
-                        <strong>Telefone:</strong> 
-                        <span className="">
-                            {values.person.phoneNumber}
-                        </span> 
-                       
+                    <li className={listItem}>
+                        <p className={pStyle}>
+                            <strong className={strongText}>Telefone:</strong>
+                            <span className="">
+                                {values.person.phoneNumber}
+                            </span>
+                        </p>
                     </li>
                 </ul>
 
-                <h4 className="h4 text-center my-2 text-capitalize text-primary">Endereço</h4>
+                <h4 className="h4 text-center my-4 text-capitalize text-primary">Endereço</h4>
 
-                <ul className="list-group">
-                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
-                        <strong>País:</strong> 
-                        <span className="text-capitalize ">
-                            {values.address.country}
-                        </span> 
+                <ul className="grid grid-cols-2">
+                    <li className={listItem} >
+                        <p className={pStyle}>
+                            <strong className={strongText}>País:</strong>
+                            <span className="text-capitalize ">
+                                {values.address.country}
+                            </span>
+                        </p>
                     </li>
-                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
-                        <strong>Rua:</strong> 
-                        <span className="text-capitalize ">
-                            {values.address.street}
-                        </span>
+                    <li className={listItem} >
+                        <p className={pStyle}>
+                            <strong className={strongText}>Rua:</strong>
+                            <span className="text-capitalize ">
+                                {values.address.street}
+                            </span>
+                        </p>
                     </li >
-                    <li className="list-group-item fw-bold d-flex gap-2 text-gray-600" >
-                        <strong>Número:</strong> 
-                        <span className="">
-                            {values.address.number}
-                        </span>
+                    <li className={listItem} >
+                        <p className={pStyle}>
+                            <strong className={strongText}>Número:</strong>
+                            <span className="">
+                                {values.address.number}
+                            </span>
+                        </p>
                     </li>
-                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
-                        <strong>Complemento:</strong> 
-                        <span className="text-capitalize ">
-                            {values.address.complement || "Não informado"}
-                        </span>
+                    <li className={listItem} >
+                        <p className={pStyle}>
+                            <strong className={strongText}>Complemento:</strong>
+                            <span className="text-capitalize ">
+                                {values.address.complement || "Não informado"}
+                            </span>
+                        </p>
                     </li>
-                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
-                        <strong>Bairro:</strong> 
-                        <span className="text-capitalize ">
-                            {values.address.neighborhood}
-                        </span>
+                    <li className={listItem} >
+                        <p className={pStyle}>
+                            <strong className={strongText}>Bairro:</strong>
+                            <span className="text-capitalize ">
+                                {values.address.neighborhood}
+                            </span>
+                        </p>
                     </li>
-                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
-                        <strong>Cidade:</strong> 
-                        <span className="text-capitalize ">
-                            {values.address.city}
-                        </span>
+                    <li className={listItem} >
+                        <p className={pStyle}>
+                            <strong className={strongText}>Cidade:</strong>
+                            <span className="text-capitalize ">
+                                {values.address.city}
+                            </span>
+                        </p>
                     </li>
-                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
-                        <strong>Estado:</strong> 
-                        <span className="text-capitalize ">
-                            {values.address.state}
-                        </span>
+                    <li className={listItem} >
+                        <p className={pStyle}>
+                            <strong className={strongText}>Estado:</strong>
+                            <span className="text-capitalize ">
+                                {values.address.state}
+                            </span>
+                        </p>
                     </li>
-                    <li className="list-group-item d-flex gap-2 fw-bold text-gray-600" >
-                        <strong>CEP:</strong> 
-                        <span className="">
-                            {values.address.zipCode}
-                        </span>
+                    <li className={listItem} >
+                        <p className={pStyle}>
+                            <strong className={strongText}>CEP:</strong>
+                            <span className="">
+                                {values.address.zipCode}
+                            </span>
+                        </p>
                     </li>
                 </ul>
             </div>
@@ -123,10 +153,10 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
                             {"Você se registrando aceita os termos de uso da plataforma: "}
                             <Link href="#" className="text-primary text-decoration-underline fst-normal fw-medium">Termos de Uso</Link>
                         </p>
-                    } 
+                    }
                 />
             </div>
-    
+
             <div className="d-flex justify-content-evenly align-items-center">
                 <div>
                     <BtnCancel onClick={prevStep} label="Anterior" className="m-1" />
