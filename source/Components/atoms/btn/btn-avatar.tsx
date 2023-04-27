@@ -12,11 +12,13 @@ type AvatarImageProps = {
     alt?: string;
     name?: string;
     disabled?: boolean;
+    size?: number;
+
 } & Omit<ImageProps, 'src'>;
 
 
 
-const BtnAvatar = ({ src, alt, name = 'avatar', disabled = false }: AvatarImageProps) => {
+const BtnAvatar = ({ src, alt, name = 'avatar', disabled = false, size = 40 }: AvatarImageProps) => {
     const [image, setImage] = useState<File | null>(null);
 
     const sourceImage = src || dummyImg;
@@ -72,10 +74,13 @@ const BtnAvatar = ({ src, alt, name = 'avatar', disabled = false }: AvatarImageP
                 </div>
                 <div
                     className={
-                        cn({
-                            "avatar-sm p-1 w-20 h-20 z-0": true,
-                            "cursor-pointer": !disabled
-                        })
+                        cn(
+                            `w-${size} h-${size}`,
+                            "avatar-sm p-1 z-0",
+                            {
+                                "cursor-pointer": !disabled
+                            }
+                        )
                     }
                     onClick={openImageInput}
                 >

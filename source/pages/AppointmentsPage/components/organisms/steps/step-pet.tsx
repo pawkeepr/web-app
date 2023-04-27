@@ -9,21 +9,27 @@ import FieldDocument from "~/Components/molecules/field-document/field-document"
 import { useFormikContext } from 'formik';
 import { useEffect, useState, useTransition } from 'react';
 import { BtnAvatar, BtnSuccess } from '~/Components/atoms/btn';
-import ComboBoxFields from '~/Components/modals/modal-add-pet/components/organisms/combo-box-fields/combo-box-fields';
 import ComboBoxAutocomplete from '~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete';
 import { StepProps } from './types';
 
 import { InitialValues } from '../../../Appointments';
 
 import FieldControl from '~/Components/molecules/field-control/field-control';
+import ListBoxTailwind from '~/Components/molecules/list-box-tailwind/list-box-tailwind';
 import { useAppSelector } from '~/store/hooks';
+import { SpeciesType, species } from '~/store/pets/speciesType';
 import { Pet } from '~/store/pets/types';
+import StepTutor from '../../molecules/tutor';
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
 
+    const [isPending, startTransition] = useTransition()
+
+    const [specie, setSpecie] = useState<SpeciesType>({} as SpeciesType)
+    const [breed, setBreed] = useState('')
+    const [bloodType, setBloodType] = useState('')
 
     const [petsOptions, setPetsOptions] = useState<(Pet & { value: string })[]>([])
-    const [isPending, startTransition] = useTransition()
     const { values, setFieldValue } = useFormikContext<InitialValues>()
 
 
@@ -63,13 +69,11 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
             tutor?.address && setFieldValue('tutor.address', tutor?.address)
         })
 
-
-        // setar tutor
-
-
     }, [values.tutor?.document, tutors, pets, setFieldValue])
 
     const onChangePet = (pet: Pet) => {
+        console.log(specie)
+
         startTransition(() => {
             setFieldValue('pet.id', pet.id)
             setFieldValue('pet.avatar', pet.avatar)
@@ -78,6 +82,14 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
             setFieldValue('pet.bloodType', pet.bloodType)
             setFieldValue('pet.gender', pet.gender)
             setFieldValue('pet.dateOfBirth', pet.dateOfBirth)
+        })
+    }
+
+    const onChangeSpecie = (specie: SpeciesType) => {
+        startTransition(() => {
+            setSpecie(specie)
+            setFieldValue('breed', '')
+            setFieldValue('bloodType', '')
         })
     }
 
@@ -92,9 +104,11 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
 
             <div>
                 <Row className="g-3">
-                    <BtnAvatar alt='Avatar do Pet' name="pet.avatar" />
-
-                    <Col sm={6}>
+                    <div className="flex flex-row gap-2 items-center justify-center m-2">
+                        <BtnAvatar alt='Avatar do Pet' name="pet.avatar" disabled size={40} />
+                        <BtnAvatar alt='Avatar de Tutor' name="tutor.avatar" disabled size={24} />
+                    </div>
+                    <Col sm={3}>
                         <FieldDocument
                             label='CPF'
                             divClassName='my-1'
@@ -107,8 +121,20 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             required
                         />
                     </Col>
-
-                    <Col sm={6}>
+                    <Col sm={5}>
+                        <FieldControl
+                            initialFocus
+                            divClassName='my-1'
+                            label='Nome Completo'
+                            name="tutor.name"
+                            aria-label="name"
+                            className="form-control"
+                            placeholder="Digite o nome do Tutor"
+                            required
+                            disabledError
+                        />
+                    </Col>
+                    <Col sm={4}>
                         <FieldControl
                             className="form-control"
                             divClassName='my-1'
@@ -138,8 +164,55 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     </Col>
 
                     <Row className="mt-2">
-                        <ComboBoxFields name="pet" />
+                        <div className="w-full lg:w-1/3 px-3 mb-6">
+                            <ListBoxTailwind
+                                items={species}
+                                option={specie}
+                                onChangeOption={onChangeSpecie}
+                                required
+                                disabled={isPending || !!values.pet?.id}
+                                name='species'
+                                placeholder="Ex: Cachorro, Gato, etc..."
+                                label="Espécie"
+                            />
+                        </div>
+
+                        <div className="w-full lg:w-1/3 px-3 mb-6">
+
+                            <ListBoxTailwind
+                                items={specie.breedType as any}
+                                option={{ name: breed, value: breed }}
+                                optionSelected={breed}
+                                disabled={!specie.breedType || !!values.pet?.id}
+                                required
+                                name='breed'
+                                label="Raça"
+                                placeholder="Ex: Vira-lata, Poodle, etc..."
+                            />
+
+                        </div>
+
+                        <div className="w-full lg:w-1/3 px-3 mb-6">
+
+                            <ListBoxTailwind
+                                items={specie.bloodType as any}
+                                option={{ name: bloodType, value: bloodType }}
+                                optionSelected={bloodType}
+                                disabled={!specie.bloodType || isPending || !!values.pet?.id}
+                                name='bloodType'
+                                label="Tipo Sanguíneo"
+                                placeholder="Ex: A, B, etc..."
+                            />
+
+                        </div>
                     </Row>
+
+                </Row>
+
+                <Row className="g-3">
+
+                    <StepTutor />
+
                 </Row>
             </div>
 

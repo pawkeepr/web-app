@@ -36,7 +36,7 @@ const ComboBoxAutocomplete = <T,>({ name, items = [], option, onChangeOption, ..
         setFieldValue(name, item.name)
     }
 
-    const filteredPeople =
+    const filteredItems =
         query === '' || query === undefined || query === null
             ? items
             : items.filter((item) =>
@@ -56,7 +56,7 @@ const ComboBoxAutocomplete = <T,>({ name, items = [], option, onChangeOption, ..
                         displayValue={(item: Item) => item.name}
                         {...rest}
                     >
-                        <Combobox.Button className="flex items-center p-1 ml-2">
+                        <Combobox.Button className="flex items-center p-1 mx-2 position-absolute right-0 top-0 bottom-0">
                             <FaArrowAltCircleDown
                                 className="h-3 w-3 text-gray-400"
                                 aria-hidden="true"
@@ -76,29 +76,33 @@ const ComboBoxAutocomplete = <T,>({ name, items = [], option, onChangeOption, ..
                         className="
                             absolute max-h-60 
                             w-full overflow-auto 
-                            rounded-md bg-white 
+                            rounded-md light:bg-white 
                             text-base shadow-lg 
                             ring-1 ring-black 
                             ring-opacity-5 
                             focus:outline-none 
                             sm:text-sm
                             z-50
+                            dark:!bg-gray-700
                         "
                     >
-                        {filteredPeople.length === 0 && query !== '' ? (
+                        {filteredItems.length === 0 && query !== '' ? (
                             <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                                 Nothing found.
                             </div>
                         ) : (
-                            filteredPeople.map((item) => (
+                            filteredItems.map((item) => (
                                 <Combobox.Option
                                     key={item.value}
                                     className={({ active }) =>
-                                        cn({
-                                            'relative cursor-default select-none py-2 pl-10 pr-4': true,
-                                            'bg-teal-600 text-white': active,
-                                            'text-gray-900': !active
-                                        })
+                                        cn(
+                                            'relative cursor-default select-none py-2 pl-10 pr-4',
+                                            {
+                                                'bg-primary-600 text-white': active,
+                                                'text-gray-900': !active
+                                            },
+                                            'dark:text-gray-200 '
+                                        )
                                     }
                                     value={item}
                                 >

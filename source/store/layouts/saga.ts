@@ -75,7 +75,7 @@ function* changeLayoutTheme({ payload: layout }: GenericPayload<layoutTypes>) {
 function* changeLayoutMode({ payload: mode }: GenericPayload<layoutModeTypes>) {
     try {
         yield call(changeHTMLAttribute, "data-layout-mode", mode);
-        yield call(changeModeHTMLAttribute, mode);
+        // yield call(changeModeHTMLAttribute, mode);
     } catch (error) {
         // console.log(error);
     }

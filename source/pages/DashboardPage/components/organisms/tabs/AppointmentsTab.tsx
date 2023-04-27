@@ -5,14 +5,11 @@ import { useAppDispatch, useAppSelector } from '~/store/hooks';
 import { VeterinaryAppointment } from '~/store/veterinary-appointments/types';
 import ListTab from '../templates/ListTab';
 
-import { BtnSuccess } from '~/Components/atoms/btn';
+import FieldDocumentAppointment from '../../molecules/field-document-appointment';
 
-import { useRouter } from 'next/navigation';
-import routes from '~/routes';
 
 const VeterinaryAppointmentsTab = () => {
 
-    const router = useRouter()
 
     const dispatch = useAppDispatch();
     const veterinaryAppointments = useAppSelector((state) => state.VeterinaryAppointments.veterinaryAppointments);
@@ -21,11 +18,7 @@ const VeterinaryAppointmentsTab = () => {
         dispatch(getVeterinaryAppointments());
     }, [dispatch]);
 
-    const routerClick = () => {
-        router.push(routes.dashboard.new.appointments)
-    }
-
-    const Modal = () => <BtnSuccess onClick={routerClick} label="Nova Consulta" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#addVeterinaryAppointmentModal" />
+    const Modal = () => <FieldDocumentAppointment />
     const cards = (veterinaryAppointments: VeterinaryAppointment[]) => veterinaryAppointments?.map(veterinaryAppointment => (<CardVeterinaryAppointments key={veterinaryAppointment.id} veterinaryAppointments={veterinaryAppointment} />))
 
     const filter = useCallback((deferredVeterinaryAppointments: VeterinaryAppointment[], search: string) => {

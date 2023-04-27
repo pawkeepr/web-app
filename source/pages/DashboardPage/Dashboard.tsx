@@ -10,10 +10,10 @@ import TabPane from 'react-bootstrap/TabPane';
 
 import { useAppSelector } from '~/store/hooks';
 import DefaultLayout from '../_layouts/dashboard/dashboard';
+import VeterinaryAppointmentsTab from './components/organisms/tabs/AppointmentsTab';
 import OverviewTab from './components/organisms/tabs/OverviewTab';
 import PetsTab from './components/organisms/tabs/PetsTab';
 import TutorsTab from './components/organisms/tabs/TutorsTab';
-import VeterinaryAppointmentsTab from './components/organisms/tabs/VeterinaryAppointmentsTab';
 
 const Section = () => {
     //Tab 
@@ -33,14 +33,14 @@ const Section = () => {
 
     const items = [
         {
-            label: 'Sobre',
-            onClick: toggleTab('1'),
-            href: '#About'
-        },
-        {
             label: 'Consultas',
             onClick: toggleTab('2'),
             href: '#Appointments'
+        },
+        {
+            label: 'Sobre',
+            onClick: toggleTab('1'),
+            href: '#About'
         },
         {
             label: 'Pets',
@@ -51,7 +51,7 @@ const Section = () => {
             label: 'Tutores',
             onClick: toggleTab('4'),
             href: '#Tutors'
-        }
+        },
     ]
 
     return (

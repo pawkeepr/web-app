@@ -17,12 +17,10 @@ import cn from "classnames";
 import { useEffect, useState } from "react";
 
 import { useAppSelector } from "~/store/hooks";
-import StepAddress from "../organisms/steps/step-address";
 import StepAnamneses from "../organisms/steps/step-anamnese";
 import StepPayment from "../organisms/steps/step-payment";
 import StepPet from "../organisms/steps/step-pet";
 import StepTreatment from "../organisms/steps/step-treatment";
-import StepTutor from '../organisms/steps/step-tutor';
 
 type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
@@ -52,26 +50,26 @@ const items: TabItem[] = [
         href: "#Treatment",
         Component: StepTreatment
     },
+    // {
+    //     id: 4,
+    //     title: "Tutor",
+    //     href: "#Tutor",
+    //     Component: StepTutor
+    // },
+    // {
+    //     id: 5,
+    //     title: "Endereço",
+    //     href: "#Address",
+    //     Component: StepAddress
+    // },
     {
         id: 4,
-        title: "Tutor",
-        href: "#Tutor",
-        Component: StepTutor
-    },
-    {
-        id: 5,
-        title: "Endereço",
-        href: "#Address",
-        Component: StepAddress
-    },
-    {
-        id: 6,
         title: "Pagamento",
         href: "#Payment",
         Component: StepPayment
     },
     {
-        id: 7,
+        id: 5,
         title: "Finalizar",
         href: "#Finish",
         Component: () => (
@@ -87,7 +85,6 @@ const items: TabItem[] = [
             </div>
         )
     },
-
 ]
 
 const VerticalTabs = () => {
@@ -97,8 +94,6 @@ const VerticalTabs = () => {
     const [passedVerticalSteps, setPassedVerticalSteps] = useState([1]);
 
     const { height } = useAppSelector(state => state.Layout.headerSize)
-
-    console.log(height)
 
     function toggleVerticalTab(tab: Tabs) {
         if (activeVerticalTab !== tab) {
@@ -111,14 +106,11 @@ const VerticalTabs = () => {
         }
     }
 
-    const handleScroll = () => {
-        setIsFixed(window.pageYOffset > 100);
-    };
-
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
+        setIsFixed(window.innerWidth < 768)
+
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            setIsFixed(false)
         };
     }, []);
 
