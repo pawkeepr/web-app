@@ -5,6 +5,7 @@ function useFormikContextSafe<T>(): FormikContextType<T> {
         const formikContext = useOriginalFormikContext<T>()
         return formikContext
     } catch (error) {
+        console.info('Context not found, using default context')
         const defaultContext = {
             values: {},
             errors: {},
