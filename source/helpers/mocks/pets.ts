@@ -46,7 +46,7 @@ const factoryPet = (document?: string, name?: string): Pet => ({
         created_at: Date.now().toLocaleString(),
         updated_at: Date.now().toLocaleString(),
         address: {
-            street: faker.address.streetName(),
+            street: faker.address.street(),
             number: faker.datatype.number(9999).toString(),
             complement: faker.address.secondaryAddress(),
             neighborhood: faker.address.cityName(),

@@ -114,7 +114,7 @@ export default function ListBoxTailwind<T>({
                                     dark:!bg-gray-700 py-1 
                                     text-base shadow-lg ring-1 
                                     ring-black ring-opacity-5 
-                                    focus:outline-none sm:text-sm z-5u0
+                                    focus:outline-none sm:text-sm z-50
                                     "
                                 >
                                     {items?.map((item, itemIdx) => (

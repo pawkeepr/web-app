@@ -65,6 +65,10 @@ const FieldControl = ({
                     data-testid={`input-${id}`}
                     className={`
                     ${className}
+                    focus-within:!outline-1
+                    dark:focus:!border-2
+                    dark:focus:!border-primary-500
+                    border-2
                     `}
                     {...inputProps}
                     {...props}

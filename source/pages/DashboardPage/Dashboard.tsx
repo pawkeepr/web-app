@@ -10,7 +10,7 @@ import TabPane from 'react-bootstrap/TabPane';
 
 import { useAppSelector } from '~/store/hooks';
 import DefaultLayout from '../_layouts/dashboard/dashboard';
-import VeterinaryAppointmentsTab from './components/organisms/tabs/AppointmentsTab';
+import AppointmentsTab from './components/organisms/tabs/AppointmentsTab';
 import OverviewTab from './components/organisms/tabs/OverviewTab';
 import PetsTab from './components/organisms/tabs/PetsTab';
 import TutorsTab from './components/organisms/tabs/TutorsTab';
@@ -59,10 +59,10 @@ const Section = () => {
             <TabContainer activeKey={activeTab}>
                 <TabContent className="text-muted">
                     <TabPane eventKey="1">
-                        <OverviewTab />
+                        <AppointmentsTab />
                     </TabPane>
                     <TabPane eventKey="2">
-                        <VeterinaryAppointmentsTab />
+                        <OverviewTab />
                     </TabPane>
                     <TabPane eventKey="3">
                         <PetsTab />
