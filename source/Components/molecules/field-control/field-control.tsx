@@ -58,17 +58,19 @@ const FieldControl = ({
 
                 {startChildren}
 
+
                 <InputComponent
                     id={id}
                     ref={ref || props.ref}
                     required={required}
                     data-testid={`input-${id}`}
                     className={`
-                    ${className}
-                    focus-within:!outline-1
-                    dark:focus:!border-2
-                    dark:focus:!border-primary-500
-                    border-2
+                        ${className}
+                        focus-within:!outline-1
+                        focus:!border-primary-500
+                        disabled:!cursor-not-allowed
+                        disabled:!opacity-25
+                        focus:!border-2
                     `}
                     {...inputProps}
                     {...props}
