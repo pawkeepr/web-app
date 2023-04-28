@@ -9,11 +9,11 @@ import logoSm from "~/assets/images/logo-sm.png";
 //import Components
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
+import ProfileDropdownTailwind from '~/Components/molecules/profile-dropdown/profile-dropdown';
 import { changeHeaderSize } from '~/store/actions';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
 import FullScreenDropdown from '../Components/Common/FullScreenDropdown';
 import LightDark from '../Components/Common/LightDark';
-import ProfileDropdown from '../Components/Common/ProfileDropdown';
 
 type HeaderProps = {
     headerClass: string;
@@ -69,7 +69,7 @@ const Header = ({ headerClass }: HeaderProps) => {
     // };
 
     return (
-        <header id="page-topbar" className={headerClass} ref={divRef}>
+        <header id="page-topbar" className={`dark:!bg-primary-700 !bg-primary-500 ${headerClass}`} ref={divRef}>
             <div className="layout-width">
                 <div className="navbar-header">
                     <div className="d-flex">
@@ -129,9 +129,7 @@ const Header = ({ headerClass }: HeaderProps) => {
 
                         {/* NotificationDropdown */}
                         {/* <NotificationDropdown /> */}
-
-                        {/* ProfileDropdown */}
-                        <ProfileDropdown />
+                        <ProfileDropdownTailwind />
                     </div>
                 </div>
             </div>
