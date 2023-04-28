@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`List Box Tailwind (Unit) > should match snapshot 1`] = `
+exports[`List Box Tailwind Snapshot (Unit) > should match snapshot 1`] = `
 <div>
   <div>
     <div
@@ -26,12 +26,15 @@ exports[`List Box Tailwind (Unit) > should match snapshot 1`] = `
                                     disabled:dark:opacity-70"
         data-headlessui-state=""
         data-testid="list-box-tailwind"
-        id="headlessui-listbox-button-:r0:"
+        id="pet-list-box-tailwind"
+        placeholder="Selecione uma opção"
         type="button"
       >
         <span
           class="block truncate"
-        />
+        >
+          Selecione uma opção
+        </span>
         <span
           class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
         >
@@ -55,7 +58,123 @@ exports[`List Box Tailwind (Unit) > should match snapshot 1`] = `
 </div>
 `;
 
-exports[`List Box Tailwind (Unit) > should match snapshot with options 1`] = `
+exports[`List Box Tailwind Snapshot (Unit) > should match snapshot with a option selected 1`] = `
+<div>
+  <div>
+    <div
+      class="relative mt-1"
+    >
+      <button
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        class="
+                                    relative w-full cursor-default 
+                                    rounded-lg bg-white dark:!bg-dark
+                                    py-2 pl-3 pr-10 text-left 
+                                    shadow-md focus:outline-none 
+                                    focus-visible:border-indigo-500 
+                                    focus-visible:ring-2 
+                                    focus-visible:ring-white 
+                                    focus-visible:ring-opacity-75 
+                                    focus-visible:ring-offset-2 
+                                    focus-visible:ring-offset-orange-300 
+                                    sm:text-sm
+                                    disabled:opacity-50
+                                    disabled:cursor-not-allowed
+                                    disabled:dark:opacity-70"
+        data-headlessui-state=""
+        data-testid="list-box-tailwind"
+        id="test-listbox-list-box-tailwind"
+        placeholder="Selecione uma opção"
+        type="button"
+      >
+        <span
+          class="block truncate"
+        >
+          Selected on Option
+        </span>
+        <span
+          class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
+        >
+          <svg
+            aria-hidden="true"
+            class="h-5 w-5 text-gray-400"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`List Box Tailwind Snapshot (Unit) > should match snapshot with a option selected 2`] = `
+<div>
+  <div>
+    <div
+      class="relative mt-1"
+    >
+      <button
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        class="
+                                    relative w-full cursor-default 
+                                    rounded-lg bg-white dark:!bg-dark
+                                    py-2 pl-3 pr-10 text-left 
+                                    shadow-md focus:outline-none 
+                                    focus-visible:border-indigo-500 
+                                    focus-visible:ring-2 
+                                    focus-visible:ring-white 
+                                    focus-visible:ring-opacity-75 
+                                    focus-visible:ring-offset-2 
+                                    focus-visible:ring-offset-orange-300 
+                                    sm:text-sm
+                                    disabled:opacity-50
+                                    disabled:cursor-not-allowed
+                                    disabled:dark:opacity-70"
+        data-headlessui-state=""
+        data-testid="list-box-tailwind"
+        id="test-listbox-list-box-tailwind"
+        placeholder="Selecione uma opção"
+        type="button"
+      >
+        <span
+          class="block truncate"
+        >
+          Selected on Option 3
+        </span>
+        <span
+          class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
+        >
+          <svg
+            aria-hidden="true"
+            class="h-5 w-5 text-gray-400"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`List Box Tailwind Snapshot (Unit) > should match snapshot with options 1`] = `
 <div>
   <div>
     <div
@@ -82,12 +201,15 @@ exports[`List Box Tailwind (Unit) > should match snapshot with options 1`] = `
                                     disabled:dark:opacity-70"
         data-headlessui-state="open"
         data-testid="list-box-tailwind"
-        id="headlessui-listbox-button-:r1:"
+        id="pet-list-box-tailwind"
+        placeholder="Selecione uma opção"
         type="button"
       >
         <span
           class="block truncate"
-        />
+        >
+          Selecione uma opção
+        </span>
         <span
           class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
         >
@@ -107,9 +229,9 @@ exports[`List Box Tailwind (Unit) > should match snapshot with options 1`] = `
         </span>
       </button>
       <ul
-        aria-labelledby="headlessui-listbox-button-:r1:"
+        aria-labelledby="pet-list-box-tailwind"
         aria-orientation="vertical"
-        class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:!bg-gray-700 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50"
+        class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:!bg-gray-700 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-5u0"
         data-headlessui-state="open"
         data-testid="list-box-tailwind-options"
         id="headlessui-listbox-options-:r2:"

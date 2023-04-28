@@ -6,16 +6,20 @@ function useFormikContextSafe<T>(): FormikContextType<T> {
         return formikContext
     } catch (error) {
         console.info('Context not found, using default context')
-        const defaultContext = {
-            values: {},
-            errors: {},
-            touched: {},
-            handleChange: () => { },
-            handleBlur: () => { },
-            setFieldValue: () => { },
-        } as unknown as FormikContextType<T>
-        return defaultContext
     }
+
+    const defaultContext = {
+        values: {} as T,
+        errors: {},
+        touched: {},
+        handleChange: () => { },
+        handleBlur: () => { },
+        setFieldValue: (name: string, value: string) => { },
+        dirty: false,
+        isValid: false,
+        initialValues: {} as T,
+    }
+    return defaultContext
 }
 
 export default useFormikContextSafe

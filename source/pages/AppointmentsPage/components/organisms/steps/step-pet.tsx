@@ -72,8 +72,6 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     }, [values.tutor?.document, tutors, pets, setFieldValue])
 
     const onChangePet = (pet: Pet) => {
-        console.log(specie)
-
         startTransition(() => {
             setFieldValue('pet.id', pet.id)
             setFieldValue('pet.avatar', pet.avatar)
@@ -168,6 +166,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             <ListBoxTailwind
                                 items={species}
                                 option={specie}
+                                value={values.pet?.species}
                                 onChangeOption={onChangeSpecie}
                                 required
                                 disabled={isPending || !!values.pet?.id}
@@ -179,11 +178,11 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
 
                         <div className="w-full lg:w-1/3 px-3 mb-6">
 
+
                             <ListBoxTailwind
                                 items={specie.breedType as any}
-                                option={{ name: breed, value: breed }}
-                                optionSelected={breed}
-                                disabled={!specie.breedType || !!values.pet?.id}
+                                value={values.pet?.breed}
+                                disabled={!!values.pet?.id}
                                 required
                                 name='breed'
                                 label="Raça"
@@ -196,9 +195,8 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
 
                             <ListBoxTailwind
                                 items={specie.bloodType as any}
-                                option={{ name: bloodType, value: bloodType }}
-                                optionSelected={bloodType}
-                                disabled={!specie.bloodType || isPending || !!values.pet?.id}
+                                value={values.pet?.bloodType}
+                                disabled={!!values.pet?.id}
                                 name='bloodType'
                                 label="Tipo Sanguíneo"
                                 placeholder="Ex: A, B, etc..."

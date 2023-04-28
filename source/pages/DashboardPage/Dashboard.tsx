@@ -34,12 +34,12 @@ const Section = () => {
     const items = [
         {
             label: 'Consultas',
-            onClick: toggleTab('2'),
+            onClick: toggleTab('1'),
             href: '#Appointments'
         },
         {
             label: 'Sobre',
-            onClick: toggleTab('1'),
+            onClick: toggleTab('2'),
             href: '#About'
         },
         {

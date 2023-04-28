@@ -1,21 +1,16 @@
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import cn from 'classnames'
-import { useFormikContext } from 'formik'
-import { Fragment, useEffect, useState, useTransition } from 'react'
+import { Fragment } from 'react'
 import { Form } from 'react-bootstrap'
 import { If } from '~/utils/tsx-control-statements'
-
-type Item = {
-    value: string | number
-    name: string
-}
+import useListBox, { Item } from './use-list-box'
 
 export type ListBoxTailwindProps<T> = {
     items: Array<Item & T>
     option?: Item & T
+    value?: string | null
     label?: string
-    value?: string
     required?: boolean
     name: string
     reset?: any // toda vez que o valor do name mudar, o valor do select será resetado
@@ -30,60 +25,22 @@ export default function ListBoxTailwind<T>({
     name,
     option,
     reset,
+    value,
     onChangeOption,
     items,
-    placeholder,
-    value,
+    placeholder = 'Selecione uma opção',
     disabled = false,
 }: ListBoxTailwindProps<T>) {
 
-    const [isPending, startTransition] = useTransition()
-
-    const [selected, setSelected] = useState<Item & T>(() => {
-        if (value) {
-            const item = items?.find(item => item.value === value)
-            if (item) {
-                return item
-            }
-        }
-
-        if (!option?.name) {
-            return {
-                name: placeholder,
-            } as Item & T
-        }
-
-        return option
+    const { isPending, onChangeValue, placeholderState, selected } = useListBox({
+        name,
+        option,
+        reset,
+        value,
+        onChangeOption,
+        items,
+        placeholder,
     })
-    const { setFieldValue } = useFormikContext<{ [key in string]: any }>()
-
-    useEffect(() => {
-        setSelected({
-            name: placeholder,
-        } as Item & T)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [reset])
-
-    useEffect(() => {
-
-        const item = items?.find(item => item.name === value)
-
-        if (!item) {
-            return
-        }
-
-        setSelected(item)
-
-    }, [value, items])
-
-
-    const onChangeValue = (item: Item & T) => {
-        startTransition(() => {
-            onChangeOption?.(item)
-            setSelected(item)
-            setFieldValue(name, item.name)
-        })
-    }
 
     return (
         <div>
@@ -108,6 +65,7 @@ export default function ListBoxTailwind<T>({
                             <Listbox.Button
                                 data-testid="list-box-tailwind"
                                 placeholder={placeholder}
+                                id={`${name}-list-box-tailwind`}
                                 className="
                                     relative w-full cursor-default 
                                     rounded-lg bg-white dark:!bg-dark
@@ -124,7 +82,17 @@ export default function ListBoxTailwind<T>({
                                     disabled:cursor-not-allowed
                                     disabled:dark:opacity-70"
                             >
-                                <span className="block truncate">{value || selected.name}</span>
+                                {
+                                    disabled && (
+                                        <span className="block truncate">{value || placeholder}</span>
+                                    )
+                                }
+
+                                {
+                                    !disabled && (
+                                        <span className="block truncate">{placeholderState}</span>
+                                    )
+                                }
                                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                     <ChevronUpDownIcon
                                         className="h-5 w-5 text-gray-400"
@@ -146,7 +114,7 @@ export default function ListBoxTailwind<T>({
                                     dark:!bg-gray-700 py-1 
                                     text-base shadow-lg ring-1 
                                     ring-black ring-opacity-5 
-                                    focus:outline-none sm:text-sm z-50
+                                    focus:outline-none sm:text-sm z-5u0
                                     "
                                 >
                                     {items?.map((item, itemIdx) => (
