@@ -11,14 +11,22 @@ import { IAddress } from '~/helpers/fetch-address-by-cep';
 import useFetchAddress from '~/hooks/use-fetch-address';
 import { InitialValues } from '../../../Appointments';
 
+type StepTutorProps = {
+    disabled?: boolean
+}
 
-const StepTutor = () => {
-    const [disabledInputs, setDisabledInputs] = useState({ state: false, city: false, neighborhood: false, street: false, complement: false })
+const StepTutor = ({ disabled }: StepTutorProps) => {
+    const [disabledInputs, setDisabledInputs] = useState({
+        state: false,
+        city: false,
+        neighborhood: false,
+        street: false,
+        complement: false
+    })
 
     const { values, setFieldValue } = useFormikContext<InitialValues>()
 
     const [isPending, startTransition] = useTransition()
-
 
     const updateAddressFields = useCallback(
         (params: IAddress) => {
@@ -67,6 +75,7 @@ const StepTutor = () => {
                         label='Email'
                         name="tutor.email"
                         aria-label="email"
+                        disabled={disabled}
                         className="form-control"
                         placeholder="Digite o email do tutor (opcional)"
                         required
@@ -82,38 +91,51 @@ const StepTutor = () => {
                         initialFocus
                         label="CEP"
                         name="tutor.address.zipCode"
+                        disabled={disabled || isLoading}
                         placeholder="Digite o CEP"
                         component={MaskedInput as any}
                         mask={"99999-999"}
                         required
                     />
                 </Col>
-                <Col sm={5}>
+                <Col sm={3}>
                     <FieldControl
                         divClassName='my-1'
                         className="form-control"
                         type="text"
                         label="Estado"
                         name="tutor.address.state"
-                        disabled={disabledInputs.state || isLoading}
+                        disabled={(disabledInputs.state || disabled) || isLoading}
                         placeholder={isLoading ? 'Carregando...' : 'Digite o nome do estado'}
                         required
                     />
                 </Col>
 
-                <Col sm={5}>
+                <Col sm={3}>
                     <FieldControl
                         divClassName='my-1'
                         className="form-control"
                         type="text"
                         label="Cidade"
                         name="tutor.address.city"
-                        disabled={disabledInputs.city || isLoading}
+                        disabled={(disabledInputs.city || disabled) || isLoading}
                         placeholder={isLoading ? 'Carregando...' : 'Digite o nome da cidade'}
                         required
                     />
                 </Col>
 
+                <Col sm={4}>
+                    <FieldControl
+                        divClassName='my-1'
+                        className="form-control"
+                        type="text"
+                        label="Rua"
+                        name="tutor.address.street"
+                        disabled={(disabledInputs.street || disabled) || isLoading}
+                        placeholder={isLoading ? 'Carregando...' : 'Digite o nome da rua'}
+                        required
+                    />
+                </Col>
             </Row>
         </div>
 

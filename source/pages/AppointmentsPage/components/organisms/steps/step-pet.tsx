@@ -7,81 +7,36 @@ import MaskedInput from 'react-input-mask';
 import FieldDocument from "~/Components/molecules/field-document/field-document";
 
 import { useFormikContext } from 'formik';
-import { useEffect, useState, useTransition } from 'react';
 import { BtnAvatar, BtnSuccess } from '~/Components/atoms/btn';
 import ComboBoxAutocomplete from '~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete';
 import { StepProps } from './types';
 
 import { InitialValues } from '../../../Appointments';
 
+import { useState, useTransition } from 'react';
 import FieldControl from '~/Components/molecules/field-control/field-control';
 import ListBoxTailwind from '~/Components/molecules/list-box-tailwind/list-box-tailwind';
-import { useAppSelector } from '~/store/hooks';
 import { SpeciesType, species } from '~/store/pets/speciesType';
-import { Pet } from '~/store/pets/types';
+import usePetByName from '../../hooks/use-pet-by-name';
+import useTutorByDocument from '../../hooks/use-tutor-by-document';
 import StepTutor from '../../molecules/tutor';
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
 
-    const [isPending, startTransition] = useTransition()
-
+    const [isPendingPet, startTransition] = useTransition()
     const [specie, setSpecie] = useState<SpeciesType>({} as SpeciesType)
-    const [breed, setBreed] = useState('')
-    const [bloodType, setBloodType] = useState('')
-
-    const [petsOptions, setPetsOptions] = useState<(Pet & { value: string })[]>([])
     const { values, setFieldValue } = useFormikContext<InitialValues>()
 
-
-    const { pets, tutors } = useAppSelector(state => ({
-        pets: state.Pets.pets,
-        tutors: state.Tutor.tutors
+    const { isPending: isPendingTutors, petsOptions, tutorExists } = useTutorByDocument({
+        document: values.tutor?.document || '',
+        onChangeField: setFieldValue
     })
-    )
 
-    useEffect(() => {
-        const document = values.tutor?.document
-        const documentNumber = document?.replace(/\D/g, '')
-
-        if (!documentNumber || documentNumber.length < 11) {
-            return
-        }
-
-        const tutor = tutors.find(tutor => tutor.document === documentNumber)
-        const petsOptions = pets
-            .filter(pet => pet.ownerEmergencyContact.document === documentNumber)
-            .map(pet => ({
-                ...pet,
-                value: pet.id,
-            }))
-
-        if (!tutor) {
-            // setar erro de cliente não está cadastrado
-        }
-
-        startTransition(() => {
-            setPetsOptions(petsOptions)
-            setFieldValue('tutor.id', tutor?.id || '')
-            setFieldValue('tutor.phone', tutor?.phone || '')
-            setFieldValue('tutor.name', tutor?.name || '')
-            setFieldValue('tutor.email', tutor?.email || '')
-            setFieldValue('tutor.avatar', tutor?.avatar || '')
-            tutor?.address && setFieldValue('tutor.address', tutor?.address)
-        })
-
-    }, [values.tutor?.document, tutors, pets, setFieldValue])
-
-    const onChangePet = (pet: Pet) => {
-        startTransition(() => {
-            setFieldValue('pet.id', pet.id)
-            setFieldValue('pet.avatar', pet.avatar)
-            setFieldValue('pet.breed', pet.breed)
-            setFieldValue('pet.species', pet.species)
-            setFieldValue('pet.bloodType', pet.bloodType)
-            setFieldValue('pet.gender', pet.gender)
-            setFieldValue('pet.dateOfBirth', pet.dateOfBirth)
-        })
-    }
+    const { onChangePet, isPending: isPendingChangePet } = usePetByName({
+        onChangeField: setFieldValue,
+        name: values.pet?.name,
+        pets: petsOptions
+    })
 
     const onChangeSpecie = (specie: SpeciesType) => {
         startTransition(() => {
@@ -91,9 +46,19 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
         })
     }
 
+    const onChangeSelected = (pet: any) => {
+        if (pet?.id) {
+            return {}
+        }
+
+        return pet
+    }
+
+    const isPending = isPendingPet || isPendingTutors || isPendingChangePet
+
     return (
         <>
-            <div>
+            <div className="p-1 m-2 mb-4">
                 <h5>Pet</h5>
                 <p className="text-muted">
                     Todas as Informações sobre o PET
@@ -102,7 +67,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
 
             <div>
                 <Row className="g-3">
-                    <div className="flex flex-row gap-2 items-center justify-center m-2">
+                    <div className="flex flex-row gap-2 items-center justify-center m-2 p-1">
                         <BtnAvatar alt='Avatar do Pet' name="pet.avatar" disabled size={40} />
                         <BtnAvatar alt='Avatar de Tutor' name="tutor.avatar" disabled size={24} />
                     </div>
@@ -114,6 +79,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             aria-label="document"
                             className="form-control"
                             onlyCPF
+                            disabled={isPending || tutorExists}
                             placeholder="CPF"
                             component={MaskedInput as any}
                             required
@@ -125,6 +91,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             divClassName='my-1'
                             label='Nome Completo'
                             name="tutor.name"
+                            disabled={isPending || tutorExists}
                             aria-label="name"
                             className="form-control"
                             placeholder="Digite o nome do Tutor"
@@ -139,7 +106,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             type="text"
                             label="Telefone/Celular"
                             name="tutor.phone"
-                            disabled={isPending}
+                            disabled={isPending || tutorExists}
                             placeholder={isPending ? 'Carregando...' : "Digite o seu Número de Telefone"}
                             component={MaskedInput as any}
                             mask={"(99) 99999-9999"}
@@ -158,6 +125,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             label="Qual é o nome do pet?"
                             placeholder={isPending ? 'Carregando...' : "Digite o nome do pet: Doguinho"}
                             onChangeOption={onChangePet}
+                            onChangeSelected={onChangeSelected}
                         />
                     </Col>
 
@@ -209,7 +177,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
 
                 <Row className="g-3">
 
-                    <StepTutor />
+                    <StepTutor disabled={tutorExists} />
 
                 </Row>
             </div>
