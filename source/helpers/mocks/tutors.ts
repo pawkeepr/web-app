@@ -16,7 +16,7 @@ const factoryTutor = (document?: string, name?: string) => ({
     avatar: faker.image.avatar(),
     phone: faker.phone.number('## 9 ####-####'),
     address: {
-        street: faker.address.streetName(),
+        street: faker.address.street(),
         number: faker.datatype.number(9999).toString(),
         complement: faker.address.secondaryAddress(),
         neighborhood: faker.address.cityName(),
