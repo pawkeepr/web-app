@@ -6,18 +6,30 @@ import { Tutor } from "~/store/tutor/types";
 import * as url from '../url_helper';
 
 
+const factoryTutor = (document?: string, name?: string) => ({
+    id: faker.datatype.uuid(),
+    name: name || faker.name.firstName(),
+    email: faker.internet.email(),
+    document: document || faker.datatype.number(99999999999).toString(),
+    created_at: Date.now().toLocaleString(),
+    updated_at: Date.now().toLocaleString(),
+    avatar: faker.image.avatar(),
+    phone: faker.phone.number('## 9 ####-####'),
+    address: {
+        street: faker.address.streetName(),
+        number: faker.datatype.number(9999).toString(),
+        complement: faker.address.secondaryAddress(),
+        neighborhood: faker.address.cityName(),
+        city: faker.address.cityName(),
+        state: faker.address.state(),
+        zipCode: faker.address.zipCode('###########'),
+    }
+})
+
 
 const tutors: Array<Tutor> = [
-    ...Array(10).fill(0).map(() => ({
-        id: faker.datatype.uuid(),
-        name: faker.name.firstName(),
-        email: faker.internet.email(),
-        document: faker.datatype.number(99999999999).toString(),
-        created_at: Date.now().toLocaleString(),
-        updated_at: Date.now().toLocaleString(),
-        avatar: faker.image.avatar(),
-        phone: faker.phone.number('## 9 ####-####')
-    })),
+    ...Array(10).fill(0).map(() => factoryTutor()),
+    factoryTutor('00000000000', 'Murilo Montino'),
 ]
 
 const getTutors = () => {

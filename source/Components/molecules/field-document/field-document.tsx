@@ -6,20 +6,28 @@ import MaskedInput from 'react-input-mask';
 import type { InputControlProps } from '~/Components/molecules/field-control';
 import FieldControl from '~/Components/molecules/field-control/field-control';
 
-const FieldDocument = (props: InputControlProps) => {
+type InputDocumentProps = InputControlProps & {
+    onlyCPF?: boolean
+    onlyCNPJ?: boolean
+}
+
+const FieldDocument = ({ onlyCPF = false, onlyCNPJ = false, ...props }: InputDocumentProps) => {
     const { values } = useFormikContext()
 
     const document = (values as any)[props.name]
 
     const mask = useMemo(() => {
         // somente os números
-        const numbers = document.replace(/\D/g, '')
+        const numbers = document?.replace(/\D/g, '')
 
-        // verifica se é CPF ou CNPJ
+        if (onlyCPF && !onlyCNPJ) return '999.999.999-99'
+
+        if (onlyCNPJ && !onlyCPF) return '99.999.999/9999-99'
+
         if (numbers.length === 11 && cpf.isValid(numbers)) return '999.999.999-99'
 
         return numbers.length >= 11 ? '99.999.999/9999-99' : '999.999.999-99'
-    }, [document])
+    }, [document, onlyCNPJ, onlyCPF])
 
 
     return (

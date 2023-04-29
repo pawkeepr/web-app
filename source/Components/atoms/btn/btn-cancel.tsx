@@ -1,13 +1,9 @@
-
-export type BtnProps = {
-    onClick: (e?: any) => void
-    label?: string
-} & React.ButtonHTMLAttributes<HTMLButtonElement>
+import { BtnProps } from './types'
 
 const BtnCancel = ({ onClick, label = 'Cancelar', className, ...rest }: BtnProps) => {
     return (
         <button
-            className={`btn btn-secondary border-secondary-500 bg-secondary-500 w-40 m-1 previous ${className}`}
+            className={`btn text-gray-50 hover:text-gray-400 w-40 m-1 previous ${className}`}
             type="button"
             onClick={onClick}
             {...rest}

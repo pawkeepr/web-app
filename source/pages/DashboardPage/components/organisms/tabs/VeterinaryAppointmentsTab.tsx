@@ -1,12 +1,19 @@
 import React, { useCallback, useEffect } from 'react';
-import ModalAddVeterinaryAppointment from '~/Components/modals/modal-add-veterinary-appointments';
 import CardVeterinaryAppointments from '~/Components/molecules/card-veterinary-appointments/card-veterinary-appointments';
 import { getVeterinaryAppointments } from '~/store/actions';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
 import { VeterinaryAppointment } from '~/store/veterinary-appointments/types';
 import ListTab from '../templates/ListTab';
 
+import { BtnSuccess } from '~/Components/atoms/btn';
+
+import { useRouter } from 'next/navigation';
+import routes from '~/routes';
+
 const VeterinaryAppointmentsTab = () => {
+
+    const router = useRouter()
+
     const dispatch = useAppDispatch();
     const veterinaryAppointments = useAppSelector((state) => state.VeterinaryAppointments.veterinaryAppointments);
 
@@ -14,7 +21,11 @@ const VeterinaryAppointmentsTab = () => {
         dispatch(getVeterinaryAppointments());
     }, [dispatch]);
 
-    const Modal = () => <ModalAddVeterinaryAppointment />
+    const routerClick = () => {
+        router.push(routes.dashboard.new.appointments)
+    }
+
+    const Modal = () => <BtnSuccess onClick={routerClick} label="Nova Consulta" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#addVeterinaryAppointmentModal" />
     const cards = (veterinaryAppointments: VeterinaryAppointment[]) => veterinaryAppointments?.map(veterinaryAppointment => (<CardVeterinaryAppointments key={veterinaryAppointment.id} veterinaryAppointments={veterinaryAppointment} />))
 
     const filter = useCallback((deferredVeterinaryAppointments: VeterinaryAppointment[], search: string) => {

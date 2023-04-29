@@ -28,7 +28,7 @@ const PetsTab = () => {
                 || pet.breed.toLowerCase().includes(lowerSearch)
                 || pet.ownerEmergencyContact.name.toLowerCase().includes(lowerSearch)
                 || pet.ownerEmergencyContact.phone.toLowerCase().includes(lowerSearch)
-                || pet.ownerEmergencyContact.address.toLowerCase().includes(lowerSearch)
+                
         })
     }, [pets])
 

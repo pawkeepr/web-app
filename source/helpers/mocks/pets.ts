@@ -2,15 +2,18 @@ import MockAdapter from "axios-mock-adapter/types";
 import { getCookie, setCookie } from "~/utils/cookies-utils";
 
 import { faker } from '@faker-js/faker';
-import { Pet } from "~/store/pets/types";
+import { CatBloodType } from "~/store/pets/bloodType";
+import { CatBreed } from "~/store/pets/breedType";
+import { Species } from "~/store/pets/speciesType";
+import { GenderPet, Pet } from "~/store/pets/types";
 import * as url from '../url_helper';
 
-const factoryPet = (): Pet => ({
+const factoryPet = (document?: string, name?: string): Pet => ({
     id: faker.datatype.uuid(),
     name: faker.name.middleName(),
-    species: "Felino",
-    breed: faker.animal.cat(),
-    gender: 'male',
+    species: Species.cat,
+    breed: CatBreed.ViraLata,
+    gender: GenderPet.unknown,
     dateOfBirth: faker.date.past().toLocaleString(),
     color: faker.color.human(),
     allergies: [],
@@ -18,9 +21,23 @@ const factoryPet = (): Pet => ({
     medicationsInUse: [],
     healthHistory: [],
     ownerEmergencyContact: {
-        name: faker.name.fullName(),
+        id: faker.datatype.uuid(),
+        name: name || faker.name.fullName(),
         phone: faker.phone.number('## 9 ####-####'),
-        address: faker.address.streetAddress(),
+        document: document || faker.datatype.number(99999999999).toString(),
+        avatar: faker.image.avatar(),
+        email: faker.internet.email(),
+        created_at: Date.now().toLocaleString(),
+        updated_at: Date.now().toLocaleString(),
+        address: {
+            street: faker.address.streetName(),
+            number: faker.datatype.number(9999).toString(),
+            complement: faker.address.secondaryAddress(),
+            neighborhood: faker.address.cityName(),
+            city: faker.address.cityName(),
+            state: faker.address.state(),
+            zipCode: faker.address.zipCode('###########'),
+        }
     },
     diet: {
         foodType: 'Ração Premium',
@@ -31,13 +48,17 @@ const factoryPet = (): Pet => ({
     updated_at: Date.now().toLocaleString(),
     activityLevel: 'Ativo',
     avatar: faker.image.cats(1234, 1234, true),
-    tutor_id: faker.datatype.uuid(),
+    bloodType: CatBloodType.A,
     specialPhysicalFeatures: [],
     behavior: faker.lorem.paragraph(),
+    castrated: faker.datatype.boolean(),
+    dateOfCastration: faker.date.past().toLocaleString(),
+    dateOfAdoption: faker.date.past().toLocaleString(),
 })
 
 const pets: Array<Pet> = [
     ...Array(10).fill(0).map(() => factoryPet()),
+    ...Array(3).fill(0).map(() => factoryPet('00000000000', 'Murilo Montino')),
 ]
 
 const getPets = () => {

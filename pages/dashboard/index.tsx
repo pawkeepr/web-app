@@ -1,5 +1,5 @@
 
-import DashboardPage from '~/pages/DashboardPage/Dashboard'
+import DashboardPage from '~/pages/DashboardPage'
 
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
 

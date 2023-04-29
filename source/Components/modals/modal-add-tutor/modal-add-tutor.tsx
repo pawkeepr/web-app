@@ -9,15 +9,13 @@ import ModalFooter from 'react-bootstrap/ModalFooter';
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import Row from 'react-bootstrap/Row';
 //Import actions
-import {
-    getTutors as onGetTutors
-} from "~/store/actions";
+import { getTutors as onGetTutors } from "~/store/actions";
 //redux
 
 import 'react-toastify/dist/ReactToastify.css';
 
 // Formik
-import { Formik } from "formik";
+import { Formik, useFormikContext } from "formik";
 import * as Yup from "yup";
 import BtnAvatar from "~/Components/atoms/btn/btn-avatar";
 import BtnCancel from "~/Components/atoms/btn/btn-cancel";
@@ -26,6 +24,12 @@ import FieldControl from "~/Components/molecules/field-control/field-control";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import { Tutor } from "~/store/tutor/types";
 import MaskedInput from 'react-input-mask';
+
+import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
+import useFetchAddress from "~/hooks/use-fetch-address";
+import { IAddress } from "~/helpers/fetch-address-by-cep";
+
+import ModalBodyFieldsAddress from "./components/molecules/modal-body-fields-address";
 
 const ModalAddTutor = () => {
 
@@ -36,7 +40,7 @@ const ModalAddTutor = () => {
     const { tutors } = useAppSelector((state) => ({
         tutors: state.Tutor.tutors
     }));
-
+   
     const openModal = useCallback(() => {
         setModal(true);
     }, []);
@@ -63,6 +67,12 @@ const ModalAddTutor = () => {
             name: tutor?.name || '',
             email: tutor?.email || '',
             phone: tutor?.phone || '',
+            cep: '',
+            state: '',
+            city: '',
+            neighborhood: '',
+            street: '',
+            complement: '',
         },
         validationSchema: Yup.object({
             name: Yup.string().required("Please Enter Name"),
@@ -89,53 +99,57 @@ const ModalAddTutor = () => {
                     onSubmit={validation.onSubmit}
                     enableReinitialize
                 >
+                    
                     <>
-                        <ModalBody>
+                        <ModalBody> 
 
                             <Row className="g-3">
                                 <Col lg={12}>
                                     <BtnAvatar src="" alt="" />
 
                                     <div>
-
                                         <FieldControl
                                             label="Nome"
                                             name="name"
                                             className="form-control"
-                                            placeholder="Enter Name"
+                                            placeholder="Nome do tutor"
                                             type="text"
+                                            required
                                         />
-
-
                                     </div>
                                 </Col>
-                                <Col lg={12}>
+
+                                <Col lg={8}>
                                     <div>
                                         <FieldControl
                                             label="Email"
                                             name="email"
                                             className="form-control"
-                                            placeholder="Enter Email"
+                                            placeholder="Email"
                                             type="text"
                                         />
                                     </div>
                                 </Col>
-                                <Col lg={12}>
+
+                                <Col lg={4}>
                                     <div>
                                         <FieldControl
                                             label="Telefone/Celular"
                                             name="phone"
                                             className="form-control"
-                                            placeholder="Enter number Phone"
+                                            placeholder="Telefone/Celular"
                                             type="text"
                                             component={MaskedInput as any}
                                             mask={"(99) 99999-9999"}
                                             maskChar={null}
+                                            required
                                         />
 
                                     </div>
                                 </Col>
 
+                                <ModalBodyFieldsAddress />
+                                
                             </Row>
                         </ModalBody>
                         <ModalFooter>
@@ -150,6 +164,7 @@ const ModalAddTutor = () => {
                             </div>
                         </ModalFooter>
                     </>
+                            
                 </Formik>
             </Modal>
         </>
