@@ -66,7 +66,7 @@ const CardPets = ({ pet }: CardPetsProps) => {
                                 <p className="text-muted mb-0">
                                     <strong>Tutor: </strong> {pet?.ownerEmergencyContact.name}
                                 </p>
-                                <p className="text-muted mb-0">{pet?.ownerEmergencyContact.phone}</p>
+                                {/* <p className="text-muted mb-0">{pet?.ownerEmergencyContact.phone}</p> */}
                             </div>
                         </div>
                     </Col>

@@ -15,6 +15,7 @@ import AuthInputs from './components/organism/auth-inputs';
 
 import { useRouter } from 'next/navigation';
 import LogoSimple from '~/Components/atoms/logo-simple';
+import LogoSimpleMobile from '~/Components/atoms/logo-simple-mobile';
 import { useAppSelector } from '~/store/hooks';
 
 const CoverSignIn = () => {
@@ -43,12 +44,13 @@ const CoverSignIn = () => {
                             <Col lg={12}>
                                 <Card className="overflow-hidden">
                                     <Row className="g-0">
-                                        <AuthSlider bg='auth-bg-image-3' />
+                                        <AuthSlider bg='auth-bg-image-3 d-none d-sm-block' />
 
                                         <Col lg={6}>
                                             <div className="p-lg-5 p-4 items-center flex-col justify-center h-100">
                                                 <div className='flex flex-col items-center justify-center'>
-                                                    <LogoSimple />
+                                                    <LogoSimple className='d-none d-sm-block' />
+                                                    <LogoSimpleMobile className='d-sm-none' />
                                                     <div className="text-center">
                                                         <h5 className="text-primary">Seja bem Vindo!</h5>
                                                         <p className="text-muted">Entre para ter acesso a todas as funcionalidades.</p>
@@ -71,7 +73,10 @@ const CoverSignIn = () => {
                                                 </div>
 
                                                 <div className="mt-5 text-center">
-                                                    <p className="mb-0">Você não tem uma conta ? <br /> <Link href="/sign-up" className="fw-bold text-primary text-decoration-underline"> Registre-se</Link> </p>
+                                                    <p className="mb-0">Você não tem uma conta ? <br /> 
+                                                        <Link href="/sign-up" className="fw-bold text-primary text-decoration-underline d-none d-sm-block"> Registre-se</Link>
+                                                        <Link href="/sign-up" className="fw-bold text-secondary text-decoration-underline d-sm-none"> Registre-se</Link> 
+                                                    </p>
                                                 </div>
                                             </div>
                                         </Col>
