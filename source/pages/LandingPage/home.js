@@ -32,13 +32,15 @@ const Home = () => {
                 <Container>
                     <Row className="justify-content-center">
                         <Col lg={8} sm={10}>
-                            <div className="text-center mt-lg-5 pt-5">
-                                <h3 className="display-10 fw-bold mb-3 lh-base">A melhor maneira de gerenciar sua Clinica Veterinária</h3>
-                                <h1 className="display-6 fw-bold mb-3 lh-base text-secondary">PawKeepr</h1>
-                                <p className="lead text-muted lh-base">Lorem Ipsum</p>
+                            <div className="text-center mt-lg-5 pt-5">                                
+                                <h1 className="display-6 fw-bold mb-3 lh-base text-secondary">Pawkeepr: smartcare</h1>
+                                <h3 className="display-10 fw-bold mb-3 lh-base">Uma plataforma para facilitar os cuidados com seu pet.</h3>
+                                <h2 className="display-6 fw-bold mb-3 lh-base">Com PawKeepr você resolve
+                                    todas as necessidades do seu pet:
+                                    da higiene até a alimentação.</h2>
 
                                 <div className="d-flex gap-2 justify-content-center mt-4">
-                                    <Link href="/register" className="btn btn-primary">Entrar <i className="ri-arrow-right-line align-middle ms-1"></i></Link>
+                                    <Link href="/sign-in" className="btn btn-primary">Entrar <i className="ri-arrow-right-line align-middle ms-1"></i></Link>
                                     <Link href="/pages-pricing" className="btn btn-danger">Ver Planos <i className="ri-eye-line align-middle ms-1"></i></Link>
                                 </div>
                             </div>

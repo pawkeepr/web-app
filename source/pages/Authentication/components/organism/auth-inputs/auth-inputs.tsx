@@ -136,7 +136,16 @@ const Auth = () => {
                     <div className="mt-4">
                         <Button
                             color="primary"
-                            className="w-full bg-primary-500"
+                            className="w-full bg-primary-500 d-none d-sm-block"
+                            type="submit"
+                            data-testid="submit-button"
+                            disabled={!isValid || isAuthenticated}
+                        >
+                            Entrar
+                        </Button>
+                        <Button
+                            color="secondary"
+                            className="w-full bg-secondary-500 d-sm-none"
                             type="submit"
                             data-testid="submit-button"
                             disabled={!isValid || isAuthenticated}
