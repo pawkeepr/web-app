@@ -1,43 +1,92 @@
-import type { ImageProps, StaticImageData } from 'next/image'
-import { ChangeEvent, useState } from 'react';
-
-type AvatarImageProps = {
-    src: string | StaticImageData;
-    alt?: string;
-} & ImageProps;
+import { useField } from 'formik';
+import type { ImageProps, StaticImageData } from 'next/image';
+import { ChangeEvent, useMemo, useRef, useState } from 'react';
 
 import dummyImg from "~/assets/images/users/user-dummy-img.jpg";
 import MyImage from '../my-image/my-image';
 
-const BtnAvatar = ({ src, alt }: AvatarImageProps) => {
+import cn from 'classnames';
+
+type AvatarImageProps = {
+    src?: string | StaticImageData;
+    alt?: string;
+    name?: string;
+    disabled?: boolean;
+} & Omit<ImageProps, 'src'>;
+
+
+
+const BtnAvatar = ({ src, alt, name = 'avatar', disabled = false }: AvatarImageProps) => {
     const [image, setImage] = useState<File | null>(null);
 
     const sourceImage = src || dummyImg;
 
-    function handleImageChange(event: ChangeEvent<HTMLInputElement>): void {
-        const file = event.target.files?.[0];
+    const [field, meta, helpers] = useField(name);
+    const { onBlur, value } = field
+    const { setValue } = helpers
 
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    function handleImageChange(event: ChangeEvent<HTMLInputElement>): void {
+
+        const file = event.target.files?.[0];
+        /// onChange(event)
         if (file) {
             setImage(file);
+            setValue(file);
         }
     }
-    
+
+    function openImageInput() {
+        inputRef.current?.click();
+    }
+
+
+    const img = useMemo(() => {
+        if (image) {
+            return URL.createObjectURL(image)
+        }
+
+        return value || sourceImage
+
+    }, [image, sourceImage, value])
+
     return (
         <div className="text-center">
             <div className="relative inline-block">
                 <div className="absolute bottom-0 end-0">
-                    <label htmlFor="customer-image-input" className="block mb-0 cursor-pointer">
-                        <div className="avatar-xs">
-                            <div className="avatar-title bg-light border rounded-circle text-muted">
-                                <i className="ri-image-fill"></i>
-                            </div>
-                        </div>
-                    </label>
-                    <input id="customer-image-input" className="hidden" type="file" accept="image/png, image/gif, image/jpeg" onChange={handleImageChange}/>
+
+                    <input
+                        ref={inputRef}
+                        name={name}
+                        id="customer-image-input"
+                        className="hidden"
+                        type="file"
+                        accept="image/png, image/gif, image/jpeg"
+                        onChange={handleImageChange}
+                        onBlur={onBlur}
+                        disabled={disabled}
+                    //onBlur={onBlur}
+
+                    />
                 </div>
-                <div className="avatar-lg p-1">
+                <div
+                    className={
+                        cn({
+                            "avatar-sm p-1 w-20 h-20 z-0": true,
+                            "cursor-pointer": !disabled
+                        })
+                    }
+                    onClick={openImageInput}
+                >
                     <div className="avatar-title bg-light rounded-circle">
-                        <MyImage src={image && URL.createObjectURL(image) || sourceImage} width={300} height={300} alt={alt || "dummyImg"} id="customer-img" className="avatar-md rounded-circle object-cover"/>
+                        <MyImage
+                            src={img}
+                            alt={alt || "dummyImg"}
+                            id="customer-img"
+                            fill
+                            className="avatar-md rounded-circle"
+                        />
                     </div>
                 </div>
             </div>

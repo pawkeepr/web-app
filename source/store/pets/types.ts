@@ -1,3 +1,16 @@
+import {
+    BloodType
+} from './bloodType';
+
+import {
+    Species
+} from './speciesType';
+
+import { Tutor } from '../tutor/types';
+import {
+    Breed
+} from './breedType';
+
 export const name = "Pet"
 
 export const GET_PETS = `${name}/getPets`;
@@ -14,32 +27,40 @@ export const CRM_API_RESPONSE_SUCCESS = `${name}/apiResponseSuccess`;
 export const CRM_API_RESPONSE_ERROR = `${name}/apiResponseError`;
 
 
+export enum GenderPet {
+    male = 'Macho',
+    female = 'Fêmea',
+    unknown = 'Desconhecido'
+};
+
+export type Diet = {
+    foodType: string;
+    dailyAmount: number;
+    dietaryRestrictions: string[];
+}
+
 export type Pet = {
     id: string;
     name: string;
-    species: string;
-    breed: string;
-    gender: 'male' | 'female' | 'neutral';
+    species: Species;
+    breed: Breed;
+    gender: GenderPet;
     dateOfBirth: string;
+    bloodType: BloodType;
     color: string;
     allergies: string[];
     preexistingConditions: string[];
     medicationsInUse: string[];
+    castrated: boolean;
+    dateOfCastration: string;
+    dateOfAdoption: string;
     healthHistory: string[];
-    diet: {
-        foodType: string;
-        dailyAmount: number;
-        dietaryRestrictions: string[];
-    };
+    diet: Diet;
     specialPhysicalFeatures: string[];
     behavior: string;
-    tutor_id: string;
     activityLevel: string;
-    ownerEmergencyContact: {
-        name: string;
-        phone: string;
-        address: string;
-    };
+    ownerEmergencyContact: Tutor;
+    address?: string;
     avatar: string;
     created_at: string;
     updated_at: string;
@@ -51,3 +72,8 @@ export type PetInitialState = {
     isPetCreated: boolean,
     isPetSuccess: boolean,
 };
+
+export type {
+    BloodType, Breed, Species
+};
+

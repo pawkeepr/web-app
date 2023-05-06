@@ -1,3 +1,6 @@
+import { Pet } from "../pets/types";
+import { Tutor } from "../tutor/types";
+
 export const name = "VeterinaryAppointment"
 
 export const GET_VETERINARY_APPOINTMENTS = `${name}/getVeterinaryAppointments`;
@@ -44,27 +47,20 @@ export type Disease = {
     updated_at: string;
 }
 
+
+
+type OmitPet = Nullable<Omit<Pet, 'ownerEmergencyContact'>>
+
 export type VeterinaryAppointment = {
     id: string;
-    exams: Array<Exam>,
-    vaccines: Array<Vaccine>,
-    treatments: Array<Treatment>,
-    diseases: Array<Disease>,
-    pet: {
-        id: string;
-        name: string;
-        breed: string;
-        species: string;
-        avatar: string;
-    }
-    tutor: {
-        id: string;
-        name: string;
-        phone: string;
-        avatar: string;
-    }
-    created_at: string;
-    updated_at: string;
+    exams: Array<Partial<Exam>>,
+    vaccines: Array<Partial<Vaccine>>,
+    treatments: Array<Partial<Treatment>>,
+    diseases: Array<Partial<Disease>>,
+    pet: Partial<OmitPet>;
+    tutor: Nullable<Partial<Tutor>>;
+    created_at?: string;
+    updated_at?: string;
 }
 
 export type VeterinaryAppointmentInitialState = {
