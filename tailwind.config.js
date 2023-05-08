@@ -42,6 +42,11 @@ module.exports = {
         black: "#161616",
 
 
+      },
+      screens: {
+        mobile: {
+          max: "767px"
+        }
       }
     },
   },

@@ -6,6 +6,7 @@ import { useAppSelector } from "~/store/hooks";
 
 import cn from 'classnames';
 import { StaticImageData } from "next/image";
+import useChangeLayoutMode from "~/hooks/use-change-layout-mode";
 
 type CustomToggleProps = {
     onClick: () => void;
@@ -52,6 +53,7 @@ const options = [
 
 const ProfileDropdownTailwind = () => {
     const profile = useAppSelector(state => state.Profile.user);
+    const { onHandleChangeLayout } = useChangeLayoutMode()
 
     return (
         <Menu as="div" className="relative inline-block text-left">
@@ -104,7 +106,33 @@ const ProfileDropdownTailwind = () => {
                     <div className="flex items-center justify-center">
                         <MyImage className="rounded-circle" src={profile?.avatar as any} alt="Header Avatar" height={62} width={62} />
                     </div>
-                    <h6 className="text-xs text-center p-1 m-1">Bem Vindo, {profile?.firstName}!</h6>
+                    <h6 className="text-xs text-center p-1 m-1">Bem Vindo, {profile?.firstName} aaaa!</h6>
+
+                    <Menu.Item as={Fragment}>
+                        {
+                            ({ active }) => (
+
+                                <button
+                                    onClick={onHandleChangeLayout}
+                                    type="button"
+                                    className={
+                                        cn(
+                                            "hidden mobile:flex",
+                                            "group w-full items-center justify-center rounded-md px-2 py-2 text-sm gap-2",
+                                            {
+                                                "bg-primary-500 dark:!bg-primary-600 text-white": active,
+                                            },
+                                            "light-dark-mode"
+                                        )}>
+
+                                    <i className='bx bx-moon fs-16'></i>
+                                    <span className="align-middle">Modo</span>
+
+                                </button>
+                            )
+                        }
+                    </Menu.Item>
+
                     <div className="px-1 py-1 ">
                         {
                             options.map((item, index) => (
