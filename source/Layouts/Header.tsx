@@ -4,16 +4,18 @@ import Link from 'next/link';
 //import images
 import logoDark from "~/assets/images/logo-dark.png";
 import logoLight from "~/assets/images/logo-light.png";
-import logoSm from "~/assets/images/logo-sm.png";
+import logoSm from "~/assets/images/logo-sm-1.png";
 
 //import Components
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import ProfileDropdownTailwind from '~/Components/molecules/profile-dropdown/profile-dropdown';
 import { changeHeaderSize } from '~/store/actions';
-import { useAppDispatch, useAppSelector } from '~/store/hooks';
+import { useAppDispatch } from '~/store/hooks';
 import FullScreenDropdown from '../Components/Common/FullScreenDropdown';
 import LightDark from '../Components/Common/LightDark';
+
+import styles from './Header.module.scss';
 
 type HeaderProps = {
     headerClass: string;
@@ -22,8 +24,6 @@ type HeaderProps = {
 const Header = ({ headerClass }: HeaderProps) => {
 
     const divRef = useRef<HTMLDivElement>(null);
-
-    const { headerSize } = useAppSelector(state => state.Layout);
 
     const dispatch = useAppDispatch();
 
@@ -74,22 +74,22 @@ const Header = ({ headerClass }: HeaderProps) => {
                 <div className="navbar-header">
                     <div className="d-flex">
 
-                        <div className="navbar-brand-box horizontal-logo flex items-center">
-                            <Link href="/" className="logo logo-dark">
-                                <span className="logo-sm">
-                                    <Image src={logoSm} alt="Logo Pawkeepr Mode Dark" height="44" />
+                        <div className="flex items-center justify-center">
+                            <Link href="/" className={`${styles['logo']} logo-light`}>
+                                <span className={styles['minimal-logo']}>
+                                    <Image src={logoSm} alt="Logo Pawkeepr Mode Light" height="44" />
                                 </span>
-                                <span className="logo-lg">
-                                    <Image src={logoDark} alt="Logo Pawkeepr Mode Dark" height="34" />
+                                <span className={styles['maximum-logo']}>
+                                    <Image src={logoLight} alt="Logo Pawkeepr Mode Light" height="34" />
                                 </span>
                             </Link>
 
-                            <Link href="/" className="logo logo-light">
-                                <span className="logo-sm">
-                                    <Image src={logoSm} alt="Logo Pawkeepr Mode Light" height="44" />
+                            <Link href="/" className={`${styles['logo']} logo-dark`}>
+                                <span className={styles['minimal-logo']}>
+                                    <Image src={logoSm} alt="Logo Pawkeepr Mode Dark" height="44" />
                                 </span>
-                                <span className="logo-lg">
-                                    <Image src={logoLight} alt="Logo Pawkeepr Mode Light" height="34" />
+                                <span className={styles['maximum-logo']}>
+                                    <Image src={logoDark} alt="Logo Pawkeepr Mode Dark" height="34" />
                                 </span>
                             </Link>
                         </div>

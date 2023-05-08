@@ -1,0 +1,37 @@
+.logo {
+
+    @media (min-width: 767.98px) {
+
+        span.maximum-logo {
+            display: inline-block;
+        }
+
+        span.minimal-logo {
+            display: none;
+        }
+    }
+
+
+    @media (max-width: 767.98px) {
+        span.maximum-logo {
+            display: none;
+        }
+
+        span.minimal-logo {
+            display: inline-block;
+            margin-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+
+    }
+
+}
+
+.maximum-logo {
+    display: inline-block;
+}
+
+.minimal-logo {
+    display: inline-block;
+}
