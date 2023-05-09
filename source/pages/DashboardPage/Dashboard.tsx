@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import TabContainer from 'react-bootstrap/TabContainer';
 import TabContent from 'react-bootstrap/TabContent';
@@ -8,7 +8,6 @@ import TabPane from 'react-bootstrap/TabPane';
 
 //import images
 
-import { useAppSelector } from '~/store/hooks';
 import DefaultLayout from '../_layouts/dashboard/dashboard';
 import AppointmentsTab from './components/organisms/tabs/AppointmentsTab';
 import OverviewTab from './components/organisms/tabs/OverviewTab';
@@ -19,17 +18,11 @@ const Section = () => {
     //Tab 
     const [activeTab, setActiveTab] = useState('1');
 
-    const profile = useAppSelector(state => state.Profile.user)
-
     const toggleTab = (tab: '1' | '2' | '3' | '4') => () => {
         if (activeTab !== tab) {
             setActiveTab(tab);
         }
     };
-
-    const name = useMemo(() => {
-        return profile?.firstName + " " + profile?.lastName
-    }, [profile]);
 
     const items = [
         {

@@ -49,7 +49,7 @@ const AppointmentsPage = ({ document }: AppointmentsPageProps) => {
             <Formik
                 onSubmit={handleSubmit}
                 enableReinitialize
-                initialValues={initialValues(document)}
+                initialValues={initialValues(document as any)}
             >
                 <Container>
                     <VerticalTabs />

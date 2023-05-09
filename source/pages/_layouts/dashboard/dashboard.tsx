@@ -57,43 +57,35 @@ const DashboardLayouts = ({ children, navItems, title = 'Dashboard' }: Dashboard
                 <React.Fragment>
                     <Row>
                         <Col lg={12}>
-                            <Card className="mt-n4 mx-n4">
-                                <div>
-                                    <Card className="p-4 pb-0">
-                                        <Row className="mb-1 ">
-                                            <div className="col-md">
-                                                <Row className="align-items-center g-3">
-                                                    <div className="col-md-auto sm:flex sm:justify-center sm:align-middle sm:self-center">
-                                                        <div className="avatar-md w-32 h-32">
-                                                            <div className="avatar-title bg-white rounded-circle relative mt-2">
-                                                                <MyImage
-                                                                    src={profile?.avatar || ''}
-                                                                    alt={`Avatar de ${name}`}
-                                                                    className="avatar-xs rounded-full"
-                                                                    fill
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md">
-                                                        <div>
-                                                            <h4 className="fw-bold">{name}</h4>
-                                                            <div className="hstack gap-3 flex-wrap">
-                                                                <div><i className="ri-building-line align-bottom me-1"></i>{profile?.company}</div>
-                                                                <div className="vr"></div>
-                                                                <div>Criado : <span className="fw-medium">{profile?.created_at}</span></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </Row>
+                            <Card className="mt-1 mx-1">
+                                <Card className="p-4 pb-0">
+                                    <Row className="items-center gap-4">
+                                        <div className="col-md-auto flex justify-center align-middle self-center pb-2">
+                                            <div className="avatar-md w-32 h-32">
+                                                <div className="avatar-title bg-white rounded-circle relative mt-2">
+                                                    <MyImage
+                                                        src={profile?.avatar || ''}
+                                                        alt={`Avatar de ${name}`}
+                                                        className="avatar-xs rounded-full"
+                                                        fill
+                                                    />
+                                                </div>
                                             </div>
-                                        </Row>
-                                    </Card>
-                                </div>
+                                        </div>
+                                        <div className="col-md">
+                                            <h4 className="text-base font-bold mobile:text-center">{name}</h4>
+                                            <div className="hstack gap-3 flex-wrap mobile:flex mobile:items-center mobile:justify-center">
+                                                <div><i className="ri-building-line align-bottom me-1"></i>{profile?.company}</div>
+                                                <div className="vr mobile:hidden"></div>
+                                                <div>Criado : <span className="fw-medium">{profile?.created_at}</span></div>
+                                            </div>
+                                        </div>
+                                    </Row>
+                                </Card>
                             </Card>
                         </Col>
                         <Col lg={12}>
-                            <Card className="mt-n4 mx-n4 block">
+                            <Card className="mx-1 block mobile:flex mobile:items-center mobile:justify-center">
                                 <Nav className="nav-tabs-custom border-bottom-0" role="tablist">
                                     {
                                         items.map(({ label, onClick, ...rest }, index) => (
