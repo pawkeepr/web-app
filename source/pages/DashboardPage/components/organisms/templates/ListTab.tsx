@@ -1,6 +1,5 @@
 import React, { ReactElement, useCallback, useDeferredValue, useEffect, useState } from 'react';
-import Row from 'react-bootstrap/Row';
-import SearchInput from '~/Components/molecules/search-input/search-input';
+import SearchInput from '~/Components/molecules/search-input';
 
 interface ListTabProps<T> {
     items: T[]
@@ -28,19 +27,19 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
 
     return (
         <React.Fragment>
-            <Row className="g-4 mb-3">
-                <div className="col-sm">
+            <div className="grid grid-cols-2 w-full gap-2">
+                <div className="col-span-1 mobile:col-span-full mobile:centering w-full">
                     <SearchInput
                         value={search}
                         onChange={handleSearch}
-                        className="form-control"
+                        className="form-control mobile:!w-full"
                         placeholder='Busque a Consulta...'
                     />
                 </div>
-                <div className="col-sm-auto">
+                <div className="col-span-1 mobile:col-span-full w-full sm:flex sm:justify-end sm:items-end">
                     <Modal />
                 </div>
-            </Row>
+            </div>
             <div className="team-list list-view-filter">
                 {cards(deferredItems)}
             </div>

@@ -52,14 +52,15 @@ const CardPets = ({ pet }: CardPetsProps) => {
                     </div>
                     <Col lg={4}>
                         <div className="team-profile-img">
-                            <div className="avatar-lg img-thumbnail rounded-circle">
-                                <MyImage
-                                    src={pet?.avatar}
-                                    alt={`Foto de Perfil de ${pet?.name}`}
-                                    className="img-fluid d-block rounded-circle"
-                                    width={200}
-                                    height={200}
-                                />
+                            <div className="avatar-md w-24 h-24">
+                                <div className="avatar-title bg-white rounded-circle relative">
+                                    <MyImage
+                                        src={pet?.avatar}
+                                        alt={`Foto de Perfil de ${pet?.name}`}
+                                        className="img-fluid d-block rounded-circle"
+                                        fill
+                                    />
+                                </div>
                             </div>
                             <div className="team-content">
                                 <Link href="#" className="d-block"><h5 className="fs-16 mb-1">{pet?.name}</h5></Link>

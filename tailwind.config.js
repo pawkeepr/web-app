@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./source/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: ['class', '[data-layout-mode="dark"]'],
   theme: {
     extend: {
       colors: {
@@ -32,8 +33,20 @@ module.exports = {
           '800': '#8e2d14',
           '900': '#6b0000',
         },
+        dark: {
+          '500': '#292e33',
+          '600': "#212529"
+        }
+        ,
         white: "#FFFEFD",
         black: "#161616",
+
+
+      },
+      screens: {
+        mobile: {
+          max: "767px"
+        }
       }
     },
   },

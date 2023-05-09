@@ -9,7 +9,11 @@ import { Formik } from 'formik';
 
 export type InitialValues = Partial<Nullable<VeterinaryAppointment>>;
 
-const initialValues: InitialValues = {
+type AppointmentsPageProps = {
+    document: string
+}
+
+const initialValues = (document = null): InitialValues => ({
     pet: {
         id: null,
         name: null,
@@ -26,15 +30,15 @@ const initialValues: InitialValues = {
         email: null,
         phone: null,
         avatar: null,
-        document: null,
+        document: document,
     },
     treatments: [],
     diseases: [],
     vaccines: [],
     exams: [],
-}
+})
 
-const AppointmentsPage = () => {
+const AppointmentsPage = ({ document }: AppointmentsPageProps) => {
 
     const handleSubmit = (values: InitialValues) => {
         console.log(values)
@@ -45,7 +49,7 @@ const AppointmentsPage = () => {
             <Formik
                 onSubmit={handleSubmit}
                 enableReinitialize
-                initialValues={initialValues}
+                initialValues={initialValues(document as any)}
             >
                 <Container>
                     <VerticalTabs />

@@ -24,7 +24,11 @@ const initialState: LayoutState = {
   leftSideBarSizeType: leftSideBarSizeTypes.DEFAULT,
   leftSidebarViewType: leftSidebarViewTypes.DEFAULT,
   leftSidebarImageType: leftSidebarImageTypes.NONE,
-  preloader: preloaderTypes.DISABLE
+  preloader: preloaderTypes.DISABLE,
+  headerSize: {
+    height: 80,
+    width: 80
+  }
 };
 
 const layoutSlice = createSlice({
@@ -58,6 +62,9 @@ const layoutSlice = createSlice({
     changeSidebarImageType: (state, action) => {
       state.leftSidebarImageType = action.payload;
     },
+    changeHeaderSize: (state, action) => {
+      state.headerSize = action.payload;
+    },
     resetValue: (state) => {
       return initialState;
     },
@@ -78,7 +85,8 @@ export const {
   changeSideBarView,
   changeSidebarImageType,
   resetValue,
-  changePreloader
+  changePreloader,
+  changeHeaderSize,
 } = layoutSlice.actions;
 
 export default layoutSlice.reducer;

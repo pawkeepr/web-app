@@ -14,14 +14,13 @@ import {
 //Import images
 
 import cn from "classnames";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import StepAddress from "../organisms/steps/step-address";
-import StepAnamnese from "../organisms/steps/step-anamnese";
+import { useAppSelector } from "~/store/hooks";
+import StepAnamneses from "../organisms/steps/step-anamnese";
 import StepPayment from "../organisms/steps/step-payment";
 import StepPet from "../organisms/steps/step-pet";
 import StepTreatment from "../organisms/steps/step-treatment";
-import StepTutor from '../organisms/steps/step-tutor';
 
 type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
@@ -32,67 +31,69 @@ type TabItem = {
     Component: (props: any) => JSX.Element;
 }
 
+const items: TabItem[] = [
+    {
+        id: 1,
+        title: "Pet",
+        href: "#Pet",
+        Component: StepPet
+    },
+    {
+        id: 2,
+        title: "Anamnese",
+        href: "#Anamnese",
+        Component: StepAnamneses
+    },
+    {
+        id: 3,
+        title: "Tratamento",
+        href: "#Treatment",
+        Component: StepTreatment
+    },
+    // {
+    //     id: 4,
+    //     title: "Tutor",
+    //     href: "#Tutor",
+    //     Component: StepTutor
+    // },
+    // {
+    //     id: 5,
+    //     title: "Endereço",
+    //     href: "#Address",
+    //     Component: StepAddress
+    // },
+    {
+        id: 4,
+        title: "Pagamento",
+        href: "#Payment",
+        Component: StepPayment
+    },
+    {
+        id: 5,
+        title: "Finalizar",
+        href: "#Finish",
+        Component: () => (
+            <div className="text-center pt-4 pb-2">
+                <div className="mb-4">
+
+                </div>
+                <h5>Your Order is Completed !</h5>
+                <p className="text-muted">
+                    You Will receive an order confirmation email
+                    with details of your order.
+                </p>
+            </div>
+        )
+    },
+]
+
 const VerticalTabs = () => {
 
+    const [isFixed, setIsFixed] = useState(false);
     const [activeVerticalTab, setActiveVerticalTab] = useState(1);
     const [passedVerticalSteps, setPassedVerticalSteps] = useState([1]);
 
-    const items: TabItem[] = [
-        {
-            id: 1,
-            title: "Pet",
-            href: "#Pet",
-            Component: StepPet
-        },
-        {
-            id: 2,
-            title: "Anamnese",
-            href: "#Anamnese",
-            Component: StepAnamnese
-        },
-        {
-            id: 3,
-            title: "Tratamento",
-            href: "#Treatment",
-            Component: StepTreatment
-        },
-        {
-            id: 4,
-            title: "Tutor",
-            href: "#Tutor",
-            Component: StepTutor
-        },
-        {
-            id: 5,
-            title: "Endereço",
-            href: "#Address",
-            Component: StepAddress
-        },
-        {
-            id: 6,
-            title: "Pagamento",
-            href: "#Payment",
-            Component: StepPayment
-        },
-        {
-            id: 7,
-            title: "Finalizar",
-            href: "#Finish",
-            Component: () => (
-                <div className="text-center pt-4 pb-2">
-                    <div className="mb-4">
-
-                    </div>
-                    <h5>Your Order is Completed !</h5>
-                    <p className="text-muted">
-                        You Will receive an order confirmation email
-                        with details of your order.
-                    </p>
-                </div>
-            )
-        },
-
-    ]
+    const { height } = useAppSelector(state => state.Layout.headerSize)
 
     function toggleVerticalTab(tab: Tabs) {
         if (activeVerticalTab !== tab) {
@@ -105,6 +106,13 @@ const VerticalTabs = () => {
         }
     }
 
+    useEffect(() => {
+        setIsFixed(window.innerWidth < 768)
+
+        return () => {
+            setIsFixed(false)
+        };
+    }, []);
 
 
     return (
@@ -115,11 +123,20 @@ const VerticalTabs = () => {
                         <h4 className="card-title mb-0">Nova Consulta</h4>
                     </CardHeader>
                     <CardBody className="form-steps">
-                        <form className="vertical-navs-step">
-                            <Row className="gy-5">
-                                <Col lg={3}>
+                        <form>
+                            <div className="flex flex-col relative">
+                                <div
+                                    style={{ marginTop: isFixed ? `${height}px` : 0 }}
+                                    className={cn(
+                                        'mb-4 step-arrow-nav',
+                                        {
+                                            'fixed top-0 left-0 right-0 z-[100] bg-white': isFixed,
+                                        },
+                                        'md:static'
+                                    )}>
                                     <Nav
-                                        className="flex-column custom-nav nav-pills"
+                                        className="nav-pills custom-nav nav-justified"
+                                        role="tablist"
                                     >
                                         {
                                             items.map((item, index) => {
@@ -127,6 +144,7 @@ const VerticalTabs = () => {
                                                     <NavItem key={index}>
                                                         <NavLink
                                                             href={item.href}
+                                                            id="steparrow-gen-info-tab"
                                                             className={
                                                                 (cn({
                                                                     active: activeVerticalTab === item.id,
@@ -137,21 +155,19 @@ const VerticalTabs = () => {
                                                                 toggleVerticalTab(item.id);
                                                             }}
                                                         >
-                                                            <span className="step-title me-2">
-                                                                <i className="ri-close-circle-fill step-icon me-2"></i>
-                                                                Passo {item.id}
-                                                            </span>
+                                                            {/* <span className="step-title me-2">
+                                                                <i className="ri-close-circle-fill step-icon me-2"/>
+                                                            </span> */}
                                                             {item.title}
                                                         </NavLink>
                                                     </NavItem>
                                                 )
                                             })
                                         }
-
-
                                     </Nav>
-                                </Col>
-                                <Col lg={9}>
+                                </div>
+
+                                <Col lg={12}>
                                     <div className="px-lg-4">
                                         <TabContent activeTab={activeVerticalTab}>
 
@@ -167,9 +183,7 @@ const VerticalTabs = () => {
                                         </TabContent>
                                     </div>
                                 </Col>
-
-
-                            </Row>
+                            </div>
                         </form>
                     </CardBody>
                 </Card>

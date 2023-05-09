@@ -9,12 +9,14 @@
     "prepare": "husky install",
     "commit": "git-cz",
     "dev": "next dev",
+    "prebuild": "npx tailwindcss -o build.css --minify",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
+    "@heroicons/react": "^2.0.17",
     "@reduxjs/toolkit": "^1.9.1",
     "axios": "^0.26.0",
     "bootstrap": "^5.2.3",
@@ -76,6 +78,7 @@
     "axios-mock-adapter": "^1.20.0",
     "commitizen": "^4.3.0",
     "cross-env": "^7.0.3",
+    "cssnano": "^6.0.1",
     "cypress": "^12.7.0",
     "cz-emoji-conventional": "^1.0.1",
     "eslint": "8.28.0",

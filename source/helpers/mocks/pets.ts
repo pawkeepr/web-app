@@ -8,11 +8,27 @@ import { Species } from "~/store/pets/speciesType";
 import { GenderPet, Pet } from "~/store/pets/types";
 import * as url from '../url_helper';
 
+import _ from 'lodash';
+
+const factoryBreeds = (species: Species): string => {
+    if (species === Species.cat) {
+        // escolha aleatória de uma raça de gato com lodash
+        const breed = _.sample(Object.values(CatBreed))
+        return breed || CatBreed.ViraLata
+    }
+}
+
+const factoryBloodType = (): string => {
+    // escolha aleatória de um tipo sanguíneo de gato
+    const bloodType = _.sample(Object.values(CatBloodType))
+    return bloodType || CatBloodType.A
+}
+
 const factoryPet = (document?: string, name?: string): Pet => ({
     id: faker.datatype.uuid(),
     name: faker.name.middleName(),
     species: Species.cat,
-    breed: CatBreed.ViraLata,
+    breed: factoryBreeds(Species.cat),
     gender: GenderPet.unknown,
     dateOfBirth: faker.date.past().toLocaleString(),
     color: faker.color.human(),
@@ -30,7 +46,7 @@ const factoryPet = (document?: string, name?: string): Pet => ({
         created_at: Date.now().toLocaleString(),
         updated_at: Date.now().toLocaleString(),
         address: {
-            street: faker.address.streetName(),
+            street: faker.address.street(),
             number: faker.datatype.number(9999).toString(),
             complement: faker.address.secondaryAddress(),
             neighborhood: faker.address.cityName(),
@@ -48,7 +64,7 @@ const factoryPet = (document?: string, name?: string): Pet => ({
     updated_at: Date.now().toLocaleString(),
     activityLevel: 'Ativo',
     avatar: faker.image.cats(1234, 1234, true),
-    bloodType: CatBloodType.A,
+    bloodType: factoryBloodType(),
     specialPhysicalFeatures: [],
     behavior: faker.lorem.paragraph(),
     castrated: faker.datatype.boolean(),

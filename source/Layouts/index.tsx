@@ -108,10 +108,10 @@ const Layout = ({ children }: LayoutProps) => {
 
     return (
         <React.Fragment>
-            <div id="layout-wrapper">
+            <div id="layout-wrapper mobile:gap-2">
                 <Header headerClass={headerClass} />
                 {/* <Sidebar layoutType={layoutType} /> */}
-                <div className="main-content">
+                <div className="main-content mobile:mt-2">
                     {children}
                     <Footer />
                 </div>

@@ -72,20 +72,22 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
         <Container>
 
             <div className="container d-flex flex-column mt-4">
-                <CountrySelect className="mb-2" />
-                <FieldControl
-                    divClassName='my-1'
-                    className="form-control"
-                    type="text"
-                    initialFocus
-                    label="CEP"
-                    name="address.zipCode"
-                    placeholder="Digite o CEP"
-                    component={MaskedInput as any}
-                    mask={"99999-999"}
-                    required
-                />
-                {cepInvalid && <ErrMessage message={'CEP não encontrado'} />}
+                <div className='grid grid-cols-2 gap-2'>
+                    <CountrySelect className="mb-2" />
+                    <FieldControl
+                        divClassName='my-1'
+                        className="form-control"
+                        type="text"
+                        initialFocus
+                        label="CEP"
+                        name="address.zipCode"
+                        placeholder="Digite o CEP"
+                        component={MaskedInput as any}
+                        mask={"99999-999"}
+                        required
+                    />
+                    {cepInvalid && <ErrMessage message={'CEP não encontrado'} />}
+                </div>
                 <Address loading={loading} disabledInputs={disabledInputs} />
 
                 <div className="mt-4 d-flex justify-content-center">

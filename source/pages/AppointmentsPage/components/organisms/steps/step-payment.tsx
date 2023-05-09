@@ -147,7 +147,9 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                             Security code required
                         </div>
                     </Col>
+
                 </Row>
+
             </div>
 
             <div className="d-flex align-items-start gap-3 mt-4">
@@ -177,3 +179,5 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
 }
 
 export default StepVaccines
+
+const finalizer = null
