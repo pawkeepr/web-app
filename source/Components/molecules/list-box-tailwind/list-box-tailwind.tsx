@@ -68,7 +68,7 @@ export default function ListBoxTailwind<T>({
                                 id={`${name}-list-box-tailwind`}
                                 className="
                                     relative w-full cursor-default 
-                                    rounded-lg bg-white dark:!bg-dark
+                                    rounded-lg bg-white dark:!bg-dark-500
                                     py-2 pl-3 pr-10 text-left 
                                     shadow-md focus:outline-none 
                                     focus-visible:border-indigo-500 
