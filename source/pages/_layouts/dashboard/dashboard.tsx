@@ -16,12 +16,16 @@ import { useRouter } from 'next/navigation';
 
 import HeaderTitle from '~/Components/atoms/header-title';
 import MyImage from '~/Components/atoms/my-image/my-image';
+import ModalConfirm from '~/Components/modals/modal-confirm/modal-confirm';
 import { useAppSelector } from '~/store/hooks';
+
+type F = (arg?: any) => void
 
 type NavItem = {
     [key: string]: any
+    Element?: (onClick: F) => React.ReactNode
     label: string
-    onClick: (arg: any) => void
+    onClick: F
 }
 
 type DashboardLayoutsProps = {
@@ -36,6 +40,20 @@ const DashboardLayouts = ({ children, navItems, title = 'Dashboard' }: Dashboard
 
     const items: NavItem[] = navItems || [
         {
+            // label com icon de voltar
+            Element: (onClick) => (
+                <ModalConfirm title='Cancelar Operações!' onConfirm={onClick} description='Importante!' message='Deseja realmente voltar?'>
+                    {
+                        ({ onChangeOpen }) => {
+                            return (
+                                <button type="button" onClick={() => onChangeOpen(true)}>
+                                    <span><i className="ri-arrow-left-line align-middle"></i> Voltar</span>
+                                </button>
+                            )
+                        }
+                    }
+                </ModalConfirm>
+            ),
             label: 'Voltar',
             onClick: () => {
                 router.push('/dashboard')
@@ -86,17 +104,33 @@ const DashboardLayouts = ({ children, navItems, title = 'Dashboard' }: Dashboard
                         </Col>
                         <Col lg={12}>
                             <Card className="mx-1 block mobile:flex mobile:items-center mobile:justify-center">
+
                                 <Nav className="nav-tabs-custom border-bottom-0" role="tablist">
                                     {
-                                        items.map(({ label, onClick, ...rest }, index) => (
+                                        items.map(({ label, onClick, Element, ...rest }, index) => (
                                             <NavItem key={index}>
-                                                <NavLink
-                                                    className="fw-bold"
-                                                    onClick={onClick}
-                                                    {...rest}
-                                                >
-                                                    {label}
-                                                </NavLink>
+                                                {
+                                                    Element && (
+                                                        <NavLink
+                                                            className="fw-bold"
+                                                            {...rest}
+                                                        >
+                                                            {Element(onClick)}
+                                                        </NavLink>
+                                                    )
+                                                }
+
+                                                {
+                                                    !Element && (
+                                                        <NavLink
+                                                            className="fw-bold"
+                                                            onClick={onClick}
+                                                            {...rest}
+                                                        >
+                                                            {label}
+                                                        </NavLink>
+                                                    )
+                                                }
                                             </NavItem>
                                         ))
                                     }
