@@ -64,34 +64,17 @@ const items: TabItem[] = [
     // },
     {
         id: 4,
-        title: "Pagamento",
-        href: "#Payment",
-        Component: StepPayment
-    },
-    {
-        id: 5,
         title: "Finalizar",
-        href: "#Finish",
-        Component: () => (
-            <div className="text-center pt-4 pb-2">
-                <div className="mb-4">
-
-                </div>
-                <h5>Your Order is Completed !</h5>
-                <p className="text-muted">
-                    You Will receive an order confirmation email
-                    with details of your order.
-                </p>
-            </div>
-        )
+        href: "#Finalizar",
+        Component: StepPayment
     },
 ]
 
 const VerticalTabs = () => {
 
     const [isFixed, setIsFixed] = useState(false);
-    const [activeVerticalTab, setActiveVerticalTab] = useState(1);
-    const [passedVerticalSteps, setPassedVerticalSteps] = useState([1]);
+    const [activeVerticalTab, setActiveVerticalTab] = useState(2);
+    const [passedVerticalSteps, setPassedVerticalSteps] = useState([1, 2]);
 
     const { height } = useAppSelector(state => state.Layout.headerSize)
 

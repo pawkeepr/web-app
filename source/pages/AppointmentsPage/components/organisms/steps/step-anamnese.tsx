@@ -3,9 +3,9 @@ import Row from 'react-bootstrap/Row';
 
 import { StepProps } from './types';
 
-import { BtnAvatar } from '~/Components/atoms/btn';
 import AnswerRadio from '~/Components/molecules/answer-radio';
 
+import { useFormikContext } from 'formik';
 import {
     questions_digestive_system,
     questions_locomotive_system,
@@ -13,8 +13,13 @@ import {
     questions_respiratory_system,
     questions_urinary_system,
 } from '~/constants/anamnese-questions';
+import { InitialValues } from '~/pages/AppointmentsPage/Appointments';
+import AvatarPet from '../../atoms/pet-avatar';
 
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
+
+    const { values } = useFormikContext<InitialValues>()
+
     return (
         <>
             <div>
@@ -26,7 +31,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
 
                 <Row className="g-3">
 
-                    <BtnAvatar alt='Avatar de Tutor' name="pet.avatar" disabled />
+                    <AvatarPet name={values.pet?.name || 'Pet'} />
 
                     <AnswerRadio
                         title="Sistema Digestivo"
