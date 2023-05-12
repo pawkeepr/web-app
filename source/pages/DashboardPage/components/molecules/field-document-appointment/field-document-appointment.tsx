@@ -1,33 +1,51 @@
 import { Form, Formik } from 'formik';
-import { useRouter } from 'next/navigation';
 import FieldDocument from '~/Components/molecules/field-document/field-document';
-import routes from '~/routes';
 
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
+import { startTransition } from 'react';
+import ModalListPets from '~/Components/modals/modal-list-pets/modal-list-pets';
 
 type InitialValues = {
     document: string
 }
 
+type onChangeOpen = (arg: boolean) => void
+
+type HandleProps = {
+    onChangeOpen: onChangeOpen
+    onChangeDocument: (doc: string) => void
+}
+
+
 const FieldDocumentAppointment = () => {
-    const router = useRouter()
 
     const initialValues: InitialValues = { document: '' }
 
-    const onSubmit = (values: InitialValues) => {
-        router.push(`${routes.dashboard.new.appointments}?document=${values.document}`)
+    const onHandleSubmit = ({ onChangeDocument, onChangeOpen }: HandleProps) => {
+        return (values: InitialValues) => {
+            startTransition(() => {
+                onChangeDocument(values.document)
+                onChangeOpen(true)
+            })
+        }
     }
 
     return (
-        <Formik initialValues={initialValues} onSubmit={onSubmit} enableReinitialize>
-            <Form className="flex flex-row items-center justify-center">
-                <FieldDocument name='document' className="form-control" placeholder='Nova Consulta' label="CPF" onlyCPF >
-                    <button data-bs-target="#addVeterinaryAppointmentModal" type="submit">
-                        <PlusCircleIcon className="h-6 w-6 self-center m-2" />
-                    </button>
-                </FieldDocument>
-            </Form>
-        </Formik>
+        <ModalListPets>
+            {
+                ({ onChangeOpen, onChangeDocument }) => (
+                    <Formik initialValues={initialValues} onSubmit={onHandleSubmit({ onChangeDocument, onChangeOpen })} enableReinitialize>
+                        <Form className="flex flex-row items-center justify-center">
+                            <FieldDocument name='document' className="form-control" placeholder='Nova Consulta' label="CPF" onlyCPF >
+                                <button data-bs-target="#addVeterinaryAppointmentModal" type="submit">
+                                    <PlusCircleIcon className="h-6 w-6 self-center m-2" />
+                                </button>
+                            </FieldDocument>
+                        </Form>
+                    </Formik>
+                )
+            }
+        </ModalListPets>
     )
 }
 
