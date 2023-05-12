@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Card, CardBody, CardHeader, Col, Container, Form, Input, Label, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
 import classnames from "classnames";
+import Link from 'next/link';
+import React, { useState } from 'react';
 import Flatpickr from "react-flatpickr";
+import {
+    Card,
+    CardBody,
+    CardHeader,
+    Col,
+    Container,
+    Form,
+    Input,
+    Label,
+    Nav,
+    NavItem,
+    NavLink,
+    Row,
+    TabContent,
+    TabPane
+} from 'reactstrap';
 
 //import images
-import progileBg from '../../../../assets/images/profile-bg.jpg';
-import avatar1 from '../../../../assets/images/users/avatar-1.jpg';
+import progileBg from '~/assets/images/profile-bg.jpg';
+import avatar1 from '~/assets/images/users/avatar-1.jpg';
 
-const Settings = () => {
-    document.title="Profile Settings | Velzon - React Admin & Dashboard Template";
-
+const Profile = () => {
     const [activeTab, setActiveTab] = useState("1");
 
     const tabChange = (tab) => {
@@ -19,7 +32,7 @@ const Settings = () => {
 
     return (
         <React.Fragment>
-            <div className="page-content">                
+            <div className="page-content">
                 <Container fluid>
                     <div className="position-relative mx-n4 mt-n4">
                         <div className="profile-wid-bg profile-setting-img">
@@ -71,7 +84,7 @@ const Settings = () => {
                                             <h5 className="card-title mb-0">Complete Your Profile</h5>
                                         </div>
                                         <div className="flex-shrink-0">
-                                            <Link to="#" className="badge bg-light text-primary fs-12"><i
+                                            <Link href="#" className="badge bg-light text-primary fs-12"><i
                                                 className="ri-edit-box-line align-bottom me-1"></i> Edit</Link>
                                         </div>
                                     </div>
@@ -90,7 +103,7 @@ const Settings = () => {
                                             <h5 className="card-title mb-0">Portfolio</h5>
                                         </div>
                                         <div className="flex-shrink-0">
-                                            <Link to="#" className="badge bg-light text-primary fs-12"><i
+                                            <Link href="#" className="badge bg-light text-primary fs-12"><i
                                                 className="ri-add-fill align-bottom me-1"></i> Add</Link>
                                         </div>
                                     </div>
@@ -150,7 +163,7 @@ const Settings = () => {
                                             </NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink to="#"
+                                            <NavLink href="#"
                                                 className={classnames({ active: activeTab === "2" })}
                                                 onClick={() => {
                                                     tabChange("2");
@@ -161,7 +174,7 @@ const Settings = () => {
                                             </NavLink>
                                         </NavItem>
                                         <NavItem >
-                                            <NavLink to="#"
+                                            <NavLink href="#"
                                                 className={classnames({ active: activeTab === "3" })}
                                                 onClick={() => {
                                                     tabChange("3");
@@ -172,7 +185,7 @@ const Settings = () => {
                                             </NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink to="#"
+                                            <NavLink href="#"
                                                 className={classnames({ active: activeTab === "4" })}
                                                 onClick={() => {
                                                     tabChange("4");
@@ -344,7 +357,7 @@ const Settings = () => {
 
                                                     <Col lg={12}>
                                                         <div className="mb-3">
-                                                            <Link to="#"
+                                                            <Link href="#"
                                                                 className="link-primary text-decoration-underline">Forgot
                                                                 Password ?</Link>
                                                         </div>
@@ -362,7 +375,7 @@ const Settings = () => {
                                             </Form>
                                             <div className="mt-4 mb-3 border-bottom pb-2">
                                                 <div className="float-end">
-                                                    <Link to="#" className="link-primary">All Logout</Link>
+                                                    <Link href="#" className="link-primary">All Logout</Link>
                                                 </div>
                                                 <h5 className="card-title">Login History</h5>
                                             </div>
@@ -378,7 +391,7 @@ const Settings = () => {
                                                         2:47PM</p>
                                                 </div>
                                                 <div>
-                                                    <Link to="#">Logout</Link>
+                                                    <Link href="#">Logout</Link>
                                                 </div>
                                             </div>
                                             <div className="d-flex align-items-center mb-3">
@@ -393,7 +406,7 @@ const Settings = () => {
                                                         at 10:43AM</p>
                                                 </div>
                                                 <div>
-                                                    <Link to="#">Logout</Link>
+                                                    <Link href="#">Logout</Link>
                                                 </div>
                                             </div>
                                             <div className="d-flex align-items-center mb-3">
@@ -408,7 +421,7 @@ const Settings = () => {
                                                         3:24PM</p>
                                                 </div>
                                                 <div>
-                                                    <Link to="#">Logout</Link>
+                                                    <Link href="#">Logout</Link>
                                                 </div>
                                             </div>
                                             <div className="d-flex align-items-center">
@@ -423,7 +436,7 @@ const Settings = () => {
                                                         8:10AM</p>
                                                 </div>
                                                 <div>
-                                                    <Link to="#">Logout</Link>
+                                                    <Link href="#">Logout</Link>
                                                 </div>
                                             </div>
                                         </TabPane>
@@ -539,7 +552,7 @@ const Settings = () => {
 
                                                             <div className="hstack gap-2 justify-content-end">
                                                                 <Link className="btn btn-success"
-                                                                    to="#">Delete</Link>
+                                                                    href="#">Delete</Link>
                                                             </div>
                                                         </Row>
                                                     </div>
@@ -550,7 +563,7 @@ const Settings = () => {
                                                 <Col lg={12}>
                                                     <div className="hstack gap-2">
                                                         <button type="submit" className="btn btn-success">Update</button>
-                                                        <Link to="#" className="btn btn-primary">Add
+                                                        <Link href="#" className="btn btn-primary">Add
                                                             New</Link>
                                                     </div>
                                                 </Col>
@@ -569,7 +582,7 @@ const Settings = () => {
                                                             Authentication and SMS are Supported.</p>
                                                     </div>
                                                     <div className="flex-shrink-0 ms-sm-3">
-                                                        <Link to="#"
+                                                        <Link href="#"
                                                             className="btn btn-sm btn-primary">Enable Two-facor
                                                             Authentication</Link>
                                                     </div>
@@ -583,7 +596,7 @@ const Settings = () => {
                                                             retina.</p>
                                                     </div>
                                                     <div className="flex-shrink-0 ms-sm-3">
-                                                        <Link to="#" className="btn btn-sm btn-primary">Set
+                                                        <Link href="#" className="btn btn-sm btn-primary">Set
                                                             up secondary method</Link>
                                                     </div>
                                                 </div>
@@ -596,7 +609,7 @@ const Settings = () => {
                                                             generate a backup code on twitter.com.</p>
                                                     </div>
                                                     <div className="flex-shrink-0 ms-sm-3">
-                                                        <Link to="#"
+                                                        <Link href="#"
                                                             className="btn btn-sm btn-primary">Generate backup codes</Link>
                                                     </div>
                                                 </div>
@@ -699,9 +712,9 @@ const Settings = () => {
                                                         style={{ maxWidth: "265px" }} />
                                                 </div>
                                                 <div className="hstack gap-2 mt-3">
-                                                    <Link to="#" className="btn btn-soft-danger">Close &
+                                                    <Link href="#" className="btn btn-soft-danger">Close &
                                                         Delete This Account</Link>
-                                                    <Link to="#" className="btn btn-light">Cancel</Link>
+                                                    <Link href="#" className="btn btn-light">Cancel</Link>
                                                 </div>
                                             </div>
                                         </TabPane>
@@ -716,4 +729,4 @@ const Settings = () => {
     );
 };
 
-export default Settings;
+export default Profile;
