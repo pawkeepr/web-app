@@ -2,7 +2,7 @@ const routes = {
     dashboard: {
         root: '/dashboard',
         new: {
-            appointments: '/dashboard/new/appointments',
+            appointments: '/dashboard/appointments',
         },
     },
     signIn: '/sign-in',

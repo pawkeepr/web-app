@@ -11,11 +11,14 @@ export type InitialValues = Partial<Nullable<VeterinaryAppointment>>;
 
 type AppointmentsPageProps = {
     document: string
+    pet?: string
 }
 
-const initialValues = (document = null): InitialValues => ({
+type NullString = string | null
+
+const initialValues = (document: NullString = null, id: NullString = null): InitialValues => ({
     pet: {
-        id: null,
+        id,
         name: null,
         castrated: null,
         breed: null,
@@ -30,7 +33,7 @@ const initialValues = (document = null): InitialValues => ({
         email: null,
         phone: null,
         avatar: null,
-        document: document,
+        document,
     },
     treatments: [],
     diseases: [],
@@ -38,18 +41,19 @@ const initialValues = (document = null): InitialValues => ({
     exams: [],
 })
 
-const AppointmentsPage = ({ document }: AppointmentsPageProps) => {
+const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
 
     const handleSubmit = (values: InitialValues) => {
         console.log(values)
     }
+
 
     return (
         <DashboardLayouts title="Nova Consulta">
             <Formik
                 onSubmit={handleSubmit}
                 enableReinitialize
-                initialValues={initialValues(document as any)}
+                initialValues={initialValues(document, pet)}
             >
                 <Container>
                     <VerticalTabs />

@@ -17,7 +17,7 @@ export default function RadioGroup<T>({ items = [], name, className, ...rest }: 
     return (
         <Row className={`w-full ${className}`} {...rest}>
             <Col sm={12}>
-                <div className="mx-auto w-full relative">
+                <div className="mx-auto w-full relative flex justify-center items-center flex-wrap gap-2">
                     {
                         items.map((item, index) => (
                             <div className="form-check form-check-inline" key={index}>

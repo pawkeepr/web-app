@@ -4,8 +4,9 @@ import AppointmentsPage from "~/pages/AppointmentsPage/Appointments"
 const AppointmentsNext = () => {
     const search = useSearchParams()
     const document = search.get('document') || ''
+    const pet = search.get('pet') || ''
     return (
-        <AppointmentsPage document={document} />
+        <AppointmentsPage document={document} pet={pet} />
     )
 }
 
