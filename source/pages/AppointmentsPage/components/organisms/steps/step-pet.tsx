@@ -175,8 +175,8 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         toggleTab(activeTab + 1);
                     }}
                 >
-                    <i className="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
                     Próximo
+                    <i className="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
                 </BtnSuccess>
             </div>
         </>

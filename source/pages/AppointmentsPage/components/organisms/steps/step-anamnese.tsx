@@ -6,6 +6,7 @@ import { StepProps } from './types';
 import AnswerRadio from '~/Components/molecules/answer-radio';
 
 import { useFormikContext } from 'formik';
+import { BtnSuccess } from '~/Components/atoms/btn';
 import {
     questions_digestive_system,
     questions_locomotive_system,
@@ -75,16 +76,17 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
             </div>
 
             <div className="d-flex align-items-start gap-3 mt-4">
-                <button
+                <BtnSuccess
                     type="button"
-                    className="btn btn-success btn-label right ms-auto nexttab"
+                    className="btn-label right ms-auto nexttab"
+                    label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}
                 >
+                    Continuar
                     <i className="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
-                    Próximo
-                </button>
+                </BtnSuccess>
             </div>
         </>
     )

@@ -9,3 +9,19 @@
         @apply flex items-center justify-center;
     }
 }
+
+@layer components {
+    .btn {
+        @apply transition duration-300 ease-in-out w-32;
+        @apply py-2 px-4 m-1 text-sm font-semibold rounded-md gap-4 leading-4;
+        @apply !bg-opacity-70 !text-opacity-70 bg-primary-600 text-white;
+    }
+
+    .btn:hover {
+        @apply !bg-opacity-100 !text-opacity-100 bg-primary-600 text-white;
+    }
+
+    .btn-link {
+        @apply bg-transparent border-0;
+    }
+}

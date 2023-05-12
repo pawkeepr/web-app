@@ -6,6 +6,7 @@ import {
 } from "reactstrap";
 
 
+import { BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
 import { StepProps } from './types';
 
 const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
@@ -161,18 +162,31 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                     }}
                 >
                     <i className="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>{" "}
-                    Back to Shipping Info
+                    Voltar
                 </button>
-                <button
+                <BtnLabel
+                    link
                     type="button"
-                    className="btn btn-success btn-label right ms-auto nexttab"
+                    className="right ms-auto previestab"
+                    label="Próximo"
                     onClick={() => {
-                        toggleTab(activeTab + 1);
+                        toggleTab(activeTab - 1);
                     }}
                 >
-                    <i className="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>{" "}
-                    Order Complete
-                </button>
+                    <i className="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>{" "}
+                    Voltar
+                </BtnLabel>
+                <BtnSuccess
+                    type="button"
+                    className="btn-label right ms-auto nexttab"
+                    label="Próximo"
+                    onClick={() => {
+
+                    }}
+                >
+                    Finalizar
+                    <i className="ri-check-line label-icon align-middle fs-16 ms-2"></i>
+                </BtnSuccess>
             </div>
         </>
     )
