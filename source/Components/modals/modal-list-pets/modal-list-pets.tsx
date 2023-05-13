@@ -1,11 +1,15 @@
-import { Dialog, Transition } from '@headlessui/react'
+import { Dialog, Tab, Transition } from '@headlessui/react'
+import { Formik } from 'formik'
 import { useRouter } from 'next/navigation'
 import { Fragment, useState } from 'react'
-import { BtnCancel, BtnSuccess } from '~/Components/atoms/btn'
 import routes from '~/routes'
-import { useAppSelector } from '~/store/hooks'
-import { Pet } from '~/store/pets/types'
-import MiniBoxPet from './mini-box-pet'
+import { addNewPet } from '~/store/actions'
+import { useAppDispatch, useAppSelector } from '~/store/hooks'
+import { SpeciesType } from '~/store/pets/speciesType'
+import { Breed, Pet } from '~/store/pets/types'
+import StepListBreeds from './components/organisms/steps/step-list-breeds'
+import StepListPets from './components/organisms/steps/step-list-pets'
+import StepListSpecies from './components/organisms/steps/step-list-species'
 
 type onChangeOpen = (arg: boolean) => void
 
@@ -21,31 +25,42 @@ type ModalConfirmProps = {
     children?: (params: ChildrenProps) => React.ReactNode
 }
 
-enum EmojiPet {
-    Gato = '🐱',
-    Cachorro = '🐶',
-    Coelho = '🐰',
-    Peixe = '🐠',
-    Pássaro = '🐦',
-    Réptil = '🦎',
-    Cavalo = '🐴',
+export type InitialValues = {
+    name: string
+    species: SpeciesType
+    breed: Breed
+    document: string
 }
 
 const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmProps) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const [document, setDocument] = useState('')
+    const [selectedTab, setSelectedTab] = useState(0)
+
+    const dispatch = useAppDispatch()
+
+    const initialValues: InitialValues = {
+        name: '',
+        document: document,
+        species: '' as any,
+        breed: '' as any,
+    }
 
     const pets = useAppSelector(state => state.Pets.pets.filter(pet => {
         return pet.ownerEmergencyContact.document === document.replace(/\D/g, '')
     }))
 
+    const onChangeSelectedTab = (index: number) => {
+        setSelectedTab(index)
+    }
 
     const router = useRouter()
 
-    const handleConfirm = () => {
-        onConfirm?.()
-        setIsOpen(false)
+    const handleSubmit = (values: InitialValues) => {
+        console.log(values)
+        const { payload } = dispatch(addNewPet(values))
+        console.log(payload)
     }
 
     const handleCancel = () => {
@@ -107,104 +122,110 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
 
 
             <Transition appear show={isOpen} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={closeModal}>
-                    <Transition.Child
-                        as={Fragment}
-                        enter="ease-out duration-300"
-                        enterFrom="opacity-0"
-                        enterTo="opacity-100"
-                        leave="ease-in duration-200"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                    >
-                        <div className="fixed inset-0 bg-black bg-opacity-25" />
-                    </Transition.Child>
+                <Tab.Group selectedIndex={selectedTab} onChange={onChangeSelectedTab}>
+                    <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                        >
+                            <div className="fixed inset-0 bg-black bg-opacity-25" />
+                        </Transition.Child>
 
-                    <div className="fixed inset-0 overflow-y-auto">
-                        <div className="flex min-h-full items-center justify-center p-4 text-center">
-                            <Transition.Child
-                                as={Fragment}
-                                enter="ease-out duration-300"
-                                enterFrom="opacity-0 scale-95"
-                                enterTo="opacity-100 scale-100"
-                                leave="ease-in duration-200"
-                                leaveFrom="opacity-100 scale-100"
-                                leaveTo="opacity-0 scale-95"
-                            >
-                                <Dialog.Panel className="
-                                    w-full 
-                                    max-w-md 
-                                    transform 
-                                    overflow-hidden 
-                                    rounded-2xl 
-                                    bg-white 
-                                    p-6 
-                                    text-left 
-                                    align-middle 
-                                    shadow-xl 
-                                    transition-all
-                                    dark:!bg-dark-500
-                                    dark:!text-gray-200
-                                    !font-sans
-                                ">
-                                    <Dialog.Title
-                                        as="h2"
-                                        className="text-xl font-semibold leading-6 text-gray-900 dark:!text-gray-200 text-center"
+                        <div className="fixed inset-0 overflow-y-auto">
+                            <div className="flex min-h-full items-center justify-center p-4 text-center">
+                                <Transition.Child
+                                    as={Fragment}
+                                    enter="ease-out duration-300"
+                                    enterFrom="opacity-0 scale-95"
+                                    enterTo="opacity-100 scale-100"
+                                    leave="ease-in duration-200"
+                                    leaveFrom="opacity-100 scale-100"
+                                    leaveTo="opacity-0 scale-95"
+                                >
+                                    <Dialog.Panel className="
+                                        w-full 
+                                        max-w-md 
+                                        transform 
+                                        overflow-hidden 
+                                        rounded-2xl 
+                                        bg-white 
+                                        p-6 
+                                        text-left 
+                                        align-middle 
+                                        shadow-xl 
+                                        transition-all
+                                        dark:!bg-dark-500
+                                        dark:!text-gray-200
+                                        !font-sans
+                                        "
                                     >
-                                        Adicionar Pet
-                                    </Dialog.Title>
+                                        <Dialog.Title
+                                            as="h2"
+                                            className="text-xl font-semibold leading-6 text-gray-900 dark:!text-gray-200 text-center"
+                                        >
+                                            Adicionar Pet
+                                        </Dialog.Title>
 
-                                    <Dialog.Description
-                                        as="p"
-                                        className="text-xs text-gray-700 dark:!text-gray-200 text-center"
-                                    >
-                                        Selecione ou Adicione um Pet para prosseguir na consulta.
-                                    </Dialog.Description>
+                                        <Dialog.Description
+                                            as="p"
+                                            className="text-xs text-gray-700 dark:!text-gray-200 text-center"
+                                        >
+                                            Selecione ou Adicione um Pet para prosseguir na consulta.
+                                        </Dialog.Description>
 
-                                    <div className="mt-3 p-1">
-                                        {pets.map(pet => (
-                                            <button
-                                                key={pet.id}
-                                                type="button"
-                                                onClick={() => handleNavigate(pet)}
-                                                className="
-                                                    group w-full items-center justify-center 
-                                                    rounded-md px-2 py-2 text-sm gap-2 
-                                                    hover:bg-primary-500 dark:hover:!bg-primary-600 hover:text-white
-                                                ">
-                                                <div className="grid grid-cols-4 justify-center items-center">
-                                                    <span className="align-middle col-span-1">{EmojiPet[pet.species]}</span>
-                                                    <span className="align-middle col-span-2">{pet.name}</span>
-                                                    <span className="align-middle col-span-1">{pet.species}</span>
-                                                </div>
-                                            </button>
-                                        ))}
-                                    </div>
+                                        <Tab.List>
+                                            {
+                                                [1, 2, 3].map(
+                                                    (item) => (
+                                                        <Tab
+                                                            key={item}
+                                                            className="hidden"
+                                                        />
+                                                    )
+                                                )
+                                            }
+                                        </Tab.List>
+                                        <Formik initialValues={initialValues} enableReinitialize onSubmit={handleSubmit} >
 
-                                    <div className="mt-4 flex justify-center items-center">
-                                        <MiniBoxPet />
-                                    </div>
+                                            <Tab.Panels className="mt-2">
+                                                <Tab.Panel key={1}>
+                                                    <StepListPets
+                                                        pets={pets}
+                                                        handleNavigate={handleNavigate}
+                                                        handleCancel={handleCancel}
+                                                        onChangeSelectedTab={onChangeSelectedTab}
+                                                        selectedTab={selectedTab}
+                                                    />
+                                                </Tab.Panel>
+                                                <Tab.Panel key={2}>
+                                                    <StepListSpecies
+                                                        selectedTab={selectedTab}
+                                                        onChangeSelectedTab={onChangeSelectedTab}
+                                                    />
+                                                </Tab.Panel>
+                                                <Tab.Panel key={3}>
+                                                    <StepListBreeds
+                                                        selectedTab={selectedTab}
+                                                        onChangeSelectedTab={onChangeSelectedTab}
+                                                    />
+                                                </Tab.Panel>
+                                            </Tab.Panels>
+                                        </Formik>
 
-                                    <div className="mt-4 flex flex-row justify-center items-center">
-                                        <BtnSuccess
-                                            type="button"
-                                            label="Criar Pet"
-                                            onClick={handleConfirm}
-                                        />
-
-                                        <BtnCancel
-                                            type="button"
-                                            onClick={handleCancel}
-                                        />
-
-                                    </div>
 
 
-                                </Dialog.Panel>
-                            </Transition.Child>
+                                    </Dialog.Panel>
+                                </Transition.Child>
+                            </div>
                         </div>
-                    </div>
-                </Dialog>
+                    </Dialog>
+                </Tab.Group>
+
             </Transition>
         </>
     )
