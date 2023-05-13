@@ -130,7 +130,7 @@ function factoryMockPets(adapter: MockAdapter) {
 
             setTimeout(() => {
                 return resolve([200, { data: pet }]);
-            }, 1000)
+            }, 2500)
         })
     })
 }

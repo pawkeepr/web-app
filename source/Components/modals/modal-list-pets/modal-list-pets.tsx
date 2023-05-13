@@ -10,6 +10,8 @@ import { Breed, Pet } from '~/store/pets/types'
 import StepListBreeds from './components/organisms/steps/step-list-breeds'
 import StepListPets from './components/organisms/steps/step-list-pets'
 import StepListSpecies from './components/organisms/steps/step-list-species'
+import useFindTutorByDocument from '~/hooks/use-find-tutor-by-document'
+import LOADING from '~/constants/loading'
 
 type onChangeOpen = (arg: boolean) => void
 
@@ -30,6 +32,7 @@ export type InitialValues = {
     species: SpeciesType
     breed: Breed
     document: string
+    ownerEmergencyContact: ReturnType<typeof useFindTutorByDocument>
 }
 
 const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmProps) => {
@@ -38,13 +41,16 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
     const [document, setDocument] = useState('')
     const [selectedTab, setSelectedTab] = useState(0)
 
+    const isLoading = useAppSelector(state => state.Pets.isLoading)
     const dispatch = useAppDispatch()
+    const tutor = useFindTutorByDocument(document);
 
     const initialValues: InitialValues = {
         name: '',
         document: document,
         species: '' as any,
         breed: '' as any,
+        ownerEmergencyContact: tutor
     }
 
     const pets = useAppSelector(state => state.Pets.pets.filter(pet => {
@@ -56,11 +62,16 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
     }
 
     const router = useRouter()
+    const handleNavigate = (pet: Pet) => {
+        router.push(`${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`)
+    }
 
     const handleSubmit = (values: InitialValues) => {
-        console.log(values)
-        const { payload } = dispatch(addNewPet(values))
-        console.log(payload)
+        const { payload: pet } = dispatch(addNewPet(values))
+        
+        if (pet) {
+            handleNavigate(pet as Pet)
+        }
     }
 
     const handleCancel = () => {
@@ -84,9 +95,7 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
         setDocument(doc)
     }
 
-    const handleNavigate = (pet: Pet) => {
-        router.push(`${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`)
-    }
+    
 
 
     return (
@@ -170,7 +179,13 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
                                         >
                                             Adicionar Pet
                                         </Dialog.Title>
-
+                                        {
+                                            isLoading === LOADING.PENDING && (
+                                                <div className="flex items-center justify-center">
+                                                    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-500"></div>
+                                                </div>
+                                            )
+                                        }
                                         <Dialog.Description
                                             as="p"
                                             className="text-xs text-gray-700 dark:!text-gray-200 text-center"
@@ -214,6 +229,7 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
                                                         onChangeSelectedTab={onChangeSelectedTab}
                                                     />
                                                 </Tab.Panel>
+
                                             </Tab.Panels>
                                         </Formik>
 

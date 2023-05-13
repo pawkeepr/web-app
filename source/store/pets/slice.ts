@@ -1,10 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { Pet, PetInitialState, name } from './types';
+import LOADING from '~/constants/loading';
 
 const initialState: PetInitialState = {
     pets: [],
     error: {},
+    isLoading: LOADING.IDLE,
     isPetCreated: false,
     isPetSuccess: false,
 };
@@ -23,12 +25,17 @@ export const petSlice = createSlice({
             state.isPetCreated = false;
             state.isPetSuccess = false;
         },
+        addPet: (state, action: PayloadAction<{ pet: any }>) => {
+            state.isLoading = LOADING.PENDING;
+        },
         addPetSuccess: (state, action: PayloadAction<{ data: any }>) => {
             state.isPetCreated = true;
+            state.isLoading = LOADING.IDLE;
             state.pets.push(action.payload.data);
         },
         addPetFail: (state, action) => {
             state.error = action.payload;
+            state.isLoading = LOADING.IDLE;
         },
         updatePetSuccess: (state, action: PayloadAction<{ data: any }>) => {
             state.pets = state.pets.map(pet =>
@@ -42,7 +49,7 @@ export const petSlice = createSlice({
         },
         deletePetSuccess: (state, action: PayloadAction<{ pet: any }>) => {
             state.pets = state.pets.filter(
-                pet => pet._id.toString() !== action.payload.pet.toString()
+                pet => pet.id.toString() !== action.payload.pet.toString()
             );
         },
         deletePetFail: (state, action) => {

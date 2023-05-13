@@ -10,6 +10,7 @@ import { Tutor } from '../tutor/types';
 import {
     Breed
 } from './breedType';
+import LOADING from '~/constants/loading';
 
 export const name = "Pet"
 
@@ -71,6 +72,7 @@ export type PetInitialState = {
     error: any,
     isPetCreated: boolean,
     isPetSuccess: boolean,
+    isLoading: LOADING,
 };
 
 export type {
