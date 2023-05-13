@@ -8,19 +8,17 @@ import {
 
 import { BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
 import { StepProps } from './types';
+import ListBoxTailwind from "~/Components/molecules/list-box-tailwind/list-box-tailwind";
 
 const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
     return (
         <>
             <div>
-                <h5>Payment</h5>
-                <p className="text-muted">
-                    Fill all information below
-                </p>
+                <h2 className="text-lg">Pagamento</h2>
             </div>
 
             <div>
-                <div className="my-3">
+                <div className="my-3 justify-center items-center flex">
                     <div className="form-check form-check-inline">
                         <Input
                             id="credit"
@@ -34,7 +32,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                             className="form-check-label"
                             htmlFor="credit"
                         >
-                            Credit card
+                            Cartão de Crédito
                         </Label>
                     </div>
                     <div className="form-check form-check-inline">
@@ -49,12 +47,12 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                             className="form-check-label"
                             htmlFor="debit"
                         >
-                            Debit card
+                            Cartão de Débito
                         </Label>
                     </div>
                     <div className="form-check form-check-inline">
                         <Input
-                            id="paypal"
+                            id="pix"
                             name="paymentMethod"
                             type="radio"
                             className="form-check-input"
@@ -62,108 +60,38 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                         />
                         <Label
                             className="form-check-label"
-                            htmlFor="paypal"
+                            htmlFor="pix"
                         >
-                            PayPal
+                            Pix
+                        </Label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                        <Input
+                            id="cash"
+                            name="paymentMethod"
+                            type="radio"
+                            className="form-check-input"
+                            required
+                        />
+                        <Label
+                            className="form-check-label"
+                            htmlFor="cash"
+                        >
+                            Dinheiro
                         </Label>
                     </div>
                 </div>
 
                 <Row className="gy-3">
-                    <Col md={12}>
-                        <Label
-                            htmlFor="cc-name"
-                            className="form-label"
-                        >
-                            Name on card
-                        </Label>
-                        <Input
-                            type="text"
-                            className="form-control"
-                            id="cc-name"
-                            placeholder=""
-                            required
-                        />
-                        <small className="text-muted">
-                            Full name as displayed on card
-                        </small>
-                        <div className="invalid-feedback">
-                            Name on card is required
-                        </div>
-                    </Col>
-
-                    <Col md={6}>
-                        <Label
-                            htmlFor="cc-number"
-                            className="form-label"
-                        >
-                            Credit card number
-                        </Label>
-                        <Input
-                            type="text"
-                            className="form-control"
-                            id="cc-number"
-                            placeholder=""
-                            required
-                        />
-                        <div className="invalid-feedback">
-                            Credit card number is required
-                        </div>
-                    </Col>
-
-                    <Col md={3}>
-                        <Label
-                            htmlFor="cc-expiration"
-                            className="form-label"
-                        >
-                            Expiration
-                        </Label>
-                        <Input
-                            type="text"
-                            className="form-control"
-                            id="cc-expiration"
-                            placeholder=""
-                            required
-                        />
-                        <div className="invalid-feedback">
-                            Expiration date required
-                        </div>
-                    </Col>
-
-                    <Col md={3}>
-                        <Label
-                            htmlFor="cc-cvv"
-                            className="form-label"
-                        >
-                            CVV
-                        </Label>
-                        <Input
-                            type="text"
-                            className="form-control"
-                            id="cc-cvv"
-                            placeholder=""
-                            required
-                        />
-                        <div className="invalid-feedback">
-                            Security code required
-                        </div>
-                    </Col>
+                    {
+                        <ListBoxTailwind  />
+                    }
 
                 </Row>
 
             </div>
 
-            <div className="d-flex align-items-start gap-3 mt-4">
-                <button
-                    type="button"
-                    className="btn btn-light btn-label previestab"
-                    onClick={() => {
-                        toggleTab(activeTab - 1);
-                    }}
-                >
-                    <i className="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>{" "}
-                    Voltar
-                </button>
+            <div className="flex align-items-center justify-end gap-3 mt-4">
                 <BtnLabel
                     link
                     type="button"

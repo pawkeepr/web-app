@@ -26,8 +26,8 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
 
 
     return (
-        <React.Fragment>
-            <div className="grid grid-cols-2 w-full gap-2">
+        <div className="gap-2">
+            <div className="grid grid-cols-2 w-full gap-2 mb-2">
                 <div className="col-span-1 mobile:col-span-full mobile:centering w-full">
                     <SearchInput
                         value={search}
@@ -43,8 +43,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
             <div className="team-list list-view-filter">
                 {cards(deferredItems)}
             </div>
-
-        </React.Fragment>
+        </div>
     );
 };
 

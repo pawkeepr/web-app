@@ -8,13 +8,11 @@ const BtnSuccess = ({ onClick, label = 'Sucesso', className, link = false, child
 	return (
 		<button
 			className={cn(
-				'next btn',
-				// {
-				// 	'bg-primary-600 dark:!text-gray-50 text-gray-200': !link,
-				// 	'text-primary-500 btn-link': link,
-				// 	'hover:text-primary-600': !link && !disabled,
-				// 	'dark:!text-gray-700': disabled,
-				// }
+				'next btn', 
+				{
+					'btn-primary': !link,
+					'btn-link': link,
+				}
 			)}
 			type="button"
 			onClick={onClick}

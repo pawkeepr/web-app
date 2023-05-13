@@ -27,6 +27,16 @@ export type Treatment = {
     updated_at: string;
 }
 
+type PaymentMethod = 'cash' | 'credit_card' | 'debit_card' | 'check' | 'transfer' | 'deposit' | 'other';
+
+export type Payment = {
+    id: string;
+    price: number;
+    payment_method: PaymentMethod;
+    created_at: string;
+    updated_at: string;
+}
+
 export type Vaccine = {
     id: string;
     name: string;
@@ -57,6 +67,7 @@ export type VeterinaryAppointment = {
     vaccines: Array<Partial<Vaccine>>,
     treatments: Array<Partial<Treatment>>,
     diseases: Array<Partial<Disease>>,
+    payment: Partial<Payment>;
     pet: Partial<OmitPet>;
     tutor: Nullable<Partial<Tutor>>;
     created_at?: string;

@@ -12,16 +12,43 @@
 
 @layer components {
     .btn {
-        @apply transition duration-300 ease-in-out w-32;
+        @apply transition duration-300 ease-in-out w-32 border-none;
         @apply py-2 px-4 m-1 text-sm font-semibold rounded-md gap-4 leading-4;
-        @apply !bg-opacity-70 !text-opacity-70 bg-primary-600 text-white;
+        @apply !bg-opacity-90 !text-opacity-90;
     }
 
     .btn:hover {
-        @apply !bg-opacity-100 !text-opacity-100 bg-primary-600 text-white;
+        @apply !bg-opacity-100 !text-opacity-100;
+        /* btn efeito de leve crescimento no hover */
+        @apply transform scale-105;
     }
 
-    .btn-link {
-        @apply bg-transparent border-0;
+    .btn:disabled {
+        @apply opacity-50 cursor-not-allowed;
     }
+
+    /* btn-link */
+    .btn-link {
+        @apply bg-transparent border-0 text-neutral-800; 
+        @apply no-underline bg-opacity-10;
+    }
+
+    .btn-link:hover {
+        @apply !bg-opacity-10 bg-gray-50;
+    }
+
+    .dark .btn-link {
+        @apply text-neutral-50;
+    }
+
+
+    /* btn-primary */
+    .btn-primary {
+        @apply bg-primary-600 text-white;
+    }
+
+    .dark .btn-primary {
+        @apply bg-secondary-600 text-gray-50;
+    }
+
 }
