@@ -33,7 +33,6 @@ const usePetById = ({ id, onChangeField }: UsePetByNameProps) => {
         if (!id) {
             return
         }
-
         const pet = pets?.find(pet => pet?.id === id)
 
         if (!pet) return

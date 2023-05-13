@@ -1,7 +1,9 @@
 import { Dialog, Tab, Transition } from '@headlessui/react'
 import { Formik } from 'formik'
 import { useRouter } from 'next/navigation'
-import { Fragment, useState } from 'react'
+import { Fragment, useCallback, useState } from 'react'
+import LOADING from '~/constants/loading'
+import useFindTutorByDocument from '~/hooks/use-find-tutor-by-document'
 import routes from '~/routes'
 import { addNewPet } from '~/store/actions'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
@@ -10,8 +12,6 @@ import { Breed, Pet } from '~/store/pets/types'
 import StepListBreeds from './components/organisms/steps/step-list-breeds'
 import StepListPets from './components/organisms/steps/step-list-pets'
 import StepListSpecies from './components/organisms/steps/step-list-species'
-import useFindTutorByDocument from '~/hooks/use-find-tutor-by-document'
-import LOADING from '~/constants/loading'
 
 type onChangeOpen = (arg: boolean) => void
 
@@ -62,17 +62,19 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
     }
 
     const router = useRouter()
-    const handleNavigate = (pet: Pet) => {
+    const handleNavigate = useCallback((pet: Pet) => {
         router.push(`${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`)
-    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [document])
 
-    const handleSubmit = (values: InitialValues) => {
-        const { payload: pet } = dispatch(addNewPet(values))
-        
-        if (pet) {
+    const handleSubmit = useCallback((values: InitialValues) => {
+        dispatch(addNewPet(values))
+        const pet = pets.find(pet => pet.name === values.name)
+        console.log(pet)
+        if (false) {
             handleNavigate(pet as Pet)
         }
-    }
+    }, [dispatch, pets, handleNavigate])
 
     const handleCancel = () => {
         onCancel?.()
@@ -94,9 +96,6 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
     const onChangeDocument = (doc: string) => {
         setDocument(doc)
     }
-
-    
-
 
     return (
         <>
