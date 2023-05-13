@@ -28,10 +28,10 @@ export const petSlice = createSlice({
         addPet: (state, action: PayloadAction<{ pet: any }>) => {
             state.isLoading = LOADING.PENDING;
         },
-        addPetSuccess: (state, action: PayloadAction<{ data: any }>) => {
+        addPetSuccess: (state, action: PayloadAction<Pet>) => {
             state.isPetCreated = true;
             state.isLoading = LOADING.IDLE;
-            state.pets.push(action.payload.data);
+            state.pets.push(action.payload);
         },
         addPetFail: (state, action) => {
             state.error = action.payload;

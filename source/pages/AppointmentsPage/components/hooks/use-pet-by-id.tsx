@@ -34,7 +34,7 @@ const usePetById = ({ id, onChangeField }: UsePetByNameProps) => {
             return
         }
 
-        const pet = pets.find(pet => pet.id === id)
+        const pet = pets?.find(pet => pet?.id === id)
 
         if (!pet) return
 

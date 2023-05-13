@@ -27,6 +27,23 @@ export enum Species {
     'reptile' = 'Réptil',
 }
 
+export enum MapOptionSpecies {
+    'dog' = 'dog',
+    'cat' = 'cat',
+    'horse' = 'horse',
+    'rabbit' = 'rabbit',
+    'bird' = 'bird',
+    'fish' = 'fish',
+    'reptile' = 'reptile',
+    'Cachorro' = 'dog',
+    'Gato' = 'cat',
+    'Cavalo' = 'horse',
+    'Coelho' = 'rabbit',
+    'Pássaro' = 'bird',
+    'Peixe' = 'fish',
+    'Réptil' = 'reptile',
+}
+
 export const dog = {
     name: 'Cachorro',
     value: 'dog',

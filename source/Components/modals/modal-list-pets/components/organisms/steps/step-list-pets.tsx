@@ -3,6 +3,7 @@ import FieldControl from '~/Components/molecules/field-control/field-control'
 import { Pet } from '~/store/pets/types'
 import { InitialValues } from '../../../modal-list-pets'
 import { useFormikContext } from 'formik'
+import { MapOptionSpecies } from '~/store/pets/speciesType'
 
 type StepListPetsProps = {
     pets: Pet[]
@@ -13,13 +14,13 @@ type StepListPetsProps = {
 }
 
 enum EmojiPet {
-    Gato = '🐱',
-    Cachorro = '🐶',
-    Coelho = '🐰',
-    Peixe = '🐠',
-    Pássaro = '🐦',
-    Réptil = '🦎',
-    Cavalo = '🐴',
+    cat = '🐱',
+    dog = '🐶',
+    rabbit = '🐰',
+    fish = '🐠',
+    bird = '🐦',
+    reptile = '🦎',
+    horse = '🐴',
 }
 
 const StepListPets = ({
@@ -54,7 +55,8 @@ const StepListPets = ({
                         "
                         >
                             <div className="grid grid-cols-4 justify-center items-center">
-                                <span className="align-middle col-span-1">{EmojiPet[pet.species]}</span>
+                                <span className="align-middle col-span-1">{
+                                EmojiPet[MapOptionSpecies[pet.species]]}</span>
                                 <span className="align-middle col-span-2">{pet.name}</span>
                                 <span className="align-middle col-span-1">{pet.species}</span>
                             </div>

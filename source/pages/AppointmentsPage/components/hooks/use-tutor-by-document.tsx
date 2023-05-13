@@ -34,7 +34,7 @@ const useTutorByDocument = ({ document, onChangeField }: UseTutorByDocumentProps
         }
 
         const petsOptions = pets
-            .filter(pet => pet.ownerEmergencyContact.document === documentNumber)
+            .filter(pet => pet?.ownerEmergencyContact.document === documentNumber)
             .map(pet => ({
                 ...pet,
                 value: pet.id,
