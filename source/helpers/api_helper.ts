@@ -52,7 +52,7 @@ class APIClient {
   //  get = (url, params) => {
   //   return axios.get(url, params);
   // };
-  get = (url: string, params: AxiosRequestConfig<any> | undefined) => {
+  get = (url: string, params?: AxiosRequestConfig<any> | undefined) => {
     let response;
 
     let paramKeys: any[] = [];
@@ -90,7 +90,7 @@ class APIClient {
   /**
    * Delete
    */
-  delete = (url: string, config: AxiosRequestConfig<any> | undefined) => {
+  delete = (url: string, config?: AxiosRequestConfig<any> | undefined) => {
     return axios.delete(url, { ...config });
   };
 }
