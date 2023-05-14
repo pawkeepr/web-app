@@ -39,7 +39,7 @@ const StepListSpecies = ({
 
     return (
         <div className="mt-3 p-1 gap-2">
-            <div className="pb-1">
+            <div className="pb-1 max-h-[250px] overflow-auto">
                 {
                     species.map(specie => (
                         <button

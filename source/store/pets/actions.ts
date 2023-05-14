@@ -10,7 +10,8 @@ import {
     GET_PETS,
     UPDATE_PET,
     UPDATE_PET_FAIL,
-    UPDATE_PET_SUCCESS
+    UPDATE_PET_SUCCESS,
+    RESET_CREATED_PET
 } from './types';
 
 export const getPets = createAction(GET_PETS);
@@ -23,3 +24,5 @@ export const addPetFail = createAction<string>(ADD_PET_FAIL);
 export const deletePet = createAction<{ [key: string]: any }>(DELETE_PET);
 export const deletePetSuccess = createAction<{ [key: string]: any }>(DELETE_PET_SUCCESS);
 export const deletePetFail = createAction<string>(DELETE_PET_FAIL);
+
+export const resetCreatedPet = createAction(RESET_CREATED_PET);

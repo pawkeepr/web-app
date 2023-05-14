@@ -1,17 +1,18 @@
 import { Dialog, Tab, Transition } from '@headlessui/react'
 import { Formik } from 'formik'
 import { useRouter } from 'next/navigation'
-import { Fragment, useCallback, useState } from 'react'
+import { Fragment, useCallback, useEffect, useState } from 'react'
 import LOADING from '~/constants/loading'
 import useFindTutorByDocument from '~/hooks/use-find-tutor-by-document'
 import routes from '~/routes'
-import { addNewPet } from '~/store/actions'
+import { addNewPet, resetCreatedPet } from '~/store/actions'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import { SpeciesType } from '~/store/pets/speciesType'
 import { Breed, Pet } from '~/store/pets/types'
 import StepListBreeds from './components/organisms/steps/step-list-breeds'
 import StepListPets from './components/organisms/steps/step-list-pets'
 import StepListSpecies from './components/organisms/steps/step-list-species'
+import StepLoading from './components/organisms/steps/step-loading'
 
 type onChangeOpen = (arg: boolean) => void
 
@@ -41,9 +42,27 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
     const [document, setDocument] = useState('')
     const [selectedTab, setSelectedTab] = useState(0)
 
-    const isLoading = useAppSelector(state => state.Pets.isLoading)
+    const { isPetSuccess, isPetCreated } = useAppSelector(state => state.Pets)
     const dispatch = useAppDispatch()
     const tutor = useFindTutorByDocument(document);
+    const router = useRouter()
+
+    const handleNavigate = useCallback((pet: Pet) => {
+        dispatch(resetCreatedPet())
+        router.push(`${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [document])
+
+    useEffect(() => {
+        if (isPetSuccess && isPetCreated) {
+            handleNavigate(isPetCreated)
+        }
+
+        return () => {
+            dispatch(resetCreatedPet())
+        }
+
+    }, [isPetSuccess, isPetCreated, handleNavigate, dispatch])
 
     const initialValues: InitialValues = {
         name: '',
@@ -61,20 +80,9 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
         setSelectedTab(index)
     }
 
-    const router = useRouter()
-    const handleNavigate = useCallback((pet: Pet) => {
-        router.push(`${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [document])
-
     const handleSubmit = useCallback((values: InitialValues) => {
         dispatch(addNewPet(values))
-        const pet = pets.find(pet => pet.name === values.name)
-        console.log(pet)
-        if (false) {
-            handleNavigate(pet as Pet)
-        }
-    }, [dispatch, pets, handleNavigate])
+    }, [dispatch])
 
     const handleCancel = () => {
         onCancel?.()
@@ -90,6 +98,7 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
     }
 
     const openModal = () => {
+        dispatch(resetCreatedPet())
         onChangeOpen(true)
     }
 
@@ -178,13 +187,7 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
                                         >
                                             Adicionar Pet
                                         </Dialog.Title>
-                                        {
-                                            isLoading === LOADING.PENDING && (
-                                                <div className="flex items-center justify-center">
-                                                    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-500"></div>
-                                                </div>
-                                            )
-                                        }
+                                        
                                         <Dialog.Description
                                             as="p"
                                             className="text-xs text-gray-700 dark:!text-gray-200 text-center"
@@ -194,7 +197,7 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
 
                                         <Tab.List>
                                             {
-                                                [1, 2, 3].map(
+                                                [1, 2, 3, 4].map(
                                                     (item) => (
                                                         <Tab
                                                             key={item}
@@ -228,7 +231,9 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
                                                         onChangeSelectedTab={onChangeSelectedTab}
                                                     />
                                                 </Tab.Panel>
-
+                                                <Tab.Panel key={4}>
+                                                    <StepLoading />
+                                                </Tab.Panel>
                                             </Tab.Panels>
                                         </Formik>
 

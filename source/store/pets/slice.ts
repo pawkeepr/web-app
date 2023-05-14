@@ -5,9 +5,9 @@ import LOADING from '~/constants/loading';
 
 const initialState: PetInitialState = {
     pets: [],
-    error: {},
+    error: null,
     isLoading: LOADING.IDLE,
-    isPetCreated: false,
+    isPetCreated: null,
     isPetSuccess: false,
 };
 
@@ -17,20 +17,23 @@ export const petSlice = createSlice({
     reducers: {
         apiResponseSuccess: (state, action: PayloadAction<Pet[]>) => {
             state.pets = action.payload;
-            state.isPetCreated = false;
             state.isPetSuccess = true;
         },
         apiResponseError: (state, action: PayloadAction<{ error: any }>) => {
             state.error = action.payload.error;
-            state.isPetCreated = false;
+            state.isPetCreated = null;
             state.isPetSuccess = false;
         },
-        addPet: (state, action: PayloadAction<{ pet: any }>) => {
+        addNewPet: (state, action: PayloadAction<{ pet: any }>) => {
             state.isLoading = LOADING.PENDING;
+            state.isPetCreated = null;
+            state.isPetSuccess = false;
+            state.error = null;
         },
         addPetSuccess: (state, action: PayloadAction<Pet>) => {
-            state.isPetCreated = true;
-            state.isLoading = LOADING.IDLE;
+            state.isPetCreated = action.payload;
+            state.isPetSuccess = true;
+            state.isLoading = LOADING.SUCCESS;
             state.pets.push(action.payload);
         },
         addPetFail: (state, action) => {
@@ -55,6 +58,11 @@ export const petSlice = createSlice({
         deletePetFail: (state, action) => {
             state.error = action.payload;
         },
+        resetCreatedPet: state => {
+            state.isPetCreated = null;
+            state.isPetSuccess = false;
+            state.error = null;
+        }
     },
 });
 

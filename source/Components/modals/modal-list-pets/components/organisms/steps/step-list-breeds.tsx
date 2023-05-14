@@ -21,15 +21,19 @@ const StepListBreeds = ({
 }: StepListBreedsProps) => {
 
     const [breeds, setBreeds] = useState<Item[]>([])
-    const { values, handleSubmit, setFieldValue } = useFormikContext<InitialValues>()
+    const { values, setFieldValue } = useFormikContext<InitialValues>()
 
     const prevStep = () => {
         onChangeSelectedTab(selectedTab - 1)
     }
 
+    const nextStep = () => {
+        onChangeSelectedTab(selectedTab + 1)
+    }
+
     const handleSelectBreed = (breed: Breed) => {
         setFieldValue('breed', breed)
-        handleSubmit()
+        nextStep()
     }
 
     useEffect(() => {
@@ -70,7 +74,7 @@ const StepListBreeds = ({
                 labelCancel='Voltar'
                 visibleSuccess={false}
                 onClickCancel={prevStep}
-                onClickSuccess={handleSubmit}
+                onClickSuccess={()=>{}}
             />
         </div>
     )
