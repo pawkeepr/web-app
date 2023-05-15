@@ -1,0 +1,12 @@
+skills
+portifolio
+
+
+ - config
+
+
+ - expe
+  skills
+  tempo de atuação
+  descrição de trabalhos feitos
+  

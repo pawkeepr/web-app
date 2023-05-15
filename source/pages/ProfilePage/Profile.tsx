@@ -20,15 +20,18 @@ import {
 } from 'reactstrap';
 
 //import images
-import progileBg from '~/assets/images/profile-bg.jpg';
+import profileBG from '~/assets/images/profile-bg.jpg';
 import avatar1 from '~/assets/images/users/avatar-1.jpg';
 
 const Profile = () => {
     const [activeTab, setActiveTab] = useState("1");
 
-    const tabChange = (tab) => {
+    const tabChange = (tab: string) => {
         if (activeTab !== tab) setActiveTab(tab);
     };
+
+    const currentYear = new Date().getFullYear();
+    const listOfYears = Array.from({ length: 100 }, (_, index) => currentYear - index);
 
     return (
         <React.Fragment>
@@ -36,7 +39,7 @@ const Profile = () => {
                 <Container fluid>
                     <div className="position-relative mx-n4 mt-n4">
                         <div className="profile-wid-bg profile-setting-img">
-                            <img src={progileBg} className="profile-wid-img" alt="" />
+                            <img src={profileBG} className="profile-wid-img" alt="" />
                             <div className="overlay-content">
                                 <div className="text-end p-3">
                                     <div className="p-0 ms-auto rounded-circle profile-photo-edit">
@@ -77,25 +80,6 @@ const Profile = () => {
                                 </CardBody>
                             </Card>
 
-                            <Card>
-                                <CardBody>
-                                    <div className="d-flex align-items-center mb-5">
-                                        <div className="flex-grow-1">
-                                            <h5 className="card-title mb-0">Complete Your Profile</h5>
-                                        </div>
-                                        <div className="flex-shrink-0">
-                                            <Link href="#" className="badge bg-light text-primary fs-12"><i
-                                                className="ri-edit-box-line align-bottom me-1"></i> Edit</Link>
-                                        </div>
-                                    </div>
-                                    <div className="progress animated-progress custom-progress progress-label">
-                                        <div className="progress-bar bg-danger" role="progressbar" style={{ "width": "30%" }}
-                                            aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
-                                            <div className="label">30%</div>
-                                        </div>
-                                    </div>
-                                </CardBody>
-                            </Card>
                             <Card>
                                 <CardBody>
                                     <div className="d-flex align-items-center mb-4">
@@ -159,7 +143,7 @@ const Profile = () => {
                                                     tabChange("1");
                                                 }}>
                                                 <i className="fas fa-home"></i>
-                                                Personal Details
+                                                Informações Pessoais
                                             </NavLink>
                                         </NavItem>
                                         <NavItem>
@@ -170,7 +154,7 @@ const Profile = () => {
                                                 }}
                                                 type="button">
                                                 <i className="far fa-user"></i>
-                                                Change Password
+                                                Alterar Senha
                                             </NavLink>
                                         </NavItem>
                                         <NavItem >
@@ -181,7 +165,7 @@ const Profile = () => {
                                                 }}
                                                 type="button">
                                                 <i className="far fa-envelope"></i>
-                                                Experience
+                                                Experiência Profissional
                                             </NavLink>
                                         </NavItem>
                                         <NavItem>
@@ -192,7 +176,7 @@ const Profile = () => {
                                                 }}
                                                 type="button">
                                                 <i className="far fa-envelope"></i>
-                                                Privacy Policy
+                                                Configurações
                                             </NavLink>
                                         </NavItem>
                                     </Nav>
@@ -235,48 +219,6 @@ const Profile = () => {
                                                             <Input type="email" className="form-control" id="emailInput"
                                                                 placeholder="Enter your email"
                                                                 defaultValue="daveadame@velzon.com" />
-                                                        </div>
-                                                    </Col>
-                                                    <Col lg={12}>
-                                                        <div className="mb-3">
-                                                            <Label htmlFor="JoiningdatInput" className="form-label">Joining
-                                                                Date</Label>
-                                                            <Flatpickr
-                                                                className="form-control"
-                                                                options={{
-                                                                    dateFormat: "d M, Y"
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    </Col>
-                                                    <Col lg={12}>
-                                                        <div className="mb-3">
-                                                            <Label htmlFor="skillsInput" className="form-label">Skills</Label>
-                                                            <select className="form-select mb-3">
-                                                                <option >Select your Skill </option>
-                                                                <option value="Choices1">CSS</option>
-                                                                <option value="Choices2">HTML</option>
-                                                                <option value="Choices3">PYTHON</option>
-                                                                <option value="Choices4">JAVA</option>
-                                                                <option value="Choices5">ASP.NET</option>
-                                                            </select>
-                                                        </div>
-                                                    </Col>
-                                                    <Col lg={6}>
-                                                        <div className="mb-3">
-                                                            <Label htmlFor="designationInput"
-                                                                className="form-label">Designation</Label>
-                                                            <Input type="text" className="form-control"
-                                                                id="designationInput" placeholder="Designation"
-                                                                defaultValue="Lead Designer / Developer" />
-                                                        </div>
-                                                    </Col>
-                                                    <Col lg={6}>
-                                                        <div className="mb-3">
-                                                            <Label htmlFor="websiteInput1"
-                                                                className="form-label">Website</Label>
-                                                            <Input type="text" className="form-control" id="websiteInput1"
-                                                                placeholder="www.example.com" defaultValue="www.velzon.com" />
                                                         </div>
                                                     </Col>
                                                     <Col lg={4}>
@@ -373,7 +315,7 @@ const Profile = () => {
                                                 </Row>
 
                                             </Form>
-                                            <div className="mt-4 mb-3 border-bottom pb-2">
+                                            {/* <div className="mt-4 mb-3 border-bottom pb-2">
                                                 <div className="float-end">
                                                     <Link href="#" className="link-primary">All Logout</Link>
                                                 </div>
@@ -438,7 +380,7 @@ const Profile = () => {
                                                 <div>
                                                     <Link href="#">Logout</Link>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </TabPane>
 
                                         <TabPane tabId="3">
@@ -446,114 +388,169 @@ const Profile = () => {
                                                 <div id="newlink">
                                                     <div id="1">
                                                         <Row>
-                                                            <Col lg={12}>
+                                                            <Col lg={6}>
                                                                 <div className="mb-3">
-                                                                    <Label htmlFor="jobTitle" className="form-label">Job
-                                                                        Title</Label>
-                                                                    <Input type="text" className="form-control"
-                                                                        id="jobTitle" placeholder="Job title"
-                                                                        defaultValue="Lead Designer / Developer" />
+                                                                    <Label 
+                                                                        htmlFor="jobTitle" 
+                                                                        className="form-label"
+                                                                    >
+                                                                        Título
+                                                                    </Label>
+                                                                    <Input 
+                                                                        type="text" 
+                                                                        className="form-control"
+                                                                        id="jobTitle" 
+                                                                        placeholder=""
+                                                                        defaultValue="" 
+                                                                    />
                                                                 </div>
                                                             </Col>
 
                                                             <Col lg={6}>
                                                                 <div className="mb-3">
-                                                                    <Label htmlFor="companyName" className="form-label">Company
-                                                                        Name</Label>
-                                                                    <Input type="text" className="form-control"
-                                                                        id="companyName" placeholder="Company name"
-                                                                        defaultValue="Themesbrand" />
+                                                                    <Label 
+                                                                        htmlFor="companyName" 
+                                                                        className="form-label"
+                                                                    >
+                                                                        Nome da empresa
+                                                                    </Label>
+                                                                    <Input 
+                                                                        type="text" 
+                                                                        className="form-control"
+                                                                        id="companyName"
+                                                                        placeholder=""
+                                                                    />
                                                                 </div>
                                                             </Col>
+                                                            
+                                                            <Col>
+                                                                <Row>
+                                                                    <Col lg={6}>
+                                                                        <div className="mb-3">
+                                                                            <label 
+                                                                                htmlFor="experienceYear"
+                                                                                className="form-label"
+                                                                            >
+                                                                                Início
+                                                                            </label>
+                                                                            <Row>
+                                                                                <Col lg={5} widths={['xs']}>
+                                                                                    <select className="form-control" 
+                                                                                        data-choices
+                                                                                        data-choices-search-false
+                                                                                        name="experienceYear"
+                                                                                        id="experienceYear"
+                                                                                        defaultValue=""
+                                                                                    >
+                                                                                        <option value="">Mês</option>
+                                                                                        <option value="1">Janeiro</option>
+                                                                                        <option value="2">Fevereiro</option>
+                                                                                        <option value="3">Março</option>
+                                                                                        <option value="4">Abril</option>
+                                                                                        <option value="5">Maio</option>
+                                                                                        <option value="6">Junho</option>
+                                                                                        <option value="7">Julho</option>
+                                                                                        <option value="8">Agosto</option>
+                                                                                        <option value="9">Setembro</option>
+                                                                                        <option value="10">Outubro</option>
+                                                                                        <option value="11">Novembro</option>
+                                                                                        <option value="12">Dezembro</option>
+                                                                                    </select>
+                                                                                </Col>
 
-                                                            <Col lg={6}>
-                                                                <div className="mb-3">
-                                                                    <label htmlFor="experienceYear"
-                                                                        className="form-label">Experience Years</label>
-                                                                    <Row>
-                                                                        <Col lg={5}>
-                                                                            <select className="form-control" data-choices
-                                                                                data-choices-search-false
-                                                                                name="experienceYear"
-                                                                                id="experienceYear">
-                                                                                <option defaultValue="">Select years</option>
-                                                                                <option value="Choice 1">2001</option>
-                                                                                <option value="Choice 2">2002</option>
-                                                                                <option value="Choice 3">2003</option>
-                                                                                <option value="Choice 4">2004</option>
-                                                                                <option value="Choice 5">2005</option>
-                                                                                <option value="Choice 6">2006</option>
-                                                                                <option value="Choice 7">2007</option>
-                                                                                <option value="Choice 8">2008</option>
-                                                                                <option value="Choice 9">2009</option>
-                                                                                <option value="Choice 10">2010</option>
-                                                                                <option value="Choice 11">2011</option>
-                                                                                <option value="Choice 12">2012</option>
-                                                                                <option value="Choice 13">2013</option>
-                                                                                <option value="Choice 14">2014</option>
-                                                                                <option value="Choice 15">2015</option>
-                                                                                <option value="Choice 16">2016</option>
-                                                                                <option value="Choice 17" >2017</option>
-                                                                                <option value="Choice 18">2018</option>
-                                                                                <option value="Choice 19">2019</option>
-                                                                                <option value="Choice 20">2020</option>
-                                                                                <option value="Choice 21">2021</option>
-                                                                                <option value="Choice 22">2022</option>
-                                                                            </select>
-                                                                        </Col>
+                                                                                <div className="col-auto align-self-center">
+                                                                                    de
+                                                                                </div>
 
-                                                                        <div className="col-auto align-self-center">
-                                                                            to
+                                                                                <Col lg={5} widths={['xs']}>
+                                                                                    <select 
+                                                                                        className="form-control" 
+                                                                                        data-choices
+                                                                                        data-choices-search-false
+                                                                                        name="choices-single-default2"
+                                                                                        defaultValue=""
+                                                                                    >
+                                                                                        <option value="">Ano</option>
+                                                                                        {listOfYears?.map((year) => (
+                                                                                            <option key={year} value={year}>
+                                                                                                {year}
+                                                                                            </option>
+                                                                                        ))}
+
+                                                                                    </select>
+                                                                                </Col>
+                                                                            </Row>
                                                                         </div>
+                                                                    </Col>
 
-                                                                        <Col lg={5}>
-                                                                            <select className="form-control" data-choices
-                                                                                data-choices-search-false
-                                                                                name="choices-single-default2">
-                                                                                <option defaultValue="">Select years</option>
-                                                                                <option value="Choice 1">2001</option>
-                                                                                <option value="Choice 2">2002</option>
-                                                                                <option value="Choice 3">2003</option>
-                                                                                <option value="Choice 4">2004</option>
-                                                                                <option value="Choice 5">2005</option>
-                                                                                <option value="Choice 6">2006</option>
-                                                                                <option value="Choice 7">2007</option>
-                                                                                <option value="Choice 8">2008</option>
-                                                                                <option value="Choice 9">2009</option>
-                                                                                <option value="Choice 10">2010</option>
-                                                                                <option value="Choice 11">2011</option>
-                                                                                <option value="Choice 12">2012</option>
-                                                                                <option value="Choice 13">2013</option>
-                                                                                <option value="Choice 14">2014</option>
-                                                                                <option value="Choice 15">2015</option>
-                                                                                <option value="Choice 16">2016</option>
-                                                                                <option value="Choice 17">2017</option>
-                                                                                <option value="Choice 18">2018</option>
-                                                                                <option value="Choice 19">2019</option>
-                                                                                <option value="Choice 20">2020</option>
-                                                                                <option value="Choice 21">2021</option>
-                                                                                <option value="Choice 22">2022</option>
-                                                                            </select>
-                                                                        </Col>
-                                                                    </Row>
-                                                                </div>
+                                                                    <Col lg={6}>
+                                                                        <div className="mb-3">
+                                                                            <label 
+                                                                                htmlFor="experienceYear"
+                                                                                className="form-label"
+                                                                            >
+                                                                                Término
+                                                                            </label>
+                                                                            <Row>
+                                                                                <Col lg={5} widths={['xs']}>
+                                                                                    <select className="form-control" 
+                                                                                        data-choices
+                                                                                        data-choices-search-false
+                                                                                        name="experienceYear"
+                                                                                        id="experienceYear"
+                                                                                        defaultValue=""
+                                                                                    >
+                                                                                        <option value="">Mês</option>
+                                                                                        <option value="1">Janeiro</option>
+                                                                                        <option value="2">Fevereiro</option>
+                                                                                        <option value="3">Março</option>
+                                                                                        <option value="4">Abril</option>
+                                                                                        <option value="5">Maio</option>
+                                                                                        <option value="6">Junho</option>
+                                                                                        <option value="7">Julho</option>
+                                                                                        <option value="8">Agosto</option>
+                                                                                        <option value="9">Setembro</option>
+                                                                                        <option value="10">Outubro</option>
+                                                                                        <option value="11">Novembro</option>
+                                                                                        <option value="12">Dezembro</option>
+                                                                                    </select>
+                                                                                </Col>
+
+                                                                                <div className="col-auto align-self-center">
+                                                                                    de
+                                                                                </div>
+
+                                                                                <Col lg={5} widths={['xs']}>
+                                                                                    <select className="form-control" data-choices
+                                                                                        data-choices-search-false
+                                                                                        name="choices-single-default2">
+                                                                                        <option value="">Ano</option>
+                                                                                        {listOfYears?.map((year) => (
+                                                                                            <option key={year} value={year}>
+                                                                                                {year}
+                                                                                            </option>
+                                                                                        ))}
+                                                                                    </select>
+                                                                                </Col>
+                                                                            </Row>
+                                                                        </div>
+                                                                    </Col>
+                                                                </Row>
                                                             </Col>
 
                                                             <Col lg={12}>
                                                                 <div className="mb-3">
-                                                                    <Label htmlFor="jobDescription" className="form-label">Job
-                                                                        Description</Label>
-                                                                    {/* <textarea className="form-control" id="jobDescription"
-                                                                    defaultValue=""
-                                                                        rows="3"
-                                                                        placeholder="Enter description">You always want to make sure that your fonts work well together and try to limit the number of fonts you use to three or less. Experiment and play around with the fonts that you already have in the software you're working with reputable font websites. </textarea> */}
+                                                                    <Label htmlFor="jobDescription" className="form-label">
+                                                                        Descrição
+                                                                    </Label>
+                                                                    <textarea 
+                                                                        className="form-control" 
+                                                                        id="jobDescription"
+                                                                        rows={ 3 }
+                                                                        placeholder="crie uma breve descrição sobre o cargo">
+                                                                    </textarea>
                                                                 </div>
                                                             </Col>
-
-                                                            <div className="hstack gap-2 justify-content-end">
-                                                                <Link className="btn btn-success"
-                                                                    href="#">Delete</Link>
-                                                            </div>
                                                         </Row>
                                                     </div>
                                                 </div>
@@ -562,16 +559,17 @@ const Profile = () => {
 
                                                 <Col lg={12}>
                                                     <div className="hstack gap-2">
-                                                        <button type="submit" className="btn btn-success">Update</button>
-                                                        <Link href="#" className="btn btn-primary">Add
-                                                            New</Link>
+                                                        <button type="submit" className="btn btn-success">Atualizar</button>
+                                                        <Link href="#" className="btn btn-primary">
+                                                            Adicionar
+                                                        </Link>
                                                     </div>
                                                 </Col>
                                             </form>
                                         </TabPane>
 
                                         <TabPane tabId="4">
-                                            <div className="mb-4 pb-2">
+                                            {/* <div className="mb-4 pb-2">
                                                 <h5 className="card-title text-decoration-underline mb-3">Security:</h5>
                                                 <div className="d-flex flex-column flex-sm-row mb-4 mb-sm-0">
                                                     <div className="flex-grow-1">
@@ -613,7 +611,7 @@ const Profile = () => {
                                                             className="btn btn-sm btn-primary">Generate backup codes</Link>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                             <div className="mb-3">
                                                 <h5 className="card-title text-decoration-underline mb-3">Application Notifications:</h5>
                                                 <ul className="list-unstyled mb-0">
@@ -712,9 +710,9 @@ const Profile = () => {
                                                         style={{ maxWidth: "265px" }} />
                                                 </div>
                                                 <div className="hstack gap-2 mt-3">
-                                                    <Link href="#" className="btn btn-soft-danger">Close &
-                                                        Delete This Account</Link>
-                                                    <Link href="#" className="btn btn-light">Cancel</Link>
+                                                    {/* <Link href="#" className="btn btn-soft-danger">Close &
+                                                        Delete This Account</Link> */}
+                                                    <Link href="#" className="btn btn-light">Salvar</Link>
                                                 </div>
                                             </div>
                                         </TabPane>
