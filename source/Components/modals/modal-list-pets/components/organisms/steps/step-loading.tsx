@@ -1,5 +1,5 @@
 import { useFormikContext } from 'formik'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import LoaderError from '~/Components/molecules/loaders/loader-error'
 import LoaderPending from '~/Components/molecules/loaders/loader-pending'
 import LoaderSuccess from '~/Components/molecules/loaders/loader-success'
@@ -17,7 +17,7 @@ const StepLoading = () => {
     useSubmitPet({ handleSubmit })
 
     return (
-        <div className="mt-3 p-1 gap-2 h-[250px]">
+        <div className="mt-3 p-1 gap-2 h-[250px] flex justify-center items-center">
                 {pending && (<LoaderPending />)}
 
                 {!pending && isPetSuccess && (

@@ -49,7 +49,9 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
 
     const handleNavigate = useCallback((pet: Pet) => {
         dispatch(resetCreatedPet())
-        router.push(`${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`)
+        setTimeout(() => {
+            router.push(`${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`)
+        }, 1000)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [document])
 

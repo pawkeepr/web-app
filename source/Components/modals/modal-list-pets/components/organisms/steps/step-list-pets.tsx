@@ -3,7 +3,7 @@ import FieldControl from '~/Components/molecules/field-control/field-control'
 import { Pet } from '~/store/pets/types'
 import { InitialValues } from '../../../modal-list-pets'
 import { useFormikContext } from 'formik'
-import { MapOptionSpecies } from '~/store/pets/speciesType'
+import { MapOptionSpecies, Species } from '~/store/pets/speciesType'
 
 type StepListPetsProps = {
     pets: Pet[]
@@ -41,7 +41,7 @@ const StepListPets = ({
 
     return (
         <div className="mt-3 p-1 gap-2">
-            <div className="pb-1 max-h-[250px] overflow-auto">
+            <div className="pb-5 max-h-[250px] overflow-auto">
                 {
                     pets.map(pet => (
                         <button
@@ -58,7 +58,9 @@ const StepListPets = ({
                                 <span className="align-middle col-span-1">{
                                 EmojiPet[MapOptionSpecies[pet.species]]}</span>
                                 <span className="align-middle col-span-2">{pet.name}</span>
-                                <span className="align-middle col-span-1">{pet.species}</span>
+                                <span className="align-middle col-span-1">{
+                                Species[MapOptionSpecies[pet.species]]
+                                }</span>
                             </div>
                         </button>
                     ))}
