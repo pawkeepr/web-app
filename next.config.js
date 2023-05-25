@@ -23,7 +23,10 @@ const nextConfig = ((phase) => {
     },
     env: {
       API_URL: _currentURL,
-      SECRET_KEY: process.env.SECRET_KEY
+      SECRET_KEY: process.env.SECRET_KEY,
+      REGION: process.env.REGION,
+      USER_POOL_ID: process.env.USER_POOL_ID,
+      USER_POOL_WEB_CLIENT_ID: process.env.USER_POOL_WEB_CLIENT_ID,
     },
   }
 })(process.env.NODE_ENV)

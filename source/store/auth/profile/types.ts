@@ -7,6 +7,7 @@ export const PROFILE_ERROR = `${name}/profileError`;
 export const RESET_PROFILE_FLAG = `${name}/resetProfileFlag`;
 
 export type Profile = {
+    [key: string]: any;
     id: number;
     email: string;
     phone: string;

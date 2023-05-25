@@ -1,4 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
+import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { destroyCookie, setCookie } from 'nookies';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import cookies from '~/constants/cookies';
@@ -18,31 +19,35 @@ import {
     SignInCredentials,
 } from '~/services/helpers/auth';
 
-import { getUser, postJwtLogin } from '~/helpers/fakebackend_helper';
+import { UserData, getUser, signInAws, signOut } from '~/services/helpers/auth';
 
 import { resetProfileFlag, setProfile } from '../profile/actions';
+import { Profile } from "../profile/types";
 
 export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
     try {
-        const { data: token } = yield call(postJwtLogin, action.payload);
-        const { data: user } = yield call(getUser, token.access_token);
-        yield setCookie(undefined, cookies.token.name, token.access_token, {
-            maxAge: cookies.token.expires,
+        const response: UserData = yield call(signInAws, action.payload);
+        const { signInUserSession: { accessToken } } = response;
+        // token
+        // const { data: user } = yield call(getUser, accessToken.jwtToken);
+        yield setCookie(undefined, cookies.token.name, accessToken.jwtToken, {
+            maxAge: accessToken.payload.exp,
         });
-        yield put(setProfile(user));
-        yield put(signInSuccess({ user, ...token }));
+        // yield put(setProfile(user));
+        yield put(signInSuccess({ user: {}, token: accessToken.jwtToken }));
     } catch (error) {
         console.log(error)
         yield put(signInFailed((error as any).message));
     }
 }
 
-export function* recoverUserByTokenSaga(action: PayloadAction<string>) {
+export function* recoverUserByTokenSaga() {
     try {
-        const { data: user } = yield call(getUser, action.payload);
-        const access_token = action.payload;
-        yield put(setProfile(user));
-        yield put(recoverUserByTokenSuccess({ user, access_token }));
+        const session: CognitoUserSession = yield call(getUser);
+        const access_token = session.getAccessToken().getJwtToken();
+        const userData = session.getIdToken().payload;
+        yield put(setProfile(userData as Profile));
+        yield put(recoverUserByTokenSuccess({ user: userData, access_token }));
     } catch (error) {
         console.log(error)
         yield put(recoverUserByTokenFailed((error as any).message));
@@ -54,6 +59,7 @@ export function* signOutUserSaga() {
         yield destroyCookie(null, cookies.token.name);
         yield put(resetProfileFlag());
         yield put(signOutUserSuccess());
+        yield call(signOut);
     } catch (error) {
         console.log(error)
         yield put(signOutUserFailed((error as any).message));

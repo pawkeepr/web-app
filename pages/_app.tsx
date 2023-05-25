@@ -11,11 +11,11 @@ import type { AppProps } from 'next/app';
 import { SSRProvider } from '@react-aria/ssr';
 import { AuthProvider } from "~/contexts/auth-context";
 import LayoutProvider from "~/contexts/layout-context";
-import fakeBackend from '~/helpers/AuthType/fakeBackend';
+// import fakeBackend from '~/helpers/AuthType/fakeBackend';
+
+import '~/aws';
 
 export default function App({ Component, pageProps }: AppProps) {
-
-  fakeBackend();
 
   return (
     <SSRProvider>

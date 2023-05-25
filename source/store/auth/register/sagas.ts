@@ -6,15 +6,15 @@ import { registerUser, registerUserFailed, registerUserSuccessful } from "./acti
 
 //Include Both Helper File with needed methods
 import {
-  postJwtRegister
-} from "../../../helpers/fakebackend_helper";
+  singUpAws
+} from "~/services/helpers/auth";
 
 import { AccountSignUp } from './types';
 
 // Is user register successful then direct plot user in redux.
 function* registerUserSaga({ payload: user }: PayloadAction<AccountSignUp>) {
   try {
-    yield call(postJwtRegister, user);
+    yield call(singUpAws, user);
     yield put(registerUserSuccessful());
   } catch (error) {
     yield put(registerUserFailed(error as string));

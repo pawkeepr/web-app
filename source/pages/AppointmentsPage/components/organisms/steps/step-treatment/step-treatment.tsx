@@ -2,26 +2,33 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 //Import images
 
-import { StepProps } from './types';
+import { StepProps } from '../types';
 
+import { useFormikContext } from 'formik';
 import { BtnAvatar, BtnLabel, BtnSuccess } from '~/Components/atoms/btn';
+import { InitialValues } from '~/pages/AppointmentsPage/Appointments';
+import AvatarPet from '../../../atoms/pet-avatar/pet-avatar';
 
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
+
+    const { values } = useFormikContext<InitialValues>()
+
+
     return (
         <>
             <div>
                 <h5>Tratamento</h5>
-
             </div>
 
             <div>
-
-
-
                 <Row className="g-3">
 
-                    <BtnAvatar alt='Avatar de Tutor' name="tutor.avatar" disabled />
+                    <div className="flex flex-row gap-2 items-center justify-center m-2 p-1">
+                        <AvatarPet name={values.pet?.name || ''} />
+                        <BtnAvatar alt='Avatar de Tutor' name="tutor.avatar" disabled size={24} />
+                    </div>
+
 
                     <Col sm={6}>
 
@@ -39,7 +46,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
             </div>
 
             <div className="flex align-items-center justify-end gap-3 mt-4">
-                <BtnLabel 
+                <BtnLabel
                     link
                     type="button"
                     className="right ms-auto previestab"
