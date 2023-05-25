@@ -10,14 +10,15 @@ import logoLight from "~/assets/images/logo-light.png";
 
 type AuthSliderProps = {
     bg?: 'auth-bg-image' | 'auth-bg-image-2' | 'auth-bg-image-3';
+    classNames?: string;
 };
 
-const AuthSlider = ({ bg = 'auth-bg-image' }: AuthSliderProps) => {
+const AuthSlider = ({ bg = 'auth-bg-image', classNames }: AuthSliderProps) => {
     return (
         <React.Fragment>
 
             <Col lg={6}>
-                <div className={`p-lg-5 p-4 auth-one-bg ${bg} h-100`}>
+                <div className={`p-lg-5 p-4 auth-one-bg ${bg} ${classNames} h-100`}>
                     <div className="bg-overlay"></div>
                     <div className="position-relative h-100 d-flex flex-column">
                         <div className="mb-4">

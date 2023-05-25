@@ -44,7 +44,7 @@ const CoverSignIn = () => {
                             <Col lg={12}>
                                 <Card className="overflow-hidden">
                                     <Row className="g-0">
-                                        <AuthSlider bg='auth-bg-image-3 d-none d-sm-block' />
+                                        <AuthSlider bg='auth-bg-image-3' classNames='d-none d-sm-block' />
 
                                         <Col lg={6}>
                                             <div className="p-lg-5 p-4 items-center flex-col justify-center h-100">
