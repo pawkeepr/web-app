@@ -1,34 +1,51 @@
-import { AxiosInstance } from 'axios';
-import { api } from '../api';
+import { CognitoUserSession } from 'amazon-cognito-identity-js';
+import { Auth } from 'aws-amplify';
+
+import { AccountSignUp } from '~/store/auth/register/types';
+import { UserData } from './types';
 
 export type SignInCredentials = {
     username: string;
     password: string;
 }
 
+export async function resendConfirmationCode(username: string) {
+    return Auth.resendSignUp(username);
+}
 
-export type SignInResponse = {
-    access_token: string
-    token_type: "bearer"
+export const singUpAws = async (data: AccountSignUp) => {
+    const { email, password, ...rest } = data
+    return await Auth.signUp({
+        username: email,
+        password,
+        attributes: {
+            email,
+            ...rest
+        }
+    });
 }
 
 // Login Method
-export const postJwtLogin = async (data: SignInCredentials) => {
-    return api.post<SignInResponse>('usuarios/login', data, {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    })
+export const signInAws = async (data: SignInCredentials): Promise<UserData> => {
+    return Auth.signIn(data.username, data.password)
 };
 
-export const getUser = async (token: string, newApi: AxiosInstance | null = null) => {
+export const signOut = async () => {
+    return Auth.signOut()
+}
 
-    const API = newApi || api
+export async function getUser(): Promise<CognitoUserSession> {
+    return Auth.currentSession();
+}
 
-    return API.get('usuarios/logado', {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    }
-    )
-}	
+export async function forgetPwd(email: string) {
+    return Auth.forgotPassword(email);
+}
+
+export async function forgotPasswordSubmit(email: string, code: string, newPassword: string) {
+    return Auth.forgotPasswordSubmit(email, code, newPassword)
+}
+
+export type {
+    UserData
+};

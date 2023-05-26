@@ -13,6 +13,7 @@ export const DELETE_TUTOR_FAIL = `${name}/deleteTutorFail`;
 export const CRM_API_RESPONSE_SUCCESS = `${name}/apiResponseSuccess`;
 export const CRM_API_RESPONSE_ERROR = `${name}/apiResponseError`;
 
+export const GET_TUTORS_BY_DOCUMENT = `${name}/getTutorsByDocument`;
 
 export type Tutor = {
     id: string;

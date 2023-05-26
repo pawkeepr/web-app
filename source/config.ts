@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   google: {
     API_KEY: "",
     CLIENT_ID: "",
@@ -11,3 +11,5 @@ module.exports = {
     API_URL: "https://api-node.themesbrand.website",
   }
 };
+
+export default config;

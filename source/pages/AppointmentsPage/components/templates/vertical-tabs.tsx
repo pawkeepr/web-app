@@ -90,7 +90,9 @@ const VerticalTabs = () => {
     }
 
     useEffect(() => {
-        setIsFixed(window.innerWidth < 768)
+        if (window.innerWidth < 768) {
+            setIsFixed(window.innerWidth < 768)
+        }
 
         return () => {
             setIsFixed(false)

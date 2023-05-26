@@ -3,7 +3,7 @@ import { all, fork } from "redux-saga/effects";
 import LoginSagas from "./auth/login/sagas";
 import LayoutSaga from "./layouts/saga";
 //Auth
-import ForgetSaga from "./auth/forget-pwd/saga";
+import ForgetSaga from "./auth/forget-pwd/sagas";
 import ProfileSaga from "./auth/profile/sagas";
 import AccountSaga from "./auth/register/sagas";
 

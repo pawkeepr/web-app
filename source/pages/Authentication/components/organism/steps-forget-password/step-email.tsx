@@ -1,0 +1,72 @@
+import Alert from 'react-bootstrap/Alert';
+import { BtnSuccess } from "~/Components/atoms/btn";
+import FieldControl from "~/Components/molecules/field-control/field-control";
+import LOADING from "~/constants/loading";
+import { useAppDispatch, useAppSelector } from "~/store/hooks";
+
+import { FormEventHandler, useEffect } from "react";
+import { forgetPwd, resetLoading } from '~/store/auth/forget-pwd/actions';
+
+import validateEmail from '~/validations/email';
+
+type StepEmailProps = {
+    email: string;
+    onChangeNextTab: () => void;
+}
+
+const StepEmail = ({ email, onChangeNextTab }: StepEmailProps) => {
+
+    const dispatch = useAppDispatch();
+
+    const isLoading = useAppSelector(state => state.ForgetPassword.isLoading);
+
+    useEffect(() => {
+        if (isLoading === LOADING.SUCCESS) {
+            dispatch(resetLoading());
+            setTimeout(() => {
+                onChangeNextTab();
+            }, 1000);
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading])
+
+    const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+        e.preventDefault();
+        dispatch(forgetPwd({ email }));
+    }
+
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <Alert className="alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
+                Digite seu email para receber um link de redefinição de senha.
+            </Alert>
+
+            <div className="mb-4">
+                <FieldControl
+                    name="email"
+                    type="email"
+                    label="Email"
+                    pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+                    required
+                    placeholder="Digite seu email"
+                    className="form-control"
+                />
+
+            </div>
+
+            <div className="text-center mt-4 w-full ">
+                <BtnSuccess
+                    type="submit"
+                    className="w-full"
+                    disabled={isLoading === LOADING.PENDING || !validateEmail.isValidSync(email)}
+                >
+                    Enviar Link de Redefinição de Senha
+                </BtnSuccess>
+            </div>
+        </form>
+    )
+}
+
+export default StepEmail

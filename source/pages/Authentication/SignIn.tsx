@@ -44,7 +44,7 @@ const CoverSignIn = () => {
                             <Col lg={12}>
                                 <Card className="overflow-hidden">
                                     <Row className="g-0">
-                                        <AuthSlider bg='auth-bg-image-3 d-none d-sm-block' />
+                                        <AuthSlider bg='auth-bg-image-3' classNames='d-none d-sm-block' />
 
                                         <Col lg={6}>
                                             <div className="p-lg-5 p-4 items-center flex-col justify-center h-100">
@@ -73,9 +73,9 @@ const CoverSignIn = () => {
                                                 </div>
 
                                                 <div className="mt-5 text-center">
-                                                    <p className="mb-0">Você não tem uma conta ? <br /> 
-                                                        <Link href="/sign-up" className="fw-bold text-primary text-decoration-underline d-none d-sm-block"> Registre-se</Link>
-                                                        <Link href="/sign-up" className="fw-bold text-secondary text-decoration-underline d-sm-none"> Registre-se</Link> 
+                                                    <p className="mb-0">Você não tem uma conta ? <br />
+                                                        <Link href="/sign-up" className="fw-bold text-primary no-underline d-none d-sm-block"> Registre-se</Link>
+                                                        <Link href="/sign-up" className="fw-bold text-secondary no-underline d-sm-none"> Registre-se</Link>
                                                     </p>
                                                 </div>
                                             </div>

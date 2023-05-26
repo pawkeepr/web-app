@@ -14,6 +14,8 @@ import validatePassword from '~/validations/password';
 import PasswordRules from '../../molecules/password-rules';
 import Container from '../../template/container';
 
+import Link from 'next/link';
+import { Form } from 'react-bootstrap';
 import useNextStep from '~/hooks/use-next-step';
 import { StepProps } from './types';
 
@@ -22,7 +24,13 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
     const [passwordShow, setPasswordShow] = useState(false);
     const [passwordConfirmShow, setPasswordConfirmShow] = useState(false);
 
-    const { values, handleBlur } = useFormikContext<AccountSignUp>()
+    const {
+        values,
+        handleBlur,
+        handleChange,
+        isValid,
+        handleSubmit
+    } = useFormikContext<AccountSignUp>()
     const { email, password, passwordConfirm } = values;
 
     const requiredValid = useMemo(() => {
@@ -42,6 +50,13 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
     const onToggleVisiblePasswordConfirm = () => {
         setPasswordConfirmShow(state => !state)
     }
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        handleSubmit()
+        nextStep()
+    }
+
 
     return (
         <Container>
@@ -94,10 +109,29 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
 
 
             <PasswordRules value={values.password} />
-
+            <Form.Check
+                type="checkbox"
+                className="w-100"
+                name="termsOfUse"
+                id="termsOfUse"
+                onChange={handleChange}
+                checked={values.termsOfUse}
+                label={
+                    <p className="mb-4 fs-12 fst-italic">
+                        {"Você se registrando aceita os termos de uso da plataforma: "}
+                        <Link href="#" className="text-primary text-decoration-underline fst-normal fw-medium">Termos de Uso</Link>
+                    </p>
+                }
+            />
 
             <div className="mt-4 d-flex justify-content-center">
-                <BtnSuccess label="Próximo" className="m-1" onClick={nextStep} disabled={!requiredValid} />
+                <BtnSuccess
+                    label="Finalizar cadastro"
+                    type="submit"
+                    onClick={handleClick}
+                    disabled={!isValid}
+                    className="align-self-center"
+                />
             </div>
 
         </Container>

@@ -10,6 +10,7 @@ import { Tutor } from '../tutor/types';
 import {
     Breed
 } from './breedType';
+import LOADING from '~/constants/loading';
 
 export const name = "Pet"
 
@@ -25,7 +26,7 @@ export const DELETE_PET_SUCCESS = `${name}/deletePetSuccess`;
 export const DELETE_PET_FAIL = `${name}/deletePetFail`;
 export const CRM_API_RESPONSE_SUCCESS = `${name}/apiResponseSuccess`;
 export const CRM_API_RESPONSE_ERROR = `${name}/apiResponseError`;
-
+export const RESET_CREATED_PET = `${name}/resetCreatedPet`;
 
 export enum GenderPet {
     male = 'Macho',
@@ -69,8 +70,9 @@ export type Pet = {
 export type PetInitialState = {
     pets: Array<Pet>,
     error: any,
-    isPetCreated: boolean,
+    isPetCreated: Pet | null,
     isPetSuccess: boolean,
+    isLoading: LOADING,
 };
 
 export type {

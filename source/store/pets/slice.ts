@@ -1,11 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { Pet, PetInitialState, name } from './types';
+import LOADING from '~/constants/loading';
 
 const initialState: PetInitialState = {
     pets: [],
-    error: {},
-    isPetCreated: false,
+    error: null,
+    isLoading: LOADING.IDLE,
+    isPetCreated: null,
     isPetSuccess: false,
 };
 
@@ -15,20 +17,28 @@ export const petSlice = createSlice({
     reducers: {
         apiResponseSuccess: (state, action: PayloadAction<Pet[]>) => {
             state.pets = action.payload;
-            state.isPetCreated = false;
             state.isPetSuccess = true;
         },
         apiResponseError: (state, action: PayloadAction<{ error: any }>) => {
             state.error = action.payload.error;
-            state.isPetCreated = false;
+            state.isPetCreated = null;
             state.isPetSuccess = false;
         },
-        addPetSuccess: (state, action: PayloadAction<{ data: any }>) => {
-            state.isPetCreated = true;
-            state.pets.push(action.payload.data);
+        addNewPet: (state, action: PayloadAction<{ pet: any }>) => {
+            state.isLoading = LOADING.PENDING;
+            state.isPetCreated = null;
+            state.isPetSuccess = false;
+            state.error = null;
+        },
+        addPetSuccess: (state, action: PayloadAction<Pet>) => {
+            state.isPetCreated = action.payload;
+            state.isPetSuccess = true;
+            state.isLoading = LOADING.SUCCESS;
+            state.pets.push(action.payload);
         },
         addPetFail: (state, action) => {
             state.error = action.payload;
+            state.isLoading = LOADING.IDLE;
         },
         updatePetSuccess: (state, action: PayloadAction<{ data: any }>) => {
             state.pets = state.pets.map(pet =>
@@ -42,12 +52,17 @@ export const petSlice = createSlice({
         },
         deletePetSuccess: (state, action: PayloadAction<{ pet: any }>) => {
             state.pets = state.pets.filter(
-                pet => pet._id.toString() !== action.payload.pet.toString()
+                pet => pet.id.toString() !== action.payload.pet.toString()
             );
         },
         deletePetFail: (state, action) => {
             state.error = action.payload;
         },
+        resetCreatedPet: state => {
+            state.isPetCreated = null;
+            state.isPetSuccess = false;
+            state.error = null;
+        }
     },
 });
 

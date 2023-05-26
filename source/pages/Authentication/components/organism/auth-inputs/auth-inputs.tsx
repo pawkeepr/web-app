@@ -13,6 +13,7 @@ import { Formik } from 'formik';
 import { SignInCredentials } from '~/services/helpers/auth';
 
 import cn from 'classnames';
+import Link from 'next/link';
 import * as Yup from 'yup';
 
 const initialValues: SignInCredentials = {
@@ -84,6 +85,22 @@ const Auth = () => {
 
 
                         <div className="position-relative auth-pass-inputgroup mb-3">
+                            <Link
+                                href="/forgot-password"
+                                className="
+                                    absolute
+                                    z-10
+                                    font-semibold 
+                                    text-primary-600
+                                    text-xs
+                                    no-underline
+                                    mobile:text-secondary-600
+                                    top-0
+                                    right-0
+                                ">
+                                Esqueceu a senha?
+                            </Link>
+
                             <FieldControl
                                 type={visiblePassword ? 'text' : 'password'}
                                 label="Senha"

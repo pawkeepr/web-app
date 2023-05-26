@@ -16,7 +16,7 @@ const PetsTab = () => {
     }, [dispatch]);
 
     const Modal = () => <ModalAddPet />
-    const cards = (pets: Pet[]) => pets?.map(pet => (<CardPets key={pet.id} pet={pet} />))
+    const cards = (pets: Pet[]) => pets?.map(pet => (<CardPets key={pet?.id} pet={pet} />))
 
     const filter = useCallback((deferredPets: Pet[], search: string) => {
 

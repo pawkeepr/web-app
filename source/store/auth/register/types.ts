@@ -14,22 +14,4 @@ export type AccountSignUp = {
     password: string;
     passwordConfirm: string;
     termsOfUse: boolean;
-    person: {
-        firstName: string,
-        lastName: string,
-        crmv: string,
-        document: string,
-        company: string | null,
-        phoneNumber: string,
-    },
-    address: {
-        country: string;
-        street: string;
-        number: string;
-        complement: string;
-        neighborhood: string;
-        city: string;
-        state: string;
-        zipCode: string;
-    };
 };
