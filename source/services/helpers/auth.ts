@@ -38,6 +38,10 @@ export async function getUser(): Promise<CognitoUserSession> {
     return Auth.currentSession();
 }
 
+export async function forgetPwd(email: string) {
+    return Auth.forgotPassword(email);
+}
+
 export type {
     UserData
 };

@@ -1,127 +1,122 @@
 'use client'
 
 import PropTypes from "prop-types";
-import { Alert, Card, CardBody, Col, Container, Form, FormFeedback, Input, Label, Row } from "reactstrap";
+
+import Alert from 'react-bootstrap/Alert';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 
 //redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Link from "next/link";
 
 // Formik Validation
-import { useFormik } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
 // action
-import { userForgetPassword } from "~/store/actions";
+import { forgetPwd } from "~/store/auth/forget-pwd/actions";
 
-// import images
-// import profile from "../../assets/images/bg.png";
-import Image from "next/image";
-import logoLight from "~/assets/images/logo-light.png";
+import { BtnSuccess } from "~/Components/atoms/btn";
+import HeaderTitle from "~/Components/atoms/header-title";
+import LogoSimple from "~/Components/atoms/logo-simple";
+import LogoSimpleMobile from "~/Components/atoms/logo-simple-mobile";
+import FieldControl from "~/Components/molecules/field-control/field-control";
+import LOADING from "~/constants/loading";
+import { useAppSelector } from "~/store/hooks";
+
+const validationSchema = Yup.object({
+  email: Yup.string().required("Por favor, digite seu email!").email("Email inválido"),
+})
+
+type InitialValues = Yup.InferType<typeof validationSchema>
+
+const initialValues: InitialValues = {
+  email: '',
+}
+
 
 const ForgetPasswordPage = (props: { history: any; }) => {
 
   const dispatch = useDispatch();
 
-  const validation = useFormik({
-    // enableReinitialize : use this flag when initial values needs to be changed
-    enableReinitialize: true,
+  const isLoading = useAppSelector(state => state.ForgetPassword.isLoading);
 
-    initialValues: {
-      email: '',
-    },
-    validationSchema: Yup.object({
-      email: Yup.string().required("Please Enter Your Email"),
-    }),
-    onSubmit: (values) => {
-      dispatch(userForgetPassword(values, props.history));
-    }
-  });
-
-  const { forgetError, forgetSuccessMsg } = useSelector(state => ({
-    forgetError: state.ForgetPassword.forgetError,
-    forgetSuccessMsg: state.ForgetPassword.forgetSuccessMsg,
-  }));
+  const handleSubmit = (values: InitialValues) => {
+    dispatch(forgetPwd(values));
+  }
 
   return (
-    <div className="auth-page-content">
+    <div className="auth-page-wrapper auth-bg-cover py-5 flex justify-content-center align-items-center min-h-[94vh]">
+      <div className="bg-overlay" />
+      <HeaderTitle title="Forget Password" />
       <Container>
-        <Row>
-          <Col lg={12}>
-            <div className="text-center mt-sm-5 mb-4 text-white-50">
-              <div>
-                <Link href="/" className="d-inline-block auth-logo">
-                  <Image src={logoLight} alt="" height="20" />
-                </Link>
-              </div>
-              <p className="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
-            </div>
-          </Col>
-        </Row>
+
 
         <Row className="justify-content-center">
           <Col md={8} lg={6} xl={5}>
-            <Card className="mt-4">
-
-              <CardBody className="p-4">
-                <div className="text-center mt-2">
-                  <h5 className="text-primary">Forgot Password?</h5>
-                  <p className="text-muted">Reset password with velzon</p>
-
-
+            <Card className="mt-4 p-4">
+              <div className='flex flex-col items-center justify-center'>
+                <LogoSimple className='d-none d-sm-block' />
+                <LogoSimpleMobile className='d-sm-none' />
+                <div className="text-center mb-2">
+                  <h5 className="text-primary">Ola!</h5>
+                  <p className="text-muted">Você esqueceu sua senha?</p>
+                  <p className="text-muted">Podemos te Ajudar!</p>
                 </div>
+              </div>
 
-                <Alert className="alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
-                  Enter your email and instructions will be sent to you!
-                </Alert>
-                <div className="p-2">
-                  {forgetError && forgetError ? (
-                    <Alert color="danger" style={{ marginTop: "13px" }}>
-                      {forgetError}
-                    </Alert>
-                  ) : null}
-                  {forgetSuccessMsg ? (
-                    <Alert color="success" style={{ marginTop: "13px" }}>
-                      {forgetSuccessMsg}
-                    </Alert>
-                  ) : null}
-                  <Form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      validation.handleSubmit();
-                      return false;
-                    }}
-                  >
+
+              <Alert className="alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
+                Digite seu email para receber um link de redefinição de senha.
+              </Alert>
+              <div className="p-2">
+                <Formik
+                  enableReinitialize
+                  initialValues={initialValues}
+                  validationSchema={validationSchema}
+                  onSubmit={handleSubmit}
+                >
+                  <Form>
                     <div className="mb-4">
-                      <Label className="form-label">Email</Label>
-                      <Input
+                      <FieldControl
                         name="email"
-                        className="form-control"
-                        placeholder="Enter email"
                         type="email"
-                        onChange={validation.handleChange}
-                        onBlur={validation.handleBlur}
-                        value={validation.values.email || ""}
-                        invalid={
-                          validation.touched.email && validation.errors.email ? true : false
-                        }
+                        label="Email"
+                        required
+                        placeholder="Digite seu email"
+                        className="form-control"
                       />
-                      {validation.touched.email && validation.errors.email ? (
-                        <FormFeedback type="invalid"><div>{validation.errors.email}</div></FormFeedback>
-                      ) : null}
+
                     </div>
 
-                    <div className="text-center mt-4">
-                      <button className="btn btn-success w-100" type="submit">Send Reset Link</button>
+                    <div className="text-center mt-4 w-full ">
+                      <BtnSuccess
+                        type="submit"
+                        className="w-full"
+                        disabled={isLoading === LOADING.PENDING}
+                      >
+                        Enviar Link de Redefinição de Senha
+                      </BtnSuccess>
                     </div>
                   </Form>
-                </div>
-              </CardBody>
+                </Formik>
+              </div>
             </Card>
 
             <div className="mt-4 text-center">
-              <p className="mb-0">Wait, I remember my password... <Link href="/sign-in" className="fw-semibold text-primary text-decoration-underline"> Click here </Link> </p>
+              <p className="mb-0">Espere, Eu lembro minha senha...
+                <br />
+                <Link
+                  href="/sign-in"
+                  className="font-semibold text-secondary-500 opacity-80 hover:text-secondary-500 hover:opacity-100 !no-underline"
+                >
+                  Clique Aqui!
+                </Link>
+              </p>
             </div>
 
           </Col>

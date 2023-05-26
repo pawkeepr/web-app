@@ -3,18 +3,28 @@ import cn from 'classnames'
 import { BtnProps } from './types'
 
 
-const BtnSuccess = ({ onClick, label = 'Sucesso', className, link = false, children, disabled, ...rest }: BtnProps) => {
+const BtnSuccess = ({
+	onClick,
+	label = 'Sucesso',
+	className,
+	link = false,
+	children,
+	type,
+	disabled,
+	...rest
+}: BtnProps) => {
 
 	return (
 		<button
 			className={cn(
-				'next btn', 
+				'next btn',
 				{
 					'btn-primary': !link,
 					'btn-link': link,
-				}
+				},
+				className
 			)}
-			type="button"
+			type={type}
 			onClick={onClick}
 			disabled={disabled}
 			{...rest}
