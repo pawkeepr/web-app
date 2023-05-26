@@ -13,3 +13,5 @@ export const recoverUserByTokenFailed = createAction<string>(`${name}/recoverUse
 export const signOutUser = createAction(`${name}/signOutUser`);
 export const signOutUserSuccess = createAction(`${name}/signOutUserSuccess`);
 export const signOutUserFailed = createAction(`${name}/signOutUserFailed`);
+
+export const resetLoading = createAction(`${name}/resetLoading`);

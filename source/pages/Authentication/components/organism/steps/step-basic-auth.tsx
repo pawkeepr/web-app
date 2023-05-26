@@ -16,7 +16,6 @@ import Container from '../../template/container';
 
 import Link from 'next/link';
 import { Form } from 'react-bootstrap';
-import useNextStep from '~/hooks/use-next-step';
 import { StepProps } from './types';
 
 const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
@@ -41,8 +40,6 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
         )
     }, [email, password, passwordConfirm])
 
-    useNextStep(nextStep, requiredValid)
-
     const onToggleVisiblePassword = () => {
         setPasswordShow(state => !state)
     }
@@ -62,7 +59,6 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
         <Container>
 
             <FieldControl
-                divClassName='my-1'
                 label="Email"
                 initialFocus
                 name="email"
@@ -74,7 +70,6 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
             />
 
             <FieldControl
-                divClassName='my-1'
                 required
                 label='Senha'
                 name="password"
@@ -92,7 +87,6 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
 
             <FieldControl
                 required
-                divClassName='my-1'
                 label='Repita a senha'
                 name="passwordConfirm"
                 type={passwordConfirmShow ? "text" : "password"}
@@ -117,20 +111,35 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
                 onChange={handleChange}
                 checked={values.termsOfUse}
                 label={
-                    <p className="mb-4 fs-12 fst-italic">
+                    <p className="fs-12 fst-italic">
                         {"Você se registrando aceita os termos de uso da plataforma: "}
-                        <Link href="#" className="text-primary text-decoration-underline fst-normal fw-medium">Termos de Uso</Link>
+                        <Link href="#" className="text-primary no-underline fst-normal fw-medium">Termos de Uso</Link>
                     </p>
                 }
             />
 
-            <div className="mt-4 d-flex justify-content-center">
+            <Form.Check
+                type="checkbox"
+                className="w-100"
+                name="policyPrivacy"
+                id="policyPrivacy"
+                onChange={handleChange}
+                checked={values.policyPrivacy}
+                label={
+                    <p className="fs-12 fst-italic">
+                        {"Você se registrando aceita a política de privacidade da plataforma: "}
+                        <Link href="#" className="text-primary no-underline fst-normal fw-medium">Política de Privacidade</Link>
+                    </p>
+                }
+            />
+
+            <div className="mt-4 flex justify-center w-full">
                 <BtnSuccess
                     label="Finalizar cadastro"
                     type="submit"
                     onClick={handleClick}
                     disabled={!isValid}
-                    className="align-self-center"
+                    className="align-self-center !w-60 mobile:!w-full"
                 />
             </div>
 

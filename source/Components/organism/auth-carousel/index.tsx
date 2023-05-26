@@ -18,7 +18,7 @@ const AuthSlider = ({ bg = 'auth-bg-image', classNames }: AuthSliderProps) => {
         <React.Fragment>
 
             <Col lg={6}>
-                <div className={`p-lg-5 p-4 auth-one-bg ${bg} ${classNames} h-100`}>
+                <div className={`p-4 auth-one-bg ${bg} ${classNames} h-100`}>
                     <div className="bg-overlay"></div>
                     <div className="position-relative h-100 d-flex flex-column">
                         <div className="mb-4">

@@ -87,6 +87,9 @@ const loginSlice = createSlice({
       state.error = action.payload;
       state.isLoading = LOADING.FAILED;
     },
+    resetLoading: (state) => {
+      state.isLoading = LOADING.IDLE;
+    },
   },
   initialState,
 

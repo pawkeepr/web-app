@@ -14,4 +14,5 @@ export type AccountSignUp = {
     password: string;
     passwordConfirm: string;
     termsOfUse: boolean;
+    policyPrivacy: boolean;
 };

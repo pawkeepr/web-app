@@ -134,19 +134,20 @@ const ForgetPasswordPage = (props: { history: any; }) => {
 
                 </Formik>
               </div>
+              <div className="mt-4 text-center">
+                <p className="mb-0">Espere, Eu lembro minha senha...
+                  <br />
+                  <Link
+                    href="/sign-in"
+                    className="font-semibold text-secondary-500 opacity-80 hover:text-secondary-500 hover:opacity-100 !no-underline"
+                  >
+                    Clique Aqui!
+                  </Link>
+                </p>
+              </div>
             </Card>
 
-            <div className="mt-4 text-center">
-              <p className="mb-0">Espere, Eu lembro minha senha...
-                <br />
-                <Link
-                  href="/sign-in"
-                  className="font-semibold text-secondary-500 opacity-80 hover:text-secondary-500 hover:opacity-100 !no-underline"
-                >
-                  Clique Aqui!
-                </Link>
-              </p>
-            </div>
+
 
           </Col>
         </Row>

@@ -21,10 +21,9 @@ import {
 
 import { UserData, getUser, signInAws, signOut } from '~/services/helpers/auth';
 
+import { errorToast } from '../../helpers/toast';
 import { resetProfileFlag, setProfile } from '../profile/actions';
 import { Profile } from "../profile/types";
-
-import { errorToast } from '../../helpers/toast';
 
 export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
     try {
@@ -38,7 +37,6 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
         // yield put(setProfile(user));
         yield put(signInSuccess({ user: {}, token: accessToken.jwtToken }));
     } catch (error) {
-        console.log(error)
         errorToast('Não foi possível realizar o login.', 'Falha!')
         yield put(signInFailed((error as any).message));
     }
