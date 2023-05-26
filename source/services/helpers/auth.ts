@@ -42,6 +42,10 @@ export async function forgetPwd(email: string) {
     return Auth.forgotPassword(email);
 }
 
+export async function forgotPasswordSubmit(email: string, code: string, newPassword: string) {
+    return Auth.forgotPasswordSubmit(email, code, newPassword)
+}
+
 export type {
     UserData
 };

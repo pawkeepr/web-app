@@ -2,7 +2,6 @@
 
 import PropTypes from "prop-types";
 
-import Alert from 'react-bootstrap/Alert';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -14,39 +13,66 @@ import { useDispatch } from "react-redux";
 import Link from "next/link";
 
 // Formik Validation
-import { Form, Formik } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 
 // action
-import { forgetPwd } from "~/store/auth/forget-pwd/actions";
+import { updatePwd } from "~/store/auth/forget-pwd/actions";
 
-import { BtnSuccess } from "~/Components/atoms/btn";
 import HeaderTitle from "~/Components/atoms/header-title";
 import LogoSimple from "~/Components/atoms/logo-simple";
 import LogoSimpleMobile from "~/Components/atoms/logo-simple-mobile";
-import FieldControl from "~/Components/molecules/field-control/field-control";
+
+// 187913
+
+import { Tab } from "@headlessui/react";
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from "react";
 import LOADING from "~/constants/loading";
 import { useAppSelector } from "~/store/hooks";
-
+import validatePassword from '~/validations/password';
+import StepEmail from "./components/organism/steps-forget-password/step-email";
+import StepPassword from "./components/organism/steps-forget-password/step-password";
 const validationSchema = Yup.object({
   email: Yup.string().required("Por favor, digite seu email!").email("Email inválido"),
+  password: validatePassword,
+  code: Yup.string().required("Por favor, digite o código de verificação!"),
 })
 
-type InitialValues = Yup.InferType<typeof validationSchema>
+export type InitialValues = Yup.InferType<typeof validationSchema>
 
 const initialValues: InitialValues = {
   email: '',
+  password: '',
+  code: '',
 }
 
-
 const ForgetPasswordPage = (props: { history: any; }) => {
-
+  const [selectedTab, setSelectedTab] = useState(0);
+  const router = useRouter()
   const dispatch = useDispatch();
+  const isLoading = useAppSelector(state => state.ForgetPassword.isLoadingUpdate);
 
-  const isLoading = useAppSelector(state => state.ForgetPassword.isLoading);
+  useEffect(() => {
+    if (isLoading === LOADING.SUCCESS) {
+      setTimeout(() => {
+        router.push('/sign-in')
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading])
+
+
+  const onChangeSelectedTab = (index: number) => {
+    setSelectedTab(index);
+  }
+
+  const onChangeTab = (index: number) => () => {
+    setSelectedTab(index);
+  }
 
   const handleSubmit = (values: InitialValues) => {
-    dispatch(forgetPwd(values));
+    dispatch(updatePwd(values));
   }
 
   return (
@@ -63,16 +89,14 @@ const ForgetPasswordPage = (props: { history: any; }) => {
                 <LogoSimple className='d-none d-sm-block' />
                 <LogoSimpleMobile className='d-sm-none' />
                 <div className="text-center mb-2">
-                  <h5 className="text-primary">Ola!</h5>
+                  <h5 className="text-primary">Ola! Seja Bem Vindo!</h5>
                   <p className="text-muted">Você esqueceu sua senha?</p>
                   <p className="text-muted">Podemos te Ajudar!</p>
                 </div>
               </div>
 
 
-              <Alert className="alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
-                Digite seu email para receber um link de redefinição de senha.
-              </Alert>
+
               <div className="p-2">
                 <Formik
                   enableReinitialize
@@ -80,29 +104,34 @@ const ForgetPasswordPage = (props: { history: any; }) => {
                   validationSchema={validationSchema}
                   onSubmit={handleSubmit}
                 >
-                  <Form>
-                    <div className="mb-4">
-                      <FieldControl
-                        name="email"
-                        type="email"
-                        label="Email"
-                        required
-                        placeholder="Digite seu email"
-                        className="form-control"
-                      />
+                  {
+                    ({ handleSubmit, isValid, values }) => (
+                      <>
+                        <Tab.Group selectedIndex={selectedTab} onChange={onChangeSelectedTab}>
+                          <Tab.List className="hidden">
+                            {[0, 1].map((category) => (
+                              <Tab
+                                key={category}
 
-                    </div>
+                              />
 
-                    <div className="text-center mt-4 w-full ">
-                      <BtnSuccess
-                        type="submit"
-                        className="w-full"
-                        disabled={isLoading === LOADING.PENDING}
-                      >
-                        Enviar Link de Redefinição de Senha
-                      </BtnSuccess>
-                    </div>
-                  </Form>
+                            ))}
+                          </Tab.List>
+
+                          <Tab.Panels className="mt-2">
+                            <Tab.Panel key={0}>
+                              <StepEmail email={values.email} onChangeNextTab={onChangeTab(1)} />
+                            </Tab.Panel>
+                            <Tab.Panel key={1}>
+                              <StepPassword handleSubmit={handleSubmit} isValid={isValid} />
+                            </Tab.Panel>
+                          </Tab.Panels>
+                        </Tab.Group>
+
+                      </>
+                    )
+                  }
+
                 </Formik>
               </div>
             </Card>

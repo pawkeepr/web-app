@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -11,80 +11,81 @@ import TabContent from 'react-bootstrap/TabContent';
 import TabPane from 'react-bootstrap/TabPane';
 //formik
 import { Formik, FormikHelpers } from 'formik';
-import Link from 'next/link';
 import * as Yup from 'yup';
 import HeaderTitle from '~/Components/atoms/header-title';
 import AuthSlider from '~/Components/organism/auth-carousel';
 import FooterAuth from '~/Components/organism/footer-auth';
 
 
-import validateEmail from '~/validations/email';
-import validatePassword from '~/validations/password';
+import validateAddress from '~/validations/address';
+import validatePerson from '~/validations/person';
 
-import { registerUser, resetRegisterFlag } from '~/store/actions';
-import { AccountSignUp } from '~/store/auth/register/types';
+import { editProfile } from '~/store/auth/profile/actions';
 import { useAppDispatch } from '~/store/hooks';
 
-import StepSignUpBasicAuth from './components/organism/steps/step-basic-auth';
+import { Profile, RULES } from '~/store/auth/profile/types';
+import StepSignUpAddress from './components/organism/steps/step-address';
+import StepSignUpLoading from './components/organism/steps/step-loading';
+import StepSignUpPerson from './components/organism/steps/step-person';
 import StepSignUpTermsOfUse from './components/organism/steps/step-terms-of-use';
 
-
 const validationSchema = Yup.object({
-    email: validateEmail,
-    password: validatePassword,
-    passwordConfirm: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'As senhas não coincidem')
-        .required('Este campo é obrigatório'),
-    termsOfUse: Yup.boolean().oneOf(
-        [true],
-        'Você deve aceitar os termos de uso'
-    ),
-    //person: validatePerson,
-    //address: validateAddress,
+    person: validatePerson,
+    address: validateAddress,
 });
 
-const CoverSignUp = () => {
+const FinishRegistration = () => {
     const [tab, setTab] = useState('1')
 
     const dispatch = useAppDispatch()
 
-    const onSubmit = async (values: AccountSignUp, helper: FormikHelpers<AccountSignUp>) => {
-        dispatch(registerUser(values))
+    const onSubmit = async (values: Profile, helper: FormikHelpers<Profile>) => {
+        dispatch(editProfile(values))
     }
 
-    useEffect(() => {
-        dispatch(resetRegisterFlag())
-    }, [dispatch])
-
-    const initialValues: AccountSignUp = {
-        email: '',
-        password: '',
-        passwordConfirm: '',
-        termsOfUse: false
+    const initialValues: Profile = {
+        crmv: null,
+        type: RULES.ADMIN,
+        cpf_cnpj: null,
+        firstName: null,
+        lastName: null,
+        company: null,
+        phoneNumber: null,
+        about: null,
+        country: 'Brazil',
+        street: null,
+        number: null,
+        complement: null,
+        neighborhood: null,
+        city: null,
+        state: null,
+        zipCode: null,
+        avatar: null,
+        email: null,
+        phone: null,
+        created_at: null,
+        updated_at: null,
+        id: null,
     };
 
 
     const Tabs = [
         {
             id: '1',
-            component: (props: any) => <StepSignUpBasicAuth {...props} />
+            component: (props: any) => <StepSignUpPerson {...props} />
         },
-        // {
-        //     id: '2',
-        //     component: (props: any) => <StepSignUpPerson {...props} />
-        // },
-        // {
-        //     id: '3',
-        //     component: (props: any) => <StepSignUpAddress {...props} />
-        // },
         {
             id: '2',
+            component: (props: any) => <StepSignUpAddress {...props} />
+        },
+        {
+            id: '3',
             component: (props: any) => <StepSignUpTermsOfUse {...props} />
         },
-        // {
-        //     id: '3',
-        //     component: (props: any) => <StepSignUpLoading {...props} />
-        // }
+        {
+            id: '4',
+            component: (props: any) => <StepSignUpLoading {...props} />
+        }
     ]
 
     const onChangeNextStep = () => {
@@ -115,7 +116,6 @@ const CoverSignUp = () => {
     return (
         <React.Fragment>
             <HeaderTitle title="Criar Conta" />
-
             <Formik
                 enableReinitialize
                 validationSchema={validationSchema}
@@ -149,14 +149,7 @@ const CoverSignUp = () => {
                                                 ))
                                             }
                                         </TabContainer>
-                                        <div className="text-center pt-24">
-                                            <p className="list-group-item fs-12 mb-4">Você já tem uma conta ?
-                                                <br />
-                                                <Link href="/sign-in" className="fw-semibold text-primary text-decoration-underline">
-                                                    Entrar!
-                                                </Link>
-                                            </p>
-                                        </div>
+
 
                                     </Col>
                                 </Row>
@@ -172,4 +165,4 @@ const CoverSignUp = () => {
     );
 };
 
-export default CoverSignUp;
+export default FinishRegistration;
