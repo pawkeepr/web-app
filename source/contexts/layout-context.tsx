@@ -7,7 +7,7 @@ type LayoutProps = {
     children: React.ReactNode;
 }
 
-const routesAuth = ['/sign-in', '/sign-up', '/forget-password', '/reset-password', '/logout']
+const routesAuth = ['/sign-in', '/sign-up', '/forgot-password', '/reset-password', '/logout']
 
 const LayoutAuth = ({ children }: LayoutProps) => {
     return (
