@@ -9,7 +9,7 @@ type AddressProps = {
         state: boolean
         city: boolean
         neighborhood: boolean
-        street: boolean
+        road: boolean
         complement: boolean
     }
 }
@@ -66,18 +66,18 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                     <FieldControl
                         divClassName='my-1'
                         label='Rua'
-                        name="street"
-                        aria-label="street"
+                        name="road"
+                        aria-label="road"
                         className="form-control w-70"
-                        disabled={disabledInputs.street || loading}
+                        disabled={disabledInputs.road || loading}
                         placeholder={loading ? 'Carregando...' : 'Digite o nome da rua'}
                         required
                         disabledError
                     >
                         <Form.Control
                             type="text"
-                            name="number"
-                            aria-label="number"
+                            name="no"
+                            aria-label="no"
                             placeholder="N°"
                             required
                             onChange={onChangeNumber}

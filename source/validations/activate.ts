@@ -9,12 +9,12 @@ const transformTrim = (value: any, originalValue: string) => {
 
 const validate = Yup.object().shape({
     email: Yup.string().email('O email deve ser válido').required('O campo de email é obrigatório'),
-    firstName: Yup.string()
+    name: Yup.string()
         .transform(transformTrim)
         .min(2, 'O nome deve ter pelo menos 2 caracteres')
         .max(50, 'O nome deve ter no máximo 50 caracteres')
         .required('O campo de nome é obrigatório'),
-    lastName: Yup.string()
+    lastname: Yup.string()
         .transform(transformTrim)
         .min(2, 'O sobrenome deve ter pelo menos 2 caracteres')
         .max(155, 'O sobrenome deve ter no máximo 50 caracteres')
@@ -49,10 +49,10 @@ const validate = Yup.object().shape({
             return cpf.isValid(value) || cnpj.isValid(value);
         }),
     country: Yup.string(),
-    street: Yup.string()
+    road: Yup.string()
         .transform(transformTrim)
         .required('O campo Rua é obrigatório'),
-    number: Yup.string()
+    no: Yup.string()
         .transform(transformTrim)
         .required('O campo Número é obrigatório'),
     complement: Yup.string().transform(transformTrim),
@@ -65,7 +65,7 @@ const validate = Yup.object().shape({
         .max(3, 'O campo Estado deve ter no max 3 caracteres')
         .min(2, 'O campo Estado deve ter no min 2 caracteres')
         .required('O campo Estado é obrigatório'),
-    zipCode: Yup.string()
+    zip_code: Yup.string()
         .matches(/^[0-9]{5}-[0-9]{3}$/, 'O campo CEP deve ter o formato 00000-000')
         .required('O campo CEP é obrigatório'),
     // gender: Yup.string().oneOf(['Male', 'Female', 'Other']).required()
@@ -73,20 +73,20 @@ const validate = Yup.object().shape({
 
 export type ActivateAccount = {
     email: string;
-    firstName: string;
-    lastName: string;
+    name: string;
+    lastname: string;
     crmv: string;
     type: RULES;
     phone: string;
     cpf_cnpj: string;
     country: string;
-    street: string;
-    number: string;
+    road: string;
+    no: string;
     complement: string;
     neighborhood: string;
     city: string;
     state: string;
-    zipCode: string;
+    zip_code: string;
 };
 
 export default validate;
