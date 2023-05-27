@@ -39,6 +39,11 @@ const initialValues = (document: NullString = null, id: NullString = null): Init
     diseases: [],
     vaccines: [],
     exams: [],
+    payment: {
+        method: null,
+        price: null,
+        discount: null,
+    }
 })
 
 const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {

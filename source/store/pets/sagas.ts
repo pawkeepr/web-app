@@ -52,7 +52,7 @@ export function* onUpdatePet({ payload: pet }: PayloadAction<{ [key: string]: an
 
 export function* onDeletePet({ payload: pet }: PayloadAction<{ [key: string]: any }>) {
   try {
-    const { data } = yield call(deletePet, pet);
+    const { data } = yield call(deletePet, pet.id);
     yield put(deletePetSuccess({ pet, ...data }));
     toast.success("Pet Delete Successfully", { autoClose: 3000 });
   } catch (error) {
@@ -64,11 +64,12 @@ export function* onDeletePet({ payload: pet }: PayloadAction<{ [key: string]: an
 export function* onAddNewPet({ payload: pet }: PayloadAction<{ [key: string]: any }>) {
   try {
     const { data } = yield call(postPet, pet);
+    toast.success("Pet Adicionado com Sucesso", { autoClose: 3000 });
     yield put(addPetSuccess(data));
-    toast.success("Pet Added Successfully", { autoClose: 3000 });
+
   } catch (error) {
+    toast.error("Ocorreu um Erro ao Adicionar Pet! :'(", { autoClose: 3000 });
     yield put(addPetFail((error as Error).message));
-    toast.error("Pet Added Failed", { autoClose: 3000 });
   }
 }
 

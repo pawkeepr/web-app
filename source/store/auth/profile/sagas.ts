@@ -5,13 +5,14 @@ import { editProfile as editProfileAction, profileError, profileSuccess } from "
 import { Profile } from './types';
 //Include Both Helper File with needed methods
 import { PayloadAction } from "@reduxjs/toolkit";
-import {
-  postFakeProfile
-} from "../../../helpers/fakebackend_helper";
 
-function* editProfile({ payload: user }: PayloadAction<Profile>) {
+import {
+  updateProfile,
+} from "~/services/helpers/profile";
+
+function* onUpdateProfile({ payload: user }: PayloadAction<Profile>) {
   try {
-    const { data } = yield call(postFakeProfile, user);
+    const { data } = yield call(updateProfile, user);
     yield put(profileSuccess(data));
   } catch (error) {
     yield put(profileError((error as any).message));
@@ -19,7 +20,7 @@ function* editProfile({ payload: user }: PayloadAction<Profile>) {
 }
 
 export function* watchProfile() {
-  yield takeEvery(editProfileAction, editProfile);
+  yield takeEvery(editProfileAction, onUpdateProfile);
 }
 
 function* ProfileSaga() {

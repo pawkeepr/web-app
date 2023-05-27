@@ -7,22 +7,10 @@ const BtnLabel = ({ onClick, label = 'Sucesso', className, children, disabled, .
 
 	return (
 		<button
-			className={cn(
-				`
-				btn 
-				text-gray-700 
-				dark:!text-gray-200 
-				hover:!bg-gray-100
-				bg-transparent
-				`,
-				{
-					'hover:text-gray-300': !disabled,
-					'dark:!text-gray-700': disabled,
-				}
-			)}
+			className='btn btn-link'
 			type="button"
 			onClick={onClick}
-			disabled={disabled}
+			disabled={true}
 			{...rest}
 		>
 			{children || label}

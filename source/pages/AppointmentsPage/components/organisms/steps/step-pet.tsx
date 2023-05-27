@@ -166,7 +166,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 </Row>
             </div>
 
-            <div className="d-flex align-items-start gap-3 mt-4">
+            <div className="flex align-items-center justify-end gap-3 mt-4">
                 <BtnSuccess
                     type="button"
                     className="btn-label right ms-auto nexttab nexttab"

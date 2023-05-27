@@ -44,6 +44,11 @@ const FieldControl = ({
     const InputComponent = component as any
     const display = !disabledError && meta.touched && !!meta.error ? 'block' : 'none'
 
+    const onChange = (e: any) => {
+        props.onChange?.(e)
+        inputProps.onChange(e)
+    }
+
     return (
         <div className={divClassName}>
             <If condition={!!label}>
@@ -74,6 +79,7 @@ const FieldControl = ({
                     `}
                     {...inputProps}
                     {...props}
+                    onChange={onChange}
                 />
 
                 {children}

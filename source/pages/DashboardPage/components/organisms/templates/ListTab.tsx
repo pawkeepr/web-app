@@ -70,7 +70,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
             <div className="team-list list-view-filter">
                 {cards(deferredItems)}
             </div>
-        </React.Fragment>
+        </React.Fragment >
     );
 };
 

@@ -18,19 +18,14 @@ import AuthSlider from '~/Components/organism/auth-carousel';
 import FooterAuth from '~/Components/organism/footer-auth';
 
 
-import validateAddress from '~/validations/address';
 import validateEmail from '~/validations/email';
 import validatePassword from '~/validations/password';
-import validatePerson from '~/validations/person';
 
 import { registerUser, resetRegisterFlag } from '~/store/actions';
 import { AccountSignUp } from '~/store/auth/register/types';
 import { useAppDispatch } from '~/store/hooks';
 
-import StepSignUpAddress from './components/organism/steps/step-address';
 import StepSignUpBasicAuth from './components/organism/steps/step-basic-auth';
-import StepSignUpLoading from './components/organism/steps/step-loading';
-import StepSignUpPerson from './components/organism/steps/step-person';
 import StepSignUpTermsOfUse from './components/organism/steps/step-terms-of-use';
 
 
@@ -44,8 +39,8 @@ const validationSchema = Yup.object({
         [true],
         'Você deve aceitar os termos de uso'
     ),
-    person: validatePerson,
-    address: validateAddress,
+    //person: validatePerson,
+    //address: validateAddress,
 });
 
 const CoverSignUp = () => {
@@ -65,25 +60,7 @@ const CoverSignUp = () => {
         email: '',
         password: '',
         passwordConfirm: '',
-        termsOfUse: false,
-        person: {
-            crmv: '',
-            document: '',
-            firstName: '',
-            lastName: '',
-            company: null,
-            phoneNumber: '',
-        },
-        address: {
-            country: 'Brazil',
-            street: '',
-            number: '',
-            complement: '',
-            neighborhood: '',
-            city: '',
-            state: '',
-            zipCode: '',
-        },
+        termsOfUse: false
     };
 
 
@@ -92,22 +69,22 @@ const CoverSignUp = () => {
             id: '1',
             component: (props: any) => <StepSignUpBasicAuth {...props} />
         },
+        // {
+        //     id: '2',
+        //     component: (props: any) => <StepSignUpPerson {...props} />
+        // },
+        // {
+        //     id: '3',
+        //     component: (props: any) => <StepSignUpAddress {...props} />
+        // },
         {
             id: '2',
-            component: (props: any) => <StepSignUpPerson {...props} />
-        },
-        {
-            id: '3',
-            component: (props: any) => <StepSignUpAddress {...props} />
-        },
-        {
-            id: '4',
             component: (props: any) => <StepSignUpTermsOfUse {...props} />
         },
-        {
-            id: '5',
-            component: (props: any) => <StepSignUpLoading {...props} />
-        }
+        // {
+        //     id: '3',
+        //     component: (props: any) => <StepSignUpLoading {...props} />
+        // }
     ]
 
     const onChangeNextStep = () => {

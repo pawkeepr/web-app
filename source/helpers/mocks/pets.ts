@@ -107,18 +107,9 @@ function factoryMockPets(adapter: MockAdapter) {
 
         const pets = getPets()
 
-        const isValid = pets.filter(
-            usr => usr.document === pet.document || usr.email === pet.email
-        );
-
-
         return new Promise((resolve, reject) => {
-
-            pets.push({ id: faker.datatype.uuid(), created_at: Date.now().toLocaleString(), ...pet })
-
-            if (isValid.length > 0) {
-                return reject([400, { message: 'Este Pet já existe!' }]);
-            }
+            const newPet = { id: faker.datatype.uuid(), created_at: Date.now().toLocaleString(), ...pet }
+            pets.push(newPet)
 
             try {
                 const maxAge = 60 * 60 * 24 * 30
@@ -129,8 +120,8 @@ function factoryMockPets(adapter: MockAdapter) {
             }
 
             setTimeout(() => {
-                return resolve([200, { data: pet }]);
-            }, 1000)
+                return resolve([200, { data: newPet }]);
+            }, 2500)
         })
     })
 }

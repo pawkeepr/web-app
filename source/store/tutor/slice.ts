@@ -42,12 +42,12 @@ export const tutorSlice = createSlice({
         },
         deleteTutorSuccess: (state, action: PayloadAction<{ tutor: any }>) => {
             state.tutors = state.tutors.filter(
-                tutor => tutor._id.toString() !== action.payload.tutor.toString()
+                tutor => tutor.id.toString() !== action.payload.tutor.toString()
             );
         },
         deleteTutorFail: (state, action) => {
             state.error = action.payload;
-        },
+        }
     },
 });
 
