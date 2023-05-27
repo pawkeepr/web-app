@@ -20,6 +20,7 @@ function* registerUserSaga({ payload: user }: PayloadAction<AccountSignUp>) {
     yield put(registerUserSuccessful());
     successToast('Um e-mail de confirmação foi enviado para o seu e-mail.', 'Registro realizado com sucesso!')
   } catch (error) {
+    console.log(error)
     errorToast('Não foi possível realizar o registro.', 'Erro ao realizar o registro!')
     yield put(registerUserFailed(error as string));
   }

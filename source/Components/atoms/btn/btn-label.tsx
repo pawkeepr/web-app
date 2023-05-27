@@ -1,5 +1,4 @@
 
-import cn from 'classnames'
 import { BtnProps } from './types'
 
 
@@ -7,13 +6,12 @@ const BtnLabel = ({ onClick, label = 'Sucesso', className, children, disabled, .
 
 	return (
 		<button
-			className='btn btn-link'
+			className={`btn-label !max-w-fit-content ${className}`}
 			type="button"
 			onClick={onClick}
-			disabled={true}
+			disabled={disabled}
 			{...rest}
-		>
-			{children || label}
+		>{children || label}
 		</button>
 	)
 }

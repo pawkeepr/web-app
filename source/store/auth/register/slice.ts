@@ -2,11 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { AccountState, name } from './types';
 
+import LOADING from '~/constants/loading';
 import { registerUser, resetRegisterFlag } from './actions';
 
 const initialState: AccountState = {
   message: null,
-  loading: true,
+  loading: LOADING.IDLE,
   success: false,
   error: false
 };
@@ -16,18 +17,19 @@ const accountSlice = createSlice({
   initialState,
   reducers: {
     registerUser: (state) => {
-      state.loading = true;
+      state.loading = LOADING.PENDING;
     },
     registerUserSuccessful: (state, action) => {
-      state.loading = false;
+      state.loading = LOADING.SUCCESS;
       state.success = true;
     },
     registerUserFailed: (state, action) => {
-      state.loading = false;
+      state.loading = LOADING.FAILED;
       state.message = action.payload;
       state.error = true;
     },
     resetRegisterFlag: (state) => {
+      state.loading = LOADING.IDLE;
       state.success = false;
       state.error = false;
     },

@@ -20,7 +20,6 @@ export const singUpAws = async (data: AccountSignUp) => {
         password,
         attributes: {
             email,
-            ...rest
         }
     });
 }
@@ -29,6 +28,10 @@ export const singUpAws = async (data: AccountSignUp) => {
 export const signInAws = async (data: SignInCredentials): Promise<UserData> => {
     return Auth.signIn(data.username, data.password)
 };
+
+export const confirmSignUp = async (username: string, code: string) => {
+    return Auth.confirmSignUp(username, code)
+}
 
 export const signOut = async () => {
     return Auth.signOut()

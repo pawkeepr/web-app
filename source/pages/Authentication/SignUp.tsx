@@ -9,7 +9,7 @@ import TabContainer from 'react-bootstrap/TabContainer';
 import TabContent from 'react-bootstrap/TabContent';
 import TabPane from 'react-bootstrap/TabPane';
 //formik
-import { Formik, FormikHelpers } from 'formik';
+import { Formik } from 'formik';
 import Link from 'next/link';
 import * as Yup from 'yup';
 import AuthSlider from '~/Components/organism/auth-carousel';
@@ -18,10 +18,12 @@ import AuthSlider from '~/Components/organism/auth-carousel';
 import validateEmail from '~/validations/email';
 import validatePassword from '~/validations/password';
 
-import { registerUser, resetRegisterFlag } from '~/store/actions';
+import { registerUser, resetRegisterFlag } from '~/store/auth/register/actions';
 import { AccountSignUp } from '~/store/auth/register/types';
-import { useAppDispatch } from '~/store/hooks';
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
 
+import { useRouter } from 'next/navigation';
+import LOADING from '~/constants/loading';
 import AuthLayout from '../_layouts/auth/auth_layout';
 import StepSignUpBasicAuth from './components/organism/steps/step-basic-auth';
 
@@ -48,14 +50,28 @@ const CoverSignUp = () => {
     const [tab, setTab] = useState('1')
 
     const dispatch = useAppDispatch()
-
-    const onSubmit = async (values: AccountSignUp, helper: FormikHelpers<AccountSignUp>) => {
+    const router = useRouter()
+    const isLoading = useAppSelector(state => state.Account.loading)
+    const onSubmit = async (values: AccountSignUp) => {
         dispatch(registerUser(values))
     }
 
     useEffect(() => {
-        dispatch(resetRegisterFlag())
-    }, [dispatch])
+        return () => {
+            dispatch(resetRegisterFlag())
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    useEffect(() => {
+        if (isLoading === LOADING.SUCCESS) {
+            dispatch(resetRegisterFlag())
+            setTimeout(() => {
+                router.push('/sign-in')
+            }, 1500)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading])
 
     const initialValues: AccountSignUp = {
         email: '',
@@ -116,7 +132,7 @@ const CoverSignUp = () => {
 
     return (
         <AuthLayout title="Criar conta">
-            <div className="h-full mt-5">
+            <div className="h-full mt-5 w-full ">
                 <Card className="overflow-hidden shadow-xl !rounded-xl !bg-gray-50 m-10 !mt-2 max-h-screen">
                     <Row className="justify-content-center g-0">
                         <AuthSlider bg='auth-bg-image-2' />

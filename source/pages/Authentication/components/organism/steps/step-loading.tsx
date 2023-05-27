@@ -6,34 +6,39 @@ import { useAppDispatch, useAppSelector } from "~/store/hooks"
 import LoaderError from "~/Components/molecules/loaders/loader-error"
 import LoaderPending from "~/Components/molecules/loaders/loader-pending"
 import LoaderSuccess from "~/Components/molecules/loaders/loader-success"
+import LOADING from "~/constants/loading"
 import Container from "../../template/container"
 
 const StepLoading = () => {
     const router = useRouter()
     const dispatch = useAppDispatch()
-    const { loading, success, error } = useAppSelector(state => state.Account)
+    const { isLoading } = useAppSelector(state => state.ActivateAccount)
 
     useEffect(() => {
-        if (success) {
+        if (isLoading === LOADING.SUCCESS) {
             setTimeout(() => {
                 router.push("/sign-in")
             }, 3000)
         }
-    }, [success, router, dispatch])
+        return () => {
+            dispatch({ type: 'RESET' })
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading])
 
 
     return (
         <Container>
             <div className="flex justify-center items-center h-96">
-                {loading && (
+                {isLoading === LOADING.PENDING && (
                     <LoaderPending />
                 )}
 
-                {!loading && success && (
+                {isLoading === LOADING.SUCCESS && (
                     <LoaderSuccess />
                 )}
 
-                {!loading && error && (
+                {isLoading === LOADING.FAILED && (
                     <LoaderError />
                 )}
             </div>

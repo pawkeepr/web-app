@@ -11,7 +11,7 @@ const AuthLayout = ({ children, title }: AuthLayoutProps) => {
         <div className="h-screen auth-page-wrapper auth-bg-cover flex content-center items-center">
             <HeaderTitle title={title} />
             <div className="bg-overlay" />
-            <div className="auth-page-content flex h-full justify-center items-center gap-2">
+            <div className="auth-page-content flex h-full justify-center items-center gap-2 overflow-hidden">
                 {children}
             </div>
         </div>

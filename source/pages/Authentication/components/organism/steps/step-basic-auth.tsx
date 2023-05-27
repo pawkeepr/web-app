@@ -7,8 +7,6 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import BtnSuccess from '~/Components/atoms/btn/btn-success';
 import FieldControl from '~/Components/molecules/field-control';
 import { AccountSignUp } from '~/store/auth/register/types';
-import validateEmail from '~/validations/email';
-import validatePassword from '~/validations/password';
 
 
 import PasswordRules from '../../molecules/password-rules';
@@ -16,9 +14,11 @@ import Container from '../../template/container';
 
 import Link from 'next/link';
 import { Form } from 'react-bootstrap';
+import LOADING from '~/constants/loading';
+import { useAppSelector } from '~/store/hooks';
 import { StepProps } from './types';
 
-const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
+const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
 
     const [passwordShow, setPasswordShow] = useState(false);
     const [passwordConfirmShow, setPasswordConfirmShow] = useState(false);
@@ -30,15 +30,16 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
         isValid,
         handleSubmit
     } = useFormikContext<AccountSignUp>()
-    const { email, password, passwordConfirm } = values;
 
-    const requiredValid = useMemo(() => {
-        return (
-            validatePassword.isValidSync(password) &&
-            validateEmail.isValidSync(email) &&
-            password === passwordConfirm
-        )
-    }, [email, password, passwordConfirm])
+    const isLoading = useAppSelector(state => state.Account.loading)
+
+    // const requiredValid = useMemo(() => {
+    //     return (
+    //         validatePassword.isValidSync(password) &&
+    //         validateEmail.isValidSync(email) &&
+    //         password === passwordConfirm
+    //     )
+    // }, [email, password, passwordConfirm])
 
     const onToggleVisiblePassword = () => {
         setPasswordShow(state => !state)
@@ -54,6 +55,7 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
         nextStep()
     }
 
+    const loading = useMemo(() => isLoading === LOADING.PENDING || !isValid, [isLoading, isValid])
 
     return (
         <Container>
@@ -67,6 +69,7 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
                 aria-label="email"
                 placeholder="Digite seu email"
                 required
+                disabledError
             />
 
             <FieldControl
@@ -138,7 +141,7 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
                     label="Finalizar cadastro"
                     type="submit"
                     onClick={handleClick}
-                    disabled={!isValid}
+                    disabled={loading}
                     className="align-self-center !w-60 mobile:!w-full"
                 />
             </div>

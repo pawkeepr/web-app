@@ -19,7 +19,6 @@ import * as Yup from "yup";
 // action
 import { updatePwd } from "~/store/auth/forget-pwd/actions";
 
-import HeaderTitle from "~/Components/atoms/header-title";
 import LogoSimple from "~/Components/atoms/logo-simple";
 import LogoSimpleMobile from "~/Components/atoms/logo-simple-mobile";
 
@@ -31,6 +30,7 @@ import { useEffect, useState } from "react";
 import LOADING from "~/constants/loading";
 import { useAppSelector } from "~/store/hooks";
 import validatePassword from '~/validations/password';
+import AuthLayout from "../_layouts/auth/auth_layout";
 import StepEmail from "./components/organism/steps-forget-password/step-email";
 import StepPassword from "./components/organism/steps-forget-password/step-password";
 const validationSchema = Yup.object({
@@ -76,13 +76,9 @@ const ForgetPasswordPage = (props: { history: any; }) => {
   }
 
   return (
-    <div className="auth-page-wrapper auth-bg-cover py-5 flex justify-content-center align-items-center min-h-[94vh]">
-      <div className="bg-overlay" />
-      <HeaderTitle title="Forget Password" />
+    <AuthLayout title="Forgot Password" >
       <Container>
-
-
-        <Row className="justify-content-center">
+        <Row className="justify-center">
           <Col md={8} lg={6} xl={5}>
             <Card className="mt-4 p-4">
               <div className='flex flex-col items-center justify-center'>
@@ -94,8 +90,6 @@ const ForgetPasswordPage = (props: { history: any; }) => {
                   <p className="text-muted">Podemos te Ajudar!</p>
                 </div>
               </div>
-
-
 
               <div className="p-2">
                 <Formik
@@ -146,13 +140,10 @@ const ForgetPasswordPage = (props: { history: any; }) => {
                 </p>
               </div>
             </Card>
-
-
-
           </Col>
         </Row>
       </Container>
-    </div>
+    </AuthLayout>
   );
 };
 
