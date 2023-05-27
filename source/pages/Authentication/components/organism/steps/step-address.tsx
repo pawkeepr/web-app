@@ -23,13 +23,7 @@ import { StepProps } from './types';
 
 
 const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
-    const [disabledInputs, setDisabledInputs] = useState({
-        state: false,
-        city: false,
-        neighborhood: false,
-        road: false,
-        complement: false
-    })
+    const [disabledInputs, setDisabledInputs] = useState({ state: false, city: false, neighborhood: false, street: false, complement: false })
 
     const { values, setFieldValue } = useFormikContext<ActivateAccount>()
     const { zipCode } = values
@@ -45,7 +39,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
             setFieldValue('neighborhood', bairro || '')
 
-            setFieldValue('road', logradouro || '')
+            setFieldValue('street', logradouro || '')
 
             setFieldValue('complement', complemento || '')
 
@@ -53,7 +47,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 state: !!uf,
                 city: !!localidade,
                 neighborhood: !!bairro,
-                road: !!logradouro,
+                street: !!logradouro,
                 complement: !!complemento,
             })
         },
@@ -79,7 +73,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 type="text"
                 initialFocus
                 label="CEP"
-                name="zip_code"
+                name="zipCode"
                 placeholder="Digite o CEP"
                 component={MaskedInput as any}
                 mask={"99999-999"}

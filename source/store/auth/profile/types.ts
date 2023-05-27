@@ -28,20 +28,20 @@ export type Profile = Nullable<{
     phone: string;
     about: string;
     avatar: string;
-    name: string,
-    lastname: string,
+    firstName: string,
+    lastName: string,
     crmv: string,
     cpf_cnpj: string,
     company: string | null,
     phoneNumber: string,
     country: string;
-    road: string;
-    no: string;
+    street: string;
+    number: string;
     complement: string;
     neighborhood: string;
     city: string;
     state: string;
-    zip_code: string;
+    zipCode: string;
     created_at: string;
     updated_at: string;
 }>;

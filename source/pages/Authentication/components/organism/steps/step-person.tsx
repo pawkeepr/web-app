@@ -58,8 +58,8 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 initialFocus
                 divClassName='my-1'
                 label='Nome Completo'
-                name="name"
-                aria-label="name"
+                name="firstName"
+                aria-label="firstName"
                 className="form-control"
                 placeholder="Nome"
                 required
@@ -68,8 +68,8 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
                 <Form.Control
                     type="text"
-                    name="lastname"
-                    aria-label="lastname"
+                    name="lastName"
+                    aria-label="lastName"
                     placeholder="Sobrenome"
                     onChange={onChangeLastName}
                     required

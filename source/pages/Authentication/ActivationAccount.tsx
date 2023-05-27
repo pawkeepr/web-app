@@ -32,20 +32,20 @@ import StepSignUpTermsOfUse from './components/organism/steps/step-terms-of-use'
 
 const initialValues = (email: string): ActivateAccount => ({
     email,
-    name: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
     crmv: '',
     type: RULES.ADMIN as any,
     phone: '',
     cpf_cnpj: '',
     country: '',
-    no: '',
-    state: '',
+    street: '',
+    number: '',
     complement: '',
     neighborhood: '',
     city: '',
-    road: '',
-    zip_code: '',
+    state: '',
+    zipCode: '',
 });
 
 
