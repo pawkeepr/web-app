@@ -30,17 +30,17 @@ import { Profile } from "../profile/types";
 export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
     try {
         const response: UserData = yield call(signInAws, action.payload);
-        const { signInUserSession: { accessToken } } = response;
+        const { signInUserSession: { idToken } } = response;
         // token
         // const { data: user } = yield call(getUser, accessToken.jwtToken);
-        yield setCookie(undefined, cookies.token.name, accessToken.jwtToken, {
-            maxAge: accessToken.payload.exp,
+        yield setCookie(undefined, cookies.token.name, idToken.jwtToken, {
+            maxAge: idToken.payload.exp,
         });
-        console.log(response)
-        yield put(setAuthorization({ token: accessToken.jwtToken }));
+        console.log(idToken)
+        yield put(setAuthorization({ token: idToken.jwtToken }));
 
         yield call([Router, Router.push], '/activation');
-        yield put(signInSuccess({ user: {}, token: accessToken.jwtToken }));
+        yield put(signInSuccess({ user: {}, token: idToken.jwtToken }));
         // yield put(setProfile(user));
     } catch (error) {
         if ((error as any)?.code === 'UserNotConfirmedException') {
