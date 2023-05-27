@@ -1,10 +1,18 @@
+import LOADING from "~/constants/loading";
+
 export const name = "profile";
 
-export const SET_PROFILE = `${name}/setProfile`;
-export const EDIT_PROFILE = `${name}/editProfile`;
-export const PROFILE_SUCCESS = `${name}/profileSuccess`;
-export const PROFILE_ERROR = `${name}/profileError`;
-export const RESET_PROFILE_FLAG = `${name}/resetProfileFlag`;
+export const SET_PROFILE = `setProfile`;
+export const EDIT_PROFILE = `editProfile`;
+export const EDIT_PROFILE_SUCCESS = `editProfileSuccess`;
+export const EDIT_PROFILE_ERROR = `editProfileError`;
+export const RESET_PROFILE_FLAG = `resetProfileFlag`;
+
+export const ACTION_SET_PROFILE = `${name}/${SET_PROFILE}`;
+export const ACTION_EDIT_PROFILE = `${name}/${EDIT_PROFILE}`;
+export const ACTION_EDIT_PROFILE_SUCCESS = `${name}/${EDIT_PROFILE_SUCCESS}`;
+export const ACTION_EDIT_PROFILE_ERROR = `${name}/${EDIT_PROFILE_ERROR}`;
+export const ACTION_RESET_PROFILE_FLAG = `${name}/${RESET_PROFILE_FLAG}`;
 
 export enum RULES {
     ADMIN = 1,
@@ -39,7 +47,7 @@ export type Profile = Nullable<{
 }>;
 
 export type InitialStateProfile = {
-    error: string;
-    success: string;
+    isLoading: LOADING;
+    error?: string;
     user: Profile | null;
 }

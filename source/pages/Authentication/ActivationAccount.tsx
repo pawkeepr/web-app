@@ -9,7 +9,6 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { useAppSelector } from '~/store/hooks';
-import StepActivation from './components/organism/steps/step-activation';
 
 
 import TabContainer from 'react-bootstrap/TabContainer';
@@ -20,7 +19,9 @@ import { Formik } from 'formik';
 
 import validate, { ActivateAccount } from '~/validations/activate';
 
+import { signOutUser } from '~/store/auth/login/actions';
 import { editProfile } from '~/store/auth/profile/actions';
+
 import { useAppDispatch } from '~/store/hooks';
 
 import { Profile, RULES } from '~/store/auth/profile/types';
@@ -51,22 +52,18 @@ const initialValues = (email: string): ActivateAccount => ({
 const Tabs = [
     {
         id: '1',
-        component: (props: any) => <StepActivation  {...props} />
-    },
-    {
-        id: '2',
         component: (props: any) => <StepSignUpPerson {...props} />
     },
     {
-        id: '3',
+        id: '2',
         component: (props: any) => <StepSignUpAddress {...props} />
     },
     {
-        id: '4',
+        id: '3',
         component: (props: any) => <StepSignUpTermsOfUse {...props} />
     },
     {
-        id: '5',
+        id: '4',
         component: (props: any) => <StepSignUpLoading {...props} />
     }
 ]
@@ -85,7 +82,7 @@ const ActivationAccount = () => {
 
     useEffect(() => {
         if (!email) {
-            router.push('/sign-in')
+            dispatch(signOutUser())
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [email])
@@ -118,7 +115,7 @@ const ActivationAccount = () => {
 
 
     return (
-        <AuthLayout title="Forgot Password" >
+        <AuthLayout title="Activation Profile" >
             <Container>
 
                 <Row className="justify-content-center">
@@ -131,10 +128,8 @@ const ActivationAccount = () => {
                                     <h5 className="text-primary p-2">Ola! Seja Bem Vindo!</h5>
                                     <p >
                                         Para seu primeiro acesso,
-                                        você deve ativar sua conta e
+                                        você deve
                                         completar seu cadastro na plataform.
-                                        Preencha o código de verificação
-                                        enviado para o seu email:
                                         <br />
                                         <span className="mx-2 fw-bold">{email}</span>
                                     </p>

@@ -5,7 +5,7 @@ Amplify.configure({
         // REQUIRED - Amazon Cognito Identity Pool ID
         identityPoolId: process.env.IDENTITY_POOL_ID || '',
         // REQUIRED - Amazon Cognito Region
-        region: process.env.REGION || 'us-east-1',
+        region: process.env.REGION || 'east-1',
         // OPTIONAL - Amazon Cognito User Pool ID
         userPoolId: process.env.USER_POOL_ID || 'us-east-1_PDrf1BmAs',
         // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)

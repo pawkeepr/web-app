@@ -204,23 +204,32 @@
     events "^3.1.0"
     tslib "^1.8.0"
 
-"@aws-amplify/ui-react-core@2.1.21":
-  version "2.1.21"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/ui-react-core/-/ui-react-core-2.1.21.tgz#818f2e23a8ab2d77b6f485e97da7a1655dfa98e1"
-  integrity sha512-0FP+jwB3oGcFhnDvPdiC2DLaldTTebKPEtMMHyhz/p9BbQlWqq4pAjPTU6xYvh9cWPQtLgPKGFNSbmfSKIvWng==
+"@aws-amplify/ui-react-core-notifications@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/ui-react-core-notifications/-/ui-react-core-notifications-1.0.0.tgz#b146c0afdd6f17a352aa003983e620caecd47f84"
+  integrity sha512-perIfLK+JQKZV1XxQ4wpQjaNTRH4X/9lPjT+A0GJjTaxG81LWMACxz84aggV+8Icv1Jis5+9sUb0+3tEUEr7sw==
   dependencies:
-    "@aws-amplify/ui" "5.6.2"
+    "@aws-amplify/ui" "5.6.4"
+    "@aws-amplify/ui-react-core" "2.1.23"
+
+"@aws-amplify/ui-react-core@2.1.23":
+  version "2.1.23"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/ui-react-core/-/ui-react-core-2.1.23.tgz#e27f8e7ec3a86dba7828e8b69cc036a5b6b2a435"
+  integrity sha512-qKoPcLpKpniwlji0mTiTXdwOdFSTD/LO//T5iLsE+uyu/BzsEFpbznl/XdRsCbHrtLDrMlygf25OczTLPNQtQg==
+  dependencies:
+    "@aws-amplify/ui" "5.6.4"
     "@xstate/react" "3.0.1"
     lodash "4.17.21"
     xstate "^4.33.6"
 
-"@aws-amplify/ui-react@^4.6.2":
-  version "4.6.2"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/ui-react/-/ui-react-4.6.2.tgz#b8db79ecedb00dbc1225d82f65d34933bd6897a1"
-  integrity sha512-mUuOwLAxvxTWBTa20X+SuhsCR0+jE6A7wFXIT/OEG/Sha8iWbl57vVlsRTuAAbdYOGmT+l4Mbq7GcI4kwXikBg==
+"@aws-amplify/ui-react@^4.6.4":
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/ui-react/-/ui-react-4.6.4.tgz#879485d4d99f6125b3d0d0439d858d81acf1f00c"
+  integrity sha512-6OF4F7CFm2fs3y3GO1vy9eTAXCGuh4d+rQ+DiLnIKMkOsKnzYLXzk20wUeL4aceVR0NkZVyolgBAf3+yfTVbMw==
   dependencies:
-    "@aws-amplify/ui" "5.6.2"
-    "@aws-amplify/ui-react-core" "2.1.21"
+    "@aws-amplify/ui" "5.6.4"
+    "@aws-amplify/ui-react-core" "2.1.23"
+    "@aws-amplify/ui-react-core-notifications" "1.0.0"
     "@radix-ui/react-accordion" "1.0.0"
     "@radix-ui/react-direction" "1.0.0"
     "@radix-ui/react-dropdown-menu" "1.0.0"
@@ -239,10 +248,10 @@
     tinycolor2 "1.4.2"
     tslib "2.4.1"
 
-"@aws-amplify/ui@5.6.2":
-  version "5.6.2"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/ui/-/ui-5.6.2.tgz#b320c813ca3399f26f2840243b5c451e31f0f1c6"
-  integrity sha512-1Eit8qeKVhcGccrQTBuKAC4j4m4/maxbuwzQCgoxy2lJJjcDQu7lAfdwpwTFYld62pjxH/JMQ4cjWOiTSntUdg==
+"@aws-amplify/ui@5.6.4":
+  version "5.6.4"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/ui/-/ui-5.6.4.tgz#ff7723d57668e435ce374e09169573355dbada99"
+  integrity sha512-6xXHWMMZ9OGNcRq/FoW8KrHC5dsX841O/fOeFDi5a7aHLPTqGdc9PNLFjzrlaqAQT6Sj9QMfCPAJcLT6UcUG3g==
   dependencies:
     csstype "^3.1.1"
     lodash "4.17.21"

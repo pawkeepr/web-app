@@ -2,6 +2,8 @@ import { createAction } from '@reduxjs/toolkit';
 
 import { name } from './types';
 
+export const setAuthorization = createAction<{ token: string }>(`${name}/setAuthorization`);
+
 export const signInUser = createAction<{ username: string, password: string }>(`${name}/signInUser`);
 export const signInSuccess = createAction<{ user: any, token: any }>(`${name}/signInSuccess`);
 export const signInFailed = createAction<string>(`${name}/signInFailed`);

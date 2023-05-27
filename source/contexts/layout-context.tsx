@@ -12,7 +12,10 @@ const routesAuth = [
     '/sign-up',
     '/forgot-password',
     '/reset-password',
-    '/logout',
+    '/logout'
+]
+
+const routesPrivates = [
     '/activation'
 ]
 
@@ -33,6 +36,10 @@ const LayoutDefault = ({ children }: LayoutProps) => {
     }
 
     if (routesAuth.includes(pathname as string)) {
+        return <LayoutAuth>{children}</LayoutAuth>
+    }
+
+    if (routesPrivates.includes(pathname as string)) {
         return <LayoutAuth>{children}</LayoutAuth>
     }
 

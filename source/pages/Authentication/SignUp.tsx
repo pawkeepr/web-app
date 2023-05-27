@@ -25,6 +25,7 @@ import { useAppDispatch, useAppSelector } from '~/store/hooks';
 import { useRouter } from 'next/navigation';
 import LOADING from '~/constants/loading';
 import AuthLayout from '../_layouts/auth/auth_layout';
+import StepActivation from './components/organism/steps/step-activation';
 import StepSignUpBasicAuth from './components/organism/steps/step-basic-auth';
 
 
@@ -51,7 +52,7 @@ const CoverSignUp = () => {
 
     const dispatch = useAppDispatch()
     const router = useRouter()
-    const isLoading = useAppSelector(state => state.Account.loading)
+    const isLoading = useAppSelector(state => state.ActivateAccount.isLoading)
     const onSubmit = async (values: AccountSignUp) => {
         dispatch(registerUser(values))
     }
@@ -87,10 +88,10 @@ const CoverSignUp = () => {
             id: '1',
             component: (props: any) => <StepSignUpBasicAuth {...props} />
         },
-        // {
-        //     id: '2',
-        //     component: (props: any) => <StepSignUpPerson {...props} />
-        // },
+        {
+            id: '2',
+            component: (props: any) => <StepActivation {...props} />
+        },
         // {
         //     id: '3',
         //     component: (props: any) => <StepSignUpAddress {...props} />

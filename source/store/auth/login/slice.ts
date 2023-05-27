@@ -60,11 +60,13 @@ const loginSlice = createSlice({
     signInUser: (state, action: PayloadAction<{ username: string; password: string }>) => {
       state.isLoading = LOADING.PENDING;
     },
-    signInSuccess: (state, action: PayloadAction<{ user: IUser, token: string }>) => {
-      if (api.defaults.headers['Authorization']) {
+    setAuthorization: (state, action: PayloadAction<{ token: string }>) => {
+      if (api.defaults.headers) {
         api.defaults.headers['Authorization'] = `Bearer ${action.payload.token}`;
       }
-
+      state.token = action.payload.token;
+    },
+    signInSuccess: (state, action: PayloadAction<{ user: IUser, token: string }>) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isAuthenticated = true;

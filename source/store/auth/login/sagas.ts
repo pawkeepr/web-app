@@ -8,6 +8,7 @@ import cookies from '~/constants/cookies';
 import {
     recoverUserByTokenFailed,
     recoverUserByTokenSuccess,
+    setAuthorization,
     signInFailed,
     signInSuccess,
     signOutUserFailed,
@@ -35,12 +36,16 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
         yield setCookie(undefined, cookies.token.name, accessToken.jwtToken, {
             maxAge: accessToken.payload.exp,
         });
-        // yield put(setProfile(user));
+        console.log(response)
+        yield put(setAuthorization({ token: accessToken.jwtToken }));
+
+        yield call([Router, Router.push], '/activation');
         yield put(signInSuccess({ user: {}, token: accessToken.jwtToken }));
+        // yield put(setProfile(user));
     } catch (error) {
         if ((error as any)?.code === 'UserNotConfirmedException') {
             // Se o usuário não estiver confirmado, redirecione para a página de ativação.
-            yield call([Router, Router.push], '/activation');
+
             yield put(signInFailed((error as any).message));
         } else {
             errorToast('Não foi possível realizar o login.', 'Falha!')

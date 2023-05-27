@@ -4,7 +4,7 @@ require('dotenv').config()
 const nextConfig = ((phase) => {
   const isProduction = phase === 'production'
 
-  const _currentURL = isProduction ? process.env.API_URL : 'http://localhost:8000/api/v1/'
+  // const _currentURL = isProduction ? process.env.API_URL : 'http://localhost:8000/api/v1/'
 
   return {
     publicRuntimeConfig: {
@@ -22,7 +22,7 @@ const nextConfig = ((phase) => {
       ignoreBuildErrors: true,
     },
     env: {
-      API_URL: _currentURL,
+      API_URL: process.env.API_URL,
       SECRET_KEY: process.env.SECRET_KEY,
       REGION: process.env.REGION,
       USER_POOL_ID: process.env.USER_POOL_ID,

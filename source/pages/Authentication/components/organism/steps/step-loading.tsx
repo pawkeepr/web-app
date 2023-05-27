@@ -3,16 +3,18 @@ import { useEffect } from 'react'
 
 import { useAppDispatch, useAppSelector } from "~/store/hooks"
 
+import { resetProfileFlag } from '~/store/auth/profile/actions'
+
+import { BtnCancel } from "~/Components/atoms/btn"
 import LoaderError from "~/Components/molecules/loaders/loader-error"
 import LoaderPending from "~/Components/molecules/loaders/loader-pending"
 import LoaderSuccess from "~/Components/molecules/loaders/loader-success"
 import LOADING from "~/constants/loading"
-import Container from "../../template/container"
 
-const StepLoading = () => {
+const StepLoading = ({ prevStep }) => {
     const router = useRouter()
     const dispatch = useAppDispatch()
-    const { isLoading } = useAppSelector(state => state.ActivateAccount)
+    const { isLoading } = useAppSelector(state => state.Profile)
 
     useEffect(() => {
         if (isLoading === LOADING.SUCCESS) {
@@ -21,29 +23,33 @@ const StepLoading = () => {
             }, 3000)
         }
         return () => {
-            dispatch({ type: 'RESET' })
+            dispatch(resetProfileFlag())
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading])
 
 
     return (
-        <Container>
-            <div className="flex justify-center items-center h-96">
-                {isLoading === LOADING.PENDING && (
-                    <LoaderPending />
-                )}
 
-                {isLoading === LOADING.SUCCESS && (
-                    <LoaderSuccess />
-                )}
+        <div className="flex justify-center items-center h-96">
+            {isLoading === LOADING.PENDING && (
+                <LoaderPending />
+            )}
 
-                {isLoading === LOADING.FAILED && (
-                    <LoaderError />
-                )}
+            {isLoading === LOADING.SUCCESS && (
+                <LoaderSuccess />
+            )}
+
+            {isLoading === LOADING.FAILED && (
+                <LoaderError />
+            )}
+
+            <div className="mt-4 d-flex justify-content-center">
+                <BtnCancel onClick={prevStep} label="Anterior" className="m-1" />
             </div>
+        </div>
 
-        </Container>
+
     )
 }
 

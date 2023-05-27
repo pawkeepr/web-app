@@ -17,7 +17,8 @@ import { ToastContainer } from 'react-toastify';
 
 import '~/aws';
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
+
 
   return (
     <SSRProvider>
@@ -32,3 +33,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </SSRProvider>
   )
 }
+
+export default App;
