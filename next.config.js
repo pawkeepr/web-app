@@ -22,7 +22,7 @@ const nextConfig = ((phase) => {
       ignoreBuildErrors: true,
     },
     env: {
-      API_URL: process.env.API_URL,
+      API_URL: "https://z4etzps20a.execute-api.us-east-1.amazonaws.com/development/api",
       SECRET_KEY: process.env.SECRET_KEY,
       REGION: process.env.REGION,
       USER_POOL_ID: process.env.USER_POOL_ID,

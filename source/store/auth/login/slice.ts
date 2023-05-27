@@ -62,7 +62,7 @@ const loginSlice = createSlice({
     },
     setAuthorization: (state, action: PayloadAction<{ token: string }>) => {
       if (api.defaults.headers) {
-        api.defaults.headers['Authorization'] = `Bearer ${action.payload.token}`;
+        api.defaults.headers['Authorization'] = `${action.payload.token}`;
       }
       state.token = action.payload.token;
     },
