@@ -1,7 +1,6 @@
-
 type SearchInputProps = {
-    value?: string
-} & React.HTMLAttributes<HTMLInputElement>
+    value?: string;
+} & React.HTMLAttributes<HTMLInputElement>;
 
 const SearchInput = ({ ...rest }: SearchInputProps) => {
     return (
@@ -11,7 +10,7 @@ const SearchInput = ({ ...rest }: SearchInputProps) => {
                 <i className="ri-search-line search-icon"></i>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default SearchInput
+export default SearchInput;
