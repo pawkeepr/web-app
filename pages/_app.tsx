@@ -16,6 +16,10 @@ import LayoutProvider from "~/contexts/layout-context";
 import { ToastContainer } from 'react-toastify';
 
 import '~/aws';
+import fakebackend from '~/helpers/AuthType/fakeBackend';
+
+
+fakebackend();
 
 function App({ Component, pageProps }: AppProps) {
 
