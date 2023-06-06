@@ -75,7 +75,7 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
     }
 
     const pets = useAppSelector(state => state.Pets.pets.filter(pet => {
-        return pet?.ownerEmergencyContact.document === document.replace(/\D/g, '')
+        return pet?.ownerEmergencyContact?.document === document.replace(/\D/g, '')
     }))
 
     const onChangeSelectedTab = (index: number) => {

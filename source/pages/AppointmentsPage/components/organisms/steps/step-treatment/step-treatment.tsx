@@ -1,5 +1,10 @@
+'use client'
+
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { Formik , Form , Field , ErrorMessage } from 'formik' ;       
+import {useState } from 'react';
+import ControlSwitch from '../../../molecules/switch/switch';
 //Import images
 
 import { StepProps } from '../types';
@@ -13,37 +18,60 @@ import AvatarPet from '../../../atoms/pet-avatar/pet-avatar';
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
 
     const { values } = useFormikContext<InitialValues>()
+    const [enabled, setEnabled] = useState<Boolean>(false)
+
 
 
     return (
         <>
-            <div>
-                <h5>Tratamento</h5>
-            </div>
 
-            <div>
-                <Row className="g-3">
-
-                    <div className="flex flex-row gap-2 items-center justify-center m-2 p-1">
-                        <AvatarPet name={values.pet?.name || ''} />
-                        <BtnAvatar alt='Avatar de Tutor' name="tutor.avatar" disabled size={24} />
+            <Formik
+             initialValues={{ marca: '', inicio:''}}>
+                <form>
+                    <div>
+                        <h5 className='text-center'>Tratamento</h5>
                     </div>
 
+                    <div>
+                        <div className='mt-2'>
+                            <span>Aplicar medicação?</span>
+                            <ControlSwitch/>
+                            <div className='grid grid-cols-2'>
+                                <div className='flex flex-col'>
+                                    <label>Marca</label>
+                                    <Field className='text-black rounded-md' name='marca' type='text'/>
+                                </div>
+                                <div className='flex flex-col'>
+                                    <label>Início</label>
+                                    <Field className='rounded-md' name='inicio' type='text'/>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span>Aplicar vacina?</span>
+                            <ControlSwitch/>
+                        </div>
+                        <div>
+                            <span>Aplicar exame?</span>
+                            <ControlSwitch/>
+                        </div>
+                        <div>
+                            <span>Possui doença?</span>
+                            <ControlSwitch/>
+                        </div>
+                        <div>
+                            <span>Aplicar Nutrição Alimentar?</span>
+                            <ControlSwitch/>
+                        </div>
+                    </div>
 
-                    <Col sm={6}>
+                    <div>
+                        <button type='submit'>Cancelar Consulta</button>
+                    </div>
+                </form>
 
-                    </Col>
+            </Formik>
 
-                    <Col sm={6}>
-
-                    </Col>
-
-                    <Col xs={12}>
-
-                    </Col>
-
-                </Row>
-            </div>
 
             <div className="flex align-items-center justify-end gap-3 mt-4">
                 <BtnLabel
