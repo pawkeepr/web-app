@@ -1,6 +1,3 @@
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import { Formik , Form , Field , ErrorMessage } from 'formik' ;       
 import {useState } from 'react';
 import ControlSwitch from '../../../molecules/switch/switch';
 
@@ -13,14 +10,17 @@ import { useFormikContext } from 'formik';
 import { BtnAvatar, BtnLabel, BtnSuccess } from '~/Components/atoms/btn';
 import { InitialValues } from '~/pages/AppointmentsPage/Appointments';
 import AvatarPet from '../../../atoms/pet-avatar/pet-avatar';
+import FieldControl from '~/Components/molecules/field-control/field-control';
+import ComboboxSelect from '../../../molecules/combobox/combobox';
 
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
 
 
     const { values } = useFormikContext<InitialValues>()
+    const [enableField, setEnableField] = useState<boolean>(true)
  
-
+    
     const vacinas = [
         {
           id: 1,
@@ -33,9 +33,11 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
         {
           id: 3,
           name:'Raiva'
-        },
-      ]
+        }
+    ]
     
+
+
       const exames = [
         {
           id: 1,
@@ -50,127 +52,112 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
           name:'Check-up'
         },
       ]
-    
 
+      const onClick = ()=>{
+       enableField == false ? setEnableField(true) : setEnableField(false)
+      }
+      
+      
     return (
         <>
 
-            <Formik
-             initialValues={{ marca: '', inicio:''}}>
-                <form>
                     <div>
                         <h4 className='text-center'>Tratamento</h4>
                     </div>
 
-                    <div>
+                    <div className=''>
                         <div className='mt-2'>
-                            <div className='flex justify-between'>
-                                <span className='mt-2'>Aplicar medicação?</span>
-                                <ControlSwitch className='mt-2 w-16 h-7'/>
-                            </div>
-                            
-                            {/* <div className='flex gap-2 flex-col'>
-                                <span>Uso Contínuo?</span>
-                                <ControlSwitch/>
-                            </div> */}
+                            <ControlSwitch label='Aplicar Medicação' className='mt-2 w-16 h-7' >
+                             <div className='flex flex-col'>
+                                <ControlSwitch label='Uso Contínuo?' className='mt-2 w-16 h-7' onClick={onClick}/>
+
+                            </div> 
                             <div className='grid grid-cols-2 gap-2'>
                                 <div className='flex flex-col'>
-                                    <label>Marca</label>
-                                    <Field className='text-black rounded-md' name='marca' type='text'/>
+                                    <FieldControl label='Marca' className='form-control' name='marca' type='text'/>
+                                </div>
+                             
+                                <div className='flex flex-col'>
+                                    <FieldControl label='Início' className='form-control' name='inicio' type='text'/>
+                                </div>
+
+                                {enableField &&
+                                   <div className='flex flex-col'>
+                                        <FieldControl label='Fim' className='form-control' name='fim' type='text'/>
+                                    </div> 
+                                }
+                                                           
+                                <div className='flex flex-col'>
+                                    <FieldControl label='Quantidade' className='form-control' name='quantidade' type='text'/>
                                 </div>
                                 <div className='flex flex-col'>
-                                    <label>Início</label>
-                                    <Field className='rounded-md' name='inicio' type='text'/>
+                                    <FieldControl label='A cada' className='form-control' name='cada' type='text'/>
                                 </div>
                                 <div className='flex flex-col'>
-                                    <label>Marca</label>
-                                    <Field className='text-black rounded-md' name='marca' type='text'/>
+                                    <FieldControl label='Intervalo' className='form-control' name='intervalo' type='text'/>
                                 </div>
-                                <div className='flex flex-col'>
-                                    <label>Início</label>
-                                    <Field className='rounded-md' name='inicio' type='text'/>
-                                </div>
-                                <div className='flex flex-col'>
-                                    <label>Marca</label>
-                                    <Field className='text-black rounded-md' name='marca' type='text'/>
-                                </div>
-                                <div className='flex flex-col'>
-                                    <label>Início</label>
-                                    <Field className='rounded-md' name='inicio' type='text'/>
-                                </div>
-                            </div>
+                            </div> 
+                            </ControlSwitch>
                         </div>
+
                         <div className='mt-2'>
-                        <div className='flex justify-between'>
-                                <span className='mt-2'>Aplicar vacina?</span>
-                                <ControlSwitch className='mt-2 w-16 h-7'/>
-                            </div>
+                                <ControlSwitch label='Aplicar vacina?' className='mt-2 w-16 h-7'>
                             <div className='mt-2'>
-                                {vacinas.map((vacina)=>(
-                                    <div>
-                                        <p>{vacina.name}</p>
-                                    </div>
-                                ))}
+                                <ComboboxSelect zIndex={`z-[12]`} items={vacinas}/>
                             </div>
+                            </ControlSwitch>
+                        </div> 
+                        <div className='mt-2'>
+                                <ControlSwitch label='Aplicar exame?' className='mt-2 w-16 h-7'>
+                            <div className='mt-2 flex flex-col'>
+                                <ComboboxSelect zIndex={`z-[10]`} items={exames}/>
+                            </div>
+                        </ControlSwitch>
                         </div>
                         <div className='mt-2'>
-                        <div className='flex justify-between'>
-                                <span className='mt-2'>Aplicar exame?</span>
-                                <ControlSwitch className='mt-2 w-16 h-7'/>
+                                <ControlSwitch label='Possui doença?' className='mt-2 w-16 h-7'>
+                            <div className='grid grid-cols-2 gap-2 mt-2'>
+                                <div className='flex flex-col'>
+                                    <FieldControl label='Nome da Doença' className='rounded-md form-control' name='doenca' type='text'/>
+                                </div>
+                                <div className='flex flex-col'>
+                                    <FieldControl label='Tipo de Doença' className='rounded-md form-control' name='tipoDoenca' type='text'/>
+                                </div>
+                                <div className='flex flex-col'>
+                                    <FieldControl label='Severidade' className='rounded-md form-control' name='severidade' type='text'/>
+                                </div>
+                                <div className='flex flex-col'>
+                                    <FieldControl label='Descrição' className='rounded-md form-control' name='descricao' type='text'/>
+                                </div>
                             </div>
-                            <div className='mt-2 flex flex-col'>
-                                {exames.map((exame)=>(
-                                    <div className=''>
-                                        <p>{exame.name}</p>
-                                    </div>
-                                ))}
-                            </div>
+                            </ControlSwitch>
                         </div>
-                        <div>
-                            <div className='flex justify-between'>
-                                <span className='mt-2'>Possui doença?</span>
-                                <ControlSwitch className='mt-2 w-16 h-7'/>
-                            </div>
+                        <div className='mt-2'>
+                                <ControlSwitch label='Aplicar nutrição alimentar?' className='mt-2 w-16 h-7'>
                             <div className='grid grid-cols-2 gap-2'>
                                 <div className='flex flex-col'>
-                                    <label>Marca</label>
-                                    <Field className='text-black rounded-md' name='marca' type='text'/>
+                                    <FieldControl label='Nome do Alimento' className='rounded-md form-control' name='alimento' type='text'/>
                                 </div>
                                 <div className='flex flex-col'>
-                                    <label>Início</label>
-                                    <Field className='rounded-md' name='inicio' type='text'/>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className='flex justify-between'>
-                                <span className='mt-2'>Aplicar nutrição alimentar?</span>
-                                <ControlSwitch className='mt-2 w-16 h-7'/>
-                            </div>
-                            <div className='grid grid-cols-2 gap-2'>
-                                <div className='flex flex-col'>
-                                    <label>Marca</label>
-                                    <Field className='text-black rounded-md' name='marca' type='text'/>
+                                    <FieldControl label='Qtd de Alimento' className='rounded-md form-control' name='qtdAlimento' type='text'/>
                                 </div>
                                 <div className='flex flex-col'>
-                                    <label>Início</label>
-                                    <Field className='rounded-md' name='inicio' type='text'/>
+                                    <FieldControl label='Tipo Alimento' className='rounded-md form-control' name='tipoAlimento' type='text'/>
                                 </div>
                             </div>
+                                </ControlSwitch>
                         </div>
 
                         <div className='mt-4'>
                             <span>Informações Obrigatórias</span>
                                 <div className='flex flex-col mt-2'>
                                     <label>Peso</label>
-                                    <Field className='rounded-md' name='inicio' type='text'/>
+                                    <FieldControl className='rounded-md form-control' name='inicio' type='text'/>
                                 </div>
                         </div>
+                    
                     </div>
 
-                </form>
-
-            </Formik>
 
 
             <div className="flex align-items-center justify-end gap-3 mt-4">
