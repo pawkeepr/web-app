@@ -5,36 +5,34 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
 
 type ComboboxProps = {
-  items: [{
-    id?: number,
-    name: string
-  }],
-  zIndex: string 
+  items: string[]
+  zIndex: string,
+  onChange: (item:string)=> void
 }
 
 
-const ComboboxSelect = ({items, zIndex}: ComboboxProps)=> {
+const ComboboxSelect = ({items, zIndex, onChange}: ComboboxProps)=> {
   const [selected, setSelected] = useState([])
   const [query, setQuery] = useState('')
 
   const filteredItems =
     query === ''
       ? items
-      : items.filter((item) =>
-          item.name
+      : items.filter((item:string) =>
+          item
             .toLowerCase()
             .replace(/\s+/g, '')
             .includes(query.toLowerCase().replace(/\s+/g, ''))
         )
       
   return (
-    <div className={`relative ${zIndex} w-72`}>
+    <div className={`relative ${zIndex} w-full h-[35px] `}>
       <Combobox value={selected} onChange={setSelected}>
-        <div className="relative mt-1">
+        <div className="relative mt-1 ">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-gray-900! text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
               className="w-full  py-2 pl-3 pr-10 text-sm leading-5  form-control focus:ring-0"
-              displayValue={(item) => item.name}
+              displayValue={(item:string) => item}
               onChange={(event) => setQuery(event.target.value)}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
@@ -59,13 +57,18 @@ const ComboboxSelect = ({items, zIndex}: ComboboxProps)=> {
               ) : (
                 filteredItems.map((item) => (
                   <Combobox.Option
-                    key={item.id}
+                    key={item}
                     className={({ active }) =>
                       `relative cursor-default select-none py-2 pl-10 pr-4 ${
                         active ? 'bg-teal-600 text-white' : 'text-white-900'
                       }`
                     }
                     value={item}
+                    onClick={() => {
+                      if (typeof onChange === 'function') {
+                        onChange(item);
+                      }
+                    }}
                   >
                     {({ selected, active }) => (
                       <>
@@ -74,7 +77,7 @@ const ComboboxSelect = ({items, zIndex}: ComboboxProps)=> {
                             selected ? 'font-medium' : 'font-normal'
                           }`}
                         >
-                          {item.name}
+                          {item}
                         </span>
                         {selected ? (
                           <span
