@@ -1,164 +1,274 @@
-import {useState } from 'react';
-import ControlSwitch from '../../../molecules/switch/switch';
-
+import { useState } from "react";
+import ControlSwitch from "../../../molecules/switch/switch";
 
 //Import images
 
-import { StepProps } from '../types';
+import { StepProps } from "../types";
 
-import { useFormikContext } from 'formik';
-import { BtnAvatar, BtnLabel, BtnSuccess } from '~/Components/atoms/btn';
-import { InitialValues } from '~/pages/AppointmentsPage/Appointments';
-import AvatarPet from '../../../atoms/pet-avatar/pet-avatar';
-import FieldControl from '~/Components/molecules/field-control/field-control';
-import ComboboxSelect from '../../../molecules/combobox/combobox';
+import { FieldArray,useFormikContext } from "formik";
+import { BtnAvatar, BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
+import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
+import AvatarPet from "../../../atoms/pet-avatar/pet-avatar";
+import FieldControl from "~/Components/molecules/field-control/field-control";
+import ComboboxSelect from "../../../molecules/combobox/combobox";
+import { exams } from "~/common/data/exams";
+import { vaccines } from "~/common/data/vaccines";
+import { diseases } from "~/common/data/diseases";
 
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
+    const { values, setFieldValue } = useFormikContext<InitialValues>();
+    const [enableField, setEnableField] = useState<boolean>(true);
 
 
-    const { values } = useFormikContext<InitialValues>()
-    const [enableField, setEnableField] = useState<boolean>(true)
- 
-    
-    const vacinas = [
-        {
-          id: 1,
-          name:'Vermefugo'
-        },
-        {
-          id: 2,
-          name:'Febre'
-        },
-        {
-          id: 3,
-          name:'Raiva'
-        }
-    ]
-    
+    const onClick = () => {
+        enableField == false ? setEnableField(true) : setEnableField(false);
+    };
+
+    const handleComboboxSelect = (selectedItem:string) => {
+        setFieldValue('selectedValue', selectedItem);     
+        console.log(selectedItem);
+    };
 
 
-      const exames = [
-        {
-          id: 1,
-          name:'Raio X'
-        },
-        {
-          id: 2,
-          name:'Exame de Sangue'
-        },
-        {
-          id: 3,
-          name:'Check-up'
-        },
-      ]
 
-      const onClick = ()=>{
-       enableField == false ? setEnableField(true) : setEnableField(false)
-      }
-      
-      
     return (
         <>
+            <div>
+                <h4 className="text-center">Tratamento</h4>
+            </div>
 
-                    <div>
-                        <h4 className='text-center'>Tratamento</h4>
+            <div className="">
+                <div className="mt-2">
+                    <ControlSwitch
+                        label="Aplicar Medicação"
+                        className="mt-2 w-16 h-7"
+                    >
+                        <div className="flex flex-col">
+                            <ControlSwitch
+                                label="Uso Contínuo?"
+                                className="mt-2 w-16 h-7"
+                                onClick={onClick}
+                            />
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                            <div className="flex flex-col">
+                                <FieldControl
+                                    label="Marca"
+                                    className="form-control"
+                                    name="marca"
+                                    type="text"
+                                />
+                            </div>
+
+                            <div className="flex flex-col">
+                                <FieldControl
+                                    label="Início"
+                                    className="form-control"
+                                    name="inicio"
+                                    type="text"
+                                />
+                            </div>
+
+                            {enableField && (
+                                <div className="flex flex-col">
+                                    <FieldControl
+                                        label="Fim"
+                                        className="form-control"
+                                        name="fim"
+                                        type="text"
+                                    />
+                                </div>
+                            )}
+
+                            <div className="flex flex-col">
+                                <FieldControl
+                                    label="Quantidade"
+                                    className="form-control"
+                                    name="quantidade"
+                                    type="text"
+                                />
+                            </div>
+                            <div className="flex flex-col">
+                                <FieldControl
+                                    label="A cada"
+                                    className="form-control"
+                                    name="cada"
+                                    type="text"
+                                />
+                            </div>
+                            <div className="flex flex-col">
+                                <FieldControl
+                                    label="Intervalo"
+                                    className="form-control"
+                                    name="intervalo"
+                                    type="text"
+                                />
+                            </div>
+                        </div>
+                    </ControlSwitch>
+                </div>
+
+                <div className="mt-2">
+                    <ControlSwitch
+                        label="Aplicar vacina?"
+                        className="mt-2 w-16 h-7"
+                    >
+                        <div className="mt-2">
+                            <FieldArray name="selectedVacinas">
+                                {({ push, remove }) => (
+                                    <ComboboxSelect
+                                        zIndex={`z-[20]`}
+                                        items={vaccines}
+                                        onChange={handleComboboxSelect}
+                                    />
+                                )}
+                            </FieldArray>
+                        </div>
+                    </ControlSwitch>
+                </div>
+                <div className="mt-2">
+                    <ControlSwitch
+                        label="Aplicar exame?"
+                        className="mt-2 w-16 h-7"
+                    >
+                        <div className="mt-2 flex flex-col">
+                        <FieldArray name="selectedExames">
+                                {({ push, remove }) => (
+                                    <ComboboxSelect
+                                        zIndex={`z-[18]`}
+                                        items={exams}
+                                        onChange={handleComboboxSelect}
+                                    />
+                                )}
+                            </FieldArray>
+                        </div>
+                    </ControlSwitch>
+                </div>
+                <div className="mt-2">
+                    <ControlSwitch
+                        label="Possui doença?"
+                        className="mt-2 w-16 h-7"
+                    >
+                        <div className="grid grid-cols-2 gap-2 ">
+                            <div className="flex flex-col items-center justify-center">
+                            <FieldArray name="selectedDoencas">
+                                {({ push, remove }) => (
+                                    <ComboboxSelect
+                                        zIndex={`z-[16]`}
+                                        items={diseases}
+                                        onChange={handleComboboxSelect}
+                                    />
+                                )}
+                            </FieldArray>
+                            </div>
+                            <div className="flex flex-col">
+                                <FieldControl
+                                    label="Tipo de Doença"
+                                    className="rounded-md form-control"
+                                    name="tipoDoenca"
+                                    type="text"
+                                />
+                            </div>
+                            <div className="flex flex-col">
+                                <FieldControl
+                                    label="Severidade"
+                                    className="rounded-md form-control"
+                                    name="severidade"
+                                    type="text"
+                                />
+                            </div>
+                        </div>
+                            <div className="flex flex-col">
+                            <FieldControl
+                            label="Descrição"
+                            className="rounded-md hidden"
+                            name="descricao"
+                            type="text"
+                        >
+                            <textarea
+                                className="form-control"
+                                name="descricao"
+                            ></textarea>
+                        </FieldControl>
+                            </div>
+                    </ControlSwitch>
+                </div>
+                <div className="mt-2">
+                    <ControlSwitch
+                        label="Aplicar nutrição alimentar?"
+                        className="mt-2 w-16 h-7"
+                    >
+                        <div className="grid grid-cols-2 gap-2">
+                            <div className="flex flex-col">
+                                <FieldControl
+                                    label="Nome do Alimento"
+                                    className="rounded-md form-control"
+                                    name="alimento"
+                                    type="text"
+                                />
+                            </div>
+                            <div className="flex flex-col">
+                                <FieldControl
+                                    label="Qtd de Alimento"
+                                    className="rounded-md form-control"
+                                    name="qtdAlimento"
+                                    type="text"
+                                />
+                            </div>
+                            <div className="flex flex-col">
+                                <FieldControl
+                                    label="Tipo Alimento"
+                                    className="rounded-md form-control"
+                                    name="tipoAlimento"
+                                    type="text"
+                                />
+                            </div>
+                            <div className="flex flex-col">
+                                <FieldControl
+                                    label="Horário Alimentação"
+                                    className="rounded-md form-control"
+                                    name="horario"
+                                    type="text"
+                                />
+                            </div>
+                            <div className="flex flex-col">
+                                <FieldControl
+                                    label="A cada"
+                                    className="rounded-md form-control"
+                                    name="periodoTempo"
+                                    type="text"
+                                />
+                            </div>
+                        </div>
+                    </ControlSwitch>
+                </div>
+
+                <div className="mt-4">
+                    <span>Informações Obrigatórias</span>
+                    <div className="flex flex-col mt-2">
+                        <FieldControl
+                            label="Peso"
+                            className="rounded-md form-control"
+                            name="peso"
+                            type="text"
+                        />
                     </div>
-
-                    <div className=''>
-                        <div className='mt-2'>
-                            <ControlSwitch label='Aplicar Medicação' className='mt-2 w-16 h-7' >
-                             <div className='flex flex-col'>
-                                <ControlSwitch label='Uso Contínuo?' className='mt-2 w-16 h-7' onClick={onClick}/>
-
-                            </div> 
-                            <div className='grid grid-cols-2 gap-2'>
-                                <div className='flex flex-col'>
-                                    <FieldControl label='Marca' className='form-control' name='marca' type='text'/>
-                                </div>
-                             
-                                <div className='flex flex-col'>
-                                    <FieldControl label='Início' className='form-control' name='inicio' type='text'/>
-                                </div>
-
-                                {enableField &&
-                                   <div className='flex flex-col'>
-                                        <FieldControl label='Fim' className='form-control' name='fim' type='text'/>
-                                    </div> 
-                                }
-                                                           
-                                <div className='flex flex-col'>
-                                    <FieldControl label='Quantidade' className='form-control' name='quantidade' type='text'/>
-                                </div>
-                                <div className='flex flex-col'>
-                                    <FieldControl label='A cada' className='form-control' name='cada' type='text'/>
-                                </div>
-                                <div className='flex flex-col'>
-                                    <FieldControl label='Intervalo' className='form-control' name='intervalo' type='text'/>
-                                </div>
-                            </div> 
-                            </ControlSwitch>
-                        </div>
-
-                        <div className='mt-2'>
-                                <ControlSwitch label='Aplicar vacina?' className='mt-2 w-16 h-7'>
-                            <div className='mt-2'>
-                                <ComboboxSelect zIndex={`z-[12]`} items={vacinas}/>
-                            </div>
-                            </ControlSwitch>
-                        </div> 
-                        <div className='mt-2'>
-                                <ControlSwitch label='Aplicar exame?' className='mt-2 w-16 h-7'>
-                            <div className='mt-2 flex flex-col'>
-                                <ComboboxSelect zIndex={`z-[10]`} items={exames}/>
-                            </div>
-                        </ControlSwitch>
-                        </div>
-                        <div className='mt-2'>
-                                <ControlSwitch label='Possui doença?' className='mt-2 w-16 h-7'>
-                            <div className='grid grid-cols-2 gap-2 mt-2'>
-                                <div className='flex flex-col'>
-                                    <FieldControl label='Nome da Doença' className='rounded-md form-control' name='doenca' type='text'/>
-                                </div>
-                                <div className='flex flex-col'>
-                                    <FieldControl label='Tipo de Doença' className='rounded-md form-control' name='tipoDoenca' type='text'/>
-                                </div>
-                                <div className='flex flex-col'>
-                                    <FieldControl label='Severidade' className='rounded-md form-control' name='severidade' type='text'/>
-                                </div>
-                                <div className='flex flex-col'>
-                                    <FieldControl label='Descrição' className='rounded-md form-control' name='descricao' type='text'/>
-                                </div>
-                            </div>
-                            </ControlSwitch>
-                        </div>
-                        <div className='mt-2'>
-                                <ControlSwitch label='Aplicar nutrição alimentar?' className='mt-2 w-16 h-7'>
-                            <div className='grid grid-cols-2 gap-2'>
-                                <div className='flex flex-col'>
-                                    <FieldControl label='Nome do Alimento' className='rounded-md form-control' name='alimento' type='text'/>
-                                </div>
-                                <div className='flex flex-col'>
-                                    <FieldControl label='Qtd de Alimento' className='rounded-md form-control' name='qtdAlimento' type='text'/>
-                                </div>
-                                <div className='flex flex-col'>
-                                    <FieldControl label='Tipo Alimento' className='rounded-md form-control' name='tipoAlimento' type='text'/>
-                                </div>
-                            </div>
-                                </ControlSwitch>
-                        </div>
-
-                        <div className='mt-4'>
-                            <span>Informações Obrigatórias</span>
-                                <div className='flex flex-col mt-2'>
-                                    <label>Peso</label>
-                                    <FieldControl className='rounded-md form-control' name='inicio' type='text'/>
-                                </div>
-                        </div>
-                    
+                    <div className="flex flex-col mt-2">
+                        <FieldControl
+                            label="Orientações e Anotações"
+                            className="rounded-md hidden"
+                            name="observações"
+                            type="text"
+                        >
+                            <textarea
+                                className="form-control"
+                                name="observacoes"
+                            ></textarea>
+                        </FieldControl>
                     </div>
-
-
+                </div>
+            </div>
 
             <div className="flex align-items-center justify-end gap-3 mt-4">
                 <BtnLabel
@@ -186,7 +296,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 </BtnSuccess>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default StepTreatment
+export default StepTreatment;
