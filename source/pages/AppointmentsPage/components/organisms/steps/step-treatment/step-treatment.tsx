@@ -14,6 +14,7 @@ import ComboboxSelect from "../../../molecules/combobox/combobox";
 import { exams } from "~/common/data/exams";
 import { vaccines } from "~/common/data/vaccines";
 import { diseases } from "~/common/data/diseases";
+import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
 
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
@@ -25,9 +26,9 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
         enableField == false ? setEnableField(true) : setEnableField(false);
     };
 
-    const handleComboboxSelect = (selectedItem:string) => {
-        setFieldValue('selectedValue', selectedItem);     
-        console.log(selectedItem);
+    const handleComboboxSelect = (selected:string) => {
+        setFieldValue('selectedValue', selected);     
+        console.log(selected);
     };
 
 
@@ -37,6 +38,8 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
             <div>
                 <h4 className="text-center">Tratamento</h4>
             </div>
+
+            
 
             <div className="">
                 <div className="mt-2">
@@ -115,13 +118,10 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         className="mt-2 w-16 h-7"
                     >
                         <div className="mt-2">
+                            
                             <FieldArray name="selectedVacinas">
                                 {({ push, remove }) => (
-                                    <ComboboxSelect
-                                        zIndex={`z-[20]`}
-                                        items={vaccines}
-                                        onChange={handleComboboxSelect}
-                                    />
+                                    <ComboBoxAutocomplete label="Lista de Vacinas" name="selectVaccines" items={vaccines} onChange={handleComboboxSelect} />
                                 )}
                             </FieldArray>
                         </div>
@@ -135,11 +135,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         <div className="mt-2 flex flex-col">
                         <FieldArray name="selectedExames">
                                 {({ push, remove }) => (
-                                    <ComboboxSelect
-                                        zIndex={`z-[18]`}
-                                        items={exams}
-                                        onChange={handleComboboxSelect}
-                                    />
+                                    <ComboBoxAutocomplete label="Lista de Exames" name="selectExams" items={exams} onChange={handleComboboxSelect} />
                                 )}
                             </FieldArray>
                         </div>
@@ -154,13 +150,11 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                             <div className="flex flex-col items-center justify-center">
                             <FieldArray name="selectedDoencas">
                                 {({ push, remove }) => (
-                                    <ComboboxSelect
-                                        zIndex={`z-[16]`}
-                                        items={diseases}
-                                        onChange={handleComboboxSelect}
-                                    />
+                                    <ComboBoxAutocomplete label="Lista de Doenças" name="selectDoencas" items={diseases} onChange={handleComboboxSelect} />
                                 )}
+                                
                             </FieldArray>
+                            
                             </div>
                             <div className="flex flex-col">
                                 <FieldControl

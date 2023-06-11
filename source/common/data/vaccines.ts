@@ -1,4 +1,16 @@
 export const vaccines = [
+    {
+        id:1,
+        name: "Vacina antirrábica"
+    },
+    {
+        id:2,
+        name: "Vacina múltipla para cães (DAPP)",
+    },  
+    {
+        id:3,
+        name: "Vacina múltipla para gatos (FVRCP)",
+    },
     "Vacina antirrábica",
     "Vacina múltipla para cães (DAPP)",
     "Vacina múltipla para gatos (FVRCP)",

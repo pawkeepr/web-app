@@ -1,4 +1,16 @@
 export const diseases = [
+    {
+        id:1,
+        name: "Parvovirose"
+    },
+    {
+        id:2,
+        name: "Cinomose",
+    },  
+    {
+        id:3,
+        name: "Leptospirose",
+    },
     "Parvovirose",
     "Cinomose",
     "Leptospirose",
