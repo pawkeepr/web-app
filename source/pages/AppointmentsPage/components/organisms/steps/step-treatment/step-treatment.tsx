@@ -10,7 +10,6 @@ import { BtnAvatar, BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
 import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 import AvatarPet from "../../../atoms/pet-avatar/pet-avatar";
 import FieldControl from "~/Components/molecules/field-control/field-control";
-import ComboboxSelect from "../../../molecules/combobox/combobox";
 import { exams } from "~/common/data/exams";
 import { vaccines } from "~/common/data/vaccines";
 import { diseases } from "~/common/data/diseases";
@@ -20,14 +19,15 @@ import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<InitialValues>();
     const [enableField, setEnableField] = useState<boolean>(true);
+ 
 
 
     const onClick = () => {
-        enableField == false ? setEnableField(true) : setEnableField(false);
+        setEnableField((prevValue) => !prevValue);
     };
 
     const handleComboboxSelect = (selected:string) => {
-        setFieldValue('selectedValue', selected);     
+        setFieldValue('selectedValue', selected);    
         console.log(selected);
     };
 
@@ -151,9 +151,9 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                             <FieldArray name="selectedDoencas">
                                 {({ push, remove }) => (
                                     <ComboBoxAutocomplete label="Lista de Doenças" name="selectDoencas" items={diseases} onChange={handleComboboxSelect} />
-                                )}
-                                
+                                    )}          
                             </FieldArray>
+
                             
                             </div>
                             <div className="flex flex-col">

@@ -20,7 +20,7 @@ type ComboBoxAutocompleteProps<T> = {
     onChange?: (item:Item & T)=> void
 } & InputControlProps
 
-const ComboBoxAutocomplete = <T,>({ name, items = [], option, label, onChange, onChangeOption, ...rest }: ComboBoxAutocompleteProps<T>) => {
+const ComboBoxAutocomplete = <T,>({ name, items = [], option, onChange, onChangeOption, ...rest }: ComboBoxAutocompleteProps<T>) => {
     const [selected, setSelected] = useState<Item & T>(option || {} as Item & T)
     const [query, setQuery] = useState('')
 
@@ -51,7 +51,7 @@ const ComboBoxAutocomplete = <T,>({ name, items = [], option, label, onChange, o
             <div className="relative  w-full items-center ">
                 <div className="relative">
                     <FieldControl
-                        label={label}
+                        
                         className='form-control'
                         name={name}
                         disabled={true}
