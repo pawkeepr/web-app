@@ -5,7 +5,7 @@ import ControlSwitch from "../../../molecules/switch/switch";
 
 import { StepProps } from "../types";
 
-import { FieldArray,useFormikContext } from "formik";
+import { FieldArray, useFormikContext } from "formik";
 import { BtnAvatar, BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
 import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 import AvatarPet from "../../../atoms/pet-avatar/pet-avatar";
@@ -19,17 +19,20 @@ import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<InitialValues>();
     const [enableField, setEnableField] = useState<boolean>(true);
- 
+
 
 
     const onClick = () => {
         setEnableField((prevValue) => !prevValue);
     };
 
-    const handleComboboxSelect = (selected:string) => {
-        setFieldValue('selectedValue', selected);    
-        console.log(selected);
-    };
+
+
+    // const handleComboboxSelect = (selected: string) => {
+    //     setFieldValue('selectedValue', selected);    
+    //     console.log(selected);
+    // };
+
 
 
 
@@ -39,7 +42,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 <h4 className="text-center">Tratamento</h4>
             </div>
 
-            
+
 
             <div className="">
                 <div className="mt-2">
@@ -55,7 +58,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                             />
                         </div>
                         <div className="grid grid-cols-2 gap-2">
-                            <div className="flex flex-col">
+                            <div className="flex flex-col col-span-2">
                                 <FieldControl
                                     label="Marca"
                                     className="form-control"
@@ -69,7 +72,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                     label="Início"
                                     className="form-control"
                                     name="inicio"
-                                    type="text"
+                                    type="date"
                                 />
                             </div>
 
@@ -79,35 +82,50 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                         label="Fim"
                                         className="form-control"
                                         name="fim"
-                                        type="text"
+                                        type="date"
                                     />
                                 </div>
                             )}
 
-                            <div className="flex flex-col">
+                            <div className="flex items-center justify-center gap-2 w-full col-span-2">
                                 <FieldControl
                                     label="Quantidade"
                                     className="form-control"
                                     name="quantidade"
                                     type="text"
                                 />
+                                <div className="flex flex-col mb-[6px] w-full">
+                                    <span className=" text-xs">Tipo</span>
+                                    <select className="form-control" id="selectTipoMedicacao">
+                                        <option value="comprimido">Comprimido</option>
+                                        <option value="gotas">Gotas</option>
+                                        <option value="ml">ML</option>
+                                        <option value="mg">Mg</option>
+                                        <option value="gramas">Gramas</option>
+                                        <option value="dose">Dose</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div className="flex flex-col">
-                                <FieldControl
-                                    label="A cada"
-                                    className="form-control"
-                                    name="cada"
-                                    type="text"
-                                />
-                            </div>
-                            <div className="flex flex-col">
+
+                            <div className="flex w-full gap-2 justify-center items-center col-span-2 ">
                                 <FieldControl
                                     label="Intervalo"
-                                    className="form-control"
+                                    className="form-control w-full"
                                     name="intervalo"
                                     type="text"
                                 />
+                                <div className="flex flex-col w-full mb-[6px]">
+                                    <span className=" text-xs">Período</span>
+                                    <select className="form-control" id="selectPeriodoMedicacao">
+                                        <option value="hora">Hora(s)</option>
+                                        <option value="dia">Dia</option>
+                                        <option value="mes">Mes(es)</option>
+                                        <option value="ano">Ano</option>
+                                    </select>
+                                </div>
                             </div>
+
+
                         </div>
                     </ControlSwitch>
                 </div>
@@ -118,12 +136,44 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         className="mt-2 w-16 h-7"
                     >
                         <div className="mt-2">
-                            
-                            <FieldArray name="selectedVacinas">
+                            <FieldArray name="selectedExames">
                                 {({ push, remove }) => (
-                                    <ComboBoxAutocomplete label="Lista de Vacinas" name="selectVaccines" items={vaccines} onChange={handleComboboxSelect} />
+                                    <ComboBoxAutocomplete label="Lista de Vacinas" name="selectVaccines" items={vaccines}
+                                    // onChange={handleComboboxSelect} 
+                                    />
                                 )}
                             </FieldArray>
+                            {/* <FieldArray name="vaccines">
+                {(arrayHelpers) => (
+                  <>
+                  
+                    { values?.vaccines?.map((vaccine, index) => (
+                      <div key={index} className="flex flex-col">
+                        <ComboBoxAutocomplete
+                          label={`Vacina ${index + 1}`}
+                          name={`vaccines[${index}]`}
+                          items={vaccines}
+                        //   onChange={handleComboboxSelect}
+                        />
+                        <button
+                        className="bg-primary w-32 h-10 rounded-lg mx-auto "
+                          type="button"
+                          onClick={() => arrayHelpers.remove(index)}
+                        >
+                          Remover Vacina
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                    className="bg-primary w-32 h-10 rounded-lg mt-2"
+                      type="button"
+                      onClick={() => arrayHelpers.push("")}
+                    >
+                      Adicionar Vacina
+                    </button>
+                  </>
+                )}
+              </FieldArray> */}
                         </div>
                     </ControlSwitch>
                 </div>
@@ -133,9 +183,11 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         className="mt-2 w-16 h-7"
                     >
                         <div className="mt-2 flex flex-col">
-                        <FieldArray name="selectedExames">
+                            <FieldArray name="selectedExames">
                                 {({ push, remove }) => (
-                                    <ComboBoxAutocomplete label="Lista de Exames" name="selectExams" items={exams} onChange={handleComboboxSelect} />
+                                    <ComboBoxAutocomplete label="Lista de Exames" name="selectExams" items={exams}
+                                    // onChange={handleComboboxSelect} 
+                                    />
                                 )}
                             </FieldArray>
                         </div>
@@ -148,13 +200,15 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     >
                         <div className="grid grid-cols-2 gap-2 ">
                             <div className="flex flex-col items-center justify-center">
-                            <FieldArray name="selectedDoencas">
-                                {({ push, remove }) => (
-                                    <ComboBoxAutocomplete label="Lista de Doenças" name="selectDoencas" items={diseases} onChange={handleComboboxSelect} />
-                                    )}          
-                            </FieldArray>
+                                <FieldArray name="selectedDoencas">
+                                    {({ push, remove }) => (
+                                        <ComboBoxAutocomplete label="Lista de Doenças" name="selectDoencas" items={diseases}
+                                        //onChange={handleComboboxSelect}
+                                        />
+                                    )}
+                                </FieldArray>
 
-                            
+
                             </div>
                             <div className="flex flex-col">
                                 <FieldControl
@@ -164,7 +218,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                     type="text"
                                 />
                             </div>
-                            <div className="flex flex-col">
+                            <div className="flex flex-col col-span-2">
                                 <FieldControl
                                     label="Severidade"
                                     className="rounded-md form-control"
@@ -173,19 +227,19 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                 />
                             </div>
                         </div>
-                            <div className="flex flex-col">
+                        <div className="flex flex-col">
                             <FieldControl
-                            label="Descrição"
-                            className="rounded-md hidden"
-                            name="descricao"
-                            type="text"
-                        >
-                            <textarea
-                                className="form-control"
+                                label="Descrição"
+                                className="rounded-md hidden"
                                 name="descricao"
-                            ></textarea>
-                        </FieldControl>
-                            </div>
+                                type="text"
+                            >
+                                <textarea
+                                    className="form-control"
+                                    name="descricao"
+                                ></textarea>
+                            </FieldControl>
+                        </div>
                     </ControlSwitch>
                 </div>
                 <div className="mt-2">
@@ -194,7 +248,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         className="mt-2 w-16 h-7"
                     >
                         <div className="grid grid-cols-2 gap-2">
-                            <div className="flex flex-col">
+                            <div className="flex flex-col col-span-2">
                                 <FieldControl
                                     label="Nome do Alimento"
                                     className="rounded-md form-control"
@@ -202,37 +256,47 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                     type="text"
                                 />
                             </div>
-                            <div className="flex flex-col">
+                            <div className="flex flex-col col-span-2">
                                 <FieldControl
-                                    label="Qtd de Alimento"
-                                    className="rounded-md form-control"
-                                    name="qtdAlimento"
-                                    type="text"
-                                />
-                            </div>
-                            <div className="flex flex-col">
-                                <FieldControl
-                                    label="Tipo Alimento"
-                                    className="rounded-md form-control"
-                                    name="tipoAlimento"
-                                    type="text"
-                                />
-                            </div>
-                            <div className="flex flex-col">
-                                <FieldControl
-                                    label="Horário Alimentação"
+                                    label="Horário que começa Alimentação"
                                     className="rounded-md form-control"
                                     name="horario"
                                     type="text"
                                 />
                             </div>
-                            <div className="flex flex-col">
+                            <div className="flex  w-full items-center gap-2 col-span-2 ">
                                 <FieldControl
-                                    label="A cada"
+                                    label="Quantidade"
                                     className="rounded-md form-control"
-                                    name="periodoTempo"
+                                    name="qtdAlimento"
                                     type="text"
                                 />
+                                <div className="flex flex-col mb-[6px] w-full">
+                                    <span className=" text-xs">Medida</span>
+                                    <select className="form-control">
+                                        <option value="kg">Kilogramas</option>
+                                        <option value="g">Gramas</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                         
+                            <div className="flex items-center justify-center gap-2 col-span-2">
+                                <FieldControl
+                                    label="Intervalo"
+                                    className="rounded-md form-control"
+                                    name="intervaloTempo"
+                                    type="text"
+                                />
+                                <div className="flex flex-col w-full mb-[6px]">
+                                    <span className=" text-xs">Período</span>
+                                    <select className="form-control" id="alimentacaoSelect" name="alimentacaoSelect">
+                                        <option value="hora">Hora(s)</option>
+                                        <option value="dia">Dia</option>
+                                        <option value="mes">Mes(es)</option>
+                                        <option value="ano">Ano</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </ControlSwitch>
@@ -240,13 +304,22 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
 
                 <div className="mt-4">
                     <span>Informações Obrigatórias</span>
-                    <div className="flex flex-col mt-2">
+                    <div className="flex items-center mt-2 gap-2 w-full">
                         <FieldControl
                             label="Peso"
                             className="rounded-md form-control"
                             name="peso"
                             type="text"
+
                         />
+                        <div className="flex flex-col mb-[6px] w-full">
+                            <span className=" text-xs">Medida</span>
+                            <select className="form-control" id="informacoesSelect">
+                                <option value="kg">Kilogramas</option>
+                                <option value="g">Gramas</option>
+                            </select>
+                        </div>
+
                     </div>
                     <div className="flex flex-col mt-2">
                         <FieldControl
