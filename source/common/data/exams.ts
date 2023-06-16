@@ -1,16 +1,4 @@
 export const exams = [
-    {
-        id:1,
-        name: "Hemograma completo"
-    },
-    {
-        id:2,
-        name: "Perfil bioquímico",
-    },  
-    {
-        id:3,
-        name: "Urinalise",
-    },
     "Hemograma completo",
     "Perfil bioquímico",
     "Urinalise",

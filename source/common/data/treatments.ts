@@ -1,16 +1,4 @@
 export const treatments = [
-    {
-        id:1,
-        name: "Antibióticos"
-    },
-    {
-        id:2,
-        name: "Anti-inflamatórios",
-    },  
-    {
-        id:3,
-        name: "Antiparasitários internos",
-    },
     "Antibióticos",
     "Anti-inflamatórios",
     "Antiparasitários internos",
