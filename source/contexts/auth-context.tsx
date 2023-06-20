@@ -45,8 +45,6 @@ interface AuthProviderProps {
 }
 
 
-const publicRoutes = ['/sign-in', '/sign-up', '/forgot-password', '/reset-password', '/', '/404', '/500', '']
-
 export function AuthProvider({ children }: AuthProviderProps) {
     const dispatch = useAppDispatch()
     const {

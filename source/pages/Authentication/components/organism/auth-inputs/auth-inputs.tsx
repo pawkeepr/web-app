@@ -137,7 +137,7 @@ const Auth = () => {
 
                     </div>
 
-                    <Form.Check
+                    {/* <Form.Check
                         type="checkbox"
                         className="w-full"
                         name="rememberMe"
@@ -148,7 +148,7 @@ const Auth = () => {
                             <p className="mb-0 fs-12 text-muted fst-italic">
                                 Lembrar-me
                             </p>
-                        } />
+                        } /> */}
 
                     <div className="mt-4">
                         <Button

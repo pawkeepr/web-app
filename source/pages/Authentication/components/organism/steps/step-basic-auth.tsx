@@ -7,8 +7,6 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import BtnSuccess from '~/Components/atoms/btn/btn-success';
 import FieldControl from '~/Components/molecules/field-control';
 import { AccountSignUp } from '~/store/auth/register/types';
-import validateEmail from '~/validations/email';
-import validatePassword from '~/validations/password';
 
 
 import PasswordRules from '../../molecules/password-rules';
@@ -16,10 +14,11 @@ import Container from '../../template/container';
 
 import Link from 'next/link';
 import { Form } from 'react-bootstrap';
-import useNextStep from '~/hooks/use-next-step';
+import LOADING from '~/constants/loading';
+import { useAppSelector } from '~/store/hooks';
 import { StepProps } from './types';
 
-const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
+const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
 
     const [passwordShow, setPasswordShow] = useState(false);
     const [passwordConfirmShow, setPasswordConfirmShow] = useState(false);
@@ -31,17 +30,16 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
         isValid,
         handleSubmit
     } = useFormikContext<AccountSignUp>()
-    const { email, password, passwordConfirm } = values;
 
-    const requiredValid = useMemo(() => {
-        return (
-            validatePassword.isValidSync(password) &&
-            validateEmail.isValidSync(email) &&
-            password === passwordConfirm
-        )
-    }, [email, password, passwordConfirm])
+    const isLoading = useAppSelector(state => state.Account.loading)
 
-    useNextStep(nextStep, requiredValid)
+    // const requiredValid = useMemo(() => {
+    //     return (
+    //         validatePassword.isValidSync(password) &&
+    //         validateEmail.isValidSync(email) &&
+    //         password === passwordConfirm
+    //     )
+    // }, [email, password, passwordConfirm])
 
     const onToggleVisiblePassword = () => {
         setPasswordShow(state => !state)
@@ -57,12 +55,12 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
         nextStep()
     }
 
+    const loading = useMemo(() => isLoading === LOADING.PENDING || !isValid, [isLoading, isValid])
 
     return (
         <Container>
 
             <FieldControl
-                divClassName='my-1'
                 label="Email"
                 initialFocus
                 name="email"
@@ -71,10 +69,10 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
                 aria-label="email"
                 placeholder="Digite seu email"
                 required
+                disabledError
             />
 
             <FieldControl
-                divClassName='my-1'
                 required
                 label='Senha'
                 name="password"
@@ -92,7 +90,6 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
 
             <FieldControl
                 required
-                divClassName='my-1'
                 label='Repita a senha'
                 name="passwordConfirm"
                 type={passwordConfirmShow ? "text" : "password"}
@@ -117,20 +114,35 @@ const StepSignUpBasicAuth = ({ nextStep, ...rest }: StepProps) => {
                 onChange={handleChange}
                 checked={values.termsOfUse}
                 label={
-                    <p className="mb-4 fs-12 fst-italic">
+                    <p className="fs-12 fst-italic">
                         {"Você se registrando aceita os termos de uso da plataforma: "}
-                        <Link href="#" className="text-primary text-decoration-underline fst-normal fw-medium">Termos de Uso</Link>
+                        <Link href="#" className="text-primary no-underline fst-normal fw-medium">Termos de Uso</Link>
                     </p>
                 }
             />
 
-            <div className="mt-4 d-flex justify-content-center">
+            <Form.Check
+                type="checkbox"
+                className="w-100"
+                name="policyPrivacy"
+                id="policyPrivacy"
+                onChange={handleChange}
+                checked={values.policyPrivacy}
+                label={
+                    <p className="fs-12 fst-italic">
+                        {"Você se registrando aceita a política de privacidade da plataforma: "}
+                        <Link href="#" className="text-primary no-underline fst-normal fw-medium">Política de Privacidade</Link>
+                    </p>
+                }
+            />
+
+            <div className="mt-4 flex justify-center w-full">
                 <BtnSuccess
                     label="Finalizar cadastro"
                     type="submit"
                     onClick={handleClick}
-                    disabled={!isValid}
-                    className="align-self-center"
+                    disabled={loading}
+                    className="align-self-center !w-60 mobile:!w-full"
                 />
             </div>
 

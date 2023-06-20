@@ -1,26 +1,31 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 
 // Login Redux States
-import { editProfile as editProfileAction, profileError, profileSuccess } from "./actions";
+import { editProfile, editProfileError, editProfileSuccess } from "./actions";
 import { Profile } from './types';
 //Include Both Helper File with needed methods
 import { PayloadAction } from "@reduxjs/toolkit";
 
 import {
-  updateProfile,
+  updateProfile
 } from "~/services/helpers/profile";
+import { errorToast, successToast } from "~/store/helpers/toast";
 
 function* onUpdateProfile({ payload: user }: PayloadAction<Profile>) {
   try {
     const { data } = yield call(updateProfile, user);
-    yield put(profileSuccess(data));
+    // yield call(createProfile, user)
+    yield put(editProfileSuccess(data));
+    successToast("Perfil atualizado com sucesso!");
   } catch (error) {
-    yield put(profileError((error as any).message));
+    console.log(error)
+    errorToast("Erro ao atualizar perfil!");
+    yield put(editProfileError((error as any).message));
   }
 }
 
 export function* watchProfile() {
-  yield takeEvery(editProfileAction, onUpdateProfile);
+  yield takeEvery(editProfile, onUpdateProfile);
 }
 
 function* ProfileSaga() {

@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import ScrollSpy from "react-scrollspy";
 
 import Collapse from 'react-bootstrap/Collapse';
 import Container from 'react-bootstrap/Container';
@@ -54,7 +53,7 @@ const NavbarLanding = () => {
                         id="navbarSupportedContent"
                     >
                         <>
-                            <ScrollSpy
+                            {/* <ScrollSpy
                                 offset={0}
                                 items={[
                                     "hero",
@@ -92,7 +91,7 @@ const NavbarLanding = () => {
                                 </li>
 
 
-                            </ScrollSpy>
+                            </ScrollSpy> */}
                             <div className="z-50">
                                 <Link href="/sign-in" className="btn btn-link text-dark cursor-pointer">
                                     <span className="m-1 fw-semibold">Entrar</span>
@@ -102,7 +101,6 @@ const NavbarLanding = () => {
                                 <Link href="/sign-up" className="btn btn-secondary text-dark cursor-pointer">
                                     <span className="m-1 fw-semibold">Cadastre-se</span>
                                     {/* icon de cadastro */}
-                                    <i className="mdi mdi-account-plus"></i>
                                 </Link>
                             </div>
 

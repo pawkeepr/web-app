@@ -4,6 +4,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import Layout from "./layouts/slice";
 
 // Authentication
+import ActivateAccount from './auth/activate-account/slice';
 import ForgetPassword from "./auth/forget-pwd/slice";
 import Login from "./auth/login/slice";
 import Profile from "./auth/profile/slice";
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
     Tutor,
     Team,
     Pets,
+    ActivateAccount
 });
 
 export default rootReducer;

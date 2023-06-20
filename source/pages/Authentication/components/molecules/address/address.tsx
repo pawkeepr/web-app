@@ -19,7 +19,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
 
     const onChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target
-        setFieldValue('address.number', value)
+        setFieldValue('number', value)
     }
 
     return (
@@ -30,7 +30,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                     className="form-control"
                     type="text"
                     label="Estado"
-                    name="address.state"
+                    name="state"
                     disabled={disabledInputs.state || loading}
                     placeholder={loading ? 'Carregando...' : 'Digite o nome do estado'}
                     required
@@ -42,7 +42,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                     className="form-control"
                     type="text"
                     label="Cidade"
-                    name="address.city"
+                    name="city"
                     disabled={disabledInputs.city || loading}
                     placeholder={loading ? 'Carregando...' : 'Digite o nome da cidade'}
                     required
@@ -55,7 +55,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                         className="form-control"
                         type="text"
                         label="Bairro"
-                        name="address.neighborhood"
+                        name="neighborhood"
                         disabled={disabledInputs.neighborhood || loading}
                         placeholder={loading ? 'Carregando...' : 'Digite o nome do bairro'}
                         required
@@ -66,7 +66,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                     <FieldControl
                         divClassName='my-1'
                         label='Rua'
-                        name="address.street"
+                        name="street"
                         aria-label="street"
                         className="form-control w-70"
                         disabled={disabledInputs.street || loading}
@@ -76,7 +76,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                     >
                         <Form.Control
                             type="text"
-                            name="address.number"
+                            name="number"
                             aria-label="number"
                             placeholder="N°"
                             required
@@ -96,7 +96,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                     className="form-control"
                     type="text"
                     label="Complemento"
-                    name="address.complement"
+                    name="complement"
                     disabled={disabledInputs.complement || loading}
                     placeholder={loading ? 'Carregando...' : "Digite o complemento (opcional)"}
                 />

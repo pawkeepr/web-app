@@ -7,7 +7,17 @@ type LayoutProps = {
     children: React.ReactNode;
 }
 
-const routesAuth = ['/sign-in', '/sign-up', '/forget-password', '/reset-password', '/logout']
+const routesAuth = [
+    '/sign-in',
+    '/sign-up',
+    '/forgot-password',
+    '/reset-password',
+    '/logout'
+]
+
+const routesPrivates = [
+    '/activation'
+]
 
 const LayoutAuth = ({ children }: LayoutProps) => {
     return (
@@ -26,6 +36,10 @@ const LayoutDefault = ({ children }: LayoutProps) => {
     }
 
     if (routesAuth.includes(pathname as string)) {
+        return <LayoutAuth>{children}</LayoutAuth>
+    }
+
+    if (routesPrivates.includes(pathname as string)) {
         return <LayoutAuth>{children}</LayoutAuth>
     }
 

@@ -16,8 +16,13 @@ import LayoutProvider from "~/contexts/layout-context";
 import { ToastContainer } from 'react-toastify';
 
 import '~/aws';
+import fakebackend from '~/helpers/AuthType/fakeBackend';
 
-export default function App({ Component, pageProps }: AppProps) {
+
+fakebackend();
+
+function App({ Component, pageProps }: AppProps) {
+
 
   return (
     <SSRProvider>
@@ -32,3 +37,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </SSRProvider>
   )
 }
+
+export default App;

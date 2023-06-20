@@ -1,38 +1,43 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { InitialStateProfile, name } from './types';
+import LOADING from "~/constants/loading";
+import {
+    EDIT_PROFILE,
+    EDIT_PROFILE_ERROR,
+    EDIT_PROFILE_SUCCESS,
+    InitialStateProfile,
+    RESET_PROFILE_FLAG,
+    SET_PROFILE,
+    name
+} from './types';
 
 const initialState: InitialStateProfile = {
-    error: "",
-    success: "",
+    isLoading: LOADING.IDLE,
     user: null,
+    error: "",
 };
 
 const profileSlice = createSlice({
     name,
     initialState,
     reducers: {
-        setProfile: (state, action) => {
-            state.error = "";
-            state.success = "";
+        [SET_PROFILE]: (state, action) => {
             state.user = action.payload;
         },
-        editProfile: (state) => {
-            state.error = "";
-            state.success = "";
+        [EDIT_PROFILE]: (state) => {
+            state.isLoading = LOADING.PENDING;
         },
-        profileSuccess: (state, action) => {
+        [EDIT_PROFILE_SUCCESS]: (state, action) => {
             state.error = "";
-            state.success = action.payload.status;
+            state.isLoading = LOADING.SUCCESS;
             state.user = action.payload.data;
         },
-        profileError: (state, action) => {
+        [EDIT_PROFILE_ERROR]: (state, action) => {
             state.error = action.payload;
-            state.success = "";
+            state.isLoading = LOADING.FAILED;
         },
-        resetProfileFlag: (state) => {
-            state.success = "";
-            state.error = "";
+        [RESET_PROFILE_FLAG]: (state) => {
+            state.isLoading = LOADING.IDLE;
             state.user = null;
         }
     }

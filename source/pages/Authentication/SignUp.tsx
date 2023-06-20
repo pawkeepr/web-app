@@ -1,32 +1,32 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import TabContainer from 'react-bootstrap/TabContainer';
 import TabContent from 'react-bootstrap/TabContent';
 import TabPane from 'react-bootstrap/TabPane';
 //formik
-import { Formik, FormikHelpers } from 'formik';
+import { Formik } from 'formik';
 import Link from 'next/link';
 import * as Yup from 'yup';
-import HeaderTitle from '~/Components/atoms/header-title';
 import AuthSlider from '~/Components/organism/auth-carousel';
-import FooterAuth from '~/Components/organism/footer-auth';
 
 
 import validateEmail from '~/validations/email';
 import validatePassword from '~/validations/password';
 
-import { registerUser, resetRegisterFlag } from '~/store/actions';
+import { registerUser, resetRegisterFlag } from '~/store/auth/register/actions';
 import { AccountSignUp } from '~/store/auth/register/types';
-import { useAppDispatch } from '~/store/hooks';
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
 
+import { useRouter } from 'next/navigation';
+import LOADING from '~/constants/loading';
+import AuthLayout from '../_layouts/auth/auth_layout';
+import StepActivation from './components/organism/steps/step-activation';
 import StepSignUpBasicAuth from './components/organism/steps/step-basic-auth';
-import StepSignUpTermsOfUse from './components/organism/steps/step-terms-of-use';
 
 
 const validationSchema = Yup.object({
@@ -39,6 +39,10 @@ const validationSchema = Yup.object({
         [true],
         'Você deve aceitar os termos de uso'
     ),
+    policyPrivacy: Yup.boolean().oneOf(
+        [true],
+        'Você deve aceitar a política de privacidade'
+    ),
     //person: validatePerson,
     //address: validateAddress,
 });
@@ -47,20 +51,35 @@ const CoverSignUp = () => {
     const [tab, setTab] = useState('1')
 
     const dispatch = useAppDispatch()
-
-    const onSubmit = async (values: AccountSignUp, helper: FormikHelpers<AccountSignUp>) => {
+    const router = useRouter()
+    const isLoading = useAppSelector(state => state.ActivateAccount.isLoading)
+    const onSubmit = async (values: AccountSignUp) => {
         dispatch(registerUser(values))
     }
 
     useEffect(() => {
-        dispatch(resetRegisterFlag())
-    }, [dispatch])
+        return () => {
+            dispatch(resetRegisterFlag())
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    useEffect(() => {
+        if (isLoading === LOADING.SUCCESS) {
+            dispatch(resetRegisterFlag())
+            setTimeout(() => {
+                router.push('/sign-in')
+            }, 1500)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading])
 
     const initialValues: AccountSignUp = {
         email: '',
         password: '',
         passwordConfirm: '',
-        termsOfUse: false
+        termsOfUse: false,
+        policyPrivacy: false,
     };
 
 
@@ -69,18 +88,18 @@ const CoverSignUp = () => {
             id: '1',
             component: (props: any) => <StepSignUpBasicAuth {...props} />
         },
-        // {
-        //     id: '2',
-        //     component: (props: any) => <StepSignUpPerson {...props} />
-        // },
+        {
+            id: '2',
+            component: (props: any) => <StepActivation {...props} />
+        },
         // {
         //     id: '3',
         //     component: (props: any) => <StepSignUpAddress {...props} />
         // },
-        {
-            id: '2',
-            component: (props: any) => <StepSignUpTermsOfUse {...props} />
-        },
+        // {
+        //     id: '2',
+        //     component: (props: any) => <StepSignUpTermsOfUse {...props} />
+        // },
         // {
         //     id: '3',
         //     component: (props: any) => <StepSignUpLoading {...props} />
@@ -113,62 +132,50 @@ const CoverSignUp = () => {
 
 
     return (
-        <React.Fragment>
-            <HeaderTitle title="Criar Conta" />
+        <AuthLayout title="Criar conta">
+            <div className="h-full mt-5 w-full ">
+                <Card className="overflow-hidden shadow-xl !rounded-xl !bg-gray-50 m-10 !mt-2 max-h-screen">
+                    <Row className="justify-content-center g-0">
+                        <AuthSlider bg='auth-bg-image-2' />
+                        <Col lg={6} className="items-center flex-col justify-center">
+                            <Formik
+                                enableReinitialize
+                                validationSchema={validationSchema}
+                                initialValues={initialValues}
+                                onSubmit={onSubmit}
+                            >
+                                <TabContainer activeKey={tab}  >
+                                    {
+                                        Tabs.map((tab, index) => (
+                                            <TabContent key={index}>
+                                                <TabPane
+                                                    eventKey={tab.id}
+                                                    data-testid={`step-${tab.id.padStart(2, '0')}`}
+                                                >
+                                                    {tab.component({
+                                                        prevStep: onChangePrevStep,
+                                                        nextStep: onChangeNextStep,
+                                                    })}
+                                                </TabPane>
+                                            </TabContent>
+                                        ))
+                                    }
+                                </TabContainer>
+                            </Formik>
+                            <div className="text-center pb-4">
+                                <p className="list-group-item text-muted">Você já tem uma conta ?
+                                    <br />
+                                    <Link href="/sign-in" className="font-semibold text-primary-600 no-underline">
+                                        Entrar!
+                                    </Link>
+                                </p>
+                            </div>
 
-            <Formik
-                enableReinitialize
-                validationSchema={validationSchema}
-                initialValues={initialValues}
-                onSubmit={onSubmit}
-            >
-                <div className="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center">
-                    <div className="bg-overlay"></div>
-                    <div className="auth-page-content overflow-hidden pt-lg-5">
-                        <Container>
-
-                            <Card className="overflow-hidden m-0">
-                                <Row className="justify-content-center g-0">
-                                    <AuthSlider bg='auth-bg-image-2' />
-                                    <Col lg={6} className="items-center flex-col justify-center">
-
-                                        <TabContainer activeKey={tab}  >
-                                            {
-                                                Tabs.map((tab, index) => (
-                                                    <TabContent key={index}>
-                                                        <TabPane
-                                                            eventKey={tab.id}
-                                                            data-testid={`step-${tab.id.padStart(2, '0')}`}
-                                                        >
-                                                            {tab.component({
-                                                                prevStep: onChangePrevStep,
-                                                                nextStep: onChangeNextStep,
-                                                            })}
-                                                        </TabPane>
-                                                    </TabContent>
-                                                ))
-                                            }
-                                        </TabContainer>
-                                        <div className="text-center pt-24">
-                                            <p className="list-group-item fs-12 mb-4">Você já tem uma conta ?
-                                                <br />
-                                                <Link href="/sign-in" className="fw-semibold text-primary text-decoration-underline">
-                                                    Entrar!
-                                                </Link>
-                                            </p>
-                                        </div>
-
-                                    </Col>
-                                </Row>
-                            </Card>
-
-                        </Container>
-                    </div>
-
-                    <FooterAuth />
-                </div>
-            </Formik>
-        </React.Fragment >
+                        </Col>
+                    </Row>
+                </Card>
+            </div>
+        </AuthLayout>
     );
 };
 

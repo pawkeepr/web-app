@@ -2,14 +2,9 @@
 
 import React, { useEffect } from 'react';
 import NavbarLanding from '~/Components/molecules/nav-bar-landing';
-import Contact from './contact';
-import FAQ from "./faq";
 import Footer from "./footer";
 import Home from "./home";
 import Plans from './plans';
-import Reviews from './reviews';
-import Teams from "./team";
-import WorkProcess from './workProcess';
 
 
 const LandingPage = () => {
@@ -41,12 +36,12 @@ const LandingPage = () => {
             <div className="layout-wrapper landing">
                 <NavbarLanding />
                 <Home />
-                <WorkProcess />
+                {/* <WorkProcess /> */}
                 <Plans />
-                <Reviews />
+                {/* <Reviews />
                 <Teams />
                 <FAQ />
-                <Contact />
+                <Contact /> */}
                 <Footer />
                 <button onClick={() => toTop()} className="btn btn-secondary btn-icon landing-back-top" id="back-to-top">
                     <i className="ri-arrow-up-line"></i>
