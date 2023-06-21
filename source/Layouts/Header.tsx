@@ -8,14 +8,15 @@ import logoSm from "~/assets/images/logo-sm-1.png";
 
 //import Components
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ProfileDropdownTailwind from '~/Components/molecules/profile-dropdown/profile-dropdown';
 import { changeHeaderSize } from '~/store/actions';
 import { useAppDispatch } from '~/store/hooks';
 import FullScreenDropdown from '../Components/Common/FullScreenDropdown';
 import LightDark from '../Components/Common/LightDark';
-
+ 
 import styles from './Header.module.scss';
+import Drawer from '~/Components/Common/Drawer';
 
 type HeaderProps = {
     headerClass: string;
@@ -23,7 +24,9 @@ type HeaderProps = {
 
 const Header = ({ headerClass }: HeaderProps) => {
 
-    const divRef = useRef<HTMLDivElement>(null);
+    const [show, setShow] = useState<boolean>(false)
+
+    const divRef = useRef<HTMLDivElement>   (null);
 
     const dispatch = useAppDispatch();
 
@@ -67,12 +70,35 @@ const Header = ({ headerClass }: HeaderProps) => {
     //         document.body.classList.contains('twocolumn-panel') ? document.body.classList.remove('twocolumn-panel') : document.body.classList.add('twocolumn-panel');
     //     }
     // };
+    
+    const handleShow = () => setShow(!show);
+
+    console.log(show);
+    
 
     return (
+     
+                        
         <header id="page-topbar" className={`dark:!bg-primary-700 !bg-primary-500 ${headerClass}`} ref={divRef}>
             <div className="layout-width">
                 <div className="navbar-header">
                     <div className="d-flex">
+                    <button
+                            onClick={handleShow}
+                            type="button"
+                            className="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
+                            id="topnav-hamburger-icon">
+                            <span className="hamburger-icon">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </span>
+                        </button>
+
+                        {
+                            show === true ? <Drawer/> : null
+                        } 
+
 
                         <div className="flex items-center justify-center">
                             <Link href="/" className={`${styles['logo']} logo-light`}>
@@ -94,21 +120,16 @@ const Header = ({ headerClass }: HeaderProps) => {
                             </Link>
                         </div>
 
-                        {/* <button
-                            onClick={toggleMenuBtn}
-                            type="button"
-                            className="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
-                            id="topnav-hamburger-icon">
-                            <span className="hamburger-icon">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </span>
-                        </button> */}
-
+                        
+                    
+                       
+                
+                       
+                        
 
                         {/* <SearchOption /> */}
                     </div>
+                      
 
                     <div className="d-flex align-items-center">
 
@@ -134,6 +155,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                 </div>
             </div>
         </header>
+   
     );
 };
 
