@@ -1,21 +1,27 @@
-import logoDark from '~/assets/images/logo-dark.png'
+import { XMarkIcon } from '@heroicons/react/20/solid'; 
 import logoLight from '~/assets/images/logo-light.png'
 import Image from 'next/image';
-import Dashboard from '~/pages/DashboardPage/Dashboard'
 
-const  Drawer = ()=> {
+
+type DrawerProps = {
+    closeDrawer: ()=> void
+}
+
+const  Drawer = ({closeDrawer}: DrawerProps)=> {
   
+
+
   return (
     <>
- <div className="fixed top-0 bottom-0 left-0 right-0 bg-white dark:!bg-dark-500 opacity-40 z-10"></div>
- <aside className=" absolute top-0 bottom-0 left-0 z-[20] flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-white dark:!bg-dark-500 border-r rtl:border-r-0 rtl:border-l ">
-    <a href="#" className="mx-auto">
-        <Image className="w-auto h-8" src={ logoLight} alt=""/>
-    </a>
+ 
+ <div className=" absolute top-0 bottom-0 left-0 z-[20] flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-white dark:!bg-dark-500 border-r rtl:border-r-0 rtl:border-l ">
+    <div className="flex justify-between">
+        <a href="#"> <Image className="w-auto h-8" src={ logoLight} alt=""/> </a>
+        <XMarkIcon onClick={closeDrawer} className='w-8 h-8'/>
+    </div>
     
 
     <div className="flex flex-col items-center mt-6 -mx-2">
-        <img className="object-cover w-24 h-24 mx-2 rounded-full" src="https://img.freepik.com/premium-photo/happy-vet-holding-yorkshire-terrier-puppy-smiling-camera_13339-206914.jpg?size=626&ext=jpg&ga=GA1.1.948677361.1683763162&semt=sph" alt="avatar"/>
         <h4 className="mx-2 mt-2 font-medium ">Olá Veterinária</h4>     
     </div>
 
@@ -57,7 +63,7 @@ const  Drawer = ()=> {
             </a>
         </nav>
     </div>
-</aside>
+</div>
     </>
   );
 }

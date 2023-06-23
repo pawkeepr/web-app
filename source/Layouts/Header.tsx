@@ -72,6 +72,7 @@ const Header = ({ headerClass }: HeaderProps) => {
     // };
     
     const handleShow = () => setShow(!show);
+    const handleClose = () => setShow(false)
 
     console.log(show);
     
@@ -96,7 +97,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                         </button>
 
                         {
-                            show === true ? <Drawer/> : null
+                            show === true ? <Drawer closeDrawer={handleClose}/> : null
                         } 
 
 
