@@ -18,7 +18,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
             </div>
 
             <div>
-                <div className="my-3 justify-center items-center flex">
+                <div className="my-3 justify-center items-center flex mobile:flex-col mobile:items-start">
                     <div className="form-check form-check-inline">
                         <Input
                             id="credit"
@@ -95,13 +95,13 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                 <BtnLabel
                     link
                     type="button"
-                    className="right ms-auto previestab"
+                    className="right  previestab"
                     label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab - 1);
                     }}
                 >
-                    <i className="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>{" "}
+                    <i className="ri-arrow-left-line  align-middle fs-16 me-2"></i>{" "}
                     Voltar
                 </BtnLabel>
                 <BtnSuccess
@@ -112,8 +112,8 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
 
                     }}
                 >
-                    Finalizar
-                    <i className="ri-check-line label-icon align-middle fs-16 ms-2"></i>
+                   <span className='ml-1'> Próximo </span>
+                    <i className="ri-check-line  align-middle fs-16 ms-2"></i>
                 </BtnSuccess>
             </div>
         </>

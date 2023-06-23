@@ -65,10 +65,10 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
 
             <div>
                 <Row className="g-3">
-                    <div className="flex flex-row gap-2 items-center justify-center m-2 p-1">
+                    {/* <div className="flex flex-row gap-2 items-center justify-center m-2 p-1">
                         <AvatarPet name={values.pet?.name || ''} />
                         <BtnAvatar alt='Avatar de Tutor' name="tutor.avatar" disabled size={24} />
-                    </div>
+                    </div> */}
                     <Col sm={3}>
                         <FieldDocument
                             label='CPF'
@@ -169,14 +169,14 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
             <div className="flex align-items-center justify-end gap-3 mt-4">
                 <BtnSuccess
                     type="button"
-                    className="btn-label right ms-auto nexttab nexttab"
+                    className="ml-4 btn-label right ms-auto nexttab nexttab"
                     label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}
                 >
-                    Próximo
-                    <i className="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
+                    <span className='ml-1'> Próximo </span>
+                    <i className="ri-arrow-right-line  align-middle fs-16 ms-2"></i>
                 </BtnSuccess>
             </div>
         </>

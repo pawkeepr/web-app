@@ -341,13 +341,13 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 <BtnLabel
                     link
                     type="button"
-                    className="right ms-auto previestab"
+                    className="right  previestab"
                     label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab - 1);
                     }}
                 >
-                    <i className="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>{" "}
+                    <i className="ri-arrow-left-line  align-middle fs-16 me-2"></i>{" "}
                     Voltar
                 </BtnLabel>
                 <BtnSuccess
@@ -358,8 +358,8 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         toggleTab(activeTab + 1);
                     }}
                 >
-                    Próximo
-                    <i className="ri-check-line label-icon align-middle fs-16 ms-2"></i>
+                      <span className='ml-1'> Próximo </span>
+                    <i className="ri-check-line align-middle fs-16 ms-2"></i>
                 </BtnSuccess>
             </div>
         </>
