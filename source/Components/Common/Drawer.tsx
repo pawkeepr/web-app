@@ -1,22 +1,23 @@
 import { XMarkIcon } from '@heroicons/react/20/solid'; 
-import logoLight from '~/assets/images/logo-light.png'
+import logoDark from '~/assets/images/logo-dark.png'
 import Image from 'next/image';
 
 
 type DrawerProps = {
     closeDrawer: ()=> void
+    display: string
 }
 
-const  Drawer = ({closeDrawer}: DrawerProps)=> {
+const  Drawer = ({closeDrawer, display}: DrawerProps)=> {
   
 
 
   return (
     <>
  
- <div className=" absolute top-0 bottom-0 left-0 z-[20] flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-white dark:!bg-dark-500 border-r rtl:border-r-0 rtl:border-l ">
+ <div className={`absolute top-0 bottom-0 left-0 z-[20] flex flex-col w-64 h-screen px-4 py-8 ${display} overflow-y-auto bg-white dark:!bg-dark-500 border-r rtl:border-r-0 rtl:border-l`}>
     <div className="flex justify-between">
-        <a href="#"> <Image className="w-auto h-8" src={ logoLight} alt=""/> </a>
+        <a href="#"> <Image className="w-auto h-8" src={ logoDark} alt=""/> </a>
         <XMarkIcon onClick={closeDrawer} className='w-8 h-8'/>
     </div>
     

@@ -96,10 +96,8 @@ const Header = ({ headerClass }: HeaderProps) => {
                             </span>
                         </button>
 
-                        {
-                            show === true ? <Drawer closeDrawer={handleClose}/> : null
-                        } 
-
+                            <Drawer closeDrawer={handleClose}  display={show === true ? `flex` : `hidden`} />
+                     
 
                         <div className="flex items-center justify-center">
                             <Link href="/" className={`${styles['logo']} logo-light`}>
