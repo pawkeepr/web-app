@@ -36,9 +36,9 @@ const initialValues = (document: NullString = null, id: NullString = null): Init
         document,
     },
     treatments: [],
-    diseases: [],
-    vaccines: [],
-    exams: [],
+    diseases: [''],
+    vaccines: [''],
+    exams: [''],
     payment: {
         method: null,
         price: null,
