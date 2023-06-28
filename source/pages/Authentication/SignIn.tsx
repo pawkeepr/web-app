@@ -35,12 +35,12 @@ const CoverSignIn = () => {
 
     return (
         <AuthLayout title='Entrar'>
-            <Card className="overflow-hidden shadow-xl mt-5 !bg-gray-50 rounded-full w-full mx-4">
-                <Row className="g-0">
+            <Card className="overflow-hidden shadow-sm mt-5 !bg-gray-50 rounded-xl md:w-[80%] h-[70%] w-full mx-1">
+                <Row className="g-0 h-full">
                     <AuthSlider bg='auth-bg-image-3' classNames='d-none d-sm-block' />
 
                     <Col lg={6} className="sm:pr-12">
-                        <div className="p-lg-5 p-4 items-center flex-col justify-center h-100">
+                        <div className="p-lg-5 p-4 items-center flex-col justify-center h-100 lg:mt-10">
                             <div className='flex flex-col items-center justify-center'>
                                 <LogoSimple className='d-none d-sm-block' />
                                 <LogoSimpleMobile className='d-sm-none' />

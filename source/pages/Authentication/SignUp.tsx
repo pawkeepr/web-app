@@ -133,8 +133,8 @@ const CoverSignUp = () => {
 
     return (
         <AuthLayout title="Criar conta">
-            <div className="h-full mt-5 w-full ">
-                <Card className="overflow-hidden shadow-xl !rounded-xl !bg-gray-50 m-10 !mt-2 max-h-screen">
+            <div className=" lg:mt-5 h-screen  w-full overflow-auto lg:overflow-hidden lg:flex justify-center items-center ">
+                <Card className="lg:!w-screen shadow  !bg-gray-50 lg:justify-center ">
                     <Row className="justify-content-center g-0">
                         <AuthSlider bg='auth-bg-image-2' />
                         <Col lg={6} className="items-center flex-col justify-center">
@@ -162,7 +162,7 @@ const CoverSignUp = () => {
                                     }
                                 </TabContainer>
                             </Formik>
-                            <div className="text-center pb-4">
+                            <div className="text-center pb-20">
                                 <p className="list-group-item text-muted">Você já tem uma conta ?
                                     <br />
                                     <Link href="/sign-in" className="font-semibold text-primary-600 no-underline">
