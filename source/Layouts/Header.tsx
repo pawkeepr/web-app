@@ -74,7 +74,7 @@ const Header = ({ headerClass }: HeaderProps) => {
     const handleShow = () => setShow(!show);
     const handleClose = () => setShow(false)
 
-    console.log(show);
+   
     
 
     return (

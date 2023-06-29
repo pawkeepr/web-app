@@ -150,12 +150,13 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                             <div key={index} className="flex gap-2 justify-center items-center">
                                                 <ComboBoxAutocomplete
                                                     label={`Vacina ${index + 1}`}
-                                                    name={`vaccines[${index}]`}
+                                                    name={`vaccine${index}`}
                                                     items={vaccines}
                                                 //   onChange={handleComboboxSelect}
                                                 />
                                                 
-                                                <FaRegTrashAlt title="Remover Vacina" className="w-8 h-5 mt-2 text-primary-500" onClick={() => arrayHelpers.remove(index)} type="button" />
+                                                {values.vaccines?.length == 1 ? null :  <FaRegTrashAlt title="Remover Vacina" className="w-8 h-5 mt-2 text-primary-500" onClick={() => arrayHelpers.remove(index)} type="button" />}
+                                               
                                             </div>
 
                                         ))}
@@ -184,7 +185,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                             <div key={index} className="flex gap-2 justify-center items-center">
                                                 <ComboBoxAutocomplete
                                                     label={`Exame ${index + 1}`}
-                                                    name={`exams[${index}]`}
+                                                    name={`exam${index}`}
                                                     items={exams}
                                                 //   onChange={handleComboboxSelect}
                                                 />
@@ -218,7 +219,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                             <div key={index} className="flex gap-2 justify-center items-center ">
                                                 <ComboBoxAutocomplete
                                                     label={`Doença ${index + 1}`}
-                                                    name={`diseases[${index}]`}
+                                                    name={`disease${index}`}
                                                     items={diseases}
                                                 //   onChange={handleComboboxSelect}
                                                 />
