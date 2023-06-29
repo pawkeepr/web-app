@@ -1,14 +1,12 @@
-'use client'
+"use client";
 
-import React, { useEffect } from 'react';
-import NavbarLanding from '~/Components/molecules/nav-bar-landing';
+import React, { useEffect } from "react";
+import NavbarLanding from "~/Components/molecules/nav-bar-landing";
 import Footer from "./footer";
 import Home from "./home";
-import Plans from './plans';
-
+import Plans from "./plans";
 
 const LandingPage = () => {
-
     useEffect(() => {
         window.onscroll = function () {
             scrollFunction();
@@ -18,7 +16,10 @@ const LandingPage = () => {
     const scrollFunction = () => {
         const element = document.getElementById("back-to-top");
         if (element) {
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            if (
+                document.body.scrollTop > 100 ||
+                document.documentElement.scrollTop > 100
+            ) {
                 element.style.display = "block";
             } else {
                 element.style.display = "none";
@@ -43,7 +44,11 @@ const LandingPage = () => {
                 <FAQ />
                 <Contact /> */}
                 <Footer />
-                <button onClick={() => toTop()} className="btn btn-secondary btn-icon landing-back-top" id="back-to-top">
+                <button
+                    onClick={() => toTop()}
+                    className="btn btn-secondary btn-icon landing-back-top"
+                    id="back-to-top"
+                >
                     <i className="ri-arrow-up-line"></i>
                 </button>
             </div>

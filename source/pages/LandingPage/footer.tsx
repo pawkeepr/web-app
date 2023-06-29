@@ -1,74 +1,46 @@
-import Link from 'next/link';
-import React from 'react';
-import { Col, Container, Row } from 'reactstrap';
-
 // Import Images
-import Image from 'next/image';
-import logolight from "~/assets/images/logo-light.png";
+import Link from "next/link";
+
+import { FaInstagram } from "react-icons/fa";
+import { GrFacebookOption } from "react-icons/gr";
+import { RiLinkedinFill } from "react-icons/ri";
 
 const Footer = () => {
     return (
-        <React.Fragment>
-            <footer className="custom-footer bg-primary py-5 position-relative">
-                <Container>
-                    <Row>
-                        <Col lg={4} className="mt-4">
-                            <div>
-                                <div>
-                                    <Image src={logolight} alt="logo light" height="17" />
+        <footer className="bg-gray-900 py-1">
+            <div className="container flex flex-col items-center justify-between p-6 mx-auto space-y-4 sm:space-y-0 sm:flex-row">
+                <p className="text-sm text-gray-100 font-light">
+                    {new Date().getFullYear()} © PawKeepr - Todos os direitos
+                    reservados.
+                </p>
 
-                                </div>
-                                <Col sm={4} className="mt-4">
-                                    <div className="mt-3">
-                                        <ul className="list-unstyled ff-secondary footer-list fs-15 !text-white ">
-                                            <li><Link href="/pages-profile">Sobre a PawKeepr</Link></li>
-                                            <li><Link href="/pages-gallery">Equipe</Link></li>
-                                            <li><Link href="/pages-faqs">Contato</Link></li>
+                <div className="flex -mx-2 items-center">
+                    <Link
+                        href="#"
+                        className="mx-2 text-gray-600 transition-colors duration-300 hover:text-white"
+                        aria-label="Instagram"
+                    >
+                        <FaInstagram size={20} />
+                    </Link>
 
-                                        </ul>
-                                    </div>
-                                </Col>
+                    <Link
+                        href="#"
+                        className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-white"
+                        aria-label="Facebook"
+                    >
+                        <GrFacebookOption size={20} />
+                    </Link>
 
-                            </div>
-                        </Col>
-
-                    </Row>
-
-                    <Row className="text-center text-sm-start align-items-center mt-5 !text-white">
-                        <Col sm={6}>
-
-                            <div>
-                                <p className="copy-rights mb-0">
-                                    {new Date().getFullYear()} © PawKeepr - Todos os direitos reservados.
-                                </p>
-                            </div>
-                        </Col>
-                        <Col sm={6}>
-                            <div className="text-sm-end mt-3 mt-sm-0 !text-white">
-                                <ul className="list-inline mb-0 footer-social-link">
-                                    <li className="list-inline-item">
-                                        <Link href="#" className="avatar-xs d-block">
-                                            <div className="avatar-title rounded-circle">
-                                                <i className="ri-facebook-fill"></i>
-                                            </div>
-                                        </Link>
-                                    </li>
-
-                                    <li className="list-inline-item">
-                                        <Link href="#" className="avatar-xs d-block">
-                                            <div className="avatar-title rounded-circle">
-                                                <i className="ri-linkedin-fill"></i>
-                                            </div>
-                                        </Link>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </footer>
-        </React.Fragment >
+                    <Link
+                        href="#"
+                        className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-white"
+                        aria-label="Github"
+                    >
+                        <RiLinkedinFill size={20} />
+                    </Link>
+                </div>
+            </div>
+        </footer>
     );
 };
 
