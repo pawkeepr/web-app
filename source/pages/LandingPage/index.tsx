@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { HiOutlineArrowSmUp } from "react-icons/hi";
 import NavbarLanding from "~/Components/molecules/nav-bar-landing";
-import Footer from "./footer";
+import Footer from "./components/Footer";
+import Plans from "./components/Plans";
 import Home from "./home";
-import Plans from "./plans";
 
 const LandingPage = () => {
     useEffect(() => {
@@ -46,10 +47,10 @@ const LandingPage = () => {
                 <Footer />
                 <button
                     onClick={() => toTop()}
-                    className="btn btn-secondary btn-icon landing-back-top"
+                    className="bg-secondary-500 p-3 rounded-full landing-back-top mb-[5rem] shadow-md"
                     id="back-to-top"
                 >
-                    <i className="ri-arrow-up-line"></i>
+                    <HiOutlineArrowSmUp size={20} />
                 </button>
             </div>
         </React.Fragment>
