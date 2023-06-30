@@ -19,7 +19,7 @@ const Home = () => {
             <section className="section hero-section bg-primary" id="hero">
                 <div className="bg-overlay bg-overlay-pattern"></div>
 
-                <div className="grid grid-cols-1 mt-5 md:mt-0 md:grid-cols-2 p-4">
+                <div className="grid grid-cols-1 items-swiper-centered mt-5 md:mt-0 md:grid-cols-2 p-4">
                     <Slide left>
                         <div className="col-span-1">
                             {/* <div className="demo-img-patten-top d-none d-sm-block">
@@ -31,7 +31,7 @@ const Home = () => {
 
                             <Image
                                 src={landingPage01}
-                                className="w-100 !border-none"
+                                className="w-100"
                                 alt="..."
                             />
                             {/* <Swiper
