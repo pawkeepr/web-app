@@ -132,7 +132,7 @@ const CoverSignUp = () => {
     return (
         <AuthLayout title="Criar conta">
             <div className=" lg:mt-5 h-screen w-full overflow-auto lg:overflow-hidden lg:flex justify-center items-center z-10">
-                <Card className="lg:!w-screen shadow  !bg-gray-50 lg:justify-center ">
+                <div className="lg:!w-screen shadow  !bg-gray-50 lg:justify-center pb-1 ">
                     <Row className="justify-content-center g-0">
                         <AuthSlider bg="auth-bg-image-2" />
                         <Col
@@ -178,7 +178,7 @@ const CoverSignUp = () => {
                             </div>
                         </Col>
                     </Row>
-                </Card>
+                </div>
             </div>
         </AuthLayout>
     );

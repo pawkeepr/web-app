@@ -37,7 +37,7 @@ const CoverSignIn = () => {
 
     return (
         <AuthLayout title="Entrar">
-            <Card className="overflow-hidden shadow-sm mt-0 md:mt-5 !bg-gray-50 md:w-[80%] h-full md:h-[90%] lg:w-[80%] w-full">
+            <div className="overflow-hidden shadow-sm mt-0 md:mt-5 !bg-gray-50 md:w-[80%] h-full md:h-[90%] lg:w-[80%] w-full z-10">
                 <Row className="h-full">
                     <AuthSlider
                         bg="auth-bg-image-3"
@@ -99,7 +99,7 @@ const CoverSignIn = () => {
                         </div>
                     </Col>
                 </Row>
-            </Card>
+            </div>
         </AuthLayout>
     );
 };
