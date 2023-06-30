@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import TabContainer from "react-bootstrap/TabContainer";
@@ -131,8 +130,8 @@ const CoverSignUp = () => {
 
     return (
         <AuthLayout title="Criar conta">
-            <div className=" lg:mt-5 h-screen w-full overflow-auto lg:overflow-hidden lg:flex justify-center items-center z-10">
-                <div className="lg:!w-screen shadow  !bg-gray-50 lg:justify-center pb-1 ">
+            <div className=" lg:mt-5 h-screen w-full lg:w-[80%] overflow-auto lg:overflow-hidden md:flex justify-center items-center z-10">
+                <div className="lg:!w-screen shadow  !bg-gray-50 lg:justify-center">
                     <Row className="justify-content-center g-0">
                         <AuthSlider bg="auth-bg-image-2" />
                         <Col
