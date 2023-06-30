@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -19,7 +20,7 @@ import validatePassword from "~/validations/password";
 import { registerUser, resetRegisterFlag } from "~/store/auth/register/actions";
 import { AccountSignUp } from "~/store/auth/register/types";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
-
+import bgAuth from "~/assets/images/bg-auth.webp";
 import { useRouter } from "next/navigation";
 import LOADING from "~/constants/loading";
 import AuthLayout from "../_layouts/auth/auth_layout";
@@ -130,53 +131,53 @@ const CoverSignUp = () => {
 
     return (
         <AuthLayout title="Criar conta">
-            <div className=" lg:mt-5 h-screen w-full lg:w-[80%] overflow-auto lg:overflow-hidden md:flex justify-center items-center z-10">
-                <div className="lg:!w-screen shadow  !bg-gray-50 lg:justify-center">
-                    <Row className="justify-content-center g-0">
-                        <AuthSlider bg="auth-bg-image-2" />
-                        <Col
-                            lg={6}
-                            className="items-center flex-col justify-center"
-                        >
-                            <Formik
-                                enableReinitialize
-                                validationSchema={validationSchema}
-                                initialValues={initialValues}
-                                onSubmit={onSubmit}
-                            >
-                                <TabContainer activeKey={tab}>
-                                    {Tabs.map((tab, index) => (
-                                        <TabContent key={index}>
-                                            <TabPane
-                                                eventKey={tab.id}
-                                                data-testid={`step-${tab.id.padStart(
-                                                    2,
-                                                    "0"
-                                                )}`}
-                                            >
-                                                {tab.component({
-                                                    prevStep: onChangePrevStep,
-                                                    nextStep: onChangeNextStep,
-                                                })}
-                                            </TabPane>
-                                        </TabContent>
-                                    ))}
-                                </TabContainer>
-                            </Formik>
-                            <div className="text-center pb-20">
-                                <p className="list-group-item text-muted">
-                                    Você já tem uma conta ?
-                                    <br />
-                                    <Link
-                                        href="/sign-in"
-                                        className="font-semibold text-primary-600 no-underline"
+            <div className="h-full lg:h-[80%] lg:w-[80%] z-10 flex flex-col lg:grid grid-cols-2">
+                <div className="flex flex-1">
+                    <Image
+                        className="h-24 lg:h-full object-cover"
+                        src={bgAuth}
+                        alt="imagem pessoas"
+                    />
+                </div>
+                <div className="z-10 bg-white h-full">
+                    <Formik
+                        enableReinitialize
+                        validationSchema={validationSchema}
+                        initialValues={initialValues}
+                        onSubmit={onSubmit}
+                    >
+                        <TabContainer activeKey={tab}>
+                            {Tabs.map((tab, index) => (
+                                <TabContent key={index}>
+                                    <TabPane
+                                        eventKey={tab.id}
+                                        data-testid={`step-${tab.id.padStart(
+                                            2,
+                                            "0"
+                                        )}`}
                                     >
-                                        Entrar!
-                                    </Link>
-                                </p>
-                            </div>
-                        </Col>
-                    </Row>
+                                        {tab.component({
+                                            prevStep: onChangePrevStep,
+                                            nextStep: onChangeNextStep,
+                                        })}
+                                    </TabPane>
+                                </TabContent>
+                            ))}
+                        </TabContainer>
+                    </Formik>
+
+                    <div className="text-center pb-0 bg-white">
+                        <p className="list-group-item text-muted">
+                            Você já tem uma conta ?
+                            <br />
+                            <Link
+                                href="/sign-in"
+                                className="font-semibold text-primary-600 no-underline "
+                            >
+                                Entrar!
+                            </Link>
+                        </p>
+                    </div>
                 </div>
             </div>
         </AuthLayout>
