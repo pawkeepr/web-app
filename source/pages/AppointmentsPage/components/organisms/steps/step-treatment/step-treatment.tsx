@@ -14,32 +14,21 @@ import { exams } from "~/common/data/exams";
 import { vaccines } from "~/common/data/vaccines";
 import { diseases } from "~/common/data/diseases";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import { PlusIcon } from "@heroicons/react/24/outline";
 import { FaRegTrashAlt } from "react-icons/fa";
-
-
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<InitialValues>();
     const [enableField, setEnableField] = useState<boolean>(true);
 
-
-
     const onClick = () => {
         setEnableField((prevValue) => !prevValue);
     };
 
-
-
-
-
     // const handleComboboxSelect = (selected: string) => {
-    //     setFieldValue('selectedValue', selected);    
+    //     setFieldValue('selectedValue', selected);
     //     console.log(selected);
     // };
-
-
-
 
     return (
         <>
@@ -47,18 +36,16 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 <h4 className="text-center">Tratamento</h4>
             </div>
 
-
-
             <div className="">
                 <div className="mt-2">
                     <ControlSwitch
                         label="Aplicar Medicação"
-                        className="mt-2 w-16 h-7"
+                        className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7 "
                     >
                         <div className="flex flex-col">
                             <ControlSwitch
                                 label="Uso Contínuo?"
-                                className="mt-2 w-16 h-7"
+                                className="mt-2 w-[3.72rem] h-6"
                                 onClick={onClick}
                             />
                         </div>
@@ -101,8 +88,13 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                 />
                                 <div className="flex flex-col mb-[6px] w-full">
                                     <span className=" text-xs">Tipo</span>
-                                    <select className="form-control" id="selectTipoMedicacao">
-                                        <option value="comprimido">Comprimido</option>
+                                    <select
+                                        className="form-control"
+                                        id="selectTipoMedicacao"
+                                    >
+                                        <option value="comprimido">
+                                            Comprimido
+                                        </option>
                                         <option value="gotas">Gotas</option>
                                         <option value="ml">ML</option>
                                         <option value="mg">Mg</option>
@@ -121,7 +113,10 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                 />
                                 <div className="flex flex-col w-full mb-[6px]">
                                     <span className=" text-xs">Período</span>
-                                    <select className="form-control" id="selectPeriodoMedicacao">
+                                    <select
+                                        className="form-control"
+                                        id="selectPeriodoMedicacao"
+                                    >
                                         <option value="hora">Hora(s)</option>
                                         <option value="dia">Dia</option>
                                         <option value="mes">Mes(es)</option>
@@ -129,8 +124,6 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                     </select>
                                 </div>
                             </div>
-
-
                         </div>
                     </ControlSwitch>
                 </div>
@@ -138,33 +131,52 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 <div className="mt-2">
                     <ControlSwitch
                         label="Aplicar vacina?"
-                        className="mt-2 w-16 h-7"
+                        className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
                     >
                         <div className="mt-2">
                             <FieldArray name="vaccines">
                                 {(arrayHelpers) => (
-
                                     <>
+                                        {values?.vaccines?.map(
+                                            (vaccine, index) => (
+                                                <div
+                                                    key={index}
+                                                    className="flex gap-2 justify-center items-center"
+                                                >
+                                                    <ComboBoxAutocomplete
+                                                        label={`Vacina ${
+                                                            index + 1
+                                                        }`}
+                                                        name={`vaccine${index}`}
+                                                        items={vaccines}
+                                                        //   onChange={handleComboboxSelect}
+                                                    />
+                                                    {index == 0 && (
+                                                        <PlusIcon
+                                                            onClick={() =>
+                                                                arrayHelpers.push(
+                                                                    ""
+                                                                )
+                                                            }
+                                                            className="w-8 h-5 hover:scale-110 mt-2 text-primary-500   transition   cursor-pointer"
+                                                        />
+                                                    )}
 
-                                        {values?.vaccines?.map((vaccine, index) => (
-                                            <div key={index} className="flex gap-2 justify-center items-center">
-                                                <ComboBoxAutocomplete
-                                                    label={`Vacina ${index + 1}`}
-                                                    name={`vaccine${index}`}
-                                                    items={vaccines}
-                                                //   onChange={handleComboboxSelect}
-                                                />
-                                                
-                                                {values.vaccines?.length == 1 ? null :  <FaRegTrashAlt title="Remover Vacina" className="w-8 h-5 mt-2 text-primary-500" onClick={() => arrayHelpers.remove(index)} type="button" />}
-                                               
-                                            </div>
-
-                                        ))}
-                                        <div onClick={() => arrayHelpers.push("")} className=" w-44 active:scale-90 transition flex gap-2 text-white bg-primary-500 dark:bg-primary-600 rounded-lg text-sm p-2 cursor-pointer" >
-                                            <PlusCircleIcon className="w-10 h-6" />
-                                            <button type="button">Adicionar vacina</button>
-                                        </div>
-
+                                                    {index > 0 && (
+                                                        <FaRegTrashAlt
+                                                            title="Remover Vacina"
+                                                            className="w-8 h-5 mt-2 hover:scale-110 text-primary-500 cursor-pointer"
+                                                            onClick={() =>
+                                                                arrayHelpers.remove(
+                                                                    index
+                                                                )
+                                                            }
+                                                            type="button"
+                                                        />
+                                                    )}
+                                                </div>
+                                            )
+                                        )}
                                     </>
                                 )}
                             </FieldArray>
@@ -174,30 +186,48 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 <div className="mt-2">
                     <ControlSwitch
                         label="Aplicar exame?"
-                        className="mt-2 w-16 h-7"
+                        className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
                     >
                         <div className="mt-2 flex flex-col">
                             <FieldArray name="exams">
                                 {(arrayHelpers) => (
                                     <>
-
                                         {values?.exams?.map((exam, index) => (
-                                            <div key={index} className="flex gap-2 justify-center items-center">
+                                            <div
+                                                key={index}
+                                                className="flex gap-2 justify-center items-center"
+                                            >
                                                 <ComboBoxAutocomplete
                                                     label={`Exame ${index + 1}`}
                                                     name={`exam${index}`}
                                                     items={exams}
-                                                //   onChange={handleComboboxSelect}
+                                                    //   onChange={handleComboboxSelect}
                                                 />
-                                                <FaRegTrashAlt title="Remover Exame" className="w-8 h-5 mt-2 text-primary-500" onClick={() => arrayHelpers.remove(index)} type="button" />
+                                                {index == 0 && (
+                                                    <PlusIcon
+                                                        onClick={() =>
+                                                            arrayHelpers.push(
+                                                                ""
+                                                            )
+                                                        }
+                                                        className="w-8 h-5 hover:scale-110 mt-2 text-primary-500   transition   cursor-pointer"
+                                                    />
+                                                )}
+
+                                                {index > 0 && (
+                                                    <FaRegTrashAlt
+                                                        title="Remover Vacina"
+                                                        className="w-8 h-5 mt-2 hover:scale-110 text-primary-500 cursor-pointer"
+                                                        onClick={() =>
+                                                            arrayHelpers.remove(
+                                                                index
+                                                            )
+                                                        }
+                                                        type="button"
+                                                    />
+                                                )}
                                             </div>
-
                                         ))}
-                                        <div onClick={() => arrayHelpers.push("")} className=" w-44 active:scale-90 transition flex gap-2 text-white bg-primary-500 dark:bg-primary-600 rounded-lg text-sm p-2 cursor-pointer" >
-                                            <PlusCircleIcon className="w-10 h-6" />
-                                            <button type="button">Adicionar Exame</button>
-                                        </div>
-
                                     </>
                                 )}
                             </FieldArray>
@@ -207,35 +237,56 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 <div className="mt-2">
                     <ControlSwitch
                         label="Possui doença?"
-                        className="mt-2 w-16 h-7"
+                        className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
                     >
                         <div className="grid grid-cols-2 gap-2 mt-2">
                             <div className="flex flex-col col-span-2">
-                                <FieldArray name="selectedDoencas">
-                                {(arrayHelpers) => (
-                                    <>
+                                <FieldArray name="diseases">
+                                    {(arrayHelpers) => (
+                                        <>
+                                            {values?.diseases?.map(
+                                                (disease, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="flex gap-2 justify-center items-center "
+                                                    >
+                                                        <ComboBoxAutocomplete
+                                                            label={`Doença ${
+                                                                index + 1
+                                                            }`}
+                                                            name={`disease${index}`}
+                                                            items={diseases}
+                                                            //   onChange={handleComboboxSelect}
+                                                        />
+                                                        {index == 0 && (
+                                                            <PlusIcon
+                                                                onClick={() =>
+                                                                    arrayHelpers.push(
+                                                                        ""
+                                                                    )
+                                                                }
+                                                                className="w-8 h-5 hover:scale-110 mt-2 text-primary-500   transition   cursor-pointer"
+                                                            />
+                                                        )}
 
-                                        {values?.diseases?.map((disease, index) => (
-                                            <div key={index} className="flex gap-2 justify-center items-center ">
-                                                <ComboBoxAutocomplete
-                                                    label={`Doença ${index + 1}`}
-                                                    name={`disease${index}`}
-                                                    items={diseases}
-                                                //   onChange={handleComboboxSelect}
-                                                />
-                                                <FaRegTrashAlt title="Remover Doença" className="w-8 h-5 mt-2 text-primary-500" onClick={() => arrayHelpers.remove(index)} type="button" />
-                                            </div>
-
-                                        ))}
-                                        <div onClick={() => arrayHelpers.push("")} className=" w-[11.2rem] active:scale-90 transition flex gap-2 text-white bg-primary-500 dark:bg-primary-600 rounded-lg text-sm p-2 cursor-pointer" >
-                                            <PlusCircleIcon className="w-10 h-6" />
-                                            <button type="button">Adicionar Doença</button>
-                                        </div>
-
-                                    </>
-                                )}
+                                                        {index > 0 && (
+                                                            <FaRegTrashAlt
+                                                                title="Remover Vacina"
+                                                                className="w-8 h-5 mt-2 hover:scale-110 text-primary-500 cursor-pointer"
+                                                                onClick={() =>
+                                                                    arrayHelpers.remove(
+                                                                        index
+                                                                    )
+                                                                }
+                                                                type="button"
+                                                            />
+                                                        )}
+                                                    </div>
+                                                )
+                                            )}
+                                        </>
+                                    )}
                                 </FieldArray>
-
                             </div>
                             <div className="flex flex-col">
                                 <FieldControl
@@ -272,7 +323,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 <div className="mt-2">
                     <ControlSwitch
                         label="Aplicar nutrição alimentar?"
-                        className="mt-2 w-16 h-7"
+                        className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
                     >
                         <div className="grid grid-cols-2 gap-2">
                             <div className="flex flex-col col-span-2">
@@ -307,7 +358,6 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                 </div>
                             </div>
 
-
                             <div className="flex items-center justify-center gap-2 col-span-2">
                                 <FieldControl
                                     label="Intervalo"
@@ -317,7 +367,11 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                 />
                                 <div className="flex flex-col w-full mb-[6px]">
                                     <span className=" text-xs">Período</span>
-                                    <select className="form-control" id="alimentacaoSelect" name="alimentacaoSelect">
+                                    <select
+                                        className="form-control"
+                                        id="alimentacaoSelect"
+                                        name="alimentacaoSelect"
+                                    >
                                         <option value="hora">Hora(s)</option>
                                         <option value="dia">Dia</option>
                                         <option value="mes">Mes(es)</option>
@@ -336,17 +390,18 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                             label="Peso"
                             className="rounded-md form-control"
                             name="peso"
-                            type="text"
-
+                            type="number"
                         />
                         <div className="flex flex-col mb-[6px] w-full">
                             <span className=" text-xs">Medida</span>
-                            <select className="form-control" id="informacoesSelect">
+                            <select
+                                className="form-control"
+                                id="informacoesSelect"
+                            >
                                 <option value="kg">Kilogramas</option>
                                 <option value="g">Gramas</option>
                             </select>
                         </div>
-
                     </div>
                     <div className="flex flex-col mt-2">
                         <FieldControl
@@ -364,7 +419,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 </div>
             </div>
 
-            <div className="flex align-items-center justify-end gap-3 mt-4">
+            <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnLabel
                     link
                     type="button"
@@ -379,14 +434,14 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 </BtnLabel>
                 <BtnSuccess
                     type="button"
-                    className="btn-label right ms-auto nexttab"
+                    className="btn-label "
                     label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}
                 >
-                    <span className='ml-1'> Próximo </span>
-                    <i className="ri-check-line align-middle fs-16 ms-2"></i>
+                    <span className="ml-1"> Próximo </span>
+                    <i className="ri-arrow-right-line  align-middle fs-16  p-1"></i>
                 </BtnSuccess>
             </div>
         </>

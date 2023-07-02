@@ -1,13 +1,7 @@
-import {
-    Col,
-    Input,
-    Label,
-    Row
-} from "reactstrap";
-
+import { Col, Input, Label, Row } from "reactstrap";
 
 import { BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
-import { StepProps } from './types';
+import { StepProps } from "./types";
 import ListBoxTailwind from "~/Components/molecules/list-box-tailwind/list-box-tailwind";
 
 const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
@@ -28,10 +22,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                             defaultChecked
                             required
                         />
-                        <Label
-                            className="form-check-label"
-                            htmlFor="credit"
-                        >
+                        <Label className="form-check-label" htmlFor="credit">
                             Cartão de Crédito
                         </Label>
                     </div>
@@ -43,10 +34,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                             className="form-check-input"
                             required
                         />
-                        <Label
-                            className="form-check-label"
-                            htmlFor="debit"
-                        >
+                        <Label className="form-check-label" htmlFor="debit">
                             Cartão de Débito
                         </Label>
                     </div>
@@ -58,10 +46,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                             className="form-check-input"
                             required
                         />
-                        <Label
-                            className="form-check-label"
-                            htmlFor="pix"
-                        >
+                        <Label className="form-check-label" htmlFor="pix">
                             Pix
                         </Label>
                     </div>
@@ -73,25 +58,16 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                             className="form-check-input"
                             required
                         />
-                        <Label
-                            className="form-check-label"
-                            htmlFor="cash"
-                        >
+                        <Label className="form-check-label" htmlFor="cash">
                             Dinheiro
                         </Label>
                     </div>
                 </div>
 
-                <Row className="gy-3">
-                    {
-                        <ListBoxTailwind  />
-                    }
-
-                </Row>
-
+                <Row className="gy-3">{<ListBoxTailwind />}</Row>
             </div>
 
-            <div className="flex align-items-center justify-end gap-3 mt-4">
+            <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnLabel
                     link
                     type="button"
@@ -106,20 +82,18 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                 </BtnLabel>
                 <BtnSuccess
                     type="button"
-                    className="btn-label right ms-auto nexttab"
+                    className="btn-label"
                     label="Próximo"
-                    onClick={() => {
-
-                    }}
+                    onClick={() => {}}
                 >
-                   <span className='ml-1'> Próximo </span>
-                    <i className="ri-check-line  align-middle fs-16 ms-2"></i>
+                    <span className="ml-1"> Próximo </span>
+                    <i className="ri-check-line  align-middle fs-16 p-1"></i>
                 </BtnSuccess>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default StepVaccines
+export default StepVaccines;
 
-const finalizer = null
+const finalizer = null;
