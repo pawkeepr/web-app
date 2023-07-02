@@ -85,7 +85,7 @@ const Home = () => {
                             </p>
                         </div>
                     </Zoom>
-                    <Slide right>
+                    <Slide left>
                         <div className="col-span-1">
                             <Image
                                 src={landingPage02}
