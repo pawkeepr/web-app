@@ -35,7 +35,7 @@ const NavbarLanding = () => {
                 data-scroll-action={actionScroll}
             >
                 <div className="container flex flex-wrap justify-center gap-2 md:gap-0 md:justify-between">
-                    <Link href="/index">
+                    <Link href="/">
                         <Image
                             src={logoDark}
                             className="hidden data-[logo-light=false]:flex"
