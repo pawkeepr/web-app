@@ -17,12 +17,13 @@ const Plans = () => {
                         <div className="flex flex-wrap justify-center -m-4">
                             <div className="p-4 xl:w-1/4 md:w-1/2 w-full">
                                 <div className="h-full p-6 rounded-lg border-2 border-primary-500 flex flex-col relative overflow-hidden">
-                                    <h5 className="text-4xl md:text-5xl text-gray-900 font-mono leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                        Grátis
-                                    </h5>
+                                    <div>
+                                        <h5 className="text-4xl md:text-3xl text-center text-gray-900 font-mono mb-3 border-gray-200 leading-none">Grátis</h5>
+                                        <h3 className="text-4xl md:text-5xl text-center text-gray-900 font-semibold pb-4 mb-4 border-b border-gray-200">R$ 0,00</h3>
+                                    </div>
                                     <ul className="flex flex-col list-none gap-2 mb-5 md:mb-0">
                                         <li className="flex items-start gap-2">
-                                            <BsFillCheckCircleFill size={14} className="text-primary-500 mt-1" />
+                                            <BsFillCheckCircleFill size={18} className="text-primary-500 mt-1" />
                                             <span className="font-semibold text-base">10 consultas grátis durante 90 dias</span>
                                         </li>
                                     </ul>
@@ -35,14 +36,18 @@ const Plans = () => {
 
                             <div className="p-4 xl:w-1/4 md:w-1/2 w-full">
                                 <div className="h-full p-6 rounded-lg border-2 border-primary-500 flex flex-col relative overflow-hidden">
-                                    <h5 className="text-4xl md:text-5xl text-gray-900 font-mono pb-4 mb-4 border-b border-gray-200 leading-none">Business</h5>
+                                    <div>
+                                        <h5 className="text-4xl md:text-3xl text-center text-gray-900 font-mono mb-3 border-gray-200 leading-none">Business</h5>
+                                        <h3 className="text-4xl md:text-5xl text-center text-gray-900 font-semibold pb-4 mb-4 border-b border-gray-200">R$ 49,90</h3>
+                                    </div>
+
                                     <ul className="flex flex-col list-none gap-2 mb-5 md:mb-0">
                                         <li className="flex items-start gap-2">
-                                            <BsFillCheckCircleFill size={13} className="text-primary-500 mt-1" />
+                                            <BsFillCheckCircleFill size={15} className="text-primary-500 mt-1" />
                                             <span className="font-semibold text-base">Pague de forma planejada</span>
                                         </li>
                                         <li className="flex items-start gap-2">
-                                            <BsFillCheckCircleFill size={13} className="text-primary-500 mt-1" />
+                                            <BsFillCheckCircleFill size={15} className="text-primary-500 mt-1" />
                                             <span className="font-semibold text-base">Faça 10 consultas por mês</span>
                                         </li>
                                     </ul>
@@ -56,12 +61,13 @@ const Plans = () => {
 
                             <div className="p-4 xl:w-1/4 md:w-1/2 w-full">
                                 <div className="h-full p-6 rounded-lg border-2 border-primary-500 flex flex-col relative overflow-hidden">
-                                    <h1 className="text-4xl md:text-5xl text-gray-900 font-mono leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                        Premium
-                                    </h1>
+                                    <div>
+                                        <h5 className="text-4xl md:text-3xl text-center text-gray-900 font-mono mb-3 border-gray-200 leading-none">Premium</h5>
+                                        <h3 className="text-4xl md:text-5xl text-center text-gray-900 font-semibold pb-4 mb-4 border-b border-gray-200">R$ 14,90</h3>
+                                    </div>
                                     <ul className="flex flex-col list-none gap-2 mb-5 md:mb-0">
                                         <li className="flex items-start gap-2">
-                                            <BsFillCheckCircleFill size={15} className="text-primary-500 mt-1" />
+                                            <BsFillCheckCircleFill size={20} className="text-primary-500 mt-1" />
                                             <span className="font-semibold text-base">Pague consultas apenas quando usar</span>
                                         </li>
                                     </ul>
