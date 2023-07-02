@@ -60,6 +60,12 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
         isPendingChangePet ||
         isPendingPetById;
 
+    const onlyWords = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const regex = /[^a-zA-Z ]/g;
+        e.target.value = e.target.value.replace(regex, "");
+        console.log(e.target.value);
+    };
+
     return (
         <>
             <div className="p-1 m-2 mb-4">
@@ -99,6 +105,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             placeholder="Digite o nome do Tutor"
                             required
                             disabledError
+                            onChange={onlyWords}
                         />
                     </Col>
                     <Col sm={4}>
