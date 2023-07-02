@@ -7,7 +7,7 @@ import Zoom from "react-reveal/Zoom";
 
 import landingPage03 from "~/assets/images/bg-three.webp";
 import landingPage01 from "~/assets/images/landing-page-01.jpg";
-import landingPage02 from "~/assets/images/landing-page-02.jpg";
+import landingPage02 from "~/assets/images/landing-page02.webp";
 
 // Import Images
 
