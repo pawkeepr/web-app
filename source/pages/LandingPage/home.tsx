@@ -122,7 +122,7 @@ const Home = () => {
                                 Por apenas
                                 <span className="italic text-base font-bold">
                                     {" "}
-                                    R$ 0,99{" "}
+                                    R$ 9,99{" "}
                                 </span>
                                 por consulta
                             </p>

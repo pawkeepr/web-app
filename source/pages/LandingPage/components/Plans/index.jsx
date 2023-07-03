@@ -1,16 +1,90 @@
-import Link from 'next/link';
-import { useState } from 'react';
-import Pulse from 'react-reveal/Pulse';
-import { Card, CardBody, Col, Container, Row } from 'reactstrap';
+import { BsArrowRightShort, BsFillCheckCircleFill } from 'react-icons/bs';
 
 const Plans = () => {
-    const [plan, setPlan] = useState(true);
-    const toggle = () => setPlan(!plan);
+    // const [plan, setPlan] = useState(true);
+    // const toggle = () => setPlan(!plan);
     return (
         <>
             <section className="section bg-light" id="plans">
                 <div className="bg-overlay bg-overlay-pattern"></div>
-                <Container>
+                <div className="text-gray-600 body-font overflow-hidden py-5">
+                    <div className="container px-5 mx-auto">
+                        <div className="flex flex-col text-center w-full mb-20">
+                            <h1 className="sm:text-4xl text-3xl font-semibold title-font mb-2 text-gray-900">Escolha o plano ideal para você</h1>
+                            <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">Preços acessíveis e transparentes. Sem taxas ocultas. Sempre cuidando de você e do seu Pet.</p>
+                        </div>
+
+                        <div className="flex flex-wrap justify-center -m-4">
+                            <div className="p-4 xl:w-1/4 md:w-1/2 w-full">
+                                <div className="h-full p-6 rounded-lg border-2 border-primary-500 flex flex-col relative overflow-hidden">
+                                    <div>
+                                        <h5 className="text-4xl md:text-3xl text-center text-gray-900 font-mono mb-3 border-gray-200 leading-none">Grátis</h5>
+                                        <h3 className="text-4xl md:text-5xl text-center text-gray-900 font-semibold pb-4 mb-4 border-b border-gray-200">R$ 0,00</h3>
+                                    </div>
+                                    <ul className="flex flex-col list-none gap-2 mb-5 md:mb-0">
+                                        <li className="flex items-start gap-2">
+                                            <BsFillCheckCircleFill size={18} className="text-primary-500 mt-1" />
+                                            <span className="font-semibold text-base">10 consultas grátis durante 90 dias</span>
+                                        </li>
+                                    </ul>
+                                    <button className="flex justify-between items-center mt-auto text-white font-semibold bg-primary-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">
+                                        Adquirir Agora
+                                        <BsArrowRightShort size={23} />
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="p-4 xl:w-1/4 md:w-1/2 w-full">
+                                <div className="h-full p-6 rounded-lg border-2 border-primary-500 flex flex-col relative overflow-hidden">
+                                    <div>
+                                        <h5 className="text-4xl md:text-3xl text-center text-gray-900 font-mono mb-3 border-gray-200 leading-none">Business</h5>
+                                        <h3 className="text-4xl md:text-5xl text-center text-gray-900 font-semibold pb-4 mb-4 border-b border-gray-200">R$ 49,90</h3>
+                                    </div>
+
+                                    <ul className="flex flex-col list-none gap-2 mb-5 md:mb-0">
+                                        <li className="flex items-start gap-2">
+                                            <BsFillCheckCircleFill size={15} className="text-primary-500 mt-1" />
+                                            <span className="font-semibold text-base">Pague de forma planejada</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <BsFillCheckCircleFill size={15} className="text-primary-500 mt-1" />
+                                            <span className="font-semibold text-base">Faça 10 consultas por mês</span>
+                                        </li>
+                                    </ul>
+
+                                    <button className="flex justify-between items-center mt-auto text-white font-semibold bg-primary-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">
+                                        Adquirir Agora
+                                        <BsArrowRightShort size={23} />
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="p-4 xl:w-1/4 md:w-1/2 w-full">
+                                <div className="h-full p-6 rounded-lg border-2 border-primary-500 flex flex-col relative overflow-hidden">
+                                    <div>
+                                        <h5 className="text-4xl md:text-3xl text-center text-gray-900 font-mono mb-3 border-gray-200 leading-none">Premium</h5>
+                                        <h3 className="text-4xl md:text-5xl text-center text-gray-900 font-semibold pb-4 mb-4 border-b border-gray-200">R$ 14,90</h3>
+                                    </div>
+                                    <ul className="flex flex-col list-none gap-2 mb-5 md:mb-0">
+                                        <li className="flex items-start gap-2">
+                                            <BsFillCheckCircleFill size={20} className="text-primary-500 mt-1" />
+                                            <span className="font-semibold text-base">Pague consultas apenas quando usar</span>
+                                        </li>
+                                    </ul>
+                                    <button className="flex justify-between items-center mt-auto text-white font-semibold bg-primary-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">
+                                        Adquirir agora
+                                        <BsArrowRightShort size={23} />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex justify-center px-3">
+                    <p className="text-base text-gray-800 md:text-xl text-center font-semibold">Tenha todos os recursos e pague apenas R$ 9,90 por consulta realizada!</p>
+                </div>
+                {/* <Container>
                     <Row className="justify-content-center">
                         <Col lg={8}>
                             <div className="text-center mb-5">
@@ -79,10 +153,10 @@ const Plans = () => {
                                     </div>
                                 </CardBody>
                             </Card>
-                        </Col>
+                        </Col> */}
 
-                        {/* <!--end col--> */}
-                        <Col lg={4}>
+                {/* <!--end col--> */}
+                {/* <Col lg={4}>
                             <Pulse>
                                 <Card className="plan-box mb-0 ribbon-box right bg-primary !text-white">
                                     <CardBody className="p-4 m-2 h-42 text-base md:text-lg">
@@ -178,7 +252,7 @@ const Plans = () => {
                             Para mais de 100 consultas, fale com nossos atendentes!
                         </div>
                     </div>
-                </Container>
+                </Container> */}
             </section>
         </>
     );

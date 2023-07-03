@@ -10,8 +10,8 @@ const Footer = () => {
         <footer className="bg-gray-900 py-1">
             <div className="container flex flex-col items-center justify-between p-6 mx-auto space-y-4 sm:space-y-0 sm:flex-row">
                 <p className="text-sm text-gray-100 font-light">
-                    {new Date().getFullYear()} © PawKeepr - Todos os direitos
-                    reservados.
+                    {new Date().getFullYear()} © PawKeepr Smartcare- Todos os
+                    direitos reservados.
                 </p>
 
                 <div className="flex -mx-2 items-center">
