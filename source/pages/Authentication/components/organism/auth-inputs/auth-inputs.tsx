@@ -1,30 +1,30 @@
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 
-import useAuth from '~/hooks/use-auth';
-import { onChangePassword, onChangeUsername } from '~/store/auth/login/slice';
-import { useAppDispatch } from '~/store/hooks';
+import useAuth from "~/hooks/use-auth";
+import { onChangePassword, onChangeUsername } from "~/store/auth/login/slice";
+import { useAppDispatch } from "~/store/hooks";
 
-import { ChangeEvent, useMemo } from 'react';
-import FieldControl from '~/Components/molecules/field-control';
+import { ChangeEvent, useMemo } from "react";
+import FieldControl from "~/Components/molecules/field-control";
 
-import { Formik } from 'formik';
-import { SignInCredentials } from '~/services/helpers/auth';
+import { Formik } from "formik";
+import { SignInCredentials } from "~/services/helpers/auth";
 
-import cn from 'classnames';
-import Link from 'next/link';
-import * as Yup from 'yup';
+import cn from "classnames";
+import Link from "next/link";
+import * as Yup from "yup";
 
 const initialValues: SignInCredentials = {
-    username: '',
-    password: '',
-}
+    username: "",
+    password: "",
+};
 
 const validationSchema = Yup.object({
-    username: Yup.string().email().required('Este campo é obrigatório'),
-    password: Yup.string().required('Este campo é obrigatório'),
-})
+    username: Yup.string().email().required("Este campo é obrigatório"),
+    password: Yup.string().required("Este campo é obrigatório"),
+});
 
 const Auth = () => {
     const dispatch = useAppDispatch();
@@ -48,8 +48,8 @@ const Auth = () => {
     };
 
     const isValid: boolean = useMemo(() => {
-        return validationSchema.isValidSync({ password, username })
-    }, [password, username])
+        return validationSchema.isValidSync({ password, username });
+    }, [password, username]);
 
     const handleChangeUsername = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(onChangeUsername(e.target.value));
@@ -60,15 +60,12 @@ const Auth = () => {
     };
 
     return (
-        <Formik
-            initialValues={initialValues}
-            onSubmit={handleSubmit}
-        >
+        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
             {({ handleSubmit }) => (
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit} className="w-full">
                     <div className="mb-3">
                         <FieldControl
-                            label='Email:'
+                            label="Email:"
                             type="text"
                             pattern="[^\s]+" // no spaces
                             className="form-control"
@@ -82,8 +79,6 @@ const Auth = () => {
                     </div>
 
                     <div className="mb-3">
-
-
                         <div className="position-relative auth-pass-inputgroup mb-3">
                             <Link
                                 href="/forgot-password"
@@ -97,33 +92,31 @@ const Auth = () => {
                                     mobile:text-secondary-600
                                     top-0
                                     right-0
-                                ">
+                                "
+                            >
                                 Esqueceu a senha?
                             </Link>
 
                             <FieldControl
-                                type={visiblePassword ? 'text' : 'password'}
+                                type={visiblePassword ? "text" : "password"}
                                 label="Senha"
                                 className="form-control pe-5 password-input border-end-0"
                                 placeholder="Digite sua senha"
                                 name="password"
                                 data-testid="password-input"
-
                                 value={password}
                                 onChange={handleChangePassword}
                                 disabledError
                             >
-                                <InputGroup.Text className="bg-transparent border-start-0 cursor-pointer" >
+                                <InputGroup.Text className="bg-transparent border-start-0 cursor-pointer">
                                     <i
                                         onClick={onToggleVisiblePassword}
                                         data-testid="toggle-password"
-                                        className={
-                                            cn({
-                                                'ri-eye-fill': !visiblePassword,
-                                                'ri-eye-off-fill': visiblePassword,
-                                                'cursor-pointer': true,
-                                            })
-                                        }
+                                        className={cn({
+                                            "ri-eye-fill": !visiblePassword,
+                                            "ri-eye-off-fill": visiblePassword,
+                                            "cursor-pointer": true,
+                                        })}
                                     ></i>
                                 </InputGroup.Text>
                             </FieldControl>
@@ -134,7 +127,6 @@ const Auth = () => {
                                     Esqueceu a Senha?
                                 </Link>
                             </div> */}
-
                     </div>
 
                     {/* <Form.Check
@@ -169,13 +161,9 @@ const Auth = () => {
                         >
                             Entrar
                         </Button>
-
                     </div>
                 </Form>
             )}
-
-
-
         </Formik>
     );
 };

@@ -16,8 +16,8 @@ import { LayoutState, name } from './types';
 
 const initialState: LayoutState = {
   layoutType: layoutTypes.HORIZONTAL,
-  leftSidebarType: leftSidebarTypes.DARK,
-  layoutModeType: layoutModeTypes.DARK_MODE,
+  leftSidebarType: leftSidebarTypes.LIGHT,
+  layoutModeType: layoutModeTypes.LIGHT_MODE,
   layoutWidthType: layoutWidthTypes.FLUID,
   layoutPositionType: layoutPositionTypes.FIXED,
   topbarThemeType: topbarThemeTypes.DARK,
