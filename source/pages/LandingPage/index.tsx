@@ -1,14 +1,13 @@
-'use client'
+"use client";
 
-import React, { useEffect } from 'react';
-import NavbarLanding from '~/Components/molecules/nav-bar-landing';
-import Footer from "./footer";
+import React, { useEffect } from "react";
+import { HiOutlineArrowSmUp } from "react-icons/hi";
+import NavbarLanding from "~/Components/molecules/nav-bar-landing";
+import Footer from "./components/Footer";
+import Plans from "./components/Plans";
 import Home from "./home";
-import Plans from './plans';
-
 
 const LandingPage = () => {
-
     useEffect(() => {
         window.onscroll = function () {
             scrollFunction();
@@ -18,7 +17,10 @@ const LandingPage = () => {
     const scrollFunction = () => {
         const element = document.getElementById("back-to-top");
         if (element) {
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            if (
+                document.body.scrollTop > 100 ||
+                document.documentElement.scrollTop > 100
+            ) {
                 element.style.display = "block";
             } else {
                 element.style.display = "none";
@@ -43,8 +45,12 @@ const LandingPage = () => {
                 <FAQ />
                 <Contact /> */}
                 <Footer />
-                <button onClick={() => toTop()} className="btn btn-secondary btn-icon landing-back-top" id="back-to-top">
-                    <i className="ri-arrow-up-line"></i>
+                <button
+                    onClick={() => toTop()}
+                    className="bg-secondary-500 p-3 rounded-full landing-back-top mb-[5rem] shadow-md"
+                    id="back-to-top"
+                >
+                    <HiOutlineArrowSmUp size={20} />
                 </button>
             </div>
         </React.Fragment>

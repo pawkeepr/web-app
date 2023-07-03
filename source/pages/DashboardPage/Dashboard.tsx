@@ -30,31 +30,31 @@ const Section = () => {
             onClick: toggleTab("1"),
             href: "#Appointments",
         },
-        {
-            label: "Sobre",
-            onClick: toggleTab("2"),
-            href: "#About",
-        },
-        {
-            label: "Pets",
-            onClick: toggleTab("3"),
-            href: "#Pets",
-        },
-        {
-            label: "Tutores",
-            onClick: toggleTab("4"),
-            href: "#Tutors",
-        },
+        // {
+        //     label: "Sobre",
+        //     onClick: toggleTab("2"),
+        //     href: "#About",
+        // },
+        // {
+        //     label: "Pets",
+        //     onClick: toggleTab("3"),
+        //     href: "#Pets",
+        // },
+        // {
+        //     label: "Tutores",
+        //     onClick: toggleTab("4"),
+        //     href: "#Tutors",
+        // },
     ];
 
     return (
         <DefaultLayout navItems={items} title="Dashboard">
             <TabContainer activeKey={activeTab}>
                 <TabContent className="text-muted">
-                    <TabPane eventKey="1">
+                    <TabPane  eventKey="1">
                         <AppointmentsTab />
                     </TabPane>
-                    <TabPane eventKey="2">
+                    <TabPane  eventKey="2">
                         <OverviewTab />
                     </TabPane>
                     <TabPane eventKey="3">

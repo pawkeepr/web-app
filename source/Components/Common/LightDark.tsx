@@ -6,7 +6,7 @@ const LightDark = () => {
     const { onHandleChangeLayout } = useChangeLayoutMode();
 
     return (
-        <div className="ms-1 header-item d-none d-sm-flex">
+        <div className="ms-1 header-item d-flex ">
             <button
                 onClick={onHandleChangeLayout}
                 type="button"

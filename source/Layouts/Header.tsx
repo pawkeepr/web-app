@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import Link from "next/link";
 
 //import images
 import logoDark from "~/assets/images/logo-dark.png";
@@ -7,21 +6,23 @@ import logoLight from "~/assets/images/logo-light.png";
 import logoSm from "~/assets/images/logo-sm-1.png";
 
 //import Components
-import Image from 'next/image';
-import { useEffect, useRef } from 'react';
-import ProfileDropdownTailwind from '~/Components/molecules/profile-dropdown/profile-dropdown';
-import { changeHeaderSize } from '~/store/actions';
-import { useAppDispatch } from '~/store/hooks';
-import FullScreenDropdown from '../Components/Common/FullScreenDropdown';
-import LightDark from '../Components/Common/LightDark';
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import ProfileDropdownTailwind from "~/Components/molecules/profile-dropdown/profile-dropdown";
+import { changeHeaderSize } from "~/store/actions";
+import { useAppDispatch } from "~/store/hooks";
+import FullScreenDropdown from "../Components/Common/FullScreenDropdown";
+import LightDark from "../Components/Common/LightDark";
 
-import styles from './Header.module.scss';
+import styles from "./Header.module.scss";
+import Drawer from "~/Components/Common/Drawer";
 
 type HeaderProps = {
     headerClass: string;
-}
+};
 
 const Header = ({ headerClass }: HeaderProps) => {
+    const [show, setShow] = useState<boolean>(false);
 
     const divRef = useRef<HTMLDivElement>(null);
 
@@ -32,8 +33,9 @@ const Header = ({ headerClass }: HeaderProps) => {
             dispatch(
                 changeHeaderSize({
                     width: divRef.current.offsetWidth,
-                    height: divRef.current.offsetHeight
-                }));
+                    height: divRef.current.offsetHeight,
+                })
+            );
         }
     }, [dispatch]);
 
@@ -68,68 +70,99 @@ const Header = ({ headerClass }: HeaderProps) => {
     //     }
     // };
 
+    const handleShow = () => setShow(!show);
+    const handleClose = () => setShow(false);
+
     return (
-        <header id="page-topbar" className={`dark:!bg-primary-700 !bg-primary-500 ${headerClass}`} ref={divRef}>
+        <header
+            id="page-topbar"
+            className={`dark:!bg-primary-700 !bg-primary-500 ${headerClass}`}
+            ref={divRef}
+        >
             <div className="layout-width">
                 <div className="navbar-header">
-                    <div className="d-flex">
-
-                        <div className="flex items-center justify-center">
-                            <Link href="/" className={`${styles['logo']} logo-light`}>
-                                <span className={styles['minimal-logo']}>
-                                    <Image src={logoSm} alt="Logo Pawkeepr Mode Light" height="44" />
-                                </span>
-                                <span className={styles['maximum-logo']}>
-                                    <Image src={logoLight} alt="Logo Pawkeepr Mode Light" height="34" />
-                                </span>
-                            </Link>
-
-                            <Link href="/" className={`${styles['logo']} logo-dark`}>
-                                <span className={styles['minimal-logo']}>
-                                    <Image src={logoSm} alt="Logo Pawkeepr Mode Dark" height="44" />
-                                </span>
-                                <span className={styles['maximum-logo']}>
-                                    <Image src={logoDark} alt="Logo Pawkeepr Mode Dark" height="34" />
-                                </span>
-                            </Link>
-                        </div>
-
-                        {/* <button
-                            onClick={toggleMenuBtn}
+                    <div className="d-flex w-screen justify-between items-center">
+                        <button
+                            onClick={handleShow}
                             type="button"
-                            className="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
-                            id="topnav-hamburger-icon">
+                            className="px-2 header-item topnav-hamburger lg:hidden"
+                            id="topnav-hamburger-icon"
+                        >
                             <span className="hamburger-icon">
                                 <span></span>
                                 <span></span>
                                 <span></span>
                             </span>
-                        </button> */}
+                        </button>
 
+                        <Drawer
+                            closeDrawer={handleClose}
+                            display={show === true ? `flex` : `hidden`}
+                        />
+
+                        <div className="flex items-center justify-center">
+                            <Link
+                                href="/"
+                                className={`${styles["logo"]} logo-light justify-center`}
+                            >
+                                <span className={styles["minimal-logo"]}>
+                                    <Image
+                                        src={logoSm}
+                                        alt="Logo Pawkeepr Mode Light"
+                                        height="44"
+                                    />
+                                </span>
+                                <span className={styles["maximum-logo"]}>
+                                    <Image
+                                        src={logoLight}
+                                        alt="Logo Pawkeepr Mode Light"
+                                        height="34"
+                                    />
+                                </span>
+                            </Link>
+
+                            <Link
+                                href="/"
+                                className={`${styles["logo"]} logo-dark justify-center`}
+                            >
+                                <span className={styles["minimal-logo"]}>
+                                    <Image
+                                        src={logoSm}
+                                        alt="Logo Pawkeepr Mode Dark"
+                                        height="44"
+                                    />
+                                </span>
+                                <span className={styles["maximum-logo"]}>
+                                    <Image
+                                        src={logoDark}
+                                        alt="Logo Pawkeepr Mode Dark"
+                                        height="34"
+                                    />
+                                </span>
+                            </Link>
+                        </div>
+                        <div className="d-flex align-items-center">
+                            {/* LanguageDropdown */}
+                            {/* <LanguageDropdown /> */}
+
+                            {/* WebAppsDropdown */}
+                            {/* <WebAppsDropdown /> */}
+
+                            {/* MyCartDropdwon */}
+                            {/* <MyCartDropdown /> */}
+
+                            {/* FullScreenDropdown */}
+                            <FullScreenDropdown />
+
+                            {/* Dark/Light Mode set */}
+                            <LightDark />
+
+                            {/* NotificationDropdown */}
+                            {/* <NotificationDropdown /> */}
+                            <ProfileDropdownTailwind />
+                        </div>
 
                         {/* <SearchOption /> */}
-                    </div>
-
-                    <div className="d-flex align-items-center">
-
-                        {/* LanguageDropdown */}
-                        {/* <LanguageDropdown /> */}
-
-                        {/* WebAppsDropdown */}
-                        {/* <WebAppsDropdown /> */}
-
-                        {/* MyCartDropdwon */}
-                        {/* <MyCartDropdown /> */}
-
-                        {/* FullScreenDropdown */}
-                        <FullScreenDropdown />
-
-                        {/* Dark/Light Mode set */}
-                        <LightDark />
-
-                        {/* NotificationDropdown */}
-                        {/* <NotificationDropdown /> */}
-                        <ProfileDropdownTailwind />
                     </div>
                 </div>
             </div>

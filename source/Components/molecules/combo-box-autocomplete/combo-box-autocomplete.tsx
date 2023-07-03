@@ -87,6 +87,7 @@ const ComboBoxAutocomplete = <T,>({ name, items = [], option, onChange, onChange
                             sm:text-sm
                             z-50
                             dark:!bg-gray-700
+                            bg-white 
                         "
                     >
                         {filteredItems.length === 0 && query !== '' ? (
