@@ -18,15 +18,15 @@ const ControlSwitch = ({
 
     return (
         <>
-            <div className="flex justify-between items-center">
-                <span>{label}</span>
+            <div className="flex justify-between items-center gap-2">
+                <span className="font-bold">{label}</span>
                 <div className={className}>
                     <Switch
                         onClick={onClick}
                         checked={enabled}
                         onChange={setEnabled}
                         className={`${
-                            enabled ? "bg-primary-500 " : "bg-primary-700"
+                            enabled ? "bg-secondary-500" : "  bg-secondary-600"
                         }
             relative inline-flex h-full w-full shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
                     >
