@@ -84,7 +84,7 @@ const DashboardLayouts = ({
             <div className="container container-fluid">
                 <React.Fragment>
                     <Row>
-                        <Col lg={12}>
+                        {/* <Col lg={12}>
                             <Card className="mt-1 mx-1 mobile:hidden">
                                 <Card className="p-4 pb-0">
                                     <Row className="items-center gap-4">
@@ -124,7 +124,7 @@ const DashboardLayouts = ({
                                     </Row>
                                 </Card>
                             </Card>
-                        </Col>
+                        </Col> */}
                         <Col lg={12}>
                             <Card className="mx-1 block mobile:flex mobile:items-center mobile:justify-center">
                                 <Nav
