@@ -1,13 +1,18 @@
-import { BsArrowRightShort, BsFillCheckCircleFill } from 'react-icons/bs';
+// import { BsArrowRightShort, BsFillCheckCircleFill } from 'react-icons/bs';
+import Link from 'next/link';
+import { useState } from 'react';
+import Pulse from 'react-reveal/Pulse';
+import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 
 const Plans = () => {
-    // const [plan, setPlan] = useState(true);
-    // const toggle = () => setPlan(!plan);
+    const [plan, setPlan] = useState(true);
+    const toggle = () => setPlan(!plan);
+
     return (
         <>
             <section className="section bg-light" id="plans">
                 <div className="bg-overlay bg-overlay-pattern"></div>
-                <div className="text-gray-600 body-font overflow-hidden py-5">
+                {/* <div className="text-gray-600 body-font overflow-hidden py-5">
                     <div className="container px-5 mx-auto">
                         <div className="flex flex-col text-center w-full mb-20">
                             <h1 className="sm:text-4xl text-3xl font-semibold title-font mb-2 text-gray-900">Escolha o plano ideal para você</h1>
@@ -83,8 +88,9 @@ const Plans = () => {
 
                 <div className="flex justify-center px-3">
                     <p className="text-base text-gray-800 md:text-xl text-center font-semibold">Tenha todos os recursos e pague apenas R$ 9,90 por consulta realizada!</p>
-                </div>
-                {/* <Container>
+                </div> */}
+
+                <Container>
                     <Row className="justify-content-center">
                         <Col lg={8}>
                             <div className="text-center mb-5">
@@ -153,10 +159,10 @@ const Plans = () => {
                                     </div>
                                 </CardBody>
                             </Card>
-                        </Col> */}
+                        </Col>
 
-                {/* <!--end col--> */}
-                {/* <Col lg={4}>
+                        {/* <!--end col--> */}
+                        <Col lg={4}>
                             <Pulse>
                                 <Card className="plan-box mb-0 ribbon-box right bg-primary !text-white">
                                     <CardBody className="p-4 m-2 h-42 text-base md:text-lg">
@@ -252,7 +258,7 @@ const Plans = () => {
                             Para mais de 100 consultas, fale com nossos atendentes!
                         </div>
                     </div>
-                </Container> */}
+                </Container>
             </section>
         </>
     );
