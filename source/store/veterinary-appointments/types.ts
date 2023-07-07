@@ -1,7 +1,7 @@
 import { Pet } from "../pets/types";
 import { Tutor } from "../tutor/types";
 
-export const name = "VeterinaryAppointment"
+export const name = "VeterinaryAppointment";
 
 export const GET_VETERINARY_APPOINTMENTS = `${name}/getVeterinaryAppointments`;
 export const UPDATE_VETERINARY_APPOINTMENT = `${name}/updateVeterinaryAppointment`;
@@ -25,9 +25,16 @@ export type Treatment = {
     duration: string;
     created_at: string;
     updated_at: string;
-}
+};
 
-type PaymentMethod = 'cash' | 'credit_card' | 'debit_card' | 'check' | 'transfer' | 'deposit' | 'other';
+type PaymentMethod =
+    | "cash"
+    | "credit_card"
+    | "debit_card"
+    | "check"
+    | "transfer"
+    | "deposit"
+    | "other";
 
 export type Payment = {
     id: string;
@@ -35,48 +42,47 @@ export type Payment = {
     payment_method: PaymentMethod;
     created_at: string;
     updated_at: string;
-}
+};
 
 export type Vaccine = {
     id: string;
     name: string;
-}
+};
 
 export type Exam = {
     id: string;
     name: string;
-}
+};
 
 export type Disease = {
-    id: string;
+    id?: string;
     name: string;
+    typeDisease?: string;
     severity: string;
-    symptoms: Array<string>;
+    symptoms?: Array<string>;
     description: string;
-    created_at: string;
-    updated_at: string;
-}
+    created_at?: string;
+    updated_at?: string;
+};
 
-
-
-type OmitPet = Nullable<Omit<Pet, 'ownerEmergencyContact'>>
+type OmitPet = Nullable<Omit<Pet, "ownerEmergencyContact">>;
 
 export type VeterinaryAppointment = {
     id: string;
-    exams: string[] | Array<Partial<Exam>>,
-    vaccines: string[] | Array<Partial<Vaccine>>,
-    treatments: Array<Partial<Treatment>>,
-    diseases: string[] | Array<Partial<Disease>>,
+    exams: string[] | Array<Partial<Exam>>;
+    vaccines: string[] | Array<Partial<Vaccine>>;
+    treatments: Array<Partial<Treatment>>;
+    diseases: string | Array<Partial<Disease>>;
     payment: Partial<Payment>;
     pet: Partial<OmitPet>;
     tutor: Nullable<Partial<Tutor>>;
     created_at?: string;
     updated_at?: string;
-}
+};
 
 export type VeterinaryAppointmentInitialState = {
-    veterinaryAppointments: Array<VeterinaryAppointment>,
-    error: any,
-    isVeterinaryAppointmentCreated: boolean,
-    isVeterinaryAppointmentSuccess: boolean,
+    veterinaryAppointments: Array<VeterinaryAppointment>;
+    error: any;
+    isVeterinaryAppointmentCreated: boolean;
+    isVeterinaryAppointmentSuccess: boolean;
 };
