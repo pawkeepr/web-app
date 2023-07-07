@@ -13,7 +13,7 @@ type Item = {
 };
 
 type ComboBoxAutocompleteProps<T> = {
-    items: string[];
+    items?: string[];
     option?: Item & T;
     onChangeOption?: (item: Item & T) => void;
     onChange?: (item: string) => void;
