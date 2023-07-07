@@ -1,12 +1,12 @@
-import { useField } from 'formik';
-import Form from 'react-bootstrap/Form';
-import { If } from '~/utils/tsx-control-statements';
+import { useField } from "formik";
+import Form from "react-bootstrap/Form";
+import { If } from "~/utils/tsx-control-statements";
 
-import InputGroup from 'react-bootstrap/InputGroup';
-import ErrMessage from '~/Components/atoms/err-message';
+import InputGroup from "react-bootstrap/InputGroup";
+import ErrMessage from "~/Components/atoms/err-message";
 
-import { useEffect, useRef } from 'react';
-import type { InputControlProps } from './types';
+import { useEffect, useRef } from "react";
+import type { InputControlProps } from "./types";
 
 const FieldControl = ({
     label,
@@ -20,39 +20,43 @@ const FieldControl = ({
     divClassName,
     ...props
 }: InputControlProps) => {
-
-    const ref = useRef<HTMLInputElement>(null)
-    const { current } = ref
-
+    const ref = useRef<HTMLInputElement>(null);
+    const { current } = ref;
 
     useEffect(() => {
-        if (!initialFocus) return
+        if (!initialFocus) return;
 
         if (!current?.focus) {
-            console.warn('FieldControl: initialFocus is true, but the component does not have the focus method')
+            console.warn(
+                "FieldControl: initialFocus is true, but the component does not have the focus method"
+            );
         }
 
         if (current?.focus) {
-            current.focus()
+            current.focus();
         }
+    }, [current, initialFocus]);
 
-    }, [current, initialFocus])
+    const [inputProps, meta] = useField(props);
+    const id = props.name || props.id;
 
-    const [inputProps, meta] = useField(props)
-    const id = props.name || props.id
-
-    const InputComponent = component as any
-    const display = !disabledError && meta.touched && !!meta.error ? 'block' : 'none'
+    const InputComponent = component as any;
+    const display =
+        !disabledError && meta.touched && !!meta.error ? "block" : "none";
 
     const onChange = (e: any) => {
-        props.onChange?.(e)
-        inputProps.onChange(e)
-    }
+        props.onChange?.(e);
+        inputProps.onChange(e);
+    };
 
     return (
         <div className={divClassName}>
             <If condition={!!label}>
-                <Form.Label htmlFor={id} className="mb-0 list-group-item fs-12" data-testid={`label-${id}`}>
+                <Form.Label
+                    htmlFor={id}
+                    className="mb-0 list-group-item fs-12"
+                    data-testid={`label-${id}`}
+                >
                     {label}
                     <If condition={required}>
                         <span className="text-danger">*</span>
@@ -60,9 +64,7 @@ const FieldControl = ({
                 </Form.Label>
             </If>
             <InputGroup className="position-relative mb-2">
-
                 {startChildren}
-
 
                 <InputComponent
                     id={id}
@@ -83,21 +85,20 @@ const FieldControl = ({
                 />
 
                 {children}
-
             </InputGroup>
             <ErrMessage
                 message={meta.error?.toString() as string}
                 data-testid={`err-${id}`}
                 style={{
-                    display
+                    display,
                 }}
             />
         </div>
-    )
-}
+    );
+};
 
 FieldControl.defaultProps = {
-    component: 'input'
-}
+    component: "input",
+};
 
-export default FieldControl
+export default FieldControl;
