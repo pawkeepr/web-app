@@ -39,6 +39,8 @@ const initialValues = (
         document,
     },
     treatments: [],
+    speciality: null,
+    sub_specialty: null,
 
     medicines: [
         {
