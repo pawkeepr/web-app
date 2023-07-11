@@ -63,10 +63,10 @@ type OmitPet = Nullable<Omit<Pet, 'ownerEmergencyContact'>>
 
 export type VeterinaryAppointment = {
     id: string;
-    exams: Array<Partial<Exam>>,
-    vaccines: Array<Partial<Vaccine>>,
+    exams: string[] | Array<Partial<Exam>>,
+    vaccines: string[] | Array<Partial<Vaccine>>,
     treatments: Array<Partial<Treatment>>,
-    diseases: Array<Partial<Disease>>,
+    diseases: string[] | Array<Partial<Disease>>,
     payment: Partial<Payment>;
     pet: Partial<OmitPet>;
     tutor: Nullable<Partial<Tutor>>;

@@ -9,17 +9,17 @@ import { InputControlProps } from '../field-control/types'
 import cn from 'classnames'
 
 type Item = {
-    value: string | number
-    name: string
+    item: string[]
 }
 
 type ComboBoxAutocompleteProps<T> = {
-    items: Array<Item & T>
+    items: string[]
     option?: Item & T
     onChangeOption?: (item: Item & T) => void
+    onChange?: (item: string) => void
 } & InputControlProps
 
-const ComboBoxAutocomplete = <T,>({ name, items = [], option, onChangeOption, ...rest }: ComboBoxAutocompleteProps<T>) => {
+const ComboBoxAutocomplete = <T,>({ name, items = [], option, onChange, onChangeOption, ...rest }: ComboBoxAutocompleteProps<T>) => {
     const [selected, setSelected] = useState<Item & T>(option || {} as Item & T)
     const [query, setQuery] = useState('')
 
@@ -30,30 +30,33 @@ const ComboBoxAutocomplete = <T,>({ name, items = [], option, onChangeOption, ..
         setQuery(queryValue)
     }, [queryValue])
 
+    
     const onChangeValue = (item: Item & T) => {
         onChangeOption?.(item)
         setSelected(item)
-        setFieldValue(name, item.name)
+        setFieldValue(name, item)
     }
 
     const filteredItems =
         query === '' || query === undefined || query === null
             ? items
             : items.filter((item) =>
-                item.name?.toLowerCase()
+                item.toLowerCase()
                     .replace(/\s+/g, '')
                     .includes(query?.toLowerCase().replace(/\s+/g, ''))
             )
 
     return (
         <Combobox value={selected} onChange={onChangeValue}>
-            <div className="relative">
+            <div className="relative  w-full items-center ">
                 <div className="relative">
                     <FieldControl
+                        
+                        className='form-control'
                         name={name}
                         disabled={true}
                         component={Combobox.Input as any}
-                        displayValue={(item: Item) => item.name}
+                        displayValue={items}
                         {...rest}
                     >
                         <Combobox.Button className="flex items-center p-1 mx-2 position-absolute right-0 top-0 bottom-0">
@@ -84,6 +87,7 @@ const ComboBoxAutocomplete = <T,>({ name, items = [], option, onChangeOption, ..
                             sm:text-sm
                             z-50
                             dark:!bg-gray-700
+                            bg-white 
                         "
                     >
                         {filteredItems.length === 0 && query !== '' ? (
@@ -93,7 +97,7 @@ const ComboBoxAutocomplete = <T,>({ name, items = [], option, onChangeOption, ..
                         ) : (
                             filteredItems.map((item) => (
                                 <Combobox.Option
-                                    key={item.value}
+                                    key={item}
                                     className={({ active }) =>
                                         cn(
                                             'relative cursor-default select-none py-2 pl-10 pr-4',
@@ -104,7 +108,13 @@ const ComboBoxAutocomplete = <T,>({ name, items = [], option, onChangeOption, ..
                                             'dark:text-gray-200 '
                                         )
                                     }
+                                    
                                     value={item}
+                                    onClick={() => {
+                                        if (typeof onChange === 'function') {
+                                          onChange(item);
+                                        }
+                                      }}
                                 >
                                     {({ selected, active }) => (
                                         <div>
@@ -117,7 +127,7 @@ const ComboBoxAutocomplete = <T,>({ name, items = [], option, onChangeOption, ..
                                                     })
                                                 }
                                             >
-                                                {item.name}
+                                                {item}
                                             </span>
                                             {selected && (
                                                 <span

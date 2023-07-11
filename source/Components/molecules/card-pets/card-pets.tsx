@@ -65,7 +65,7 @@ const CardPets = ({ pet }: CardPetsProps) => {
                             <div className="team-content">
                                 <Link href="#" className="d-block"><h5 className="fs-16 mb-1">{pet?.name}</h5></Link>
                                 <p className="text-muted mb-0">
-                                    <strong>Tutor: </strong> {pet?.ownerEmergencyContact.name}
+                                    <strong>Tutor: </strong> {pet?.ownerEmergencyContact?.name}
                                 </p>
                                 {/* <p className="text-muted mb-0">{pet?.ownerEmergencyContact.phone}</p> */}
                             </div>
