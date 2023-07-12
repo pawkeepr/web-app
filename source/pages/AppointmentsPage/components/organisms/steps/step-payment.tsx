@@ -1,10 +1,14 @@
 import { Col, Input, Label, Row } from "reactstrap";
-
+import InputMask from "react-input-mask";
 import { BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
 import { StepProps } from "./types";
 import ListBoxTailwind from "~/Components/molecules/list-box-tailwind/list-box-tailwind";
+import FieldControl from "~/Components/molecules/field-control/field-control";
+import { useFormikContext } from "formik";
 
 const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
+    const { handleSubmit } = useFormikContext();
+
     return (
         <>
             <div>
@@ -65,6 +69,15 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                 </div>
 
                 <Row className="gy-3">{<ListBoxTailwind />}</Row>
+                <div className="mt-4">
+                    <FieldControl
+                        label="Valor do Pagamento ?"
+                        className="form-control no-underline"
+                        name="paymentValue"
+                        component={InputMask as any}
+                        mask="R$ 999,99"
+                    />
+                </div>
             </div>
 
             <div className="flex align-items-center justify-center gap-3 mt-4">
@@ -81,12 +94,12 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                     Voltar
                 </BtnLabel>
                 <BtnSuccess
+                    onClick={handleSubmit}
                     type="button"
                     className="btn-label"
                     label="Próximo"
-                    onClick={() => {}}
                 >
-                    <span className="ml-1"> Próximo </span>
+                    <span className="ml-1"> Finalizar </span>
                     <i className="ri-check-line  align-middle fs-16 p-1"></i>
                 </BtnSuccess>
             </div>

@@ -1,52 +1,68 @@
-import { Form, Formik } from 'formik';
-import FieldDocument from '~/Components/molecules/field-document/field-document';
-
-import { PlusCircleIcon } from '@heroicons/react/24/outline';
-import { startTransition } from 'react';
-import ModalListPets from '~/Components/modals/modal-list-pets/modal-list-pets';
+import { Form, Formik } from "formik";
+import { cpf } from "cpf-cnpj-validator";
+import FieldDocument from "~/Components/molecules/field-document/field-document";
+import ReactInputMask from "react-input-mask";
+import { PlusCircleIcon } from "@heroicons/react/24/solid";
+import { startTransition } from "react";
+import ModalListPets from "~/Components/modals/modal-list-pets/modal-list-pets";
 
 type InitialValues = {
-    document: string
-}
+    document: string;
+};
 
-type onChangeOpen = (arg: boolean) => void
+type onChangeOpen = (arg: boolean) => void;
 
 type HandleProps = {
-    onChangeOpen: onChangeOpen
-    onChangeDocument: (doc: string) => void
-}
-
+    onChangeOpen: onChangeOpen;
+    onChangeDocument: (doc: string) => void;
+};
 
 const FieldDocumentAppointment = () => {
+    const initialValues: InitialValues = { document: "" };
 
-    const initialValues: InitialValues = { document: '' }
-
-    const onHandleSubmit = ({ onChangeDocument, onChangeOpen }: HandleProps) => {
+    const onHandleSubmit = ({
+        onChangeDocument,
+        onChangeOpen,
+    }: HandleProps) => {
         return (values: InitialValues) => {
             startTransition(() => {
-                onChangeDocument(values.document)
-                onChangeOpen(true)
-            })
-        }
-    }
+                onChangeDocument(values.document);
+                onChangeOpen(true);
+            });
+        };
+    };
 
     return (
         <ModalListPets>
-            {
-                ({ onChangeOpen, onChangeDocument }) => (
-                    <Formik initialValues={initialValues} onSubmit={onHandleSubmit({ onChangeDocument, onChangeOpen })} enableReinitialize>
-                        <Form className="flex flex-row items-center justify-center">
-                            <FieldDocument name='document' className="form-control" placeholder='Nova Consulta' label="CPF" onlyCPF >
-                                <button data-bs-target="#addVeterinaryAppointmentModal" type="submit">
-                                    <PlusCircleIcon className="h-6 w-6 self-center m-2" />
-                                </button>
-                            </FieldDocument>
-                        </Form>
-                    </Formik>
-                )
-            }
+            {({ onChangeOpen, onChangeDocument }) => (
+                <Formik
+                    initialValues={initialValues}
+                    onSubmit={onHandleSubmit({
+                        onChangeDocument,
+                        onChangeOpen,
+                    })}
+                    enableReinitialize
+                >
+                    <Form className="flex flex-row items-center justify-center">
+                        <FieldDocument
+                            name="document"
+                            className="form-control border-2 border-solid border-primary-500"
+                            placeholder="Nova Consulta"
+                            label="CPF"
+                            onlyCPF
+                        >
+                            <button
+                                data-bs-target="#addVeterinaryAppointmentModal"
+                                type="submit"
+                            >
+                                <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
+                            </button>
+                        </FieldDocument>
+                    </Form>
+                </Formik>
+            )}
         </ModalListPets>
-    )
-}
+    );
+};
 
 export default FieldDocumentAppointment;

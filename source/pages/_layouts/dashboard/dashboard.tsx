@@ -88,7 +88,7 @@ const DashboardLayouts = ({
                             <Card className="mt-1 mx-1 mobile:hidden">
                                 <Card className="p-4 pb-0">
                                     <Row className="items-center gap-4">
-                                        <div className="col-md-auto flex justify-center align-middle self-center pb-2">
+                                        {/* <div className="col-md-auto flex justify-center align-middle self-center pb-2">
                                             <div className="avatar-md w-32 h-32">
                                                 <div className="avatar-title bg-white rounded-circle relative mt-2">
                                                     <MyImage
@@ -102,12 +102,12 @@ const DashboardLayouts = ({
                                                     />
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className="col-md">
                                             <h4 className="text-base font-bold mobile:text-center">
-                                                {name}
+                                                Seja bem vindo, {name} !
                                             </h4>
-                                            <div className="hstack gap-3 flex-wrap mobile:flex mobile:items-center mobile:justify-center">
+                                            {/* <div className="hstack gap-3 flex-wrap mobile:flex mobile:items-center mobile:justify-center">
                                                 <div>
                                                     <i className="ri-building-line align-bottom me-1"></i>
                                                     {profile?.company}
@@ -119,7 +119,7 @@ const DashboardLayouts = ({
                                                         {profile?.created_at}
                                                     </span>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </Row>
                                 </Card>

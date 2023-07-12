@@ -85,7 +85,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                         <button
                             onClick={handleShow}
                             type="button"
-                            className="px-2 header-item topnav-hamburger lg:hidden"
+                            className="px-2 header-item topnav-hamburger"
                             id="topnav-hamburger-icon"
                         >
                             <span className="hamburger-icon">
@@ -159,7 +159,7 @@ const Header = ({ headerClass }: HeaderProps) => {
 
                             {/* NotificationDropdown */}
                             {/* <NotificationDropdown /> */}
-                            <ProfileDropdownTailwind />
+                            {/* <ProfileDropdownTailwind /> */}
                         </div>
 
                         {/* <SearchOption /> */}
