@@ -16,6 +16,8 @@ import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
 import { sub_speciality } from "~/common/data/subSpecialitys";
+import image_whatsapp from "../../../../../../styles/assets/images/WhatsApp.svg.png";
+import NumberWhatsapp from "~/Components/molecules/field-control/__snapshots__/field-whatsapp";
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<ActivateAccount>();
@@ -119,7 +121,8 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 name="sub_speciality"
                 items={sub_speciality}
             />
-            <FieldControl
+            <NumberWhatsapp />
+            {/* <FieldControl
                 className="form-control"
                 divClassName="my-1"
                 type="text"
@@ -130,7 +133,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 mask={"(99) 99999-9999"}
                 maskChar={null}
                 required
-            />
+            /> */}
 
             <div className="mt-4 d-flex justify-content-center">
                 <BtnCancel
