@@ -7,10 +7,12 @@ import MaskedInput from "react-input-mask";
 const NumberWhatsapp = () => {
     const [phoneValue, setPhoneValue] = useState<string | any>(undefined);
     const [showWhatsAppInput, setShowWhatsAppInput] = useState(false);
+    const [clickAppInput, setClickAppInput] = useState(false);
 
     // guarda o valor do input de telefone
     const handlePhoneInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPhoneValue(event.target.value);
+        setClickAppInput(true)
     };
 
     // atualiza o estado do input de whatsapp para true
@@ -25,7 +27,7 @@ const NumberWhatsapp = () => {
             <div className="relative w-full items-center">
                 <div className="relative">
                     <FieldControl
-                        className="form-control"
+                        className=" focus-visible:bg-transparent hover:bg-transparent focus:bg-transparent bg-transparent flex form-control"
                         divClassName="my-1"
                         type="text"
                         label="Telefone/Celular"
@@ -36,14 +38,22 @@ const NumberWhatsapp = () => {
                         maskChar={null}
                         required
                         onChange={handlePhoneInputChange}
-                    />
+                    >
+                        <div
+                            className="absolute top-1/3 right-7 cursor-pointer transform -translate-y-1/2 "
+                            onClick={copyPhoneToWhatsapp}
+                        >
+                            {
+                            clickAppInput && (<FaWhatsapp className="flex absolute justify-center text-green-600 text-lg" />)
+                        }  
+                            
+                        </div>
+                        
+                    </FieldControl>
                 </div>
-                <div
-                    className="absolute top-1/2 right-7 cursor-pointer transform -translate-y-1/2 z-10"
-                    onClick={copyPhoneToWhatsapp}
-                >
-                    <FaWhatsapp className="flex absolute justify-center text-green-600 text-lg" />
-                </div>
+                        
+                    
+               
             </div>
                 <div>
                     {

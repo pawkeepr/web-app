@@ -9,6 +9,7 @@ import MaskedInput from "react-input-mask";
 import BtnCancel from "~/Components/atoms/btn/btn-cancel";
 import BtnSuccess from "~/Components/atoms/btn/btn-success";
 import FieldControl from "~/Components/molecules/field-control";
+import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import validatePerson from "~/validations/person";
 
 import useNextStep from "~/hooks/use-next-step";
@@ -17,7 +18,7 @@ import { StepProps } from "./types";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
 import { sub_speciality } from "~/common/data/subSpecialitys";
 import image_whatsapp from "../../../../../../styles/assets/images/WhatsApp.svg.png";
-import NumberWhatsapp from "~/Components/molecules/field-control/__snapshots__/field-whatsapp";
+import NumberWhatsapp from "~/Components/molecules/field-control/field-whatsapp";
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<ActivateAccount>();
@@ -116,24 +117,20 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 placeholder="Digite sua especialidade"
                 required
             />
-            <ComboBoxAutocomplete
+            {/* <ComboBoxAutocomplete
                 label="Sub Especialidade"
                 name="sub_speciality"
                 items={sub_speciality}
-yy            />
-            <NumberWhatsapp />
-            {/* <FieldControl
-                className="form-control"
-                divClassName="my-1"
-                type="text"
-                label="Telefone/Celular"
-                name="phone"
-                placeholder="Digite o seu Número de Telefone"
-                component={MaskedInput as any}
-                mask={"(99) 99999-9999"}
-                maskChar={null}
-                required
             /> */}
+            <FieldControlSelect
+                   divClassName="my-1"
+                   type="text"
+                   label="Sub Especialidade"
+                   name="sub_speciality"
+                   items={sub_speciality}
+                   placeholder="Digite sua especialidade"
+             />
+            <NumberWhatsapp />
             <div className="mt-4 d-flex justify-content-center">
                 <BtnCancel
                     onClick={prevStep}
