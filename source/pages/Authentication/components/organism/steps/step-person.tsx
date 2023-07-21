@@ -107,20 +107,20 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 maskChar={null}
                 required
             />
-            <FieldControl
-                type="text"
+             <ComboBoxAutocomplete
                 divClassName="my-1"
+                type="text"
                 label="Especialidade"
                 name="speciality"
+                items={sub_speciality}
                 placeholder="Digite sua especialidade"
-                className="form-control"
                 required
             />
             <ComboBoxAutocomplete
                 label="Sub Especialidade"
                 name="sub_speciality"
                 items={sub_speciality}
-            />
+yy            />
             <NumberWhatsapp />
             {/* <FieldControl
                 className="form-control"
@@ -134,7 +134,6 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 maskChar={null}
                 required
             /> */}
-
             <div className="mt-4 d-flex justify-content-center">
                 <BtnCancel
                     onClick={prevStep}
