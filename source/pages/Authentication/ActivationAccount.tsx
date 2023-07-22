@@ -35,6 +35,7 @@ const initialValues = (email: string): ActivateAccount => ({
     firstName: '',
     lastName: '',
     crmv: '',
+    serviceType: [],
     type: RULES.ADMIN as any,
     phone: '',
     cpf_cnpj: '',
@@ -76,7 +77,7 @@ const ActivationAccount = () => {
 
     const dispatch = useAppDispatch()
 
-    const onSubmit = async (values: Profile) => {
+    const onSubmit = async (values: Profile) => {        
         dispatch(editProfile(values))
     }
 
@@ -129,7 +130,7 @@ const ActivationAccount = () => {
                                     <p >
                                         Para seu primeiro acesso,
                                         você deve
-                                        completar seu cadastro na plataform.
+                                        completar seu cadastro na plataforma.
                                         <br />
                                         <span className="mx-2 fw-bold">{email}</span>
                                     </p>
