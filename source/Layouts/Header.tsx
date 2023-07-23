@@ -8,7 +8,6 @@ import logoSm from "~/assets/images/logo-sm-1.png";
 //import Components
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import ProfileDropdownTailwind from "~/Components/molecules/profile-dropdown/profile-dropdown";
 import { changeHeaderSize } from "~/store/actions";
 import { useAppDispatch } from "~/store/hooks";
 import FullScreenDropdown from "../Components/Common/FullScreenDropdown";
