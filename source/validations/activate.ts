@@ -2,6 +2,8 @@ import { cnpj, cpf } from "cpf-cnpj-validator";
 import * as Yup from "yup";
 import { RULES } from "~/store/auth/profile/types";
 
+import Address from './address'
+
 const transformTrim = (value: any, originalValue: string) => {
     // Remover espaços em branco extras da string
     return typeof originalValue === "string"
@@ -9,10 +11,42 @@ const transformTrim = (value: any, originalValue: string) => {
         : originalValue;
 };
 
+type Specialty = {
+    type: string;
+    name_specialty: string;
+}
+
+type Contact = {
+    email: string;
+    phone: string;
+    whatsapp: string;
+}
+
+type Location = {
+    country: string;
+    zipCode: string;
+    state: string;
+    city: string;
+    neighborhood: string;
+    street: string;
+    number: string;
+    complement: string;
+}
+
+export type ActivateAccount = {
+    firstName: string;
+    lastName: string;
+    crmv: string;
+    cpf_cnpj: string;
+    specialty: string;
+    type: number;
+    list_specialty: Specialty[];
+    list_service_type: string[];
+    contact: Contact;
+    location: Location;
+}
+
 const validate = Yup.object().shape({
-    email: Yup.string()
-        .email("O email deve ser válido")
-        .required("O campo de email é obrigatório"),
     firstName: Yup.string()
         .transform(transformTrim)
         .min(2, "O nome deve ter pelo menos 2 caracteres")
@@ -27,16 +61,20 @@ const validate = Yup.object().shape({
         .matches(/^[A-Z]{2}\d{4,6}$/, "CRMV inválido. Exemplo: SP12345")
         .required("O Campo CRMV é obrigatório"),
     speciality: Yup.string().required("O campo especialidade é obrigatório"),
-    type: Yup.number()
-        .oneOf([RULES.ADMIN, RULES.VETERINARY, RULES.TUTOR])
-        .required(),
-    // company: Yup.string().when('cpf_cnpj', {
-    //     is: (value: string) => cnpj.isValid(value),
-    //     then: Yup.string().transform(transformTrim).required('Este campo é obrigatório'),
-    //     otherwise: Yup.string().nullable(),
-    // }),
-    // age: Yup.number().positive().integer().required(),
-    phone: Yup.string()
+    list_specialty: Yup.array().of(
+        Yup.object().shape({
+            type: Yup.string().required("O campo especialidade é obrigatório"),
+            name_specialty: Yup.string().required("O campo especialidade é obrigatório"),
+        }),
+    ),
+    list_service_type: Yup.array().of(
+        Yup.string().required("O campo especialidade é obrigatório"),
+    ),
+    contact: Yup.object().shape({
+        email: Yup.string()
+        .email("O email deve ser válido")
+        .required("O campo de email é obrigatório"),
+        phone: Yup.string()
         .matches(/^[\d()-\s]+$/)
         .test("valid-phone-number", "Número de telefone inválido", (value) => {
             if (!value) {
@@ -50,6 +88,30 @@ const validate = Yup.object().shape({
             return numericValue.length === 11;
         })
         .required(),
+        whatsapp: Yup.string()
+        .matches(/^[\d()-\s]+$/)
+        .test("valid-phone-number", "Número de telefone inválido", (value) => {
+            if (!value) {
+                return false;
+            }
+
+            // Removendo caracteres não numéricos do número de telefone
+            const numericValue = value.replace(/\D/g, "");
+
+            // Verificando se o número de telefone tem pelo menos 10 dígitos
+            return numericValue.length === 11;
+        })
+        .required(),
+    }),
+    type: Yup.number()
+        .oneOf([RULES.ADMIN, RULES.VETERINARY, RULES.TUTOR])
+        .required(),
+    // company: Yup.string().when('cpf_cnpj', {
+    //     is: (value: string) => cnpj.isValid(value),
+    //     then: Yup.string().transform(transformTrim).required('Este campo é obrigatório'),
+    //     otherwise: Yup.string().nullable(),
+    // }),
+    // age: Yup.number().positive().integer().required(),
     cpf_cnpj: Yup.string()
         .required("Este campo é obrigatório")
         .transform((value) => value.replace(/[^\d]/g, ""))
@@ -57,49 +119,8 @@ const validate = Yup.object().shape({
             if (!value) return false;
             return cpf.isValid(value) || cnpj.isValid(value);
         }),
-    country: Yup.string(),
-    street: Yup.string()
-        .transform(transformTrim)
-        .required("O campo Rua é obrigatório"),
-    number: Yup.string()
-        .transform(transformTrim)
-        .required("O campo Número é obrigatório"),
-    complement: Yup.string().transform(transformTrim),
-    neighborhood: Yup.string()
-        .transform(transformTrim)
-        .required("O campo Bairro é obrigatório"),
-    city: Yup.string()
-        .transform(transformTrim)
-        .required("O campo Cidade é obrigatório"),
-    state: Yup.string()
-        .max(3, "O campo Estado deve ter no max 3 caracteres")
-        .min(2, "O campo Estado deve ter no min 2 caracteres")
-        .required("O campo Estado é obrigatório"),
-    zipCode: Yup.string()
-        .matches(
-            /^[0-9]{5}-[0-9]{3}$/,
-            "O campo CEP deve ter o formato 00000-000"
-        )
-        .required("O campo CEP é obrigatório"),
-    // gender: Yup.string().oneOf(['Male', 'Female', 'Other']).required()
+    location: Address
 });
 
-export type ActivateAccount = {
-    email: string;
-    firstName: string;
-    lastName: string;
-    crmv: string;
-    type: RULES;
-    phone: string;
-    cpf_cnpj: string;
-    country: string;
-    street: string;
-    number: string;
-    complement: string;
-    neighborhood: string;
-    city: string;
-    state: string;
-    zipCode: string;
-};
 
 export default validate;

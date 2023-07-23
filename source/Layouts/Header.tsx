@@ -8,13 +8,11 @@ import logoSm from "~/assets/images/logo-sm-1.png";
 //import Components
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import ProfileDropdownTailwind from "~/Components/molecules/profile-dropdown/profile-dropdown";
 import { changeHeaderSize } from "~/store/actions";
 import { useAppDispatch } from "~/store/hooks";
 import FullScreenDropdown from "../Components/Common/FullScreenDropdown";
 import LightDark from "../Components/Common/LightDark";
 
-import styles from "./Header.module.scss";
 import Drawer from "~/Components/Common/Drawer";
 
 type HeaderProps = {
@@ -103,42 +101,13 @@ const Header = ({ headerClass }: HeaderProps) => {
                         <div className="flex items-center justify-center">
                             <Link
                                 href="/"
-                                className={`${styles["logo"]} logo-light justify-center`}
+                                className="logo-light justify-centerblock"
                             >
-                                <span className={styles["minimal-logo"]}>
-                                    <Image
-                                        src={logoSm}
-                                        alt="Logo Pawkeepr Mode Light"
-                                        height="44"
-                                    />
-                                </span>
-                                <span className={styles["maximum-logo"]}>
                                     <Image
                                         src={logoLight}
                                         alt="Logo Pawkeepr Mode Light"
                                         height="34"
                                     />
-                                </span>
-                            </Link>
-
-                            <Link
-                                href="/"
-                                className={`${styles["logo"]} logo-dark justify-center`}
-                            >
-                                <span className={styles["minimal-logo"]}>
-                                    <Image
-                                        src={logoSm}
-                                        alt="Logo Pawkeepr Mode Dark"
-                                        height="44"
-                                    />
-                                </span>
-                                <span className={styles["maximum-logo"]}>
-                                    <Image
-                                        src={logoDark}
-                                        alt="Logo Pawkeepr Mode Dark"
-                                        height="34"
-                                    />
-                                </span>
                             </Link>
                         </div>
                         <div className="d-flex align-items-center">

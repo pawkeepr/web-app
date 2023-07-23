@@ -40,7 +40,7 @@ function* onActiveAcccount({ payload }: PayloadAction<ActivateAccount>) {
     yield put(activateAccountSuccess(data));
     successToast("Conta ativada com sucesso")
   } catch (error) {
-    errorToast('Código de confirmação inválido')
+    errorToast('Erro na ativação da conta')
     yield put(activateAccountError((error as any).message));
   }
 }

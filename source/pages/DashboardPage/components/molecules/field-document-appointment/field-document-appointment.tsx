@@ -1,7 +1,5 @@
 import { Form, Formik } from "formik";
-import { cpf } from "cpf-cnpj-validator";
 import FieldDocument from "~/Components/molecules/field-document/field-document";
-import ReactInputMask from "react-input-mask";
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import { startTransition } from "react";
 import ModalListPets from "~/Components/modals/modal-list-pets/modal-list-pets";
@@ -17,7 +15,15 @@ type HandleProps = {
     onChangeDocument: (doc: string) => void;
 };
 
-const FieldDocumentAppointment = () => {
+type FieldDocumentAppointmentProps = {
+    selectedTabInitial?: number;
+    children?: (props: HandleProps) => JSX.Element;
+}
+
+const FieldDocumentAppointment = ({
+    selectedTabInitial = 1,
+    children,
+}: FieldDocumentAppointmentProps) => {
     const initialValues: InitialValues = { document: "" };
 
     const onHandleSubmit = ({
@@ -33,7 +39,8 @@ const FieldDocumentAppointment = () => {
     };
 
     return (
-        <ModalListPets>
+        <ModalListPets selectedTabInitial={selectedTabInitial}>
+
             {({ onChangeOpen, onChangeDocument }) => (
                 <Formik
                     initialValues={initialValues}
@@ -44,20 +51,25 @@ const FieldDocumentAppointment = () => {
                     enableReinitialize
                 >
                     <Form className="flex flex-row items-center justify-center">
-                        <FieldDocument
-                            name="document"
-                            className="form-control border-2 border-solid border-primary-500"
-                            placeholder="Nova Consulta"
-                            label="CPF"
-                            onlyCPF
-                        >
-                            <button
-                                data-bs-target="#addVeterinaryAppointmentModal"
-                                type="submit"
-                            >
-                                <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
-                            </button>
-                        </FieldDocument>
+                        {
+                            children?.({ onChangeOpen, onChangeDocument }) ||
+                            <div className="mobile:hidden">
+                                <FieldDocument
+                                    name="document"
+                                    className="form-control border-2 border-solid border-primary-500"
+                                    placeholder="Nova Consulta"
+                                    label="CPF"
+                                    onlyCPF
+                                >
+                                    <button
+                                        data-bs-target="#addVeterinaryAppointmentModal"
+                                        type="submit"
+                                    >
+                                        <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
+                                    </button>
+                                </FieldDocument>
+                            </div>
+                        }
                     </Form>
                 </Formik>
             )}

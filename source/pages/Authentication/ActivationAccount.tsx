@@ -1,13 +1,9 @@
-import Container from 'react-bootstrap/Container';
 import LogoSimple from '~/Components/atoms/logo-simple';
 import LogoSimpleMobile from '~/Components/atoms/logo-simple-mobile';
 import AuthLayout from '../_layouts/auth/auth_layout';
 
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+
 import { useAppSelector } from '~/store/hooks';
 
 
@@ -31,21 +27,29 @@ import StepSignUpPerson from './components/organism/steps/step-person';
 import StepSignUpTermsOfUse from './components/organism/steps/step-terms-of-use';
 
 const initialValues = (email: string): ActivateAccount => ({
-    email,
     firstName: '',
     lastName: '',
     crmv: '',
+    contact: {
+        email,
+        phone: '',
+        whatsapp: '',
+    },
     type: RULES.ADMIN as any,
-    phone: '',
     cpf_cnpj: '',
-    country: '',
-    street: '',
-    number: '',
-    complement: '',
-    neighborhood: '',
-    city: '',
-    state: '',
-    zipCode: '',
+    location: {
+        country: '',
+        street: '',
+        number: '',
+        complement: '',
+        neighborhood: '',
+        city: '',
+        state: '',
+        zipCode: '',
+    },
+    list_service_type: [],
+    list_specialty: [],
+    specialty: ''
 });
 
 
@@ -71,7 +75,6 @@ const Tabs = [
 const ActivationAccount = () => {
 
     const email = useAppSelector(state => state.Login.username)
-    const router = useRouter()
     const [tab, setTab] = useState('1')
 
     const dispatch = useAppDispatch()
@@ -116,56 +119,49 @@ const ActivationAccount = () => {
 
     return (
         <AuthLayout title="Activation Profile" >
-            <Container>
+            <section className="grid grid-cols-1 mobile:w-full mobile:h-full z-10 shadow-2xl">
+                <main className="grid grid-cols-1 p-3 mobile:!p-1 md:p-5 bg-white w-full mobile:rounded-none rounded-xl">
 
-                <Row className="justify-content-center">
-                    <Col md={8} lg={6} xl={5}>
-                        <Card className="mt-4 p-4">
-                            <div className='flex flex-col items-center justify-center'>
-                                <LogoSimple className='d-none d-sm-block' />
-                                <LogoSimpleMobile className='d-sm-none' />
-                                <div className="text-center text-muted mb-2 gap-2">
-                                    <h5 className="text-primary p-2">Ola! Seja Bem Vindo!</h5>
-                                    <p >
-                                        Para seu primeiro acesso,
-                                        você deve
-                                        completar seu cadastro na plataform.
-                                        <br />
-                                        <span className="mx-2 fw-bold">{email}</span>
-                                    </p>
-                                </div>
-
-                            </div>
-                            <Formik
-                                enableReinitialize
-                                validationSchema={validate}
-                                initialValues={initialValues(email) as any}
-                                onSubmit={onSubmit}
-                            >
-                                <TabContainer activeKey={tab}  >
-                                    {
-                                        Tabs.map((tab, index) => (
-                                            <TabContent key={index}>
-                                                <TabPane
-                                                    eventKey={tab.id}
-                                                    data-testid={`step-${tab.id.padStart(2, '0')}`}
-                                                >
-                                                    {tab.component({
-                                                        prevStep: onChangePrevStep,
-                                                        nextStep: onChangeNextStep,
-                                                    })}
-                                                </TabPane>
-                                            </TabContent>
-                                        ))
-                                    }
-                                </TabContainer>
-                            </Formik>
-
-                        </Card>
-
-                    </Col>
-                </Row>
-            </Container>
+                    <div className='flex flex-col items-center justify-center '>
+                        <LogoSimple className='mobile:hidden block' />
+                        <LogoSimpleMobile className='hidden mobile:block' />
+                        <div className="text-center font-sans text-gray-600 gap-1">
+                            <h5 className="text-primary-600 uppercase font-semibold font-sans p-2">Ola! Seja Bem Vindo!</h5>
+                            <p>
+                                Para seu primeiro acesso,
+                                você deve
+                                completar seu cadastro na plataforma.
+                                <br />
+                                <span className="mx-2 font-semibold">{email || 'email@teste.com'}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <Formik
+                        enableReinitialize
+                        validationSchema={validate}
+                        initialValues={initialValues(email) as any}
+                        onSubmit={onSubmit}
+                    >
+                        <TabContainer activeKey={tab}  >
+                            {
+                                Tabs.map((tab, index) => (
+                                    <TabContent key={index}>
+                                        <TabPane
+                                            eventKey={tab.id}
+                                            data-testid={`step-${tab.id.padStart(2, '0')}`}
+                                        >
+                                            {tab.component({
+                                                prevStep: onChangePrevStep,
+                                                nextStep: onChangeNextStep,
+                                            })}
+                                        </TabPane>
+                                    </TabContent>
+                                ))
+                            }
+                        </TabContainer>
+                    </Formik>
+                </main>
+            </section>
         </AuthLayout >
     );
 };
