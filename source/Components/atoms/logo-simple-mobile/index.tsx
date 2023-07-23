@@ -10,7 +10,7 @@ type LogoSimpleMobileProps = {
 const LogoSimpleMobile = ({ href = '/dashboard', size = 62, className, ...rest }: LogoSimpleMobileProps) => {
 
 	return (
-		<div className={`mb-4 ${className}`} {...rest}>
+		<div className={`mb-1 ${className}`} {...rest}>
 			<Link href={href} className="d-block">
 				<Image src={logoMobile} alt="Logo Pawkeepr" height={size} draggable="false"/>
 			</Link>
