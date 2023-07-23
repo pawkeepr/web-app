@@ -1,7 +1,5 @@
 import { Form, Formik } from "formik";
-import { cpf } from "cpf-cnpj-validator";
 import FieldDocument from "~/Components/molecules/field-document/field-document";
-import ReactInputMask from "react-input-mask";
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import { startTransition } from "react";
 import ModalListPets from "~/Components/modals/modal-list-pets/modal-list-pets";
@@ -33,7 +31,8 @@ const FieldDocumentAppointment = () => {
     };
 
     return (
-        <ModalListPets>
+        <ModalListPets selectedTabInitial={1}>
+
             {({ onChangeOpen, onChangeDocument }) => (
                 <Formik
                     initialValues={initialValues}
@@ -43,7 +42,7 @@ const FieldDocumentAppointment = () => {
                     })}
                     enableReinitialize
                 >
-                    <Form className="flex flex-row items-center justify-center">
+                    <Form className="flex flex-row items-center justify-center mobile:hidden">
                         <FieldDocument
                             name="document"
                             className="form-control border-2 border-solid border-primary-500"
