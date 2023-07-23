@@ -2,6 +2,7 @@
 
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from 'react';
+import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 
 //import Components
 import Footer from './Footer';
@@ -40,7 +41,8 @@ const Layout = ({ children }: LayoutProps) => {
         topbarThemeType,
         leftSideBarSizeType,
         leftSidebarViewType,
-        leftSidebarImageType
+        leftSidebarImageType,
+        headerSize,
     } = useAppSelector(state => ({
         layoutType: state.Layout.layoutType,
         leftSidebarType: state.Layout.leftSidebarType,
@@ -51,6 +53,7 @@ const Layout = ({ children }: LayoutProps) => {
         leftSideBarSizeType: state.Layout.leftSideBarSizeType,
         leftSidebarViewType: state.Layout.leftSidebarViewType,
         leftSidebarImageType: state.Layout.leftSidebarImageType,
+        headerSize: state.Layout.headerSize,
     }));
 
     /*
@@ -106,19 +109,33 @@ const Layout = ({ children }: LayoutProps) => {
         }
     }
 
+
     return (
-        <React.Fragment>
-            <div id="layout-wrapper mobile:gap-2">
-                <Header headerClass={headerClass} />
-                {/* <Sidebar layoutType={layoutType} /> */}
-                <div className="main-content mobile:mt-2">
-                    {children}
-                    <Footer />
-                </div>
+        <div id="mobile:gap-2 relative">
+            <Header headerClass={headerClass} />
+            {/* <Sidebar layoutType={layoutType} /> */}
+            <div
+                style={{
+                    paddingTop: `${headerSize.height}px`
+                }}
+                className="mobile:mt-2 px-24 mobile:px-4 relative"
+            >
+                <button
+                    onClick={() => console.log('clicou')}
+                    className="
+                        bg-primary-600 p-3 rounded-full 
+                        shadow-2xl z-50 fixed bottom-4 right-4
+                        transition duration-500 ease-in-out
+                        opacity-40 hover:opacity-100
+                        mobile:opacity-100 mobile:bottom-4 mobile:right-4
+                    "
+                >
+                    <PlusIcon className="w-8 h-8 text-gray-50" />
+                </button>
+                {children}
+                <Footer />
             </div>
-
-        </React.Fragment>
-
+        </div>
     );
 };
 

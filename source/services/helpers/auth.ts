@@ -30,7 +30,6 @@ export const signInAws = async (data: SignInCredentials): Promise<UserData> => {
 };
 
 export const confirmSignUp = async (username: string, code: string) => {
-    Auth.confirmSignIn
     return Auth.confirmSignUp(username, code)
 }
 
