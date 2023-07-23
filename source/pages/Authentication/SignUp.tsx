@@ -132,11 +132,11 @@ const CoverSignUp = () => {
     return (
         <AuthLayout title="Criar conta">
             <div className="h-full lg:h-[80%] lg:w-[80%] z-10 flex flex-col lg:grid grid-cols-2">
-                <div className="flex flex-1">
+                <div className="flex flex-1 mobile:hidden">
                     <Image
                         className="h-24 lg:h-full object-cover"
                         src={bgAuth}
-                        alt="imagem pessoas"
+                        alt="Imagem cartunizada de pessoas e um globo terestre se comunicando"
                     />
                 </div>
                 <div className="z-10 bg-white h-full">
