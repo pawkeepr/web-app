@@ -4,9 +4,9 @@ import BtnCancel from "../../../../../Components/atoms/btn/btn-cancel";
 import BtnSuccess from "../../../../../Components/atoms/btn/btn-success";
 import { StepProps } from "./types";
 
-const listItem = "flex gap-2 fw-bold text-gray-500 p-1 text-center w-full";
+const listItem = "flex gap-1 font-semibold text-gray-500 p-1 text-center w-full";
 const strongText = "text-gray-700 mr-2";
-const pStyle = "text-center w-full text-sm";
+const pStyle = "text-center w-full text-sm flex flex-col";
 
 const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
     const { values, isValid, handleSubmit } =
@@ -19,10 +19,10 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
     };
 
     return (
-        <>
-            <div className="my-4">
-                <h4 className="h4 my-4 text-center text-capitalize text-primary">
-                    Informações pessoais
+        <div className="-mt-1">
+            <div className="shadow-lg p-4 mb-2">
+                <h4 className="font-semibold text-lg capitalize mb-2 text-center text-primary-600">
+                    Informações Pessoais
                 </h4>
 
                 <ul className="grid grid-cols-2">
@@ -53,9 +53,16 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
                             <span className="">{values.phone}</span>
                         </p>
                     </li>
+
+                    <li className={listItem}>
+                        <p className={pStyle}>
+                            <strong className={strongText}>WhatsApp:</strong>
+                            <span className="">{values.phone}</span>
+                        </p>
+                    </li>
                 </ul>
 
-                <h4 className="h4 text-center my-4 text-capitalize text-primary">
+                <h4 className="font-semibold text-lg uppercase my-2 text-center text-primary-600">
                     Endereço
                 </h4>
 
@@ -134,7 +141,7 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
                     />
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

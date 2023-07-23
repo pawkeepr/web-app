@@ -66,7 +66,8 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     return (
 
-        <div className="container d-flex flex-column mt-4">
+        <div className="container grid grid-cols-2 mobile:grid-cols-1 gap-1">
+
             <FieldControl
                 divClassName='my-1'
                 className="form-control"
@@ -81,7 +82,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             />
             <Address loading={loading} disabledInputs={disabledInputs} />
 
-            <div className="mt-4 d-flex justify-content-center">
+            <div className="mt-1 flex justify-center items-center col-span-full">
                 <BtnCancel onClick={prevStep} label="Anterior" className="m-1" />
                 <BtnSuccess label="Próximo" className="m-1" onClick={nextStep} disabled={!requiredValid || loading} />
             </div>

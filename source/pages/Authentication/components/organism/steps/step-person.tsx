@@ -51,32 +51,31 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     }, [cpf_cnpj]);
 
     return (
-        <div className="container d-flex flex-column">
-            <FieldControl
-                initialFocus
-                divClassName="my-1"
-                label="Nome Completo"
-                name="firstName"
-                aria-label="firstName"
-                className="form-control"
-                placeholder="Nome"
-                required
-                disabledError
-            >
-                <Form.Control
-                    type="text"
-                    name="lastName"
-                    aria-label="lastName"
-                    placeholder="Sobrenome"
-                    onChange={onChangeLastName}
+        <div className="container grid grid-cols-2 mobile:grid-cols-1 gap-1">
+            <div className="col-span-2 mobile:col-span-2">
+                <FieldControl
+                    initialFocus
+                    label="Nome Completo"
+                    name="firstName"
+                    aria-label="firstName"
+                    className="form-control"
+                    placeholder="Nome"
                     required
-                    className="ms-1 w-50"
-                />
-            </FieldControl>
-
+                    disabledError
+                >
+                    <Form.Control
+                        type="text"
+                        name="lastName"
+                        aria-label="lastName"
+                        placeholder="Sobrenome"
+                        onChange={onChangeLastName}
+                        required
+                        className="ms-1 w-50"
+                    />
+                </FieldControl>
+            </div>
             <FieldControl
                 label="CPF/CNPJ"
-                divClassName="my-1"
                 name="cpf_cnpj"
                 aria-label="cpf_cnpj"
                 className="form-control"
@@ -85,21 +84,11 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 mask={mask}
                 required
             />
-            {/* {isValidCnpj &&
-                    (<FieldControl
-                        label='Companhia'
-                        divClassName='my-1'
-                        name="company"
-                        aria-label="company"
-                        className="form-control"
-                        placeholder="Nome da Empresa"
-                        required
-                        disabledError
-                    />)} */}
+
             <FieldControl
                 type="text"
-                divClassName="my-1"
                 label="CRMV"
+                divClassName="mobile:col-span-2"
                 name="crmv"
                 placeholder="Digite o seu CRMV"
                 className="form-control"
@@ -108,9 +97,9 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 maskChar={null}
                 required
             />
-             <ComboBoxAutocomplete
-                divClassName="my-1"
+            <ComboBoxAutocomplete
                 type="text"
+                divClassName="mobile:col-span-2"
                 label="Especialidade"
                 name="speciality"
                 items={sub_speciality}
@@ -123,20 +112,16 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 items={sub_speciality}
             /> */}
             <FieldControlSelect
-                   divClassName="my-1"
-                   type="text"
-                   label="Sub Especialidade"
-                   name="sub_speciality"
-                   items={sub_speciality}
-                   placeholder="Digite sua especialidade"
-             />
+                type="text"
+                divClassName="mobile:col-span-2"
+                label="Sub Especialidade"
+                name="sub_speciality"
+                items={sub_speciality}
+                placeholder="Digite sua especialidade"
+            />
             <NumberWhatsapp />
-            <div className="mt-4 d-flex justify-content-center">
-                <BtnCancel
-                    onClick={prevStep}
-                    label="Anterior"
-                    className="m-1"
-                />
+            <div className="mt-1 flex justify-center items-center col-span-full">
+                
                 <BtnSuccess
                     label="Próximo"
                     className="m-1"

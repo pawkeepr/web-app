@@ -23,10 +23,8 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
     }
 
     return (
-        <div className="grid grid-cols-2 gap-2">
-            <div className="col-span-1">
+        <>
                 <FieldControl
-                    divClassName='my-1'
                     className="form-control"
                     type="text"
                     label="Estado"
@@ -35,10 +33,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                     placeholder={loading ? 'Carregando...' : 'Digite o nome do estado'}
                     required
                 />
-            </div>
-            <div className="col-span-1">
                 <FieldControl
-                    divClassName='my-1'
                     className="form-control"
                     type="text"
                     label="Cidade"
@@ -47,12 +42,8 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                     placeholder={loading ? 'Carregando...' : 'Digite o nome da cidade'}
                     required
                 />
-            </div>
-            <div className="grid grid-cols-4 col-span-full gap-1">
-                <div className="col-span-1">
                     <FieldControl
-                        divClassName='my-1'
-                        className="form-control"
+                            className="form-control"
                         type="text"
                         label="Bairro"
                         name="neighborhood"
@@ -60,12 +51,9 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                         placeholder={loading ? 'Carregando...' : 'Digite o nome do bairro'}
                         required
                     />
-                </div>
-                <div className="col-span-3">
 
                     <FieldControl
-                        divClassName='my-1'
-                        label='Rua'
+                            label='Rua'
                         name="street"
                         aria-label="street"
                         className="form-control w-70"
@@ -87,12 +75,9 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                             }}
                         />
                     </FieldControl>
-                </div >
-            </div>
             <div className="col-span-full">
 
                 <FieldControl
-                    divClassName='my-1'
                     className="form-control"
                     type="text"
                     label="Complemento"
@@ -102,7 +87,7 @@ const AddressInputs = ({ loading, disabledInputs }: AddressProps) => {
                 />
             </div>
 
-        </div>
+        </>
     )
 }
 
