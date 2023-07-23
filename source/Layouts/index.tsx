@@ -23,6 +23,7 @@ import {
 
 //redux
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
+import FieldDocumentAppointment from "~/pages/DashboardPage/components/molecules/field-document-appointment";
 
 
 type LayoutProps = {
@@ -120,18 +121,24 @@ const Layout = ({ children }: LayoutProps) => {
                 }}
                 className="mobile:mt-2 px-24 mobile:px-4 relative"
             >
-                <button
-                    onClick={() => console.log('clicou')}
-                    className="
-                        bg-primary-600 p-3 rounded-full 
-                        shadow-2xl z-50 fixed bottom-4 right-4
-                        transition duration-500 ease-in-out
-                        opacity-40 hover:opacity-100
-                        mobile:opacity-100 mobile:bottom-4 mobile:right-4
-                    "
-                >
-                    <PlusIcon className="w-8 h-8 text-gray-50" />
-                </button>
+                <FieldDocumentAppointment selectedTabInitial={0}>
+                    {
+                        ({ onChangeOpen }) => (
+                            <button
+                                onClick={() => onChangeOpen(true)}
+                                className="
+                                bg-primary-600 p-3 rounded-full 
+                                shadow-2xl z-50 fixed bottom-4 right-4
+                                transition duration-500 ease-in-out
+                                opacity-40 hover:opacity-100
+                                mobile:opacity-100 mobile:bottom-4 mobile:right-4
+                            "
+                            >
+                                <PlusIcon className="w-8 h-8 text-gray-50" />
+                            </button>
+                        )
+                        }
+                </FieldDocumentAppointment>
                 {children}
                 <Footer />
             </div>

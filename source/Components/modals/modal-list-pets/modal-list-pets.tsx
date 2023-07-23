@@ -38,10 +38,10 @@ export type InitialValues = {
     ownerEmergencyContact: ReturnType<typeof useFindTutorByDocument>
 }
 
-const ModalListPets = ({ 
-    children, 
-    label, 
-    onCancel, 
+const ModalListPets = ({
+    children,
+    label,
+    onCancel,
     onConfirm,
     selectedTabInitial = 2
 }: ModalConfirmProps) => {
@@ -224,10 +224,8 @@ const ModalListPets = ({
                                         >
 
                                             <Tab.Panels className="mt-2">
-                                                 <Tab.Panel key={1} tabIndex={1}>
+                                                <Tab.Panel key={1} tabIndex={1}>
                                                     <StepDocument
-                                                        pets={pets}
-                                                        handleNavigate={handleNavigate}
                                                         handleCancel={handleCancel}
                                                         onChangeSelectedTab={onChangeSelectedTab}
                                                         selectedTab={selectedTab}
@@ -255,7 +253,11 @@ const ModalListPets = ({
                                                     />
                                                 </Tab.Panel>
                                                 <Tab.Panel key={5} tabIndex={5}>
-                                                    <StepLoading />
+                                                    <StepLoading
+                                                        onChangeSelectedTab={onChangeSelectedTab}
+                                                        selectedTab={selectedTab}
+                                                        handleCloseModal={closeModal}
+                                                    />
                                                 </Tab.Panel>
                                             </Tab.Panels>
                                         </Formik>

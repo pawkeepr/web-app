@@ -131,28 +131,28 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
                 })}
             >
                 <div className="gap-2 mt-2 mobile:py-6">
-                    
-                <ModalConfirm
-                    title="Cancelar Operações!"
-                    onConfirm={() => router.push("/dashboard")}
-                    description="Importante!"
-                    message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
-                >
-                    {({ onChangeOpen }) => {
-                        return (
-                            <button
-                                type="button"
-                                className="btn bg-danger text-white mb-2 mobile:!w-full mobile:px-4 mobile:py-4"
-                                onClick={() => onChangeOpen(true)}
-                            >
-                                <span>
-                                    <i className="ri-arrow-left-line align-middle"></i>{" "}
-                                    Cancelar Consulta
-                                </span>
-                            </button>
-                        );
-                    }}
-                </ModalConfirm>
+
+                    <ModalConfirm
+                        title="Cancelar Operações!"
+                        onConfirm={() => router.push("/dashboard")}
+                        description="Importante!"
+                        message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
+                    >
+                        {({ onChangeOpen }) => {
+                            return (
+                                <button
+                                    type="button"
+                                    className="btn bg-danger text-white mb-2 mobile:!w-full mobile:px-4 mobile:py-4"
+                                    onClick={() => onChangeOpen(true)}
+                                >
+                                    <span>
+                                        <i className="ri-arrow-left-line align-middle"></i>{" "}
+                                        Cancelar Consulta
+                                    </span>
+                                </button>
+                            );
+                        }}
+                    </ModalConfirm>
                     <VerticalTabs />
                 </div>
             </Formik>

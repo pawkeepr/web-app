@@ -1,32 +1,17 @@
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
-import FieldControl from '~/Components/molecules/field-control/field-control'
-import { Pet } from '~/store/pets/types'
 import { InitialValues } from '../../../modal-list-pets'
 import { useFormikContext } from 'formik'
-import { MapOptionSpecies, Species } from '~/store/pets/speciesType'
 import FieldDocument from '~/Components/molecules/field-document'
+import { cpf, cnpj } from 'cpf-cnpj-validator'
+import { useMemo } from 'react'
 
 type SpetDocumentProps = {
-    pets: Pet[]
-    handleNavigate: (pet: Pet) => void
     handleCancel: () => void
     onChangeSelectedTab: (index: number) => void
     selectedTab: number
 }
 
-enum EmojiPet {
-    cat = '🐱',
-    dog = '🐶',
-    rabbit = '🐰',
-    fish = '🐠',
-    bird = '🐦',
-    reptile = '🦎',
-    horse = '🐴',
-}
-
 const StepDocument = ({
-    pets,
-    handleNavigate,
     handleCancel,
     onChangeSelectedTab,
     selectedTab
@@ -38,11 +23,13 @@ const StepDocument = ({
         onChangeSelectedTab(selectedTab + 1)
     }
 
-
+    const validateDocument = useMemo(() => {
+        return cpf.isValid(values.document) || cnpj.isValid(values.document)
+    }, [values.document])
 
     return (
         <div className="mt-3 p-1 gap-2">
-          
+        
             <FieldDocument
                 name="document"
                 className="form-control w-full flex-1 mt-2"
@@ -50,9 +37,9 @@ const StepDocument = ({
             />
 
             <BoxButtons
-                isValid={values.name.length > 0}
+                isValid={validateDocument}
                 link={false}
-                labelSuccess="Prosseguir"
+                labelSuccess="Próximo"
                 onClickCancel={handleCancel}
                 onClickSuccess={nextStep}
             />

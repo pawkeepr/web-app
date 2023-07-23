@@ -15,7 +15,15 @@ type HandleProps = {
     onChangeDocument: (doc: string) => void;
 };
 
-const FieldDocumentAppointment = () => {
+type FieldDocumentAppointmentProps = {
+    selectedTabInitial?: number;
+    children?: (props: HandleProps) => JSX.Element;
+}
+
+const FieldDocumentAppointment = ({
+    selectedTabInitial = 1,
+    children,
+}: FieldDocumentAppointmentProps) => {
     const initialValues: InitialValues = { document: "" };
 
     const onHandleSubmit = ({
@@ -31,7 +39,7 @@ const FieldDocumentAppointment = () => {
     };
 
     return (
-        <ModalListPets selectedTabInitial={1}>
+        <ModalListPets selectedTabInitial={selectedTabInitial}>
 
             {({ onChangeOpen, onChangeDocument }) => (
                 <Formik
@@ -42,21 +50,26 @@ const FieldDocumentAppointment = () => {
                     })}
                     enableReinitialize
                 >
-                    <Form className="flex flex-row items-center justify-center mobile:hidden">
-                        <FieldDocument
-                            name="document"
-                            className="form-control border-2 border-solid border-primary-500"
-                            placeholder="Nova Consulta"
-                            label="CPF"
-                            onlyCPF
-                        >
-                            <button
-                                data-bs-target="#addVeterinaryAppointmentModal"
-                                type="submit"
-                            >
-                                <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
-                            </button>
-                        </FieldDocument>
+                    <Form className="flex flex-row items-center justify-center">
+                        {
+                            children?.({ onChangeOpen, onChangeDocument }) ||
+                            <div className="mobile:hidden">
+                                <FieldDocument
+                                    name="document"
+                                    className="form-control border-2 border-solid border-primary-500"
+                                    placeholder="Nova Consulta"
+                                    label="CPF"
+                                    onlyCPF
+                                >
+                                    <button
+                                        data-bs-target="#addVeterinaryAppointmentModal"
+                                        type="submit"
+                                    >
+                                        <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
+                                    </button>
+                                </FieldDocument>
+                            </div>
+                        }
                     </Form>
                 </Formik>
             )}
