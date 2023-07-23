@@ -25,6 +25,7 @@ const schema = Yup.object().shape({
     zipCode: Yup.string()
         .matches(/^[0-9]{5}-[0-9]{3}$/, 'O campo CEP deve ter o formato 00000-000')
         .required('O campo CEP é obrigatório'),
+    country: Yup.string()
 });
 
 export type Address = Yup.InferType<typeof schema>;
