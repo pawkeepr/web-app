@@ -14,7 +14,7 @@ const AuthLayout = ({ children, title }: AuthLayoutProps) => {
             <div className="flex items-center justify-center h-full w-full overflow-auto">
                 {children}
             </div>
-            <footer className="hidden bg-gray-800 md:block w-full p-3 text-slate-300 text-center z-10">
+            <footer className="hidden bg-gray-800 md:block w-full p-3 text-slate-300 text-center">
                 &copy; {new Date().getFullYear()} PawKeeprs Smartcare.
             </footer>
         </div>
