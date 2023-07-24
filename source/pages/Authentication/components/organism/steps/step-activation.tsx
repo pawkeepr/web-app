@@ -81,7 +81,7 @@ const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     <p >
                         Para seu primeiro acesso,
                         você deve ativar sua conta e
-                        completar seu cadastro na plataform.
+                        completar seu cadastro na plataforma.
                         Preencha o código de verificação
                         enviado para o seu email:
                         <br />

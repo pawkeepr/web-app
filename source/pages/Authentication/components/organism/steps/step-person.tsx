@@ -14,13 +14,14 @@ import validatePerson from "~/validations/person";
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
-import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
+import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete";
 import { sub_speciality } from "~/common/data/subSpecialitys";
+import CheckboxGroup  from "~/Components/molecules/checkbox-group";
+
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<ActivateAccount>();
-    const { cpf_cnpj } = values;
-
+    const { cpf_cnpj } = values;    
     const isValidCnpj = useMemo(() => cnpj.isValid(cpf_cnpj), [cpf_cnpj]);
 
     const requiredValid = useMemo((): boolean => {
@@ -119,6 +120,27 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 name="sub_speciality"
                 items={sub_speciality}
             />
+
+            <CheckboxGroup 
+                label="Tipo de atendimento"
+                name='serviceType'
+                items={[
+                    {
+                        label: "Domésticos",
+                        value:  "domestics"
+                    },
+                    {
+                        label: "Médio porte",
+                        value: "midsize"
+                    }, 
+                    {
+                        label: "Grande porte",
+                        value: "large"
+                    }
+                ]}
+                required
+            />
+
             <FieldControl
                 className="form-control"
                 divClassName="my-1"

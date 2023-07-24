@@ -27,6 +27,7 @@ const validate = Yup.object().shape({
         .matches(/^[A-Z]{2}\d{4,6}$/, "CRMV inválido. Exemplo: SP12345")
         .required("O Campo CRMV é obrigatório"),
     speciality: Yup.string().required("O campo especialidade é obrigatório"),
+    serviceType: Yup.array().min(1, "Selecione pelo menos um tipo de atendimento").required(),
     type: Yup.number()
         .oneOf([RULES.ADMIN, RULES.VETERINARY, RULES.TUTOR])
         .required(),
@@ -89,6 +90,7 @@ export type ActivateAccount = {
     firstName: string;
     lastName: string;
     crmv: string;
+    serviceType: string[];
     type: RULES;
     phone: string;
     cpf_cnpj: string;
