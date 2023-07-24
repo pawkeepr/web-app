@@ -85,7 +85,7 @@ const ForgetPasswordPage = (props: { history: any; }) => {
                 <LogoSimple className='d-none d-sm-block' />
                 <LogoSimpleMobile className='d-sm-none' />
                 <div className="text-center mb-2">
-                  <h5 className="text-primary">Ola! Seja Bem Vindo!</h5>
+                  <h5 className="text-primary">Olá! Seja Bem-Vindo(a)</h5>
                   <p className="text-muted">Você esqueceu sua senha?</p>
                   <p className="text-muted">Podemos te Ajudar!</p>
                 </div>
