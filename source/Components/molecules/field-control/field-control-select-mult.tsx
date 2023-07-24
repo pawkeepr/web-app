@@ -92,8 +92,9 @@ const FieldControlTest = ({
                           primary: 'rgb(9, 178, 133);',
                         },
                       })}
-                    placeholder="Selecione uma opção"
+                    placeholder="Selecione uma ou mais opções"
                     isSearchable={true}
+                    isMulti
                     name="speciality"
                     options={options}
 
