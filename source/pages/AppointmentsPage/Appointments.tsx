@@ -6,6 +6,8 @@ import { VeterinaryAppointment } from "~/store/veterinary-appointments/types";
 import VerticalTabs from "./components/templates/vertical-tabs";
 
 import { Formik } from "formik";
+import ModalConfirm from "~/Components/modals/modal-confirm";
+import { useRouter } from "next/navigation";
 
 export type InitialValues = Partial<Nullable<VeterinaryAppointment>>;
 
@@ -39,9 +41,8 @@ const initialValues = (
         document,
     },
     treatments: [],
-    speciality: null,
+    speciality: '',
     sub_specialty: null,
-
     medicines: [
         {
             name_medicine: "",
@@ -77,13 +78,15 @@ const initialValues = (
     vaccines: [""],
     exams: [""],
     payment: {
-        method: null,
-        price: null,
-        discount: null,
+        payment_method: undefined,
+        price: 0,
     },
 });
 
 const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
+
+    const router = useRouter();
+
     const handleSubmit = (values: InitialValues) => {
         const valuesAltered = {
             name_pet: values.pet?.name,
@@ -111,7 +114,7 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
     };
 
     return (
-        <DashboardLayouts title="Nova Consulta">
+        <DashboardLayouts title="Nova Consulta" >
             <Formik
                 onSubmit={handleSubmit}
                 enableReinitialize
@@ -127,9 +130,31 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
                     ),
                 })}
             >
-                <Container>
+                <div className="gap-2 mt-2 mobile:py-6">
+
+                    <ModalConfirm
+                        title="Cancelar Operações!"
+                        onConfirm={() => router.push("/dashboard")}
+                        description="Importante!"
+                        message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
+                    >
+                        {({ onChangeOpen }) => {
+                            return (
+                                <button
+                                    type="button"
+                                    className="btn bg-danger text-white mb-2 mobile:!w-full mobile:px-4 mobile:py-4"
+                                    onClick={() => onChangeOpen(true)}
+                                >
+                                    <span>
+                                        <i className="ri-arrow-left-line align-middle"></i>{" "}
+                                        Cancelar Consulta
+                                    </span>
+                                </button>
+                            );
+                        }}
+                    </ModalConfirm>
                     <VerticalTabs />
-                </Container>
+                </div>
             </Formik>
         </DashboardLayouts>
     );

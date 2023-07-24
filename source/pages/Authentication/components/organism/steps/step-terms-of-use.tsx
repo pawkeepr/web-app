@@ -1,12 +1,12 @@
 import { useFormikContext } from "formik";
 import { ActivateAccount } from "~/validations/activate";
-import BtnCancel from "../../../../../Components/atoms/btn/btn-cancel";
-import BtnSuccess from "../../../../../Components/atoms/btn/btn-success";
+import BtnCancel from "~/Components/atoms/btn/btn-cancel";
+import BtnSuccess from "~/Components/atoms/btn/btn-success";
 import { StepProps } from "./types";
 
-const listItem = "flex gap-2 fw-bold text-gray-500 p-1 text-center w-full";
+const listItem = "flex gap-1 font-semibold text-gray-500 p-1 text-center w-full";
 const strongText = "text-gray-700 mr-2";
-const pStyle = "text-center w-full text-sm";
+const pStyle = "text-center w-full text-sm flex flex-col";
 
 const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
     const { values, isValid, handleSubmit } =
@@ -19,14 +19,14 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
     };
 
     return (
-        <>
-            <div className="my-4">
-                <h4 className="h4 my-4 text-center text-capitalize text-primary">
-                    Informações pessoais
+        <div>
+            <div className="shadow-lg mb-2">
+                <h4 className="font-semibold text-lg capitalize mb-2 text-center text-primary-600">
+                    Informações Pessoais
                 </h4>
 
                 <ul className="grid grid-cols-2">
-                    <li className={listItem}>
+                    <li className={`${listItem} col-span-full`}>
                         <p className={pStyle}>
                             <strong className={strongText}>Nome:</strong>
                             <span className="text-capitalize ">
@@ -50,27 +50,34 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
                     <li className={listItem}>
                         <p className={pStyle}>
                             <strong className={strongText}>Telefone:</strong>
-                            <span className="">{values.phone}</span>
+                            <span className="">{values?.contact?.phone}</span>
+                        </p>
+                    </li>
+
+                    <li className={listItem}>
+                        <p className={pStyle}>
+                            <strong className={strongText}>WhatsApp:</strong>
+                            <span className="">{values?.contact?.phone}</span>
                         </p>
                     </li>
                 </ul>
 
-                <h4 className="h4 text-center my-4 text-capitalize text-primary">
+                <h4 className="font-semibold text-lg capitalize mb-2 text-center text-primary-600">
                     Endereço
                 </h4>
 
-                <ul className="grid grid-cols-2">
+                <ul className="grid grid-cols-3">
                     <li className={listItem}>
                         <p className={pStyle}>
                             <strong className={strongText}>CEP:</strong>
-                            <span className="">{values.zipCode}</span>
+                            <span className="">{values?.location?.zipCode}</span>
                         </p>
                     </li>
                     <li className={listItem}>
                         <p className={pStyle}>
                             <strong className={strongText}>Estado:</strong>
                             <span className="text-capitalize ">
-                                {values.state}
+                                {values?.location?.state}
                             </span>
                         </p>
                     </li>
@@ -78,7 +85,7 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
                         <p className={pStyle}>
                             <strong className={strongText}>Cidade:</strong>
                             <span className="text-capitalize ">
-                                {values.city}
+                                {values?.location?.city}
                             </span>
                         </p>
                     </li>
@@ -87,29 +94,29 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
                         <p className={pStyle}>
                             <strong className={strongText}>Rua:</strong>
                             <span className="text-capitalize ">
-                                {values.street}
+                                {values?.location?.street}
                             </span>
                         </p>
                     </li>
                     <li className={listItem}>
                         <p className={pStyle}>
                             <strong className={strongText}>Número:</strong>
-                            <span className="">{values.number}</span>
-                        </p>
-                    </li>
-                    <li className={listItem}>
-                        <p className={pStyle}>
-                            <strong className={strongText}>Complemento:</strong>
-                            <span className="text-capitalize ">
-                                {values.complement || "Não informado"}
-                            </span>
+                            <span className="">{values?.location?.number}</span>
                         </p>
                     </li>
                     <li className={listItem}>
                         <p className={pStyle}>
                             <strong className={strongText}>Bairro:</strong>
                             <span className="text-capitalize ">
-                                {values.neighborhood}
+                                {values?.location?.neighborhood}
+                            </span>
+                        </p>
+                    </li>
+                    <li className={`${listItem} col-span-full`}>
+                        <p className={pStyle}>
+                            <strong className={strongText}>Complemento:</strong>
+                            <span className="text-capitalize ">
+                                {values?.location?.complement || "Não informado"}
                             </span>
                         </p>
                     </li>
@@ -134,7 +141,7 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
                     />
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

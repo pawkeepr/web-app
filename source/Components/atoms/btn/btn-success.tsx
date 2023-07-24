@@ -17,7 +17,7 @@ const BtnSuccess = ({
 	return (
 		<button
 			className={cn(
-				'next btn',
+				'next btn mobile:p-4',
 				{
 					'btn-primary': !link,
 					'btn-link': link,

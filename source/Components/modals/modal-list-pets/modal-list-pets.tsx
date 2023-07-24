@@ -13,6 +13,7 @@ import StepListBreeds from './components/organisms/steps/step-list-breeds'
 import StepListPets from './components/organisms/steps/step-list-pets'
 import StepListSpecies from './components/organisms/steps/step-list-species'
 import StepLoading from './components/organisms/steps/step-loading'
+import StepDocument from './components/organisms/steps/step-document'
 
 type onChangeOpen = (arg: boolean) => void
 
@@ -26,6 +27,7 @@ type ModalConfirmProps = {
     onConfirm?: () => void
     onCancel?: () => void
     children?: (params: ChildrenProps) => React.ReactNode
+    selectedTabInitial?: number
 }
 
 export type InitialValues = {
@@ -36,11 +38,17 @@ export type InitialValues = {
     ownerEmergencyContact: ReturnType<typeof useFindTutorByDocument>
 }
 
-const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmProps) => {
+const ModalListPets = ({
+    children,
+    label,
+    onCancel,
+    onConfirm,
+    selectedTabInitial = 2
+}: ModalConfirmProps) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const [document, setDocument] = useState('')
-    const [selectedTab, setSelectedTab] = useState(0)
+    const [selectedTab, setSelectedTab] = useState(selectedTabInitial)
 
     const { isPetSuccess, isPetCreated } = useAppSelector(state => state.Pets)
     const dispatch = useAppDispatch()
@@ -52,7 +60,7 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
         setTimeout(() => {
             router.push(`${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`)
         }, 1000)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [document])
 
     useEffect(() => {
@@ -189,7 +197,7 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
                                         >
                                             Adicionar Pet
                                         </Dialog.Title>
-                                        
+
                                         <Dialog.Description
                                             as="p"
                                             className="text-xs text-gray-700 dark:!text-gray-200 text-center"
@@ -199,7 +207,7 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
 
                                         <Tab.List>
                                             {
-                                                [1, 2, 3, 4].map(
+                                                [1, 2, 3, 4, 5].map(
                                                     (item) => (
                                                         <Tab
                                                             key={item}
@@ -209,10 +217,21 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
                                                 )
                                             }
                                         </Tab.List>
-                                        <Formik initialValues={initialValues} enableReinitialize onSubmit={handleSubmit} >
+                                        <Formik
+                                            initialValues={initialValues}
+                                            enableReinitialize
+                                            onSubmit={handleSubmit}
+                                        >
 
                                             <Tab.Panels className="mt-2">
-                                                <Tab.Panel key={1}>
+                                                <Tab.Panel key={1} tabIndex={1}>
+                                                    <StepDocument
+                                                        handleCancel={handleCancel}
+                                                        onChangeSelectedTab={onChangeSelectedTab}
+                                                        selectedTab={selectedTab}
+                                                    />
+                                                </Tab.Panel>
+                                                <Tab.Panel key={2} tabIndex={2}>
                                                     <StepListPets
                                                         pets={pets}
                                                         handleNavigate={handleNavigate}
@@ -221,20 +240,24 @@ const ModalListPets = ({ children, label, onCancel, onConfirm }: ModalConfirmPro
                                                         selectedTab={selectedTab}
                                                     />
                                                 </Tab.Panel>
-                                                <Tab.Panel key={2}>
+                                                <Tab.Panel key={3} tabIndex={3}>
                                                     <StepListSpecies
                                                         selectedTab={selectedTab}
                                                         onChangeSelectedTab={onChangeSelectedTab}
                                                     />
                                                 </Tab.Panel>
-                                                <Tab.Panel key={3}>
+                                                <Tab.Panel key={4} tabIndex={4}>
                                                     <StepListBreeds
                                                         selectedTab={selectedTab}
                                                         onChangeSelectedTab={onChangeSelectedTab}
                                                     />
                                                 </Tab.Panel>
-                                                <Tab.Panel key={4}>
-                                                    <StepLoading />
+                                                <Tab.Panel key={5} tabIndex={5}>
+                                                    <StepLoading
+                                                        onChangeSelectedTab={onChangeSelectedTab}
+                                                        selectedTab={selectedTab}
+                                                        handleCloseModal={closeModal}
+                                                    />
                                                 </Tab.Panel>
                                             </Tab.Panels>
                                         </Formik>

@@ -30,14 +30,15 @@ const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAp
                 <Row className="align-items-center team-row">
                     <div className="col team-settings">
                         <Row className="align-items-center">
-                            <div className="col">
+                            {/* <div className="col">
                                 <div className="flex-shrink-0 me-2">
                                     <button type="button" className="btn fs-16 p-0 favourite-btn">
                                         <i className="ri-star-fill"></i>
                                     </button>
                                 </div>
                             </div>
-                            <UncontrolledDropdown className="col text-end">
+                            */}
+                            <UncontrolledDropdown className="w-full text-end">
                                 <DropdownToggle tag="a" role="button">
                                     <i className="ri-more-fill fs-17"></i>
                                 </DropdownToggle>
@@ -54,7 +55,7 @@ const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAp
                             <div className="avatar-md w-24 h-24">
                                 <div className="avatar-title bg-white rounded-circle relative">
                                     <MyImage
-                                        src={veterinaryAppointments?.pet.avatar}
+                                        src={veterinaryAppointments?.pet.avatar as any}
                                         alt={`Foto de Perfil de ${veterinaryAppointments?.pet.name}`}
                                         className="img-fluid d-block rounded-circle"
                                         fill
@@ -72,18 +73,21 @@ const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAp
                         </div>
                     </Col>
                     <Col lg={4}>
-                        <Row className="text-muted text-center">
-                            <Col xs={6} className="border-end border-end-dashed">
+                        <Row className="text-center">
+                            <Col xs={6} className="border-end border-end-dashed gap-1">
+                                <p className="font-bold font-sans uppercase mb-2">Doenças:</p>
                                 {
-                                    veterinaryAppointments?.diseases.map((disease, index) => {
+                                    veterinaryAppointments?.diseases?.map((disease, index) => {
                                         return (
-                                            <h5 key={index} className="mb-0">{disease.name}</h5>
+                                            <h5 key={index} className="mb-0 ">{disease.name}</h5>
                                         )
                                     })
                                 }
-                                <p className="text-muted mb-0">Doenças</p>
+                            
                             </Col>
                             <Col xs={6}>
+                                <p className="font-bold font-sans uppercase mb-2">Tratamento:</p>
+
                                 {
                                     veterinaryAppointments?.treatments.map((treatment, index) => {
                                         return (
@@ -91,7 +95,6 @@ const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAp
                                         )
                                     })
                                 }
-                                <p className="text-muted mb-0">Tratamento</p>
                             </Col>
                         </Row>
                     </Col>
