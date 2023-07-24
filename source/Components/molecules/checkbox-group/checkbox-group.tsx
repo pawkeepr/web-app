@@ -17,9 +17,10 @@ interface CheckboxGroupProps<T> extends React.HTMLAttributes<HTMLDivElement> {
     label: string
     required?: boolean
     disabledError?: boolean
+    divClassName?: string
 }
 
-export default function CheckboxGroup<T>({ items = [], name, label, required, className, id, disabledError, ...rest }: CheckboxGroupProps<T>) {
+export default function CheckboxGroup<T>({ items = [], name, label, required, className, id, disabledError, divClassName, ...rest }: CheckboxGroupProps<T>) {
 
     const [field, meta, helpers] = useField(name)
     const display =
@@ -46,7 +47,7 @@ export default function CheckboxGroup<T>({ items = [], name, label, required, cl
     }
     
     return (
-        <div>
+        <div className={divClassName}>
              <Form.Label
                 htmlFor={name} className="mb-1 list-group-item fs-12" data-testid={`label-${name}`}
             >

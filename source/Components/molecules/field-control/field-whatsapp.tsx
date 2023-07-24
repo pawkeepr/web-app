@@ -28,11 +28,10 @@ const NumberWhatsapp = () => {
                 <div className="relative">
                     <FieldControl
                         className=" focus-visible:bg-transparent hover:bg-transparent focus:bg-transparent bg-transparent flex form-control"
-                        divClassName="my-1"
                         type="text"
                         label="Telefone/Celular"
                         name="phone"
-                        placeholder="Digite o seu Número de Telefone"
+                        placeholder="Digite o seu número de telefone"
                         component={MaskedInput as any}
                         mask={"(99) 99999-9999"}
                         maskChar={null}

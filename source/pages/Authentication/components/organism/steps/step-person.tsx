@@ -15,16 +15,16 @@ import validatePerson from "~/validations/person";
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
-import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete";
+import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
+import CheckboxGroup from "~/Components/molecules/checkbox-group"
 import { sub_speciality } from "~/common/data/subSpecialitys";
-import CheckboxGroup  from "~/Components/molecules/checkbox-group";
-
 import image_whatsapp from "../../../../../../styles/assets/images/WhatsApp.svg.png";
 import NumberWhatsapp from "~/Components/molecules/field-control/field-whatsapp";
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<ActivateAccount>();
-    const { cpf_cnpj } = values;    
+    const { cpf_cnpj } = values;
+
     const isValidCnpj = useMemo(() => cnpj.isValid(cpf_cnpj), [cpf_cnpj]);
 
     const requiredValid = useMemo((): boolean => {
@@ -71,7 +71,14 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                         placeholder="Sobrenome"
                         onChange={onChangeLastName}
                         required
-                        className="ms-1 w-50"
+                        className="
+                            ms-1 w-50
+                            focus-within:!outline-1
+                            focus:!border-primary-500
+                            disabled:!cursor-not-allowed
+                            disabled:!opacity-25
+                            focus:!border-2
+                        "
                     />
                 </FieldControl>
             </div>
@@ -84,21 +91,8 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 component={MaskedInput as any}
                 mask={mask}
                 required
-            />
+            /> 
 
-            <FieldControl
-                type="text"
-                label="CRMV"
-                divClassName="mobile:col-span-2"
-                name="crmv"
-                placeholder="Digite o seu CRMV"
-                className="form-control"
-                component={MaskedInput as any}
-                mask={"aa999999"}
-                maskChar={null}
-                required
-            />
-            
             <CheckboxGroup 
                 label="Tipo de atendimento"
                 name='serviceType'
@@ -116,17 +110,35 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                         value: "large"
                     }
                 ]}
+                divClassName="mobile:col-span-2"
+                required
+            />
+
+            <FieldControl
+                type="text"
+                label="CRMV"
+                divClassName="mobile:col-span-2"
+                name="crmv"
+                placeholder="Digite o seu CRMV"
+                className="form-control"
+                component={MaskedInput as any}
+                mask={"aa999999"}
+                maskChar={null}
+                required
+            />
+            <ComboBoxAutocomplete
+                type="text"
+                divClassName="mobile:col-span-2"
+                label="Especialidade"
+                name="speciality"
+                items={sub_speciality}
+                placeholder="Digite sua especialidade"
                 required
             />
             {/* <ComboBoxAutocomplete
                 label="Sub Especialidade"
                 name="sub_speciality"
                 items={sub_speciality}
-            />           
-
-            <FieldControl
-                className="form-control"
-                divClassName="my-1"
             /> */}
             <FieldControlSelect
                 type="text"
