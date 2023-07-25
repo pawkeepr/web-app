@@ -9,11 +9,44 @@ import { useEffect, useRef } from "react";
 import type { InputControlProps } from "./types";
 import { sub_speciality } from "~/common/data/subSpecialitys";
 import Select from "react-select";
+import { StylesConfig } from 'react-select';
 
 const options = sub_speciality.map((item) => ({
     value: item,
     label: item,
+    color: 'rgb(255 200 107);',
   }));
+
+
+  const colorStyles = {
+    control: (styles: any) => ({ ...styles, backgroundColor: "white" }),
+    option: (styles: any, { data }: any) => {
+      return { ...styles, color: 'black' };
+    },
+    multiValue: (styles: any, { data }: any) => {
+      return {
+        ...styles,
+        backgroundColor: data.color,
+        color: "#fff",
+      };
+    },
+    multiValueLabel: (styles: any) => {
+      return {
+        ...styles,
+        color: "#0b0909",
+      };
+    },
+    multiValueRemove: (styles: any) => {
+      return {
+        ...styles,
+        color: "#fff",
+        cursor: "pointer",
+        ":hover": {
+          color: "#fff",
+        },
+      };
+    },
+  };
 
 const FieldControlTest = ({
     label,
@@ -92,6 +125,7 @@ const FieldControlTest = ({
                           primary: 'rgb(9, 178, 133);',
                         },
                       })}
+                    styles={colorStyles}
                     placeholder="Selecione uma ou mais opções"
                     isSearchable={true}
                     isMulti
