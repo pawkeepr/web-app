@@ -56,7 +56,7 @@ const CoverSignIn = () => {
                             className="flex lg:hidden h-24 w-auto object-cover"
                         />
                         <p className="text-sm font-light text-primary-500">
-                            Seja bem-vindo!
+                            Seja bem-vindo(a)!
                         </p>
                     </div>
                     <div className="mt-3 md:mt-5 md:px-10">

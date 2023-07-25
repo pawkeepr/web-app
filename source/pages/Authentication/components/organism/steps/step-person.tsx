@@ -16,6 +16,8 @@ import validatePerson from "~/validations/person";
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
+import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
+import CheckboxGroup from "~/Components/molecules/checkbox-group"
 import { sub_speciality } from "~/common/data/subSpecialitys";
 import image_whatsapp from "../../../../../../styles/assets/images/WhatsApp.svg.png";
 import NumberWhatsapp from "~/Components/molecules/field-control/field-whatsapp";
@@ -70,7 +72,14 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                         placeholder="Sobrenome"
                         onChange={onChangeLastName}
                         required
-                        className="ms-1 w-50"
+                        className="
+                            ms-1 w-50
+                            focus-within:!outline-1
+                            focus:!border-primary-500
+                            disabled:!cursor-not-allowed
+                            disabled:!opacity-25
+                            focus:!border-2
+                        "
                     />
                 </FieldControl>
             </div>
@@ -82,6 +91,27 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 placeholder="CPF/CNPJ"
                 component={MaskedInput as any}
                 mask={mask}
+                required
+            /> 
+
+            <CheckboxGroup 
+                label="Tipo de atendimento"
+                name='serviceType'
+                items={[
+                    {
+                        label: "Domésticos",
+                        value:  "domestics"
+                    },
+                    {
+                        label: "Médio porte",
+                        value: "midsize"
+                    }, 
+                    {
+                        label: "Grande porte",
+                        value: "large"
+                    }
+                ]}
+                divClassName="mobile:col-span-2"
                 required
             />
 

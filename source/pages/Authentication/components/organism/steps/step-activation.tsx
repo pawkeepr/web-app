@@ -77,11 +77,11 @@ const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <LogoSimple className='d-none d-sm-block' />
                 <LogoSimpleMobile className='d-sm-none' />
                 <div className="text-center text-muted mb-2 gap-2">
-                    <h5 className="text-primary p-2">Ola! Seja Bem Vindo!</h5>
+                    <h5 className="text-primary p-2">Olá! Seja Bem-Vindo(a)</h5>
                     <p >
                         Para seu primeiro acesso,
                         você deve ativar sua conta e
-                        completar seu cadastro na plataform.
+                        completar seu cadastro na plataforma.
                         Preencha o código de verificação
                         enviado para o seu email:
                         <br />

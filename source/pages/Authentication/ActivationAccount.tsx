@@ -30,6 +30,7 @@ const initialValues = (email: string): ActivateAccount => ({
     firstName: '',
     lastName: '',
     crmv: '',
+    serviceType: [],
     contact: {
         email,
         phone: '',
@@ -79,7 +80,7 @@ const ActivationAccount = () => {
 
     const dispatch = useAppDispatch()
 
-    const onSubmit = async (values: Profile) => {
+    const onSubmit = async (values: Profile) => {        
         dispatch(editProfile(values))
     }
 
@@ -126,7 +127,7 @@ const ActivationAccount = () => {
                         <LogoSimple className='mobile:hidden block' />
                         <LogoSimpleMobile className='hidden mobile:block' />
                         <div className="text-center font-sans text-gray-600 gap-1">
-                            <h5 className="text-primary-600 uppercase font-semibold font-sans p-2">Ola! Seja Bem Vindo!</h5>
+                            <h5 className="text-primary-600 uppercase font-semibold font-sans p-2">Olá! Seja Bem-Vindo(a)</h5>
                             <p>
                                 Para seu primeiro acesso,
                                 você deve
