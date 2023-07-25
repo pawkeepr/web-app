@@ -9,6 +9,7 @@ import MaskedInput from "react-input-mask";
 import BtnCancel from "~/Components/atoms/btn/btn-cancel";
 import BtnSuccess from "~/Components/atoms/btn/btn-success";
 import FieldControl from "~/Components/molecules/field-control";
+import FieldControlSelectMult from "~/Components/molecules/field-control/field-control-select-mult";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import validatePerson from "~/validations/person";
 
@@ -126,27 +127,19 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 maskChar={null}
                 required
             />
-            <ComboBoxAutocomplete
+             <FieldControlSelect
                 type="text"
                 divClassName="mobile:col-span-2"
                 label="Especialidade"
                 name="speciality"
                 items={sub_speciality}
-                placeholder="Digite sua especialidade"
-                required
             />
-            {/* <ComboBoxAutocomplete
-                label="Sub Especialidade"
-                name="sub_speciality"
-                items={sub_speciality}
-            /> */}
-            <FieldControlSelect
+            <FieldControlSelectMult
                 type="text"
                 divClassName="mobile:col-span-2"
                 label="Sub Especialidade"
                 name="sub_speciality"
                 items={sub_speciality}
-                placeholder="Digite sua especialidade"
             />
             <NumberWhatsapp />
             <div className="mt-1 flex justify-center items-center col-span-full">
