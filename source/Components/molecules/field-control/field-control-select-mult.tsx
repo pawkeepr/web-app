@@ -9,7 +9,6 @@ import { useEffect, useRef } from "react";
 import type { InputControlProps } from "./types";
 import { sub_speciality } from "~/common/data/subSpecialitys";
 import Select from "react-select";
-import { StylesConfig } from 'react-select';
 
 const options = sub_speciality.map((item) => ({
     value: item,
@@ -106,6 +105,7 @@ const FieldControlTest = ({
             <InputGroup className="position-relative mb-2 z-10">
                 {startChildren}
                 <Select
+                    className="w-full"
                     theme={(theme) => ({
                         ...theme,
                         borderRadius: 0,
