@@ -7,6 +7,9 @@ import React, {
 } from "react";
 import SearchInput from "~/Components/molecules/search-input";
 
+import HorizontalTabs from "../templates/Horizontal-List";
+
+
 interface ListTabProps<T> {
     items: T[];
     filter: (items: T[], search: string) => T[];
@@ -36,8 +39,10 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
 
     return (
         <React.Fragment>
+            <HorizontalTabs/>
             <div
                 className="
+                md:w-full
                 flex 
                 flex-wrap
                 mobile:gap-3
@@ -45,6 +50,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                 justify-between
                 "
             >
+                
                 <div
                     className="
                     mt-3 
