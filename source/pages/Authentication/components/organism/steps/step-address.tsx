@@ -154,8 +154,8 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             </div>
 
 
-            <div className="mt-1 flex justify-center items-center col-span-full">
-                <BtnCancel onClick={prevStep} label="Anterior" className="m-1" />
+            <div className="mt-1 flex justify-center justify-items-center col-span-full">
+                <BtnCancel onClick={prevStep} label="Anterior" className="m-1 bg-secondary-500 hover:bg-secondary-100 disabled:bg-secondary-500" />
                 <BtnSuccess label="Próximo" className="m-1" onClick={nextStep} disabled={!requiredValid || loading} />
             </div>
         </div>

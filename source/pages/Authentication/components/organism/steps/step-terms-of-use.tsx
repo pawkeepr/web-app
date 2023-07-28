@@ -128,7 +128,7 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
                     <BtnCancel
                         onClick={prevStep}
                         label="Anterior"
-                        className="m-1"
+                        className="m-1 bg-secondary-500 hover:bg-secondary-100 disabled:bg-secondary-500"
                     />
                 </div>
                 <div>
