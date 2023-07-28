@@ -13,7 +13,39 @@ import Select from "react-select";
 const options = sub_speciality.map((item) => ({
     value: item,
     label: item,
+    color: 'rgb(255 200 107);',
   }));
+
+
+const colorStyles = {
+    control: (styles: any) => ({ ...styles, backgroundColor: "white" }),
+    option: (styles: any, { data }: any) => {
+      return { ...styles, color: 'black' };
+    },
+    multiValue: (styles: any, { data }: any) => {
+      return {
+        ...styles,
+        backgroundColor: data.color,
+        color: "#fff",
+      };
+    },
+    multiValueLabel: (styles: any) => {
+      return {
+        ...styles,
+        color: "#0b0909",
+      };
+    },
+    multiValueRemove: (styles: any) => {
+      return {
+        ...styles,
+        color: "#fff",
+        cursor: "pointer",
+        ":hover": {
+          color: "#fff",
+        },
+      };
+    },
+};
 
 const FieldControlTest = ({
     label,
@@ -73,16 +105,7 @@ const FieldControlTest = ({
             <InputGroup className="position-relative mb-2 z-10">
                 {startChildren}
                 <Select
-                    className={` hover:border-primary-500
-                    box-shadow-none
-                    w-full
-                    hover-
-                    focus-within:!outline-1
-                    focus:border-primary-500
-                    disabled:!cursor-not-allowed
-                    disabled:!opacity-25
-                    focus:!border-2
-                    `}
+                    className="w-full"
                     theme={(theme) => ({
                         ...theme,
                         borderRadius: 0,
@@ -92,6 +115,7 @@ const FieldControlTest = ({
                           primary: 'rgb(9, 178, 133);',
                         },
                       })}
+                    styles={colorStyles}
                     placeholder="Selecione uma ou mais opções"
                     isSearchable={true}
                     isMulti
@@ -99,7 +123,6 @@ const FieldControlTest = ({
                     options={options}
 
                 />
-
                 {children}
             </InputGroup>
             <ErrMessage

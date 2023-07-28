@@ -73,16 +73,7 @@ const FieldControlTest = ({
             <InputGroup className="position-relative mb-2 z-10">
                 {startChildren}
                 <Select
-                    className={` hover:border-primary-500
-                    box-shadow-none
-                    w-full
-                    hover-
-                    focus-within:!outline-1
-                    focus:border-primary-500
-                    disabled:!cursor-not-allowed
-                    disabled:!opacity-25
-                    focus:!border-2
-                    `}
+                    className="w-full"
                     theme={(theme) => ({
                         ...theme,
                         borderRadius: 0,

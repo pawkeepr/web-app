@@ -19,7 +19,6 @@ import { StepProps } from "./types";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
 import CheckboxGroup from "~/Components/molecules/checkbox-group"
 import { sub_speciality } from "~/common/data/subSpecialitys";
-import image_whatsapp from "../../../../../../styles/assets/images/WhatsApp.svg.png";
 import NumberWhatsapp from "~/Components/molecules/field-control/field-whatsapp";
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
