@@ -1,6 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
-import Router from 'next/router';
 import { destroyCookie, setCookie } from 'nookies';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import cookies from '~/constants/cookies';
@@ -24,28 +23,24 @@ import {
 import { UserData, getUser, signInAws, signOut } from '~/services/helpers/auth';
 
 import { errorToast } from '../../helpers/toast';
-import { resetProfileFlag, setProfile } from '../profile/actions';
+import { getProfileSession, resetProfileFlag, setProfile } from '../profile/actions';
 import { Profile } from "../profile/types";
 
 export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
     try {
         const response: UserData = yield call(signInAws, action.payload);
         const { signInUserSession: { idToken } } = response;
-        // token
-        // const { data: user } = yield call(getUser, accessToken.jwtToken);
+
         yield setCookie(undefined, cookies.token.name, idToken.jwtToken, {
             maxAge: idToken.payload.exp,
         });
-        console.log(idToken)
-        yield put(setAuthorization({ token: idToken.jwtToken }));
 
-        yield call([Router, Router.push], '/activation');
+        yield put(setAuthorization({ token: idToken.jwtToken }));
         yield put(signInSuccess({ user: {}, token: idToken.jwtToken }));
-        // yield put(setProfile(user));
+        yield put(getProfileSession());
     } catch (error) {
         if ((error as any)?.code === 'UserNotConfirmedException') {
             // Se o usuário não estiver confirmado, redirecione para a página de ativação.
-
             yield put(signInFailed((error as any).message));
         } else {
             errorToast('Não foi possível realizar o login.', 'Falha!')
