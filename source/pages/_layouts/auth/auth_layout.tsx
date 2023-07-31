@@ -6,7 +6,7 @@ type AuthLayoutProps = {
     title: string;
 };
 
-const AuthLayout = ({ children, title }: AuthLayoutProps) => {
+const AuthLayout = ({ children, title, bgColor = '!bg-gray-50', shadow = 'shadow-xl' }: AuthLayoutProps) => {
     return (
         <div className="h-screen auth-bg-cover flex flex-col content-center items-center">
             <HeaderTitle title={title} />

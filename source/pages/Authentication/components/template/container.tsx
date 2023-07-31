@@ -7,7 +7,7 @@ type ContainerProps = {
 
 const Container = ({ children }: ContainerProps) => {
     return (
-        <div className="w-full py-3 px-6">
+        <div className="w-full px-6 pt-4">
             <div className="flex flex-col w-full items-center">
                 <LogoSimple className="d-none d-sm-block" />
                 <LogoSimpleMobile className="d-sm-none" />

@@ -6,13 +6,15 @@ import Form from "react-bootstrap/Form";
 import { useMemo } from "react";
 import MaskedInput from "react-input-mask";
 
-import BtnCancel from "~/Components/atoms/btn/btn-cancel";
 import BtnSuccess from "~/Components/atoms/btn/btn-success";
 import FieldControl from "~/Components/molecules/field-control";
 import FieldControlSelectMult from "~/Components/molecules/field-control/field-control-select-mult";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import validatePerson from "~/validations/person";
 
+import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
+import NumberWhatsapp from "~/Components/molecules/field-control/field-whatsapp";
+import { sub_speciality } from "~/common/data/subSpecialitys";
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
@@ -112,7 +114,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
             />
             <NumberWhatsapp />
             <div className="mt-1 flex justify-center items-center col-span-full">
-                
+
                 <BtnSuccess
                     label="Próximo"
                     className="m-1"

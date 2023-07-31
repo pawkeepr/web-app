@@ -1,6 +1,3 @@
-
-
-
 import { useFormikContext } from 'formik';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -78,7 +75,6 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
         <div className="container grid grid-cols-2 mobile:grid-cols-1 gap-1">
 
             <FieldControl
-                divClassName='my-1'
                 className="form-control"
                 type="text"
                 initialFocus
