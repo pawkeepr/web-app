@@ -75,6 +75,7 @@ const HorizontalTabs = () => {
     const [isFixed, setIsFixed] = useState(false);
     const [activeHorizontalTab, setActiveHorizontalTab] = useState(2);
     const [passedHorizontalSteps, setPassedHorizontalSteps] = useState([1, 2]);
+    const [maxItemsToShow, setMaxItemsToShow] = useState(2); // Define o número de itens a serem mostrados na versão mobile
 
     const { height } = useAppSelector(state => state.Layout.headerSize)
 
@@ -92,10 +93,11 @@ const HorizontalTabs = () => {
     useEffect(() => {
         if (window.innerWidth < 768) {
             setIsFixed(window.innerWidth < 768)
+            setMaxItemsToShow(2);
         }
-
         return () => {
-            setIsFixed(false)
+            setIsFixed(false);
+            setMaxItemsToShow(items.length);
         };
     }, []);
 
@@ -117,11 +119,11 @@ const HorizontalTabs = () => {
                                         'md:static'
                                     )}>
                                     <Nav
-                                        className="nav-pills bg-secondary-500 custom-nav nav-justified"
+                                        className="nav-pills custom-nav nav-justified"
                                         role="tablist"
                                     >
                                         {
-                                            items.map((item, index) => {
+                                            items.slice(0, maxItemsToShow).map((item, index) => {
                                                 return (
                                                     <NavItem key={index}>
                                                         <NavLink

@@ -39,7 +39,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
 
     return (
         <React.Fragment>
-            <HorizontalTabs/>
+                <HorizontalTabs/>
             <div
                 className="
                 md:w-full
