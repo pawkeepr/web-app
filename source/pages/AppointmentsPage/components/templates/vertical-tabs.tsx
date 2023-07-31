@@ -106,6 +106,7 @@ const VerticalTabs = () => {
                 <Card>
                     <CardHeader>
                         <h4 className="card-title mb-0">Nova Consulta</h4>
+                        
                     </CardHeader>
                     <CardBody className="form-steps">
                         <form>

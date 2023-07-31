@@ -43,6 +43,8 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                 mobile:gap-3
                 align-center 
                 justify-between
+                mt-4
+                mb-4
                 "
             >
                 <div
@@ -68,11 +70,13 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                     <Modal />
                 </div>
             </div>
-            <div className="team-list list-view-filter">
+            <div className="team-list list-view-filter"
+                
+            >
             <div
                     className="
-                    mt-1 
-                    mb-2
+                    mt-4 
+                    mb-4
                     mobile:w-full
                     hidden
                     mobile:block
