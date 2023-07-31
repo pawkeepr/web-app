@@ -8,6 +8,7 @@ import MaskedInput from "react-input-mask";
 
 import BtnSuccess from "~/Components/atoms/btn/btn-success";
 import FieldControl from "~/Components/molecules/field-control";
+import FieldControlSelectMult from "~/Components/molecules/field-control/field-control-select-mult";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import validatePerson from "~/validations/person";
 
@@ -17,6 +18,8 @@ import { sub_speciality } from "~/common/data/subSpecialitys";
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
+import { sub_speciality } from "~/common/data/subSpecialitys";
+import NumberWhatsapp from "~/Components/molecules/field-control/field-whatsapp";
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<ActivateAccount>();
@@ -95,27 +98,19 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 maskChar={null}
                 required
             />
-            <ComboBoxAutocomplete
+             <FieldControlSelect
                 type="text"
                 divClassName="mobile:col-span-2"
                 label="Especialidade"
                 name="speciality"
                 items={sub_speciality}
-                placeholder="Digite sua especialidade"
-                required
             />
-            {/* <ComboBoxAutocomplete
-                label="Sub Especialidade"
-                name="sub_speciality"
-                items={sub_speciality}
-            /> */}
-            <FieldControlSelect
+            <FieldControlSelectMult
                 type="text"
                 divClassName="mobile:col-span-2"
                 label="Sub Especialidade"
                 name="sub_speciality"
                 items={sub_speciality}
-                placeholder="Digite sua especialidade"
             />
             <NumberWhatsapp />
             <div className="mt-1 flex justify-center items-center col-span-full">

@@ -14,7 +14,7 @@ import { exams } from "~/common/data/exams";
 import { vaccines } from "~/common/data/vaccines";
 import { diseases } from "~/common/data/diseases";
 
-import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
+import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { BsFillTrash3Fill } from "react-icons/bs";
 
