@@ -1,57 +1,31 @@
-import { LOADING } from "~/types/constants";
+import { LOADING } from "~/helpers/loading";
 import {
-  ADD_FAIL, ADD_NEW, ADD_SUCCESS,
-  DELETE, DELETE_FAIL, DELETE_SUCCESS,
-  GET_ALL, GET_ALL_FAIL,
-  GET_ALL_INACTIVES, GET_ALL_INACTIVES_FAIL, GET_ALL_INACTIVES_SUCCESS,
-  GET_ALL_SUCCESS,
-  STOP_LOADING,
-  TOGGLE_STATUS, TOGGLE_STATUS_FAIL, TOGGLE_STATUS_SUCCESS,
-  UPDATE, UPDATE_FAIL, UPDATE_SUCCESS
+    ADD_FAIL, ADD_NEW, ADD_SUCCESS,
+    DELETE, DELETE_FAIL, DELETE_SUCCESS,
+    GET_ALL, GET_ALL_FAIL,
+    GET_ALL_INACTIVES, GET_ALL_INACTIVES_FAIL, GET_ALL_INACTIVES_SUCCESS,
+    GET_ALL_SUCCESS,
+    STOP_LOADING,
+    TOGGLE_STATUS, TOGGLE_STATUS_FAIL, TOGGLE_STATUS_SUCCESS,
+    UPDATE, UPDATE_FAIL, UPDATE_SUCCESS
 } from "../helpers/constants";
 
 
-export interface ISecs {
-  _id: string
-  name: string
-  email: string
-  password: string
-  celphone: string
-  document: string
-  specialty: string
-  board: string
-  record: string
-  profession: string
-  occupation_code: string
-  type: 'sec'
-  avatar: string
-  due_date: string
-  schedule_obs: string
-  show_lack: boolean
-  genrer: 'M' | 'F' | 'O' | 'NB'
-  active: boolean
-  unity_id: string
-  permissions?: string[]
-  screens?: string[]
-  reports?: string[]
-  blackListPermissions?: string[]
-  blackListScreens?: string[]
-  blackListReports?: string[]
-  created_at?: Date
-  updated_at?: Date
+export interface IGeneric {
+
 }
 
-export interface Data extends ISecs { }
+export interface Data extends IGeneric { }
 
 export type InitialState = {
-  data: Data[];
-  isLoading: LOADING;
-  isLoadingOnlyOne: LOADING;
-  error: string | null;
-  inactives: Data[];
+    data: Data[];
+    isLoading: LOADING;
+    isLoadingOnlyOne: LOADING;
+    error: string | null;
+    inactives: Data[];
 };
 
-export const name = 'secs';
+export const name = 'generic';
 
 export const ACTION_GET_ALL = `${name}/${GET_ALL}`;
 export const ACTION_GET_ALL_SUCCESS = `${name}/${GET_ALL_SUCCESS}`;
