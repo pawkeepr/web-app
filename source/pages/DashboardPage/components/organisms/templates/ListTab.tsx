@@ -49,9 +49,9 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
             >
                 <div
                     className="
-                    mt-3 
+                    mt-4
                     w-1/2
-                    mobile:w-full
+                    mobile:!w-full
                     mobile:hidden
                     "
                 >

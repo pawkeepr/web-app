@@ -53,10 +53,10 @@ const FieldDocumentAppointment = ({
                     <Form className="flex flex-row items-center justify-center">
                         {
                             children?.({ onChangeOpen, onChangeDocument }) ||
-                            <div className="mobile:hidden">
+                            <div className="mobile:w-full">
                                 <FieldDocument
                                     name="document"
-                                    className="form-control border-2 border-solid border-primary-500"
+                                    className=" form-control border-2 border-solid border-primary-500"
                                     placeholder="Nova Consulta"
                                     label="CPF"
                                     onlyCPF
