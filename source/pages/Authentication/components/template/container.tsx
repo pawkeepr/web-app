@@ -1,21 +1,24 @@
-import LogoSimpleMobile from "~/Components/atoms/logo-simple-mobile"
+import LogoSimple from "~/Components/atoms/logo-simple";
+import LogoSimpleMobile from "~/Components/atoms/logo-simple-mobile";
 
 type ContainerProps = {
-    children: React.ReactNode
-}
+    children: React.ReactNode;
+};
 
 const Container = ({ children }: ContainerProps) => {
     return (
         <div className="w-full px-6 pt-4">
             <div className="flex flex-col w-full items-center">
-                <LogoSimpleMobile className='block' mb="mb-0" />
-                <p className="text-muted">Aproveite todos os Benefícios Agora!</p>
+                <LogoSimple className="d-none d-sm-block" />
+                <LogoSimpleMobile className="d-sm-none" />
+                <h4 className="text-gray-700">Crie uma Conta</h4>
+                <p className="text-muted">
+                    Aproveite todos os Benefícios Agora!
+                </p>
             </div>
-            <div>
-                {children}
-            </div>
+            <div className="mt-2">{children}</div>
         </div>
-    )
-}
+    );
+};
 
-export default Container
+export default Container;

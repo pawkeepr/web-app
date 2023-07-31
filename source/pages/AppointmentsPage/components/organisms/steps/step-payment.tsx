@@ -1,16 +1,14 @@
-import {
-    Col,
-    Input,
-    Label,
-    Row
-} from "reactstrap";
-
-
+import { Col, Input, Label, Row } from "reactstrap";
+import InputMask from "react-input-mask";
 import { BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
-import { StepProps } from './types';
+import { StepProps } from "./types";
 import ListBoxTailwind from "~/Components/molecules/list-box-tailwind/list-box-tailwind";
+import FieldControl from "~/Components/molecules/field-control/field-control";
+import { useFormikContext } from "formik";
 
 const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
+    const { handleSubmit } = useFormikContext();
+
     return (
         <>
             <div>
@@ -18,7 +16,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
             </div>
 
             <div>
-                <div className="my-3 justify-center items-center flex">
+                <div className="my-3 justify-center items-center flex mobile:flex-col mobile:items-start">
                     <div className="form-check form-check-inline">
                         <Input
                             id="credit"
@@ -28,10 +26,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                             defaultChecked
                             required
                         />
-                        <Label
-                            className="form-check-label"
-                            htmlFor="credit"
-                        >
+                        <Label className="form-check-label" htmlFor="credit">
                             Cartão de Crédito
                         </Label>
                     </div>
@@ -43,10 +38,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                             className="form-check-input"
                             required
                         />
-                        <Label
-                            className="form-check-label"
-                            htmlFor="debit"
-                        >
+                        <Label className="form-check-label" htmlFor="debit">
                             Cartão de Débito
                         </Label>
                     </div>
@@ -58,10 +50,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                             className="form-check-input"
                             required
                         />
-                        <Label
-                            className="form-check-label"
-                            htmlFor="pix"
-                        >
+                        <Label className="form-check-label" htmlFor="pix">
                             Pix
                         </Label>
                     </div>
@@ -73,53 +62,51 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                             className="form-check-input"
                             required
                         />
-                        <Label
-                            className="form-check-label"
-                            htmlFor="cash"
-                        >
+                        <Label className="form-check-label" htmlFor="cash">
                             Dinheiro
                         </Label>
                     </div>
                 </div>
 
-                <Row className="gy-3">
-                    {
-                        <ListBoxTailwind  />
-                    }
-
-                </Row>
-
+                <Row className="gy-3">{<ListBoxTailwind />}</Row>
+                <div className="mt-4">
+                    <FieldControl
+                        label="Valor do Pagamento ?"
+                        className="form-control no-underline"
+                        name="paymentValue"
+                        component={InputMask as any}
+                        mask="R$ 999,99"
+                    />
+                </div>
             </div>
 
-            <div className="flex align-items-center justify-end gap-3 mt-4">
+            <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnLabel
                     link
                     type="button"
-                    className="right ms-auto previestab"
+                    className="right  previestab"
                     label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab - 1);
                     }}
                 >
-                    <i className="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>{" "}
+                    <i className="ri-arrow-left-line  align-middle fs-16 me-2"></i>{" "}
                     Voltar
                 </BtnLabel>
                 <BtnSuccess
+                    onClick={handleSubmit}
                     type="button"
-                    className="btn-label right ms-auto nexttab"
+                    className="btn-label"
                     label="Próximo"
-                    onClick={() => {
-
-                    }}
                 >
-                    Finalizar
-                    <i className="ri-check-line label-icon align-middle fs-16 ms-2"></i>
+                    <span className="ml-1"> Finalizar </span>
+                    <i className="ri-check-line  align-middle fs-16 p-1"></i>
                 </BtnSuccess>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default StepVaccines
+export default StepVaccines;
 
-const finalizer = null
+const finalizer = null;

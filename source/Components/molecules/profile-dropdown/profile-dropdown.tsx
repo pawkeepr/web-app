@@ -56,7 +56,7 @@ const ProfileDropdownTailwind = () => {
     const { onHandleChangeLayout } = useChangeLayoutMode()
 
     return (
-        <Menu as="div" className="relative inline-block text-left">
+        <Menu as="div" className="relative inline-block text-left mobile:hidden">
             <div>
                 <Menu.Button className="
                     inline-flex 

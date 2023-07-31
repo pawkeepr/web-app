@@ -50,12 +50,13 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                     mt-3 
                     w-1/2
                     mobile:w-full
+                    mobile:hidden
                     "
                 >
                     <SearchInput
                         value={search}
                         onChange={handleSearch}
-                        className="form-control mobile:!w-full"
+                        className="form-control mobile:!w-full border-2 border-solid border-primary-500"
                         placeholder="Busque a Consulta..."
                     />
                 </div>
@@ -68,9 +69,25 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                 </div>
             </div>
             <div className="team-list list-view-filter">
+            <div
+                    className="
+                    mt-1 
+                    mb-2
+                    mobile:w-full
+                    hidden
+                    mobile:block
+                    "
+                >
+                    <SearchInput
+                        value={search}
+                        onChange={handleSearch}
+                        className="form-control mobile:!w-full border-2 border-solid border-primary-500"
+                        placeholder="Busque a Consulta..."
+                    />
+                </div>
                 {cards(deferredItems)}
             </div>
-        </React.Fragment >
+        </React.Fragment>
     );
 };
 
