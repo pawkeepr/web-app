@@ -71,39 +71,39 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                 required
                 disabledError
             />
+            <div className="grid grid-cols-2 gap-2">
+                <FieldControl
+                    required
+                    label='Senha'
+                    name="password"
+                    type={passwordShow ? "text" : "password"}
+                    className="form-control border-end-0"
+                    placeholder="Digite sua senha"
+                    aria-label="password"
+                    onBlur={handleBlur}
+                    disabledError
+                >
+                    <InputGroup.Text className="bg-transparent border-start-0">
+                        <i onClick={onToggleVisiblePassword} className={passwordShow ? 'ri-eye-fill' : 'ri-eye-off-fill'} ></i>
+                    </InputGroup.Text>
+                </FieldControl>
 
-            <FieldControl
-                required
-                label='Senha'
-                name="password"
-                type={passwordShow ? "text" : "password"}
-                className="form-control border-end-0"
-                placeholder="Digite sua senha"
-                aria-label="password"
-                onBlur={handleBlur}
-                disabledError
-            >
-                <InputGroup.Text className="bg-transparent border-start-0">
-                    <i onClick={onToggleVisiblePassword} className={passwordShow ? 'ri-eye-fill' : 'ri-eye-off-fill'} ></i>
-                </InputGroup.Text>
-            </FieldControl>
-
-            <FieldControl
-                required
-                label='Repita a senha'
-                name="passwordConfirm"
-                type={passwordConfirmShow ? "text" : "password"}
-                className="form-control border-end-0"
-                placeholder="Repita a senha"
-                aria-label="password-confirm"
-                onBlur={handleBlur}
-                disabledError
-            >
-                <InputGroup.Text className="bg-transparent border-start-0">
-                    <i onClick={onToggleVisiblePasswordConfirm} className={passwordConfirmShow ? 'ri-eye-fill' : 'ri-eye-off-fill'} ></i>
-                </InputGroup.Text>
-            </FieldControl>
-
+                <FieldControl
+                    required
+                    label='Repita a senha'
+                    name="passwordConfirm"
+                    type={passwordConfirmShow ? "text" : "password"}
+                    className="form-control border-end-0"
+                    placeholder="Repita a senha"
+                    aria-label="password-confirm"
+                    onBlur={handleBlur}
+                    disabledError
+                >
+                    <InputGroup.Text className="bg-transparent border-start-0">
+                        <i onClick={onToggleVisiblePasswordConfirm} className={passwordConfirmShow ? 'ri-eye-fill' : 'ri-eye-off-fill'} ></i>
+                    </InputGroup.Text>
+                </FieldControl>
+            </div>
 
             <PasswordRules value={values.password} />
             <Form.Check
@@ -114,22 +114,9 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                 onChange={handleChange}
                 checked={values.termsOfUse}
                 label={
-                    <p className="fs-12 fst-italic">
+                    <p className="italic text-xs text-justify">
                         {"Você se registrando aceita os termos de uso da plataforma: "}
-                        <Link href="#" className="text-primary no-underline fst-normal fw-medium">Termos de Uso</Link>
-                    </p>
-                }
-            />
-
-            <Form.Check
-                type="checkbox"
-                className="w-100"
-                name="policyPrivacy"
-                id="policyPrivacy"
-                onChange={handleChange}
-                checked={values.policyPrivacy}
-                label={
-                    <p className="fs-12 fst-italic">
+                        <Link href="#" className="text-primary no-underline fst-normal fw-medium">Termos de Uso.{" "}</Link>
                         {"Você se registrando aceita a política de privacidade da plataforma: "}
                         <Link href="#" className="text-primary no-underline fst-normal fw-medium">Política de Privacidade</Link>
                     </p>

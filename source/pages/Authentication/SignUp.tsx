@@ -2,9 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import TabContainer from 'react-bootstrap/TabContainer';
 import TabContent from 'react-bootstrap/TabContent';
 import TabPane from 'react-bootstrap/TabPane';
@@ -37,11 +34,7 @@ const validationSchema = Yup.object({
         .required('Este campo é obrigatório'),
     termsOfUse: Yup.boolean().oneOf(
         [true],
-        'Você deve aceitar os termos de uso'
-    ),
-    policyPrivacy: Yup.boolean().oneOf(
-        [true],
-        'Você deve aceitar a política de privacidade'
+        'Você deve aceitar os termos de uso e politíca de privacidade da empresa'
     ),
     //person: validatePerson,
     //address: validateAddress,
@@ -79,7 +72,6 @@ const CoverSignUp = () => {
         password: '',
         passwordConfirm: '',
         termsOfUse: false,
-        policyPrivacy: false,
     };
 
 
@@ -133,47 +125,43 @@ const CoverSignUp = () => {
 
     return (
         <AuthLayout title="Criar conta">
-            <div className="h-full mt-5 w-full ">
-                <Card className="overflow-hidden shadow-xl !rounded-xl !bg-gray-50 m-10 !mt-2 max-h-screen">
-                    <Row className="justify-content-center g-0">
-                        <AuthSlider bg='auth-bg-image-2' />
-                        <Col lg={6} className="items-center flex-col justify-center">
-                            <Formik
-                                enableReinitialize
-                                validationSchema={validationSchema}
-                                initialValues={initialValues}
-                                onSubmit={onSubmit}
-                            >
-                                <TabContainer activeKey={tab}  >
-                                    {
-                                        Tabs.map((tab, index) => (
-                                            <TabContent key={index}>
-                                                <TabPane
-                                                    eventKey={tab.id}
-                                                    data-testid={`step-${tab.id.padStart(2, '0')}`}
-                                                >
-                                                    {tab.component({
-                                                        prevStep: onChangePrevStep,
-                                                        nextStep: onChangeNextStep,
-                                                    })}
-                                                </TabPane>
-                                            </TabContent>
-                                        ))
-                                    }
-                                </TabContainer>
-                            </Formik>
-                            <div className="text-center pb-4">
-                                <p className="list-group-item text-muted">Você já tem uma conta ?
-                                    <br />
-                                    <Link href="/sign-in" className="font-semibold text-primary-600 no-underline">
-                                        Entrar!
-                                    </Link>
-                                </p>
-                            </div>
+            <div className="flex flex-row ">
+                <AuthSlider bg='auth-bg-image-2' />
+                <div className="items-center flex-col justify-center">
+                    <Formik
+                        enableReinitialize
+                        validationSchema={validationSchema}
+                        initialValues={initialValues}
+                        onSubmit={onSubmit}
+                    >
+                        <TabContainer activeKey={tab}  >
+                            {
+                                Tabs.map((tab, index) => (
+                                    <TabContent key={index}>
+                                        <TabPane
+                                            eventKey={tab.id}
+                                            data-testid={`step-${tab.id.padStart(2, '0')}`}
+                                        >
+                                            {tab.component({
+                                                prevStep: onChangePrevStep,
+                                                nextStep: onChangeNextStep,
+                                            })}
+                                        </TabPane>
+                                    </TabContent>
+                                ))
+                            }
+                        </TabContainer>
+                    </Formik>
+                    <div className="text-center pb-4 text-xs">
+                        <p className="list-group-item text-muted">Você já tem uma conta ?
+                            <br />
+                            <Link href="/sign-in" className="font-semibold text-primary-600 no-underline">
+                                Entrar!
+                            </Link>
+                        </p>
+                    </div>
 
-                        </Col>
-                    </Row>
-                </Card>
+                </div>
             </div>
         </AuthLayout>
     );

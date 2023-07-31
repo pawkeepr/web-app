@@ -66,9 +66,8 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     return (
 
-        <div className="container d-flex flex-column mt-4">
+        <div className="container d-flex flex-column mt-0">
             <FieldControl
-                divClassName='my-1'
                 className="form-control"
                 type="text"
                 initialFocus

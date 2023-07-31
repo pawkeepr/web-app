@@ -1,4 +1,3 @@
-import LogoSimple from "~/Components/atoms/logo-simple"
 import LogoSimpleMobile from "~/Components/atoms/logo-simple-mobile"
 
 type ContainerProps = {
@@ -7,14 +6,12 @@ type ContainerProps = {
 
 const Container = ({ children }: ContainerProps) => {
     return (
-        <div className="w-full py-3 px-6">
+        <div className="w-full px-6 pt-4">
             <div className="flex flex-col w-full items-center">
-                <LogoSimple className='d-none d-sm-block' />
-                <LogoSimpleMobile className='d-sm-none' />
-                <h4 className="text-gray-700">Crie uma Conta</h4>
+                <LogoSimpleMobile className='block' mb="mb-0" />
                 <p className="text-muted">Aproveite todos os Benefícios Agora!</p>
             </div>
-            <div className="mt-2">
+            <div>
                 {children}
             </div>
         </div>

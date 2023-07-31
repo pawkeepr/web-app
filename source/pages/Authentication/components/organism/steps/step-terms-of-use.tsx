@@ -21,8 +21,8 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
 
     return (
         <>
-            <div className="my-4">
-                <h4 className="h4 my-4 text-center text-capitalize text-primary">
+            <div>
+                <h4 className="text-center uppercase text-primary-600 text-base font-bold mb-1">
                     Informações pessoais
                 </h4>
 
@@ -62,7 +62,7 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
                     </li>
                 </ul>
 
-                <h4 className="h4 text-center my-4 text-capitalize text-primary">Endereço</h4>
+                <h4 className="text-center uppercase text-primary-600 text-base font-bold my-2">Endereço</h4>
 
                 <ul className="grid grid-cols-2">
                     <li className={listItem} >
@@ -110,7 +110,7 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
                         <p className={pStyle}>
                             <strong className={strongText}>Complemento:</strong>
                             <span className="text-capitalize ">
-                                {values.complement || "Não informado"}
+                                {values.complement || "N/I"}
                             </span>
                         </p>
                     </li>

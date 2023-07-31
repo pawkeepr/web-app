@@ -79,40 +79,32 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
             </FieldControl>
 
-            <FieldControl
-                label='CPF/CNPJ'
-                divClassName='my-1'
-                name="cpf_cnpj"
-                aria-label="cpf_cnpj"
-                className="form-control"
-                placeholder="CPF/CNPJ"
-                component={MaskedInput as any}
-                mask={mask}
-                required
-            />
-            {/* {isValidCnpj &&
-                    (<FieldControl
-                        label='Companhia'
-                        divClassName='my-1'
-                        name="company"
-                        aria-label="company"
-                        className="form-control"
-                        placeholder="Nome da Empresa"
-                        required
-                        disabledError
-                    />)} */}
-            <FieldControl
-                type="text"
-                divClassName='my-1'
-                label="CRMV"
-                name="crmv"
-                placeholder="Digite o seu CRMV"
-                className="form-control"
-                component={MaskedInput as any}
-                mask={"aa999999"}
-                maskChar={null}
-                required
-            />
+            <div className="grid grid-cols-2 gap-2">
+                <FieldControl
+                    label='CPF/CNPJ'
+                    divClassName='my-1'
+                    name="cpf_cnpj"
+                    aria-label="cpf_cnpj"
+                    className="form-control"
+                    placeholder="CPF/CNPJ"
+                    component={MaskedInput as any}
+                    mask={mask}
+                    required
+                />
+
+                <FieldControl
+                    type="text"
+                    divClassName='my-1'
+                    label="CRMV"
+                    name="crmv"
+                    placeholder="Digite o seu CRMV"
+                    className="form-control"
+                    component={MaskedInput as any}
+                    mask={"aa999999"}
+                    maskChar={null}
+                    required
+                />
+            </div>
             <FieldControl
                 className="form-control"
                 divClassName='my-1'
