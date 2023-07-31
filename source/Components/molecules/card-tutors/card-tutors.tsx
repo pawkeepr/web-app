@@ -33,11 +33,7 @@ const CardTutors = ({ tutor }: CardTutorsProps) => {
                     <div className="col team-settings">
                         <Row className="align-items-center">
                             <div className="col">
-                                <div className="flex-shrink-0 me-2">
-                                    <button type="button" className="btn fs-16 p-0 favourite-btn">
-                                        <i className="ri-star-fill"></i>
-                                    </button>
-                                </div>
+                                
                             </div>
                             <UncontrolledDropdown className="col text-end">
                                 <DropdownToggle tag="a" role="button">
@@ -45,8 +41,6 @@ const CardTutors = ({ tutor }: CardTutorsProps) => {
                                 </DropdownToggle>
                                 <DropdownMenu className="dropdown-menu-end">
                                     <li><DropdownItem><i className="ri-eye-fill text-muted me-2 align-bottom"></i>Ver</DropdownItem></li>
-                                    <li><DropdownItem><i className="ri-star-fill text-muted me-2 align-bottom"></i>Favoritar</DropdownItem></li>
-                                    <li><DropdownItem><i className="ri-delete-bin-5-fill text-muted me-2 align-bottom"></i>Deletar</DropdownItem></li>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                         </Row>

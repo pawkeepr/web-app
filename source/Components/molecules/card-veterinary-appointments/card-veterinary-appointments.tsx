@@ -35,9 +35,7 @@ const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAp
                                     <i className="ri-more-fill fs-17"></i>
                                 </DropdownToggle>
                                 <DropdownMenu className="dropdown-menu-end">
-                                    <li><DropdownItem><i className="ri-eye-fill text-muted me-2 align-bottom"></i>Ver</DropdownItem></li>
-                                    
-                                    <li><DropdownItem><i className="ri-delete-bin-5-fill text-muted me-2 align-bottom"></i>Deletar</DropdownItem></li>
+                                    <li><DropdownItem><i className="ri-eye-fill text-muted me-2 align-bottom"></i>Ver</DropdownItem></li>   
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                         </Row>
