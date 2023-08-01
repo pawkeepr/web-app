@@ -4,7 +4,7 @@ require('dotenv').config()
 const nextConfig = ((phase) => {
   const isProduction = phase === 'production'
 
-  const _currentURL = isProduction ? process.env.API_URL : 'http://localhost:5000/api'
+  const _currentURL = 'https://z4etzps20a.execute-api.us-east-1.amazonaws.com/development'
 
   return {
     publicRuntimeConfig: {

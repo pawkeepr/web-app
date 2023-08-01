@@ -28,7 +28,8 @@ import {
 import cn from "classnames";
 import { useEffect, useState } from "react";
 
-import { useAppSelector } from "~/store/hooks";
+import { getAll } from "~/store/consults/actions";
+import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import StepScheduledAll from "../steps/step-scheduled-all";
 import StepScheduledCanceled from "../steps/step-scheduled-canceled";
 import StepScheduledConfirmed from "../steps/step-scheduled-confirmed";
@@ -76,6 +77,7 @@ const HorizontalTabs = () => {
     const [activeHorizontalTab, setActiveHorizontalTab] = useState(2);
     const [passedHorizontalSteps, setPassedHorizontalSteps] = useState([1, 2]);
     const [maxItemsToShow, setMaxItemsToShow] = useState(2); // Define o número de itens a serem mostrados na versão mobile
+    const dispatch = useAppDispatch();
 
     const { height } = useAppSelector(state => state.Layout.headerSize)
 
@@ -100,6 +102,11 @@ const HorizontalTabs = () => {
             setMaxItemsToShow(items.length);
         };
     }, []);
+    
+    useEffect(() => {
+        dispatch(getAll());
+    }, [])
+
 
 
     return (
