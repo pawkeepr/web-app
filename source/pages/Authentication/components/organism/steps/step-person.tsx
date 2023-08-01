@@ -12,9 +12,6 @@ import FieldControlSelectMult from "~/Components/molecules/field-control/field-c
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import validatePerson from "~/validations/person";
 
-import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
-import NumberWhatsapp from "~/Components/molecules/field-control/field-whatsapp";
-import { sub_speciality } from "~/common/data/subSpecialitys";
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
