@@ -104,6 +104,7 @@ const FieldControlTest = ({
             </If>
             <InputGroup className="position-relative mb-2 z-10">
                 {startChildren}
+                <p className="text-xs" >Selecione uma ou mais opções:</p>
                 <Select
                     className="w-full"
                     theme={(theme) => ({
@@ -116,7 +117,7 @@ const FieldControlTest = ({
                         },
                       })}
                     styles={colorStyles}
-                    placeholder="Selecione uma ou mais opções"
+                    placeholder="Selecione uma ou mais especialidades"
                     isSearchable={true}
                     isMulti
                     name="speciality"
