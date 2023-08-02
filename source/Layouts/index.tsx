@@ -130,8 +130,9 @@ const Layout = ({ children }: LayoutProps) => {
                                 bg-primary-600 p-3 rounded-full 
                                 shadow-2xl z-50 fixed bottom-4 right-4
                                 transition duration-500 ease-in-out
-                                opacity-40 hover:opacity-100
+                                opacity-40 hover:opacity-100 
                                 mobile:opacity-100 mobile:bottom-4 mobile:right-4
+                                md:block lg:hidden
                             "
                             >
                                 <PlusIcon className="w-8 h-8 text-gray-50" />
