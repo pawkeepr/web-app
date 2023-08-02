@@ -51,10 +51,11 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                     className="
                     mt-4
                     w-1/2
-                    
-                    block sm:hidden
+                    mobile:!w-full
+                    mobile:hidden
                     "
                 >
+                     
                      
                 </div>
                 <div

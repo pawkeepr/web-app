@@ -50,10 +50,10 @@ const FieldDocumentAppointment = ({
                     })}
                     enableReinitialize
                 >
-                    <Form className="flex flex-row items-center justify-center">
+                    <Form className=" flex flex-row items-center justify-center">
                         {
                             children?.({ onChangeOpen, onChangeDocument }) ||
-                            <div className="mobile:w-full hidden md:block lg:block xl:block ">
+                            <div className=" mobile:w-full hidden md:block lg:block xl:block  ">
                                 <FieldDocument
                                     name="document"
                                     className=" form-control border-2 border-solid border-primary-500"
