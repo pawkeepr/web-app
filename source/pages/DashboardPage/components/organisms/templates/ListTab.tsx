@@ -50,17 +50,11 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                 <div
                     className="
                     mt-4
-                    w-1/2
-                    mobile:!w-full
-                    mobile:hidden
+                    w-1/2                    
+                    block sm:hidden
                     "
                 >
-                    <SearchInput
-                        value={search}
-                        onChange={handleSearch}
-                        className="form-control mobile:!w-full border-2 border-solid border-primary-500"
-                        placeholder="Busque a Consulta..."
-                    />
+                     
                 </div>
                 <div
                     className="

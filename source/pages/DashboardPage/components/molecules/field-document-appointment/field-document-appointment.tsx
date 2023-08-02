@@ -53,7 +53,7 @@ const FieldDocumentAppointment = ({
                     <Form className="flex flex-row items-center justify-center">
                         {
                             children?.({ onChangeOpen, onChangeDocument }) ||
-                            <div className="mobile:w-full">
+                            <div className="hidden sm:block">
                                 <FieldDocument
                                     name="document"
                                     className=" form-control border-2 border-solid border-primary-500"
@@ -67,6 +67,7 @@ const FieldDocumentAppointment = ({
                                     >
                                         <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
                                     </button>
+                                  
                                 </FieldDocument>
                             </div>
                         }
@@ -78,3 +79,4 @@ const FieldDocumentAppointment = ({
 };
 
 export default FieldDocumentAppointment;
+                                     
