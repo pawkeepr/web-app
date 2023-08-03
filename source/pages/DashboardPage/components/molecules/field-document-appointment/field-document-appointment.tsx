@@ -50,15 +50,15 @@ const FieldDocumentAppointment = ({
                     })}
                     enableReinitialize
                 >
-                    <Form className=" flex flex-row items-center justify-center">
+                    <Form className=" flex flex-row items-center justify-end ">
                         {
                             children?.({ onChangeOpen, onChangeDocument }) ||
-                            <div className=" mobile:w-full hidden md:block lg:block xl:block  ">
+                            <div className="w-full hidden lg:block xl:block   ">
                                 <FieldDocument
                                     name="document"
-                                    className=" form-control border-2 border-solid border-primary-500"
-                                    placeholder="Nova Consulta"
-                                    label="CPF"
+                                    className=" form-control border-2 border-solid border-primary-500" 
+                                    placeholder="Nova Consulta"                                         
+                                    label="CPF"                                        
                                     onlyCPF
                                 >
                                     <button
