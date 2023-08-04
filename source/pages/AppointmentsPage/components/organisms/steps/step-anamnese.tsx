@@ -23,7 +23,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
     return (
         <>
             <div>
-                <h5>Anamnese</h5>
+                <h4 className="text-center"> Anamnese</h4>
             </div>
 
             <div>
