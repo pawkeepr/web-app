@@ -1,4 +1,4 @@
-export const sub_speciality = [
+export const sub_specialty = [
     "Acupuntura",
     "Anestesiologia e controle da dor",
     "Cardiologia",

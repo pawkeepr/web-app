@@ -37,8 +37,9 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
 
         yield put(setAuthorization({ token: idToken.jwtToken }));
         yield put(signInSuccess({ user: {}, token: idToken.jwtToken }));
-        yield put(getProfileSession());
+        yield put(getProfileSession({ email: action.payload.username }));
     } catch (error) {
+        console.log(error)
         if ((error as any)?.code === 'UserNotConfirmedException') {
             // Se o usuário não estiver confirmado, redirecione para a página de ativação.
             yield put(signInFailed((error as any).message));

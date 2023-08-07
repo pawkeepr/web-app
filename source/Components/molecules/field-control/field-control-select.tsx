@@ -6,14 +6,14 @@ import InputGroup from "react-bootstrap/InputGroup";
 import ErrMessage from "~/Components/atoms/err-message";
 
 import { useEffect, useRef } from "react";
-import type { InputControlProps } from "./types";
-import { sub_speciality } from "~/common/data/subSpecialitys";
 import Select from "react-select";
+import { sub_specialty } from "~/common/data/sub-specialtys";
+import type { InputControlProps } from "./types";
 
-const options = sub_speciality.map((item) => ({
+const options = sub_specialty.map((item) => ({
     value: item,
     label: item,
-  }));
+}));
 
 const FieldControlTest = ({
     label,
@@ -70,7 +70,7 @@ const FieldControlTest = ({
                     </If>
                 </Form.Label>
             </If>
-            <InputGroup className="position-relative mb-2 z-10">
+            <InputGroup className="z-10 mb-2 position-relative">
                 {startChildren}
                 <Select
                     className="w-full"
@@ -78,11 +78,11 @@ const FieldControlTest = ({
                         ...theme,
                         borderRadius: 0,
                         colors: {
-                          ...theme.colors,
-                          primary25: 'rgb(9, 178, 133);',
-                          primary: 'rgb(9, 178, 133);',
+                            ...theme.colors,
+                            primary25: 'rgb(9, 178, 133);',
+                            primary: 'rgb(9, 178, 133);',
                         },
-                      })}
+                    })}
                     placeholder="Selecione uma opção"
                     isSearchable={true}
                     name="speciality"
