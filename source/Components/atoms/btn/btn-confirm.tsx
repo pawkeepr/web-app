@@ -2,9 +2,9 @@
 import cn from 'classnames'
 import { BtnProps } from './types'
 
-import { twMerge } from 'tailwind-merge'
-const BtnSuccess = ({
-    label = 'Sucesso',
+
+const BtnConfirm = ({
+    label = 'Confirmar',
     className,
     link = false,
     children,
@@ -13,13 +13,14 @@ const BtnSuccess = ({
 
     return (
         <button
-            className={twMerge(cn(
+            className={cn(
                 'next btn mobile:p-4',
                 {
                     'btn-primary': !link,
                     'btn-link': link,
-                }
-            ), className)}
+                },
+                className
+            )}
             {...rest}
         >
             {children || label}
@@ -27,4 +28,4 @@ const BtnSuccess = ({
     )
 }
 
-export default BtnSuccess
+export default BtnConfirm
