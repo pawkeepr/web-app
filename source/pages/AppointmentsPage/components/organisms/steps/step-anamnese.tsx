@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 
 import { StepProps } from "./types";
 
-import AnswerRadio from "~/Components/molecules/answer-radio";
+import AnswerSwitch from "./components/molecules/answer-switch";
 
 import { useFormikContext } from "formik";
 import { BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
@@ -30,7 +30,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 <Row className="g-3">
                     {/* <AvatarPet name={values.pet?.name || 'Pet'} /> */}
 
-                    <AnswerRadio
+                    <AnswerSwitch
                         title="Sistema Digestivo"
                         answers={questions_digestive_system.map((question) => ({
                             ...question,
@@ -38,7 +38,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                         }))}
                     />
 
-                    <AnswerRadio
+                    <AnswerSwitch
                         title="Sistema Respiratório"
                         answers={questions_respiratory_system.map(
                             (question) => ({
@@ -48,7 +48,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                         )}
                     />
 
-                    <AnswerRadio
+                    <AnswerSwitch
                         title="Sistema Locomotor"
                         answers={questions_locomotive_system.map(
                             (question) => ({
@@ -58,7 +58,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                         )}
                     />
 
-                    <AnswerRadio
+                    <AnswerSwitch
                         title="Sistema Urinário"
                         answers={questions_urinary_system.map((question) => ({
                             ...question,
@@ -66,7 +66,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                         }))}
                     />
 
-                    <AnswerRadio
+                    <AnswerSwitch
                         title="Sistema Nervoso"
                         answers={questions_nervous_system.map((question) => ({
                             ...question,
