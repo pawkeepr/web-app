@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useField } from 'formik'
 import { Switch } from "@headlessui/react";
 
 type AnswerProps = {
@@ -13,7 +14,29 @@ type AnswerSwitchProps = {
 }
 
 const AnswerSwitch = ({ answers, title, onClick }: AnswerSwitchProps) => {
-    const [enabled, setEnabled] = useState<boolean>(false);
+    const [enableds, setEnableds] = useState<string[]>([]);
+
+    const [field, meta, helpers] = useField("anamnese")
+   
+    const { setValue } = helpers
+
+    function onChange(e: any, name : string){
+        if (e){
+            return setEnableds(state => {
+                const result = [...state, name]
+                setValue(result)
+                return result
+            })
+        }
+
+        setEnableds(state => {
+            const result = state.filter(value => value !== name)
+            setValue(result)
+            return result
+        })
+                
+
+    }
 
     return (
         <div className="grid grid-cols-3">
@@ -29,10 +52,10 @@ const AnswerSwitch = ({ answers, title, onClick }: AnswerSwitchProps) => {
                       <div className="align-middle lg:w-16 lg:h-7 w-[3.72rem] h-6">
                       <Switch
                         onClick={onClick}
-                        checked={enabled}
-                        onChange={setEnabled}
+                        checked={enableds.includes(answer.name)}
+                        onChange={(e) => onChange(e, answer.name)}
                         className={`${
-                            enabled ? "bg-secondary-500" : "  bg-secondary-600"
+                            enableds.includes(answer.name) ? "bg-secondary-500" : "  bg-secondary-600"
                                     }
                         relative inline-flex h-full w-full shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
                                 >
@@ -40,7 +63,7 @@ const AnswerSwitch = ({ answers, title, onClick }: AnswerSwitchProps) => {
                                     <span
                                         aria-hidden="true"
                                         className={`${
-                                            enabled ? "translate-x-9" : "translate-x-0"
+                                            enableds.includes(answer.name) ? "translate-x-9" : "translate-x-0"
                                         }
                         pointer-events-none inline-block lg:h-[24px] lg:w-[24px] h-[20px] w-[20px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
                                     />
