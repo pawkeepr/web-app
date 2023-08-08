@@ -8,7 +8,7 @@ import { decrypt, encrypt } from '~/helpers/encrypt-and-decrypt';
 import {
     recoverUserByToken,
     signInUser
-} from '~/store/actions';
+} from '~/store/auth/login/actions';
 import {
     LoginState,
     onChangePassword,
