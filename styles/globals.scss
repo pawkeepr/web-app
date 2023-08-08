@@ -1,118 +1,118 @@
 @import './assets/scss/themes.scss';
 
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
 
-  to {
-    transform: rotate(360deg);
-  }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 input:invalid {
-  color: rgb(248, 113, 113) !important;
-  // border-color: rgb(248, 113, 113) !important;
+    color: rgb(248, 113, 113) !important;
+    // border-color: rgb(248, 113, 113) !important;
 }
 
 /* Adiciona animação de check */
 @keyframes check {
-  0% {
-    stroke-dashoffset: 100;
-  }
+    0% {
+        stroke-dashoffset: 100;
+    }
 
-  100% {
-    stroke-dashoffset: 0;
-  }
+    100% {
+        stroke-dashoffset: 0;
+    }
 }
 
 .animate-check .circle {
-  stroke-dasharray: 126.9;
-  stroke-dashoffset: 126.9;
-  animation: check 0.5s ease-in-out forwards;
+    stroke-dasharray: 126.9;
+    stroke-dashoffset: 126.9;
+    animation: check 0.5s ease-in-out forwards;
 }
 
 @keyframes animate-ellipsis {
-  0% {
-    content: ".";
-  }
+    0% {
+        content: ".";
+    }
 
-  33% {
-    content: "..";
-  }
+    33% {
+        content: "..";
+    }
 
-  66% {
-    content: "...";
-  }
+    66% {
+        content: "...";
+    }
 
-  100% {
-    content: ".";
-  }
+    100% {
+        content: ".";
+    }
 }
 
 .animate-ellipsis::after {
-  content: ".";
-  animation: animate-ellipsis 3s steps(4) infinite;
+    content: ".";
+    animation: animate-ellipsis 3s steps(4) infinite;
 }
 
 
 /* Adiciona animação de X */
 @keyframes cancel-x {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
 
-  50% {
-    transform: scale(1);
-    opacity: 1;
-  }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
 
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .animate-cancel-x .line-1 {
-  animation: cancel-x 0.5s ease-in-out forwards;
+    animation: cancel-x 0.5s ease-in-out forwards;
 }
 
 .animate-cancel-x .line-2 {
-  animation: cancel-x 0.5s ease-in-out 0.2s forwards;
+    animation: cancel-x 0.5s ease-in-out 0.2s forwards;
 }
 
 /* Define cor de erro personalizada */
 :root {
-  --error-color: #dc3545;
+    --error-color: #dc3545;
 }
