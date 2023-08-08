@@ -2,7 +2,6 @@
 
 import PropTypes from "prop-types";
 
-import Card from 'react-bootstrap/Card';
 
 //redux
 import { useDispatch } from "react-redux";
@@ -73,63 +72,65 @@ const ForgetPasswordPage = (props: { history: any; }) => {
 
     return (
         <AuthLayout title="Forgot Password" >
-            <Card className="mt-4 p-4">
-                <div className='flex flex-col items-center justify-center'>
-                    <LogoSimpleMobile />
-                    <div className="text-center mb-2">
-                        <h5 className="text-primary">Ola! Seja Bem Vindo!</h5>
-                        <p className="text-muted">Você esqueceu sua senha?</p>
-                        <p className="text-muted">Podemos te Ajudar!</p>
+            <section className="relative grid grid-cols-1 mobile:w-full mobile:h-full z-10 shadow-2xl w-[40%]">
+                <main className="grid grid-cols-1 p-3 mobile:!p-1 md:p-5 bg-white w-full mobile:rounded-none rounded-xl">
+                    <div className='flex flex-col items-center justify-center'>
+                        <LogoSimpleMobile />
+                        <div className="text-center">
+                            <h5 className="text-primary">Ola! Seja Bem Vindo!</h5>
+                            <p className="text-muted">Você esqueceu sua senha?</p>
+                            <p className="text-muted">Podemos te Ajudar!</p>
+                        </div>
                     </div>
-                </div>
 
-                <div className="p-2">
-                    <Formik
-                        enableReinitialize
-                        initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        onSubmit={handleSubmit}
-                    >
-                        {
-                            ({ handleSubmit, isValid, values }) => (
-                                <>
-                                    <Tab.Group selectedIndex={selectedTab} onChange={onChangeSelectedTab}>
-                                        <Tab.List className="hidden">
-                                            {[0, 1].map((category) => (
-                                                <Tab
-                                                    key={category}
+                    <div className="px-2">
+                        <Formik
+                            enableReinitialize
+                            initialValues={initialValues}
+                            validationSchema={validationSchema}
+                            onSubmit={handleSubmit}
+                        >
+                            {
+                                ({ handleSubmit, isValid, values }) => (
+                                    <>
+                                        <Tab.Group selectedIndex={selectedTab} onChange={onChangeSelectedTab}>
+                                            <Tab.List className="hidden">
+                                                {[0, 1].map((category) => (
+                                                    <Tab
+                                                        key={category}
 
-                                                />
+                                                    />
 
-                                            ))}
-                                        </Tab.List>
+                                                ))}
+                                            </Tab.List>
 
-                                        <Tab.Panels className="mt-2">
-                                            <Tab.Panel key={0}>
-                                                <StepEmail email={values.email} onChangeNextTab={onChangeTab(1)} />
-                                            </Tab.Panel>
-                                            <Tab.Panel key={1}>
-                                                <StepPassword handleSubmit={handleSubmit} isValid={isValid} />
-                                            </Tab.Panel>
-                                        </Tab.Panels>
-                                    </Tab.Group>
+                                            <Tab.Panels className="mt-2">
+                                                <Tab.Panel key={0}>
+                                                    <StepEmail email={values.email} onChangeNextTab={onChangeTab(1)} />
+                                                </Tab.Panel>
+                                                <Tab.Panel key={1}>
+                                                    <StepPassword handleSubmit={handleSubmit} isValid={isValid} />
+                                                </Tab.Panel>
+                                            </Tab.Panels>
+                                        </Tab.Group>
 
-                                </>
-                            )
-                        }
+                                    </>
+                                )
+                            }
 
-                    </Formik>
-                </div>
-                <div className="mt-4 text-center">
-                    <p className="mb-1 text-sm">
-                        <span>Espere, Eu lembro minha senha...</span>
-                        <br />
-                        <BtnLink href="/sign-in">
-                            Clique Aqui!
-                        </BtnLink>
-                    </p>
-                </div>
-            </Card>
+                        </Formik>
+                    </div>
+                    <div className="mt-4 text-center">
+                        <p className="mb-1 text-sm">
+                            <span>Espere, Eu lembro minha senha...</span>
+                            <br />
+                            <BtnLink href="/sign-in">
+                                Clique Aqui!
+                            </BtnLink>
+                        </p>
+                    </div>
+                </main>
+            </section>
         </AuthLayout>
     );
 };
