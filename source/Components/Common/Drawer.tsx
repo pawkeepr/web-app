@@ -35,7 +35,7 @@ const Drawer = ({ closeDrawer, display }: DrawerProps) => {
 
                     <div className="flex flex-col items-center mt-6 -mx-2">
                         <h4 className="mx-2 mt-2 font-medium ">
-                            Olá Veterinária
+                            Olá Veterinário(a)
                         </h4>
                     </div>
 
