@@ -2,18 +2,17 @@
 import { useFormikContext } from 'formik';
 import { useMemo, useState } from 'react';
 
-import InputGroup from 'react-bootstrap/InputGroup';
 
 import { BtnSuccess } from '~/Components/atoms/btn';
 import FieldControl from '~/Components/molecules/field-control';
 import { AccountSignUp } from '~/store/auth/register/types';
-
 
 import PasswordRules from '../../molecules/password-rules';
 import Container from '../../template/container';
 
 import Link from 'next/link';
 import { Form } from 'react-bootstrap';
+import FieldPassword from '~/Components/molecules/field-password';
 import LOADING from '~/constants/loading';
 import { useAppSelector } from '~/store/hooks';
 import { StepProps } from './types';
@@ -72,7 +71,7 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                 disabledError
             />
             <div className="grid grid-cols-2 gap-2">
-                <FieldControl
+                <FieldPassword
                     required
                     label='Senha'
                     name="password"
@@ -82,13 +81,9 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                     aria-label="password"
                     onBlur={handleBlur}
                     disabledError
-                >
-                    <InputGroup.Text className="bg-transparent border-start-0">
-                        <i onClick={onToggleVisiblePassword} className={passwordShow ? 'ri-eye-fill' : 'ri-eye-off-fill'} ></i>
-                    </InputGroup.Text>
-                </FieldControl>
+                />
 
-                <FieldControl
+                <FieldPassword
                     required
                     label='Repita a senha'
                     name="passwordConfirm"
@@ -98,11 +93,7 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                     aria-label="password-confirm"
                     onBlur={handleBlur}
                     disabledError
-                >
-                    <InputGroup.Text className="bg-transparent border-start-0">
-                        <i onClick={onToggleVisiblePasswordConfirm} className={passwordConfirmShow ? 'ri-eye-fill' : 'ri-eye-off-fill'} ></i>
-                    </InputGroup.Text>
-                </FieldControl>
+                />
             </div>
 
             <PasswordRules value={values.password} />
@@ -122,16 +113,16 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                     </p>
                 }
             />
-
-            <div className="mt-4 flex justify-center w-full">
+            <div className='flex  items-center justify-center'>
                 <BtnSuccess
                     label="Finalizar cadastro"
                     type="submit"
+                    className="w-full"
                     onClick={handleClick}
                     disabled={loading}
-                    className="align-self-center !w-60 mobile:!w-full"
                 />
             </div>
+
 
         </Container>
     )

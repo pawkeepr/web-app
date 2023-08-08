@@ -12,6 +12,7 @@ import { SignInCredentials } from "~/services/helpers/auth";
 import cn from "classnames";
 import * as Yup from "yup";
 import { BtnLink, BtnSuccess } from "~/Components/atoms/btn";
+import FieldPassword from "~/Components/molecules/field-password/field-password";
 
 const initialValues: SignInCredentials = {
     username: "",
@@ -92,7 +93,7 @@ const Auth = () => {
                                 Esqueceu a senha?
                             </BtnLink>
 
-                            <FieldControl
+                            <FieldPassword
                                 type={visiblePassword ? "text" : "password"}
                                 label="Senha"
                                 className={cn("form-control pe-5 password-input border-end-0")}
@@ -102,25 +103,8 @@ const Auth = () => {
                                 value={password}
                                 onChange={handleChangePassword}
                                 disabledError
-                            >
+                            />
 
-                                <button
-                                    type="button"
-                                    onClick={onToggleVisiblePassword}
-                                    className="p-2 border-2 border-l-0 rounded-sm cursor-pointer "
-                                >
-                                    <i
-                                        data-testid="toggle-password"
-                                        className={cn({
-                                            "ri-eye-fill": !visiblePassword,
-                                            "ri-eye-off-fill": visiblePassword,
-                                            "cursor-pointer": true,
-                                        })}
-                                    ></i>
-                                </button>
-
-
-                            </FieldControl>
                         </div>
                     </div>
                     <BtnSuccess
