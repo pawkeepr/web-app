@@ -55,13 +55,13 @@ const CoverSignIn = () => {
                             alt="logo"
                             className="flex lg:hidden h-24 w-auto object-cover"
                         />
-                        <p className="text-sm font-light text-primary-500">
+                        <p className="text-sm font-light mobile:hidden text-primary-500">
                             Seja bem-vindo!
                         </p>
                     </div>
-                    <div className="mt-3 md:mt-5 md:px-10">
+                    <div className="mt-5 px-10 mobile:!mt-0 mobile:p-0">
                         {loading && (
-                            <div className="d-flex justify-content-center">
+                            <div className="flex justify-content-center">
                                 <div
                                     className="spinner-border text-primary"
                                     role="status"
@@ -80,11 +80,10 @@ const CoverSignIn = () => {
                         {!loading && <AuthInputs />}
                     </div>
 
-                    <div className="w-full flex flex-col justify-center items-center ">
+                    <div className="w-full h-fit flex flex-col justify-center items-center ">
                         <p className="mb-0">
                             Você não tem uma conta ?
                         </p>
-                        <br />
                         <BtnLink
                             href="/sign-up"
                         >
