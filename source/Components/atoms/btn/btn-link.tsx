@@ -6,8 +6,8 @@ import { tv } from "tailwind-variants";
 const button = tv({
     base: `
         cursor-pointer
-        text-sm rounded-md 
-        gap-4 leading-4
+        text-sm rounded-md
+        gap-1 leading-1
         text-center
         no-underline block
         rounded-lg transition 
@@ -24,10 +24,10 @@ const button = tv({
             semibold: 'font-semibold',
         },
         size: {
-            xs: 'py-0 px-1 mobile:p-1',
-            sm: 'py-1 px-2 mobile:p-4',
-            md: 'py-2 px-5 mobile:p-4',
-            lg: 'py-2 px-6 mobile:p-4',
+            xs: 'py-0 px-1',
+            sm: 'py-1 px-2',
+            md: 'py-2 px-5',
+            lg: 'py-2 px-6',
         },
         fontSize: {
             xs: 'text-xs',

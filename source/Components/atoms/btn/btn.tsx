@@ -3,7 +3,7 @@ import { tv } from "tailwind-variants";
 
 const button = tv({
     base: `
-        mobile:p-4
+        mobile:p-4 mobile:w-full
         px-4 m-1 text-white
         text-sm font-semibold rounded-md 
         gap-4 leading-4 font-semibold 
@@ -14,6 +14,23 @@ const button = tv({
         hover:transform hover:scale-105
     `,
     variants: {
+        weight: {
+            bold: 'font-bold',
+            medium: 'font-medium',
+            semibold: 'font-semibold',
+        },
+        size: {
+            xs: 'py-0 px-1',
+            sm: 'py-1 px-2',
+            md: 'py-3 px-5',
+            lg: 'py-4 px-6',
+        },
+        fontSize: {
+            xs: 'text-xs',
+            sm: 'text-sm',
+            md: 'text-md',
+            lg: 'text-lg',
+        },
         color: {
             primary: "bg-primary-500 dark:bg-secondary-500",
             secondary: "bg-secondary-500 dark:bg-primary-500",
@@ -25,6 +42,9 @@ const button = tv({
     },
     defaultVariants: {
         color: "primary",
+        weight: "semibold",
+        size: "md",
+        fontSize: "sm",
     }
 })
 
