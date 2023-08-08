@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BtnLink } from "~/Components/atoms/btn";
 
+import ArrowRightOnRectangleIcon from '@heroicons/react/24/solid/ArrowRightOnRectangleIcon';
+
 // Import Images
 import logoLight from "~/assets/images/logo-dark.png";
 import logoDark from "~/assets/images/logo-light.png";
@@ -113,10 +115,11 @@ const NavbarLanding = () => {
                             color="label"
                             bgColor="label"
                             weight="bold"
-                            className="border-2 border-solid border-primary-600 w-32"
+                            className=" w-32"
                             href="/sign-in"
                         >
-                            Entrar                            {/* icon de seta a direita circular na porta */}
+                            Entrar
+                            <ArrowRightOnRectangleIcon className="w-5 h-5" />
                         </BtnLink>
                         <BtnLink
                             size="sm"
