@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 
 import InputGroup from 'react-bootstrap/InputGroup';
 
-import BtnSuccess from '~/Components/atoms/btn/btn-success';
+import { BtnSuccess } from '~/Components/atoms/btn';
 import FieldControl from '~/Components/molecules/field-control';
 import { AccountSignUp } from '~/store/auth/register/types';
 

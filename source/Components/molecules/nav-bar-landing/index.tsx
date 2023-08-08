@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { BtnLink } from "~/Components/atoms/btn";
 
 // Import Images
 import logoLight from "~/assets/images/logo-dark.png";
@@ -106,24 +107,28 @@ const NavbarLanding = () => {
 
 
                             </ScrollSpy> */}
-                    <div className="z-50">
-                        <Link
+                    <div className="z-50 flex gap-2">
+                        <BtnLink
+                            size="sm"
+                            color="label"
+                            bgColor="label"
+                            weight="bold"
+                            className="border-2 border-solid border-primary-600 w-32"
                             href="/sign-in"
-                            className="btn btn-link text-dark cursor-pointer border-2 border-solid border-primary-600"
                         >
-                            <span className="m-1 text-xs font-semibold ">Entrar</span>
-                            {/* icon de seta a direita circular na porta */}
-                            <i className="mdi mdi-arrow-right-circle"></i>
-                        </Link>
-                        <Link
+                            Entrar                            {/* icon de seta a direita circular na porta */}
+                        </BtnLink>
+                        <BtnLink
+                            size="sm"
+                            weight="bold"
+                            color="label"
+                            bgColor="label"
+                            className="border-2 border-solid border-primary-600 w-32 hover:!bg-secondary-500"
                             href="/sign-up"
-                            className="btn btn-secondary text-dark cursor-pointer hover:bg-secondary-500 hover:text-white"
                         >
-                            <span className="m-1 text-xs font-semibold ">
-                                Cadastre-se
-                            </span>
+                            Criar Conta
                             {/* icon de cadastro */}
-                        </Link>
+                        </BtnLink>
                     </div>
                     {/* </Collapse> */}
                 </div>

@@ -5,8 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import MaskedInput from 'react-input-mask';
 import validateAddress from '~/validations/address';
 
-import BtnCancel from '~/Components/atoms/btn/btn-cancel';
-import BtnSuccess from '~/Components/atoms/btn/btn-success';
+import { BtnCancel, BtnSuccess } from '~/Components/atoms/btn';
 import FieldControl from '~/Components/molecules/field-control/field-control';
 import { IAddress } from '~/helpers/fetch-address-by-cep';
 import useFetchAddress from '~/hooks/use-fetch-address';

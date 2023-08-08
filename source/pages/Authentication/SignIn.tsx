@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect } from "react";
 
 import bgAuthaimage from "~/assets/images/bg-three.webp";
@@ -10,6 +9,7 @@ import LOADING from "~/constants/loading";
 import AuthInputs from "./components/organism/auth-inputs";
 
 import { useRouter } from "next/navigation";
+import { BtnLink } from "~/Components/atoms/btn";
 import { resetLoading } from "~/store/auth/login/actions";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import AuthLayout from "../_layouts/auth/auth_layout";
@@ -80,24 +80,16 @@ const CoverSignIn = () => {
                         {!loading && <AuthInputs />}
                     </div>
 
-                    <div className="mt-3 md:mt-5 text-center">
+                    <div className="w-full flex flex-col justify-center items-center ">
                         <p className="mb-0">
-                            Você não tem uma conta ? <br />
-                            <Link
-                                href="/sign-up"
-                                className="font-bold text-primary-600 no-underline d-none d-sm-block"
-                            >
-                                {" "}
-                                Registre-se
-                            </Link>
-                            <Link
-                                href="/sign-up"
-                                className="font-bold text-secondary-600 no-underline d-sm-none"
-                            >
-                                {" "}
-                                Registre-se
-                            </Link>
+                            Você não tem uma conta ?
                         </p>
+                        <br />
+                        <BtnLink
+                            href="/sign-up"
+                        >
+                            Registre-se
+                        </BtnLink>
                     </div>
                 </main>
             </section>

@@ -10,9 +10,8 @@ import { Form, Formik } from "formik";
 import { SignInCredentials } from "~/services/helpers/auth";
 
 import cn from "classnames";
-import Link from "next/link";
 import * as Yup from "yup";
-import { BtnSuccess } from "~/Components/atoms/btn";
+import { BtnLink, BtnSuccess } from "~/Components/atoms/btn";
 
 const initialValues: SignInCredentials = {
     username: "",
@@ -76,22 +75,22 @@ const Auth = () => {
 
                     <div className="mb-3">
                         <div className="position-relative auth-pass-inputgroup mb-3">
-                            <Link
+
+                            <BtnLink
                                 href="/forgot-password"
+                                fontSize="xs"
                                 className="
                                     absolute
                                     z-10
-                                    font-semibold 
-                                    text-primary-600
-                                    text-xs
-                                    no-underline
-                                    mobile:text-secondary-600
+                                    font-semibold
+                                    p-0
+                                    m-0
                                     top-0
                                     right-0
                                 "
                             >
                                 Esqueceu a senha?
-                            </Link>
+                            </BtnLink>
 
                             <FieldControl
                                 type={visiblePassword ? "text" : "password"}
