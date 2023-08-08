@@ -14,7 +14,7 @@ const BtnSuccess = ({
     return (
         <button
             className={twMerge(cn(
-                'next btn mobile:p-4',
+                'next tbtn mobile:p-4',
                 {
                     'btn-primary': !link,
                     'btn-link': link,

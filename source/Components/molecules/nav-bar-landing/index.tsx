@@ -109,17 +109,17 @@ const NavbarLanding = () => {
                     <div className="z-50">
                         <Link
                             href="/sign-in"
-                            className="btn btn-link text-dark cursor-pointer border-2 border-solid border-secondary"
+                            className="btn btn-link text-dark cursor-pointer border-2 border-solid border-primary-600"
                         >
-                            <span className="m-1 fw-semibold">Entrar</span>
+                            <span className="m-1 text-xs font-semibold ">Entrar</span>
                             {/* icon de seta a direita circular na porta */}
                             <i className="mdi mdi-arrow-right-circle"></i>
                         </Link>
                         <Link
                             href="/sign-up"
-                            className="btn btn-secondary text-dark cursor-pointer"
+                            className="btn btn-secondary text-dark cursor-pointer hover:bg-secondary-500 hover:text-white"
                         >
-                            <span className="m-1 fw-semibold ">
+                            <span className="m-1 text-xs font-semibold ">
                                 Cadastre-se
                             </span>
                             {/* icon de cadastro */}

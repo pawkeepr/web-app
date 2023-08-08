@@ -51,4 +51,20 @@ module.exports = {
         },
     },
     plugins: [require('daisyui')],
+    daisyui: {
+        themes: [
+            // {
+            //     light: {
+            //         ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
+            //         "primary": "#09b285",
+            //         "secondary": "#FFC86B",
+            //     },
+            //     dark: {
+            //         ...require("daisyui/src/theming/themes")["[data-theme=light]"],
+            //         "primary": "#FFC86B",
+            //         "secondary": "#09b285",
+            //     }
+            // }
+        ]
+    }
 }

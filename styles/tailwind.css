@@ -11,19 +11,19 @@
 }
 
 @layer components {
-    .btn {
+    .tbtn {
         @apply transition duration-300 ease-in-out w-32 border-none;
         @apply py-2 px-4 m-1 text-sm font-semibold rounded-md gap-4 leading-4;
-        @apply !bg-opacity-90 !text-opacity-90;
+        @apply !bg-opacity-70 !text-opacity-90;
     }
 
-    .btn:hover {
+    .tbtn:hover {
         @apply !bg-opacity-100 !text-opacity-100;
         /* btn efeito de leve crescimento no hover */
         @apply transform scale-105;
     }
 
-    .btn:disabled {
+    .tbtn:disabled {
         @apply opacity-50 cursor-not-allowed;
     }
 
@@ -47,11 +47,20 @@
 
     /* btn-primary */
     .btn-primary {
-        @apply bg-primary-600 text-white;
+        @apply !bg-primary-600 text-white;
     }
 
     .dark .btn-primary {
-        @apply bg-secondary-600 text-gray-50;
+        @apply !bg-secondary-500 text-gray-50;
+    }
+
+    /* btn-primary */
+    .btn-secondary {
+        @apply !bg-secondary-500 text-white;
+    }
+
+    .dark .btn-primary {
+        @apply !bg-primary-700 text-gray-50;
     }
 
 }
