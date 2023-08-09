@@ -107,10 +107,9 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <div className="flex items-center justify-center mt-1 col-span-full">
 
                 <BtnSuccess
-                    label="Próximo"
-                    className="m-1"
                     onClick={nextStep}
                     disabled={!requiredValid}
+                    label="Próximo"
                 />
             </div>
         </div>

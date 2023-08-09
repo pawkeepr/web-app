@@ -21,7 +21,7 @@ import { editProfile } from '~/store/auth/profile/actions';
 import { useAppDispatch } from '~/store/hooks';
 
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid';
-import Link from 'next/link';
+import { BtnLink } from '~/Components/atoms/btn';
 import { Profile, RULES } from '~/store/auth/profile/types';
 import StepSignUpAddress from './components/organism/steps/step-address';
 import StepSignUpLoading from './components/organism/steps/step-loading';
@@ -121,7 +121,7 @@ const ActivationAccount = () => {
 
     return (
         <AuthLayout title="Activation Profile" >
-            <section className="relative grid grid-cols-1 mobile:w-full mobile:h-full z-10 shadow-2xl w-[80%]">
+            <section className="relative grid grid-cols-1 mobile:w-full mobile:h-full h-3/4 z-10 shadow-2xl w-1/2">
                 <main className="grid grid-cols-1 p-3 mobile:!p-1 md:p-5 bg-white w-full mobile:rounded-none rounded-xl">
 
                     <div className='flex flex-col items-center justify-center '>
@@ -163,8 +163,9 @@ const ActivationAccount = () => {
                         </TabContainer>
                     </Formik>
                 </main>
-                <Link
-                    className="absolute top-2 right-2 flex items-center justify-center gap-2"
+                <BtnLink
+                    className="absolute top-2 right-2"
+                    color='primary'
                     href="/logout"
                 >
                     <ArrowLeftCircleIcon
@@ -174,7 +175,7 @@ const ActivationAccount = () => {
                     <span className="font-medium">
                         Sair
                     </span>
-                </Link>
+                </BtnLink>
             </section>
         </AuthLayout >
     );
