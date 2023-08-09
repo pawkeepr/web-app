@@ -1,6 +1,6 @@
 
 import { useFormikContext } from 'formik';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 
 import { BtnSuccess } from '~/Components/atoms/btn';
@@ -19,9 +19,6 @@ import { StepProps } from './types';
 
 const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
 
-    const [passwordShow, setPasswordShow] = useState(false);
-    const [passwordConfirmShow, setPasswordConfirmShow] = useState(false);
-
     const {
         values,
         handleBlur,
@@ -39,14 +36,6 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
     //         password === passwordConfirm
     //     )
     // }, [email, password, passwordConfirm])
-
-    const onToggleVisiblePassword = () => {
-        setPasswordShow(state => !state)
-    }
-
-    const onToggleVisiblePasswordConfirm = () => {
-        setPasswordConfirmShow(state => !state)
-    }
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -75,7 +64,6 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                     required
                     label='Senha'
                     name="password"
-                    type={passwordShow ? "text" : "password"}
                     className="form-control border-end-0"
                     placeholder="Digite sua senha"
                     aria-label="password"
@@ -87,7 +75,6 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                     required
                     label='Repita a senha'
                     name="passwordConfirm"
-                    type={passwordConfirmShow ? "text" : "password"}
                     className="form-control border-end-0"
                     placeholder="Repita a senha"
                     aria-label="password-confirm"

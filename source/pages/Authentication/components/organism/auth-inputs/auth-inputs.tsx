@@ -31,8 +31,6 @@ const Auth = () => {
         signIn,
         password,
         username,
-        onToggleVisiblePassword,
-        visiblePassword,
         isAuthenticated,
     } = useAuth();
 
@@ -61,7 +59,7 @@ const Auth = () => {
                 <Form onSubmit={handleSubmit} className="w-full">
                     <div className="mb-3">
                         <FieldControl
-                            label="Email:"
+                            label="Email"
                             type="text"
                             pattern="[^\s]+" // no spaces
                             className="form-control"
@@ -94,7 +92,6 @@ const Auth = () => {
                             </BtnLink>
 
                             <FieldPassword
-                                type={visiblePassword ? "text" : "password"}
                                 label="Senha"
                                 className={cn("form-control pe-5 password-input border-end-0")}
                                 placeholder="Digite sua senha"
