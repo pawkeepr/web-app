@@ -1,5 +1,4 @@
 import { useState } from "react";
-import InputGroup from 'react-bootstrap/InputGroup';
 import FieldControl, { InputControlProps } from "../field-control";
 
 import EyeIcon from "@heroicons/react/24/solid/EyeIcon";
@@ -14,17 +13,15 @@ const FieldPassword = (props: InputControlProps) => {
     }
 
     return (
-        <FieldControl {...props}>
-            <InputGroup.Text className="bg-transparent border-start-0">
-                <button onClick={onToggleVisiblePassword}>
-                    {
-                        passwordShow && <EyeIcon className="w-5 h-5 text-gray-500" />
-                    }
-                    {
-                        !passwordShow && <EyeSlashIcon className="w-5 h-5 text-gray-500" />
-                    }
-                </button>
-            </InputGroup.Text>
+        <FieldControl {...props} type={passwordShow ? "text" : "password"}>
+            <button onClick={onToggleVisiblePassword} type="button" className="p-2 flex item-center justify-center">
+                {
+                    passwordShow && <EyeIcon className="w-5 h-5 text-gray-500" />
+                }
+                {
+                    !passwordShow && <EyeSlashIcon className="w-5 h-5 text-gray-500" />
+                }
+            </button>
         </FieldControl>
     )
 }
