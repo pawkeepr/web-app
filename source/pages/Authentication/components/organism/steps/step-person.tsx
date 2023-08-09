@@ -14,6 +14,7 @@ import validatePerson from "~/validations/person";
 
 import NumberWhatsApp from "~/Components/molecules/field-control/field-whatsapp";
 import { sub_specialty } from "~/common/data/sub-specialtys";
+
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
