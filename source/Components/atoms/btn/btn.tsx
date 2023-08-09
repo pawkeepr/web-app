@@ -5,8 +5,8 @@ const button = tv({
     base: `
         mobile:p-4 mobile:w-full
         px-4 m-1 text-white
-        text-sm font-semibold rounded-md 
-        gap-4 leading-4 font-semibold 
+        text-sm font-semibold rounded-md text-center
+        gap-1 leading-1 font-semibold 
         rounded-lg transition 
         duration-300 ease-in-out w-32 border-none
         disabled:opacity-50 disabled:cursor-not-allowed
@@ -22,7 +22,7 @@ const button = tv({
         size: {
             xs: 'py-0 px-1',
             sm: 'py-1 px-2',
-            md: 'py-3 px-5',
+            md: 'py-3 px-4',
             lg: 'py-4 px-6',
         },
         fontSize: {
@@ -48,13 +48,21 @@ const button = tv({
     }
 })
 
-type BtnProps = {
+export type BtnProps = {
     color?: 'primary' | 'secondary' | 'success' | 'error';
+    type?: 'button' | 'submit' | 'reset';
+    className?: string;
+    children?: React.ReactNode;
+    weight?: 'bold' | 'medium' | 'semibold';
+    size?: 'xs' | 'sm' | 'md' | 'lg';
+    fontSize?: 'xs' | 'sm' | 'md' | 'lg';
+    label?: string
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 
 const Button = ({
     children,
+    label = 'Button',
     className,
     color = 'primary',
     type = 'button',
@@ -64,7 +72,7 @@ const Button = ({
         <button
             type={type}
             className={twMerge(button({ color }), className)} {...props}>
-            <span>{children}</span>
+            <span>{children || label}</span>
         </button>
     )
 }

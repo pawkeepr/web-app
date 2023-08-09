@@ -1,13 +1,11 @@
 import BtnAvatar from './btn-avatar';
 import BtnLink from './btn-link';
-import { BtnProps } from './types';
 
 import { twMerge } from 'tailwind-merge';
 
-import Button from './btn';
+import Button, { BtnProps } from './btn';
 
 const BtnSuccess = ({
-    label = 'Sucesso',
     className,
     children,
     ...rest
@@ -19,14 +17,12 @@ const BtnSuccess = ({
             className={twMerge('next', className)}
             {...rest}
         >
-            {children || label
-            }
+            {children}
         </Button>
     )
 }
 
 const BtnCancel = ({
-    label = 'Cancelar',
     className,
     children,
     ...rest
@@ -35,17 +31,15 @@ const BtnCancel = ({
     return (
         <Button
             color={'cancel' as any}
-            className={twMerge('next', className)}
+            className={twMerge('previous', className)}
             {...rest}
         >
-            {children || label
-            }
+            {children}
         </Button>
     )
 }
 
 const BtnLabel = ({
-    label = 'Cancelar',
     className,
     children,
     ...rest
@@ -57,8 +51,7 @@ const BtnLabel = ({
             className={twMerge('next', className)}
             {...rest}
         >
-            {children || label
-            }
+            {children}
         </Button>
     )
 }
