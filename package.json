@@ -23,6 +23,7 @@
     "bootstrap": "^5.2.3",
     "cpf-cnpj-validator": "^1.0.3",
     "crypto-js": "^4.1.1",
+    "daisyui": "^3.5.1",
     "dotenv": "^16.0.3",
     "formik": "^2.2.9",
     "i18next": "^21.6.11",
@@ -52,6 +53,8 @@
     "simplebar-react": "^2.3.6",
     "styled-components": "^5.3.5",
     "swiper": "^8.0.6",
+    "tailwind-merge": "^1.14.0",
+    "tailwind-variants": "^0.1.13",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },

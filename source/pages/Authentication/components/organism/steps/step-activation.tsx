@@ -1,6 +1,4 @@
-import BtnSuccess from '~/Components/atoms/btn/btn-success';
-
-import { BtnLabel } from '~/Components/atoms/btn';
+import { BtnLabel, BtnSuccess } from '~/Components/atoms/btn';
 import InputCode from '~/Components/atoms/input-code/input-code';
 import { StepProps } from './types';
 

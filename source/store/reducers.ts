@@ -1,4 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
+import Consults from "./consults/slice";
 
 // Front
 import Layout from "./layouts/slice";
@@ -44,7 +45,8 @@ const rootReducer = combineReducers({
     Tutor,
     Team,
     Pets,
-    ActivateAccount
+    ActivateAccount,
+    Consults,
 });
 
 export default rootReducer;

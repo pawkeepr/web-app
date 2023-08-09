@@ -1,12 +1,12 @@
 import { useField } from "formik";
-import Form from "react-bootstrap/Form";
-import { If } from "~/utils/tsx-control-statements";
 
-import InputGroup from "react-bootstrap/InputGroup";
 import ErrMessage from "~/Components/atoms/err-message";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { InputControlProps } from "./types";
+
+import cn from 'classnames';
+import { twMerge } from 'tailwind-merge';
 
 const FieldControl = ({
     label,
@@ -14,14 +14,19 @@ const FieldControl = ({
     required = false,
     component,
     startChildren,
+    separator = ':',
     disabledError = false,
     className,
     initialFocus = false,
     divClassName,
     ...props
 }: InputControlProps) => {
+
+
     const ref = useRef<HTMLInputElement>(null);
-    const { current } = ref;
+    const { current } = ref || props.ref;
+
+    const [focus, setFocus] = useState(false);
 
     useEffect(() => {
         if (!initialFocus) return;
@@ -49,43 +54,58 @@ const FieldControl = ({
         inputProps.onChange(e);
     };
 
+    const onBlur = (e: any) => {
+        setFocus(false);
+        props.onBlur?.(e);
+        inputProps.onBlur(e);
+    }
+
+    const onFocus = (e: any) => {
+        setFocus(true);
+        props.onFocus?.(e);
+    }
+
     return (
         <div className={divClassName}>
-            <If condition={!!label}>
-                <Form.Label
+            {!!label && (
+                <label
                     htmlFor={id}
-                    className="mb-0 list-group-item fs-12"
+                    className="mb-0 text-xs font-semibold text-gray-500 gap-1"
                     data-testid={`label-${id}`}
                 >
-                    {label}
-                    <If condition={required}>
-                        <span className="text-danger">*</span>
-                    </If>
-                </Form.Label>
-            </If>
-            <InputGroup className="position-relative mb-2">
+                    {label.trim() ? (label + separator) : ''}
+                    {required && <span className="text-danger">*</span>}
+                </label>
+            )
+            }
+            <div
+                className={cn(`
+                    transition-all duration-300 ease-in-out
+                    relative flex flex-row border-2 
+                    disabled:!cursor-not-allowed 
+                    disabled:!opacity-25 rounded-sm
+                `, {
+                    '!border-primary-500 border-2': focus,
+                })}>
                 {startChildren}
-
                 <InputComponent
                     id={id}
-                    ref={ref || props.ref}
+                    ref={ref}
                     required={required}
                     data-testid={`input-${id}`}
-                    className={`
-                        ${className}
-                        focus-within:!outline-1
-                        focus:!border-primary-500
-                        disabled:!cursor-not-allowed
-                        disabled:!opacity-25
-                        focus:!border-2
-                    `}
+                    className={
+                        twMerge(
+                            "border-0",
+                            className
+                        )}
                     {...inputProps}
                     {...props}
                     onChange={onChange}
+                    onBlur={onBlur}
+                    onFocus={onFocus}
                 />
-
                 {children}
-            </InputGroup>
+            </div>
             <ErrMessage
                 message={meta.error?.toString() as string}
                 data-testid={`err-${id}`}

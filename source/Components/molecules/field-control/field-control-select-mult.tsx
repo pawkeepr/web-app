@@ -6,44 +6,44 @@ import InputGroup from "react-bootstrap/InputGroup";
 import ErrMessage from "~/Components/atoms/err-message";
 
 import { useEffect, useRef } from "react";
-import type { InputControlProps } from "./types";
-import { sub_speciality } from "~/common/data/subSpecialitys";
 import Select from "react-select";
+import { sub_specialty } from "~/common/data/sub-specialtys";
+import type { InputControlProps } from "./types";
 
-const options = sub_speciality.map((item) => ({
+const options = sub_specialty.map((item) => ({
     value: item,
     label: item,
     color: 'rgb(255 200 107);',
-  }));
+}));
 
 
 const colorStyles = {
     control: (styles: any) => ({ ...styles, backgroundColor: "white" }),
     option: (styles: any, { data }: any) => {
-      return { ...styles, color: 'black' };
+        return { ...styles, color: 'black' };
     },
     multiValue: (styles: any, { data }: any) => {
-      return {
-        ...styles,
-        backgroundColor: data.color,
-        color: "#fff",
-      };
+        return {
+            ...styles,
+            backgroundColor: data.color,
+            color: "#fff",
+        };
     },
     multiValueLabel: (styles: any) => {
-      return {
-        ...styles,
-        color: "#0b0909",
-      };
+        return {
+            ...styles,
+            color: "#0b0909",
+        };
     },
     multiValueRemove: (styles: any) => {
-      return {
-        ...styles,
-        color: "#fff",
-        cursor: "pointer",
-        ":hover": {
-          color: "#fff",
-        },
-      };
+        return {
+            ...styles,
+            color: "#fff",
+            cursor: "pointer",
+            ":hover": {
+                color: "#fff",
+            },
+        };
     },
 };
 
@@ -102,21 +102,22 @@ const FieldControlTest = ({
                     </If>
                 </Form.Label>
             </If>
-            <InputGroup className="position-relative mb-2 z-10">
+            <InputGroup className="z-10 mb-2 position-relative">
                 {startChildren}
+                <p className="text-xs" >Selecione uma ou mais opções:</p>
                 <Select
                     className="w-full"
                     theme={(theme) => ({
                         ...theme,
                         borderRadius: 0,
                         colors: {
-                          ...theme.colors,
-                          primary25: 'rgb(9, 178, 133);',
-                          primary: 'rgb(9, 178, 133);',
+                            ...theme.colors,
+                            primary25: 'rgb(9, 178, 133);',
+                            primary: 'rgb(9, 178, 133);',
                         },
-                      })}
+                    })}
                     styles={colorStyles}
-                    placeholder="Selecione uma ou mais opções"
+                    placeholder="Selecione uma ou mais especialidades"
                     isSearchable={true}
                     isMulti
                     name="speciality"

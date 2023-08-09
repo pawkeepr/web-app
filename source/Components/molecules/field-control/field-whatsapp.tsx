@@ -12,13 +12,14 @@ const NumberWhatsapp = () => {
     // guarda o valor do input de telefone
     const handlePhoneInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPhoneValue(event.target.value);
-        setClickAppInput(true)
+        
     };
 
     // atualiza o estado do input de whatsapp para true
     const copyPhoneToWhatsapp = () => {
         if (phoneValue !== undefined) {
-            setShowWhatsAppInput(true);
+            setClickAppInput(true)
+            // setShowWhatsAppInput(true);
         }
     };
 
@@ -28,6 +29,7 @@ const NumberWhatsapp = () => {
                 <div className="relative">
                     <FieldControl
                         className=" focus-visible:bg-transparent hover:bg-transparent focus:bg-transparent bg-transparent flex form-control"
+                        // divClassName="my-1"
                         type="text"
                         label="Telefone/Celular"
                         name="phone"
@@ -37,28 +39,27 @@ const NumberWhatsapp = () => {
                         maskChar={null}
                         required
                         onChange={handlePhoneInputChange}
-                    >
-                        <div
-                            className="absolute top-1/3 right-7 cursor-pointer transform -translate-y-1/2 "
-                            onClick={copyPhoneToWhatsapp}
+                    />
+                    <div
+                        onClick={copyPhoneToWhatsapp}
+                        className="flex justify-center items-center"
                         >
-                            {
-                            clickAppInput && (<FaWhatsapp className="flex absolute justify-center text-green-600 text-lg" />)
-                        }  
-                            
-                        </div>
-                        
-                    </FieldControl>
+                        <p className="text-xs mr-2 mb-2 md:m-2">
+                            Clique no ícone do whatsapp para duplicar o telefone no campo abaixo:
+                        </p>
+                        <FaWhatsapp onClick={copyPhoneToWhatsapp} className="text-green-600 text-xl cursor-pointer" />
+                    </div>
                 </div>
+                
 
             </div>
                 <div>
                     {
-                        // mostra o input de whatsapp caso o usuário clique no ícone do whatsapp
-                        showWhatsAppInput && (
+                        // input de whatsapp com o mesmo numero do telefone caso o usuário clique no ícone do whatsapp
+                        clickAppInput ? (
                             <FieldControl
                             className="form-control"
-                            divClassName="my-1"
+                            // divClassName="my-1"
                             type="text"
                             label="WhatsApp"
                             name="whatsapp"
@@ -66,7 +67,21 @@ const NumberWhatsapp = () => {
                             component={MaskedInput as any}
                             mask={"(99) 99999-9999"}
                             maskChar={null}
-                            value={phoneValue || ""}
+                            value={phoneValue}
+                            required
+                        />)
+                        : (
+                            <FieldControl
+                            className="form-control"
+                            // divClassName="my-1"
+                            type="text"
+                            label="WhatsApp"
+                            name="whatsapp"
+                            placeholder="Digite o seu Número do WhatsApp"
+                            component={MaskedInput as any}
+                            mask={"(99) 99999-9999"}
+                            maskChar={null}
+                            value={""}
                             required
                         />)
                     }

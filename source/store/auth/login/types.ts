@@ -24,5 +24,4 @@ export type LoginState = {
     isLoading: LOADING;
     username: string;
     password: string;
-    visiblePassword: boolean;
 }

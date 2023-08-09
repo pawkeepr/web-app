@@ -1,27 +1,23 @@
 
 import { useFormikContext } from 'formik';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
-import InputGroup from 'react-bootstrap/InputGroup';
 
-import BtnSuccess from '~/Components/atoms/btn/btn-success';
+import { BtnSuccess } from '~/Components/atoms/btn';
 import FieldControl from '~/Components/molecules/field-control';
 import { AccountSignUp } from '~/store/auth/register/types';
-
 
 import PasswordRules from '../../molecules/password-rules';
 import Container from '../../template/container';
 
 import Link from 'next/link';
 import { Form } from 'react-bootstrap';
+import FieldPassword from '~/Components/molecules/field-password';
 import LOADING from '~/constants/loading';
 import { useAppSelector } from '~/store/hooks';
 import { StepProps } from './types';
 
 const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
-
-    const [passwordShow, setPasswordShow] = useState(false);
-    const [passwordConfirmShow, setPasswordConfirmShow] = useState(false);
 
     const {
         values,
@@ -40,14 +36,6 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
     //         password === passwordConfirm
     //     )
     // }, [email, password, passwordConfirm])
-
-    const onToggleVisiblePassword = () => {
-        setPasswordShow(state => !state)
-    }
-
-    const onToggleVisiblePasswordConfirm = () => {
-        setPasswordConfirmShow(state => !state)
-    }
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -71,39 +59,29 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                 required
                 disabledError
             />
+            <div className="grid grid-cols-2 gap-2">
+                <FieldPassword
+                    required
+                    label='Senha'
+                    name="password"
+                    className="form-control border-end-0"
+                    placeholder="Digite sua senha"
+                    aria-label="password"
+                    onBlur={handleBlur}
+                    disabledError
+                />
 
-            <FieldControl
-                required
-                label='Senha'
-                name="password"
-                type={passwordShow ? "text" : "password"}
-                className="form-control border-end-0"
-                placeholder="Digite sua senha"
-                aria-label="password"
-                onBlur={handleBlur}
-                disabledError
-            >
-                <InputGroup.Text className="bg-transparent border-start-0">
-                    <i onClick={onToggleVisiblePassword} className={passwordShow ? 'ri-eye-fill' : 'ri-eye-off-fill'} ></i>
-                </InputGroup.Text>
-            </FieldControl>
-
-            <FieldControl
-                required
-                label='Repita a senha'
-                name="passwordConfirm"
-                type={passwordConfirmShow ? "text" : "password"}
-                className="form-control border-end-0"
-                placeholder="Repita a senha"
-                aria-label="password-confirm"
-                onBlur={handleBlur}
-                disabledError
-            >
-                <InputGroup.Text className="bg-transparent border-start-0">
-                    <i onClick={onToggleVisiblePasswordConfirm} className={passwordConfirmShow ? 'ri-eye-fill' : 'ri-eye-off-fill'} ></i>
-                </InputGroup.Text>
-            </FieldControl>
-
+                <FieldPassword
+                    required
+                    label='Repita a senha'
+                    name="passwordConfirm"
+                    className="form-control border-end-0"
+                    placeholder="Repita a senha"
+                    aria-label="password-confirm"
+                    onBlur={handleBlur}
+                    disabledError
+                />
+            </div>
 
             <PasswordRules value={values.password} />
             <Form.Check
@@ -114,37 +92,24 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                 onChange={handleChange}
                 checked={values.termsOfUse}
                 label={
-                    <p className="fs-12 fst-italic">
+                    <p className="italic text-xs text-justify">
                         {"Você se registrando aceita os termos de uso da plataforma: "}
-                        <Link href="#" className="text-primary no-underline fst-normal fw-medium">Termos de Uso</Link>
-                    </p>
-                }
-            />
-
-            <Form.Check
-                type="checkbox"
-                className="w-100"
-                name="policyPrivacy"
-                id="policyPrivacy"
-                onChange={handleChange}
-                checked={values.policyPrivacy}
-                label={
-                    <p className="fs-12 fst-italic">
+                        <Link href="#" className="text-primary no-underline fst-normal fw-medium">Termos de Uso.{" "}</Link>
                         {"Você se registrando aceita a política de privacidade da plataforma: "}
                         <Link href="#" className="text-primary no-underline fst-normal fw-medium">Política de Privacidade</Link>
                     </p>
                 }
             />
-
-            <div className="mt-4 flex justify-center w-full">
+            <div className='flex  items-center justify-center'>
                 <BtnSuccess
                     label="Finalizar cadastro"
                     type="submit"
+                    className="w-full"
                     onClick={handleClick}
                     disabled={loading}
-                    className="align-self-center !w-60 mobile:!w-full"
                 />
             </div>
+
 
         </Container>
     )

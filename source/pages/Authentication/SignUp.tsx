@@ -1,28 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import TabContainer from "react-bootstrap/TabContainer";
 import TabContent from "react-bootstrap/TabContent";
 import TabPane from "react-bootstrap/TabPane";
 //formik
 import { Formik } from "formik";
-import Link from "next/link";
 import * as Yup from "yup";
-import AuthSlider from "~/Components/organism/auth-carousel";
 
 import validateEmail from "~/validations/email";
 import validatePassword from "~/validations/password";
 
+import { useRouter } from "next/navigation";
+import { BtnLink } from "~/Components/atoms/btn";
+import bgAuth from "~/assets/images/bg-auth.webp";
+import LOADING from "~/constants/loading";
 import { registerUser, resetRegisterFlag } from "~/store/auth/register/actions";
 import { AccountSignUp } from "~/store/auth/register/types";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
-import bgAuth from "~/assets/images/bg-auth.webp";
-import { useRouter } from "next/navigation";
-import LOADING from "~/constants/loading";
 import AuthLayout from "../_layouts/auth/auth_layout";
 import StepActivation from "./components/organism/steps/step-activation";
 import StepSignUpBasicAuth from "./components/organism/steps/step-basic-auth";
@@ -79,7 +76,6 @@ const CoverSignUp = () => {
         password: "",
         passwordConfirm: "",
         termsOfUse: false,
-        policyPrivacy: false,
     };
 
     const Tabs = [
@@ -165,19 +161,17 @@ const CoverSignUp = () => {
                             ))}
                         </TabContainer>
                     </Formik>
-
-                    <div className="text-center pb-0 bg-white">
-                        <p className="list-group-item text-muted">
+                    <div className="w-full h-fit flex flex-col justify-center items-center ">
+                        <p className="text-xs">
                             Você já tem uma conta ?
-                            <br />
-                            <Link
-                                href="/sign-in"
-                                className="font-semibold text-primary-600 no-underline "
-                            >
-                                Entrar!
-                            </Link>
                         </p>
+                        <BtnLink
+                            href="/sign-in"
+                        >
+                            Entrar!
+                        </BtnLink>
                     </div>
+
                 </div>
             </div>
         </AuthLayout>

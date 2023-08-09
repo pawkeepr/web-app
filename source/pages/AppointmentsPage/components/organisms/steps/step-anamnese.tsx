@@ -88,7 +88,8 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                     }}
                 >
                     <i className="ri-arrow-left-line align-middle fs-16 me-2"></i>{" "}
-                    Voltar
+                    <span className="mr-1"> Voltar </span>
+                    
                 </BtnLabel>
                 <BtnSuccess
                     type="button"

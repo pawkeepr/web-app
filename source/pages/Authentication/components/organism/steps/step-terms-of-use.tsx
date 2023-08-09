@@ -1,7 +1,6 @@
 import { useFormikContext } from "formik";
+import { BtnCancel, BtnSuccess } from "~/Components/atoms/btn";
 import { ActivateAccount } from "~/validations/activate";
-import BtnCancel from "~/Components/atoms/btn/btn-cancel";
-import BtnSuccess from "~/Components/atoms/btn/btn-success";
 import { StepProps } from "./types";
 
 const listItem = "flex gap-1 font-semibold text-gray-500 p-1 text-center w-full";

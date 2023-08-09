@@ -1,28 +1,28 @@
 import { cnpj, cpf } from "cpf-cnpj-validator";
 import { useFormikContext } from "formik";
 
-import Form from "react-bootstrap/Form";
 
 import { useMemo } from "react";
 import MaskedInput from "react-input-mask";
 
-import BtnCancel from "~/Components/atoms/btn/btn-cancel";
-import BtnSuccess from "~/Components/atoms/btn/btn-success";
+import { BtnSuccess } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control";
-import FieldControlSelectMult from "~/Components/molecules/field-control/field-control-select-mult";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
+import FieldControlSelectMult from "~/Components/molecules/field-control/field-control-select-mult";
 import validatePerson from "~/validations/person";
+
+import NumberWhatsApp from "~/Components/molecules/field-control/field-whatsapp";
+import { sub_specialty } from "~/common/data/sub-specialtys";
 
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
-import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
 import CheckboxGroup from "~/Components/molecules/checkbox-group"
 import { sub_speciality } from "~/common/data/subSpecialitys";
 import NumberWhatsapp from "~/Components/molecules/field-control/field-whatsapp";
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
-    const { values, setFieldValue } = useFormikContext<ActivateAccount>();
+    const { values } = useFormikContext<ActivateAccount>();
     const { cpf_cnpj } = values;
 
     const isValidCnpj = useMemo(() => cnpj.isValid(cpf_cnpj), [cpf_cnpj]);
@@ -34,11 +34,6 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     }, [values]);
 
     useNextStep(nextStep, requiredValid);
-
-    const onChangeLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
-        setFieldValue("lastName", value);
-    };
 
     const mask = useMemo(() => {
         // somente os números
@@ -52,8 +47,8 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     }, [cpf_cnpj]);
 
     return (
-        <div className="container grid grid-cols-2 mobile:grid-cols-1 gap-1">
-            <div className="col-span-2 mobile:col-span-2">
+        <div className="container grid grid-cols-2 gap-1 mobile:grid-cols-1">
+            <div className="col-span-2 mobile:col-span-2 grid grid-cols-2">
                 <FieldControl
                     initialFocus
                     label="Nome Completo"
@@ -63,24 +58,17 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     placeholder="Nome"
                     required
                     disabledError
-                >
-                    <Form.Control
-                        type="text"
-                        name="lastName"
-                        aria-label="lastName"
-                        placeholder="Sobrenome"
-                        onChange={onChangeLastName}
-                        required
-                        className="
-                            ms-1 w-50
-                            focus-within:!outline-1
-                            focus:!border-primary-500
-                            disabled:!cursor-not-allowed
-                            disabled:!opacity-25
-                            focus:!border-2
-                        "
-                    />
-                </FieldControl>
+                />
+
+                <FieldControl
+                    label=" "
+                    separator={""}
+                    name="lastName"
+                    aria-label="lastName"
+                    className="form-control"
+                    placeholder="Sobrenome"
+                    disabledError
+                />
             </div>
             <FieldControl
                 label="CPF/CNPJ"
@@ -126,28 +114,27 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 maskChar={null}
                 required
             />
-             <FieldControlSelect
+            <FieldControlSelect
                 type="text"
                 divClassName="mobile:col-span-2"
                 label="Especialidade"
-                name="speciality"
-                items={sub_speciality}
+                name="specialty"
+                items={sub_specialty}
             />
             <FieldControlSelectMult
                 type="text"
                 divClassName="mobile:col-span-2"
                 label="Sub Especialidade"
-                name="sub_speciality"
-                items={sub_speciality}
+                name="sub_specialty"
+                items={sub_specialty}
             />
-            <NumberWhatsapp />
-            <div className="mt-1 flex justify-center items-center col-span-full">
-                
+            <NumberWhatsApp />
+            <div className="flex items-center justify-center mt-1 col-span-full">
+
                 <BtnSuccess
-                    label="Próximo"
-                    className="m-1"
                     onClick={nextStep}
                     disabled={!requiredValid}
+                    label="Próximo"
                 />
             </div>
         </div>
