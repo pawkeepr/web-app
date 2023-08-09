@@ -8,15 +8,16 @@ import MaskedInput from "react-input-mask";
 
 import BtnSuccess from "~/Components/atoms/btn/btn-success";
 import FieldControl from "~/Components/molecules/field-control";
-import FieldControlSelectMult from "~/Components/molecules/field-control/field-control-select-mult";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
+import FieldControlSelectMult from "~/Components/molecules/field-control/field-control-select-mult";
 import validatePerson from "~/validations/person";
+
+import NumberWhatsApp from "~/Components/molecules/field-control/field-whatsapp";
+import { sub_specialty } from "~/common/data/sub-specialtys";
 
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
-import { sub_speciality } from "~/common/data/subSpecialitys";
-import NumberWhatsapp from "~/Components/molecules/field-control/field-whatsapp";
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<ActivateAccount>();
@@ -49,7 +50,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     }, [cpf_cnpj]);
 
     return (
-        <div className="container grid grid-cols-2 mobile:grid-cols-1 gap-1">
+        <div className="container grid grid-cols-2 gap-1 mobile:grid-cols-1">
             <div className="col-span-2 mobile:col-span-2">
                 <FieldControl
                     initialFocus
@@ -95,22 +96,22 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 maskChar={null}
                 required
             />
-             <FieldControlSelect
+            <FieldControlSelect
                 type="text"
                 divClassName="mobile:col-span-2"
                 label="Especialidade"
-                name="speciality"
-                items={sub_speciality}
+                name="specialty"
+                items={sub_specialty}
             />
             <FieldControlSelectMult
                 type="text"
                 divClassName="mobile:col-span-2"
                 label="Sub Especialidade"
-                name="sub_speciality"
-                items={sub_speciality}
+                name="sub_specialty"
+                items={sub_specialty}
             />
-            <NumberWhatsapp />
-            <div className="mt-1 flex justify-center items-center col-span-full">
+            <NumberWhatsApp />
+            <div className="flex items-center justify-center mt-1 col-span-full">
 
                 <BtnSuccess
                     label="Próximo"

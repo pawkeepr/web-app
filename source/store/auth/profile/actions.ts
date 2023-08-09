@@ -15,4 +15,4 @@ export const editProfile = createAction<Profile>(ACTION_EDIT_PROFILE);
 export const editProfileSuccess = createAction(ACTION_EDIT_PROFILE_SUCCESS);
 export const editProfileError = createAction(ACTION_EDIT_PROFILE_ERROR);
 export const resetProfileFlag = createAction(ACTION_RESET_PROFILE_FLAG);
-export const getProfileSession = createAction(ACTION_GET_PROFILE_SESSION);
+export const getProfileSession = createAction<{ email: string }>(ACTION_GET_PROFILE_SESSION);

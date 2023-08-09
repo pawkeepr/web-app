@@ -1,11 +1,10 @@
-import { XMarkIcon } from "@heroicons/react/20/solid";
-import logoDark from "~/assets/images/logo-dark.png";
 import Image from "next/image";
 import Slide from "react-reveal/Slide";
+
+import { ArrowLeftCircleIcon, XMarkIcon } from "@heroicons/react/20/solid";
+
 import Link from "next/link";
-
-import ArrowLeftCircleIcon from '@heroicons/react/24/solid/ArrowLeftCircleIcon'
-
+import logoDark from "~/assets/images/logo-dark.png";
 type DrawerProps = {
     closeDrawer: () => void;
     display: string;
@@ -154,11 +153,11 @@ const Drawer = ({ closeDrawer, display }: DrawerProps) => {
                                 </span>
                             </a>
                             <Link
-                                className="flex items-center px-4 py-2 mt-4 absolute bottom-0 w-full mb-4"
+                                className="flex text-gray-700 items-center px-4 py-2 mt-4 absolute bottom-0 w-full mb-4"
                                 href="/logout"
                             >
                                 <ArrowLeftCircleIcon
-                                    className="w-5 h-5 text-gray-700"
+                                    className="w-5 h-5"
                                     viewBox="0 0 24 24"
                                 />
 

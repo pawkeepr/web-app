@@ -13,9 +13,9 @@ import {
 } from "~/services/helpers";
 import { errorToast, successToast } from "~/store/helpers/toast";
 
-function* onGetProfile() {
+function* onGetProfile({ payload: user }: PayloadAction<{ email: string }>) {
     try {
-        const { data } = yield call(getUserProfile);
+        const { data } = yield call(getUserProfile, user.email);
         yield put(editProfileSuccess(data));
     } catch (error) {
         yield call([Router, Router.push], '/activation');
