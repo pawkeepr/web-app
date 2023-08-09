@@ -9,12 +9,9 @@ const Footer = () => {
             <footer className="footer">
                 <Container fluid>
                     <Row>
-                        <Col sm={6}>
-                            {new Date().getFullYear()} © PawKeepers.
-                        </Col>
-                        <Col sm={6}>
-                            <div className="text-sm-end d-none d-sm-block">
-                                Design & Develop by PawKeepers
+                        <Col >
+                            <div className="flex justify-center text-center m-3">
+                            2023 &copy; Design & Develop by Pawkeepr SmartCare
                             </div>
                         </Col>
                     </Row>

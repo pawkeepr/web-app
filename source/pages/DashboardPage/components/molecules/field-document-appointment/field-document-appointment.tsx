@@ -3,6 +3,7 @@ import FieldDocument from "~/Components/molecules/field-document/field-document"
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import { startTransition } from "react";
 import ModalListPets from "~/Components/modals/modal-list-pets/modal-list-pets";
+import isValidCPF  from "~/validations/cpf";
 
 type InitialValues = {
     document: string;
@@ -30,13 +31,19 @@ const FieldDocumentAppointment = ({
         onChangeDocument,
         onChangeOpen,
     }: HandleProps) => {
-        return (values: InitialValues) => {
+        return async (values: InitialValues) => {
+            if (!isValidCPF(values.document)) {
+                alert("CPF inválido! Por favor, insira um CPF válido.");
+                return;
+            }
+
             startTransition(() => {
                 onChangeDocument(values.document);
                 onChangeOpen(true);
             });
         };
     };
+
 
     return (
         <ModalListPets selectedTabInitial={selectedTabInitial}>

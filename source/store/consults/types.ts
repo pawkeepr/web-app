@@ -11,21 +11,24 @@ import {
 } from "../helpers/constants";
 
 
-export interface IGeneric {
 
+export interface IConsults {
+    all_scheduled: any[];
+    all_scheduled_confirmed: any[];
+    all_scheduled_canceled: any[];
+    all_scheduled_done: any[];
 }
 
-export interface Data extends IGeneric { }
+export interface Data extends IConsults {}
 
 export type InitialState = {
-    data: Data[];
+    data: Data;
     isLoading: LOADING;
     isLoadingOnlyOne: LOADING;
     error: string | null;
-    inactives: Data[];
 };
 
-export const name = 'generic';
+export const name = 'consults';
 
 export const ACTION_GET_ALL = `${name}/${GET_ALL}`;
 export const ACTION_GET_ALL_SUCCESS = `${name}/${GET_ALL_SUCCESS}`;
