@@ -30,8 +30,8 @@ const PasswordRules = ({ value }: PasswordRulesProps) => {
 
     return (
 
-        <div className="card bg-light rounded shadow-none">
-            <h4 className="fs-11">Senha deve conter:</h4>
+        <div className="card bg-light rounded shadow-none mt-2">
+            <h4 className="text-xs italic font-semibold">Senha deve conter:</h4>
             <ul className="gap-4 mt-2">
                 <ItemListChecked name="pass-length" condition={passLength} text="Mínimo 8 caracteres" />
                 <ItemListChecked name="pass-lower" condition={passLower} text="Uma letra minúscula (a-z)" />

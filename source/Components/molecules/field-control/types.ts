@@ -5,6 +5,7 @@ export type InputControlProps = FieldHookConfig<string> & {
     name: string
     label?: string
     initialFocus?: boolean
+    separator?: string
     required?: boolean
     disabledError?: boolean
     component?: JSX.Element

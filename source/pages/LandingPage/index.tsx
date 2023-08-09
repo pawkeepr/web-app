@@ -45,14 +45,14 @@ const LandingPage = () => {
                 <FAQ />
                 <Contact /> */}
                 <Footer />
-                <button
-                    onClick={() => toTop()}
-                    className="bg-secondary-500 p-3 rounded-full landing-back-top mb-[5rem] shadow-md"
-                    id="back-to-top"
-                >
-                    <HiOutlineArrowSmUp size={20} />
-                </button>
             </div>
+            <button
+                onClick={() => toTop()}
+                className="bg-secondary-500 p-3 rounded-full absolute bottom-0 right-0 mb-[5rem] shadow-md"
+                id="back-to-top"
+            >
+                <HiOutlineArrowSmUp size={20} />
+            </button>
         </React.Fragment>
     );
 };

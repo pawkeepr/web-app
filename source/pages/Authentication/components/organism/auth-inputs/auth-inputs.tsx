@@ -10,9 +10,9 @@ import { Form, Formik } from "formik";
 import { SignInCredentials } from "~/services/helpers/auth";
 
 import cn from "classnames";
-import Link from "next/link";
 import * as Yup from "yup";
-import { BtnSuccess } from "~/Components/atoms/btn";
+import { BtnLink, BtnSuccess } from "~/Components/atoms/btn";
+import FieldPassword from "~/Components/molecules/field-password/field-password";
 
 const initialValues: SignInCredentials = {
     username: "",
@@ -31,8 +31,6 @@ const Auth = () => {
         signIn,
         password,
         username,
-        onToggleVisiblePassword,
-        visiblePassword,
         isAuthenticated,
     } = useAuth();
 
@@ -61,7 +59,7 @@ const Auth = () => {
                 <Form onSubmit={handleSubmit} className="w-full">
                     <div className="mb-3">
                         <FieldControl
-                            label="Email:"
+                            label="Email"
                             type="text"
                             pattern="[^\s]+" // no spaces
                             className="form-control"
@@ -76,25 +74,24 @@ const Auth = () => {
 
                     <div className="mb-3">
                         <div className="position-relative auth-pass-inputgroup mb-3">
-                            <Link
+
+                            <BtnLink
                                 href="/forgot-password"
+                                fontSize="xs"
                                 className="
                                     absolute
                                     z-10
-                                    font-semibold 
-                                    text-primary-600
-                                    text-xs
-                                    no-underline
-                                    mobile:text-secondary-600
+                                    font-semibold
+                                    p-0
+                                    m-0
                                     top-0
                                     right-0
                                 "
                             >
                                 Esqueceu a senha?
-                            </Link>
+                            </BtnLink>
 
-                            <FieldControl
-                                type={visiblePassword ? "text" : "password"}
+                            <FieldPassword
                                 label="Senha"
                                 className={cn("form-control pe-5 password-input border-end-0")}
                                 placeholder="Digite sua senha"
@@ -103,25 +100,8 @@ const Auth = () => {
                                 value={password}
                                 onChange={handleChangePassword}
                                 disabledError
-                            >
+                            />
 
-                                <button
-                                    type="button"
-                                    onClick={onToggleVisiblePassword}
-                                    className="p-2 border-2 border-l-0 rounded-sm cursor-pointer "
-                                >
-                                    <i
-                                        data-testid="toggle-password"
-                                        className={cn({
-                                            "ri-eye-fill": !visiblePassword,
-                                            "ri-eye-off-fill": visiblePassword,
-                                            "cursor-pointer": true,
-                                        })}
-                                    ></i>
-                                </button>
-
-
-                            </FieldControl>
                         </div>
                     </div>
                     <BtnSuccess

@@ -1,12 +1,11 @@
 import { cnpj, cpf } from "cpf-cnpj-validator";
 import { useFormikContext } from "formik";
 
-import Form from "react-bootstrap/Form";
 
 import { useMemo } from "react";
 import MaskedInput from "react-input-mask";
 
-import BtnSuccess from "~/Components/atoms/btn/btn-success";
+import { BtnSuccess } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldControlSelectMult from "~/Components/molecules/field-control/field-control-select-mult";
@@ -20,7 +19,7 @@ import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
-    const { values, setFieldValue } = useFormikContext<ActivateAccount>();
+    const { values } = useFormikContext<ActivateAccount>();
     const { cpf_cnpj } = values;
 
     const isValidCnpj = useMemo(() => cnpj.isValid(cpf_cnpj), [cpf_cnpj]);
@@ -32,11 +31,6 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     }, [values]);
 
     useNextStep(nextStep, requiredValid);
-
-    const onChangeLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
-        setFieldValue("lastName", value);
-    };
 
     const mask = useMemo(() => {
         // somente os números
@@ -51,7 +45,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     return (
         <div className="container grid grid-cols-2 gap-1 mobile:grid-cols-1">
-            <div className="col-span-2 mobile:col-span-2">
+            <div className="col-span-2 mobile:col-span-2 grid grid-cols-2">
                 <FieldControl
                     initialFocus
                     label="Nome Completo"
@@ -61,17 +55,17 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     placeholder="Nome"
                     required
                     disabledError
-                >
-                    <Form.Control
-                        type="text"
-                        name="lastName"
-                        aria-label="lastName"
-                        placeholder="Sobrenome"
-                        onChange={onChangeLastName}
-                        required
-                        className="ms-1 w-50"
-                    />
-                </FieldControl>
+                />
+
+                <FieldControl
+                    label=" "
+                    separator={""}
+                    name="lastName"
+                    aria-label="lastName"
+                    className="form-control"
+                    placeholder="Sobrenome"
+                    disabledError
+                />
             </div>
             <FieldControl
                 label="CPF/CNPJ"
@@ -114,10 +108,9 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <div className="flex items-center justify-center mt-1 col-span-full">
 
                 <BtnSuccess
-                    label="Próximo"
-                    className="m-1"
                     onClick={nextStep}
                     disabled={!requiredValid}
+                    label="Próximo"
                 />
             </div>
         </div>

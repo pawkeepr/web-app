@@ -8,13 +8,13 @@ import TabContent from "react-bootstrap/TabContent";
 import TabPane from "react-bootstrap/TabPane";
 //formik
 import { Formik } from "formik";
-import Link from "next/link";
 import * as Yup from "yup";
 
 import validateEmail from "~/validations/email";
 import validatePassword from "~/validations/password";
 
 import { useRouter } from "next/navigation";
+import { BtnLink } from "~/Components/atoms/btn";
 import bgAuth from "~/assets/images/bg-auth.webp";
 import LOADING from "~/constants/loading";
 import { registerUser, resetRegisterFlag } from "~/store/auth/register/actions";
@@ -161,19 +161,17 @@ const CoverSignUp = () => {
                             ))}
                         </TabContainer>
                     </Formik>
-
-                    <div className="text-center pb-0 bg-white">
-                        <p className="list-group-item text-muted">
+                    <div className="w-full h-fit flex flex-col justify-center items-center ">
+                        <p className="text-xs">
                             Você já tem uma conta ?
-                            <br />
-                            <Link
-                                href="/sign-in"
-                                className="font-semibold text-primary-600 no-underline "
-                            >
-                                Entrar!
-                            </Link>
                         </p>
+                        <BtnLink
+                            href="/sign-in"
+                        >
+                            Entrar!
+                        </BtnLink>
                     </div>
+
                 </div>
             </div>
         </AuthLayout>

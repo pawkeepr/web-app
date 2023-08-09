@@ -1,6 +1,5 @@
 import { useFormikContext } from "formik";
-import BtnCancel from "~/Components/atoms/btn/btn-cancel";
-import BtnSuccess from "~/Components/atoms/btn/btn-success";
+import { BtnCancel, BtnSuccess } from "~/Components/atoms/btn";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
 

@@ -1,4 +1,3 @@
-import Alert from 'react-bootstrap/Alert';
 import { BtnSuccess } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import LOADING from "~/constants/loading";
@@ -7,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import { FormEventHandler, useEffect } from "react";
 import { forgetPwd, resetLoading } from '~/store/auth/forget-pwd/actions';
 
+import Alert from "~/Components/atoms/alert";
 import validateEmail from '~/validations/email';
 
 type StepEmailProps = {
@@ -39,7 +39,7 @@ const StepEmail = ({ email, onChangeNextTab }: StepEmailProps) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Alert className="alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
+            <Alert color="warning" >
                 Digite seu email para receber um link de redefinição de senha.
             </Alert>
 

@@ -5,13 +5,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import MaskedInput from 'react-input-mask';
 import validateAddress from '~/validations/address';
 
-import BtnCancel from '~/Components/atoms/btn/btn-cancel';
-import BtnSuccess from '~/Components/atoms/btn/btn-success';
+import { BtnLabel, BtnSuccess } from '~/Components/atoms/btn';
 import FieldControl from '~/Components/molecules/field-control/field-control';
 import { IAddress } from '~/helpers/fetch-address-by-cep';
 import useFetchAddress from '~/hooks/use-fetch-address';
 
-import Form from 'react-bootstrap/Form';
 
 
 import useNextStep from '~/hooks/use-next-step';
@@ -114,29 +112,31 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 required
             />
 
-            <FieldControl
-                label='Rua'
-                name="location.street"
-                aria-label="street"
-                className="form-control w-70"
-                disabled={disabledInputs.street || loading}
-                placeholder={loading ? 'Carregando...' : 'Digite o nome da rua'}
-                required
-                disabledError
-            >
-                <Form.Control
-                    type="text"
+            <div className="grid grid-cols-4 col-span-full">
+                <FieldControl
+                    label='Rua'
+                    divClassName='col-span-3'
+                    name="location.street"
+                    aria-label="street"
+                    className="form-control"
+                    disabled={disabledInputs.street || loading}
+                    placeholder={loading ? 'Carregando...' : 'Digite o nome da rua'}
+                    required
+                    disabledError
+                />
+
+                <FieldControl
+                    label=' '
+                    divClassName='col-span-1'
                     name="location.number"
                     aria-label="number"
+                    className="form-control"
+                    disabled={disabledInputs.street || loading}
                     placeholder="N°"
-                    required
-                    onChange={onChangeNumber}
-                    className='ms-1 w-20'
-                    style={{
-                        maxWidth: '20%'
-                    }}
                 />
-            </FieldControl>
+
+            </div>
+
             <div className="col-span-full">
 
                 <FieldControl
@@ -151,8 +151,12 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
 
             <div className="mt-1 flex justify-center items-center col-span-full">
-                <BtnCancel onClick={prevStep} label="Anterior" className="m-1" />
-                <BtnSuccess label="Próximo" className="m-1" onClick={nextStep} disabled={!requiredValid || loading} />
+                <BtnLabel onClick={prevStep} label="Anterior" />
+                <BtnSuccess
+                    onClick={nextStep}
+                    disabled={!requiredValid || loading}
+                    label="Próximo"
+                />
             </div>
         </div>
 
