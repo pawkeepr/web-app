@@ -1,7 +1,7 @@
 "use client";
 
+import ArrowUpIcon from "@heroicons/react/24/solid/ArrowUpIcon";
 import React, { useEffect } from "react";
-import { HiOutlineArrowSmUp } from "react-icons/hi";
 import NavbarLanding from "~/Components/molecules/nav-bar-landing";
 import Footer from "./components/Footer";
 import Plans from "./components/Plans";
@@ -51,7 +51,7 @@ const LandingPage = () => {
                 className="bg-secondary-500 p-3 rounded-full absolute bottom-0 right-0 mb-[5rem] shadow-md"
                 id="back-to-top"
             >
-                <HiOutlineArrowSmUp size={20} />
+                <ArrowUpIcon className="w-6 h-6" />
             </button>
         </React.Fragment>
     );

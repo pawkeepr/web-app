@@ -1,9 +1,7 @@
 import Link from "next/link";
 
 //import images
-import logoDark from "~/assets/images/logo-dark.png";
 import logoLight from "~/assets/images/logo-light.png";
-import logoSm from "~/assets/images/logo-sm-1.png";
 
 //import Components
 import Image from "next/image";
@@ -13,7 +11,7 @@ import { useAppDispatch } from "~/store/hooks";
 import FullScreenDropdown from "../Components/Common/FullScreenDropdown";
 import LightDark from "../Components/Common/LightDark";
 
-import Drawer from "~/Components/Common/Drawer";
+import Drawer from "~/Components/organism/drawer";
 
 type HeaderProps = {
     headerClass: string;
@@ -95,7 +93,7 @@ const Header = ({ headerClass }: HeaderProps) => {
 
                         <Drawer
                             closeDrawer={handleClose}
-                            display={show === true ? `flex` : `hidden`}
+                            visibleDrawer={show}
                         />
 
                         <div className="flex items-center justify-center">
@@ -103,11 +101,11 @@ const Header = ({ headerClass }: HeaderProps) => {
                                 href="/"
                                 className="logo-light justify-centerblock"
                             >
-                                    <Image
-                                        src={logoLight}
-                                        alt="Logo Pawkeepr Mode Light"
-                                        height="34"
-                                    />
+                                <Image
+                                    src={logoLight}
+                                    alt="Logo Pawkeepr Mode Light"
+                                    height="34"
+                                />
                             </Link>
                         </div>
                         <div className="d-flex align-items-center">

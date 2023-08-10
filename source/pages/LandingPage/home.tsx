@@ -1,7 +1,3 @@
-// Import Swiper styles
-// import "swiper/css";
-// import "swiper/css/effect-fade";
-// import "swiper/css/pagination";
 import Slide from "react-reveal/Slide";
 import Zoom from "react-reveal/Zoom";
 
@@ -22,34 +18,14 @@ const Home = () => {
                 <div className="grid grid-cols-1 items-swiper-centered mt-5 md:mt-0 md:grid-cols-2 p-4">
                     <Slide left>
                         <div className="col-span-1">
-                            {/* <div className="demo-img-patten-top d-none d-sm-block">
-                                    <Image src={imgPattern} className="d-block img-fluid" alt="..." />
-                                </div>
-                                <div className="demo-img-patten-bottom d-none d-sm-block">
-                                    <Image src={imgPattern} className="d-block img-fluid" alt="..." />
-                                </div> */}
+
 
                             <Image
                                 src={landingPage01}
                                 className="w-100"
                                 alt="..."
                             />
-                            {/* <Swiper
-                        spaceBetween={30}
-                        effect={"fade"}
-                        loop={true}
-                        pagination={{
-                            clickable: true,
-                        }}
-                        autoplay={{ delay: 2000, disableOnInteraction: false }}
-                        modules={[EffectFade, Autoplay]}
-                        className="mySwiper" >
 
-                        <SwiperSlide className="carousel-inner shadow-lg p-2 bg-white rounded">
-                            
-                        </SwiperSlide>
-
-                    </Swiper> */}
                         </div>
                     </Slide>
                     <Zoom>
