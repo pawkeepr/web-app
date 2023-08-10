@@ -635,7 +635,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     </ControlSwitch>
                 </div>
 
-                <div className="mt-4">
+                {/* <div className="mt-4">
                     <span className="font-bold">Informações Obrigatórias</span>
                     <div className="flex items-center mt-2 gap-2 w-full">
                         <FieldControl
@@ -664,7 +664,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                             type="text"
                         />
                     </div>
-                </div>
+                </div> */}
             </div>
 
             <div className="flex align-items-center justify-center gap-3 mt-4">
