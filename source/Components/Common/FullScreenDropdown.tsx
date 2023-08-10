@@ -1,3 +1,6 @@
+import ArrowsPointingInIcon from '@heroicons/react/24/solid/ArrowsPointingInIcon';
+import ArrowsPointingOutIcon from '@heroicons/react/24/solid/ArrowsPointingOutIcon';
+
 import React, { useState } from 'react';
 
 const FullScreenDropdown = () => {
@@ -10,7 +13,7 @@ const FullScreenDropdown = () => {
     full screen
     */
     const toggleFullscreen = () => {
-        let document = window.document;
+        let document: any = window.document;
         document.body.classList.add("fullscreen-enable");
 
         if (
@@ -53,13 +56,20 @@ const FullScreenDropdown = () => {
     };
     return (
         <React.Fragment>
-            <div className="ms-1 header-item d-none d-sm-flex">
+            <div className="flex">
                 <button
                     onClick={toggleFullscreen}
                     type="button"
-                    className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle text-white"
+                    className="text-white"
                 >
-                    <i className={isFullScreenMode ? 'bx bx-fullscreen fs-22' : "bx bx-exit-fullscreen fs-22"}></i>
+                    {
+                        isFullScreenMode &&
+                        <ArrowsPointingOutIcon className="w-5 h-5" />
+                    }
+                    {
+                        !isFullScreenMode &&
+                        <ArrowsPointingInIcon className="w-5 h-5" />
+                    }
                 </button>
             </div>
         </React.Fragment>

@@ -8,8 +8,8 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { changeHeaderSize } from "~/store/actions";
 import { useAppDispatch } from "~/store/hooks";
-import FullScreenDropdown from "../Components/Common/FullScreenDropdown";
-import LightDark from "../Components/Common/LightDark";
+import FullScreenDropdown from "../Components/Common/full-screen-dropdown";
+import LightDark from "../Components/Common/light-dark";
 
 import Drawer from "~/Components/organism/drawer";
 

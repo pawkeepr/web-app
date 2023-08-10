@@ -3,16 +3,16 @@
 import useChangeLayoutMode from "~/hooks/use-change-layout-mode";
 
 const LightDark = () => {
-    const { onHandleChangeLayout } = useChangeLayoutMode();
+    const { onHandleChangeLayout, mode } = useChangeLayoutMode();
 
     return (
-        <div className="ms-1 header-item d-flex ">
+        <div className="ms-1 header-item flex ">
             <button
                 onClick={onHandleChangeLayout}
                 type="button"
-                className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode text-white"
+                className="btn border-none active:outline-none text-white"
             >
-                <i className="bx bx-moon fs-22"></i>
+                <span>A</span>
             </button>
         </div>
     );
