@@ -10,9 +10,11 @@ import { BtnAvatar, BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
 import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 import AvatarPet from "../../../atoms/pet-avatar/pet-avatar";
 import FieldControl from "~/Components/molecules/field-control/field-control";
+import { tests } from "~/common/data/tests";
 import { exams } from "~/common/data/exams";
 import { vaccines } from "~/common/data/vaccines";
 import { diseases } from "~/common/data/diseases";
+
 
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete";
 import { BsPlusCircleFill } from "react-icons/bs";
@@ -26,7 +28,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
         enableField === true ? setEnableField(false) : setEnableField(true);
     };
 
-    // const handleComboboxSelect = (selected: string) => {
+    // const handleComboboxSelect = (selected: text) => {
     //     setFieldValue('selectedValue', selected);
     //     console.log(selected);
     // };
@@ -37,6 +39,35 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 <h4 className="text-center">Tratamento</h4>
             </div>
 
+
+            <div className="mt-2"> {/** Adicionando sub-step CONSULTAS RÁPIDO */}
+                    <ControlSwitch
+                        label="Consultas rápidas"
+                        className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
+                    >
+                        <div className="mt-2">
+                        <ComboBoxAutocomplete
+                            label={`Teste/exame `}
+                                name={`test`}
+                                items={tests}
+                            />
+                          </div>
+                        <div>
+                            <FieldControl
+                                label = 'Resultado do teste/exame'
+                                className= "form-control"
+                                name= {`tests`}
+                                type="text"
+                            />
+                            <FieldControl
+                                label = 'Comentários adicionais sobre o exame'
+                                className= "form-control"
+                                name= {`tests`}
+                                type="text"
+                            />
+                        </div>
+                </ControlSwitch>
+            </div>
             <div className="">
                 <div className="mt-2">
                     <ControlSwitch
@@ -148,7 +179,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                     }`}
                                                                     className="form-control"
                                                                     name={`medicine[${index}].date_init`}
-                                                                    type="date"
+                                                                   type="text"
                                                                 />
                                                             </div>
 
@@ -162,7 +193,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                         }`}
                                                                         className="form-control"
                                                                         name={`medicine[${index}].date_end`}
-                                                                        type="date"
+                                                                       type="text"
                                                                     />
                                                                 </div>
                                                             ) : null}
@@ -256,7 +287,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 <div className="mt-2">
                     <ControlSwitch
                         label="Aplicar vacina?"
-                        className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
+                        className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
                     >
                         <div className="mt-2">
                             <FieldArray name="vaccines">
@@ -634,7 +665,9 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         </div>
                     </ControlSwitch>
                 </div>
+                
 
+                
                 <div className="mt-4">
                     <span className="font-bold">Informações Obrigatórias</span>
                     <div className="flex items-center mt-2 gap-2 w-full">
@@ -666,7 +699,8 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     </div>
                 </div>
             </div>
-
+         
+    
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnLabel
                     link
