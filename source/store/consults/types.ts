@@ -3,7 +3,7 @@ import {
     ADD_FAIL, ADD_NEW, ADD_SUCCESS,
     DELETE, DELETE_FAIL, DELETE_SUCCESS,
     GET_ALL, GET_ALL_FAIL,
-    GET_ALL_INACTIVES, GET_ALL_INACTIVES_FAIL, GET_ALL_INACTIVES_SUCCESS,
+    GET_ALL_INATIVES, GET_ALL_INATIVES_FAIL, GET_ALL_INATIVES_SUCCESS,
     GET_ALL_SUCCESS,
     STOP_LOADING,
     TOGGLE_STATUS, TOGGLE_STATUS_FAIL, TOGGLE_STATUS_SUCCESS,
@@ -19,7 +19,7 @@ export interface IConsults {
     all_scheduled_done: any[];
 }
 
-export interface Data extends IConsults {}
+export interface Data extends IConsults { }
 
 export type InitialState = {
     data: Data;
@@ -33,9 +33,9 @@ export const name = 'consults';
 export const ACTION_GET_ALL = `${name}/${GET_ALL}`;
 export const ACTION_GET_ALL_SUCCESS = `${name}/${GET_ALL_SUCCESS}`;
 export const ACTION_GET_ALL_FAIL = `${name}/${GET_ALL_FAIL}`;
-export const ACTION_GET_ALL_INACTIVES = `${name}/${GET_ALL_INACTIVES}`;
-export const ACTION_GET_ALL_INACTIVES_SUCCESS = `${name}/${GET_ALL_INACTIVES_SUCCESS}`;
-export const ACTION_GET_ALL_INACTIVES_FAIL = `${name}/${GET_ALL_INACTIVES_FAIL}`;
+export const ACTION_GET_ALL_INATIVES = `${name}/${GET_ALL_INATIVES}`;
+export const ACTION_GET_ALL_INATIVES_SUCCESS = `${name}/${GET_ALL_INATIVES_SUCCESS}`;
+export const ACTION_GET_ALL_INATIVES_FAIL = `${name}/${GET_ALL_INATIVES_FAIL}`;
 export const ACTION_UPDATE = `${name}/${UPDATE}`;
 export const ACTION_UPDATE_SUCCESS = `${name}/${UPDATE_SUCCESS}`;
 export const ACTION_UPDATE_FAIL = `${name}/${UPDATE_FAIL}`;

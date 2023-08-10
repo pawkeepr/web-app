@@ -1,16 +1,8 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 
-import { errorToast, successToast } from "../helpers/toast";
 import {
-  addFail,
-  addSuccess,
   getAllFail,
-  getAllInactivesSuccess,
-  getAllSuccess,
-  toggleStatusFail,
-  toggleStatusSuccess,
-  updateFail,
-  updateSuccess
+  getAllSuccess
 } from "./actions";
 
 import {
@@ -18,13 +10,8 @@ import {
 } from '~/services/helpers';
 
 //Include Both Helper File with needed methods
-import { PayloadAction } from "@reduxjs/toolkit";
 import {
-  ACTION_ADD_NEW,
-  ACTION_GET_ALL,
-  ACTION_TOGGLE_STATUS,
-  ACTION_UPDATE,
-  Data
+  ACTION_GET_ALL
 } from "./types";
 
 export function* onGetAll() {

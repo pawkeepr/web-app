@@ -1,35 +1,35 @@
 import { createAction } from '@reduxjs/toolkit';
 
 import {
-  ACTION_ADD_FAIL,
-  ACTION_ADD_NEW,
-  ACTION_ADD_SUCCESS,
-  ACTION_DELETE,
-  ACTION_DELETE_FAIL,
-  ACTION_DELETE_SUCCESS,
-  ACTION_GET_ALL,
-  ACTION_GET_ALL_FAIL,
-  ACTION_GET_ALL_INACTIVES,
-  ACTION_GET_ALL_INACTIVES_FAIL,
-  ACTION_GET_ALL_INACTIVES_SUCCESS,
-  ACTION_GET_ALL_SUCCESS,
-  ACTION_STOP_LOADING,
-  ACTION_TOGGLE_STATUS,
-  ACTION_TOGGLE_STATUS_FAIL,
-  ACTION_TOGGLE_STATUS_SUCCESS,
-  ACTION_UPDATE,
-  ACTION_UPDATE_FAIL,
-  ACTION_UPDATE_SUCCESS,
-  Data
+    ACTION_ADD_FAIL,
+    ACTION_ADD_NEW,
+    ACTION_ADD_SUCCESS,
+    ACTION_DELETE,
+    ACTION_DELETE_FAIL,
+    ACTION_DELETE_SUCCESS,
+    ACTION_GET_ALL,
+    ACTION_GET_ALL_FAIL,
+    ACTION_GET_ALL_INATIVES,
+    ACTION_GET_ALL_INATIVES_FAIL,
+    ACTION_GET_ALL_INATIVES_SUCCESS,
+    ACTION_GET_ALL_SUCCESS,
+    ACTION_STOP_LOADING,
+    ACTION_TOGGLE_STATUS,
+    ACTION_TOGGLE_STATUS_FAIL,
+    ACTION_TOGGLE_STATUS_SUCCESS,
+    ACTION_UPDATE,
+    ACTION_UPDATE_FAIL,
+    ACTION_UPDATE_SUCCESS,
+    Data
 } from './types';
 
 export const getAll = createAction(ACTION_GET_ALL);
 export const getAllSuccess = createAction<Data[]>(ACTION_GET_ALL_SUCCESS)
 export const getAllFail = createAction<string>(ACTION_GET_ALL_FAIL);
 
-export const getAllInactives = createAction(ACTION_GET_ALL_INACTIVES);
-export const getAllInactivesSuccess = createAction<Data[]>(ACTION_GET_ALL_INACTIVES_SUCCESS)
-export const getAllInactivesFail = createAction<string>(ACTION_GET_ALL_INACTIVES_FAIL);
+export const getAllInatives = createAction(ACTION_GET_ALL_INATIVES);
+export const getAllInativesSuccess = createAction<Data[]>(ACTION_GET_ALL_INATIVES_SUCCESS)
+export const getAllInativesFail = createAction<string>(ACTION_GET_ALL_INATIVES_FAIL);
 
 export const update = createAction<{ id: string, data: Partial<Data> }>(ACTION_UPDATE);
 export const updateSuccess = createAction<Data>(ACTION_UPDATE_SUCCESS);
