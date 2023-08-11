@@ -1,10 +1,8 @@
 export const exams = [
     "Hemograma completo",
     "Perfil bioquímico",
-    "Urinalise",
     "Exame Coproparasitológico",
     "Exame de fezes",
-    "Teste de FIV e FeLV (para gatos)",
     "Teste de dirofilariose (para cães)",
     "Exame de pele e raspado cutâneo",
     "Exame otoscópico",
@@ -28,10 +26,8 @@ export const exams = [
 export enum Exams {
     HemogramaCompleto = "Hemograma Completo",
     PerfilBioquímico = "Perfil Bioquímico",
-    Urinalise = "Urinalise",
     ExameCoproparasitológico = "Exame Coproparasitológico",
     ExameDeFezes = "Exame de fezes",
-    TesteFIVFeLV = "Teste de FIV e FeLV (para gatos)",
     TesteDirofilariose = "Teste de dirofilariose (para cães)",
     ExameDePeleRaspadoCutâneo = "Exame de pele e raspado cutâneo",
     ExameOtoscopy = "Exame otoscópico",
