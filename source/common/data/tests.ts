@@ -1,11 +1,27 @@
 export const tests = [
-    "Exame de sangue",
-    "Exame de urina",
+    "Teste de glicemia",
+    "Teste de urinalise",
+    "Teste de FIV e FeLV (para gatos)",
+    "Teste de anaplasma",
+    "Teste de borrelia",
+    "Teste de parvovírus",
+    "Teste de dirofilariose",
+    "Teste de hemagasometria",
+    "Teste de cinomose",
+    
 
  
 ]
 
 export enum Tests {
-    Examedeurina = "Exame de urina",
-    Examedesangue = "Exame de sange",
+    Testedeglicemia = "Teste de glicemia",
+    Testedeurinalise = "Teste de urinalise",
+    TesteFIVFeLV = "Teste de FIV e FeLV (para gatos)",
+    TestedeAnaplasma = "Teste de anaplasma",
+    TestedeBorrelia = "Teste de borrelia",
+    TestedeParvovírus = "Teste de parvovírus",
+    TestedeDirofilariose   = "Teste de dirofilariose ",
+    TestedeHemagasometria = "Teste de hemagasometria",
+    Testedecinomose =  "Teste de cinomose", 
+
 }
