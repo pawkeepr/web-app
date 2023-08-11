@@ -28,41 +28,35 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
         enableField === true ? setEnableField(false) : setEnableField(true);
     };
 
-    // const handleComboboxSelect = (selected: text) => {
-    //     setFieldValue('selectedValue', selected);
-    //     console.log(selected);
-    // };
-
     return (
         <>
             <div>
                 <h4 className="text-center">Tratamento</h4>
             </div>
-
-
-            <div className="mt-2"> {/** Adicionando sub-step CONSULTAS RÁPIDO */}
+            <div className="mt-2">
                     <ControlSwitch
-                        label="Consultas rápidas"
+                        label="Testes rápidos"
                         className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
                     >
                         <div className="mt-2">
                         <ComboBoxAutocomplete
-                            label={`Teste/exame `}
-                                name={`test`}
+                            label={`Tipos de testes `}
+                                name={`typeTest`}
                                 items={tests}
                             />
                           </div>
                         <div>
                             <FieldControl
-                                label = 'Resultado do teste/exame'
-                                className= "form-control"
-                                name= {`tests`}
-                                type="text"
-                            />
+                                label = {`Resultado do teste `}
+                                    className= "form-control"
+                                    name= {`testsResult`}
+                                    type="text"
+                                />
+                            
                             <FieldControl
-                                label = 'Comentários adicionais sobre o exame'
+                                label = {`Comentários adicionais sobre o teste`}
                                 className= "form-control"
-                                name= {`tests`}
+                                name= {`testsComments`}
                                 type="text"
                             />
                         </div>
@@ -179,7 +173,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                     }`}
                                                                     className="form-control"
                                                                     name={`medicine[${index}].date_init`}
-                                                                   type="text"
+                                                                   type="date"
                                                                 />
                                                             </div>
 
@@ -193,7 +187,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                         }`}
                                                                         className="form-control"
                                                                         name={`medicine[${index}].date_end`}
-                                                                       type="text"
+                                                                       type="date"
                                                                     />
                                                                 </div>
                                                             ) : null}
@@ -287,7 +281,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 <div className="mt-2">
                     <ControlSwitch
                         label="Aplicar vacina?"
-                        className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
+                        className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
                     >
                         <div className="mt-2">
                             <FieldArray name="vaccines">
@@ -300,7 +294,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                     className="flex gap-2 justify-center items-center"
                                                 >
                                                     <ComboBoxAutocomplete
-                                                        label={`Vacina ${
+                                                        label={`Vacino ${
                                                             index + 1
                                                         }`}
                                                         name={`vaccine${index}`}
@@ -563,7 +557,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                 }
                                                             >
                                                                 <BsPlusCircleFill
-                                                                    title="Adicionar Vacina"
+                                                                    title="Adicionar nutrição alimentar"
                                                                     className="w-8 h-5 hover:scale-110 mt-2 text-secondary-500    transition   cursor-pointer"
                                                                 />
                                                             </button>
@@ -665,9 +659,6 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         </div>
                     </ControlSwitch>
                 </div>
-                
-
-                
                 <div className="mt-4">
                     <span className="font-bold">Informações Obrigatórias</span>
                     <div className="flex items-center mt-2 gap-2 w-full">

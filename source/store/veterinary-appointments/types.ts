@@ -1,5 +1,7 @@
+import { Tests } from "~/common/data/tests";
 import { Pet } from "../pets/types";
 import { Tutor } from "../tutor/types";
+import { Test } from "vitest";
 
 export const name = "VeterinaryAppointment";
 
@@ -44,6 +46,12 @@ export type Payment = {
     updated_at: string;
 };
 
+    
+export type Test = {
+    id: string;
+    name: string;   //Alter aqui
+};
+
 export type Vaccine = {
     id: string;
     name: string;
@@ -71,6 +79,7 @@ export type VeterinaryAppointment = {
     id: string;
     exams: string[] | Array<Partial<Exam>>;
     vaccines: string[] | Array<Partial<Vaccine>>;
+    tests: string[] | Array<Partial<Test>>; //alter aqui
     treatments: Array<Partial<Treatment>>;
     diseases: string | Array<Partial<Disease>>;
     payment: Partial<Payment>;
