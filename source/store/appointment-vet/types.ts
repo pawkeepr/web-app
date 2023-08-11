@@ -1,12 +1,4 @@
-import {
-    BloodType
-} from './bloodType';
-
-import {
-    Species
-} from './speciesType';
-
-import LOADING from '~/constants/loading';
+import { LOADING } from "~/helpers/loading";
 import {
     ADD_FAIL, ADD_NEW, ADD_SUCCESS,
     DELETE, DELETE_FAIL, DELETE_SUCCESS,
@@ -19,41 +11,33 @@ import {
     TOGGLE_STATUS, TOGGLE_STATUS_FAIL, TOGGLE_STATUS_SUCCESS,
     UPDATE, UPDATE_FAIL, UPDATE_SUCCESS
 } from "../helpers/constants";
-import { Tutor } from '../tutor/types';
-import {
-    Breed
-} from './breedType';
 
-export const name = "Pet"
-
-export type IPet = {
-    id: string;
-    name: string;
-    species: Species;
-    breed: Breed;
-    gender: GenderPet;
-    dateOfBirth: string;
-    bloodType: BloodType;
-    color: string;
-    allergies: string[];
-    preexistingConditions: string[];
-    medicationsInUse: string[];
-    castrated: boolean;
-    dateOfCastration: string;
-    dateOfAdoption: string;
-    healthHistory: string[];
-    diet: Diet;
-    specialPhysicalFeatures: string[];
-    behavior: string;
-    activityLevel: string;
-    ownerEmergencyContact: Tutor;
-    address?: string;
-    avatar: string;
-    created_at: string;
-    updated_at: string;
+export interface IAppointmentVet {
+    id?: string; // UUID é normalmente representado como string em TypeScript
+    id_pet?: string;
+    pet_data: Record<string, string>;
+    cpf_tutor: string;
+    tutor_data: Record<string, string>;
+    crmv_vet: string;
+    cpf_cnpj_vet: string;
+    vet_data: Record<string, string>;
+    medicines: Record<string, string>[];
+    anamnesis: Record<string, string>;
+    vaccines: Record<string, string>[];
+    exams: Record<string, string>[];
+    nutritions?: Record<string, string>[];
+    illnesses?: Record<string, string>[];
+    info_required?: Record<string, string>;
+    payments?: Record<string, string>;
+    dates_consults?: Record<string, string>;
+    appointment_status?: Record<string, string>;
+    appointment_signature?: Record<string, string>;
+    appointment_geolocation?: Record<string, string>;
+    tests_fasts?: Record<string, string>[];
+    owner?: string;
 }
 
-export interface Data extends IPet {
+export interface Data extends IAppointmentVet {
 
 }
 
@@ -65,22 +49,7 @@ export type InitialState = {
     error: string | null;
 };
 
-
-export enum GenderPet {
-    male = 'Macho',
-    female = 'Fêmea',
-    unknown = 'Desconhecido'
-};
-
-export type Diet = {
-    foodType: string;
-    dailyAmount: number;
-    dietaryRestrictions: string[];
-}
-
-export type {
-    BloodType, Breed, Species
-};
+export const name = 'appointment-vet';
 
 export const ACTION_GET_ALL = `${name}/${GET_ALL}`;
 export const ACTION_GET_ALL_SUCCESS = `${name}/${GET_ALL_SUCCESS}`;

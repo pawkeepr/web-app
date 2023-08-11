@@ -14,6 +14,9 @@ import {
     ACTION_GET_ALL_INATIVES_SUCCESS,
     ACTION_GET_ALL_SUCCESS,
     ACTION_STOP_LOADING,
+    ACTION_TOGGLE_STATUS,
+    ACTION_TOGGLE_STATUS_FAIL,
+    ACTION_TOGGLE_STATUS_SUCCESS,
     ACTION_UPDATE,
     ACTION_UPDATE_FAIL,
     ACTION_UPDATE_SUCCESS,
@@ -40,8 +43,8 @@ export const deleteOnly = createAction<{ id: string }>(ACTION_DELETE);
 export const deleteSuccess = createAction<{ id: string }>(ACTION_DELETE_SUCCESS);
 export const deleteFail = createAction<string>(ACTION_DELETE_FAIL);
 
-// export const toggleStatus = createAction<{ id: string, data: Pick<Data, 'id'> }>(ACTION_TOGGLE_STATUS);
-// export const toggleStatusSuccess = createAction<Data>(ACTION_TOGGLE_STATUS_SUCCESS);
-// export const toggleStatusFail = createAction<string>(ACTION_TOGGLE_STATUS_FAIL);
+export const toggleStatus = createAction<{ id: string, data: Pick<Data, 'active'> }>(ACTION_TOGGLE_STATUS);
+export const toggleStatusSuccess = createAction<Data>(ACTION_TOGGLE_STATUS_SUCCESS);
+export const toggleStatusFail = createAction<string>(ACTION_TOGGLE_STATUS_FAIL);
 
 export const stopLoading = createAction(ACTION_STOP_LOADING);

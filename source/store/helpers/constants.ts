@@ -2,9 +2,9 @@ export const GET_ALL = 'getAll';
 export const GET_ALL_SUCCESS = 'getAllSuccess';
 export const GET_ALL_FAIL = 'getAllFail';
 
-export const GET_ALL_ATIVES = 'getAll';
-export const GET_ALL_ATIVES_SUCCESS = 'getAllSuccess';
-export const GET_ALL_ATIVES_FAIL = 'getAllFail';
+export const GET_ALL_ATIVES = 'getAllAtives';
+export const GET_ALL_ATIVES_SUCCESS = 'getAllAtivesSuccess';
+export const GET_ALL_ATIVES_FAIL = 'getAllAtivesFail';
 
 export const GET_ALL_INATIVES = 'getAllInatives';
 export const GET_ALL_INATIVES_SUCCESS = 'getAllInativesSuccess';

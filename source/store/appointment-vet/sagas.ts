@@ -16,8 +16,8 @@ import {
 
 export function* onGetAll() {
     try {
-        const { data } = yield call(getConsults);
-        yield put(getAllSuccess(data));
+        const { data: actives } = yield call(getConsults);
+        yield put(getAllSuccess(actives));
     } catch (error) {
         yield put(getAllFail(error as any));
     }

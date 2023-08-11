@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import LOADING from '~/constants/loading';
 import {
     ADD_FAIL,
     ADD_NEW,
@@ -17,21 +16,32 @@ import {
     GET_ALL_INATIVES_SUCCESS,
     GET_ALL_SUCCESS,
     STOP_LOADING,
+    TOGGLE_STATUS,
+    TOGGLE_STATUS_FAIL,
+    TOGGLE_STATUS_SUCCESS,
     UPDATE,
     UPDATE_FAIL,
     UPDATE_SUCCESS
 } from '../helpers/constants';
-import { Data, InitialState, name } from './types';
+
+
+import { LOADING } from '~/helpers/loading';
+import { toggleStatus } from '../helpers/toggle-status';
+import {
+    Data,
+    InitialState,
+    name,
+} from './types';
 
 const initialState: InitialState = {
-    data: [],
     error: null,
     isLoading: LOADING.IDLE,
-    inatives: [],
     isLoadingOnlyOne: LOADING.IDLE,
+    data: [],
+    inatives: []
 };
 
-export const petSlice = createSlice({
+const slice = createSlice({
     name,
     initialState,
     reducers: {
@@ -101,17 +111,17 @@ export const petSlice = createSlice({
             state.error = action.payload;
             state.isLoading = LOADING.FAILED;
         },
-        // [TOGGLE_STATUS]: (state) => {
-        //     state.isLoadingOnlyOne = LOADING.PENDING;
-        // },
-        // [TOGGLE_STATUS_SUCCESS]: (state, action: PayloadAction<{ id: string }>) => {
-        //     toggleStatus(action.payload.id, state.data, state.inatives)
-        //     state.isLoadingOnlyOne = LOADING.SUCCESS;
-        // },
-        // [TOGGLE_STATUS_FAIL]: (state, action) => {
-        //     state.error = action.payload;
-        //     state.isLoadingOnlyOne = LOADING.FAILED;
-        // },
+        [TOGGLE_STATUS]: (state) => {
+            state.isLoadingOnlyOne = LOADING.PENDING;
+        },
+        [TOGGLE_STATUS_SUCCESS]: (state, action: PayloadAction<{ id: string }>) => {
+            toggleStatus(action.payload.id, state.data, state.inatives)
+            state.isLoadingOnlyOne = LOADING.SUCCESS;
+        },
+        [TOGGLE_STATUS_FAIL]: (state, action) => {
+            state.error = action.payload;
+            state.isLoadingOnlyOne = LOADING.FAILED;
+        },
         [STOP_LOADING]: (state) => {
             state.isLoading = LOADING.IDLE;
             state.isLoadingOnlyOne = LOADING.IDLE;
@@ -119,12 +129,11 @@ export const petSlice = createSlice({
         resetValue: (state) => {
             return initialState;
         },
-    },
+    }
 });
 
-
 export const {
+    resetValue
+} = slice.actions;
 
-} = petSlice.actions;
-
-export default petSlice.reducer;
+export default slice.reducer;
