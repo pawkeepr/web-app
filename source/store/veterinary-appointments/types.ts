@@ -1,7 +1,5 @@
-import { Tests } from "~/common/data/tests";
 import { Pet } from "../pets/types";
 import { Tutor } from "../tutor/types";
-import { Test } from "vitest";
 
 export const name = "VeterinaryAppointment";
 
@@ -49,7 +47,9 @@ export type Payment = {
     
 export type Test = {
     id: string;
-    name: string;   //Alter aqui
+    type: string;  
+    result: string;
+    comments: string;
 };
 
 export type Vaccine = {

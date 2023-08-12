@@ -65,6 +65,13 @@ const initialValues = (
             description: "",
         },
     ],
+    tests: [
+        {   type: "",
+            result: "",
+            comments: "",
+           
+        },
+    ],
     nutritions: [
         {
             food_name: "",
@@ -80,6 +87,11 @@ const initialValues = (
     payment: {
         payment_method: undefined,
         price: 0,
+        
+        
+
+
+
     },
 });
 
