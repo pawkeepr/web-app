@@ -1,21 +1,9 @@
 import { useCallback, useMemo } from "react";
 import { layoutModeTypes } from "~/Components/constants/layout";
+import cookies from '~/constants/cookies';
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import { changeLayoutMode } from "~/store/layouts/slice";
-
-const userPreferenceMode = () => {
-    let preferenceMode = localStorage.getItem("userPreferenceMode");
-
-    if (!preferenceMode) {
-        preferenceMode = "light";
-        localStorage.setItem("userPreferenceMode", preferenceMode);
-    } else {
-        preferenceMode = preferenceMode === "dark" ? "light" : "dark";
-        localStorage.setItem("userPreferenceMode", preferenceMode);
-    }
-
-    return preferenceMode;
-};
+import { setCookie } from "~/utils/cookies-utils";
 
 const useChangeLayoutMode = () => {
     const dispatch = useAppDispatch();
@@ -28,6 +16,7 @@ const useChangeLayoutMode = () => {
     )
 
     const onHandleChangeLayout = useCallback(() => {
+        setCookie(cookies.layoutMode.name, mode, cookies.layoutMode.expires);
         dispatch(changeLayoutMode(mode));
     }, [dispatch, mode]);
 
