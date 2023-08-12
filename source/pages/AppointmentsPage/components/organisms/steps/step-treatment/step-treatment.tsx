@@ -171,14 +171,14 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                 }
                                                             >
                                                                 <BsPlusCircleFill
-                                                                    title="Adicionar Vacina"
+                                                                    title="Adicionar medicação"
                                                                     className="w-8 h-5 hover:scale-110 mt-2 text-secondary-500    transition   cursor-pointer"
                                                                 />
                                                             </button>
 
                                                             {index > 0 && (
                                                                 <BsFillTrash3Fill
-                                                                    title="Remover Vacina"
+                                                                    title="Remover medicação"
                                                                     className="w-8 h-5 mt-2 hover:scale-110 text-red-500 cursor-pointer"
                                                                     onClick={() =>
                                                                         arrayHelpers.remove(
@@ -405,14 +405,14 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                     }
                                                 >
                                                     <BsPlusCircleFill
-                                                        title="Adicionar Vacina"
+                                                        title="Adicionar exame"
                                                         className="w-8 h-5 hover:scale-110 mt-2 text-secondary-500    transition   cursor-pointer"
                                                     />
                                                 </button>
 
                                                 {index > 0 && (
                                                     <BsFillTrash3Fill
-                                                        title="Remover Vacina"
+                                                        title="Remover exame"
                                                         className="w-8 h-5 mt-2 hover:scale-110 text-red-500 cursor-pointer"
                                                         onClick={() =>
                                                             arrayHelpers.remove(
@@ -481,14 +481,14 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                 }
                                                             >
                                                                 <BsPlusCircleFill
-                                                                    title="Adicionar Vacina"
+                                                                    title="Adicionar doença"
                                                                     className="w-8 h-5 hover:scale-110 mt-2 text-secondary-500    transition   cursor-pointer"
                                                                 />
                                                             </button>
 
                                                             {index > 0 && (
                                                                 <BsFillTrash3Fill
-                                                                    title="Remover Vacina"
+                                                                    title="Remover doença"
                                                                     className="w-8 h-5 mt-2 hover:scale-110 text-red-500 cursor-pointer"
                                                                     onClick={() =>
                                                                         arrayHelpers.remove(
@@ -584,14 +584,14 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                 }
                                                             >
                                                                 <BsPlusCircleFill
-                                                                    title="Adicionar Vacina"
+                                                                    title="Adicionar nutrição alimentar"
                                                                     className="w-8 h-5 hover:scale-110 mt-2 text-secondary-500    transition   cursor-pointer"
                                                                 />
                                                             </button>
 
                                                             {index > 0 && (
                                                                 <BsFillTrash3Fill
-                                                                    title="Remover Vacina"
+                                                                    title="Remover nutrição alimentar"
                                                                     className="w-8 h-5 mt-2 hover:scale-110 text-red-500 cursor-pointer"
                                                                     onClick={() =>
                                                                         arrayHelpers.remove(
