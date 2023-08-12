@@ -1,39 +1,48 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 
 import {
+    addFail,
+    addSuccess,
     getAllFail,
-    getAllSuccess
+    getAllSuccess,
+    updateFail,
+    updateSuccess
 } from "./actions";
 
 import {
-    getConsults,
+    createAppointmentVet,
+    getAllAppointmentsVet,
+    updateAppointmentVet,
 } from '~/services/helpers';
 
 //Include Both Helper File with needed methods
+import { PayloadAction } from "@reduxjs/toolkit";
+import { errorToast, successToast } from "../helpers/toast";
 import {
-    ACTION_GET_ALL
+    ACTION_ADD_NEW,
+    ACTION_GET_ALL, ACTION_UPDATE, Data
 } from "./types";
 
 export function* onGetAll() {
     try {
-        const { data: actives } = yield call(getConsults);
-        yield put(getAllSuccess(actives));
+        const { data } = yield call(getAllAppointmentsVet);
+        yield put(getAllSuccess(data));
     } catch (error) {
         yield put(getAllFail(error as any));
     }
 }
 
-// export function* onUpdate({ payload }: PayloadAction<{ id: string, data: Partial<Data> }>) {
-//   try {
-//     const { id, data } = payload
-//     const response = yield call(updateUsersProfessionals, id, data);
-//     yield put(updateSuccess(response.data));
-//     yield successToast('Alterado com sucesso!')
-//   } catch (error) {
-//     yield errorToast('Erro ao alterar!')
-//     yield put(updateFail((error as Error).message));
-//   }
-// }
+export function* onUpdate({ payload }: PayloadAction<{ appointment_id: string, data: Partial<Data> }>) {
+    try {
+        const { appointment_id, data: appointment } = payload
+        const { data } = yield call(updateAppointmentVet, appointment, appointment_id);
+        yield put(updateSuccess(data));
+        yield successToast('Alterado com sucesso!')
+    } catch (error) {
+        yield errorToast('Erro ao alterar!')
+        yield put(updateFail((error as Error).message));
+    }
+}
 
 // export function* onToggleStatus({ payload }: PayloadAction<{ id: string, data: Pick<Data, 'active'> }>) {
 //   try {
@@ -56,32 +65,32 @@ export function* onGetAll() {
 //   }
 // }
 
-// export function* onAdd({ payload }: PayloadAction<Data>) {
-//   try {
-//     const { data } = yield call(postUsersProfessionals, payload);
-//     yield put(addSuccess(data));
-//     yield successToast('Cadastrado com sucesso!')
-//   } catch (error) {
-//     yield errorToast('Erro ao cadastrar!')
-//     yield put(addFail((error as Error).message));
-//   }
-// }
+export function* onAdd({ payload: { data: appointment } }: PayloadAction<{ data: Data, }>) {
+    try {
+        const { data } = yield call(createAppointmentVet, appointment);
+        yield put(addSuccess(data));
+        yield successToast('Cadastrado com sucesso!')
+    } catch (error) {
+        yield errorToast('Erro ao cadastrar!')
+        yield put(addFail((error as Error).message));
+    }
+}
 
 export function* watchGetAll() {
     yield takeEvery(ACTION_GET_ALL, onGetAll);
 }
 
-// export function* watchUpdate() {
-//   yield takeEvery(ACTION_UPDATE, onUpdate);
-// }
+export function* watchUpdate() {
+    yield takeEvery(ACTION_UPDATE, onUpdate);
+}
 
 // export function* watchDelete() {
 //   yield takeEvery(ACTION_DELETE, onDelete);
 // }
 
-// export function* watchAddNew() {
-//   yield takeEvery(ACTION_ADD_NEW, onAdd);
-// }
+export function* watchAddNew() {
+    yield takeEvery(ACTION_ADD_NEW, onAdd);
+}
 
 // export function* watchToggleStatus() {
 //   yield takeEvery(ACTION_TOGGLE_STATUS, onToggleStatus);
@@ -91,9 +100,9 @@ export function* watchGetAll() {
 function* crmSaga() {
     yield all([
         fork(watchGetAll),
-        // fork(watchUpdate),
+        fork(watchUpdate),
         // // fork(watchDelete),
-        // fork(watchAddNew),
+        fork(watchAddNew),
         // fork(watchToggleStatus),
     ]);
 }

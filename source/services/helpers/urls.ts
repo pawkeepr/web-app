@@ -1,7 +1,29 @@
-// PROFILE
+// Appointment Vet
+export const APPOINTMENT_GET_ALL = () => '/api-appointment/fetch-all-appointment-vet'
+export const APPOINTMENT_UPDATE = () => `/api-appointment/update-appointment`
+export const APPOINTMENT_CREATE = () => '/api-appointment/create-appointment'
+export const APPOINTMENT_GET_BY_ID = () => `/api-appointment/search-appointment`
 
-//export const GET_USER_PROFILE_BY_ID = (id: string) => `/search-perfil/${id}`
-export const GET_ALL_APPOINTMENT_VET = () => '/api-appointment/fetch-all-appointment-vet'
-export const CREATE_PROFILE = () => '/create-user-vet'
-export const GET_USER_PROFILE = (email: string) => `/search-user-vet/${email}`
-export const UPDATE_PROFILE = () => '/update-user-vet'
+// Schedule Vet
+export const SCHEDULED_CREATE = () => '/api-appointment/create-schedule'
+
+// Profile Vet
+
+export const VET_CREATE_PROFILE = () => '/create-user-vet'
+export const VET_GET_PROFILE = () => `/search-user-vet`
+export const VET_UPDATE_PROFILE = () => `/update-user-vet`
+
+// Profile Tutor
+
+export const TUTOR_CREATE_PROFILE = () => '/create-user-tutor'
+export const TUTOR_GET_PROFILE = () => `/search-user-tutor`
+export const TUTOR_UPDATE_PROFILE = () => `/update-user-tutor`
+
+// Pet
+
+export const PET_FETCH_ALL = () => `/api-pet/fetch-all-pets-tutor`
+export const PET_CREATE_PROFILE = () => '/api-pet/create-pet'
+export const PET_GET_PROFILE = () => `/api-pet/search-pet`
+export const PET_UPDATE_PROFILE = () => '/api-pet/update-pet'
+export const PET_UPDATE_HEALTH = () => '/api-pet/update-pet-health'
+
