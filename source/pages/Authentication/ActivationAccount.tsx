@@ -164,17 +164,11 @@ const ActivationAccount = () => {
                     </Formik>
                 </main>
                 <BtnLink
+                    message="Sair"
                     className="absolute top-2 right-2"
-                    color='primary'
                     href="/logout"
                 >
-                    <ArrowLeftCircleIcon
-                        className="w-5 h-5 "
-                        viewBox="0 0 24 24"
-                    />
-                    <span className="font-medium">
-                        Sair
-                    </span>
+                    <ArrowLeftCircleIcon />
                 </BtnLink>
             </section>
         </AuthLayout >
