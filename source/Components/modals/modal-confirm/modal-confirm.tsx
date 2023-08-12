@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import { BtnCancel, BtnSuccess } from '~/Components/atoms/btn'
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
 type onChangeOpen = (arg: boolean) => void
 
@@ -150,7 +150,7 @@ const ModalConfirm = ({
                                             onClick={handleCancel}
                                         />
 
-                                        <BtnSuccess
+                                        <BtnPrimary
                                             type="button"
                                             label="Continuar"
                                             onClick={handleConfirm}

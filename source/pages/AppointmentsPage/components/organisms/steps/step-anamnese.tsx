@@ -6,7 +6,7 @@ import { StepProps } from "./types";
 import AnswerRadio from "~/Components/molecules/answer-radio";
 
 import { useFormikContext } from "formik";
-import { BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
+import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
 import {
     questions_digestive_system,
     questions_locomotive_system,
@@ -15,7 +15,6 @@ import {
     questions_urinary_system,
 } from "~/constants/anamnese-questions";
 import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
-import AvatarPet from "../../atoms/pet-avatar";
 
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
     const { values } = useFormikContext<InitialValues>();
@@ -88,9 +87,9 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 >
                     <i className="ri-arrow-left-line align-middle fs-16 me-2"></i>{" "}
                     <span className="mr-1"> Voltar </span>
-                    
+
                 </BtnLabel>
-                <BtnSuccess
+                <BtnPrimary
                     type="button"
                     className="btn-label "
                     label="Próximo"
@@ -100,7 +99,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 >
                     <span className="ml-1"> Próximo </span>
                     <i className="ri-arrow-right-line  align-middle fs-16 p-1"></i>
-                </BtnSuccess>
+                </BtnPrimary>
             </div>
         </>
     );

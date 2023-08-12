@@ -1,4 +1,4 @@
-import { BtnLabel, BtnSuccess } from '~/Components/atoms/btn';
+import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn';
 import InputCode from '~/Components/atoms/input-code/input-code';
 import { StepProps } from './types';
 
@@ -104,7 +104,7 @@ const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 </div>
             </form>
             <div className="mt-3">
-                <BtnSuccess
+                <BtnPrimary
                     label='Confirmar'
                     className="w-full"
                     onClick={() => handleSubmit()}

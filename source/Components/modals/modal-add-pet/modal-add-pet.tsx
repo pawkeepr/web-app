@@ -19,7 +19,7 @@ import { Formik, FormikHelpers } from "formik";
 import BtnAvatar from "~/Components/atoms/btn/btn-avatar";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
-import { BtnSuccess } from "~/Components/atoms/btn";
+import { BtnPrimary } from "~/Components/atoms/btn";
 import BoxButtons from "~/Components/molecules/box-buttons";
 import FieldDocument from "~/Components/molecules/field-document";
 import { useAppDispatch } from '~/store/hooks';
@@ -90,7 +90,7 @@ const ModalAddNewPet = () => {
     return (
         <>
             <div>
-                <BtnSuccess onClick={openModal} label="Adicionar Pet" />
+                <BtnPrimary onClick={openModal} label="Adicionar Pet" />
             </div>
             <Modal id="showModal" show={modal} toggle={toggle} centered size="lg">
                 <ModalHeader className="bg-soft-info p-3">

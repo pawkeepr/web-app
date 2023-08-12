@@ -5,7 +5,7 @@ import { useFormikContext } from "formik";
 import { useMemo } from "react";
 import MaskedInput from "react-input-mask";
 
-import { BtnSuccess } from "~/Components/atoms/btn";
+import { BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldControlSelectMult from "~/Components/molecules/field-control/field-control-select-mult";
@@ -107,7 +107,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <NumberWhatsApp />
             <div className="flex items-center justify-center mt-1 col-span-full">
 
-                <BtnSuccess
+                <BtnPrimary
                     onClick={nextStep}
                     disabled={!requiredValid}
                     label="Próximo"

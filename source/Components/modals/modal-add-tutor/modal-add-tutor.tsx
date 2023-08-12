@@ -15,19 +15,14 @@ import { getTutors as onGetTutors } from "~/store/actions";
 import 'react-toastify/dist/ReactToastify.css';
 
 // Formik
-import { Formik, useFormikContext } from "formik";
+import { Formik } from "formik";
+import MaskedInput from 'react-input-mask';
 import * as Yup from "yup";
-import BtnAvatar from "~/Components/atoms/btn/btn-avatar";
-import BtnCancel from "~/Components/atoms/btn/btn-cancel";
-import BtnSuccess from "~/Components/atoms/btn/btn-success";
+import { BtnAvatar, BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import { Tutor } from "~/store/tutor/types";
-import MaskedInput from 'react-input-mask';
 
-import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
-import useFetchAddress from "~/hooks/use-fetch-address";
-import { IAddress } from "~/helpers/fetch-address-by-cep";
 
 import ModalBodyFieldsAddress from "./components/molecules/modal-body-fields-address";
 
@@ -40,7 +35,7 @@ const ModalAddTutor = () => {
     const { tutors } = useAppSelector((state) => ({
         tutors: state.Tutor.tutors
     }));
-   
+
     const openModal = useCallback(() => {
         setModal(true);
     }, []);
@@ -86,7 +81,7 @@ const ModalAddTutor = () => {
     return (
         <>
             <div>
-                <BtnSuccess onClick={openModal} label="Adicionar Tutor" />
+                <BtnPrimary onClick={openModal} label="Adicionar Tutor" />
             </div>
             <Modal id="showModal" show={modal} toggle={toggle} centered >
                 <ModalHeader className="bg-soft-info p-3">
@@ -99,9 +94,9 @@ const ModalAddTutor = () => {
                     onSubmit={validation.onSubmit}
                     enableReinitialize
                 >
-                    
+
                     <>
-                        <ModalBody> 
+                        <ModalBody>
 
                             <Row className="g-3">
                                 <Col lg={12}>
@@ -149,13 +144,13 @@ const ModalAddTutor = () => {
                                 </Col>
 
                                 <ModalBodyFieldsAddress />
-                                
+
                             </Row>
                         </ModalBody>
                         <ModalFooter>
                             <div className="hstack gap-2 justify-content-end">
                                 <BtnCancel onClick={() => { setModal(false); }} />
-                                <BtnSuccess
+                                <BtnPrimary
                                     onClick={() => { }}
                                     type="submit"
                                     id="add-btn"
@@ -164,7 +159,7 @@ const ModalAddTutor = () => {
                             </div>
                         </ModalFooter>
                     </>
-                            
+
                 </Formik>
             </Modal>
         </>

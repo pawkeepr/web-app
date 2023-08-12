@@ -5,18 +5,16 @@ import ControlSwitch from "../../../molecules/switch/switch";
 
 import { StepProps } from "../types";
 
-import { FieldArray, useFormikContext, ErrorMessage, Field } from "formik";
-import { BtnAvatar, BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
-import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
-import AvatarPet from "../../../atoms/pet-avatar/pet-avatar";
+import { FieldArray, useFormikContext } from "formik";
+import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
+import { diseases } from "~/common/data/diseases";
 import { exams } from "~/common/data/exams";
 import { vaccines } from "~/common/data/vaccines";
-import { diseases } from "~/common/data/diseases";
+import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 
+import { BsFillTrash3Fill, BsPlusCircleFill } from "react-icons/bs";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete";
-import { BsPlusCircleFill } from "react-icons/bs";
-import { BsFillTrash3Fill } from "react-icons/bs";
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
@@ -63,9 +61,8 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                             className="flex gap-2   items-center col-span-2  "
                                                         >
                                                             <ComboBoxAutocomplete
-                                                                label={`Nome do Medicamento ${
-                                                                    index + 1
-                                                                }`}
+                                                                label={`Nome do Medicamento ${index + 1
+                                                                    }`}
                                                                 name={`medicine[${index}].name_medicine`}
                                                             />
 
@@ -130,9 +127,8 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
 
                                                         <div className="flex flex-col col-span-2">
                                                             <FieldControl
-                                                                label={`Marca ${
-                                                                    index + 1
-                                                                }`}
+                                                                label={`Marca ${index + 1
+                                                                    }`}
                                                                 className="form-control"
                                                                 name={`medicine[${index}].brand`}
                                                                 type="text"
@@ -142,10 +138,9 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                         <div className="grid grid-cols-2 gap-2">
                                                             <div>
                                                                 <FieldControl
-                                                                    label={`Inicio ${
-                                                                        index +
+                                                                    label={`Inicio ${index +
                                                                         1
-                                                                    }`}
+                                                                        }`}
                                                                     className="form-control"
                                                                     name={`medicine[${index}].date_init`}
                                                                     type="date"
@@ -153,13 +148,12 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                             </div>
 
                                                             {enableField ==
-                                                            true ? (
+                                                                true ? (
                                                                 <div className="">
                                                                     <FieldControl
-                                                                        label={`Fim ${
-                                                                            index +
+                                                                        label={`Fim ${index +
                                                                             1
-                                                                        }`}
+                                                                            }`}
                                                                         className="form-control"
                                                                         name={`medicine[${index}].date_end`}
                                                                         type="date"
@@ -171,10 +165,9 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                         <div className="flex items-center justify-center gap-2 w-full col-span-2">
                                                             <div>
                                                                 <FieldControl
-                                                                    label={`Quantidade ${
-                                                                        index +
+                                                                    label={`Quantidade ${index +
                                                                         1
-                                                                    }`}
+                                                                        }`}
                                                                     className="form-control"
                                                                     name={`medicine[${index}].amount`}
                                                                     type="text"
@@ -269,12 +262,11 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                     className="flex gap-2 justify-center items-center"
                                                 >
                                                     <ComboBoxAutocomplete
-                                                        label={`Vacina ${
-                                                            index + 1
-                                                        }`}
+                                                        label={`Vacina ${index + 1
+                                                            }`}
                                                         name={`vaccine${index}`}
                                                         items={vaccines}
-                                                        //   onChange={handleComboboxSelect}
+                                                    //   onChange={handleComboboxSelect}
                                                     />
                                                     {index == 0 && (
                                                         <button
@@ -335,7 +327,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                     label={`Exame ${index + 1}`}
                                                     name={`exam${index}`}
                                                     items={exams}
-                                                    //   onChange={handleComboboxSelect}
+                                                //   onChange={handleComboboxSelect}
                                                 />
 
                                                 <button
@@ -391,9 +383,8 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                             className="flex gap-2 justify-center items-center "
                                                         >
                                                             <ComboBoxAutocomplete
-                                                                label={`Doença ${
-                                                                    index + 1
-                                                                }`}
+                                                                label={`Doença ${index + 1
+                                                                    }`}
                                                                 name={`diseases[${index}].name`}
                                                                 items={diseases}
                                                             />
@@ -446,10 +437,9 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                         <div className="grid grid-cols-2 gap-2">
                                                             <div className="flex flex-col">
                                                                 <FieldControl
-                                                                    label={`Tipo de doença ${
-                                                                        index +
+                                                                    label={`Tipo de doença ${index +
                                                                         1
-                                                                    }`}
+                                                                        }`}
                                                                     className="rounded-md form-control"
                                                                     name={`diseases.${index}.typeDisease`}
                                                                     type="text"
@@ -457,10 +447,9 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                             </div>
                                                             <div className="flex flex-col">
                                                                 <FieldControl
-                                                                    label={`Severidade ${
-                                                                        index +
+                                                                    label={`Severidade ${index +
                                                                         1
-                                                                    }`}
+                                                                        }`}
                                                                     className="rounded-md form-control"
                                                                     name={`diseases.${index}.severity`}
                                                                     type="text"
@@ -468,10 +457,9 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                             </div>
                                                             <div className="flex flex-col col-span-2">
                                                                 <FieldControl
-                                                                    label={`Descrição ${
-                                                                        index +
+                                                                    label={`Descrição ${index +
                                                                         1
-                                                                    }`}
+                                                                        }`}
                                                                     className="rounded-md form-control"
                                                                     component="textarea"
                                                                     name={`diseases.${index}.description`}
@@ -506,9 +494,8 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                             className="flex gap-2   items-center col-span-2  "
                                                         >
                                                             <ComboBoxAutocomplete
-                                                                label={`Nome do Alimento ${
-                                                                    index + 1
-                                                                }`}
+                                                                label={`Nome do Alimento ${index + 1
+                                                                    }`}
                                                                 name={`nutrition[${index}].food_name`}
                                                             />
 
@@ -553,10 +540,9 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                         <div className="grid grid-cols-2 gap-2">
                                                             <div className="flex flex-col col-span-2">
                                                                 <FieldControl
-                                                                    label={`Horário que começa a alimentação ${
-                                                                        index +
+                                                                    label={`Horário que começa a alimentação ${index +
                                                                         1
-                                                                    }`}
+                                                                        }`}
                                                                     className="rounded-md form-control"
                                                                     name={`nutrition[${index}].time_food`}
                                                                     type="text"
@@ -565,10 +551,9 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
 
                                                             <div className="flex  w-full items-center gap-2 col-span-2 ">
                                                                 <FieldControl
-                                                                    label={`Quantidade Alimento ${
-                                                                        index +
+                                                                    label={`Quantidade Alimento ${index +
                                                                         1
-                                                                    }`}
+                                                                        }`}
                                                                     className="rounded-md form-control"
                                                                     name={`nutrition[${index}].amount`}
                                                                     type="text"
@@ -592,10 +577,9 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                             </div>
                                                             <div className="flex items-center justify-center gap-2 col-span-2">
                                                                 <FieldControl
-                                                                    label={`Intervalo ${
-                                                                        index +
+                                                                    label={`Intervalo ${index +
                                                                         1
-                                                                    }`}
+                                                                        }`}
                                                                     className="rounded-md form-control"
                                                                     name={`nutrition[${index}].interval`}
                                                                     type="text"
@@ -680,7 +664,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     <i className="ri-arrow-left-line  align-middle fs-16 me-2"></i>{" "}
                     Voltar
                 </BtnLabel>
-                <BtnSuccess
+                <BtnPrimary
                     type="button"
                     className="btn-label "
                     label="Próximo"
@@ -690,7 +674,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 >
                     <span className="ml-1"> Próximo </span>
                     <i className="ri-arrow-right-line  align-middle fs-16  p-1"></i>
-                </BtnSuccess>
+                </BtnPrimary>
             </div>
         </>
     );

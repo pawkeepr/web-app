@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import MaskedInput from 'react-input-mask';
 import validateAddress from '~/validations/address';
 
-import { BtnLabel, BtnSuccess } from '~/Components/atoms/btn';
+import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn';
 import FieldControl from '~/Components/molecules/field-control/field-control';
 import { IAddress } from '~/helpers/fetch-address-by-cep';
 import useFetchAddress from '~/hooks/use-fetch-address';
@@ -152,7 +152,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
             <div className="mt-1 flex justify-center items-center col-span-full">
                 <BtnLabel onClick={prevStep} label="Anterior" />
-                <BtnSuccess
+                <BtnPrimary
                     onClick={nextStep}
                     disabled={!requiredValid || loading}
                     label="Próximo"

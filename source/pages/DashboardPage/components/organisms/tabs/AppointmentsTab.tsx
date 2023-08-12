@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 import CardVeterinaryAppointments from '~/Components/molecules/card-veterinary-appointments/card-veterinary-appointments';
-import { getVeterinaryAppointments } from '~/store/actions';
+import { getAll } from '~/store/actions';
+import { Data } from '~/store/appointment-vet/types';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
-import { VeterinaryAppointment } from '~/store/veterinary-appointments/types';
 import ListTab from '../templates/ListTab';
 
 import FieldDocumentAppointment from '../../molecules/field-document-appointment';
@@ -11,16 +11,16 @@ import FieldDocumentAppointment from '../../molecules/field-document-appointment
 const VeterinaryAppointmentsTab = () => {
 
     const dispatch = useAppDispatch();
-    const veterinaryAppointments = useAppSelector((state) => state.VeterinaryAppointments.veterinaryAppointments);
+    const veterinaryAppointments = useAppSelector((state) => state.VeterinaryAppointments?.veterinaryAppointments);
 
     useEffect(() => {
-        dispatch(getVeterinaryAppointments());
+        dispatch(getAll());
     }, [dispatch]);
 
     const Modal = () => <FieldDocumentAppointment />
-    const cards = (veterinaryAppointments: VeterinaryAppointment[]) => veterinaryAppointments?.map(veterinaryAppointment => (<CardVeterinaryAppointments key={veterinaryAppointment.id} veterinaryAppointments={veterinaryAppointment} />))
+    const cards = (veterinaryAppointments: Data[]) => veterinaryAppointments?.map(veterinaryAppointment => (<CardVeterinaryAppointments key={veterinaryAppointment.id} veterinaryAppointments={veterinaryAppointment} />))
 
-    const filter = useCallback((deferredVeterinaryAppointments: VeterinaryAppointment[], search: string) => {
+    const filter = useCallback((deferredVeterinaryAppointments: Data[], search: string) => {
         if (!search.trim()) return veterinaryAppointments;
 
         return deferredVeterinaryAppointments.filter(veterinaryAppointment => {

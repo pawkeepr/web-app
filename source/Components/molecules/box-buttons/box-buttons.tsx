@@ -1,4 +1,4 @@
-import { BtnCancel, BtnSuccess } from '~/Components/atoms/btn'
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
 type BoxButtonsProps = {
     onClickCancel: () => void
@@ -33,7 +33,7 @@ const BoxButtons = ({
             }
             {
                 visibleSuccess &&
-                <BtnSuccess
+                <BtnPrimary
                     link={link}
                     onClick={onClickSuccess}
                     disabled={!isValid}

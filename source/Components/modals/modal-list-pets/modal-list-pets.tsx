@@ -2,18 +2,17 @@ import { Dialog, Tab, Transition } from '@headlessui/react'
 import { Formik } from 'formik'
 import { useRouter } from 'next/navigation'
 import { Fragment, useCallback, useEffect, useState } from 'react'
-import LOADING from '~/constants/loading'
 import useFindTutorByDocument from '~/hooks/use-find-tutor-by-document'
 import routes from '~/routes'
-import { addNewPet, resetCreatedPet } from '~/store/actions'
+import { addNew } from '~/store/actions'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import { SpeciesType } from '~/store/pets/speciesType'
-import { Breed, Pet } from '~/store/pets/types'
+import { Breed, IPet } from '~/store/pets/types'
+import StepDocument from './components/organisms/steps/step-document'
 import StepListBreeds from './components/organisms/steps/step-list-breeds'
 import StepListPets from './components/organisms/steps/step-list-pets'
 import StepListSpecies from './components/organisms/steps/step-list-species'
 import StepLoading from './components/organisms/steps/step-loading'
-import StepDocument from './components/organisms/steps/step-document'
 
 type onChangeOpen = (arg: boolean) => void
 
@@ -55,7 +54,7 @@ const ModalListPets = ({
     const tutor = useFindTutorByDocument(document);
     const router = useRouter()
 
-    const handleNavigate = useCallback((pet: Pet) => {
+    const handleNavigate = useCallback((pet: IPet) => {
         dispatch(resetCreatedPet())
         setTimeout(() => {
             router.push(`${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`)
@@ -69,7 +68,7 @@ const ModalListPets = ({
         }
 
         return () => {
-            dispatch(resetCreatedPet())
+            // dispatch(resetCreatedPet())
         }
 
     }, [isPetSuccess, isPetCreated, handleNavigate, dispatch])
@@ -82,7 +81,7 @@ const ModalListPets = ({
         ownerEmergencyContact: tutor
     }
 
-    const pets = useAppSelector(state => state.Pets.pets.filter(pet => {
+    const pets = useAppSelector(state => state.Pets?.pets?.filter(pet => {
         return pet?.ownerEmergencyContact?.document === document.replace(/\D/g, '')
     }))
 
@@ -91,7 +90,7 @@ const ModalListPets = ({
     }
 
     const handleSubmit = useCallback((values: InitialValues) => {
-        dispatch(addNewPet(values))
+        dispatch(addNew(values))
     }, [dispatch])
 
     const handleCancel = () => {
@@ -108,7 +107,7 @@ const ModalListPets = ({
     }
 
     const openModal = () => {
-        dispatch(resetCreatedPet())
+        // dispatch(resetCreatedPet())
         onChangeOpen(true)
     }
 

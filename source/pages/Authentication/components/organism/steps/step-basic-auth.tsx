@@ -3,7 +3,7 @@ import { useFormikContext } from 'formik';
 import { useMemo } from 'react';
 
 
-import { BtnSuccess } from '~/Components/atoms/btn';
+import { BtnPrimary } from '~/Components/atoms/btn';
 import FieldControl from '~/Components/molecules/field-control';
 import { AccountSignUp } from '~/store/auth/register/types';
 
@@ -101,7 +101,7 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                 }
             />
             <div className='flex  items-center justify-center'>
-                <BtnSuccess
+                <BtnPrimary
                     label="Finalizar cadastro"
                     type="submit"
                     className="w-full"

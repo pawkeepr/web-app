@@ -1,5 +1,5 @@
 import Alert from 'react-bootstrap/Alert';
-import { BtnSuccess } from "~/Components/atoms/btn";
+import { BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
 import { FormEventHandler } from "react";
@@ -39,13 +39,13 @@ const StepPassword = ({ handleSubmit, isValid }: StepPasswordProps) => {
             </div>
 
             <div className="text-center mt-4 w-full ">
-                <BtnSuccess
+                <BtnPrimary
                     type="submit"
                     className="w-full"
                     disabled={!isValid}
                 >
                     Redefinir Senha
-                </BtnSuccess>
+                </BtnPrimary>
             </div>
         </Form>
     )
