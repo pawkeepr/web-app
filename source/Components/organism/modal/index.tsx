@@ -20,8 +20,9 @@ const Modal = ({
             className={twMerge(`
                 relative
                 z-50
-                popup-content
-                w-[800px] flex flex-col overflow-y-auto
+                popup-content mobile:overflow-hidden
+                w-[800px] flex flex-col 
+                h-[600px]
                 mobile:!w-screen mobile:!h-screen mobile:rounded-none 
 	            overflow-auto px-4 py-10 bg-gray-50 dark:bg-dark-500
 	            shadow-2xl rounded-md
