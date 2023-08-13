@@ -41,9 +41,15 @@ export interface Data extends IAppointmentVet {
 
 }
 
+export type IAppointmentVetData = {
+    all_scheduled: Data[];
+    all_scheduled_confirmed: Data[];
+    all_scheduled_canceled: Data[];
+    all_scheduled_confirmed_done: Data[];
+}
+
 export type InitialState = {
-    data: Data[];
-    inatives: Data[];
+    data: IAppointmentVetData;
     isLoading: LOADING;
     isLoadingOnlyOne: LOADING;
     error: string | null;

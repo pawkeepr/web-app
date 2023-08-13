@@ -1,4 +1,4 @@
-const optionsCookies = {
+const cookies = {
     token: {
         name: 'pawkeepr.token',
         expires: 60 * 60 * 1, // 1 hour
@@ -13,4 +13,4 @@ const optionsCookies = {
     }
 }
 
-export default optionsCookies
+export default cookies

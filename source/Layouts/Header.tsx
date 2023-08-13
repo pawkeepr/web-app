@@ -11,6 +11,8 @@ import { useAppDispatch } from "~/store/hooks";
 import FullScreenDropdown from "../Components/Common/full-screen-dropdown";
 import LightDark from "../Components/Common/light-dark";
 
+import Bars3CenterLeftIcon from "@heroicons/react/24/solid/Bars3CenterLeftIcon";
+
 import Drawer from "~/Components/organism/drawer";
 
 type HeaderProps = {
@@ -71,7 +73,7 @@ const Header = ({ headerClass }: HeaderProps) => {
 
     return (
         <header
-            id="page-topbar"
+            id="page-topBar"
             className={`dark:!bg-primary-700 !bg-primary-500 ${headerClass}`}
             ref={divRef}
         >
@@ -84,11 +86,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                             className="px-2 header-item topnav-hamburger"
                             id="topnav-hamburger-icon"
                         >
-                            <span className="hamburger-icon">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </span>
+                            <Bars3CenterLeftIcon className="h-6 w-6 text-white " />
                         </button>
 
                         <Drawer

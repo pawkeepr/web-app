@@ -76,7 +76,7 @@
     }
 }
 
-.email-topbar-link {
+.email-topBar-link {
     .btn-ghost-secondary {
         color: $text-muted;
 
@@ -92,7 +92,7 @@
     transition: all 0.2s;
 }
 
-.unreadConversations-alert{
+.unreadConversations-alert {
     position: fixed;
     bottom: $footer-height;
     left: 50%;
@@ -238,7 +238,7 @@
                 overflow: hidden;
                 white-space: nowrap;
 
-                .teaser{
+                .teaser {
                     color: var(--#{$prefix}gray-600);
                 }
             }
@@ -268,18 +268,19 @@
     }
 }
 
-#unreadConversations, #email-topbar-actions{
+#unreadConversations,
+#email-topBar-actions {
     display: none;
 }
 
-#elmLoader{
+#elmLoader {
     display: flex;
     width: 100%;
     justify-content: center;
-    align-items: center; 
-    position: absolute; 
-    left: 0; 
-    top: 0; 
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
     bottom: 0;
 }
 
@@ -321,7 +322,7 @@
     }
 }
 
-.email-chat-detail{
+.email-chat-detail {
     width: 350px;
     position: fixed;
     max-width: 100%;
@@ -329,7 +330,8 @@
     right: $footer-height;
     z-index: 9;
     display: none;
-    .card{
+
+    .card {
         box-shadow: $box-shadow-lg;
     }
 
@@ -340,38 +342,43 @@
 }
 
 // for horizontal layout
-[data-layout="horizontal"]{
-    .email-wrapper{
+[data-layout="horizontal"] {
+    .email-wrapper {
         @media (min-width: 1025px) {
             margin-left: 0 !important;
             margin-right: 0 !important;
         }
+
         @media (max-width: 991.98px) {
             margin-top: 0 !important;
         }
     }
 
-    .email-menu-sidebar{
+    .email-menu-sidebar {
         height: calc(100vh - #{$header-height} - #{$footer-height} - 54px);
+
         @media (max-width: 991.98px) {
             height: 100vh
         }
-        .email-menu-sidebar-scroll{
+
+        .email-menu-sidebar-scroll {
             height: calc(100vh - 330px);
+
             @media (max-width: 991.98px) {
                 height: calc(100vh - 150px)
             }
         }
     }
-    
+
     .message-list-content {
         height: calc(100vh - 289px);
-        
+
     }
 
-    .email-detail-content-scroll{
+    .email-detail-content-scroll {
         height: calc(100vh - 435px);
-        @media (max-width: 1349.98px){
+
+        @media (max-width: 1349.98px) {
             height: calc(100vh - 252px);
         }
     }

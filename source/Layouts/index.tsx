@@ -1,8 +1,10 @@
 'use client'
 
+import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from 'react';
-import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
+
+import cookies from '~/constants/cookies';
 
 //import Components
 import Footer from './Footer';
@@ -18,12 +20,13 @@ import {
     changeSideBarView,
     changeSidebarImageType,
     changeSidebarTheme,
-    changeTopbarTheme
+    changeTopBarTheme,
 } from "../store/layouts/slice";
 
 //redux
-import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import FieldDocumentAppointment from "~/pages/DashboardPage/components/molecules/field-document-appointment";
+import { useAppDispatch, useAppSelector } from "~/store/hooks";
+import { getCookie } from '~/utils/cookies-utils';
 
 
 type LayoutProps = {
@@ -39,23 +42,17 @@ const Layout = ({ children }: LayoutProps) => {
         layoutModeType,
         layoutWidthType,
         layoutPositionType,
-        topbarThemeType,
+        topBarThemeType,
         leftSideBarSizeType,
         leftSidebarViewType,
         leftSidebarImageType,
         headerSize,
-    } = useAppSelector(state => ({
-        layoutType: state.Layout.layoutType,
-        leftSidebarType: state.Layout.leftSidebarType,
-        layoutModeType: state.Layout.layoutModeType,
-        layoutWidthType: state.Layout.layoutWidthType,
-        layoutPositionType: state.Layout.layoutPositionType,
-        topbarThemeType: state.Layout.topbarThemeType,
-        leftSideBarSizeType: state.Layout.leftSideBarSizeType,
-        leftSidebarViewType: state.Layout.leftSidebarViewType,
-        leftSidebarImageType: state.Layout.leftSidebarImageType,
-        headerSize: state.Layout.headerSize,
-    }));
+    } = useAppSelector(state => state.Layout);
+
+    useEffect(() => {
+        const mode = getCookie(cookies.layoutMode.name)
+        dispatch(changeLayoutMode(mode))
+    }, []);
 
     /*
     layout settings
@@ -67,7 +64,7 @@ const Layout = ({ children }: LayoutProps) => {
             layoutModeType ||
             layoutWidthType ||
             layoutPositionType ||
-            topbarThemeType ||
+            topBarThemeType ||
             leftSideBarSizeType ||
             leftSidebarViewType ||
             leftSidebarImageType
@@ -78,7 +75,7 @@ const Layout = ({ children }: LayoutProps) => {
             dispatch(changeLayoutMode(layoutModeType));
             dispatch(changeLayoutWidth(layoutWidthType));
             dispatch(changeLayoutPosition(layoutPositionType));
-            dispatch(changeTopbarTheme(topbarThemeType));
+            dispatch(changeTopBarTheme(topBarThemeType));
             dispatch(changeLayout(layoutType));
             dispatch(changeSidebarImageType(leftSidebarImageType))
         }
@@ -88,7 +85,7 @@ const Layout = ({ children }: LayoutProps) => {
         layoutModeType,
         layoutWidthType,
         layoutPositionType,
-        topbarThemeType,
+        topBarThemeType,
         leftSideBarSizeType,
         leftSidebarViewType,
         leftSidebarImageType,
@@ -104,7 +101,7 @@ const Layout = ({ children }: LayoutProps) => {
     function scrollNavigation() {
         const scrollUp = document.documentElement.scrollTop;
         if (scrollUp > 50) {
-            setHeaderClass("topbar-shadow");
+            setHeaderClass("topBar-shadow");
         } else {
             setHeaderClass("");
         }
@@ -137,7 +134,7 @@ const Layout = ({ children }: LayoutProps) => {
                                 <PlusIcon className="w-8 h-8 text-gray-50" />
                             </button>
                         )
-                        }
+                    }
                 </FieldDocumentAppointment>
                 {children}
                 <Footer />
