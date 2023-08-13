@@ -1,5 +1,4 @@
 import { all, fork } from "redux-saga/effects";
-import ConsultsSagas from './consults/sagas';
 //layout
 import LoginSagas from "./auth/login/sagas";
 import LayoutSaga from "./layouts/saga";
@@ -44,7 +43,6 @@ export default function* rootSaga() {
         fork(AppointmentVetSagas),
         fork(calendarSaga),
         fork(crmSaga),
-        fork(ConsultsSagas),
         fork(teamSaga),
         fork(LoginSagas),
     ]);

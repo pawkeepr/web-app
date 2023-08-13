@@ -53,17 +53,7 @@ export function* onGetAllScheduledConfirmedDone({ payload }: PayloadAction<Data[
     }
 }
 
-// export function* onUpdate({ payload }: PayloadAction<{ appointment_id: string, data: Partial<Data> }>) {
-//     try {
-//         const { appointment_id, data: appointment } = payload
-//         const { data } = yield call(updateAppointmentVet, appointment, appointment_id);
-//         yield put(updateSuccess(data));
-//         yield successToast('Alterado com sucesso!')
-//     } catch (error) {
-//         yield errorToast('Erro ao alterar!')
-//         yield put(updateFail((error as Error).message));
-//     }
-// }
+
 
 export function* watchGetAllScheduled() {
     yield takeEvery(ACTION_GET_ALL_SCHEDULED, onGetAllScheduled);
@@ -81,9 +71,6 @@ export function* watchGetAllScheduledConfirmedDone() {
     yield takeEvery(ACTION_GET_ALL_SCHEDULED_CONFIRMED_DONE, onGetAllScheduledConfirmedDone);
 }
 
-// export function* watchUpdate() {
-//     yield takeEvery(ACTION_UPDATE, onUpdate);
-// }
 
 
 function* crmSaga() {

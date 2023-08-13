@@ -20,12 +20,32 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { errorToast, successToast } from "../helpers/toast";
 import {
     ACTION_ADD_NEW,
-    ACTION_GET_ALL, ACTION_UPDATE, Data
+    ACTION_GET_ALL, ACTION_UPDATE, Data,
+    IAppointmentVetData
 } from "./types";
+
+import {
+    getAllScheduledCanceledSuccess,
+    getAllScheduledConfirmedDoneSuccess,
+    getAllScheduledConfirmedSuccess,
+    getAllScheduledSuccess
+} from '../scheduled/actions';
 
 export function* onGetAll() {
     try {
         const { data } = yield call(getAllAppointmentsVet);
+        const {
+            all_scheduled,
+            all_scheduled_canceled,
+            all_scheduled_confirmed,
+            all_scheduled_confirmed_done
+        } = data as IAppointmentVetData
+
+        yield put(getAllScheduledSuccess(all_scheduled));
+        yield put(getAllScheduledCanceledSuccess(all_scheduled_canceled));
+        yield put(getAllScheduledConfirmedSuccess(all_scheduled_confirmed));
+        yield put(getAllScheduledConfirmedDoneSuccess(all_scheduled_confirmed_done));
+
         yield put(getAllSuccess(data));
     } catch (error) {
         yield put(getAllFail(error as any));

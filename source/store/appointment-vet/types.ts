@@ -49,7 +49,6 @@ export type IAppointmentVetData = {
 }
 
 export type InitialState = {
-    data: IAppointmentVetData;
     isLoading: LOADING;
     isLoadingOnlyOne: LOADING;
     error: string | null;

@@ -2,13 +2,14 @@
 import { Profile } from '~/store/auth/profile/types';
 import { api } from '../api';
 
+import { IAppointmentVetData } from '~/store/appointment-vet/types';
 import * as urls from './urls';
 
 export const createProfileVet = async (data: Profile) => api.post(urls.VET_CREATE_PROFILE(), data);
 export const updateProfileVet = async (data: Profile, user_id: string) => api.post(urls.VET_UPDATE_PROFILE(), data, { params: { user_id } });
 export const getVetProfile = async () => api.get(urls.VET_GET_PROFILE());
 
-export const getAllAppointmentsVet = async () => api.get(urls.APPOINTMENT_GET_ALL());
+export const getAllAppointmentsVet = async () => api.get<IAppointmentVetData>(urls.APPOINTMENT_GET_ALL());
 export const getAppointmentVet = async (id_appointment: string) => api.get(urls.APPOINTMENT_GET_BY_ID(), { params: { id_appointment } });
 export const createAppointmentVet = async (data: any) => api.post(urls.APPOINTMENT_CREATE(), data);
 export const updateAppointmentVet = async (data: any, id_appointment: string) => api.post(urls.APPOINTMENT_UPDATE(), data, { params: { id_appointment } });

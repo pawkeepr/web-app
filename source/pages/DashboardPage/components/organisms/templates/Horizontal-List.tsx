@@ -2,14 +2,11 @@
 import {
     Card,
     CardBody,
-    CardHeader,
     Col,
     Nav,
     NavItem,
     NavLink,
-    Row,
-    TabContent,
-    TabPane
+    Row
 } from "reactstrap";
 // import axios from 'axios';
 
@@ -22,13 +19,12 @@ import {
 //       console.error('Ocorreu um erro na requisição:', error);
 //     }
 //   }
-  
+
 //   fetchDataFromAPI();
 
 import cn from "classnames";
 import { useEffect, useState } from "react";
 
-import { getAll } from "~/store/consults/actions";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import StepScheduledAll from "../steps/step-scheduled-all";
 import StepScheduledCanceled from "../steps/step-scheduled-canceled";
@@ -57,7 +53,7 @@ const items: TabItem[] = [
         href: "#All",
         Component: StepScheduledAll
     },
-     {
+    {
         id: 3,
         title: "Consultas Finalizadas",
         href: "#Done",
@@ -102,12 +98,6 @@ const HorizontalTabs = () => {
             setMaxItemsToShow(items.length);
         };
     }, []);
-    
-    useEffect(() => {
-        dispatch(getAll());
-    }, [])
-
-
 
     return (
         <Row>
