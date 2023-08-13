@@ -8,10 +8,13 @@ import landingPage02 from "~/assets/images/landing-page02.webp";
 // Import Images
 
 import Image from "next/image";
+import HeaderTitle from "~/Components/atoms/header-title";
 
 const Home = () => {
     return (
         <>
+            <HeaderTitle title='Bem Vindo' />
+
             <section className="section hero-section bg-primary" id="hero">
                 <div className="bg-overlay bg-overlay-pattern"></div>
 
