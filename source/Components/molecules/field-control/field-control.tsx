@@ -12,7 +12,7 @@ const FieldControl = ({
     label,
     children,
     required = false,
-    component,
+    component = 'input',
     startChildren,
     separator = ':',
     disabledError = false,
@@ -46,8 +46,6 @@ const FieldControl = ({
     const id = props.name || props.id;
 
     const InputComponent = component as any;
-    const display =
-        !disabledError && meta.touched && !!meta.error ? "block" : "none";
 
     const onChange = (e: any) => {
         props.onChange?.(e);
@@ -66,7 +64,7 @@ const FieldControl = ({
     }
 
     return (
-        <div className={divClassName}>
+        <div className={twMerge('pb-4 relative', divClassName)}>
             {!!label && (
                 <label
                     htmlFor={id}
@@ -109,16 +107,9 @@ const FieldControl = ({
             <ErrMessage
                 message={meta.error?.toString() as string}
                 data-testid={`err-${id}`}
-                style={{
-                    display,
-                }}
             />
         </div>
     );
-};
-
-FieldControl.defaultProps = {
-    component: "input",
 };
 
 export default FieldControl;

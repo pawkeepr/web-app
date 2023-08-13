@@ -11,14 +11,15 @@ const LightDark = () => {
     const { mode, onHandleChangeLayout } = useChangeLayoutMode()
     const isLightMode = mode === layoutModeTypes.LIGHT_MODE;
 
-    const style = 'w-7 h-7 text-gray-200 dark:text-gray-200'
 
     return (
-        <div className="ms-1 header-item d-none d-sm-flex">
+        <div className="flex">
             <button
                 onClick={onHandleChangeLayout}
                 type="button" className="btn-icon">
-                {isLightMode ? <MoonIcon className={style} /> : <SunIcon className={style} />}
+                <span className="w-7 h-7 text-gray-200 dark:text-gray-200">
+                    {isLightMode ? <MoonIcon /> : <SunIcon />}
+                </span>
             </button>
         </div>
     );

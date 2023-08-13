@@ -1,10 +1,9 @@
-import React,{ useCallback, useState } from 'react';
 import { useFormikContext } from "formik";
-import FieldControl from "~/Components/molecules/field-control/field-control";
-import Col from 'react-bootstrap/Col';
+import { useCallback, useState } from 'react';
 import MaskedInput from 'react-input-mask';
-import useFetchAddress from "~/hooks/use-fetch-address";
+import FieldControl from "~/Components/molecules/field-control/field-control";
 import { IAddress } from "~/helpers/fetch-address-by-cep";
+import useFetchAddress from "~/hooks/use-fetch-address";
 
 const ModalBodyFieldsAddress = () => {
     const { values, setFieldValue } = useFormikContext<any>();
@@ -13,9 +12,9 @@ const ModalBodyFieldsAddress = () => {
     const updateAddressFields = useCallback(
         (address: IAddress) => {
             if (!address) return;
-            
+
             const { uf, localidade, bairro, logradouro, complemento } = address;
-            
+
             setFieldValue('state', uf || '')
             setFieldValue('city', localidade || '')
             setFieldValue('neighborhood', bairro || '')
@@ -33,14 +32,13 @@ const ModalBodyFieldsAddress = () => {
         [setFieldValue]
     )
 
-    const { loading } = useFetchAddress({ 
+    const { loading } = useFetchAddress({
         zipCode: values?.cep || '',
         onChangeAddress: updateAddressFields,
     })
 
     return (
-    <>                        
-        <Col lg={3}>
+        <>
             <div>
                 <FieldControl
                     label="CEP"
@@ -54,9 +52,7 @@ const ModalBodyFieldsAddress = () => {
                 />
 
             </div>
-        </Col>
 
-        <Col lg={4}>
             <FieldControl
                 divClassName='my-1'
                 className="form-control"
@@ -67,22 +63,18 @@ const ModalBodyFieldsAddress = () => {
                 disabled={disabledInputs.state || loading}
                 required
             />
-        </ Col>
 
-        <Col lg={5}>
             <FieldControl
                 divClassName='my-1'
                 className="form-control"
                 type="text"
                 label="Cidade"
-                name="city"       
+                name="city"
                 disabled={disabledInputs.city || loading}
-                placeholder={loading ? 'buscando...' : 'Cidade'}                      
+                placeholder={loading ? 'buscando...' : 'Cidade'}
                 required
             />
-        </Col>
 
-        <Col lg={5}>
             <FieldControl
                 divClassName='my-1'
                 className="form-control"
@@ -93,9 +85,7 @@ const ModalBodyFieldsAddress = () => {
                 placeholder={loading ? 'buscando...' : 'Bairro'}
                 required
             />
-        </Col>
 
-        <Col lg={7}>
             <FieldControl
                 divClassName='my-1'
                 label='Rua'
@@ -107,9 +97,7 @@ const ModalBodyFieldsAddress = () => {
                 required
                 disabledError
             />
-        </Col>
 
-        <Col lg={12}>
             <FieldControl
                 divClassName='my-1'
                 className="form-control"
@@ -119,9 +107,8 @@ const ModalBodyFieldsAddress = () => {
                 disabled={disabledInputs.complement || loading}
                 placeholder={loading ? 'buscando...' : 'Complemento (opcional)'}
             />
-        </Col>
-    </>
-  )
+        </>
+    )
 };
 
 export default ModalBodyFieldsAddress;

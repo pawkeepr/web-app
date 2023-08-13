@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import ModalAddTutor from '~/Components/modals/modal-add-tutor';
+import AddTutorModal from '~/Components/modals/add-tutor-modal';
 import CardTutors from '~/Components/molecules/card-tutors';
 
 import { useAppSelector } from '~/store/hooks';
@@ -10,7 +10,7 @@ import { Data } from '~/store/tutors/types';
 const TutorsTab = () => {
     const tutors = useAppSelector((state) => state.Tutor.data);
 
-    const Modal = () => <ModalAddTutor />
+    const Modal = () => <AddTutorModal />
     const cards = (tutors: Data[]) => tutors?.map(tutor => (<CardTutors key={tutor.id} tutor={tutor} />))
 
     const filter = useCallback((deferredTutors: Data[], search: string) => {

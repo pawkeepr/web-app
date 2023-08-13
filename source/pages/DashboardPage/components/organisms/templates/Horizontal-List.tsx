@@ -111,7 +111,7 @@ const HorizontalTabs = () => {
                                     className={cn(
                                         'mb-4 step-arrow-nav',
                                         {
-                                            'fixed top-0 left-0 right-0 z-[100] bg-white': isFixed,
+                                            'fixed top-0 left-0 right-0 z-10 bg-white': isFixed,
                                         },
                                         'md:static'
                                     )}>

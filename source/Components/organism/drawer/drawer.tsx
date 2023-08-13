@@ -26,7 +26,8 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                 top-0 bottom-0 left-0 fixed
                 transition-all duration-500 ease-out
                 z-[20] flex flex-col
-                h-full
+                mobile:!z-50
+                h-full  
                 px-4 py-8
                 w-72
                 overflow-y-auto bg-white dark:!bg-dark-500

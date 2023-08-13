@@ -109,15 +109,17 @@ const Layout = ({ children }: LayoutProps) => {
 
 
     return (
-        <div id="mobile:gap-2 relative">
+        <div id="relative">
             <Header headerClass={headerClass} />
             {/* <Sidebar layoutType={layoutType} /> */}
+
             <div
                 style={{
                     paddingTop: `${headerSize.height}px`
                 }}
-                className="mobile:mt-2 px-24 mobile:px-4 relative"
+                className="px-24 mobile:px-4 relative"
             >
+                {children}
                 <FieldDocumentAppointment selectedTabInitial={0}>
                     {
                         ({ onChangeOpen }) => (
@@ -136,7 +138,7 @@ const Layout = ({ children }: LayoutProps) => {
                         )
                     }
                 </FieldDocumentAppointment>
-                {children}
+
                 <Footer />
             </div>
         </div>
