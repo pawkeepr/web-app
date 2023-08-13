@@ -2,6 +2,8 @@ import { RefAttributes } from 'react'
 import Popup from 'reactjs-popup'
 import { PopupActions, PopupProps } from 'reactjs-popup/dist/types'
 
+import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
+
 import { twMerge } from 'tailwind-merge'
 
 const Modal = ({
@@ -16,17 +18,23 @@ const Modal = ({
         overlayStyle={{ background: 'rgba(0,0,0,0.1)' }} closeOnEscape={false} {...props}>
         <div
             className={twMerge(`
+                relative
                 z-50
-                dark:bg-dark-500
                 popup-content
-                max-h-[95vh] w-[800px] flex flex-col overflow-y-auto
-                mobile:!w-full
-	            overflow-x-hidden px-4 py-8 bg-white
+                w-[800px] flex flex-col overflow-y-auto
+                mobile:!w-screen mobile:!h-screen mobile:rounded-none 
+	            overflow-auto px-4 py-10 bg-gray-50 dark:bg-dark-500
 	            shadow-2xl rounded-md
                 `,
                 className
             )}
         >
+            <button
+                className="absolute top-4 right-4"
+                onClick={() => props.onClose?.()}
+                aria-label="Close modal">
+                <XMarkIcon className="w-6 h-6 text-gray-600" />
+            </button>
             {props.children}
         </div>
     </Popup>
