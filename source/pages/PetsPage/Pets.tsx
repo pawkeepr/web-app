@@ -3,23 +3,22 @@
 import { useEffect } from "react";
 import { useAppDispatch } from "~/store/hooks";
 import DefaultLayout from "../_layouts/dashboard/dashboard";
-import AppointmentsTab from "./AppointmentsTab";
+import PetsTab from "./PetsTab";
 
-import { getAll } from '~/store/appointment-vet/actions';
+import { getAll } from '~/store/pets/actions';
 
-const DashboardPage = () => {
+const PetsPage = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(getAll())
     }, []);
 
-
     return (
         <DefaultLayout title="Dashboard">
-            <AppointmentsTab />
+            <PetsTab />
         </DefaultLayout>
     );
 };
 
-export default DashboardPage;
+export default PetsPage;

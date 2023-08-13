@@ -24,7 +24,7 @@ import {
 } from "../store/layouts/slice";
 
 //redux
-import FieldDocumentAppointment from "~/pages/DashboardPage/components/molecules/field-document-appointment";
+import FieldDocumentAppointment from "~/Components/molecules/field-document-appointment";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import { getCookie } from '~/utils/cookies-utils';
 

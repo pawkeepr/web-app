@@ -23,11 +23,11 @@ import { BtnPrimary } from "~/Components/atoms/btn";
 import BoxButtons from "~/Components/molecules/box-buttons";
 import FieldDocument from "~/Components/molecules/field-document";
 import { useAppDispatch } from '~/store/hooks';
-import { addNewPet } from '~/store/pets/actions';
-import { GenderPet, Pet } from '~/store/pets/types';
+import { addNew } from '~/store/pets/actions';
+import { Data, GenderPet } from '~/store/pets/types';
 import ComboBoxFields from "./components/organisms/combo-box-fields/combo-box-fields";
 
-type InitialValues = Partial<Nullable<Pet>>
+type InitialValues = Partial<Nullable<Data>>
 
 import RadioGroupCustom from "~/Components/molecules/radio-group/radio-group";
 import validationPet from '~/validations/pet';
@@ -68,7 +68,7 @@ const ModalAddNewPet = () => {
         values: InitialValues,
         { resetForm }: FormikHelpers<InitialValues>
     ) => {
-        dispatch(addNewPet(values));
+        dispatch(addNew(values));
         resetForm()
         closeModal();
     }
@@ -80,9 +80,6 @@ const ModalAddNewPet = () => {
         castrated: false,
         avatar: null,
         dateOfBirth: null,
-        ownerEmergencyContact: {
-            document: '',
-        },
         gender: GenderPet.unknown,
         bloodType: '' as any,
     }

@@ -19,7 +19,7 @@ import chat from "./chat/reducer";
 import Tasks from "./tasks/reducer";
 
 //Tutor
-import Tutor from "./tutor/slice";
+import Tutor from "./tutors/slice";
 
 // Pets
 import Pets from "./pets/slice";

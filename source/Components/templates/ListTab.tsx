@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import SearchInput from "~/Components/molecules/search-input";
 
-import HorizontalTabs from "../templates/Horizontal-List";
+import HorizontalTabs from "../../pages/DashboardPage/components/organisms/templates/Horizontal-List";
 
 
 interface ListTabProps<T> {
@@ -39,7 +39,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
 
     return (
         <React.Fragment>
-                <HorizontalTabs/>
+            <HorizontalTabs />
             <div
                 className="
                 md:w-full
@@ -50,7 +50,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                 justify-between
                 "
             >
-                
+
                 <div
                     className="
                     mt-3 
@@ -75,7 +75,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                 </div>
             </div>
             <div className="team-list list-view-filter">
-            <div
+                <div
                     className="
                     mt-1 
                     mb-2

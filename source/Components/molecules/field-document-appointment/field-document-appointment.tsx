@@ -1,9 +1,9 @@
-import { Form, Formik } from "formik";
-import FieldDocument from "~/Components/molecules/field-document/field-document";
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
+import { Form, Formik } from "formik";
 import { startTransition } from "react";
 import ModalListPets from "~/Components/modals/modal-list-pets/modal-list-pets";
-import isValidCPF  from "~/validations/cpf";
+import FieldDocument from "~/Components/molecules/field-document/field-document";
+import isValidCPF from "~/validations/cpf";
 
 type InitialValues = {
     document: string;

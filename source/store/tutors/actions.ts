@@ -33,8 +33,4 @@ export const deleteOnly = createAction<{ id: string }>(ACTION_DELETE);
 export const deleteSuccess = createAction<{ id: string }>(ACTION_DELETE_SUCCESS);
 export const deleteFail = createAction<string>(ACTION_DELETE_FAIL);
 
-// export const toggleStatus = createAction<{ id: string, data: Pick<Data, 'id'> }>(ACTION_TOGGLE_STATUS);
-// export const toggleStatusSuccess = createAction<Data>(ACTION_TOGGLE_STATUS_SUCCESS);
-// export const toggleStatusFail = createAction<string>(ACTION_TOGGLE_STATUS_FAIL);
-
 export const stopLoading = createAction(ACTION_STOP_LOADING);

@@ -2,7 +2,7 @@ import logoDark from "~/assets/images/logo-dark.png";
 
 import ArrowLeftCircleIcon from "@heroicons/react/20/solid/ArrowLeftCircleIcon";
 import Cog8ToothIcon from "@heroicons/react/24/solid/Cog8ToothIcon";
-import NewspaperIcon from "@heroicons/react/24/solid/NewspaperIcon";
+import DashboardIcon from '@heroicons/react/24/solid/HomeIcon';
 import UserIcon from "@heroicons/react/24/solid/UserIcon";
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
 import { MdPets } from 'react-icons/md';
@@ -52,41 +52,52 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
             </div>
 
             <div className="flex flex-col items-center mt-6 -mx-2">
-                <h4 className="mx-2 mt-2 font-medium ">
+                <h4 className="mx-2 mt-4 font-semibold">
                     Olá Veterinária
                 </h4>
             </div>
 
             <div className="flex flex-col justify-between flex-1 mt-6">
                 <nav>
-                    <a
-                        className="flex items-center px-4 py-2 rounded-lg"
-                        href="#"
+                    <Link
+                        className="flex items-center px-4 py-2 rounded-lg mt-4"
+                        href="/dashboard"
+                    >
+                        <DashboardIcon className="w-5 h-5" />
+
+                        <span className="mx-4 font-medium">
+                            Consultas
+                        </span>
+                    </Link>
+
+                    <Link
+                        className="flex items-center px-4 py-2 rounded-lg mt-4"
+                        href="/dashboard/tutors"
                     >
                         <UserIcon className="w-5 h-5" />
 
                         <span className="mx-4 font-medium">
                             Tutores
                         </span>
-                    </a>
+                    </Link>
 
-                    <a
+                    <Link
                         className="flex items-center px-4 py-2 mt-4"
-                        href="#"
+                        href="/dashboard/pets"
                     >
                         <MdPets className="w-5 h-5" />
 
                         <span className="mx-4 font-medium">Pets</span>
-                    </a>
+                    </Link>
 
-                    <a
+                    {/* <Link
                         className="flex items-center px-4 py-2 mt-4 "
-                        href="#"
+                        href="/about"
                     >
                         <NewspaperIcon className="w-5 h-5" />
 
                         <span className="mx-4 font-medium">Sobre</span>
-                    </a>
+                    </Link> */}
 
                     <a
                         className="flex items-center px-4 py-2 mt-4 "

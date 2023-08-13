@@ -1,25 +1,19 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import ModalAddTutor from '~/Components/modals/modal-add-tutor';
 import CardTutors from '~/Components/molecules/card-tutors';
 
-import { useAppDispatch, useAppSelector } from '~/store/hooks';
+import { useAppSelector } from '~/store/hooks';
 
-import { getTutors } from '~/store/actions';
-import { Tutor } from '~/store/tutor/types';
-import ListTab from '../templates/ListTab';
+import ListTab from '~/Components/templates/ListTab';
+import { Data } from '~/store/tutors/types';
 
 const TutorsTab = () => {
-    const dispatch = useAppDispatch();
-    const tutors = useAppSelector((state) => state.Tutor.tutors);
-
-    useEffect(() => {
-        dispatch(getTutors());
-    }, [dispatch]);
+    const tutors = useAppSelector((state) => state.Tutor.data);
 
     const Modal = () => <ModalAddTutor />
-    const cards = (tutors: Tutor[]) => tutors?.map(tutor => (<CardTutors key={tutor.id} tutor={tutor} />))
+    const cards = (tutors: Data[]) => tutors?.map(tutor => (<CardTutors key={tutor.id} tutor={tutor} />))
 
-    const filter = useCallback((deferredTutors: Tutor[], search: string) => {
+    const filter = useCallback((deferredTutors: Data[], search: string) => {
 
         if (!search.trim()) return tutors;
 

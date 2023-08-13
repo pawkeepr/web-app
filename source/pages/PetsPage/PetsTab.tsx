@@ -1,24 +1,19 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import ModalAddPet from '~/Components/modals/modal-add-pet';
 import CardPets from '~/Components/molecules/card-pets';
-import { getPets } from '~/store/actions';
-import { useAppDispatch, useAppSelector } from '~/store/hooks';
-import { Pet } from '~/store/pets/types';
-import ListTab from '../templates/ListTab';
+import ListTab from '~/Components/templates/ListTab';
+import { useAppSelector } from '~/store/hooks';
+import { Data } from '~/store/pets/types';
 
 const PetsTab = () => {
 
-    const dispatch = useAppDispatch();
-    const pets = useAppSelector((state) => state.Pets.pets);
+    const pets = useAppSelector((state) => state.Pets.data);
 
-    useEffect(() => {
-        dispatch(getPets());
-    }, [dispatch]);
 
     const Modal = () => <ModalAddPet />
-    const cards = (pets: Pet[]) => pets?.map(pet => (<CardPets key={pet?.id} pet={pet} />))
+    const cards = (pets: Data[]) => pets?.map(pet => (<CardPets key={pet?.id} pet={pet} />))
 
-    const filter = useCallback((deferredPets: Pet[], search: string) => {
+    const filter = useCallback((deferredPets: Data[], search: string) => {
 
         if (!search.trim()) return pets;
 
@@ -28,7 +23,7 @@ const PetsTab = () => {
                 || pet.breed.toLowerCase().includes(lowerSearch)
                 || pet.ownerEmergencyContact.name.toLowerCase().includes(lowerSearch)
                 || pet.ownerEmergencyContact.phone.toLowerCase().includes(lowerSearch)
-                
+
         })
     }, [pets])
 

@@ -21,16 +21,17 @@ import {
 
 import { PayloadAction } from "@reduxjs/toolkit";
 import {
-    deletePet,
-    getPets,
-    postPet,
-    updatePet,
+    deleteTutor,
+    getTutors,
+    postTutor,
+    updateTutor,
 } from "../../helpers/fakebackend_helper";
+
 import { errorToast, successToast } from "../helpers/toast";
 
 export function* onGetAll() {
     try {
-        const { data } = yield call(getPets);
+        const { data } = yield call(getTutors);
         yield put(getAllSuccess(data));
     } catch (error) {
         yield put(getAllFail(error as any));
@@ -39,8 +40,8 @@ export function* onGetAll() {
 
 export function* onUpdate({ payload }: PayloadAction<{ id: string, data: Partial<Data> }>) {
     try {
-        const { data: pet } = payload
-        const { data } = yield call(updatePet, pet);
+        const { data: tutors, id } = payload
+        const { data } = yield call(updateTutor, tutors, id);
         yield put(updateSuccess(data));
         yield successToast('Alterado com sucesso!')
     } catch (error) {
@@ -51,7 +52,7 @@ export function* onUpdate({ payload }: PayloadAction<{ id: string, data: Partial
 
 export function* onDelete({ payload: { id } }: PayloadAction<{ id: string }>) {
     try {
-        yield call(deletePet, id);
+        yield call(deleteTutor, id);
         yield put(deleteSuccess({ id }));
     } catch (error) {
         yield put(deleteFail((error as Error).message));
@@ -60,7 +61,7 @@ export function* onDelete({ payload: { id } }: PayloadAction<{ id: string }>) {
 
 export function* onAdd({ payload }: PayloadAction<Data>) {
     try {
-        const { data } = yield call(postPet, payload);
+        const { data } = yield call(postTutor, payload);
         yield put(addSuccess(data));
         yield successToast('Cadastrado com sucesso!')
     } catch (error) {

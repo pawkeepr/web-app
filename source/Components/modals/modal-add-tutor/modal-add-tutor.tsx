@@ -9,7 +9,7 @@ import ModalFooter from 'react-bootstrap/ModalFooter';
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import Row from 'react-bootstrap/Row';
 //Import actions
-import { getTutors as onGetTutors } from "~/store/actions";
+import { getAll as onGetTutors } from "~/store/tutors/actions";
 //redux
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,7 +21,7 @@ import * as Yup from "yup";
 import { BtnAvatar, BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
-import { Tutor } from "~/store/tutor/types";
+import { Data } from "~/store/tutors/types";
 
 
 import ModalBodyFieldsAddress from "./components/molecules/modal-body-fields-address";
@@ -29,11 +29,11 @@ import ModalBodyFieldsAddress from "./components/molecules/modal-body-fields-add
 const ModalAddTutor = () => {
 
     const dispatch = useAppDispatch();
-    const [tutor, setTutor] = useState<Tutor | null>(null);
+    const [tutor, setTutor] = useState<Data | null>(null);
     const [modal, setModal] = useState(false);
 
     const { tutors } = useAppSelector((state) => ({
-        tutors: state.Tutor.tutors
+        tutors: state.Tutor.data
     }));
 
     const openModal = useCallback(() => {

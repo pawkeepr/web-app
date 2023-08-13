@@ -14,15 +14,13 @@ import chatSaga from "./chat/saga";
 
 import AppointmentVetSagas from './appointment-vet/sagas';
 import PetsSagas from './pets/sagas';
-import TutorsSagas from './tutor/sagas';
+import TutorsSagas from './tutors/sagas';
 
 
 // Task
 import taskSaga from "./tasks/saga";
 // Crypto
 
-//crm
-import crmSaga from "./tutor/sagas";
 
 // Pages > Team
 import teamSaga from "./team/saga";
@@ -42,7 +40,6 @@ export default function* rootSaga() {
         fork(PetsSagas),
         fork(AppointmentVetSagas),
         fork(calendarSaga),
-        fork(crmSaga),
         fork(teamSaga),
         fork(LoginSagas),
     ]);

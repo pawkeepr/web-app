@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect } from 'react';
 import CardVeterinaryAppointments from '~/Components/molecules/card-veterinary-appointments/card-veterinary-appointments';
-import { getAll } from '~/store/actions';
+import { getAll } from '~/store/appointment-vet/actions';
 import { Data } from '~/store/appointment-vet/types';
-import { useAppDispatch, useAppSelector } from '~/store/hooks';
-import ListTab from '../templates/ListTab';
+import { useAppDispatch } from '~/store/hooks';
+import ListTab from '../../Components/templates/ListTab';
 
-import FieldDocumentAppointment from '../../molecules/field-document-appointment';
+import FieldDocumentAppointment from '../../Components/molecules/field-document-appointment';
 
 
 const VeterinaryAppointmentsTab = () => {
 
     const dispatch = useAppDispatch();
-    const veterinaryAppointments = useAppSelector((state) => state.VeterinaryAppointments?.veterinaryAppointments);
+    const veterinaryAppointments = [];
 
     useEffect(() => {
         dispatch(getAll());
@@ -31,7 +31,7 @@ const VeterinaryAppointmentsTab = () => {
                 || veterinaryAppointment?.pet?.breed?.toLowerCase().includes(lowerSearch)
 
         })
-    }, [veterinaryAppointments])
+    }, [])
 
     return (
         <React.Fragment>

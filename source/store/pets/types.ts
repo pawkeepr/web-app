@@ -19,7 +19,7 @@ import {
     TOGGLE_STATUS, TOGGLE_STATUS_FAIL, TOGGLE_STATUS_SUCCESS,
     UPDATE, UPDATE_FAIL, UPDATE_SUCCESS
 } from "../helpers/constants";
-import { Tutor } from '../tutor/types';
+import { ITutor } from '../tutors/types';
 import {
     Breed
 } from './breedType';
@@ -46,7 +46,7 @@ export type IPet = {
     specialPhysicalFeatures: string[];
     behavior: string;
     activityLevel: string;
-    ownerEmergencyContact: Tutor;
+    ownerEmergencyContact: ITutor;
     address?: string;
     avatar: string;
     created_at: string;

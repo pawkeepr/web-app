@@ -8,13 +8,7 @@ import {
     DELETE_FAIL,
     DELETE_SUCCESS,
     GET_ALL,
-    GET_ALL_ATIVES,
-    GET_ALL_ATIVES_FAIL,
-    GET_ALL_ATIVES_SUCCESS,
     GET_ALL_FAIL,
-    GET_ALL_INATIVES,
-    GET_ALL_INATIVES_FAIL,
-    GET_ALL_INATIVES_SUCCESS,
     GET_ALL_SUCCESS,
     STOP_LOADING,
     UPDATE,
@@ -27,7 +21,6 @@ const initialState: InitialState = {
     data: [],
     error: null,
     isLoading: LOADING.IDLE,
-    inatives: [],
     isLoadingOnlyOne: LOADING.IDLE,
 };
 
@@ -43,28 +36,6 @@ export const petSlice = createSlice({
             state.isLoading = LOADING.SUCCESS;
         },
         [GET_ALL_FAIL]: (state, action: PayloadAction<{ error: any }>) => {
-            state.error = action.payload.error;
-            state.isLoading = LOADING.FAILED;
-        },
-        [GET_ALL_ATIVES]: (state) => {
-            state.isLoading = LOADING.PENDING;
-        },
-        [GET_ALL_ATIVES_SUCCESS]: (state, action: PayloadAction<Data[]>) => {
-            state.data = action.payload;
-            state.isLoading = LOADING.SUCCESS;
-        },
-        [GET_ALL_ATIVES_FAIL]: (state, action: PayloadAction<{ error: any }>) => {
-            state.error = action.payload.error;
-            state.isLoading = LOADING.FAILED;
-        },
-        [GET_ALL_INATIVES]: (state) => {
-            state.isLoading = LOADING.PENDING;
-        },
-        [GET_ALL_INATIVES_SUCCESS]: (state, action: PayloadAction<Data[]>) => {
-            state.inatives = action.payload;
-            state.isLoading = LOADING.SUCCESS;
-        },
-        [GET_ALL_INATIVES_FAIL]: (state, action: PayloadAction<{ error: any }>) => {
             state.error = action.payload.error;
             state.isLoading = LOADING.FAILED;
         },
@@ -102,17 +73,6 @@ export const petSlice = createSlice({
             state.error = action.payload;
             state.isLoading = LOADING.FAILED;
         },
-        // [TOGGLE_STATUS]: (state) => {
-        //     state.isLoadingOnlyOne = LOADING.PENDING;
-        // },
-        // [TOGGLE_STATUS_SUCCESS]: (state, action: PayloadAction<{ id: string }>) => {
-        //     toggleStatus(action.payload.id, state.data, state.inatives)
-        //     state.isLoadingOnlyOne = LOADING.SUCCESS;
-        // },
-        // [TOGGLE_STATUS_FAIL]: (state, action) => {
-        //     state.error = action.payload;
-        //     state.isLoadingOnlyOne = LOADING.FAILED;
-        // },
         [STOP_LOADING]: (state) => {
             state.isLoading = LOADING.IDLE;
             state.isLoadingOnlyOne = LOADING.IDLE;
