@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import ModalAddPet from '~/Components/modals/modal-add-pet';
+import ModalAddPet from '~/Components/modals/add-pet-modal';
 import CardPets from '~/Components/molecules/card-pets';
 import ListTab from '~/Components/templates/ListTab';
 import { useAppSelector } from '~/store/hooks';

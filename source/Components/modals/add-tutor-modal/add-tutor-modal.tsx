@@ -7,14 +7,15 @@
 import 'react-toastify/dist/ReactToastify.css';
 
 // Formik
-import { Formik, Form } from "formik";
+import { Form, Formik } from "formik";
 import MaskedInput from 'react-input-mask';
 import * as Yup from "yup";
-import { BtnAvatar, BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
+import { BtnAvatar, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control";
 
 
 import PlusCircleIcon from "@heroicons/react/24/solid/PlusCircleIcon";
+import BoxButtons from '~/Components/molecules/box-buttons';
 import Modal from "~/Components/organism/modal";
 import useModal from "~/hooks/use-modal";
 import ModalBodyFieldsAddress from "./components/molecules/modal-body-fields-address";
@@ -80,7 +81,7 @@ const AddTutorModal = ({ children, item }: AddModalProps) => {
                     onSubmit={onSubmit}
                     enableReinitialize
                 >
-                    {({ handleSubmit }) => (
+                    {({ handleSubmit, isValid }) => (
                         <Form onSubmit={handleSubmit}>
 
                             <BtnAvatar src="" alt="Avatar do Tutor" />
@@ -117,15 +118,7 @@ const AddTutorModal = ({ children, item }: AddModalProps) => {
 
                             <ModalBodyFieldsAddress />
 
-                            <div className="flex w-full gap-2 justify-end">
-                                <BtnCancel onClick={() => { closeModal(); }} />
-                                <BtnPrimary
-                                    onClick={() => { }}
-                                    type="submit"
-                                    id="add-btn"
-                                    label="Adicionar"
-                                />
-                            </div>
+                            <BoxButtons onClickCancel={closeModal} onClickSuccess={handleSubmit} isValid={isValid} />
                         </Form>
 
                     )}

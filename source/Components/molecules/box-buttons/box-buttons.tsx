@@ -24,7 +24,7 @@ const BoxButtons = ({
     visibleSuccess = true,
 }: BoxButtonsProps) => {
     return (
-        <div className="hstack gap-2 justify-content-end">
+        <div className="gap-2 justify-end flex w-full">
             {visibleCancel &&
                 <BtnCancel
                     label={labelCancel}
