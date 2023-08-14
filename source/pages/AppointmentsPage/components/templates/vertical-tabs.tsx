@@ -41,7 +41,7 @@ const items: TabItem[] = [
     },
     {
         id: 2,
-        title: "Info Bem-Estar",
+        title: "Bem-Estar",
         href: "#BemEstar",
         Component: StepInfo
     },

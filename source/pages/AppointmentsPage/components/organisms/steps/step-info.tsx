@@ -6,24 +6,44 @@ import { FieldArray, useFormikContext } from "formik";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
 import { BsFillTrash3Fill, BsPlusCircleFill } from "react-icons/bs";
 import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
+import { useState } from "react";
 
 const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
-
+    const [heightPet, setHeightPet] = useState(0);
+    const [weighthPet, setweighthPet] = useState(0);
+    
+    // Função para calcular o IMC de um animal
+    function calcularIMC(heigth: number, weight: number): number {
+        if (heigth === 0 || weight === 0) {
+            return 0; // Evita divisão por zero
+        }
+        const imc = weight / ((heigth / 100) * (heigth / 100)); // Converter altura para metros
+        return imc;
+    }
 
     return (
         <>
         <div>
             <h4 className="text-center">Info Bem-Estar</h4>
-        </div><div className="mt-4">
+        </div>
+        <div className="flex flex-col mt-4 w-full">
                 <span className="font-bold">Informações Obrigatórias</span>
-                <div className="flex items-center mt-2 gap-2 w-full">
+                <div className="mt-2 mb-2 gap-2">
+                    <FieldControl
+                            label="Idade"
+                            placeholder="Idade do pet em meses ou anos"
+                            className="form-control"
+                            name="age"
+                            type="number" />
                     <FieldControl
                         label="Peso"
-                        className="rounded-md form-control font-semibold "
+                        placeholder="Peso do pet em quilos ou gramas"
+                        className="form-control"
+                        onChange={ (e: any) => { e.target.value = e.target.value.replace(/[^0-9]/g, ''); setweighthPet(e.target.value) }}
                         name="weight"
                         type="number" />
-                    <div className="flex flex-col mb-[6px] w-full">
+                <div className="flex flex-col mb-[6px] w-full">
                         <span className=" text-xs">Medida:</span>
                         <select
                             className="form-control mt-2 border-2"
@@ -32,10 +52,35 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                             <option value="kg">Kilogramas</option>
                             <option value="g">Gramas</option>
                         </select>
-                    </div>
                 </div>
+                </div>
+                <span className="font-bold">Informações Opcionais</span>
+                <div className="tems-center mt-2 mb-2 gap-2">
+                    <FieldControl
+                        label="Altura"
+                        placeholder="Altura do pet em centímetros "
+                        className="form-control"
+                        onChange={(e: any) => { e.target.value = e.target.value.replace(/[^0-9]/g, ''); setHeightPet(e.target.value) }}
+                        name="height"
+                        type="number" />
+                    <FieldControl
+                        label="Comprimento"
+                        placeholder="Comprimento do pet em centímetros "
+                        className="form-control"
+                        name="length"
+                        type="number" />
+                </div>
+                <div>
+                {weighthPet > 0 && heightPet > 0 && (
+                    <h2 className="m-4 font-bold">
+                        O IMC do animal é: {calcularIMC(heightPet, weighthPet).toFixed(2)}
+                    </h2>
+                )}
+            </div>
+
                 <div className="flex flex-col mt-2">
                     <FieldControl
+                        description="Information and notes"
                         label="Orientações e Anotações"
                         className="rounded-md form-control"
                         component="textarea"
