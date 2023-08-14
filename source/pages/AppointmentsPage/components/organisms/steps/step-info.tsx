@@ -25,7 +25,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
     return (
         <>
         <div>
-            <h4 className="text-center">Info Bem-Estar</h4>
+            <h4 className="text-center">Informações bem-estar do pet</h4>
         </div>
         <div className="flex flex-col mt-4 w-full">
                 <span className="font-bold">Informações Obrigatórias</span>
@@ -38,7 +38,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                             type="number" />
                     <FieldControl
                         label="Peso"
-                        placeholder="Peso do pet em quilos ou gramas"
+                        placeholder="Peso do pet em quilos ou gramas, exemplo = 4"
                         className="form-control"
                         onChange={ (e: any) => { e.target.value = e.target.value.replace(/[^0-9]/g, ''); setweighthPet(e.target.value) }}
                         name="weight"
@@ -58,7 +58,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                 <div className="tems-center mt-2 mb-2 gap-2">
                     <FieldControl
                         label="Altura"
-                        placeholder="Altura do pet em centímetros "
+                        placeholder="Altura do pet em centímetros, exemplo = 32"
                         className="form-control"
                         onChange={(e: any) => { e.target.value = e.target.value.replace(/[^0-9]/g, ''); setHeightPet(e.target.value) }}
                         name="height"
@@ -80,7 +80,6 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
 
                 <div className="flex flex-col mt-2">
                     <FieldControl
-                        description="Information and notes"
                         label="Orientações e Anotações"
                         className="rounded-md form-control"
                         component="textarea"
@@ -238,7 +237,6 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
 
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnLabel
-                    link
                     type="button"
                     className="right  previestab"
                     label="Próximo"
