@@ -17,7 +17,7 @@ const options = sub_specialty.map((item) => ({
 }));
 
 
-const colorStyles = {
+export const colorStyles = {
     control: (styles: any) => ({ ...styles, backgroundColor: "white" }),
     option: (styles: any, { data }: any) => {
         return { ...styles, color: 'black' };

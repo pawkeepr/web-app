@@ -1,6 +1,8 @@
 import { BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control"
 import { StepProps } from "./types";
+import Select from "react-select";
+import { colorStyles } from "~/Components/molecules/field-control/field-control-select-mult";
 import ControlSwitch from "../../molecules/switch/switch";
 import { FieldArray, useFormikContext } from "formik";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
@@ -9,9 +11,16 @@ import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 import { useState } from "react";
 
 const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
+    const physical_activity = ['Caminhadas', 'Corridas', 'Natação', 'Passeios', 'Cabo-de-guerra', 'Varetinhas', 'Bolinhas', 'Outros']
     const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
     const [heightPet, setHeightPet] = useState(0);
     const [weighthPet, setweighthPet] = useState(0);
+    
+    const options = physical_activity.map((item) => ({
+        value: item,
+        label: item,
+        color: 'rgb(255 200 107);',
+    }));
     
     // Função para calcular o IMC de um animal
     function calcularIMC(heigth: number, weight: number): number {
@@ -88,6 +97,30 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                 </div>
             </div>
              <div className="mt-2">
+                    <ControlSwitch
+                        label="O pet está praticando atividade física ?"
+                        className="mt-3 w-[3.72rem] h-6 lg:w-16 lg:h-7"
+                    >
+                        <p className="font-semibold mt-3">Selecione uma ou mais opções:</p>
+                         <Select
+                            className="w-full mb-3"
+                            theme={(theme) => ({
+                                ...theme,
+                                borderRadius: 0,
+                                colors: {
+                                    ...theme.colors,
+                                    primary25: 'rgb(9, 178, 133);',
+                                    primary: 'rgb(9, 178, 133);',
+                                },
+                            })}
+                            styles={colorStyles}
+                            placeholder="Selecione uma ou mais atividades"
+                            isSearchable={true}
+                            isMulti
+                            name="activity"
+                            options={options}
+                        />
+                    </ControlSwitch>
                     <ControlSwitch
                         label="Aplicar nutrição alimentar?"
                         className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
