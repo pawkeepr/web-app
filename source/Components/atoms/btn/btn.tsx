@@ -8,7 +8,7 @@ const button = tv({
         text-sm font-semibold rounded-md text-center
         gap-1 leading-1 font-semibold 
         rounded-lg transition 
-        duration-300 ease-in-out w-32 border-none
+        duration-300 ease-in-out w-32 
         disabled:opacity-50 disabled:cursor-not-allowed
         opacity-80 hover:opacity-100 active:opacity-100
         hover:transform hover:scale-105
@@ -37,7 +37,7 @@ const button = tv({
             success: "bg-green-500",
             cancel: "bg-transparent text-gray-500 dark:hover:text-gray-100",
             error: "bg-red-500",
-            label: "bg-transparent text-gray-500 dark:hover:text-gray-100",
+            label: "text-gray-500 dark:hover:text-gray-100 border-2 border-secondary-500",
         },
     },
     defaultVariants: {
