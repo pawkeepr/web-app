@@ -20,6 +20,7 @@ import usePetById from "../../hooks/use-pet-by-id";
 import usePetByName from "../../hooks/use-pet-by-name";
 import useTutorByDocument from "../../hooks/use-tutor-by-document";
 import StepTutor from "../../molecules/tutor";
+import ControlSwitch from "../../molecules/switch/switch";
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const [isPendingPet, startTransition] = useTransition();
@@ -167,9 +168,21 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         </div>
                     </Row>
                 </Row>
-
+                
                 <Row className="g-3">
                     <StepTutor disabled={tutorExists} />
+                </Row>
+                <Row>
+                <ControlSwitch
+                        label="O pet é doador de sangue?"
+                        className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
+                    >
+                </ControlSwitch>
+                <ControlSwitch
+                        label="O pet é doador de orgão?"
+                        className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
+                    >
+                </ControlSwitch>
                 </Row>
             </div>
 
