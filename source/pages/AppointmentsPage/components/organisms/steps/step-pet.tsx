@@ -21,6 +21,7 @@ import usePetById from "../../hooks/use-pet-by-id";
 import usePetByName from "../../hooks/use-pet-by-name";
 import useTutorByDocument from "../../hooks/use-tutor-by-document";
 import StepTutor from "../../molecules/tutor";
+import StepSecondTutor from "../../molecules/second-tutor";
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const [isPendingPet, startTransition] = useTransition();
@@ -105,7 +106,6 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 placeholder="Ex: Vira-lata, Poodle, etc..."
                             />
                         </div>
-
                         <div className="w-full lg:w-1/3 px-3 mb-6">
                             <ListBoxTailwind
                                 items={specie.bloodType as any}
@@ -173,7 +173,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 <Row className="g-3">
                     <StepTutor disabled={tutorExists} />
                 </Row>
-                <Row className="mt-2">
+            <Row className="mt-2">
                 <ControlSwitch
                     label="O pet possui um segundo Tutor?"
                     className="mt-2 mb-4 lg:w-16 lg:h-7 w-[3.72rem] h-6"
@@ -183,7 +183,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         <FieldDocument
                             label="CPF"
                             divClassName="my-1"
-                            name="tutor.document"
+                            name="secondTutor.document"
                             aria-label="document"
                             className="form-control"
                             onlyCPF
@@ -198,7 +198,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             initialFocus
                             divClassName="my-1"
                             label="Nome Completo"
-                            name="tutor.name"
+                            name="secondTutor.name"
                             disabled={isPending || tutorExists}
                             aria-label="name"
                             className="form-control"
@@ -214,7 +214,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             divClassName="my-1"
                             type="text"
                             label="Telefone/Celular"
-                            name="tutor.phone"
+                            name="secondTutor.phone"
                             disabled={isPending || tutorExists}
                             placeholder={
                                 isPending
@@ -227,14 +227,9 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             required
                         />
                     </Col>
-                    <Row className="g-3">
-                    <StepTutor disabled={tutorExists} />
-                    </Row>
-                    </ControlSwitch>
-                    </Row>
-                
-                
-                
+                    <StepSecondTutor disabled={tutorExists} />
+                </ControlSwitch>
+            </Row>
             </div>
             <div className="flex align-items-center justify-end gap-3 mt-4">
                 <BtnSuccess

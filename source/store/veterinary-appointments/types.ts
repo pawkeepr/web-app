@@ -85,6 +85,7 @@ export type VeterinaryAppointment = {
     payment: Partial<Payment>;
     pet: Partial<OmitPet>;
     tutor: Nullable<Partial<Tutor>>;
+    secundTutor: Nullable<Partial<Tutor>>;
     created_at?: string;
     updated_at?: string;
 };
