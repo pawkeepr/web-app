@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import CardVeterinaryAppointments from '~/Components/molecules/card-veterinary-appointments/card-veterinary-appointments';
 import { getAll } from '~/store/appointment-vet/actions';
 import { Data } from '~/store/appointment-vet/types';
@@ -34,9 +34,8 @@ const VeterinaryAppointmentsTab = () => {
     }, [])
 
     return (
-        <React.Fragment>
-            <ListTab Modal={Modal} cards={cards} filter={filter} items={veterinaryAppointments} />
-        </React.Fragment>
+        <ListTab Modal={Modal} cards={cards} filter={filter} items={veterinaryAppointments} />
+
     );
 };
 

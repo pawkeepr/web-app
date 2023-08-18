@@ -46,15 +46,13 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                 flex 
                 flex-wrap
                 mobile:gap-3
-                align-center 
+                items-center 
                 justify-between
                 "
             >
 
                 <div
                     className="
-                    mt-3 
-                    w-1/2
                     mobile:w-full
                     mobile:hidden
                     "

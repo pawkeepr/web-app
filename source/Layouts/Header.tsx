@@ -73,60 +73,58 @@ const Header = ({ headerClass }: HeaderProps) => {
 
     return (
         <header
-            className={`dark:!bg-primary-700 !bg-primary-500 mobile:fixed mobile:z-50 w-full ${headerClass}`}
+            className={`dark:!bg-primary-700 mb-2 !bg-primary-500 mobile:fixed mobile:z-50 w-full `}
             ref={divRef}
         >
-            <div className="navbar-header">
-                <div className="flex w-full justify-between items-center">
-                    <button
-                        onClick={handleShow}
-                        type="button"
-                        className="px-2 header-item topnav-hamburger"
-                        id="topnav-hamburger-icon"
+            <div className="flex w-full justify-between items-center px-4 mobile:px-2">
+                <button
+                    onClick={handleShow}
+                    type="button"
+                    className="px-2 header-item topnav-hamburger"
+                    id="topnav-hamburger-icon"
+                >
+                    <Bars3CenterLeftIcon className="h-6 w-6 text-white " />
+                </button>
+
+                <Drawer
+                    closeDrawer={handleClose}
+                    visibleDrawer={show}
+                />
+
+                <div className="flex items-center justify-center">
+                    <Link
+                        href="/"
+                        className="logo-light justify-centerblock"
                     >
-                        <Bars3CenterLeftIcon className="h-6 w-6 text-white " />
-                    </button>
-
-                    <Drawer
-                        closeDrawer={handleClose}
-                        visibleDrawer={show}
-                    />
-
-                    <div className="flex items-center justify-center">
-                        <Link
-                            href="/"
-                            className="logo-light justify-centerblock"
-                        >
-                            <Image
-                                src={logoLight}
-                                alt="Logo Pawkeepr Mode Light"
-                                height="34"
-                            />
-                        </Link>
-                    </div>
-                    <div className="flex align-center">
-                        {/* LanguageDropdown */}
-                        {/* <LanguageDropdown /> */}
-
-                        {/* WebAppsDropdown */}
-                        {/* <WebAppsDropdown /> */}
-
-                        {/* MyCartDropdwon */}
-                        {/* <MyCartDropdown /> */}
-
-                        {/* FullScreenDropdown */}
-                        <FullScreenDropdown />
-
-                        {/* Dark/Light Mode set */}
-                        <LightDark />
-
-                        {/* NotificationDropdown */}
-                        {/* <NotificationDropdown /> */}
-                        {/* <ProfileDropdownTailwind /> */}
-                    </div>
-
-                    {/* <SearchOption /> */}
+                        <Image
+                            src={logoLight}
+                            alt="Logo Pawkeepr Mode Light"
+                            height="34"
+                        />
+                    </Link>
                 </div>
+                <div className="flex align-center">
+                    {/* LanguageDropdown */}
+                    {/* <LanguageDropdown /> */}
+
+                    {/* WebAppsDropdown */}
+                    {/* <WebAppsDropdown /> */}
+
+                    {/* MyCartDropdwon */}
+                    {/* <MyCartDropdown /> */}
+
+                    {/* FullScreenDropdown */}
+                    <FullScreenDropdown />
+
+                    {/* Dark/Light Mode set */}
+                    <LightDark />
+
+                    {/* NotificationDropdown */}
+                    {/* <NotificationDropdown /> */}
+                    {/* <ProfileDropdownTailwind /> */}
+                </div>
+
+                {/* <SearchOption /> */}
             </div>
         </header>
     );

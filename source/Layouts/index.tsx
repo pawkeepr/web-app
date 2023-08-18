@@ -24,10 +24,10 @@ import {
 } from "../store/layouts/slice";
 
 //redux
+import cn from 'classnames';
 import FieldDocumentAppointment from "~/Components/molecules/field-document-appointment";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import { getCookie } from '~/utils/cookies-utils';
-
 
 type LayoutProps = {
     children: React.ReactNode;
@@ -114,10 +114,10 @@ const Layout = ({ children }: LayoutProps) => {
             {/* <Sidebar layoutType={layoutType} /> */}
 
             <div
-                style={{
-                    paddingTop: `${headerSize.height}px`
-                }}
-                className="px-24 mobile:px-4 relative"
+                className={cn(
+                    "px-24 mobile:px-4 relative",
+                    "mobile:pt-20"
+                )}
             >
                 {children}
                 <FieldDocumentAppointment selectedTabInitial={0}>
