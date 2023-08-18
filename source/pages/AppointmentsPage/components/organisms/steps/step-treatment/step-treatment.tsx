@@ -16,10 +16,13 @@ import { diseases } from "~/common/data/diseases";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { BsFillTrash3Fill } from "react-icons/bs";
+import Select from "react-select";
+import { colorStyles } from "~/Components/molecules/field-control/field-control-select-mult";
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
     const [enableField, setEnableField] = useState<boolean>(true);
+    const avaliation = ['Limpeza bucal', 'Retirada de tártaro', 'Extração', 'Canal', 'Aplicação de anti-inflamatório', 'Aplicação de polivitamínicos', 'Aplicação de Prótese', 'Aplicação de resina']
 
     const handleClick = () => {
         enableField === true ? setEnableField(false) : setEnableField(true);
@@ -29,6 +32,11 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     //     setFieldValue('selectedValue', selected);
     //     console.log(selected);
     // };
+    const options = avaliation.map((item) => ({
+        value: item,
+        label: item,
+        color: 'rgb(255 200 107);',
+    }));
 
     return (
         <>
@@ -39,7 +47,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
             <div className="">
                 <div className="mt-2">
                     <ControlSwitch
-                        label="Aplicar Medicação"
+                        label="Aplicar Medicação?"
                         className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7 "
                     >
                         <div className="flex flex-col lg:flex-row mt-2 ">
@@ -484,6 +492,54 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                     )}
                                 </FieldArray>
                             </div>
+                        </div>
+                    </ControlSwitch>
+                    <ControlSwitch
+                        label="Tratamento dentário?"
+                        className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7 "
+                    >
+                         <FieldControl
+                            label='Motivo da consulta:'
+                            placeholder="Descrição do motivo pelo qual o pet está sendo levado ao dentista.
+                            Quaisquer sintomas ou problemas específicos que o tutor tenha notado."
+                            className="form-control"
+                            name="Description"
+                            type="text"
+                        />
+                        <FieldControl
+                            label='Exame bucal:'
+                            placeholder="Avaliação completa da saúde bucal do pet, incluindo exame dos dentes, gengivas, língua, etc.
+                            Detalhes sobre problemas dentários, como tártaro, cáries, inflamações, etc."
+                            className="form-control"
+                            name="Description"
+                            type="text"
+                        />
+                        <p className="mt-2">Tratamentos realizados:</p>
+                         <Select
+                            className="w-full mb-3"
+                            theme={(theme) => ({
+                                ...theme,
+                                borderRadius: 0,
+                                colors: {
+                                    ...theme.colors,
+                                    primary25: 'rgb(9, 178, 133);',
+                                    primary: 'rgb(9, 178, 133);',
+                                },
+                            })}
+                            styles={colorStyles}
+                            placeholder="Selecione uma ou mais atividades"
+                            isSearchable={true}
+                            isMulti
+                            name="activity"
+                            options={options}
+                        />
+                        <div className="flex flex-col mt-2">
+                            <FieldControl
+                                label="Recomendações e orientações:"
+                                className="rounded-md form-control"
+                                component="textarea"
+                                name="observations"
+                                type="text" />
                         </div>
                     </ControlSwitch>
                 </div>
