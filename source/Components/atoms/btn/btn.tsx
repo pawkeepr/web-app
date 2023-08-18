@@ -3,7 +3,7 @@ import React, { ComponentProps } from 'react';
 import { VariantProps, tv } from 'tailwind-variants';
 import BtnAvatar from './btn-avatar';
 
-const button = tv({
+export const button = tv({
     base: `
         mobile:p-4 mobile:w-full
         px-4 m-1 text-white h-10
@@ -113,7 +113,7 @@ const BtnLabel = ({ label = "Texto", ...props }: BtnProps) => {
 }
 
 type BtnLinkProps = {
-    message: string;
+    message?: string;
     children?: React.ReactNode;
     className?: string;
 } & VariantProps<typeof button> & LinkProps

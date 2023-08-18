@@ -7,9 +7,13 @@ import UserIcon from "@heroicons/react/24/solid/UserIcon";
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
 import { MdPets } from 'react-icons/md';
 
+import { button } from '~/Components/atoms/btn';
+
 import cn from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from "next/navigation";
+import { twMerge } from "tailwind-merge";
 
 type DrawerProps = {
     closeDrawer: () => void;
@@ -17,8 +21,38 @@ type DrawerProps = {
     drawerWidth?: number;
 };
 
-const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
+const items = [
+    {
+        name: 'Consultas',
+        icon: <DashboardIcon className="w-5 h-5" />,
+        href: '/dashboard'
+    },
+    {
+        name: 'Tutores',
+        icon: <UserIcon className="w-5 h-5" />,
+        href: '/dashboard/tutors'
+    },
+    {
+        name: 'Pets',
+        icon: <MdPets className="w-5 h-5" />,
+        href: '/dashboard/pets'
+    },
+    {
+        name: 'Configurações',
+        icon: <Cog8ToothIcon className="w-5 h-5" />,
+        href: '#'
+    },
+]
 
+const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
+    const pathname = usePathname();
+
+    const buttonStyled = twMerge(button({ link: true }),
+        "flex justify-start items-center",
+        "px-4 py-2 w-full mt-4",
+        "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-600",
+        "hover:bg-gray-200 dark:hover:bg-dark-600 rounded-none"
+    )
 
     return (
         <div
@@ -28,27 +62,26 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                 z-[20] flex flex-col
                 mobile:!z-50
                 h-full  
-                px-4 py-8
+                py-8
                 w-72
                 overflow-y-auto bg-white dark:!bg-dark-500
-                border-r rtl:border-r-0 rtl:border-l
+                border-none
             `, {
                 '-translate-x-full': !visibleDrawer,
                 'translate-x-0': visibleDrawer
             })}
         >
-            <div className="flex justify-between">
+            <div className="flex justify-between px-4">
                 <a href="#">
-                    {" "}
                     <Image
                         className="w-auto h-8"
                         src={logoDark}
                         alt=""
-                    />{" "}
+                    />
                 </a>
                 <XMarkIcon
                     onClick={closeDrawer}
-                    className="cursor-pointer w-8 h-8"
+                    className="cursor-pointer w-8 h-8 hover:text-gray-500 dark:hover:text-gray-400"
                 />
             </div>
 
@@ -59,70 +92,42 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
             </div>
 
             <div className="flex flex-col justify-between flex-1 mt-6">
-                <nav>
-                    <Link
-                        className="flex items-center px-4 py-2 rounded-lg mt-4"
-                        href="/dashboard"
-                    >
-                        <DashboardIcon className="w-5 h-5" />
+                <nav className="gap-1">
+                    {
+                        items.map((item, index) => (
+                            <Link
+                                key={index}
+                                className={cn(
+                                    buttonStyled,
+                                    {
+                                        "bg-gray-200 dark:bg-dark-600": pathname === item.href
+                                    },
+                                )}
+                                href={item.href}
+                            >
+                                {item.icon}
 
-                        <span className="mx-4 font-medium">
-                            Consultas
-                        </span>
-                    </Link>
+                                <span className="mx-4 font-medium">
+                                    {item.name}
+                                </span>
+                            </Link>
+                        ))
+                    }
+                    <div className="absolute w-full bottom-0">
+                        <Link
+                            className={buttonStyled}
+                            href="/logout"
+                        >
 
-                    <Link
-                        className="flex items-center px-4 py-2 rounded-lg mt-4"
-                        href="/dashboard/tutors"
-                    >
-                        <UserIcon className="w-5 h-5" />
-
-                        <span className="mx-4 font-medium">
-                            Tutores
-                        </span>
-                    </Link>
-
-                    <Link
-                        className="flex items-center px-4 py-2 mt-4"
-                        href="/dashboard/pets"
-                    >
-                        <MdPets className="w-5 h-5" />
-
-                        <span className="mx-4 font-medium">Pets</span>
-                    </Link>
-
-                    {/* <Link
-                        className="flex items-center px-4 py-2 mt-4 "
-                        href="/about"
-                    >
-                        <NewspaperIcon className="w-5 h-5" />
-
-                        <span className="mx-4 font-medium">Sobre</span>
-                    </Link> */}
-
-                    <a
-                        className="flex items-center px-4 py-2 mt-4 "
-                        href="#"
-                    >
-                        <Cog8ToothIcon className="w-5 h-5" />
-
-                        <span className="mx-4 font-medium">
-                            Settings
-                        </span>
-                    </a>
-                    <Link
-                        className="flex text-gray-700 items-center px-4 py-2 mt-4 absolute bottom-0 w-full mb-4"
-                        href="/logout"
-                    >
-                        <ArrowLeftCircleIcon
-                            className="w-5 h-5"
-                            viewBox="0 0 24 24"
-                        />
-
-                        <span className="mx-4 font-medium">
-                            Sair
-                        </span>
-                    </Link>
+                            <ArrowLeftCircleIcon
+                                className="w-5 h-5 mt-1"
+                                viewBox="0 0 24 24"
+                            />
+                            <span className="mx-4 font-medium">
+                                Sair
+                            </span>
+                        </Link>
+                    </div>
                 </nav>
             </div>
 
