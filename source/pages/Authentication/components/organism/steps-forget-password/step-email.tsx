@@ -61,9 +61,8 @@ const StepEmail = ({ email, onChangeNextTab }: StepEmailProps) => {
                     type="submit"
                     className="w-full"
                     disabled={isLoading === LOADING.PENDING || !validateEmail.isValidSync(email)}
-                >
-                    Enviar Link de Redefinição de Senha
-                </BtnPrimary>
+                    label="Enviar Link de Redefinição de Senha"
+                />
             </div>
         </form>
     )

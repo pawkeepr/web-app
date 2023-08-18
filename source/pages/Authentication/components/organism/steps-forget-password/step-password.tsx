@@ -1,4 +1,4 @@
-import Alert from 'react-bootstrap/Alert';
+import Alert from "~/Components/atoms/alert";
 import { BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
@@ -15,9 +15,10 @@ const StepPassword = ({ handleSubmit, isValid }: StepPasswordProps) => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Alert className="alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
+            <Alert color="warning" >
                 Digite o código enviado para o email e sua nova senha.
             </Alert>
+
 
             <div className="mb-4">
                 <FieldControl
