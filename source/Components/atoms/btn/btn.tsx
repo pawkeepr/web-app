@@ -5,12 +5,12 @@ import BtnAvatar from './btn-avatar';
 
 export const button = tv({
     base: `
-        mobile:p-4 mobile:w-full
-        px-4 m-1 text-white h-10
+        mobile:p-4 mobile:w-full w-44
+        px-4 m-1 h-10 
         text-sm font-semibold rounded-md text-center
         gap-1 leading-1 font-semibold
         transition
-        duration-300 ease-in-out w-40 border-none
+        duration-300 ease-in-out border-none
         disabled:opacity-50 disabled:cursor-not-allowed
         bg-opacity-80 hover:bg-opacity-100 active:opacity-100
         hover:transform hover:scale-105
@@ -19,7 +19,7 @@ export const button = tv({
     `,
     variants: {
         primary: {
-            true: "bg-primary-500 dark:bg-secondary-500 text-white"
+            true: "bg-primary-500 dark:bg-secondary-500 !text-white"
         },
         secondary: {
             true: "bg-secondary-500 dark:bg-primary-500"

@@ -79,11 +79,12 @@ const FieldControl = ({
             <div
                 className={cn(`
                     transition-all duration-300 ease-in-out
-                    relative flex flex-row border-2 
+                    relative flex flex-row 
                     disabled:!cursor-not-allowed 
                     disabled:!opacity-25 rounded-sm
                 `, {
                     '!border-primary-500 border-2': focus,
+                    ' border': !focus,
                 })}>
                 {startChildren}
                 <InputComponent

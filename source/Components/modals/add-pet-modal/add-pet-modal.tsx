@@ -84,7 +84,7 @@ const AddNewPetModal = ({ children, item }: AddModalProps) => {
                 nested
                 open={open}
                 lockScroll
-                className="pb-0 w-[750px]"
+                className="w-[750px] py-4"
             >
                 <div className="w-full">
                     <h6 className="mb-4 font-semibold text-center uppercase">Adicionar Pet</h6>
