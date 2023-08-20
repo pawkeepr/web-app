@@ -8,7 +8,7 @@ import {
     leftSidebarTypes,
     leftSidebarViewTypes,
     preloaderTypes,
-    topbarThemeTypes
+    topBarThemeTypes
 } from "../../Components/constants/layout";
 
 export type DivSize = {
@@ -22,7 +22,7 @@ export type LayoutState = {
     layoutModeType: layoutModeTypes;
     layoutWidthType: layoutWidthTypes;
     layoutPositionType: layoutPositionTypes;
-    topbarThemeType: topbarThemeTypes;
+    topBarThemeType: topBarThemeTypes;
     leftSideBarSizeType: leftSideBarSizeTypes;
     leftSidebarViewType: leftSidebarViewTypes;
     leftSidebarImageType: leftSidebarImageTypes;

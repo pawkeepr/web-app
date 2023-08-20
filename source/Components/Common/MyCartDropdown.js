@@ -1,17 +1,17 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { Col, Dropdown, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
-import Link from 'next/link';
 
 //SimpleBar
 import SimpleBar from "simplebar-react";
 
 //import images
+import Image from 'next/image';
 import image1 from "~/assets/images/products/img-1.png";
 import image2 from "~/assets/images/products/img-2.png";
 import image3 from "~/assets/images/products/img-3.png";
-import image6 from "~/assets/images/products/img-6.png";
 import image5 from "~/assets/images/products/img-5.png";
-import Image from 'next/image';
+import image6 from "~/assets/images/products/img-6.png";
 
 const MyCartDropdown = () => {
 
@@ -52,11 +52,11 @@ const MyCartDropdown = () => {
 
     return (
         <React.Fragment>
-            <Dropdown isOpen={isCartDropdown} toggle={toggleCartDropdown} className="topbar-head-dropdown ms-1 header-item">
-                <DropdownToggle type="button" tag="button" className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle">
+            <Dropdown isOpen={isCartDropdown} toggle={toggleCartDropdown} className="topBar-head-dropdown ms-1 header-item">
+                <DropdownToggle type="button" tag="button" className="btn btn-icon btn-topBar btn-ghost-secondary rounded-circle">
                     <i className='bx bx-shopping-bag fs-22'></i>
                     <span
-                        className="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-info">{cartItem}<span
+                        className="position-absolute topBar-badge fs-10 translate-middle badge rounded-pill bg-info">{cartItem}<span
                             className="visually-hidden">unread messages</span></span>
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-menu-xl dropdown-menu-end p-0"

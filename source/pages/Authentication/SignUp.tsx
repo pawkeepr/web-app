@@ -132,7 +132,7 @@ const CoverSignUp = () => {
                     <Image
                         className="h-24 lg:h-full object-cover"
                         src={bgAuth}
-                        alt="Imagem cartunizada de pessoas e um globo terestre se comunicando"
+                        alt="Imagem cartunizada de pessoas e um globo terrestre se comunicando"
                     />
                 </div>
                 <div className="z-10 bg-white h-full">
@@ -167,9 +167,9 @@ const CoverSignUp = () => {
                         </p>
                         <BtnLink
                             href="/sign-in"
-                        >
-                            Entrar!
-                        </BtnLink>
+                            message="Entrar"
+                        />
+
                     </div>
 
                 </div>

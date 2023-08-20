@@ -1,5 +1,4 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import Consults from "./consults/slice";
 
 // Front
 import Layout from "./layouts/slice";
@@ -20,12 +19,12 @@ import chat from "./chat/reducer";
 import Tasks from "./tasks/reducer";
 
 //Tutor
-import Tutor from "./tutor/slice";
+import Tutor from "./tutors/slice";
 
 // Pets
 import Pets from "./pets/slice";
 
-import VeterinaryAppointments from "./veterinary-appointments/slice";
+import AppointmentVet from "./appointment-vet/slice";
 
 // Pages > Team
 import Team from "./team/reducer";
@@ -37,7 +36,7 @@ const rootReducer = combineReducers({
     Login,
     Account,
     ForgetPassword,
-    VeterinaryAppointments,
+    AppointmentVet,
     Profile,
     Calendar,
     chat,
@@ -46,7 +45,6 @@ const rootReducer = combineReducers({
     Team,
     Pets,
     ActivateAccount,
-    Consults,
 });
 
 export default rootReducer;

@@ -1,4 +1,4 @@
-import { BtnCancel, BtnSuccess } from '~/Components/atoms/btn'
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
 type BoxButtonsProps = {
     onClickCancel: () => void
@@ -24,7 +24,7 @@ const BoxButtons = ({
     visibleSuccess = true,
 }: BoxButtonsProps) => {
     return (
-        <div className="hstack gap-2 justify-content-end">
+        <div className="gap-2 justify-end flex w-full">
             {visibleCancel &&
                 <BtnCancel
                     label={labelCancel}
@@ -33,10 +33,11 @@ const BoxButtons = ({
             }
             {
                 visibleSuccess &&
-                <BtnSuccess
+                <BtnPrimary
                     link={link}
                     onClick={onClickSuccess}
                     disabled={!isValid}
+                    className='!w-44'
                     type={type}
                     id="add-btn"
                     label={labelSuccess}

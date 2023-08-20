@@ -7,7 +7,7 @@ import {
     changeLayoutWidth as actionChangeLayoutWidth,
     changePreloader as actionChangePreloader,
     changeSidebarImageType as actionChangeSidebarImageType,
-    changeTopbarTheme as actionChangeTopbarTheme,
+    changeTopBarTheme as actionChangeTopBarTheme,
     changeHeaderSize,
     changeLayout,
     changeSidebarSizeType,
@@ -25,7 +25,7 @@ import {
     leftSidebarTypes,
     leftSidebarViewTypes,
     preloaderTypes,
-    topbarThemeTypes
+    topBarThemeTypes
 } from "../../Components/constants/layout";
 import { DivSize } from "./types";
 
@@ -123,19 +123,19 @@ function* changeLayoutPosition({ payload: layoutPosition }: GenericPayload<layou
 }
 
 /**
- * Changes the topbar themes
+ * Changes the topBar themes
  * @param {*} param0
  */
-function* changeTopbarTheme({ payload: topbarTheme }: GenericPayload<topbarThemeTypes>) {
+function* changeTopBarTheme({ payload: topBarTheme }: GenericPayload<topBarThemeTypes>) {
     try {
-        yield call(changeHTMLAttribute, "data-topbar", topbarTheme);
+        yield call(changeHTMLAttribute, "data-top-bar", topBarTheme);
     } catch (error) {
         // console.log(error);
     }
 }
 
 /**
- * Changes the topbar themes
+ * Changes the topBar themes
  * @param {*} param0
  */
 function* changeSidebarImageType({ payload: leftSideBarImageType }: GenericPayload<leftSidebarImageTypes>) {
@@ -168,7 +168,7 @@ function* changeHeaderSizeSaga({ payload: headerSize }: GenericPayload<DivSize>)
 
 
 /**
- * Changes the topbar themes
+ * Changes the topBar themes
  * @param {*} param0
  */
 function* changeLeftSideBarSizeType({ payload: leftSideBarSizeType }: GenericPayload<leftSideBarSizeTypes>) {
@@ -195,7 +195,7 @@ function* changeLeftSideBarSizeType({ payload: leftSideBarSizeType }: GenericPay
 }
 
 /**
- * Changes the topbar themes
+ * Changes the topBar themes
  * @param {*} param0
  */
 function* changeLeftSidebarViewType({ payload: leftSideBarViewType }: GenericPayload<leftSidebarViewTypes>) {
@@ -224,8 +224,8 @@ export function* watchChangeLayoutWidth() {
 export function* watchChangeLayoutPosition() {
     yield takeEvery(actionChangeLayoutPosition, changeLayoutPosition);
 }
-export function* watchChangeTopbarTheme() {
-    yield takeEvery(actionChangeTopbarTheme, changeTopbarTheme);
+export function* watchChangeTopBarTheme() {
+    yield takeEvery(actionChangeTopBarTheme, changeTopBarTheme);
 }
 export function* watchChangeLeftSideBarSizeType() {
     yield takeEvery(changeSidebarSizeType, changeLeftSideBarSizeType);
@@ -252,7 +252,7 @@ function* LayoutSaga() {
         fork(watchChangeLayoutMode),
         fork(watchChangeLayoutWidth),
         fork(watchChangeLayoutPosition),
-        fork(watchChangeTopbarTheme),
+        fork(watchChangeTopBarTheme),
         fork(watchChangeLeftSideBarSizeType),
         fork(watchChangeLeftSidebarViewType),
         fork(watchChangeSidebarImageType),

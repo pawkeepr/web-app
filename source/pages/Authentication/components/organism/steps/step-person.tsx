@@ -1,11 +1,11 @@
-import { cnpj, cpf } from "cpf-cnpj-validator";
+import { cpf } from "cpf-cnpj-validator";
 import { useFormikContext } from "formik";
 
 
 import { useMemo } from "react";
 import MaskedInput from "react-input-mask";
 
-import { BtnSuccess } from "~/Components/atoms/btn";
+import { BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldControlSelectMult from "~/Components/molecules/field-control/field-control-select-mult";
@@ -14,6 +14,7 @@ import validatePerson from "~/validations/person";
 import NumberWhatsApp from "~/Components/molecules/field-control/field-whatsapp";
 import { sub_specialty } from "~/common/data/sub-specialtys";
 
+import FieldDocument from "~/Components/molecules/field-document";
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
@@ -21,8 +22,6 @@ import { StepProps } from "./types";
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const { values } = useFormikContext<ActivateAccount>();
     const { cpf_cnpj } = values;
-
-    const isValidCnpj = useMemo(() => cnpj.isValid(cpf_cnpj), [cpf_cnpj]);
 
     const requiredValid = useMemo((): boolean => {
         const isValid = validatePerson.isValidSync(values);
@@ -67,7 +66,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     disabledError
                 />
             </div>
-            <FieldControl
+            <FieldDocument
                 label="CPF/CNPJ"
                 name="cpf_cnpj"
                 aria-label="cpf_cnpj"
@@ -107,7 +106,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <NumberWhatsApp />
             <div className="flex items-center justify-center mt-1 col-span-full">
 
-                <BtnSuccess
+                <BtnPrimary
                     onClick={nextStep}
                     disabled={!requiredValid}
                     label="Próximo"

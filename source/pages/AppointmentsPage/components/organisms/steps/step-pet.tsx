@@ -6,7 +6,7 @@ import MaskedInput from "react-input-mask";
 import FieldDocument from "~/Components/molecules/field-document/field-document";
 
 import { useFormikContext } from "formik";
-import { BtnAvatar, BtnSuccess } from "~/Components/atoms/btn";
+import { BtnPrimary } from "~/Components/atoms/btn";
 import { StepProps } from "./types";
 
 import { InitialValues } from "../../../Appointments";
@@ -15,7 +15,6 @@ import { useState, useTransition } from "react";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import ListBoxTailwind from "~/Components/molecules/list-box-tailwind/list-box-tailwind";
 import { SpeciesType, species } from "~/store/pets/speciesType";
-import AvatarPet from "../../atoms/pet-avatar";
 import usePetById from "../../hooks/use-pet-by-id";
 import usePetByName from "../../hooks/use-pet-by-name";
 import useTutorByDocument from "../../hooks/use-tutor-by-document";
@@ -174,7 +173,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
             </div>
 
             <div className="flex align-items-center justify-end gap-3 mt-4">
-                <BtnSuccess
+                <BtnPrimary
                     type="button"
                     className="ml-4 btn-label right ms-auto nexttab nexttab"
                     label="Próximo"
@@ -184,7 +183,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 >
                     <span className="ml-1"> Próximo </span>
                     <i className="ri-arrow-right-line  align-middle fs-16 ms-2 p-1"></i>
-                </BtnSuccess>
+                </BtnPrimary>
             </div>
         </>
     );

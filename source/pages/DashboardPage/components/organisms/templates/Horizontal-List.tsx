@@ -2,20 +2,16 @@
 import {
     Card,
     CardBody,
-    CardHeader,
     Col,
     Nav,
     NavItem,
     NavLink,
-    Row,
-    TabContent,
-    TabPane
+    Row
 } from "reactstrap";
 
 import cn from "classnames";
 import { useEffect, useState } from "react";
 
-import { getAll } from "~/store/consults/actions";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import StepScheduledAll from "../steps/step-scheduled-all";
 import StepScheduledCanceled from "../steps/step-scheduled-canceled";
@@ -44,7 +40,7 @@ const items: TabItem[] = [
         href: "#All",
         Component: StepScheduledAll
     },
-     {
+    {
         id: 3,
         title: "Consultas Finalizadas",
         href: "#Done",
@@ -88,12 +84,6 @@ const HorizontalTabs = () => {
 
         };
     }, []);
-    
-    useEffect(() => {
-        dispatch(getAll());
-    }, [])
-
-
 
     return (
         <Row>
@@ -107,7 +97,7 @@ const HorizontalTabs = () => {
                                     className={cn(
                                         'mb-4 step-arrow-nav',
                                         {
-                                            'fixed top-0 left-0 right-0 z-[100] bg-white': isFixed,
+                                            'fixed top-0 left-0 right-0 z-10 bg-white': isFixed,
                                         },
                                         'md:static'
                                     )}>
@@ -115,74 +105,74 @@ const HorizontalTabs = () => {
                                         className="nav-pills custom-nav nav-justified"
                                         role="tablist"
                                     >
-                                            <NavItem key={1}>
-                                                <NavLink
-                                                    href= "#Confirmed"
-                                                    id="steparrow-gen-info-tab"
-                                                    className={
-                                                        (cn({
-                                                            active: activeHorizontalTab === 1,
-                                                            done: (activeHorizontalTab <= items.length && activeHorizontalTab > 1)
-                                                        }))
-                                                    }
-                                                    onClick={() => {
-                                                        toggleHorizontalTab(1);
-                                                    }}
-                                                >
-                                                    Consultas Confirmadas
-                                                </NavLink>
-                                            </NavItem>
-                                            <NavItem key={2}>
-                                                <NavLink
-                                                    href= "#All"
-                                                    id="steparrow-gen-info-tab"
-                                                    className={
-                                                        (cn({
-                                                            active: activeHorizontalTab === 2,
-                                                            done: (activeHorizontalTab <= items.length && activeHorizontalTab > 2)
-                                                        }))
-                                                    }
-                                                    onClick={() => {
-                                                        toggleHorizontalTab(2);
-                                                    }}
-                                                >
-                                                    Consultas Agendadas
-                                                </NavLink>
-                                            </NavItem>
-                                            <NavItem className="mobile:hidden" key={3}>
-                                                <NavLink
-                                                    href= "#Canceled"
-                                                    id="steparrow-gen-info-tab"
-                                                    className={
-                                                        (cn({
-                                                            active: activeHorizontalTab === 3,
-                                                            done: (activeHorizontalTab <= items.length && activeHorizontalTab > 3)
-                                                        }))
-                                                    }
-                                                    onClick={() => {
-                                                        toggleHorizontalTab(3);
-                                                    }}
-                                                >
-                                                    Consultas Canceladas
-                                                </NavLink>
-                                            </NavItem>
-                                            <NavItem className="mobile:hidden" key={4}>
-                                                <NavLink
-                                                    href= "#Done"
-                                                    id="steparrow-gen-info-tab"
-                                                    className={
-                                                        (cn({
-                                                            active: activeHorizontalTab === 4,
-                                                            done: (activeHorizontalTab <= items.length && activeHorizontalTab > 4)
-                                                        }))
-                                                    }
-                                                    onClick={() => {
-                                                        toggleHorizontalTab(4);
-                                                    }}
-                                                >
-                                                    Consultas Finalizadas
-                                                </NavLink>
-                                            </NavItem>
+                                        <NavItem key={1}>
+                                            <NavLink
+                                                href="#Confirmed"
+                                                id="steparrow-gen-info-tab"
+                                                className={
+                                                    (cn({
+                                                        active: activeHorizontalTab === 1,
+                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab > 1)
+                                                    }))
+                                                }
+                                                onClick={() => {
+                                                    toggleHorizontalTab(1);
+                                                }}
+                                            >
+                                                Consultas Confirmadas
+                                            </NavLink>
+                                        </NavItem>
+                                        <NavItem key={2}>
+                                            <NavLink
+                                                href="#All"
+                                                id="steparrow-gen-info-tab"
+                                                className={
+                                                    (cn({
+                                                        active: activeHorizontalTab === 2,
+                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab > 2)
+                                                    }))
+                                                }
+                                                onClick={() => {
+                                                    toggleHorizontalTab(2);
+                                                }}
+                                            >
+                                                Consultas Agendadas
+                                            </NavLink>
+                                        </NavItem>
+                                        <NavItem className="mobile:hidden" key={3}>
+                                            <NavLink
+                                                href="#Canceled"
+                                                id="steparrow-gen-info-tab"
+                                                className={
+                                                    (cn({
+                                                        active: activeHorizontalTab === 3,
+                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab > 3)
+                                                    }))
+                                                }
+                                                onClick={() => {
+                                                    toggleHorizontalTab(3);
+                                                }}
+                                            >
+                                                Consultas Canceladas
+                                            </NavLink>
+                                        </NavItem>
+                                        <NavItem className="mobile:hidden" key={4}>
+                                            <NavLink
+                                                href="#Done"
+                                                id="steparrow-gen-info-tab"
+                                                className={
+                                                    (cn({
+                                                        active: activeHorizontalTab === 4,
+                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab > 4)
+                                                    }))
+                                                }
+                                                onClick={() => {
+                                                    toggleHorizontalTab(4);
+                                                }}
+                                            >
+                                                Consultas Finalizadas
+                                            </NavLink>
+                                        </NavItem>
                                     </Nav>
                                 </div>
                             </div>

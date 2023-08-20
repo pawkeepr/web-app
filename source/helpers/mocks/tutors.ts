@@ -2,7 +2,7 @@ import MockAdapter from "axios-mock-adapter/types";
 import { getCookie, setCookie } from "~/utils/cookies-utils";
 
 import { faker } from '@faker-js/faker';
-import { Tutor } from "~/store/tutor/types";
+import { Tutor } from "~/store/tutors/types";
 import * as url from '../url_helper';
 
 

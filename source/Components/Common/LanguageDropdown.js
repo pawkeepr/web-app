@@ -1,11 +1,11 @@
+import { get, map } from "lodash";
 import React, { useEffect, useState } from 'react';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
-import { get, map } from "lodash";
 
 //i18n
-import useLanguage from "../../i18n";
-import languages from "../../common/languages";
 import Image from 'next/image';
+import languages from "../../common/languages";
+import useLanguage from "../../i18n";
 
 
 const LanguageDropdown = () => {
@@ -31,8 +31,8 @@ const LanguageDropdown = () => {
     };
     return (
         <React.Fragment>
-            <Dropdown isOpen={isLanguageDropdown} toggle={toggleLanguageDropdown} className="ms-1 topbar-head-dropdown header-item">
-                <DropdownToggle className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" tag="button">
+            <Dropdown isOpen={isLanguageDropdown} toggle={toggleLanguageDropdown} className="ms-1 topBar-head-dropdown header-item">
+                <DropdownToggle className="btn btn-icon btn-topBar btn-ghost-secondary rounded-circle" tag="button">
                     <Image
                         src={get(languages, `${selectedLang}.flag`)}
                         alt="Header Language"

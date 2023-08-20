@@ -1,5 +1,5 @@
-import Alert from 'react-bootstrap/Alert';
-import { BtnSuccess } from "~/Components/atoms/btn";
+import Alert from "~/Components/atoms/alert";
+import { BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
 import { FormEventHandler } from "react";
@@ -15,9 +15,10 @@ const StepPassword = ({ handleSubmit, isValid }: StepPasswordProps) => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Alert className="alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
+            <Alert color="warning" >
                 Digite o código enviado para o email e sua nova senha.
             </Alert>
+
 
             <div className="mb-4">
                 <FieldControl
@@ -39,13 +40,13 @@ const StepPassword = ({ handleSubmit, isValid }: StepPasswordProps) => {
             </div>
 
             <div className="text-center mt-4 w-full ">
-                <BtnSuccess
+                <BtnPrimary
                     type="submit"
                     className="w-full"
                     disabled={!isValid}
                 >
                     Redefinir Senha
-                </BtnSuccess>
+                </BtnPrimary>
             </div>
         </Form>
     )

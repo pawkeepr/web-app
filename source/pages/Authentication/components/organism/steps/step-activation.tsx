@@ -1,4 +1,4 @@
-import { BtnLabel, BtnSuccess } from '~/Components/atoms/btn';
+import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn';
 import InputCode from '~/Components/atoms/input-code/input-code';
 import { StepProps } from './types';
 
@@ -72,8 +72,8 @@ const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
         <div className="p-2 mt-4">
             <div className='flex flex-col items-center justify-center'>
-                <LogoSimple className='d-none d-sm-block' />
-                <LogoSimpleMobile className='d-sm-none' />
+                <LogoSimple className='hidden mobile:block' />
+                <LogoSimpleMobile className='mobile:hidden' />
                 <div className="text-center text-muted mb-2 gap-2">
                     <h5 className="text-primary p-2">Ola! Seja Bem Vindo!</h5>
                     <p >
@@ -104,14 +104,14 @@ const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 </div>
             </form>
             <div className="mt-3">
-                <BtnSuccess
+                <BtnPrimary
                     label='Confirmar'
                     className="w-full"
                     onClick={() => handleSubmit()}
                     disabled={!isValid}
                 />
             </div>
-            <div className="mt-4 text-center">
+            <div className="mt-4 text-center w-full flex items-center justify-center flex-col">
                 <p className="mb-0">Você não recebeu o código?</p>
                 <BtnLabel label='Reenviar' onClick={() => handleResend()} />
             </div>

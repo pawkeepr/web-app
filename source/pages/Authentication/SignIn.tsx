@@ -81,14 +81,13 @@ const CoverSignIn = () => {
                     </div>
 
                     <div className="w-full h-fit flex flex-col justify-center items-center ">
-                        <p className="mb-0">
+                        <p className="-mb-2 text-gray-400 font-normal">
                             Você não tem uma conta ?
                         </p>
                         <BtnLink
+                            message="Criar Conta"
                             href="/sign-up"
-                        >
-                            Registre-se
-                        </BtnLink>
+                        />
                     </div>
                 </main>
             </section>

@@ -1,5 +1,5 @@
 import { useFormikContext } from "formik";
-import { BtnCancel, BtnSuccess } from "~/Components/atoms/btn";
+import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
 
@@ -131,7 +131,7 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
                     />
                 </div>
                 <div>
-                    <BtnSuccess
+                    <BtnPrimary
                         label="Cadastrar"
                         type="submit"
                         onClick={handleClick}

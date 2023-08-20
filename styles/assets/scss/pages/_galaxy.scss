@@ -51,8 +51,8 @@ body {
     }
 }
 
-#page-topbar {
-    &.topbar-shadow {
+#page-topBar {
+    &.topBar-shadow {
         background-color: var(--#{$prefix}card-bg-fill);
     }
 }
@@ -156,14 +156,15 @@ body {
 }
 
 @media (max-width: 767.98px) {
-    [data-topbar="light"] {
+    [data-topBar="light"] {
         .app-menu {
-           background-color: $white;
+            background-color: $white;
         }
     }
-   [data-layout-mode="dark"] {
-    .vertical-sidebar-enable .app-menu {
-        background-color: var(--#{$prefix}card-bg-fill);
+
+    [data-layout-mode="dark"] {
+        .vertical-sidebar-enable .app-menu {
+            background-color: var(--#{$prefix}card-bg-fill);
+        }
     }
-   }
 }

@@ -2,9 +2,13 @@ export const GET_ALL = 'getAll';
 export const GET_ALL_SUCCESS = 'getAllSuccess';
 export const GET_ALL_FAIL = 'getAllFail';
 
-export const GET_ALL_INACTIVES = 'getAllInactives';
-export const GET_ALL_INACTIVES_SUCCESS = 'getAllInactivesSuccess';
-export const GET_ALL_INACTIVES_FAIL = 'getAllInactivesFail';
+export const GET_ALL_ATIVES = 'getAllAtives';
+export const GET_ALL_ATIVES_SUCCESS = 'getAllAtivesSuccess';
+export const GET_ALL_ATIVES_FAIL = 'getAllAtivesFail';
+
+export const GET_ALL_INATIVES = 'getAllInatives';
+export const GET_ALL_INATIVES_SUCCESS = 'getAllInativesSuccess';
+export const GET_ALL_INATIVES_FAIL = 'getAllInativesFail';
 
 export const UPDATE = 'update';
 export const UPDATE_SUCCESS = 'updateSuccess';

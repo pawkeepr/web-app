@@ -8,7 +8,7 @@ export type InputControlProps = FieldHookConfig<string> & {
     separator?: string
     required?: boolean
     disabledError?: boolean
-    component?: JSX.Element
+    component?: JSX.Element | 'input'
     startChildren?: React.ReactNode | React.ReactNode[] | JSX.Element | JSX.Element[]
     children?: React.ReactNode | React.ReactNode[] | JSX.Element | JSX.Element[]
     mask?: string
