@@ -3,7 +3,7 @@
 import ArrowUpIcon from "@heroicons/react/24/solid/ArrowUpIcon";
 import React, { useEffect } from "react";
 import NavbarLanding from "~/Components/molecules/nav-bar-landing";
-import Footer from "./components/Footer";
+import Footer from "../../Layouts/Footer";
 import Plans from "./components/Plans";
 import Home from "./home";
 

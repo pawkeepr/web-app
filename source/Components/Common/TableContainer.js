@@ -1,30 +1,30 @@
-import React, { Fragment } from "react";
 import PropTypes from "prop-types";
+import React, { Fragment } from "react";
 import {
-  useTable,
-  useGlobalFilter,
   useAsyncDebounce,
-  useSortBy,
-  useFilters,
   useExpanded,
+  useFilters,
+  useGlobalFilter,
   usePagination,
-  useRowSelect
+  useRowSelect,
+  useSortBy,
+  useTable
 } from "react-table";
-import { Table, Row, Col, Button, Input, CardBody } from "reactstrap";
-import { DefaultColumnFilter } from "./filters";
+import { Button, CardBody, Col, Input, Row, Table } from "reactstrap";
 import {
-  ProductsGlobalFilter,
-  CustomersGlobalFilter,
-  OrderGlobalFilter,
-  ContactsGlobalFilter,
   CompaniesGlobalFilter,
-  LeadsGlobalFilter,
+  ContactsGlobalFilter,
   CryptoOrdersGlobalFilter,
+  CustomersGlobalFilter,
   InvoiceListGlobalSearch,
-  TicketsListGlobalFilter,
+  LeadsGlobalFilter,
   NFTRankingGlobalFilter,
-  TaskListGlobalFilter
+  OrderGlobalFilter,
+  ProductsGlobalFilter,
+  TaskListGlobalFilter,
+  TicketsListGlobalFilter
 } from "../../Components/Common/GlobalSearchFilter";
+import { DefaultColumnFilter } from "./filters";
 
 // Define a default UI for filtering
 function GlobalFilter({
@@ -63,7 +63,7 @@ function GlobalFilter({
                   }}
                   id="search-bar-0"
                   type="text"
-                  className="form-control search /"
+                  className="  search /"
                   placeholder={`${count} Search...`}
                   value={value || ""}
                 />

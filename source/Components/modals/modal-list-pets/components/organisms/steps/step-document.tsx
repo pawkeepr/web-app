@@ -1,9 +1,9 @@
-import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
-import { InitialValues } from '../../../modal-list-pets'
+import { cnpj, cpf } from 'cpf-cnpj-validator'
 import { useFormikContext } from 'formik'
-import FieldDocument from '~/Components/molecules/field-document'
-import { cpf, cnpj } from 'cpf-cnpj-validator'
 import { useMemo } from 'react'
+import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
+import FieldDocument from '~/Components/molecules/field-document'
+import { InitialValues } from '../../../modal-list-pets'
 
 type SpetDocumentProps = {
     handleCancel: () => void
@@ -29,10 +29,10 @@ const StepDocument = ({
 
     return (
         <div className="mt-3 p-1 gap-2">
-        
+
             <FieldDocument
                 name="document"
-                className="form-control w-full flex-1 mt-2"
+                className="  w-full flex-1 mt-2"
                 placeholder="CPF/CNPJ"
             />
 

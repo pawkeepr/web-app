@@ -111,25 +111,17 @@ const NavbarLanding = () => {
                             </ScrollSpy> */}
                     <div className="z-50 flex gap-2">
                         <BtnLink
-                            size="sm"
-                            color="label"
-                            bgColor="label"
-                            weight="bold"
-                            className=" w-32"
+                            message="Entrar"
+                            className="text-gray-500 hover:!bg-secondary-500"
                             href="/sign-in"
                         >
-                            Entrar
-                            <ArrowRightOnRectangleIcon className="w-5 h-5" />
+                            <ArrowRightOnRectangleIcon />
                         </BtnLink>
                         <BtnLink
-                            size="sm"
-                            weight="bold"
-                            color="label"
-                            bgColor="label"
-                            className="border-2 border-solid border-primary-600 w-32 hover:!bg-secondary-500"
+                            message="Criar Conta"
+                            className="border-2 border-solid border-primary-600 hover:!bg-secondary-500"
                             href="/sign-up"
                         >
-                            Criar Conta
                             {/* icon de cadastro */}
                         </BtnLink>
                     </div>

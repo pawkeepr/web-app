@@ -1,10 +1,10 @@
-import { Col, Input, Label, Row } from "reactstrap";
-import InputMask from "react-input-mask";
-import { BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
-import { StepProps } from "./types";
-import ListBoxTailwind from "~/Components/molecules/list-box-tailwind/list-box-tailwind";
-import FieldControl from "~/Components/molecules/field-control/field-control";
 import { useFormikContext } from "formik";
+import InputMask from "react-input-mask";
+import { Input, Label, Row } from "reactstrap";
+import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
+import FieldControl from "~/Components/molecules/field-control/field-control";
+import ListBoxTailwind from "~/Components/molecules/list-box-tailwind/list-box-tailwind";
+import { StepProps } from "./types";
 
 const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit } = useFormikContext();
@@ -72,7 +72,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                 <div className="mt-4">
                     <FieldControl
                         label="Valor do Pagamento ?"
-                        className="form-control no-underline"
+                        className="  no-underline"
                         name="paymentValue"
                         component={InputMask as any}
                         mask="R$ 999,99"
@@ -93,7 +93,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                     <i className="ri-arrow-left-line  align-middle fs-16 me-2"></i>{" "}
                     Voltar
                 </BtnLabel>
-                <BtnSuccess
+                <BtnPrimary
                     onClick={handleSubmit}
                     type="button"
                     className="btn-label"
@@ -101,7 +101,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                 >
                     <span className="ml-1"> Finalizar </span>
                     <i className="ri-check-line  align-middle fs-16 p-1"></i>
-                </BtnSuccess>
+                </BtnPrimary>
             </div>
         </>
     );

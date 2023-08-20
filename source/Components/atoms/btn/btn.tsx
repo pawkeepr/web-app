@@ -1,82 +1,146 @@
-import { twMerge } from 'tailwind-merge';
-import { tv } from "tailwind-variants";
+import Link, { LinkProps } from 'next/link';
+import React, { ComponentProps } from 'react';
+import { VariantProps, tv } from 'tailwind-variants';
+import BtnAvatar from './btn-avatar';
 
-const button = tv({
+export const button = tv({
     base: `
-        mobile:p-4 mobile:w-full
-        px-4 m-1 text-white
+        mobile:p-4 mobile:w-full w-44
+        px-4 m-1 h-10 
         text-sm font-semibold rounded-md text-center
-        gap-1 leading-1 font-semibold 
-        rounded-lg transition 
-        duration-300 ease-in-out w-32 border-none
+        gap-1 leading-1 font-semibold
+        transition
+        duration-300 ease-in-out border-none
         disabled:opacity-50 disabled:cursor-not-allowed
-        opacity-80 hover:opacity-100 active:opacity-100
+        bg-opacity-80 hover:bg-opacity-100 active:opacity-100
         hover:transform hover:scale-105
+        !text-opacity-100
+        flex justify-center items-center
     `,
     variants: {
-        weight: {
-            bold: 'font-bold',
-            medium: 'font-medium',
-            semibold: 'font-semibold',
+        primary: {
+            true: "bg-primary-500 dark:bg-secondary-500 !text-white"
         },
-        size: {
-            xs: 'py-0 px-1',
-            sm: 'py-1 px-2',
-            md: 'py-3 px-4',
-            lg: 'py-4 px-6',
+        secondary: {
+            true: "bg-secondary-500 dark:bg-primary-500"
         },
-        fontSize: {
-            xs: 'text-xs',
-            sm: 'text-sm',
-            md: 'text-md',
-            lg: 'text-lg',
+        success: {
+            true: "bg-green-500"
         },
-        color: {
-            primary: "bg-primary-500 dark:bg-secondary-500",
-            secondary: "bg-secondary-500 dark:bg-primary-500",
-            success: "bg-green-500",
-            cancel: "bg-transparent text-gray-500 dark:hover:text-gray-100",
-            error: "bg-red-500",
-            label: "bg-transparent text-gray-500 dark:hover:text-gray-100",
+        confirm: {
+            true: "bg-blue-600 hover:bg-blue-700 enabled:focus:bg-blue-800 enabled:hover:bg-btn-blue-700"
         },
+        cancel: {
+            true: "bg-transparent border border-red text-red-700 border-red-400 hover:!bg-red-100 hover:border-red-500 hover:text-red-800"
+        },
+        text: {
+            true: "bg-transparent border border-gray-400 text-gray-700 hover:!bg-gray-100 hover:border-gray-500 hover:text-gray-800"
+        },
+        link: {
+            true: "text-secondary-500 dark:text-primary-600 hover:!no-underline capitalize w-fit"
+        }
     },
-    defaultVariants: {
-        color: "primary",
-        weight: "semibold",
-        size: "md",
-        fontSize: "sm",
-    }
 })
 
-export type BtnProps = {
-    color?: 'primary' | 'secondary' | 'success' | 'error';
-    type?: 'button' | 'submit' | 'reset';
-    className?: string;
+const styledIcon = tv({
+    base: `
+    flex justify-center items-center
+    w-5 h-5
+  `,
+})
+
+type BtnProps = {
+    icon?: React.ReactNode | string;
+    label?: string;
+    iconStyle?: string;
     children?: React.ReactNode;
-    weight?: 'bold' | 'medium' | 'semibold';
-    size?: 'xs' | 'sm' | 'md' | 'lg';
-    fontSize?: 'xs' | 'sm' | 'md' | 'lg';
-    label?: string
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+} & ComponentProps<'button'> & VariantProps<typeof button> & VariantProps<typeof styledIcon>
 
-
-const Button = ({
-    children,
-    label = 'Button',
+const Btn = ({
+    label,
+    icon,
     className,
-    color = 'primary',
+    iconStyle,
+    children,
     type = 'button',
     ...props
 }: BtnProps) => {
     return (
         <button
             type={type}
-            className={twMerge(button({ color }), className)} {...props}>
-            <span>{children || label}</span>
+            className={button({ className, ...props })} {...props}>
+            {icon && <span className={styledIcon({ ...props })}>{icon}</span>}
+            {children && <span className={styledIcon({ ...props })}>{children}</span>}
+            <span>{label}</span>
         </button>
     )
 }
 
+const BtnPrimary = ({ label = "Primário", ...props }: BtnProps) => {
+    return (
+        <Btn primary label={label} {...props} />
+    )
+}
 
-export default Button
+const BtnSecondary = ({ label = "Secundário", ...props }: BtnProps) => {
+    return (
+        <Btn secondary label={label} {...props} />
+    )
+}
+
+const BtnSuccess = ({ label = "Sucesso", ...props }: BtnProps) => {
+    return (
+        <Btn success label={label} {...props} />
+    )
+}
+
+const BtnConfirm = ({ label = "Confirmar", ...props }: BtnProps) => {
+    return (
+        <Btn confirm label={label} {...props} />
+    )
+}
+
+const BtnCancel = ({ label = "Cancelar", ...props }: BtnProps) => {
+    return (
+        <Btn cancel label={label} {...props} />
+    )
+}
+
+const BtnLabel = ({ label = "Texto", ...props }: BtnProps) => {
+    return (
+        <Btn text label={label} {...props} />
+    )
+}
+
+type BtnLinkProps = {
+    message?: string;
+    children?: React.ReactNode;
+    className?: string;
+} & VariantProps<typeof button> & LinkProps
+
+const BtnLink = ({
+    href,
+    children,
+    link = true,
+    message,
+    className,
+    ...props
+}: BtnLinkProps) => {
+    return (
+        <Link
+            href={href}
+            className={button({ ...props, link, className })}
+            {...props as any}
+        >
+            {children && <span className={styledIcon({ ...props })}>{children}</span>}
+            {message}
+        </Link>
+    )
+}
+
+export {
+    Btn, BtnAvatar, BtnCancel,
+    BtnConfirm, BtnLabel,
+    BtnLink, BtnPrimary, BtnSecondary, BtnSuccess
+};
 

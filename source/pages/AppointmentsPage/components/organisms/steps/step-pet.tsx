@@ -6,9 +6,9 @@ import MaskedInput from "react-input-mask";
 import FieldDocument from "~/Components/molecules/field-document/field-document";
 
 import { useFormikContext } from "formik";
-import { BtnAvatar, BtnSuccess } from "~/Components/atoms/btn";
-import { StepProps } from "./types";
+import { BtnPrimary } from "~/Components/atoms/btn";
 import ControlSwitch from "../../molecules/switch/switch";
+import { StepProps } from "./types";
 
 import { InitialValues } from "../../../Appointments";
 
@@ -16,12 +16,11 @@ import { useState, useTransition } from "react";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import ListBoxTailwind from "~/Components/molecules/list-box-tailwind/list-box-tailwind";
 import { SpeciesType, species } from "~/store/pets/speciesType";
-import AvatarPet from "../../atoms/pet-avatar";
 import usePetById from "../../hooks/use-pet-by-id";
 import usePetByName from "../../hooks/use-pet-by-name";
 import useTutorByDocument from "../../hooks/use-tutor-by-document";
-import StepTutor from "../../molecules/tutor";
 import StepSecondTutor from "../../molecules/second-tutor";
+import StepTutor from "../../molecules/tutor";
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const [isPendingPet, startTransition] = useTransition();
@@ -80,7 +79,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         <AvatarPet name={values.pet?.name || ''} />
                         <BtnAvatar alt='Avatar de Tutor' name="tutor.avatar" disabled size={24} />
                     </div> */}
-                      <Row className="mt-2">
+                    <Row className="mt-2">
                         <div className="w-full lg:w-1/3 px-3 mb-6">
                             <ListBoxTailwind
                                 items={species}
@@ -127,7 +126,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             divClassName="my-1"
                             name="tutor.document"
                             aria-label="document"
-                            className="form-control"
+                            className=" "
                             onlyCPF
                             disabled={isPending || tutorExists}
                             placeholder="CPF"
@@ -143,7 +142,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             name="tutor.name"
                             disabled={isPending || tutorExists}
                             aria-label="name"
-                            className="form-control"
+                            className=" "
                             placeholder="Digite o nome do Tutor"
                             required
                             disabledError
@@ -152,7 +151,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     </Col>
                     <Col sm={4}>
                         <FieldControl
-                            className="form-control"
+                            className=" "
                             divClassName="my-1"
                             type="text"
                             label="Telefone/Celular"
@@ -173,66 +172,66 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 <Row className="g-3">
                     <StepTutor disabled={tutorExists} />
                 </Row>
-            <Row className="mt-2">
-                <ControlSwitch
-                    label="O pet possui um segundo Tutor?"
-                    className="mt-2 mb-4 lg:w-16 lg:h-7 w-[3.72rem] h-6"
+                <Row className="mt-2">
+                    <ControlSwitch
+                        label="O pet possui um segundo Tutor?"
+                        className="mt-2 mb-4 lg:w-16 lg:h-7 w-[3.72rem] h-6"
                     >
-                    <div className="text-align: left mb-2">Preencha as Informações do segundo Tutor</div>     
-                    <Col sm={3}>
-                        <FieldDocument
-                            label="CPF"
-                            divClassName="my-1"
-                            name="secondTutor.document"
-                            aria-label="document"
-                            className="form-control"
-                            onlyCPF
-                            disabled={isPending || tutorExists}
-                            placeholder="CPF"
-                            component={MaskedInput as any}
-                            required
-                        />
-                    </Col>
-                    <Col sm={5}>
-                        <FieldControl
-                            initialFocus
-                            divClassName="my-1"
-                            label="Nome Completo"
-                            name="secondTutor.name"
-                            disabled={isPending || tutorExists}
-                            aria-label="name"
-                            className="form-control"
-                            placeholder="Digite o nome do Tutor"
-                            required
-                            disabledError
-                            onChange={onlyWords}
-                        />
-                    </Col>
-                    <Col sm={4}>
-                        <FieldControl
-                            className="form-control"
-                            divClassName="my-1"
-                            type="text"
-                            label="Telefone/Celular"
-                            name="secondTutor.phone"
-                            disabled={isPending || tutorExists}
-                            placeholder={
-                                isPending
-                                    ? "Carregando..."
-                                    : "Digite o seu Número de Telefone"
-                            }
-                            component={MaskedInput as any}
-                            mask={"(99) 99999-9999"}
-                            maskChar={null}
-                            required
-                        />
-                    </Col>
-                    <StepSecondTutor disabled={tutorExists} />
-                </ControlSwitch>
-            </Row>
+                        <div className="text-align: left mb-2">Preencha as Informações do segundo Tutor</div>
+                        <Col sm={3}>
+                            <FieldDocument
+                                label="CPF"
+                                divClassName="my-1"
+                                name="secondTutor.document"
+                                aria-label="document"
+                                className="form-control"
+                                onlyCPF
+                                disabled={isPending || tutorExists}
+                                placeholder="CPF"
+                                component={MaskedInput as any}
+                                required
+                            />
+                        </Col>
+                        <Col sm={5}>
+                            <FieldControl
+                                initialFocus
+                                divClassName="my-1"
+                                label="Nome Completo"
+                                name="secondTutor.name"
+                                disabled={isPending || tutorExists}
+                                aria-label="name"
+                                className="form-control"
+                                placeholder="Digite o nome do Tutor"
+                                required
+                                disabledError
+                                onChange={onlyWords}
+                            />
+                        </Col>
+                        <Col sm={4}>
+                            <FieldControl
+                                className="form-control"
+                                divClassName="my-1"
+                                type="text"
+                                label="Telefone/Celular"
+                                name="secondTutor.phone"
+                                disabled={isPending || tutorExists}
+                                placeholder={
+                                    isPending
+                                        ? "Carregando..."
+                                        : "Digite o seu Número de Telefone"
+                                }
+                                component={MaskedInput as any}
+                                mask={"(99) 99999-9999"}
+                                maskChar={null}
+                                required
+                            />
+                        </Col>
+                        <StepSecondTutor disabled={tutorExists} />
+                    </ControlSwitch>
+                </Row>
             </div>
             <div className="flex align-items-center justify-end gap-3 mt-4">
-                <BtnSuccess
+                <BtnPrimary
                     type="button"
                     className="ml-4 btn-label right ms-auto nexttab nexttab"
                     label="Próximo"
@@ -242,7 +241,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 >
                     <span className="ml-1"> Próximo </span>
                     <i className="ri-arrow-right-line  align-middle fs-16 ms-2 p-1"></i>
-                </BtnSuccess>
+                </BtnPrimary>
             </div>
         </>
     );

@@ -11,7 +11,7 @@ import { SignInCredentials } from "~/services/helpers/auth";
 
 import cn from "classnames";
 import * as Yup from "yup";
-import { BtnLink, BtnSuccess } from "~/Components/atoms/btn";
+import { BtnLink, BtnPrimary } from "~/Components/atoms/btn";
 import FieldPassword from "~/Components/molecules/field-password/field-password";
 
 const initialValues: SignInCredentials = {
@@ -62,7 +62,7 @@ const Auth = () => {
                             label="Email"
                             type="text"
                             pattern="[^\s]+" // no spaces
-                            className="form-control"
+                            className=" "
                             name="username"
                             placeholder="Digite seu email"
                             data-testid="email-input"
@@ -73,12 +73,14 @@ const Auth = () => {
                     </div>
 
                     <div className="mb-3">
-                        <div className="position-relative auth-pass-inputgroup mb-3">
+                        <div className="position-relative mb-3">
 
                             <BtnLink
+                                message="Esqueceu a senha?"
                                 href="/forgot-password"
-                                fontSize="xs"
                                 className="
+                                    h-fit
+                                    text-xs
                                     absolute
                                     z-10
                                     font-semibold
@@ -87,13 +89,11 @@ const Auth = () => {
                                     top-0
                                     right-0
                                 "
-                            >
-                                Esqueceu a senha?
-                            </BtnLink>
+                            />
 
                             <FieldPassword
                                 label="Senha"
-                                className={cn("form-control pe-5 password-input border-end-0")}
+                                className={cn("  pe-5 password-input border-end-0")}
                                 placeholder="Digite sua senha"
                                 name="password"
                                 data-testid="password-input"
@@ -104,14 +104,15 @@ const Auth = () => {
 
                         </div>
                     </div>
-                    <BtnSuccess
-                        className="w-full mt-4 mobile:bg-secondary-500 py-3"
+                    <BtnPrimary
+                        label="Entrar"
+                        className="w-full"
                         type="submit"
                         data-testid="submit-button"
                         disabled={!isValid || isAuthenticated}
-                    >
-                        Entrar
-                    </BtnSuccess>
+                    />
+
+
                 </Form>
             )}
         </Formik>

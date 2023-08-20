@@ -1,22 +1,22 @@
 import React from "react";
 import HeaderTitle from "~/Components/atoms/header-title";
+import Footer from "~/Layouts/Footer";
 
 type AuthLayoutProps = {
     children: React.ReactNode;
     title: string;
 };
 
-const AuthLayout = ({ children, title, bgColor = '!bg-gray-50', shadow = 'shadow-xl' }: AuthLayoutProps) => {
+const AuthLayout = ({ children, title }: AuthLayoutProps) => {
     return (
-        <div className="h-screen auth-bg-cover flex flex-col content-center items-center">
+        <div className="h-screen auth-bg-cover flex flex-col ">
+
             <HeaderTitle title={title} />
             <div className="bg-overlay" />
-            <div className="flex items-center justify-center h-full w-full overflow-auto">
+            <main className="flex flex-1 content-center items-center justify-center mobile:overflow-hidden">
                 {children}
-            </div>
-            <footer className="hidden bg-gray-800 md:block w-full p-3 text-slate-300 text-center">
-                &copy; {new Date().getFullYear()} PawKeeprs Smartcare.
-            </footer>
+            </main>
+            <Footer />
         </div>
     );
 };

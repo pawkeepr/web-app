@@ -1,4 +1,4 @@
-import { BtnSuccess } from "~/Components/atoms/btn";
+import { BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import LOADING from "~/constants/loading";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
@@ -51,19 +51,18 @@ const StepEmail = ({ email, onChangeNextTab }: StepEmailProps) => {
                     pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
                     required
                     placeholder="Digite seu email"
-                    className="form-control"
+                    className=" "
                 />
 
             </div>
 
             <div className="text-center mt-4 w-full ">
-                <BtnSuccess
+                <BtnPrimary
                     type="submit"
                     className="w-full"
                     disabled={isLoading === LOADING.PENDING || !validateEmail.isValidSync(email)}
-                >
-                    Enviar Link de Redefinição de Senha
-                </BtnSuccess>
+                    label="Enviar Link de Redefinição de Senha"
+                />
             </div>
         </form>
     )

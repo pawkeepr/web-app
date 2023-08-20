@@ -1,9 +1,9 @@
+import { useFormikContext } from 'formik'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldControl from '~/Components/molecules/field-control/field-control'
+import { MapOptionSpecies, Species } from '~/store/pets/speciesType'
 import { Pet } from '~/store/pets/types'
 import { InitialValues } from '../../../modal-list-pets'
-import { useFormikContext } from 'formik'
-import { MapOptionSpecies, Species } from '~/store/pets/speciesType'
 
 type StepListPetsProps = {
     pets: Pet[]
@@ -56,10 +56,10 @@ const StepListPets = ({
                         >
                             <div className="grid grid-cols-4 justify-center items-center">
                                 <span className="align-middle col-span-1">{
-                                EmojiPet[MapOptionSpecies[pet.species]]}</span>
+                                    EmojiPet[MapOptionSpecies[pet.species]]}</span>
                                 <span className="align-middle col-span-2">{pet.name}</span>
                                 <span className="align-middle col-span-1">{
-                                Species[MapOptionSpecies[pet.species]]
+                                    Species[MapOptionSpecies[pet.species]]
                                 }</span>
                             </div>
                         </button>
@@ -68,7 +68,7 @@ const StepListPets = ({
             <FieldControl
                 name="name"
                 label='Caso o pet não esteja na lista, digite o nome dele:'
-                className="form-control w-full flex-1 mt-2"
+                className="  w-full flex-1 mt-2"
                 placeholder="Nome do Pet"
             />
 

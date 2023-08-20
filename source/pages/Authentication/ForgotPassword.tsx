@@ -120,14 +120,11 @@ const ForgetPasswordPage = (props: { history: any; }) => {
 
                         </Formik>
                     </div>
-                    <div className="mt-4 text-center">
-                        <p className="mb-1 text-sm">
-                            <span>Espere, Eu lembro minha senha...</span>
-                            <br />
-                            <BtnLink href="/sign-in">
-                                Clique Aqui!
-                            </BtnLink>
+                    <div className="mt-4 text-center flex items-center flex-col">
+                        <p className="mb-1 text-sm text-center">
+                            Espere, Eu lembro minha senha...
                         </p>
+                        <BtnLink href="/sign-in" message="Clique Aqui!" />
                     </div>
                 </main>
             </section>

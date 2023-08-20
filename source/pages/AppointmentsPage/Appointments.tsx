@@ -2,14 +2,14 @@ import DashboardLayouts from "../_layouts/dashboard";
 import * as Yup from "yup";
 import Container from "react-bootstrap/Container";
 
-import { VeterinaryAppointment } from "~/store/veterinary-appointments/types";
+import { Data } from "~/store/appointment-vet/types";
 import VerticalTabs from "./components/templates/vertical-tabs";
 
 import { Formik } from "formik";
 import ModalConfirm from "~/Components/modals/modal-confirm";
 import { useRouter } from "next/navigation";
 
-export type InitialValues = Partial<Nullable<VeterinaryAppointment>>;
+export type InitialValues = Partial<Nullable<Data>>;
 
 type AppointmentsPageProps = {
     document: string;

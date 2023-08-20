@@ -21,6 +21,7 @@ import StepAnamneses from "../organisms/steps/step-anamnese";
 import StepPayment from "../organisms/steps/step-payment";
 import StepPet from "../organisms/steps/step-pet";
 import StepTreatment from "../organisms/steps/step-treatment";
+import StepInfo from "../organisms/steps/step-info";
 
 type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
@@ -40,15 +41,27 @@ const items: TabItem[] = [
     },
     {
         id: 2,
+        title: "Bem-Estar",
+        href: "#BemEstar",
+        Component: StepInfo
+    },
+    {
+        id: 3,
         title: "Anamnese",
         href: "#Anamnese",
         Component: StepAnamneses
     },
     {
-        id: 3,
+        id: 4,
         title: "Tratamento",
         href: "#Treatment",
         Component: StepTreatment
+    },
+    {
+        id: 5,
+        title: "Finalizar",
+        href: "#Finalizar",
+        Component: StepPayment
     },
     // {
     //     id: 4,
@@ -62,12 +75,6 @@ const items: TabItem[] = [
     //     href: "#Address",
     //     Component: StepAddress
     // },
-    {
-        id: 4,
-        title: "Finalizar",
-        href: "#Finalizar",
-        Component: StepPayment
-    },
 ]
 
 const VerticalTabs = () => {

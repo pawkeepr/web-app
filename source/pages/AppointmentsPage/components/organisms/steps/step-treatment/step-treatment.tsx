@@ -5,20 +5,18 @@ import ControlSwitch from "../../../molecules/switch/switch";
 
 import { StepProps } from "../types";
 
-import { FieldArray, useFormikContext, ErrorMessage, Field } from "formik";
-import { BtnAvatar, BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
-import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
-import AvatarPet from "../../../atoms/pet-avatar/pet-avatar";
+import { FieldArray, useFormikContext } from "formik";
+import { BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
-import { tests } from "~/common/data/tests";
-import { exams } from "~/common/data/exams";
-import { vaccines } from "~/common/data/vaccines";
 import { diseases } from "~/common/data/diseases";
+import { exams } from "~/common/data/exams";
+import { tests } from "~/common/data/tests";
+import { vaccines } from "~/common/data/vaccines";
+import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 
 
+import { BsFillTrash3Fill, BsPlusCircleFill } from "react-icons/bs";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete";
-import { BsPlusCircleFill } from "react-icons/bs";
-import { BsFillTrash3Fill } from "react-icons/bs";
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
@@ -33,7 +31,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
             <div>
                 <h4 className="text-center">Tratamento</h4>
             </div>
-            
+
             <div className="mt-2">
                 <ControlSwitch
                     label="Testes rápidos?"
@@ -43,8 +41,8 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         <FieldArray name="tests">
                             {(arrayHelpers) => (
                                 <>
-                                    {values?.tests?.map (
-                                        (test, index) => 
+                                    {values?.tests?.map(
+                                        (test, index) =>
                                             <><><div
                                                 key={index}
                                                 className="flex gap-2   items-center col-span-2  "
@@ -92,7 +90,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                         name={`test[${index}].test_Comments`}
                                                         type="text" />
                                                 </div></>
-                                        )
+                                    )
                                     }
                                 </>
                             )}

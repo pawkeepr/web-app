@@ -3,7 +3,7 @@ import { useFormikContext } from 'formik';
 import { useMemo } from 'react';
 
 
-import { BtnSuccess } from '~/Components/atoms/btn';
+import { BtnPrimary } from '~/Components/atoms/btn';
 import FieldControl from '~/Components/molecules/field-control';
 import { AccountSignUp } from '~/store/auth/register/types';
 
@@ -53,7 +53,7 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                 initialFocus
                 name="email"
                 type="email"
-                className="form-control"
+                className=" "
                 aria-label="email"
                 placeholder="Digite seu email"
                 required
@@ -64,7 +64,6 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                     required
                     label='Senha'
                     name="password"
-                    className="form-control border-end-0"
                     placeholder="Digite sua senha"
                     aria-label="password"
                     onBlur={handleBlur}
@@ -75,7 +74,6 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                     required
                     label='Repita a senha'
                     name="passwordConfirm"
-                    className="form-control border-end-0"
                     placeholder="Repita a senha"
                     aria-label="password-confirm"
                     onBlur={handleBlur}
@@ -101,7 +99,7 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                 }
             />
             <div className='flex  items-center justify-center'>
-                <BtnSuccess
+                <BtnPrimary
                     label="Finalizar cadastro"
                     type="submit"
                     className="w-full"
