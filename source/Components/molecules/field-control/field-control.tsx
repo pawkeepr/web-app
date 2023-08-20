@@ -64,7 +64,12 @@ const FieldControl = ({
     }
 
     return (
-        <div className={twMerge('gap-1 relative', divClassName)}>
+        <div className={cn(
+            twMerge('gap-1 relative', divClassName),
+            {
+                'pb-2': !meta.error,
+            }
+        )}>
             <Label label={label} required={required} id={id} separator={separator} />
             <div
                 className={cn(`
@@ -97,7 +102,7 @@ const FieldControl = ({
             </div>
             {
                 meta.error && (
-                    <div className="w-full text-xs text-center text-red-700">
+                    <div className="w-full text-xs text-center text-red-400">
                         {meta.error}
                     </div>
                 )
