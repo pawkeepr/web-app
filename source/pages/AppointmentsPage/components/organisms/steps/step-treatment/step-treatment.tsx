@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ControlSwitch from "../../../molecules/switch/switch";
+import ControlSwitch from "../../../molecules/switch";
 
 //Import images
 
@@ -16,9 +16,13 @@ import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 import { BsFillTrash3Fill, BsPlusCircleFill } from "react-icons/bs";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete";
 
+import Select from "react-select";
+import { colorStyles } from "~/Components/molecules/field-control/field-control-select-mult";
+
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
     const [enableField, setEnableField] = useState<boolean>(true);
+    const avaliation = ['Limpeza bucal', 'Retirada de tártaro', 'Extração', 'Canal', 'Aplicação de anti-inflamatório', 'Aplicação de polivitamínicos', 'Aplicação de Prótese', 'Aplicação de resina']
 
     const handleClick = () => {
         enableField === true ? setEnableField(false) : setEnableField(true);
@@ -28,6 +32,11 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     //     setFieldValue('selectedValue', selected);
     //     console.log(selected);
     // };
+    const options = avaliation.map((item) => ({
+        value: item,
+        label: item,
+        color: 'rgb(255 200 107);',
+    }));
 
     return (
         <>
@@ -38,7 +47,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
             <div className="">
                 <div className="mt-2">
                     <ControlSwitch
-                        label="Aplicar Medicação"
+                        label="Aplicar Medicação?"
                         className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7 "
                     >
                         <div className="flex flex-col lg:flex-row mt-2 ">
@@ -475,179 +484,54 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                             </div>
                         </div>
                     </ControlSwitch>
-                </div>
-                <div className="mt-2">
                     <ControlSwitch
-                        label="Aplicar nutrição alimentar?"
-                        className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
+                        label="Tratamento dentário?"
+                        className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7 "
                     >
-                        <div className="grid grid-cols-2 gap-2">
-                            <div className="flex flex-col col-span-2 w-full">
-                                <FieldArray name="nutritions">
-                                    {(arrayHelpers) => (
-                                        <>
-                                            {values.nutritions?.map(
-                                                (nutrition, index) => (
-                                                    <>
-                                                        <div
-                                                            key={index}
-                                                            className="flex gap-2   items-center col-span-2  "
-                                                        >
-                                                            <ComboBoxAutocomplete
-                                                                label={`Nome do Alimento ${index + 1
-                                                                    }`}
-                                                                name={`nutrition[${index}].food_name`}
-                                                            />
-
-                                                            <button
-                                                                type="button"
-                                                                onClick={() =>
-                                                                    arrayHelpers.push(
-                                                                        {
-                                                                            food_name:
-                                                                                "",
-                                                                            food_start_time:
-                                                                                "",
-                                                                            amount: "",
-                                                                            measure:
-                                                                                "",
-                                                                            interval:
-                                                                                "",
-                                                                            period: "",
-                                                                        }
-                                                                    )
-                                                                }
-                                                            >
-                                                                <BsPlusCircleFill
-                                                                    title="Adicionar Vacina"
-                                                                    className="w-8 h-5 hover:scale-110 mt-2 text-secondary-500    transition   cursor-pointer"
-                                                                />
-                                                            </button>
-
-                                                            {index > 0 && (
-                                                                <BsFillTrash3Fill
-                                                                    title="Remover Vacina"
-                                                                    className="w-8 h-5 mt-2 hover:scale-110 text-red-500 cursor-pointer"
-                                                                    onClick={() =>
-                                                                        arrayHelpers.remove(
-                                                                            index
-                                                                        )
-                                                                    }
-                                                                    type="button"
-                                                                />
-                                                            )}
-                                                        </div>
-                                                        <div className="grid grid-cols-2 gap-2">
-                                                            <div className="flex flex-col col-span-2">
-                                                                <FieldControl
-                                                                    label={`Horário que começa a alimentação ${index +
-                                                                        1
-                                                                        }`}
-                                                                    className="rounded-md form-control"
-                                                                    name={`nutrition[${index}].time_food`}
-                                                                    type="text"
-                                                                />
-                                                            </div>
-
-                                                            <div className="flex  w-full items-center gap-2 col-span-2 ">
-                                                                <FieldControl
-                                                                    label={`Quantidade Alimento ${index +
-                                                                        1
-                                                                        }`}
-                                                                    className="rounded-md form-control"
-                                                                    name={`nutrition[${index}].amount`}
-                                                                    type="text"
-                                                                />
-                                                                <div className="flex flex-col mb-[6px] w-full">
-                                                                    <span className=" text-xs font-bold">
-                                                                        Medida
-                                                                    </span>
-                                                                    <select
-                                                                        className="form-control"
-                                                                        name={`nutrition[${index}].measure`}
-                                                                    >
-                                                                        <option value="kilos">
-                                                                            Kilo(s)
-                                                                        </option>
-                                                                        <option value="gramas">
-                                                                            Grama(s)
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div className="flex items-center justify-center gap-2 col-span-2">
-                                                                <FieldControl
-                                                                    label={`Intervalo ${index +
-                                                                        1
-                                                                        }`}
-                                                                    className="rounded-md form-control"
-                                                                    name={`nutrition[${index}].interval`}
-                                                                    type="text"
-                                                                />
-                                                                <div className="flex flex-col w-full mb-[6px]">
-                                                                    <span className=" text-xs font-bold">
-                                                                        Período
-                                                                    </span>
-                                                                    <select
-                                                                        className="form-control"
-                                                                        name={`nutrition[${index}].period`}
-                                                                    >
-                                                                        <option value="hours">
-                                                                            Hora(s)
-                                                                        </option>
-                                                                        <option value="days">
-                                                                            Dia
-                                                                        </option>
-                                                                        <option value="months">
-                                                                            Mes(es)
-                                                                        </option>
-                                                                        <option value="years">
-                                                                            Ano
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </>
-                                                )
-                                            )}
-                                        </>
-                                    )}
-                                </FieldArray>
-                            </div>
-                        </div>
-                    </ControlSwitch>
-                </div>
-
-                <div className="mt-4">
-                    <span className="font-bold">Informações Obrigatórias</span>
-                    <div className="flex items-center mt-2 gap-2 w-full">
                         <FieldControl
-                            label="Peso"
-                            className="rounded-md form-control font-semibold "
-                            name="weight"
-                            type="number"
-                        />
-                        <div className="flex flex-col mb-[6px] w-full">
-                            <span className=" text-xs font-bold ">Medida</span>
-                            <select
-                                className="form-control"
-                                name="measureWeight"
-                            >
-                                <option value="kg">Kilogramas</option>
-                                <option value="g">Gramas</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="flex flex-col mt-2">
-                        <FieldControl
-                            label="Orientações e Anotações"
-                            className="rounded-md form-control"
-                            component="textarea"
-                            name="observations"
+                            label='Motivo da consulta:'
+                            placeholder="Descrição do motivo pelo qual o pet está sendo levado ao dentista.
+                            Quaisquer sintomas ou problemas específicos que o tutor tenha notado."
+                            className="form-control"
+                            name="Description"
                             type="text"
                         />
-                    </div>
+                        <FieldControl
+                            label='Exame bucal:'
+                            placeholder="Avaliação completa da saúde bucal do pet, incluindo exame dos dentes, gengivas, língua, etc.
+                            Detalhes sobre problemas dentários, como tártaro, cáries, inflamações, etc."
+                            className="form-control"
+                            name="Description"
+                            type="text"
+                        />
+                        <p className="mt-2">Tratamentos realizados:</p>
+                        <Select
+                            className="w-full mb-3"
+                            theme={(theme) => ({
+                                ...theme,
+                                borderRadius: 0,
+                                colors: {
+                                    ...theme.colors,
+                                    primary25: 'rgb(9, 178, 133);',
+                                    primary: 'rgb(9, 178, 133);',
+                                },
+                            })}
+                            styles={colorStyles}
+                            placeholder="Selecione uma ou mais atividades"
+                            isSearchable={true}
+                            isMulti
+                            name="activity"
+                            options={options}
+                        />
+                        <div className="flex flex-col mt-2">
+                            <FieldControl
+                                label="Recomendações e orientações:"
+                                className="rounded-md form-control"
+                                component="textarea"
+                                name="observations"
+                                type="text" />
+                        </div>
+                    </ControlSwitch>
                 </div>
             </div>
 

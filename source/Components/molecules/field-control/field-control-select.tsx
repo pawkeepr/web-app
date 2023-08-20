@@ -61,7 +61,7 @@ const FieldControlTest = ({
             <If condition={!!label}>
                 <Form.Label
                     htmlFor={id}
-                    className="mb-0 list-group-item fs-12"
+                    className="mb-0 mt-2 list-group-item fs-12"
                     data-testid={`label-${id}`}
                 >
                     {label}
@@ -70,7 +70,7 @@ const FieldControlTest = ({
                     </If>
                 </Form.Label>
             </If>
-            <InputGroup className="z-10 mb-2 position-relative">
+            {/* <InputGroup className="z-10 mb-2 position-relative"> */}
                 {startChildren}
                 <Select
                     className="w-full"
@@ -91,7 +91,7 @@ const FieldControlTest = ({
                 />
 
                 {children}
-            </InputGroup>
+            {/* </InputGroup> */}
             <ErrMessage
                 message={meta.error?.toString() as string}
                 data-testid={`err-${id}`}
