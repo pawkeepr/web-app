@@ -29,8 +29,8 @@ const initialValues = (
         breed: null,
         species: null,
         avatar: null,
-        gender: null,
-        dateOfBirth: null,
+        sex: null,
+        date_birth: null,
     },
     tutor: {
         id: null,

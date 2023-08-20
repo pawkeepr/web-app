@@ -26,7 +26,11 @@ export enum Species {
     'fish' = 'Peixe',
     'reptile' = 'Réptil',
 }
-
+export enum sexType {
+    male = 'Macho',
+    female = 'Fêmea',
+    unknown = 'Desconhecido',
+}
 export enum MapOptionSpecies {
     'dog' = 'dog',
     'cat' = 'cat',

@@ -10,6 +10,8 @@ import { Tutor } from '../tutor/types';
 import {
     Breed
 } from './breedType';
+
+
 import LOADING from '~/constants/loading';
 
 export const name = "Pet"
@@ -28,10 +30,12 @@ export const CRM_API_RESPONSE_SUCCESS = `${name}/apiResponseSuccess`;
 export const CRM_API_RESPONSE_ERROR = `${name}/apiResponseError`;
 export const RESET_CREATED_PET = `${name}/resetCreatedPet`;
 
+
 export enum GenderPet {
     male = 'Macho',
     female = 'Fêmea',
-    unknown = 'Desconhecido'
+    unknown = 'Desconhecido',
+    
 };
 
 export type Diet = {
@@ -45,8 +49,8 @@ export type Pet = {
     name: string;
     species: Species;
     breed: Breed;
-    gender: GenderPet;
-    dateOfBirth: string;
+    sex: GenderPet;
+    date_birth: string;
     bloodType: BloodType;
     color: string;
     allergies: string[];

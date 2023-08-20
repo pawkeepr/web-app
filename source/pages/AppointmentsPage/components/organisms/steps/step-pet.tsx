@@ -16,12 +16,14 @@ import { useState, useTransition } from "react";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import ListBoxTailwind from "~/Components/molecules/list-box-tailwind/list-box-tailwind";
 import { SpeciesType, species } from "~/store/pets/speciesType";
+import{ genderValues } from "~/store/pets/sexType";
 import AvatarPet from "../../atoms/pet-avatar";
 import usePetById from "../../hooks/use-pet-by-id";
 import usePetByName from "../../hooks/use-pet-by-name";
 import useTutorByDocument from "../../hooks/use-tutor-by-document";
 import StepTutor from "../../molecules/tutor";
 import StepSecondTutor from "../../molecules/second-tutor";
+import { GenderPet } from "~/store/pets/types";
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const [isPendingPet, startTransition] = useTransition();
@@ -108,12 +110,30 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         </div>
                         <div className="w-full lg:w-1/3 px-3 mb-6">
                             <ListBoxTailwind
-                                items={specie.bloodType as any}
+                                items={specie.bloodType as any} 
                                 value={values.pet?.bloodType}
                                 disabled={!!values.pet?.id}
                                 name="bloodType"
                                 label="Tipo Sanguíneo"
                                 placeholder="Ex: A, B, etc..."
+                            />
+                        </div>
+                        <div className="w-full lg:w-1/3 px-3 mb-6">
+                            <ListBoxTailwind
+                                items={genderValues as any}
+                                value={values.pet?.sex}
+                                //disabled={!!values.pet?.id}
+                                name="sex"          // Lista d sexo
+                                label="Sexo do Pet"
+                                placeholder="Masculino Feminino..."
+                            />
+                        </div>
+                        <div className="w-full lg:w-1/3 px-3 mb-6">
+                        <FieldControl
+                                label={`Data de nascimento`}
+                                className="form-control"
+                                name={`date_birth`}
+                                type="date"
                             />
                         </div>
                     </Row>
