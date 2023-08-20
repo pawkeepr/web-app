@@ -60,7 +60,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                     <SearchInput
                         value={search}
                         onChange={handleSearch}
-                        className="form-control mobile:!w-full border-2 border-solid border-primary-500"
+                        className="  mobile:!w-full border-2 border-solid border-primary-500"
                         placeholder="Busque a Consulta..."
                     />
                 </div>
@@ -85,7 +85,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                     <SearchInput
                         value={search}
                         onChange={handleSearch}
-                        className="form-control mobile:!w-full border-2 border-solid border-primary-500"
+                        className="  mobile:!w-full border-2 border-solid border-primary-500"
                         placeholder="Busque a Consulta..."
                     />
                 </div>

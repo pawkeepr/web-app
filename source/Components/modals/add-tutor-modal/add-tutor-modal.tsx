@@ -14,7 +14,7 @@ import { BtnAvatar, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control";
 
 
-import PlusCircleIcon from "@heroicons/react/24/solid/PlusCircleIcon";
+import UserCircleIcon from "@heroicons/react/24/solid/UserCircleIcon";
 import BoxButtons from '~/Components/molecules/box-buttons';
 import Modal from "~/Components/organism/modal";
 import useModal from "~/hooks/use-modal";
@@ -45,10 +45,10 @@ const AddTutorModal = ({ children, item }: AddModalProps) => {
             {children?.(showModal) || (
                 <BtnPrimary
                     onClick={showModal}
-                    label="Adicionar Tutor"
+                    label="Novo Tutor"
                     id="button-new-consult"
                 >
-                    <PlusCircleIcon />
+                    <UserCircleIcon />
                 </BtnPrimary>
             )}
             <Modal
@@ -86,36 +86,38 @@ const AddTutorModal = ({ children, item }: AddModalProps) => {
 
                             <BtnAvatar src="" alt="Avatar do Tutor" />
 
-                            <FieldControl
-                                label="Nome"
-                                name="name"
-                                className="form-control"
-                                placeholder="Nome do tutor"
-                                type="text"
-                                required
-                            />
+                            <div className="grid grid-cols-2">
+                                <FieldControl
+                                    label="Nome"
+                                    divClassName='col-span-full'
+                                    name="name"
+                                    className=" "
+                                    placeholder="Nome do tutor"
+                                    type="text"
+                                    required
+                                />
 
-                            <FieldControl
-                                label="Email"
-                                name="email"
-                                className="form-control"
-                                placeholder="Email"
-                                type="text"
-                            />
+                                <FieldControl
+                                    label="Email"
+                                    name="email"
+                                    className=" "
+                                    placeholder="Email"
+                                    type="text"
+                                />
 
-                            <FieldControl
-                                label="Telefone/Celular"
-                                name="phone"
-                                className="form-control"
-                                placeholder="Telefone/Celular"
-                                type="text"
-                                component={MaskedInput as any}
-                                mask={"(99) 99999-9999"}
-                                maskChar={null}
-                                required
-                            />
+                                <FieldControl
+                                    label="Telefone/Celular"
+                                    name="phone"
+                                    className=" "
+                                    placeholder="Telefone/Celular"
+                                    type="text"
+                                    component={MaskedInput as any}
+                                    mask={"(99) 99999-9999"}
+                                    maskChar={null}
+                                    required
+                                />
 
-
+                            </div>
                             <ModalBodyFieldsAddress />
 
                             <BoxButtons onClickCancel={closeModal} onClickSuccess={handleSubmit} isValid={isValid} />

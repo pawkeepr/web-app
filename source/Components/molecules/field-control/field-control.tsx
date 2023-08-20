@@ -1,6 +1,5 @@
 import { useField } from "formik";
 
-import ErrMessage from "~/Components/atoms/err-message";
 
 import { useEffect, useRef, useState } from "react";
 import type { InputControlProps } from "./types";
@@ -64,7 +63,7 @@ const FieldControl = ({
     }
 
     return (
-        <div className={twMerge('pb-4 relative', divClassName)}>
+        <div className={twMerge('gap-1 relative', divClassName)}>
             {!!label && (
                 <label
                     htmlFor={id}
@@ -94,7 +93,7 @@ const FieldControl = ({
                     data-testid={`input-${id}`}
                     className={
                         twMerge(
-                            "border-0",
+                            "border-0 px-2 py-2 focus:outline-none w-full",
                             className
                         )}
                     {...inputProps}
@@ -105,10 +104,13 @@ const FieldControl = ({
                 />
                 {children}
             </div>
-            <ErrMessage
-                message={meta.error?.toString() as string}
-                data-testid={`err-${id}`}
-            />
+            {
+                meta.error && (
+                    <div className="w-full text-xs text-center text-red-700">
+                        {meta.error}
+                    </div>
+                )
+            }
         </div>
     );
 };

@@ -27,14 +27,14 @@ const StepPassword = ({ handleSubmit, isValid }: StepPasswordProps) => {
                     mask='999999'
                     required
                     placeholder="Digite seu código"
-                    className="form-control"
+                    className=" "
                 />
                 <FieldControl
                     name="password"
                     label="Senha"
                     required
                     placeholder="Digite sua nova senha"
-                    className="form-control"
+                    className=" "
                 />
 
             </div>

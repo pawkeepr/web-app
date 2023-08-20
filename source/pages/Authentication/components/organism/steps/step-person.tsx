@@ -62,7 +62,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     label="Nome Completo"
                     name="firstName"
                     aria-label="firstName"
-                    className="form-control"
+                    className=" "
                     placeholder="Nome"
                     required
                     disabledError
@@ -73,7 +73,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     separator={""}
                     name="lastName"
                     aria-label="lastName"
-                    className="form-control"
+                    className=" "
                     placeholder="Sobrenome"
                     disabledError
                 />
@@ -82,7 +82,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 label="CPF/CNPJ"
                 name="cpf_cnpj"
                 aria-label="cpf_cnpj"
-                className="form-control"
+                className=" "
                 placeholder="CPF/CNPJ"
                 component={MaskedInput as any}
                 mask={mask}
@@ -95,7 +95,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 divClassName="mobile:col-span-2"
                 name="crmv"
                 placeholder="Digite o seu CRMV"
-                className="form-control"
+                className=" "
                 component={MaskedInput as any}
                 mask={"aa999999"}
                 maskChar={null}
@@ -117,7 +117,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
             />
             <div className="relative">
                 <FieldControl
-                    className=" focus-visible:bg-transparent hover:bg-transparent focus:bg-transparent bg-transparent flex form-control"
+                    className=" focus-visible:bg-transparent hover:bg-transparent focus:bg-transparent bg-transparent flex  "
                     type="text"
                     label="Telefone/Celular"
                     name="phone"
@@ -143,7 +143,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     // input de whatsapp com o mesmo numero do telefone caso o usuário clique no ícone do whatsapp
                     clickAppInput ? (
                         <FieldControl
-                            className="form-control"
+                            className=" "
                             type="text"
                             label="WhatsApp"
                             name="whatsapp"
@@ -156,7 +156,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                         />)
                         : (
                             <FieldControl
-                                className="form-control"
+                                className=" "
                                 type="text"
                                 label="WhatsApp"
                                 name="whatsapp"

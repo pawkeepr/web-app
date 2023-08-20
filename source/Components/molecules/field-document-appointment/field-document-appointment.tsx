@@ -63,7 +63,7 @@ const FieldDocumentAppointment = ({
                             <div className="mobile:hidden">
                                 <FieldDocument
                                     name="document"
-                                    className="form-control border-2 border-solid border-primary-500"
+                                    className="  border-2 border-solid border-primary-500"
                                     placeholder="Nova Consulta"
                                     label="CPF"
                                     onlyCPF

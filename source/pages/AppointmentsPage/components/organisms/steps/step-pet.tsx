@@ -18,8 +18,8 @@ import { SpeciesType, species } from "~/store/pets/speciesType";
 import usePetById from "../../hooks/use-pet-by-id";
 import usePetByName from "../../hooks/use-pet-by-name";
 import useTutorByDocument from "../../hooks/use-tutor-by-document";
-import StepTutor from "../../molecules/tutor";
 import ControlSwitch from "../../molecules/switch/switch";
+import StepTutor from "../../molecules/tutor";
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const [isPendingPet, startTransition] = useTransition();
@@ -85,7 +85,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             divClassName="my-1"
                             name="tutor.document"
                             aria-label="document"
-                            className="form-control"
+                            className=" "
                             onlyCPF
                             disabled={isPending || tutorExists}
                             placeholder="CPF"
@@ -101,7 +101,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             name="tutor.name"
                             disabled={isPending || tutorExists}
                             aria-label="name"
-                            className="form-control"
+                            className=" "
                             placeholder="Digite o nome do Tutor"
                             required
                             disabledError
@@ -110,7 +110,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     </Col>
                     <Col sm={4}>
                         <FieldControl
-                            className="form-control"
+                            className=" "
                             divClassName="my-1"
                             type="text"
                             label="Telefone/Celular"
@@ -167,21 +167,21 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         </div>
                     </Row>
                 </Row>
-                
+
                 <Row className="g-3">
                     <StepTutor disabled={tutorExists} />
                 </Row>
                 <Row>
-                <ControlSwitch
+                    <ControlSwitch
                         label="O pet é doador de sangue?"
                         className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
                     >
-                </ControlSwitch>
-                <ControlSwitch
+                    </ControlSwitch>
+                    <ControlSwitch
                         label="O pet é doador de orgão?"
                         className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
                     >
-                </ControlSwitch>
+                    </ControlSwitch>
                 </Row>
             </div>
 

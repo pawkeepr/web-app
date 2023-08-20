@@ -5,6 +5,7 @@ import { Formik, FormikHelpers } from "formik";
 import BtnAvatar from "~/Components/atoms/btn/btn-avatar";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
+import { MdPets } from 'react-icons/md';
 import { BtnPrimary } from "~/Components/atoms/btn";
 import BoxButtons from "~/Components/molecules/box-buttons";
 import FieldDocument from "~/Components/molecules/field-document";
@@ -15,7 +16,6 @@ import ComboBoxFields from "./components/organisms/combo-box-fields/combo-box-fi
 
 type InitialValues = Partial<Nullable<Data>>
 
-import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import RadioGroupCustom from "~/Components/molecules/radio-group/radio-group";
 import Modal from "~/Components/organism/modal";
 import useModal from '~/hooks/use-modal';
@@ -71,10 +71,10 @@ const AddNewPetModal = ({ children, item }: AddModalProps) => {
             {children?.(showModal) || (
                 <BtnPrimary
                     onClick={showModal}
-                    label="Adicionar Novo Pet"
+                    label="Novo Pet"
                     id="button-new-consult"
                 >
-                    <PlusCircleIcon />
+                    <MdPets className='w-6 h-6' />
                 </BtnPrimary>
             )}
             <Modal
@@ -107,25 +107,25 @@ const AddNewPetModal = ({ children, item }: AddModalProps) => {
                                     label="Nome"
                                     name="name"
                                     required
-                                    className="form-control"
+                                    className=" "
                                     placeholder="Qual o nome do seu pet?"
                                     type="text"
                                 />
+                                <ComboBoxFields />
+
                                 <FieldDocument
                                     onlyCPF
                                     label="CPF"
                                     required
                                     name="ownerEmergencyContact.document"
-                                    className="form-control"
+                                    className=" "
                                     placeholder="CPF do tutor"
                                     type="text"
                                 />
-                                <ComboBoxFields />
-
                                 <FieldControl
                                     label="Data de Nascimento"
                                     name="dateOfBirth"
-                                    className="form-control"
+                                    className=" "
                                     placeholder="Escreva a data de nascimento"
                                     type="date"
                                 />

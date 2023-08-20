@@ -138,7 +138,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                             <FieldControl
                                                                 label={`Marca ${index + 1
                                                                     }`}
-                                                                className="form-control"
+                                                                className=" "
                                                                 name={`medicine[${index}].brand`}
                                                                 type="text"
                                                             />
@@ -150,7 +150,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                     label={`Inicio ${index +
                                                                         1
                                                                         }`}
-                                                                    className="form-control"
+                                                                    className=" "
                                                                     name={`medicine[${index}].date_init`}
                                                                     type="date"
                                                                 />
@@ -163,7 +163,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                         label={`Fim ${index +
                                                                             1
                                                                             }`}
-                                                                        className="form-control"
+                                                                        className=" "
                                                                         name={`medicine[${index}].date_end`}
                                                                         type="date"
                                                                     />
@@ -177,7 +177,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                     label={`Quantidade ${index +
                                                                         1
                                                                         }`}
-                                                                    className="form-control"
+                                                                    className=" "
                                                                     name={`medicine[${index}].amount`}
                                                                     type="text"
                                                                 />
@@ -188,7 +188,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                     {index + 1}
                                                                 </span>
                                                                 <select
-                                                                    className="form-control "
+                                                                    className="  "
                                                                     name={`medicine[${index}]type_medicine`}
                                                                 >
                                                                     <option value="pill">
@@ -215,7 +215,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                         <div className="flex items-center justify-center gap-2 w-full col-span-2">
                                                             <FieldControl
                                                                 label={`Intervalo ${+1}`}
-                                                                className="form-control w-full "
+                                                                className="  w-full "
                                                                 name={`medicine[${index}].interval`}
                                                                 type="text"
                                                             />
@@ -225,7 +225,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                         Período
                                                                     </span>
                                                                     <select
-                                                                        className="form-control"
+                                                                        className=" "
                                                                         name={`medicine[${index}].period`}
                                                                     >
                                                                         <option value="hours">
@@ -449,7 +449,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                     label={`Tipo de doença ${index +
                                                                         1
                                                                         }`}
-                                                                    className="rounded-md form-control"
+                                                                    className="rounded-md  "
                                                                     name={`diseases.${index}.typeDisease`}
                                                                     type="text"
                                                                 />
@@ -459,7 +459,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                     label={`Severidade ${index +
                                                                         1
                                                                         }`}
-                                                                    className="rounded-md form-control"
+                                                                    className="rounded-md  "
                                                                     name={`diseases.${index}.severity`}
                                                                     type="text"
                                                                 />
@@ -469,7 +469,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                                                     label={`Descrição ${index +
                                                                         1
                                                                         }`}
-                                                                    className="rounded-md form-control"
+                                                                    className="rounded-md  "
                                                                     component="textarea"
                                                                     name={`diseases.${index}.description`}
                                                                 />
@@ -492,7 +492,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                             label='Motivo da consulta:'
                             placeholder="Descrição do motivo pelo qual o pet está sendo levado ao dentista.
                             Quaisquer sintomas ou problemas específicos que o tutor tenha notado."
-                            className="form-control"
+                            className=" "
                             name="Description"
                             type="text"
                         />
@@ -500,7 +500,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                             label='Exame bucal:'
                             placeholder="Avaliação completa da saúde bucal do pet, incluindo exame dos dentes, gengivas, língua, etc.
                             Detalhes sobre problemas dentários, como tártaro, cáries, inflamações, etc."
-                            className="form-control"
+                            className=" "
                             name="Description"
                             type="text"
                         />
@@ -526,7 +526,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         <div className="flex flex-col mt-2">
                             <FieldControl
                                 label="Recomendações e orientações:"
-                                className="rounded-md form-control"
+                                className="rounded-md  "
                                 component="textarea"
                                 name="observations"
                                 type="text" />

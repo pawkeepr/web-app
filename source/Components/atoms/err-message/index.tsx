@@ -7,11 +7,11 @@ type ErrMessageProps = {
 const ErrMessage = ({ message, ...rest }: ErrMessageProps) => {
 
     return (
-        <label className="
-            absolute bottom-0 left-0 right-0
-            font-bold text-red-400 
-            text-xs text-center 
-        " {...rest}>{message}</label>
+        message && (
+            <div className="w-full text-xs text-center text-red-700">
+                {message}
+            </div>
+        )
     )
 }
 
