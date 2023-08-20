@@ -7,10 +7,10 @@ const Footer = () => {
     return (
         <React.Fragment>
             <footer className="footer">
-                <Container fluid>
+                <Container fluid className='flex justify-center'>
                     <Row>
                         <Col >
-                            <div className="flex justify-center text-center m-3">
+                            <div className="m-3 mobile: text-xs">
                             2023 &copy; Design & Develop by Pawkeepr SmartCare
                             </div>
                         </Col>

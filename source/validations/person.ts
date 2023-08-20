@@ -20,11 +20,6 @@ const validate = Yup.object().shape({
     crmv: Yup.string().matches(/^[A-Z]{2}\d{4,6}$/,
         'CRMV inválido. Exemplo: SP12345'
     ).required('O Campo CRMV é obrigatório'),
-    company: Yup.string().when('document', {
-        is: (value: string) => cnpj.isValid(value),
-        then: Yup.string().transform(transformTrim).required('Este campo é obrigatório'),
-        otherwise: Yup.string().nullable(),
-    }),
     // age: Yup.number().positive().integer().required(),
     phone: Yup.string().matches(/^[\d()-\s]+$/)
         .test('valid-phone-number', 'Número de telefone inválido', (value) => {
