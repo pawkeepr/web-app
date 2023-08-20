@@ -31,7 +31,7 @@ const FieldControlSelect = ({
     onChangeValue = () => { },
     ...props
 }: FieldSelectControl) => {
-    const { values, setFieldValue, errors, touched } = useFormikContext<any>();
+    const { values, setFieldValue, } = useFormikContext<any>();
 
     useEffect(() => {
 
@@ -60,21 +60,13 @@ const FieldControlSelect = ({
                 {...props}
                 id={props.name}
                 className="w-full"
-                theme={(theme) => ({
-                    ...theme,
-                    borderRadius: 0,
-                    colors: {
-                        ...theme.colors,
-                        primary25: 'rgb(9, 178, 133);',
-                        primary: 'rgb(9, 178, 133);',
-                    },
-                })}
                 isMulti={isMulti}
                 options={options}
                 name={props.name}
                 onChange={onChange}
             />
             {children}
+
 
         </div>
     );
