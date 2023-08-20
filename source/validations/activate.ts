@@ -38,10 +38,9 @@ export type ActivateAccount = {
     crmv: string;
     cpf_cnpj: string;
     specialty: string;
-    serviceType: string[];
-    type: number;
-    list_specialty: Specialty[];
     list_service_type: string[];
+    list_specialty: Specialty[];
+    type: number;
     contact: Contact;
     location: Location;
 }
@@ -60,16 +59,16 @@ const validate = Yup.object().shape({
     crmv: Yup.string()
         .matches(/^[A-Z]{2}\d{4,6}$/, "CRMV inválido. Exemplo: SP12345")
         .required("O Campo CRMV é obrigatório"),
-    speciality: Yup.string().required("O campo especialidade é obrigatório"),
-    serviceType: Yup.array().min(1, "Selecione pelo menos um tipo de atendimento").required(),
+    specialty: Yup.object({
+        value: Yup.string().required("O campo especialidade é obrigatório"),
+        label: Yup.string().required("O campo especialidade é obrigatório"),
+    }).required("O campo especialidade é obrigatório"),
+    list_service_type: Yup.array().min(1, "Selecione pelo menos um tipo de atendimento").required(),
     list_specialty: Yup.array().of(
         Yup.object().shape({
-            type: Yup.string().required("O campo especialidade é obrigatório"),
-            name_specialty: Yup.string().required("O campo especialidade é obrigatório"),
+            value: Yup.string().required("O campo especialidade é obrigatório"),
+            label: Yup.string().required("O campo especialidade é obrigatório"),
         }),
-    ),
-    list_service_type: Yup.array().of(
-        Yup.string().required("O campo especialidade é obrigatório"),
     ),
     contact: Yup.object().shape({
         email: Yup.string()
@@ -77,10 +76,10 @@ const validate = Yup.object().shape({
             .required("O campo de email é obrigatório"),
         phone: Yup.string()
             .matches(/^[\d()-\s]+$/)
-            .required(),
+            .required('O campo de telefone é obrigatório'),
         whatsapp: Yup.string()
             .matches(/^[\d()-\s]+$/)
-            .required(),
+            .required('O campo de whatsapp é obrigatório'),
     }),
     cpf_cnpj: Yup.string()
         .required("Este campo é obrigatório")

@@ -9,7 +9,6 @@ import FieldControl from "~/Components/molecules/field-control";
 import validatePerson from "~/validations/person";
 
 import { FaWhatsapp } from "react-icons/fa";
-import CheckboxGroup from "~/Components/molecules/checkbox-group";
 import FieldDocument from "~/Components/molecules/field-document";
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
@@ -61,27 +60,6 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 className=" "
                 placeholder="CPF/CNPJ"
                 component={MaskedInput as any}
-                required
-            />
-
-            <CheckboxGroup
-                label="Tipo de atendimento"
-                name='serviceType'
-                items={[
-                    {
-                        label: "Domésticos",
-                        value: "domestics"
-                    },
-                    {
-                        label: "Médio porte",
-                        value: "midsize"
-                    },
-                    {
-                        label: "Grande porte",
-                        value: "large"
-                    }
-                ]}
-                divClassName="mobile:col-span-2"
                 required
             />
 

@@ -35,7 +35,6 @@ export const colorStyles = {
 const Select = (props: Props) => {
     return (
         <ReactSelect
-            {...props}
             placeholder={<div className="text-gray-400">{props.placeholder || 'Clique aqui ...'}</div>}
             theme={(theme) => ({
                 ...theme,
@@ -57,6 +56,7 @@ const Select = (props: Props) => {
                     } !py-1 hover:bg-btn-blue-50 hover:cursor-pointer`,
                 indicatorSeparator: () => '!hidden',
             }}
+            {...props}
         />
     )
 }

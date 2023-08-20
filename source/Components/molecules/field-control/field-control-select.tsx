@@ -20,10 +20,8 @@ const FieldControlSelect = ({
     label,
     children,
     required = false,
-    component,
     isMulti = false,
     startChildren,
-    disabledError = false,
     className,
     name,
     divClassName,
@@ -66,8 +64,6 @@ const FieldControlSelect = ({
                 onChange={onChange}
             />
             {children}
-
-
         </div>
     );
 };
