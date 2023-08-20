@@ -54,7 +54,10 @@ const initialValues = (email: string): ActivateAccount => ({
 
     list_service_type: [],
     list_specialty: [],
-    specialty: ''
+    specialty: {
+        label: '',
+        value: '',
+    }
 });
 
 
@@ -88,8 +91,19 @@ const ActivationAccount = () => {
 
     const dispatch = useAppDispatch()
 
-    const onSubmit = async (values: Profile) => {
-        dispatch(addNew(values))
+    const onSubmit = async (values: ActivateAccount) => {
+        const { list_specialty, ...rest } = values
+
+        const profile: Profile = {
+            ...rest,
+            specialty: values.specialty.value,
+            list_specialty: list_specialty.map(item => ({
+                name_specialty: item.label,
+                type: item.value,
+            }))
+        }
+
+        dispatch(addNew(profile))
     }
 
     useEffect(() => {

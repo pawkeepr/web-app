@@ -11,8 +11,8 @@ const transformTrim = (value: any, originalValue: string) => {
 };
 
 type Specialty = {
-    type: string;
-    name_specialty: string;
+    value: string;
+    label: string;
 }
 
 type Contact = {
@@ -37,7 +37,10 @@ export type ActivateAccount = {
     lastName: string;
     crmv: string;
     cpf_cnpj: string;
-    specialty: string;
+    specialty: {
+        value: string;
+        label: string;
+    };
     list_service_type: string[];
     list_specialty: Specialty[];
     type: number;
@@ -69,16 +72,24 @@ const validate = Yup.object().shape({
             value: Yup.string().required("O campo especialidade é obrigatório"),
             label: Yup.string().required("O campo especialidade é obrigatório"),
         }),
-    ),
+    ).min(1, "Selecione pelo menos uma especialidade").required(),
     contact: Yup.object().shape({
         email: Yup.string()
             .email("O email deve ser válido")
             .required("O campo de email é obrigatório"),
         phone: Yup.string()
             .matches(/^[\d()-\s]+$/)
+            .test('phone-validator', 'Número de telefone inválido', value => {
+                if (!value) return false;
+                return value.length >= 10;
+            })
             .required('O campo de telefone é obrigatório'),
         whatsapp: Yup.string()
             .matches(/^[\d()-\s]+$/)
+            .test('phone-validator', 'Número de telefone inválido', value => {
+                if (!value) return false;
+                return value.length >= 10;
+            })
             .required('O campo de whatsapp é obrigatório'),
     }),
     cpf_cnpj: Yup.string()

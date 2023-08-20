@@ -21,9 +21,19 @@ const validate = Yup.object().shape({
         'CRMV inválido. Exemplo: SP12345'
     ).required('O Campo CRMV é obrigatório'),
     contact: Yup.object().shape({
-        phone: Yup.string().matches(/^[\d()-\s]+$/).required(),
+        phone: Yup.string().matches(/^[\d()-\s]+$/)
+            .test('phone-validator', 'Número de telefone inválido', value => {
+                if (!value) return false;
+                return value.length >= 10;
+            })
+            .required(),
         email: Yup.string().email('E-mail inválido').required('O campo de e-mail é obrigatório'),
         whatsapp: Yup.string().matches(/^[\d()-\s]+$/)
+            .test('whatsapp-validator', 'Número de telefone inválido', value => {
+                if (!value) return false;
+                return value.length >= 10;
+            })
+            .required()
     }).required(),
     cpf_cnpj: Yup.string()
         .required('Este campo é obrigatório')
