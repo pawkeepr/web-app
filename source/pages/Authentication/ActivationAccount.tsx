@@ -16,7 +16,7 @@ import { Formik } from 'formik';
 import validate, { ActivateAccount } from '~/validations/activate';
 
 import { signOutUser } from '~/store/auth/login/actions';
-import { editProfile } from '~/store/auth/profile/actions';
+import { addNew } from '~/store/auth/profile/actions';
 
 import { useAppDispatch } from '~/store/hooks';
 
@@ -89,7 +89,7 @@ const ActivationAccount = () => {
     const dispatch = useAppDispatch()
 
     const onSubmit = async (values: Profile) => {
-        dispatch(editProfile(values))
+        dispatch(addNew(values))
     }
 
     useEffect(() => {

@@ -57,7 +57,7 @@ function* onUpdateProfile({ payload: user }: PayloadAction<Profile>) {
     }
 }
 
-export function* watchProfile() {
+export function* watchUpdateProfile() {
     yield takeEvery(ACTION_EDIT_PROFILE, onUpdateProfile);
 }
 
@@ -72,7 +72,7 @@ export function* watchAddProfile() {
 
 function* ProfileSaga() {
     yield all([
-        fork(watchProfile),
+        fork(watchUpdateProfile),
         fork(watchGetProfile),
         fork(watchAddProfile),
     ]);
