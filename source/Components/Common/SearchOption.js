@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { Input } from 'reactstrap';
 
 //SimpleBar
@@ -61,7 +61,7 @@ const SearchOption = () => {
         <React.Fragment>
             <form className="app-search d-none d-md-block">
                 <div className="position-relative">
-                    <Input type="text" className="form-control" placeholder="Search..."
+                    <Input type="text" className=" " placeholder="Search..."
                         id="search-options"
                         value={value}
                         onChange={e => {

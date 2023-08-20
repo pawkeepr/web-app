@@ -22,7 +22,7 @@ exports[`Auth Unit (Unit) > should render without errors 1`] = `
           >
             <input
               class="
-                    form-control
+                     
                     "
               data-testid="email-input"
               id="username"
@@ -59,7 +59,7 @@ exports[`Auth Unit (Unit) > should render without errors 1`] = `
             >
               <input
                 class="
-                    form-control pe-5 password-input border-end-0
+                      pe-5 password-input border-end-0
                     "
                 data-testid="password-input"
                 id="password"

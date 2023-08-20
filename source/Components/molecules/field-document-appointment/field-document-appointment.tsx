@@ -57,13 +57,13 @@ const FieldDocumentAppointment = ({
                     })}
                     enableReinitialize
                 >
-                    <Form className="flex flex-row items-center justify-center">
+                    <Form className=" flex flex-row items-center justify-end ">
                         {
                             children?.({ onChangeOpen, onChangeDocument }) ||
-                            <div className="mobile:hidden">
+                            <div className="w-full hidden lg:block xl:block   ">
                                 <FieldDocument
                                     name="document"
-                                    className="form-control border-2 border-solid border-primary-500"
+                                    className="border-2 border-solid border-primary-500"
                                     placeholder="Nova Consulta"
                                     label="CPF"
                                     onlyCPF
@@ -74,6 +74,7 @@ const FieldDocumentAppointment = ({
                                     >
                                         <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
                                     </button>
+
                                 </FieldDocument>
                             </div>
                         }

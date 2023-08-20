@@ -1,5 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
+import { persistReducer } from 'redux-persist';
+import storage from './storage';
+
 // Front
 import Layout from "./layouts/slice";
 
@@ -30,10 +33,20 @@ import AppointmentVet from "./appointment-vet/slice";
 import Team from "./team/reducer";
 
 
+const persistConfig = {
+    key: '@pawkeepr/session',
+    storage,
+}
+
+const persistedReducersSession = persistReducer(
+    persistConfig,
+    Login
+)
+
 const rootReducer = combineReducers({
     // public
     Layout,
-    Login,
+    Login: persistedReducersSession,
     Account,
     ForgetPassword,
     AppointmentVet,

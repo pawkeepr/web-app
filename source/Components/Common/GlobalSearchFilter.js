@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
+import Flatpickr from "react-flatpickr";
+import { Link } from "react-router-dom";
+import Select from "react-select";
 import {
-    Col,
-    Row,
     Button,
-    UncontrolledDropdown,
-    DropdownToggle,
+    Col,
     DropdownItem,
     DropdownMenu,
+    DropdownToggle,
+    Row,
+    UncontrolledDropdown,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-import Flatpickr from "react-flatpickr";
-import Select from "react-select";
 
 const ProductsGlobalFilter = () => {
     return (
@@ -54,7 +54,7 @@ const CustomersGlobalFilter = () => {
                     <Col sm={4}>
                         <div className="">
                             <Flatpickr
-                                className="form-control"
+                                className=" "
                                 id="datepicker-publish-input"
                                 placeholder="Select a date"
                                 options={{
@@ -143,7 +143,7 @@ const OrderGlobalFilter = () => {
             <Col sm={6} className="col-xxl-2">
                 <div>
                     <Flatpickr
-                        className="form-control"
+                        className=" "
                         id="datepicker-publish-input"
                         placeholder="Select a date"
                         options={{
@@ -278,7 +278,7 @@ const CryptoOrdersGlobalFilter = () => {
                     <span className="input-group-text" id="basic-addon1"><i className="ri-calendar-2-line"></i></span>
                     <Flatpickr
                         placeholder="Select date"
-                        className="form-control"
+                        className=" "
                         options={{
                             mode: "range",
                             dateFormat: "d M, Y"
@@ -287,7 +287,7 @@ const CryptoOrdersGlobalFilter = () => {
                 </div>
             </Col>
             <Col xl={2} md={4}>
-                <select className="form-control" data-choices data-choices-search-false name="choices-single-default"
+                <select className=" " data-choices data-choices-search-false name="choices-single-default"
                     id="choices-single-default">
                     <option defaultValue="">Select Type</option>
                     <option value="Buy">Sell</option>
@@ -295,7 +295,7 @@ const CryptoOrdersGlobalFilter = () => {
                 </select>
             </Col>
             <Col xl={2} md={4}>
-                <select className="form-control" data-choices data-choices-search-false name="choices-single-default2"
+                <select className=" " data-choices data-choices-search-false name="choices-single-default2"
                     id="choices-single-default2">
                     <option defaultValue="">Select Status</option>
                     <option value="Successful">Successful</option>
@@ -333,7 +333,7 @@ const InvoiceListGlobalSearch = () => {
         <React.Fragment>
             <Col sm={4} xxl={3}>
                 <Flatpickr
-                    className="form-control bg-light border-light"
+                    className="  bg-light border-light"
                     id="datepicker-publish-input"
                     placeholder="Select a date"
                     options={{
@@ -375,7 +375,7 @@ const TicketsListGlobalFilter = () => {
         <React.Fragment>
             <Col xxl={3} sm={4}>
                 <Flatpickr
-                    className="form-control"
+                    className=" "
                     placeholder="Select date range"
                     options={{
                         mode: "range",
@@ -385,7 +385,7 @@ const TicketsListGlobalFilter = () => {
             </Col>
             <Col xxl={3} sm={4}>
                 <div className="input-light">
-                    <select className="form-control" data-choices data-choices-search-false name="choices-single-default" id="idStatus">
+                    <select className=" " data-choices data-choices-search-false name="choices-single-default" id="idStatus">
                         <option value="">Status</option>
                         <option defaultValue="all">All</option>
                         <option value="Open">Open</option>
@@ -409,7 +409,7 @@ const NFTRankingGlobalFilter = () => {
         <React.Fragment>
             <Col xxl={2} sm={4} className="ms-auto">
                 <div>
-                    <select className="form-control" data-choices data-choices-search-false name="choices-single-default" id="idStatus">
+                    <select className=" " data-choices data-choices-search-false name="choices-single-default" id="idStatus">
                         <option value="All Time" defaultValue>All Time</option>
                         <option value="1 Day">1 Day</option>
                         <option value="7 Days">7 Days</option>
@@ -429,7 +429,7 @@ const TaskListGlobalFilter = () => {
             <div className="col-xxl-3 col-sm-4">
                 <Flatpickr
                     placeholder="Select date range"
-                    className="form-control bg-light border-light"
+                    className="  bg-light border-light"
                     options={{
                         mode: "range",
                         dateFormat: "d M, Y"
@@ -439,7 +439,7 @@ const TaskListGlobalFilter = () => {
 
             <div className="col-xxl-3 col-sm-4">
                 <div className="input-light">
-                    <select className="form-control" data-choices data-choices-search-false name="status" id="idStatus">
+                    <select className=" " data-choices data-choices-search-false name="status" id="idStatus">
                         <option value="">Status</option>
                         <option defaultValue="all"  >All</option>
                         <option value="New">New</option>
@@ -527,15 +527,5 @@ const LeadsGlobalFilter = ({ onClickDelete }) => {
 };
 
 export {
-    ProductsGlobalFilter,
-    CustomersGlobalFilter,
-    OrderGlobalFilter,
-    ContactsGlobalFilter,
-    CompaniesGlobalFilter,
-    CryptoOrdersGlobalFilter,
-    InvoiceListGlobalSearch,
-    TicketsListGlobalFilter,
-    NFTRankingGlobalFilter,
-    TaskListGlobalFilter,
-    LeadsGlobalFilter
+    CompaniesGlobalFilter, ContactsGlobalFilter, CryptoOrdersGlobalFilter, CustomersGlobalFilter, InvoiceListGlobalSearch, LeadsGlobalFilter, NFTRankingGlobalFilter, OrderGlobalFilter, ProductsGlobalFilter, TaskListGlobalFilter, TicketsListGlobalFilter
 };

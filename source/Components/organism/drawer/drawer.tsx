@@ -62,10 +62,10 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                 z-[20] flex flex-col
                 mobile:!z-50
                 h-full  
-                py-8
+                py-8 border-r-2 border-gray-200 dark:border-dark-600
                 w-72
                 overflow-y-auto bg-white dark:!bg-dark-500
-                border-none
+                overflow-x-hidden
             `, {
                 '-translate-x-full': !visibleDrawer,
                 'translate-x-0': visibleDrawer

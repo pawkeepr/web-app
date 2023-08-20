@@ -38,24 +38,21 @@ const ModalBodyFieldsAddress = () => {
     })
 
     return (
-        <>
-            <div>
-                <FieldControl
-                    label="CEP"
-                    name="cep"
-                    className="form-control"
-                    placeholder="Cep"
-                    type="text"
-                    component={MaskedInput as any}
-                    mask={"99999-999"}
-                    required
-                />
+        <div className="grid grid-cols-3 ">
+            <FieldControl
+                label="CEP"
+                name="cep"
+                placeholder="Cep"
+                type="text"
+                component={MaskedInput as any}
+                mask={"99999-999"}
+                required
+            />
 
-            </div>
 
             <FieldControl
                 divClassName='my-1'
-                className="form-control"
+                className=" "
                 type="text"
                 label="Estado"
                 name="state"
@@ -66,7 +63,7 @@ const ModalBodyFieldsAddress = () => {
 
             <FieldControl
                 divClassName='my-1'
-                className="form-control"
+                className=" "
                 type="text"
                 label="Cidade"
                 name="city"
@@ -77,7 +74,7 @@ const ModalBodyFieldsAddress = () => {
 
             <FieldControl
                 divClassName='my-1'
-                className="form-control"
+                className=" "
                 type="text"
                 label="Bairro"
                 name="neighborhood"
@@ -91,7 +88,7 @@ const ModalBodyFieldsAddress = () => {
                 label='Rua'
                 name="street"
                 aria-label="street"
-                className="form-control w-70"
+                className="  w-70"
                 disabled={disabledInputs.street || loading}
                 placeholder={loading ? 'buscando...' : 'Rua'}
                 required
@@ -100,14 +97,14 @@ const ModalBodyFieldsAddress = () => {
 
             <FieldControl
                 divClassName='my-1'
-                className="form-control"
+                className=" "
                 type="text"
                 label="Complemento"
                 name="complement"
                 disabled={disabledInputs.complement || loading}
                 placeholder={loading ? 'buscando...' : 'Complemento (opcional)'}
             />
-        </>
+        </div>
     )
 };
 

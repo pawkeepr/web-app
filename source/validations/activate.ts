@@ -1,8 +1,7 @@
 import { cnpj, cpf } from "cpf-cnpj-validator";
 import * as Yup from "yup";
-import { RULES } from "~/store/auth/profile/types";
 
-import Address from './address'
+import Address from './address';
 
 const transformTrim = (value: any, originalValue: string) => {
     // Remover espaços em branco extras da string
@@ -39,6 +38,7 @@ export type ActivateAccount = {
     crmv: string;
     cpf_cnpj: string;
     specialty: string;
+    serviceType: string[];
     type: number;
     list_specialty: Specialty[];
     list_service_type: string[];
@@ -61,6 +61,7 @@ const validate = Yup.object().shape({
         .matches(/^[A-Z]{2}\d{4,6}$/, "CRMV inválido. Exemplo: SP12345")
         .required("O Campo CRMV é obrigatório"),
     speciality: Yup.string().required("O campo especialidade é obrigatório"),
+    serviceType: Yup.array().min(1, "Selecione pelo menos um tipo de atendimento").required(),
     list_specialty: Yup.array().of(
         Yup.object().shape({
             type: Yup.string().required("O campo especialidade é obrigatório"),
@@ -72,46 +73,15 @@ const validate = Yup.object().shape({
     ),
     contact: Yup.object().shape({
         email: Yup.string()
-        .email("O email deve ser válido")
-        .required("O campo de email é obrigatório"),
+            .email("O email deve ser válido")
+            .required("O campo de email é obrigatório"),
         phone: Yup.string()
-        .matches(/^[\d()-\s]+$/)
-        .test("valid-phone-number", "Número de telefone inválido", (value) => {
-            if (!value) {
-                return false;
-            }
-
-            // Removendo caracteres não numéricos do número de telefone
-            const numericValue = value.replace(/\D/g, "");
-
-            // Verificando se o número de telefone tem pelo menos 10 dígitos
-            return numericValue.length === 11;
-        })
-        .required(),
+            .matches(/^[\d()-\s]+$/)
+            .required(),
         whatsapp: Yup.string()
-        .matches(/^[\d()-\s]+$/)
-        .test("valid-phone-number", "Número de telefone inválido", (value) => {
-            if (!value) {
-                return false;
-            }
-
-            // Removendo caracteres não numéricos do número de telefone
-            const numericValue = value.replace(/\D/g, "");
-
-            // Verificando se o número de telefone tem pelo menos 10 dígitos
-            return numericValue.length === 11;
-        })
-        .required(),
+            .matches(/^[\d()-\s]+$/)
+            .required(),
     }),
-    type: Yup.number()
-        .oneOf([RULES.ADMIN, RULES.VETERINARY, RULES.TUTOR])
-        .required(),
-    // company: Yup.string().when('cpf_cnpj', {
-    //     is: (value: string) => cnpj.isValid(value),
-    //     then: Yup.string().transform(transformTrim).required('Este campo é obrigatório'),
-    //     otherwise: Yup.string().nullable(),
-    // }),
-    // age: Yup.number().positive().integer().required(),
     cpf_cnpj: Yup.string()
         .required("Este campo é obrigatório")
         .transform((value) => value.replace(/[^\d]/g, ""))

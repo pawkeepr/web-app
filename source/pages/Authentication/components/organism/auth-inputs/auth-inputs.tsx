@@ -62,7 +62,7 @@ const Auth = () => {
                             label="Email"
                             type="text"
                             pattern="[^\s]+" // no spaces
-                            className="form-control"
+                            className=" "
                             name="username"
                             placeholder="Digite seu email"
                             data-testid="email-input"
@@ -93,7 +93,7 @@ const Auth = () => {
 
                             <FieldPassword
                                 label="Senha"
-                                className={cn("form-control pe-5 password-input border-end-0")}
+                                className={cn("  pe-5 password-input border-end-0")}
                                 placeholder="Digite sua senha"
                                 name="password"
                                 data-testid="password-input"

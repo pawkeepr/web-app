@@ -73,7 +73,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
         <div className="container grid grid-cols-2 mobile:grid-cols-1 gap-1">
 
             <FieldControl
-                className="form-control"
+                className=" "
                 type="text"
                 initialFocus
                 label="CEP"
@@ -85,7 +85,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             />
 
             <FieldControl
-                className="form-control"
+                className=" "
                 type="text"
                 label="Estado"
                 name="location.state"
@@ -94,7 +94,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 required
             />
             <FieldControl
-                className="form-control"
+                className=" "
                 type="text"
                 label="Cidade"
                 name="location.city"
@@ -103,7 +103,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 required
             />
             <FieldControl
-                className="form-control"
+                className=" "
                 type="text"
                 label="Bairro"
                 name="location.neighborhood"
@@ -118,7 +118,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     divClassName='col-span-3'
                     name="location.street"
                     aria-label="street"
-                    className="form-control"
+                    className=" "
                     disabled={disabledInputs.street || loading}
                     placeholder={loading ? 'Carregando...' : 'Digite o nome da rua'}
                     required
@@ -130,7 +130,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     divClassName='col-span-1'
                     name="location.number"
                     aria-label="number"
-                    className="form-control"
+                    className=" "
                     disabled={disabledInputs.street || loading}
                     placeholder="N°"
                 />
@@ -140,7 +140,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <div className="col-span-full">
 
                 <FieldControl
-                    className="form-control"
+                    className=" "
                     type="text"
                     label="Complemento"
                     name="location.complement"

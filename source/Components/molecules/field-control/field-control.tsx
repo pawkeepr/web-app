@@ -1,12 +1,12 @@
 import { useField } from "formik";
 
-import ErrMessage from "~/Components/atoms/err-message";
 
 import { useEffect, useRef, useState } from "react";
 import type { InputControlProps } from "./types";
 
 import cn from 'classnames';
 import { twMerge } from 'tailwind-merge';
+import Label from "~/Components/atoms/label";
 
 const FieldControl = ({
     label,
@@ -64,18 +64,8 @@ const FieldControl = ({
     }
 
     return (
-        <div className={twMerge('pb-4 relative', divClassName)}>
-            {!!label && (
-                <label
-                    htmlFor={id}
-                    className="mb-0 text-xs font-semibold text-gray-500 gap-1"
-                    data-testid={`label-${id}`}
-                >
-                    {label.trim() ? (label + separator) : ''}
-                    {required && <span className="text-danger">*</span>}
-                </label>
-            )
-            }
+        <div className={twMerge('gap-1 relative', divClassName)}>
+            <Label label={label} required={required} id={id} separator={separator} />
             <div
                 className={cn(`
                     transition-all duration-300 ease-in-out
@@ -94,7 +84,7 @@ const FieldControl = ({
                     data-testid={`input-${id}`}
                     className={
                         twMerge(
-                            "border-0",
+                            "border-0 px-2 py-2 focus:outline-none w-full",
                             className
                         )}
                     {...inputProps}
@@ -105,10 +95,13 @@ const FieldControl = ({
                 />
                 {children}
             </div>
-            <ErrMessage
-                message={meta.error?.toString() as string}
-                data-testid={`err-${id}`}
-            />
+            {
+                meta.error && (
+                    <div className="w-full text-xs text-center text-red-700">
+                        {meta.error}
+                    </div>
+                )
+            }
         </div>
     );
 };

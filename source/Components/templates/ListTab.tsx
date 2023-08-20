@@ -48,21 +48,21 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                 mobile:gap-3
                 items-center 
                 justify-between
+                mt-4
+                mb-4
                 "
             >
 
                 <div
                     className="
-                    mobile:w-full
+                    mt-4
+                    w-1/2
+                    mobile:!w-full
                     mobile:hidden
                     "
                 >
-                    <SearchInput
-                        value={search}
-                        onChange={handleSearch}
-                        className="form-control mobile:!w-full border-2 border-solid border-primary-500"
-                        placeholder="Busque a Consulta..."
-                    />
+
+
                 </div>
                 <div
                     className="
@@ -72,20 +72,21 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                     <Modal />
                 </div>
             </div>
-            <div className="team-list list-view-filter">
+            <div className="team-list list-view-filter"
+
+            >
                 <div
                     className="
-                    mt-1 
-                    mb-2
-                    mobile:w-full
-                    hidden
-                    mobile:block
+                    mt-4 
+                    mb-4
+                    block lg:hidden xl:hidden
+  
                     "
                 >
                     <SearchInput
                         value={search}
                         onChange={handleSearch}
-                        className="form-control mobile:!w-full border-2 border-solid border-primary-500"
+                        className="  mobile:!w-full border-2 border-solid border-primary-500"
                         placeholder="Busque a Consulta..."
                     />
                 </div>
