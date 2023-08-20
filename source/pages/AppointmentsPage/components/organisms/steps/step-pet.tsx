@@ -136,6 +136,22 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 type="date"
                             />
                         </div>
+                        <div className="w-full lg:w-1/3 px-3 mb-6">
+                        <FieldControl
+                                label={`Número do microchip`}
+                                className="form-control"
+                                name={`chipNumber`}
+                                type="number"
+                            />
+                        </div>
+                        <div className="w-full lg:w-1/3 px-3 mb-6">
+                        <FieldControl
+                                label={`Número de registro cartório`}
+                                className="form-control"
+                                name={`idOfficeRegister`}
+                                type="number" //aterar conforme padrão do tipo number/string
+                            />
+                        </div>
                     </Row>
                     <div className="p-1 m-2 mb-4">
                         <h5 className="font-bold text-center">Tutor</h5>
