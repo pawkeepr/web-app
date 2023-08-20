@@ -8,14 +8,14 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import Router from 'next/router';
 
 import {
-    getUserProfile,
-    updateProfile
+    getVetProfile,
+    updateProfileVet
 } from "~/services/helpers";
 import { errorToast, successToast } from "~/store/helpers/toast";
 
 function* onGetProfile({ payload: user }: PayloadAction<{ email: string }>) {
     try {
-        const { data } = yield call(getUserProfile, user.email);
+        const { data } = yield call(getVetProfile);
         yield put(editProfileSuccess(data));
     } catch (error) {
         yield call([Router, Router.push], '/activation');
@@ -24,7 +24,7 @@ function* onGetProfile({ payload: user }: PayloadAction<{ email: string }>) {
 
 function* onUpdateProfile({ payload: user }: PayloadAction<Profile>) {
     try {
-        const { data } = yield call(updateProfile, user);
+        const { data } = yield call(updateProfileVet, user as any, user.id);
         // yield call(createProfile, user)
         yield put(editProfileSuccess(data));
         successToast("Perfil atualizado com sucesso!");

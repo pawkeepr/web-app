@@ -1,11 +1,10 @@
 import { FieldArray, useFormikContext } from "formik";
 import { useState } from "react";
 import { BsFillTrash3Fill, BsPlusCircleFill } from "react-icons/bs";
-import Select from "react-select";
 import { BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
 import FieldControl from "~/Components/molecules/field-control/field-control";
-import { colorStyles } from "~/Components/molecules/field-control/field-control-select-mult";
+import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 import ControlSwitch from "../../molecules/switch/switch";
 import { StepProps } from "./types";
@@ -101,21 +100,9 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                     label="O pet está praticando atividade física ?"
                     className="mt-3 w-[3.72rem] h-6 lg:w-16 lg:h-7"
                 >
-                    <p className="font-semibold mt-3">Selecione uma ou mais opções:</p>
-                    <Select
-                        className="w-full mb-3"
-                        theme={(theme) => ({
-                            ...theme,
-                            borderRadius: 0,
-                            colors: {
-                                ...theme.colors,
-                                primary25: 'rgb(9, 178, 133);',
-                                primary: 'rgb(9, 178, 133);',
-                            },
-                        })}
-                        styles={colorStyles}
+                    <FieldControlSelect
+                        label="Selecione uma ou mais opções:"
                         placeholder="Selecione uma ou mais atividades"
-                        isSearchable={true}
                         isMulti
                         name="activity"
                         options={options}
