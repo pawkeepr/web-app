@@ -6,16 +6,13 @@ import MaskedInput from "react-input-mask";
 
 import { BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control";
-import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
-import FieldControlSelectMult from "~/Components/molecules/field-control/field-control-select-mult";
-import { sub_specialty } from "~/common/data/sub-specialtys";
 import validatePerson from "~/validations/person";
 
 import { FaWhatsapp } from "react-icons/fa";
 import FieldDocument from "~/Components/molecules/field-document";
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
-import { StepProps } from "./types";
+import { StepProps } from "../steps/types";
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<ActivateAccount>();
@@ -78,20 +75,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 maskChar={null}
                 required
             />
-            <FieldControlSelect
-                type="text"
-                divClassName="mobile:col-span-2"
-                label="Especialidade"
-                name="specialty"
-                items={sub_specialty}
-            />
-            <FieldControlSelectMult
-                type="text"
-                divClassName="mobile:col-span-2"
-                label="Sub Especialidade"
-                name="sub_specialty"
-                items={sub_specialty}
-            />
+
             <div className="relative">
                 <FieldControl
                     className=" focus-visible:bg-transparent hover:bg-transparent focus:bg-transparent bg-transparent flex  "

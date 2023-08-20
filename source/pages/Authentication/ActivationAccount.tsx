@@ -23,10 +23,12 @@ import { useAppDispatch } from '~/store/hooks';
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid';
 import { BtnLink } from '~/Components/atoms/btn';
 import { Profile, RULES } from '~/store/auth/profile/types';
-import StepSignUpAddress from './components/organism/steps/step-address';
-import StepSignUpLoading from './components/organism/steps/step-loading';
-import StepSignUpPerson from './components/organism/steps/step-person';
-import StepSignUpTermsOfUse from './components/organism/steps/step-terms-of-use';
+
+import StepActivationAddress from './components/organism/steps-activation/step-address';
+import StepActivationLoading from './components/organism/steps-activation/step-loading';
+import StepActivationPerson from './components/organism/steps-activation/step-person';
+import StepActivationSpecialty from './components/organism/steps-activation/step-specialty';
+import StepActivationTermsOfUse from './components/organism/steps-activation/step-terms-of-use';
 
 const initialValues = (email: string): ActivateAccount => ({
     firstName: '',
@@ -58,19 +60,23 @@ const initialValues = (email: string): ActivateAccount => ({
 const Tabs = [
     {
         id: '1',
-        component: (props: any) => <StepSignUpPerson {...props} />
+        component: (props: any) => <StepActivationPerson {...props} />
     },
     {
         id: '2',
-        component: (props: any) => <StepSignUpAddress {...props} />
+        component: (props: any) => <StepActivationSpecialty {...props} />
     },
     {
         id: '3',
-        component: (props: any) => <StepSignUpTermsOfUse {...props} />
+        component: (props: any) => <StepActivationAddress {...props} />
     },
     {
         id: '4',
-        component: (props: any) => <StepSignUpLoading {...props} />
+        component: (props: any) => <StepActivationTermsOfUse {...props} />
+    },
+    {
+        id: '5',
+        component: (props: any) => <StepActivationLoading {...props} />
     }
 ]
 

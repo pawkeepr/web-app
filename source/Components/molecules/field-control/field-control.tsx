@@ -6,6 +6,7 @@ import type { InputControlProps } from "./types";
 
 import cn from 'classnames';
 import { twMerge } from 'tailwind-merge';
+import Label from "~/Components/atoms/label";
 
 const FieldControl = ({
     label,
@@ -64,17 +65,7 @@ const FieldControl = ({
 
     return (
         <div className={twMerge('gap-1 relative', divClassName)}>
-            {!!label && (
-                <label
-                    htmlFor={id}
-                    className="mb-0 text-xs font-semibold text-gray-500 gap-1"
-                    data-testid={`label-${id}`}
-                >
-                    {label.trim() ? (label + separator) : ''}
-                    {required && <span className="text-danger">*</span>}
-                </label>
-            )
-            }
+            <Label label={label} required={required} id={id} separator={separator} />
             <div
                 className={cn(`
                     transition-all duration-300 ease-in-out

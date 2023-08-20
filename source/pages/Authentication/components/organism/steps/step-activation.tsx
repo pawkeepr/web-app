@@ -13,7 +13,11 @@ import {
     resetProfileFlag
 } from '~/store/auth/activate-account/actions';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
-import { ActivateAccount } from '~/validations/activate';
+
+export type ActivateAccount = {
+    email: string;
+    code: string;
+}
 
 const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const [inputValues, setInputValues] = useState<string[]>(Array(6).fill('')); // Inicializa um array de 6 strings vazias
@@ -37,7 +41,7 @@ const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
         return document.getElementById('digit' + index + '-input');
     }
 
-    const handleChange = (index: number) => (event) => {
+    const handleChange = (index: number) => (event: { target: { value: string; }; }) => {
         setInputValues((state) => {
             state[index] = event.target.value;
             return [...state];
