@@ -72,6 +72,7 @@ const FieldControlSelect = ({
                 isMulti={isMulti}
                 options={options}
                 name={props.name}
+                onChange={onChange}
             />
             {children}
 
