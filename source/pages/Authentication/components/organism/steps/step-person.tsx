@@ -1,8 +1,7 @@
-import { cpf } from "cpf-cnpj-validator";
 import { useFormikContext } from "formik";
 
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import MaskedInput from "react-input-mask";
 
 import { BtnPrimary } from "~/Components/atoms/btn";
@@ -19,10 +18,7 @@ import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
-    const { values } = useFormikContext<ActivateAccount>();
-    const [clickAppInput, setClickAppInput] = useState(false);
-    const [phoneValue, setPhoneValue] = useState<string | any>(undefined);
-    const { cpf_cnpj } = values;
+    const { values, setFieldValue } = useFormikContext<ActivateAccount>();
 
     const requiredValid = useMemo((): boolean => {
         const isValid = validatePerson.isValidSync(values);
@@ -32,26 +28,8 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     useNextStep(nextStep, requiredValid);
 
-    const mask = useMemo(() => {
-        // somente os números
-        const numbers = cpf_cnpj.replace(/\D/g, "");
-
-        // verifica se é CPF ou CNPJ
-        if (numbers.length === 11 && cpf.isValid(numbers))
-            return "999.999.999-99";
-
-        return numbers.length >= 11 ? "99.999.999/9999-99" : "999.999.999-99";
-    }, [cpf_cnpj]);
-
-    const copyPhoneToWhatsapp = () => {
-        if (phoneValue !== undefined) {
-            setClickAppInput(true)
-        }
-    };
-
-    const handlePhoneInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPhoneValue(event.target.value);
-
+    const copyPhoneToWhatsApp = () => {
+        setFieldValue("contact.whatsapp", values.contact.phone);
     };
 
     return (
@@ -85,7 +63,6 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 className=" "
                 placeholder="CPF/CNPJ"
                 component={MaskedInput as any}
-                mask={mask}
                 required
             />
 
@@ -120,54 +97,34 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     className=" focus-visible:bg-transparent hover:bg-transparent focus:bg-transparent bg-transparent flex  "
                     type="text"
                     label="Telefone/Celular"
-                    name="phone"
+                    name="contact.phone"
                     placeholder="Digite o seu Número de Telefone"
                     component={MaskedInput as any}
                     mask={"(99) 99999-9999"}
                     maskChar={null}
                     required
-                    onChange={handlePhoneInputChange}
                 />
                 <div
-                    onClick={copyPhoneToWhatsapp}
+                    onClick={copyPhoneToWhatsApp}
                     className="flex justify-center items-center"
                 >
                     <p className="text-xs font-semibold mr-2 mb-2 md:m-2">
                         Clique neste ícone para duplicar o telefone no campo ao lado:
                     </p>
-                    <FaWhatsapp onClick={copyPhoneToWhatsapp} className="text-green-600 text-xl cursor-pointer" />
+                    <FaWhatsapp className="text-green-600 text-xl cursor-pointer" />
                 </div>
             </div>
             <div>
-                {
-                    // input de whatsapp com o mesmo numero do telefone caso o usuário clique no ícone do whatsapp
-                    clickAppInput ? (
-                        <FieldControl
-                            className=" "
-                            type="text"
-                            label="WhatsApp"
-                            name="whatsapp"
-                            placeholder="Digite o seu Número do WhatsApp"
-                            component={MaskedInput as any}
-                            mask={"(99) 99999-9999"}
-                            maskChar={null}
-                            value={phoneValue}
-                            required
-                        />)
-                        : (
-                            <FieldControl
-                                className=" "
-                                type="text"
-                                label="WhatsApp"
-                                name="whatsapp"
-                                placeholder="Digite o seu Número do WhatsApp"
-                                component={MaskedInput as any}
-                                mask={"(99) 99999-9999"}
-                                maskChar={null}
-                                value={""}
-                                required
-                            />)
-                }
+                <FieldControl
+                    type="text"
+                    label="WhatsApp"
+                    name="contact.whatsapp"
+                    placeholder="Digite o seu Número do WhatsApp"
+                    component={MaskedInput as any}
+                    mask={"(99) 99999-9999"}
+                    maskChar={null}
+                    required
+                />
             </div>
             <div className="flex items-center justify-center mt-1 col-span-full">
 

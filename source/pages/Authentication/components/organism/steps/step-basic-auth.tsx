@@ -64,7 +64,6 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                     required
                     label='Senha'
                     name="password"
-                    className="  border-end-0"
                     placeholder="Digite sua senha"
                     aria-label="password"
                     onBlur={handleBlur}
@@ -75,7 +74,6 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                     required
                     label='Repita a senha'
                     name="passwordConfirm"
-                    className="  border-end-0"
                     placeholder="Repita a senha"
                     aria-label="password-confirm"
                     onBlur={handleBlur}

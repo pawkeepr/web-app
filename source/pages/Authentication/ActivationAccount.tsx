@@ -122,7 +122,7 @@ const ActivationAccount = () => {
     return (
         <AuthLayout title="Activation Profile" >
             <section className="relative grid grid-cols-1 mobile:w-full mobile:h-full h-3/4 z-10 shadow-2xl w-1/2">
-                <main className="grid grid-cols-1 p-3 mobile:!p-1 md:p-5 bg-white w-full mobile:rounded-none rounded-xl">
+                <main className="grid grid-cols-1 p-3 mobile:!p-1 md:p-5 bg-white w-full mobile:rounded-none rounded-sm">
 
                     <div className='flex flex-col items-center justify-center '>
                         <LogoSimple className='mobile:hidden block' />
