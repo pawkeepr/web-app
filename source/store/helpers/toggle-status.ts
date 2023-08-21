@@ -1,22 +1,22 @@
 type Generic = {
-  [key: string]: any
-  _id: string
-  active: boolean
+    [key: string]: any
+    id: string
+    active: boolean
 }
 
-export const toggleStatus = (id: string, actives: Array<Generic>, inactives: Array<Generic>) => {
-  const indexActivate = actives.findIndex(item => item._id?.toString() === id);
-  const indexInactivate = inactives.findIndex(item => item._id?.toString() === id);
+export const toggleStatus = (id: string, actives: Array<Generic>, inatives: Array<Generic>) => {
+    const indexActivate = actives.findIndex(item => item.id?.toString() === id);
+    const indexInactivate = inatives.findIndex(item => item.id?.toString() === id);
 
-  if (indexActivate !== -1) {
-    actives[indexActivate].active = !actives[indexActivate].active;
-    inactives.push(actives[indexActivate]);
-    actives.splice(indexActivate, 1);
-  }
+    if (indexActivate !== -1) {
+        actives[indexActivate].active = !actives[indexActivate].active;
+        inatives.push(actives[indexActivate]);
+        actives.splice(indexActivate, 1);
+    }
 
-  if (indexInactivate !== -1) {
-    inactives[indexInactivate].active = !inactives[indexInactivate].active;
-    actives.push(inactives[indexInactivate]);
-    inactives.splice(indexInactivate, 1);
-  }
+    if (indexInactivate !== -1) {
+        inatives[indexInactivate].active = !inatives[indexInactivate].active;
+        actives.push(inatives[indexInactivate]);
+        inatives.splice(indexInactivate, 1);
+    }
 }

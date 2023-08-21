@@ -1,18 +1,18 @@
 import { useField } from "formik";
 
-import ErrMessage from "~/Components/atoms/err-message";
 
 import { useEffect, useRef, useState } from "react";
 import type { InputControlProps } from "./types";
 
 import cn from 'classnames';
 import { twMerge } from 'tailwind-merge';
+import Label from "~/Components/atoms/label";
 
 const FieldControl = ({
     label,
     children,
     required = false,
-    component,
+    component = 'input',
     startChildren,
     separator = ':',
     disabledError = false,
@@ -46,8 +46,6 @@ const FieldControl = ({
     const id = props.name || props.id;
 
     const InputComponent = component as any;
-    const display =
-        !disabledError && meta.touched && !!meta.error ? "block" : "none";
 
     const onChange = (e: any) => {
         props.onChange?.(e);
@@ -66,26 +64,17 @@ const FieldControl = ({
     }
 
     return (
-        <div className={divClassName}>
-            {!!label && (
-                <label
-                    htmlFor={id}
-                    className="mb-0 text-xs font-semibold text-gray-500 gap-1"
-                    data-testid={`label-${id}`}
-                >
-                    {label.trim() ? (label + separator) : ''}
-                    {required && <span className="text-danger">*</span>}
-                </label>
-            )
-            }
+        <div className={twMerge('gap-1 relative', divClassName)}>
+            <Label label={label} required={required} id={id} separator={separator} />
             <div
                 className={cn(`
                     transition-all duration-300 ease-in-out
-                    relative flex flex-row border-2 
+                    relative flex flex-row 
                     disabled:!cursor-not-allowed 
                     disabled:!opacity-25 rounded-sm
                 `, {
                     '!border-primary-500 border-2': focus,
+                    ' border': !focus,
                 })}>
                 {startChildren}
                 <InputComponent
@@ -95,7 +84,7 @@ const FieldControl = ({
                     data-testid={`input-${id}`}
                     className={
                         twMerge(
-                            "border-0",
+                            "border-0 px-2 py-2 focus:outline-none w-full",
                             className
                         )}
                     {...inputProps}
@@ -106,19 +95,15 @@ const FieldControl = ({
                 />
                 {children}
             </div>
-            <ErrMessage
-                message={meta.error?.toString() as string}
-                data-testid={`err-${id}`}
-                style={{
-                    display,
-                }}
-            />
+            {
+                meta.error && (
+                    <div className="w-full text-xs text-center text-red-700">
+                        {meta.error}
+                    </div>
+                )
+            }
         </div>
     );
-};
-
-FieldControl.defaultProps = {
-    component: "input",
 };
 
 export default FieldControl;

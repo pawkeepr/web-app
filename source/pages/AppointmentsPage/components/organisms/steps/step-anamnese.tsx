@@ -6,7 +6,7 @@ import { StepProps } from "./types";
 import AnswerRadio from "~/Components/molecules/answer-radio";
 
 import { useFormikContext } from "formik";
-import { BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
+import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
 import {
     questions_digestive_system,
     questions_locomotive_system,
@@ -17,7 +17,6 @@ import {
 import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 import ControlSwitch from "../../molecules/switch/switch";
 
-import AvatarPet from "../../atoms/pet-avatar";
 
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
     const { values } = useFormikContext<InitialValues>();
@@ -32,35 +31,35 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 <Row className="g-3">
                     {/* <AvatarPet name={values.pet?.name || 'Pet'} /> */}
 
-                        <ControlSwitch
+                    <ControlSwitch
                         label="Sistema Digestivo"
                         className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
-                        >
-                            <AnswerRadio
-                                answers={questions_digestive_system.map((question) => ({
-                                    ...question,
-                                    name: `anamnese.${question.question}`,
-                                }))}
-                            />
+                    >
+                        <AnswerRadio
+                            answers={questions_digestive_system.map((question) => ({
+                                ...question,
+                                name: `anamnese.${question.question}`,
+                            }))}
+                        />
                     </ControlSwitch>
-                        <ControlSwitch
+                    <ControlSwitch
                         label="Sistema Respiratório"
                         className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
-                        >
-                            <AnswerRadio
+                    >
+                        <AnswerRadio
                             answers={questions_respiratory_system.map(
                                 (question) => ({
                                     ...question,
                                     name: `anamnese.${question.question}`,
                                 })
-                                )}
-                            />
+                            )}
+                        />
                     </ControlSwitch>
-                        <ControlSwitch
+                    <ControlSwitch
                         label="Sistema Locomotor"
-                        className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"   
-                        >
-                            <AnswerRadio
+                        className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
+                    >
+                        <AnswerRadio
                             answers={questions_locomotive_system.map(
                                 (question) => ({
                                     ...question,
@@ -69,27 +68,27 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                             )}
                         />
                     </ControlSwitch>
-                        <ControlSwitch
+                    <ControlSwitch
                         label="Sistema Urinário"
                         className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
-                        >
-                            <AnswerRadio
-                                answers={questions_urinary_system.map((question) => ({
-                                    ...question,
-                                    name: `anamnese.${question.question}`,
-                                }))}
-                            />
+                    >
+                        <AnswerRadio
+                            answers={questions_urinary_system.map((question) => ({
+                                ...question,
+                                name: `anamnese.${question.question}`,
+                            }))}
+                        />
                     </ControlSwitch>
-                        <ControlSwitch
+                    <ControlSwitch
                         label="Sistema Nervoso"
                         className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
-                        >
-                            <AnswerRadio
-                        answers={questions_nervous_system.map((question) => ({
-                            ...question,
-                            name: `anamnese.${question.question}`,
-                        }))}
-                    />
+                    >
+                        <AnswerRadio
+                            answers={questions_nervous_system.map((question) => ({
+                                ...question,
+                                name: `anamnese.${question.question}`,
+                            }))}
+                        />
                     </ControlSwitch>
                 </Row>
             </div>
@@ -107,7 +106,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                     <i className="ri-arrow-left-line align-middle fs-16 me-2"></i>{" "}
                     Voltar
                 </BtnLabel>
-                <BtnSuccess
+                <BtnPrimary
                     type="button"
                     className="btn-label "
                     label="Próximo"
@@ -117,7 +116,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 >
                     <span className="ml-1"> Próximo </span>
                     <i className="ri-arrow-right-line  align-middle fs-16 p-1"></i>
-                </BtnSuccess>
+                </BtnPrimary>
             </div>
         </>
     );

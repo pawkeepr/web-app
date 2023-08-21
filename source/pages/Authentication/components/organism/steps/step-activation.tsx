@@ -1,4 +1,4 @@
-import { BtnLabel, BtnSuccess } from '~/Components/atoms/btn';
+import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn';
 import InputCode from '~/Components/atoms/input-code/input-code';
 import { StepProps } from './types';
 
@@ -13,7 +13,11 @@ import {
     resetProfileFlag
 } from '~/store/auth/activate-account/actions';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
-import { ActivateAccount } from '~/validations/activate';
+
+export type ActivateAccount = {
+    email: string;
+    code: string;
+}
 
 const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const [inputValues, setInputValues] = useState<string[]>(Array(6).fill('')); // Inicializa um array de 6 strings vazias
@@ -37,7 +41,7 @@ const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
         return document.getElementById('digit' + index + '-input');
     }
 
-    const handleChange = (index: number) => (event) => {
+    const handleChange = (index: number) => (event: { target: { value: string; }; }) => {
         setInputValues((state) => {
             state[index] = event.target.value;
             return [...state];
@@ -72,8 +76,8 @@ const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
         <div className="p-2 mt-4">
             <div className='flex flex-col items-center justify-center'>
-                <LogoSimple className='d-none d-sm-block' />
-                <LogoSimpleMobile className='d-sm-none' />
+                <LogoSimple className='hidden mobile:block' />
+                <LogoSimpleMobile className='mobile:hidden' />
                 <div className="text-center text-muted mb-2 gap-2">
                     <h5 className="text-primary p-2">Olá, Seja Bem-Vindo(a)!</h5>
                     <p >
@@ -104,14 +108,14 @@ const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 </div>
             </form>
             <div className="mt-3">
-                <BtnSuccess
+                <BtnPrimary
                     label='Confirmar'
                     className="w-full"
                     onClick={() => handleSubmit()}
                     disabled={!isValid}
                 />
             </div>
-            <div className="mt-4 text-center">
+            <div className="mt-4 text-center w-full flex items-center justify-center flex-col">
                 <p className="mb-0">Você não recebeu o código?</p>
                 <BtnLabel label='Reenviar' onClick={() => handleResend()} />
             </div>

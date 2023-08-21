@@ -1,44 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
+    Collapse,
     Offcanvas,
-    OffcanvasHeader,
     OffcanvasBody,
-    Collapse
+    OffcanvasHeader
 } from "reactstrap";
 
 //redux
+import { useDispatch, useSelector } from "react-redux";
 import {
     changeLayout,
-    changeSidebarTheme,
     changeLayoutMode,
-    changeLayoutWidth,
     changeLayoutPosition,
-    changeTopbarTheme,
+    changeLayoutWidth,
     changeLeftsidebarSizeType,
     changeLeftsidebarViewType,
-    changeSidebarImageType,
     changePreLoader
     // resetValue
+    ,
+
+
+    changeSidebarImageType,
+    changeSidebarTheme,
+    changeTopbarTheme
 } from "~/store/actions";
-import { useSelector, useDispatch } from "react-redux";
 
 //import Constant
 import {
-    layoutTypes,
-    leftSidebarTypes,
     layoutModeTypes,
-    layoutWidthTypes,
     layoutPositionTypes,
-    topbarThemeTypes,
-    leftsidbarSizeTypes,
-    leftSidebarViewTypes,
+    layoutTypes,
+    layoutWidthTypes,
     leftSidebarImageTypes,
-    preloaderTypes
+    leftSidebarTypes,
+    leftSidebarViewTypes,
+    leftsidbarSizeTypes,
+    preloaderTypes,
+    topBarThemeTypes
 } from "../constants/layout";
 
 //SimpleBar
-import SimpleBar from "simplebar-react";
 import classnames from "classnames";
+import SimpleBar from "simplebar-react";
 
 //import Images
 import img01 from "~/assets/images/sidebar/img-1.jpg";
@@ -66,7 +69,7 @@ const RightSidebar = () => {
         layoutModeType,
         layoutWidthType,
         layoutPositionType,
-        topbarThemeType,
+        topBarThemeType,
         leftsidbarSizeType,
         leftSidebarViewType,
         leftSidebarImageType,
@@ -77,7 +80,7 @@ const RightSidebar = () => {
         layoutModeType: state.Layout.layoutModeType,
         layoutWidthType: state.Layout.layoutWidthType,
         layoutPositionType: state.Layout.layoutPositionType,
-        topbarThemeType: state.Layout.topbarThemeType,
+        topBarThemeType: state.Layout.topBarThemeType,
         leftsidbarSizeType: state.Layout.leftsidbarSizeType,
         leftSidebarViewType: state.Layout.leftSidebarViewType,
         leftSidebarImageType: state.Layout.leftSidebarImageType,
@@ -486,17 +489,17 @@ const RightSidebar = () => {
                                             <input
                                                 className="form-check-input"
                                                 type="radio"
-                                                name="data-topbar"
-                                                id="topbar-color-light"
-                                                value={topbarThemeTypes.LIGHT}
-                                                checked={topbarThemeType === topbarThemeTypes.LIGHT}
+                                                name="data-topBar"
+                                                id="topBar-color-light"
+                                                value={topBarThemeTypes.LIGHT}
+                                                checked={topBarThemeType === topBarThemeTypes.LIGHT}
                                                 onChange={e => {
                                                     if (e.target.checked) {
                                                         dispatch(changeTopbarTheme(e.target.value));
                                                     }
                                                 }}
                                             />
-                                            <label className="form-check-label p-0 avatar-md w-100" htmlFor="topbar-color-light">
+                                            <label className="form-check-label p-0 avatar-md w-100" htmlFor="topBar-color-light">
                                                 <span className="d-flex gap-1 h-100">
                                                     <span className="flex-shrink-0">
                                                         <span className="bg-light d-flex h-100 flex-column gap-1 p-1">
@@ -522,17 +525,17 @@ const RightSidebar = () => {
                                             <input
                                                 className="form-check-input"
                                                 type="radio"
-                                                name="data-topbar"
-                                                id="topbar-color-dark"
-                                                value={topbarThemeTypes.DARK}
-                                                checked={topbarThemeType === topbarThemeTypes.DARK}
+                                                name="data-topBar"
+                                                id="topBar-color-dark"
+                                                value={topBarThemeTypes.DARK}
+                                                checked={topBarThemeType === topBarThemeTypes.DARK}
                                                 onChange={e => {
                                                     if (e.target.checked) {
                                                         dispatch(changeTopbarTheme(e.target.value));
                                                     }
                                                 }}
                                             />
-                                            <label className="form-check-label p-0 avatar-md w-100" htmlFor="topbar-color-dark">
+                                            <label className="form-check-label p-0 avatar-md w-100" htmlFor="topBar-color-dark">
                                                 <span className="d-flex gap-1 h-100">
                                                     <span className="flex-shrink-0">
                                                         <span className="bg-light d-flex h-100 flex-column gap-1 p-1">

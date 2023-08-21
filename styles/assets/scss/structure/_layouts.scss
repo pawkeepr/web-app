@@ -20,7 +20,7 @@
         }
     }
 
-    #page-topbar,
+    #page-topBar,
     .footer {
         max-width: $boxed-layout-width;
         margin: 0 auto;
@@ -43,7 +43,7 @@
             }
         }
 
-        #page-topbar,
+        #page-topBar,
         .footer {
             left: 0 !important;
             max-width: calc(#{$boxed-layout-width} - #{$vertical-menu-width-sm});
@@ -57,7 +57,7 @@
     &[data-sidebar-size="sm-hover-active"],
     &[data-sidebar-size="lg"] {
 
-        #page-topbar,
+        #page-topBar,
         .footer {
             max-width: calc(#{$boxed-layout-width} - #{$vertical-menu-width});
 
@@ -69,7 +69,7 @@
 
     &[data-sidebar-size="md"] {
 
-        #page-topbar,
+        #page-topBar,
         .footer {
             max-width: calc(#{$boxed-layout-width} - #{$vertical-menu-width-md});
 
@@ -102,7 +102,7 @@
         &[data-sidebar-size="md"],
         &[data-sidebar-size="lg"] {
 
-            #page-topbar,
+            #page-topBar,
             .footer {
                 max-width: 100%;
                 left: 0 !important;
@@ -115,7 +115,7 @@
 
 [data-layout="horizontal"][data-layout-width="boxed"] {
 
-    #page-topbar,
+    #page-topBar,
     #layout-wrapper,
     .footer {
         max-width: 100%;
@@ -134,7 +134,7 @@
     &[data-sidebar-size="sm"] &[data-sidebar-size="sm-hover-active"],
     &[data-sidebar-size="lg"] {
 
-        #page-topbar,
+        #page-topBar,
         .footer {
             left: 0 !important;
         }
@@ -146,7 +146,7 @@
 [data-layout-position="scrollable"] {
     @media (min-width: 992px) {
 
-        #page-topbar,
+        #page-topBar,
         .navbar-menu {
             position: absolute;
         }
@@ -155,7 +155,7 @@
     &[data-layout="horizontal"] {
         @media (min-width: 992px) {
 
-            #page-topbar,
+            #page-topBar,
             .topnav {
                 position: absolute;
             }

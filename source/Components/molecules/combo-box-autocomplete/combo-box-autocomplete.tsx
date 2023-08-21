@@ -50,18 +50,18 @@ const ComboBoxAutocomplete = <T,>({
         query === "" || query === undefined || query === null
             ? items
             : items.filter((item) =>
-                  item
-                      .toLowerCase()
-                      .replace(/\s+/g, "")
-                      .includes(query?.toLowerCase().replace(/\s+/g, ""))
-              );
+                item
+                    .toLowerCase()
+                    .replace(/\s+/g, "")
+                    .includes(query?.toLowerCase().replace(/\s+/g, ""))
+            );
 
     return (
         <Combobox value={selected} onChange={onChangeValue}>
             <div className="relative  w-full items-center ">
                 <div className="relative">
                     <FieldControl
-                        className="form-control"
+                        className=" "
                         name={name}
                         component={Combobox.Input as any}
                         displayValue={items}
@@ -137,11 +137,10 @@ const ComboBoxAutocomplete = <T,>({
                                             </span>
                                             {selected && (
                                                 <span
-                                                    className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                                        active
+                                                    className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active
                                                             ? "text-white"
                                                             : "text-teal-600"
-                                                    }`}
+                                                        }`}
                                                 >
                                                     <FaCheck />
                                                 </span>

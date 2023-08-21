@@ -12,7 +12,7 @@ import {
     leftSidebarTypes,
     leftSidebarViewTypes,
     preloaderTypes,
-    topbarThemeTypes,
+    topBarThemeTypes,
 } from "../../Components/constants/layout";
 
 export const changeLayout = createAction<layoutTypes>(`${name}/changeLayout`);
@@ -20,7 +20,7 @@ export const changeLayoutMode = createAction<layoutModeTypes>(`${name}/changeLay
 export const changeSidebarTheme = createAction<leftSidebarTypes>(`${name}/changeSidebarTheme`);
 export const changeLayoutWidth = createAction<layoutWidthTypes>(`${name}/changeLayoutWidth`);
 export const changeLayoutPosition = createAction<layoutPositionTypes>(`${name}/changeLayoutPosition`);
-export const changeTopbarTheme = createAction<topbarThemeTypes>(`${name}/changeTopbarTheme`);
+export const changeTopBarTheme = createAction<topBarThemeTypes>(`${name}/changeTopBarTheme`);
 export const changeSidebarSizeType = createAction<leftSideBarSizeTypes>(`${name}/changeSidebarSizeType`);
 export const changeSidebarView = createAction<leftSidebarViewTypes>(`${name}/changeSidebarView`);
 export const changeSidebarImageType = createAction<leftSidebarImageTypes>(`${name}/changeSidebarImageType`);

@@ -14,7 +14,7 @@ import MyImage from '~/Components/atoms/my-image/my-image';
 
 import { sample } from 'lodash';
 
-import { Tutor } from '~/store/tutor/types';
+import { Tutor } from '~/store/tutors/types';
 
 type CardTutorsProps = {
     tutor: Tutor

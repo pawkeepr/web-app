@@ -1,8 +1,10 @@
 'use client'
 
+import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from 'react';
-import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
+
+import cookies from '~/constants/cookies';
 
 //import Components
 import Footer from './Footer';
@@ -18,13 +20,14 @@ import {
     changeSideBarView,
     changeSidebarImageType,
     changeSidebarTheme,
-    changeTopbarTheme
+    changeTopBarTheme,
 } from "../store/layouts/slice";
 
 //redux
+import cn from 'classnames';
+import FieldDocumentAppointment from "~/Components/molecules/field-document-appointment";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
-import FieldDocumentAppointment from "~/pages/DashboardPage/components/molecules/field-document-appointment";
-
+import { getCookie } from '~/utils/cookies-utils';
 
 type LayoutProps = {
     children: React.ReactNode;
@@ -39,23 +42,17 @@ const Layout = ({ children }: LayoutProps) => {
         layoutModeType,
         layoutWidthType,
         layoutPositionType,
-        topbarThemeType,
+        topBarThemeType,
         leftSideBarSizeType,
         leftSidebarViewType,
         leftSidebarImageType,
         headerSize,
-    } = useAppSelector(state => ({
-        layoutType: state.Layout.layoutType,
-        leftSidebarType: state.Layout.leftSidebarType,
-        layoutModeType: state.Layout.layoutModeType,
-        layoutWidthType: state.Layout.layoutWidthType,
-        layoutPositionType: state.Layout.layoutPositionType,
-        topbarThemeType: state.Layout.topbarThemeType,
-        leftSideBarSizeType: state.Layout.leftSideBarSizeType,
-        leftSidebarViewType: state.Layout.leftSidebarViewType,
-        leftSidebarImageType: state.Layout.leftSidebarImageType,
-        headerSize: state.Layout.headerSize,
-    }));
+    } = useAppSelector(state => state.Layout);
+
+    useEffect(() => {
+        const mode = getCookie(cookies.layoutMode.name)
+        dispatch(changeLayoutMode(mode))
+    }, []);
 
     /*
     layout settings
@@ -67,7 +64,7 @@ const Layout = ({ children }: LayoutProps) => {
             layoutModeType ||
             layoutWidthType ||
             layoutPositionType ||
-            topbarThemeType ||
+            topBarThemeType ||
             leftSideBarSizeType ||
             leftSidebarViewType ||
             leftSidebarImageType
@@ -78,7 +75,7 @@ const Layout = ({ children }: LayoutProps) => {
             dispatch(changeLayoutMode(layoutModeType));
             dispatch(changeLayoutWidth(layoutWidthType));
             dispatch(changeLayoutPosition(layoutPositionType));
-            dispatch(changeTopbarTheme(topbarThemeType));
+            dispatch(changeTopBarTheme(topBarThemeType));
             dispatch(changeLayout(layoutType));
             dispatch(changeSidebarImageType(leftSidebarImageType))
         }
@@ -88,7 +85,7 @@ const Layout = ({ children }: LayoutProps) => {
         layoutModeType,
         layoutWidthType,
         layoutPositionType,
-        topbarThemeType,
+        topBarThemeType,
         leftSideBarSizeType,
         leftSidebarViewType,
         leftSidebarImageType,
@@ -104,7 +101,7 @@ const Layout = ({ children }: LayoutProps) => {
     function scrollNavigation() {
         const scrollUp = document.documentElement.scrollTop;
         if (scrollUp > 50) {
-            setHeaderClass("topbar-shadow");
+            setHeaderClass("topBar-shadow");
         } else {
             setHeaderClass("");
         }
@@ -112,15 +109,17 @@ const Layout = ({ children }: LayoutProps) => {
 
 
     return (
-        <div id="mobile:gap-2 relative">
+        <div id="relative">
             <Header headerClass={headerClass} />
             {/* <Sidebar layoutType={layoutType} /> */}
+
             <div
-                style={{
-                    paddingTop: `${headerSize.height}px`
-                }}
-                className="mobile:mt-2 px-24 mobile:px-4 relative"
+                className={cn(
+                    "px-24 mobile:px-4 relative",
+                    "mobile:pt-20"
+                )}
             >
+                {children}
                 <FieldDocumentAppointment selectedTabInitial={0}>
                     {
                         ({ onChangeOpen }) => (
@@ -130,17 +129,16 @@ const Layout = ({ children }: LayoutProps) => {
                                 bg-primary-600 p-3 rounded-full 
                                 shadow-2xl z-50 fixed bottom-4 right-4
                                 transition duration-500 ease-in-out
-                                opacity-40 hover:opacity-100 
+                                opacity-40 hover:opacity-100
                                 mobile:opacity-100 mobile:bottom-4 mobile:right-4
-                                md:block  xl:hidden lg:hidden
                             "
                             >
                                 <PlusIcon className="w-8 h-8 text-gray-50" />
                             </button>
                         )
-                        }
+                    }
                 </FieldDocumentAppointment>
-                {children}
+
                 <Footer />
             </div>
         </div>
