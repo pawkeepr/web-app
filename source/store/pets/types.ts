@@ -71,7 +71,7 @@ export type Pet = {
     updated_at: string;
 }
 
-export interface Data extends IPet {
+export interface Data extends Pet {
 
 }
 
