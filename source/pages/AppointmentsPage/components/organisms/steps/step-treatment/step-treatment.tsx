@@ -6,7 +6,7 @@ import ControlSwitch from "../../../molecules/switch/switch";
 import { StepProps } from "../types";
 
 import { FieldArray, useFormikContext } from "formik";
-import { BtnLabel, BtnSuccess } from "~/Components/atoms/btn";
+import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import { diseases } from "~/common/data/diseases";
 import { exams } from "~/common/data/exams";
@@ -714,30 +714,22 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
             </div>
 
 
-            <div className="flex align-items-center justify-center gap-3 mt-4">
+            <div className="flex items-center justify-center">
                 <BtnLabel
                     link
                     type="button"
-                    className="right  previestab"
-                    label="Próximo"
+                    label="Voltar"
                     onClick={() => {
                         toggleTab(activeTab - 1);
                     }}
-                >
-                    <i className="ri-arrow-left-line  align-middle fs-16 me-2"></i>{" "}
-                    Voltar
-                </BtnLabel>
-                <BtnSuccess
+                />
+                <BtnPrimary
                     type="button"
-                    className="btn-label "
                     label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}
-                >
-                    <span className="ml-1"> Próximo </span>
-                    <i className="ri-arrow-right-line  align-middle fs-16  p-1"></i>
-                </BtnSuccess>
+                />
             </div>
         </>
     );

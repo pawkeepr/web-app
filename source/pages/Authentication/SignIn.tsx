@@ -21,8 +21,7 @@ const CoverSignIn = () => {
     );
     const dispatch = useAppDispatch();
 
-    const loading =
-        isLoading === LOADING.PENDING || isLoading === LOADING.SUCCESS;
+    const loading = isLoading === LOADING.PENDING
 
     useEffect(() => {
         if (isAuthenticated) {

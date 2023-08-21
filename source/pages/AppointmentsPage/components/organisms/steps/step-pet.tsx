@@ -233,15 +233,13 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
             <div className="flex align-items-center justify-end gap-3 mt-4">
                 <BtnPrimary
                     type="button"
-                    className="ml-4 btn-label right ms-auto nexttab nexttab"
                     label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}
-                >
-                    <span className="ml-1"> Próximo </span>
-                    <i className="ri-arrow-right-line  align-middle fs-16 ms-2 p-1"></i>
-                </BtnPrimary>
+                />
+
+
             </div>
         </>
     );

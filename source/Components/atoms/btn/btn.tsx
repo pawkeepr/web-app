@@ -5,21 +5,20 @@ import BtnAvatar from './btn-avatar';
 
 export const button = tv({
     base: `
-        mobile:p-4 mobile:w-full w-44
-        px-4 m-1 h-10 
+        mobile:p-4 mobile:w-full w-52
+        px-4 m-1 h-12 py-2
         text-sm font-semibold rounded-md text-center
         gap-1 leading-1 font-semibold
-        transition
-        duration-300 ease-in-out border-none
+        transition duration-300 ease-in-out
         disabled:opacity-50 disabled:cursor-not-allowed
         bg-opacity-80 hover:bg-opacity-100 active:opacity-100
         hover:transform hover:scale-105
-        !text-opacity-100
+        text-opacity-100
         flex justify-center items-center
     `,
     variants: {
         primary: {
-            true: "bg-primary-500 dark:bg-secondary-500 !text-white"
+            true: "bg-primary-500 dark:bg-secondary-500 text-gray-50 dark:text-gray-600 border border-secondary-600 "
         },
         secondary: {
             true: "bg-secondary-500 dark:bg-primary-500"
@@ -31,13 +30,11 @@ export const button = tv({
             true: "bg-blue-600 hover:bg-blue-700 enabled:focus:bg-blue-800 enabled:hover:bg-btn-blue-700"
         },
         cancel: {
-            true: "bg-transparent border border-red text-red-700 border-red-400 hover:!bg-red-100 hover:border-red-500 hover:text-red-800"
+            true: "bg-red-300 border border-red-600 text-gray-600 border-red-400 hover:bg-red-100 hover:border-red-500 hover:text-red-800"
         },
-        text: {
-            true: "bg-transparent border border-gray-400 text-gray-700 hover:!bg-gray-100 hover:border-gray-500 hover:text-gray-800"
-        },
+        text: {},
         link: {
-            true: "text-secondary-500 dark:text-primary-600 hover:!no-underline capitalize w-fit"
+            true: "text-secondary-500 dark:text-primary-600 hover:no-underline capitalize w-fit"
         }
     },
 })
@@ -68,7 +65,7 @@ const Btn = ({
     return (
         <button
             type={type}
-            className={button({ className, ...props })} {...props}>
+            className={button({ ...props, className })} {...props}>
             {icon && <span className={styledIcon({ ...props })}>{icon}</span>}
             {children && <span className={styledIcon({ ...props })}>{children}</span>}
             <span>{label}</span>

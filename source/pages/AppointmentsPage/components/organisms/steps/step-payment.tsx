@@ -1,4 +1,4 @@
-import { useFormikContext } from "formik";
+import { Form, useFormikContext } from "formik";
 import InputMask from "react-input-mask";
 import { Input, Label, Row } from "reactstrap";
 import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
@@ -10,7 +10,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit } = useFormikContext();
 
     return (
-        <>
+        <Form onSubmit={handleSubmit}>
             <div>
                 <h2 className="text-lg">Pagamento</h2>
             </div>
@@ -84,26 +84,17 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                 <BtnLabel
                     link
                     type="button"
-                    className="right  previestab"
-                    label="Próximo"
+                    label="Voltar"
                     onClick={() => {
                         toggleTab(activeTab - 1);
                     }}
-                >
-                    <i className="ri-arrow-left-line  align-middle fs-16 me-2"></i>{" "}
-                    Voltar
-                </BtnLabel>
+                />
                 <BtnPrimary
-                    onClick={handleSubmit}
-                    type="button"
-                    className="btn-label"
-                    label="Próximo"
-                >
-                    <span className="ml-1"> Finalizar </span>
-                    <i className="ri-check-line  align-middle fs-16 p-1"></i>
-                </BtnPrimary>
+                    type="submit"
+                    label="Concluir Consulta"
+                />
             </div>
-        </>
+        </Form>
     );
 };
 
