@@ -43,7 +43,7 @@ const StepListPets = ({
         <div className="mt-3 p-1 gap-2">
             <div className="pb-5 max-h-[250px] overflow-auto">
                 {
-                    pets.map(pet => (
+                    pets?.map(pet => (
                         <button
                             key={pet.id}
                             type="button"

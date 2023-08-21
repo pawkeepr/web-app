@@ -5,9 +5,19 @@ import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import ListBoxTailwind from "~/Components/molecules/list-box-tailwind/list-box-tailwind";
 import { StepProps } from "./types";
+import { useState } from "react";
+import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
+import { colorStyles } from "~/Components/molecules/field-control/field-control-select-mult";
 
 const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit } = useFormikContext();
+    const [event, setEvent] = useState<string>('credit');
+
+    const options = new Array(12).fill(0).map((item, index) => ({
+        value: index +1,
+        label: `${index+1} Parcela${index+1 > 1 ? 's' : ''}` ,
+        color: 'rgb(255 200 107);',
+    }));
 
     return (
         <>
@@ -24,9 +34,10 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                             type="radio"
                             className="form-check-input"
                             defaultChecked
+                            onChange={ (e) => { setEvent('credit') } }
                             required
                         />
-                        <Label className="form-check-label" htmlFor="credit">
+                        <Label className="form-check-label"  htmlFor="credit">
                             Cartão de Crédito
                         </Label>
                     </div>
@@ -35,6 +46,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                             id="debit"
                             name="paymentMethod"
                             type="radio"
+                            onChange={ (e) => { setEvent('debit') } }
                             className="form-check-input"
                             required
                         />
@@ -46,6 +58,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                         <Input
                             id="pix"
                             name="paymentMethod"
+                            onChange={ (e) => { setEvent('pix') } }
                             type="radio"
                             className="form-check-input"
                             required
@@ -58,6 +71,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                         <Input
                             id="cash"
                             name="paymentMethod"
+                            onChange={ (e) => { setEvent('cash') } }
                             type="radio"
                             className="form-check-input"
                             required
@@ -67,8 +81,18 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                         </Label>
                     </div>
                 </div>
-
-                <Row className="gy-3">{<ListBoxTailwind />}</Row>
+                {
+                    event === 'credit' && (
+                    <>
+                        <p className="text-gray-600">Quantas parcelas?</p>
+                        <FieldControlSelect
+                        placeholder="Selecione a quantidade de parcelas"
+                        name="installments"
+                        options={options}  
+                    />
+                    </>
+                    )
+                }
                 <div className="mt-4">
                     <FieldControl
                         label="Valor do Pagamento ?"
