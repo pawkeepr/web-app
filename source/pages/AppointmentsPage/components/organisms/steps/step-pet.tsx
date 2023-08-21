@@ -140,7 +140,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         <FieldControl
                                 label={`Número do microchip`}
                                 className="form-control"
-                                name={`chipNumber`}
+                                name={`chip_number`}
                                 type="number"
                             />
                         </div>
@@ -148,7 +148,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         <FieldControl
                                 label={`Número de registro cartório`}
                                 className="form-control"
-                                name={`idOfficeRegister`}
+                                name={`id_office_register`}
                                 type="number" //aterar conforme padrão do tipo number/string
                             />
                         </div>

@@ -49,8 +49,8 @@ export type Pet = {
     name: string;
     species: Species;
     breed: Breed;
-    chipNumber?: string;  
-    idOfficeRegister?: string;
+    chip_number?: string;  
+    id_office_register?: string;
     sex: GenderPet;
     date_birth: string;
     bloodType: BloodType;
