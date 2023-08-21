@@ -23,6 +23,7 @@ import usePetByName from "../../hooks/use-pet-by-name";
 import useTutorByDocument from "../../hooks/use-tutor-by-document";
 import StepSecondTutor from "../../molecules/second-tutor";
 import { GenderPet } from "~/store/pets/types";
+import StepTutor from "../../molecules/tutor";
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const [isPendingPet, startTransition] = useTransition();
@@ -148,7 +149,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 label={`Número de registro cartório`}
                                 className="form-control"
                                 name={`id_office_register`}
-                                type="number" //aterar conforme padrão do tipo number/string
+                                type="number"
                             />
                         </div>
                     </Row>
@@ -204,10 +205,9 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             required
                         />
                     </Col>
-                </Row>
-                <Row className="g-3">
                     <StepTutor disabled={tutorExists} />
                 </Row>
+                
                 <Row className="mt-2">
                     <ControlSwitch
                         label="O pet possui um segundo Tutor?"
