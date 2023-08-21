@@ -1,14 +1,15 @@
-import * as Yup from "yup";
 import DashboardLayouts from "../_layouts/dashboard";
+import * as Yup from "yup";
+import Container from "react-bootstrap/Container";
 
-import { Data } from "~/store/appointment-vet/types";
+import { VeterinaryAppointment } from "~/store/veterinary-appointments/types";
 import VerticalTabs from "./components/templates/vertical-tabs";
 
 import { Formik } from "formik";
-import { useRouter } from "next/navigation";
 import ModalConfirm from "~/Components/modals/modal-confirm";
+import { useRouter } from "next/navigation";
 
-export type InitialValues = Partial<Nullable<Data>>;
+export type InitialValues = Partial<Nullable<VeterinaryAppointment>>;
 
 type AppointmentsPageProps = {
     document: string;
@@ -30,6 +31,8 @@ const initialValues = (
         avatar: null,
         sex: null,
         date_birth: null,
+        chip_number: null,
+        id_office_register: null,
     },
     tutor: {
         id: null,
@@ -73,11 +76,10 @@ const initialValues = (
         },
     ],
     tests: [
-        {
-            type: "",
+        {   type: "",
             result: "",
             comments: "",
-
+           
         },
     ],
     nutritions: [
@@ -95,6 +97,11 @@ const initialValues = (
     payment: {
         payment_method: undefined,
         price: 0,
+        
+        
+
+
+
     },
 });
 
