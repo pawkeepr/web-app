@@ -9,7 +9,7 @@ import { sub_specialty } from "~/common/data/sub-specialtys";
 import CheckboxGroup from "~/Components/molecules/checkbox-group";
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
-import { StepProps } from "../steps/types";
+import { StepProps } from "../steps-sign-up/types";
 
 import * as Yup from 'yup';
 
