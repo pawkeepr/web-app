@@ -12,7 +12,7 @@ export const input = tv({
     invalid:focus:!border-gray-300 invalid:!shadow-outline-secondary-500 invalid:!text-secondary-500
     focus:outline-none focus:ring-2 focus:ring-primary-500
     font-sans dark:bg-[#292e33] dark:text-gray-200 
-    border border-primary-500 
+    border !border-primary-500 
   `
 })
 

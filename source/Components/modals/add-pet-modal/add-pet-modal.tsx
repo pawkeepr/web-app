@@ -14,7 +14,20 @@ import { addNew } from '~/store/pets/actions';
 import { Data, GenderPet } from '~/store/pets/types';
 import ComboBoxFields from "./components/organisms/combo-box-fields/combo-box-fields";
 
-type InitialValues = Partial<Nullable<Data>>
+type InitialValues = Partial<Nullable<Omit<Data, 'bloodType' | 'breed' | 'species'>>> & {
+    bloodType: {
+        value: string;
+        name: string;
+    };
+    breed: {
+        value: string;
+        name: string;
+    };
+    species: {
+        value: string;
+        name: string;
+    };
+}
 
 import RadioGroupCustom from "~/Components/molecules/radio-group/radio-group";
 import Modal from "~/Components/organism/modal";
@@ -51,19 +64,33 @@ const AddNewPetModal = ({ children, item }: AddModalProps) => {
         values: InitialValues,
         { resetForm }: FormikHelpers<InitialValues>
     ) => {
-        dispatch(addNew(values));
+        dispatch(addNew({
+            ...values,
+            bloodType: values.bloodType.value,
+            breed: values.breed.value,
+            species: values.species.value,
+        } as Data));
         resetForm()
     }
 
     const initialValues: InitialValues = {
         name: '',
-        species: '' as any,
-        breed: '' as any,
+        species: {
+            value: '',
+            name: ''
+        },
+        breed: {
+            value: '',
+            name: ''
+        },
         castrated: false,
         avatar: null,
         dateOfBirth: null,
         gender: GenderPet.unknown,
-        bloodType: '' as any,
+        bloodType: {
+            value: '',
+            name: ''
+        },
     }
 
     return (
@@ -102,6 +129,7 @@ const AddNewPetModal = ({ children, item }: AddModalProps) => {
 
 
                                 <BtnAvatar alt="Foto do Pet" name="avatar" />
+                                <RadioGroupCustom items={genders} name="gender" />
 
                                 <FieldControl
                                     label="Nome"
@@ -111,6 +139,7 @@ const AddNewPetModal = ({ children, item }: AddModalProps) => {
                                     placeholder="Qual o nome do seu pet?"
                                     type="text"
                                 />
+
                                 <ComboBoxFields />
 
                                 <FieldDocument
@@ -129,7 +158,6 @@ const AddNewPetModal = ({ children, item }: AddModalProps) => {
                                     placeholder="Escreva a data de nascimento"
                                     type="date"
                                 />
-                                <RadioGroupCustom items={genders} name="gender" />
 
                                 <BoxButtons onClickCancel={closeModal} onClickSuccess={handleSubmit} isValid={isValid} />
                             </>

@@ -1,9 +1,7 @@
 
 import { useField } from 'formik'
-
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
-
+import Checkbox from '~/Components/atoms/checkbox'
+import Label from '~/Components/atoms/label'
 
 interface RadioGroupProps<T> extends React.HTMLAttributes<HTMLDivElement> {
     items: (T & { name: string, value: any })[]
@@ -15,30 +13,23 @@ export default function RadioGroup<T>({ items = [], name, className, ...rest }: 
     const [field, meta] = useField(name)
 
     return (
-        <Row className={`w-full ${className}`} {...rest}>
-            <Col sm={12}>
-                <div className="mx-auto w-full relative flex justify-center items-center flex-wrap gap-2">
-                    {
-                        items.map((item, index) => (
-                            <div className="form-check form-check-inline" key={index}>
-                                <input
-                                    id={item.name}
-                                    type="radio"
-                                    className="form-check-input"
-                                    required
-                                    {...field}
-                                />
-                                <label
-                                    className="form-check-label"
-                                    htmlFor={item.name}
-                                >
-                                    {item.name}
-                                </label>
-                            </div>
-                        ))
-                    }
-                </div>
-            </Col>
-        </Row>
+
+        <div className="mx-auto w-full relative flex justify-center items-center flex-wrap gap-2">
+            {
+                items.map((item, index) => (
+                    <div className="flex flex-row items-center justify-center" key={index}>
+                        <Checkbox
+                            id={item.name}
+                            type="radio"
+                            radio
+                            required
+                            {...field}
+                        />
+                        <Label htmlFor={item.name} label={item.name} />
+                    </div>
+                ))
+            }
+        </div>
+
     )
 }
