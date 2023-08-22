@@ -14,7 +14,7 @@ export const checkbox = tv({
     font-sans dark:bg-[#292e33] dark:text-gray-200 
     border border-primary-500
     
-    !w-4 h-4 px-0 py-0 mx-1 rounded-none
+    !w-4 h-4 px-0 py-0 mx-1
     focus:!ring-0 border !border-primary-500
     active:bg-secondary-500 text-primary-500
   `
