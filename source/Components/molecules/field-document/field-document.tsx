@@ -2,39 +2,40 @@
 import { cpf } from 'cpf-cnpj-validator';
 import { useFormikContext } from 'formik';
 import { useMemo } from 'react';
-import MaskedInput from 'react-input-mask';
-import type { InputControlProps } from '~/Components/molecules/field-control';
-import FieldControl from '~/Components/molecules/field-control/field-control';
 
-type InputDocumentProps = InputControlProps & {
-    onlyCPF?: boolean
-    onlyCNPJ?: boolean
+import { InputControlProps } from '~/Components/molecules/field-control';
+
+import FieldMasked from '../field-masked';
+
+type FieldDocumentProps<T> = InputControlProps<T> & {
+    typeDocument?: 'all' | 'cpf' | 'cnpj'
 }
 
-const FieldDocument = ({ onlyCPF = false, onlyCNPJ = false, ...props }: InputDocumentProps) => {
+const FieldDocument = <T,>({ typeDocument = 'all', ...props }: FieldDocumentProps<T>) => {
     const { values } = useFormikContext()
 
-    const document = (values as any)[props.name]
+    const document = (values as any)[props.name] || ""
 
     const mask = useMemo(() => {
         // somente os números
-        const numbers = document?.replace(/\D/g, '')
+        const numbers = document.replace(/\D/g, '')
 
-        if (onlyCPF && !onlyCNPJ) return '999.999.999-99'
+        if (typeDocument === 'cpf') return '___.___.___-__'
+        if (typeDocument === 'cnpj') return '__.___.___/____-__'
 
-        if (onlyCNPJ && !onlyCPF) return '99.999.999/9999-99'
+        // verifica se é CPF ou CNPJ
+        if (numbers.length === 11 && cpf.isValid(numbers)) return '___.___.___-__'
 
-        if (numbers.length === 11 && cpf.isValid(numbers)) return '999.999.999-99'
-
-        return numbers.length >= 11 ? '99.999.999/9999-99' : '999.999.999-99'
-    }, [document, onlyCNPJ, onlyCPF])
+        return numbers.length >= 11 ? '__.___.___/____-__' : '___.___.___-__'
+    }, [document, typeDocument])
 
 
     return (
-        <FieldControl
+        <FieldMasked
             {...props}
-            component={MaskedInput as any}
+            name={props.name}
             mask={mask}
+            replacement={{ _: /\d/ }}
         />
     );
 };
