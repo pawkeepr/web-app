@@ -60,7 +60,9 @@ const validate = Yup.object().shape({
         .max(155, "O sobrenome deve ter no máximo 50 caracteres")
         .required("O campo de sobrenome é obrigatório"),
     crmv: Yup.string()
-        .matches(/^[A-Z]{2}\d{4,6}$/, "CRMV inválido. Exemplo: SP12345")
+        .matches(/^[A-Za-z]{2}\d{4,6}$/, "CRMV inválido. Exemplo: SP12345")
+        .min(6, "O CRMV deve ter pelo menos 6 caracteres")
+        .transform((value) => value.toUpperCase())
         .required("O Campo CRMV é obrigatório"),
     specialty: Yup.object({
         value: Yup.string().required("O campo especialidade é obrigatório"),
