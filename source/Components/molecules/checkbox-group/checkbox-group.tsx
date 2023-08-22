@@ -54,11 +54,10 @@ export default function CheckboxGroup<T>({ items = [], name, label, required, cl
             <div className="flex items-center justify-center">
                 {
                     items.map((item, index) => (
-                        <div className="flex w-32" key={index}>
+                        <div className="flex flex-row items-center justify-center" key={index}>
                             <Checkbox
                                 id={item.value}
                                 type="checkbox"
-                                className="form-check-input"
                                 checked={checkedValues.includes(item.value)}
                                 {...field}
                                 onChange={() => setCheckboxValue(item.value)}
@@ -69,8 +68,6 @@ export default function CheckboxGroup<T>({ items = [], name, label, required, cl
                     ))
                 }
             </div>
-
-
         </div>
     )
 }
