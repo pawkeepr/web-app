@@ -1,5 +1,7 @@
+/* eslint-disable react/jsx-no-undef */
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+
 
 import MaskedInput from "react-input-mask";
 
@@ -125,29 +127,23 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 //disabled={!!values.pet?.id}
                                 name="sex"          // Lista d sexo
                                 label="Sexo do Pet"
-                                placeholder="Masculino Feminino..."
+                                placeholder="Masculino/Feminino..."
                             />
                         </div>
-                        <div className="w-full lg:w-1/3 px-3 mb-6">
+
+                       <div className="grid grid-cols-3 mobile:grid-cols-1 gap-3 m-2 p-1">
                         <FieldControl
                                 label={`Data de nascimento`}
-                                className="form-control"
                                 name={`date_birth`}
-                                type="date"
+                                type="date"                    
                             />
-                        </div>
-                        <div className="w-full lg:w-1/3 px-3 mb-6">
                         <FieldControl
                                 label={`Número do microchip`}
-                                className="form-control"
                                 name={`chip_number`}
                                 type="number"
                             />
-                        </div>
-                        <div className="w-full lg:w-1/3 px-3 mb-6">
                         <FieldControl
-                                label={`Número de registro cartório`}
-                                className="form-control"
+                                label={`Número de registro em cartório`}
                                 name={`id_office_register`}
                                 type="number"
                             />
