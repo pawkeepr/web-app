@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useFormikContext } from "formik"
-import { useEffect, useState, useTransition } from "react"
-import ListBoxTailwind from "~/Components/molecules/list-box-tailwind/list-box-tailwind"
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react"
+import FieldControlSelect from "~/Components/molecules/field-control/field-control-select"
 import { BloodType } from "~/store/pets/bloodType"
 import { Breed } from "~/store/pets/breedType"
 import { SpeciesType, species } from '~/store/pets/speciesType'
@@ -24,7 +25,6 @@ type ComboBoxFieldsProps = {
 const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
 
     const [specie, setSpecie] = useState<SpeciesType>({} as SpeciesType)
-    const [reset, setReset] = useState(false)
 
     const { setFieldValue, values } = useFormikContext<AuxSpeciesFormikProps>()
 
@@ -49,70 +49,65 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
             setFieldValue('bloodType', pet.bloodType)
         })
 
-    }, [pet, setFieldValue])
 
-    const onChangeSpecie = (specie: SpeciesType) => {
-        startTransition(() => {
-            setSpecie(specie)
-            setFieldValue('breed', '')
-            setFieldValue('bloodType', '')
-            setReset(!reset)
-        })
-    }
+    }, [pet])
 
     const memoNameSpecies = !name ? 'species' : `${name}.species`
     const memoNameBreed = !name ? 'breed' : `${name}.breed`
     const memoNameBloodType = !name ? 'bloodType' : `${name}.bloodType`
 
 
+    const onChangeSpecie = useCallback((specie: SpeciesType) => {
+        startTransition(() => {
+            setSpecie(specie)
+            setFieldValue(memoNameBreed, null)
+            setFieldValue(memoNameBloodType, null)
+        })
+
+    }, [memoNameBreed, memoNameBloodType])
+
+    const memoSpecies = useMemo(() => {
+        return species.map(({ name, value, ...specie }) => ({ label: name, value: value, ...specie }))
+    }, [])
+
+    const memoBreed = useMemo(() => {
+        return specie?.breedType?.map(({ name, value, ...breed }) => ({ label: name, value: value, ...breed }))
+    }, [specie])
+
+    const memoBloodType = useMemo(() => {
+        return specie?.bloodType?.map(({ name, value, ...bloodType }) => ({ label: name, value: value, ...bloodType }))
+    }, [specie])
+
     return (
-        <div className="w-full grid grid-cols-3 mobile:grid-cols-1">
-            <ListBoxTailwind
-                items={species}
-                option={specie}
+        <div className="w-full grid grid-cols-3 mobile:grid-cols-1 gap-2">
+            <FieldControlSelect
+                options={memoSpecies}
                 required
                 disabled={isPending || !!values.pet?.id}
-                onChangeOption={onChangeSpecie}
+                onChangeValue={onChangeSpecie}
                 name={memoNameSpecies}
                 placeholder="Ex: Cachorro, Gato, etc..."
                 label="Espécie"
             />
 
-            {
-                isPending && (<div className="spinner-border text-primary" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </div>)
-            }
-            {!isPending && (
-                <ListBoxTailwind
-                    items={specie.breedType}
-                    reset={specie}
-                    option={{ name: values.breed, value: values.breed }}
-                    disabled={!specie.breedType || !!values.pet?.id}
-                    required
-                    name={memoNameBreed}
-                    label="Raça"
-                    placeholder="Ex: Vira-lata, Poodle, etc..."
-                />)
-            }
 
-            {
-                isPending && (<div className="spinner-border text-primary" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </div>)
-            }
-            {!isPending && (
-                <ListBoxTailwind
-                    reset={specie}
-                    items={specie.bloodType}
-                    option={{ name: values.bloodType, value: values.bloodType }}
-                    disabled={!specie.bloodType || isPending || !!values.pet?.id}
-                    name={memoNameBloodType}
-                    label="Tipo Sanguíneo"
-                    placeholder="Ex: A, B, etc..."
-                />
-            )
-            }
+            <FieldControlSelect
+                options={memoBreed}
+                disabled={!specie.breedType || isPending || !!values.pet?.id}
+                required
+                name={memoNameBreed}
+                label="Raça"
+                placeholder="Ex: Vira-lata, Poodle, etc..."
+            />
+
+            <FieldControlSelect
+                options={memoBloodType}
+                disabled={!specie.bloodType || isPending || !!values.pet?.id}
+                required
+                name={memoNameBloodType}
+                label="Tipo Sanguíneo"
+                placeholder="Ex: A, B, etc..."
+            />
         </div>
     )
 }

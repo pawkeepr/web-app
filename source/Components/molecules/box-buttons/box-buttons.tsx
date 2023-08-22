@@ -37,7 +37,6 @@ const BoxButtons = ({
                     link={link}
                     onClick={onClickSuccess}
                     disabled={!isValid}
-                    className='!w-44'
                     type={type}
                     id="add-btn"
                     label={labelSuccess}

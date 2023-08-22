@@ -1,6 +1,9 @@
 import ReactSelect, { Props } from 'react-select';
 
+import styles from './select.module.scss';
+
 export type SelectProps = Props
+
 
 export const colorStyles = {
     control: (styles: any) => ({ ...styles, backgroundColor: "white" }),
@@ -35,9 +38,12 @@ export const colorStyles = {
 const Select = (props: Props) => {
     return (
         <ReactSelect
+            className={styles.select}
             placeholder={<div className="text-gray-400">{props.placeholder || 'Clique aqui ...'}</div>}
+            delimiter=','
             theme={(theme) => ({
                 ...theme,
+
                 borderRadius: 0,
                 colors: {
                     ...theme.colors,
@@ -50,11 +56,10 @@ const Select = (props: Props) => {
             classNames={{
                 noOptionsMessage: () => 'Não há opções',
                 control: () =>
-                    '!rounded-md border !border-gray-300 focus:ring-1 focus:ring-sky-500 focus:outline-none transition-shadow',
-                option: (state) =>
-                    `${state.isSelected && '!bg-btn-blue-500'
-                    } !py-1 hover:bg-btn-blue-50 hover:cursor-pointer`,
+                    '!rounded-md border !border-gray-300  focus:outline-none transition-shadow',
                 indicatorSeparator: () => '!hidden',
+                input: () => 'focus:outline-none',
+
             }}
             {...props}
         />

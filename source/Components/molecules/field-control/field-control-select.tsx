@@ -6,22 +6,21 @@ import Label from "~/Components/atoms/label";
 import Select from "~/Components/atoms/select";
 import type { InputControlProps } from "./types";
 
+type Option = {
+    value: string;
+    label: string;
+}
 
 type FieldSelectControl = InputControlProps<Props> & {
     name: string
+    deps?: any[]
     onChangeValue?: (item: any) => void;
-    options?: Array<{
-        value: string;
-        label: string;
-    }>
+    options?: Option[]
 }
 
 const FieldControlSelect = ({
     label,
-    children,
     required = false,
-    isMulti = false,
-    startChildren,
     className,
     name,
     divClassName,
@@ -33,16 +32,29 @@ const FieldControlSelect = ({
 
     useEffect(() => {
 
-        const item = options.find((option) => option?.value === values[name])
+        const item = options.find((option: Option) => option?.value === values?.[name]?.value)
+
+        if (!item && values?.[name]?.value) {
+            setFieldValue(
+                name,
+                null,
+            )
+
+            return
+        }
+
+        if (!item) return
 
         setFieldValue(
             name,
             item,
         )
-    }, [])
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [options])
 
     const onChange = useCallback(
-        option => {
+        (option: any) => {
             onChangeValue?.(option);
             setFieldValue(name, option, true);
         },
@@ -52,18 +64,16 @@ const FieldControlSelect = ({
 
     return (
         <div className={divClassName}>
-            <Label label={label} required={required} id={props.name} separator={':'} />
-            {startChildren}
+            <Label label={label} required={required} id={name} separator={':'} />
             <Select
                 {...props}
-                id={props.name}
+                id={name}
                 className="w-full"
-                isMulti={isMulti}
                 options={options}
-                name={props.name}
+                name={name}
                 onChange={onChange}
+                value={values?.[name]}
             />
-            {children}
         </div>
     );
 };

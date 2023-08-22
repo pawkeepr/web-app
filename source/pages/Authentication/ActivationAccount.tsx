@@ -164,6 +164,7 @@ const ActivationAccount = () => {
                         validationSchema={validate}
                         initialValues={initialValues(email) as any}
                         onSubmit={onSubmit}
+                        initialErrors={{}}
                     >
                         <TabContainer activeKey={tab}  >
                             {

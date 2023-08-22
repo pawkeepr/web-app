@@ -27,7 +27,7 @@ import {
 export const name = "Pet"
 
 export type IPet = {
-    id: string;
+    id?: string;
     name: string;
     species: Species;
     breed: Breed;

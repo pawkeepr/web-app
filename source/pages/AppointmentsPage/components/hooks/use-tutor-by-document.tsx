@@ -1,6 +1,6 @@
 import { useEffect, useState, useTransition } from "react"
 import { useAppSelector } from "~/store/hooks"
-import { Pet } from "~/store/pets/types"
+import { Data as Pet } from "~/store/pets/types"
 
 type UseTutorByDocumentProps = {
     document: string
@@ -14,8 +14,8 @@ const useTutorByDocument = ({ document, onChangeField }: UseTutorByDocumentProps
     const [petsOptions, setPetsOptions] = useState<(Pet & { value: string })[]>([])
 
     const { pets, tutors } = useAppSelector(state => ({
-        pets: state.Pets.pets,
-        tutors: state.Tutor.tutors
+        pets: state.Pets.data,
+        tutors: state.Tutor.data
     })
     )
 
