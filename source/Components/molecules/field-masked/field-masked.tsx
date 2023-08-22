@@ -16,7 +16,7 @@ const FieldMasked = ({
             placeholder={placeholder || "Digite aqui..."}
             name={name}
             replacement={replacement}
-            input={InputMask as any}
+            component={InputMask as any}
             className={input({ className: props.className })}
         />
     )
