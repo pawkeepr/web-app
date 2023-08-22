@@ -11,9 +11,9 @@ import BoxButtons from "~/Components/molecules/box-buttons";
 import FieldDocument from "~/Components/molecules/field-document";
 import { useAppDispatch } from '~/store/hooks';
 import { addNew } from '~/store/pets/actions';
+import { genderValues } from "~/store/pets/sexType";
 import { Data } from '~/store/pets/types';
 import ComboBoxFields from "./components/organisms/combo-box-fields/combo-box-fields";
-import { genderValues } from "~/store/pets/sexType";
 
 
 

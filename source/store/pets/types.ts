@@ -36,7 +36,7 @@ export type Pet = {
     health_insurance?: string;
     card_number?: string;
     wallet_validity?: number;
-    chip_number?: string;  
+    chip_number?: string;
     id_office_register?: string;
     sex: string[];
     date_birth: number;
