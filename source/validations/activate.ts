@@ -69,25 +69,25 @@ const validate = Yup.object().shape({
         label: Yup.string().required("O campo especialidade é obrigatório"),
     }).required("O campo especialidade é obrigatório"),
     list_service_type: Yup.array().min(1, "Selecione pelo menos um tipo de atendimento").required(),
-    list_specialty: Yup.array().of(
+    list_specialty: Yup.array().min(1, "Selecione pelo menos uma especialidade").of(
         Yup.object().shape({
             value: Yup.string().required("O campo especialidade é obrigatório"),
             label: Yup.string().required("O campo especialidade é obrigatório"),
         }),
-    ).min(1, "Selecione pelo menos uma especialidade").required(),
+    ).required(),
     contact: Yup.object().shape({
         email: Yup.string()
             .email("O email deve ser válido")
             .required("O campo de email é obrigatório"),
         phone: Yup.string()
-            .matches(/^\+55 \(\d{2}\) \d \d{4}-\d{4}$/)
+            .matches(/^\+55 \(\d{2}\) \d \d{4}-\d{4}$/, 'Número de telefone inválido')
             .test('phone-validator', 'Número de telefone inválido', value => {
                 if (!value) return false;
                 return value.length >= 10;
             })
             .required('O campo de telefone é obrigatório'),
         whatsapp: Yup.string()
-            .matches(/^\+55 \(\d{2}\) \d \d{4}-\d{4}$/)
+            .matches(/^\+55 \(\d{2}\) \d \d{4}-\d{4}$/, 'Número de telefone inválido')
             .test('phone-validator', 'Número de telefone inválido', value => {
                 if (!value) return false;
                 return value.length >= 10;

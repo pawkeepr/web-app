@@ -2,7 +2,6 @@ import { useFormikContext } from 'formik';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import MaskedInput from 'react-input-mask';
 import validateAddress from '~/validations/address';
 
 import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn';
@@ -12,6 +11,7 @@ import useFetchAddress from '~/hooks/use-fetch-address';
 
 
 
+import FieldMasked from '~/Components/molecules/field-masked';
 import useNextStep from '~/hooks/use-next-step';
 import { ActivateAccount } from '~/validations/activate';
 import { StepProps } from './types';
@@ -72,15 +72,11 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
         <div className="container grid grid-cols-2 mobile:grid-cols-1 gap-1">
 
-            <FieldControl
-                className=" "
-                type="text"
-                initialFocus
+            <FieldMasked
                 label="CEP"
                 name="location.zipCode"
                 placeholder="Digite o CEP"
-                component={MaskedInput as any}
-                mask={"99999-999"}
+                mask={"_____-___"}
                 required
             />
 
@@ -94,7 +90,6 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 required
             />
             <FieldControl
-                className=" "
                 type="text"
                 label="Cidade"
                 name="location.city"
@@ -103,7 +98,6 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 required
             />
             <FieldControl
-                className=" "
                 type="text"
                 label="Bairro"
                 name="location.neighborhood"
@@ -112,13 +106,12 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 required
             />
 
-            <div className="grid grid-cols-4 col-span-full">
+            <div className="grid grid-cols-4 mobile:grid-cols-1 col-span-full w-full gap-1">
                 <FieldControl
+                    divClassName="col-span-3"
                     label='Rua'
-                    divClassName='col-span-3'
                     name="location.street"
                     aria-label="street"
-                    className=" "
                     disabled={disabledInputs.street || loading}
                     placeholder={loading ? 'Carregando...' : 'Digite o nome da rua'}
                     required
@@ -126,11 +119,10 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 />
 
                 <FieldControl
-                    label=' '
-                    divClassName='col-span-1'
+                    divClassName="col-span-1"
+                    label='N°'
                     name="location.number"
                     aria-label="number"
-                    className=" "
                     disabled={disabledInputs.street || loading}
                     placeholder="N°"
                 />
@@ -140,7 +132,6 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <div className="col-span-full">
 
                 <FieldControl
-                    className=" "
                     type="text"
                     label="Complemento"
                     name="location.complement"

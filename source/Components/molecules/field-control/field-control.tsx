@@ -35,7 +35,7 @@ const FieldControl = <T,>({
     };
 
     return (
-        <div className="w-full">
+        <div className={twMerge("w-full", divClassName)}>
             <Label label={label} required={required} id={id} separator={separator} />
             <div className='relative'>
                 {startIcon && (
