@@ -35,7 +35,7 @@ const FieldControl = <T,>({
     };
 
     return (
-        <div className="w-full pb-3">
+        <div className="w-full">
             <Label label={label} required={required} id={id} separator={separator} />
             <div className='relative'>
                 {startIcon && (
@@ -68,6 +68,10 @@ const FieldControl = <T,>({
                     </div>
                 )}
             </div>
+            {!meta.error && (
+                <div className="pb-3" />
+            )}
+
             {meta.error && (
                 <div className="w-full text-xs text-center text-red-700">
                     {meta.error}
