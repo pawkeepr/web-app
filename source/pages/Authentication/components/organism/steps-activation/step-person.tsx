@@ -35,7 +35,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <div className="col-span-2 mobile:col-span-2 grid grid-cols-2 gap-1">
                 <FieldControl
                     initialFocus
-                    label="Nome Completo"
+                    label="Nome"
                     name="firstName"
                     aria-label="firstName"
                     placeholder="Nome"
@@ -44,7 +44,8 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 />
 
                 <FieldControl
-                    label=" "
+                    label="Sobrenome"
+                    required
                     separator={""}
                     name="lastName"
                     aria-label="lastName"
