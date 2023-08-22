@@ -1,5 +1,6 @@
 import { useField } from 'formik'
 import { useState } from 'react'
+import Checkbox from '~/Components/atoms/checkbox'
 
 import Label from '~/Components/atoms/label'
 
@@ -50,24 +51,20 @@ export default function CheckboxGroup<T>({ items = [], name, label, required, cl
                 id={id}
                 separator=':'
             />
-            <div className="mx-auto w-full relative flex justify-center items-center flex-wrap gap-2">
+            <div className="flex items-center justify-center">
                 {
                     items.map((item, index) => (
-                        <div className="form-check form-check-inline" key={index}>
-                            <input
-                                id={item.label}
+                        <div className="flex w-32" key={index}>
+                            <Checkbox
+                                id={item.value}
                                 type="checkbox"
                                 className="form-check-input"
                                 checked={checkedValues.includes(item.value)}
                                 {...field}
                                 onChange={() => setCheckboxValue(item.value)}
                             />
-                            <label
-                                className="form-check-label"
-                                htmlFor={item.label}
-                            >
-                                {item.label}
-                            </label>
+                            <Label htmlFor={item.value} label={item.label} />
+
                         </div>
                     ))
                 }
