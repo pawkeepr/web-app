@@ -9,7 +9,7 @@ type AuthLayoutProps = {
 
 const AuthLayout = ({ children, title }: AuthLayoutProps) => {
     return (
-        <div className="h-screen auth-bg-cover flex flex-col ">
+        <div className="min-h-screen auth-bg-cover flex flex-col ">
 
             <HeaderTitle title={title} />
             <div className="bg-overlay" />
