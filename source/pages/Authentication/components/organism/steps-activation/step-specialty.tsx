@@ -25,7 +25,7 @@ const validate = Yup.object().shape({
         label: Yup.string().required("O campo especialidade é obrigatório"),
     }).required("O campo especialidade é obrigatório"),
     list_service_type: Yup.array().min(1, "Selecione pelo menos um tipo de atendimento").required(),
-    list_specialty: Yup.array().of(
+    list_specialty: Yup.array().min(1, "Selecione pelo menos uma sub especialidade").of(
         Yup.object().shape({
             value: Yup.string().required("O campo especialidade é obrigatório"),
             label: Yup.string().required("O campo especialidade é obrigatório"),
