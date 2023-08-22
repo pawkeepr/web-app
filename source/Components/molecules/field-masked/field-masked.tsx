@@ -4,7 +4,7 @@ import FieldControl, { InputControlProps } from '~/Components/molecules/field-co
 
 import { input } from '~/Components/atoms/input';
 
-const InputMasked = ({
+const FieldMasked = ({
     placeholder,
     name,
     replacement = { _: /\d/ },
@@ -22,4 +22,4 @@ const InputMasked = ({
     )
 }
 
-export default InputMasked
+export default FieldMasked

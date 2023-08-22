@@ -7,7 +7,7 @@ import Select from "~/Components/atoms/select";
 import type { InputControlProps } from "./types";
 
 
-type FieldSelectControl = Props & InputControlProps & {
+type FieldSelectControl = InputControlProps<Props> & {
     name: string
     onChangeValue?: (item: any) => void;
     options?: Array<{

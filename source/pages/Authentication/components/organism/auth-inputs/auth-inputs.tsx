@@ -9,7 +9,6 @@ import FieldControl from "~/Components/molecules/field-control";
 import { Form, Formik } from "formik";
 import { SignInCredentials } from "~/services/helpers/auth";
 
-import cn from "classnames";
 import * as Yup from "yup";
 import { BtnLink, BtnPrimary } from "~/Components/atoms/btn";
 import FieldPassword from "~/Components/molecules/field-password/field-password";
@@ -62,7 +61,6 @@ const Auth = () => {
                             label="Email"
                             type="text"
                             pattern="[^\s]+" // no spaces
-                            className=" "
                             name="username"
                             placeholder="Digite seu email"
                             data-testid="email-input"
@@ -93,7 +91,6 @@ const Auth = () => {
 
                             <FieldPassword
                                 label="Senha"
-                                className={cn("  pe-5 password-input border-end-0")}
                                 placeholder="Digite sua senha"
                                 name="password"
                                 data-testid="password-input"

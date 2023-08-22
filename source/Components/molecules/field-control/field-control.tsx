@@ -1,46 +1,28 @@
 import { useField } from "formik";
 
 
-import { useEffect, useRef, useState } from "react";
 import type { InputControlProps } from "./types";
 
 import cn from 'classnames';
 import { twMerge } from 'tailwind-merge';
+import Input from "~/Components/atoms/input/input";
 import Label from "~/Components/atoms/label";
 
-const FieldControl = ({
+const FieldControl = <T,>({
     label,
     children,
     required = false,
-    component = 'input',
+    component = Input,
+    startIcon,
     startChildren,
+    endIcon,
     separator = ':',
     disabledError = false,
     className,
     initialFocus = false,
     divClassName,
     ...props
-}: InputControlProps) => {
-
-
-    const ref = useRef<HTMLInputElement>(null);
-    const { current } = ref || props.ref;
-
-    const [focus, setFocus] = useState(false);
-
-    useEffect(() => {
-        if (!initialFocus) return;
-
-        if (!current?.focus) {
-            console.warn(
-                "FieldControl: initialFocus is true, but the component does not have the focus method"
-            );
-        }
-
-        if (current?.focus) {
-            current.focus();
-        }
-    }, [current, initialFocus]);
+}: InputControlProps<T>) => {
 
     const [inputProps, meta] = useField(props);
     const id = props.name || props.id;
@@ -52,61 +34,45 @@ const FieldControl = ({
         inputProps.onChange(e);
     };
 
-    const onBlur = (e: any) => {
-        setFocus(false);
-        props.onBlur?.(e);
-        inputProps.onBlur(e);
-    }
-
-    const onFocus = (e: any) => {
-        setFocus(true);
-        props.onFocus?.(e);
-    }
-
     return (
-        <div className={cn(
-            twMerge('gap-1 relative', divClassName),
-            {
-                'pb-2': !meta.error,
-            }
-        )}>
+        <div className="w-full pb-3">
             <Label label={label} required={required} id={id} separator={separator} />
-            <div
-                className={cn(`
-                    transition-all duration-300 ease-in-out
-                    relative flex flex-row 
-                    disabled:!cursor-not-allowed 
-                    disabled:!opacity-25 rounded-sm
-                `, {
-                    '!border-primary-500 border-2': focus,
-                    ' border': !focus,
-                })}>
-                {startChildren}
+            <div className='relative'>
+                {startIcon && (
+                    <div className="absolute inset-y-0 flex items-center pl-1 text-sm text-gray-400 pointer-events-none left-1">
+                        {startIcon}
+                    </div>
+                )}
                 <InputComponent
                     id={id}
-                    ref={ref}
                     required={required}
                     data-testid={`input-${id}`}
                     className={
                         twMerge(
-                            "border-0 px-2 py-2 focus:outline-none w-full",
-                            className
-                        )}
+                            cn(
+                                {
+                                    'bg-slate-100': props.disabled,
+                                    '!pl-8': startIcon,
+                                    '!pr-8': endIcon,
+                                },
+
+                            ), className)
+                    }
                     {...inputProps}
                     {...props}
                     onChange={onChange}
-                    onBlur={onBlur}
-                    onFocus={onFocus}
                 />
-                {children}
-            </div>
-            {
-                meta.error && (
-                    <div className="w-full text-xs text-center text-red-400">
-                        {meta.error}
+                {endIcon && (
+                    <div className={`absolute top-1/2 transform -translate-y-1/2 right-0 mr-2`}>
+                        {endIcon}
                     </div>
-                )
-            }
+                )}
+            </div>
+            {meta.error && (
+                <div className="w-full text-xs text-center text-red-700">
+                    {meta.error}
+                </div>
+            )}
         </div>
     );
 };

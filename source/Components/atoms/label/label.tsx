@@ -1,24 +1,30 @@
+import { ClassAttributes, LabelHTMLAttributes } from "react"
+import withControl from "~/Components/helpers/with-control"
 
 type LabelProps = {
-    label?: string;
-    required?: boolean;
-    id?: string;
-    separator?: string;
-}
+    id?: string
+    required?: boolean
+    name?: string
+    label?: string
+    separator?: string
+} & JSX.IntrinsicAttributes &
+    ClassAttributes<HTMLLabelElement> &
+    LabelHTMLAttributes<HTMLLabelElement>
 
-const Label = ({ id, label, required, separator }: LabelProps) => {
+const Label = ({ id, label, required, separator, ...props }: LabelProps) => {
     if (!label) return null;
 
     return (
         <label
-            htmlFor={id}
+            {...props}
+            htmlFor={id || props.name}
             className="mb-0 text-xs font-semibold text-gray-500 gap-1"
             data-testid={`label-${id}`}
         >
             {label.trim() ? (label + separator) : ''}
-            {required && <span className="text-danger">*</span>}
+            {required && <abbr className="text-red-400">*</abbr>}
         </label>
     )
 }
 
-export default Label
+export default withControl(Label)
