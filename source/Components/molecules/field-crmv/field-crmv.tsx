@@ -16,7 +16,6 @@ const FieldCRMV = <T,>({ ...props }: FieldDocumentProps<T>) => {
             name={props.name}
             showMask={true}
             mask={'--______'}
-            className='uppercase'
             replacement={{
                 _: /\d/,
                 '-': /[A-Za-z]/ // letras maiusculas
