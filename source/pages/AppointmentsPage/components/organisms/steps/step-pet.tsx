@@ -124,8 +124,8 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             <ListBoxTailwind
                                 items={genderValues as any}
                                 value={values.pet?.sex}
-                                //disabled={!!values.pet?.id}
-                                name="sex"          // Lista d sexo
+                                required
+                                name="sex"          
                                 label="Sexo do Pet"
                                 placeholder="Masculino/Feminino..."
                             />
@@ -134,6 +134,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                        <div className="grid grid-cols-3 mobile:grid-cols-1 gap-3 m-2 p-1">
                         <FieldControl
                                 label={`Data de nascimento`}
+                                required
                                 name={`date_birth`}
                                 type="date"                    
                             />
