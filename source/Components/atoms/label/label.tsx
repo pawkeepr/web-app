@@ -26,7 +26,7 @@ const Label = ({
         <label
             {...props}
             htmlFor={id || props.name}
-            className={twMerge("text-xs font-semibold text-gray-500 gap-1", className)}
+            className={twMerge("text-xs font-semibold text-gray-500 gap-1 text-start items-center label justify-start pb-1 mb-0  ", className)}
             data-testid={`label-${id}`}
         >
             {label.trim() ? (label + separator) : ''}
