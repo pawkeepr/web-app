@@ -80,14 +80,14 @@ const validate = Yup.object().shape({
             .email("O email deve ser válido")
             .required("O campo de email é obrigatório"),
         phone: Yup.string()
-            .matches(/^[\d()-\s]+$/)
+            .matches(/^\+55 \(\d{2}\) \d \d{4}-\d{4}$/)
             .test('phone-validator', 'Número de telefone inválido', value => {
                 if (!value) return false;
                 return value.length >= 10;
             })
             .required('O campo de telefone é obrigatório'),
         whatsapp: Yup.string()
-            .matches(/^[\d()-\s]+$/)
+            .matches(/^\+55 \(\d{2}\) \d \d{4}-\d{4}$/)
             .test('phone-validator', 'Número de telefone inválido', value => {
                 if (!value) return false;
                 return value.length >= 10;
