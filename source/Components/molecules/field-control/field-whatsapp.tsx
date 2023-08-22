@@ -32,12 +32,12 @@ const NumberWhatsapp = ({ name }: NumberWhatsAppProps) => {
             <div className="relative w-full items-center">
                 <div className="relative">
                     <FieldControl
-                        className="focus-visible:bg-transparent hover:bg-transparent focus:bg-transparent bg-transparent flex form-control"
+                        className="focus-visible:bg-transparent hover:bg-transparent focus:bg-transparent bg-transparent flex  "
                         // divClassName="my-1"
                         type="text"
                         label="Telefone/Celular"
+                        placeholder="Digite o seu número de telefone"
                         name={name}
-                        placeholder="Digite o seu Número de Telefone"
                         component={MaskedInput as any}
                         mask={"(99) 99999-9999"}
                         maskChar={null}
@@ -62,7 +62,7 @@ const NumberWhatsapp = ({ name }: NumberWhatsAppProps) => {
                     // input de whatsapp com o mesmo numero do telefone caso o usuário clique no ícone do whatsapp
                     clickAppInput ? (
                         <FieldControl
-                            className="form-control"
+                            className=" "
                             // divClassName="my-1"
                             type="text"
                             label="WhatsApp"
@@ -76,7 +76,7 @@ const NumberWhatsapp = ({ name }: NumberWhatsAppProps) => {
                         />)
                         : (
                             <FieldControl
-                                className="form-control"
+                                className=" "
                                 // divClassName="my-1"
                                 type="text"
                                 label="WhatsApp"

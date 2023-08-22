@@ -1,23 +1,46 @@
-import React from 'react';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
+// Import Images
+import Link from "next/link";
+
+import { FaInstagram } from "react-icons/fa";
+import { GrFacebookOption } from "react-icons/gr";
+import { RiLinkedinFill } from "react-icons/ri";
 
 const Footer = () => {
     return (
-        <React.Fragment>
-            <footer className="footer">
-                <Container fluid className='flex justify-center'>
-                    <Row>
-                        <Col >
-                            <div className="m-3 mobile: text-xs">
-                            2023 &copy; Design & Develop by Pawkeepr SmartCare
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </footer>
-        </React.Fragment>
+        <footer className="bg-transparent w-full my-2 mobile:hidden">
+            <div className="flex items-center justify-between px-6 flex-row mobile:flex-col">
+                <p className="text-sm text-gray-600 font-semibold">
+                    {new Date().getFullYear()} © PawKeepr SmartCare - Todos os
+                    direitos reservados.
+                </p>
+
+                <div className="flex items-center">
+                    <Link
+                        href="#"
+                        className="mx-2 text-gray-600 transition-colors duration-300 hover:text-primary-600"
+                        aria-label="Instagram"
+                    >
+                        <FaInstagram size={20} />
+                    </Link>
+
+                    <Link
+                        href="#"
+                        className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-primary-600"
+                        aria-label="Facebook"
+                    >
+                        <GrFacebookOption size={20} />
+                    </Link>
+
+                    <Link
+                        href="#"
+                        className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-primary-600"
+                        aria-label="Github"
+                    >
+                        <RiLinkedinFill size={20} />
+                    </Link>
+                </div>
+            </div>
+        </footer>
     );
 };
 

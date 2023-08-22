@@ -5,42 +5,49 @@
 $font-size-mixing: 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 36, 48;
 
 @each $font-size-mixing in $font-size-mixing {
-  .fs-#{$font-size-mixing} {
-    font-size: #{$font-size-mixing}px !important;
-  }
+    .fs-#{$font-size-mixing} {
+        font-size: #{$font-size-mixing}px !important;
+    }
 }
 
 // border-color
 .border-dark {
-    border-color: var(--#{$prefix}dark)!important;
+    border-color: var(--#{$prefix}dark) !important;
 }
+
 .border-light {
-    border-color: var(--#{$prefix}light)!important;
+    border-color: var(--#{$prefix}light) !important;
 }
 
 // Border Style
 $border-style-mixing: double, dashed, groove, outset, ridge, dotted, inset;
+
 @each $border-style-mixing in $border-style-mixing {
     .border-#{$border-style-mixing} {
         border-style: #{$border-style-mixing} !important;
     }
+
     .border-top-#{$border-style-mixing} {
         border-top-style: #{$border-style-mixing} !important;
     }
+
     .border-bottom-#{$border-style-mixing} {
         border-bottom-style: #{$border-style-mixing} !important;
     }
+
     .border-end-#{$border-style-mixing} {
         border-right-style: #{$border-style-mixing} !important;
     }
+
     .border-start-#{$border-style-mixing} {
         border-left-style: #{$border-style-mixing} !important;
     }
-    
+
     // List Group Flush Style
     .list-group-flush {
-        &.border-#{$border-style-mixing} { 
+        &.border-#{$border-style-mixing} {
             border: none !important;
+
             .list-group-item {
                 border-style: #{$border-style-mixing} !important;
             }
@@ -49,10 +56,14 @@ $border-style-mixing: double, dashed, groove, outset, ridge, dotted, inset;
 }
 
 //link
-[data-layout-mode="dark"]{
-    .link-dark, .link-light{
+[data-layout-mode="dark"] {
+
+    .link-dark,
+    .link-light {
         color: var(--#{$prefix}dark) !important;
-        &:focus, &:hover{
+
+        &:focus,
+        &:hover {
             color: rgba(var(--#{$prefix}dark-rgb), 0.75) !important;
         }
     }
@@ -161,7 +172,7 @@ $border-style-mixing: double, dashed, groove, outset, ridge, dotted, inset;
 // Dual Icons
 .icon-dual {
     color: $gray-500;
-    fill: rgba($gray-500,0.16);
+    fill: rgba($gray-500, 0.16);
 }
 
 @each $color,
@@ -173,12 +184,14 @@ $value in $theme-colors {
 }
 
 // Search 
-.search-box{
+.search-box {
     position: relative;
-    .form-control{
+
+    .form-control {
         padding-left: 40px;
     }
-    .search-icon{
+
+    .search-icon {
         font-size: 14px;
         position: absolute;
         left: 13px;
@@ -228,7 +241,7 @@ code {
 
 .layout-rightside-col {
 
-    @media (max-width: 1699.98px) { 
+    @media (max-width: 1699.98px) {
         display: none;
         position: fixed !important;
         height: 100vh;
@@ -236,20 +249,23 @@ code {
         top: 0px;
         bottom: 0px;
         z-index: 1004;
-        .overlay{
+
+        .overlay {
             position: fixed;
             top: 0;
             right: 0px;
             bottom: 0px;
             left: 0px;
             background-color: rgba($dark, 0.2);
-           
+
         }
+
         .layout-rightside {
             margin-top: 0px;
             height: 100%;
             margin-left: auto;
         }
+
         .card-body {
             overflow-y: auto;
             padding-bottom: 1rem !important;
@@ -257,9 +273,10 @@ code {
     }
 }
 
-[data-layout="horizontal"], [data-layout-style=detached]{
+[data-layout="horizontal"],
+[data-layout-style=detached] {
     @media (min-width: 1700px) {
-        .layout-rightside{
+        .layout-rightside {
             margin-top: calc(28px - #{$grid-gutter-width});
             margin-right: 0;
             height: calc(100% - calc(#{$grid-gutter-width} / 5));
@@ -268,12 +285,12 @@ code {
 }
 
 // object fit cover
-.object-cover{
+.object-cover {
     object-fit: cover;
 }
 
 // text-truncate-two-lines
-.text-truncate-two-lines{
+.text-truncate-two-lines {
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-line-clamp: 2;
@@ -283,33 +300,37 @@ code {
 }
 
 // Favourite button 
-.favourite-btn{
+.favourite-btn {
     border-color: transparent;
-    .ri-star-fill{
+
+    .ri-star-fill {
         color: $text-muted;
     }
-    &.active{
+
+    &.active {
         border-color: transparent;
-        .ri-star-fill{
+
+        .ri-star-fill {
             color: $warning;
-            
-            &:before{
+
+            &:before {
                 content: "\f186";
             }
         }
     }
 }
+
 // card
-.card-logo-light{
+.card-logo-light {
     display: var(--#{$prefix}card-logo-light);
 }
 
-.card-logo-dark{
+.card-logo-dark {
     display: var(--#{$prefix}card-logo-dark);
 }
 
-[data-layout-mode="dark"]{
-    .btn-close{
+[data-layout-mode="dark"] {
+    .btn-close {
         filter: invert(1) grayscale(100%) brightness(200%);
     }
 }
@@ -322,21 +343,22 @@ code {
     transition: all 0.5s ease;
     display: none;
     z-index: 1000;
+
     &:hover {
         animation: fade-up 1.5s infinite linear;
     }
 }
 
 @keyframes fade-up {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 
-  75% {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
+    75% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
 }
 
 .cursor-pointer {

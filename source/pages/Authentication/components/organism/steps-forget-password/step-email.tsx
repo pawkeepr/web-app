@@ -51,7 +51,7 @@ const StepEmail = ({ email, onChangeNextTab }: StepEmailProps) => {
                     pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
                     required
                     placeholder="Digite seu email"
-                    className="form-control"
+                    className=" "
                 />
 
             </div>

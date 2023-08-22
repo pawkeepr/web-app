@@ -1,16 +1,14 @@
-import { FieldHookConfig } from "formik"
+import { FieldHookConfig } from "formik";
 
-export type InputControlProps = FieldHookConfig<string> & {
+export type InputControlProps<T> = FieldHookConfig<string> & T & {
     [key: string]: any
-    name: string
-    label?: string
-    initialFocus?: boolean
-    separator?: string
-    required?: boolean
-    disabledError?: boolean
-    component?: JSX.Element | 'input'
-    startChildren?: React.ReactNode | React.ReactNode[] | JSX.Element | JSX.Element[]
-    children?: React.ReactNode | React.ReactNode[] | JSX.Element | JSX.Element[]
-    mask?: string
-    divClassName?: string
-}
+    endIcon?: React.ReactNode;
+    label?: string;
+    name: string;
+    input?: Omit<React.ElementType, 'name'> | 'input';
+    startIcon?: React.ReactNode;
+    required?: boolean;
+    pattern?: string;
+    mask?: string | Array<string | RegExp>;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};

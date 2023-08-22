@@ -13,7 +13,11 @@ import {
     resetProfileFlag
 } from '~/store/auth/activate-account/actions';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
-import { ActivateAccount } from '~/validations/activate';
+
+export type ActivateAccount = {
+    email: string;
+    code: string;
+}
 
 const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const [inputValues, setInputValues] = useState<string[]>(Array(6).fill('')); // Inicializa um array de 6 strings vazias
@@ -37,7 +41,7 @@ const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
         return document.getElementById('digit' + index + '-input');
     }
 
-    const handleChange = (index: number) => (event) => {
+    const handleChange = (index: number) => (event: { target: { value: string; }; }) => {
         setInputValues((state) => {
             state[index] = event.target.value;
             return [...state];
@@ -75,11 +79,11 @@ const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <LogoSimple className='hidden mobile:block' />
                 <LogoSimpleMobile className='mobile:hidden' />
                 <div className="text-center text-muted mb-2 gap-2">
-                    <h5 className="text-primary p-2">Ola! Seja Bem Vindo!</h5>
+                    <h5 className="text-primary p-2">Olá, Seja Bem-Vindo(a)!</h5>
                     <p >
                         Para seu primeiro acesso,
                         você deve ativar sua conta e
-                        completar seu cadastro na plataform.
+                        completar seu cadastro na plataforma.
                         Preencha o código de verificação
                         enviado para o seu email:
                         <br />

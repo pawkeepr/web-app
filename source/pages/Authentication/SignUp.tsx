@@ -21,8 +21,8 @@ import { registerUser, resetRegisterFlag } from "~/store/auth/register/actions";
 import { AccountSignUp } from "~/store/auth/register/types";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import AuthLayout from "../_layouts/auth/auth_layout";
-import StepActivation from "./components/organism/steps/step-activation";
-import StepSignUpBasicAuth from "./components/organism/steps/step-basic-auth";
+import StepActivation from "./components/organism/steps-sign-up/step-activation";
+import StepSignUpBasicAuth from "./components/organism/steps-sign-up/step-basic-auth";
 
 const validationSchema = Yup.object({
     email: validateEmail,
@@ -76,6 +76,7 @@ const CoverSignUp = () => {
         password: "",
         passwordConfirm: "",
         termsOfUse: false,
+        policyPrivacy: false,
     };
 
     const Tabs = [

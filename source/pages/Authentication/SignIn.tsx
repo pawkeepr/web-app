@@ -21,8 +21,7 @@ const CoverSignIn = () => {
     );
     const dispatch = useAppDispatch();
 
-    const loading =
-        isLoading === LOADING.PENDING || isLoading === LOADING.SUCCESS;
+    const loading = isLoading === LOADING.PENDING
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -55,8 +54,8 @@ const CoverSignIn = () => {
                             alt="logo"
                             className="flex lg:hidden h-24 w-auto object-cover"
                         />
-                        <p className="text-sm font-light mobile:hidden text-primary-500">
-                            Seja bem-vindo!
+                        <p className="text-sm font-light text-primary-500">
+                            Seja bem-vindo(a)!
                         </p>
                     </div>
                     <div className="mt-5 px-10 mobile:!mt-0 mobile:p-0">

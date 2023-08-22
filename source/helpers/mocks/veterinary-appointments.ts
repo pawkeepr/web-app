@@ -29,6 +29,8 @@ const factoryTreatments = (n: number): Treatment[] => {
     }))
 }
 
+
+
 const factoryExams = (n: number): Exam[] => {
     return Array(n).fill(0).map(() => ({
         id: faker.datatype.uuid(),
@@ -105,7 +107,7 @@ function factoryMockVeterinaryAppointments(adapter: MockAdapter) {
             }, 1000)
         })
     })
-
+    
     adapter.onPost(url.ADD_VETERINARY_APPOINTMENTS).reply((config) => {
 
         const veterinary_appointment = JSON.parse(config["data"]);
@@ -132,3 +134,5 @@ function factoryMockVeterinaryAppointments(adapter: MockAdapter) {
 }
 
 export default factoryMockVeterinaryAppointments
+
+

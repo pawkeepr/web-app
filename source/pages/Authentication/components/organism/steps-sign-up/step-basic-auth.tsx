@@ -11,7 +11,7 @@ import PasswordRules from '../../molecules/password-rules';
 import Container from '../../template/container';
 
 import Link from 'next/link';
-import { Form } from 'react-bootstrap';
+import FieldCheckbox from '~/Components/molecules/field-checkbox';
 import FieldPassword from '~/Components/molecules/field-password';
 import LOADING from '~/constants/loading';
 import { useAppSelector } from '~/store/hooks';
@@ -53,7 +53,7 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                 initialFocus
                 name="email"
                 type="email"
-                className="form-control"
+                className=" "
                 aria-label="email"
                 placeholder="Digite seu email"
                 required
@@ -64,7 +64,6 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                     required
                     label='Senha'
                     name="password"
-                    className="form-control border-end-0"
                     placeholder="Digite sua senha"
                     aria-label="password"
                     onBlur={handleBlur}
@@ -75,7 +74,6 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                     required
                     label='Repita a senha'
                     name="passwordConfirm"
-                    className="form-control border-end-0"
                     placeholder="Repita a senha"
                     aria-label="password-confirm"
                     onBlur={handleBlur}
@@ -84,13 +82,7 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
             </div>
 
             <PasswordRules value={values.password} />
-            <Form.Check
-                type="checkbox"
-                className="w-100"
-                name="termsOfUse"
-                id="termsOfUse"
-                onChange={handleChange}
-                checked={values.termsOfUse}
+            <FieldCheckbox
                 label={
                     <p className="italic text-xs text-justify">
                         {"Você se registrando aceita os termos de uso da plataforma: "}
@@ -99,7 +91,9 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                         <Link href="#" className="text-primary no-underline fst-normal fw-medium">Política de Privacidade</Link>
                     </p>
                 }
+                name="termsOfUse"
             />
+
             <div className='flex  items-center justify-center'>
                 <BtnPrimary
                     label="Finalizar cadastro"

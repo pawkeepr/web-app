@@ -4,8 +4,8 @@ import { useRouter } from 'next/navigation'
 import { Fragment, useCallback, useEffect, useState } from 'react'
 import useFindTutorByDocument from '~/hooks/use-find-tutor-by-document'
 import routes from '~/routes'
-import { addNew } from '~/store/actions'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
+import { addNew } from '~/store/pets/actions'
 import { SpeciesType } from '~/store/pets/speciesType'
 import { Breed, IPet } from '~/store/pets/types'
 import StepDocument from './components/organisms/steps/step-document'
@@ -55,7 +55,6 @@ const ModalListPets = ({
     const router = useRouter()
 
     const handleNavigate = useCallback((pet: IPet) => {
-        dispatch(resetCreatedPet())
         setTimeout(() => {
             router.push(`${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`)
         }, 1000)
