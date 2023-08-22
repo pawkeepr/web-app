@@ -32,7 +32,7 @@ const FieldDocumentAppointment = ({
         onChangeOpen,
     }: HandleProps) => {
         return async (values: InitialValues) => {
-            if (!isValidCPF(values.document)) {
+            if (!isValidCPF(values.document) && selectedTabInitial === 1) {
                 alert("CPF inválido! Por favor, insira um CPF válido.");
                 return;
             }
@@ -63,19 +63,19 @@ const FieldDocumentAppointment = ({
                             <div className="w-full hidden lg:block xl:block   ">
                                 <FieldDocument
                                     name="document"
-                                    className="border-2 border-solid border-primary-500"
                                     placeholder="Nova Consulta"
                                     label="CPF"
                                     onlyCPF
-                                >
-                                    <button
-                                        data-bs-target="#addVeterinaryAppointmentModal"
-                                        type="submit"
-                                    >
-                                        <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
-                                    </button>
-
-                                </FieldDocument>
+                                    endIcon={
+                                        <button
+                                            className="focus:outline-none flex h-full items-center justify-center"
+                                            data-bs-target="#addVeterinaryAppointmentModal"
+                                            type="submit"
+                                        >
+                                            <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
+                                        </button>
+                                    }
+                                />
                             </div>
                         }
                     </Form>
