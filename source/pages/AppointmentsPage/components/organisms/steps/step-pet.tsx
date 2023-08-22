@@ -217,7 +217,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 divClassName="my-1"
                                 name="secondTutor.document"
                                 aria-label="document"
-                                className="form-control"
+                                
                                 onlyCPF
                                 disabled={isPending || tutorExists}
                                 placeholder="CPF"
@@ -233,7 +233,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 name="secondTutor.name"
                                 disabled={isPending || tutorExists}
                                 aria-label="name"
-                                className="form-control"
+                                
                                 placeholder="Digite o nome do Tutor"
                                 required
                                 disabledError
@@ -242,7 +242,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         </Col>
                         <Col sm={4}>
                             <FieldControl
-                                className="form-control"
+                                
                                 divClassName="my-1"
                                 type="text"
                                 label="Telefone/Celular"

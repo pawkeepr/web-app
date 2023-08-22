@@ -76,7 +76,7 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                         name="secondTutor.email"
                         aria-label="email"
                         disabled={disabled}
-                        className="form-control"
+                        
                         placeholder="Digite o email do secondTutor (opcional)"
                         required
                         disabledError
@@ -86,7 +86,7 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                 <Col sm={2}>
                     <FieldControl
                         divClassName='my-1'
-                        className="form-control"
+                        
                         type="text"
                         initialFocus
                         label="CEP"
@@ -101,7 +101,6 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                 <Col sm={3}>
                     <FieldControl
                         divClassName='my-1'
-                        className="form-control"
                         type="text"
                         label="Estado"
                         name="secondTutor.address.state"
@@ -114,7 +113,6 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                 <Col sm={3}>
                     <FieldControl
                         divClassName='my-1'
-                        className="form-control"
                         type="text"
                         label="Cidade"
                         name="secondTutor.address.city"
@@ -127,7 +125,6 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                 <Col sm={4}>
                     <FieldControl
                         divClassName='my-1'
-                        className="form-control"
                         type="text"
                         label="Rua"
                         name="secondTutor.address.street"
