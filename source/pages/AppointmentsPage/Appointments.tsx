@@ -6,8 +6,10 @@ import { VeterinaryAppointment } from "~/store/veterinary-appointments/types";
 import VerticalTabs from "./components/templates/vertical-tabs";
 
 import { Formik } from "formik";
-import ModalConfirm from "~/Components/modals/modal-confirm";
 import { useRouter } from "next/navigation";
+import { BtnCancel } from "~/Components/atoms/btn";
+import ModalConfirm from "~/Components/modals/modal-confirm";
+
 
 export type InitialValues = Partial<Nullable<VeterinaryAppointment>>;
 
@@ -162,16 +164,13 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
                     >
                         {({ onChangeOpen }) => {
                             return (
-                                <button
+                                <BtnCancel
                                     type="button"
-                                    className="btn bg-danger text-white mb-2 mobile:!w-full mobile:px-4 mobile:py-4"
+                                    label="Cancelar Consulta"
                                     onClick={() => onChangeOpen(true)}
-                                >
-                                    <span>
-                                        <i className="ri-arrow-left-line align-middle"></i>{" "}
-                                        Cancelar Consulta
-                                    </span>
-                                </button>
+                                />
+
+
                             );
                         }}
                     </ModalConfirm>

@@ -7,7 +7,8 @@ import LOADING from '~/constants/loading';
 import { decrypt, encrypt } from '~/helpers/encrypt-and-decrypt';
 import {
     recoverUserByToken,
-    signInUser
+    signInUser,
+    signOutUser,
 } from '~/store/auth/login/actions';
 import {
     LoginState,
@@ -58,6 +59,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         const token = getCookie(cookies.token.name)
 
         if (!token) {
+            dispatch(signOutUser())
             router.prefetch('/sign-in')
             return
         }

@@ -97,26 +97,18 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 <BtnLabel
                     link
                     type="button"
-                    className="right previestab"
-                    label="Próximo"
+                    label="Voltar"
                     onClick={() => {
                         toggleTab(activeTab - 1);
                     }}
-                >
-                    <i className="ri-arrow-left-line align-middle fs-16 me-2"></i>{" "}
-                    Voltar
-                </BtnLabel>
+                />
                 <BtnPrimary
                     type="button"
-                    className="btn-label "
                     label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}
-                >
-                    <span className="ml-1"> Próximo </span>
-                    <i className="ri-arrow-right-line  align-middle fs-16 p-1"></i>
-                </BtnPrimary>
+                />
             </div>
         </>
     );

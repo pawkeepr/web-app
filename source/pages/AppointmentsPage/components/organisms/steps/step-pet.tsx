@@ -16,10 +16,9 @@ import { InitialValues } from "../../../Appointments";
 
 import { useState, useTransition } from "react";
 import FieldControl from "~/Components/molecules/field-control/field-control";
-import ListBoxTailwind from "~/Components/molecules/list-box-tailwind/list-box-tailwind";
-import { SpeciesType, species } from "~/store/pets/speciesType";
-import{ genderValues } from "~/store/pets/sexType";
-import AvatarPet from "../../atoms/pet-avatar";
+
+import ComboBoxFields from "~/Components/modals/add-pet-modal/components/organisms/combo-box-fields";
+import { SpeciesType } from "~/store/pets/speciesType";
 import usePetById from "../../hooks/use-pet-by-id";
 import usePetByName from "../../hooks/use-pet-by-name";
 import useTutorByDocument from "../../hooks/use-tutor-by-document";
@@ -84,72 +83,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         <AvatarPet name={values.pet?.name || ''} />
                         <BtnAvatar alt='Avatar de Tutor' name="tutor.avatar" disabled size={24} />
                     </div> */}
-                    <Row className="mt-2">
-                        <div className="w-full lg:w-1/3 px-3 mb-6">
-                            <ListBoxTailwind
-                                items={species}
-                                option={specie}
-                                value={values.pet?.species}
-                                onChangeOption={onChangeSpecie}
-                                required
-                                disabled={isPending || !!values.pet?.id}
-                                name="species"
-                                placeholder="Ex: Cachorro, Gato, etc..."
-                                label="Espécie"
-                            />
-                        </div>
-
-                        <div className="w-full lg:w-1/3 px-3 mb-6">
-                            <ListBoxTailwind
-                                items={specie.breedType as any}
-                                value={values.pet?.breed}
-                                disabled={!!values.pet?.id}
-                                required
-                                name="breed"
-                                label="Raça"
-                                placeholder="Ex: Vira-lata, Poodle, etc..."
-                            />
-                        </div>
-                        <div className="w-full lg:w-1/3 px-3 mb-6">
-                            <ListBoxTailwind
-                                items={specie.bloodType as any} 
-                                value={values.pet?.bloodType}
-                                disabled={!!values.pet?.id}
-                                name="bloodType"
-                                label="Tipo Sanguíneo"
-                                placeholder="Ex: A, B, etc..."
-                            />
-                        </div>
-                        <div className="w-full lg:w-1/3 px-3 mb-6">
-                            <ListBoxTailwind
-                                items={genderValues as any}
-                                value={values.pet?.sex}
-                                required
-                                name="sex"          
-                                label="Sexo do Pet"
-                                placeholder="Masculino/Feminino..."
-                            />
-                        </div>
-
-                       <div className="grid grid-cols-3 mobile:grid-cols-1 gap-3 m-2 p-1">
-                        <FieldControl
-                                label={`Data de nascimento`}
-                                required
-                                name={`date_birth`}
-                                type="date"                    
-                            />
-                        <FieldControl
-                                label={`Número do microchip`}
-                                name={`chip_number`}
-                                type="number"
-                            />
-                        <FieldControl
-                                label={`Número de registro em cartório`}
-                                name={`id_office_register`}
-                                type="number"
-                            />
-                        </div>
-                    </Row>
+                    <ComboBoxFields name="pet" />
                     <div className="p-1 m-2 mb-4">
                         <h5 className="font-bold text-center">Tutor</h5>
                     </div>
@@ -266,15 +200,13 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
             <div className="flex align-items-center justify-end gap-3 mt-4">
                 <BtnPrimary
                     type="button"
-                    className="ml-4 btn-label right ms-auto nexttab nexttab"
                     label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}
-                >
-                    <span className="ml-1"> Próximo </span>
-                    <i className="ri-arrow-right-line  align-middle fs-16 ms-2 p-1"></i>
-                </BtnPrimary>
+                />
+
+
             </div>
         </>
     );

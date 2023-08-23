@@ -11,8 +11,8 @@ const transformTrim = (value: any, originalValue: string) => {
 };
 
 type Specialty = {
-    type: string;
-    name_specialty: string;
+    value: string;
+    label: string;
 }
 
 type Contact = {
@@ -37,11 +37,13 @@ export type ActivateAccount = {
     lastName: string;
     crmv: string;
     cpf_cnpj: string;
-    specialty: string;
-    serviceType: string[];
-    type: number;
-    list_specialty: Specialty[];
+    specialty: {
+        value: string;
+        label: string;
+    };
     list_service_type: string[];
+    list_specialty: Specialty[];
+    type: number;
     contact: Contact;
     location: Location;
 }
@@ -58,29 +60,39 @@ const validate = Yup.object().shape({
         .max(155, "O sobrenome deve ter no máximo 50 caracteres")
         .required("O campo de sobrenome é obrigatório"),
     crmv: Yup.string()
-        .matches(/^[A-Z]{2}\d{4,6}$/, "CRMV inválido. Exemplo: SP12345")
+        .matches(/^[A-Za-z]{2}\d{4,6}$/, "CRMV inválido. Exemplo: SP12345")
+        .min(6, "O CRMV deve ter pelo menos 6 caracteres")
+        .transform((value) => value.toUpperCase())
         .required("O Campo CRMV é obrigatório"),
-    speciality: Yup.string().required("O campo especialidade é obrigatório"),
-    serviceType: Yup.array().min(1, "Selecione pelo menos um tipo de atendimento").required(),
-    list_specialty: Yup.array().of(
+    specialty: Yup.object({
+        value: Yup.string().required("O campo especialidade é obrigatório"),
+        label: Yup.string().required("O campo especialidade é obrigatório"),
+    }).required("O campo especialidade é obrigatório"),
+    list_service_type: Yup.array().min(1, "Selecione pelo menos um tipo de atendimento").required(),
+    list_specialty: Yup.array().min(1, "Selecione pelo menos uma especialidade").of(
         Yup.object().shape({
-            type: Yup.string().required("O campo especialidade é obrigatório"),
-            name_specialty: Yup.string().required("O campo especialidade é obrigatório"),
+            value: Yup.string().required("O campo especialidade é obrigatório"),
+            label: Yup.string().required("O campo especialidade é obrigatório"),
         }),
-    ),
-    list_service_type: Yup.array().of(
-        Yup.string().required("O campo especialidade é obrigatório"),
-    ),
+    ).required(),
     contact: Yup.object().shape({
         email: Yup.string()
             .email("O email deve ser válido")
             .required("O campo de email é obrigatório"),
         phone: Yup.string()
-            .matches(/^[\d()-\s]+$/)
-            .required(),
+            .matches(/^\+55 \(\d{2}\) \d \d{4}-\d{4}$/, 'Número de telefone inválido')
+            .test('phone-validator', 'Número de telefone inválido', value => {
+                if (!value) return false;
+                return value.length >= 10;
+            })
+            .required('O campo de telefone é obrigatório'),
         whatsapp: Yup.string()
-            .matches(/^[\d()-\s]+$/)
-            .required(),
+            .matches(/^\+55 \(\d{2}\) \d \d{4}-\d{4}$/, 'Número de telefone inválido')
+            .test('phone-validator', 'Número de telefone inválido', value => {
+                if (!value) return false;
+                return value.length >= 10;
+            })
+            .required('O campo de whatsapp é obrigatório'),
     }),
     cpf_cnpj: Yup.string()
         .required("Este campo é obrigatório")

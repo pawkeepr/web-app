@@ -1,29 +1,38 @@
-import { useState } from "react";
-import FieldControl, { InputControlProps } from "../field-control";
+import Visibility from '@heroicons/react/24/outline/EyeIcon';
+import VisibilityOff from '@heroicons/react/24/outline/EyeSlashIcon';
+import { useState } from 'react';
 
-import EyeIcon from "@heroicons/react/24/solid/EyeIcon";
-import EyeSlashIcon from "@heroicons/react/24/solid/EyeSlashIcon";
+import VpnKey from '@heroicons/react/24/outline/KeyIcon';
+import InputWithIcon, { InputControlProps } from '~/Components/molecules/field-control';
 
-
-const FieldPassword = (props: InputControlProps) => {
-    const [passwordShow, setPasswordShow] = useState(false);
-
-    const onToggleVisiblePassword = () => {
-        setPasswordShow(state => !state)
-    }
+const InputPassword = <T,>({ name = 'password', label = 'Senha', ...rest }: InputControlProps<T>) => {
+    const [visiblePassword, setVisiblePassword] = useState(false);
 
     return (
-        <FieldControl {...props} type={passwordShow ? "text" : "password"}>
-            <button onClick={onToggleVisiblePassword} type="button" className="p-2 flex item-center justify-center">
-                {
-                    passwordShow && <EyeIcon className="w-5 h-5 text-gray-500" />
-                }
-                {
-                    !passwordShow && <EyeSlashIcon className="w-5 h-5 text-gray-500" />
-                }
-            </button>
-        </FieldControl>
-    )
-}
+        <InputWithIcon
+            name={name}
+            label={label}
+            startIcon={<VpnKey className="w-5 h-5 " />}
+            type={visiblePassword ? 'text' : 'password'}
+            position="right"
+            endIcon={
+                <button
+                    type="button"
+                    onClick={() => setVisiblePassword(!visiblePassword)}
+                    aria-label="toggle password visibility"
+                    className="flex items-center justify-center opacity-50"
+                >
+                    {visiblePassword ? (
+                        <Visibility className="w-5 h-5" />
+                    ) : (
+                        <VisibilityOff className="w-5 h-5" />
+                    )}
+                </button>
+            }
+            size='lg'
+            {...rest}
+        />
+    );
+};
 
-export default FieldPassword
+export default InputPassword;

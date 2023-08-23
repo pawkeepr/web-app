@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "engines": {
-        "node": ">= 18",
+        "node": ">=16",
         "npm": ">= 9",
         "yarn": ">= 1.22"
     },
@@ -22,7 +22,9 @@
     "dependencies": {
         "@headlessui/react": "^1.7.16",
         "@heroicons/react": "^2.0.17",
+        "@react-input/mask": "^1.0.18",
         "@reduxjs/toolkit": "^1.9.1",
+        "@tailwindcss/forms": "^0.5.4",
         "aws-amplify": "^5.3.6",
         "axios": "^1.4.0",
         "bootstrap": "^5.2.3",
@@ -37,6 +39,7 @@
         "nookies": "^2.5.2",
         "react": "18.2.0",
         "react-bootstrap": "^2.8.0",
+        "react-currency-input-field": "^3.6.11",
         "react-dom": "18.2.0",
         "react-facebook-login": "^4.1.1",
         "react-flatpickr": "^3.10.7",

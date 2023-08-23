@@ -5,11 +5,13 @@ import { useMemo } from "react";
 import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import { sub_specialty } from "~/common/data/sub-specialtys";
-import validatePerson from "~/validations/person";
 
+import CheckboxGroup from "~/Components/molecules/checkbox-group";
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
-import { StepProps } from "../steps/types";
+import { StepProps } from "../steps-sign-up/types";
+
+import * as Yup from 'yup';
 
 const options = sub_specialty.map((item) => ({
     value: item,
@@ -17,11 +19,25 @@ const options = sub_specialty.map((item) => ({
     color: 'rgb(255 200 107);',
 }));
 
+const validate = Yup.object().shape({
+    specialty: Yup.object({
+        value: Yup.string().required("O campo especialidade é obrigatório"),
+        label: Yup.string().required("O campo especialidade é obrigatório"),
+    }).required("O campo especialidade é obrigatório"),
+    list_service_type: Yup.array().min(1, "Selecione pelo menos um tipo de atendimento").required(),
+    list_specialty: Yup.array().min(1, "Selecione pelo menos uma sub especialidade").of(
+        Yup.object().shape({
+            value: Yup.string().required("O campo especialidade é obrigatório"),
+            label: Yup.string().required("O campo especialidade é obrigatório"),
+        }),
+    ),
+});
+
 const StepActivationSpecialty = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const { values } = useFormikContext<ActivateAccount>();
 
     const requiredValid = useMemo((): boolean => {
-        const isValid = validatePerson.isValidSync(values);
+        const isValid = validate.isValidSync(values);
 
         return isValid;
     }, [values]);
@@ -29,20 +45,40 @@ const StepActivationSpecialty = ({ nextStep, prevStep, ...rest }: StepProps) => 
     useNextStep(nextStep, requiredValid);
 
     return (
-        <div className="container grid grid-cols-2 gap-1 mobile:grid-cols-1">
+        <div className="flex flex-1 flex-col gap-2">
+            <CheckboxGroup
+                label="Tipo de atendimento"
+                name='list_service_type'
+                items={[
+                    {
+                        label: "Domésticos",
+                        value: "domestics"
+                    },
+                    {
+                        label: "Médio porte",
+                        value: "midsize"
+                    },
+                    {
+                        label: "Grande porte",
+                        value: "large"
+                    }
+                ]}
+                divClassName="mobile:col-span-full col-span-full "
+                required
+            />
             <FieldControlSelect
                 type="text"
-                divClassName="mobile:col-span-2"
                 label="Especialidade"
+                required
                 name="specialty"
                 options={options}
             />
             <FieldControlSelect
                 isMulti
                 type="text"
-                divClassName="mobile:col-span-2"
+                required
                 label="Sub Especialidades"
-                name="sub_specialty"
+                name="list_specialty"
                 options={options}
             />
             <div className="mt-1 flex justify-center items-center col-span-full">

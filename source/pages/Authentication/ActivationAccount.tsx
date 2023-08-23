@@ -16,7 +16,7 @@ import { Formik } from 'formik';
 import validate, { ActivateAccount } from '~/validations/activate';
 
 import { signOutUser } from '~/store/auth/login/actions';
-import { editProfile } from '~/store/auth/profile/actions';
+import { addNew } from '~/store/auth/profile/actions';
 
 import { useAppDispatch } from '~/store/hooks';
 
@@ -34,7 +34,6 @@ const initialValues = (email: string): ActivateAccount => ({
     firstName: '',
     lastName: '',
     crmv: '',
-    serviceType: [],
     contact: {
         email,
         phone: '',
@@ -52,9 +51,13 @@ const initialValues = (email: string): ActivateAccount => ({
         state: '',
         zipCode: '',
     },
+
     list_service_type: [],
     list_specialty: [],
-    specialty: ''
+    specialty: {
+        label: '',
+        value: '',
+    }
 });
 
 
@@ -88,8 +91,19 @@ const ActivationAccount = () => {
 
     const dispatch = useAppDispatch()
 
-    const onSubmit = async (values: Profile) => {        
-        dispatch(editProfile(values))
+    const onSubmit = async (values: ActivateAccount) => {
+        const { list_specialty, ...rest } = values
+
+        const profile: Profile = {
+            ...rest,
+            specialty: values.specialty.value,
+            list_specialty: list_specialty.map(item => ({
+                name_specialty: item.label,
+                type: item.value,
+            }))
+        }
+
+        dispatch(addNew(profile))
     }
 
     useEffect(() => {
@@ -129,7 +143,7 @@ const ActivationAccount = () => {
     return (
         <AuthLayout title="Activation Profile" >
             <section className="relative grid grid-cols-1 mobile:w-full mobile:h-full h-3/4 z-10 shadow-2xl w-1/2">
-                <main className="grid grid-cols-1 p-3 mobile:!p-1 md:p-5 bg-white w-full mobile:rounded-none rounded-sm">
+                <main className="grid grid-cols-1 px-4 py-6 mobile:!p-1 bg-white w-full mobile:rounded-none rounded-sm">
 
                     <div className='flex flex-col items-center justify-center '>
                         <LogoSimple className='mobile:hidden block' />
@@ -150,6 +164,7 @@ const ActivationAccount = () => {
                         validationSchema={validate}
                         initialValues={initialValues(email) as any}
                         onSubmit={onSubmit}
+                        initialErrors={{}}
                     >
                         <TabContainer activeKey={tab}  >
                             {

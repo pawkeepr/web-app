@@ -2,18 +2,18 @@ import { useFormikContext } from "formik";
 
 
 import { useMemo } from "react";
-import MaskedInput from "react-input-mask";
 
 import { BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control";
 import validatePerson from "~/validations/person";
 
 import { FaWhatsapp } from "react-icons/fa";
-import CheckboxGroup from "~/Components/molecules/checkbox-group";
+import FieldCrmv from "~/Components/molecules/field-crmv";
 import FieldDocument from "~/Components/molecules/field-document";
+import FieldPhone from "~/Components/molecules/field-phone";
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
-import { StepProps } from "../steps/types";
+import { StepProps } from "../steps-sign-up/types";
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<ActivateAccount>();
@@ -32,24 +32,23 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     return (
         <div className="container grid grid-cols-2 gap-1 mobile:grid-cols-1">
-            <div className="col-span-2 mobile:col-span-2 grid grid-cols-2">
+            <div className="col-span-2 mobile:col-span-2 grid grid-cols-2 gap-1">
                 <FieldControl
                     initialFocus
-                    label="Nome Completo"
+                    label="Nome"
                     name="firstName"
                     aria-label="firstName"
-                    className=" "
                     placeholder="Nome"
                     required
                     disabledError
                 />
 
                 <FieldControl
-                    label=" "
+                    label="Sobrenome"
+                    required
                     separator={""}
                     name="lastName"
                     aria-label="lastName"
-                    className=" "
                     placeholder="Sobrenome"
                     disabledError
                 />
@@ -58,56 +57,22 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 label="CPF/CNPJ"
                 name="cpf_cnpj"
                 aria-label="cpf_cnpj"
-                className=" "
                 placeholder="CPF/CNPJ"
-                component={MaskedInput as any}
                 required
             />
 
-            <CheckboxGroup
-                label="Tipo de atendimento"
-                name='serviceType'
-                items={[
-                    {
-                        label: "Domésticos",
-                        value: "domestics"
-                    },
-                    {
-                        label: "Médio porte",
-                        value: "midsize"
-                    },
-                    {
-                        label: "Grande porte",
-                        value: "large"
-                    }
-                ]}
-                divClassName="mobile:col-span-2"
-                required
-            />
-
-            <FieldControl
-                type="text"
+            <FieldCrmv
                 label="CRMV"
-                divClassName="mobile:col-span-2"
                 name="crmv"
                 placeholder="Digite o seu CRMV"
-                className=" "
-                component={MaskedInput as any}
-                mask={"aa999999"}
-                maskChar={null}
                 required
             />
 
             <div className="relative">
-                <FieldControl
-                    className=" focus-visible:bg-transparent hover:bg-transparent focus:bg-transparent bg-transparent flex  "
-                    type="text"
+                <FieldPhone
                     label="Telefone/Celular"
                     name="contact.phone"
                     placeholder="Digite o seu Número de Telefone"
-                    component={MaskedInput as any}
-                    mask={"(99) 99999-9999"}
-                    maskChar={null}
                     required
                 />
                 <div
@@ -121,14 +86,10 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 </div>
             </div>
             <div>
-                <FieldControl
-                    type="text"
+                <FieldPhone
                     label="WhatsApp"
                     name="contact.whatsapp"
                     placeholder="Digite o seu Número do WhatsApp"
-                    component={MaskedInput as any}
-                    mask={"(99) 99999-9999"}
-                    maskChar={null}
                     required
                 />
             </div>

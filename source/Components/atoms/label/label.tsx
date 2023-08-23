@@ -1,24 +1,38 @@
+import { ClassAttributes, LabelHTMLAttributes } from "react"
+import { twMerge } from "tailwind-merge"
+import withControl from "~/Components/helpers/with-control"
+
 
 type LabelProps = {
-    label?: string;
-    required?: boolean;
-    id?: string;
-    separator?: string;
-}
+    id?: string
+    required?: boolean
+    name?: string
+    label?: string
+    separator?: string
+} & JSX.IntrinsicAttributes &
+    ClassAttributes<HTMLLabelElement> &
+    LabelHTMLAttributes<HTMLLabelElement>
 
-const Label = ({ id, label, required, separator }: LabelProps) => {
+const Label = ({
+    id,
+    label,
+    required,
+    separator = '',
+    className,
+    ...props }: LabelProps) => {
     if (!label) return null;
 
     return (
         <label
-            htmlFor={id}
-            className="mb-0 text-xs font-semibold text-gray-500 gap-1"
+            {...props}
+            htmlFor={id || props.name}
+            className={twMerge("text-xs font-semibold text-gray-500 gap-1 text-start items-center label justify-start pb-1 mb-0  ", className)}
             data-testid={`label-${id}`}
         >
             {label.trim() ? (label + separator) : ''}
-            {required && <span className="text-danger">*</span>}
+            {required && <abbr className="text-red-400">*</abbr>}
         </label>
     )
 }
 
-export default Label
+export default withControl(Label)
