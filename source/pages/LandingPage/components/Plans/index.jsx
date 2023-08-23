@@ -123,7 +123,7 @@ const Plans = () => {
                                 <CardBody className="p-4 m-2 text-base md:text-lg">
                                     <div className="d-flex align-items-center">
                                         <div className="flex-grow-1">
-                                            <h5 className="mb-1 fw-semibold">Free</h5>
+                                            <h5 className="mb-1 fw-semibold">Grátis</h5>
                                             <p className="text-muted mb-0">Experimente Agora!</p>
                                         </div>
                                         <div className="avatar-sm">
@@ -133,10 +133,8 @@ const Plans = () => {
                                         </div>
                                     </div>
                                     <div className="py-4 text-center">
-                                        {plan ? <h1 className="month"><sup><small>R$</small></sup><span className="ff-secondary fw-bold">0,00</span> <span
-                                            className="fs-13 text-muted">/Mês</span></h1> :
-                                            <h1 className="annual"><sup><small>$</small></sup><span className="ff-secondary fw-bold">171</span> <span
-                                                className="fs-13 text-muted">/Ano</span></h1>}
+                                        <h1 className="annual"><sup><small>R$</small></sup><span className="ff-secondary fw-bold">0,00</span> <span
+                                            className="fs-13 text-muted">/Mês</span></h1>
                                     </div>
 
                                     <div>
