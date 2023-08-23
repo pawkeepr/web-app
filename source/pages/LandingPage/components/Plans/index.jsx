@@ -147,7 +147,7 @@ const Plans = () => {
                                                         <i className="ri-checkbox-circle-fill fs-15 align-middle"></i>
                                                     </div>
                                                     <div className="flex-grow-1">
-                                                        Consultas <b>10</b> por mês
+                                                    <b>10</b> Consultas por mês
                                                     </div>
                                                 </div>
                                             </li>
@@ -193,7 +193,7 @@ const Plans = () => {
                                                             <i className="ri-checkbox-circle-fill fs-15 align-middle text-white"></i>
                                                         </div>
                                                         <div className="flex-grow-1 !text-white">
-                                                            Consultas <b>50</b> Mensais
+                                                        <b>50</b> Consultas por mês
                                                         </div>
                                                     </div>
                                                 </li>
@@ -237,7 +237,7 @@ const Plans = () => {
                                                         <i className="ri-checkbox-circle-fill fs-15 align-middle"></i>
                                                     </div>
                                                     <div className="flex-grow-1">
-                                                        <b>100</b> Consultas
+                                                        <b>100</b> Consultas por mês
                                                     </div>
                                                 </div>
                                             </li>
