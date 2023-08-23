@@ -7,8 +7,9 @@ import Select from "~/Components/atoms/select";
 import type { InputControlProps } from "./types";
 
 type Option = {
-    value: string;
+    value: string | number;
     label: string;
+    [key: string]: any;
 }
 
 type FieldSelectControl = InputControlProps<Props> & {
