@@ -15,7 +15,6 @@ import validatePassword from "~/validations/password";
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 import { BtnLink } from "~/Components/atoms/btn";
-import bgAuth from "~/assets/images/bg-auth.webp";
 import LOADING from "~/constants/loading";
 import { registerUser, resetRegisterFlag } from "~/store/auth/register/actions";
 import { AccountSignUp } from "~/store/auth/register/types";
@@ -127,7 +126,7 @@ const CoverSignUp = () => {
     };
 
     return (
-        <AuthLayout title="Criar conta" image={bgAuth}
+        <AuthLayout title="Criar conta" image='/bg-auth.webp'
             alt="Imagem cartunizada de pessoas e um globo terrestre se comunicando">
 
             <Formik

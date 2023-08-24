@@ -4,8 +4,6 @@ import { StepProps } from './types';
 
 import { useFormikContext } from 'formik';
 import { useEffect, useState } from 'react';
-import LogoSimple from '~/Components/atoms/logo-simple';
-import LogoSimpleMobile from '~/Components/atoms/logo-simple-mobile';
 import LOADING from '~/constants/loading';
 import {
     activateAccount,
@@ -74,10 +72,8 @@ const StepActivation = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     return (
 
-        <div className="p-2 mt-4">
+        <div>
             <div className='flex flex-col items-center justify-center'>
-                <LogoSimple className='hidden mobile:block' />
-                <LogoSimpleMobile className='mobile:hidden' />
                 <div className="text-center text-muted mb-2 gap-2">
                     <h5 className="text-primary p-2">Olá, Seja Bem-Vindo(a)!</h5>
                     <p >

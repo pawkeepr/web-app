@@ -14,7 +14,6 @@ import * as Yup from "yup";
 // action
 import { updatePwd } from "~/store/auth/forget-pwd/actions";
 
-import LogoSimpleMobile from "~/Components/atoms/logo-simple-mobile";
 
 // 187913
 
@@ -73,9 +72,7 @@ const ForgetPasswordPage = (props: { history: any; }) => {
     return (
         <AuthLayout title="Forgot Password" >
             <div className='flex flex-col items-center justify-center'>
-                <LogoSimpleMobile />
                 <div className="text-center">
-                    <h5 className="text-primary">Ola! Seja Bem Vindo!</h5>
                     <p className="text-muted">Você esqueceu sua senha?</p>
                     <p className="text-muted">Podemos te Ajudar!</p>
                 </div>
