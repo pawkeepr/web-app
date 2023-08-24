@@ -7,8 +7,9 @@ import { BtnPrimary } from '~/Components/atoms/btn';
 import FieldControl from '~/Components/molecules/field-control';
 import { AccountSignUp } from '~/store/auth/register/types';
 
+import LogoSimple from "~/Components/atoms/logo-simple";
+import LogoSimpleMobile from "~/Components/atoms/logo-simple-mobile";
 import PasswordRules from '../../molecules/password-rules';
-import Container from '../../template/container';
 
 import Link from 'next/link';
 import FieldCheckbox from '~/Components/molecules/field-checkbox';
@@ -46,8 +47,15 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
     const loading = useMemo(() => isLoading === LOADING.PENDING || !isValid, [isLoading, isValid])
 
     return (
-        <Container>
-
+        <div>
+            <div className="flex flex-col w-full items-center">
+                <LogoSimple className="hidden mobile:block" />
+                <LogoSimpleMobile className="block mobile:hidden" />
+                <h4 className="text-gray-700">Crie uma Conta</h4>
+                <p className="text-gray-400 text-xs">
+                    Aproveite todos os Benefícios Agora!
+                </p>
+            </div>
             <FieldControl
                 label="Email"
                 initialFocus
@@ -59,7 +67,7 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                 required
                 disabledError
             />
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 mobile:grid-cols-1 gap-2">
                 <FieldPassword
                     required
                     label='Senha'
@@ -83,16 +91,15 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
 
             <PasswordRules value={values.password} />
             <FieldCheckbox
-                label={
-                    <p className="italic text-xs text-justify">
-                        {"Você se registrando aceita os termos de uso da plataforma: "}
-                        <Link href="#" className="text-primary no-underline fst-normal fw-medium">Termos de Uso.{" "}</Link>
-                        {"Você se registrando aceita a política de privacidade da plataforma: "}
-                        <Link href="#" className="text-primary no-underline fst-normal fw-medium">Política de Privacidade</Link>
-                    </p>
-                }
                 name="termsOfUse"
-            />
+            >
+                <p className="italic text-xs text-justify">
+                    {"Você se registrando aceita os termos de uso da plataforma: "}
+                    <Link href="#" className="text-primary no-underline fst-normal fw-medium">Termos de Uso.{" "}</Link>
+                    {"Você se registrando aceita a política de privacidade da plataforma: "}
+                    <Link href="#" className="text-primary no-underline fst-normal fw-medium">Política de Privacidade</Link>
+                </p>
+            </FieldCheckbox>
 
             <div className='flex  items-center justify-center'>
                 <BtnPrimary
@@ -105,7 +112,7 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
             </div>
 
 
-        </Container>
+        </div>
     )
 }
 

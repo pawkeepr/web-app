@@ -56,50 +56,45 @@ const Auth = () => {
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
             {({ handleSubmit }) => (
                 <Form onSubmit={handleSubmit} className="w-full">
-                    <div className="mb-3">
-                        <FieldControl
-                            label="Email"
-                            type="text"
-                            pattern="[^\s]+" // no spaces
-                            name="username"
-                            placeholder="Digite seu email"
-                            data-testid="email-input"
-                            value={username}
-                            onChange={handleChangeUsername}
+                    <FieldControl
+                        label="Email"
+                        type="text"
+                        pattern="[^\s]+" // no spaces
+                        name="username"
+                        placeholder="Digite seu email"
+                        data-testid="email-input"
+                        value={username}
+                        onChange={handleChangeUsername}
+                        disabledError
+                    />
+
+                    <div className="position-relative mb-3 w-full flex flex-col justify-center items-end">
+                        <FieldPassword
+                            label="Senha"
+                            placeholder="Digite sua senha"
+                            name="password"
+                            data-testid="password-input"
+                            value={password}
+                            onChange={handleChangePassword}
                             disabledError
                         />
-                    </div>
-
-                    <div className="mb-3">
-                        <div className="position-relative mb-3">
-
-                            <BtnLink
-                                message="Esqueceu a senha?"
-                                href="/forgot-password"
-                                className="
+                        <BtnLink
+                            message="Esqueceu a senha?"
+                            href="/forgot-password"
+                            className="
                                     h-fit
+                                    w-fit
+                                    content-end
                                     text-xs
-                                    absolute
+                                    flex
+                                    items-center
+                                    justify-end
                                     z-10
                                     font-semibold
                                     p-0
                                     m-0
-                                    top-0
-                                    right-0
                                 "
-                            />
-
-                            <FieldPassword
-                                label="Senha"
-                                placeholder="Digite sua senha"
-                                name="password"
-                                data-testid="password-input"
-                                value={password}
-                                onChange={handleChangePassword}
-                                disabledError
-                            />
-
-                        </div>
+                        />
                     </div>
                     <BtnPrimary
                         label="Entrar"
