@@ -10,8 +10,8 @@ import { AuthProvider } from "~/contexts/auth-context";
 import LayoutProvider from "~/contexts/layout-context";
 
 import { ToastContainer } from 'react-toastify';
-
 import '~/aws';
+import ErrorBoundary from '~/contexts/error-boundary';
 import fakebackend from '~/helpers/AuthType/fakeBackend';
 
 process.env.NODE_ENV !== 'production' && fakebackend();
@@ -20,14 +20,16 @@ function App({ Component, pageProps }: AppProps) {
 
 
     return (
-        <Provider>
-            <AuthProvider>
-                <LayoutProvider>
-                    <Component {...pageProps} />
-                    <ToastContainer />
-                </LayoutProvider>
-            </AuthProvider>
-        </Provider>
+        <ErrorBoundary>
+            <Provider>
+                <AuthProvider>
+                    <LayoutProvider>
+                        <Component {...pageProps} />
+                        <ToastContainer />
+                    </LayoutProvider>
+                </AuthProvider>
+            </Provider>
+        </ErrorBoundary>
     )
 }
 
