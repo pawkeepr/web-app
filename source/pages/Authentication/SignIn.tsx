@@ -1,9 +1,4 @@
-import Image from "next/image";
 import { useEffect } from "react";
-
-import bgAuthaimage from "~/assets/images/bg-three.webp";
-import logoMobile from "~/assets/images/logo-mobile-login.png";
-import logo from "~/assets/images/logo-sm.png";
 
 import LOADING from "~/constants/loading";
 import AuthInputs from "./components/organism/auth-inputs";
@@ -32,25 +27,15 @@ const CoverSignIn = () => {
     }, [isAuthenticated]);
 
     return (
-        <AuthLayout title="Entrar" image={bgAuthaimage} alt="Imagem" hasImage>
+        <AuthLayout title="Entrar" image="/bg-three.webp" alt="Imagem" hasImage>
 
 
             <div className="flex flex-col justify-center items-center gap-3 lg:mt-5">
-                <Image
-                    src={logo}
-                    alt="logo"
-                    className="hidden mobile:flex h-16 w-16"
-                />
-                <Image
-                    src={logoMobile}
-                    alt="logo"
-                    className="mobile:hidden flex h-24 w-auto object-cover"
-                />
-                <p className="text-sm font-light text-primary-500">
-                    Seja bem-vindo(a)!
+                <p className="text-sm font-semibold text-secondary-500">
+                    Seja Bem-vindo(a)!
                 </p>
             </div>
-            <div className="px-10 mobile:!mt-0 mobile:p-0">
+            <div className="mobile:!mt-0 mobile:p-0">
                 {loading && (
                     <div className="flex justify-center item-center">
                         <div

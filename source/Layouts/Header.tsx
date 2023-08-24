@@ -1,8 +1,5 @@
 import Link from "next/link";
 
-//import images
-import logoLight from "~/assets/images/logo-light.png";
-
 //import Components
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -97,7 +94,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                         className="logo-light justify-centerblock"
                     >
                         <Image
-                            src={logoLight}
+                            src="/logo-light.png"
                             alt="Logo Pawkeepr Mode Light"
                             height="34"
                         />

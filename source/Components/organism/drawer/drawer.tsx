@@ -1,4 +1,3 @@
-import logoDark from "~/assets/images/logo-dark.png";
 
 import ArrowLeftCircleIcon from "@heroicons/react/20/solid/ArrowLeftCircleIcon";
 import Cog8ToothIcon from "@heroicons/react/24/solid/Cog8ToothIcon";
@@ -75,8 +74,8 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                 <a href="#">
                     <Image
                         className="w-auto h-8"
-                        src={logoDark}
-                        alt=""
+                        src='/logo-dark.png'
+                        alt="Logo PawKeeprs Dark Mode"
                     />
                 </a>
                 <XMarkIcon

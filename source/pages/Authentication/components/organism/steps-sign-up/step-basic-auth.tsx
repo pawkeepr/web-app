@@ -7,8 +7,6 @@ import { BtnPrimary } from '~/Components/atoms/btn';
 import FieldControl from '~/Components/molecules/field-control';
 import { AccountSignUp } from '~/store/auth/register/types';
 
-import LogoSimple from "~/Components/atoms/logo-simple";
-import LogoSimpleMobile from "~/Components/atoms/logo-simple-mobile";
 import PasswordRules from '../../molecules/password-rules';
 
 import Link from 'next/link';
@@ -48,10 +46,8 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
 
     return (
         <div>
-            <div className="flex flex-col w-full items-center">
-                <LogoSimple className="hidden mobile:block" />
-                <LogoSimpleMobile className="block mobile:hidden" />
-                <h4 className="text-gray-700">Crie uma Conta</h4>
+            <div className="flex flex-col w-full items-center mt-2">
+                <h4 className="text-gray-700 text-xs font-semibold">Crie uma Conta</h4>
                 <p className="text-gray-400 text-xs">
                     Aproveite todos os Benefícios Agora!
                 </p>

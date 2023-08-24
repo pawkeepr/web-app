@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import logoMobile from "~/assets/images/logo-mobile-login.png";
 
 type LogoSimpleMobileProps = {
     size?: number
@@ -12,8 +11,8 @@ const LogoSimpleMobile = ({ href = '/dashboard', mb = 'mb-4', size = 62, classNa
 
     return (
         <div className={`${mb} ${className}`} {...rest}>
-            <Link href={href} className="d-block">
-                <Image src={logoMobile} alt="Logo Pawkeepr" height={size} draggable="false" />
+            <Link href={href} className="block">
+                <Image src="/logo-mobile-login.png" alt="Logo Pawkeepr" height={size} width={size} draggable="false" />
             </Link>
         </div>
     )

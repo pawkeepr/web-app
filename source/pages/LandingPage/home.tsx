@@ -1,9 +1,6 @@
 import Slide from "react-reveal/Slide";
 import Zoom from "react-reveal/Zoom";
 
-import landingPage03 from "~/assets/images/bg-three.webp";
-import landingPage01 from "~/assets/images/landing-page-01.jpg";
-import landingPage02 from "~/assets/images/landing-page02.webp";
 
 // Import Images
 
@@ -24,9 +21,10 @@ const Home = () => {
 
 
                             <Image
-                                src={landingPage01}
+                                src="/landing-page-01.jpg"
                                 className="w-100"
                                 alt="..."
+                                fill
                             />
 
                         </div>
@@ -64,9 +62,10 @@ const Home = () => {
                     <Slide left>
                         <div className="col-span-1">
                             <Image
-                                src={landingPage02}
+                                src='/landing-page02.webp'
                                 className="w-100 h-[90%] !border-none rounded-3xl"
                                 alt="..."
+                                fill
                             />
                         </div>
                     </Slide>
@@ -81,9 +80,10 @@ const Home = () => {
                     <Slide left>
                         <div className="col-span-1">
                             <Image
-                                src={landingPage03}
+                                src='/bg-three.webp'
                                 className="w-100 !border-none"
                                 alt="..."
+                                fill
                             />
                         </div>
                     </Slide>

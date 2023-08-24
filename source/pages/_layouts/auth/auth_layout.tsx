@@ -11,7 +11,7 @@ type AuthLayoutProps = {
     hasImage?: boolean;
 } & (
         | {
-            image: StaticImageData;
+            image: StaticImageData | string;
             alt: string;
         }
         | {
@@ -40,24 +40,43 @@ const AuthLayout = ({
                     }
                 )}>
                     {image && (
-                        <picture className={cn("col-span-1", {
-                            "block mobile:hidden": !hasImage,
-                            "block": hasImage,
-                        })}>
-                            <Image
-                                className="mobile:h-24 h-full object-cover rounded-l-xl mobile:rounded-l-none"
-                                src={image}
-                                alt={alt}
-                            />
-                        </picture>
+                        <div className="mobile:h-24 h-full relative">
+                            <picture className={cn("col-span-1 ", {
+                                "block mobile:hidden": !hasImage,
+                                "block": hasImage,
+                            })}>
+                                <Image
+                                    className=" object-cover rounded-l-xl mobile:rounded-l-none"
+                                    src={image}
+                                    alt={alt}
+                                    fill
+                                />
+                            </picture>
+                        </div>
                     )}
                     <div className={cn(
-                        "!overflow-hidden relative mobile:rounded-r-none mobile:rounded-none grid grid-cols-1 mobile:!w-full mobile:!min-h-full p-4 mobile:py-2 mobile:px-4 bg-white",
+                        "!overflow-hidden relative mobile:rounded-r-none mobile:rounded-none grid grid-cols-1 mobile:!w-full mobile:!min-h-full py-4 px-12 mobile:py-2 mobile:px-4 bg-white",
                         {
                             "rounded-r-xl": image,
                             "rounded-xl": !image,
                         }
                     )}>
+                        <div className="flex flex-col justify-center items-center mt-5 mobile:mt-0 mb-2">
+                            <Image
+                                src='/logo-dark.png'
+                                alt="logo"
+                                className="hidden mobile:flex h-16 w-16"
+                                width={64}
+                                height={64}
+                            />
+                            <Image
+                                src='/logo-mobile-login.png'
+                                alt="logo"
+                                className="mobile:hidden flex h-24 w-auto object-cover"
+                                width={128}
+                                height={128}
+                            />
+                        </div>
                         {children}
                     </div>
                 </section>

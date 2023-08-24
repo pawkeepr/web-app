@@ -1,5 +1,3 @@
-import LogoSimple from '~/Components/atoms/logo-simple';
-import LogoSimpleMobile from '~/Components/atoms/logo-simple-mobile';
 import AuthLayout from '../_layouts/auth/auth_layout';
 
 import { useEffect, useState } from 'react';
@@ -144,8 +142,6 @@ const ActivationAccount = () => {
         <AuthLayout title="Activation Profile" >
 
             <div className='flex flex-col items-center justify-center '>
-                <LogoSimple className='mobile:hidden block' />
-                <LogoSimpleMobile className='hidden mobile:block' />
                 <div className="text-center font-sans text-gray-600 gap-1">
                     <h5 className="text-primary-600 uppercase font-semibold font-sans p-2">Olá, Seja Bem-Vindo(a)!</h5>
                     <p>
