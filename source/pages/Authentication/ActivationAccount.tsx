@@ -142,57 +142,55 @@ const ActivationAccount = () => {
 
     return (
         <AuthLayout title="Activation Profile" >
-            <section className="relative grid grid-cols-1 mobile:w-full mobile:h-full h-3/4 z-10 shadow-2xl w-1/2">
-                <main className="grid grid-cols-1 px-4 py-6 mobile:!p-1 bg-white w-full mobile:rounded-none rounded-sm">
 
-                    <div className='flex flex-col items-center justify-center '>
-                        <LogoSimple className='mobile:hidden block' />
-                        <LogoSimpleMobile className='hidden mobile:block' />
-                        <div className="text-center font-sans text-gray-600 gap-1">
-                            <h5 className="text-primary-600 uppercase font-semibold font-sans p-2">Olá, Seja Bem-Vindo(a)!</h5>
-                            <p>
-                                Para seu primeiro acesso,
-                                você deve
-                                completar seu cadastro na plataforma.
-                                <br />
-                                <span className="mx-2 font-semibold">{email || 'email@teste.com'}</span>
-                            </p>
-                        </div>
-                    </div>
-                    <Formik
-                        enableReinitialize
-                        validationSchema={validate}
-                        initialValues={initialValues(email) as any}
-                        onSubmit={onSubmit}
-                        initialErrors={{}}
-                    >
-                        <TabContainer activeKey={tab}  >
-                            {
-                                Tabs.map((tab, index) => (
-                                    <TabContent key={index}>
-                                        <TabPane
-                                            eventKey={tab.id}
-                                            data-testid={`step-${tab.id.padStart(2, '0')}`}
-                                        >
-                                            {tab.component({
-                                                prevStep: onChangePrevStep,
-                                                nextStep: onChangeNextStep,
-                                            })}
-                                        </TabPane>
-                                    </TabContent>
-                                ))
-                            }
-                        </TabContainer>
-                    </Formik>
-                </main>
-                <BtnLink
-                    message="Sair"
-                    className="absolute top-2 right-2"
-                    href="/logout"
-                >
-                    <ArrowLeftCircleIcon />
-                </BtnLink>
-            </section>
+            <div className='flex flex-col items-center justify-center '>
+                <LogoSimple className='mobile:hidden block' />
+                <LogoSimpleMobile className='hidden mobile:block' />
+                <div className="text-center font-sans text-gray-600 gap-1">
+                    <h5 className="text-primary-600 uppercase font-semibold font-sans p-2">Olá, Seja Bem-Vindo(a)!</h5>
+                    <p>
+                        Para seu primeiro acesso,
+                        você deve
+                        completar seu cadastro na plataforma.
+                        <br />
+                        <span className="mx-2 font-semibold">{email || 'email@teste.com'}</span>
+                    </p>
+                </div>
+            </div>
+            <Formik
+                enableReinitialize
+                validationSchema={validate}
+                initialValues={initialValues(email) as any}
+                onSubmit={onSubmit}
+                initialErrors={{}}
+            >
+                <TabContainer activeKey={tab}  >
+                    {
+                        Tabs.map((tab, index) => (
+                            <TabContent key={index}>
+                                <TabPane
+                                    eventKey={tab.id}
+                                    data-testid={`step-${tab.id.padStart(2, '0')}`}
+                                >
+                                    {tab.component({
+                                        prevStep: onChangePrevStep,
+                                        nextStep: onChangeNextStep,
+                                    })}
+                                </TabPane>
+                            </TabContent>
+                        ))
+                    }
+                </TabContainer>
+            </Formik>
+
+            <BtnLink
+                message="Sair"
+                className="absolute top-2 right-2"
+                href="/logout"
+            >
+                <ArrowLeftCircleIcon />
+            </BtnLink>
+
         </AuthLayout >
     );
 };
