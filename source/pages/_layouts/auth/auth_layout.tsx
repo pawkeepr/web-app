@@ -40,18 +40,21 @@ const AuthLayout = ({
                     }
                 )}>
                     {image && (
-                        <div className="mobile:h-24 h-full relative">
-                            <picture className={cn("col-span-1 ", {
+                        <div className="mobile:h-24 h-full relative object-cover rounded-l-xl mobile:rounded-l-none" style={{
+                            background: `url(${image})`,
+                            backgroundSize: 'cover',
+                        }}>
+                            {/* <picture className={cn("col-span-1 ", {
                                 "block mobile:hidden": !hasImage,
                                 "block": hasImage,
                             })}>
                                 <Image
-                                    className=" object-cover rounded-l-xl mobile:rounded-l-none"
+                                    className="object-cover rounded-l-xl mobile:rounded-l-none"
                                     src={image}
                                     alt={alt}
                                     fill
                                 />
-                            </picture>
+                            </picture> */}
                         </div>
                     )}
                     <div className={cn(
