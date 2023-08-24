@@ -7,9 +7,6 @@ import { BtnLink } from "~/Components/atoms/btn";
 
 import ArrowRightOnRectangleIcon from '@heroicons/react/24/solid/ArrowRightOnRectangleIcon';
 
-// Import Images
-import logoLight from "~/assets/images/logo-dark.png";
-import logoDark from "~/assets/images/logo-light.png";
 
 const NavbarLanding = () => {
     // const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -40,18 +37,21 @@ const NavbarLanding = () => {
                 <div className="container flex flex-wrap justify-center gap-2 md:gap-0 md:justify-between">
                     <Link href="/">
                         <Image
-                            src={logoDark}
+                            src='/logo-light.png'
                             className="hidden data-[logo-light=false]:flex"
                             data-logo-light={actionScroll}
                             alt="logo light"
                             height="40"
+                            width={120}
                         />
                         <Image
-                            src={logoLight}
+                            src='/logo-dark.png'
                             className="hidden data-[logo-light=true]:flex"
                             data-logo-light={actionScroll}
                             alt="logo dark"
                             height="40"
+                            width={120}
+
                         />
                     </Link>
 

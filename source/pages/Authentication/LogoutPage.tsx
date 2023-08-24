@@ -9,7 +9,6 @@ import { resetLoading, signOutUser } from '~/store/auth/login/actions';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
 
 import { useRouter } from 'next/navigation';
-import LogoSimpleMobile from '~/Components/atoms/logo-simple-mobile';
 import AuthLayout from '../_layouts/auth/auth_layout';
 
 
@@ -36,9 +35,6 @@ const LogoutPage = () => {
         <AuthLayout title='Sair'>
 
             <div className='flex flex-col items-center justify-center'>
-                <LogoSimpleMobile />
-
-
                 {/* icon de um emoji chorando */}
                 <div className="mt-4 pt-2">
                     <h4>Você acabou de sair 😭</h4>
