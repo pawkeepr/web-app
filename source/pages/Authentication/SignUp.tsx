@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import TabContainer from "react-bootstrap/TabContainer";
@@ -13,6 +12,7 @@ import * as Yup from "yup";
 import validateEmail from "~/validations/email";
 import validatePassword from "~/validations/password";
 
+import { ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 import { BtnLink } from "~/Components/atoms/btn";
 import bgAuth from "~/assets/images/bg-auth.webp";
@@ -127,54 +127,54 @@ const CoverSignUp = () => {
     };
 
     return (
-        <AuthLayout title="Criar conta">
-            <div className="h-full lg:h-[80%] lg:w-[80%] z-10 flex flex-col lg:grid grid-cols-2">
-                <div className="flex flex-1 mobile:hidden">
-                    <Image
-                        className="h-24 lg:h-full object-cover"
-                        src={bgAuth}
-                        alt="Imagem cartunizada de pessoas e um globo terrestre se comunicando"
-                    />
-                </div>
-                <div className="z-10 bg-white h-full">
-                    <Formik
-                        enableReinitialize
-                        validationSchema={validationSchema}
-                        initialValues={initialValues}
-                        onSubmit={onSubmit}
-                    >
-                        <TabContainer activeKey={tab}>
-                            {Tabs.map((tab, index) => (
-                                <TabContent key={index}>
-                                    <TabPane
-                                        eventKey={tab.id}
-                                        data-testid={`step-${tab.id.padStart(
-                                            2,
-                                            "0"
-                                        )}`}
-                                    >
-                                        {tab.component({
-                                            prevStep: onChangePrevStep,
-                                            nextStep: onChangeNextStep,
-                                        })}
-                                    </TabPane>
-                                </TabContent>
-                            ))}
-                        </TabContainer>
-                    </Formik>
-                    <div className="w-full h-fit flex flex-col justify-center items-center ">
-                        <p className="text-xs">
-                            Você já tem uma conta ?
-                        </p>
-                        <BtnLink
-                            href="/sign-in"
-                            message="Entrar"
-                        />
+        <AuthLayout title="Criar conta" image={bgAuth}
+            alt="Imagem cartunizada de pessoas e um globo terrestre se comunicando">
 
-                    </div>
+            <Formik
+                enableReinitialize
+                validationSchema={validationSchema}
+                initialValues={initialValues}
+                onSubmit={onSubmit}
+            >
+                <TabContainer activeKey={tab}>
+                    {Tabs.map((tab, index) => (
+                        <TabContent key={index}>
+                            <TabPane
+                                eventKey={tab.id}
+                                data-testid={`step-${tab.id.padStart(
+                                    2,
+                                    "0"
+                                )}`}
+                            >
+                                {tab.component({
+                                    prevStep: onChangePrevStep,
+                                    nextStep: onChangeNextStep,
+                                })}
+                            </TabPane>
+                        </TabContent>
+                    ))}
+                </TabContainer>
+            </Formik>
+            <div className="mobile:hidden w-full flex flex-col justify-center items-center !h-fit">
+                <p className="text-xs">
+                    Você já tem uma conta ?
+                </p>
+                <BtnLink
+                    className="p-0 h-fit"
+                    href="/sign-in"
+                    message="Entrar"
+                />
 
-                </div>
+
             </div>
+            <BtnLink
+                message="Voltar"
+                className="hidden mobile:flex max-w-fit absolute top-2 left-2  items-center justify-start"
+                href="/sign-in"
+            >
+                <ArrowLeftCircleIcon />
+            </BtnLink>
+
         </AuthLayout>
     );
 };

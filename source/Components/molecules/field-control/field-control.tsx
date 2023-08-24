@@ -69,7 +69,7 @@ const FieldControl = <T,>({
                 )}
             </div>
             {!meta.error && (
-                <div className="pb-3" />
+                <div className="pb-2" />
             )}
 
             {meta.error && (

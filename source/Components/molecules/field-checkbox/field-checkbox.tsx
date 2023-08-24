@@ -1,17 +1,17 @@
 
 import { useField } from "formik";
 import Checkbox from "~/Components/atoms/checkbox";
-import Label from "~/Components/atoms/label";
+import { labelStyled } from "~/Components/atoms/label/label";
 import { InputControlProps } from '../field-control/types';
 
 type FieldCheckboxProps<T> = {
-    label: string | JSX.Element;
     name: string;
 } & InputControlProps<T>;
 
 const FieldCheckbox = <T,>({
-    label,
     name,
+    className,
+    children,
     ...rest
 }: FieldCheckboxProps<T>) => {
 
@@ -24,7 +24,9 @@ const FieldCheckbox = <T,>({
                 {...field}
                 checked={field.value}
             />
-            <Label htmlFor={field.name} label={label} />
+            <label htmlFor={field.name} className={labelStyled({ className })}>
+                {children}
+            </label>
         </div>
     );
 };
