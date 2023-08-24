@@ -65,6 +65,7 @@ const Home = () => {
                                 src='/landing-page-02.webp'
                                 className="w-100 h-[90%] !border-none rounded-3xl"
                                 alt="..."
+
                             />
                         </div>
                     </Slide>
@@ -82,6 +83,7 @@ const Home = () => {
                                 src='/bg-three.webp'
                                 className="w-100 h-[90%]  !border-none"
                                 alt="..."
+
                             />
                         </div>
                     </Slide>
