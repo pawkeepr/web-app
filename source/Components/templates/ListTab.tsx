@@ -6,6 +6,7 @@ import React, {
     useState,
 } from "react";
 import SearchInput from "~/Components/molecules/search-input";
+import AddNewAppointment from "../modals/add-appointment/add-appointment-modal";
 
 import HorizontalTabs from "../../pages/DashboardPage/components/organisms/templates/Horizontal-List";
 
@@ -61,14 +62,14 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                     mobile:hidden
                     "
                 >
-
-
                 </div>
+                <AddNewAppointment />
                 <div
                     className="
                     mobile:flex content-start
                     "
                 >
+                    
                     <Modal />
                 </div>
             </div>
