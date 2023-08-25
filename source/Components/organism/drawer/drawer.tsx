@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 
 import ArrowLeftCircleIcon from "@heroicons/react/20/solid/ArrowLeftCircleIcon";
 import Cog8ToothIcon from "@heroicons/react/24/solid/Cog8ToothIcon";
@@ -9,7 +10,6 @@ import { MdPets } from 'react-icons/md';
 import { button } from '~/Components/atoms/btn';
 
 import cn from 'classnames';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
@@ -72,7 +72,7 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
         >
             <div className="flex justify-between px-4">
                 <a href="#">
-                    <Image
+                    <img
                         className="w-auto h-8"
                         src='/logo-dark.png'
                         alt="Logo PawKeeprs Dark Mode"

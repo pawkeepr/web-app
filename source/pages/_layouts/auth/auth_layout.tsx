@@ -40,13 +40,12 @@ const AuthLayout = ({
                     }
                 )}>
                     {image && (
-                        <div className="flex flex-1 overflow-hidden w-full h-full mobile:h-24 relative rounded-l-xl mobile:rounded-l-none">
+                        <div className="flex flex-1 overflow-hidden !w-full !h-full relative rounded-l-xl mobile:rounded-l-none">
                             <div
                                 className=
-                                "flex-1 w-full h-full bg-no-repeat !bg-cover"
+                                "flex-1 w-full h-full bg-no-repeat !bg-cover mobile:w-32 mobile:h-1/2 mobile:!bg-contain"
                                 style={{
                                     background: `url(${image})`,
-                                    backgroundSize: "cover",
                                 }}
                             />
                         </div>
@@ -73,9 +72,9 @@ const AuthLayout = ({
                         <div className="flex flex-col justify-center items-center mt-5 mobile:mt-0 mb-2">
                             <div
                                 className=
-                                "hidden mobile:flex h-16 w-full !bg-no-repeat !bg-cover !bg-center"
+                                "hidden mobile:flex h-20 w-16 !bg-no-repeat !bg-cover !bg-center"
                                 style={{
-                                    background: 'url(/logo-dark.png)',
+                                    background: 'url(/logo-sm.png)',
                                 }}
                             />
 
