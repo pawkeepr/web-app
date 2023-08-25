@@ -1,10 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import Slide from "react-reveal/Slide";
 import Zoom from "react-reveal/Zoom";
 
 
 // Import Images
 
-import Image from "next/image";
 import HeaderTitle from "~/Components/atoms/header-title";
 
 const Home = () => {
@@ -20,11 +20,11 @@ const Home = () => {
                         <div className="col-span-1">
 
 
-                            <Image
+                            <img
                                 src="/landing-page-01.jpg"
                                 className="w-100"
                                 alt="..."
-                                fill
+
                             />
 
                         </div>
@@ -61,11 +61,10 @@ const Home = () => {
                     </Zoom>
                     <Slide left>
                         <div className="col-span-1">
-                            <Image
-                                src='/landing-page02.webp'
+                            <img
+                                src='/landing-page-02.webp'
                                 className="w-100 h-[90%] !border-none rounded-3xl"
                                 alt="..."
-                                fill
                             />
                         </div>
                     </Slide>
@@ -79,11 +78,10 @@ const Home = () => {
                 <div className="grid grid-cols-1 mt-5 md:mt-0 md:grid-cols-2 p-4">
                     <Slide left>
                         <div className="col-span-1">
-                            <Image
+                            <img
                                 src='/bg-three.webp'
-                                className="w-100 !border-none"
+                                className="w-100 h-[90%]  !border-none"
                                 alt="..."
-                                fill
                             />
                         </div>
                     </Slide>
