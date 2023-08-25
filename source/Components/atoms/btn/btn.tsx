@@ -32,7 +32,9 @@ export const button = tv({
         cancel: {
             true: "bg-red-300 border border-red-600 text-gray-600 border-red-400 hover:bg-red-100 hover:border-red-500 hover:text-red-800"
         },
-        text: {},
+        text: {
+            true: "bg-transparent border border-gray-400 text-gray-700 hover:!bg-gray-100 hover:border-gray-500 hover:text-gray-800"
+        },
         link: {
             true: "text-secondary-500 dark:text-primary-600 hover:no-underline capitalize w-fit"
         }
@@ -41,9 +43,9 @@ export const button = tv({
 
 const styledIcon = tv({
     base: `
-    flex justify-center items-center
-    w-5 h-5
-  `,
+        flex justify-center items-center
+        w-5 h-5
+    `,
 })
 
 type BtnProps = {

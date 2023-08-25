@@ -10,7 +10,7 @@ const Plans = () => {
 
     return (
         <>
-            <section className="section bg-light" id="plans">
+            <section className="section bg-light" id="plans" data-logo-green >
                 <div className="bg-overlay bg-overlay-pattern"></div>
                 {/* <div className="text-gray-600 body-font overflow-hidden py-5">
                     <div className="container px-5 mx-auto">

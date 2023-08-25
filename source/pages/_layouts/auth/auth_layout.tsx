@@ -83,7 +83,7 @@ const AuthLayout = ({
                                 className=
                                 "mobile:hidden flex h-32 w-full !bg-contain !bg-no-repeat !bg-center"
                                 style={{
-                                    background: 'url(/logo-mobile-login.png)',
+                                    background: 'url(/logo-mobile-login.webp)',
                                 }}
                             />
                         </div>
