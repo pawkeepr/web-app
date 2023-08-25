@@ -1,7 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 
 //import Components
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { changeHeaderSize } from "~/store/actions";
 import { useAppDispatch } from "~/store/hooks";
@@ -93,7 +93,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                         href="/"
                         className="logo-light justify-centerblock"
                     >
-                        <Image
+                        <img
                             src="/logo-light.png"
                             alt="Logo Pawkeepr Mode Light"
                             height="34"
