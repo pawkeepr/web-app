@@ -47,7 +47,8 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
     return (
         <div>
             <div className="flex flex-col w-full items-center mt-2">
-                <h4 className="text-gray-700 text-xs font-semibold">Crie uma Conta</h4>
+                <p className="text-sm font-semibold text-secondary-500">
+                    Crie uma Conta</p>
                 <p className="text-gray-400 text-xs">
                     Aproveite todos os Benefícios Agora!
                 </p>
