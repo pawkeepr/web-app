@@ -93,6 +93,12 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                 <p className="italic text-xs text-justify">
                     {"Você se registrando aceita os termos de uso da plataforma: "}
                     <Link href="#" className="text-primary no-underline fst-normal fw-medium">Termos de Uso.{" "}</Link>
+                </p>
+            </FieldCheckbox>
+            <FieldCheckbox
+                name="privacyPolicy"
+            >
+                <p className="italic text-xs text-justify">
                     {"Você se registrando aceita a política de privacidade da plataforma: "}
                     <Link href="#" className="text-primary no-underline fst-normal fw-medium">Política de Privacidade</Link>
                 </p>
