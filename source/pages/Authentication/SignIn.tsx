@@ -27,7 +27,7 @@ const CoverSignIn = () => {
     }, [isAuthenticated]);
 
     return (
-        <AuthLayout title="Entrar" image="/bg-three.webp" alt="Imagem" hasImage>
+        <AuthLayout title="Entrar" image="/bg-sign-in.webp" alt="Imagem" hasImage>
 
 
             <div className="flex flex-col justify-center items-center gap-3 lg:mt-5">
