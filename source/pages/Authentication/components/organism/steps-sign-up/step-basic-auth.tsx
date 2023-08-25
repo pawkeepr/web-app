@@ -1,6 +1,6 @@
 
 import { useFormikContext } from 'formik';
-import { useMemo } from 'react';
+import { useEffect } from 'react';
 
 
 import { BtnPrimary } from '~/Components/atoms/btn';
@@ -12,7 +12,6 @@ import PasswordRules from '../../molecules/password-rules';
 import Link from 'next/link';
 import FieldCheckbox from '~/Components/molecules/field-checkbox';
 import FieldPassword from '~/Components/molecules/field-password';
-import LOADING from '~/constants/loading';
 import { useAppSelector } from '~/store/hooks';
 import { StepProps } from './types';
 
@@ -21,20 +20,13 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
     const {
         values,
         handleBlur,
-        handleChange,
         isValid,
-        handleSubmit
+        handleSubmit,
+        errors,
+        isSubmitting
     } = useFormikContext<AccountSignUp>()
 
     const isLoading = useAppSelector(state => state.Account.loading)
-
-    // const requiredValid = useMemo(() => {
-    //     return (
-    //         validatePassword.isValidSync(password) &&
-    //         validateEmail.isValidSync(email) &&
-    //         password === passwordConfirm
-    //     )
-    // }, [email, password, passwordConfirm])
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -42,7 +34,9 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
         nextStep()
     }
 
-    const loading = useMemo(() => isLoading === LOADING.PENDING || !isValid, [isLoading, isValid])
+    useEffect(() => {
+        console.log(values, errors)
+    }, [values, errors])
 
     return (
         <div>
@@ -87,22 +81,24 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
             </div>
 
             <PasswordRules value={values.password} />
-            <FieldCheckbox
-                name="termsOfUse"
-            >
-                <p className="italic text-xs text-justify">
-                    {"Você se registrando aceita os termos de uso da plataforma: "}
-                    <Link href="#" className="text-primary no-underline fst-normal fw-medium">Termos de Uso.{" "}</Link>
-                </p>
-            </FieldCheckbox>
-            <FieldCheckbox
-                name="privacyPolicy"
-            >
-                <p className="italic text-xs text-justify">
-                    {"Você se registrando aceita a política de privacidade da plataforma: "}
-                    <Link href="#" className="text-primary no-underline fst-normal fw-medium">Política de Privacidade</Link>
-                </p>
-            </FieldCheckbox>
+            <div className="flex flex-col justify-start items-start">
+                <FieldCheckbox
+                    name="termsOfUse"
+                >
+                    <p className="italic text-xs text-justify">
+                        {"Você se registrando aceita os termos de uso da plataforma: "}
+                        <Link href="#" className="text-primary no-underline fst-normal fw-medium">Termos de Uso.{" "}</Link>
+                    </p>
+                </FieldCheckbox>
+                <FieldCheckbox
+                    name="privacyPolicy"
+                >
+                    <p className="italic text-xs text-justify">
+                        {"Você se registrando aceita a política de privacidade da plataforma: "}
+                        <Link href="#" className="text-primary no-underline fst-normal fw-medium">Política de Privacidade</Link>
+                    </p>
+                </FieldCheckbox>
+            </div>
 
             <div className='flex  items-center justify-center'>
                 <BtnPrimary
@@ -110,7 +106,7 @@ const StepSignUpBasicAuth = ({ nextStep }: StepProps) => {
                     type="submit"
                     className="w-full"
                     onClick={handleClick}
-                    disabled={loading}
+                    disabled={!isValid || isSubmitting}
                 />
             </div>
 
