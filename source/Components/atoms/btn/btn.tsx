@@ -12,7 +12,7 @@ export const button = tv({
         transition duration-300 ease-in-out
         disabled:opacity-50 disabled:cursor-not-allowed
         bg-opacity-80 hover:bg-opacity-100 active:opacity-100
-        hover:transform hover:scale-105
+        hover:transform hover:scale-105 disabled:hover:scale-100
         text-opacity-100
         flex justify-center items-center
     `,
@@ -33,7 +33,7 @@ export const button = tv({
             true: "bg-red-300 border border-red-600 text-gray-600 border-red-400 hover:bg-red-100 hover:border-red-500 hover:text-red-800"
         },
         text: {
-            true: "bg-transparent border border-gray-400 text-gray-700 hover:!bg-gray-100 hover:border-gray-500 hover:text-gray-800"
+            true: "bg-transparent border-2 border-secondary-500 text-secondary-500 hover:!bg-gray-100"
         },
         link: {
             true: "text-secondary-500 dark:text-primary-600 hover:no-underline capitalize w-fit"
