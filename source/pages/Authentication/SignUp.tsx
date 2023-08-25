@@ -27,13 +27,22 @@ const validationSchema = Yup.object({
     email: validateEmail,
     password: validatePassword,
     passwordConfirm: Yup.string()
-        .oneOf([Yup.ref("password"), null], "As senhas não coincidem")
-        .required("Este campo é obrigatório"),
+        .trim()
+        .when('password', ([password]) => {
+            return Yup.string()
+                .trim()
+                .required('Repita a Senha')
+                .test(
+                    'passwords-match',
+                    'As senhas não conferem',
+                    value => password === value
+                );
+        }),
     termsOfUse: Yup.boolean().oneOf(
         [true],
         "Você deve aceitar os termos de uso"
     ),
-    policyPrivacy: Yup.boolean().oneOf(
+    privacyPolicy: Yup.boolean().oneOf(
         [true],
         "Você deve aceitar a política de privacidade"
     ),
