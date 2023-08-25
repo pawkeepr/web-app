@@ -126,7 +126,7 @@ const CoverSignUp = () => {
     };
 
     return (
-        <AuthLayout title="Criar conta" image='/bg-auth.webp'
+        <AuthLayout title="Criar conta" image='/bg-sign-up.webp'
             alt="Imagem cartunizada de pessoas e um globo terrestre se comunicando">
 
             <Formik

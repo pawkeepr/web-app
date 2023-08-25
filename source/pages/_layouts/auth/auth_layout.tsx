@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import React from "react";
 import HeaderTitle from "~/Components/atoms/header-title";
 import Footer from "~/Layouts/Footer";
@@ -40,22 +40,28 @@ const AuthLayout = ({
                     }
                 )}>
                     {image && (
-                        <div className="mobile:h-24 h-full relative object-cover rounded-l-xl mobile:rounded-l-none" style={{
-                            background: `url(${image})`,
-                            backgroundSize: 'cover',
-                        }}>
-                            {/* <picture className={cn("col-span-1 ", {
-                                "block mobile:hidden": !hasImage,
-                                "block": hasImage,
-                            })}>
-                                <Image
-                                    className="object-cover rounded-l-xl mobile:rounded-l-none"
-                                    src={image}
-                                    alt={alt}
-                                    fill
-                                />
-                            </picture> */}
+                        <div className="flex flex-1 overflow-hidden w-full h-full mobile:h-24 relative rounded-l-xl mobile:rounded-l-none">
+                            <div
+                                className=
+                                "flex-1 w-full h-full bg-no-repeat !bg-cover"
+                                style={{
+                                    background: `url(${image})`,
+                                    backgroundSize: "cover",
+                                }}
+                            />
                         </div>
+                        // {/* <picture className={cn("col-span-1 ", {
+                        //     "block mobile:hidden": !hasImage,
+                        //     "block": hasImage,
+                        // })}>
+                        //     <Image
+                        //         className="object-cover rounded-l-xl mobile:rounded-l-none"
+                        //         src={image}
+                        //         alt={alt}
+                        //         fill
+                        //     />
+                        // </picture> */}
+
                     )}
                     <div className={cn(
                         "!overflow-hidden relative mobile:rounded-r-none mobile:rounded-none grid grid-cols-1 mobile:!w-full mobile:!min-h-full py-4 px-12 mobile:py-2 mobile:px-4 bg-white",
@@ -65,19 +71,20 @@ const AuthLayout = ({
                         }
                     )}>
                         <div className="flex flex-col justify-center items-center mt-5 mobile:mt-0 mb-2">
-                            <Image
-                                src='/logo-dark.png'
-                                alt="logo"
-                                className="hidden mobile:flex h-16 w-16"
-                                width={64}
-                                height={64}
+                            <div
+                                className=
+                                "hidden mobile:flex h-16 w-full !bg-no-repeat !bg-cover !bg-center"
+                                style={{
+                                    background: 'url(/logo-dark.png)',
+                                }}
                             />
-                            <Image
-                                src='/logo-mobile-login.png'
-                                alt="logo"
-                                className="mobile:hidden flex h-24 w-auto object-cover"
-                                width={128}
-                                height={128}
+
+                            <div
+                                className=
+                                "mobile:hidden flex h-32 w-full !bg-contain !bg-no-repeat !bg-center"
+                                style={{
+                                    background: 'url(/logo-mobile-login.png)',
+                                }}
                             />
                         </div>
                         {children}

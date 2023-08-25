@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BtnLink } from "~/Components/atoms/btn";
@@ -36,22 +36,19 @@ const NavbarLanding = () => {
             >
                 <div className="container flex flex-wrap justify-center gap-2 md:gap-0 md:justify-between">
                     <Link href="/">
-                        <Image
+                        <img
                             src='/logo-light.png'
-                            className="hidden data-[logo-light=false]:flex"
+                            className="hidden h-12 w-40  data-[logo-light=false]:flex"
                             data-logo-light={actionScroll}
                             alt="logo light"
                             height="40"
                             width={120}
                         />
-                        <Image
+                        <img
                             src='/logo-dark.png'
-                            className="hidden data-[logo-light=true]:flex"
+                            className="hidden h-12 w-40 data-[logo-light=true]:flex"
                             data-logo-light={actionScroll}
                             alt="logo dark"
-                            height="40"
-                            width={120}
-
                         />
                     </Link>
 
