@@ -31,14 +31,14 @@ const NavbarLanding = () => {
     return (
         <header>
             <nav
-                className="fixed z-50 left-0 right-0 mobile:p-2 md:p-4 transition-colors data-[scroll-action=true]:bg-white data-[scrollAction=true]:shadow-md"
+                className="fixed z-50 left-0 right-0 mobile:p-2 px-4 py-2 transition-colors data-[scroll-action=true]:bg-white shadow-md"
                 data-scroll-action={actionScroll}
             >
                 <div className="container flex flex-wrap justify-center gap-2 md:gap-0 md:justify-between">
                     <Link href="/">
                         <img
                             src='/logo-light.png'
-                            className="hidden h-12 w-40  data-[logo-light=false]:flex"
+                            className="hidden h-12 w-36  data-[logo-light=false]:flex"
                             data-logo-light={actionScroll}
                             alt="logo light"
                             height="40"
@@ -46,7 +46,7 @@ const NavbarLanding = () => {
                         />
                         <img
                             src='/logo-dark.png'
-                            className="hidden h-12 w-40 data-[logo-light=true]:flex"
+                            className="hidden h-12 w-36 data-[logo-light=true]:flex"
                             data-logo-light={actionScroll}
                             alt="logo dark"
                         />
@@ -109,7 +109,7 @@ const NavbarLanding = () => {
                     <div className="z-50 flex gap-2">
                         <BtnLink
                             message="Entrar"
-                            className="text-gray-500 hover:!bg-secondary-500"
+                            className="text-gray-500 hover:!bg-secondary-500 !border-secondary-500 border"
                             href="/sign-in"
                         >
                             <ArrowRightOnRectangleIcon />
