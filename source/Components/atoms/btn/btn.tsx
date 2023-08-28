@@ -18,7 +18,7 @@ export const button = tv({
     `,
     variants: {
         primary: {
-            true: "bg-primary-500 dark:bg-secondary-500 text-gray-50 dark:text-gray-600 border border-secondary-600 "
+            true: "bg-primary-500 dark:bg-secondary-500 text-gray-50 dark:text-gray-600 border border-secondary-600 !w-44 "
         },
         secondary: {
             true: "bg-secondary-500 dark:bg-primary-500"
@@ -30,11 +30,11 @@ export const button = tv({
             true: "bg-blue-600 hover:bg-blue-700 enabled:focus:bg-blue-800 enabled:hover:bg-btn-blue-700"
         },
         cancel: {
-            true: "bg-red-300 border border-red-600 text-gray-600 border-red-400 hover:bg-red-100 hover:border-red-500 hover:text-red-800"
+            true: "bg-secondary-500 text-white hover-text-white !w-44 "
         },
         text: {},
         link: {
-            true: "text-secondary-500 dark:text-primary-600 hover:no-underline capitalize w-fit"
+            true: "text-white dark:text-primary-600 hover:no-underline capitalize w-fit"
         }
     },
 })

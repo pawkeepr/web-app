@@ -6,7 +6,7 @@ import ControlSwitch from "../../../molecules/switch/switch";
 import { StepProps } from "../types";
 
 import { FieldArray, useFormikContext } from "formik";
-import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
+import { BtnCancel, BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import { diseases } from "~/common/data/diseases";
 import { exams } from "~/common/data/exams";
@@ -575,7 +575,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
 
 
             <div className="flex items-center justify-center">
-                <BtnLabel
+                <BtnCancel
                     link
                     type="button"
                     label="Voltar"
