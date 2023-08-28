@@ -122,7 +122,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                                                 <>
                                                     <div
                                                         key={index}
-                                                        className="flex gap-2   items-center col-span-2  "
+                                                        className="flex gap-2 items-center col-span-2  "
                                                     >
                                                         <ComboBoxAutocomplete
                                                             label={`Nome do Alimento ${index + 1
