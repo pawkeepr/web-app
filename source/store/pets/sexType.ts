@@ -1,15 +1,15 @@
 export const genderValues = [
     {
-        name : 'Macho',
+        label : 'Macho',
         value : 'male',
 
     },
     {
-        name : 'Fêmea',
+        label : 'Fêmea',
         value :  'female',
     },
     {
-        name : 'Desconhecido',
+        label : 'Desconhecido',
         value :  'unknown',
     }
 ]

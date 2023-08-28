@@ -11,8 +11,11 @@ import BoxButtons from "~/Components/molecules/box-buttons";
 import FieldDocument from "~/Components/molecules/field-document";
 import { useAppDispatch } from '~/store/hooks';
 import { addNew } from '~/store/pets/actions';
-import { Data, GenderPet } from '~/store/pets/types';
+import { Data } from '~/store/pets/types';
 import ComboBoxFields from "./components/organisms/combo-box-fields/combo-box-fields";
+import { genderValues } from "~/store/pets/sexType";
+
+
 
 type InitialValues = Partial<Nullable<Omit<Data, 'bloodType' | 'breed' | 'species'>>> & {
     bloodType: {
@@ -33,21 +36,6 @@ import RadioGroupCustom from "~/Components/molecules/radio-group/radio-group";
 import Modal from "~/Components/organism/modal";
 import useModal from '~/hooks/use-modal';
 import validationPet from '~/validations/pet';
-
-const genders = [
-    {
-        name: 'Macho',
-        value: GenderPet.male
-    },
-    {
-        name: 'Fêmea',
-        value: GenderPet.female
-    },
-    {
-        name: 'Indefinido',
-        value: GenderPet.unknown
-    }
-]
 
 type AddModalProps = {
     children?: (showModal: () => void) => JSX.Element;
@@ -86,7 +74,7 @@ const AddNewPetModal = ({ children, item }: AddModalProps) => {
         castrated: false,
         avatar: null,
         dateOfBirth: null,
-        gender: GenderPet.unknown,
+        gender: 'unknown',
         bloodType: {
             value: '',
             name: ''
@@ -129,7 +117,7 @@ const AddNewPetModal = ({ children, item }: AddModalProps) => {
 
 
                                 <BtnAvatar alt="Foto do Pet" name="avatar" />
-                                <RadioGroupCustom items={genders} name="gender" />
+                                <RadioGroupCustom items={genderValues} name="gender" />
 
                                 <FieldControl
                                     label="Nome"

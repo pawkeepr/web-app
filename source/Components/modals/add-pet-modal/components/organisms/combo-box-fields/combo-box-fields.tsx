@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useFormikContext } from "formik"
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react"
@@ -5,12 +6,17 @@ import FieldControlSelect from "~/Components/molecules/field-control/field-contr
 import { BloodType } from "~/store/pets/bloodType"
 import { Breed } from "~/store/pets/breedType"
 import { SpeciesType, species } from '~/store/pets/speciesType'
+import FieldControl from "~/Components/molecules/field-control/field-control";
+import { genderValues } from "~/store/pets/sexType";
+
+
 
 type AuxSpeciesFormikProps = {
     species: SpeciesType
     breed: string
     bloodType: string
     pet: {
+        sex: any
         id?: string
         species: SpeciesType
         breed: Breed
@@ -107,6 +113,20 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
                 name={memoNameBloodType}
                 label="Tipo Sanguíneo"
                 placeholder="Ex: A, B, etc..."
+            />
+            <FieldControlSelect
+                options={genderValues as any}
+                disabled={!!values.pet?.id}
+                name="sex"          
+                required         
+                label="Sexo do Pet"
+                placeholder="Macho/Fêmea..."
+            />
+             <FieldControl
+                label={`Data de nascimento`}
+                required
+                name={`date_birth`}
+                type="date"                    
             />
         </div>
     )

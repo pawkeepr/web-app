@@ -25,6 +25,9 @@ import useTutorByDocument from "../../hooks/use-tutor-by-document";
 import StepSecondTutor from "../../molecules/second-tutor";
 import { GenderPet } from "~/store/pets/types";
 import StepTutor from "../../molecules/tutor";
+import HealthInsurance from "../../molecules/health-insurance";
+
+
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const [isPendingPet, startTransition] = useTransition();
@@ -196,6 +199,11 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         <StepSecondTutor disabled={tutorExists} />
                     </ControlSwitch>
                 </Row>
+
+                <Row>
+                    <HealthInsurance />
+                </Row>
+                    
             </div>
             <div className="flex align-items-center justify-end gap-3 mt-4">
                 <BtnPrimary
@@ -205,8 +213,6 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         toggleTab(activeTab + 1);
                     }}
                 />
-
-
             </div>
         </>
     );

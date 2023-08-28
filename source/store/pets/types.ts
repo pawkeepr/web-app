@@ -34,7 +34,7 @@ export type Pet = {
     breed: Breed;
     chip_number?: string;  
     id_office_register?: string;
-    sex: GenderPet;
+    sex: string[];
     date_birth: string;
     bloodType: BloodType;
     color: string;
@@ -69,11 +69,7 @@ export type InitialState = {
 };
 
 
-export enum GenderPet {
-    male = 'Macho',
-    female = 'Fêmea',
-    unknown = 'Desconhecido'
-};
+//apaguei aqui o gander pet
 
 export type Diet = {
     foodType: string;
@@ -114,3 +110,4 @@ export const ACTION_TOGGLE_STATUS_SUCCESS = `${name}/${TOGGLE_STATUS_SUCCESS}`;
 export const ACTION_TOGGLE_STATUS_FAIL = `${name}/${TOGGLE_STATUS_FAIL}`;
 
 export const ACTION_STOP_LOADING = `${name}/${STOP_LOADING}`;
+
