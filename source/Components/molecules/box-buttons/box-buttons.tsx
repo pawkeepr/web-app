@@ -29,6 +29,7 @@ const BoxButtons = ({
                 <BtnCancel
                     label={labelCancel}
                     onClick={onClickCancel}
+                    className='bg-secondary border-2 border-secondary text-white hover:bg-primary hover:text-white !w-44'
                 />
             }
             {
@@ -37,7 +38,7 @@ const BoxButtons = ({
                     link={link}
                     onClick={onClickSuccess}
                     disabled={!isValid}
-                    className='!w-44'
+                    className='!w-44 text-white'
                     type={type}
                     id="add-btn"
                     label={labelSuccess}
