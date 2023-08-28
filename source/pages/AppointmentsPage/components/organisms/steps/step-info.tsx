@@ -10,7 +10,7 @@ import ControlSwitch from "../../molecules/switch/switch";
 import { StepProps } from "./types";
 
 const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
-    const physical_activity = ['Caminhadas', 'Corridas', 'Natação', 'Passeios', 'Cabo-de-guerra', 'Varetinhas', 'Bolinhas', 'Outros']
+    const physical_activity = ['Caminhadas', 'Corridas', 'Natação', 'Passeios', 'Cabo-de-guerra', 'Varetinhas', 'Bolinhas']
     const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
     const [heightPet, setHeightPet] = useState(0);
     const [weighthPet, setweighthPet] = useState(0);
