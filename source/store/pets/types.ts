@@ -32,10 +32,14 @@ export type Pet = {
     name: string;
     species: Species;
     breed: Breed;
+    Palno_type?: string;
+    health_insurance?: string;
+    card_number?: string;
+    wallet_validity?: number;
     chip_number?: string;  
     id_office_register?: string;
     sex: string[];
-    date_birth: string;
+    date_birth: number;
     bloodType: BloodType;
     color: string;
     allergies: string[];
