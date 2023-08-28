@@ -128,6 +128,20 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
                 name={`date_birth`}
                 type="date"                    
             />
+            <FieldControl
+                label={`Número do microchip`}
+                name={`chip_Number`}
+                type="field masked"
+                mask="_____"
+                placeholder="Digite o número do microchip (opcional)"
+            />
+            <FieldControl
+                label={`Número de registro cartório`}
+                name={`id_Office_Register`}
+                type="field masked"
+                mask="_____"
+                placeholder="Digite o número do registro (opcional)"
+            />
         </div>
     )
 }
