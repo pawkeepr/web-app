@@ -54,8 +54,8 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                     <div className="flex flex-col mb-[6px] w-full">
                         <span className=" text-xs">Medida:</span>
                         <select
-                            className="  mt-2 border-2"
-                            name="measureWeight"
+                            className="hover:border-primary-500  mt-2 border-2"
+                            // name="measureWeight"
                         >
                             <option value="kg">Kilogramas</option>
                             <option value="g">Gramas</option>
@@ -89,7 +89,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                 <div className="flex flex-col mt-2">
                     <FieldControl
                         label="Orientações e Anotações"
-                        className="rounded-md  "
+                        className="rounded-md w-full"
                         component="textarea"
                         name="observations"
                         type="text" />
