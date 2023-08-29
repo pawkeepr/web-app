@@ -37,24 +37,26 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
             </div>
             <div className="flex flex-col mt-4 w-full">
                 <span className="font-bold">Informações Obrigatórias</span>
-                <div className="mt-2 mb-2 gap-2">
+                <div className="flex flex-row mt-2 mb-2 gap-2">
                     <FieldControl
                         label="Idade"
                         placeholder="Idade do pet em meses ou anos"
-                        className=" "
+                        className=""
                         name="age"
+                        required
                         type="number" />
                     <FieldControl
                         label="Peso"
                         placeholder="Peso do pet em quilos ou gramas, exemplo = 4"
-                        className=" "
+                        className=""
+                        required
                         onChange={(e: any) => { e.target.value = e.target.value.replace(/[^0-9]/g, ''); setweighthPet(e.target.value) }}
                         name="weight"
                         type="number" />
                     <div className="flex flex-col mb-[6px] w-full">
                         <span className=" text-xs">Medida:</span>
                         <select
-                            className="hover:border-primary-500  mt-2 border-2"
+                            className="hover:border-primary-500 mt-2 border-2"
                             // name="measureWeight"
                         >
                             <option value="kg">Kilogramas</option>
@@ -63,7 +65,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                     </div>
                 </div>
                 <span className="font-bold">Informações Opcionais</span>
-                <div className="tems-center mt-2 mb-2 gap-2">
+                <div className="flex flex-row tems-center mt-2 mb-2 gap-2">
                     <FieldControl
                         label="Altura"
                         placeholder="Altura do pet em centímetros, exemplo = 32"
