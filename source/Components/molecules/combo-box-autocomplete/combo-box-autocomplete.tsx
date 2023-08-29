@@ -58,10 +58,10 @@ const ComboBoxAutocomplete = <T,>({
 
     return (
         <Combobox value={selected} onChange={onChangeValue}>
-            <div className="relative  w-full items-center ">
+            <div className="relative w-full items-center ">
                 <div className="relative">
                     <FieldControl
-                        className=" "
+                        className="w-full"
                         name={name}
                         component={Combobox.Input as any}
                         displayValue={items}

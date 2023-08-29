@@ -57,10 +57,7 @@ const Home = () => {
                     <Zoom>
                         <div className="flex items-center text-center col-span-1">
                             <p className="text-lg lg:text-2xl font-semibold font-sans p-4">
-                                {`Desperte a revolução veterinária em suas mãos!
-                            Tenha todos os registros de seus pacientes ao alcance das suas mãos, 
-                            de forma prática, simples e rápida. Do registro inicial até o histórico 
-                            médico completo, todas as informações estarão disponíveis de forma instantânea.`}
+                                {`Desperte a revolução veterinária em suas mãos! Agora você pode ter acesso a todos os registros de seus pacientes de forma prática, simples e rápida. Desde o registro inicial até o histórico médico completo, todas as informações estarão ao alcance de seus dedos, de forma instantânea e conveniente. Cuide dos seus pacientes com eficiência e agilidade, proporcionando um atendimento excepcional com a tecnologia mais avançada ao seu lado!`}
                             </p>
                         </div>
                     </Zoom>

@@ -24,7 +24,7 @@ const Modal = ({
                 w-[800px] flex flex-col 
                 h-fit
                 mobile:!w-screen mobile:!h-screen mobile:rounded-none 
-	            overflow-auto px-4 py-10 bg-primary-100 dark:bg-dark-500
+	            overflow-auto px-4 py-10 bg-gray-100 dark:bg-dark-500
 	            shadow-2xl rounded-md
                 `,
                 className

@@ -1,8 +1,8 @@
 import { Form, useFormikContext } from "formik";
 import { useState } from "react";
 import InputMask from "react-input-mask";
-import { Input, Label } from "reactstrap";
-import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
+import { Input, Label, Row } from "reactstrap";
+import { BtnCancel, BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import { StepProps } from "./types";
@@ -103,7 +103,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
             </div>
 
             <div className="flex align-items-center justify-center gap-3 mt-4">
-                <BtnLabel
+                <BtnCancel
                     link
                     type="button"
                     label="Voltar"

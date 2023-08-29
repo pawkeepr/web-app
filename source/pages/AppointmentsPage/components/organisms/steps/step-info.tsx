@@ -1,7 +1,7 @@
 import { FieldArray, useFormikContext } from "formik";
 import { useState } from "react";
 import { BsFillTrash3Fill, BsPlusCircleFill } from "react-icons/bs";
-import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
+import { BtnCancel, BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
@@ -10,7 +10,7 @@ import ControlSwitch from "../../molecules/switch/switch";
 import { StepProps } from "./types";
 
 const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
-    const physical_activity = ['Caminhadas', 'Corridas', 'Natação', 'Passeios', 'Cabo-de-guerra', 'Varetinhas', 'Bolinhas', 'Outros']
+    const physical_activity = ['Caminhadas', 'Corridas', 'Natação', 'Passeios', 'Cabo-de-guerra', 'Varetinhas', 'Bolinhas']
     const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
     const [heightPet, setHeightPet] = useState(0);
     const [weighthPet, setweighthPet] = useState(0);
@@ -54,8 +54,8 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                     <div className="flex flex-col mb-[6px] w-full">
                         <span className=" text-xs">Medida:</span>
                         <select
-                            className="  mt-2 border-2"
-                            name="measureWeight"
+                            className="hover:border-primary-500  mt-2 border-2"
+                            // name="measureWeight"
                         >
                             <option value="kg">Kilogramas</option>
                             <option value="g">Gramas</option>
@@ -89,7 +89,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                 <div className="flex flex-col mt-2">
                     <FieldControl
                         label="Orientações e Anotações"
-                        className="rounded-md  "
+                        className="rounded-md w-full"
                         component="textarea"
                         name="observations"
                         type="text" />
@@ -122,7 +122,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                                                 <>
                                                     <div
                                                         key={index}
-                                                        className="flex gap-2   items-center col-span-2  "
+                                                        className="flex gap-2 items-center col-span-2  "
                                                     >
                                                         <ComboBoxAutocomplete
                                                             label={`Nome do Alimento ${index + 1
@@ -251,7 +251,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
             </div>
 
             <div className="flex align-items-center justify-center gap-3 mt-4">
-                <BtnLabel
+                <BtnCancel
                     link
                     type="button"
                     label="Voltar"

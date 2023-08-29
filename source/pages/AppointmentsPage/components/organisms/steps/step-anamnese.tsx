@@ -6,7 +6,7 @@ import { StepProps } from "./types";
 import AnswerRadio from "~/Components/molecules/answer-radio";
 
 import { useFormikContext } from "formik";
-import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
+import { BtnCancel, BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
 import {
     questions_digestive_system,
     questions_locomotive_system,
@@ -94,7 +94,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
             </div>
 
             <div className="flex align-items-center justify-center gap-3 mt-4">
-                <BtnLabel
+                <BtnCancel
                     link
                     type="button"
                     label="Voltar"
