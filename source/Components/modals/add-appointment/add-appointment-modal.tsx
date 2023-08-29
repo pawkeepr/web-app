@@ -86,8 +86,9 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                 lockScroll
                 className="w-[750px] py-4"
             >
-                <div className="w-full">
-                    <h6 className="mb-4 font-semibold text-center uppercase">Agendamento</h6>
+                <div className="flex flex-col w-full">
+                    <h6 className="font-semibold text-center uppercase">Agendamento</h6>
+                    <p className='mb-4 font-semibold text-center text-secondary-500'>Obrigatório (*)</p>
                 </div>
 
                 <Formik
