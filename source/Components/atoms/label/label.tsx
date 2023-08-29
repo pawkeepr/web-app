@@ -30,7 +30,7 @@ const Label = ({
             data-testid={`label-${id}`}
         >
             {label.trim() ? (label + separator) : ''}
-            {required && <abbr className="text-secondary-500 font-bold"> Obrigatório*</abbr>}
+            {required && <abbr className="text-secondary-500 font-bold">*</abbr>}
         </label>
     )
 }
