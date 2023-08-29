@@ -37,7 +37,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
             </div>
             <div className="flex flex-col mt-4 w-full">
                 <span className="font-bold">Informações Obrigatórias</span>
-                <div className="flex flex-row mt-2 mb-2 gap-2">
+                <div className="flex md:flex-row flex-col mt-2 mb-2 gap-2">
                     <FieldControl
                         label="Idade"
                         placeholder="Idade do pet em meses ou anos"
@@ -65,7 +65,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                     </div>
                 </div>
                 <span className="font-bold">Informações Opcionais</span>
-                <div className="flex flex-row tems-center mt-2 mb-2 gap-2">
+                <div className="flex flex-col md:flex-row tems-center mt-2 mb-2 gap-2">
                     <FieldControl
                         label="Altura"
                         placeholder="Altura do pet em centímetros, exemplo = 32"
