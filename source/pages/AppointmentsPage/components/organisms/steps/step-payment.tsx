@@ -1,8 +1,8 @@
 import { Form, useFormikContext } from "formik";
 import { useState } from "react";
 import InputMask from "react-input-mask";
-import { Input, Label, Row } from "reactstrap";
-import { BtnCancel, BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
+import { Input, Label } from "reactstrap";
+import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import { StepProps } from "./types";
@@ -79,26 +79,30 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                         </Label>
                     </div>
                 </div>
-                {
-                    event === 'credit' && (
-                        <>
-                            <p className="text-gray-600">Quantas parcelas?</p>
-                            <FieldControlSelect
-                                placeholder="Selecione a quantidade de parcelas"
-                                name="installments"
-                                options={options}
-                            />
-                        </>
-                    )
-                }
-                <div className="mt-4">
-                    <FieldControl
-                        label="Valor do Pagamento ?"
-                        className="  no-underline"
-                        name="paymentValue"
-                        component={InputMask as any}
-                        mask="R$ 999,99"
-                    />
+
+                <div className="flex flex-col md:flex-row gap-3 mt-4">
+                    {
+                        event === 'credit' && (
+                            <>
+                                <p className="text-gray-600">Quantas parcelas?</p>
+                                <FieldControlSelect
+                                    placeholder="Selecione a quantidade de parcelas"
+                                    name="installments"
+                                    options={options}
+                                />
+                            </>
+                        )
+                    }
+
+                    <div className="w-full">
+                        <FieldControl
+                            label="Valor do Pagamento?"
+                            className="rounded-md w-full border-1 h-10 border-gray-300 no-underline"
+                            name="paymentValue"
+                            component={InputMask as any}
+                            mask="R$ 999,99"
+                        />
+                    </div>
                 </div>
             </div>
 
