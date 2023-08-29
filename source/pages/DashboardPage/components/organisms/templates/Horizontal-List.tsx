@@ -112,7 +112,7 @@ const HorizontalTabs = () => {
                                                 className={
                                                     (cn({
                                                         active: activeHorizontalTab === 1,
-                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab > 1)
+                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab === 1)
                                                     }))
                                                 }
                                                 onClick={() => {
@@ -129,7 +129,7 @@ const HorizontalTabs = () => {
                                                 className={
                                                     (cn({
                                                         active: activeHorizontalTab === 2,
-                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab > 2)
+                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab === 2)
                                                     }))
                                                 }
                                                 onClick={() => {
@@ -146,7 +146,7 @@ const HorizontalTabs = () => {
                                                 className={
                                                     (cn({
                                                         active: activeHorizontalTab === 3,
-                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab > 3)
+                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab === 3)
                                                     }))
                                                 }
                                                 onClick={() => {
@@ -163,7 +163,7 @@ const HorizontalTabs = () => {
                                                 className={
                                                     (cn({
                                                         active: activeHorizontalTab === 4,
-                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab > 4)
+                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab === 4)
                                                     }))
                                                 }
                                                 onClick={() => {
