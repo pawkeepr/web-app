@@ -81,26 +81,30 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                         </Label>
                     </div>
                 </div>
+                
+                <div className="flex flex-col md:flex-row gap-3 mt-4">
                 {
                     event === 'credit' && (
-                    <>
-                        <p className="text-gray-600">Quantas parcelas?</p>
+                    <div className="w-full">
+                        <p className="text-gray-600 ">Quantas parcelas?</p>
                         <FieldControlSelect
                         placeholder="Selecione a quantidade de parcelas"
                         name="installments"
                         options={options}  
-                    />
-                    </>
+                        />
+                    </div>
                     )
                 }
-                <div className="mt-4">
+
+               <div className="w-full">
                     <FieldControl
-                        label="Valor do Pagamento ?"
-                        className="  no-underline"
+                        label="Valor do Pagamento?"
+                        className="rounded-md w-full border-1 h-10 border-gray-300 no-underline"
                         name="paymentValue"
                         component={InputMask as any}
                         mask="R$ 999,99"
                     />
+               </div>
                 </div>
             </div>
 
