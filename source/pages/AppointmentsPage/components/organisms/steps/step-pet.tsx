@@ -23,7 +23,6 @@ import usePetById from "../../hooks/use-pet-by-id";
 import usePetByName from "../../hooks/use-pet-by-name";
 import useTutorByDocument from "../../hooks/use-tutor-by-document";
 import StepSecondTutor from "../../molecules/second-tutor";
-import { GenderPet } from "~/store/pets/types";
 import StepTutor from "../../molecules/tutor";
 import HealthInsurance from "../../molecules/health-insurance";
 
