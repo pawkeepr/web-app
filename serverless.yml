@@ -1,0 +1,66 @@
+service: front-vet-ui
+
+frameworkVersion: '3'
+useDotenv: true
+
+
+provider:
+  name: aws
+  region: ${opt:region, 'us-east-1'}
+  stage: ${opt:stage, 'development'}
+
+
+
+plugins:
+  - serverless-s3-sync
+
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  bucketName: ${self:custom.stage}-front-vet-api
+  s3Sync:
+    # A simple configuration for copying static assets
+    - bucketName: ${self:custom.bucketName}
+      localDir: dist
+
+
+resources:
+  Resources:
+    FrontVetAPIBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.bucketName}
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+        OwnershipControls:
+          Rules:
+            - ObjectOwnership: ObjectWriter
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: error.html
+    FrontVetAPIBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref FrontVetAPIBucket
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Sid: "PublicReadGetObject"
+              Effect: "Allow"
+              Principal: "*"
+              Action: "s3:GetObject"
+              Resource:
+                Fn::Join:
+                  - ""
+                  - - "arn:aws:s3:::"
+                    - !Ref FrontVetAPIBucket
+                    - "/*"
+  Outputs:
+    FrontVetAPIBucketName:
+      Value: !Ref FrontVetAPIBucket
+      Export:
+        Name: s3-${self:custom.bucketName}-name
+    FrontVetAPIBucketArn:
+      Value: !GetAtt FrontVetAPIBucket.Arn
+      Export:
+        Name: s3-${self:custom.bucketName}-arn
