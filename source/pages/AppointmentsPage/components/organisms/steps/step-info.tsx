@@ -8,6 +8,7 @@ import FieldControlSelect from "~/Components/molecules/field-control/field-contr
 import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 import ControlSwitch from "../../molecules/switch/switch";
 import { StepProps } from "./types";
+import FieldTextArea from "~/Components/molecules/field-text-area/field-text-area";
 
 const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
     const physical_activity = ['Caminhadas', 'Corridas', 'Natação', 'Passeios', 'Cabo-de-guerra', 'Varetinhas', 'Bolinhas']
@@ -95,7 +96,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                 </div>
 
                 <div className="flex flex-col mt-2">
-                    <FieldControl
+                    <FieldTextArea
                         label="Orientações e Anotações"
                         className="rounded-md w-full"
                         component="textarea"
