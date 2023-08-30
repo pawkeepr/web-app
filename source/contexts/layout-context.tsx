@@ -12,7 +12,8 @@ const routesAuth = [
     '/sign-up',
     '/forgot-password',
     '/reset-password',
-    '/logout'
+    '/logout',
+    '/confirm-account',
 ]
 
 const routesPrivates = [

@@ -22,6 +22,7 @@ import {
     SignInCredentials,
 } from '~/services/helpers/auth';
 
+import Router from 'next/router';
 import { UserData, getUser, signInAws, signOut } from '~/services/helpers/auth';
 
 import { layoutModeTypes } from "~/Components/constants/layout";
@@ -44,6 +45,8 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
         yield put(getProfileSession({ email: action.payload.username }));
     } catch (error) {
         if ((error as any)?.code === 'UserNotConfirmedException') {
+            yield call([Router, Router.push], '/confirm-account');
+
             // Se o usuário não estiver confirmado, redirecione para a página de ativação.
             yield put(signInFailed((error as any).message));
         } else {

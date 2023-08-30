@@ -50,15 +50,25 @@ const validationSchema = Yup.object({
     //address: validateAddress,
 });
 
+
+const initialValues: AccountSignUp = {
+    email: "",
+    password: "",
+    passwordConfirm: "",
+    termsOfUse: false,
+    policyPrivacy: false,
+};
+
 const CoverSignUp = () => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
     const isLoading = useAppSelector(
-        (state) => state.ActivateAccount.isLoading
+        (state) => state.Login.isLoading
     );
     const onSubmit = async (values: AccountSignUp) => {
         dispatch(registerUser(values));
+        router.push("/confirm-account");
     };
 
     useEffect(() => {
@@ -67,25 +77,6 @@ const CoverSignUp = () => {
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    useEffect(() => {
-        if (isLoading === LOADING.SUCCESS) {
-            dispatch(resetRegisterFlag());
-            setTimeout(() => {
-                router.push("/sign-in");
-            }, 1500);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading]);
-
-    const initialValues: AccountSignUp = {
-        email: "",
-        password: "",
-        passwordConfirm: "",
-        termsOfUse: false,
-        policyPrivacy: false,
-    };
-
 
     return (
         <AuthLayout title="Criar conta" image='/bg-sign-up.webp'
@@ -159,10 +150,10 @@ const CoverSignUp = () => {
 
                             <div className='flex  items-center justify-center'>
                                 <BtnPrimary
-                                    label="Finalizar cadastro"
+                                    label={isLoading === LOADING.PENDING ? "Carregando..." : "Criar conta"}
                                     type="submit"
                                     className="w-full"
-                                    disabled={!isValid || isSubmitting}
+                                    disabled={!isValid || isSubmitting || isLoading === LOADING.PENDING}
                                 />
                             </div>
 
