@@ -1,55 +1,32 @@
-// Import Swiper styles
-// import "swiper/css";
-// import "swiper/css/effect-fade";
-// import "swiper/css/pagination";
+/* eslint-disable @next/next/no-img-element */
 import Slide from "react-reveal/Slide";
 import Zoom from "react-reveal/Zoom";
 
-import landingPage03 from "~/assets/images/bg-three.webp";
-import landingPage01 from "~/assets/images/landing-page-01.jpg";
-import landingPage02 from "~/assets/images/landing-page02.webp";
 
 // Import Images
 
-import Image from "next/image";
+import HeaderTitle from "~/Components/atoms/header-title";
 
 const Home = () => {
     return (
         <>
+            <HeaderTitle title='Bem Vindo' />
+
             <section className="section hero-section bg-primary" id="hero">
                 <div className="bg-overlay bg-overlay-pattern"></div>
 
                 <div className="grid grid-cols-1 items-swiper-centered mt-5 md:mt-0 md:grid-cols-2 p-4">
                     <Slide left>
                         <div className="col-span-1">
-                            {/* <div className="demo-img-patten-top d-none d-sm-block">
-                                    <Image src={imgPattern} className="d-block img-fluid" alt="..." />
-                                </div>
-                                <div className="demo-img-patten-bottom d-none d-sm-block">
-                                    <Image src={imgPattern} className="d-block img-fluid" alt="..." />
-                                </div> */}
 
-                            <Image
-                                src={landingPage01}
+
+                            <img
+                                src="/landing-page-01.jpg"
                                 className="w-100"
                                 alt="..."
+
                             />
-                            {/* <Swiper
-                        spaceBetween={30}
-                        effect={"fade"}
-                        loop={true}
-                        pagination={{
-                            clickable: true,
-                        }}
-                        autoplay={{ delay: 2000, disableOnInteraction: false }}
-                        modules={[EffectFade, Autoplay]}
-                        className="mySwiper" >
 
-                        <SwiperSlide className="carousel-inner shadow-lg p-2 bg-white rounded">
-                            
-                        </SwiperSlide>
-
-                    </Swiper> */}
                         </div>
                     </Slide>
                     <Zoom>
@@ -78,17 +55,14 @@ const Home = () => {
                     <Zoom>
                         <div className="flex items-center text-center col-span-1">
                             <p className="text-lg lg:text-2xl font-semibold font-sans p-4">
-                                {`Desperte a revolução veterinária em suas mãos!
-                            Tenha todos os registros de seus pacientes ao alcance das suas mãos, 
-                            de forma prática, simples e rápida. Do registro inicial até o histórico 
-                            médico completo, todas as informações estarão disponíveis de forma instantânea.`}
+                                {`Desperte a revolução veterinária em suas mãos! Agora você pode ter acesso a todos os registros de seus pacientes de forma prática, simples e rápida. Desde o registro inicial até o histórico médico completo, todas as informações estarão ao alcance de seus dedos, de forma instantânea e conveniente. Cuide dos seus pacientes com eficiência e agilidade, proporcionando um atendimento excepcional com a tecnologia mais avançada ao seu lado!`}
                             </p>
                         </div>
                     </Zoom>
                     <Slide left>
                         <div className="col-span-1">
-                            <Image
-                                src={landingPage02}
+                            <img
+                                src='/landing-page-02.webp'
                                 className="w-100 h-[90%] !border-none rounded-3xl"
                                 alt="..."
                             />
@@ -104,9 +78,9 @@ const Home = () => {
                 <div className="grid grid-cols-1 mt-5 md:mt-0 md:grid-cols-2 p-4">
                     <Slide left>
                         <div className="col-span-1">
-                            <Image
-                                src={landingPage03}
-                                className="w-100 !border-none"
+                            <img
+                                src='/bg-three.webp'
+                                className="w-100 h-[90%]  !border-none"
                                 alt="..."
                             />
                         </div>

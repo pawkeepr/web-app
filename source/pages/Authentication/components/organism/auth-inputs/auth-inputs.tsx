@@ -1,6 +1,3 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 
 import useAuth from "~/hooks/use-auth";
 import { onChangePassword, onChangeUsername } from "~/store/auth/login/slice";
@@ -9,12 +6,12 @@ import { useAppDispatch } from "~/store/hooks";
 import { ChangeEvent, useMemo } from "react";
 import FieldControl from "~/Components/molecules/field-control";
 
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
 import { SignInCredentials } from "~/services/helpers/auth";
 
-import cn from "classnames";
-import Link from "next/link";
 import * as Yup from "yup";
+import { BtnLink, BtnPrimary } from "~/Components/atoms/btn";
+import FieldPassword from "~/Components/molecules/field-password/field-password";
 
 const initialValues: SignInCredentials = {
     username: "",
@@ -33,10 +30,6 @@ const Auth = () => {
         signIn,
         password,
         username,
-        onToggleRememberMe,
-        onToggleVisiblePassword,
-        rememberMe,
-        visiblePassword,
         isAuthenticated,
     } = useAuth();
 
@@ -63,105 +56,55 @@ const Auth = () => {
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
             {({ handleSubmit }) => (
                 <Form onSubmit={handleSubmit} className="w-full">
-                    <div className="mb-3">
-                        <FieldControl
-                            label="Email:"
-                            type="text"
-                            pattern="[^\s]+" // no spaces
-                            className="form-control"
-                            name="username"
-                            placeholder="Digite seu email"
-                            data-testid="email-input"
-                            value={username}
-                            onChange={handleChangeUsername}
+                    <FieldControl
+                        label="Email"
+                        type="text"
+                        pattern="[^\s]+" // no spaces
+                        name="username"
+                        placeholder="Digite seu email"
+                        data-testid="email-input"
+                        value={username}
+                        onChange={handleChangeUsername}
+                        disabledError
+                    />
+
+                    <div className="position-relative mb-3 w-full flex flex-col justify-center items-end">
+                        <FieldPassword
+                            label="Senha"
+                            placeholder="Digite sua senha"
+                            name="password"
+                            data-testid="password-input"
+                            value={password}
+                            onChange={handleChangePassword}
                             disabledError
                         />
-                    </div>
-
-                    <div className="mb-3">
-                        <div className="position-relative auth-pass-inputgroup mb-3">
-                            <Link
-                                href="/forgot-password"
-                                className="
-                                    absolute
-                                    z-10
-                                    font-semibold 
-                                    text-primary-600
+                        <BtnLink
+                            message="Esqueceu a senha?"
+                            href="/forgot-password"
+                            className="
+                                    h-fit
+                                    w-fit
+                                    content-end
                                     text-xs
-                                    no-underline
-                                    mobile:text-secondary-600
-                                    top-0
-                                    right-0
+                                    flex
+                                    items-center
+                                    justify-end
+                                    z-10
+                                    font-semibold
+                                    p-0
+                                    m-0
                                 "
-                            >
-                                Esqueceu a senha?
-                            </Link>
-
-                            <FieldControl
-                                type={visiblePassword ? "text" : "password"}
-                                label="Senha"
-                                className="form-control pe-5 password-input border-end-0"
-                                placeholder="Digite sua senha"
-                                name="password"
-                                data-testid="password-input"
-                                value={password}
-                                onChange={handleChangePassword}
-                                disabledError
-                            >
-                                <InputGroup.Text className="bg-transparent border-start-0 cursor-pointer">
-                                    <i
-                                        onClick={onToggleVisiblePassword}
-                                        data-testid="toggle-password"
-                                        className={cn({
-                                            "ri-eye-fill": !visiblePassword,
-                                            "ri-eye-off-fill": visiblePassword,
-                                            "cursor-pointer": true,
-                                        })}
-                                    ></i>
-                                </InputGroup.Text>
-                            </FieldControl>
-                        </div>
-
-                        {/* <div className="w-100 float-end">
-                                <Link href="/forget-password" className="text-muted cursor-pointer text-center mt-2">
-                                    Esqueceu a Senha?
-                                </Link>
-                            </div> */}
+                        />
                     </div>
-
-                    {/* <Form.Check
-                        type="checkbox"
+                    <BtnPrimary
+                        label="Entrar"
                         className="w-full"
-                        name="rememberMe"
-                        id="rememberMe"
-                        onChange={onToggleRememberMe}
-                        checked={rememberMe}
-                        label={
-                            <p className="mb-0 fs-12 text-muted fst-italic">
-                                Lembrar-me
-                            </p>
-                        } /> */}
+                        type="submit"
+                        data-testid="submit-button"
+                        disabled={!isValid || isAuthenticated}
+                    />
 
-                    <div className="mt-4">
-                        <Button
-                            color="primary"
-                            className="w-full bg-primary-500 d-none d-sm-block"
-                            type="submit"
-                            data-testid="submit-button"
-                            disabled={!isValid || isAuthenticated}
-                        >
-                            Entrar
-                        </Button>
-                        <Button
-                            color="secondary"
-                            className="w-full bg-secondary-500 d-sm-none"
-                            type="submit"
-                            data-testid="submit-button"
-                            disabled={!isValid || isAuthenticated}
-                        >
-                            Entrar
-                        </Button>
-                    </div>
+
                 </Form>
             )}
         </Formik>

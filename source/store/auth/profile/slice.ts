@@ -11,6 +11,8 @@ import {
     name
 } from './types';
 
+import { ADD_FAIL, ADD_NEW, ADD_SUCCESS } from '../../helpers/constants';
+
 const initialState: InitialStateProfile = {
     isLoading: LOADING.IDLE,
     user: null,
@@ -21,6 +23,18 @@ const profileSlice = createSlice({
     name,
     initialState,
     reducers: {
+        [ADD_NEW]: (state) => {
+            state.isLoading = LOADING.PENDING;
+        },
+        [ADD_SUCCESS]: (state, action) => {
+            state.error = "";
+            state.isLoading = LOADING.SUCCESS;
+            state.user = action.payload.data;
+        },
+        [ADD_FAIL]: (state, action) => {
+            state.error = action.payload;
+            state.isLoading = LOADING.FAILED;
+        },
         [SET_PROFILE]: (state, action) => {
             state.user = action.payload;
         },

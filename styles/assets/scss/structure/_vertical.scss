@@ -21,9 +21,7 @@
 }
 
 .page-content {
-    padding: calc(#{$header-height} + #{$grid-gutter-width})
-        calc(#{$grid-gutter-width} * 0.5) $footer-height
-        calc(#{$grid-gutter-width} * 0.5);
+    padding: calc(#{$header-height} + #{$grid-gutter-width}) calc(#{$grid-gutter-width} * 0.5) $footer-height calc(#{$grid-gutter-width} * 0.5);
 }
 
 .navbar-menu {
@@ -116,6 +114,7 @@
                     }
                 }
             }
+
             &.collapsed {
                 &.active {
                     &::after {
@@ -129,8 +128,7 @@
             padding-left: $vertical-menu-item-icon-width;
 
             .nav-link {
-                padding: $vertical-menu-sub-item-padding-y
-                    $vertical-menu-sub-item-padding-x !important;
+                padding: $vertical-menu-sub-item-padding-y $vertical-menu-sub-item-padding-x !important;
                 color: $vertical-menu-sub-item-color;
                 white-space: none;
                 position: relative;
@@ -293,7 +291,7 @@
         .row {
             margin: 0;
 
-            > * {
+            >* {
                 width: 100%;
                 padding: 0;
             }
@@ -512,7 +510,7 @@
             }
         }
 
-        #page-topbar {
+        #page-topBar {
             z-index: calc(#{$vertical-menu-z-index} + 1);
         }
 
@@ -603,7 +601,7 @@
                     position: relative;
 
                     &:hover {
-                        > a.menu-link {
+                        >a.menu-link {
                             position: relative;
                             width: calc(200px + #{$vertical-menu-width-sm});
                             color: $white;
@@ -627,7 +625,7 @@
                             }
                         }
 
-                        > .menu-dropdown {
+                        >.menu-dropdown {
                             display: block;
                             left: $vertical-menu-width-sm;
                             position: absolute;
@@ -646,7 +644,7 @@
 
                     .nav-item {
                         &:hover {
-                            > .nav-link {
+                            >.nav-link {
                                 color: $vertical-menu-item-hover-color;
 
                                 &:after {
@@ -693,8 +691,7 @@
                 .nav-link {
                     display: block;
                     text-align: center;
-                    padding: $vertical-menu-sub-item-padding-y
-                        $vertical-menu-sub-item-padding-x * 0.35;
+                    padding: $vertical-menu-sub-item-padding-y $vertical-menu-sub-item-padding-x * 0.35;
 
                     i {
                         display: block;
@@ -801,7 +798,7 @@
                 }
             }
 
-            > .nav-item {
+            >.nav-item {
                 .nav-link.active {
                     color: $vertical-menu-item-active-color-dark;
 
@@ -867,7 +864,7 @@
                 .navbar-nav {
                     .nav-item {
                         &:hover {
-                            > .menu-dropdown {
+                            >.menu-dropdown {
                                 background: $vertical-menu-bg-dark;
                             }
                         }
@@ -885,7 +882,7 @@
 
                         .nav-item {
                             &:hover {
-                                > .nav-link {
+                                >.nav-link {
                                     color: $vertical-menu-item-active-color-dark;
 
                                     &:after {
@@ -929,6 +926,7 @@
     }
 
     &[data-layout-style="detached"] {
+
         #layout-wrapper,
         .main-content {
             min-height: 100vh;
@@ -990,6 +988,7 @@
 
         &[data-sidebar-size="sm"] {
             @media (min-width: 768px) {
+
                 #layout-wrapper,
                 .main-content {
                     min-height: 1400px;
@@ -1105,6 +1104,7 @@
 
                 &[aria-expanded="true"] {
                     color: $vertical-menu-item-active-color-dark;
+
                     &:after {
                         color: inherit;
                     }
@@ -1123,6 +1123,7 @@
 
             &:hover {
                 color: $vertical-menu-item-hover-color-dark;
+
                 .icon-dual {
                     color: $vertical-menu-item-hover-color-dark;
                     fill: rgba($white, 0.16);
@@ -1130,9 +1131,10 @@
             }
         }
 
-        > .nav-item {
+        >.nav-item {
             .nav-link.active {
                 color: $vertical-menu-item-active-color-dark;
+
                 .icon-dual {
                     color: $vertical-menu-item-hover-color-dark;
                     fill: rgba($white, 0.16);
@@ -1175,6 +1177,7 @@
 
                     &.active {
                         color: $vertical-menu-item-active-color-dark;
+
                         &:before {
                             background-color: $vertical-menu-item-active-color-dark !important;
                         }
@@ -1194,7 +1197,7 @@
             .navbar-nav {
                 .nav-item {
                     &:hover {
-                        > .menu-dropdown {
+                        >.menu-dropdown {
                             background: $vertical-menu-bg-dark;
                         }
                     }
@@ -1212,7 +1215,7 @@
 
                     .nav-item {
                         &:hover {
-                            > .nav-link {
+                            >.nav-link {
                                 color: $vertical-menu-item-active-color-dark;
 
                                 &:after {
@@ -1230,12 +1233,13 @@
                 }
             }
         }
+
         &[data-layout="vertical"] {
             .navbar-menu {
                 .navbar-nav {
                     .nav-item {
                         &:hover {
-                            > a.menu-link {
+                            >a.menu-link {
                                 background: $vertical-menu-bg-gradient;
                             }
                         }
@@ -1251,35 +1255,27 @@
 }
 
 .bg-vertical-gradient {
-    background: linear-gradient(
-        to right,
+    background: linear-gradient(to right,
         var(--#{$prefix}primary),
-        var(--#{$prefix}success)
-    );
+        var(--#{$prefix}success));
 }
 
 .bg-vertical-gradient-2 {
-    background: linear-gradient(
-        to right,
+    background: linear-gradient(to right,
         var(--#{$prefix}info),
-        var(--#{$prefix}secondary)
-    );
+        var(--#{$prefix}secondary));
 }
 
 .bg-vertical-gradient-3 {
-    background: linear-gradient(
-        to right,
+    background: linear-gradient(to right,
         var(--#{$prefix}info),
-        var(--#{$prefix}success)
-    );
+        var(--#{$prefix}success));
 }
 
 .bg-vertical-gradient-4 {
-    background: linear-gradient(
-        to right,
+    background: linear-gradient(to right,
         var(--#{$prefix}dark),
-        var(--#{$prefix}primary)
-    );
+        var(--#{$prefix}primary));
 }
 
 //sidebar-images
@@ -1301,16 +1297,19 @@
         background-image: url("../../images/sidebar/img-1.jpg");
     }
 }
+
 [data-sidebar-image="img-2"] {
     .sidebar-background {
         background-image: url("../../images/sidebar/img-2.jpg");
     }
 }
+
 [data-sidebar-image="img-3"] {
     .sidebar-background {
         background-image: url("../../images/sidebar/img-3.jpg");
     }
 }
+
 [data-sidebar-image="img-4"] {
     .sidebar-background {
         background-image: url("../../images/sidebar/img-4.jpg");

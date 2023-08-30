@@ -1,37 +1,28 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { layoutModeTypes } from "~/Components/constants/layout";
+import cookies from '~/constants/cookies';
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import { changeLayoutMode } from "~/store/layouts/slice";
-
-const userPreferenceMode = () => {
-    let preferenceMode = localStorage.getItem("userPreferenceMode");
-
-    if (!preferenceMode) {
-        preferenceMode = "light";
-        localStorage.setItem("userPreferenceMode", preferenceMode);
-    } else {
-        preferenceMode = preferenceMode === "dark" ? "light" : "dark";
-        localStorage.setItem("userPreferenceMode", preferenceMode);
-    }
-
-    return preferenceMode;
-};
+import { setCookie } from "~/utils/cookies-utils";
 
 const useChangeLayoutMode = () => {
     const dispatch = useAppDispatch();
     const layoutMode = useAppSelector((state) => state.Layout.layoutModeType);
 
-    const onHandleChangeLayout = useCallback(() => {
-        const mode =
-            layoutMode === layoutModeTypes.LIGHT_MODE
-                ? layoutModeTypes.DARK_MODE
-                : layoutModeTypes.LIGHT_MODE;
+    const mode = useMemo(() => layoutMode === layoutModeTypes.LIGHT_MODE ?
+        layoutModeTypes.DARK_MODE :
+        layoutModeTypes.LIGHT_MODE,
+        [layoutMode]
+    )
 
+    const onHandleChangeLayout = useCallback(() => {
+        setCookie(cookies.layoutMode.name, mode, cookies.layoutMode.expires);
         dispatch(changeLayoutMode(mode));
-    }, [dispatch, layoutMode]);
+    }, [dispatch, mode]);
 
     return {
         onHandleChangeLayout,
+        mode,
     };
 };
 

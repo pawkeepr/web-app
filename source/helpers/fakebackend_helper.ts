@@ -7,21 +7,21 @@ const api = new APIClient();
 
 // Gets the logged in user data from local session
 export const getLoggedInUser = () => {
-  const user = localStorage.getItem("user");
-  if (user) return JSON.parse(user);
-  return null;
+    const user = localStorage.getItem("user");
+    if (user) return JSON.parse(user);
+    return null;
 };
 
 // //is user is logged in
 export const isUserAuthenticated = () => {
-  return getLoggedInUser() !== null;
+    return getLoggedInUser() !== null;
 };
 
 // Tutors methods 
 
 export const getTutors = () => api.get(url.GET_TUTORS);
 export const postTutor = (data: any) => api.create(url.ADD_TUTORS, data);
-export const updateTutor = (data: { id: string; }) => api.update(url.UPDATE_TUTORS + '/' + data.id, data);
+export const updateTutor = (data: any, id: string) => api.update(url.UPDATE_TUTORS + '/' + id, data);
 export const deleteTutor = (id: string) => api.delete(url.DELETE_TUTORS + '/' + id);
 
 // Veterinary Appointment methods
@@ -35,7 +35,7 @@ export const deleteVeterinaryAppointment = (id: string) => api.delete(url.DELETE
 
 export const getPets = () => api.get(url.GET_PETS);
 export const postPet = (data: any) => api.create(url.ADD_PETS, data);
-export const updatePet = (data: { id: string; }) => api.update(url.UPDATE_PETS + '/' + data.id, data);
+export const updatePet = (data: any) => api.update(url.UPDATE_PETS + '/' + data.id, data);
 export const deletePet = (id: string) => api.delete(url.DELETE_PETS + '/' + id);
 
 // Login Method
@@ -51,27 +51,27 @@ export const postFakeProfile = (data: { idx: string; }) => api.update(url.POST_E
 
 // Register Method
 export const postJwtRegister = (data: any) => {
-  return api.create(url.POST_FAKE_REGISTER, data)
-    .catch(err => {
-      var message;
-      if (err.response && err.response.status) {
-        switch (err.response.status) {
-          case 404:
-            message = "Sorry! the page you are looking for could not be found";
-            break;
-          case 500:
-            message = "Sorry! something went wrong, please contact our support team";
-            break;
-          case 401:
-            message = "Invalid credentials";
-            break;
-          default:
-            message = err[1];
-            break;
-        }
-      }
-      throw message;
-    });
+    return api.create(url.POST_FAKE_REGISTER, data)
+        .catch(err => {
+            var message;
+            if (err.response && err.response.status) {
+                switch (err.response.status) {
+                    case 404:
+                        message = "Sorry! the page you are looking for could not be found";
+                        break;
+                    case 500:
+                        message = "Sorry! something went wrong, please contact our support team";
+                        break;
+                    case 401:
+                        message = "Invalid credentials";
+                        break;
+                    default:
+                        message = err[1];
+                        break;
+                }
+            }
+            throw message;
+        });
 };
 
 // Login Method

@@ -1,119 +1,82 @@
-import { useField } from "formik";
-import Form from "react-bootstrap/Form";
-import { If } from "~/utils/tsx-control-statements";
+import { useFormikContext } from "formik";
 
-import InputGroup from "react-bootstrap/InputGroup";
-import ErrMessage from "~/Components/atoms/err-message";
-
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect } from "react";
+import { Props } from 'react-select';
+import Label from "~/Components/atoms/label";
+import Select from "~/Components/atoms/select";
 import type { InputControlProps } from "./types";
-import { sub_speciality } from "~/common/data/subSpecialitys";
-import Select from "react-select";
 
-const options = sub_speciality.map((item) => ({
-    value: item,
-    label: item,
-  }));
+type Option = {
+    value: string | number;
+    label: string;
+    [key: string]: any;
+}
 
-const FieldControlTest = ({
+type FieldSelectControl = InputControlProps<Props> & {
+    name: string
+    deps?: any[]
+    onChangeValue?: (item: any) => void;
+    options?: Option[]
+}
+
+const FieldControlSelect = ({
     label,
-    children,
     required = false,
-    component,
-    startChildren,
-    disabledError = false,
     className,
-    initialFocus = false,
+    name,
     divClassName,
+    options = [],
+    onChangeValue = () => { },
     ...props
-}: InputControlProps) => {
-    const ref = useRef<HTMLInputElement>(null);
-    const { current } = ref;
+}: FieldSelectControl) => {
+    const { values, setFieldValue, } = useFormikContext<any>();
 
     useEffect(() => {
-        if (!initialFocus) return;
 
-        if (!current?.focus) {
-            console.warn(
-                "FieldControl: initialFocus is true, but the component does not have the focus method"
-            );
+        const item = options.find((option: Option) => option?.value === values?.[name]?.value)
+
+        if (!item && values?.[name]?.value) {
+            setFieldValue(
+                name,
+                null,
+            )
+
+            return
         }
 
-        if (current?.focus) {
-            current.focus();
-        }
-    }, [current, initialFocus]);
+        if (!item) return
 
-    const [inputProps, meta] = useField(props);
-    const id = props.name || props.id;
+        setFieldValue(
+            name,
+            item,
+        )
 
-    const InputComponent = component as any;
-    const display =
-        !disabledError && meta.touched && !!meta.error ? "block" : "none";
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [options])
 
-    const onChange = (e: any) => {
-        props.onChange?.(e);
-        inputProps.onChange(e);
-    };
+    const onChange = useCallback(
+        (option: any) => {
+            onChangeValue?.(option);
+            setFieldValue(name, option, true);
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [setFieldValue]
+    );
 
     return (
         <div className={divClassName}>
-            <If condition={!!label}>
-                <Form.Label
-                    htmlFor={id}
-                    className="mb-0 list-group-item fs-12"
-                    data-testid={`label-${id}`}
-                >
-                    {label}
-                    <If condition={required}>
-                        <span className="text-danger">*</span>
-                    </If>
-                </Form.Label>
-            </If>
-            <InputGroup className="position-relative mb-2 z-10">
-                {startChildren}
-                <Select
-                    className={` hover:border-primary-500
-                    box-shadow-none
-                    w-full
-                    hover-
-                    focus-within:!outline-1
-                    focus:border-primary-500
-                    disabled:!cursor-not-allowed
-                    disabled:!opacity-25
-                    focus:!border-2
-                    `}
-                    theme={(theme) => ({
-                        ...theme,
-                        borderRadius: 0,
-                        colors: {
-                          ...theme.colors,
-                          primary25: 'rgb(9, 178, 133);',
-                          primary: 'rgb(9, 178, 133);',
-                        },
-                      })}
-                    isSearchable={true}
-                    isMulti
-                    name="speciality"
-                    options={options}
-
-                />
-
-                {children}
-            </InputGroup>
-            <ErrMessage
-                message={meta.error?.toString() as string}
-                data-testid={`err-${id}`}
-                style={{
-                    display,
-                }}
+            <Label label={label} required={required} id={name} separator={':'} />
+            <Select
+                {...props}
+                id={name}
+                className="w-full"
+                options={options}
+                name={name}
+                onChange={onChange}
+                value={values?.[name]}
             />
         </div>
     );
 };
 
-FieldControlTest.defaultProps = {
-    component: "input",
-};
-
-export default FieldControlTest;
+export default FieldControlSelect;

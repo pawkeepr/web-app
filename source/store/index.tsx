@@ -4,38 +4,42 @@ import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 
 import { configureStore } from '@reduxjs/toolkit';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 import rootReducer from "./reducers";
-
 import rootSaga from "./sagas";
 
 const configureDefaultStore = (initialState = {}) => {
-  const sagaMiddleware = createSagaMiddleware();
-  const middlewares = [sagaMiddleware];
+    const sagaMiddleware = createSagaMiddleware();
+    const middlewares = [sagaMiddleware];
 
-  const store = configureStore({
-    reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares),
-    preloadedState: initialState,
-    devTools: process.env.NODE_ENV !== 'production',
-  })
+    const store = configureStore({
+        reducer: rootReducer,
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares),
+        preloadedState: initialState,
+        devTools: process.env.NODE_ENV !== 'production',
+    })
 
-  sagaMiddleware.run(rootSaga);
+    sagaMiddleware.run(rootSaga);
 
-  return store;
+    return store;
 }
 
 const store = configureDefaultStore();
+const persistor = persistStore(store);
 
 type ProviderClientProps = {
-  children: React.ReactNode
+    children: React.ReactNode
 }
 
 const ProviderClient = ({ children }: ProviderClientProps) => {
-  return (
-    <Provider store={store}>
-      {children}
-    </Provider>
-  );
+    return (
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+                {children}
+            </PersistGate>
+        </Provider>
+    );
 }
 
 export default ProviderClient;

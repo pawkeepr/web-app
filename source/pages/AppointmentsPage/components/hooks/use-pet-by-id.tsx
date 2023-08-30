@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState, useTransition } from "react"
 import { useAppSelector } from "~/store/hooks"
-import { Pet } from "~/store/pets/types"
+import { Data as Pet } from "~/store/pets/types"
 
 type UsePetByNameProps = {
     id?: string | null,
@@ -12,7 +12,7 @@ const usePetById = ({ id, onChangeField }: UsePetByNameProps) => {
     const [isPending, startTransition] = useTransition()
     const [petExists, setPetExists] = useState(false)
 
-    const pets = useAppSelector(state => state.Pets.pets)
+    const pets = useAppSelector(state => state.Pets.data)
 
     const onChangePet = useCallback((pet: Pet) => {
         startTransition(() => {

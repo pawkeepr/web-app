@@ -12,40 +12,35 @@ import calendarSaga from "./calendar/saga";
 //chat
 import chatSaga from "./chat/saga";
 
+import AppointmentVetSagas from './appointment-vet/sagas';
 import PetsSagas from './pets/sagas';
-import TutorsSagas from './tutor/sagas';
-import VeterinaryAppointmentsSagas from './veterinary-appointments/sagas';
+import TutorsSagas from './tutors/sagas';
 
 
 // Task
 import taskSaga from "./tasks/saga";
 // Crypto
 
-//crm
-import crmSaga from "./tutor/sagas";
 
 // Pages > Team
 import teamSaga from "./team/saga";
 
 
 export default function* rootSaga() {
-  yield all([
-    //public
-    fork(LayoutSaga),
-    fork(AccountSaga),
-    fork(ForgetSaga),
-    fork(ProfileSaga),
-    fork(chatSaga),
-    fork(taskSaga),
-    fork(ActivateAccountSaga),
-    fork(TutorsSagas),
-    fork(PetsSagas),
-    fork(VeterinaryAppointmentsSagas),
-    fork(calendarSaga),
-    fork(crmSaga),
-
-    fork(teamSaga),
-
-    fork(LoginSagas),
-  ]);
+    yield all([
+        //public
+        fork(LayoutSaga),
+        fork(AccountSaga),
+        fork(ForgetSaga),
+        fork(ProfileSaga),
+        fork(chatSaga),
+        fork(taskSaga),
+        fork(ActivateAccountSaga),
+        fork(TutorsSagas),
+        fork(PetsSagas),
+        fork(AppointmentVetSagas),
+        fork(calendarSaga),
+        fork(teamSaga),
+        fork(LoginSagas),
+    ]);
 }

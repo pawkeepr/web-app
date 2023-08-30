@@ -5,7 +5,7 @@ import { faker } from '@faker-js/faker';
 import { CatBloodType } from "~/store/pets/bloodType";
 import { CatBreed } from "~/store/pets/breedType";
 import { Species } from "~/store/pets/speciesType";
-import { GenderPet, Pet } from "~/store/pets/types";
+import { Pet } from "~/store/pets/types";
 import * as url from '../url_helper';
 
 import _ from 'lodash';
@@ -29,7 +29,7 @@ const factoryPet = (document?: string, name?: string): Pet => ({
     name: faker.name.middleName(),
     species: Species.cat,
     breed: factoryBreeds(Species.cat),
-    gender: GenderPet.unknown,
+    gender: 'unknown',
     dateOfBirth: faker.date.past().toLocaleString(),
     color: faker.color.human(),
     allergies: [],

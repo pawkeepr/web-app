@@ -1,12 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { BtnLink } from "~/Components/atoms/btn";
 
-// Import Images
-import logoLight from "~/assets/images/logo-dark.png";
-import logoDark from "~/assets/images/logo-light.png";
+import ArrowRightOnRectangleIcon from '@heroicons/react/24/solid/ArrowRightOnRectangleIcon';
+
 
 const NavbarLanding = () => {
     // const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -31,24 +31,24 @@ const NavbarLanding = () => {
     return (
         <header>
             <nav
-                className="fixed z-50 left-0 right-0 mobile:p-2 md:p-4 transition-colors data-[scroll-action=true]:bg-white data-[scrollAction=true]:shadow-md"
+                className="fixed z-50 left-0 right-0 mobile:p-2 px-4 py-2 transition-colors data-[scroll-action=true]:bg-white shadow-md"
                 data-scroll-action={actionScroll}
             >
                 <div className="container flex flex-wrap justify-center gap-2 md:gap-0 md:justify-between">
                     <Link href="/">
-                        <Image
-                            src={logoDark}
-                            className="hidden data-[logo-light=false]:flex"
+                        <img
+                            src='/logo-light.png'
+                            className="hidden h-12 w-36  data-[logo-light=false]:flex"
                             data-logo-light={actionScroll}
                             alt="logo light"
                             height="40"
+                            width={120}
                         />
-                        <Image
-                            src={logoLight}
-                            className="hidden data-[logo-light=true]:flex"
+                        <img
+                            src='/logo-dark.png'
+                            className="hidden h-12 w-36 data-[logo-light=true]:flex"
                             data-logo-light={actionScroll}
                             alt="logo dark"
-                            height="40"
                         />
                     </Link>
 
@@ -106,24 +106,21 @@ const NavbarLanding = () => {
 
 
                             </ScrollSpy> */}
-                    <div className="z-50">
-                        <Link
+                    <div className="z-50 flex gap-2">
+                        <BtnLink
+                            message="Entrar"
+                            className="text-gray-500 hover:!bg-secondary-500 !border-secondary-500 border"
                             href="/sign-in"
-                            className="btn btn-link text-dark cursor-pointer border-2 border-solid border-secondary"
                         >
-                            <span className="m-1 fw-semibold">Entrar</span>
-                            {/* icon de seta a direita circular na porta */}
-                            <i className="mdi mdi-arrow-right-circle"></i>
-                        </Link>
-                        <Link
+                            <ArrowRightOnRectangleIcon />
+                        </BtnLink>
+                        <BtnLink
+                            message="Criar Conta"
+                            className="border-2 border-solid border-primary-600 hover:!bg-secondary-500"
                             href="/sign-up"
-                            className="btn btn-secondary text-dark cursor-pointer"
                         >
-                            <span className="m-1 fw-semibold ">
-                                Cadastre-se
-                            </span>
                             {/* icon de cadastro */}
-                        </Link>
+                        </BtnLink>
                     </div>
                     {/* </Collapse> */}
                 </div>

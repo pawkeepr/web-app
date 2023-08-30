@@ -2,33 +2,33 @@ require('dotenv').config()
 
 /**@type {import('next').NextConfig} */
 const nextConfig = ((phase) => {
-  const isProduction = phase === 'production'
+    const isProduction = phase === 'production'
 
-  // const _currentURL = isProduction ? process.env.API_URL : 'http://localhost:8000/api/v1/'
+    const _currentURL = 'https://z4etzps20a.execute-api.us-east-1.amazonaws.com/development'
 
-  return {
-    publicRuntimeConfig: {
-      publicRoutes: ['/sign-in', '/sign-up', '/forget-password', '/reset-password', '/'],
-    },
-    images: {
-      domains: ['localhost', 'cloudflare-ipfs.com', 'loremflickr.com'],
-    },
-    reactStrictMode: true,
-    swcMinify: true,
-    eslint: {
-      ignoreDuringBuilds: true,
-    },
-    typescript: {
-      ignoreBuildErrors: true,
-    },
-    env: {
-      API_URL: "https://z4etzps20a.execute-api.us-east-1.amazonaws.com/development/api",
-      SECRET_KEY: process.env.SECRET_KEY,
-      REGION: process.env.REGION,
-      USER_POOL_ID: process.env.USER_POOL_ID,
-      USER_POOL_WEB_CLIENT_ID: process.env.USER_POOL_WEB_CLIENT_ID,
-    },
-  }
+    return {
+        publicRuntimeConfig: {
+            publicRoutes: ['/sign-in', '/sign-up', '/forget-password', '/reset-password', '/'],
+        },
+        images: {
+            domains: ['localhost', 'cloudflare-ipfs.com', 'loremflickr.com', 'z4etzps20a.execute-api.us-east-1.amazonaws.com'],
+        },
+        reactStrictMode: true,
+        swcMinify: true,
+        eslint: {
+            ignoreDuringBuilds: true,
+        },
+        typescript: {
+            ignoreBuildErrors: true,
+        },
+        env: {
+            API_URL: _currentURL,
+            SECRET_KEY: process.env.SECRET_KEY,
+            REGION: process.env.REGION,
+            USER_POOL_ID: process.env.USER_POOL_ID,
+            USER_POOL_WEB_CLIENT_ID: process.env.USER_POOL_WEB_CLIENT_ID,
+        },
+    }
 })(process.env.NODE_ENV)
 
 module.exports = nextConfig

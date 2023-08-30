@@ -1,5 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
+import { persistReducer } from 'redux-persist';
+import storage from './storage';
+
 // Front
 import Layout from "./layouts/slice";
 
@@ -19,24 +22,34 @@ import chat from "./chat/reducer";
 import Tasks from "./tasks/reducer";
 
 //Tutor
-import Tutor from "./tutor/slice";
+import Tutor from "./tutors/slice";
 
 // Pets
 import Pets from "./pets/slice";
 
-import VeterinaryAppointments from "./veterinary-appointments/slice";
+import AppointmentVet from "./appointment-vet/slice";
 
 // Pages > Team
 import Team from "./team/reducer";
 
 
+const persistConfig = {
+    key: '@pawkeepr/session',
+    storage,
+}
+
+const persistedReducersSession = persistReducer(
+    persistConfig,
+    Login
+)
+
 const rootReducer = combineReducers({
     // public
     Layout,
-    Login,
+    Login: persistedReducersSession,
     Account,
     ForgetPassword,
-    VeterinaryAppointments,
+    AppointmentVet,
     Profile,
     Calendar,
     chat,
@@ -44,7 +57,7 @@ const rootReducer = combineReducers({
     Tutor,
     Team,
     Pets,
-    ActivateAccount
+    ActivateAccount,
 });
 
 export default rootReducer;

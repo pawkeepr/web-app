@@ -1,9 +1,9 @@
 import { useEffect, useTransition } from "react"
-import { Pet } from "~/store/pets/types"
+import { Data } from "~/store/pets/types"
 
 type UsePetByNameProps = {
     name?: string | null,
-    pets: Pet[],
+    pets: Data[],
     onChangeField: (field: string, value: any) => void
 }
 
@@ -23,7 +23,7 @@ const usePetByName = ({ onChangeField, pets, name }: UsePetByNameProps) => {
         onChangeField('pet.avatar', '')
     }, [name, pets, onChangeField])
 
-    const onChangePet = (pet: Pet) => {
+    const onChangePet = (pet: Data) => {
         startTransition(() => {
             onChangeField('pet.id', pet.id)
             onChangeField('pet.avatar', pet.avatar)

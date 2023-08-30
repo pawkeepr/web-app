@@ -7,15 +7,15 @@ import LOADING from '~/constants/loading';
 import { decrypt, encrypt } from '~/helpers/encrypt-and-decrypt';
 import {
     recoverUserByToken,
-    signInUser
-} from '~/store/actions';
+    signInUser,
+    signOutUser,
+} from '~/store/auth/login/actions';
 import {
     LoginState,
     onChangePassword,
     onChangeRememberMe,
     onChangeUsername,
     onSetRememberMe,
-    onToggleVisiblePassword as onToggleVisiblePasswordAction,
 } from '~/store/auth/login/slice';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
 import { getCookie, setCookie } from '~/utils/cookies-utils';
@@ -30,10 +30,8 @@ interface AuthContextType {
     user: any;
     password: string;
     username: string;
-    visiblePassword: boolean;
     isLoading: LOADING;
     rememberMe: boolean;
-    onToggleVisiblePassword: () => void;
     onToggleRememberMe: () => void;
     signIn: (data: SignInData) => Promise<void>;
 }
@@ -54,7 +52,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password,
         rememberMe,
         username,
-        visiblePassword
     } = useAppSelector(state => state.Login as LoginState)
     const router = useRouter()
 
@@ -62,6 +59,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         const token = getCookie(cookies.token.name)
 
         if (!token) {
+            dispatch(signOutUser())
             router.prefetch('/sign-in')
             return
         }
@@ -108,10 +106,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         dispatch(onChangeRememberMe())
     }
 
-    const onToggleVisiblePassword = () => {
-        dispatch(onToggleVisiblePasswordAction())
-    }
-
     return (
         <AuthContext.Provider
             value={{
@@ -121,9 +115,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 isLoading,
                 password,
                 username,
-                visiblePassword,
                 onToggleRememberMe,
-                onToggleVisiblePassword,
                 signIn,
             }}
         >

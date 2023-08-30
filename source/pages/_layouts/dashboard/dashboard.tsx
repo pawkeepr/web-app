@@ -17,9 +17,7 @@ const DashboardLayouts = ({
     return (
         <>
             <HeaderTitle title={title} />
-            <div className="">
-                {children}
-            </div>
+            {children}
         </>
     );
 };

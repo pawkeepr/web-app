@@ -1,48 +1,33 @@
 import { useField } from "formik";
-import Form from "react-bootstrap/Form";
-import { If } from "~/utils/tsx-control-statements";
 
-import InputGroup from "react-bootstrap/InputGroup";
-import ErrMessage from "~/Components/atoms/err-message";
 
-import { useEffect, useRef } from "react";
 import type { InputControlProps } from "./types";
 
-const FieldControl = ({
+import cn from 'classnames';
+import { twMerge } from 'tailwind-merge';
+import Input from "~/Components/atoms/input/input";
+import Label from "~/Components/atoms/label";
+
+const FieldControl = <T,>({
     label,
     children,
     required = false,
-    component,
+    component = Input,
+    startIcon,
     startChildren,
+    endIcon,
+    separator = ':',
     disabledError = false,
     className,
     initialFocus = false,
     divClassName,
     ...props
-}: InputControlProps) => {
-    const ref = useRef<HTMLInputElement>(null);
-    const { current } = ref;
-
-    useEffect(() => {
-        if (!initialFocus) return;
-
-        if (!current?.focus) {
-            console.warn(
-                "FieldControl: initialFocus is true, but the component does not have the focus method"
-            );
-        }
-
-        if (current?.focus) {
-            current.focus();
-        }
-    }, [current, initialFocus]);
+}: InputControlProps<T>) => {
 
     const [inputProps, meta] = useField(props);
     const id = props.name || props.id;
 
     const InputComponent = component as any;
-    const display =
-        !disabledError && meta.touched && !!meta.error ? "block" : "none";
 
     const onChange = (e: any) => {
         props.onChange?.(e);
@@ -50,55 +35,50 @@ const FieldControl = ({
     };
 
     return (
-        <div className={divClassName}>
-            <If condition={!!label}>
-                <Form.Label
-                    htmlFor={id}
-                    className="mb-0 list-group-item fs-12"
-                    data-testid={`label-${id}`}
-                >
-                    {label}
-                    <If condition={required}>
-                        <span className="text-danger">*</span>
-                    </If>
-                </Form.Label>
-            </If>
-            <InputGroup className="position-relative mb-2">
-                {startChildren}
-
+        <div className={twMerge("w-full", divClassName)}>
+            <Label label={label} required={required} id={id} separator={separator} />
+            <div className='relative'>
+                {startIcon && (
+                    <div className="absolute inset-y-0 flex items-center pl-1 text-sm text-gray-400 pointer-events-none left-1">
+                        {startIcon}
+                    </div>
+                )}
                 <InputComponent
                     id={id}
-                    ref={ref || props.ref}
                     required={required}
                     data-testid={`input-${id}`}
-                    className={`
-                        ${className}
-                        focus-within:!outline-1
-                        focus:!border-primary-500
-                        disabled:!cursor-not-allowed
-                        disabled:!opacity-25
-                        focus:!border-2
-                    `}
+                    className={
+                        twMerge(
+                            cn(
+                                {
+                                    'bg-slate-100': props.disabled,
+                                    '!pl-8': startIcon,
+                                    '!pr-8': endIcon,
+                                },
+
+                            ), className)
+                    }
                     {...inputProps}
                     {...props}
                     onChange={onChange}
                 />
+                {endIcon && (
+                    <div className={`absolute top-1/2 transform -translate-y-1/2 right-0 mr-2`}>
+                        {endIcon}
+                    </div>
+                )}
+            </div>
+            {!meta.error && (
+                <div className="pb-2" />
+            )}
 
-                {children}
-            </InputGroup>
-            <ErrMessage
-                message={meta.error?.toString() as string}
-                data-testid={`err-${id}`}
-                style={{
-                    display,
-                }}
-            />
+            {meta.error && (
+                <div className="w-full text-xs text-center text-red-700">
+                    {meta.error}
+                </div>
+            )}
         </div>
     );
-};
-
-FieldControl.defaultProps = {
-    component: "input",
 };
 
 export default FieldControl;

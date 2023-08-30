@@ -1,40 +1,19 @@
 "use client";
 
+import { useEffect } from "react";
+import { useAppDispatch } from "~/store/hooks";
 import DefaultLayout from "../_layouts/dashboard/dashboard";
-import AppointmentsTab from "./components/organisms/tabs/AppointmentsTab";
+import AppointmentsTab from "./AppointmentsTab";
 
-const Section = () => {
-    //Tab
-    // const [activeTab, setActiveTab] = useState("1");
+import { getAll } from '~/store/appointment-vet/actions';
 
-    // const toggleTab = (tab: "1" | "2" | "3" | "4") => () => {
-    //     if (activeTab !== tab) {
-    //         setActiveTab(tab);
-    //     }
-    // };
+const DashboardPage = () => {
+    const dispatch = useAppDispatch();
 
-    // const items = [
-    //     {
-    //         label: "Consultas",
-    //         onClick: toggleTab("1"),
-    //         href: "#Appointments",
-    //     },
-    // {
-    //     label: "Sobre",
-    //     onClick: toggleTab("2"),
-    //     href: "#About",
-    // },
-    // {
-    //     label: "Pets",
-    //     onClick: toggleTab("3"),
-    //     href: "#Pets",
-    // },
-    // {
-    //     label: "Tutores",
-    //     onClick: toggleTab("4"),
-    //     href: "#Tutors",
-    // },
-    // ];
+    useEffect(() => {
+        dispatch(getAll())
+    }, []);
+
 
     return (
         <DefaultLayout title="Dashboard">
@@ -43,4 +22,4 @@ const Section = () => {
     );
 };
 
-export default Section;
+export default DashboardPage;

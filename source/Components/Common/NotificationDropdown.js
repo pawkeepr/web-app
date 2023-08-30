@@ -1,3 +1,5 @@
+import classnames from 'classnames';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import {
     Col,
@@ -11,19 +13,17 @@ import {
     TabContent,
     TabPane
 } from 'reactstrap';
-import Link from 'next/link';
-import classnames from 'classnames';
 
 //import images
+import bell from "~/assets/images/svg/bell.svg";
 import avatar2 from "~/assets/images/users/avatar-2.jpg";
-import avatar8 from "~/assets/images/users/avatar-8.jpg";
 import avatar3 from "~/assets/images/users/avatar-3.jpg";
 import avatar6 from "~/assets/images/users/avatar-6.jpg";
-import bell from "~/assets/images/svg/bell.svg";
+import avatar8 from "~/assets/images/users/avatar-8.jpg";
 
 //SimpleBar
-import SimpleBar from "simplebar-react";
 import Image from 'next/image';
+import SimpleBar from "simplebar-react";
 
 const NotificationDropdown = () => {
     //Dropdown Toggle
@@ -41,11 +41,11 @@ const NotificationDropdown = () => {
     };
     return (
         <React.Fragment>
-            <Dropdown isOpen={isNotificationDropdown} toggle={toggleNotificationDropdown} className="topbar-head-dropdown ms-1 header-item">
-                <DropdownToggle type="button" tag="button" className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle">
+            <Dropdown isOpen={isNotificationDropdown} toggle={toggleNotificationDropdown} className="topBar-head-dropdown ms-1 header-item">
+                <DropdownToggle type="button" tag="button" className="btn btn-icon btn-topBar btn-ghost-secondary rounded-circle">
                     <i className='bx bx-bell fs-22'></i>
                     <span
-                        className="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">3<span
+                        className="position-absolute topBar-badge fs-10 translate-middle badge rounded-pill bg-danger">3<span
                             className="visually-hidden">unread messages</span></span>
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-menu-lg dropdown-menu-end p-0">
