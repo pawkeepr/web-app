@@ -69,7 +69,7 @@ const AuthLayout = ({
                             "rounded-xl": !image,
                         }
                     )}>
-                        <div className="flex flex-col justify-center items-center mt-5 mobile:mt-0 mb-2">
+                        <div className="flex flex-col justify-center items-center mt-2 mobile:mt-0 mb-2">
                             <div
                                 className=
                                 "hidden mobile:flex h-20 w-16 !bg-no-repeat !bg-cover !bg-center"
