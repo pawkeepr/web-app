@@ -99,7 +99,7 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                <div className="w-full">
                     <FieldControl
                         label="Valor do Pagamento?"
-                        className="rounded-md w-full border-1 h-10 border-gray-300 no-underline"
+                        className="form-control border-2 h-9 border-gray-200"
                         name="paymentValue"
                         component={InputMask as any}
                         mask="R$ 999,99"

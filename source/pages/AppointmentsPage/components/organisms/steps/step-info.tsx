@@ -11,11 +11,18 @@ import { StepProps } from "./types";
 
 const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
     const physical_activity = ['Caminhadas', 'Corridas', 'Natação', 'Passeios', 'Cabo-de-guerra', 'Varetinhas', 'Bolinhas']
+    const measurements = ['Kilogramas', 'Gramas']
     const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
     const [heightPet, setHeightPet] = useState(0);
     const [weighthPet, setweighthPet] = useState(0);
 
     const options = physical_activity.map((item) => ({
+        value: item,
+        label: item,
+        color: 'rgb(255 200 107);',
+    }));
+
+    const options2 = measurements.map((item) => ({
         value: item,
         label: item,
         color: 'rgb(255 200 107);',
@@ -54,14 +61,13 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                         name="weight"
                         type="number" />
                     <div className="flex flex-col mb-[6px] w-full">
-                        <span className=" text-xs">Medida:</span>
-                        <select
-                            className="hover:border-primary-500 mt-2 border-2"
-                            // name="measureWeight"
-                        >
-                            <option value="kg">Kilogramas</option>
-                            <option value="g">Gramas</option>
-                        </select>
+                        {/* <span className=" text-xs">Medida:</span> */}
+                        <FieldControlSelect
+                            label="Selecione uma medida"
+                            placeholder="Selecione uma medida"
+                            name="measurements"
+                            options={options2}
+                        />
                     </div>
                 </div>
                 <span className="font-bold">Informações Opcionais</span>
