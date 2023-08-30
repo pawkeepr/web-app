@@ -98,7 +98,7 @@ const Auth = () => {
                     </div>
                     <BtnPrimary
                         label="Entrar"
-                        className="w-full"
+                        className="!w-full"
                         type="submit"
                         data-testid="submit-button"
                         disabled={!isValid || isAuthenticated}
