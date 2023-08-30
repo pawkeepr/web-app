@@ -18,6 +18,7 @@ import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 import { BsFillTrash3Fill, BsPlusCircleFill } from "react-icons/bs";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
+import FieldTextArea from "~/Components/molecules/field-text-area/field-text-area";
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
@@ -569,7 +570,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         </div>
                     </div>
                     <div className="flex flex-col mt-2">
-                        <FieldControl
+                        <FieldTextArea
                             label="Orientações e Anotações"
                             className="rounded-md form-control"
                             component="textarea"
