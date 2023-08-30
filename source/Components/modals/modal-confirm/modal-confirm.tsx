@@ -133,7 +133,7 @@ const ModalConfirm = ({
 
                                     <Dialog.Description
                                         as="p"
-                                        className="text-xs text-red-500 dark:!text-red-300 text-center"
+                                        className="text-sm font-bold text-secondary-500 dark:!text-secondary-500 text-center"
                                     >
                                         {description}
                                     </Dialog.Description>

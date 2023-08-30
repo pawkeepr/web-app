@@ -140,11 +140,11 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                     placeholder="digite a razão da consulta, exemplo='consulta de rotina'"
                                     type="text"
                                 />
-                                <FieldTextArea
-                                    label='Observações adicionais'
-                                    name="type"
-                                    className="mb-3  border-1 border-gray-300"
-                                    placeholder="digite observações adicionais, exemplo='Cliente prioritário'"
+                                 <FieldTextArea
+                                    label="Orientações e Anotações"
+                                    className="form-control"
+                                    component="textarea"
+                                    name="observations"
                                     type="text"
                                 />
 
