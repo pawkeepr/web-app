@@ -17,10 +17,19 @@ import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 
 import { BsFillTrash3Fill, BsPlusCircleFill } from "react-icons/bs";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete";
+import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
     const [enableField, setEnableField] = useState<boolean>(true);
+    const measurements = ['Kilogramas', 'Gramas']
+
+    const options2 = measurements.map((item) => ({
+        value: item,
+        label: item,
+        color: 'rgb(255 200 107);',
+    }));
+
 
     const handleClick = () => {
         enableField === true ? setEnableField(false) : setEnableField(true);
@@ -551,14 +560,12 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                             type="number"
                         />
                         <div className="flex flex-col mb-[6px] w-full">
-                            <span className=" text-xs font-bold ">Medida</span>
-                            <select
-                                className="form-control"
-                                name="measureWeight"
-                            >
-                                <option value="kg">Kilogramas</option>
-                                <option value="g">Gramas</option>
-                            </select>
+                            <FieldControlSelect
+                                label="Selecione uma medida"
+                                placeholder="Selecione uma medida"
+                                name="measurements"
+                                options={options2}
+                            />
                         </div>
                     </div>
                     <div className="flex flex-col mt-2">
