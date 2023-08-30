@@ -139,7 +139,7 @@ const VerticalTabs = () => {
                                                     className={
                                                         (cn({
                                                             active: activeVerticalTab === item.id,
-                                                            done: (activeVerticalTab <= items.length && activeVerticalTab > item.id)
+                                                            done: (activeVerticalTab <= items.length && activeVerticalTab === item.id)
                                                         }))
                                                     }
                                                     onClick={() => {
