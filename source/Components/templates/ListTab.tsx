@@ -39,28 +39,45 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
 
     return (
         <React.Fragment>
-            <div className="flex justify-between items-center">
-                <div
-                    className="team-list w-full list-view-filter col-span-8"
-                    style={{ marginTop: 12 }}
-                >
-                        <SearchInput
-                            value={search}
-                            onChange={handleSearch}
-                            placeholder="Busque a Consulta..."
-                            className="rounded-md"
-                        />
-                </div>
-
-                <div className="flex col-span-4 items-center gap-2">
-                    <Modal />
-                    <div style={{ marginTop: 10 }}>
-                        <AddNewAppointment />
-                    </div>
-                </div>
-            </div>
             <HorizontalTabs />
-            {cards(deferredItems)}
+            <div
+                className="
+                    grid
+                    grid-cols-12
+                    items-center
+                    gap-3
+                "
+            >
+                <div className="team-list list-view-filter col-span-8"
+                    style={{marginTop: 12}}
+                    >
+                        <div
+                    >
+                        <SearchInput
+                        value={search}
+                        onChange={handleSearch}
+                        placeholder="Busque a Consulta..."
+                    />
+
+                    </div>
+                    {cards(deferredItems)}
+                </div>
+                
+                <div
+                    className="
+                        flex
+                        col-span-4
+                        items-center
+                        gap-2
+                    "
+                >   
+                    <Modal />
+                    
+                   <div style={{marginTop: 10}} >
+                        <AddNewAppointment />      
+                    </div>          
+                </div>            
+            </div>            
         </React.Fragment>
     );
 };
