@@ -31,6 +31,8 @@ import { errorToast } from '../../helpers/toast';
 import { getProfileSession, resetProfileFlag, setProfile } from '../profile/actions';
 import { Profile } from "../profile/types";
 
+import { setEmailAccount } from '../activate-account/actions';
+
 export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
     try {
         const response: UserData = yield call(signInAws, action.payload);
@@ -48,6 +50,7 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
             yield call([Router, Router.push], '/confirm-account');
 
             // Se o usuário não estiver confirmado, redirecione para a página de ativação.
+            yield put(setEmailAccount(action.payload.username));
             yield put(signInFailed((error as any).message));
         } else {
             errorToast('Não foi possível realizar o login.', 'Falha!')

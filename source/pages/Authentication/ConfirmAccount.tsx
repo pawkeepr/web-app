@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 
@@ -13,6 +14,7 @@ import AuthLayout from "../_layouts/auth/auth_layout";
 import * as Yup from "yup";
 import validateEmail from "~/validations/email";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from 'react';
 import LOADING from "~/constants/loading";
 import {
@@ -43,6 +45,13 @@ type ConfirmAccountProps = {
 }
 
 const ConfirmAccount = ({ email }: ConfirmAccountProps) => {
+    const router = useRouter()
+
+    useEffect(() => {
+        if (!email) {
+            router.push('/sign-in')
+        }
+    }, [email])
 
     const [inputValues, setInputValues] = useState<string[]>(Array(6).fill('')); // Inicializa um array de 6 strings vazias
 
@@ -115,7 +124,8 @@ const ConfirmAccount = ({ email }: ConfirmAccountProps) => {
                                         Preencha o código de verificação
                                         enviado para o seu email:
                                         <br />
-                                        <span className="mx-2 fw-bold">{values.email}</span>
+                                        <span className="mx-2 font-semibold">{email || 'email@teste.com'}</span>
+
                                     </p>
                                 </div>
                             </div>

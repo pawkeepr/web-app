@@ -3,6 +3,8 @@ import optionsCookies from "~/constants/cookies"
 
 import type { GetServerSideProps, GetServerSidePropsContext, PreviewData } from "next"
 import type { ParsedUrlQuery } from "querystring"
+import { api } from "~/services/api"
+import { getVetProfile } from "~/services/helpers"
 
 const getServerSidePropsPagesPrivates =
     (callback?: GetServerSideProps) =>
@@ -18,6 +20,13 @@ const getServerSidePropsPagesPrivates =
                     }
                 }
             }
+
+            api.defaults.headers.Authorization = `Bearer ${token}`
+
+            const { data } = await getVetProfile()
+            console.log(data)
+
+
 
             if (callback) {
                 return callback(ctx)

@@ -16,6 +16,8 @@ import {
 //Include Both Helper File with needed methods
 import { PayloadAction } from "@reduxjs/toolkit";
 import Router from 'next/router';
+import cookies from '~/constants/cookies';
+import { setCookie } from "~/utils/cookies-utils";
 
 import {
     createProfileVet,
@@ -27,6 +29,8 @@ import { errorToast, successToast } from "~/store/helpers/toast";
 function* onGetProfile() {
     try {
         const { data } = yield call(getVetProfile);
+        yield setCookie(cookies.token.name, JSON.stringify(data), cookies.token.expires);
+
         yield put(editProfileSuccess(data));
     } catch (error) {
         yield call([Router, Router.push], '/activation');

@@ -1,17 +1,17 @@
 import {
-    ClassAttributes,
-    TextareaHTMLAttributes,
+    ComponentProps
 } from 'react'
 
 import { twMerge } from 'tailwind-merge'
+import { VariantProps } from 'tailwind-variants'
 import { input } from '../input'
+
+type TextAreaProps = ComponentProps<'textarea'> & VariantProps<typeof input>
 
 const TextArea = ({
     className,
     ...props
-}: JSX.IntrinsicAttributes &
-    ClassAttributes<HTMLTextAreaElement> &
-    TextareaHTMLAttributes<HTMLTextAreaElement>) => {
+}: TextAreaProps) => {
     const style = 'h-20 resize-none overflow-auto transition-shadow'
     return (
         <textarea
