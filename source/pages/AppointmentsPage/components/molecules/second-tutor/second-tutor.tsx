@@ -10,7 +10,7 @@ import MaskedInput from 'react-input-mask';
 import { IAddress } from '~/helpers/fetch-address-by-cep';
 import useFetchAddress from '~/hooks/use-fetch-address';
 import { InitialValues } from '../../../Appointments';
-
+import FieldCep from "~/Components/molecules/field-cep/field-cep";
 type StepsecondTutorProps = {
     disabled?: boolean
 }
@@ -84,11 +84,8 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                 </Col>
 
                 <Col sm={2}>
-                    <FieldControl
+                    <FieldCep
                         divClassName='my-1'
-                        
-                        type="text"
-                        initialFocus
                         label="CEP"
                         name="secondTutor.address.zipCode"
                         disabled={disabled || isLoading}
@@ -96,7 +93,8 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                         component={MaskedInput as any}
                         mask={"99999-999"}
                         required
-                    />
+                        
+                    />  
                 </Col>
                 <Col sm={3}>
                     <FieldControl
