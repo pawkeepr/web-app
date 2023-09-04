@@ -35,15 +35,15 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
             const { uf, localidade, bairro, logradouro, complemento } = params
 
             startTransition(() => {
-                setFieldValue('secondTutor.address.state', uf || '')
+                setFieldValue('second_tutor.address.state', uf || '')
 
-                setFieldValue('secondTutor.address.city', localidade || '')
+                setFieldValue('second_tutor.address.city', localidade || '')
 
-                setFieldValue('secondTutor.address.neighborhood', bairro || '')
+                setFieldValue('second_tutor.address.neighborhood', bairro || '')
 
-                setFieldValue('secondTutor.address.street', logradouro || '')
+                setFieldValue('second_tutor.address.street', logradouro || '')
 
-                setFieldValue('secondTutor.address.complement', complemento || '')
+                setFieldValue('second_tutor.address.complement', complemento || '')
 
                 setDisabledInputs({
                     state: !!uf,
@@ -57,7 +57,7 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
         [setFieldValue],
     )
 
-    const { loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode: values.secondTutor?.address?.zipCode || '' })
+    const { loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode: values.secondTuto_r?.address?.zipCode || '' })
 
 
     const isLoading = useMemo(() => isPending || loading, [isPending, loading])
@@ -73,11 +73,11 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                         initialFocus
                         divClassName='my-1'
                         label='Email'
-                        name="secondTutor.email"
+                        name="second_tutor.email"
                         aria-label="email"
                         disabled={disabled}
                         
-                        placeholder="Digite o email do secondTutor (opcional)"
+                        placeholder="Digite o email do secondTuto_r (opcional)"
                         required
                         disabledError
                     />
@@ -87,7 +87,7 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                     <FieldCep
                         divClassName='my-1'
                         label="CEP"
-                        name="secondTutor.address.zipCode"
+                        name="second_tutor.address.zipCode"
                         disabled={disabled || isLoading}
                         placeholder="Digite o CEP"
                         component={MaskedInput as any}
@@ -101,7 +101,7 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                         divClassName='my-1'
                         type="text"
                         label="Estado"
-                        name="secondTutor.address.state"
+                        name="second_tutor.address.state"
                         disabled={(disabledInputs.state || disabled) || isLoading}
                         placeholder={isLoading ? 'Carregando...' : 'Digite o nome do estado'}
                         required
@@ -113,7 +113,7 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                         divClassName='my-1'
                         type="text"
                         label="Cidade"
-                        name="secondTutor.address.city"
+                        name="second_tutor.address.city"
                         disabled={(disabledInputs.city || disabled) || isLoading}
                         placeholder={isLoading ? 'Carregando...' : 'Digite o nome da cidade'}
                         required
@@ -125,7 +125,7 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                         divClassName='my-1'
                         type="text"
                         label="Rua"
-                        name="secondTutor.address.street"
+                        name="second_tutor.address.street"
                         disabled={(disabledInputs.street || disabled) || isLoading}
                         placeholder={isLoading ? 'Carregando...' : 'Digite o nome da rua'}
                         required

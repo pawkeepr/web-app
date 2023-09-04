@@ -110,7 +110,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             initialFocus
                             divClassName="my-1"
                             label="Nome Completo"
-                            name="tutor.name"
+                            name="tutor_name"
                             disabled={isPending || tutorExists}
                             aria-label="name"
                             className=" "
@@ -124,7 +124,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     <FieldPhone
                         label="Telefone/Celular"
                         divClassName="my-1"
-                        name="Tutor.phone"                                
+                        name="tutor_phone"                                
                         disabled={isPending || tutorExists}
                         placeholder={
                             isPending
@@ -147,7 +147,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             <FieldDocument
                                 label="CPF"
                                 divClassName="my-1"
-                                name="secondTutor.document"
+                                name="second_tutor.document"
                                 aria-label="document"
                                 
                                 onlyCPF
@@ -162,7 +162,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 initialFocus
                                 divClassName="my-1"
                                 label="Nome Completo"
-                                name="secondTutor.name"
+                                name="second_tutor.name"
                                 disabled={isPending || tutorExists}
                                 aria-label="name"
                                 
@@ -177,7 +177,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 divClassName="my-1"
                                 type="text"
                                 label="Telefone/Celular"
-                                name="secondTutor.phone"
+                                name="second_tutor.name"
                                 disabled={isPending || tutorExists}
                                 placeholder={
                                     isPending
