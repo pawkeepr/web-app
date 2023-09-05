@@ -31,7 +31,7 @@ import { errorToast } from '../../helpers/toast';
 import { getProfileSession, resetProfileFlag, setProfile } from '../profile/actions';
 import { Profile } from "../profile/types";
 
-import { setEmailAccount } from '../activate-account/actions';
+import { setEmailAccount, setPasswordAccount } from '../activate-account/actions';
 
 export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
     try {
@@ -40,20 +40,26 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
 
         yield setCookie(cookies.token.name, idToken.jwtToken, idToken.payload.exp);
 
-        const mode = getCookie(cookies.layoutMode.name);
-        yield put(changeLayoutMode(mode as layoutModeTypes || layoutModeTypes.LIGHT_MODE));
-        yield put(setAuthorization({ token: idToken.jwtToken }));
-        yield put(signInSuccess({ user: {}, token: idToken.jwtToken }));
-        yield put(getProfileSession({ email: action.payload.username }));
+        const mode = getCookie(cookies.layoutMode.name) || layoutModeTypes.LIGHT_MODE
+        const token = idToken.jwtToken
+
+        yield put(changeLayoutMode(mode));
+        yield put(setAuthorization({ token }));
+        yield put(signInSuccess({ token }));
+        yield put(getProfileSession());
+
     } catch (error) {
-        if ((error as any)?.code === 'UserNotConfirmedException') {
-            // Se o usuário não estiver confirmado, redirecione para a página de ativação.
-            yield put(setEmailAccount(action.payload.username));
-            yield call([Router, Router.push], '/confirm-account');
-            yield put(signInFailed((error as any).message));
-        } else {
-            errorToast('Não foi possível realizar o login.', 'Falha!')
-            yield put(signInFailed((error as any).message));
+        switch ((error as any)?.code) {
+            case 'UserNotConfirmedException':
+                yield put(setEmailAccount(action.payload.username));
+                yield put(setPasswordAccount(action.payload.password));
+                yield call([Router, Router.push], '/confirm-account');
+                yield put(signInFailed((error as any).message));
+                break;
+            default:
+                errorToast('Não foi possível realizar o login.', 'Falha!')
+                yield put(signInFailed((error as any).message));
+                break;
         }
     }
 }
@@ -64,7 +70,7 @@ export function* recoverUserByTokenSaga() {
         const access_token = session.getAccessToken().getJwtToken();
         const userData = session.getIdToken().payload;
         yield put(setProfile(userData as Profile));
-        yield put(recoverUserByTokenSuccess({ user: userData, access_token }));
+        yield put(recoverUserByTokenSuccess({ access_token }));
     } catch (error) {
         console.log(error)
         yield put(recoverUserByTokenFailed((error as any).message));

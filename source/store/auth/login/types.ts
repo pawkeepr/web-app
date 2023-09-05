@@ -34,7 +34,6 @@ interface UserAuthenticationData {
 export type LoginState = {
     isAuthenticated: boolean;
     rememberMe: boolean;
-    user: UserAuthenticationData
     token: string;
     error?: string | null;
     isLoading: LOADING;

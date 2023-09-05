@@ -21,6 +21,7 @@ import { useAppDispatch, useAppSelector } from '~/store/hooks';
 
 const validationSchema = Yup.object({
     email: Yup.string().email().required('Campo obrigatório'),
+    password: Yup.string().required('Campo obrigatório'),
     digit0: Yup.string().required('Campo obrigatório').min(1, 'Campo obrigatório').max(1, 'Campo obrigatório'),
     digit1: Yup.string().required('Campo obrigatório').min(1, 'Campo obrigatório').max(1, 'Campo obrigatório'),
     digit2: Yup.string().required('Campo obrigatório').min(1, 'Campo obrigatório').max(1, 'Campo obrigatório'),
@@ -33,13 +34,13 @@ export type SchemaConfirmAccount = Yup.InferType<typeof validationSchema>
 
 
 const ConfirmAccount = () => {
-    const email = useAppSelector(state => state.ActivateAccount.email)
+    const { email, password } = useAppSelector(state => state.ActivateAccount)
 
     const dispatch = useAppDispatch()
     const router = useRouter()
 
     useEffect(() => {
-        if (!email) {
+        if (!email?.trim()) {
             router.push('/sign-in')
         }
     }, [email])
@@ -48,7 +49,6 @@ const ConfirmAccount = () => {
         return () => {
             dispatch(resetProfileFlag())
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleResend = () => {
@@ -57,7 +57,7 @@ const ConfirmAccount = () => {
 
     const handleSubmit = (values: SchemaConfirmAccount) => {
         const code = `${values.digit0}${values.digit1}${values.digit2}${values.digit3}${values.digit4}${values.digit5}`
-        dispatch(activateAccount({ username: values.email, code }))
+        dispatch(activateAccount({ username: values.email, code, password: values.password }))
     }
 
     return (
@@ -67,6 +67,7 @@ const ConfirmAccount = () => {
             <Formik
                 initialValues={{
                     email: email,
+                    password: password,
                     digit0: '',
                     digit1: '',
                     digit2: '',

@@ -3,6 +3,7 @@ import LOADING from "~/constants/loading";
 export const name = "activate";
 
 export const SET_EMAIL_ACCOUNT = "SET_EMAIL_ACCOUNT";
+export const SET_PASSWORD_ACCOUNT = "SET_PASSWORD_ACCOUNT";
 
 export const ACTIVATE_ACCOUNT = "ACTIVATE_ACCOUNT";
 export const ACTIVATE_ACCOUNT_SUCCESS = "ACTIVATE_ACCOUNT_SUCCESS";
@@ -22,15 +23,18 @@ export const ACTION_RESEND_CONFIRMATION_CODE_SUCCESS = `${name}/${RESEND_CONFIRM
 export const ACTION_RESEND_CONFIRMATION_CODE_ERROR = `${name}/${RESEND_CONFIRMATION_CODE_ERROR}`;
 
 export const ACTION_SET_EMAIL_ACCOUNT = `${name}/${SET_EMAIL_ACCOUNT}`;
+export const ACTION_SET_PASSWORD_ACCOUNT = `${name}/${SET_PASSWORD_ACCOUNT}`;
 
 export type ActivateAccount = {
     username: string,
     code: string
+    password: string
 }
 
 export type InitialStateProfile = {
     error: string;
     isLoading: LOADING;
     email: string;
+    password: string;
     user: ActivateAccount | null;
 }

@@ -8,6 +8,7 @@ import {
     ACTION_RESEND_CONFIRMATION_CODE_ERROR,
     ACTION_RESEND_CONFIRMATION_CODE_SUCCESS,
     ACTION_SET_EMAIL_ACCOUNT,
+    ACTION_SET_PASSWORD_ACCOUNT,
     ActivateAccount,
     RESET_PROFILE_FLAG,
 } from './types';
@@ -20,3 +21,4 @@ export const resendConfirmationCode = createAction<{ username: string }>(ACTION_
 export const resendConfirmationCodeSuccess = createAction(ACTION_RESEND_CONFIRMATION_CODE_SUCCESS);
 export const resendConfirmationCodeError = createAction(ACTION_RESEND_CONFIRMATION_CODE_ERROR);
 export const setEmailAccount = createAction<string>(ACTION_SET_EMAIL_ACCOUNT);
+export const setPasswordAccount = createAction<string>(ACTION_SET_PASSWORD_ACCOUNT);

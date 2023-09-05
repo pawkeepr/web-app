@@ -2,8 +2,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import LOADING from '~/constants/loading';
 
-
-
 import { api } from '~/services/api';
 import { IUser, LoginState, name } from './types';
 
@@ -11,7 +9,6 @@ const initialState: LoginState = {
     isAuthenticated: false,
     rememberMe: false,
     token: '',
-    user: null,
     error: null,
     username: '',
     password: '',
@@ -41,7 +38,6 @@ const loginSlice = createSlice({
         signOutUserSuccess: (state) => {
             state.isAuthenticated = false;
             state.token = '';
-            state.user = null;
             state.error = null;
             state.username = '';
             state.password = '';
@@ -61,8 +57,7 @@ const loginSlice = createSlice({
             }
             state.token = action.payload.token;
         },
-        signInSuccess: (state, action: PayloadAction<{ user: IUser, token: string }>) => {
-            state.user = action.payload.user;
+        signInSuccess: (state, action: PayloadAction<{ token: string }>) => {
             state.token = action.payload.token;
             state.isAuthenticated = true;
             state.isLoading = LOADING.SUCCESS;
@@ -75,7 +70,6 @@ const loginSlice = createSlice({
             state.isLoading = LOADING.PENDING;
         },
         recoverUserByTokenSuccess: (state, action: PayloadAction<{ user: IUser, access_token: string }>) => {
-            state.user = action.payload.user;
             state.token = action.payload.access_token;
             state.isAuthenticated = true;
             state.isLoading = LOADING.SUCCESS;
