@@ -14,6 +14,7 @@ import {
 } from './types';
 //Include Both Helper File with needed methods
 import { PayloadAction } from "@reduxjs/toolkit";
+import Router from 'next/router';
 
 import {
     confirmSignUp,
@@ -39,8 +40,9 @@ function* onActiveAccount({ payload }: PayloadAction<ActivateAccount>) {
         const { data } = yield call(confirmSignUp, username, code);
         yield put(activateAccountSuccess(data));
         successToast("Conta ativada com sucesso")
+        yield call([Router, Router.push], '/sign-in');
     } catch (error) {
-        errorToast('Erro na ativação da conta')
+        errorToast('Erro na ativação da conta, código inválido ou expirado!')
         yield put(activateAccountError((error as any).message));
     }
 }
