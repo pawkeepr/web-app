@@ -12,7 +12,6 @@ import InputCode from '~/Components/atoms/input-code/input-code';
 import AuthLayout from "../_layouts/auth/auth_layout";
 
 import * as Yup from "yup";
-import validateEmail from "~/validations/email";
 
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from 'react';
@@ -31,27 +30,24 @@ export type ActivateAccount = {
 
 
 const validationSchema = Yup.object({
-    email: validateEmail,
+    email: Yup.string().email().required('Campo obrigatório'),
 });
 
-
-const initialValues: ActivateAccount = {
-    email: "",
-    code: "",
-};
 
 type ConfirmAccountProps = {
     email: string;
 }
 
 const ConfirmAccount = ({ email }: ConfirmAccountProps) => {
+    const [firstLoad, setFirstLoad] = useState(true)
     const router = useRouter()
 
     useEffect(() => {
-        if (!email) {
+        if (!email && !firstLoad) {
             router.push('/sign-in')
         }
-    }, [email])
+        setFirstLoad(false)
+    }, [email, firstLoad])
 
     const [inputValues, setInputValues] = useState<string[]>(Array(6).fill('')); // Inicializa um array de 6 strings vazias
 
@@ -92,8 +88,10 @@ const ConfirmAccount = ({ email }: ConfirmAccountProps) => {
         dispatch(resendConfirmationCode({ username: email }))
     }
 
-    const handleSubmit = (values) => {
+    const handleSubmit = (values: ActivateAccount) => {
         const code = inputValues.join('')
+        console.log(code)
+
         dispatch(activateAccount({ username: values.email, code }))
         // router.push("/sign-in");
     }
@@ -107,11 +105,14 @@ const ConfirmAccount = ({ email }: ConfirmAccountProps) => {
 
             <Formik
                 validationSchema={validationSchema}
-                initialValues={initialValues}
+                initialValues={{
+                    email,
+                    code: ''
+                }}
                 onSubmit={handleSubmit}
             >
                 {
-                    ({ values, isSubmitting, handleSubmit }) => (
+                    ({ values, isSubmitting, handleSubmit, isValid: isValidFormik }) => (
 
                         <Form onSubmit={handleSubmit}>
                             <div className='flex flex-col items-center justify-center'>
@@ -135,6 +136,7 @@ const ConfirmAccount = ({ email }: ConfirmAccountProps) => {
                                         inputValues.map((item, index) => (
                                             <div className="col-span-1" key={index} >
                                                 <InputCode
+                                                    required
                                                     value={item}
                                                     onChange={handleChange(index)}
                                                     moveToNext={moveToNext(index)}
@@ -150,7 +152,7 @@ const ConfirmAccount = ({ email }: ConfirmAccountProps) => {
                                     label='Confirmar'
                                     className="!w-full"
                                     type="submit"
-                                    disabled={!isValid || isSubmitting || loading}
+                                    disabled={!isValid || isSubmitting || loading || !isValidFormik}
                                 />
                             </div>
                             <div className="mt-4 text-center w-full flex items-center justify-center flex-col">
