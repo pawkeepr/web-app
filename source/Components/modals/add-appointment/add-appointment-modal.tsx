@@ -52,6 +52,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                     onClick={showModal}
                     label="Agendar Consulta"
                     id="button-new-consult"
+                    style={{ height: 42}}
                 >
 
                 </BtnPrimary>

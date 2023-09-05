@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import MaskedInput from "react-input-mask";
 
 import FieldDocument from "~/Components/molecules/field-document/field-document";
+import FieldPhone from "~/Components/molecules/field-phone/field-phone";
 
 import { useFormikContext } from "formik";
 import { BtnPrimary } from "~/Components/atoms/btn";
@@ -109,7 +110,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             initialFocus
                             divClassName="my-1"
                             label="Nome Completo"
-                            name="tutor.name"
+                            name="tutor_name"
                             disabled={isPending || tutorExists}
                             aria-label="name"
                             className=" "
@@ -120,23 +121,18 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         />
                     </Col>
                     <Col sm={4}>
-                        <FieldControl
-                            className=" "
-                            divClassName="my-1"
-                            type="text"
-                            label="Telefone/Celular"
-                            name="tutor.phone"
-                            disabled={isPending || tutorExists}
-                            placeholder={
-                                isPending
-                                    ? "Carregando..."
-                                    : "Digite o seu Número de Telefone"
-                            }
-                            component={MaskedInput as any}
-                            mask={"(99) 99999-9999"}
-                            maskChar={null}
-                            required
-                        />
+                    <FieldPhone
+                        label="Telefone/Celular"
+                        divClassName="my-1"
+                        name="tutor_phone"                                
+                        disabled={isPending || tutorExists}
+                        placeholder={
+                            isPending
+                                ? "Carregando..."
+                                : "Digite o seu Número de Telefone"
+                        }
+                        required
+                    /> 
                     </Col>
                     <StepTutor disabled={tutorExists} />
                 </Row>
@@ -151,7 +147,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             <FieldDocument
                                 label="CPF"
                                 divClassName="my-1"
-                                name="secondTutor.document"
+                                name="second_tutor.document"
                                 aria-label="document"
                                 
                                 onlyCPF
@@ -166,7 +162,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 initialFocus
                                 divClassName="my-1"
                                 label="Nome Completo"
-                                name="secondTutor.name"
+                                name="second_tutor.name"
                                 disabled={isPending || tutorExists}
                                 aria-label="name"
                                 
@@ -177,12 +173,11 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             />
                         </Col>
                         <Col sm={4}>
-                            <FieldControl
-                                
+                            <FieldPhone
                                 divClassName="my-1"
                                 type="text"
                                 label="Telefone/Celular"
-                                name="secondTutor.phone"
+                                name="second_tutor.name"
                                 disabled={isPending || tutorExists}
                                 placeholder={
                                     isPending

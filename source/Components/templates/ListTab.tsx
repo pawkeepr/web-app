@@ -43,57 +43,42 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
             <HorizontalTabs />
             <div
                 className="
-                md:w-full
-                flex 
-                flex-wrap
-                mobile:gap-3
-                items-center 
-                justify-between
-                mt-4
-                mb-4
+                    grid
+                    grid-cols-12
+                    items-center
+                    gap-3
                 "
             >
+                <div className="team-list list-view-filter col-span-8"
+                    style={{marginTop: 12}}
+                    >
+                        <div
+                    >
+                        <SearchInput
+                        value={search}
+                        onChange={handleSearch}
+                        placeholder="Busque a Consulta..."
+                    />
 
-                <div
-                    className="
-                    mt-4
-                    w-1/2
-                    mobile:!w-full
-                    mobile:hidden
-                    "
-                >
+                    </div>
+                    {cards(deferredItems)}
                 </div>
-                <AddNewAppointment />
+                
                 <div
                     className="
-                    mobile:flex content-start
+                        flex
+                        col-span-4
+                        items-center
+                        gap-2
                     "
-                >
-                    
+                >   
                     <Modal />
-                </div>
-            </div>
-            <div className="team-list list-view-filter"
-
-            >
-                <div
-                    className="
-                    mt-4 
-                    mb-4
-                    block lg:hidden xl:hidden
-  
-                    "
-                >
-                    <SearchInput
-                    value={search}
-                    onChange={handleSearch}
-                    className="mobile:!w-full border-2 border-solid border-primary-500 focus:border-green-500"
-                    placeholder="Busque a Consulta..."
-                />
-
-                </div>
-                {cards(deferredItems)}
-            </div>
+                    
+                   <div style={{marginTop: 10}} >
+                        <AddNewAppointment />      
+                    </div>          
+                </div>            
+            </div>            
         </React.Fragment>
     );
 };

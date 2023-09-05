@@ -3,6 +3,8 @@ import Row from 'react-bootstrap/Row';
 //Import images
 
 import FieldControl from "~/Components/molecules/field-control/field-control";
+import FieldCep from "~/Components/molecules/field-cep/field-cep";
+
 
 import { useFormikContext } from 'formik';
 import { useCallback, useMemo, useState, useTransition } from 'react';
@@ -84,19 +86,16 @@ const StepTutor = ({ disabled }: StepTutorProps) => {
                 </Col>
 
                 <Col sm={2}>
-                    <FieldControl
+                    <FieldCep
                         divClassName='my-1'
                         className=" "
-                        type="text"
-                        initialFocus
                         label="CEP"
                         name="tutor.address.zipCode"
                         disabled={disabled || isLoading}
                         placeholder="Digite o CEP"
-                        component={MaskedInput as any}
-                        mask={"99999-999"}
                         required
-                    />
+                    />   
+                    
                 </Col>
                 <Col sm={3}>
                     <FieldControl
@@ -123,7 +122,6 @@ const StepTutor = ({ disabled }: StepTutorProps) => {
                         required
                     />
                 </Col>
-
                 <Col sm={4}>
                     <FieldControl
                         divClassName='my-1'
