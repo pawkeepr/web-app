@@ -157,7 +157,7 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
                 <div className="gap-2 mt-2 mobile:py-6">
 
                     <ModalConfirm
-                        title="Cancelar Operações!"
+                        title="Cancelar Consulta!"
                         onConfirm={() => router.push("/dashboard")}
                         description="Importante!"
                         message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"

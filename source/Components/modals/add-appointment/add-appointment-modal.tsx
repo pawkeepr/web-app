@@ -20,6 +20,7 @@ import RadioGroupCustom from "~/Components/molecules/radio-group/radio-group";
 import Modal from "~/Components/organism/modal";
 import useModal from '~/hooks/use-modal';
 import validationPet from '~/validations/pet';
+import FieldTextArea from '~/Components/molecules/field-text-area/field-text-area';
 
 
 const AddNewAppointment = ({ children, item }: AddModalProps) => {
@@ -119,11 +120,11 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                     placeholder="digite a razão da consulta, exemplo='consulta de rotina'"
                                     type="text"
                                 />
-                                <p className='text-gray-500'>Observações adicionais</p>
-                                <textarea
-                                    name="type"
-                                    className=" mb-3 "
-                                    placeholder="digite observações adicionais, exemplo='Cliente prioritário'"
+                                 <FieldTextArea
+                                    label="Orientações e Anotações"
+                                    className="form-control"
+                                    component="textarea"
+                                    name="observations"
                                     type="text"
                                 />
 

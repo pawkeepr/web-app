@@ -16,6 +16,7 @@ const FieldTextArea = <T,>({
     required = false,
     startIcon = false,
     disabled = false,
+    separator = ':',
     onChange,
     className,
     div,
@@ -35,8 +36,7 @@ const FieldTextArea = <T,>({
 
     return (
         <div className="w-full pb-3" {...div} >
-            <Label htmlFor={id} condition={label} required={required} label={label} />
-
+            <Label label={label} required={required} id={id} separator={separator} />
             <div className="relative">
                 {startIcon && (
                     <div className="absolute inset-y-0 flex items-center pl-1 text-sm text-gray-400 pointer-events-none left-1">
