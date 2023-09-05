@@ -31,7 +31,7 @@ const CoverSignIn = () => {
 
 
             <div className="flex flex-col justify-center items-center gap-3 lg:mt-5">
-                <p className="text-sm font-semibold text-secondary-500">
+                <p className="text-sm font-bold text-secondary-500">
                     Seja Bem-vindo(a)!
                 </p>
             </div>

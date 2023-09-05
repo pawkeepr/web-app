@@ -73,7 +73,7 @@ const FieldControl = <T,>({
             )}
 
             {meta.error && (
-                <div className="w-full text-xs text-center text-red-700">
+                <div className="w-full text-xs text-center text-secondary-500 font-semibold">
                     {meta.error}
                 </div>
             )}

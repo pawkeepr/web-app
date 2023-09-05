@@ -14,11 +14,15 @@ import {
 } from './types';
 //Include Both Helper File with needed methods
 import { PayloadAction } from "@reduxjs/toolkit";
+import Router from 'next/router';
 
 import {
     confirmSignUp,
     resendConfirmationCode,
 } from "~/services/helpers/auth";
+
+import { signInUser } from '../login/actions';
+
 import { errorToast, successToast } from "~/store/helpers/toast";
 
 function* onResendConfirmationCode({ payload }: PayloadAction<{ username: string }>) {
@@ -34,13 +38,15 @@ function* onResendConfirmationCode({ payload }: PayloadAction<{ username: string
 }
 
 function* onActiveAccount({ payload }: PayloadAction<ActivateAccount>) {
-    const { username, code } = payload;
+    const { username, code, password } = payload;
     try {
         const { data } = yield call(confirmSignUp, username, code);
         yield put(activateAccountSuccess(data));
         successToast("Conta ativada com sucesso")
+        yield put(signInUser({ username, password }));
+        yield call([Router, Router.push], '/sign-in');
     } catch (error) {
-        errorToast('Erro na ativação da conta')
+        errorToast('Erro na ativação da conta, código inválido ou expirado!')
         yield put(activateAccountError((error as any).message));
     }
 }

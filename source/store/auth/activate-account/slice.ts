@@ -7,12 +7,16 @@ import {
     ACTIVATE_ACCOUNT_SUCCESS,
     InitialStateProfile,
     RESET_PROFILE_FLAG,
+    SET_EMAIL_ACCOUNT,
+    SET_PASSWORD_ACCOUNT,
     name
 } from './types';
 
 const initialState: InitialStateProfile = {
     error: "",
     user: null,
+    password: "",
+    email: "",
     isLoading: LOADING.IDLE
 };
 
@@ -20,6 +24,12 @@ const profileSlice = createSlice({
     name,
     initialState,
     reducers: {
+        [SET_EMAIL_ACCOUNT]: (state, action) => {
+            state.email = action.payload;
+        },
+        [SET_PASSWORD_ACCOUNT]: (state, action) => {
+            state.password = action.payload;
+        },
         [ACTIVATE_ACCOUNT]: (state) => {
             state.isLoading = LOADING.PENDING;
         },

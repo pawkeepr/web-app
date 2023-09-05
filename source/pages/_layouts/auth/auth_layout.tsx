@@ -69,12 +69,12 @@ const AuthLayout = ({
                             "rounded-xl": !image,
                         }
                     )}>
-                        <div className="flex flex-col justify-center items-center mt-5 mobile:mt-0 mb-2">
+                        <div className="flex flex-col justify-center items-center mt-2 mobile:mt-0 mb-2">
                             <div
                                 className=
                                 "hidden mobile:flex h-20 w-16 !bg-no-repeat !bg-cover !bg-center"
                                 style={{
-                                    background: 'url(/logo-sm.png)',
+                                    background: 'url(/logo-mobile.png)',
                                 }}
                             />
 
@@ -82,7 +82,7 @@ const AuthLayout = ({
                                 className=
                                 "mobile:hidden flex h-32 w-full !bg-contain !bg-no-repeat !bg-center"
                                 style={{
-                                    background: 'url(/logo-mobile-login.webp)',
+                                    background: 'url(/logo-default.webp)',
                                 }}
                             />
                         </div>

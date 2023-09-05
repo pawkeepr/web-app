@@ -1,20 +1,20 @@
+import { InputProps, input } from "../input";
+
 type InputCodeProps = {
     moveToNext: () => void;
-} & React.InputHTMLAttributes<HTMLInputElement>
+} & InputProps
 
-const InputCode = ({ moveToNext, className, id, ...rest }: InputCodeProps) => {
+const InputCode = ({ moveToNext, required = false, className, id, ...rest }: InputCodeProps) => {
     return (
         <div className="mb-3">
-            <label htmlFor={id} className="visually-hidden">Digit 1</label>
+            <label htmlFor={id} className="visually-hidden">{id}</label>
             <input
                 type="text"
-                className={`
-                    form-control 
-                    form-control-lg 
-                    border-2 
-                    text-center
-                    ${className}
-                `}
+                className={input({
+                    className,
+                    required,
+                    center: true,
+                })}
                 id={id}
                 maxLength={1}
                 onKeyUp={() => moveToNext()}

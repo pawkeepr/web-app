@@ -19,6 +19,14 @@ const getServerSidePropsPagesPrivates =
                 }
             }
 
+            const route = ctx.resolvedUrl
+
+            if (route === '/activation') {
+                return {
+                    props: {}
+                }
+            }
+
             if (callback) {
                 return callback(ctx)
             }
@@ -26,6 +34,7 @@ const getServerSidePropsPagesPrivates =
             return {
                 props: {}
             }
+
         }
 
 export default getServerSidePropsPagesPrivates

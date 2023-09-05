@@ -143,7 +143,7 @@ const ActivationAccount = () => {
 
             <div className='flex flex-col items-center justify-center '>
                 <div className="text-center font-sans text-gray-600 gap-1">
-                    <h5 className="text-secondary-500 uppercase font-semibold font-sans p-2">Olá, Seja Bem-Vindo(a)!</h5>
+                    <h5 className="text-secondary-500 uppercase font-bold font-sans p-2">Olá, Seja Bem-Vindo(a)!</h5>
                     <p>
                         Para seu primeiro acesso,
                         você deve
