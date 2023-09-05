@@ -47,10 +47,9 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
         yield put(getProfileSession({ email: action.payload.username }));
     } catch (error) {
         if ((error as any)?.code === 'UserNotConfirmedException') {
-            yield call([Router, Router.push], '/confirm-account');
-
             // Se o usuário não estiver confirmado, redirecione para a página de ativação.
             yield put(setEmailAccount(action.payload.username));
+            yield call([Router, Router.push], '/confirm-account');
             yield put(signInFailed((error as any).message));
         } else {
             errorToast('Não foi possível realizar o login.', 'Falha!')

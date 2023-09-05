@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useFormikContext } from "formik";
-import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 
 import { Form } from "formik";
 
@@ -14,20 +13,9 @@ import type { SchemaConfirmAccount } from "~/pages/Authentication/ConfirmAccount
 import { useAppSelector } from '~/store/hooks';
 
 const ConfirmAccountForm = () => {
-    const [firstLoad, setFirstLoad] = useState(true)
 
     const { values: { email }, handleSubmit, isSubmitting, isValid } = useFormikContext<SchemaConfirmAccount>()
     const isLoading = useAppSelector((state) => state.ActivateAccount.isLoading)
-
-    const router = useRouter()
-
-    useEffect(() => {
-        if (!email.trim() && !firstLoad) {
-            router.push('/sign-in')
-        }
-        setFirstLoad(false)
-    }, [email, firstLoad])
-
 
     const getInputElement = (index: number) => {
         return document.getElementById('digit' + index + '-input');

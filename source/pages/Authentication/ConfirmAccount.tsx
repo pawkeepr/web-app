@@ -9,6 +9,7 @@ import AuthLayout from "../_layouts/auth/auth_layout";
 
 import * as Yup from "yup";
 
+import { useRouter } from "next/navigation";
 import { useEffect } from 'react';
 import ConfirmAccountForm from "~/Components/forms/confirm-account-form";
 import {
@@ -16,7 +17,7 @@ import {
     resendConfirmationCode,
     resetProfileFlag
 } from '~/store/auth/activate-account/actions';
-import { useAppDispatch } from '~/store/hooks';
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
 
 const validationSchema = Yup.object({
     email: Yup.string().email().required('Campo obrigatório'),
@@ -30,13 +31,18 @@ const validationSchema = Yup.object({
 
 export type SchemaConfirmAccount = Yup.InferType<typeof validationSchema>
 
-type ConfirmAccountProps = {
-    email: string;
-}
 
-const ConfirmAccount = ({ email }: ConfirmAccountProps) => {
+const ConfirmAccount = () => {
+    const email = useAppSelector(state => state.ActivateAccount.email)
 
     const dispatch = useAppDispatch()
+    const router = useRouter()
+
+    useEffect(() => {
+        if (!email) {
+            router.push('/sign-in')
+        }
+    }, [email])
 
     useEffect(() => {
         return () => {
