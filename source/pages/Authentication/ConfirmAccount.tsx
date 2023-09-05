@@ -116,9 +116,9 @@ const ConfirmAccount = ({ email }: ConfirmAccountProps) => {
 
                         <Form onSubmit={handleSubmit}>
                             <div className='flex flex-col items-center justify-center'>
-                                <div className="text-center text-muted mb-2 gap-2">
-                                    <h5 className="text-primary p-2">Olá, Seja Bem-Vindo(a)!</h5>
-                                    <p >
+                                <div className="text-center mb-2 gap-2">
+                                    <h5 className="text-secondary-500 font-semibold p-2">Olá, Seja Bem-Vindo(a)!</h5>
+                                    <p className="text-xs text-gray-500" >
                                         Para seu primeiro acesso,
                                         você deve ativar sua conta e
                                         completar seu cadastro na plataforma.
@@ -156,8 +156,8 @@ const ConfirmAccount = ({ email }: ConfirmAccountProps) => {
                                 />
                             </div>
                             <div className="mt-4 text-center w-full flex items-center justify-center flex-col">
-                                <p className="mb-0">Você não recebeu o código?</p>
-                                <BtnCancel label='Reenviar' onClick={() => handleResend()} />
+                                <p className="mb-0 text-xs text-gray-500">Você não recebeu o código?</p>
+                                <BtnCancel label='Reenviar Código' onClick={() => handleResend()} />
                             </div>
                         </Form>
                     )
@@ -165,7 +165,7 @@ const ConfirmAccount = ({ email }: ConfirmAccountProps) => {
 
             </Formik>
             <div className="mobile:hidden w-full flex flex-col justify-center items-center !h-fit">
-                <p className="text-xs">
+                <p className="text-xs text-gray-500">
                     Você já tem uma conta ?
                 </p>
                 <BtnLink

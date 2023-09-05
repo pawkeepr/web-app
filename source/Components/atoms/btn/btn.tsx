@@ -9,7 +9,7 @@ export const button = tv({
         px-4 m-1 h-12 py-2
         text-sm font-semibold rounded-md text-center
         gap-1 leading-1 font-semibold
-        transition duration-300 ease-in-out
+        transition duration-100 ease-in-out
         disabled:opacity-50 disabled:cursor-not-allowed
         bg-opacity-80 hover:bg-opacity-100 active:opacity-100
         hover:transform hover:scale-105 disabled:hover:scale-100

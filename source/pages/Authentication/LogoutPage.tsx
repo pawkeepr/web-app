@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useEffect } from 'react';
 
 
@@ -9,6 +8,7 @@ import { resetLoading, signOutUser } from '~/store/auth/login/actions';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
 
 import { useRouter } from 'next/navigation';
+import { BtnLink } from '~/Components/atoms/btn';
 import AuthLayout from '../_layouts/auth/auth_layout';
 
 
@@ -39,9 +39,7 @@ const LogoutPage = () => {
                 <div className="mt-4 pt-2">
                     <h4>Você acabou de sair 😭</h4>
                     <p className="text-muted">Obrigado por usar <span className="fw-bold">PawKeeprs</span>, não esqueça de voltar</p>
-                    <div className="mt-4">
-                        <Link href="/sign-in" className="btn btn-success bg-green-600 w-100">Entrar</Link>
-                    </div>
+                    <BtnLink href='sign-in' className="!w-full !bg-primary-500" message='Entrar' />
                 </div>
             </div>
 

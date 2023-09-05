@@ -80,7 +80,7 @@ const Home = () => {
                         <div className="col-span-1">
                             <img
                                 src='/bg-three.webp'
-                                className="w-100 h-[90%]  !border-none"
+                                className="w-full  !border-none"
                                 alt="..."
                             />
                         </div>
@@ -92,14 +92,14 @@ const Home = () => {
                             oferecer um cuidado excepcional aos animais.`}
                             </p>
 
-                            <p className="text-lg lg:text-xl font-semibold font-sans p-4 text-white">
+                            {/* <p className="text-lg lg:text-xl font-semibold font-sans p-4 text-white">
                                 Por apenas
                                 <span className="italic text-base font-bold">
                                     {" "}
                                     R$ 9,99{" "}
                                 </span>
                                 por consulta
-                            </p>
+                            </p> */}
                         </div>
                     </Zoom>
                 </div>

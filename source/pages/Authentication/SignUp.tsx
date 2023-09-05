@@ -16,12 +16,12 @@ import { BtnLink, BtnPrimary } from "~/Components/atoms/btn";
 import FieldCheckbox from "~/Components/molecules/field-checkbox";
 import FieldControl from "~/Components/molecules/field-control";
 import FieldPassword from "~/Components/molecules/field-password";
+import PasswordRules from "~/Components/molecules/password-rules";
 import LOADING from "~/constants/loading";
 import { registerUser, resetRegisterFlag } from "~/store/auth/register/actions";
 import { AccountSignUp } from "~/store/auth/register/types";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import AuthLayout from "../_layouts/auth/auth_layout";
-import PasswordRules from "./components/molecules/password-rules";
 
 const validationSchema = Yup.object({
     email: validateEmail,
@@ -91,7 +91,7 @@ const CoverSignUp = () => {
                     ({ values, isValid, isSubmitting, handleSubmit }) => (
                         <Form onSubmit={handleSubmit}>
                             <div className="flex flex-col w-full items-center mt-2">
-                                <p className="text-sm font-semibold text-secondary-500">
+                                <p className="text-sm font-bold text-secondary-500">
                                     Crie uma Conta</p>
                                 <p className="text-gray-400 text-xs">
                                     Aproveite todos os Benefícios Agora!
