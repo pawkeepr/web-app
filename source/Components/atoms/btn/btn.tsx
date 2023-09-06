@@ -21,7 +21,7 @@ export const button = tv({
             true: "bg-primary-500 dark:bg-secondary-500 text-gray-50 dark:text-gray-600 border border-secondary-600 !w-44 "
         },
         secondary: {
-            true: "bg-secondary-500 dark:bg-primary-500"
+            true: "bg-secondary-500 text-white dark:bg-primary-500"
         },
         success: {
             true: "bg-green-500"
