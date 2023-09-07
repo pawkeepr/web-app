@@ -96,11 +96,11 @@ const validate = Yup.object().shape({
     }),
     cpf_cnpj: Yup.string()
         .required("Este campo é obrigatório")
-        .transform((value) => value.replace(/[^\d]/g, ""))
-        .test("cpf-cnpj-validator", "Documento inválido", (value) => {
-            if (!value) return false;
-            return cpf.isValid(value) || cnpj.isValid(value);
-        }),
+        .transform((value) => value.replace(/[^\d]/g, "")),
+        // .test("cpf-cnpj-validator", "CPF/CNPJ inválido", (value) => {
+        //     if (!value) return false;
+        //     return cpf.isValid(value) || cnpj.isValid(value);
+        // }),
     location: Address
 });
 
