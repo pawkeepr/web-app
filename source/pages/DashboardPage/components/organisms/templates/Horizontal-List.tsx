@@ -93,11 +93,10 @@ const HorizontalTabs = () => {
                         <form>
                             <div className="flex flex-col relative">
                                 <div
-                                    style={{ marginTop: isFixed ? `${height}px` : 0 }}
                                     className={cn(
-                                        'mb-4 step-arrow-nav',
+                                        ' step-arrow-nav',
                                         {
-                                            'fixed top-0 left-0 right-0 z-10 bg-white': isFixed,
+                                            ' bg-white': isFixed,
                                         },
                                         'md:static'
                                     )}>

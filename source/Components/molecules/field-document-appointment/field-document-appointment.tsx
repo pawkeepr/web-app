@@ -1,6 +1,10 @@
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
+import { is } from "cypress/types/bluebird";
+import { set } from "cypress/types/lodash";
 import { Form, Formik } from "formik";
-import { startTransition } from "react";
+import { startTransition, useState } from "react";
+import { Modal } from "reactstrap";
+import ModalWarning from "~/Components/modals/modal-warning/modal-warning";
 import ModalListPets from "~/Components/modals/modal-list-pets/modal-list-pets";
 import FieldDocument from "~/Components/molecules/field-document/field-document";
 import isValidCPF from "~/validations/cpf";
@@ -26,6 +30,7 @@ const FieldDocumentAppointment = ({
     children,
 }: FieldDocumentAppointmentProps) => {
     const initialValues: InitialValues = { document: "" };
+    const [isOpen, setIsOpen] = useState(false);
 
     const onHandleSubmit = ({
         onChangeDocument,
@@ -33,7 +38,7 @@ const FieldDocumentAppointment = ({
     }: HandleProps) => {
         return async (values: InitialValues) => {
             if (!isValidCPF(values.document) && selectedTabInitial === 1) {
-                alert("CPF inválido! Por favor, insira um CPF válido.");
+                setIsOpen(true);
                 return;
             }
 
@@ -46,6 +51,13 @@ const FieldDocumentAppointment = ({
 
 
     return (
+    <>
+        <ModalWarning
+            title='CPF INVÁLIDO'
+            description='Por favor, cadastrar um CPF válido para prosseguir.'
+            isOpen={ isOpen }
+            closeModal={()=> { setIsOpen(false)}}
+        />
         <ModalListPets selectedTabInitial={selectedTabInitial}>
 
             {({ onChangeOpen, onChangeDocument }) => (
@@ -60,28 +72,29 @@ const FieldDocumentAppointment = ({
                     <Form className=" flex flex-row items-center justify-end ">
                         {
                             children?.({ onChangeOpen, onChangeDocument }) ||
-                            <div className="w-full hidden lg:block xl:block   ">
-                                <FieldDocument
-                                    name="document"
-                                    placeholder="Nova Consulta"
-                                    label="CPF"
-                                    onlyCPF
-                                    endIcon={
-                                        <button
-                                            className="focus:outline-none flex h-full items-center justify-center"
-                                            data-bs-target="#addVeterinaryAppointmentModal"
-                                            type="submit"
-                                        >
-                                            <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
-                                        </button>
-                                    }
-                                />
+                            <div className="w-full mb-2 ml-3 hidden lg:block xl:block   ">
+                               <FieldDocument
+                                name="document"
+                                placeholder="Nova Consulta"
+                                label="CPF"
+                                onlyCPF
+                                endIcon={
+                                    <button
+                                        className="focus:outline-none flex h-full items-center justify-center"
+                                        data-bs-target="#addVeterinaryAppointmentModal"
+                                        type="submit"
+                                    >
+                                        <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
+                                    </button>
+                                }
+                            />
                             </div>
                         }
                     </Form>
                 </Formik>
             )}
-        </ModalListPets>
+        </ModalListPets> 
+    </>
     );
 };
 
