@@ -29,6 +29,8 @@ type ComboBoxFieldsProps = {
 const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
 
     const [specie, setSpecie] = useState<SpeciesType>({} as SpeciesType)
+    const [breedValue, setBreedValue] = useState('')
+    const [bloodTypeValue, setBloodTypeValue] = useState('')
 
     const { setFieldValue, values } = useFormikContext<AuxSpeciesFormikProps>()
 
@@ -55,20 +57,31 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
 
 
     }, [pet])
-
+    
     const memoNameSpecies = !name ? 'species' : `${name}.species`
     const memoNameBreed = !name ? 'breed' : `${name}.breed`
     const memoNameBloodType = !name ? 'bloodType' : `${name}.bloodType`
 
 
-    const onChangeSpecie = useCallback((specie: SpeciesType) => {
+    const onChangeSpecie = useCallback((specie: SpeciesType) => {        
         startTransition(() => {
             setSpecie(specie)
             setFieldValue(memoNameBreed, null)
             setFieldValue(memoNameBloodType, null)
+            setBreedValue('')
+            setBloodTypeValue('')
+
         })
 
-    }, [memoNameBreed, memoNameBloodType])
+    }, [setFieldValue, memoNameBreed, memoNameBloodType])
+
+    // const onChangeSpecie = (specie: SpeciesType) => {
+    //     startTransition(() => {
+    //         setSpecie(specie)
+    //         setFieldValue(memoNameBreed, null)
+    //         setFieldValue(memoNameBloodType, null)
+    //     })
+    // }
 
     const memoSpecies = useMemo(() => {
         return species.map(({ name, value, ...specie }) => ({ label: name, value: value, ...specie }))
@@ -81,7 +94,7 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
     const memoBloodType = useMemo(() => {
         return specie?.bloodType?.map(({ name, value, ...bloodType }) => ({ label: name, value: value, ...bloodType }))
     }, [specie])
-
+    
     return (
         <div className="w-full grid grid-cols-3 mobile:grid-cols-1 gap-2">
             <FieldControlSelect
@@ -98,6 +111,8 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
             <FieldControlSelect
                 options={memoBreed}
                 disabled={!specie.breedType || isPending || !!values.pet?.id}
+                onChangeValue={e => setBreedValue(e)}
+                value={breedValue}
                 required
                 name={memoNameBreed}
                 label="Raça"
@@ -106,6 +121,8 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
 
             <FieldControlSelect
                 options={memoBloodType}
+                onChangeValue={e => setBloodTypeValue(e)}
+                value={bloodTypeValue}
                 disabled={!specie.bloodType || isPending || !!values.pet?.id}
                 required
                 name={memoNameBloodType}
