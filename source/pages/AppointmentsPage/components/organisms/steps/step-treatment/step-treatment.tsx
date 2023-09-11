@@ -551,34 +551,6 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 </div>
                 <div className="mt-2">
                 </div>
-                <div className="mt-4">
-                    <span className="font-bold">Informações Obrigatórias</span>
-                    <div className="flex items-center mt-2 gap-2 w-full">
-                        <FieldControl
-                            label="Peso"
-                            className="rounded-md form-control font-semibold "
-                            name="weight"
-                            type="number"
-                        />
-                        <div className="flex flex-col mb-[6px] w-full">
-                            <FieldControlSelect
-                                label="Selecione uma medida"
-                                placeholder="Selecione uma medida"
-                                name="measurements"
-                                options={options2}
-                            />
-                        </div>
-                    </div>
-                    <div className="flex flex-col mt-2">
-                        <FieldTextArea
-                            label="Orientações e Anotações"
-                            className="rounded-md form-control"
-                            component="textarea"
-                            name="observations"
-                            type="text"
-                        />
-                    </div>
-                </div>
             </div>
 
 
