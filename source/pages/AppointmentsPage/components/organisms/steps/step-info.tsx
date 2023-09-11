@@ -41,10 +41,12 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
     return (
         <>
             <div>
-                <h4 className="text-center">Informações bem-estar do pet</h4>
+                <h4 className="text-center">Informações bem-estar do pet
+                <br />
+                <span className="text-sm font-bold text-secondary-500">Obrigatório (*)</span>
+                </h4>
             </div>
             <div className="flex flex-col mt-4 w-full">
-                <span className="font-bold">Informações Obrigatórias</span>
                 <div className="flex md:flex-row flex-col mt-2 mb-2 gap-2">
                     <FieldControl
                         label="Idade"
@@ -71,7 +73,6 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                         />
                     </div>
                 </div>
-                <span className="font-bold">Informações Opcionais</span>
                 <div className="flex flex-col md:flex-row tems-center mt-2 mb-2 gap-2">
                     <FieldControl
                         label="Altura"

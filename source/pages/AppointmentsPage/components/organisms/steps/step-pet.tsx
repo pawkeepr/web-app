@@ -77,7 +77,10 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     return (
         <>
             <div className="p-1 m-2 mb-4">
-                <h5 className="font-bold text-center">Pet</h5>
+                <h5 className="font-bold text-center">Pet
+                <br />
+                <span className="text-sm font-bold text-secondary-500">Obrigatório (*)</span>
+                </h5>
             </div>
             <div className="text-align: left mb-4">Preencha as Informações do PET</div>
             <div>
@@ -88,7 +91,10 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     </div> */}
                     <ComboBoxFields name="pet" />
                     <div className="p-1 m-2 mb-4">
-                        <h5 className="font-bold text-center">Tutor</h5>
+                        <h5 className="font-bold text-center">Tutor
+                        <br />
+                        <span className="text-sm font-bold text-secondary-500">Obrigatório (*)</span>
+                        </h5>
                     </div>
                     <div className="text-align: left  mb-2">Preencha as Informações do Tutor</div>
                     <Col sm={3}>
