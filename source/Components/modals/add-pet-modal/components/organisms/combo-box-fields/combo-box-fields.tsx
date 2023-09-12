@@ -96,7 +96,10 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
     }, [specie])
     
     return (
-        <div className="w-full grid grid-cols-3 mobile:grid-cols-1 gap-2">
+        
+        <>
+        
+        <div className="w-full grid grid-cols-2 mobile:grid-cols-1 gap-2">
             <FieldControlSelect
                 options={memoSpecies}
                 required
@@ -104,8 +107,7 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
                 onChangeValue={onChangeSpecie}
                 name={memoNameSpecies}
                 placeholder="Ex: Cachorro, Gato, etc..."
-                label="Espécie"
-            />
+                label="Espécie" />
 
 
             <FieldControlSelect
@@ -116,8 +118,7 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
                 required
                 name={memoNameBreed}
                 label="Raça"
-                placeholder="Ex: Vira-lata, Poodle, etc..."
-            />
+                placeholder="Ex: Vira-lata, Poodle, etc..." />
 
             <FieldControlSelect
                 options={memoBloodType}
@@ -127,37 +128,37 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
                 required
                 name={memoNameBloodType}
                 label="Tipo Sanguíneo"
-                placeholder="Ex: A, B, etc..."
-            />
+                placeholder="Ex: A, B, etc..." />
             <FieldControlSelect
                 options={genderValues as any}
                 disabled={!!values.pet?.id}
                 name="sex"
                 required
                 label="Sexo do Pet"
-                placeholder="Macho/Fêmea..."
-            />
-            <FieldControl
-                label={`Data de nascimento`}
-                required
-                name={`date_birth`}
-                type="date"
-            />
-            <FieldControl
-                label={`Número do microchip`}
-                name={`chip_Number`}
-                type="field masked"
-                mask="_____"
-                placeholder="Digite o número do microchip (opcional)"
-            />
-            <FieldControl
-                label={`Número de registro cartório`}
-                name={`id_Office_Register`}
-                type="field masked"
-                mask="_____"
-                placeholder="Digite o número do registro (opcional)"
-            />
+                placeholder="Macho/Fêmea..." />
         </div>
+            <div className="flex md:flex-row flex-col mt-2 mb-2 gap-2">
+
+                <FieldControl
+                    label={`Data de nascimento`}
+                    required
+                    name={`date_birth`}
+                    type="date" />
+                <FieldControl
+                    label={`Número do microchip`}
+                    name={`chip_Number`}
+                    type="field masked"
+                    mask="_____"
+                    placeholder="Digite o número do microchip (opcional)" />
+                <FieldControl
+                    label={`Número de registro cartório`}
+                    name={`id_Office_Register`}
+                    type="field masked"
+                    mask="_____"
+                    placeholder="Digite o número do registro (opcional)" />
+
+            </div>
+        </>   
     )
 }
 
