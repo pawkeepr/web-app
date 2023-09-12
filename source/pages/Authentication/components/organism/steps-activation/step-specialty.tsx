@@ -2,7 +2,7 @@ import { useFormikContext } from "formik";
 
 import { useMemo } from "react";
 
-import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
+import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import { sub_specialty } from "~/common/data/sub-specialtys";
 
@@ -82,7 +82,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep, ...rest }: StepProps) => 
                 options={options}
             />
             <div className="mt-1 flex justify-center items-center col-span-full">
-                <BtnLabel onClick={prevStep} label="Anterior" />
+                <BtnCancel onClick={prevStep} label="Voltar" />
                 <BtnPrimary
                     onClick={nextStep}
                     disabled={!requiredValid}

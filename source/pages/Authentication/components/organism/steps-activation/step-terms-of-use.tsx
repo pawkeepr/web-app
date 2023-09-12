@@ -126,7 +126,7 @@ const StepTermsOfUse = ({ prevStep, nextStep }: StepProps) => {
                 <div>
                     <BtnCancel
                         onClick={prevStep}
-                        label="Anterior"
+                        label="Voltar"
                         className="m-1 bg-secondary-500 hover:bg-secondary-100 disabled:bg-secondary-500"
                     />
                 </div>
