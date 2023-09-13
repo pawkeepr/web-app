@@ -50,7 +50,6 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                             placeholder="Busque a Consulta..."
                             className="rounded-md"
                         />
-                    {cards(deferredItems)}
                 </div>
 
                 <div className="flex col-span-4 items-center gap-2">
@@ -61,6 +60,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                 </div>
             </div>
             <HorizontalTabs />
+            {cards(deferredItems)}
         </React.Fragment>
     );
 };
