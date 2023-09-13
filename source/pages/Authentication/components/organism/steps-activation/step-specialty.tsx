@@ -9,7 +9,7 @@ import { sub_specialty } from "~/common/data/sub-specialtys";
 import CheckboxGroup from "~/Components/molecules/checkbox-group";
 import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
-import { StepProps } from "../steps-sign-up/types";
+import { StepProps } from "./types";
 
 import * as Yup from 'yup';
 
@@ -82,7 +82,10 @@ const StepActivationSpecialty = ({ nextStep, prevStep, ...rest }: StepProps) => 
                 options={options}
             />
             <div className="mt-1 flex justify-center items-center col-span-full">
-                <BtnLabel onClick={prevStep} label="Anterior" />
+                <BtnLabel
+                    onClick={prevStep}
+                    label="Anterior"
+                />
                 <BtnPrimary
                     onClick={nextStep}
                     disabled={!requiredValid}
