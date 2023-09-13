@@ -53,6 +53,7 @@ const Select = (props: Props) => {
             })}
             styles={colorStyles}
             isSearchable={true}
+            menuPosition='fixed'
             classNames={{
                 noOptionsMessage: () => 'Não há opções',
                 control: () =>
