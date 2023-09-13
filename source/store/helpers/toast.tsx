@@ -5,7 +5,7 @@ export const OptionsDefault = {
   autoClose: 2000,
   closeButton: true,
   closeOnClick: true,
-//   theme: 'colored' as Theme,
+  theme: 'colored' as Theme,
   icon: true,
 }
 
@@ -29,14 +29,14 @@ export const buildToast = async ({ type, description = '' }: ToastMessage, optio
 
 
   if (type === 'success') {
-    return toast.success(msg, optionsDefault);
+    return toast.success(msg, {...optionsDefault, className: '!bg-primary-500 text-white ' });
   }
 
   if (type === 'error') {
-    return toast.error(msg, optionsDefault);
+    return toast.error(msg, {...optionsDefault, className: '!bg-secondary-500 text-white ' });
   }
 
-  return toast.info(msg, optionsDefault);
+  return toast.info(msg, {...optionsDefault, className: '!bg-secondary-500 text-white ' });
 
 }
 
