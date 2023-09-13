@@ -1,4 +1,4 @@
-import { all, call, fork, put, takeEvery } from "redux-saga/effects";
+import { all, call, delay, fork, put, takeEvery } from "redux-saga/effects";
 
 // Login Redux States
 import {
@@ -37,7 +37,10 @@ function* onGetProfile() {
 function* onAddProfile({ payload: profile }: PayloadAction<Profile>) {
     try {
         const { data } = yield call(createProfileVet, profile);
+        yield delay(1000);
         yield put(addSuccess(data));
+        successToast("Perfil ativado com sucesso!");
+        yield call([Router, Router.push], '/dashboard');
     } catch (error) {
         errorToast("Erro ao ativar perfil!");
         yield put(addFail((error as any).message));

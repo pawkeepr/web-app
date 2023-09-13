@@ -1,6 +1,6 @@
 import { useFormikContext } from 'formik';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import validateAddress from '~/validations/address';
 
@@ -22,10 +22,6 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     const { values, setFieldValue } = useFormikContext<ActivateAccount>()
     const { zipCode } = values.location
-
-    useEffect(() => {
-        console.log(values.location)
-    }, [values.location])
 
     const updateAddressFields = useCallback(
         (params: IAddress) => {

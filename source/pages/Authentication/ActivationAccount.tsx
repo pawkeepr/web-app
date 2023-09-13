@@ -15,6 +15,7 @@ import validate, { ActivateAccount } from '~/validations/activate';
 
 import { signOutUser } from '~/store/auth/login/actions';
 import { addNew } from '~/store/auth/profile/actions';
+import { changeLayoutMode } from '~/store/layouts/actions';
 
 import { useAppDispatch } from '~/store/hooks';
 
@@ -22,11 +23,11 @@ import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid';
 import { BtnLink } from '~/Components/atoms/btn';
 import { Profile, RULES } from '~/store/auth/profile/types';
 
+import { layoutModeTypes } from '~/Components/constants/layout';
 import StepActivationAddress from './components/organism/steps-activation/step-address';
-import StepActivationLoading from './components/organism/steps-activation/step-loading';
+import StepActivationFinally from './components/organism/steps-activation/step-finally';
 import StepActivationPerson from './components/organism/steps-activation/step-person';
 import StepActivationSpecialty from './components/organism/steps-activation/step-specialty';
-import StepActivationTermsOfUse from './components/organism/steps-activation/step-terms-of-use';
 
 const initialValues = (email: string): ActivateAccount => ({
     firstName: '',
@@ -74,12 +75,8 @@ const Tabs = [
     },
     {
         id: '4',
-        component: (props: any) => <StepActivationTermsOfUse {...props} />
+        component: (props: any) => <StepActivationFinally {...props} />
     },
-    {
-        id: '5',
-        component: (props: any) => <StepActivationLoading {...props} />
-    }
 ]
 
 const ActivationAccount = () => {
@@ -103,6 +100,11 @@ const ActivationAccount = () => {
 
         dispatch(addNew(profile))
     }
+
+    useEffect(() => {
+        dispatch(changeLayoutMode(layoutModeTypes.LIGHT_MODE))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     useEffect(() => {
         if (!email) {

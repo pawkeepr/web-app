@@ -3,6 +3,9 @@ import React, { ComponentProps } from 'react';
 import { VariantProps, tv } from 'tailwind-variants';
 import BtnAvatar from './btn-avatar';
 
+import withControl from '~/Components/helpers/with-control';
+import withLoading from '~/Components/helpers/with-loading';
+
 export const button = tv({
     base: `
         mobile:p-4 mobile:w-full w-52
@@ -18,7 +21,7 @@ export const button = tv({
     `,
     variants: {
         primary: {
-            true: "bg-primary-500 dark:bg-secondary-500 text-gray-50 dark:text-gray-600 border border-secondary-600 !w-44 "
+            true: "bg-primary-500 dark:bg-secondary-500 text-gray-50 dark:text-gray-600 border border-secondary-600"
         },
         secondary: {
             true: "bg-secondary-500 text-white dark:bg-primary-500"
@@ -53,6 +56,8 @@ type BtnProps = {
     label?: string;
     iconStyle?: string;
     children?: React.ReactNode;
+    isLoading?: boolean;
+    condition?: boolean;
 } & ComponentProps<'button'> & VariantProps<typeof button> & VariantProps<typeof styledIcon>
 
 const Btn = ({
@@ -75,39 +80,41 @@ const Btn = ({
     )
 }
 
+const BtnCompose = withLoading(withControl(Btn));
+
 const BtnPrimary = ({ label = "Primário", ...props }: BtnProps) => {
     return (
-        <Btn primary label={label} {...props} />
+        <BtnCompose primary label={label} {...props} />
     )
 }
 
 const BtnSecondary = ({ label = "Secundário", ...props }: BtnProps) => {
     return (
-        <Btn secondary label={label} {...props} />
+        <BtnCompose secondary label={label} {...props} />
     )
 }
 
 const BtnSuccess = ({ label = "Sucesso", ...props }: BtnProps) => {
     return (
-        <Btn success label={label} {...props} />
+        <BtnCompose success label={label} {...props} />
     )
 }
 
 const BtnConfirm = ({ label = "Confirmar", ...props }: BtnProps) => {
     return (
-        <Btn confirm label={label} {...props} />
+        <BtnCompose confirm label={label} {...props} />
     )
 }
 
 const BtnCancel = ({ label = "Cancelar", ...props }: BtnProps) => {
     return (
-        <Btn cancel label={label} {...props} />
+        <BtnCompose cancel label={label} {...props} />
     )
 }
 
 const BtnLabel = ({ label = "Texto", ...props }: BtnProps) => {
     return (
-        <Btn text label={label} {...props} />
+        <BtnCompose text label={label} {...props} />
     )
 }
 

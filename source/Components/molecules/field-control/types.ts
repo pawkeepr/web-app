@@ -11,4 +11,5 @@ export type InputControlProps<T> = FieldHookConfig<string> & T & {
     pattern?: string;
     mask?: string | Array<string | RegExp>;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    divClassName?: string;
 };
