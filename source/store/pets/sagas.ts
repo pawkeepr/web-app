@@ -62,9 +62,9 @@ export function* onAdd({ payload }: PayloadAction<Data>) {
     try {
         const { data } = yield call(postPet, payload);
         yield put(addSuccess(data));
-        yield successToast('Cadastrado com sucesso!')
+        yield successToast('Pet cadastrado com sucesso!')
     } catch (error) {
-        yield errorToast('Erro ao cadastrar!')
+        yield errorToast('Erro ao cadastrar o pet!')
         yield put(addFail((error as Error).message));
     }
 }
