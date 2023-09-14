@@ -15,6 +15,7 @@ import chatSaga from "./chat/saga";
 import AppointmentVetSagas from './appointment-vet/sagas';
 import PetsSagas from './pets/sagas';
 import TutorsSagas from './tutors/sagas';
+import schedule from './newSchedule/sagas'
 
 
 // Task
@@ -42,5 +43,6 @@ export default function* rootSaga() {
         fork(calendarSaga),
         fork(teamSaga),
         fork(LoginSagas),
+        fork(schedule),
     ]);
 }
