@@ -76,59 +76,8 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                         name="second_tutor.email"
                         aria-label="email"
                         disabled={disabled}
-                        
-                        placeholder="Digite o email do secondTuto_r (opcional)"
-                        required
+                        placeholder="Digite o email do segundo tutor (opcional)"
                         disabledError
-                    />
-                </Col>
-
-                <Col sm={2}>
-                    <FieldCep
-                        divClassName='my-1'
-                        label="CEP"
-                        name="second_tutor.address.zipCode"
-                        disabled={disabled || isLoading}
-                        placeholder="Digite o CEP"
-                        component={MaskedInput as any}
-                        mask={"99999-999"}
-                        required
-                        
-                    />  
-                </Col>
-                <Col sm={3}>
-                    <FieldControl
-                        divClassName='my-1'
-                        type="text"
-                        label="Estado"
-                        name="second_tutor.address.state"
-                        disabled={(disabledInputs.state || disabled) || isLoading}
-                        placeholder={isLoading ? 'Carregando...' : 'Digite o nome do estado'}
-                        required
-                    />
-                </Col>
-
-                <Col sm={3}>
-                    <FieldControl
-                        divClassName='my-1'
-                        type="text"
-                        label="Cidade"
-                        name="second_tutor.address.city"
-                        disabled={(disabledInputs.city || disabled) || isLoading}
-                        placeholder={isLoading ? 'Carregando...' : 'Digite o nome da cidade'}
-                        required
-                    />
-                </Col>
-
-                <Col sm={4}>
-                    <FieldControl
-                        divClassName='my-1'
-                        type="text"
-                        label="Rua"
-                        name="second_tutor.address.street"
-                        disabled={(disabledInputs.street || disabled) || isLoading}
-                        placeholder={isLoading ? 'Carregando...' : 'Digite o nome da rua'}
-                        required
                     />
                 </Col>
             </Row>
