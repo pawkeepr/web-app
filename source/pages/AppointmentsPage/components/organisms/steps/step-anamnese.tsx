@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 import Row from "react-bootstrap/Row";
 //Import images
 
@@ -16,6 +17,7 @@ import {
 } from "~/constants/anamnese-questions";
 import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 import ControlSwitch from "../../molecules/switch/switch";
+import AnswerSwitch from "../../molecules/answer-switch/answer-switch"
 
 
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
@@ -30,66 +32,37 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
             <div>
                 <Row className="g-3">
                     {/* <AvatarPet name={values.pet?.name || 'Pet'} /> */}
+                    
+                    <AnswerSwitch 
+                        title="Sistema Digestivo"
+                        name='digestive_system'
+                        answers={questions_digestive_system}
+                    />
 
-                    <ControlSwitch
-                        label="Sistema Digestivo"
-                        className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
-                    >
-                        <AnswerRadio
-                            answers={questions_digestive_system.map((question) => ({
-                                ...question,
-                                name: `anamnese.${question.question}`,
-                            }))}
-                        />
-                    </ControlSwitch>
-                    <ControlSwitch
-                        label="Sistema Respiratório"
-                        className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
-                    >
-                        <AnswerRadio
-                            answers={questions_respiratory_system.map(
-                                (question) => ({
-                                    ...question,
-                                    name: `anamnese.${question.question}`,
-                                })
-                            )}
-                        />
-                    </ControlSwitch>
-                    <ControlSwitch
-                        label="Sistema Locomotor"
-                        className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
-                    >
-                        <AnswerRadio
-                            answers={questions_locomotive_system.map(
-                                (question) => ({
-                                    ...question,
-                                    name: `anamnese.${question.question}`,
-                                })
-                            )}
-                        />
-                    </ControlSwitch>
-                    <ControlSwitch
-                        label="Sistema Urinário"
-                        className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
-                    >
-                        <AnswerRadio
-                            answers={questions_urinary_system.map((question) => ({
-                                ...question,
-                                name: `anamnese.${question.question}`,
-                            }))}
-                        />
-                    </ControlSwitch>
-                    <ControlSwitch
-                        label="Sistema Nervoso"
-                        className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
-                    >
-                        <AnswerRadio
-                            answers={questions_nervous_system.map((question) => ({
-                                ...question,
-                                name: `anamnese.${question.question}`,
-                            }))}
-                        />
-                    </ControlSwitch>
+                    <AnswerSwitch 
+                        title="Sistema Respiratório"
+                        name='respiratory_system'
+                        answers={questions_respiratory_system}
+                    />
+
+                  
+                     <AnswerSwitch
+                        title="Sistema Urinário"
+                        name='urinary_system'
+                        answers={questions_urinary_system}
+                    />
+        
+                    <AnswerSwitch
+                        title="Sistema Nervoso"
+                        name='urinary_system'
+                        answers={questions_nervous_system}
+                    />
+                    
+                    <AnswerSwitch
+                        title="Sistema Locomotor"
+                        name='locomotive_system'
+                        answers={questions_locomotive_system}
+                    />
                 </Row>
             </div>
 
