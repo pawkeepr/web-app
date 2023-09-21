@@ -9,7 +9,6 @@ import { useAppDispatch } from "~/store/hooks";
 import FullScreenDropdown from "../Components/Common/full-screen-dropdown";
 import LightDark from "../Components/Common/light-dark";
 import lightLogo from '../../public/logo-light.png'
-import darkLogo from '../../public/logo-dark.png'
 
 import Bars3CenterLeftIcon from "@heroicons/react/24/solid/Bars3CenterLeftIcon";
 
