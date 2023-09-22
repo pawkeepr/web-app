@@ -69,7 +69,8 @@ const FieldControlSelect = ({
             <Select
                 {...props}
                 id={name}
-                className="w-full"
+                required={required}
+                className={ required ? 'border-secondary-500' : '' }
                 options={options}
                 name={name}
                 onChange={onChange}

@@ -103,7 +103,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             divClassName="my-1"
                             name="tutor.document"
                             aria-label="document"
-                            className=" "
+                            className="border-1 "
                             onlyCPF
                             disabled={isPending || tutorExists}
                             placeholder="CPF"
@@ -155,7 +155,6 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 divClassName="my-1"
                                 name="second_tutor.document"
                                 aria-label="document"
-                                
                                 onlyCPF
                                 disabled={isPending || tutorExists}
                                 placeholder="CPF"

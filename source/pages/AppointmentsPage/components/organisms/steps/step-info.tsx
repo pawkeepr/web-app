@@ -77,14 +77,14 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                     <FieldControl
                         label="Altura"
                         placeholder="Altura do pet em centímetros, exemplo = 32"
-                        className=" "
+                        className="border-gray-300"
                         onChange={(e: any) => { e.target.value = e.target.value.replace(/[^0-9]/g, ''); setHeightPet(e.target.value) }}
                         name="height"
                         type="number" />
                     <FieldControl
                         label="Comprimento"
                         placeholder="Comprimento do pet em centímetros "
-                        className=" "
+                        className="border-gray-300"
                         name="length"
                         type="number" />
                 </div>
@@ -99,7 +99,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                 <div className="flex flex-col mt-2">
                     <FieldTextArea
                         label="Orientações e Anotações"
-                        className="rounded-md w-full"
+                        className="rounded-md w-full border-gray-300"
                         component="textarea"
                         name="observations"
                         type="text" />

@@ -129,6 +129,7 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
             <FieldControl
                 label={`Número do microchip`}
                 name={`chip_Number`}
+                className="border-gray-200 border-2"
                 type="field masked"
                 mask="_____"
                 placeholder="Digite o número do microchip (opcional)"
@@ -136,6 +137,7 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
             <FieldControl
                 label={`Número de registro cartório`}
                 name={`id_Office_Register`}
+                className="border-gray-200 border-2"
                 type="field masked"
                 mask="_____"
                 placeholder="Digite o número do registro (opcional)"
