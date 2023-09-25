@@ -32,6 +32,9 @@ import AppointmentVet from "./appointment-vet/slice";
 // Pages > Team
 import Team from "./team/reducer";
 
+// schedule
+import schedule from "./newSchedule/slice";
+
 
 const persistConfig = {
     key: '@pawkeepr/session',
@@ -57,6 +60,7 @@ const rootReducer = combineReducers({
     Tutor,
     Team,
     Pets,
+    schedule,
     ActivateAccount,
 });
 

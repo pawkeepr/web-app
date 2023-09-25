@@ -96,6 +96,7 @@ const CoverSignUp = () => {
                                 <p className="text-gray-400 text-xs">
                                     Aproveite todos os Benefícios Agora!
                                 </p>
+                                <p className="text-sm font-bold text-secondary-500">Obrigatório (*)</p>
                             </div>
                             <FieldControl
                                 label="Email"

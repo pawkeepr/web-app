@@ -10,7 +10,7 @@ import { BtnPrimary } from "~/Components/atoms/btn";
 import BoxButtons from "~/Components/molecules/box-buttons";
 import FieldDocument from "~/Components/molecules/field-document";
 import { useAppDispatch } from '~/store/hooks';
-import { addNew } from '~/store/pets/actions';
+import { addNew } from '~/store/newSchedule/actions';
 
 // import ComboBoxFields from "./components/organisms/combo-box-fields/combo-box-fields";
 
@@ -37,13 +37,11 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
     }
 
     const initialValues: InitialValues = {
-        name: '',
-        species: '' as any,
-        breed: '' as any,
-        castrated: false,
-        avatar: null,
-        dateOfBirth: null,
-        bloodType: '' as any,
+        date: '',
+        time: '',
+        type: '',
+        reason: '',
+        observations: '',
     }
 
     return (
@@ -74,7 +72,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
 
                 <Formik
                     initialValues={initialValues}
-                    validationSchema={validationPet}
+                    // validationSchema={validationPet}
                     onSubmit={onSubmit}
                     enableReinitialize
                 >
@@ -93,11 +91,10 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                         type="date"
                                     />
 
-                                    <FieldDocument
-                                        onlyCPF
+                                    <FieldControl
                                         label="Hora da consulta"
                                         required
-                                        name="Time"
+                                        name="time"
                                         className=" "
                                         placeholder="digite a hora da consulta, exemplo='14:00'"
                                         type="text"
@@ -114,7 +111,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                 />
                                 <FieldControl
                                     label="Razão da consulta"
-                                    name="type"
+                                    name="reason"
                                     required
                                     className=" "
                                     placeholder="digite a razão da consulta, exemplo='consulta de rotina'"
@@ -128,7 +125,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                     type="text"
                                 />
 
-                                <BoxButtons onClickCancel={closeModal} onClickSuccess={handleSubmit} isValid={isValid} />
+                                <BoxButtons onClickCancel={closeModal} onClickSuccess={handleSubmit} isValid={true} />
                             </>
                         )
                     }

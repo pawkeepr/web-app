@@ -153,6 +153,7 @@ const ActivationAccount = () => {
                         <br />
                         <span className="mx-2 font-semibold">{email || 'email@teste.com'}</span>
                     </p>
+                    <p className="text-sm font-bold text-secondary-500">Obrigatório (*)</p>
                 </div>
             </div>
             <Formik

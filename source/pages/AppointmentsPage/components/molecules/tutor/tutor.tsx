@@ -79,7 +79,7 @@ const StepTutor = ({ disabled }: StepTutorProps) => {
                         aria-label="email"
                         disabled={disabled}
                         className=" "
-                        placeholder="Digite o email do tutor (opcional)"
+                        placeholder="Digite o email do tutor"
                         required
                         disabledError
                     />

@@ -19,13 +19,14 @@ import { BsFillTrash3Fill, BsPlusCircleFill } from "react-icons/bs";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldTextArea from "~/Components/molecules/field-text-area/field-text-area";
+import Select from "react-select/dist/declarations/src/Select";
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
     const [enableField, setEnableField] = useState<boolean>(true);
-    const measurements = ['Kilogramas', 'Gramas']
+    const tests = ['Teste 1', 'Teste 2', 'Teste 3', 'Teste 4', 'Teste 5']
 
-    const options2 = measurements.map((item) => ({
+    const options = tests.map((item) => ({
         value: item,
         label: item,
         color: 'rgb(255 200 107);',
@@ -48,7 +49,14 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
                 >
                     <div className="mt-2">
-                        <FieldArray name="tests">
+                    <FieldControlSelect
+                        label="Selecione uma ou mais opções:"
+                        placeholder="Selecione uma ou mais atividades"
+                        isMulti
+                        name="activity"
+                        options={options}
+                    />
+                        {/* <FieldArray name="tests">
                             {(arrayHelpers) => (
                                 <>
                                     {values?.tests?.map(
@@ -104,7 +112,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                     }
                                 </>
                             )}
-                        </FieldArray>
+                        </FieldArray> */}
                     </div>
                 </ControlSwitch>
             </div>
@@ -550,34 +558,6 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     </ControlSwitch>
                 </div>
                 <div className="mt-2">
-                </div>
-                <div className="mt-4">
-                    <span className="font-bold">Informações Obrigatórias</span>
-                    <div className="flex items-center mt-2 gap-2 w-full">
-                        <FieldControl
-                            label="Peso"
-                            className="rounded-md form-control font-semibold "
-                            name="weight"
-                            type="number"
-                        />
-                        <div className="flex flex-col mb-[6px] w-full">
-                            <FieldControlSelect
-                                label="Selecione uma medida"
-                                placeholder="Selecione uma medida"
-                                name="measurements"
-                                options={options2}
-                            />
-                        </div>
-                    </div>
-                    <div className="flex flex-col mt-2">
-                        <FieldTextArea
-                            label="Orientações e Anotações"
-                            className="rounded-md form-control"
-                            component="textarea"
-                            name="observations"
-                            type="text"
-                        />
-                    </div>
                 </div>
             </div>
 

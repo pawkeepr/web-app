@@ -3,6 +3,7 @@
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from 'react';
+import image from "../../styles/assets/images/landing/bg-pattern.png";
 
 import cookies from '~/constants/cookies';
 
@@ -116,9 +117,14 @@ const Layout = ({ children }: LayoutProps) => {
             <div
                 className={cn(
                     "px-24 mobile:px-4 relative",
-                    "mobile:pt-20"
+                    "mobile:pt-20",
+                    // 'bg-cover bg-no-repeat bg-fixed',
                 )}
-            >
+                style={{
+                    backgroundImage: `url(${image})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                }}>
                 {children}
                 <FieldDocumentAppointment selectedTabInitial={0}>
                     {

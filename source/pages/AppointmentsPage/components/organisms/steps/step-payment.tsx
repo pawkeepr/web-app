@@ -7,7 +7,7 @@ import FieldControl from "~/Components/molecules/field-control/field-control";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import { StepProps } from "./types";
 
-const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
+const StepPaymment = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit } = useFormikContext();
     const [event, setEvent] = useState<string>('credit');
 
@@ -81,19 +81,16 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-3 mt-4">
-                    {
-                        event === 'credit' && (
-                            <div className="w-full">
-                                <p className="text-gray-600 ">Quantas parcelas?</p>
-                                <FieldControlSelect
-                                    placeholder="Selecione a quantidade de parcelas"
-                                    name="installments"
-                                    options={options}
-                                />
-                            </div>
-                        )
-                    }
-
+               
+                    <div className="w-full">
+                        <p className="text-gray-600 ">Quantas parcelas?</p>
+                        <FieldControlSelect
+                            placeholder="Selecione a quantidade de parcelas"
+                            name="installments"
+                            options={options}
+                            isDisabled={event !== 'credit'}
+                        />
+                    </div>
                     <div className="w-full">
                         <FieldControl
                             label="Valor do Pagamento?"
@@ -118,12 +115,12 @@ const StepVaccines = ({ activeTab, toggleTab }: StepProps) => {
                 <BtnPrimary
                     type="submit"
                     label="Concluir Consulta"
+                    onClick={() => { handleSubmit
+                    }}
                 />
             </div>
         </Form>
     );
 };
 
-export default StepVaccines;
-
-const finalizer = null;
+export default StepPaymment;

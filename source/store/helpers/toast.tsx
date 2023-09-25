@@ -14,17 +14,14 @@ type Options = Partial<typeof OptionsDefault>;
 type ToastMessage = {
   id?: string;
   type?: 'success' | 'error' | 'info';
-  title: string;
   description?: string;
 }
 
-export const buildToast = async ({ type, title, description = '' }: ToastMessage, options?: Options) => {
+export const buildToast = async ({ type, description = '' }: ToastMessage, options?: Options) => {
   const optionsDefault = { ...OptionsDefault, ...options };
 
   const msg = (
     <>
-      <strong>{title}</strong>
-      <br />
       {description && <p>{description}</p>}
     </>
   )
@@ -32,26 +29,26 @@ export const buildToast = async ({ type, title, description = '' }: ToastMessage
 
 
   if (type === 'success') {
-    return toast.success(msg, optionsDefault);
+    return toast.success(msg, {...optionsDefault, className: '!bg-primary-500 text-white ' });
   }
 
   if (type === 'error') {
-    return toast.error(msg, optionsDefault);
+    return toast.error(msg, {...optionsDefault, className: '!bg-secondary-500 text-white ' });
   }
 
-  return toast.info(msg, optionsDefault);
+  return toast.info(msg, {...optionsDefault, className: '!bg-secondary-500 text-white ' });
 
 }
 
 export const successToast = async (description: string, title = 'Operação Concluida!', options?: Options) => {
-  return buildToast({ title, description, type: 'success' }, options);
+  return buildToast({ description, type: 'success' }, options);
 }
 
 export const errorToast = async (description: string, title = 'Erro na Operação!', options?: Options) => {
-  return buildToast({ title, description, type: 'error' }, options);
+  return buildToast({ description, type: 'error' }, options);
 }
 
 export const infoToast = async (description: string, title = 'Aviso!', options?: Options) => {
-  return buildToast({ title, description, type: 'info' }, options);
+  return buildToast({ description, type: 'info' }, options);
 }
 

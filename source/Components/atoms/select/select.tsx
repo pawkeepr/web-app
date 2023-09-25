@@ -31,6 +31,7 @@ export const colorStyles = {
             ":hover": {
                 color: "#fff",
             },
+            
         };
     },
 };
@@ -57,7 +58,7 @@ const Select = (props: Props) => {
             classNames={{
                 noOptionsMessage: () => 'Não há opções',
                 control: () =>
-                    '!rounded-md border !border-gray-300  focus:outline-none transition-shadow',
+                    `${props.required ? '!border-secondary-500 !border focus:outline-none transition-shadow': '!border !border-gray-300 focus:outline-none transition-shadow'}`,
                 indicatorSeparator: () => '!hidden',
                 input: () => 'focus:outline-none',
 

@@ -11,7 +11,7 @@ export const input = tv({
         text-sm h-10 invalid:!shadow-outline-secondary-500 invalid:!text-secondary-500
         focus:ring-2 focus:ring-primary-500
         font-sans dark:bg-[#292e33] dark:text-gray-200 
-        invalid:border-secondary-500 border invalid:focus:border-gray-300
+        invalid:border-secondary-500 border-1 invalid:focus:border-gray-300
     `,
     variants: {
         required: {
