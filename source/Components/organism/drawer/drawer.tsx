@@ -1,11 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-
+import Image from "next/image"
 import ArrowLeftCircleIcon from "@heroicons/react/20/solid/ArrowLeftCircleIcon";
 import Cog8ToothIcon from "@heroicons/react/24/solid/Cog8ToothIcon";
 import DashboardIcon from '@heroicons/react/24/solid/HomeIcon';
 import UserIcon from "@heroicons/react/24/solid/UserIcon";
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
 import { MdPets } from 'react-icons/md';
+import { layoutModeTypes } from "~/Components/constants/layout";
+import useChangeLayoutMode from "~/hooks/use-change-layout-mode";
+
+import lightLogo from '../../../../public/logo-light.png'
+import darkLogo from '../../../../public/logo-dark.png'
 
 import { button } from '~/Components/atoms/btn';
 
@@ -45,6 +50,9 @@ const items = [
 
 const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
     const pathname = usePathname();
+    const { mode } = useChangeLayoutMode()
+    const isLightMode = mode === layoutModeTypes.LIGHT_MODE;
+
 
     const buttonStyled = twMerge(button({ link: true }),
         "flex justify-start items-center",
@@ -71,13 +79,16 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
             })}
         >
             <div className="flex justify-between px-4">
-                <a href="#">
-                    <img
+                <Link href="/">
+                    <Image
+                        src={isLightMode? lightLogo: darkLogo}
+                        alt="Logo Pawkeepr Mode Light"
                         className="w-auto h-8"
-                        src='/logo-dark.png'
-                        alt="Logo PawKeeprs Dark Mode"
-                    />
-                </a>
+                        height={120}
+                        width={120}
+                    />        
+                   
+                </Link>
                 <XMarkIcon
                     onClick={closeDrawer}
                     className="cursor-pointer w-8 h-8 hover:text-gray-500 dark:hover:text-gray-400"
@@ -86,7 +97,7 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
 
             <div className="flex flex-col items-center mt-6 -mx-2">
                 <h4 className="mx-2 mt-4 font-semibold">
-                    Olá Veterinária
+                    Olá Veterinário(a)
                 </h4>
             </div>
 

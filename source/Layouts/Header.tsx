@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import Image from "next/image"
 
 //import Components
 import { useEffect, useRef, useState } from "react";
@@ -7,6 +8,7 @@ import { changeHeaderSize } from "~/store/actions";
 import { useAppDispatch } from "~/store/hooks";
 import FullScreenDropdown from "../Components/Common/full-screen-dropdown";
 import LightDark from "../Components/Common/light-dark";
+import lightLogo from '../../public/logo-light.png'
 
 import Bars3CenterLeftIcon from "@heroicons/react/24/solid/Bars3CenterLeftIcon";
 
@@ -86,20 +88,29 @@ const Header = ({ headerClass }: HeaderProps) => {
                 <Drawer
                     closeDrawer={handleClose}
                     visibleDrawer={show}
-                />
-
+                />        
                 <div className="flex items-center justify-center">
                     <Link
                         href="/"
-                        className="logo-light justify-centerblock"
+                        className="logo-light justify-center block"
                     >
-                        <img
-                            src="/logo-light.png"
+                        <Image
+                            src={lightLogo}
                             alt="Logo Pawkeepr Mode Light"
-                            height="34"
-                        />
+                            height={120}
+                            width={120}
+                        />   
+
+                        {/* <Image
+                            src={darkLogo}
+                            alt="Logo Pawkeepr Mode Dark"
+                            className="w-auto h-8"
+                            height={120}
+                            width={120}
+                        />                             */}
                     </Link>
                 </div>
+                
                 <div className="flex align-center">
                     {/* LanguageDropdown */}
                     {/* <LanguageDropdown /> */}
