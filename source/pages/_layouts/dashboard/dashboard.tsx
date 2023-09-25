@@ -15,10 +15,10 @@ const DashboardLayouts = ({
 }: DashboardLayoutsProps) => {
 
     return (
-        <>
+        <main className="min-h-screen">
             <HeaderTitle title={title} />
             {children}
-        </>
+        </main>
     );
 };
 

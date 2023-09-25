@@ -1,128 +1,92 @@
-
-export const optionsDefault = [
-    {
-        id: 1,
-        value: 1,
-        name: 'Sim',
-    },
-    {
-        id: 2,
-        value: 0,
-        name: 'Não',
-    },
-    {
-        id: 3,
-        value: 3,
-        name: 'Outro',
-    },
-]
-
 export const questions_digestive_system = [
     {
-        id: 1,
         question: 'O Animal está se alimentando normalmente?',
-        options: optionsDefault,
+        name: 'questions_digestive_system_1',
     },
     {
-        id: 2,
         question: 'O Animal está bebendo água normalmente?',
-        options: optionsDefault,
+        name: 'questions_digestive_system_2',
     },
     {
-        id: 3,
         question: 'O Animal está defecando normalmente?',
-        options: optionsDefault,
+        name: 'questions_digestive_system_3',
     },
     {
-        id: 4,
         question: 'O Animal está vomitando?',
-        options: optionsDefault,
+        name: 'questions_digestive_system_4',
     },
 ]
 
 export const questions_respiratory_system = [
     {
-        id: 1,
         question: 'O Animal apresenta secreção nasal ou ocular?',
-        options: optionsDefault,
+        name: 'questions_respiratory_system_1',
     },
     {
-        id: 2,
         question: 'O Animal apresenta tosse?',
-        options: optionsDefault,
+        name: 'questions_respiratory_system_2',
     },
     {
-        id: 3,
         question: 'O Animal apresenta espirros frequentes?',
-        options: optionsDefault,
+        name: 'questions_respiratory_system_3',
     },
     {
-        id: 4,
         question: 'O Animal apresenta dificuldade para respirar?',
-        options: optionsDefault,
+        name: 'questions_respiratory_system_4',
     },
 ]
 
 export const questions_urinary_system = [
     {
-        id: 1,
         question: 'O Animal apresenta dificuldade para urinar?',
-        options: optionsDefault,
+        name: 'questions_urinary_system_1',
     },
     {
         id: 2,
         question: 'O Animal apresenta sangue na urina?',
-        options: optionsDefault,
+        name: 'questions_urinary_system_2',
     },
 ]
 
 export const questions_nervous_system = [
     {
-        id: 1,
         question: 'O Animal apresenta convulsões?',
-        options: optionsDefault,
+        name: 'questions_nervous_system_1',
     },
     {
-        id: 2,
         question: 'O Animal apresenta alterações de comportamento e/ou hábitos?',
-        options: optionsDefault,
+        name: 'questions_nervous_system_2',
     },
     {
-        id: 3,
         question: 'O Animal apresenta dificuldade visual ou auditiva?',
-        options: optionsDefault,
+        name: 'questions_nervous_system_3',
     },
     {
-        id: 4,
         question: 'O Animal apresenta alguma alteração na sua movimentação?',
-        options: optionsDefault,
+        name: 'questions_nervous_system_4',
     },
 ]
 
 export const questions_locomotive_system = [
     {
-        id: 1,
         question: 'O Animal apresenta dificuldade para andar?',
-        options: optionsDefault,
+        name: 'questions_locomotive_system_1',
     },
     {
-        id: 2,
         question: 'O Animal apresenta dor ao toque?',
-        options: optionsDefault,
+        name: 'questions_locomotive_system_2',
     },
     {
-        id: 3,
+
         question: 'O Animal apresenta dificuldade para se levantar?',
-        options: optionsDefault,
+        name: 'questions_locomotive_system_3',
     },
     {
-        id: 4,
         question: 'Apresenta alguma deformidade na região da coluna?',
-        options: optionsDefault,
+        name: 'questions_locomotive_system_4',
     },
     {
-        id: 5,
         question: 'Ocorreu algum tipo de trauma?',
-        options: optionsDefault,
+        name: 'questions_locomotive_system_5',
     },
 ]

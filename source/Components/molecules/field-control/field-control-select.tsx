@@ -30,7 +30,7 @@ const FieldControlSelect = ({
     ...props
 }: FieldSelectControl) => {
     const { values, setFieldValue, } = useFormikContext<any>();
-
+   
     useEffect(() => {
 
         const item = options.find((option: Option) => option?.value === values?.[name]?.value)
@@ -74,7 +74,7 @@ const FieldControlSelect = ({
                 options={options}
                 name={name}
                 onChange={onChange}
-                value={values?.[name]}
+                value={props.value ?? values?.[name]}
             />
         </div>
     );
