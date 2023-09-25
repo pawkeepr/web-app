@@ -14,11 +14,11 @@ export default function HealthInsurance() {
                 className="mt-2 mb-4 lg:w-16 lg:h-7 w-[3.72rem] h-6"
             >
             <div className="text-align: left mb-2">Preencha as Informações do plano de saúde do Pet</div>
-                <div className="text-red-500 mt-2">Os campos abaixo são opcionais!</div>
+                <div className="text-secondary-500 mt-2">Os campos abaixo são opcionais!</div>
                 
                 <div className="grid grid-cols-2 mobile:grid-cols-1 gap-3 m-2 p-2">
                     <FieldControl
-                        label="Nome do plano"
+                        label="Nome do plano"a
                         name="health_insurance"
                         placeholder="Digite o nome do plano"
                     />
@@ -31,6 +31,7 @@ export default function HealthInsurance() {
                         label="Número da carteirinha"
                         name="card_number"
                         placeholder="Digite o número da carteirinha"
+
                     />
                     <FieldControl
                         label="Validade da carteirinha"
