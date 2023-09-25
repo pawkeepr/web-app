@@ -2,6 +2,7 @@ import { useFormikContext } from "formik"
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react"
 import FieldControl from "~/Components/molecules/field-control/field-control"
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select"
+import FieldMasked from "~/Components/molecules/field-masked"
 import { BloodType } from "~/store/pets/bloodType"
 import { Breed } from "~/store/pets/breedType"
 import { genderValues } from "~/store/pets/sexType"
@@ -143,19 +144,21 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
                     label={`Data de nascimento`}
                     required
                     name={`date_birth`}
-                    type="date" />
-                <FieldControl
+                    type="date"
+                />
+                <FieldMasked
                     label={`Número do microchip`}
                     name={`chip_Number`}
-                    type="field masked"
                     mask="_____"
-                    placeholder="Digite o número do microchip (opcional)" />
-                <FieldControl
+                    placeholder="Digite o número do microchip (opcional)"
+                />
+                
+                <FieldMasked
                     label={`Número de registro cartório`}
                     name={`id_Office_Register`}
-                    type="field masked"
                     mask="_____"
-                    placeholder="Digite o número do registro (opcional)" />
+                    placeholder="Digite o número do registro (opcional)" 
+                />
 
             </div>
         </>   

@@ -31,7 +31,6 @@ export default function HealthInsurance() {
                         label="Número da carteirinha"
                         name="card_number"
                         placeholder="Digite o número da carteirinha"
-                        type="field masked"
                     />
                     <FieldControl
                         label="Validade da carteirinha"
