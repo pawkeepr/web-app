@@ -88,6 +88,7 @@ const AddNewPetModal = ({ children, item }: AddModalProps) => {
                     onClick={showModal}
                     label="Novo Pet"
                     id="button-new-consult"
+                    style={{ height: 42}}
                 >
                     <MdPets className='w-6 h-6' />
                 </BtnPrimary>
