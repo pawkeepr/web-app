@@ -47,6 +47,7 @@ const AddTutorModal = ({ children, item }: AddModalProps) => {
                     onClick={showModal}
                     label="Novo Tutor"
                     id="button-new-consult"
+                    style={{ height: 42}}
                 >
                     <UserCircleIcon />
                 </BtnPrimary>
