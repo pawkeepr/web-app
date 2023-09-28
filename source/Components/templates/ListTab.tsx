@@ -41,7 +41,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
         <React.Fragment>
             <div className="flex justify-between items-center">
                 <div
-                    className="team-list w-full list-view-filter col-span-8"
+                    className="team-list w-1/2 list-view-filter col-span-8"
                     style={{ marginTop: 12 }}
                 >
                         <SearchInput

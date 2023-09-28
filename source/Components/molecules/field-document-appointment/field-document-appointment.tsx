@@ -77,6 +77,7 @@ const FieldDocumentAppointment = ({
                                 name="document"
                                 placeholder="Nova Consulta"
                                 label="CPF"
+                                className="rounded-md"
                                 onlyCPF
                                 endIcon={
                                     <button
