@@ -55,7 +55,7 @@ const PasswordRules = ({ value }: PasswordRulesProps) => {
                                 'text-xs font-sans font-semibold mr-1',
                                 {
                                     'text-primary-500': rule.condition.test(value.trim()),
-                                    'text-secondary-500': !rule.condition.test(value.trim())
+                                    'text-gray-500': !rule.condition.test(value.trim())
                                 })
                         }
                     >
