@@ -1,4 +1,5 @@
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import withLoading from '~/Components/helpers/with-loading'
 
 type BoxButtonsProps = {
     onClickCancel: () => void
@@ -24,7 +25,7 @@ const BoxButtons = ({
     visibleSuccess = true,
 }: BoxButtonsProps) => {
     return (
-        <div className="gap-2 justify-end flex w-full">
+        <div className="gap-2 justify-center flex w-full">
             {visibleCancel &&
                 <BtnCancel
                     label={labelCancel}
@@ -46,4 +47,4 @@ const BoxButtons = ({
     )
 }
 
-export default BoxButtons
+export default withLoading(BoxButtons)

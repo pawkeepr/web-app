@@ -1,6 +1,8 @@
 import { useFormikContext } from 'formik'
-import { startTransition, useEffect, useState } from 'react'
+import { startTransition, useEffect, useMemo, useState } from 'react'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
+import LOADING from '~/constants/loading'
+import { useAppSelector } from '~/store/hooks'
 import { species } from '~/store/pets/speciesType'
 import { Breed } from '~/store/pets/types'
 import { InitialValues } from '../../../modal-list-pets'
@@ -23,17 +25,18 @@ const StepListBreeds = ({
     const [breeds, setBreeds] = useState<Item[]>([])
     const { values, setFieldValue } = useFormikContext<InitialValues>()
 
+
+    const { isLoading } = useAppSelector(state => state.Pets)
+    const { handleSubmit } = useFormikContext<InitialValues>()
+    const pending = useMemo(() => isLoading === LOADING.PENDING, [isLoading])
+
     const prevStep = () => {
         onChangeSelectedTab(selectedTab - 1)
     }
 
-    const nextStep = () => {
-        onChangeSelectedTab(selectedTab + 1)
-    }
-
     const handleSelectBreed = (breed: Breed) => {
         setFieldValue('breed', breed)
-        nextStep()
+        handleSubmit()
     }
 
     useEffect(() => {
@@ -71,10 +74,11 @@ const StepListBreeds = ({
             <BoxButtons
                 isValid={!values.breed}
                 link={false}
+                isLoading={pending}
                 labelCancel='Voltar'
                 visibleSuccess={false}
                 onClickCancel={prevStep}
-                onClickSuccess={()=>{}}
+                onClickSuccess={() => { }}
             />
         </div>
     )

@@ -1,7 +1,7 @@
 import { Dialog, Tab, Transition } from '@headlessui/react'
 import { Formik } from 'formik'
 import { useRouter } from 'next/navigation'
-import { Fragment, useCallback, useEffect, useState } from 'react'
+import { Fragment, useCallback, useState } from 'react'
 import useFindTutorByDocument from '~/hooks/use-find-tutor-by-document'
 import routes from '~/routes'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
@@ -12,7 +12,6 @@ import StepDocument from './components/organisms/steps/step-document'
 import StepListBreeds from './components/organisms/steps/step-list-breeds'
 import StepListPets from './components/organisms/steps/step-list-pets'
 import StepListSpecies from './components/organisms/steps/step-list-species'
-import StepLoading from './components/organisms/steps/step-loading'
 
 type onChangeOpen = (arg: boolean) => void
 
@@ -49,7 +48,6 @@ const ModalListPets = ({
     const [document, setDocument] = useState('')
     const [selectedTab, setSelectedTab] = useState(selectedTabInitial)
 
-    const { isPetSuccess, isPetCreated } = useAppSelector(state => state.Pets)
     const dispatch = useAppDispatch()
     const tutor = useFindTutorByDocument(document);
     const router = useRouter()
@@ -61,16 +59,6 @@ const ModalListPets = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [document])
 
-    useEffect(() => {
-        if (isPetSuccess && isPetCreated) {
-            handleNavigate(isPetCreated)
-        }
-
-        return () => {
-            // dispatch(resetCreatedPet())
-        }
-
-    }, [isPetSuccess, isPetCreated, handleNavigate, dispatch])
 
     const initialValues: InitialValues = {
         name: '',
@@ -250,13 +238,7 @@ const ModalListPets = ({
                                                         onChangeSelectedTab={onChangeSelectedTab}
                                                     />
                                                 </Tab.Panel>
-                                                <Tab.Panel key={5} tabIndex={5}>
-                                                    <StepLoading
-                                                        onChangeSelectedTab={onChangeSelectedTab}
-                                                        selectedTab={selectedTab}
-                                                        handleCloseModal={closeModal}
-                                                    />
-                                                </Tab.Panel>
+
                                             </Tab.Panels>
                                         </Formik>
 
