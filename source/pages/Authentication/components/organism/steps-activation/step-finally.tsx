@@ -20,7 +20,10 @@ const StepFinally = ({ prevStep, nextStep }: StepProps) => {
     const { values, isValid, handleSubmit } =
         useFormikContext<ActivateAccount>();
 
-    const isLoading = useAppSelector(state => state.Profile.isLoading === LOADING.PENDING)
+    const isLoading = useAppSelector(state =>
+        state.Profile.isLoading === LOADING.PENDING ||
+        state.Profile.isLoading === LOADING.SUCCESS
+    )
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -161,6 +164,7 @@ const StepFinally = ({ prevStep, nextStep }: StepProps) => {
                 <div>
                     <BtnLabel
                         condition={!isLoading}
+                        disabled={isLoading}
                         onClick={prevStep}
                         label="Anterior"
                     />
