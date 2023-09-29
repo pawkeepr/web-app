@@ -1,14 +1,13 @@
-import { FieldArray, useFormikContext } from "formik";
+import { useFormikContext } from "formik";
 import { useState } from "react";
-import { BsFillTrash3Fill, BsPlusCircleFill } from "react-icons/bs";
-import { BtnCancel, BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
-import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete/combo-box-autocomplete";
+import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
+import FieldTextArea from "~/Components/molecules/field-text-area/field-text-area";
 import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
+import Nutritions from "../../molecules/nutritions";
 import ControlSwitch from "../../molecules/switch/switch";
 import { StepProps } from "./types";
-import FieldTextArea from "~/Components/molecules/field-text-area/field-text-area";
 
 const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
     const physical_activity = ['Caminhadas', 'Corridas', 'Natação', 'Passeios', 'Cabo-de-guerra', 'Varetinhas', 'Bolinhas']
@@ -42,8 +41,8 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
         <>
             <div>
                 <h4 className="text-center">Informações bem-estar do pet
-                <br />
-                <span className="text-sm font-bold text-secondary-500">Obrigatório (*)</span>
+                    <br />
+                    <span className="text-sm font-bold text-secondary-500">Obrigatório (*)</span>
                 </h4>
             </div>
             <div className="flex flex-col mt-4 w-full">
@@ -122,141 +121,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                     label="Aplicar nutrição alimentar?"
                     className="mt-2 w-[3.72rem] h-6 lg:w-16 lg:h-7"
                 >
-                    <div className="grid grid-cols-2 gap-2">
-                        <div className="flex flex-col col-span-2 w-full">
-                            <FieldArray name="nutritions">
-                                {(arrayHelpers) => (
-                                    <>
-                                        {values.nutritions?.map(
-                                            (nutrition, index) => (
-                                                <>
-                                                    <div
-                                                        key={index}
-                                                        className="flex gap-2 items-center col-span-2  "
-                                                    >
-                                                        <ComboBoxAutocomplete
-                                                            label={`Nome do Alimento ${index + 1
-                                                                }`}
-                                                            name={`nutrition[${index}].food_name`}
-                                                        />
-
-                                                        <button
-                                                            type="button"
-                                                            onClick={() =>
-                                                                arrayHelpers.push(
-                                                                    {
-                                                                        food_name:
-                                                                            "",
-                                                                        food_start_time:
-                                                                            "",
-                                                                        amount: "",
-                                                                        measure:
-                                                                            "",
-                                                                        interval:
-                                                                            "",
-                                                                        period: "",
-                                                                    }
-                                                                )
-                                                            }
-                                                        >
-                                                            <BsPlusCircleFill
-                                                                title="Adicionar Vacina"
-                                                                className="w-8 h-5 hover:scale-110 mt-2 text-secondary-500    transition   cursor-pointer"
-                                                            />
-                                                        </button>
-
-                                                        {index > 0 && (
-                                                            <BsFillTrash3Fill
-                                                                title="Remover Vacina"
-                                                                className="w-8 h-5 mt-2 hover:scale-110 text-red-500 cursor-pointer"
-                                                                onClick={() =>
-                                                                    arrayHelpers.remove(
-                                                                        index
-                                                                    )
-                                                                }
-                                                                type="button"
-                                                            />
-                                                        )}
-                                                    </div>
-                                                    <div className="grid grid-cols-2 gap-2">
-                                                        <div className="flex flex-col col-span-2">
-                                                            <FieldControl
-                                                                label={`Horário que começa a alimentação ${index +
-                                                                    1
-                                                                    }`}
-                                                                className="rounded-md  "
-                                                                name={`nutrition[${index}].time_food`}
-                                                                type="text"
-                                                            />
-                                                        </div>
-
-                                                        <div className="flex  w-full items-center gap-2 col-span-2 ">
-                                                            <FieldControl
-                                                                label={`Quantidade Alimento ${index +
-                                                                    1
-                                                                    }`}
-                                                                className="rounded-md  "
-                                                                name={`nutrition[${index}].amount`}
-                                                                type="text"
-                                                            />
-                                                            <div className="flex flex-col mb-[6px] w-full">
-                                                                <span className="text-xs mt-2">
-                                                                    Medida
-                                                                </span>
-                                                                <select
-                                                                    className="  border-gray-200 border-2"
-                                                                    name={`nutrition[${index}].measure`}
-                                                                >
-                                                                    <option value="kilos">
-                                                                        Kilo(s)
-                                                                    </option>
-                                                                    <option value="gramas">
-                                                                        Grama(s)
-                                                                    </option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex items-center justify-center gap-2 col-span-2">
-                                                            <FieldControl
-                                                                label={`Intervalo ${index +
-                                                                    1
-                                                                    }`}
-                                                                className="rounded-md  "
-                                                                name={`nutrition[${index}].interval`}
-                                                                type="text"
-                                                            />
-                                                            <div className="flex flex-col w-full mb-[6px]">
-                                                                <span className=" text-xs mt-2">
-                                                                    Período
-                                                                </span>
-                                                                <select
-                                                                    className="  border-2 border-gray-200"
-                                                                    name={`nutrition[${index}].period`}
-                                                                >
-                                                                    <option value="hours">
-                                                                        Hora(s)
-                                                                    </option>
-                                                                    <option value="days">
-                                                                        Dia
-                                                                    </option>
-                                                                    <option value="months">
-                                                                        Mes(es)
-                                                                    </option>
-                                                                    <option value="years">
-                                                                        Ano
-                                                                    </option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </>
-                                            )
-                                        )}
-                                    </>
-                                )}
-                            </FieldArray>
-                        </div>
-                    </div>
+                    <Nutritions />
                 </ControlSwitch>
             </div>
 

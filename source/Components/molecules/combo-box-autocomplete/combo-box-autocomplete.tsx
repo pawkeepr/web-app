@@ -63,7 +63,6 @@ const ComboBoxAutocomplete = <T,>({
                     <FieldControl
                         className="w-full"
                         name={name}
-                        component={Combobox.Input as any}
                         displayValue={items}
                         {...rest}
                     >
@@ -138,8 +137,8 @@ const ComboBoxAutocomplete = <T,>({
                                             {selected && (
                                                 <span
                                                     className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active
-                                                            ? "text-white"
-                                                            : "text-teal-600"
+                                                        ? "text-white"
+                                                        : "text-teal-600"
                                                         }`}
                                                 >
                                                     <FaCheck />

@@ -1,8 +1,7 @@
-import DashboardLayouts from "../_layouts/dashboard";
 import * as Yup from "yup";
-import Container from "react-bootstrap/Container";
+import DashboardLayouts from "../_layouts/dashboard";
 
-import { VeterinaryAppointment } from "~/store/veterinary-appointments/types";
+import { IAppointmentVet } from "~/store/appointment-vet/types";
 import VerticalTabs from "./components/templates/vertical-tabs";
 
 import { Formik } from "formik";
@@ -11,7 +10,7 @@ import { BtnCancel } from "~/Components/atoms/btn";
 import ModalConfirm from "~/Components/modals/modal-confirm";
 
 
-export type InitialValues = Partial<Nullable<VeterinaryAppointment>>;
+export type InitialValues = Partial<Nullable<IAppointmentVet>>;
 
 type AppointmentsPageProps = {
     document: string;
@@ -78,29 +77,21 @@ const initialValues = (
         },
     ],
     tests: [
-        {   type: "",
+        {
+            type: "",
             result: "",
             comments: "",
-           
+
         },
     ],
-    nutritions: [
-        {
-            food_name: "",
-            food_start_time: "",
-            amount: "",
-            measure: "",
-            interval: "",
-            period: "",
-        },
-    ],
+    nutritions: [],
     vaccines: [""],
     exams: [""],
     payment: {
         payment_method: undefined,
         price: 0,
-        
-        
+
+
 
 
 
@@ -134,7 +125,6 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
             },
             diseases: values.diseases,
         };
-        console.log(valuesAltered);
     };
 
     return (
