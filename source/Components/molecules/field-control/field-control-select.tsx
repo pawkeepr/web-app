@@ -1,6 +1,6 @@
 import { useFormikContext } from "formik";
 
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { Props } from 'react-select';
 import Label from "~/Components/atoms/label";
 import Select from "~/Components/atoms/select";
@@ -30,29 +30,29 @@ const FieldControlSelect = ({
     ...props
 }: FieldSelectControl) => {
     const { values, setFieldValue, } = useFormikContext<any>();
-   
-    useEffect(() => {
 
-        const item = options.find((option: Option) => option?.value === values?.[name]?.value)
+    // useEffect(() => {
 
-        if (!item && values?.[name]?.value) {
-            setFieldValue(
-                name,
-                null,
-            )
+    //     const item = options.find((option: Option) => option?.value === values?.[name]?.value)
 
-            return
-        }
+    //     if (!item && values?.[name]?.value) {
+    //         setFieldValue(
+    //             name,
+    //             null,
+    //         )
 
-        if (!item) return
+    //         return
+    //     }
 
-        setFieldValue(
-            name,
-            item,
-        )
+    //     if (!item) return
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [options])
+    //     setFieldValue(
+    //         name,
+    //         item,
+    //     )
+
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [options])
 
     const onChange = useCallback(
         (option: any) => {
@@ -70,7 +70,7 @@ const FieldControlSelect = ({
                 {...props}
                 id={name}
                 required={required}
-                className={ required ? 'border-secondary-500' : '' }
+                className={required ? 'border-secondary-500' : ''}
                 options={options}
                 name={name}
                 onChange={onChange}

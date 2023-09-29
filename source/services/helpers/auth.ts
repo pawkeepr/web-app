@@ -49,6 +49,14 @@ export async function forgotPasswordSubmit(email: string, code: string, newPassw
     return Auth.forgotPasswordSubmit(email, code, newPassword)
 }
 
+export async function verificarToken() {
+    try {
+        return await Auth.currentSession();
+    } catch (error) {
+        return false
+    }
+}
+
 export type {
     UserData
 };

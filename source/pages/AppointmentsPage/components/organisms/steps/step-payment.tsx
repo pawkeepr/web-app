@@ -7,7 +7,7 @@ import FieldControl from "~/Components/molecules/field-control/field-control";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import { StepProps } from "./types";
 
-const StepPaymment = ({ activeTab, toggleTab }: StepProps) => {
+const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit } = useFormikContext();
     const [event, setEvent] = useState<string>('credit');
 
@@ -81,7 +81,7 @@ const StepPaymment = ({ activeTab, toggleTab }: StepProps) => {
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-3 mt-4">
-               
+
                     <div className="w-full">
                         <p className="text-gray-600 ">Quantas parcelas?</p>
                         <FieldControlSelect
@@ -115,12 +115,10 @@ const StepPaymment = ({ activeTab, toggleTab }: StepProps) => {
                 <BtnPrimary
                     type="submit"
                     label="Concluir Consulta"
-                    onClick={() => { handleSubmit
-                    }}
                 />
             </div>
         </Form>
     );
 };
 
-export default StepPaymment;
+export default StepPayment;
