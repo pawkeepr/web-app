@@ -39,7 +39,7 @@ export const button = tv({
             true: "bg-transparent border-2 border-secondary-500 text-secondary-500 hover:!bg-gray-100"
         },
         link: {
-            true: "text-white dark:text-primary-600 hover:no-underline capitalize w-fit"
+            true: "text-secondary-500 dark:text-primary-600 hover:no-underline capitalize w-fit"
         }
     },
 })

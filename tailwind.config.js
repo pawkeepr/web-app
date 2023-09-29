@@ -50,7 +50,7 @@ module.exports = {
             }
         },
     },
-    plugins: [require('daisyui'), require("@tailwindcss/forms")],
+    plugins: [require('daisyui'), require("./deps/@tailwindcss/forms")],
     daisyui: {
         themes: [
             // {

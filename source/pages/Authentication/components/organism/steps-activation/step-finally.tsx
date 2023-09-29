@@ -25,7 +25,6 @@ const StepFinally = ({ prevStep, nextStep }: StepProps) => {
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         handleSubmit();
-        nextStep();
     };
 
     return (

@@ -1,16 +1,14 @@
 import { useState } from "react";
-import ControlSwitch from "../../../molecules/switch/switch";
 
 //Import images
 
 import { StepProps } from "../types";
 
 import { FieldArray, useFormikContext } from "formik";
-import { BtnCancel, BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
+import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 import { diseases } from "~/common/data/diseases";
 import { exams } from "~/common/data/exams";
-import { tests } from "~/common/data/tests";
 import { vaccines } from "~/common/data/vaccines";
 import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 
@@ -18,8 +16,7 @@ import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 import { BsFillTrash3Fill, BsPlusCircleFill } from "react-icons/bs";
 import ComboBoxAutocomplete from "~/Components/molecules/combo-box-autocomplete";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
-import FieldTextArea from "~/Components/molecules/field-text-area/field-text-area";
-import Select from "react-select/dist/declarations/src/Select";
+import ControlSwitch from "../../../molecules/switch/switch";
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
@@ -49,13 +46,13 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
                 >
                     <div className="mt-2">
-                    <FieldControlSelect
-                        label="Selecione uma ou mais opções:"
-                        placeholder="Selecione uma ou mais atividades"
-                        isMulti
-                        name="activity"
-                        options={options}
-                    />
+                        <FieldControlSelect
+                            label="Selecione uma ou mais opções:"
+                            placeholder="Selecione uma ou mais atividades"
+                            isMulti
+                            name="activity"
+                            options={options}
+                        />
                         {/* <FieldArray name="tests">
                             {(arrayHelpers) => (
                                 <>
