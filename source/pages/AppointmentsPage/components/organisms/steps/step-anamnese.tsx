@@ -5,7 +5,6 @@ import Row from "react-bootstrap/Row";
 import { StepProps } from "./types";
 
 
-import { useFormikContext } from "formik";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import {
     questions_digestive_system,
@@ -14,18 +13,21 @@ import {
     questions_respiratory_system,
     questions_urinary_system,
 } from "~/constants/anamnese-questions";
-import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 import AnswerSwitch from "../../molecules/answer-switch/answer-switch";
 
 
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
-    const { values } = useFormikContext<InitialValues>();
 
     return (
-        <>
+        <div className="card card-body shadow-lg">
             <div>
-                <h5 className="text-center">Anamnese</h5>
+                <h4 className="text-center font-sans font-semibold text-base capitalize">
+                    Anamnese
+                    <br />
+                    <span className="text-xs font-bold text-secondary-500">Obrigatório (*)</span>
+                </h4>
             </div>
+
 
             <div>
                 <Row className="g-3">
@@ -78,7 +80,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                     }}
                 />
             </div>
-        </>
+        </div>
     );
 };
 

@@ -1,5 +1,6 @@
 import { useFormikContext } from "formik";
 import FieldControl from "~/Components/molecules/field-control/field-control";
+import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 
 import MenuMultipleSelection, { CardProps } from "~/Components/organism/menu-multiple-selection/menu-multiple-selection";
 
@@ -18,75 +19,70 @@ type Nutrition = {
 const CardNutrition = ({ label, index }: CardProps<Nutrition>) => {
     return (
         <div className="grid grid-cols-2 gap-2 card card-body shadow-2xl rounded-sm">
-            <h3 className="text-lg font-bold col-span-2 text-gray-600">
+            <h3 className="text-lg font-bold col-span-full text-gray-600">
                 {label}
             </h3>
-            <div className="flex flex-col col-span-2">
-                <FieldControl
-                    label={`Horário que começa a alimentação ${index +
-                        1
-                        }`}
-                    name={`nutritions[${index}].time_food`}
-                    type="text"
-                />
-            </div>
+            <FieldControl
+                divClassName="col-span-full"
+                label="Horário que começa a alimentação"
+                name={`nutritions[${index}].time_food`}
+                type="text"
+            />
 
-            <div className="flex  w-full items-center gap-2 col-span-2 ">
-                <FieldControl
-                    label={`Quantidade Alimento ${index +
-                        1
-                        }`}
-                    name={`nutritions[${index}].amount`}
-                    type="text"
-                />
-                <div className="flex flex-col mb-[6px] w-full">
-                    <span className="text-xs mt-2">
-                        Medida
-                    </span>
-                    <select
-                        className="  border-gray-200 border-2"
-                        name={`nutritions[${index}].measure`}
-                    >
-                        <option value="kilos">
-                            Kilo(s)
-                        </option>
-                        <option value="gramas">
-                            Grama(s)
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div className="flex items-center justify-center gap-2 col-span-2">
-                <FieldControl
-                    label={`Intervalo ${index +
-                        1
-                        }`}
-                    name={`nutritions[${index}].interval`}
-                    type="text"
-                />
-                <div className="flex flex-col w-full mb-[6px]">
-                    <span className=" text-xs mt-2">
-                        Período
-                    </span>
-                    <select
-                        className="  border-2 border-gray-200"
-                        name={`nutritions[${index}].period`}
-                    >
-                        <option value="hours">
-                            Hora(s)
-                        </option>
-                        <option value="days">
-                            Dia
-                        </option>
-                        <option value="months">
-                            Mes(es)
-                        </option>
-                        <option value="years">
-                            Ano
-                        </option>
-                    </select>
-                </div>
-            </div>
+            <FieldControl
+                label="Quantidade Alimento"
+                name={`nutritions[${index}].amount`}
+                type="text"
+            />
+            <FieldControlSelect
+                label="Medida"
+                placeholder="Selecione..."
+                name={`nutritions[${index}].measure`}
+                options={[
+                    {
+                        value: "kilos",
+                        label: "Kilo(s)",
+                        color: 'rgb(255 200 107);',
+                    },
+                    {
+                        value: "gramas",
+                        label: "Grama(s)",
+                        color: 'rgb(255 200 107);',
+                    }
+                ]}
+            />
+            <FieldControl
+                label="Intervalo"
+                name={`nutritions[${index}].interval`}
+                type="text"
+            />
+            <FieldControlSelect
+                label="Período"
+                placeholder="Selecione..."
+                name={`nutritions[${index}].period`}
+                options={[
+                    {
+                        value: "hours",
+                        label: "Hora(s)",
+                        color: 'rgb(255 200 107);',
+                    },
+                    {
+                        value: "days",
+                        label: "Dia",
+                        color: 'rgb(255 200 107);',
+                    },
+                    {
+                        value: "months",
+                        label: "Mes(es)",
+                        color: 'rgb(255 200 107);',
+                    },
+                    {
+                        value: "years",
+                        label: "Ano",
+                        color: 'rgb(255 200 107);',
+                    }
+                ]}
+            />
         </div>
     )
 }

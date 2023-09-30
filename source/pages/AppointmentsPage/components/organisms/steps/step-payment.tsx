@@ -1,10 +1,9 @@
 import { Form, useFormikContext } from "formik";
 import { useState } from "react";
-import InputMask from "react-input-mask";
 import { Input, Label } from "reactstrap";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
-import FieldControl from "~/Components/molecules/field-control/field-control";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
+import FieldNumber from "~/Components/molecules/field-number/field-number";
 import { StepProps } from "./types";
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
@@ -18,13 +17,16 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     }));
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className="card card-body shadow-lg">
             <div>
-                <h2 className="text-lg">Pagamento</h2>
+                <h4 className="text-center font-sans font-semibold text-base capitalize">
+                    Informações de Pagamento
+                    <br />
+                </h4>
             </div>
 
-            <div>
-                <div className="my-3 justify-center items-center flex mobile:flex-col mobile:items-start">
+            <div className="grid grid-cols-2 gap-2">
+                <div className="my-3 justify-center items-center flex mobile:flex-col mobile:items-start col-span-full">
                     <div className="form-check form-check-inline">
                         <Input
                             id="credit"
@@ -80,27 +82,17 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     </div>
                 </div>
 
-                <div className="flex flex-col md:flex-row gap-3 mt-4">
-
-                    <div className="w-full">
-                        <p className="text-gray-600 ">Quantas parcelas?</p>
-                        <FieldControlSelect
-                            placeholder="Selecione a quantidade de parcelas"
-                            name="installments"
-                            options={options}
-                            isDisabled={event !== 'credit'}
-                        />
-                    </div>
-                    <div className="w-full">
-                        <FieldControl
-                            label="Valor do Pagamento?"
-                            className="form-control border-2 h-9 border-gray-200"
-                            name="paymentValue"
-                            component={InputMask as any}
-                            mask="R$ 999,99"
-                        />
-                    </div>
-                </div>
+                <FieldControlSelect
+                    label="Quantidade de Parcelas"
+                    placeholder="Selecione a quantidade de parcelas"
+                    name="installments"
+                    options={options}
+                    isDisabled={event !== 'credit'}
+                />
+                <FieldNumber
+                    label="Valor do Pagamento? (R$)"
+                    name="paymentValue"
+                />
             </div>
 
             <div className="flex align-items-center justify-center gap-3 mt-4">

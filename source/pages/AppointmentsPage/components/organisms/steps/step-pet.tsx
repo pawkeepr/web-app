@@ -75,12 +75,14 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     };
 
     return (
-        <>
+        <div className="card card-body shadow-lg">
             <div className="p-1 m-2 mb-4">
-                <h5 className="font-bold text-center">Pet
+                <h4 className="text-center font-sans font-semibold text-base capitalize">
+                    Informações do PET
                     <br />
+
                     <span className="text-sm font-bold text-secondary-500">Obrigatório (*)</span>
-                </h5>
+                </h4>
             </div>
             <div className="text-align: left mb-4">Preencha as Informações do PET</div>
             <div>
@@ -212,7 +214,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     }}
                 />
             </div>
-        </>
+        </div>
     );
 };
 

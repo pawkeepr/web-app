@@ -4,9 +4,7 @@ import { useState } from "react";
 
 import { StepProps } from "../types";
 
-import { useFormikContext } from "formik";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
-import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
 
 
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
@@ -17,7 +15,6 @@ import ControlSwitch from "../../../molecules/switch/switch";
 import Vaccines from "../../../molecules/vaccines";
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
-    const { values, setFieldValue, errors } = useFormikContext<InitialValues>();
     const [enableField, setEnableField] = useState<boolean>(true);
     const tests = ['Teste 1', 'Teste 2', 'Teste 3', 'Teste 4', 'Teste 5']
 
@@ -28,14 +25,15 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     }));
 
 
-    const handleClick = () => {
-        enableField === true ? setEnableField(false) : setEnableField(true);
-    };
 
     return (
-        <>
+        <div className="card card-body shadow-lg">
             <div>
-                <h4 className="text-center">Tratamento</h4>
+                <h4 className="text-center font-sans font-semibold text-base capitalize">
+                    Informações de Tratamento
+                    <br />
+                    <span className="text-xs font-bold text-secondary-500">Obrigatório (*)</span>
+                </h4>
             </div>
 
             <div className="mt-2">
@@ -146,7 +144,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     }}
                 />
             </div>
-        </>
+        </div>
     );
 };
 
