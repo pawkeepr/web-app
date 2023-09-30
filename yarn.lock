@@ -3107,6 +3107,13 @@
   dependencies:
     "@react-input/core" "^1.0.5"
 
+"@react-input/number-format@^1.0.20":
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/@react-input/number-format/-/number-format-1.0.20.tgz#1235889b74bdb66ef419bc542df3f937cccedc70"
+  integrity sha512-k+gzVCl1eQU20/b0yQVApLZHPgEHVmQpmL2pw5Xyqah8iDjOayztkOtdby9SOdX/e9DcaAegX8GaBKYOcs3UjA==
+  dependencies:
+    "@react-input/core" "^1.0.5"
+
 "@redux-saga/core@^1.2.3":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@redux-saga/core/-/core-1.2.3.tgz#882ed9ac58b5f42c6abb23349542315b871de305"
