@@ -60,7 +60,7 @@ const MenuMultipleSelection = <T,>({
                                     key={item.value}
                                     className={({ selected }) =>
                                         cn(
-                                            'w-full rounded-lg py-2.5 text-sm font-semibold leading-5 text-primary-500',
+                                            'w-full rounded-sm py-2.5 text-sm font-semibold leading-5 text-primary-500',
                                             'ring-white ring-opacity-60 ring-offset-2 ring-offset-secondary-400 focus:outline-none focus:ring-2',
                                             {
                                                 'bg-white shadow': selected,

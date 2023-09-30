@@ -11,7 +11,13 @@ const nextConfig = ((phase) => {
             publicRoutes: ['/sign-in', '/sign-up', '/forget-password', '/reset-password', '/'],
         },
         images: {
-            domains: ['localhost', 'cloudflare-ipfs.com', 'loremflickr.com', 'z4etzps20a.execute-api.us-east-1.amazonaws.com'],
+            domains: [
+                'localhost',
+                'cloudflare-ipfs.com',
+                'loremflickr.com',
+                'z4etzps20a.execute-api.us-east-1.amazonaws.com',
+                'avatars.githubusercontent.com'
+            ],
         },
         reactStrictMode: true,
         swcMinify: true,

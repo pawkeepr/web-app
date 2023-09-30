@@ -1,6 +1,6 @@
 import ReactSelect, { Props } from 'react-select';
 
-import styles from './select.module.scss';
+import cn from 'classnames';
 
 export type SelectProps = Props
 
@@ -31,36 +31,46 @@ export const colorStyles = {
             ":hover": {
                 color: "#fff",
             },
-            
+
         };
     },
 };
 
-const Select = (props: Props) => {
+const Select = ({
+    isSearchable = false,
+    ...props
+}: Props) => {
     return (
         <ReactSelect
-            className={styles.select}
             placeholder={<div className="text-gray-400">{props.placeholder || 'Clique aqui ...'}</div>}
             delimiter=','
             theme={(theme) => ({
                 ...theme,
-
                 borderRadius: 0,
                 colors: {
                     ...theme.colors,
-                    primary25: 'rgb(9, 178, 133);',
-                    primary: 'rgb(9, 178, 133);',
                 },
             })}
             styles={colorStyles}
-            isSearchable={true}
+            isSearchable={isSearchable}
             menuPosition='fixed'
             classNames={{
+
                 noOptionsMessage: () => 'Não há opções',
-                control: () =>
-                    `${props.required ? '!border-secondary-500 !border focus:outline-none transition-shadow': '!border !border-gray-300 focus:outline-none transition-shadow'}`,
+                control: () => cn(
+                    'focus:outline-none transition-shadow h-10',
+                    {
+                        '!border-secondary-500 !border ': props.required,
+                        '!border !border-gray-300': !props.required,
+                    }),
                 indicatorSeparator: () => '!hidden',
                 input: () => 'focus:outline-none',
+                option: (state) => cn(
+                    "py-2 hover:bg-secondary-500 hover:text-neutral hover:cursor-pointer uppercase",
+                    {
+                        '!bg-primary-500': state.isSelected,
+                    }
+                ),
 
             }}
             {...props}
