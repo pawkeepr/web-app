@@ -12,6 +12,7 @@ export type ItemProps<T> = {
 
 export type CardProps<T> = {
     index: number
+    name: string
 } & ItemProps<T>
 
 type MenuMultipleSelectionProps<T> = {
@@ -87,7 +88,7 @@ const MenuMultipleSelection = <T,>({
                             items?.map(
                                 (item, index: number) => (
                                     <Tab.Panel key={index}>
-                                        <Card index={index} {...item} />
+                                        <Card index={index} name={name} {...item} />
                                     </Tab.Panel>
                                 )
                             )

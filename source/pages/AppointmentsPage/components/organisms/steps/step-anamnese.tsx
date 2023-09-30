@@ -4,10 +4,9 @@ import Row from "react-bootstrap/Row";
 
 import { StepProps } from "./types";
 
-import AnswerRadio from "~/Components/molecules/answer-radio";
 
 import { useFormikContext } from "formik";
-import { BtnCancel, BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
+import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import {
     questions_digestive_system,
     questions_locomotive_system,
@@ -16,8 +15,7 @@ import {
     questions_urinary_system,
 } from "~/constants/anamnese-questions";
 import { InitialValues } from "~/pages/AppointmentsPage/Appointments";
-import ControlSwitch from "../../molecules/switch/switch";
-import AnswerSwitch from "../../molecules/answer-switch/answer-switch"
+import AnswerSwitch from "../../molecules/answer-switch/answer-switch";
 
 
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
@@ -32,32 +30,32 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
             <div>
                 <Row className="g-3">
                     {/* <AvatarPet name={values.pet?.name || 'Pet'} /> */}
-                    
-                    <AnswerSwitch 
+
+                    <AnswerSwitch
                         title="Sistema Digestivo"
                         name='digestive_system'
                         answers={questions_digestive_system}
                     />
 
-                    <AnswerSwitch 
+                    <AnswerSwitch
                         title="Sistema Respiratório"
                         name='respiratory_system'
                         answers={questions_respiratory_system}
                     />
 
-                  
-                     <AnswerSwitch
+
+                    <AnswerSwitch
                         title="Sistema Urinário"
                         name='urinary_system'
                         answers={questions_urinary_system}
                     />
-        
+
                     <AnswerSwitch
                         title="Sistema Nervoso"
                         name='urinary_system'
                         answers={questions_nervous_system}
                     />
-                    
+
                     <AnswerSwitch
                         title="Sistema Locomotor"
                         name='locomotive_system'
@@ -68,15 +66,12 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
 
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnCancel
-                    link
-                    type="button"
                     label="Voltar"
                     onClick={() => {
                         toggleTab(activeTab - 1);
                     }}
                 />
                 <BtnPrimary
-                    type="button"
                     label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab + 1);

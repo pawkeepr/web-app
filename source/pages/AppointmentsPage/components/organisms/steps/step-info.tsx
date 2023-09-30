@@ -127,15 +127,12 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
 
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnCancel
-                    link
-                    type="button"
                     label="Voltar"
                     onClick={() => {
                         toggleTab(activeTab - 1);
                     }}
                 />
                 <BtnPrimary
-                    type="button"
                     label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab + 1);

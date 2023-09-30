@@ -54,47 +54,21 @@ const initialValues = (
     treatments: [],
     speciality: '',
     sub_specialty: null,
-    medicines: [
-        {
-            name_medicine: "",
-            brand: "",
-            continuous_use: "",
-            amount: "",
-            type_medicine: "",
-            interval: "",
-            period: "",
-            date_init: "",
-            date_end: "",
-        },
-    ],
-
-    diseases: [
-        {
-            name: "",
-            typeDisease: "",
-            severity: "",
-            description: "",
-        },
-    ],
+    medicines: [],
+    diseases: [],
     tests: [
         {
             type: "",
             result: "",
             comments: "",
-
         },
     ],
     nutritions: [],
-    vaccines: [""],
-    exams: [""],
+    vaccines: [],
+    exams: [],
     payment: {
         payment_method: undefined,
         price: 0,
-
-
-
-
-
     },
 });
 

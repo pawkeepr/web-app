@@ -2,7 +2,7 @@ import { Switch } from "@headlessui/react";
 import { useState } from "react";
 
 type SwitchProps = {
-    className: string;
+    className?: string;
     children?: React.ReactNode;
     label: string;
     onClick?: () => void;
@@ -17,10 +17,10 @@ const ControlSwitch = ({
     const [enabled, setEnabled] = useState<boolean>(false);
 
     return (
-        <>
+        <div className="mb-2">
             <div className="flex justify-between items-center gap-2 mb-2">
                 <span className="font-bold">{label}</span>
-                <div className={className}>
+                <div className="w-16 max-h-max">
                     <Switch
                         onClick={onClick}
                         checked={enabled}
@@ -40,7 +40,7 @@ const ControlSwitch = ({
                 </div>
             </div>
             {enabled && children}
-        </>
+        </div>
     );
 };
 
