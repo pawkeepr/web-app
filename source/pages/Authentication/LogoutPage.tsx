@@ -23,11 +23,8 @@ const LogoutPage = () => {
         }
 
         if (isAuthenticated) {
+            dispatch(resetLoading());
             dispatch(signOutUser());
-            setTimeout(() => {
-                dispatch(resetLoading());
-                router.push('/sign-in')
-            }, 1000);
         }
 
     }, [isAuthenticated]);

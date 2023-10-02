@@ -33,13 +33,13 @@ export const button = tv({
             true: "bg-blue-600 hover:bg-blue-700 enabled:focus:bg-blue-800 enabled:hover:bg-btn-blue-700"
         },
         cancel: {
-            true: "bg-secondary-500 text-white hover-text-white !w-44 "
+            true: "bg-secondary-500 text-white"
         },
         text: {
             true: "bg-transparent border-2 border-secondary-500 text-secondary-500 hover:!bg-gray-100"
         },
         link: {
-            true: "text-white dark:text-primary-600 hover:no-underline capitalize w-fit"
+            true: "text-secondary-500 dark:text-primary-600 hover:no-underline capitalize w-fit"
         }
     },
 })

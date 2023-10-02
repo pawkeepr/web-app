@@ -7,7 +7,6 @@ import FieldControlSelect from "~/Components/molecules/field-control/field-contr
 import { sub_specialty } from "~/common/data/sub-specialtys";
 
 import CheckboxGroup from "~/Components/molecules/checkbox-group";
-import useNextStep from "~/hooks/use-next-step";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
 
@@ -42,7 +41,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep, ...rest }: StepProps) => 
         return isValid;
     }, [values]);
 
-    useNextStep(nextStep, requiredValid);
+    // useNextStep(nextStep, requiredValid);
 
     return (
         <div className="flex flex-1 flex-col gap-2">

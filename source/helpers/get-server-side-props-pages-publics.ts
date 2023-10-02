@@ -1,14 +1,14 @@
-import { parseCookies } from "nookies"
 import optionsCookies from "~/constants/cookies"
 
 import type { GetServerSideProps, GetServerSidePropsContext, PreviewData } from "next"
 import type { ParsedUrlQuery } from "querystring"
+import { getCookie } from "~/utils/cookies-utils"
 
 const getServerSidePropsPagesPublics =
     (callback?: GetServerSideProps) =>
         async (ctx: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
-            const cookies = parseCookies(ctx)
-            const token = cookies[optionsCookies.token.name]
+            const name = optionsCookies.token.name
+            const token = getCookie(name, ctx)
 
             if (token) {
                 return {

@@ -51,10 +51,12 @@ const PasswordRules = ({ value }: PasswordRulesProps) => {
                         data-testid={rule.name}
                         id={rule.name}
                         className={
-                            cn({
-                                'text-xs font-sans font-semibold text-gray-500 mr-1': true,
-                                'text-primary-500': rule.condition.test(value.trim()),
-                            })
+                            cn(
+                                'text-xs font-sans font-semibold mr-1',
+                                {
+                                    'text-primary-500': rule.condition.test(value.trim()),
+                                    'text-gray-500': !rule.condition.test(value.trim())
+                                })
                         }
                     >
                         {rule.text}
