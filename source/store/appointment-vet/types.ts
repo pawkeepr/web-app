@@ -15,14 +15,72 @@ import {
 export interface IAppointmentVet {
     id?: string; // UUID é normalmente representado como string em TypeScript
     id_pet?: string;
-    pet_data: Record<string, string>;
+    pet_data: {
+        name_pet: string,
+        microchip: string,
+        identification_number: string,
+        specie: string,
+        race: string,
+        blood_type: string,
+        blood_donator: string,
+        organ_donor: string,
+        sex: string,
+        date_birth: string
+    };
     cpf_tutor: string;
-    tutor_data: Record<string, string>;
+    tutor_data: {
+        name: string,
+        email: string,
+        phone: string,
+        country: string,
+        zipCode: string,
+        state: string,
+        city: string
+    };
     crmv_vet: string;
     cpf_cnpj_vet: string;
-    vet_data: Record<string, string>;
+    vet_data: {
+        name: string,
+        email: string,
+        phone: string,
+        country: string,
+        zipCode: string,
+        state: string,
+        city: string
+    };
     medicines: Record<string, string>[];
-    anamnesis: Record<string, string>;
+    anamnesis: {
+        digestive_system: [
+            {
+              question: string,
+              options: string
+            }
+          ],
+          respiratory_system: [
+            {
+              question: string,
+              options: string
+            }
+          ],
+          locomotor_system: [
+            {
+              question: string,
+              options: string
+            }
+          ],
+          urinary_system: [
+            {
+              question: string,
+              options: string
+            }
+          ],
+          nervous_system: [
+            {
+              question: string,
+              options: string
+            }
+          ]
+    };
     vaccines: Record<string, string>[];
     exams: Record<string, string>[];
     nutritions?: Record<string, string>[];
@@ -34,7 +92,16 @@ export interface IAppointmentVet {
     appointment_signature?: Record<string, string>;
     appointment_geolocation?: Record<string, string>;
     tests_fasts?: Record<string, string>[];
-    owner?: string;
+    dental_treatment: {
+        reason_query: string,
+        oral_examination: string,
+        treatments_performed: Record<string, string>[],
+        recommendations: string
+    }
+    well_being: {
+        perform_activity: string,
+        activities_carry: []
+    },
 }
 
 export interface Data extends IAppointmentVet {
