@@ -23,9 +23,9 @@ import { SpeciesType } from "~/store/pets/speciesType";
 import usePetById from "../../hooks/use-pet-by-id";
 import usePetByName from "../../hooks/use-pet-by-name";
 import useTutorByDocument from "../../hooks/use-tutor-by-document";
+import HealthInsurance from "../../molecules/health-insurance";
 import StepSecondTutor from "../../molecules/second-tutor";
 import StepTutor from "../../molecules/tutor";
-import HealthInsurance from "../../molecules/health-insurance";
 
 
 
@@ -75,12 +75,14 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     };
 
     return (
-        <>
+        <div className="card card-body shadow-lg">
             <div className="p-1 m-2 mb-4">
-                <h5 className="font-bold text-center">Pet
-                <br />
-                <span className="text-sm font-bold text-secondary-500">Obrigatório (*)</span>
-                </h5>
+                <h4 className="text-center font-sans font-semibold text-base capitalize">
+                    Informações do PET
+                    <br />
+
+                    <span className="text-sm font-bold text-secondary-500">Obrigatório (*)</span>
+                </h4>
             </div>
             <div className="text-align: left mb-4">Preencha as Informações do PET</div>
             <div>
@@ -92,8 +94,8 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     <ComboBoxFields name="pet" />
                     <div className="p-1 m-2 mb-4">
                         <h5 className="font-bold text-center">Tutor
-                        <br />
-                        <span className="text-sm font-bold text-secondary-500">Obrigatório (*)</span>
+                            <br />
+                            <span className="text-sm font-bold text-secondary-500">Obrigatório (*)</span>
                         </h5>
                     </div>
                     <div className="text-align: left  mb-2">Preencha as Informações do Tutor</div>
@@ -127,22 +129,22 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         />
                     </Col>
                     <Col sm={4}>
-                    <FieldPhone
-                        label="Telefone/Celular"
-                        divClassName="my-1"
-                        name="tutor_phone"                                
-                        disabled={isPending || tutorExists}
-                        placeholder={
-                            isPending
-                                ? "Carregando..."
-                                : "Digite o seu Número de Telefone"
-                        }
-                        required
-                    /> 
+                        <FieldPhone
+                            label="Telefone/Celular"
+                            divClassName="my-1"
+                            name="tutor_phone"
+                            disabled={isPending || tutorExists}
+                            placeholder={
+                                isPending
+                                    ? "Carregando..."
+                                    : "Digite o seu Número de Telefone"
+                            }
+                            required
+                        />
                     </Col>
                     <StepTutor disabled={tutorExists} />
                 </Row>
-                
+
                 <Row className="mt-2">
                     <ControlSwitch
                         label="O pet possui um segundo Tutor?"
@@ -170,7 +172,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 name="second_tutor.name"
                                 disabled={isPending || tutorExists}
                                 aria-label="name"
-                                
+
                                 placeholder="Digite o nome do Tutor"
                                 required
                                 disabledError
@@ -202,18 +204,17 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 <Row>
                     <HealthInsurance />
                 </Row>
-                    
+
             </div>
             <div className="flex align-items-center justify-end gap-3 mt-4">
                 <BtnPrimary
-                    type="button"
                     label="Próximo"
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}
                 />
             </div>
-        </>
+        </div>
     );
 };
 

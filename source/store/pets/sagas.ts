@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 
 import {
@@ -20,6 +21,7 @@ import {
 } from "./types";
 
 import { PayloadAction } from "@reduxjs/toolkit";
+import routes from "~/routes";
 import {
     deletePet,
     getPets,
@@ -60,8 +62,10 @@ export function* onDelete({ payload: { id } }: PayloadAction<{ id: string }>) {
 
 export function* onAdd({ payload }: PayloadAction<Data>) {
     try {
+        const document = payload.ownerEmergencyContact.document
         const { data } = yield call(postPet, payload);
         yield put(addSuccess(data));
+        yield call([Router, Router.push], `${routes.dashboard.new.appointments}?document=${document}&pet=${data.id}`);
         yield successToast('Pet cadastrado com sucesso!')
     } catch (error) {
         yield errorToast('Erro ao cadastrar o pet!')

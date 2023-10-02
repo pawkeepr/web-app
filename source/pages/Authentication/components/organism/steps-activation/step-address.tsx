@@ -18,7 +18,13 @@ import { StepProps } from './types';
 
 
 const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
-    const [disabledInputs, setDisabledInputs] = useState({ state: false, city: false, neighborhood: false, street: false, complement: false })
+    const [disabledInputs, setDisabledInputs] = useState({
+        state: false,
+        city: false,
+        neighborhood: false,
+        street: false,
+        complement: false
+    })
 
     const { values, setFieldValue } = useFormikContext<ActivateAccount>()
     const { zipCode } = values.location
@@ -97,7 +103,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 type="text"
                 label="Bairro"
                 name="location.neighborhood"
-                disabled={disabledInputs.neighborhood || loading}
+                disabled={loading}
                 placeholder={loading ? 'Carregando...' : 'Digite o nome do bairro'}
                 required
             />
@@ -108,7 +114,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     label='Rua'
                     name="location.street"
                     aria-label="street"
-                    disabled={disabledInputs.street || loading}
+                    disabled={loading}
                     placeholder={loading ? 'Carregando...' : 'Digite o nome da rua'}
                     required
                     disabledError
@@ -119,7 +125,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     label='N°'
                     name="location.number"
                     aria-label="number"
-                    disabled={disabledInputs.street || loading}
+                    disabled={loading}
                     placeholder="N°"
                 />
 
@@ -131,7 +137,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     type="text"
                     label="Complemento"
                     name="location.complement"
-                    disabled={disabledInputs.complement || loading}
+                    disabled={loading}
                     placeholder={loading ? 'Carregando...' : "Digite o complemento (opcional)"}
                 />
             </div>

@@ -1,7 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
-import { destroyCookie } from 'nookies';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import cookies from '~/constants/cookies';
 
 import {
@@ -26,7 +25,7 @@ import Router from 'next/router';
 import { UserData, getUser, signInAws, signOut } from '~/services/helpers/auth';
 
 import { layoutModeTypes } from "~/Components/constants/layout";
-import { getCookie, setCookie } from "~/utils/cookies-utils";
+import { getCookie, removeCookie, setCookie } from "~/utils/cookies-utils";
 import { errorToast } from '../../helpers/toast';
 import { getProfileSession, resetProfileFlag, setProfile } from '../profile/actions';
 import { Profile } from "../profile/types";
@@ -72,21 +71,31 @@ export function* recoverUserByTokenSaga() {
         yield put(setProfile(userData as Profile));
         yield put(recoverUserByTokenSuccess({ access_token }));
     } catch (error) {
-        console.log(error)
+        if ((error as string) === 'No current user') {
+            yield put(signOutUserSuccess());
+        }
         yield put(recoverUserByTokenFailed((error as any).message));
+        delay(1000);
+        yield call([Router, Router.push], '/sign-in');
     }
 }
 
 export function* signOutUserSaga() {
     try {
-        yield destroyCookie(null, cookies.token.name);
+        yield put(changeLayoutMode(layoutModeTypes.LIGHT_MODE));
+        yield removeCookie(cookies.token.name);
         yield put(resetProfileFlag());
         yield put(signOutUserSuccess());
-        yield put(changeLayoutMode(layoutModeTypes.LIGHT_MODE));
         yield call(signOut);
     } catch (error) {
-        console.log(error)
+        if ((error as string) === 'No current user') {
+            yield put(signOutUserSuccess());
+            return;
+        }
         yield put(signOutUserFailed((error as any).message));
+    } finally {
+        delay(1000);
+        yield call([Router, Router.push], '/sign-in');
     }
 }
 

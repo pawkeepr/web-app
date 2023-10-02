@@ -8,6 +8,7 @@ import FieldControl from "~/Components/molecules/field-control";
 import validatePerson from "~/validations/person";
 
 import { FaWhatsapp } from "react-icons/fa";
+import ControlSwitch from "~/Components/atoms/switch-v2/switch";
 import FieldCrmv from "~/Components/molecules/field-crmv";
 import FieldDocument from "~/Components/molecules/field-document";
 import FieldPhone from "~/Components/molecules/field-phone";
@@ -26,7 +27,12 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     useNextStep(nextStep, requiredValid);
 
-    const copyPhoneToWhatsApp = () => {
+    const copyPhoneToWhatsApp = (checked: boolean) => {
+        if (!checked) {
+            setFieldValue("contact.whatsapp", "");
+            return;
+        }
+
         setFieldValue("contact.whatsapp", values.contact.phone);
     };
 
@@ -79,14 +85,13 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     placeholder="Digite o seu Número de Telefone"
                     required
                 />
-                <div
-                    onClick={copyPhoneToWhatsApp}
-                    className="w-full hidden mobile:flex col-span-full justify-center items-center"
-                >
-                    <p className="text-xs font-semibold flex flex-row justify-center items-center gap-1">
-                        Clique aqui para duplicar o telefone no campo ao lado:
-                        <FaWhatsapp className="text-green-600 text-xl cursor-pointer" />
-                    </p>
+                <div className="w-full hidden mobile:flex col-span-full justify-center items-center">
+                    <ControlSwitch onChange={copyPhoneToWhatsApp} >
+                        <p className="text-xs font-semibold flex flex-row justify-center items-center gap-1">
+                            Clique aqui para duplicar o telefone no campo ao lado:
+                            <FaWhatsapp className="text-green-600 text-xl cursor-pointer" />
+                        </p>
+                    </ControlSwitch>
                 </div>
                 <FieldPhone
                     divClassName="col-span-1 mobile:col-span-full"
@@ -95,15 +100,14 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     placeholder="Digite o seu Número do WhatsApp"
                     required
                 />
-                <button
-                    onClick={copyPhoneToWhatsApp}
-                    className="w-full mobile:hidden  col-span-full"
-                >
-                    <p className="text-xs font-semibold flex flex-row justify-center items-center gap-1">
-                        Clique aqui para duplicar o telefone no campo ao lado:
-                        <FaWhatsapp className="text-green-600 text-xl cursor-pointer" />
-                    </p>
-                </button>
+                <div className="w-full flex mobile:hidden col-span-full justify-center items-center">
+                    <ControlSwitch onChange={copyPhoneToWhatsApp} >
+                        <p className="text-xs font-semibold flex flex-row justify-center items-center gap-1">
+                            Clique aqui para duplicar o telefone no campo ao lado:
+                            <FaWhatsapp className="text-green-600 text-xl" />
+                        </p>
+                    </ControlSwitch>
+                </div>
             </div>
 
 
