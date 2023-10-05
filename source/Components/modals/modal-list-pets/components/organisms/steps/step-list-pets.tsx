@@ -1,4 +1,5 @@
 import { useFormikContext } from 'formik'
+import { BtnPrimary, BtnSecondary } from '~/Components/atoms/btn'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldControl from '~/Components/molecules/field-control/field-control'
 import { MapOptionSpecies, Species } from '~/store/pets/speciesType'
@@ -75,7 +76,8 @@ const StepListPets = ({
             <BoxButtons
                 isValid={values.name.length > 0}
                 link={false}
-                labelSuccess="Prosseguir"
+                cancel={(props) => <BtnSecondary {...props} label='Cadastro Completo' />}
+                success={(props) => <BtnPrimary {...props} label='Cadastro Simplificado' />}
                 onClickCancel={handleCancel}
                 onClickSuccess={nextStep}
             />

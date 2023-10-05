@@ -75,10 +75,8 @@ const StepListBreeds = ({
                 isValid={!values.breed}
                 link={false}
                 isLoading={pending}
-                labelCancel='Voltar'
-                visibleSuccess={false}
+                success={null}
                 onClickCancel={prevStep}
-                onClickSuccess={() => { }}
             />
         </div>
     )

@@ -1,48 +1,62 @@
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
-import withLoading from '~/Components/helpers/with-loading'
+import { BtnCancel, BtnPrimary, BtnProps } from '~/Components/atoms/btn';
+import withLoading from '~/Components/helpers/with-loading';
+
+type Fn = () => void;
+
+type hasBtnCancel = {
+    onClickCancel: Fn;
+    cancel?: (props: BtnProps) => JSX.Element;
+} | {
+    cancel: null;
+    onClickCancel?: null;
+}
+
+type hasBtnSuccess = {
+    onClickSuccess: Fn;
+    success?: (props: BtnProps) => JSX.Element;
+} | {
+    success: null;
+    onClickSuccess?: null;
+}
 
 type BoxButtonsProps = {
-    onClickCancel: () => void
-    onClickSuccess: () => void
-    isValid?: boolean
-    type?: 'button' | 'submit'
-    labelCancel?: string
-    labelSuccess?: string
-    link?: boolean
-    visibleSuccess?: boolean
-    visibleCancel?: boolean
-}
+    type?: 'button' | 'submit';
+    isValid?: boolean;
+    link?: boolean;
+} & hasBtnCancel & hasBtnSuccess;
+
+
 
 const BoxButtons = ({
     onClickCancel,
     onClickSuccess,
     link = true,
     type = 'submit',
-    labelCancel = 'Cancelar',
-    labelSuccess = 'Adicionar',
+    cancel = ({
+        label = 'Voltar',
+        onClick,
+        ...props
+    }) => <BtnCancel label={label} onClick={onClick} {...props} />,
+    success = ({
+        label = 'Prosseguir',
+        onClick,
+        disabled,
+        ...props
+    }) => <BtnPrimary label={label} onClick={onClick} disabled={disabled}  {...props} />,
     isValid = false,
-    visibleCancel = true,
-    visibleSuccess = true,
 }: BoxButtonsProps) => {
     return (
         <div className="gap-2 justify-center flex w-full">
-            {visibleCancel &&
-                <BtnCancel
-                    label={labelCancel}
-                    onClick={onClickCancel}
-                />
-            }
-            {
-                visibleSuccess &&
-                <BtnPrimary
-                    link={link}
-                    onClick={onClickSuccess}
-                    disabled={!isValid}
-                    type={type}
-                    id="add-btn"
-                    label={labelSuccess}
-                />
-            }
+            {cancel?.({ onClick: onClickCancel as Fn })}
+
+
+            {success?.({
+                onClick: onClickSuccess as Fn,
+                disabled: !isValid,
+                type,
+                link
+            })}
+
         </div>
     )
 }

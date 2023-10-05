@@ -68,7 +68,7 @@ const ModalListPets = ({
         ownerEmergencyContact: tutor
     }
 
-    const pets = useAppSelector(state => state.Pets?.pets?.filter(pet => {
+    const pets = useAppSelector(state => state.Pets?.data?.filter(pet => {
         return pet?.ownerEmergencyContact?.document === document.replace(/\D/g, '')
     }))
 
@@ -161,19 +161,26 @@ const ModalListPets = ({
                                     leaveTo="opacity-0 scale-95"
                                 >
                                     <Dialog.Panel className="
-                                        w-full 
-                                        max-w-md 
+                                        mobile:w-full
+                                        w-[750px]
+                                        container
+                                        mobile:!h-[calc(100vh-12rem)]
                                         transform 
                                         overflow-hidden 
-                                        rounded-2xl 
-                                        bg-white 
-                                        p-6 
+                                        rounded-md
+                                        bg-white
+                                        py-6
+                                        px-10 
                                         text-left 
                                         align-middle 
                                         shadow-xl 
                                         transition-all
                                         dark:!bg-dark-500
                                         dark:!text-gray-200
+                                        flex
+                                        flex-col
+                                        justify-between
+                                        items-center
                                         !font-sans
                                         "
                                     >
@@ -182,14 +189,15 @@ const ModalListPets = ({
                                             className="text-xl font-semibold leading-6 text-gray-900 dark:!text-gray-200 text-center"
                                         >
                                             Adicionar Pet
+                                            <Dialog.Description
+                                                as="p"
+                                                className="text-xs text-gray-700 dark:!text-gray-200 text-center"
+                                            >
+                                                Selecione ou Adicione um Pet para prosseguir na consulta.
+                                            </Dialog.Description>
                                         </Dialog.Title>
 
-                                        <Dialog.Description
-                                            as="p"
-                                            className="text-xs text-gray-700 dark:!text-gray-200 text-center"
-                                        >
-                                            Selecione ou Adicione um Pet para prosseguir na consulta.
-                                        </Dialog.Description>
+
 
                                         <Tab.List>
                                             {
@@ -208,8 +216,7 @@ const ModalListPets = ({
                                             enableReinitialize
                                             onSubmit={handleSubmit}
                                         >
-
-                                            <Tab.Panels className="mt-2">
+                                            <Tab.Panels className="w-full">
                                                 <Tab.Panel key={1} tabIndex={1}>
                                                     <StepDocument
                                                         handleCancel={handleCancel}
@@ -238,19 +245,14 @@ const ModalListPets = ({
                                                         onChangeSelectedTab={onChangeSelectedTab}
                                                     />
                                                 </Tab.Panel>
-
                                             </Tab.Panels>
                                         </Formik>
-
-
-
                                     </Dialog.Panel>
                                 </Transition.Child>
                             </div>
                         </div>
                     </Dialog>
                 </Tab.Group>
-
             </Transition>
         </>
     )
