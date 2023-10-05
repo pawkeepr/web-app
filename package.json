@@ -20,6 +20,7 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@djpfs/react-vlibras": "^2.0.2",
         "@headlessui/react": "^1.7.17",
         "@heroicons/react": "^2.0.17",
         "@react-input/mask": "^1.0.20",

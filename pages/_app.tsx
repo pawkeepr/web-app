@@ -14,13 +14,18 @@ import '~/aws';
 import ErrorBoundary from '~/contexts/error-boundary';
 import fakebackend from '~/helpers/AuthType/fakeBackend';
 
-process.env.NODE_ENV !== 'production' && fakebackend();
+import VLibras from '@djpfs/react-vlibras';
+
+const isProd = process.env.NODE_ENV === 'production';
+
+isProd && fakebackend();
 
 function App({ Component, pageProps }: AppProps) {
 
 
     return (
         <ErrorBoundary>
+            <VLibras forceOnload={true} />
             <Provider>
                 <AuthProvider>
                     <LayoutProvider>
