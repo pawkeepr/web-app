@@ -17,7 +17,7 @@ import AnswerSwitch from "../../molecules/answer-switch/answer-switch";
 
 
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
-
+    
     return (
         <div className="card card-body shadow-lg">
             <div>

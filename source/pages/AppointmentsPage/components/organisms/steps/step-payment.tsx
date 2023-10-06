@@ -8,6 +8,7 @@ import { StepProps } from "./types";
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit } = useFormikContext();
+    
     const [event, setEvent] = useState<string>('credit');
 
     const options = new Array(12).fill(0).map((item, index) => ({
@@ -17,7 +18,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     }));
 
     return (
-        <Form onSubmit={handleSubmit} className="card card-body shadow-lg">
+        <Form className="card card-body shadow-lg">
             <div>
                 <h4 className="text-center font-sans font-semibold text-base capitalize">
                     Informações de Pagamento
@@ -103,7 +104,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     }}
                 />
                 <BtnPrimary
-                    type="submit"
+                    onClick={() => handleSubmit()}
                     label="Concluir Consulta"
                 />
             </div>
