@@ -60,7 +60,7 @@ export interface IMedicineAppointment {
  }
 
  export interface IAnamnesisAppointment {
-    digestive_system: [
+        digestive_system: [
         {
             question: string,
             options: string

@@ -62,7 +62,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                     <FieldControlSelect
                         label="Selecione uma medida"
                         placeholder="Selecione uma medida"
-                        name="measurements"
+                        name="type_weigth"
                         options={options2}
                     />
                 </div>
@@ -83,7 +83,9 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
             </div>
             <div>
                 {weightPet > 0 && heightPet > 0 && (
-                    <h2 className="m-4 font-bold">
+                    <h2 
+                    className="m-4 font-bold"
+                     >
                         O IMC do animal é: {calcularIMC(heightPet, weightPet).toFixed(2)}
                     </h2>
                 )}
@@ -94,7 +96,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                     label="Orientações e Anotações"
                     className="rounded-md w-full border-gray-300"
                     component="textarea"
-                    name="observations"
+                    name="guidelines_notes"
                     type="text" />
             </div>
         </div>
@@ -107,7 +109,7 @@ const StepInfo = ({ toggleTab, activeTab }: StepProps) => {
                     label="Selecione uma ou mais opções:"
                     placeholder="Selecione uma ou mais atividades"
                     isMulti
-                    name="activity"
+                    name="activities_carry"
                     options={options}
                 />
             </ControlSwitch>

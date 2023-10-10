@@ -31,7 +31,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="credit"
-                            name="paymentMethod"
+                            name="form_payment"
                             type="radio"
                             className="form-check-input"
                             defaultChecked
@@ -45,7 +45,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="debit"
-                            name="paymentMethod"
+                            name="form_payment"
                             type="radio"
                             onChange={(e) => { setEvent('debit') }}
                             className="form-check-input"
@@ -58,7 +58,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="pix"
-                            name="paymentMethod"
+                            name="form_payment"
                             onChange={(e) => { setEvent('pix') }}
                             type="radio"
                             className="form-check-input"
@@ -71,7 +71,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="cash"
-                            name="paymentMethod"
+                            name="form_payment"
                             onChange={(e) => { setEvent('cash') }}
                             type="radio"
                             className="form-check-input"
@@ -92,7 +92,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                 />
                 <FieldNumber
                     label="Valor do Pagamento? (R$)"
-                    name="paymentValue"
+                    name="value_payment"
                 />
             </div>
 
