@@ -42,7 +42,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <FieldControl
                     initialFocus
                     label="Nome"
-                    name="firstName"
+                    name="vets_data.name_vet"
                     aria-label="firstName"
                     placeholder="Nome"
                     required
@@ -63,7 +63,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <FieldDocument
                     divClassName="col-span-2 mobile:col-span-2"
                     label="CPF/CNPJ"
-                    name="cpf_cnpj"
+                    name="vets_data.cpf_cnpj_vet"
                     aria-label="cpf_cnpj"
                     placeholder="CPF/CNPJ"
                     required
@@ -72,7 +72,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <div className="col-span-1 mobile:col-span-2">
                 <FieldCrmv
                     label="CRMV"
-                    name="crmv"
+                    name="vets_data.crmv_vet"
                     placeholder="Digite o seu CRMV"
                     required
                 />

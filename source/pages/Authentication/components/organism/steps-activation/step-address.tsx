@@ -76,7 +76,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
             <FieldMasked
                 label="CEP"
-                name="location.zipCode"
+                name="location_tutor.zipCode"
                 placeholder="Digite o CEP"
                 mask={"_____-___"}
                 required
@@ -86,7 +86,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 className=" "
                 type="text"
                 label="Estado"
-                name="location.state"
+                name="location_tutor.state"
                 disabled={disabledInputs.state || loading}
                 placeholder={loading ? 'Carregando...' : 'Digite o nome do estado'}
                 required
@@ -94,7 +94,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <FieldControl
                 type="text"
                 label="Cidade"
-                name="location.city"
+                name="location_tutor.city"
                 disabled={disabledInputs.city || loading}
                 placeholder={loading ? 'Carregando...' : 'Digite o nome da cidade'}
                 required
@@ -102,7 +102,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <FieldControl
                 type="text"
                 label="Bairro"
-                name="location.neighborhood"
+                name="location_tutor.neighborhood"
                 disabled={loading}
                 placeholder={loading ? 'Carregando...' : 'Digite o nome do bairro'}
                 required
@@ -112,7 +112,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <FieldControl
                     divClassName="col-span-3"
                     label='Rua'
-                    name="location.street"
+                    name="location_tutor.street"
                     aria-label="street"
                     disabled={loading}
                     placeholder={loading ? 'Carregando...' : 'Digite o nome da rua'}
@@ -123,7 +123,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <FieldControl
                     divClassName="col-span-1"
                     label='N°'
-                    name="location.number"
+                    name="location_tutor.number"
                     aria-label="number"
                     disabled={loading}
                     placeholder="N°"
@@ -136,7 +136,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <FieldControl
                     type="text"
                     label="Complemento"
-                    name="location.complement"
+                    name="location_tutor.complement"
                     disabled={loading}
                     placeholder={loading ? 'Carregando...' : "Digite o complemento (opcional)"}
                 />

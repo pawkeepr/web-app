@@ -23,53 +23,45 @@ const initialValues = (
     document: NullString = null,
     id: NullString = null
 ): InitialValues => ({
-    pet: {
+    pet_data: {
         id,
-        name: null,
-        castrated: null,
-        breed: null,
-        species: null,
-        avatar: null,
+        name_pet: null,
+        microchip: null,
+        identification_number: null,
+        specie: null,
+        race: null,
+        blood_type: null,
+        blood_donator: null,
+        organ_donor: null,
         sex: null,
         date_birth: null,
-        chip_number: null,
-        id_office_register: null,
     },
-    tutor: {
-        id: null,
-        name: null,
-        email: null,
-        phone: null,
-        avatar: null,
-        document,
+    vets_data: [],
+    contact_tutor: {
+        email:  null,
+        phone:  null,
+        whatsapp:  null,
     },
-    secundTutor: {
-        id: null,
-        name: null,
-        email: null,
-        phone: null,
-        avatar: null,
-        document,
+    location_tutor: {
+        country:  null,
+        zipCode:  null,
+        state:  null,
+        city:  null,
+        neighborhood:  null,
+        street:  null,
+        number:  null,
+        complement:  null,
     },
-    treatments: [],
-    speciality: '',
-    sub_specialty: null,
-    medicines: [],
-    diseases: [],
-    tests: [
-        {
-            type: "",
-            result: "",
-            comments: "",
-        },
-    ],
-    nutritions: [],
-    vaccines: [],
-    exams: [],
-    payment: {
-        payment_method: undefined,
-        price: 0,
+    responsible_tutors: {
+        name_tutor:  null,
+        cpf_tutor:  null,
     },
+    health_insurance: {
+        name:  null,
+        type_health:  null,
+        number_health:  null,
+        validity:  null,
+  }    
 });
 
 const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
@@ -77,28 +69,7 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
     const router = useRouter();
 
     const handleSubmit = (values: InitialValues) => {
-        const valuesAltered = {
-            name_pet: values.pet?.name,
-            pet_data: {
-                species: values.pet?.species,
-                race: values.pet?.breed,
-                blood_type: values.pet?.bloodType,
-            },
-            vets: ["0121545"],
-            cpf_tutor: values.tutor?.document,
-            name_tutor: values.tutor?.name,
-            contact_tutor: {
-                email: values.tutor?.email,
-                phone: values.tutor?.phone,
-            },
-            location_tutor: {
-                address: values.tutor?.address?.street,
-                city: values.tutor?.address?.city,
-                state: values.tutor?.address?.state,
-                zipCode: values.tutor?.address?.zipCode,
-            },
-            diseases: values.diseases,
-        };
+        console.log({values})        
     };
 
     return (
@@ -139,7 +110,7 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
                         }}
                     </ModalConfirm>
                     <VerticalTabs />
-                </div>
+                </div>                
             </Formik>
         </DashboardLayouts>
     );
