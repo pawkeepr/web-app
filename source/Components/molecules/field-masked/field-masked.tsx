@@ -17,7 +17,7 @@ const FieldMasked = ({
             name={name}
             replacement={replacement}
             component={InputMask as any}
-            className={input({ className: props.className })}
+            className={input({ className: props.className, required: props.required })}
         />
     )
 }
