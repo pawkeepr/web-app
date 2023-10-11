@@ -17,7 +17,7 @@ import AnswerSwitch from "../../molecules/answer-switch/answer-switch";
 
 
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
-
+    
     return (
         <div className="card card-body shadow-lg">
             <div>
@@ -54,13 +54,13 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
 
                     <AnswerSwitch
                         title="Sistema Nervoso"
-                        name='urinary_system'
+                        name='nervous_system'
                         answers={questions_nervous_system}
                     />
 
                     <AnswerSwitch
                         title="Sistema Locomotor"
-                        name='locomotive_system'
+                        name='locomotor_system'
                         answers={questions_locomotive_system}
                     />
                 </Row>
