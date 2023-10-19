@@ -12,6 +12,209 @@ import {
     UPDATE, UPDATE_FAIL, UPDATE_SUCCESS
 } from "../helpers/constants";
 
+export interface IPetAppointment {
+    name_pet: string,
+    microchip: string,
+    identification_number: string,
+    specie: string,
+    race: string,
+    blood_type: string,
+    blood_donator: string,
+    organ_donor: string,
+    sex: string,
+    date_birth: string
+}
+
+export interface ITutorAppointment {
+    name: string,
+    email: string,
+    phone: string,
+    country: string,
+    zipCode: string,
+    state: string,
+    city: string
+}
+
+export interface IVetAppointment {
+    name: string,
+    email: string,
+    phone: string,
+    country: string,
+    zipCode: string,
+    state: string,
+    city: string
+}
+
+export interface IMedicineAppointment {
+    name_medicine: string,
+    brand: string,
+    continuous_use: string,
+    amount: string,
+    type_medicine: string,
+    interval: string,
+    period: string,
+    date_init: string,
+    date_end: string,
+    value_mediccine: string,
+    coin_mediccine: string
+ }
+
+ export interface IAnamnesisAppointment {
+        digestive_system: [
+        {
+            question: string,
+            options: string
+        }
+        ],
+        respiratory_system: [
+        {
+            question: string,
+            options: string
+        }
+        ],
+        locomotor_system: [
+        {
+            question: string,
+            options: string
+        }
+        ],
+        urinary_system: [
+        {
+            question: string,
+            options: string
+        }
+        ],
+        nervous_system: [
+        {
+            question: string,
+            options: string
+        }
+        ]
+
+ }
+
+ export interface IVaccineAppointment {
+        name_vaccine: string
+        brand: string
+        batch: string
+        local: string
+        dose: string
+        date_application: string
+        date_next_application: string
+        who_applied: string
+        health_insurance: string
+        value_vaccine: string
+        coin_vaccine: string
+ }
+
+ export interface IExamsAppointment {
+    name_exame: string,
+    local: string,
+    realization_date: string,
+    appointament_date: string,
+    time_date: string,
+    who_applied: string,
+    health_insurance: string,
+    type_exame: string,
+    value_exam: string,
+    coin_exam: string
+ }
+
+
+ export interface INutritionsAppointmen {
+    food_name: string,
+    food_start_time: string,
+    amount: string,
+    measure: string,
+    interval: string,
+    period: string,
+    starting_date: string,
+    type_nutrition: string,
+    value_nutrition: string,
+    coin_nutrition: string
+  }
+
+  export interface IllnessesAppointment {
+    name_illnese: string,
+    symptoms: string,
+    prevention: string,
+    treatment: string,
+    date_identified: string
+  }
+
+  export interface IInfo_required {
+    age: string,
+    height: string,
+    length: string,
+    weight: string,
+    type_weigth: string,
+    imc: string,
+    guidelines_notes: string
+  }
+
+  export interface IPaymentsAppointment {
+    form_payment: string,
+    value_payment: string,
+    coin: string,
+    number_installments: string,
+    status_payment: string,
+    date_payment: string
+  }
+
+  export interface IDates_consultsAppointment {
+    date_consultation: string,
+    time_consultation: string,
+    type_consultation: string,
+    reason_consultation: string,
+    additional_remarks: string,
+    date_next_consultation: string,
+    time_next_consultation: string
+  }
+
+  export interface IStatusAppointment {
+    scheduled: string,
+    confirmed: string,
+    done: string,
+    canceled: string,
+    reason_canceled: string
+  }
+
+    export interface ISignatureAppointment {
+        signature_data: string,
+        date_signature: string,
+        type_signature: string,
+        status_signature: string,
+        ip_adess: string,
+        browser_device: string,
+        operational_system: string
+    }
+
+
+    export interface IGeolocationAppointment {
+        latitude: string,
+        longitude: string,
+        precision: string,
+        altitude: string,
+        speed: string
+    }
+
+    export interface ITests_fastsAppointment {
+        test_type: string,
+        result: string,
+        notes: string
+    }
+
+    export interface IDental_treatmentAppointment {
+        reason_query: string,
+        oral_examination: string,
+        treatments_performed: Record<string, string>[],
+        recommendations: string
+    }
+
+    export interface IWell_beingAppointment {
+        perform_activity: string,
+        activities_carry: []
+    }
 export interface IAppointmentVet {
     id?: string; 
     pet_data: PetData
@@ -22,6 +225,26 @@ export interface IAppointmentVet {
     location_tutor: LocationTutor
     responsible_tutors: ResponsibleTutors
     health_insurance: HealthInsurance
+    id_pet: string;
+    tutor_data: ITutorAppointment;
+    crmv_vet: string;
+    cpf_cnpj_vet: string;
+    vet_data: IVetAppointment;
+    medicines: IMedicineAppointment[];
+    anamnesis: IAnamnesisAppointment;
+    vaccines: IVaccineAppointment[];
+    exams: IExamsAppointment[];
+    nutritions: INutritionsAppointmen;
+    illnesses: IllnessesAppointment;
+    info_required: IInfo_required;
+    payments: IPaymentsAppointment;
+    dates_consults: IDates_consultsAppointment;
+    appointment_status: IStatusAppointment;
+    appointment_signature: ISignatureAppointment;
+    appointment_geolocation: IGeolocationAppointment;
+    tests_fasts: ITests_fastsAppointment;
+    dental_treatment: IDental_treatmentAppointment;
+    well_being: IWell_beingAppointment;
 }
 
 export interface PetData {

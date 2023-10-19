@@ -8,6 +8,7 @@ import { StepProps } from "./types";
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit } = useFormikContext();
+    
     const [event, setEvent] = useState<string>('credit');
 
     const options = new Array(12).fill(0).map((item, index) => ({
@@ -17,7 +18,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     }));
 
     return (
-        <Form onSubmit={handleSubmit} className="card card-body shadow-lg">
+        <Form className="card card-body shadow-lg">
             <div>
                 <h4 className="text-center font-sans font-semibold text-base capitalize">
                     Informações de Pagamento
@@ -30,7 +31,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="credit"
-                            name="paymentMethod"
+                            name="form_payment"
                             type="radio"
                             className="form-check-input"
                             defaultChecked
@@ -44,7 +45,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="debit"
-                            name="paymentMethod"
+                            name="form_payment"
                             type="radio"
                             onChange={(e) => { setEvent('debit') }}
                             className="form-check-input"
@@ -57,7 +58,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="pix"
-                            name="paymentMethod"
+                            name="form_payment"
                             onChange={(e) => { setEvent('pix') }}
                             type="radio"
                             className="form-check-input"
@@ -70,7 +71,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="cash"
-                            name="paymentMethod"
+                            name="form_payment"
                             onChange={(e) => { setEvent('cash') }}
                             type="radio"
                             className="form-check-input"
@@ -91,7 +92,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                 />
                 <FieldNumber
                     label="Valor do Pagamento? (R$)"
-                    name="paymentValue"
+                    name="value_payment"
                 />
             </div>
 
@@ -103,7 +104,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     }}
                 />
                 <BtnPrimary
-                    type="submit"
+                    onClick={() => handleSubmit()}
                     label="Concluir Consulta"
                 />
             </div>
