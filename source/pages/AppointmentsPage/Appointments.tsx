@@ -163,18 +163,7 @@ const initialValues = (
         }
     ],
     exams: [
-        {
-            name_exame: "",
-            local: "",
-            realization_date: "",
-            appointament_date: "",
-            time_date: "",
-            who_applied: "",
-            health_insurance: "",
-            type_exame: "",
-            value_exam: "",
-            coin_exam: ""
-        }
+
     ],
     nutritions: [
         {

@@ -1,4 +1,3 @@
-
 import {
     Card,
     CardBody,
@@ -10,14 +9,12 @@ import {
     TabContent,
     TabPane
 } from "reactstrap";
-//Import images
 
 import cn from "classnames";
 import { useEffect, useState } from "react";
 
 import { useAppSelector } from "~/store/hooks";
 import StepAnamneses from "../organisms/steps/step-anamnese";
-import StepInfo from "../organisms/steps/step-info";
 import StepPayment from "../organisms/steps/step-payment";
 import StepTreatment from "../organisms/steps/step-treatment";
 
@@ -33,24 +30,18 @@ type TabItem = {
 const items: TabItem[] = [
     {
         id: 1,
-        title: "Bem-Estar",
-        href: "#BemEstar",
-        Component: StepInfo
-    },
-    {
-        id: 2,
         title: "Anamnese",
         href: "#Anamnese",
         Component: StepAnamneses
     },
     {
-        id: 3,
+        id: 2,
         title: "Tratamento",
         href: "#Treatment",
         Component: StepTreatment
     },
     {
-        id: 4,
+        id: 3,
         title: "Finalizar",
         href: "#Finalizar",
         Component: StepPayment

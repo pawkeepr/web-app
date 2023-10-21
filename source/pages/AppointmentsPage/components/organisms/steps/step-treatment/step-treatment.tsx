@@ -1,9 +1,7 @@
-import { useState } from "react";
 
 //Import images
 
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
-
 
 import ControlSwitchDiv from "~/Components/molecules/control-switch-div";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
@@ -12,10 +10,10 @@ import { StepProps } from "~/types/helpers";
 import Diseases from "../../../molecules/diseases";
 import Exams from "../../../molecules/exams";
 import Medicines from "../../../molecules/medicines";
+import Nutritions from "../../../molecules/nutritions";
 import Vaccines from "../../../molecules/vaccines";
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
-    const [enableField, setEnableField] = useState<boolean>(true);
     const tests = ['Teste 1', 'Teste 2', 'Teste 3', 'Teste 4', 'Teste 5']
 
     const options = tests.map((item) => ({
@@ -132,7 +130,11 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 <ControlSwitchDiv label="Possui doença?">
                     <Diseases />
                 </ControlSwitchDiv>
-
+                <ControlSwitchDiv
+                    label="Aplicar nutrição alimentar?"
+                >
+                    <Nutritions />
+                </ControlSwitchDiv>
             </div>
 
 
