@@ -13,6 +13,8 @@ enum EmojiPet {
     Cavalo = '🐴',
 }
 
+type Key = keyof typeof EmojiPet
+
 type StepListSpeciesProps = {
     selectedTab: number
     onChangeSelectedTab: (index: number) => void
@@ -53,7 +55,7 @@ const StepListSpecies = ({
                         "
                         >
                             <div className="grid grid-cols-4 justify-center items-center">
-                                <span className="align-middle col-span-1">{EmojiPet[specie.name]}</span>
+                                <span className="align-middle col-span-1">{EmojiPet[specie.name as Key]}</span>
                                 <span className="align-middle col-span-2">{specie.name}</span>
                             </div>
                         </button>
@@ -62,10 +64,8 @@ const StepListSpecies = ({
             <BoxButtons
                 isValid={!!values.species}
                 link={false}
-                visibleSuccess={false}
-                labelCancel='Voltar'
                 onClickCancel={prevStep}
-                onClickSuccess={nextStep}
+                success={null}
             />
         </div>
     )
