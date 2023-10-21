@@ -57,7 +57,7 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
         [setFieldValue],
     )
 
-    const { loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode: values.secondTuto_r?.address?.zipCode || '' })
+    const { loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode: '' })
 
 
     const isLoading = useMemo(() => isPending || loading, [isPending, loading])

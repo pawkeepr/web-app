@@ -24,7 +24,6 @@ import usePetById from "../../hooks/use-pet-by-id";
 import usePetByName from "../../hooks/use-pet-by-name";
 import useTutorByDocument from "../../hooks/use-tutor-by-document";
 import HealthInsurance from "../../molecules/health-insurance";
-import StepSecondTutor from "../../molecules/second-tutor";
 import StepTutor from "../../molecules/tutor";
 
 
@@ -33,10 +32,10 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const [isPendingPet, startTransition] = useTransition();
     const [specie, setSpecie] = useState<SpeciesType>({} as SpeciesType);
     const { values, setFieldValue } = useFormikContext<InitialValues>();
-
+    console.log({ values })
     const { isPending: isPendingPetById, petExists } = usePetById({
         onChangeField: setFieldValue,
-        id: values.pet?.id,
+        id: values.pet_data?.id,
     });
 
     const {
@@ -44,13 +43,13 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
         petsOptions,
         tutorExists,
     } = useTutorByDocument({
-        document: values.tutor?.document || "",
+        document: values.cpf_tutor || "",
         onChangeField: setFieldValue,
     });
 
     const { onChangePet, isPending: isPendingChangePet } = usePetByName({
         onChangeField: setFieldValue,
-        name: values.pet?.name,
+        name: values.pet_data?.name_pet,
         pets: petsOptions,
     });
 
@@ -87,7 +86,11 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
             <div className="text-align: left mb-4">Preencha as Informações do PET</div>
             <div>
                 <Row className="g-3">
-                    <ComboBoxFields name="pet" />
+                    {/* <div className="flex flex-row gap-2 items-center justify-center m-2 p-1">
+                        <AvatarPet name={values.pet?.name || ''} />
+                        <BtnAvatar alt='Avatar de Tutor' name="tutor.avatar" disabled size={24} />
+                    </div> */}
+                    <ComboBoxFields name="pet_data" />
                     <div className="p-1 m-2 mb-4">
                         <h5 className="font-bold text-center">Tutor
                             <br />
@@ -99,7 +102,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         <FieldDocument
                             label="CPF"
                             divClassName="my-1"
-                            name="tutor.document"
+                            name="cpf_tutor"
                             aria-label="document"
                             className="border-1 "
                             onlyCPF
@@ -114,7 +117,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             initialFocus
                             divClassName="my-1"
                             label="Nome Completo"
-                            name="tutor_name"
+                            name="name_tutor"
                             disabled={isPending || tutorExists}
                             aria-label="name"
                             className=" "
@@ -128,7 +131,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         <FieldPhone
                             label="Telefone/Celular"
                             divClassName="my-1"
-                            name="tutor_phone"
+                            name="contact_tutor.phone"
                             disabled={isPending || tutorExists}
                             placeholder={
                                 isPending
@@ -147,52 +150,53 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         className="mt-2 mb-4 lg:w-16 lg:h-7 w-[3.72rem] h-6"
                     >
                         <div className="text-align: left mb-2">Preencha as Informações do segundo Tutor</div>
-                        <div className="flex w-full gap-3">
-                                <Col sm={3}>
-                                    <FieldDocument
-                                        label="CPF"
-                                        divClassName="my-1"
-                                        name="tutor.document"
-                                        aria-label="document"
-                                        className="border-1 "
-                                        onlyCPF
-                                        disabled={isPending || tutorExists}
-                                        placeholder="CPF"
-                                        component={MaskedInput as any}
-                                        required
-                                    />
-                                </Col>
-                                <FieldControl
-                                    initialFocus
-                                    divClassName="my-1"
-                                    label="Nome Completo"
-                                    name="second_tutor.name"
-                                    disabled={isPending || tutorExists}
-                                    aria-label="name"
+                        <Col sm={3}>
+                            <FieldDocument
+                                label="CPF"
+                                divClassName="my-1"
+                                name="responsible_tutors.cpf_tutor"
+                                aria-label="document"
+                                onlyCPF
+                                disabled={isPending || tutorExists}
+                                placeholder="CPF"
+                                component={MaskedInput as any}
+                                required
+                            />
+                        </Col>
+                        <Col sm={5}>
+                            <FieldControl
+                                initialFocus
+                                divClassName="my-1"
+                                label="Nome Completo"
+                                name="responsible_tutors.name_tutor"
+                                disabled={isPending || tutorExists}
+                                aria-label="name"
 
-                                    placeholder="Digite o nome do Tutor"
-                                    required
-                                    disabledError
-                                    onChange={onlyWords}
-                                />
-                                <FieldPhone
-                                    divClassName="my-1"
-                                    type="text"
-                                    label="Telefone/Celular"
-                                    name="second_tutor.name"
-                                    disabled={isPending || tutorExists}
-                                    placeholder={
-                                        isPending
-                                            ? "Carregando..."
-                                            : "Digite o seu Número de Telefone"
-                                    }
-                                    component={MaskedInput as any}
-                                    mask={"(99) 99999-9999"}
-                                    maskChar={null}
-                                    required
-                                />
-                        </div>
-                        <StepSecondTutor disabled={tutorExists} />
+                                placeholder="Digite o nome do Tutor"
+                                required
+                                disabledError
+                                onChange={onlyWords}
+                            />
+                        </Col>
+                        {/* <Col sm={4}>
+                            <FieldPhone
+                                divClassName="my-1"
+                                type="text"
+                                label="Telefone/Celular"
+                                name="second_tutor.name"
+                                disabled={isPending || tutorExists}
+                                placeholder={
+                                    isPending
+                                        ? "Carregando..."
+                                        : "Digite o seu Número de Telefone"
+                                }
+                                component={MaskedInput as any}
+                                mask={"(99) 99999-9999"}
+                                maskChar={null}
+                                required
+                            />
+                        </Col>
+                        <StepSecondTutor disabled={tutorExists} /> */}
                     </ControlSwitch>
                 </Row>
 

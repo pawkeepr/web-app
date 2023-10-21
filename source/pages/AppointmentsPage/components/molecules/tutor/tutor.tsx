@@ -37,15 +37,15 @@ const StepTutor = ({ disabled }: StepTutorProps) => {
             const { uf, localidade, bairro, logradouro, complemento } = params
 
             startTransition(() => {
-                setFieldValue('tutor.address.state', uf || '')
+                setFieldValue('location_tutor.address.state', uf || '')
 
-                setFieldValue('tutor.address.city', localidade || '')
+                setFieldValue('location_tutor.address.city', localidade || '')
 
-                setFieldValue('tutor.address.neighborhood', bairro || '')
+                setFieldValue('location_tutor.address.neighborhood', bairro || '')
 
-                setFieldValue('tutor.address.street', logradouro || '')
+                setFieldValue('location_tutor.address.street', logradouro || '')
 
-                setFieldValue('tutor.address.complement', complemento || '')
+                setFieldValue('location_tutor.address.complement', complemento || '')
 
                 setDisabledInputs({
                     state: !!uf,
@@ -59,7 +59,7 @@ const StepTutor = ({ disabled }: StepTutorProps) => {
         [setFieldValue],
     )
 
-    const { loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode: values.tutor?.address?.zipCode || '' })
+    const { loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode: values.location_tutor?.zipCode || '' })
 
 
     const isLoading = useMemo(() => isPending || loading, [isPending, loading])
@@ -70,27 +70,27 @@ const StepTutor = ({ disabled }: StepTutorProps) => {
             <Row className="g-3">
 
 
-                <Col xs={12}>
+                <Col xs={12}> 
                     <FieldControl
                         initialFocus
                         divClassName='my-1'
                         label='Email'
-                        name="tutor.email"
+                        name="contact_tutor.email"
                         aria-label="email"
                         disabled={disabled}
                         className=" "
-                        placeholder="Digite o email do tutor"
+                        placeholder="Digite o email do location_tutor"
                         required
                         disabledError
                     />
-                </Col>
+                </Col>  
 
                 <Col sm={2}>
                     <FieldCep
                         divClassName='my-1'
                         className=" "
                         label="CEP"
-                        name="tutor.address.zipCode"
+                        name="location_tutor.zipCode"
                         disabled={disabled || isLoading}
                         placeholder="Digite o CEP"
                         required
@@ -100,10 +100,9 @@ const StepTutor = ({ disabled }: StepTutorProps) => {
                 <Col sm={3}>
                     <FieldControl
                         divClassName='my-1'
-                        className=" "
                         type="text"
                         label="Estado"
-                        name="tutor.address.state"
+                        name="location_tutor.state"
                         disabled={(disabledInputs.state || disabled) || isLoading}
                         placeholder={isLoading ? 'Carregando...' : 'Digite o nome do estado'}
                         required
@@ -113,10 +112,9 @@ const StepTutor = ({ disabled }: StepTutorProps) => {
                 <Col sm={3}>
                     <FieldControl
                         divClassName='my-1'
-                        className=" "
                         type="text"
                         label="Cidade"
-                        name="tutor.address.city"
+                        name="location_tutor.city"
                         disabled={(disabledInputs.city || disabled) || isLoading}
                         placeholder={isLoading ? 'Carregando...' : 'Digite o nome da cidade'}
                         required
@@ -125,10 +123,9 @@ const StepTutor = ({ disabled }: StepTutorProps) => {
                 <Col sm={4}>
                     <FieldControl
                         divClassName='my-1'
-                        className=" "
                         type="text"
                         label="Rua"
-                        name="tutor.address.street"
+                        name="location_tutor.street"
                         disabled={(disabledInputs.street || disabled) || isLoading}
                         placeholder={isLoading ? 'Carregando...' : 'Digite o nome da rua'}
                         required

@@ -216,10 +216,16 @@ export interface IMedicineAppointment {
         activities_carry: []
     }
 export interface IAppointmentVet {
-    id: string; // UUID é normalmente representado como string em TypeScript
+    id?: string; 
+    pet_data: PetData
+    vets_data: VetsData[]
+    cpf_tutor: string
+    name_tutor: string
+    contact_tutor: ContactTutor
+    location_tutor: LocationTutor
+    responsible_tutors: ResponsibleTutors
+    health_insurance: HealthInsurance
     id_pet: string;
-    pet_data: IPetAppointment;
-    cpf_tutor: string;
     tutor_data: ITutorAppointment;
     crmv_vet: string;
     cpf_cnpj_vet: string;
@@ -240,6 +246,56 @@ export interface IAppointmentVet {
     dental_treatment: IDental_treatmentAppointment;
     well_being: IWell_beingAppointment;
 }
+
+export interface PetData {
+    id?: string | null
+    name_pet: string | null
+    microchip: string | null
+    identification_number: string | null
+    specie: string | null
+    race: string | null
+    blood_type: string | null
+    blood_donator: string | null
+    organ_donor: string | null
+    sex: string | null
+    date_birth: string | null
+  }
+  
+  export interface VetsData {
+    name_vet: string | null
+    crmv_vet: string | null
+    cpf_cnpj_vet: string | null
+  }
+  
+  export interface ContactTutor {
+    email: string | null
+    phone: string | null
+    whatsapp: string | null
+  }
+  
+  export interface LocationTutor {
+    country: string | null
+    zipCode: string | null
+    state: string | null
+    city: string | null
+    neighborhood: string | null
+    street: string | null
+    number: string | null
+    complement: string | null
+  }
+  
+  export interface ResponsibleTutors {
+    name_tutor: string | null
+    cpf_tutor: string | null
+  }
+  
+  export interface HealthInsurance {
+    name: string | null
+    type_health: string | null
+    number_health: string | null
+    validity: string | null
+  }
+  
 
 export interface Data extends IAppointmentVet {
 
