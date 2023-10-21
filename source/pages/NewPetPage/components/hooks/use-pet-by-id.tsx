@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState, useTransition } from "react"
 import { useAppSelector } from "~/store/hooks"
-import { Data as Pet } from "~/store/pets/types"
+import { Data as Pet } from "~/store/slices/pets/types"
 
 type UsePetByNameProps = {
     id?: string | null,

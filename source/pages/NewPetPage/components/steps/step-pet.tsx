@@ -18,7 +18,7 @@ import { useState, useTransition } from "react";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
 import ComboBoxFields from "~/Components/modals/add-pet-modal/components/organisms/combo-box-fields";
-import { SpeciesType } from "~/store/pets/speciesType";
+import { SpeciesType } from "~/store/slices/pets/speciesType";
 import { StepProps } from "~/types/helpers";
 import usePetById from "../hooks/use-pet-by-id";
 import usePetByName from "../hooks/use-pet-by-name";

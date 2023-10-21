@@ -2,8 +2,8 @@ import { useFormikContext } from 'formik'
 import { BtnPrimary, BtnSecondary } from '~/Components/atoms/btn'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldControl from '~/Components/molecules/field-control/field-control'
-import { MapOptionSpecies, Species } from '~/store/pets/speciesType'
-import { Pet } from '~/store/pets/types'
+import { MapOptionSpecies, Species } from '~/store/slices/pets/speciesType'
+import { Pet } from '~/store/slices/pets/types'
 import { InitialValues } from '../../../modal-list-pets'
 
 type StepListPetsProps = {

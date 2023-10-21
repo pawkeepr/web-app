@@ -2,10 +2,10 @@ import MockAdapter from "axios-mock-adapter/types";
 import { getCookie, setCookie } from "~/utils/cookies-utils";
 
 import { faker } from '@faker-js/faker';
-import { CatBloodType } from "~/store/pets/bloodType";
-import { CatBreed } from "~/store/pets/breedType";
-import { Species } from "~/store/pets/speciesType";
-import { Pet } from "~/store/pets/types";
+import { CatBloodType } from "~/store/slices/pets/bloodType";
+import { CatBreed } from "~/store/slices/pets/breedType";
+import { Species } from "~/store/slices/pets/speciesType";
+import { Pet } from "~/store/slices/pets/types";
 import * as url from '../url_helper';
 
 import _ from 'lodash';

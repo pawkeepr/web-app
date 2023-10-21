@@ -1,5 +1,5 @@
 import { useEffect, useTransition } from "react"
-import { Data } from "~/store/pets/types"
+import { Data } from "~/store/slices/pets/types"
 
 type UsePetByNameProps = {
     name?: string | null,

@@ -4,36 +4,25 @@ import { persistReducer } from 'redux-persist';
 import storage from './storage';
 
 // Front
-import Layout from "./layouts/slice";
+import Layout from "./slices/layouts/slice";
 
 // Authentication
-import ActivateAccount from './auth/activate-account/slice';
-import ForgetPassword from "./auth/forget-pwd/slice";
-import Login from "./auth/login/slice";
-import Profile from "./auth/profile/slice";
-import Account from "./auth/register/slice";
-
-//Calendar
-import Calendar from "./calendar/reducer";
-//Chat
-import chat from "./chat/reducer";
-
-// Tasks
-import Tasks from "./tasks/reducer";
+import ActivateAccount from './slices/auth/activate-account/slice';
+import ForgetPassword from "./slices/auth/forget-pwd/slice";
+import Login from "./slices/auth/login/slice";
+import Profile from "./slices/auth/profile/slice";
+import Account from "./slices/auth/register/slice";
 
 //Tutor
-import Tutor from "./tutors/slice";
+import Tutor from "./slices/tutors/slice";
 
 // Pets
-import Pets from "./pets/slice";
+import Pets from "./slices/pets/slice";
 
-import AppointmentVet from "./appointment-vet/slice";
-
-// Pages > Team
-import Team from "./team/reducer";
+import AppointmentVet from "./slices/appointment-vet/slice";
 
 // schedule
-import schedule from "./newSchedule/slice";
+import schedule from "./slices/newSchedule/slice";
 
 
 const persistConfig = {
@@ -54,11 +43,7 @@ const rootReducer = combineReducers({
     ForgetPassword,
     AppointmentVet,
     Profile,
-    Calendar,
-    chat,
-    Tasks,
     Tutor,
-    Team,
     Pets,
     schedule,
     ActivateAccount,

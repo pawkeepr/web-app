@@ -1,7 +1,7 @@
 
 import useAuth from "~/hooks/use-auth";
-import { onChangePassword, onChangeUsername } from "~/store/auth/login/slice";
 import { useAppDispatch } from "~/store/hooks";
+import { onChangePassword, onChangeUsername } from "~/store/slices/auth/login/slice";
 
 import { ChangeEvent, useMemo } from "react";
 import FieldControl from "~/Components/molecules/field-control";

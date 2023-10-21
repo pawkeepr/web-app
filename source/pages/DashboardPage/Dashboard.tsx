@@ -5,7 +5,7 @@ import { useAppDispatch } from "~/store/hooks";
 import DefaultLayout from "../_layouts/dashboard/dashboard";
 import AppointmentsTab from "./AppointmentsTab";
 
-import { getAll } from '~/store/appointment-vet/actions';
+import { getAll } from '~/store/slices/appointment-vet/actions';
 
 const DashboardPage = () => {
     const dispatch = useAppDispatch();

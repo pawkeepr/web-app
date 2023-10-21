@@ -1,6 +1,6 @@
 import { useFormikContext } from 'formik'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
-import { Species, species } from '~/store/pets/speciesType'
+import { Species, species } from '~/store/slices/pets/speciesType'
 import { InitialValues } from '../../../modal-list-pets'
 
 enum EmojiPet {

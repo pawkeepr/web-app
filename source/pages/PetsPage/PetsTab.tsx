@@ -3,7 +3,7 @@ import ModalAddPet from '~/Components/modals/add-pet-modal';
 import CardPets from '~/Components/molecules/card-pets';
 import ListTab from '~/Components/templates/ListTab';
 import { useAppSelector } from '~/store/hooks';
-import { Data } from '~/store/pets/types';
+import { Data } from '~/store/slices/pets/types';
 
 const PetsTab = () => {
 

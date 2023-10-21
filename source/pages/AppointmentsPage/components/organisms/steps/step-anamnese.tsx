@@ -1,9 +1,5 @@
 /* eslint-disable react/jsx-no-undef */
 import Row from "react-bootstrap/Row";
-//Import images
-
-import { StepProps } from "./types";
-
 
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import {
@@ -13,11 +9,12 @@ import {
     questions_respiratory_system,
     questions_urinary_system,
 } from "~/constants/anamnese-questions";
+import { StepProps } from "~/types/helpers";
 import AnswerSwitch from "../../molecules/answer-switch/answer-switch";
 
 
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
-    
+
     return (
         <div className="card card-body shadow-lg">
             <div>

@@ -1,8 +1,8 @@
 
-import { Profile } from '~/store/auth/profile/types';
+import { Profile } from '~/store/slices/auth/profile/types';
 import { api } from '../api';
 
-import { IAppointmentVetData } from '~/store/appointment-vet/types';
+import { IAppointmentVetData } from '~/store/slices/appointment-vet/types';
 import * as urls from './urls';
 
 export const createProfileVet = async (data: Profile) => api.post(urls.VET_CREATE_PROFILE(), data);

@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from 'react';
 import CardVeterinaryAppointments from '~/Components/molecules/card-veterinary-appointments/card-veterinary-appointments';
-import { getAll } from '~/store/appointment-vet/actions';
-import { Data } from '~/store/appointment-vet/types';
 import { useAppDispatch } from '~/store/hooks';
+import { getAll } from '~/store/slices/appointment-vet/actions';
+import { Data } from '~/store/slices/appointment-vet/types';
 import ListTab from '../../Components/templates/ListTab';
 
 import FieldDocumentAppointment from '../../Components/molecules/field-document-appointment';

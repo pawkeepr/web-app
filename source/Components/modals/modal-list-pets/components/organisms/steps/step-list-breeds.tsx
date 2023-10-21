@@ -3,8 +3,8 @@ import { startTransition, useEffect, useMemo, useState } from 'react'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import LOADING from '~/constants/loading'
 import { useAppSelector } from '~/store/hooks'
-import { species } from '~/store/pets/speciesType'
-import { Breed } from '~/store/pets/types'
+import { species } from '~/store/slices/pets/speciesType'
+import { Breed } from '~/store/slices/pets/types'
 import { InitialValues } from '../../../modal-list-pets'
 
 type Item = {

@@ -1,5 +1,5 @@
 import { useAppSelector } from '~/store/hooks'
-import { ITutor } from '~/store/tutors/types'
+import { ITutor } from '~/store/slices/tutors/types'
 
 const useFindTutorByDocument = (document: string): ITutor | undefined => {
     const tutors = useAppSelector(state => state.Tutor.data)

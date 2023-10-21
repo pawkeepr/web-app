@@ -4,8 +4,8 @@ import ControlSwitch from "~/Components/molecules/control-switch-div/switch";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldNumber from "~/Components/molecules/field-number";
 import FieldTextArea from "~/Components/molecules/field-text-area/field-text-area";
+import { StepProps } from "~/types/helpers";
 import Nutritions from "../../molecules/nutritions";
-import { StepProps } from "./types";
 
 const physical_activity = ['Caminhadas', 'Corridas', 'Natação', 'Passeios', 'Cabo-de-guerra', 'Varetinhas', 'Bolinhas']
 const measurements = ['Kilogramas', 'Gramas']

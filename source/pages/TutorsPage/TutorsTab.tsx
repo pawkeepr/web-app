@@ -5,7 +5,7 @@ import CardTutors from '~/Components/molecules/card-tutors';
 import { useAppSelector } from '~/store/hooks';
 
 import ListTab from '~/Components/templates/ListTab';
-import { Data } from '~/store/tutors/types';
+import { Data } from '~/store/slices/tutors/types';
 
 const TutorsTab = () => {
     const tutors = useAppSelector((state) => state.Tutor.data);

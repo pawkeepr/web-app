@@ -1,6 +1,6 @@
 import DashboardLayouts from "../_layouts/dashboard";
 
-import { IAppointmentVet } from "~/store/appointment-vet/types";
+import { IAppointmentVet } from "~/store/slices/appointment-vet/types";
 import VerticalTabs from "./components/templates/vertical-tabs";
 
 import { Formik } from "formik";

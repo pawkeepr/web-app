@@ -12,7 +12,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 // action
-import { updatePwd } from "~/store/auth/forget-pwd/actions";
+import { updatePwd } from "~/store/slices/auth/forget-pwd/actions";
 
 
 // 187913
