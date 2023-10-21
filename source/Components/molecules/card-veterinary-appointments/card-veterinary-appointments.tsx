@@ -12,10 +12,9 @@ import {
 } from 'reactstrap';
 import MyImage from '~/Components/atoms/my-image/my-image';
 
-import { VeterinaryAppointment } from '~/store/veterinary-appointments/types';
 
 type CardVeterinaryAppointmentsProps = {
-    veterinaryAppointments: VeterinaryAppointment
+    veterinaryAppointments: any
 }
 
 const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAppointmentsProps) => {
@@ -35,7 +34,7 @@ const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAp
                                     <i className="ri-more-fill fs-17"></i>
                                 </DropdownToggle>
                                 <DropdownMenu className="dropdown-menu-end">
-                                    <li><DropdownItem><i className="ri-eye-fill text-muted me-2 align-bottom"></i>Ver</DropdownItem></li>   
+                                    <li><DropdownItem><i className="ri-eye-fill text-muted me-2 align-bottom"></i>Ver</DropdownItem></li>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                         </Row>
@@ -73,7 +72,7 @@ const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAp
                                         )
                                     })
                                 }
-                            
+
                             </Col>
                             <Col xs={6}>
                                 <p className="font-bold font-sans uppercase mb-2">Tratamento:</p>

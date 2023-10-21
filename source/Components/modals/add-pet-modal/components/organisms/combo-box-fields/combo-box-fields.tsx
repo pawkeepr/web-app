@@ -8,8 +8,6 @@ import { Breed } from "~/store/slices/pets/breedType"
 import { genderValues } from "~/store/slices/pets/sexType"
 import { SpeciesType, species } from '~/store/slices/pets/speciesType'
 
-
-
 type AuxSpeciesFormikProps = {
     species: SpeciesType
     breed: string
@@ -57,7 +55,7 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
         })
 
 
-    }, [pet])
+    }, [pet, setFieldValue])
 
     const memoNameSpecies = !name ? 'pet_data.specie' : `${name}.specie`
     const memoNameBreed = !name ? 'pet_data.breed' : `${name}.breed`
@@ -76,14 +74,6 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
 
     }, [setFieldValue, memoNameBreed, memoNameBloodType])
 
-    // const onChangeSpecie = (specie: SpeciesType) => {
-    //     startTransition(() => {
-    //         setSpecie(specie)
-    //         setFieldValue(memoNameBreed, null)
-    //         setFieldValue(memoNameBloodType, null)
-    //     })
-    // }
-
     const memoSpecies = useMemo(() => {
         return species.map(({ name, value, ...specie }) => ({ label: name, value: value, ...specie }))
     }, [])
@@ -97,9 +87,7 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
     }, [specie])
 
     return (
-
         <>
-
             <div className="w-full grid grid-cols-2 mobile:grid-cols-1 gap-2">
                 <FieldControlSelect
                     options={memoSpecies}

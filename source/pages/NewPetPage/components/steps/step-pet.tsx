@@ -1,77 +1,37 @@
 /* eslint-disable react/jsx-no-undef */
-import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
+import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
+import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
+import FieldNumber from "~/Components/molecules/field-number";
+import FieldTextArea from "~/Components/molecules/field-text-area/field-text-area";
 
-import MaskedInput from "react-input-mask";
-
-import FieldDocument from "~/Components/molecules/field-document/field-document";
-import FieldPhone from "~/Components/molecules/field-phone/field-phone";
-
-import { useFormikContext } from "formik";
-import { BtnPrimary } from "~/Components/atoms/btn";
-import ControlSwitch from "../../../../Components/molecules/control-switch-div/switch";
-
-import { InitialValues } from "../../../AppointmentsPage/Appointments";
-
-import { useState, useTransition } from "react";
-import FieldControl from "~/Components/molecules/field-control/field-control";
+import { useState } from "react";
 
 import ComboBoxFields from "~/Components/modals/add-pet-modal/components/organisms/combo-box-fields";
-import { SpeciesType } from "~/store/slices/pets/speciesType";
 import { StepProps } from "~/types/helpers";
-import usePetById from "../hooks/use-pet-by-id";
-import usePetByName from "../hooks/use-pet-by-name";
-import useTutorByDocument from "../hooks/use-tutor-by-document";
-import HealthInsurance from "../molecules/health-insurance";
-import StepTutor from "../molecules/tutor";
 
+const measurements = ['Quilogramas', 'Gramas']
+
+const options2 = measurements.map((item) => ({
+    value: item,
+    label: item,
+    color: 'rgb(255 200 107);',
+}));
+
+// Função para calcular o IMC de um animal
+function calcularIMC(height: number, weight: number): number {
+    if (height === 0 || weight === 0) {
+        return 0; // Evita divisão por zero
+    }
+    const imc = weight / ((height / 100) * (height / 100)); // Converter altura para metros
+    return imc;
+}
 
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
-    const [isPendingPet, startTransition] = useTransition();
-    const [specie, setSpecie] = useState<SpeciesType>({} as SpeciesType);
-    const { values, setFieldValue } = useFormikContext<InitialValues>();
-    console.log({ values })
-    const { isPending: isPendingPetById, petExists } = usePetById({
-        onChangeField: setFieldValue,
-        id: values.pet_data?.id,
-    });
-
-    const {
-        isPending: isPendingTutors,
-        petsOptions,
-        tutorExists,
-    } = useTutorByDocument({
-        document: values.cpf_tutor || "",
-        onChangeField: setFieldValue,
-    });
-
-    const { onChangePet, isPending: isPendingChangePet } = usePetByName({
-        onChangeField: setFieldValue,
-        name: values.pet_data?.name_pet,
-        pets: petsOptions,
-    });
-
-    const onChangeSpecie = (specie: SpeciesType) => {
-        startTransition(() => {
-            setSpecie(specie);
-            setFieldValue("breed", "");
-            setFieldValue("bloodType", "");
-        });
-    };
-
-    const isPending =
-        isPendingPet ||
-        isPendingTutors ||
-        isPendingChangePet ||
-        isPendingPetById;
-
-    const onlyWords = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const regex = /[^a-zA-Z ]/g;
-        e.target.value = e.target.value.replace(regex, "");
-        console.log(e.target.value);
-    };
+    const [heightPet, setHeightPet] = useState(0);
+    const [weightPet, setWeightPet] = useState(0);
 
     return (
         <div className="card card-body shadow-lg">
@@ -86,126 +46,79 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
             <div className="text-align: left mb-4">Preencha as Informações do PET</div>
             <div>
                 <Row className="g-3">
-                    {/* <div className="flex flex-row gap-2 items-center justify-center m-2 p-1">
-                        <AvatarPet name={values.pet?.name || ''} />
-                        <BtnAvatar alt='Avatar de Tutor' name="tutor.avatar" disabled size={24} />
-                    </div> */}
+
                     <ComboBoxFields name="pet_data" />
-                    <div className="p-1 m-2 mb-4">
-                        <h5 className="font-bold text-center">Tutor
-                            <br />
-                            <span className="text-sm font-bold text-secondary-500">Obrigatório (*)</span>
-                        </h5>
+
+                    <div className="flex flex-col mt-4 w-full">
+                        <div className="flex md:flex-row flex-col mt-2 mb-2 gap-2">
+                            <FieldNumber
+                                label="Idade"
+                                placeholder="Idade do pet em meses ou anos"
+                                name="age"
+                                required
+                                type="number" />
+                            <FieldNumber
+                                label="Peso"
+                                placeholder="Peso do pet em quilos ou gramas, exemplo = 4"
+                                required
+                                onChange={(e: any) => { e.target.value = e.target.value.replace(/[^0-9]/g, ''); setWeightPet(e.target.value) }}
+                                name="weight"
+                                type="number" />
+                            <div className="flex flex-col mb-[6px] w-full">
+                                <FieldControlSelect
+                                    label="Selecione uma medida"
+                                    placeholder="Selecione uma medida"
+                                    name="type_weight"
+                                    options={options2}
+                                />
+                            </div>
+                        </div>
+                        <div className="flex flex-col md:flex-row tems-center mt-2 mb-2 gap-2">
+                            <FieldNumber
+                                label="Altura"
+                                placeholder="Altura do pet em centímetros, exemplo = 32"
+                                onChange={(e: any) => {
+                                    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                                    setHeightPet(e.target.value)
+                                }}
+                                name="height"
+                                type="number" />
+                            <FieldNumber
+                                label="Comprimento"
+                                placeholder="Comprimento do pet em centímetros "
+                                className="border-gray-300"
+                                name="length"
+                                type="number" />
+                        </div>
+                        <div>
+                            {weightPet > 0 && heightPet > 0 && (
+                                <h2
+                                    className="m-4 font-bold"
+                                >
+                                    O IMC do animal é: {calcularIMC(heightPet, weightPet).toFixed(2)}
+                                </h2>
+                            )}
+                        </div>
+
+                        <div className="flex flex-col mt-2">
+                            <FieldTextArea
+                                label="Orientações e Anotações"
+                                className="rounded-md w-full border-gray-300"
+                                component="textarea"
+                                name="guidelines_notes"
+                                type="text" />
+                        </div>
                     </div>
-                    <div className="text-align: left  mb-2">Preencha as Informações do Tutor</div>
-                    <Col sm={3}>
-                        <FieldDocument
-                            label="CPF"
-                            divClassName="my-1"
-                            name="cpf_tutor"
-                            aria-label="document"
-                            className="border-1 "
-                            onlyCPF
-                            disabled={isPending || tutorExists}
-                            placeholder="CPF"
-                            component={MaskedInput as any}
-                            required
-                        />
-                    </Col>
-                    <Col sm={5}>
-                        <FieldControl
-                            initialFocus
-                            divClassName="my-1"
-                            label="Nome Completo"
-                            name="name_tutor"
-                            disabled={isPending || tutorExists}
-                            aria-label="name"
-                            className=" "
-                            placeholder="Digite o nome do Tutor"
-                            required
-                            disabledError
-                            onChange={onlyWords}
-                        />
-                    </Col>
-                    <Col sm={4}>
-                        <FieldPhone
-                            label="Telefone/Celular"
-                            divClassName="my-1"
-                            name="contact_tutor.phone"
-                            disabled={isPending || tutorExists}
-                            placeholder={
-                                isPending
-                                    ? "Carregando..."
-                                    : "Digite o seu Número de Telefone"
-                            }
-                            required
-                        />
-                    </Col>
-                    <StepTutor disabled={tutorExists} />
-                </Row>
-
-                <Row className="flex flex-row mt-2">
-                    <ControlSwitch
-                        label="O pet possui um segundo Tutor?"
-                        className="mt-2 mb-4 lg:w-16 lg:h-7 w-[3.72rem] h-6"
-                    >
-                        <div className="text-align: left mb-2">Preencha as Informações do segundo Tutor</div>
-                        <Col sm={3}>
-                            <FieldDocument
-                                label="CPF"
-                                divClassName="my-1"
-                                name="responsible_tutors.cpf_tutor"
-                                aria-label="document"
-                                onlyCPF
-                                disabled={isPending || tutorExists}
-                                placeholder="CPF"
-                                component={MaskedInput as any}
-                                required
-                            />
-                        </Col>
-                        <Col sm={5}>
-                            <FieldControl
-                                initialFocus
-                                divClassName="my-1"
-                                label="Nome Completo"
-                                name="responsible_tutors.name_tutor"
-                                disabled={isPending || tutorExists}
-                                aria-label="name"
-
-                                placeholder="Digite o nome do Tutor"
-                                required
-                                disabledError
-                                onChange={onlyWords}
-                            />
-                        </Col>
-                        {/* <Col sm={4}>
-                            <FieldPhone
-                                divClassName="my-1"
-                                type="text"
-                                label="Telefone/Celular"
-                                name="second_tutor.name"
-                                disabled={isPending || tutorExists}
-                                placeholder={
-                                    isPending
-                                        ? "Carregando..."
-                                        : "Digite o seu Número de Telefone"
-                                }
-                                component={MaskedInput as any}
-                                mask={"(99) 99999-9999"}
-                                maskChar={null}
-                                required
-                            />
-                        </Col>
-                        <StepSecondTutor disabled={tutorExists} /> */}
-                    </ControlSwitch>
-                </Row>
-
-                <Row>
-                    <HealthInsurance />
                 </Row>
 
             </div>
-            <div className="flex align-items-center justify-end gap-3 mt-4">
+            <div className="flex align-items-center justify-center gap-3 mt-4">
+                <BtnCancel
+                    label="Voltar"
+                    onClick={() => {
+                        toggleTab(activeTab - 1);
+                    }}
+                />
                 <BtnPrimary
                     label="Próximo"
                     onClick={() => {
