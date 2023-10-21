@@ -33,10 +33,10 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const [isPendingPet, startTransition] = useTransition();
     const [specie, setSpecie] = useState<SpeciesType>({} as SpeciesType);
     const { values, setFieldValue } = useFormikContext<InitialValues>();
-
+    console.log({ values })
     const { isPending: isPendingPetById, petExists } = usePetById({
         onChangeField: setFieldValue,
-        id: values.pet?.id,
+        id: values.pet_data?.id,
     });
 
     const {
@@ -44,13 +44,13 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
         petsOptions,
         tutorExists,
     } = useTutorByDocument({
-        document: values.tutor?.document || "",
+        document: values.cpf_tutor || "",
         onChangeField: setFieldValue,
     });
 
     const { onChangePet, isPending: isPendingChangePet } = usePetByName({
         onChangeField: setFieldValue,
-        name: values.pet?.name,
+        name: values.pet_data?.name_pet,
         pets: petsOptions,
     });
 
@@ -91,7 +91,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         <AvatarPet name={values.pet?.name || ''} />
                         <BtnAvatar alt='Avatar de Tutor' name="tutor.avatar" disabled size={24} />
                     </div> */}
-                    <ComboBoxFields name="pet" />
+                    <ComboBoxFields name="pet_data" />
                     <div className="p-1 m-2 mb-4">
                         <h5 className="font-bold text-center">Tutor
                             <br />
@@ -103,7 +103,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         <FieldDocument
                             label="CPF"
                             divClassName="my-1"
-                            name="tutor.document"
+                            name="cpf_tutor"
                             aria-label="document"
                             className="border-1 "
                             onlyCPF
@@ -118,7 +118,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             initialFocus
                             divClassName="my-1"
                             label="Nome Completo"
-                            name="tutor_name"
+                            name="name_tutor"
                             disabled={isPending || tutorExists}
                             aria-label="name"
                             className=" "
@@ -132,7 +132,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         <FieldPhone
                             label="Telefone/Celular"
                             divClassName="my-1"
-                            name="tutor_phone"
+                            name="contact_tutor.phone"
                             disabled={isPending || tutorExists}
                             placeholder={
                                 isPending
@@ -155,7 +155,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                             <FieldDocument
                                 label="CPF"
                                 divClassName="my-1"
-                                name="second_tutor.document"
+                                name="responsible_tutors.cpf_tutor"
                                 aria-label="document"
                                 onlyCPF
                                 disabled={isPending || tutorExists}
@@ -169,7 +169,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 initialFocus
                                 divClassName="my-1"
                                 label="Nome Completo"
-                                name="second_tutor.name"
+                                name="responsible_tutors.name_tutor"
                                 disabled={isPending || tutorExists}
                                 aria-label="name"
 
@@ -179,7 +179,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 onChange={onlyWords}
                             />
                         </Col>
-                        <Col sm={4}>
+                        {/* <Col sm={4}>
                             <FieldPhone
                                 divClassName="my-1"
                                 type="text"
@@ -197,7 +197,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                                 required
                             />
                         </Col>
-                        <StepSecondTutor disabled={tutorExists} />
+                        <StepSecondTutor disabled={tutorExists} /> */}
                     </ControlSwitch>
                 </Row>
 

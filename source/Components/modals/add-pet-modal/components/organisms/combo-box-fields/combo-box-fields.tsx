@@ -14,7 +14,7 @@ type AuxSpeciesFormikProps = {
     species: SpeciesType
     breed: string
     bloodType: string
-    pet: {
+    pet_data: {
         sex: any
         id?: string
         species: SpeciesType
@@ -34,10 +34,10 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
     const [bloodTypeValue, setBloodTypeValue] = useState('')
 
     const { setFieldValue, values } = useFormikContext<AuxSpeciesFormikProps>()
-
+   
     const [isPending, startTransition] = useTransition()
 
-    const pet = values['pet']
+    const pet = values['pet_data']
 
     useEffect(() => {
         if (!pet?.id) {
@@ -59,9 +59,9 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
 
     }, [pet])
 
-    const memoNameSpecies = !name ? 'species' : `${name}.species`
-    const memoNameBreed = !name ? 'breed' : `${name}.breed`
-    const memoNameBloodType = !name ? 'bloodType' : `${name}.bloodType`
+    const memoNameSpecies = !name ? 'pet_data.specie' : `${name}.specie`
+    const memoNameBreed = !name ? 'pet_data.breed' : `${name}.breed`
+    const memoNameBloodType = !name ? 'pet_data.blood_type' : `${name}.bloodType`
 
 
     const onChangeSpecie = useCallback((specie: SpeciesType) => {
@@ -104,7 +104,7 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
             <FieldControlSelect
                 options={memoSpecies}
                 required
-                disabled={isPending || !!values.pet?.id}
+                disabled={isPending || !!values.pet_data?.id}
                 onChangeValue={onChangeSpecie}
                 name={memoNameSpecies}
                 placeholder="Ex: Cachorro, Gato, etc..."
@@ -113,7 +113,7 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
 
             <FieldControlSelect
                 options={memoBreed}
-                disabled={!specie.breedType || isPending || !!values.pet?.id}
+                disabled={!specie.breedType || isPending || !!values.pet_data?.id}
                 onChangeValue={e => setBreedValue(e)}
                 value={breedValue}
                 required
@@ -125,15 +125,16 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
                 options={memoBloodType}
                 onChangeValue={e => setBloodTypeValue(e)}
                 value={bloodTypeValue}
-                disabled={!specie.bloodType || isPending || !!values.pet?.id}
+                disabled={!specie.bloodType || isPending || !!values.pet_data?.id}
                 required
                 name={memoNameBloodType}
                 label="Tipo Sanguíneo"
                 placeholder="Ex: A, B, etc..." />
+            
             <FieldControlSelect
                 options={genderValues as any}
-                disabled={!!values.pet?.id}
-                name="sex"
+                disabled={!!values.pet_data?.id}
+                name="pet_data.sex"
                 required
                 label="Sexo do Pet"
                 placeholder="Macho/Fêmea..." />
@@ -143,19 +144,20 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
                 <FieldControl
                     label={`Data de nascimento`}
                     required
-                    name={`date_birth`}
+                    name={`pet_data.date_birth`}
                     type="date"
                 />
+                
                 <FieldMasked
                     label={`Número do microchip`}
-                    name={`chip_Number`}
+                    name={`pet_data.microchip`}
                     mask="_____"
                     placeholder="Digite o número do microchip (opcional)"
                 />
                 
                 <FieldMasked
                     label={`Número de registro cartório`}
-                    name={`id_Office_Register`}
+                    name={`pet_data.identification_number`}
                     mask="_____"
                     placeholder="Digite o número do registro (opcional)" 
                 />

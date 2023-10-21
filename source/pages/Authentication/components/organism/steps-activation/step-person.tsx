@@ -94,7 +94,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     </ControlSwitch>
                 </div>
                 <FieldPhone
-                    divClassName="col-span-1 mobile:col-span-full"
+                    divClassName="col-span-1 mobile:col-span-full"t
                     label="WhatsApp"
                     name="contact.whatsapp"
                     placeholder="Digite o seu Número do WhatsApp"

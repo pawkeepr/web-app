@@ -17,9 +17,9 @@ enum Specialty {
 }
 
 const StepFinally = ({ prevStep, nextStep }: StepProps) => {
-    const { values, isValid, handleSubmit } =
+    const { values, isValid,  errors, handleSubmit } =
         useFormikContext<ActivateAccount>();
-
+    console.log({ errors: errors })
     const isLoading = useAppSelector(state =>
         state.Profile.isLoading === LOADING.PENDING ||
         state.Profile.isLoading === LOADING.SUCCESS

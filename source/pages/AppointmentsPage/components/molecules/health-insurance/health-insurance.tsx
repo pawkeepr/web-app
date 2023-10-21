@@ -18,24 +18,24 @@ export default function HealthInsurance() {
                 
                 <div className="grid grid-cols-2 mobile:grid-cols-1 gap-3 m-2 p-2">
                     <FieldControl
-                        label="Nome do plano"a
-                        name="health_insurance"
+                        label="Nome do plano"
+                        name="health_insurance.name"
                         placeholder="Digite o nome do plano"
                     />
                     <FieldControl
                         label="Tipo do plano"
-                        name="palno_type"
+                        name="health_insurance.type_health"
                         placeholder="Digite o tipo do plano"
                     />
                     <FieldControl
                         label="Número da carteirinha"
-                        name="card_number"
+                        name="health_insurance.number_health"
                         placeholder="Digite o número da carteirinha"
 
                     />
                     <FieldControl
                         label="Validade da carteirinha"
-                        name="wallet_validity"
+                        name="health_insurance.validity"
                         placeholder="Digite a data de validade da carteirinha"
                         type="date"
                     />

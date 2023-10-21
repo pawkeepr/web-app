@@ -13,6 +13,7 @@ import Exams from "../../../molecules/exams";
 import Medicines from "../../../molecules/medicines";
 import ControlSwitch from "../../../molecules/switch/switch";
 import Vaccines from "../../../molecules/vaccines";
+import FieldTextArea from "~/Components/molecules/field-text-area";
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const [enableField, setEnableField] = useState<boolean>(true);
@@ -48,6 +49,14 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                             isMulti
                             name="activity"
                             options={options}
+                        />
+
+                        <FieldTextArea
+                            label="Orientações e Anotações"
+                            className="rounded-md w-full border-gray-300"
+                            component="textarea"
+                            name="observations"
+                            type="text"
                         />
                         {/* <FieldArray name="tests">
                             {(arrayHelpers) => (
