@@ -1,14 +1,14 @@
 import { useFormikContext } from 'formik'
-import { BtnPrimary, BtnSecondary } from '~/Components/atoms/btn'
+import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldControl from '~/Components/molecules/field-control/field-control'
 import { MapOptionSpecies, Species } from '~/store/slices/pets/speciesType'
-import { Pet } from '~/store/slices/pets/types'
+import { IPet } from '~/types/pet'
 import { InitialValues } from '../../../modal-list-pets'
 
 type StepListPetsProps = {
-    pets: Pet[]
-    handleNavigate: (pet: Pet) => void
+    pets: IPet[]
+    handleNavigate: (pet: IPet) => void
     handleCancel: () => void
     onChangeSelectedTab: (index: number) => void
     selectedTab: number
@@ -37,8 +37,6 @@ const StepListPets = ({
     const nextStep = () => {
         onChangeSelectedTab(selectedTab + 1)
     }
-
-
 
     return (
         <div className="mt-3 p-1 gap-2">
@@ -76,7 +74,7 @@ const StepListPets = ({
             <BoxButtons
                 isValid={values.name.length > 0}
                 link={false}
-                cancel={(props) => <BtnSecondary {...props} label='Cadastro Completo' />}
+                cancel={(props) => <BtnLink {...props} message='Cadastro Completo' href="dashboard/pet" />}
                 success={(props) => <BtnPrimary {...props} label='Cadastro Simplificado' />}
                 onClickCancel={handleCancel}
                 onClickSuccess={nextStep}
