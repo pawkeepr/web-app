@@ -2,16 +2,14 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 //Import images
 
-import FieldControl from "~/Components/molecules/field-control/field-control";
 import FieldCep from "~/Components/molecules/field-cep/field-cep";
+import FieldControl from "~/Components/molecules/field-control/field-control";
 
 
 import { useFormikContext } from 'formik';
 import { useCallback, useMemo, useState, useTransition } from 'react';
-import MaskedInput from 'react-input-mask';
 import { IAddress } from '~/helpers/fetch-address-by-cep';
 import useFetchAddress from '~/hooks/use-fetch-address';
-import { InitialValues } from '../../../Appointments';
 
 type StepTutorProps = {
     disabled?: boolean
@@ -70,7 +68,7 @@ const StepTutor = ({ disabled }: StepTutorProps) => {
             <Row className="g-3">
 
 
-                <Col xs={12}> 
+                <Col xs={12}>
                     <FieldControl
                         initialFocus
                         divClassName='my-1'
@@ -83,7 +81,7 @@ const StepTutor = ({ disabled }: StepTutorProps) => {
                         required
                         disabledError
                     />
-                </Col>  
+                </Col>
 
                 <Col sm={2}>
                     <FieldCep
@@ -94,8 +92,8 @@ const StepTutor = ({ disabled }: StepTutorProps) => {
                         disabled={disabled || isLoading}
                         placeholder="Digite o CEP"
                         required
-                    />   
-                    
+                    />
+
                 </Col>
                 <Col sm={3}>
                     <FieldControl

@@ -10,21 +10,21 @@ import FieldPhone from "~/Components/molecules/field-phone/field-phone";
 
 import { useFormikContext } from "formik";
 import { BtnPrimary } from "~/Components/atoms/btn";
-import ControlSwitch from "../../molecules/switch/switch";
-import { StepProps } from "./types";
+import ControlSwitch from "../../../../Components/molecules/control-switch-div/switch";
 
-import { InitialValues } from "../../../Appointments";
+import { InitialValues } from "../../../AppointmentsPage/Appointments";
 
 import { useState, useTransition } from "react";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
 import ComboBoxFields from "~/Components/modals/add-pet-modal/components/organisms/combo-box-fields";
 import { SpeciesType } from "~/store/pets/speciesType";
-import usePetById from "../../hooks/use-pet-by-id";
-import usePetByName from "../../hooks/use-pet-by-name";
-import useTutorByDocument from "../../hooks/use-tutor-by-document";
-import HealthInsurance from "../../molecules/health-insurance";
-import StepTutor from "../../molecules/tutor";
+import { StepProps } from "~/types/helpers";
+import usePetById from "../hooks/use-pet-by-id";
+import usePetByName from "../hooks/use-pet-by-name";
+import useTutorByDocument from "../hooks/use-tutor-by-document";
+import HealthInsurance from "../molecules/health-insurance";
+import StepTutor from "../molecules/tutor";
 
 
 

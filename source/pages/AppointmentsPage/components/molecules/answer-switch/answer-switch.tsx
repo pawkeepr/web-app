@@ -1,7 +1,7 @@
 import { Switch } from "@headlessui/react";
 import { useField } from 'formik';
 import { useState } from "react";
-import ControlSwitch from "../switch/switch";
+import ControlSwitch from "~/Components/molecules/control-switch-div/switch";
 
 
 type AnswerProps = {

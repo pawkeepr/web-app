@@ -16,11 +16,7 @@ import cn from "classnames";
 import { useEffect, useState } from "react";
 
 import { useAppSelector } from "~/store/hooks";
-import StepAnamneses from "../organisms/steps/step-anamnese";
-import StepInfo from "../organisms/steps/step-info";
-import StepPayment from "../organisms/steps/step-payment";
-import StepTreatment from "../organisms/steps/step-treatment";
-
+import StepPet from '../steps/step-pet';
 type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
 type TabItem = {
@@ -33,27 +29,9 @@ type TabItem = {
 const items: TabItem[] = [
     {
         id: 1,
-        title: "Bem-Estar",
-        href: "#BemEstar",
-        Component: StepInfo
-    },
-    {
-        id: 2,
-        title: "Anamnese",
-        href: "#Anamnese",
-        Component: StepAnamneses
-    },
-    {
-        id: 3,
-        title: "Tratamento",
-        href: "#Treatment",
-        Component: StepTreatment
-    },
-    {
-        id: 4,
-        title: "Finalizar",
-        href: "#Finalizar",
-        Component: StepPayment
+        title: "Novo Pet",
+        href: "#NewPet",
+        Component: StepPet
     },
 ]
 
@@ -91,7 +69,7 @@ const VerticalTabs = () => {
 
         <Card>
             <CardHeader>
-                <h4 className="card-title mb-0">Nova Consulta</h4>
+                <h4 className="card-title mb-0">Novo Pet</h4>
 
             </CardHeader>
             <CardBody className="form-steps">

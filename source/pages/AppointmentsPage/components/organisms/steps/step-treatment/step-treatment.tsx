@@ -8,12 +8,12 @@ import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 
 
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
+import FieldTextArea from "~/Components/molecules/field-text-area";
 import Diseases from "../../../molecules/diseases";
 import Exams from "../../../molecules/exams";
 import Medicines from "../../../molecules/medicines";
-import ControlSwitch from "../../../molecules/switch/switch";
 import Vaccines from "../../../molecules/vaccines";
-import FieldTextArea from "~/Components/molecules/field-text-area";
+import ControlSwitch from "../~/Components/molecules/control-switch-div/switch";
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const [enableField, setEnableField] = useState<boolean>(true);

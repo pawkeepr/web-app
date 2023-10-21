@@ -1,6 +1,6 @@
 import { Row } from "reactstrap";
+import ControlSwitchDiv from "~/Components/molecules/control-switch-div";
 import FieldControl from "~/Components/molecules/field-control";
-import ControlSwitch from "../switch";
 
 
 
@@ -9,7 +9,7 @@ export default function HealthInsurance() {
 
         <div className="text-align: left mb-4">
             <Row className="mt-2">
-                <ControlSwitch
+                <ControlSwitchDiv
                     label="O pet possui plano de saúde?"
                     className="mt-2 mb-4 lg:w-16 lg:h-7 w-[3.72rem] h-6"
                 >
@@ -40,7 +40,7 @@ export default function HealthInsurance() {
                             type="date"
                         />
                     </div>
-                </ControlSwitch>
+                </ControlSwitchDiv>
             </Row>
         </div>
     )
