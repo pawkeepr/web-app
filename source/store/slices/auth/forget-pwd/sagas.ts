@@ -17,7 +17,7 @@ import {
     IForgetPwd
 } from './types';
 
-import { errorToast, successToast } from '../../helpers/toast';
+import { errorToast, successToast } from '~/store/helpers/toast';
 
 export function* onForgotUser({ payload }: PayloadAction<IForgetPwd>) {
     try {

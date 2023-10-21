@@ -14,7 +14,7 @@ import {
     GET_ALL_INATIVES_SUCCESS,
     GET_ALL_SUCCESS,
     STOP_LOADING
-} from '../helpers/constants';
+} from '~/store/helpers/constants';
 
 
 import { LOADING } from '~/helpers/loading';

@@ -17,7 +17,7 @@ import {
 
 //Include Both Helper File with needed methods
 import { PayloadAction } from "@reduxjs/toolkit";
-import { errorToast, successToast } from "../helpers/toast";
+import { errorToast, successToast } from "~/store/helpers/toast";
 import {
     ACTION_ADD_NEW,
     ACTION_GET_ALL, ACTION_UPDATE, Data,

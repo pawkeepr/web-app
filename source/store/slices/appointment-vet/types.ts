@@ -10,7 +10,7 @@ import {
     STOP_LOADING,
     TOGGLE_STATUS, TOGGLE_STATUS_FAIL, TOGGLE_STATUS_SUCCESS,
     UPDATE, UPDATE_FAIL, UPDATE_SUCCESS
-} from "../../helpers/constants";
+} from "~/store/helpers/constants";
 
 export interface IPetAppointment {
     name_pet: string,

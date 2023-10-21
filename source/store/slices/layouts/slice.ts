@@ -10,7 +10,7 @@ import {
     leftSidebarViewTypes,
     preloaderTypes,
     topBarThemeTypes
-} from "../../../Components/constants/layout";
+} from "~/Components/constants/layout";
 
 import { LayoutState, name } from './types';
 

@@ -11,7 +11,7 @@ import {
 
 import { AccountSignUp } from './types';
 
-import { errorToast, successToast } from '../../helpers/toast';
+import { errorToast, successToast } from '~/store/helpers/toast';
 
 // Is user register successful then direct plot user in redux.
 function* registerUserSaga({ payload: user }: PayloadAction<AccountSignUp>) {

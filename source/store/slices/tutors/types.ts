@@ -5,7 +5,7 @@ import {
     GET_ALL, GET_ALL_FAIL, GET_ALL_SUCCESS,
     STOP_LOADING,
     UPDATE, UPDATE_FAIL, UPDATE_SUCCESS,
-} from "../../helpers/constants";
+} from "~/store/helpers/constants";
 
 export const name = "tutor"
 

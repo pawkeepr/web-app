@@ -22,7 +22,7 @@ import {
     UPDATE,
     UPDATE_FAIL,
     UPDATE_SUCCESS
-} from '../../helpers/constants';
+} from '~/store/helpers/constants';
 
 
 import { LOADING } from '~/helpers/loading';

@@ -5,7 +5,7 @@ import {
     GET_ALL_SUCCESS,
     STOP_LOADING,
     UPDATE, UPDATE_FAIL, UPDATE_SUCCESS
-} from "../../helpers/constants";
+} from "~/store/helpers/constants";
 import { IAppointmentVet } from "../appointment-vet/types";
 
 

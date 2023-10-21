@@ -14,7 +14,7 @@ import {
     UPDATE,
     UPDATE_FAIL,
     UPDATE_SUCCESS
-} from '../../helpers/constants';
+} from '~/store/helpers/constants';
 import { Data, InitialState, name } from './types';
 
 const initialState: InitialState = {

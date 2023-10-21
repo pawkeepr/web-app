@@ -25,8 +25,8 @@ import Router from 'next/router';
 import { UserData, getUser, signInAws, signOut } from '~/services/helpers/auth';
 
 import { layoutModeTypes } from "~/Components/constants/layout";
+import { errorToast } from '~/store/helpers/toast';
 import { getCookie, removeCookie, setCookie } from "~/utils/cookies-utils";
-import { errorToast } from '../../helpers/toast';
 import { getProfileSession, resetProfileFlag, setProfile } from '../profile/actions';
 import { Profile } from "../profile/types";
 

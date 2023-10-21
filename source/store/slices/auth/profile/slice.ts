@@ -11,7 +11,7 @@ import {
     name
 } from './types';
 
-import { ADD_FAIL, ADD_NEW, ADD_SUCCESS } from '../../helpers/constants';
+import { ADD_FAIL, ADD_NEW, ADD_SUCCESS } from '~/store/helpers/constants';
 
 const initialState: InitialStateProfile = {
     isLoading: LOADING.IDLE,

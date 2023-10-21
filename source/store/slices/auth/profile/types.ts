@@ -1,7 +1,7 @@
 import LOADING from "~/constants/loading";
 import {
     ADD_FAIL, ADD_NEW, ADD_SUCCESS,
-} from "../../helpers/constants";
+} from "~/store/helpers/constants";
 
 export const name = "profile";
 

@@ -27,7 +27,7 @@ import {
     updateTutor,
 } from "../../../helpers/fakebackend_helper";
 
-import { errorToast, successToast } from "../../helpers/toast";
+import { errorToast, successToast } from "~/store/helpers/toast";
 
 export function* onGetAll() {
     try {

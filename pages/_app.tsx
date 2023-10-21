@@ -14,6 +14,7 @@ import '~/aws';
 import ErrorBoundary from '~/contexts/error-boundary';
 import fakebackend from '~/helpers/AuthType/fakeBackend';
 
+
 import VLibras from '@djpfs/react-vlibras';
 
 const isProd = process.env.NODE_ENV === 'production';

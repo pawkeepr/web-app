@@ -22,13 +22,13 @@ import {
 
 import { PayloadAction } from "@reduxjs/toolkit";
 import routes from "~/routes";
+import { errorToast, successToast } from "~/store/helpers/toast";
 import {
     deletePet,
     getPets,
     postPet,
     updatePet,
 } from "../../../helpers/fakebackend_helper";
-import { errorToast, successToast } from "../../helpers/toast";
 
 export function* onGetAll() {
     try {
