@@ -25,7 +25,8 @@ type NullString = string | null;
 
 const initialValues = (
     document: NullString = null,
-    id: NullString = null
+    id: NullString = null,
+    geolocation: { latitude: string, longitude: string, precision: string, altitude: string, speed: string } | null = null
 ): InitialValues => ({
     id: '',
     id_pet: '',
@@ -203,7 +204,7 @@ const initialValues = (
       browser_device: "",
       operational_system: ""
     },
-    appointment_geolocation: {
+    appointment_geolocation: geolocation || {
       latitude: "",
       longitude: "",
       precision: "",
@@ -229,19 +230,34 @@ const initialValues = (
     },
 });
 
+
 const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
 
     const router = useRouter();
 
     const handleSubmit = (values: InitialValues) => {
         try {
-            const appointment = Appointments.build(values);
-            console.log(appointment);
-            
-            return appointment;
+            const geolocation = () => {
+                if ('geolocation' in navigator) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        const geolocationData = {
+                            latitude: position.coords.latitude.toString(),
+                            longitude: position.coords.longitude.toString(),
+                            precision: position.coords.accuracy.toString(),
+                            altitude: position.coords.altitude ? position.coords.altitude.toString() : '',
+                            speed: position.coords.speed ? position.coords.speed.toString() : '',
+                        };
+                        const appointment = Appointments.build(initialValues(document, pet, geolocationData));
+                        return appointment;
+                    }, function (error) {
+                        console.log(error);
+                    });
+                }
+            };
+    
+            geolocation();
         } catch (error) {
             console.log(error);
-            
         }
     };
 
