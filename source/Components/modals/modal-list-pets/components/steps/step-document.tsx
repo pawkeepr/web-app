@@ -3,25 +3,15 @@ import { useFormikContext } from 'formik'
 import { useMemo } from 'react'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldDocument from '~/Components/molecules/field-document'
-import { InitialValues } from '../../../modal-list-pets'
+import { InitialValues, StepProps } from '../../types'
 
-type SpetDocumentProps = {
-    handleCancel: () => void
-    onChangeSelectedTab: (index: number) => void
-    selectedTab: number
-}
+
 
 const StepDocument = ({
-    handleCancel,
-    onChangeSelectedTab,
-    selectedTab
-}: SpetDocumentProps) => {
+    nextStep,
+}: StepProps) => {
 
     const { values } = useFormikContext<InitialValues>()
-
-    const nextStep = () => {
-        onChangeSelectedTab(selectedTab + 1)
-    }
 
     const validateDocument = useMemo(() => {
         return cpf.isValid(values.document) || cnpj.isValid(values.document)
@@ -39,7 +29,7 @@ const StepDocument = ({
             <BoxButtons
                 isValid={validateDocument}
                 link={false}
-                onClickCancel={handleCancel}
+                cancel={null}
                 onClickSuccess={nextStep}
             />
 

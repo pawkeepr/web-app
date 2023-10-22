@@ -26,11 +26,13 @@ export enum Species {
     'fish' = 'Peixe',
     'reptile' = 'Réptil',
 }
-export enum sexType {
+
+export enum Gender {
     male = 'Macho',
     female = 'Fêmea',
     unknown = 'Desconhecido',
 }
+
 export enum MapOptionSpecies {
     'dog' = 'dog',
     'cat' = 'cat',
@@ -47,6 +49,8 @@ export enum MapOptionSpecies {
     'Peixe' = 'fish',
     'Réptil' = 'reptile',
 }
+
+export type KeyOfMapOptionSpecies = keyof typeof MapOptionSpecies;
 
 export const dog = {
     name: 'Cachorro',

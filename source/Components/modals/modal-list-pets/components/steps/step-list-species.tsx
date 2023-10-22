@@ -1,7 +1,7 @@
 import { useFormikContext } from 'formik'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import { Species, species } from '~/store/slices/pets/speciesType'
-import { InitialValues } from '../../../modal-list-pets'
+import { InitialValues, StepProps } from '../../types'
 
 enum EmojiPet {
     Gato = '🐱',
@@ -15,24 +15,13 @@ enum EmojiPet {
 
 type Key = keyof typeof EmojiPet
 
-type StepListSpeciesProps = {
-    selectedTab: number
-    onChangeSelectedTab: (index: number) => void
-}
 
 const StepListSpecies = ({
-    onChangeSelectedTab,
-    selectedTab }: StepListSpeciesProps) => {
+    nextStep,
+    previousStep,
+}: StepProps) => {
 
     const { setFieldValue, values } = useFormikContext<InitialValues>()
-
-    const nextStep = () => {
-        onChangeSelectedTab(selectedTab + 1)
-    }
-
-    const prevStep = () => {
-        onChangeSelectedTab(selectedTab - 1)
-    }
 
     const handleSelectBreed = (specie: Species) => {
         setFieldValue('species', specie)
@@ -64,7 +53,7 @@ const StepListSpecies = ({
             <BoxButtons
                 isValid={!!values.species}
                 link={false}
-                onClickCancel={prevStep}
+                onClickCancel={previousStep}
                 success={null}
             />
         </div>

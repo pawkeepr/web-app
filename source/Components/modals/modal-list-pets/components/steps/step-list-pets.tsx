@@ -2,17 +2,8 @@ import { useFormikContext } from 'formik'
 import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldControl from '~/Components/molecules/field-control/field-control'
-import { MapOptionSpecies, Species } from '~/store/slices/pets/speciesType'
-import { IPet } from '~/types/pet'
-import { InitialValues } from '../../../modal-list-pets'
-
-type StepListPetsProps = {
-    pets: IPet[]
-    handleNavigate: (pet: IPet) => void
-    handleCancel: () => void
-    onChangeSelectedTab: (index: number) => void
-    selectedTab: number
-}
+import { KeyOfMapOptionSpecies, MapOptionSpecies, Species } from '~/store/slices/pets/speciesType'
+import { InitialValues, StepProps } from '../../types'
 
 enum EmojiPet {
     cat = '🐱',
@@ -24,19 +15,17 @@ enum EmojiPet {
     horse = '🐴',
 }
 
+
+type Key = keyof typeof EmojiPet
+
+
 const StepListPets = ({
+    nextStep,
     pets,
     handleNavigate,
-    handleCancel,
-    onChangeSelectedTab,
-    selectedTab
-}: StepListPetsProps) => {
+}: StepProps) => {
 
     const { values } = useFormikContext<InitialValues>()
-
-    const nextStep = () => {
-        onChangeSelectedTab(selectedTab + 1)
-    }
 
     return (
         <div className="mt-3 p-1 gap-2">
@@ -46,7 +35,7 @@ const StepListPets = ({
                         <button
                             key={pet.id}
                             type="button"
-                            onClick={() => handleNavigate(pet)}
+                            onClick={handleNavigate.bind(null, pet)}
                             className="
                             group w-full items-center justify-center 
                             rounded-md px-2 py-2 text-sm gap-2 
@@ -55,10 +44,10 @@ const StepListPets = ({
                         >
                             <div className="grid grid-cols-4 justify-center items-center">
                                 <span className="align-middle col-span-1">{
-                                    EmojiPet[MapOptionSpecies[pet.species]]}</span>
+                                    EmojiPet[MapOptionSpecies[pet.species as KeyOfMapOptionSpecies] as Key]}</span>
                                 <span className="align-middle col-span-2">{pet.name}</span>
                                 <span className="align-middle col-span-1">{
-                                    Species[MapOptionSpecies[pet.species]]
+                                    Species[MapOptionSpecies[pet.species as KeyOfMapOptionSpecies] as Key]
                                 }</span>
                             </div>
                         </button>
@@ -74,9 +63,8 @@ const StepListPets = ({
             <BoxButtons
                 isValid={values.name.length > 0}
                 link={false}
-                cancel={(props) => <BtnLink {...props} message='Cadastro Completo' href="dashboard/pet" />}
+                cancel={(props) => <BtnLink {...props as any} message='Cadastro Completo' href="dashboard/pet" />}
                 success={(props) => <BtnPrimary {...props} label='Cadastro Simplificado' />}
-                onClickCancel={handleCancel}
                 onClickSuccess={nextStep}
             />
 

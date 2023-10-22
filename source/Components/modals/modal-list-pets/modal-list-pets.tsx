@@ -1,57 +1,66 @@
-import { Dialog, Tab, Transition } from '@headlessui/react'
+import { Tab } from '@headlessui/react'
+import cn from 'classnames'
 import { Formik } from 'formik'
 import { useRouter } from 'next/navigation'
-import { Fragment, useCallback, useState } from 'react'
-import useFindTutorByDocument from '~/hooks/use-find-tutor-by-document'
+import { useCallback, useEffect, useState } from 'react'
+import Modal from '~/Components/organism/modal'
+import useModal from '~/hooks/use-modal'
 import routes from '~/routes'
-import { useAppDispatch, useAppSelector } from '~/store/hooks'
-import { addNew } from '~/store/slices/pets/actions'
-import { SpeciesType } from '~/store/slices/pets/speciesType'
-import { Breed } from '~/store/slices/pets/types'
+import usePetsByDocument from '~/store/hooks/pets/use-pets'
+import { Gender } from '~/store/slices/pets/speciesType'
 import { IPet } from '~/types/pet'
-import StepDocument from './components/organisms/steps/step-document'
-import StepListBreeds from './components/organisms/steps/step-list-breeds'
-import StepListPets from './components/organisms/steps/step-list-pets'
-import StepListSpecies from './components/organisms/steps/step-list-species'
+import StepDocument from './components/steps/step-document'
+import StepListBreeds from './components/steps/step-list-breeds'
+import StepListGender from './components/steps/step-list-gender'
+import StepListPets from './components/steps/step-list-pets'
+import StepListSpecies from './components/steps/step-list-species'
+import { ModalConfirmProps } from './types'
 
-type onChangeOpen = (arg: boolean) => void
-
-type ChildrenProps = {
-    onChangeOpen: onChangeOpen
-    onChangeDocument: (doc: string) => void
-}
-
-type ModalConfirmProps = {
-    label?: string
-    onConfirm?: () => void
-    onCancel?: () => void
-    children?: (params: ChildrenProps) => React.ReactNode
-    selectedTabInitial?: number
-}
-
-export type InitialValues = {
-    name: string
-    species: SpeciesType
-    breed: Breed
-    document: string
-    ownerEmergencyContact: ReturnType<typeof useFindTutorByDocument>
-}
+const STEPS = [
+    {
+        id: 1,
+        title: 'Documento',
+        component: (props: any) => <StepDocument {...props} />
+    },
+    {
+        id: 2,
+        title: 'Pets',
+        component: (props: any) => <StepListPets {...props} />
+    },
+    {
+        id: 3,
+        title: 'Espécie',
+        component: (props: any) => <StepListSpecies {...props} />
+    },
+    {
+        id: 4,
+        title: 'Raça',
+        component: (props: any) => <StepListBreeds {...props} />
+    },
+    {
+        id: 5,
+        title: 'Gênero',
+        component: (props: any) => <StepListGender {...props} />
+    },
+]
 
 const ModalListPets = ({
     children,
     label,
     onCancel,
-    onConfirm,
     selectedTabInitial = 2
 }: ModalConfirmProps) => {
-
-    const [isOpen, setIsOpen] = useState(false)
     const [document, setDocument] = useState('')
     const [selectedTab, setSelectedTab] = useState(selectedTabInitial)
+    const { closeModal, open, showModal } = useModal()
 
-    const dispatch = useAppDispatch()
-    const tutor = useFindTutorByDocument(document);
     const router = useRouter()
+
+    useEffect(() => {
+        return () => {
+            setSelectedTab(2)
+        }
+    }, [])
 
     const handleNavigate = useCallback((pet: IPet) => {
         setTimeout(() => {
@@ -61,42 +70,27 @@ const ModalListPets = ({
     }, [document])
 
 
-    const initialValues: InitialValues = {
+    const initialValues: IPet = {
         name: '',
-        document: document,
         species: '' as any,
         breed: '' as any,
-        ownerEmergencyContact: tutor
+        ownerEmergencyContact: {
+            document,
+        },
+        castrated: false,
+        date_birth: '',
+        gender: Gender.unknown,
     }
 
-    const pets = useAppSelector(state => state.Pets?.data?.filter(pet => {
-        return pet?.ownerEmergencyContact?.document === document.replace(/\D/g, '')
-    }))
+    const { activeData: pets, handleSubmit, isLoading } = usePetsByDocument(document)
 
     const onChangeSelectedTab = (index: number) => {
         setSelectedTab(index)
     }
 
-    const handleSubmit = useCallback((values: InitialValues) => {
-        dispatch(addNew(values))
-    }, [dispatch])
-
     const handleCancel = () => {
         onCancel?.()
-        setIsOpen(false)
-    }
-
-    const onChangeOpen = (arg: boolean) => {
-        setIsOpen(arg)
-    }
-
-    const closeModal = () => {
-        onChangeOpen(false)
-    }
-
-    const openModal = () => {
-        // dispatch(resetCreatedPet())
-        onChangeOpen(true)
+        closeModal()
     }
 
     const onChangeDocument = (doc: string) => {
@@ -107,14 +101,14 @@ const ModalListPets = ({
         <>
 
             {
-                children && children({ onChangeOpen, onChangeDocument })
+                children && children({ onChangeOpen: showModal, onChangeDocument })
             }
             {
                 !children && (
                     <div className="flex items-center justify-center">
                         <button
                             type="button"
-                            onClick={openModal}
+                            onClick={() => showModal()}
                             className="
                                 rounded-md 
                                 bg-secondary-500 bg-opacity-20 
@@ -135,126 +129,68 @@ const ModalListPets = ({
             }
 
 
-            <Transition appear show={isOpen} as={Fragment}>
+            <Modal
+                onOpen={() => showModal()}
+                onClose={() => closeModal()}
+                modal
+                nested
+                open={open}
+                lockScroll
+                className="w-[750px] py-4"
+            >
                 <Tab.Group selectedIndex={selectedTab} onChange={onChangeSelectedTab}>
-                    <Dialog as="div" className="relative z-10" onClose={closeModal}>
-                        <Transition.Child
-                            as={Fragment}
-                            enter="ease-out duration-300"
-                            enterFrom="opacity-0"
-                            enterTo="opacity-100"
-                            leave="ease-in duration-200"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                        >
-                            <div className="fixed inset-0 bg-black bg-opacity-25" />
-                        </Transition.Child>
-
-                        <div className="fixed inset-0 overflow-y-auto">
-                            <div className="flex min-h-full items-center justify-center p-4 text-center">
-                                <Transition.Child
-                                    as={Fragment}
-                                    enter="ease-out duration-300"
-                                    enterFrom="opacity-0 scale-95"
-                                    enterTo="opacity-100 scale-100"
-                                    leave="ease-in duration-200"
-                                    leaveFrom="opacity-100 scale-100"
-                                    leaveTo="opacity-0 scale-95"
-                                >
-                                    <Dialog.Panel className="
-                                        mobile:w-full
-                                        w-[750px]
-                                        container
-                                        mobile:!h-[calc(100vh-12rem)]
-                                        transform 
-                                        overflow-hidden 
-                                        rounded-md
-                                        bg-white
-                                        py-6
-                                        px-10 
-                                        text-left 
-                                        align-middle 
-                                        shadow-xl 
-                                        transition-all
-                                        dark:!bg-dark-500
-                                        dark:!text-gray-200
-                                        flex
-                                        flex-col
-                                        justify-between
-                                        items-center
-                                        !font-sans
-                                        "
-                                    >
-                                        <Dialog.Title
-                                            as="h2"
-                                            className="text-xl font-semibold leading-6 text-gray-900 dark:!text-gray-200 text-center"
-                                        >
-                                            Adicionar Pet
-                                            <Dialog.Description
-                                                as="p"
-                                                className="text-xs text-gray-700 dark:!text-gray-200 text-center"
-                                            >
-                                                Selecione ou Adicione um Pet para prosseguir na consulta.
-                                            </Dialog.Description>
-                                        </Dialog.Title>
-
-
-
-                                        <Tab.List>
+                    <h1 className='text-center font-bold text-2xl'>
+                        Adicionar Pet
+                    </h1>
+                    <h5 className='text-center text-gray-500 mb-2'>
+                        Selecione ou Adicione um Pet para prosseguir na consulta.
+                    </h5>
+                    <Tab.List className="flex flex-row w-full justify-between">
+                        {
+                            STEPS.map(
+                                (item) => (
+                                    <div
+                                        key={item.id}
+                                        className={cn(
+                                            "p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full",
                                             {
-                                                [1, 2, 3, 4, 5].map(
-                                                    (item) => (
-                                                        <Tab
-                                                            key={item}
-                                                            className="hidden"
-                                                        />
-                                                    )
-                                                )
+                                                "text-primary-500": selectedTab === item.id,
+                                                "text-gray-400": selectedTab !== item.id,
                                             }
-                                        </Tab.List>
-                                        <Formik
-                                            initialValues={initialValues}
-                                            enableReinitialize
-                                            onSubmit={handleSubmit}
-                                        >
-                                            <Tab.Panels className="w-full">
-                                                <Tab.Panel key={1} tabIndex={1}>
-                                                    <StepDocument
-                                                        handleCancel={handleCancel}
-                                                        onChangeSelectedTab={onChangeSelectedTab}
-                                                        selectedTab={selectedTab}
-                                                    />
-                                                </Tab.Panel>
-                                                <Tab.Panel key={2} tabIndex={2}>
-                                                    <StepListPets
-                                                        pets={pets}
-                                                        handleNavigate={handleNavigate}
-                                                        handleCancel={handleCancel}
-                                                        onChangeSelectedTab={onChangeSelectedTab}
-                                                        selectedTab={selectedTab}
-                                                    />
-                                                </Tab.Panel>
-                                                <Tab.Panel key={3} tabIndex={3}>
-                                                    <StepListSpecies
-                                                        selectedTab={selectedTab}
-                                                        onChangeSelectedTab={onChangeSelectedTab}
-                                                    />
-                                                </Tab.Panel>
-                                                <Tab.Panel key={4} tabIndex={4}>
-                                                    <StepListBreeds
-                                                        selectedTab={selectedTab}
-                                                        onChangeSelectedTab={onChangeSelectedTab}
-                                                    />
-                                                </Tab.Panel>
-                                            </Tab.Panels>
-                                        </Formik>
-                                    </Dialog.Panel>
-                                </Transition.Child>
-                            </div>
-                        </div>
-                    </Dialog>
+                                        )}
+                                    >
+                                        {item.title}
+                                    </div>
+                                )
+                            )
+                        }
+                    </Tab.List>
+                    <Formik
+                        initialValues={initialValues}
+                        enableReinitialize
+                        onSubmit={handleSubmit}
+                    >
+                        <Tab.Panels className="w-full">
+                            {
+                                STEPS.map(
+                                    ({ component: Component, id }) => (
+                                        <Tab.Panel key={id} tabIndex={id}>
+                                            <Component
+                                                pets={pets}
+                                                isLoading={isLoading}
+                                                onCancel={handleCancel}
+                                                onChangeSelectedTab={handleNavigate}
+                                            />
+                                        </Tab.Panel>
+                                    )
+                                )
+                            }
+                        </Tab.Panels>
+                    </Formik>
                 </Tab.Group>
-            </Transition>
+
+
+            </Modal>
         </>
     )
 }
