@@ -2,7 +2,7 @@ import { Tab } from '@headlessui/react'
 import cn from 'classnames'
 import { Formik } from 'formik'
 import { useRouter } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
 import routes from '~/routes'
@@ -14,53 +14,46 @@ import StepListBreeds from './components/steps/step-list-breeds'
 import StepListGender from './components/steps/step-list-gender'
 import StepListPets from './components/steps/step-list-pets'
 import StepListSpecies from './components/steps/step-list-species'
-import { ModalConfirmProps } from './types'
+import { ModalConfirmProps, StepProps } from './types'
 
 const STEPS = [
     {
         id: 1,
         title: 'Documento',
-        component: (props: any) => <StepDocument {...props} />
+        component: (props: StepProps) => <StepDocument {...props} />
     },
     {
         id: 2,
         title: 'Pets',
-        component: (props: any) => <StepListPets {...props} />
+        component: (props: StepProps) => <StepListPets {...props} />
     },
     {
         id: 3,
         title: 'Espécie',
-        component: (props: any) => <StepListSpecies {...props} />
+        component: (props: StepProps) => <StepListSpecies {...props} />
     },
     {
         id: 4,
         title: 'Raça',
-        component: (props: any) => <StepListBreeds {...props} />
+        component: (props: StepProps) => <StepListBreeds {...props} />
     },
     {
         id: 5,
         title: 'Gênero',
-        component: (props: any) => <StepListGender {...props} />
+        component: (props: StepProps) => <StepListGender {...props} />
     },
 ]
 
 const ModalListPets = ({
     children,
     label,
-    onCancel,
-    selectedTabInitial = 2
+    selectedTabInitial = 1
 }: ModalConfirmProps) => {
     const [document, setDocument] = useState('')
     const [selectedTab, setSelectedTab] = useState(selectedTabInitial)
     const { closeModal, open, showModal } = useModal()
 
     const router = useRouter()
-
-    useEffect(() => {
-        return () => {
-            setSelectedTab(2)
-        }
-    }, [])
 
     const handleNavigate = useCallback((pet: IPet) => {
         setTimeout(() => {
@@ -88,18 +81,20 @@ const ModalListPets = ({
         setSelectedTab(index)
     }
 
-    const handleCancel = () => {
-        onCancel?.()
-        closeModal()
-    }
-
     const onChangeDocument = (doc: string) => {
         setDocument(doc)
     }
 
+    const nextStep = () => {
+        setSelectedTab(state => Math.min(state + 1, STEPS.length - 1))
+    }
+
+    const previousStep = () => {
+        setSelectedTab(state => Math.max(state - 1, 0))
+    }
+
     return (
         <>
-
             {
                 children && children({ onChangeOpen: showModal, onChangeDocument })
             }
@@ -131,14 +126,17 @@ const ModalListPets = ({
 
             <Modal
                 onOpen={() => showModal()}
-                onClose={() => closeModal()}
+                onClose={() => {
+                    setSelectedTab(selectedTabInitial)
+                    closeModal()
+                }}
                 modal
                 nested
                 open={open}
                 lockScroll
                 className="w-[750px] py-4"
             >
-                <Tab.Group selectedIndex={selectedTab} onChange={onChangeSelectedTab}>
+                <Tab.Group selectedIndex={selectedTab} onChange={onChangeSelectedTab} defaultIndex={1}>
                     <h1 className='text-center font-bold text-2xl'>
                         Adicionar Pet
                     </h1>
@@ -148,19 +146,20 @@ const ModalListPets = ({
                     <Tab.List className="flex flex-row w-full justify-between">
                         {
                             STEPS.map(
-                                (item) => (
-                                    <div
+                                (item, index) => (
+                                    <Tab
+                                        disabled
                                         key={item.id}
                                         className={cn(
                                             "p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full",
                                             {
-                                                "text-primary-500": selectedTab === item.id,
-                                                "text-gray-400": selectedTab !== item.id,
+                                                "text-primary-500": selectedTab === index,
+                                                "text-gray-400": selectedTab !== index,
                                             }
                                         )}
                                     >
                                         {item.title}
-                                    </div>
+                                    </Tab>
                                 )
                             )
                         }
@@ -171,25 +170,26 @@ const ModalListPets = ({
                         onSubmit={handleSubmit}
                     >
                         <Tab.Panels className="w-full">
+
                             {
                                 STEPS.map(
-                                    ({ component: Component, id }) => (
-                                        <Tab.Panel key={id} tabIndex={id}>
+                                    ({ component: Component, id }, index) => (
+                                        <Tab.Panel key={id} tabIndex={index}>
                                             <Component
                                                 pets={pets}
-                                                isLoading={isLoading}
-                                                onCancel={handleCancel}
-                                                onChangeSelectedTab={handleNavigate}
+                                                handleNavigate={handleNavigate}
+                                                nextStep={nextStep}
+                                                previousStep={previousStep}
                                             />
                                         </Tab.Panel>
                                     )
                                 )
                             }
+
                         </Tab.Panels>
                     </Formik>
+
                 </Tab.Group>
-
-
             </Modal>
         </>
     )

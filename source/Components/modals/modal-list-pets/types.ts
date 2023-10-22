@@ -12,7 +12,6 @@ export type ChildrenProps = {
 
 export type ModalConfirmProps = {
     label?: string
-    onCancel?: () => void
     children?: (params: ChildrenProps) => React.ReactNode
     selectedTabInitial?: number
 }

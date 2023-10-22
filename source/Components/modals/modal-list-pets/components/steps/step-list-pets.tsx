@@ -31,6 +31,13 @@ const StepListPets = ({
         <div className="mt-3 p-1 gap-2">
             <div className="pb-5 max-h-[250px] overflow-auto">
                 {
+                    pets?.length === 0 && (
+                        <div className="flex justify-center items-center h-32 ">
+                            <span className="text-gray-500 text-center font-semibold text-base">Nenhum pet encontrado</span>
+                        </div>
+                    )
+                }
+                {
                     pets?.map(pet => (
                         <button
                             key={pet.id}
@@ -51,12 +58,13 @@ const StepListPets = ({
                                 }</span>
                             </div>
                         </button>
-                    ))}
+                    ))
+                }
             </div>
             <FieldControl
                 name="name"
-                label='Caso o pet não esteja na lista, digite o nome dele:'
-                className="  w-full flex-1 mt-2"
+                label='Caso o pet não esteja na lista, digite o nome dele para prosseguir:'
+                className=" w-full flex-1"
                 placeholder="Nome do Pet"
             />
 
