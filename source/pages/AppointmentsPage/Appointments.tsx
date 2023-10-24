@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { BtnCancel } from "~/Components/atoms/btn";
 import ModalConfirm from "~/Components/modals/modal-confirm";
 import { Appointments } from "~/entities/Apointments";
-import { build } from "vite";
 
 import QRCodeGenerator from "~/Components/molecules/qr-code";
 
@@ -277,18 +276,6 @@ const initialValues = (
   }    
 });
 
-const App: React.FC = () => {
-    const data = " dados cadastrais"; // Substitua pelo seu próprio conjunto de dados
-  
-    return (
-      <div>
-        <h1>QR Code Generator</h1>
-        <QRCodeGenerator data={data} />
-      </div>
-    );
-  };
-  
-  
 
 const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
 
@@ -315,10 +302,6 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
                 initialValues={initialValues(document, pet)}
             >
                 <div className="gap-2 mt-2 mobile:py-6">
-                <div>
-                    <h1>QR Code Generator</h1>
-                    <QRCodeGenerator data={"http://localhost:3333/dashboard/appointments#Finalizar?consulta=iid_da_consulta"} />
-                </div>
 
                     <ModalConfirm
                         title="Cancelar Consulta!"

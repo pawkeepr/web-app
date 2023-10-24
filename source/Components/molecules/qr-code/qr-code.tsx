@@ -1,14 +1,13 @@
-import React from 'react';
 import QRCode from 'qrcode.react';
 
-interface QRCodeProps {
-  data: string; // Os dados que serão codificados no QR code
+interface Props {
+  url: string; 
 }
 
-const QRCodeGenerator: React.FC<QRCodeProps> = ({ data }) => {
+const QRCodeGenerator = ({ url }: Props) => {
   return (
     <div>
-      <QRCode value={data} />
+      <QRCode value={url} />
     </div>
   );
 };
