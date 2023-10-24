@@ -18,21 +18,20 @@ const StepDocument = ({
     }, [values.document])
 
     return (
-        <div className="mt-3 p-1 gap-2">
+        <div className="mt-3 p-1 gap-2 ">
 
             <FieldDocument
+                required
                 name="document"
                 className="  w-full flex-1 mt-2"
                 placeholder="CPF/CNPJ"
             />
-
             <BoxButtons
                 isValid={validateDocument}
                 link={false}
                 cancel={null}
                 onClickSuccess={nextStep}
             />
-
         </div>
     )
 }

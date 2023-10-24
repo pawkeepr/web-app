@@ -2,6 +2,7 @@ import { useFormikContext } from 'formik'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import { Species, species } from '~/store/slices/pets/speciesType'
 import { InitialValues, StepProps } from '../../types'
+import { option } from '../helpers'
 
 enum EmojiPet {
     Gato = '🐱',
@@ -23,27 +24,23 @@ const StepListSpecies = ({
 
     const { setFieldValue, values } = useFormikContext<InitialValues>()
 
-    const handleSelectBreed = (specie: Species) => {
+    const handleSelectedSpecie = (specie: Species) => {
         setFieldValue('species', specie)
         nextStep()
     }
 
     return (
         <div className="mt-3 p-1 gap-2">
-            <div className="pb-1 max-h-[250px] overflow-auto">
+            <div className="pb-1 h-[calc(100vh-20rem)] overflow-auto">
                 {
                     species.map(specie => (
                         <button
                             key={specie.value}
                             type="button"
-                            onClick={() => handleSelectBreed(specie.value as any)}
-                            className="
-                            group w-full items-center justify-center 
-                            rounded-md px-2 py-2 text-sm gap-2 
-                            hover:bg-primary-500 dark:hover:!bg-primary-600 hover:text-white
-                        "
+                            onClick={() => handleSelectedSpecie(specie.value as Species)}
+                            className={option({ selected: values.species === specie.value })}
                         >
-                            <div className="grid grid-cols-4 justify-center items-center">
+                            <div className="flex justify-around gap-2 items-center w-40 ">
                                 <span className="align-middle col-span-1">{EmojiPet[specie.name as Key]}</span>
                                 <span className="align-middle col-span-2">{specie.name}</span>
                             </div>
@@ -54,7 +51,7 @@ const StepListSpecies = ({
                 isValid={!!values.species}
                 link={false}
                 onClickCancel={previousStep}
-                success={null}
+                onClickSuccess={nextStep}
             />
         </div>
     )

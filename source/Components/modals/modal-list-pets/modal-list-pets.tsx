@@ -9,11 +9,13 @@ import routes from '~/routes'
 import usePetsByDocument from '~/store/hooks/pets/use-pets'
 import { Gender } from '~/store/slices/pets/speciesType'
 import { IPet } from '~/types/pet'
+import { IPetV2 } from '~/types/pet-v2'
 import StepDocument from './components/steps/step-document'
 import StepListBreeds from './components/steps/step-list-breeds'
 import StepListGender from './components/steps/step-list-gender'
 import StepListPets from './components/steps/step-list-pets'
 import StepListSpecies from './components/steps/step-list-species'
+import StepTutor from './components/steps/step-tutor'
 import { ModalConfirmProps, StepProps } from './types'
 
 const STEPS = [
@@ -42,6 +44,11 @@ const STEPS = [
         title: 'Gênero',
         component: (props: StepProps) => <StepListGender {...props} />
     },
+    {
+        id: 6,
+        title: 'Tutor',
+        component: (props: StepProps) => <StepTutor {...props} />
+    },
 ]
 
 const ModalListPets = ({
@@ -55,7 +62,7 @@ const ModalListPets = ({
 
     const router = useRouter()
 
-    const handleNavigate = useCallback((pet: IPet) => {
+    const handleNavigate = useCallback((pet: IPetV2) => {
         setTimeout(() => {
             router.push(`${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`)
         }, 1000)
@@ -64,18 +71,21 @@ const ModalListPets = ({
 
 
     const initialValues: IPet = {
+        id: null,
         name: '',
         species: '' as any,
         breed: '' as any,
         ownerEmergencyContact: {
-            document,
+            cpf_cnpj: document,
+            phone: '',
+            email: '',
         },
         castrated: false,
         date_birth: '',
         gender: Gender.unknown,
     }
 
-    const { activeData: pets, handleSubmit, isLoading } = usePetsByDocument(document)
+    const { activeData: pets, handleSubmit } = usePetsByDocument(document)
 
     const onChangeSelectedTab = (index: number) => {
         setSelectedTab(index)
@@ -85,13 +95,59 @@ const ModalListPets = ({
         setDocument(doc)
     }
 
-    const nextStep = () => {
+    const nextStep = useCallback(() => {
         setSelectedTab(state => Math.min(state + 1, STEPS.length - 1))
-    }
+    }, [])
 
-    const previousStep = () => {
+    const previousStep = useCallback(() => {
         setSelectedTab(state => Math.max(state - 1, 0))
-    }
+    }, [])
+
+    const onSubmit = useCallback(async (values: IPet) => {
+        await handleSubmit({
+            name_tutor: values.ownerEmergencyContact.name as string,
+            phone_tutor: values.ownerEmergencyContact.phone,
+            contact_tutor: {
+                email: values.ownerEmergencyContact.email,
+                phone: values.ownerEmergencyContact.phone,
+                whatsapp: values.ownerEmergencyContact.phone,
+            },
+            cpf_tutor: values.ownerEmergencyContact.cpf_cnpj,
+            vets_data: [],
+            location_tutor: {
+                country: 'Brasil',
+                zipCode: null,
+                state: null,
+                city: null,
+                neighborhood: null,
+                street: null,
+                number: null,
+                complement: null,
+            },
+            pet_data: {
+                name_pet: values.name,
+                specie: values.species,
+                race: values.breed,
+                castrated: values.castrated,
+                sex: values.gender,
+                microchip: null,
+                identification_number: null,
+                blood_type: null,
+                blood_donator: null,
+                organ_donor: null,
+            },
+            health_insurance: {
+                name: null,
+                type_health: null,
+                number_health: null,
+                validity: null,
+            },
+            responsible_tutors: {
+                name_tutor: null,
+                cpf_tutor: null
+            },
+        })
+    }, [handleSubmit])
 
     return (
         <>
@@ -134,9 +190,9 @@ const ModalListPets = ({
                 nested
                 open={open}
                 lockScroll
-                className="w-[750px] py-4"
+                className="py-4 min-h-[calc(100vh-4rem)] !overflow-x-hidden"
             >
-                <Tab.Group selectedIndex={selectedTab} onChange={onChangeSelectedTab} defaultIndex={1}>
+                <Tab.Group selectedIndex={selectedTab} onChange={onChangeSelectedTab} defaultIndex={selectedTabInitial} >
                     <h1 className='text-center font-bold text-2xl'>
                         Adicionar Pet
                     </h1>
@@ -148,7 +204,21 @@ const ModalListPets = ({
                             STEPS.map(
                                 (item, index) => (
                                     <Tab
-                                        disabled
+
+                                        key={item.id}
+                                        className="hidden"
+                                    />
+                                )
+                            )
+                        }
+                    </Tab.List>
+                    <div className="flex flex-row w-full justify-between">
+
+                        {
+                            STEPS.map(
+                                (item, index) => (
+                                    <div
+
                                         key={item.id}
                                         className={cn(
                                             "p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full",
@@ -159,18 +229,17 @@ const ModalListPets = ({
                                         )}
                                     >
                                         {item.title}
-                                    </Tab>
+                                    </div>
                                 )
                             )
                         }
-                    </Tab.List>
+                    </div>
                     <Formik
                         initialValues={initialValues}
                         enableReinitialize
-                        onSubmit={handleSubmit}
+                        onSubmit={onSubmit}
                     >
-                        <Tab.Panels className="w-full">
-
+                        <Tab.Panels className="w-full h-full relative">
                             {
                                 STEPS.map(
                                     ({ component: Component, id }, index) => (

@@ -1,5 +1,5 @@
 import { createPet, getAllPets } from '~/services/helpers'
-import { IPet } from '~/types/pet'
+import { IPetV2 } from '~/types/pet-v2'
 import useAppStore from '../use-app-store'
 
 export const NAME = 'pets'
@@ -9,7 +9,7 @@ const usePetsByDocument = (
 ) => {
     const superKeys = [NAME, document]
 
-    return useAppStore<IPet>({
+    return useAppStore<IPetV2>({
         get: getAllPets.bind(null, document),
         add: createPet,
         keys: superKeys,

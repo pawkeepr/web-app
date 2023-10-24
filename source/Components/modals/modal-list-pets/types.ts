@@ -1,7 +1,6 @@
-import useFindTutorByDocument from '~/hooks/use-find-tutor-by-document'
-import { SpeciesType } from '~/store/slices/pets/speciesType'
+import { Gender, Species } from '~/store/slices/pets/speciesType'
 import { Breed } from '~/store/slices/pets/types'
-import { IPet } from '~/types/pet'
+import { IPetV2 } from '~/types/pet-v2'
 
 export type onChangeOpen = (arg: boolean) => void
 
@@ -17,16 +16,22 @@ export type ModalConfirmProps = {
 }
 
 export type InitialValues = {
+    id?: string | null
     name: string
-    species: SpeciesType
+    species: Species
     breed: Breed
+    gender: Gender
     document: string
-    ownerEmergencyContact: ReturnType<typeof useFindTutorByDocument>
+    ownerEmergencyContact: {
+        email: string
+        cpf_cnpj: string
+        phone: string
+    }
 }
 
 export type StepProps = {
     nextStep: () => void
     previousStep: () => void
-    pets: IPet[]
-    handleNavigate: (pet: IPet) => void
+    pets: IPetV2[]
+    handleNavigate: (pet: IPetV2) => void
 }

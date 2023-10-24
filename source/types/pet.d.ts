@@ -1,7 +1,8 @@
+import { Gender } from '~/store/slices/pets/speciesType';
 import { ITutor } from './tutor';
 
 export type IPet = {
-    id?: string;
+    id?: string | null;
     name: string;
     species: Species;
     breed: Breed;
@@ -30,5 +31,5 @@ export type IPet = {
     avatar?: string;
     created_at?: string;
     updated_at?: string;
-    gender: string;
+    gender: Gender;
 }
