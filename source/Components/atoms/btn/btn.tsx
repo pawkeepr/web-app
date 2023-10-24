@@ -51,7 +51,7 @@ const styledIcon = tv({
     `,
 })
 
-type BtnProps = {
+export type BtnProps = {
     icon?: React.ReactNode | string;
     label?: string;
     iconStyle?: string;

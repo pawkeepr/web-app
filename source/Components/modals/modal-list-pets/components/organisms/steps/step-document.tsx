@@ -39,7 +39,6 @@ const StepDocument = ({
             <BoxButtons
                 isValid={validateDocument}
                 link={false}
-                labelSuccess="Próximo"
                 onClickCancel={handleCancel}
                 onClickSuccess={nextStep}
             />

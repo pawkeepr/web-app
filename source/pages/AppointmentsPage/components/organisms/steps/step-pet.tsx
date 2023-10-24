@@ -24,7 +24,6 @@ import usePetById from "../../hooks/use-pet-by-id";
 import usePetByName from "../../hooks/use-pet-by-name";
 import useTutorByDocument from "../../hooks/use-tutor-by-document";
 import HealthInsurance from "../../molecules/health-insurance";
-import StepSecondTutor from "../../molecules/second-tutor";
 import StepTutor from "../../molecules/tutor";
 
 
@@ -145,7 +144,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     <StepTutor disabled={tutorExists} />
                 </Row>
 
-                <Row className="mt-2">
+                <Row className="flex flex-row mt-2">
                     <ControlSwitch
                         label="O pet possui um segundo Tutor?"
                         className="mt-2 mb-4 lg:w-16 lg:h-7 w-[3.72rem] h-6"
