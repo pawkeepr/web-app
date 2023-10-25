@@ -30,7 +30,7 @@ type Stores<T> = {
     options?: UseQueryOptions<T[]>
 }
 
-const TIME = 1000 * 60 // 1 min
+const TIME = 1000 * 60 * 5 // 5 min
 
 const useAppStore = <T,>({
     keys,
@@ -50,6 +50,7 @@ const useAppStore = <T,>({
         ...options,
         initialData: [],
         keepPreviousData: true,
+        staleTime: TIME, // 1 min
         enabled: !!get && enabled,
         // staleTime: TIME // 1 min
     })
