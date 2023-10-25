@@ -184,7 +184,7 @@ export interface ISignatureAppointment {
     date_signature: string,
     type_signature: string,
     status_signature: string,
-    ip_adess: string,
+    ip_address: string,
     browser_device: string,
     operational_system: string
 }
