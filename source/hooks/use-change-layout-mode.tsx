@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { layoutModeTypes } from "~/Components/constants/layout";
 import cookies from '~/constants/cookies';
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
-import { changeLayoutMode } from "~/store/layouts/slice";
+import { changeLayoutMode } from "~/store/slices/layouts/slice";
 import { setCookie } from "~/utils/cookies-utils";
 
 const useChangeLayoutMode = () => {

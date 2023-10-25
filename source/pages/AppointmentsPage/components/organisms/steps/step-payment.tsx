@@ -4,11 +4,11 @@ import { Input, Label } from "reactstrap";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldNumber from "~/Components/molecules/field-number/field-number";
-import { StepProps } from "./types";
+import { StepProps } from "~/types/helpers";
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit } = useFormikContext();
-    
+
     const [event, setEvent] = useState<string>('credit');
 
     const options = new Array(12).fill(0).map((item, index) => ({

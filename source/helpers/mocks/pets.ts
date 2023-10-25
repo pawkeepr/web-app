@@ -2,10 +2,10 @@ import MockAdapter from "axios-mock-adapter/types";
 import { getCookie, setCookie } from "~/utils/cookies-utils";
 
 import { faker } from '@faker-js/faker';
-import { CatBloodType } from "~/store/pets/bloodType";
-import { CatBreed } from "~/store/pets/breedType";
-import { Species } from "~/store/pets/speciesType";
-import { Pet } from "~/store/pets/types";
+import { CatBloodType } from "~/store/slices/pets/bloodType";
+import { CatBreed } from "~/store/slices/pets/breedType";
+import { Species } from "~/store/slices/pets/speciesType";
+import { Pet } from "~/store/slices/pets/types";
 import * as url from '../url_helper';
 
 import _ from 'lodash';
@@ -16,6 +16,7 @@ const factoryBreeds = (species: Species): string => {
         const breed = _.sample(Object.values(CatBreed))
         return breed || CatBreed.ViraLata
     }
+    return CatBreed.ViraLata;
 }
 
 const factoryBloodType = (): string => {
@@ -25,8 +26,8 @@ const factoryBloodType = (): string => {
 }
 
 const factoryPet = (document?: string, name?: string): Pet => ({
-    id: faker.datatype.uuid(),
-    name: faker.name.middleName(),
+    id: faker.string.uuid(),
+    name: faker.person.middleName(),
     species: Species.cat,
     breed: factoryBreeds(Species.cat),
     gender: 'unknown',
@@ -37,33 +38,33 @@ const factoryPet = (document?: string, name?: string): Pet => ({
     medicationsInUse: [],
     healthHistory: [],
     ownerEmergencyContact: {
-        id: faker.datatype.uuid(),
-        name: name || faker.name.fullName(),
-        phone: faker.phone.number('## 9 ####-####'),
-        document: document || faker.datatype.number(99999999999).toString(),
+        id: faker.string.uuid(),
+        name: name || faker.person.fullName(),
+        phone: faker.phone.number(),
+        document: document || faker.number.int(99999999999).toString(),
         avatar: faker.image.avatar(),
         email: faker.internet.email(),
         created_at: Date.now().toLocaleString(),
         updated_at: Date.now().toLocaleString(),
         address: {
-            street: faker.address.street(),
-            number: faker.datatype.number(9999).toString(),
-            complement: faker.address.secondaryAddress(),
-            neighborhood: faker.address.cityName(),
-            city: faker.address.cityName(),
-            state: faker.address.state(),
-            zipCode: faker.address.zipCode('###########'),
+            street: faker.location.street(),
+            number: faker.number.int().toString(),
+            complement: faker.location.secondaryAddress(),
+            neighborhood: faker.location.city(),
+            city: faker.location.city(),
+            state: faker.location.state(),
+            zipCode: faker.location.zipCode('###########'),
         }
     },
     diet: {
         foodType: 'Ração Premium',
-        dailyAmount: faker.datatype.number(10),
+        dailyAmount: faker.number.int(10),
         dietaryRestrictions: [],
     },
     created_at: Date.now().toLocaleString(),
     updated_at: Date.now().toLocaleString(),
     activityLevel: 'Ativo',
-    avatar: faker.image.cats(1234, 1234, true),
+    avatar: faker.image.urlLoremFlickr({ category: 'cats' }),
     bloodType: factoryBloodType(),
     specialPhysicalFeatures: [],
     behavior: faker.lorem.paragraph(),
@@ -108,7 +109,7 @@ function factoryMockPets(adapter: MockAdapter) {
         const pets = getPets()
 
         return new Promise((resolve, reject) => {
-            const newPet = { id: faker.datatype.uuid(), created_at: Date.now().toLocaleString(), ...pet }
+            const newPet = { id: faker.string.uuid(), created_at: Date.now().toLocaleString(), ...pet }
             pets.push(newPet)
 
             try {

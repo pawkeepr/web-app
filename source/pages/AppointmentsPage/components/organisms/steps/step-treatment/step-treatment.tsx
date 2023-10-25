@@ -1,22 +1,19 @@
-import { useState } from "react";
 
 //Import images
 
-import { StepProps } from "../types";
-
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 
-
+import ControlSwitchDiv from "~/Components/molecules/control-switch-div";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
+import FieldTextArea from "~/Components/molecules/field-text-area";
+import { StepProps } from "~/types/helpers";
 import Diseases from "../../../molecules/diseases";
 import Exams from "../../../molecules/exams";
 import Medicines from "../../../molecules/medicines";
-import ControlSwitch from "../../../molecules/switch/switch";
+import Nutritions from "../../../molecules/nutritions";
 import Vaccines from "../../../molecules/vaccines";
-import FieldTextArea from "~/Components/molecules/field-text-area";
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
-    const [enableField, setEnableField] = useState<boolean>(true);
     const tests = ['Teste 1', 'Teste 2', 'Teste 3', 'Teste 4', 'Teste 5']
 
     const options = tests.map((item) => ({
@@ -38,7 +35,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
             </div>
 
             <div className="mt-2">
-                <ControlSwitch
+                <ControlSwitchDiv
                     label="Testes rápidos?"
                     className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
                 >
@@ -116,24 +113,28 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                             )}
                         </FieldArray> */}
                     </div>
-                </ControlSwitch>
+                </ControlSwitchDiv>
             </div>
             <div className="gap-2">
-                <ControlSwitch label="Aplicar Medicação">
+                <ControlSwitchDiv label="Aplicar Medicação">
                     <Medicines />
-                </ControlSwitch>
+                </ControlSwitchDiv>
 
-                <ControlSwitch label="Aplicar vacina?">
+                <ControlSwitchDiv label="Aplicar vacina?">
                     <Vaccines />
-                </ControlSwitch>
-                <ControlSwitch label="Aplicar exame?">
+                </ControlSwitchDiv>
+                <ControlSwitchDiv label="Aplicar exame?">
                     <Exams />
-                </ControlSwitch>
+                </ControlSwitchDiv>
 
-                <ControlSwitch label="Possui doença?">
+                <ControlSwitchDiv label="Possui doença?">
                     <Diseases />
-                </ControlSwitch>
-
+                </ControlSwitchDiv>
+                <ControlSwitchDiv
+                    label="Aplicar nutrição alimentar?"
+                >
+                    <Nutritions />
+                </ControlSwitchDiv>
             </div>
 
 

@@ -13,15 +13,15 @@ import { Formik } from 'formik';
 
 import validate, { ActivateAccount } from '~/validations/activate';
 
-import { signOutUser } from '~/store/auth/login/actions';
-import { addNew } from '~/store/auth/profile/actions';
-import { changeLayoutMode } from '~/store/layouts/actions';
+import { signOutUser } from '~/store/slices/auth/login/actions';
+import { addNew } from '~/store/slices/auth/profile/actions';
+import { changeLayoutMode } from '~/store/slices/layouts/actions';
 
 import { useAppDispatch } from '~/store/hooks';
 
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid';
 import { BtnLink } from '~/Components/atoms/btn';
-import { Profile, RULES } from '~/store/auth/profile/types';
+import { Profile, RULES } from '~/store/slices/auth/profile/types';
 
 import { layoutModeTypes } from '~/Components/constants/layout';
 import StepActivationAddress from './components/organism/steps-activation/step-address';
@@ -83,7 +83,7 @@ const ActivationAccount = () => {
 
     const email = useAppSelector(state => state.Login.username)
     const state = useAppSelector(state => state)
-    
+
     const [tab, setTab] = useState('1')
 
     const dispatch = useAppDispatch()

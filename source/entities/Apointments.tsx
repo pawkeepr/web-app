@@ -1,4 +1,4 @@
-import { IAnamnesisAppointment, IAppointmentVet, IDates_consultsAppointment, IDental_treatmentAppointment, IExamsAppointment, IGeolocationAppointment, IInfo_required, IMedicineAppointment, INutritionsAppointmen, IPaymentsAppointment, IPetAppointment, ISignatureAppointment, IStatusAppointment, ITests_fastsAppointment, ITutorAppointment, IVaccineAppointment, IVetAppointment, IWell_beingAppointment, IllnessesAppointment } from "~/store/appointment-vet/types"
+import { IAnamnesisAppointment, IAppointmentVet, IDates_consultsAppointment, IDental_treatmentAppointment, IExamsAppointment, IGeolocationAppointment, IInfo_required, IMedicineAppointment, INutritionsAppointmen, IPaymentsAppointment, IPetAppointment, ISignatureAppointment, IStatusAppointment, ITests_fastsAppointment, ITutorAppointment, IVaccineAppointment, IVetAppointment, IWell_beingAppointment, IllnessesAppointment } from "~/store/slices/appointment-vet/types"
 
 export class Appointments implements IAppointmentVet {
     id: string
@@ -51,147 +51,147 @@ export class Appointments implements IAppointmentVet {
         this.well_being = {} as any;
     }
 
-    defineId(id: string): this { 
+    defineId(id: string): this {
         this.id = id;
         return this;
     }
 
-    defineIdPet(id_pet: string): this { 
+    defineIdPet(id_pet: string): this {
         this.id_pet = id_pet;
         return this;
     }
 
-    definePetData(pet_data: IPetAppointment): this { 
+    definePetData(pet_data: IPetAppointment): this {
 
         this.pet_data = pet_data;
         return this;
     }
 
-    defineCpfTutor(cpf_tutor: string): this { 
+    defineCpfTutor(cpf_tutor: string): this {
         this.cpf_tutor = cpf_tutor;
         return this;
     }
 
-    defineTutorData(tutor_data: ITutorAppointment): this { 
+    defineTutorData(tutor_data: ITutorAppointment): this {
         this.tutor_data = tutor_data;
         return this;
     }
 
-    defineCrmvVet(crmv_vet: string): this { 
+    defineCrmvVet(crmv_vet: string): this {
         this.crmv_vet = crmv_vet;
         return this;
     }
 
-    defineCpfCnpjVet(cpf_cnpj_vet: string): this { 
+    defineCpfCnpjVet(cpf_cnpj_vet: string): this {
         this.cpf_cnpj_vet = cpf_cnpj_vet;
         return this;
     }
 
-    defineVetData(vet_data: IVetAppointment): this { 
+    defineVetData(vet_data: IVetAppointment): this {
         this.vet_data = vet_data;
         return this;
     }
 
-    defineMedicines(medicines: IMedicineAppointment[]): this { 
+    defineMedicines(medicines: IMedicineAppointment[]): this {
         this.medicines = medicines;
         return this;
     }
 
-    defineAnamnesis(anamnesis: IAnamnesisAppointment): this { 
+    defineAnamnesis(anamnesis: IAnamnesisAppointment): this {
         this.anamnesis = anamnesis;
         return this;
     }
 
-    defineVaccines(vaccines: IVaccineAppointment[]): this { 
+    defineVaccines(vaccines: IVaccineAppointment[]): this {
         this.vaccines = vaccines;
         return this;
     }
 
-    defineExams(exams: IExamsAppointment[]): this { 
+    defineExams(exams: IExamsAppointment[]): this {
         this.exams = exams;
         return this;
     }
 
-    defineNutritions(nutritions: INutritionsAppointmen): this { 
+    defineNutritions(nutritions: INutritionsAppointmen): this {
         this.nutritions = nutritions;
         return this;
     }
 
-    defineIllnesses(illnesses: IllnessesAppointment): this { 
+    defineIllnesses(illnesses: IllnessesAppointment): this {
         this.illnesses = illnesses;
         return this;
     }
 
-    defineInfoRequired(info_required: IInfo_required): this { 
+    defineInfoRequired(info_required: IInfo_required): this {
         this.info_required = info_required;
         return this;
     }
 
-    definePayments(payments: IPaymentsAppointment): this { 
+    definePayments(payments: IPaymentsAppointment): this {
         this.payments = payments;
         return this;
     }
 
-    defineDatesConsults(dates_consults: IDates_consultsAppointment): this { 
+    defineDatesConsults(dates_consults: IDates_consultsAppointment): this {
         this.dates_consults = dates_consults;
         return this;
     }
 
-    defineAppointmentStatus(appointment_status: IStatusAppointment): this { 
+    defineAppointmentStatus(appointment_status: IStatusAppointment): this {
         this.appointment_status = appointment_status;
         return this;
     }
 
-    defineAppointmentSignature(appointment_signature: ISignatureAppointment): this { 
+    defineAppointmentSignature(appointment_signature: ISignatureAppointment): this {
         this.appointment_signature = appointment_signature;
         return this;
     }
 
-    defineAppointmentGeolocation(appointment_geolocation: IGeolocationAppointment): this { 
+    defineAppointmentGeolocation(appointment_geolocation: IGeolocationAppointment): this {
         this.appointment_geolocation = appointment_geolocation;
         return this;
     }
 
-    defineTestsFasts(tests_fasts: ITests_fastsAppointment): this { 
+    defineTestsFasts(tests_fasts: ITests_fastsAppointment): this {
         this.tests_fasts = tests_fasts;
         return this;
     }
 
-    defineDentalTreatment(dental_treatment: IDental_treatmentAppointment): this { 
+    defineDentalTreatment(dental_treatment: IDental_treatmentAppointment): this {
         this.dental_treatment = dental_treatment;
         return this;
     }
 
-    defineWellBeing(well_being: IWell_beingAppointment): this { 
+    defineWellBeing(well_being: IWell_beingAppointment): this {
         this.well_being = well_being;
         return this;
     }
 
     static build(params: IAppointmentVet): Appointments {
         return new Appointments()
-        .defineAnamnesis(params.anamnesis)
-        .defineAppointmentGeolocation(params.appointment_geolocation)
-        .defineAppointmentSignature(params.appointment_signature)
-        .defineAppointmentStatus(params.appointment_status)
-        .defineCpfCnpjVet(params.cpf_cnpj_vet)
-        .defineCpfTutor(params.cpf_tutor)
-        .defineCrmvVet(params.crmv_vet)
-        .defineDatesConsults(params.dates_consults)
-        .defineDentalTreatment(params.dental_treatment)
-        .defineExams(params.exams)
-        .defineId(params.id)
-        .defineIdPet(params.id_pet)
-        .defineIllnesses(params.illnesses)
-        .defineInfoRequired(params.info_required)
-        .defineMedicines(params.medicines)
-        .defineNutritions(params.nutritions)
-        .definePayments(params.payments)
-        .definePetData(params.pet_data)
-        .defineTestsFasts(params.tests_fasts)
-        .defineTutorData(params.tutor_data)
-        .defineVaccines(params.vaccines)
-        .defineVetData(params.vet_data)
-        .defineWellBeing(params.well_being)
+            .defineAnamnesis(params.anamnesis)
+            .defineAppointmentGeolocation(params.appointment_geolocation)
+            .defineAppointmentSignature(params.appointment_signature)
+            .defineAppointmentStatus(params.appointment_status)
+            .defineCpfCnpjVet(params.cpf_cnpj_vet)
+            .defineCpfTutor(params.cpf_tutor)
+            .defineCrmvVet(params.crmv_vet)
+            .defineDatesConsults(params.dates_consults)
+            .defineDentalTreatment(params.dental_treatment)
+            .defineExams(params.exams)
+            .defineId(params.id)
+            .defineIdPet(params.id_pet)
+            .defineIllnesses(params.illnesses)
+            .defineInfoRequired(params.info_required)
+            .defineMedicines(params.medicines)
+            .defineNutritions(params.nutritions)
+            .definePayments(params.payments)
+            .definePetData(params.pet_data)
+            .defineTestsFasts(params.tests_fasts)
+            .defineTutorData(params.tutor_data)
+            .defineVaccines(params.vaccines)
+            .defineVetData(params.vet_data)
+            .defineWellBeing(params.well_being)
 
     }
 };

@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import RouterProvider from '~/__mocks__/next-router';
 import { AuthProvider } from '~/contexts/auth-context';
-import ProviderClient from '~/store';
+import ProviderClient from '~/store/slices';
 import Auth from './auth-inputs';
 
 const Wrapper = () => (

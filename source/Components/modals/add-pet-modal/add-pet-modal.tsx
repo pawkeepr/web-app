@@ -10,9 +10,9 @@ import { BtnPrimary } from "~/Components/atoms/btn";
 import BoxButtons from "~/Components/molecules/box-buttons";
 import FieldDocument from "~/Components/molecules/field-document";
 import { useAppDispatch } from '~/store/hooks';
-import { addNew } from '~/store/pets/actions';
-import { genderValues } from "~/store/pets/sexType";
-import { Data } from '~/store/pets/types';
+import { addNew } from '~/store/slices/pets/actions';
+import { genderValues } from "~/store/slices/pets/sexType";
+import { Data } from '~/store/slices/pets/types';
 import ComboBoxFields from "./components/organisms/combo-box-fields/combo-box-fields";
 
 
@@ -88,7 +88,7 @@ const AddNewPetModal = ({ children, item }: AddModalProps) => {
                     onClick={showModal}
                     label="Novo Pet"
                     id="button-new-consult"
-                    style={{ height: 42}}
+                    style={{ height: 42 }}
                 >
                     <MdPets className='w-6 h-6' />
                 </BtnPrimary>

@@ -5,19 +5,19 @@ import { createContext, useEffect } from "react";
 import cookies from '~/constants/cookies';
 import LOADING from '~/constants/loading';
 import { decrypt, encrypt } from '~/helpers/encrypt-and-decrypt';
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
 import {
     recoverUserByToken,
     signInUser,
     signOutUser,
-} from '~/store/auth/login/actions';
+} from '~/store/slices/auth/login/actions';
 import {
     LoginState,
     onChangePassword,
     onChangeRememberMe,
     onChangeUsername,
     onSetRememberMe,
-} from '~/store/auth/login/slice';
-import { useAppDispatch, useAppSelector } from '~/store/hooks';
+} from '~/store/slices/auth/login/slice';
 import { getCookie, setCookie } from '~/utils/cookies-utils';
 
 interface SignInData {

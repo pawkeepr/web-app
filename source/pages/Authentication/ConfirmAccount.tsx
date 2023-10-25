@@ -12,12 +12,12 @@ import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import { useEffect } from 'react';
 import ConfirmAccountForm from "~/Components/forms/confirm-account-form";
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
 import {
     activateAccount,
     resendConfirmationCode,
     resetProfileFlag
-} from '~/store/auth/activate-account/actions';
-import { useAppDispatch, useAppSelector } from '~/store/hooks';
+} from '~/store/slices/auth/activate-account/actions';
 
 const validationSchema = Yup.object({
     email: Yup.string().email().required('Campo obrigatório'),

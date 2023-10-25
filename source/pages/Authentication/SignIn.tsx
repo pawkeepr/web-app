@@ -5,8 +5,8 @@ import AuthInputs from "./components/organism/auth-inputs";
 
 import { useRouter } from "next/navigation";
 import { BtnLink } from "~/Components/atoms/btn";
-import { resetLoading } from "~/store/auth/login/actions";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
+import { resetLoading } from "~/store/slices/auth/login/actions";
 import AuthLayout from "../_layouts/auth/auth_layout";
 
 const CoverSignIn = () => {

@@ -1,11 +1,8 @@
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
-import { is } from "cypress/types/bluebird";
-import { set } from "cypress/types/lodash";
 import { Form, Formik } from "formik";
 import { startTransition, useState } from "react";
-import { Modal } from "reactstrap";
-import ModalWarning from "~/Components/modals/modal-warning/modal-warning";
 import ModalListPets from "~/Components/modals/modal-list-pets/modal-list-pets";
+import ModalWarning from "~/Components/modals/modal-warning/modal-warning";
 import FieldDocument from "~/Components/molecules/field-document/field-document";
 import isValidCPF from "~/validations/cpf";
 
@@ -51,51 +48,51 @@ const FieldDocumentAppointment = ({
 
 
     return (
-    <>
-        <ModalWarning
-            title='CPF INVÁLIDO'
-            description='Por favor, cadastrar um CPF válido para prosseguir.'
-            isOpen={ isOpen }
-            closeModal={()=> { setIsOpen(false)}}
-        />
-        <ModalListPets selectedTabInitial={selectedTabInitial}>
+        <>
+            <ModalWarning
+                title='CPF INVÁLIDO'
+                description='Por favor, cadastrar um CPF válido para prosseguir.'
+                isOpen={isOpen}
+                closeModal={() => { setIsOpen(false) }}
+            />
+            <ModalListPets selectedTabInitial={selectedTabInitial}>
 
-            {({ onChangeOpen, onChangeDocument }) => (
-                <Formik
-                    initialValues={initialValues}
-                    onSubmit={onHandleSubmit({
-                        onChangeDocument,
-                        onChangeOpen,
-                    })}
-                    enableReinitialize
-                >
-                    <Form className=" flex flex-row items-center justify-end ">
-                        {
-                            children?.({ onChangeOpen, onChangeDocument }) ||
-                            <div className="w-full mb-2 ml-3 hidden lg:block xl:block">
-                               <FieldDocument
-                                name="document"
-                                placeholder="Nova Consulta"
-                                label="CPF"
-                                className="rounded-md"
-                                onlyCPF
-                                endIcon={
-                                    <button
-                                        className="focus:outline-none flex h-full items-center justify-center"
-                                        data-bs-target="#addVeterinaryAppointmentModal"
-                                        type="submit"
-                                    >
-                                        <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
-                                    </button>
-                                }
-                            />
-                            </div>
-                        }
-                    </Form>
-                </Formik>
-            )}
-        </ModalListPets> 
-    </>
+                {({ onChangeOpen, onChangeDocument }) => (
+                    <Formik
+                        initialValues={initialValues}
+                        onSubmit={onHandleSubmit({
+                            onChangeDocument,
+                            onChangeOpen,
+                        })}
+                        enableReinitialize
+                    >
+                        <Form className=" flex flex-row items-center justify-end ">
+                            {
+                                children?.({ onChangeOpen, onChangeDocument }) ||
+                                <div className="w-full mb-2 ml-3 hidden lg:block xl:block">
+                                    <FieldDocument
+                                        name="document"
+                                        placeholder="Nova Consulta"
+                                        label="CPF"
+                                        className="rounded-md"
+                                        onlyCPF
+                                        endIcon={
+                                            <button
+                                                className="focus:outline-none flex h-full items-center justify-center"
+                                                data-bs-target="#addVeterinaryAppointmentModal"
+                                                type="submit"
+                                            >
+                                                <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
+                                            </button>
+                                        }
+                                    />
+                                </div>
+                            }
+                        </Form>
+                    </Formik>
+                )}
+            </ModalListPets>
+        </>
     );
 };
 

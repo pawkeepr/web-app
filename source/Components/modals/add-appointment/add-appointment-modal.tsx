@@ -2,25 +2,20 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Formik
 import { Formik, FormikHelpers } from "formik";
-import BtnAvatar from "~/Components/atoms/btn/btn-avatar";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
-import { MdPets } from 'react-icons/md';
 import { BtnPrimary } from "~/Components/atoms/btn";
 import BoxButtons from "~/Components/molecules/box-buttons";
-import FieldDocument from "~/Components/molecules/field-document";
 import { useAppDispatch } from '~/store/hooks';
-import { addNew } from '~/store/newSchedule/actions';
+import { addNew } from '~/store/slices/newSchedule/actions';
 
 // import ComboBoxFields from "./components/organisms/combo-box-fields/combo-box-fields";
 
 type InitialValues = Partial<Nullable<Data>>
 
-import RadioGroupCustom from "~/Components/molecules/radio-group/radio-group";
+import FieldTextArea from '~/Components/molecules/field-text-area/field-text-area';
 import Modal from "~/Components/organism/modal";
 import useModal from '~/hooks/use-modal';
-import validationPet from '~/validations/pet';
-import FieldTextArea from '~/Components/molecules/field-text-area/field-text-area';
 
 
 const AddNewAppointment = ({ children, item }: AddModalProps) => {
@@ -51,7 +46,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                     onClick={showModal}
                     label="Agendar Consulta"
                     id="button-new-consult"
-                    style={{ height: 42}}
+                    style={{ height: 42 }}
                 >
 
                 </BtnPrimary>
@@ -100,7 +95,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                         type="text"
                                     />
                                 </div>
-                               
+
                                 <FieldControl
                                     label="Tipo da consulta"
                                     name="type"
@@ -117,7 +112,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                     placeholder="digite a razão da consulta, exemplo='consulta de rotina'"
                                     type="text"
                                 />
-                                 <FieldTextArea
+                                <FieldTextArea
                                     label="Orientações e Anotações"
                                     className="form-control"
                                     component="textarea"

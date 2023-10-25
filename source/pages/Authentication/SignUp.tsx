@@ -18,9 +18,9 @@ import FieldControl from "~/Components/molecules/field-control";
 import FieldPassword from "~/Components/molecules/field-password";
 import PasswordRules from "~/Components/molecules/password-rules";
 import LOADING from "~/constants/loading";
-import { registerUser, resetRegisterFlag } from "~/store/auth/register/actions";
-import { AccountSignUp } from "~/store/auth/register/types";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
+import { registerUser, resetRegisterFlag } from "~/store/slices/auth/register/actions";
+import { AccountSignUp } from "~/store/slices/auth/register/types";
 import AuthLayout from "../_layouts/auth/auth_layout";
 
 const validationSchema = Yup.object({
