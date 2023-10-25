@@ -5,15 +5,11 @@ import {
     Card,
     CardBody,
     Col,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    Row,
-    UncontrolledDropdown
+    Row
 } from 'reactstrap';
 import MyImage from '~/Components/atoms/my-image/my-image';
 
-import { Pet } from '~/store/pets/types';
+import { Pet } from '~/store/slices/pets/types';
 
 type CardPetsProps = {
     pet: Pet

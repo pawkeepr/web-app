@@ -1,30 +1,17 @@
 import { all, fork } from "redux-saga/effects";
 //layout
-import LoginSagas from "./auth/login/sagas";
-import LayoutSaga from "./layouts/saga";
+import LoginSagas from "./slices/auth/login/sagas";
+import LayoutSaga from "./slices/layouts/saga";
 //Auth
-import ActivateAccountSaga from "./auth/activate-account/sagas";
-import ForgetSaga from "./auth/forget-pwd/sagas";
-import ProfileSaga from "./auth/profile/sagas";
-import AccountSaga from "./auth/register/sagas";
-//calendar
-import calendarSaga from "./calendar/saga";
-//chat
-import chatSaga from "./chat/saga";
+import ActivateAccountSaga from "./slices/auth/activate-account/sagas";
+import ForgetSaga from "./slices/auth/forget-pwd/sagas";
+import ProfileSaga from "./slices/auth/profile/sagas";
+import AccountSaga from "./slices/auth/register/sagas";
 
-import AppointmentVetSagas from './appointment-vet/sagas';
-import PetsSagas from './pets/sagas';
-import TutorsSagas from './tutors/sagas';
-import schedule from './newSchedule/sagas'
-
-
-// Task
-import taskSaga from "./tasks/saga";
-// Crypto
-
-
-// Pages > Team
-import teamSaga from "./team/saga";
+import AppointmentVetSagas from './slices/appointment-vet/sagas';
+import schedule from './slices/newSchedule/sagas';
+import PetsSagas from './slices/pets/sagas';
+import TutorsSagas from './slices/tutors/sagas';
 
 
 export default function* rootSaga() {
@@ -34,14 +21,10 @@ export default function* rootSaga() {
         fork(AccountSaga),
         fork(ForgetSaga),
         fork(ProfileSaga),
-        fork(chatSaga),
-        fork(taskSaga),
         fork(ActivateAccountSaga),
         fork(TutorsSagas),
         fork(PetsSagas),
         fork(AppointmentVetSagas),
-        fork(calendarSaga),
-        fork(teamSaga),
         fork(LoginSagas),
         fork(schedule),
     ]);

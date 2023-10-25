@@ -1,4 +1,3 @@
-
 import {
     Card,
     CardBody,
@@ -10,16 +9,13 @@ import {
     TabContent,
     TabPane
 } from "reactstrap";
-//Import images
 
 import cn from "classnames";
 import { useEffect, useState } from "react";
 
 import { useAppSelector } from "~/store/hooks";
 import StepAnamneses from "../organisms/steps/step-anamnese";
-import StepInfo from "../organisms/steps/step-info";
 import StepPayment from "../organisms/steps/step-payment";
-import StepPet from "../organisms/steps/step-pet";
 import StepTreatment from "../organisms/steps/step-treatment";
 
 type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
@@ -34,53 +30,29 @@ type TabItem = {
 const items: TabItem[] = [
     {
         id: 1,
-        title: "Pet",
-        href: "#Pet",
-        Component: StepPet
-    },
-    {
-        id: 2,
-        title: "Bem-Estar",
-        href: "#BemEstar",
-        Component: StepInfo
-    },
-    {
-        id: 3,
         title: "Anamnese",
         href: "#Anamnese",
         Component: StepAnamneses
     },
     {
-        id: 4,
+        id: 2,
         title: "Tratamento",
         href: "#Treatment",
         Component: StepTreatment
     },
     {
-        id: 5,
+        id: 3,
         title: "Finalizar",
         href: "#Finalizar",
         Component: StepPayment
     },
-    // {
-    //     id: 4,
-    //     title: "Tutor",
-    //     href: "#Tutor",
-    //     Component: StepTutor
-    // },
-    // {
-    //     id: 5,
-    //     title: "Endereço",
-    //     href: "#Address",
-    //     Component: StepAddress
-    // },
 ]
 
 const VerticalTabs = () => {
 
     const [isFixed, setIsFixed] = useState(false);
-    const [activeVerticalTab, setActiveVerticalTab] = useState(2);
-    const [passedVerticalSteps, setPassedVerticalSteps] = useState([1, 2]);
+    const [activeVerticalTab, setActiveVerticalTab] = useState(1);
+    const [passedVerticalSteps, setPassedVerticalSteps] = useState([1]);
 
     const { height } = useAppSelector(state => state.Layout.headerSize)
 

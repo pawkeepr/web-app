@@ -5,7 +5,7 @@ import { useAppDispatch } from "~/store/hooks";
 import DefaultLayout from "../_layouts/dashboard/dashboard";
 import PetsTab from "./PetsTab";
 
-import { getAll } from '~/store/pets/actions';
+import { getAll } from '~/store/slices/pets/actions';
 
 const PetsPage = () => {
     const dispatch = useAppDispatch();

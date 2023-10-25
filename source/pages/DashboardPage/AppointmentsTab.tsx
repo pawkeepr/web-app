@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from 'react';
-import CardVeterinaryAppointments from '~/Components/molecules/card-veterinary-appointments/card-veterinary-appointments';
-import { getAll } from '~/store/appointment-vet/actions';
-import { Data } from '~/store/appointment-vet/types';
+import CardVeterinaryAppointments from '~/Components/molecules/card-veterinary-appointments';
+import ListTab from '~/Components/templates/ListTab';
 import { useAppDispatch } from '~/store/hooks';
-import ListTab from '../../Components/templates/ListTab';
+import { getAll } from '~/store/slices/appointment-vet/actions';
+import { Data } from '~/store/slices/appointment-vet/types';
 
-import FieldDocumentAppointment from '../../Components/molecules/field-document-appointment';
+import FieldDocumentAppointment from '~/Components/molecules/field-document-appointment';
 
 
 const VeterinaryAppointmentsTab = () => {

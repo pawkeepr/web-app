@@ -1,17 +1,8 @@
 // Layout
-export * from "./auth/forget-pwd/actions";
+export * from "./slices/auth/forget-pwd/actions";
 
-export * from "./auth/profile/actions";
+export * from "./slices/auth/profile/actions";
 // Authentication module
-export * from "./auth/register/actions";
-//calendar
-export * from "./calendar/actions";
-//chat
-export * from "./chat/action";
+export * from "./slices/auth/register/actions";
 
-export * from "./layouts/actions";
-
-// Task
-export * from "./tasks/action";
-// Pages > Team
-export * from "./team/action";
+export * from "./slices/layouts/actions";

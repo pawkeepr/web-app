@@ -14,7 +14,7 @@ import MyImage from '~/Components/atoms/my-image/my-image';
 
 import { sample } from 'lodash';
 
-import { Tutor } from '~/store/tutors/types';
+import { Tutor } from '~/store/slices/tutors/types';
 
 type CardTutorsProps = {
     tutor: Tutor
@@ -33,7 +33,7 @@ const CardTutors = ({ tutor }: CardTutorsProps) => {
                     <div className="col team-settings">
                         <Row className="align-items-center">
                             <div className="col">
-                                
+
                             </div>
                             <UncontrolledDropdown className="col text-end">
                                 <DropdownToggle tag="a" role="button">

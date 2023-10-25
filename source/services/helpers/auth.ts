@@ -1,7 +1,7 @@
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { Auth } from 'aws-amplify';
 
-import { AccountSignUp } from '~/store/auth/register/types';
+import { AccountSignUp } from '~/store/slices/auth/register/types';
 import { UserData } from './types';
 
 export type SignInCredentials = {

@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '~/store/hooks';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { BtnLink } from '~/Components/atoms/btn';
-import { resetLoading, signOutUser } from '~/store/auth/login/actions';
+import { resetLoading, signOutUser } from '~/store/slices/auth/login/actions';
 import AuthLayout from '../_layouts/auth/auth_layout';
 
 const LogoutPage = () => {

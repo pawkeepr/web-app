@@ -2,32 +2,31 @@ import MockAdapter from "axios-mock-adapter/types";
 import { getCookie, setCookie } from "~/utils/cookies-utils";
 
 import { faker } from '@faker-js/faker';
-import { Tutor } from "~/store/tutors/types";
 import * as url from '../url_helper';
 
 
 const factoryTutor = (document?: string, name?: string) => ({
-    id: faker.datatype.uuid(),
-    name: name || faker.name.firstName(),
+    id: faker.string.uuid(),
+    name: name || faker.person.firstName(),
     email: faker.internet.email(),
-    document: document || faker.datatype.number(99999999999).toString(),
+    document: document || faker.number.int(99999999999).toString(),
     created_at: Date.now().toLocaleString(),
     updated_at: Date.now().toLocaleString(),
     avatar: faker.image.avatar(),
-    phone: faker.phone.number('## 9 ####-####'),
+    phone: faker.phone.number(),
     address: {
-        street: faker.address.street(),
-        number: faker.datatype.number(9999).toString(),
-        complement: faker.address.secondaryAddress(),
-        neighborhood: faker.address.cityName(),
-        city: faker.address.cityName(),
-        state: faker.address.state(),
-        zipCode: faker.address.zipCode('###########'),
+        street: faker.location.street(),
+        number: faker.number.int().toString(),
+        complement: faker.location.secondaryAddress(),
+        neighborhood: faker.location.city(),
+        city: faker.location.city(),
+        state: faker.location.state(),
+        zipCode: faker.location.zipCode('###########'),
     }
 })
 
 
-const tutors: Array<Tutor> = [
+const tutors: Array<any> = [
     ...Array(10).fill(0).map(() => factoryTutor()),
     factoryTutor('00000000000', 'Murilo Montino'),
 ]
@@ -69,7 +68,7 @@ function factoryTutors(adapter: MockAdapter) {
 
         return new Promise((resolve, reject) => {
 
-            tutors.push({ id: faker.datatype.uuid(), created_at: Date.now().toLocaleString(), ...tutor })
+            tutors.push({ id: faker.string.uuid(), created_at: Date.now().toLocaleString(), ...tutor })
 
             if (isValid.length > 0) {
                 return reject([400, { message: 'Este Tutor já existe!' }]);

@@ -22,7 +22,7 @@ import {
     changeSidebarImageType,
     changeSidebarTheme,
     changeTopBarTheme,
-} from "../store/layouts/slice";
+} from "../store/slices/layouts/slice";
 
 //redux
 import cn from 'classnames';

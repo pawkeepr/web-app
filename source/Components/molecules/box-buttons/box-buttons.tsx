@@ -4,7 +4,7 @@ import withLoading from '~/Components/helpers/with-loading';
 type Fn = () => void;
 
 type hasBtnCancel = {
-    onClickCancel: Fn;
+    onClickCancel?: Fn;
     cancel?: (props: BtnProps) => JSX.Element;
 } | {
     cancel: null;

@@ -1,5 +1,6 @@
 import DashboardLayouts from "../_layouts/dashboard";
-import { IAppointmentVet } from "~/store/appointment-vet/types";
+
+import { IAppointmentVet } from "~/store/slices/appointment-vet/types";
 import VerticalTabs from "./components/templates/vertical-tabs";
 
 import { Formik } from "formik";
@@ -8,6 +9,7 @@ import { BtnCancel } from "~/Components/atoms/btn";
 import ModalConfirm from "~/Components/modals/modal-confirm";
 import { Appointments } from "~/entities/Apointments";
 import { browser } from "~/utils/navigator.utils";
+
 
 
 
@@ -165,18 +167,7 @@ const initialValues = (
         }
     ],
     exams: [
-        {
-            name_exame: "",
-            local: "",
-            realization_date: "",
-            appointament_date: "",
-            time_date: "",
-            who_applied: "",
-            health_insurance: "",
-            type_exame: "",
-            value_exam: "",
-            coin_exam: ""
-        }
+
     ],
     nutritions: [
         {
@@ -235,9 +226,9 @@ const initialValues = (
         reason_canceled: ""
     },
     appointment_signature: signature || {
-      ip_adess: "",
-      browser_device: "",
-      operational_system: ""
+        ip_adess: "",
+        browser_device: "",
+        operational_system: ""
     },
     appointment_geolocation: geolocation || {
         latitude: "",
@@ -280,8 +271,8 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
         try {
             const geolocation = () => {
                 if ('geolocation' in navigator) {
-                const browserUser = browser();
-                
+                    const browserUser = browser();
+
                     const signature = {
                         ip_adress: '',
                         browser_device: browserUser,
@@ -297,7 +288,7 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
                         };
                         const appointment = Appointments.build(initialValues(document, pet, signature, geolocationData));
                         console.log(appointment);
-                        
+
                         return appointment;
                     }, function (error) {
                         console.log(error);
