@@ -65,10 +65,11 @@ const ModalListPets = ({
     const handleNavigate = useCallback((pet: IPetV2) => {
         setTimeout(() => {
             router.push(`${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`)
-        }, 1000)
+        }, 300)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [document])
 
+    const { activeData: pets, handleSubmit } = usePetsByDocument(document)
 
     const initialValues: IPet = {
         id: null,
@@ -77,15 +78,16 @@ const ModalListPets = ({
         breed: '' as any,
         ownerEmergencyContact: {
             cpf_cnpj: document,
-            phone: '',
-            email: '',
+            phone: pets.length > 0 ? pets[0].contact_tutor.phone : '',
+            email: pets.length > 0 ? pets[0].contact_tutor.email : '',
+            name: pets.length > 0 ? pets[0].name_tutor : '',
         },
         castrated: false,
         date_birth: '',
         gender: Gender.unknown,
     }
 
-    const { activeData: pets, handleSubmit } = usePetsByDocument(document)
+
 
     const onChangeSelectedTab = (index: number) => {
         setSelectedTab(index)
@@ -104,7 +106,7 @@ const ModalListPets = ({
     }, [])
 
     const onSubmit = useCallback(async (values: IPet) => {
-        await handleSubmit({
+        const pet = await handleSubmit({
             name_tutor: values.ownerEmergencyContact.name as string,
             phone_tutor: values.ownerEmergencyContact.phone,
             contact_tutor: {
@@ -147,7 +149,12 @@ const ModalListPets = ({
                 cpf_tutor: null
             },
         })
-    }, [handleSubmit])
+
+        if (!pet) return
+
+        handleNavigate(pet)
+
+    }, [handleSubmit, handleNavigate])
 
     return (
         <>

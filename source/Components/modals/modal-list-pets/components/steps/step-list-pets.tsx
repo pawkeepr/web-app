@@ -2,7 +2,7 @@ import { useFormikContext } from 'formik'
 import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldControl from '~/Components/molecules/field-control/field-control'
-import { KeyOfMapOptionSpecies, MapOptionSpecies, Species } from '~/store/slices/pets/speciesType'
+import { KeyOfMapOptionSpecies, MapOptionSpecies } from '~/store/slices/pets/speciesType'
 import { InitialValues, StepProps } from '../../types'
 import { option } from '../helpers'
 
@@ -30,7 +30,7 @@ const StepListPets = ({
 
     return (
         <div className="mt-3 gap-2">
-            <div className="overflow-auto h-[calc(100vh-24rem)] flex justify-center items-center">
+            <div className="overflow-auto h-[calc(100vh-24rem)] flex justify-center items-center flex-col">
                 {
                     pets?.length === 0 && (
                         <div className="flex justify-center items-center  ">
@@ -50,9 +50,6 @@ const StepListPets = ({
                                 <span className="align-middle col-span-1">{
                                     EmojiPet[MapOptionSpecies[pet.pet_data.specie as KeyOfMapOptionSpecies] as Key]}</span>
                                 <span className="align-middle col-span-2">{pet.pet_data.name_pet}</span>
-                                <span className="align-middle col-span-1">{
-                                    Species[MapOptionSpecies[pet.pet_data.specie as KeyOfMapOptionSpecies] as Key]
-                                }</span>
                             </div>
                         </button>
                     ))

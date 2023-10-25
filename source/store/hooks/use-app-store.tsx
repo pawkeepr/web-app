@@ -100,8 +100,9 @@ const useAppStore = <T,>({
                     data = entity.build(data)
                 }
 
-                await addData.mutateAsync(data)
+                const response = await addData.mutateAsync(data)
                 successToast('Adicionado com sucesso')
+                return response
 
             } catch (err) {
                 const error = err as AxiosError;
