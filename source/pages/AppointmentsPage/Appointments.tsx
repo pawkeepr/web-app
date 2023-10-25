@@ -1,5 +1,4 @@
 import DashboardLayouts from "../_layouts/dashboard";
-
 import { IAppointmentVet } from "~/store/appointment-vet/types";
 import VerticalTabs from "./components/templates/vertical-tabs";
 
@@ -8,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { BtnCancel } from "~/Components/atoms/btn";
 import ModalConfirm from "~/Components/modals/modal-confirm";
 import { Appointments } from "~/entities/Apointments";
+import { browser } from "~/utils/navigator.utils";
+
 
 
 export type InitialValues = IAppointmentVet;
@@ -23,6 +24,7 @@ type NullString = string | null;
 const initialValues = (
     document: NullString = null,
     id: NullString = null,
+    signature: { ip_adress: string, browser_device: string, operational_system: string } | null = null,
     geolocation: { latitude: string, longitude: string, precision: string, altitude: string, speed: string } | null = null
 ): InitialValues => ({
     pet_data: {
@@ -232,14 +234,10 @@ const initialValues = (
         canceled: "",
         reason_canceled: ""
     },
-    appointment_signature: {
-        signature_data: "",
-        date_signature: "",
-        type_signature: "",
-        status_signature: "",
-        ip_adess: "",
-        browser_device: "",
-        operational_system: ""
+    appointment_signature: signature || {
+      ip_adess: "",
+      browser_device: "",
+      operational_system: ""
     },
     appointment_geolocation: geolocation || {
         latitude: "",
@@ -282,6 +280,13 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
         try {
             const geolocation = () => {
                 if ('geolocation' in navigator) {
+                const browserUser = browser();
+                
+                    const signature = {
+                        ip_adress: '',
+                        browser_device: browserUser,
+                        operational_system: navigator.platform
+                    }
                     navigator.geolocation.getCurrentPosition(function (position) {
                         const geolocationData = {
                             latitude: position.coords.latitude.toString(),
@@ -290,7 +295,9 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
                             altitude: position.coords.altitude ? position.coords.altitude.toString() : '',
                             speed: position.coords.speed ? position.coords.speed.toString() : '',
                         };
-                        const appointment = Appointments.build(initialValues(document, pet, geolocationData));
+                        const appointment = Appointments.build(initialValues(document, pet, signature, geolocationData));
+                        console.log(appointment);
+                        
                         return appointment;
                     }, function (error) {
                         console.log(error);
@@ -299,7 +306,8 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
             };
 
             geolocation();
-        } catch (error) {
+        }
+        catch (error) {
             console.log(error);
         }
     };
