@@ -3,12 +3,12 @@ import { Gender, Species } from "~/store/slices/pets/speciesType";
 
 export interface IPetV2 {
     id?: string;
-    name_tutor: string;
+    name_tutor: string
     phone_tutor: string;
     contact_tutor: {
-        email: string;
-        phone: string;
-        whatsapp: string;
+        email: string | null;
+        phone: string | null
+        whatsapp: string | null
     };
     cpf_tutor: string;
     vets_data: string[];
@@ -24,10 +24,10 @@ export interface IPetV2 {
     };
     pet_data: {
         name_pet: string;
-        specie: Species;
-        race: Breed;
+        specie: Species | null;
+        race: Breed | null;
+        sex: Gender | null;
         castrated: string | boolean;
-        sex: Gender;
         microchip: string | null;
         identification_number: string | null;
         blood_type: string | null;
