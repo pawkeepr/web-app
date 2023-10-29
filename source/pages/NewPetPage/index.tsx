@@ -73,7 +73,7 @@ type PetPageProps = {
 
 const NewPetPage = ({ document }: PetPageProps) => {
 
-    const { activeData: pets, handleSubmit, isLoading } = usePetsByDocument(document)
+    const { activeData: pets, handleSubmit } = usePetsByDocument(document)
 
     const initialValues = useMemo(() => makeInitialValues({
         cpf_tutor: document,
@@ -84,7 +84,7 @@ const NewPetPage = ({ document }: PetPageProps) => {
     }), [pets, document]) as IPetV2
 
     return (
-        <DashboardLayouts title="Novo Pet" isLoading={isLoading} >
+        <DashboardLayouts title="Novo Pet"  >
             <Formik
                 onSubmit={handleSubmit}
                 enableReinitialize

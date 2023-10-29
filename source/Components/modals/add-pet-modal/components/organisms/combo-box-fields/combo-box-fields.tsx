@@ -1,11 +1,8 @@
 import { useFormikContext } from "formik"
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react"
-import FieldControl from "~/Components/molecules/field-control/field-control"
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select"
-import FieldMasked from "~/Components/molecules/field-masked"
 import { BloodType } from "~/store/slices/pets/bloodType"
 import { Breed } from "~/store/slices/pets/breedType"
-import { genderValues } from "~/store/slices/pets/sexType"
 import { SpeciesType, species } from '~/store/slices/pets/speciesType'
 
 type AuxSpeciesFormikProps = {
@@ -88,69 +85,35 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
 
     return (
         <>
-            <div className="w-full grid grid-cols-2 mobile:grid-cols-1 gap-2">
-                <FieldControlSelect
-                    options={memoSpecies}
-                    required
-                    disabled={isPending || !!values.pet_data?.id}
-                    onChangeValue={onChangeSpecie}
-                    name={memoNameSpecies}
-                    placeholder="Ex: Cachorro, Gato, etc..."
-                    label="Espécie" />
+            <FieldControlSelect
+                options={memoSpecies}
+                required
+                disabled={isPending || !!values.pet_data?.id}
+                onChangeValue={onChangeSpecie}
+                name={memoNameSpecies}
+                placeholder="Ex: Cachorro, Gato, etc..."
+                label="Espécie" />
 
 
-                <FieldControlSelect
-                    options={memoBreed}
-                    disabled={!specie.breedType || isPending || !!values.pet_data?.id}
-                    onChangeValue={e => setBreedValue(e)}
-                    value={breedValue}
-                    required
-                    name={memoNameBreed}
-                    label="Raça"
-                    placeholder="Ex: Vira-lata, Poodle, etc..." />
+            <FieldControlSelect
+                options={memoBreed}
+                disabled={!specie.breedType || isPending || !!values.pet_data?.id}
+                onChangeValue={e => setBreedValue(e)}
+                value={breedValue}
+                required
+                name={memoNameBreed}
+                label="Raça"
+                placeholder="Ex: Vira-lata, Poodle, etc..." />
 
-                <FieldControlSelect
-                    options={memoBloodType}
-                    onChangeValue={e => setBloodTypeValue(e)}
-                    value={bloodTypeValue}
-                    disabled={!specie.bloodType || isPending || !!values.pet_data?.id}
-                    required
-                    name={memoNameBloodType}
-                    label="Tipo Sanguíneo"
-                    placeholder="Ex: A, B, etc..." />
-
-                <FieldControlSelect
-                    options={genderValues as any}
-                    disabled={!!values.pet_data?.id}
-                    name="pet_data.sex"
-                    required
-                    label="Sexo do Pet"
-                    placeholder="Macho/Fêmea..." />
-            </div>
-            <div className="flex md:flex-row flex-col mt-2 mb-2 gap-2">
-
-                <FieldControl
-                    label={`Data de nascimento`}
-                    required
-                    name={`pet_data.date_birth`}
-                    type="date"
-                />
-
-                <FieldMasked
-                    label={`Número do microchip`}
-                    name={`pet_data.microchip`}
-                    mask="_____"
-                    placeholder="Digite o número do microchip (opcional)"
-                />
-
-                <FieldMasked
-                    label={`Número de registro cartório`}
-                    name={`pet_data.identification_number`}
-                    mask="_____"
-                    placeholder="Digite o número do registro (opcional)"
-                />
-
-            </div>
+            <FieldControlSelect
+                options={memoBloodType}
+                onChangeValue={e => setBloodTypeValue(e)}
+                value={bloodTypeValue}
+                disabled={!specie.bloodType || isPending || !!values.pet_data?.id}
+                required
+                name={memoNameBloodType}
+                label="Tipo Sanguíneo"
+                placeholder="Ex: A, B, etc..." />
         </>
     )
 }

@@ -5,7 +5,6 @@ import cookies from '~/constants/cookies';
 
 import {
     recoverUserByTokenFailed,
-    recoverUserByTokenSuccess,
     setAuthorization,
     signInFailed,
     signInSuccess,
@@ -32,11 +31,8 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
     try {
         const response: UserData = yield call(signInAws, action.payload);
         const { signInUserSession: { idToken } } = response;
-        const now = new Date().getTime()
-        const time = idToken.payload.exp - now
-        console.log(idToken)
 
-        yield setCookie(cookies.token.name, idToken.jwtToken,);
+        yield setCookie(cookies.token.name, idToken.jwtToken, (idToken.payload.exp / 1000));
 
         const mode = getCookie(cookies.layoutMode.name) || layoutModeTypes.LIGHT_MODE
         const token = idToken.jwtToken
@@ -65,15 +61,13 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
 export function* recoverUserByTokenSaga() {
     try {
         const session: CognitoUserSession = yield call(getUser);
-        // token expirou
-        if (session.getIdToken().getExpiration() < new Date().getTime()) {
-            throw new Error('Token expirado');
-        }
-
-        const access_token = session.getAccessToken().getJwtToken();
+        const access_token = session.getIdToken().getJwtToken();
         const userData = session.getIdToken().payload;
+
+        yield put(setAuthorization({ token: access_token }));
         yield put(setProfile(userData as Profile));
-        yield put(recoverUserByTokenSuccess({ access_token }));
+
+        // yield put(recoverUserByTokenSuccess({ access_token }));
     } catch (error) {
 
         yield put(signOutUserSuccess());
