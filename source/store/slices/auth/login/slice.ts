@@ -56,6 +56,7 @@ const loginSlice = createSlice({
             if (api.defaults.headers) {
                 api.defaults.headers['Authorization'] = `${action.payload.token}`;
             }
+
             state.token = action.payload.token;
         },
         signInSuccess: (state, action: PayloadAction<{ token: string }>) => {
