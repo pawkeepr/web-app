@@ -15,7 +15,7 @@ type AuxSpeciesFormikProps = {
     pet_data: {
         sex: any
         id?: string
-        species: SpeciesType
+        specie: SpeciesType
         breed: Breed
         bloodType: BloodType
     }
@@ -42,7 +42,7 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
             return
         }
 
-        const specie = species.find(specie => (specie.name as any) === pet.species)
+        const specie = species.find(specie => (specie.name as any) === pet.specie)
 
         if (!specie) {
             return

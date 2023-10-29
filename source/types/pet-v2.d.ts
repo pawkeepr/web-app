@@ -27,12 +27,13 @@ export interface IPetV2 {
         specie: Species | null;
         race: Breed | null;
         sex: Gender | null;
-        castrated: string | boolean;
+        castrated: boolean | null;
         microchip: string | null;
         identification_number: string | null;
         blood_type: string | null;
         blood_donator: string | null;
         organ_donor: string | null;
+        date_birth: string | null;
     };
     health_insurance: {
         name: string | null;

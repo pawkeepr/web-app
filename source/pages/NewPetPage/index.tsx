@@ -1,4 +1,6 @@
 import { Formik } from 'formik';
+import { useMemo } from 'react';
+import usePetsByDocument from '~/store/hooks/pets/use-pets';
 import { IPetV2 } from '~/types/pet-v2';
 import DashboardLayouts from '../_layouts/dashboard/dashboard';
 import Tabs from './components/templates/vertical-tabs';
@@ -14,7 +16,7 @@ type MakeInitialValuesProps = {
 }
 type MakeInitialValues = (props: MakeInitialValuesProps) => InitialValues
 
-const initialValues: MakeInitialValues = ({
+const makeInitialValues: MakeInitialValues = ({
     cpf_tutor,
     name_tutor = null,
     phone = null,
@@ -55,6 +57,7 @@ const initialValues: MakeInitialValues = ({
         race: null,
         sex: null,
         specie: null,
+        date_birth: null,
     },
     phone_tutor: phone,
     responsible_tutors: {
@@ -70,16 +73,22 @@ type PetPageProps = {
 
 const NewPetPage = ({ document }: PetPageProps) => {
 
-    const handleSubmit = (values: InitialValues) => {
-        console.log(values)
-    }
+    const { activeData: pets, handleSubmit, isLoading } = usePetsByDocument(document)
+
+    const initialValues = useMemo(() => makeInitialValues({
+        cpf_tutor: document,
+        email: pets[0]?.contact_tutor?.email as string,
+        name_tutor: pets[0]?.name_tutor,
+        phone: pets[0]?.contact_tutor?.phone as string,
+        whatsapp: pets[0]?.contact_tutor?.whatsapp as string,
+    }), [pets, document]) as IPetV2
 
     return (
-        <DashboardLayouts title="Novo Pet" >
+        <DashboardLayouts title="Novo Pet" isLoading={isLoading} >
             <Formik
                 onSubmit={handleSubmit}
                 enableReinitialize
-                initialValues={initialValues({ cpf_tutor: document })}
+                initialValues={initialValues}
             >
                 <Tabs />
 
