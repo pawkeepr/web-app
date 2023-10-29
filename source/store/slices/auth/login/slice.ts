@@ -6,6 +6,7 @@ import { api } from '~/services/api';
 import { IUser, LoginState, name } from './types';
 
 const initialState: LoginState = {
+    user: null,
     isAuthenticated: false,
     rememberMe: false,
     token: '',
@@ -76,6 +77,7 @@ const loginSlice = createSlice({
         },
         recoverUserByTokenFailed: (state, action: PayloadAction<string>) => {
             state.error = action.payload;
+            state.isAuthenticated = false;
             state.isLoading = LOADING.FAILED;
         },
         resetLoading: (state) => {

@@ -32,6 +32,7 @@ interface UserAuthenticationData {
 }
 
 export type LoginState = {
+    user: IUser;
     isAuthenticated: boolean;
     rememberMe: boolean;
     token: string;

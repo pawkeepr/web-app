@@ -10,19 +10,15 @@ import {
     signInFailed,
     signInSuccess,
     signOutUserFailed,
-    signOutUserSuccess,
+    signOutUserSuccess
 } from './actions';
 
 import { changeLayoutMode } from '../../layouts/actions';
 
 import { name } from './types';
 
-import {
-    SignInCredentials,
-} from '~/services/helpers/auth';
-
 import Router from 'next/router';
-import { UserData, getUser, signInAws, signOut } from '~/services/helpers/auth';
+import { SignInCredentials, UserData, getUser, signInAws, signOut } from '~/services/helpers/auth';
 
 import { layoutModeTypes } from "~/Components/constants/layout";
 import { errorToast } from '~/store/helpers/toast';
@@ -36,8 +32,11 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
     try {
         const response: UserData = yield call(signInAws, action.payload);
         const { signInUserSession: { idToken } } = response;
+        const now = new Date().getTime()
+        const time = idToken.payload.exp - now
+        console.log(idToken)
 
-        yield setCookie(cookies.token.name, idToken.jwtToken, idToken.payload.exp);
+        yield setCookie(cookies.token.name, idToken.jwtToken,);
 
         const mode = getCookie(cookies.layoutMode.name) || layoutModeTypes.LIGHT_MODE
         const token = idToken.jwtToken
@@ -66,14 +65,18 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
 export function* recoverUserByTokenSaga() {
     try {
         const session: CognitoUserSession = yield call(getUser);
+        // token expirou
+        if (session.getIdToken().getExpiration() < new Date().getTime()) {
+            throw new Error('Token expirado');
+        }
+
         const access_token = session.getAccessToken().getJwtToken();
         const userData = session.getIdToken().payload;
         yield put(setProfile(userData as Profile));
         yield put(recoverUserByTokenSuccess({ access_token }));
     } catch (error) {
-        if ((error as string) === 'No current user') {
-            yield put(signOutUserSuccess());
-        }
+
+        yield put(signOutUserSuccess());
         yield put(recoverUserByTokenFailed((error as any).message));
         delay(1000);
         yield call([Router, Router.push], '/sign-in');
@@ -98,6 +101,7 @@ export function* signOutUserSaga() {
         yield call([Router, Router.push], '/sign-in');
     }
 }
+
 
 export function* LoginSaga() {
     yield takeLatest(`${name}/signInUser`, signInUserSaga);
