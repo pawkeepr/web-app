@@ -47,16 +47,17 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
 
         startTransition(() => {
             setSpecie(specie)
-            setFieldValue('breed', pet.breed)
-            setFieldValue('bloodType', pet.bloodType)
+            setFieldValue('specie', specie.name)
+            setFieldValue('race', pet.breed)
+            setFieldValue('blood_type', pet.bloodType)
         })
 
 
     }, [pet, setFieldValue])
 
     const memoNameSpecies = !name ? 'pet_data.specie' : `${name}.specie`
-    const memoNameBreed = !name ? 'pet_data.breed' : `${name}.breed`
-    const memoNameBloodType = !name ? 'pet_data.blood_type' : `${name}.bloodType`
+    const memoNameBreed = !name ? 'pet_data.race' : `${name}.race`
+    const memoNameBloodType = !name ? 'pet_data.blood_type' : `${name}.blood_type`
 
 
     const onChangeSpecie = useCallback((specie: SpeciesType) => {

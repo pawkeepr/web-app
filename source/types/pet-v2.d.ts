@@ -1,6 +1,11 @@
 import { Breed } from "~/store/slices/pets/breedType";
 import { Gender, Species } from "~/store/slices/pets/speciesType";
 
+type GenericSelect = {
+    label: string;
+    value: string;
+}
+
 export interface IPetV2 {
     id?: string;
     name_tutor: string
@@ -24,13 +29,13 @@ export interface IPetV2 {
     };
     pet_data: {
         name_pet: string;
-        specie: Species | null;
-        race: Breed | null;
-        sex: Gender | null;
+        specie: Species | null | GenericSelect;
+        race: Breed | null | GenericSelect;
+        sex: Gender | null | GenericSelect;
         castrated: boolean | null;
         microchip: string | null;
         identification_number: string | null;
-        blood_type: string | null;
+        blood_type: string | null | GenericSelect;
         blood_donator: string | null;
         organ_donor: string | null;
         date_birth: string | null;

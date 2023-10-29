@@ -1,7 +1,11 @@
 import { Formik } from 'formik';
-import { useMemo } from 'react';
+import { useRouter } from 'next/navigation';
+import { useCallback, useMemo } from 'react';
 import usePetsByDocument from '~/store/hooks/pets/use-pets';
-import { IPetV2 } from '~/types/pet-v2';
+import { BloodType } from '~/store/slices/pets/bloodType';
+import { Breed } from '~/store/slices/pets/breedType';
+import { Gender, Species } from '~/store/slices/pets/speciesType';
+import { GenericSelect, IPetV2 } from '~/types/pet-v2';
 import DashboardLayouts from '../_layouts/dashboard/dashboard';
 import Tabs from './components/templates/vertical-tabs';
 
@@ -26,7 +30,7 @@ const makeInitialValues: MakeInitialValues = ({
     contact_tutor: {
         email,
         phone,
-        whatsapp,
+        whatsapp: whatsapp || phone,
     },
     cpf_tutor,
     health_insurance: {
@@ -36,12 +40,12 @@ const makeInitialValues: MakeInitialValues = ({
         type_health: null,
     },
     location_tutor: {
+        country: 'Brasil',
         city: null,
         neighborhood: null,
         state: null,
         street: null,
         complement: null,
-        country: null,
         number: null,
         zipCode: null,
     },
@@ -64,7 +68,7 @@ const makeInitialValues: MakeInitialValues = ({
         cpf_tutor: null,
         name_tutor: null,
     },
-    vets_data: null,
+    vets_data: [],
 })
 
 type PetPageProps = {
@@ -75,6 +79,8 @@ const NewPetPage = ({ document }: PetPageProps) => {
 
     const { activeData: pets, handleSubmit } = usePetsByDocument(document)
 
+    const router = useRouter()
+
     const initialValues = useMemo(() => makeInitialValues({
         cpf_tutor: document,
         email: pets[0]?.contact_tutor?.email as string,
@@ -83,15 +89,40 @@ const NewPetPage = ({ document }: PetPageProps) => {
         whatsapp: pets[0]?.contact_tutor?.whatsapp as string,
     }), [pets, document]) as IPetV2
 
+    const onSubmit = useCallback(async (values: IPetV2) => {
+        try {
+            const data = {
+                ...values,
+                phone_tutor: values.contact_tutor.phone as string,
+                pet_data: {
+                    ...values.pet_data,
+                    race: (values.pet_data.race as GenericSelect).value as Breed,
+                    specie: (values.pet_data.specie as GenericSelect).value as Species,
+                    blood_type: (values.pet_data.blood_type as GenericSelect).value as BloodType,
+                    sex: (values.pet_data.sex as GenericSelect).value as Gender,
+                }
+            }
+
+            await handleSubmit(data)
+
+            router.push('/dashboard')
+        } catch (error) {
+            console.log(error)
+        }
+
+
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [handleSubmit])
+
     return (
         <DashboardLayouts title="Novo Pet"  >
             <Formik
-                onSubmit={handleSubmit}
+                onSubmit={onSubmit}
                 enableReinitialize
                 initialValues={initialValues}
             >
                 <Tabs />
-
             </Formik>
         </DashboardLayouts>
     )

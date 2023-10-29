@@ -137,6 +137,7 @@ const ModalListPets = ({
                 blood_type: null,
                 blood_donator: null,
                 organ_donor: null,
+                date_birth: null,
             },
             health_insurance: {
                 name: null,
