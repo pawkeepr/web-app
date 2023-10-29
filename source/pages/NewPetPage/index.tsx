@@ -5,13 +5,28 @@ import Tabs from './components/templates/vertical-tabs';
 
 export type InitialValues = Nullable<IPetV2>;
 
-const initialValues: InitialValues = {
+type MakeInitialValuesProps = {
+    cpf_tutor: string
+    name_tutor?: string
+    phone?: string
+    email?: string
+    whatsapp?: string
+}
+type MakeInitialValues = (props: MakeInitialValuesProps) => InitialValues
+
+const initialValues: MakeInitialValues = ({
+    cpf_tutor,
+    name_tutor = null,
+    phone = null,
+    email = null,
+    whatsapp = null,
+}) => ({
     contact_tutor: {
-        email: null,
-        phone: null,
-        whatsapp: null,
+        email,
+        phone,
+        whatsapp,
     },
-    cpf_tutor: null,
+    cpf_tutor,
     health_insurance: {
         name: null,
         validity: null,
@@ -28,7 +43,7 @@ const initialValues: InitialValues = {
         number: null,
         zipCode: null,
     },
-    name_tutor: null,
+    name_tutor,
     pet_data: {
         blood_donator: null,
         blood_type: null,
@@ -41,15 +56,19 @@ const initialValues: InitialValues = {
         sex: null,
         specie: null,
     },
-    phone_tutor: null,
+    phone_tutor: phone,
     responsible_tutors: {
         cpf_tutor: null,
         name_tutor: null,
     },
     vets_data: null,
+})
+
+type PetPageProps = {
+    document: string
 }
 
-const NewPetPage = () => {
+const NewPetPage = ({ document }: PetPageProps) => {
 
     const handleSubmit = (values: InitialValues) => {
         console.log(values)
@@ -60,7 +79,7 @@ const NewPetPage = () => {
             <Formik
                 onSubmit={handleSubmit}
                 enableReinitialize
-                initialValues={initialValues}
+                initialValues={initialValues({ cpf_tutor: document })}
             >
                 <Tabs />
 

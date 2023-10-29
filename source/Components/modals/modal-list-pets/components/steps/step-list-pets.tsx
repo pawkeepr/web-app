@@ -66,7 +66,11 @@ const StepListPets = ({
             <BoxButtons
                 isValid={values.name.length > 0}
                 link={false}
-                cancel={(props) => <BtnLink {...props as any} message='Cadastro Completo' href="dashboard/pet" />}
+                cancel={(props) => <BtnLink
+                    {...props as any}
+                    message='Cadastro Completo'
+                    href={`/dashboard/pet?document=${values.ownerEmergencyContact.cpf_cnpj}`}
+                />}
                 success={(props) => <BtnPrimary {...props} label='Cadastro Simplificado' />}
                 onClickSuccess={nextStep}
             />

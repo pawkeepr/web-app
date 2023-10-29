@@ -78,8 +78,8 @@ const ModalListPets = ({
         breed: '' as any,
         ownerEmergencyContact: {
             cpf_cnpj: document,
-            phone: pets.length > 0 ? pets[0].contact_tutor.phone : '',
-            email: pets.length > 0 ? pets[0].contact_tutor.email : '',
+            phone: pets.length > 0 ? pets[0].contact_tutor.phone as string : '',
+            email: pets.length > 0 ? pets[0].contact_tutor.email as string : '',
             name: pets.length > 0 ? pets[0].name_tutor : '',
         },
         castrated: false,

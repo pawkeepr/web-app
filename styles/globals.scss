@@ -1,5 +1,10 @@
 @import './assets/scss/themes.scss';
 
+html {
+    overflow: -moz-scrollbars-vertical;
+    overflow-y: scroll;
+}
+
 .App {
     text-align: center;
 }
@@ -145,10 +150,10 @@ input:invalid {
 
 .show-light {
     display: block !important;
-  }
+}
 
-  @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
     .show-light:not(.dark\\:hidden) {
-      display: none !important;
+        display: none !important;
     }
-  }
+}
