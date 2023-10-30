@@ -34,4 +34,5 @@ export type StepProps = {
     previousStep: () => void
     pets: IPetV2[]
     handleNavigate: (pet: IPetV2) => void
+    isLoading?: boolean
 }

@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
-import usePetsByDocument from '~/store/hooks/pets/use-pets';
+import usePetsByDocument from '~/store/hooks/list-pets-of-tutor';
 import { BloodType } from '~/store/slices/pets/bloodType';
 import { Breed } from '~/store/slices/pets/breedType';
 import { Gender, Species } from '~/store/slices/pets/speciesType';

@@ -24,6 +24,7 @@ const StepListPets = ({
     nextStep,
     pets,
     handleNavigate,
+    isLoading,
 }: StepProps) => {
 
     const { values } = useFormikContext<InitialValues>()
@@ -34,7 +35,9 @@ const StepListPets = ({
                 {
                     pets?.length === 0 && (
                         <div className="flex justify-center items-center  ">
-                            <span className="text-gray-500 text-center font-semibold text-base">Nenhum pet encontrado</span>
+                            <span className="text-gray-500 text-center font-semibold text-base">
+                                {isLoading ? 'Carregando...' : 'Nenhum pet encontrado'}
+                            </span>
                         </div>
                     )
                 }

@@ -55,8 +55,8 @@ export interface IMedicineAppointment {
     period: string,
     date_init: string,
     date_end: string,
-    value_mediccine: string,
-    coin_mediccine: string
+    value_medicine: string,
+    coin_medicine: string
 }
 
 export interface IAnamnesisAppointment {
@@ -111,7 +111,7 @@ export interface IExamsAppointment {
     name_exame: string,
     local: string,
     realization_date: string,
-    appointament_date: string,
+    appointment_date: string,
     time_date: string,
     who_applied: string,
     health_insurance: string,
@@ -121,7 +121,7 @@ export interface IExamsAppointment {
 }
 
 
-export interface INutritionsAppointmen {
+export interface INutritionsAppointment {
     food_name: string,
     food_start_time: string,
     amount: string,
@@ -135,7 +135,7 @@ export interface INutritionsAppointmen {
 }
 
 export interface IllnessesAppointment {
-    name_illnese: string,
+    name_illness: string,
     symptoms: string,
     prevention: string,
     treatment: string,
@@ -147,7 +147,7 @@ export interface IInfo_required {
     height: string,
     length: string,
     weight: string,
-    type_weigth: string,
+    type_weight: string,
     imc: string,
     guidelines_notes: string
 }
@@ -198,7 +198,7 @@ export interface IGeolocationAppointment {
     speed: string
 }
 
-export interface ITests_fastsAppointment {
+export interface ITests_FastsAppointment {
     test_type: string,
     result: string,
     notes: string
@@ -216,7 +216,7 @@ export interface IWell_beingAppointment {
     activities_carry: []
 }
 export interface IAppointmentVet {
-    id?: string;
+    id?: string | null;
     pet_data: PetData
     vets_data: VetsData[]
     cpf_tutor: string
@@ -234,15 +234,15 @@ export interface IAppointmentVet {
     anamnesis: IAnamnesisAppointment;
     vaccines: IVaccineAppointment[];
     exams: IExamsAppointment[];
-    nutritions: INutritionsAppointmen;
-    illnesses: IllnessesAppointment;
+    nutritions: INutritionsAppointment[];
+    illnesses: IllnessesAppointment[];
     info_required: IInfo_required;
     payments: IPaymentsAppointment;
     dates_consults: IDates_consultsAppointment;
     appointment_status: IStatusAppointment;
     appointment_signature: ISignatureAppointment;
     appointment_geolocation: IGeolocationAppointment;
-    tests_fasts: ITests_fastsAppointment;
+    tests_fasts: ITests_FastsAppointment[];
     dental_treatment: IDental_treatmentAppointment;
     well_being: IWell_beingAppointment;
 }
