@@ -9,7 +9,7 @@ import { BtnCancel } from "~/Components/atoms/btn";
 import ModalConfirm from "~/Components/modals/modal-confirm";
 import usePetById from "~/store/hooks/pet/use-pets";
 import { IPetV2 } from "~/types/pet-v2";
-import { browser } from "~/utils/navigator.utils";
+import { geolocation } from "~/utils/geolocation";
 
 export type InitialValues = IAppointmentVet;
 
@@ -141,10 +141,6 @@ const initialValues = (
         ip_address: "",
         browser_device: "",
         operational_system: "",
-        date_signature: "",
-        signature_data: "",
-        status_signature: "",
-        type_signature: ""
     },
     appointment_geolocation: {
         latitude: "",
@@ -175,39 +171,11 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
 
     const { data, isLoading, isError } = usePetById(document, pet)
 
-    const handleSubmit = (values: InitialValues) => {
-        console.log(values)
-
+    const handleSubmit = async (values: InitialValues) => {
         try {
-            const geolocation = () => {
-                if ('geolocation' in navigator) {
-                    const browserUser = browser();
+            const [geolocationData, signature] = await geolocation();
 
-                    const signature = {
-                        ip_address: '',
-                        browser_device: browserUser,
-                        operational_system: navigator.platform
-                    }
 
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        const geolocationData = {
-                            latitude: position.coords.latitude.toString(),
-                            longitude: position.coords.longitude.toString(),
-                            precision: position.coords.accuracy.toString(),
-                            altitude: position.coords.altitude ? position.coords.altitude.toString() : '',
-                            speed: position.coords.speed ? position.coords.speed.toString() : '',
-                        };
-                        // const appointment = Appointments.build(initialValues(document, pet, signature, geolocationData));
-                        // console.log(appointment);
-
-                        return;
-                    }, function (error) {
-                        console.log(error);
-                    });
-                }
-            };
-
-            geolocation();
         }
         catch (error) {
             console.log(error);

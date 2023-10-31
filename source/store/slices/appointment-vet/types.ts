@@ -180,10 +180,6 @@ export interface IStatusAppointment {
 }
 
 export interface ISignatureAppointment {
-    signature_data: string,
-    date_signature: string,
-    type_signature: string,
-    status_signature: string,
     ip_address: string,
     browser_device: string,
     operational_system: string
