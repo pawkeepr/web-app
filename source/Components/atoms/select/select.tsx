@@ -37,14 +37,14 @@ const Select = ({
             classNames={{
                 noOptionsMessage: () => 'Não há opções',
                 control: (state) => cn(
-                    'focus:!outline-none transition-shadow h-10 px-2 w-full focus:!border-0',
+                    'focus:!outline-none transition-shadow h-10 px-2 w-full focus:!border-0 dark:bg-[#292e33] dark:text-gray-200 ',
                     {
                         '!border-secondary-500 !border ': props.required,
                         '!border !border-gray-300': !props.required,
                     }),
                 indicatorSeparator: () => '!hidden',
                 option: (state) => cn(
-                    "py-2 hover:!bg-secondary-500 hover:text-neutral hover:cursor-pointer uppercase",
+                    "py-2 hover:!bg-secondary-500 hover:text-neutral hover:cursor-pointer uppercase dark:bg-[#292e33] dark:text-gray-200 ",
                     {
                         '!bg-primary-500': state.isSelected,
                     }
