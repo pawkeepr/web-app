@@ -4,10 +4,10 @@ import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import cookies from '~/constants/cookies';
 
 import {
-    recoverUserByTokenFailed,
     setAuthorization,
     signInFailed,
     signInSuccess,
+    signOutUser,
     signOutUserFailed,
     signOutUserSuccess
 } from './actions';
@@ -58,22 +58,29 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
     }
 }
 
+const checkTokenExpiration = (exp: number, iat: number) => {
+    const currentUnixTime = new Date().getTime() / 1000
+
+    return currentUnixTime > exp || currentUnixTime > iat
+};
+
 export function* recoverUserByTokenSaga() {
     try {
         const session: CognitoUserSession = yield call(getUser);
         const access_token = session.getIdToken().getJwtToken();
         const userData = session.getIdToken().payload;
 
+
+        if (checkTokenExpiration(userData.exp, userData.iat)) {
+            throw new TokenExpiredErr();
+        }
+
+
         yield put(setAuthorization({ token: access_token }));
         yield put(setProfile(userData as Profile));
 
-        // yield put(recoverUserByTokenSuccess({ access_token }));
     } catch (error) {
-
-        yield put(signOutUserSuccess());
-        yield put(recoverUserByTokenFailed((error as any).message));
-        delay(1000);
-        yield call([Router, Router.push], '/sign-in');
+        yield put(signOutUser());
     }
 }
 
