@@ -176,6 +176,8 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
     const { data, isLoading, isError } = usePetById(document, pet)
 
     const handleSubmit = (values: InitialValues) => {
+        console.log(values)
+
         try {
             const geolocation = () => {
                 if ('geolocation' in navigator) {

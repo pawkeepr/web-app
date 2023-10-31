@@ -5,10 +5,12 @@ import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldNumber from "~/Components/molecules/field-number/field-number";
 import { StepProps } from "~/types/helpers";
+import SendWhatsapp from "~/utils/pdf-generator/SendWhatsapp";
 import CardTutor from "../../molecules/card-tutor";
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit } = useFormikContext();
+    const send = new SendWhatsapp('pdfAppointment');
 
     const [event, setEvent] = useState<string>('credit');
 
@@ -107,6 +109,14 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     label="Concluir Consulta"
                 />
             </div>
+            <div>
+                <BtnPrimary
+                    onClick={() => console.log(send)
+                    }
+                    label="Enviar PDF por Whatsapp"
+                />
+            </div>
+
         </Form>
     );
 };

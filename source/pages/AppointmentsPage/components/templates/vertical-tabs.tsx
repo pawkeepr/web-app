@@ -9,10 +9,8 @@ import {
 import cn from "classnames";
 import { useEffect, useState } from "react";
 
-import { useFormikContext } from "formik";
 import withLoading from "~/Components/helpers/with-loading";
 import { useAppSelector } from "~/store/hooks";
-import { InitialValues } from "../../Appointments";
 import StepAnamneses from "../organisms/steps/step-anamnese";
 import StepPayment from "../organisms/steps/step-payment";
 import StepPet from "../organisms/steps/step-pet";
@@ -60,7 +58,6 @@ const VerticalTabs = () => {
     const [activeVerticalTab, setActiveVerticalTab] = useState(1);
     const [passedVerticalSteps, setPassedVerticalSteps] = useState([1]);
 
-    const { values } = useFormikContext<InitialValues>()
 
     const { height } = useAppSelector(state => state.Layout.headerSize)
 

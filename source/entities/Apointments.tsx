@@ -1,4 +1,29 @@
-import { ContactTutor, HealthInsurance, IAnamnesisAppointment, IAppointmentVet, IDates_consultsAppointment, IDental_treatmentAppointment, IExamsAppointment, IGeolocationAppointment, IInfo_required, IMedicineAppointment, INutritionsAppointment, IPaymentsAppointment, IPetAppointment, ISignatureAppointment, IStatusAppointment, ITests_fastsAppointment, ITutorAppointment, IVaccineAppointment, IVetAppointment, IWell_beingAppointment, IllnessesAppointment, LocationTutor, ResponsibleTutors, VetsData } from "~/store/slices/appointment-vet/types"
+import {
+    ContactTutor,
+    HealthInsurance,
+    IAnamnesisAppointment,
+    IAppointmentVet,
+    IDates_consultsAppointment,
+    IDental_treatmentAppointment,
+    IExamsAppointment,
+    IGeolocationAppointment,
+    IInfo_required,
+    IMedicineAppointment,
+    INutritionsAppointment,
+    IPaymentsAppointment,
+    IPetAppointment,
+    ISignatureAppointment,
+    IStatusAppointment,
+    ITests_FastsAppointment,
+    ITutorAppointment,
+    IVaccineAppointment,
+    IVetAppointment,
+    IWell_beingAppointment,
+    IllnessesAppointment,
+    LocationTutor,
+    ResponsibleTutors,
+    VetsData
+} from "~/store/slices/appointment-vet/types"
 
 export class Appointments implements IAppointmentVet {
     id: string | null
@@ -21,7 +46,7 @@ export class Appointments implements IAppointmentVet {
     appointment_status: IStatusAppointment
     appointment_signature: ISignatureAppointment
     appointment_geolocation: IGeolocationAppointment
-    tests_fasts: ITests_fastsAppointment
+    tests_fasts: ITests_FastsAppointment[]
     dental_treatment: IDental_treatmentAppointment
     well_being: IWell_beingAppointment
     vets_data: VetsData[]
@@ -165,7 +190,7 @@ export class Appointments implements IAppointmentVet {
         return this;
     }
 
-    defineTestsFasts(tests_fasts: ITests_fastsAppointment): this {
+    defineTestsFasts(tests_fasts: ITests_FastsAppointment[]): this {
         this.tests_fasts = tests_fasts;
         return this;
     }
@@ -199,12 +224,11 @@ export class Appointments implements IAppointmentVet {
             .defineMedicines(params.medicines)
             .defineNutritions(params.nutritions)
             .definePayments(params.payments)
-            .definePetData(params.pet_data)
+            .definePetData(params.pet_data as IPetAppointment)
             .defineTestsFasts(params.tests_fasts)
             .defineTutorData(params.tutor_data)
             .defineVaccines(params.vaccines)
             .defineVetData(params.vet_data)
             .defineWellBeing(params.well_being)
-
     }
 };
