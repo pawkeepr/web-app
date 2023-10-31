@@ -25,37 +25,34 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
 
 
     return (
-        <div className="card card-body shadow-lg">
-            <div>
-                <h4 className="text-center font-sans font-semibold text-base capitalize">
-                    Informações de Tratamento
-                    <br />
-                    <span className="text-xs font-bold text-secondary-500">Obrigatório (*)</span>
-                </h4>
-            </div>
+        <section className="card card-body shadow-lg">
+            <h4 className="text-center font-sans font-semibold text-base capitalize">
+                Informações de Tratamento
+                <br />
+                <span className="text-xs font-bold text-secondary-500">Obrigatório (*)</span>
+            </h4>
 
-            <div className="mt-2">
-                <ControlSwitchDiv
-                    label="Testes rápidos?"
-                    className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
-                >
-                    <div className="mt-2">
-                        <FieldControlSelect
-                            label="Selecione uma ou mais opções:"
-                            placeholder="Selecione uma ou mais atividades"
-                            isMulti
-                            name="activity"
-                            options={options}
-                        />
+            <ControlSwitchDiv
+                label="Testes rápidos?"
+                className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
+            >
+                <div className="mt-2">
+                    <FieldControlSelect
+                        label="Selecione uma ou mais opções:"
+                        placeholder="Selecione uma ou mais atividades"
+                        isMulti
+                        name="activity"
+                        options={options}
+                    />
 
-                        <FieldTextArea
-                            label="Orientações e Anotações"
-                            className="rounded-md w-full border-gray-300"
-                            component="textarea"
-                            name="observations"
-                            type="text"
-                        />
-                        {/* <FieldArray name="tests">
+                    <FieldTextArea
+                        label="Orientações e Anotações"
+                        className="rounded-md w-full border-gray-300"
+                        component="textarea"
+                        name="observations"
+                        type="text"
+                    />
+                    {/* <FieldArray name="tests">
                             {(arrayHelpers) => (
                                 <>
                                     {values?.tests?.map(
@@ -112,30 +109,27 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                 </>
                             )}
                         </FieldArray> */}
-                    </div>
-                </ControlSwitchDiv>
-            </div>
-            <div className="gap-2">
-                <ControlSwitchDiv label="Aplicar Medicação">
-                    <Medicines />
-                </ControlSwitchDiv>
+                </div>
+            </ControlSwitchDiv>
+            <ControlSwitchDiv label="Aplicar Medicação">
+                <Medicines />
+            </ControlSwitchDiv>
 
-                <ControlSwitchDiv label="Aplicar vacina?">
-                    <Vaccines />
-                </ControlSwitchDiv>
-                <ControlSwitchDiv label="Aplicar exame?">
-                    <Exams />
-                </ControlSwitchDiv>
+            <ControlSwitchDiv label="Aplicar vacina?">
+                <Vaccines />
+            </ControlSwitchDiv>
+            <ControlSwitchDiv label="Aplicar exame?">
+                <Exams />
+            </ControlSwitchDiv>
 
-                <ControlSwitchDiv label="Possui doença?">
-                    <Diseases />
-                </ControlSwitchDiv>
-                <ControlSwitchDiv
-                    label="Aplicar nutrição alimentar?"
-                >
-                    <Nutritions />
-                </ControlSwitchDiv>
-            </div>
+            <ControlSwitchDiv label="Possui doença?">
+                <Diseases />
+            </ControlSwitchDiv>
+            <ControlSwitchDiv
+                label="Aplicar nutrição alimentar?"
+            >
+                <Nutritions />
+            </ControlSwitchDiv>
 
 
             <div className="flex items-center justify-center">
@@ -154,7 +148,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     }}
                 />
             </div>
-        </div>
+        </section>
     );
 };
 

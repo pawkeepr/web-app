@@ -27,11 +27,15 @@ export enum Species {
     'reptile' = 'Réptil',
 }
 
+export type KeyOfSpecies = keyof typeof Species;
+
 export enum Gender {
     male = 'Macho',
     female = 'Fêmea',
     unknown = 'Desconhecido',
 }
+
+export type KeyOfGender = keyof typeof Gender
 
 export enum MapOptionSpecies {
     'dog' = 'dog',

@@ -1,7 +1,32 @@
-import { IAnamnesisAppointment, IAppointmentVet, IDates_consultsAppointment, IDental_treatmentAppointment, IExamsAppointment, IGeolocationAppointment, IInfo_required, IMedicineAppointment, INutritionsAppointmen, IPaymentsAppointment, IPetAppointment, ISignatureAppointment, IStatusAppointment, ITests_fastsAppointment, ITutorAppointment, IVaccineAppointment, IVetAppointment, IWell_beingAppointment, IllnessesAppointment } from "~/store/slices/appointment-vet/types"
+import {
+    ContactTutor,
+    HealthInsurance,
+    IAnamnesisAppointment,
+    IAppointmentVet,
+    IDates_consultsAppointment,
+    IDental_treatmentAppointment,
+    IExamsAppointment,
+    IGeolocationAppointment,
+    IInfo_required,
+    IMedicineAppointment,
+    INutritionsAppointment,
+    IPaymentsAppointment,
+    IPetAppointment,
+    ISignatureAppointment,
+    IStatusAppointment,
+    ITests_FastsAppointment,
+    ITutorAppointment,
+    IVaccineAppointment,
+    IVetAppointment,
+    IWell_beingAppointment,
+    IllnessesAppointment,
+    LocationTutor,
+    ResponsibleTutors,
+    VetsData
+} from "~/store/slices/appointment-vet/types"
 
 export class Appointments implements IAppointmentVet {
-    id: string
+    id: string | null
     id_pet: string
     pet_data: IPetAppointment
     cpf_tutor: string
@@ -13,20 +38,26 @@ export class Appointments implements IAppointmentVet {
     anamnesis: IAnamnesisAppointment
     vaccines: IVaccineAppointment[]
     exams: IExamsAppointment[]
-    nutritions: INutritionsAppointmen
-    illnesses: IllnessesAppointment
+    nutritions: INutritionsAppointment[]
+    illnesses: IllnessesAppointment[]
     info_required: IInfo_required
     payments: IPaymentsAppointment
     dates_consults: IDates_consultsAppointment
     appointment_status: IStatusAppointment
     appointment_signature: ISignatureAppointment
     appointment_geolocation: IGeolocationAppointment
-    tests_fasts: ITests_fastsAppointment
+    tests_fasts: ITests_FastsAppointment[]
     dental_treatment: IDental_treatmentAppointment
     well_being: IWell_beingAppointment
+    vets_data: VetsData[]
+    name_tutor: string
+    contact_tutor: ContactTutor
+    location_tutor: LocationTutor
+    responsible_tutors: ResponsibleTutors
+    health_insurance: HealthInsurance
 
     constructor() {
-        this.id = "";
+        this.id = null;
         this.id_pet = "";
         this.pet_data = {} as any;
         this.cpf_tutor = "";
@@ -49,9 +80,16 @@ export class Appointments implements IAppointmentVet {
         this.tests_fasts = [] as any;
         this.dental_treatment = {} as any;
         this.well_being = {} as any;
+        this.vets_data = [] as any;
+        this.name_tutor = "";
+        this.contact_tutor = {} as any;
+        this.location_tutor = {} as any;
+        this.responsible_tutors = {} as any;
+        this.health_insurance = {} as any;
     }
 
-    defineId(id: string): this {
+
+    defineId(id: string | null = null): this {
         this.id = id;
         return this;
     }
@@ -112,12 +150,12 @@ export class Appointments implements IAppointmentVet {
         return this;
     }
 
-    defineNutritions(nutritions: INutritionsAppointmen): this {
+    defineNutritions(nutritions: INutritionsAppointment[]): this {
         this.nutritions = nutritions;
         return this;
     }
 
-    defineIllnesses(illnesses: IllnessesAppointment): this {
+    defineIllnesses(illnesses: IllnessesAppointment[]): this {
         this.illnesses = illnesses;
         return this;
     }
@@ -152,7 +190,7 @@ export class Appointments implements IAppointmentVet {
         return this;
     }
 
-    defineTestsFasts(tests_fasts: ITests_fastsAppointment): this {
+    defineTestsFasts(tests_fasts: ITests_FastsAppointment[]): this {
         this.tests_fasts = tests_fasts;
         return this;
     }
@@ -186,12 +224,11 @@ export class Appointments implements IAppointmentVet {
             .defineMedicines(params.medicines)
             .defineNutritions(params.nutritions)
             .definePayments(params.payments)
-            .definePetData(params.pet_data)
+            .definePetData(params.pet_data as IPetAppointment)
             .defineTestsFasts(params.tests_fasts)
             .defineTutorData(params.tutor_data)
             .defineVaccines(params.vaccines)
             .defineVetData(params.vet_data)
             .defineWellBeing(params.well_being)
-
     }
 };

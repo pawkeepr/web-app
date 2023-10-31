@@ -1,4 +1,3 @@
-import MaskedInput from "react-input-mask";
 
 import FieldDocument from "~/Components/molecules/field-document/field-document";
 import FieldPhone from "~/Components/molecules/field-phone/field-phone";
@@ -38,7 +37,6 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
     const onlyWords = (e: React.ChangeEvent<HTMLInputElement>) => {
         const regex = /[^a-zA-Z ]/g;
         e.target.value = e.target.value.replace(regex, "");
-        console.log(e.target.value);
     };
 
     return (
@@ -58,11 +56,9 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
                         label="CPF"
                         name="cpf_tutor"
                         aria-label="document"
-                        className="border-1 "
-                        onlyCPF
-                        disabled={isPending || tutorExists}
+                        typeDocument="cpf"
+                        disabled
                         placeholder="CPF"
-                        component={MaskedInput as any}
                         required
                     />
                     <FieldControl
@@ -71,7 +67,6 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
                         name="name_tutor"
                         disabled={isPending || tutorExists}
                         aria-label="name"
-                        className=" "
                         placeholder="Digite o nome do Tutor"
                         required
                         disabledError
@@ -92,28 +87,22 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
                 </div>
                 <ControlSwitch
                     label="O pet possui um segundo Tutor?"
-                    className="mt-2 mb-4 lg:w-16 lg:h-7 w-[3.72rem] h-6"
                 >
                     <div className="left mb-2">Preencha as Informações do segundo Tutor</div>
                     <FieldDocument
                         label="CPF"
-                        divClassName="my-1"
                         name="responsible_tutors.cpf_tutor"
                         aria-label="document"
-                        onlyCPF
                         disabled={isPending || tutorExists}
+                        typeDocument="cpf"
                         placeholder="CPF"
-                        component={MaskedInput as any}
                         required
                     />
                     <FieldControl
-                        initialFocus
-                        divClassName="my-1"
                         label="Nome Completo"
                         name="responsible_tutors.name_tutor"
                         disabled={isPending || tutorExists}
                         aria-label="name"
-
                         placeholder="Digite o nome do Tutor"
                         required
                         disabledError

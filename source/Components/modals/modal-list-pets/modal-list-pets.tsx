@@ -6,7 +6,7 @@ import { useCallback, useState } from 'react'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
 import routes from '~/routes'
-import usePetsByDocument from '~/store/hooks/pets/use-pets'
+import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor'
 import { Gender } from '~/store/slices/pets/speciesType'
 import { IPet } from '~/types/pet'
 import { IPetV2 } from '~/types/pet-v2'
@@ -69,7 +69,7 @@ const ModalListPets = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [document])
 
-    const { activeData: pets, handleSubmit } = usePetsByDocument(document)
+    const { activeData: pets, handleSubmit, isLoading } = useListPetsOfTutor(document)
 
     const initialValues: IPet = {
         id: null,
@@ -78,8 +78,8 @@ const ModalListPets = ({
         breed: '' as any,
         ownerEmergencyContact: {
             cpf_cnpj: document,
-            phone: pets.length > 0 ? pets[0].contact_tutor.phone : '',
-            email: pets.length > 0 ? pets[0].contact_tutor.email : '',
+            phone: pets.length > 0 ? pets[0].contact_tutor.phone as string : '',
+            email: pets.length > 0 ? pets[0].contact_tutor.email as string : '',
             name: pets.length > 0 ? pets[0].name_tutor : '',
         },
         castrated: false,
@@ -137,6 +137,7 @@ const ModalListPets = ({
                 blood_type: null,
                 blood_donator: null,
                 organ_donor: null,
+                date_birth: null,
             },
             health_insurance: {
                 name: null,
@@ -255,6 +256,7 @@ const ModalListPets = ({
                                                 pets={pets}
                                                 handleNavigate={handleNavigate}
                                                 nextStep={nextStep}
+                                                isLoading={isLoading}
                                                 previousStep={previousStep}
                                             />
                                         </Tab.Panel>

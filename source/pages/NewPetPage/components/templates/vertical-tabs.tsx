@@ -79,70 +79,66 @@ const VerticalTabs = () => {
 
 
     return (
-        <div className="px-2 py-4 card card-body">
+        <div className="px-2 py-4 card  h-fit overflow-auto">
             <div className="w-full flex justify-center items-center">
                 <h4 className="card-title mb-2 !text-center font-semibold font-sans">Novo Pet</h4>
             </div>
-            <form>
-                <div className="flex flex-col relative">
-                    <div
-                        style={{ marginTop: isFixed ? `${height}px` : 0 }}
-                        className={cn(
-                            'mb-4 step-arrow-nav',
-                            {
-                                'fixed top-0 left-0 right-0 z-[100] bg-white': isFixed,
-                            },
-                            'md:static'
-                        )}>
-                        <Nav
-                            className="nav-pills custom-nav nav-justified"
-                            role="tablist"
-                        >
-                            {
-                                items.map((item, index) => {
-                                    return (
-                                        <NavItem key={index}>
-                                            <NavLink
-                                                href={item.href}
-                                                id="steparrow-gen-info-tab"
-                                                className={
-                                                    (cn({
-                                                        active: activeVerticalTab === item.id,
-                                                        done: (activeVerticalTab <= items.length && activeVerticalTab === item.id)
-                                                    }))
-                                                }
-                                                onClick={() => {
-                                                    toggleVerticalTab(item.id);
-                                                }}
-                                            >
-                                                {/* <span className="step-title me-2">
+            <div
+                style={{ marginTop: isFixed ? `${height}px` : 0 }}
+                className={cn(
+                    'mb-4 step-arrow-nav',
+                    {
+                        'fixed top-0 left-0 right-0 z-[100] bg-white': isFixed,
+                    },
+                    'md:static'
+                )}>
+                <Nav
+                    className="nav-pills custom-nav nav-justified"
+                    role="tablist"
+                >
+                    {
+                        items.map((item, index) => {
+                            return (
+                                <NavItem key={index}>
+                                    <NavLink
+                                        href={item.href}
+                                        id="steparrow-gen-info-tab"
+                                        className={
+                                            (cn({
+                                                active: activeVerticalTab === item.id,
+                                                done: (activeVerticalTab <= items.length && activeVerticalTab === item.id)
+                                            }))
+                                        }
+                                        onClick={() => {
+                                            toggleVerticalTab(item.id);
+                                        }}
+                                    >
+                                        {/* <span className="step-title me-2">
                                                                 <i className="ri-close-circle-fill step-icon me-2"/>
                                                             </span> */}
-                                                {item.title}
-                                            </NavLink>
-                                        </NavItem>
-                                    )
-                                })
-                            }
-                        </Nav>
-                    </div>
+                                        {item.title}
+                                    </NavLink>
+                                </NavItem>
+                            )
+                        })
+                    }
+                </Nav>
+            </div>
 
-                    <div className="px-lg-4">
-                        <TabContent activeTab={activeVerticalTab}>
+            <div className="px-lg-4">
+                <TabContent activeTab={activeVerticalTab}>
 
-                            {
-                                items.map(({ id, Component }, index) => {
-                                    return (
-                                        <TabPane tabId={id} key={index}>
-                                            <Component activeTab={activeVerticalTab} toggleTab={toggleVerticalTab} />
-                                        </TabPane>
-                                    )
-                                })
-                            }
-                        </TabContent>
-                    </div>
-                </div>
-            </form>
+                    {
+                        items.map(({ id, Component }, index) => {
+                            return (
+                                <TabPane tabId={id} key={index}>
+                                    <Component activeTab={activeVerticalTab} toggleTab={toggleVerticalTab} />
+                                </TabPane>
+                            )
+                        })
+                    }
+                </TabContent>
+            </div>
         </div>
     )
 }

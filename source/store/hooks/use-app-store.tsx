@@ -50,7 +50,7 @@ const useAppStore = <T,>({
         ...options,
         initialData: [],
         keepPreviousData: true,
-        staleTime: TIME, // 1 min
+        cacheTime: TIME, // 1 min
         enabled: !!get && enabled,
         // staleTime: TIME // 1 min
     })

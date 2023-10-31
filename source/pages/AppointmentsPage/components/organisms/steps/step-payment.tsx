@@ -1,13 +1,14 @@
 import { Form, useFormikContext } from "formik";
 import { useState } from "react";
 import { Input, Label } from "reactstrap";
-import { BtnAvatar, BtnCancel, BtnLink, BtnPrimary } from "~/Components/atoms/btn";
+import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldNumber from "~/Components/molecules/field-number/field-number";
 import { StepProps } from "~/types/helpers";
 import SendWhatsapp from "~/utils/pdf-generator/SendWhatsapp";
+import CardTutor from "../../molecules/card-tutor";
 
-const  StepPayment = ({ activeTab, toggleTab }: StepProps) => {
+const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit } = useFormikContext();
     const send = new SendWhatsapp('pdfAppointment');
 
@@ -20,14 +21,12 @@ const  StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     }));
 
     return (
-        <Form className="card card-body shadow-lg">
-            <div>
-                <h4 className="text-center font-sans font-semibold text-base capitalize">
-                    Informações de Pagamento
-                    <br />
-                </h4>
-            </div>
-
+        <Form className="card card-body shadow-lg" onSubmit={handleSubmit}>
+            <h4 className="text-center font-sans font-semibold text-base capitalize">
+                Informações de Pagamento
+                <br />
+            </h4>
+            <CardTutor />
             <div className="grid grid-cols-2 gap-2">
                 <div className="my-3 justify-center items-center flex mobile:flex-col mobile:items-start col-span-full">
                     <div className="form-check form-check-inline">
@@ -106,7 +105,7 @@ const  StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     }}
                 />
                 <BtnPrimary
-                    onClick={() => handleSubmit()}
+                    type="submit"
                     label="Concluir Consulta"
                 />
             </div>
