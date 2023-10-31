@@ -2,9 +2,9 @@ import { createPet, getAllPets } from '~/services/helpers'
 import { IPetV2 } from '~/types/pet-v2'
 import useAppStore from '../use-app-store'
 
-export const NAME = 'pets'
+export const NAME = 'list-pets-of-tutor'
 
-const usePetsByDocument = (
+const usePetsByTutor = (
     document: string
 ) => {
     const superKeys = [NAME, document]
@@ -18,4 +18,4 @@ const usePetsByDocument = (
     })
 }
 
-export default usePetsByDocument
+export default usePetsByTutor

@@ -1,7 +1,36 @@
-import { IAnamnesisAppointment, IAppointmentVet, IDates_consultsAppointment, IDental_treatmentAppointment, IExamsAppointment, IGeolocationAppointment, IInfo_required, IMedicineAppointment, INutritionsAppointmen, IPaymentsAppointment, IPetAppointment, ISignatureAppointment, IStatusAppointment, ITests_fastsAppointment, ITutorAppointment, IVaccineAppointment, IVetAppointment, IWell_beingAppointment, IllnessesAppointment } from "~/store/slices/appointment-vet/types"
+import {
+    ContactTutor,
+    HealthInsurance,
+    IAnamnesis,
+    IAnamnesisAppointment,
+    IAppointmentVet,
+    IDates_consultsAppointment,
+    IDental_treatmentAppointment,
+    IExamsAppointment,
+    IGeolocationAppointment,
+    IInfo_required,
+    IMedicineAppointment,
+    INutritionsAppointment,
+    IPaymentsAppointment,
+    IPetAppointment,
+    ISignatureAppointment,
+    IStatusAppointment,
+    ITests_FastsAppointment,
+    ITreatment,
+    ITutorAppointment,
+    IVaccineAppointment,
+    IVetAppointment,
+    IWell_beingAppointment,
+    IllnessesAppointment,
+    LocationTutor,
+    ResponsibleTutors,
+    VetsData
+} from "~/store/slices/appointment-vet/types"
+import Anamnesis from "./Anamnesis"
+import Treatment from "./Treatment"
 
 export class Appointments implements IAppointmentVet {
-    id: string
+    id: string | null
     id_pet: string
     pet_data: IPetAppointment
     cpf_tutor: string
@@ -13,20 +42,37 @@ export class Appointments implements IAppointmentVet {
     anamnesis: IAnamnesisAppointment
     vaccines: IVaccineAppointment[]
     exams: IExamsAppointment[]
-    nutritions: INutritionsAppointmen
-    illnesses: IllnessesAppointment
+    nutritions: INutritionsAppointment[]
+    illnesses: IllnessesAppointment[]
     info_required: IInfo_required
     payments: IPaymentsAppointment
     dates_consults: IDates_consultsAppointment
     appointment_status: IStatusAppointment
     appointment_signature: ISignatureAppointment
     appointment_geolocation: IGeolocationAppointment
-    tests_fasts: ITests_fastsAppointment
+    tests_fasts: ITests_FastsAppointment[]
     dental_treatment: IDental_treatmentAppointment
     well_being: IWell_beingAppointment
+    vets_data: VetsData[]
+    name_tutor: string
+    contact_tutor: ContactTutor
+    location_tutor: LocationTutor
+    responsible_tutors: ResponsibleTutors
+    health_insurance: HealthInsurance
+    digestive_system: boolean
+    respiratory_system: boolean
+    urinary_system: boolean
+    nervous_system: boolean
+    locomotor_system: boolean
+    apply_medicine: boolean
+    apply_vaccine: boolean
+    apply_exam: boolean
+    apply_nutrition: boolean
+    apply_disease: boolean
+    apply_fast_test: boolean
 
     constructor() {
-        this.id = "";
+        this.id = null;
         this.id_pet = "";
         this.pet_data = {} as any;
         this.cpf_tutor = "";
@@ -49,9 +95,28 @@ export class Appointments implements IAppointmentVet {
         this.tests_fasts = [] as any;
         this.dental_treatment = {} as any;
         this.well_being = {} as any;
+        this.vets_data = [] as any;
+        this.name_tutor = "";
+        this.contact_tutor = {} as any;
+        this.location_tutor = {} as any;
+        this.responsible_tutors = {} as any;
+        this.health_insurance = {} as any;
+        this.digestive_system = false
+        this.respiratory_system = false
+        this.urinary_system = false
+        this.nervous_system = false
+        this.locomotor_system = false
+        this.apply_medicine = false
+        this.apply_vaccine = false
+        this.apply_exam = false
+        this.apply_nutrition = false
+        this.apply_disease = false
+        this.apply_fast_test = false
     }
 
-    defineId(id: string): this {
+
+
+    defineId(id: string | null = null): this {
         this.id = id;
         return this;
     }
@@ -92,35 +157,12 @@ export class Appointments implements IAppointmentVet {
         return this;
     }
 
-    defineMedicines(medicines: IMedicineAppointment[]): this {
-        this.medicines = medicines;
+
+    defineAnamnesis(anamnesis: IAnamnesis): this {
+        this.anamnesis = Anamnesis.build(anamnesis).anamnesis;
         return this;
     }
 
-    defineAnamnesis(anamnesis: IAnamnesisAppointment): this {
-        this.anamnesis = anamnesis;
-        return this;
-    }
-
-    defineVaccines(vaccines: IVaccineAppointment[]): this {
-        this.vaccines = vaccines;
-        return this;
-    }
-
-    defineExams(exams: IExamsAppointment[]): this {
-        this.exams = exams;
-        return this;
-    }
-
-    defineNutritions(nutritions: INutritionsAppointmen): this {
-        this.nutritions = nutritions;
-        return this;
-    }
-
-    defineIllnesses(illnesses: IllnessesAppointment): this {
-        this.illnesses = illnesses;
-        return this;
-    }
 
     defineInfoRequired(info_required: IInfo_required): this {
         this.info_required = info_required;
@@ -152,11 +194,6 @@ export class Appointments implements IAppointmentVet {
         return this;
     }
 
-    defineTestsFasts(tests_fasts: ITests_fastsAppointment): this {
-        this.tests_fasts = tests_fasts;
-        return this;
-    }
-
     defineDentalTreatment(dental_treatment: IDental_treatmentAppointment): this {
         this.dental_treatment = dental_treatment;
         return this;
@@ -167,9 +204,23 @@ export class Appointments implements IAppointmentVet {
         return this;
     }
 
+    defineTreatment(
+        treatment: ITreatment
+    ): this {
+        const entity = Treatment.build(treatment)
+        this.medicines = entity.medicines
+        this.vaccines = entity.vaccines
+        this.exams = entity.exams
+        this.nutritions = entity.nutritions
+        this.illnesses = entity.illnesses
+        this.tests_fasts = entity.tests_fasts
+        return this
+    }
+
     static build(params: IAppointmentVet): Appointments {
         return new Appointments()
-            .defineAnamnesis(params.anamnesis)
+            .defineAnamnesis(params)
+            .defineTreatment(params)
             .defineAppointmentGeolocation(params.appointment_geolocation)
             .defineAppointmentSignature(params.appointment_signature)
             .defineAppointmentStatus(params.appointment_status)
@@ -178,20 +229,13 @@ export class Appointments implements IAppointmentVet {
             .defineCrmvVet(params.crmv_vet)
             .defineDatesConsults(params.dates_consults)
             .defineDentalTreatment(params.dental_treatment)
-            .defineExams(params.exams)
             .defineId(params.id)
             .defineIdPet(params.id_pet)
-            .defineIllnesses(params.illnesses)
             .defineInfoRequired(params.info_required)
-            .defineMedicines(params.medicines)
-            .defineNutritions(params.nutritions)
             .definePayments(params.payments)
-            .definePetData(params.pet_data)
-            .defineTestsFasts(params.tests_fasts)
+            .definePetData(params.pet_data as IPetAppointment)
             .defineTutorData(params.tutor_data)
-            .defineVaccines(params.vaccines)
             .defineVetData(params.vet_data)
             .defineWellBeing(params.well_being)
-
     }
 };

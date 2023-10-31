@@ -5,9 +5,12 @@ import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldNumber from "~/Components/molecules/field-number/field-number";
 import { StepProps } from "~/types/helpers";
+import SendWhatsapp from "~/utils/pdf-generator/SendWhatsapp";
+import CardTutor from "../../molecules/card-tutor";
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
-    const { handleSubmit } = useFormikContext();
+    const { handleSubmit, isSubmitting } = useFormikContext();
+    const send = new SendWhatsapp('pdfAppointment');
 
     const [event, setEvent] = useState<string>('credit');
 
@@ -18,14 +21,12 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     }));
 
     return (
-        <Form className="card card-body shadow-lg">
-            <div>
-                <h4 className="text-center font-sans font-semibold text-base capitalize">
-                    Informações de Pagamento
-                    <br />
-                </h4>
-            </div>
-
+        <Form className="card card-body shadow-lg" onSubmit={handleSubmit}>
+            <h4 className="text-center font-sans font-semibold text-base capitalize">
+                Informações de Pagamento
+                <br />
+            </h4>
+            <CardTutor />
             <div className="grid grid-cols-2 gap-2">
                 <div className="my-3 justify-center items-center flex mobile:flex-col mobile:items-start col-span-full">
                     <div className="form-check form-check-inline">
@@ -104,10 +105,19 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     }}
                 />
                 <BtnPrimary
-                    onClick={() => handleSubmit()}
+                    isLoading={isSubmitting}
+                    type="submit"
                     label="Concluir Consulta"
                 />
             </div>
+            <div>
+                <BtnPrimary
+                    onClick={() => console.log(send)
+                    }
+                    label="Enviar PDF por Whatsapp"
+                />
+            </div>
+
         </Form>
     );
 };

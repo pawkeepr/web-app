@@ -1,37 +1,23 @@
 /* eslint-disable react/jsx-no-undef */
-import Row from "react-bootstrap/Row";
 
+import { useFormikContext } from "formik";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
-import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
-import FieldNumber from "~/Components/molecules/field-number";
-import FieldTextArea from "~/Components/molecules/field-text-area/field-text-area";
 
-import { useState } from "react";
 
 import ComboBoxFields from "~/Components/modals/add-pet-modal/components/organisms/combo-box-fields";
+import FieldControl from "~/Components/molecules/field-control";
+import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
+import FieldMasked from "~/Components/molecules/field-masked";
+import { genderValues } from "~/store/slices/pets/sexType";
 import { StepProps } from "~/types/helpers";
+import { InitialValues } from "../../index";
 
-const measurements = ['Quilogramas', 'Gramas']
 
-const options2 = measurements.map((item) => ({
-    value: item,
-    label: item,
-    color: 'rgb(255 200 107);',
-}));
 
-// Função para calcular o IMC de um animal
-function calcularIMC(height: number, weight: number): number {
-    if (height === 0 || weight === 0) {
-        return 0; // Evita divisão por zero
-    }
-    const imc = weight / ((height / 100) * (height / 100)); // Converter altura para metros
-    return imc;
-}
 
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
-    const [heightPet, setHeightPet] = useState(0);
-    const [weightPet, setWeightPet] = useState(0);
+    const { values } = useFormikContext<InitialValues>();
 
     return (
         <div className="card card-body shadow-lg">
@@ -43,73 +29,49 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     <span className="text-sm font-bold text-secondary-500">Obrigatório (*)</span>
                 </h4>
             </div>
-            <div className="text-align: left mb-4">Preencha as Informações do PET</div>
-            <div>
-                <Row className="g-3">
+            <h1 className="font-semibold">Preencha as Informações do PET</h1>
+            <div className="grid grid-cols-3 gap-4 mt-4 mobile:grid-cols-1 mobile:gap-2">
+                <FieldControl
+                    label={`Nome do PET`}
+                    required
+                    name={`pet_data.name_pet`}
+                    placeholder="Digite o nome do PET"
+                    divClassName="col-span-full"
+                />
 
-                    <ComboBoxFields name="pet_data" />
+                <ComboBoxFields name="pet_data" />
 
-                    <div className="flex flex-col mt-4 w-full">
-                        <div className="flex md:flex-row flex-col mt-2 mb-2 gap-2">
-                            <FieldNumber
-                                label="Idade"
-                                placeholder="Idade do pet em meses ou anos"
-                                name="age"
-                                required
-                                type="number" />
-                            <FieldNumber
-                                label="Peso"
-                                placeholder="Peso do pet em quilos ou gramas, exemplo = 4"
-                                required
-                                onChange={(e: any) => { e.target.value = e.target.value.replace(/[^0-9]/g, ''); setWeightPet(e.target.value) }}
-                                name="weight"
-                                type="number" />
-                            <div className="flex flex-col mb-[6px] w-full">
-                                <FieldControlSelect
-                                    label="Selecione uma medida"
-                                    placeholder="Selecione uma medida"
-                                    name="type_weight"
-                                    options={options2}
-                                />
-                            </div>
-                        </div>
-                        <div className="flex flex-col md:flex-row tems-center mt-2 mb-2 gap-2">
-                            <FieldNumber
-                                label="Altura"
-                                placeholder="Altura do pet em centímetros, exemplo = 32"
-                                onChange={(e: any) => {
-                                    e.target.value = e.target.value.replace(/[^0-9]/g, '');
-                                    setHeightPet(e.target.value)
-                                }}
-                                name="height"
-                                type="number" />
-                            <FieldNumber
-                                label="Comprimento"
-                                placeholder="Comprimento do pet em centímetros "
-                                className="border-gray-300"
-                                name="length"
-                                type="number" />
-                        </div>
-                        <div>
-                            {weightPet > 0 && heightPet > 0 && (
-                                <h2
-                                    className="m-4 font-bold"
-                                >
-                                    O IMC do animal é: {calcularIMC(heightPet, weightPet).toFixed(2)}
-                                </h2>
-                            )}
-                        </div>
+                <FieldControlSelect
+                    options={genderValues as any}
+                    disabled={!!values.id}
+                    name="pet_data.sex"
+                    required
+                    label="Sexo do Pet"
+                    placeholder="Macho/Fêmea..."
+                />
 
-                        <div className="flex flex-col mt-2">
-                            <FieldTextArea
-                                label="Orientações e Anotações"
-                                className="rounded-md w-full border-gray-300"
-                                component="textarea"
-                                name="guidelines_notes"
-                                type="text" />
-                        </div>
-                    </div>
-                </Row>
+
+                <FieldControl
+                    label={`Data de nascimento`}
+                    required
+                    name={`pet_data.date_birth`}
+                    type="date"
+                />
+
+                <FieldMasked
+                    label={`Número do microchip`}
+                    name={`pet_data.microchip`}
+                    mask="_____"
+                    placeholder="Digite o número do microchip (opcional)"
+                />
+
+                <FieldMasked
+                    label={`Número de registro cartório`}
+                    name={`pet_data.identification_number`}
+                    mask="_____"
+                    placeholder="Digite o número do registro (opcional)"
+                />
+
 
             </div>
             <div className="flex align-items-center justify-center gap-3 mt-4">

@@ -35,6 +35,7 @@ type InitialValues = Partial<Nullable<Omit<Data, 'bloodType' | 'breed' | 'specie
 import RadioGroupCustom from "~/Components/molecules/radio-group/radio-group";
 import Modal from "~/Components/organism/modal";
 import useModal from '~/hooks/use-modal';
+import { Gender } from '~/store/slices/pets/speciesType';
 import validationPet from '~/validations/pet';
 
 type AddModalProps = {
@@ -74,7 +75,7 @@ const AddNewPetModal = ({ children, item }: AddModalProps) => {
         castrated: false,
         avatar: null,
         dateOfBirth: null,
-        gender: 'unknown',
+        gender: Gender.unknown,
         bloodType: {
             value: '',
             name: ''

@@ -4,9 +4,8 @@
 
 
 
-import { useAppDispatch, useAppSelector } from '~/store/hooks';
+import { useAppDispatch } from '~/store/hooks';
 
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { BtnLink } from '~/Components/atoms/btn';
 import { resetLoading, signOutUser } from '~/store/slices/auth/login/actions';
@@ -14,20 +13,13 @@ import AuthLayout from '../_layouts/auth/auth_layout';
 
 const LogoutPage = () => {
     const dispatch = useAppDispatch();
-    const { isAuthenticated } = useAppSelector(state => state.Login)
-    const router = useRouter()
 
     useEffect(() => {
-        if (!isAuthenticated) {
-            router.push('/sign-in')
-        }
-
-        if (isAuthenticated) {
-            dispatch(resetLoading());
+        dispatch(resetLoading());
+        setTimeout(() => {
             dispatch(signOutUser());
-        }
-
-    }, [isAuthenticated]);
+        }, 1000);
+    }, []);
 
     return (
         <AuthLayout title='Sair'>

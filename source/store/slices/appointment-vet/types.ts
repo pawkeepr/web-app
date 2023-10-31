@@ -55,42 +55,21 @@ export interface IMedicineAppointment {
     period: string,
     date_init: string,
     date_end: string,
-    value_mediccine: string,
-    coin_mediccine: string
+    value_medicine: string,
+    coin_medicine: string
+}
+
+export type IQuestionAnamnesis = {
+    question: string,
+    options: string
 }
 
 export interface IAnamnesisAppointment {
-    digestive_system: [
-        {
-            question: string,
-            options: string
-        }
-    ],
-    respiratory_system: [
-        {
-            question: string,
-            options: string
-        }
-    ],
-    locomotor_system: [
-        {
-            question: string,
-            options: string
-        }
-    ],
-    urinary_system: [
-        {
-            question: string,
-            options: string
-        }
-    ],
-    nervous_system: [
-        {
-            question: string,
-            options: string
-        }
-    ]
-
+    digestive_system: IQuestionAnamnesis[],
+    respiratory_system: IQuestionAnamnesis[],
+    locomotor_system: IQuestionAnamnesis[],
+    urinary_system: IQuestionAnamnesis[],
+    nervous_system: IQuestionAnamnesis[]
 }
 
 export interface IVaccineAppointment {
@@ -111,7 +90,7 @@ export interface IExamsAppointment {
     name_exame: string,
     local: string,
     realization_date: string,
-    appointament_date: string,
+    appointment_date: string,
     time_date: string,
     who_applied: string,
     health_insurance: string,
@@ -121,7 +100,7 @@ export interface IExamsAppointment {
 }
 
 
-export interface INutritionsAppointmen {
+export interface INutritionsAppointment {
     food_name: string,
     food_start_time: string,
     amount: string,
@@ -135,7 +114,7 @@ export interface INutritionsAppointmen {
 }
 
 export interface IllnessesAppointment {
-    name_illnese: string,
+    name_illness: string,
     symptoms: string,
     prevention: string,
     treatment: string,
@@ -147,7 +126,7 @@ export interface IInfo_required {
     height: string,
     length: string,
     weight: string,
-    type_weigth: string,
+    type_weight: string,
     imc: string,
     guidelines_notes: string
 }
@@ -180,10 +159,6 @@ export interface IStatusAppointment {
 }
 
 export interface ISignatureAppointment {
-    signature_data: string,
-    date_signature: string,
-    type_signature: string,
-    status_signature: string,
     ip_address: string,
     browser_device: string,
     operational_system: string
@@ -198,7 +173,7 @@ export interface IGeolocationAppointment {
     speed: string
 }
 
-export interface ITests_fastsAppointment {
+export interface ITests_FastsAppointment {
     test_type: string,
     result: string,
     notes: string
@@ -215,8 +190,33 @@ export interface IWell_beingAppointment {
     perform_activity: string,
     activities_carry: []
 }
-export interface IAppointmentVet {
-    id?: string;
+
+export interface IAnamnesis {
+    digestive_system: boolean
+    respiratory_system: boolean
+    urinary_system: boolean
+    nervous_system: boolean
+    locomotor_system: boolean
+    anamnesis?: IAnamnesisAppointment
+}
+
+export interface ITreatment {
+    apply_medicine: boolean
+    medicines: IMedicineAppointment[];
+    apply_vaccine: boolean
+    vaccines: IVaccineAppointment[];
+    apply_exam: boolean
+    exams: IExamsAppointment[];
+    apply_nutrition: boolean
+    nutritions: INutritionsAppointment[];
+    apply_disease: boolean
+    illnesses: IllnessesAppointment[];
+    apply_fast_test: boolean
+    tests_fasts: ITests_FastsAppointment[];
+}
+
+export interface IAppointmentVet extends IAnamnesis, ITreatment {
+    id?: string | null;
     pet_data: PetData
     vets_data: VetsData[]
     cpf_tutor: string
@@ -230,19 +230,13 @@ export interface IAppointmentVet {
     crmv_vet: string;
     cpf_cnpj_vet: string;
     vet_data: IVetAppointment;
-    medicines: IMedicineAppointment[];
     anamnesis: IAnamnesisAppointment;
-    vaccines: IVaccineAppointment[];
-    exams: IExamsAppointment[];
-    nutritions: INutritionsAppointmen;
-    illnesses: IllnessesAppointment;
     info_required: IInfo_required;
     payments: IPaymentsAppointment;
     dates_consults: IDates_consultsAppointment;
     appointment_status: IStatusAppointment;
     appointment_signature: ISignatureAppointment;
     appointment_geolocation: IGeolocationAppointment;
-    tests_fasts: ITests_fastsAppointment;
     dental_treatment: IDental_treatmentAppointment;
     well_being: IWell_beingAppointment;
 }

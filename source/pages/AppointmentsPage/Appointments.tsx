@@ -7,41 +7,34 @@ import { Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { BtnCancel } from "~/Components/atoms/btn";
 import ModalConfirm from "~/Components/modals/modal-confirm";
-import { Appointments } from "~/entities/Apointments";
-import { browser } from "~/utils/navigator.utils";
-
-
-
+import { Appointments } from "~/entities/Appointments";
+import useAppointment from "~/store/hooks/appointment/use-appointment";
+import usePetById from "~/store/hooks/pet/use-pets";
+import { IPetV2 } from "~/types/pet-v2";
+import { geolocation } from "~/utils/geolocation";
 
 export type InitialValues = IAppointmentVet;
 
 type AppointmentsPageProps = {
     document: string;
-    pet?: string;
+    pet: string;
 };
 
-type NullString = string | null;
-
-
 const initialValues = (
-    document: NullString = null,
-    id: NullString = null,
-    signature: { ip_adress: string, browser_device: string, operational_system: string } | null = null,
-    geolocation: { latitude: string, longitude: string, precision: string, altitude: string, speed: string } | null = null
+    {
+        id: id_pet,
+        pet_data,
+        contact_tutor,
+        cpf_tutor,
+        health_insurance,
+        location_tutor,
+        name_tutor,
+        phone_tutor,
+        responsible_tutors,
+        vets_data,
+    }: IPetV2,
 ): InitialValues => ({
-    pet_data: {
-        id,
-        name_pet: null,
-        microchip: null,
-        identification_number: null,
-        specie: null,
-        race: null,
-        blood_type: null,
-        blood_donator: null,
-        organ_donor: null,
-        sex: null,
-        date_birth: null,
-    },
+    pet_data: pet_data as any,
     vets_data: [
         // dados mockados, retirar quando estiver os dados com o retorno da Api
         {
@@ -50,40 +43,12 @@ const initialValues = (
             "cpf_cnpj_vet": "00100200352"
         }
     ],
-    contact_tutor: {
-        email: null,
-        phone: null,
-        whatsapp: null,
-    },
-    location_tutor: {
-        country: null,
-        zipCode: null,
-        state: null,
-        city: null,
-        neighborhood: null,
-        street: null,
-        number: null,
-        complement: null,
-    },
-    responsible_tutors: {
-        name_tutor: null,
-        cpf_tutor: null,
-    },
-    id: '',
-    id_pet: '',
-    pet_data: {
-        name_pet: '',
-        microchip: '',
-        identification_number: '',
-        specie: '',
-        race: '',
-        blood_type: '',
-        blood_donator: '',
-        organ_donor: '',
-        sex: '',
-        date_birth: ''
-    },
-    cpf_tutor: '',
+    contact_tutor,
+    location_tutor,
+    responsible_tutors,
+    id: null,
+    id_pet: id_pet as string,
+    cpf_tutor,
     tutor_data: {
         name: '',
         email: '',
@@ -104,21 +69,7 @@ const initialValues = (
         state: '',
         city: ''
     },
-    medicines: [
-        {
-            name_medicine: "",
-            brand: "",
-            continuous_use: "",
-            amount: "",
-            type_medicine: "",
-            interval: "",
-            period: "",
-            date_init: "",
-            date_end: "",
-            value_mediccine: "",
-            coin_mediccine: ""
-        }
-    ],
+    medicines: [],
     anamnesis: {
         digestive_system: [
             {
@@ -151,53 +102,16 @@ const initialValues = (
             }
         ]
     },
-    vaccines: [
-        {
-            name_vaccine: "",
-            brand: "",
-            batch: "",
-            local: "",
-            dose: "",
-            date_application: "",
-            date_next_application: "",
-            who_applied: "",
-            health_insurance: "",
-            value_vaccine: "",
-            coin_vaccine: ""
-        }
-    ],
-    exams: [
-
-    ],
-    nutritions: [
-        {
-            food_name: "",
-            food_start_time: "",
-            amount: "",
-            measure: "",
-            interval: "",
-            period: "",
-            starting_date: "",
-            type_nutrition: "",
-            value_nutrition: "",
-            coin_nutrition: ""
-        }
-    ],
-    illnesses: [
-        {
-            name_illnese: "",
-            symptoms: "",
-            prevention: "",
-            treatment: "",
-            date_identified: ""
-        }
-    ],
+    vaccines: [],
+    exams: [],
+    nutritions: [],
+    illnesses: [],
     info_required: {
         age: "",
         height: "",
         length: "",
         weight: "",
-        type_weigth: "",
+        type_weight: "",
         imc: "",
         guidelines_notes: ""
     },
@@ -225,25 +139,18 @@ const initialValues = (
         canceled: "",
         reason_canceled: ""
     },
-    appointment_signature: signature || {
-        ip_adess: "",
+    appointment_signature: {
+        ip_address: "",
         browser_device: "",
-        operational_system: ""
+        operational_system: "",
     },
-    appointment_geolocation: geolocation || {
+    appointment_geolocation: {
         latitude: "",
         longitude: "",
         precision: "",
         altitude: "",
         speed: ""
     },
-    tests_fasts: [
-        {
-            test_type: "",
-            result: "",
-            notes: ""
-        }
-    ],
     dental_treatment: {
         reason_query: "",
         oral_examination: "",
@@ -254,12 +161,20 @@ const initialValues = (
         perform_activity: "",
         activities_carry: []
     },
-    health_insurance: {
-        name: null,
-        type_health: null,
-        number_health: null,
-        validity: null,
-    }
+    health_insurance,
+    name_tutor: name_tutor as string,
+    tests_fasts: [],
+    digestive_system: false,
+    locomotor_system: false,
+    nervous_system: false,
+    respiratory_system: false,
+    urinary_system: false,
+    apply_disease: false,
+    apply_exam: false,
+    apply_fast_test: false,
+    apply_medicine: false,
+    apply_nutrition: false,
+    apply_vaccine: false,
 });
 
 
@@ -267,49 +182,28 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
 
     const router = useRouter();
 
-    const handleSubmit = (values: InitialValues) => {
-        try {
-            const geolocation = () => {
-                if ('geolocation' in navigator) {
-                    const browserUser = browser();
+    const { data, isLoading: isLoadingPet, isError } = usePetById(document, pet)
+    const { handleSubmit } = useAppointment();
 
-                    const signature = {
-                        ip_adress: '',
-                        browser_device: browserUser,
-                        operational_system: navigator.platform
-                    }
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        const geolocationData = {
-                            latitude: position.coords.latitude.toString(),
-                            longitude: position.coords.longitude.toString(),
-                            precision: position.coords.accuracy.toString(),
-                            altitude: position.coords.altitude ? position.coords.altitude.toString() : '',
-                            speed: position.coords.speed ? position.coords.speed.toString() : '',
-                        };
-                        const appointment = Appointments.build(initialValues(document, pet, signature, geolocationData));
-                        console.log(appointment);
-
-                        return appointment;
-                    }, function (error) {
-                        console.log(error);
-                    });
-                }
-            };
-
-            geolocation();
-        }
-        catch (error) {
-            console.log(error);
-        }
+    const onSubmit = async (values: InitialValues) => {
+        const appointment = Appointments.build(values);
+        const [geolocationData, signature] = await geolocation();
+        appointment.defineAppointmentGeolocation(geolocationData);
+        appointment.defineAppointmentSignature(signature);
+        await handleSubmit(appointment as any);
     };
 
+    if (isError) return router.back();
+
     return (
-        <DashboardLayouts title="Nova Consulta" >
-            <Formik
-                onSubmit={handleSubmit}
-                enableReinitialize
-                initialValues={initialValues(document, pet)}
-            >
+
+
+        <Formik
+            onSubmit={onSubmit}
+            enableReinitialize
+            initialValues={initialValues(data as IPetV2)}
+        >
+            <DashboardLayouts title="Nova Consulta" >
                 <div className="gap-2 mt-2 mobile:py-6">
 
                     <ModalConfirm
@@ -330,10 +224,12 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
                             );
                         }}
                     </ModalConfirm>
-                    <VerticalTabs />
+
+                    <VerticalTabs isLoading={isLoadingPet} />
                 </div>
-            </Formik>
-        </DashboardLayouts>
+            </DashboardLayouts>
+        </Formik>
+
     );
 };
 

@@ -82,7 +82,6 @@ const Tabs = [
 const ActivationAccount = () => {
 
     const email = useAppSelector(state => state.Login.username)
-    const state = useAppSelector(state => state)
 
     const [tab, setTab] = useState('1')
 

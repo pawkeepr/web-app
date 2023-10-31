@@ -1,14 +1,19 @@
 import { Breed } from "~/store/slices/pets/breedType";
 import { Gender, Species } from "~/store/slices/pets/speciesType";
 
+type GenericSelect = {
+    label: string;
+    value: string;
+}
+
 export interface IPetV2 {
     id?: string;
-    name_tutor: string;
+    name_tutor: string
     phone_tutor: string;
     contact_tutor: {
-        email: string;
-        phone: string;
-        whatsapp: string;
+        email: string | null;
+        phone: string | null
+        whatsapp: string | null
     };
     cpf_tutor: string;
     vets_data: string[];
@@ -24,15 +29,16 @@ export interface IPetV2 {
     };
     pet_data: {
         name_pet: string;
-        specie: Species;
-        race: Breed;
-        castrated: string | boolean;
-        sex: Gender;
+        specie: Species | null | GenericSelect;
+        race: Breed | null | GenericSelect;
+        sex: Gender | null | GenericSelect;
+        castrated: boolean | null;
         microchip: string | null;
         identification_number: string | null;
-        blood_type: string | null;
+        blood_type: string | null | GenericSelect;
         blood_donator: string | null;
         organ_donor: string | null;
+        date_birth: string | null;
     };
     health_insurance: {
         name: string | null;

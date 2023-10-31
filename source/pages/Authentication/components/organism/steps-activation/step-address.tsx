@@ -28,7 +28,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     const { values, setFieldValue } = useFormikContext<ActivateAccount>()
     const { zipCode } = values.location
-    console.log({ zipCode})
+
     const updateAddressFields = useCallback(
         (params: IAddress) => {
             if (!params) return

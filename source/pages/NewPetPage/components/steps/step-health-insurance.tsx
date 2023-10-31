@@ -1,12 +1,15 @@
+import { Form, useFormikContext } from "formik";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control";
 import { StepProps } from "~/types/helpers";
 
 
 export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps) {
+    const { handleSubmit, isSubmitting } = useFormikContext()
+
     return (
 
-        <div className="mb-4">
+        <Form className="mb-4" onSubmit={handleSubmit}>
 
             <div className="flex justify-center mb-2">Preencha as Informações do plano de saúde do Pet</div>
             <span className="flex justify-center items-center text-secondary-500 font-semibold">Obrigatório(*)</span>
@@ -14,7 +17,7 @@ export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps)
                 <FieldControl
                     label="Nome do plano"
                     required
-                    name="health_insurance"
+                    name="health_insurance.name"
                     placeholder="Digite o nome do plano"
                 />
                 <FieldControl
@@ -37,16 +40,18 @@ export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps)
             </div>
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnCancel
+                    condition={!isSubmitting}
                     label="Voltar"
                     onClick={() => {
                         toggleTab(activeTab - 1);
                     }}
                 />
                 <BtnPrimary
+                    isLoading={isSubmitting}
                     label="Cadastrar"
                     type="submit"
                 />
             </div>
-        </div>
+        </Form>
     )
 }
