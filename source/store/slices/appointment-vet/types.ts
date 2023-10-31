@@ -59,38 +59,17 @@ export interface IMedicineAppointment {
     coin_medicine: string
 }
 
-export interface IAnamnesisAppointment {
-    digestive_system: [
-        {
-            question: string,
-            options: string
-        }
-    ],
-    respiratory_system: [
-        {
-            question: string,
-            options: string
-        }
-    ],
-    locomotor_system: [
-        {
-            question: string,
-            options: string
-        }
-    ],
-    urinary_system: [
-        {
-            question: string,
-            options: string
-        }
-    ],
-    nervous_system: [
-        {
-            question: string,
-            options: string
-        }
-    ]
+export type IQuestionAnamnesis = {
+    question: string,
+    options: string
+}
 
+export interface IAnamnesisAppointment {
+    digestive_system: IQuestionAnamnesis[],
+    respiratory_system: IQuestionAnamnesis[],
+    locomotor_system: IQuestionAnamnesis[],
+    urinary_system: IQuestionAnamnesis[],
+    nervous_system: IQuestionAnamnesis[]
 }
 
 export interface IVaccineAppointment {
@@ -211,7 +190,32 @@ export interface IWell_beingAppointment {
     perform_activity: string,
     activities_carry: []
 }
-export interface IAppointmentVet {
+
+export interface IAnamnesis {
+    digestive_system: boolean
+    respiratory_system: boolean
+    urinary_system: boolean
+    nervous_system: boolean
+    locomotor_system: boolean
+    anamnesis?: IAnamnesisAppointment
+}
+
+export interface ITreatment {
+    apply_medicine: boolean
+    medicines: IMedicineAppointment[];
+    apply_vaccine: boolean
+    vaccines: IVaccineAppointment[];
+    apply_exam: boolean
+    exams: IExamsAppointment[];
+    apply_nutrition: boolean
+    nutritions: INutritionsAppointment[];
+    apply_disease: boolean
+    illnesses: IllnessesAppointment[];
+    apply_fast_test: boolean
+    tests_fasts: ITests_FastsAppointment[];
+}
+
+export interface IAppointmentVet extends IAnamnesis, ITreatment {
     id?: string | null;
     pet_data: PetData
     vets_data: VetsData[]
@@ -226,19 +230,13 @@ export interface IAppointmentVet {
     crmv_vet: string;
     cpf_cnpj_vet: string;
     vet_data: IVetAppointment;
-    medicines: IMedicineAppointment[];
     anamnesis: IAnamnesisAppointment;
-    vaccines: IVaccineAppointment[];
-    exams: IExamsAppointment[];
-    nutritions: INutritionsAppointment[];
-    illnesses: IllnessesAppointment[];
     info_required: IInfo_required;
     payments: IPaymentsAppointment;
     dates_consults: IDates_consultsAppointment;
     appointment_status: IStatusAppointment;
     appointment_signature: ISignatureAppointment;
     appointment_geolocation: IGeolocationAppointment;
-    tests_fasts: ITests_FastsAppointment[];
     dental_treatment: IDental_treatmentAppointment;
     well_being: IWell_beingAppointment;
 }

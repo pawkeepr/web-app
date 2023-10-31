@@ -7,6 +7,8 @@ import { Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { BtnCancel } from "~/Components/atoms/btn";
 import ModalConfirm from "~/Components/modals/modal-confirm";
+import { Appointments } from "~/entities/Appointments";
+import useAppointment from "~/store/hooks/appointment/use-appointment";
 import usePetById from "~/store/hooks/pet/use-pets";
 import { IPetV2 } from "~/types/pet-v2";
 import { geolocation } from "~/utils/geolocation";
@@ -162,6 +164,17 @@ const initialValues = (
     health_insurance,
     name_tutor: name_tutor as string,
     tests_fasts: [],
+    digestive_system: false,
+    locomotor_system: false,
+    nervous_system: false,
+    respiratory_system: false,
+    urinary_system: false,
+    apply_disease: false,
+    apply_exam: false,
+    apply_fast_test: false,
+    apply_medicine: false,
+    apply_nutrition: false,
+    apply_vaccine: false,
 });
 
 
@@ -169,29 +182,28 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
 
     const router = useRouter();
 
-    const { data, isLoading, isError } = usePetById(document, pet)
+    const { data, isLoading: isLoadingPet, isError } = usePetById(document, pet)
+    const { handleSubmit } = useAppointment();
 
-    const handleSubmit = async (values: InitialValues) => {
-        try {
-            const [geolocationData, signature] = await geolocation();
-
-
-        }
-        catch (error) {
-            console.log(error);
-        }
+    const onSubmit = async (values: InitialValues) => {
+        const appointment = Appointments.build(values);
+        const [geolocationData, signature] = await geolocation();
+        appointment.defineAppointmentGeolocation(geolocationData);
+        appointment.defineAppointmentSignature(signature);
+        await handleSubmit(appointment as any);
     };
 
     if (isError) return router.back();
 
     return (
-        <DashboardLayouts title="Nova Consulta" >
 
-            <Formik
-                onSubmit={handleSubmit}
-                enableReinitialize
-                initialValues={initialValues(data as IPetV2)}
-            >
+
+        <Formik
+            onSubmit={onSubmit}
+            enableReinitialize
+            initialValues={initialValues(data as IPetV2)}
+        >
+            <DashboardLayouts title="Nova Consulta" >
                 <div className="gap-2 mt-2 mobile:py-6">
 
                     <ModalConfirm
@@ -213,10 +225,11 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
                         }}
                     </ModalConfirm>
 
-                    <VerticalTabs isLoading={isLoading} />
+                    <VerticalTabs isLoading={isLoadingPet} />
                 </div>
-            </Formik>
-        </DashboardLayouts>
+            </DashboardLayouts>
+        </Formik>
+
     );
 };
 

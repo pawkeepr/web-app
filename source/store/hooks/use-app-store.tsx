@@ -106,6 +106,7 @@ const useAppStore = <T,>({
                 return response
 
             } catch (err) {
+
                 const error = err as AxiosError;
                 const statusCode = error?.response?.status
 

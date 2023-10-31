@@ -17,7 +17,13 @@ type AnswerSwitchProps = {
     color?: 'primary' | 'secondary'
 }
 
-const AnswerSwitch = ({ answers, title, name, onClick, color = 'primary' }: AnswerSwitchProps) => {
+const AnswerSwitch = ({
+    answers,
+    title,
+    name,
+    onClick,
+    color = 'primary'
+}: AnswerSwitchProps) => {
     const [enabled, setEnabled] = useState<string[]>([]);
 
     const [field, meta, helpers] = useField(`anamnese.${name}`)
@@ -44,6 +50,7 @@ const AnswerSwitch = ({ answers, title, name, onClick, color = 'primary' }: Answ
 
     return (
         <ControlSwitch
+            name={name}
             label={title}
         >
             <div className="gap-2">

@@ -9,7 +9,7 @@ import SendWhatsapp from "~/utils/pdf-generator/SendWhatsapp";
 import CardTutor from "../../molecules/card-tutor";
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
-    const { handleSubmit } = useFormikContext();
+    const { handleSubmit, isSubmitting } = useFormikContext();
     const send = new SendWhatsapp('pdfAppointment');
 
     const [event, setEvent] = useState<string>('credit');
@@ -105,6 +105,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     }}
                 />
                 <BtnPrimary
+                    isLoading={isSubmitting}
                     type="submit"
                     label="Concluir Consulta"
                 />

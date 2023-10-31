@@ -33,6 +33,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
             </h4>
 
             <ControlSwitchDiv
+                name="fast_test"
                 label="Testes rápidos?"
                 className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
             >
@@ -111,21 +112,34 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         </FieldArray> */}
                 </div>
             </ControlSwitchDiv>
-            <ControlSwitchDiv label="Aplicar Medicação">
+            <ControlSwitchDiv
+                name="apply_medicine"
+                label="Aplicar Medicação"
+            >
                 <Medicines />
             </ControlSwitchDiv>
 
-            <ControlSwitchDiv label="Aplicar vacina?">
+            <ControlSwitchDiv
+                name="apply_vaccine"
+                label="Aplicar vacina?"
+            >
                 <Vaccines />
             </ControlSwitchDiv>
-            <ControlSwitchDiv label="Aplicar exame?">
+            <ControlSwitchDiv
+                name="apply_exam"
+                label="Aplicar exame?"
+            >
                 <Exams />
             </ControlSwitchDiv>
 
-            <ControlSwitchDiv label="Possui doença?">
+            <ControlSwitchDiv
+                name="apply_disease"
+                label="Possui doença?"
+            >
                 <Diseases />
             </ControlSwitchDiv>
             <ControlSwitchDiv
+                name="apply_nutrition"
                 label="Aplicar nutrição alimentar?"
             >
                 <Nutritions />
