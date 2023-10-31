@@ -188,8 +188,9 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
     const onSubmit = async (values: InitialValues) => {
         const appointment = Appointments.build(values);
         const [geolocationData, signature] = await geolocation();
-        appointment.defineAppointmentGeolocation(geolocationData);
-        appointment.defineAppointmentSignature(signature);
+        appointment
+            .defineAppointmentGeolocation(geolocationData)
+            .defineAppointmentSignature(signature);
         await handleSubmit(appointment as any);
     };
 
