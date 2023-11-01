@@ -4,8 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Formik, FormikHelpers } from "formik";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
-import { BtnPrimary } from "~/Components/atoms/btn";
-import BoxButtons from "~/Components/molecules/box-buttons";
+import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import { useAppDispatch } from '~/store/hooks';
 import { addNew } from '~/store/slices/newSchedule/actions';
 
@@ -119,8 +118,16 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                     name="observations"
                                     type="text"
                                 />
-
-                                <BoxButtons onClickCancel={closeModal} onClickSuccess={handleSubmit} isValid={true} />
+                                <div className='flex justify-center mt-3'>  
+                                    <BtnCancel
+                                        label="Voltar"
+                                        onClick={() => closeModal()}
+                                    />
+                                    <BtnPrimary
+                                        label="Próximo"
+                                        onClick={() => handleSubmit()}
+                                    />
+                                </div>
                             </>
                         )
                     }
