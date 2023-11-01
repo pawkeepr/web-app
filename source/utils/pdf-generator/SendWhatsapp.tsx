@@ -1,25 +1,24 @@
 import { Component } from 'react';
+import axios from 'axios';
 
 class SendWhatsapp extends Component {
     accountSid = 'sua-account-sid'; // Substituir com valor real
     authToken = 'seu-auth-token'; // Substituir com valor real
-    client = { messages: { create: (props: any) => { return { sid: 2 } } } } // require('twilio')(this.accountSid, this.authToken);
+    // client =  require('twilio')(this.accountSid, this.authToken);
 
     send = (pdfAppointment: any) => {
-
-        try {
-            // Substituir 'SEU_NUMERO_DO_WHATSAPP' pelo número de telefone do destinatário
-            const message = this.client.messages.create({
+        axios.create({
+            baseURL: "/2010-04-01/Accounts/ACb33f50f8531ffd88ddace8c7a84c10d7/Messages/SM4668463cf786f5123705e3675c00f8aa.json",
+            auth: {
+                username: this.accountSid,
+                password: this.authToken,
+            },
+            headers: {
                 from: 'whatsapp:+14155238886', // Este é um número de teste do Twilio
                 body: pdfAppointment,
-                to: 'whatsapp:+SEU_NUMERO_DO_WHATSAPP',
-                mediaUrl: 'data:application/pdf;base64,' + pdfAppointment.toString('base64'),
-            });
-
-            console.log('Mensagem enviada com sucesso:', message.sid);
-        } catch (error) {
-            console.error('Erro ao enviar a mensagem:', error);
-        }
+                to: 'whatsapp:+557996733389',
+            }
+        });
     };
 }
 

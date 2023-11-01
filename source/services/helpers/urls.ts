@@ -27,3 +27,6 @@ export const PET_GET_PROFILE = () => '/api-pet/search-pet'
 export const PET_UPDATE_PROFILE = () => '/api-pet/update-pet'
 export const PET_UPDATE_HEALTH = () => '/api-pet/update-pet-health'
 
+// whatsapp
+
+export const WHATSAPP_SEND_MESSAGE = () => "/2010-04-01/Accounts/ACb33f50f8531ffd88ddace8c7a84c10d7/Messages/SM4668463cf786f5123705e3675c00f8aa.json"
