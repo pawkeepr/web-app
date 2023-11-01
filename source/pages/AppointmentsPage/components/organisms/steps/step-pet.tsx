@@ -67,7 +67,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     label="Peso"
                     placeholder="Peso do pet em quilos, exemplo = 0.5 (500 gramas)"
                     required
-                    onChange={(e: any) => { e.target.value = e.target.value.replace(/[^0-9]/g, ''); setWeightPet(e.target.value) }}
+                    onChange={(e: any) => { setWeightPet(e.target.value) }}
                     name="weight"
                     type="number"
                 />
@@ -75,10 +75,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 <FieldNumber
                     label="Altura"
                     placeholder="Altura do pet em centímetros, exemplo = 32"
-                    onChange={(e: any) => {
-                        e.target.value = e.target.value.replace(/[^0-9]/g, '');
-                        setHeightPet(e.target.value)
-                    }}
+                    onChange={(e: any) => { setHeightPet(e.target.value) }}
                     name="height"
                     type="number" />
                 <FieldNumber
