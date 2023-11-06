@@ -161,7 +161,12 @@ export class Pet implements IPetV2 {
         .defineCpfTutor(params.cpf_tutor)
         .defineVetsData(params.vets_data)
         .defineLocationTutor(params.location_tutor)
-        .definePetData(params.pet_data)
+        .definePetData({...params.pet_data,
+            specie: params.pet_data.specie as any,
+            race: params.pet_data.race as any,
+            blood_type: params.pet_data.blood_type as any,
+            sex: params.pet_data.blood_type as any,
+        })
         .defineHealthInsurance(params.health_insurance)
         .defineResponsibleTutors(params.responsible_tutors)
     }

@@ -92,9 +92,13 @@ const NewPetPage = ({ document }: PetPageProps) => {
     }), [pets, document]) as IPetV2
 
     const onSubmit = useCallback(async (values: IPetV2) => {
-        const petData = Pet.build(values)
-        console.log(petData);
-        
+        const petData = Pet.build({ ...values, vets_data: {
+            ...values.pet_data,
+            race: (values.pet_data.race as GenericSelect).value as Breed,
+            specie: (values.pet_data.specie as GenericSelect).value as Species,
+            blood_type: (values.pet_data.blood_type as GenericSelect).value as BloodType,
+            sex: (values.pet_data.sex as GenericSelect).value as Gender,
+        }})
         try {
             await handleSubmit(petData)
             router.push('/dashboard')
