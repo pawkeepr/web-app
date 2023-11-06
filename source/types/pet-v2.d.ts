@@ -7,7 +7,7 @@ type GenericSelect = {
 }
 
 export interface IPetV2 {
-    id?: string;
+    id: string;
     name_tutor: string
     phone_tutor: string;
     contact_tutor: {

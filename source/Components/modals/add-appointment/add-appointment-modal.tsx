@@ -124,7 +124,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                         onClick={() => closeModal()}
                                     />
                                     <BtnPrimary
-                                        label="Próximo"
+                                        label="Agendar"
                                         onClick={() => handleSubmit()}
                                     />
                                 </div>
