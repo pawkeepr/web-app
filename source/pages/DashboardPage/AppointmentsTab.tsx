@@ -11,7 +11,7 @@ import FieldDocumentAppointment from '~/Components/molecules/field-document-appo
 const VeterinaryAppointmentsTab = () => {
 
     const dispatch = useAppDispatch();
-    const veterinaryAppointments = [];
+    const veterinaryAppointments = [1];
 
     useEffect(() => {
         dispatch(getAll());

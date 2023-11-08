@@ -1,186 +1,133 @@
 
-import {
-    Card,
-    CardBody,
-    Col,
-    Nav,
-    NavItem,
-    NavLink,
-    Row
-} from "reactstrap";
+import { Tab } from '@headlessui/react'
+import { useState } from "react";
 
-import cn from "classnames";
-import { useEffect, useState } from "react";
-
-import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import StepScheduledAll from "../steps/step-scheduled-all";
 import StepScheduledCanceled from "../steps/step-scheduled-canceled";
 import StepScheduledConfirmed from "../steps/step-scheduled-confirmed";
 import StepScheduledDone from "../steps/step-scheduled-done";
 
-type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+function classNames(...classes : any[]) {
+    return classes.filter(Boolean).join(' ')
+  }
 
-type TabItem = {
-    id: Tabs;
-    title: string;
-    href: string;
-    Component: (props: any) => JSX.Element;
-}
-
-const items: TabItem[] = [
-    {
-        id: 1,
-        title: "Consultas Confirmadas",
-        href: "#Confirmed",
-        Component: StepScheduledConfirmed
-    },
-    {
-        id: 2,
-        title: "Consultas Agendadas",
-        href: "#All",
-        Component: StepScheduledAll
-    },
-    {
-        id: 3,
-        title: "Consultas Finalizadas",
-        href: "#Done",
-        Component: StepScheduledDone
-    },
-    {
-        id: 4,
-        title: "Consultas Canceladas",
-        href: "#Canceled",
-        Component: StepScheduledCanceled
-    },
-]
 
 const HorizontalTabs = () => {
 
-    const [isFixed, setIsFixed] = useState(false);
-    const [activeHorizontalTab, setActiveHorizontalTab] = useState(2);
-    const [passedHorizontalSteps, setPassedHorizontalSteps] = useState([1, 2]);
-    const dispatch = useAppDispatch();
-
-    const { height } = useAppSelector(state => state.Layout.headerSize)
-
-    function toggleHorizontalTab(tab: Tabs) {
-        if (activeHorizontalTab !== tab) {
-            var modifiedSteps = [...passedHorizontalSteps, tab];
-
-            if (tab >= 1 && tab <= items.length) {
-                setActiveHorizontalTab(tab);
-                setPassedHorizontalSteps(modifiedSteps);
-            }
-        }
-    }
-
-    useEffect(() => {
-        if (window.innerWidth < 768) {
-            setIsFixed(window.innerWidth < 768)
-
-        }
-        return () => {
-            setIsFixed(false);
-
-        };
-    }, []);
+    let [categories] = useState({
+        'Consultas Agendadas': [
+          {
+            id: 1,
+            title: 'Consultas Agendadas',
+            date: '5h ago',
+            commentCount: 5,
+            shareCount: 2,
+          },
+          {
+            id: 2,
+            title: "So you've bought coffee... now what?",
+            date: '2h ago',
+            commentCount: 3,
+            shareCount: 2,
+          },
+        ],
+        'Consultas Canceladas': [
+          {
+            id: 1,
+            title: 'Consultas Canceladas',
+            date: 'Jan 7',
+            commentCount: 29,
+            shareCount: 16,
+          },
+          {
+            id: 2,
+            title: 'The most innovative things happening in coffee',
+            date: 'Mar 19',
+            commentCount: 24,
+            shareCount: 12,
+          },
+        ],
+        'Consultas Confirmadas': [
+          {
+            id: 1,
+            title: 'Consultas Confirmadas',
+            date: '2d ago',
+            commentCount: 9,
+            shareCount: 5,
+          },
+          {
+            id: 2,
+            title: "The worst advice we've ever heard about coffee",
+            date: '4d ago',
+            commentCount: 1,
+            shareCount: 2,
+          },
+        ],
+        'Consultas Finalizadas': [
+            {
+              id: 1,
+              title: 'Consultas Finalizadas',
+              date: '2d ago',
+              commentCount: 9,
+              shareCount: 5,
+            },
+            {
+              id: 2,
+              title: "The worst advice we've ever heard about coffee",
+              date: '4d ago',
+              commentCount: 1,
+              shareCount: 2,
+            },
+          ],
+      })
 
     return (
-        <Row>
-            <Col xl={12}>
-                <Card>
-                    <CardBody className="form-steps">
-                        <form>
-                            <div className="flex flex-col relative">
-                                <div
-                                    className={cn(
-                                        ' step-arrow-nav',
-                                        {
-                                            ' bg-white': isFixed,
-                                        },
-                                        'md:static'
-                                    )}>
-                                    <Nav
-                                        className="nav-pills custom-nav nav-justified"
-                                        role="tablist"
-                                    >
-                                        <NavItem key={1}>
-                                            <NavLink
-                                                href="#Confirmed"
-                                                id="steparrow-gen-info-tab"
-                                                className={
-                                                    (cn({
-                                                        active: activeHorizontalTab === 1,
-                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab === 1)
-                                                    }))
-                                                }
-                                                onClick={() => {
-                                                    toggleHorizontalTab(1);
-                                                }}
-                                            >
-                                                Consultas Confirmadas
-                                            </NavLink>
-                                        </NavItem>
-                                        <NavItem key={2}>
-                                            <NavLink
-                                                href="#All"
-                                                id="steparrow-gen-info-tab"
-                                                className={
-                                                    (cn({
-                                                        active: activeHorizontalTab === 2,
-                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab === 2)
-                                                    }))
-                                                }
-                                                onClick={() => {
-                                                    toggleHorizontalTab(2);
-                                                }}
-                                            >
-                                                Consultas Agendadas
-                                            </NavLink>
-                                        </NavItem>
-                                        <NavItem className="mobile:hidden" key={3}>
-                                            <NavLink
-                                                href="#Canceled"
-                                                id="steparrow-gen-info-tab"
-                                                className={
-                                                    (cn({
-                                                        active: activeHorizontalTab === 3,
-                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab === 3)
-                                                    }))
-                                                }
-                                                onClick={() => {
-                                                    toggleHorizontalTab(3);
-                                                }}
-                                            >
-                                                Consultas Canceladas
-                                            </NavLink>
-                                        </NavItem>
-                                        <NavItem className="mobile:hidden" key={4}>
-                                            <NavLink
-                                                href="#Done"
-                                                id="steparrow-gen-info-tab"
-                                                className={
-                                                    (cn({
-                                                        active: activeHorizontalTab === 4,
-                                                        done: (activeHorizontalTab <= items.length && activeHorizontalTab === 4)
-                                                    }))
-                                                }
-                                                onClick={() => {
-                                                    toggleHorizontalTab(4);
-                                                }}
-                                            >
-                                                Consultas Finalizadas
-                                            </NavLink>
-                                        </NavItem>
-                                    </Nav>
-                                </div>
-                            </div>
-                        </form>
-                    </CardBody>
-                </Card>
-            </Col>
-        </Row>
-    )
+        <div className="w-full rounded-md">
+          <Tab.Group>
+            <Tab.List className="flex  rounded-xl bg-primary-500 p-1">
+              {Object.keys(categories).map((category) => (
+                <Tab
+                  key={category}
+                  className={({ selected }) =>
+                    classNames(
+                      'w-full rounded-lg py-2.5 text-sm leading-5 font-bold text-secondary-500',
+                      'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
+                      selected
+                        ? 'bg-white shadow'
+                        : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                    )
+                  }
+                >
+                  {category}
+                </Tab>
+              ))}
+            </Tab.List>
+            <Tab.Panels className="mt-2">
+              {Object.values(categories).map((posts, idx) => (
+                <Tab.Panel
+                  key={idx}
+                  className={classNames(
+                    'rounded-xl bg-white p-3',
+                    'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2'
+                  )}
+                >
+                  <ul>
+                    {posts.map((post) => (
+                        <li key={'swka'}>
+                            {post.title === 'Consultas Confirmadas' && <StepScheduledConfirmed props={ post }/>}
+                            {post.title === 'Consultas Canceladas' && <StepScheduledCanceled props={ post }/>}
+                            {post.title === 'Consultas Agendadas' && <StepScheduledAll props={ post }/>}
+                            {post.title === 'Consultas Finalizadas' && <StepScheduledDone props={ post }/>}
+                        </li>
+    
+                    ))}
+                  </ul>
+                </Tab.Panel>
+              ))}
+            </Tab.Panels>
+          </Tab.Group>
+        </div>
+      )
 }
 
 export default HorizontalTabs

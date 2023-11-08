@@ -1,7 +1,8 @@
 import { useAppSelector } from "~/store/hooks";
 
-const StepDone = () => {
-    const data = useAppSelector(state => state.Consults.data.all_scheduled_done);
+const StepDone = (props) => {
+    const data = useAppSelector(state => state.scheduled.all_scheduled_confirmed_done);
+    console.log('pet');
 
     return (
             <div>
