@@ -36,7 +36,7 @@ const AuthLayout = ({
                     "grid mobile:flex mobile:flex-1 mobile:min-h-screen mobile:flex-col mobile:!grid-cols-1 mobile:!h-full mobile:!w-full z-10 shadow-2xl rounded-lg mobile:rounded-none mobile:shadow-none mobile:overflow-hidden mobile:bg-white",
                     {
                         "w-[60%] grid-cols-1": !image,
-                        "w-[90%] grid-cols-2": image,
+                        "w-[60%] grid-cols-2": image,
                     }
                 )}>
                     {image && (

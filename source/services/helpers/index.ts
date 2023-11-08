@@ -25,3 +25,5 @@ export const getPet = async (cpf_tutor: string, id_pet: string) => api.get(urls.
 export const createPet = async (data: any,) => api.post(urls.PET_CREATE_PROFILE(), data);
 export const updatePet = async (data: any, cpf_tutor: string, id_pet: string) => api.post(urls.PET_UPDATE_PROFILE(), data, { params: { id_pet, cpf_tutor } });
 export const updateHealthPet = async (data: any, cpf_tutor: string, id_pet: string) => api.post(urls.PET_UPDATE_HEALTH(), data, { params: { id_pet, cpf_tutor } });
+
+export const sendMessageWhatsapp = async (data: any) => api.post(urls.WHATSAPP_SEND_MESSAGE(), data);
