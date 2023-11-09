@@ -82,19 +82,19 @@ const HorizontalTabs = () => {
       })
 
     return (
-        <div className="w-full rounded-md">
+        <div className="w-full mt-2 rounded-md">
           <Tab.Group>
-            <Tab.List className="flex  rounded-xl bg-primary-500 p-1">
+          <Tab.List className="flex  rounded-xl bg-primary-500 p-1">
               {Object.keys(categories).map((category) => (
                 <Tab
                   key={category}
                   className={({ selected }) =>
                     classNames(
-                      'w-full rounded-lg py-2.5 text-sm leading-5 font-bold text-secondary-500',
+                        'w-full rounded-lg py-2.5 text-sm leading-5 font-bold text-white',
                       'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
                       selected
-                        ? 'bg-white shadow'
-                        : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                      ? 'bg-white !text-secondary-500 shadow'
+                      : 'text-blue-100 hover:bg-white/[0.12]  hover:text-white'
                     )
                   }
                 >
