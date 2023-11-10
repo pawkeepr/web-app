@@ -60,7 +60,7 @@ const StepConfirmed = (appointment: IAppointmentVet) => {
     
 
     const pet = useAppSelector(state => state.scheduled.all_scheduled_confirmed);
-    console.log(pet);
+
     
     return (
 
@@ -78,7 +78,7 @@ const StepConfirmed = (appointment: IAppointmentVet) => {
                         ? 'ring-2 ring-white/20 ring-offset-2'
                         : ''
                     }
-                    ${checked ? 'bg-primary-500 text-white' : 'bg-white'}
+                    ${checked ? 'bg-primary-500 bg-opacity-60 text-white' : 'bg-white'}
                       relative flex cursor-pointer rounded-lg px-2 py-2 shadow-md focus:outline-none`
                   }
                 >
