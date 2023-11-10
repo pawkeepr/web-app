@@ -34,7 +34,7 @@ const Modal = ({
                 className="absolute top-4 right-4"
                 onClick={() => props.onClose?.()}
                 aria-label="Close modal">
-                <XMarkIcon className="w-6 h-6 text-gray-600" />
+                <XMarkIcon className="w-8 h-8 text-gray-800 font-extrabold" />
             </button>
             {props.children}
         </div>

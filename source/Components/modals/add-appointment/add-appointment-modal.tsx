@@ -81,7 +81,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                         name="date"
                                         required
                                         className=" "
-                                        placeholder="digite a data da consulta, exemplo='2023-07-05'"
+                                        placeholder="exemplo='05/12/2023'"
                                         type="date"
                                     />
 
@@ -90,7 +90,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                         required
                                         name="time"
                                         className=" "
-                                        placeholder="digite a hora da consulta, exemplo='14:00'"
+                                        placeholder="exemplo='14:00'"
                                         type="text"
                                     />
                                 </div>
@@ -100,7 +100,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                     name="type"
                                     required
                                     className=" "
-                                    placeholder="digite o tipo da consulta, exemplo='exame'"
+                                    placeholder="exemplo='exame'"
                                     type="text"
                                 />
                                 <FieldControl
@@ -108,7 +108,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                     name="reason"
                                     required
                                     className=" "
-                                    placeholder="digite a razão da consulta, exemplo='consulta de rotina'"
+                                    placeholder="exemplo='consulta de rotina'"
                                     type="text"
                                 />
                                 <FieldTextArea
