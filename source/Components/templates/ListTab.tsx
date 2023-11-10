@@ -42,7 +42,6 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
             <div className="flex justify-between items-center">
                 <div
                     className="team-list w-1/2 list-view-filter col-span-8"
-                    style={{ marginTop: 12 }}
                 >
                         <SearchInput
                             value={search}
@@ -54,7 +53,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
 
                 <div className="flex col-span-4 items-center gap-2">
                     <Modal />
-                    <div style={{ marginTop: 10 }}>
+                    <div>
                         <AddNewAppointment />
                     </div>
                 </div>

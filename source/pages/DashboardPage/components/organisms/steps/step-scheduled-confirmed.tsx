@@ -7,6 +7,7 @@ import { IAppointmentVet } from "~/store/slices/appointment-vet/types";
 import { CheckIcon } from "@heroicons/react/24/solid";
 import ravena from "~/assets/images/ravena.jpeg";
 import { useAppSelector } from "~/store/hooks";
+import QRcode from '~/Components/molecules/qr-code'
 
 const plans = [
     {
@@ -85,7 +86,7 @@ const StepConfirmed = (appointment: IAppointmentVet) => {
                   {({ active, checked }) => (
                     <>
                       <div className="flex flex-col w-full">
-                        <div className="flex mobile:gap-3 justify-around items-center">
+                        <div className="flex mobile:gap-4 justify-around items-center">
                             <MyImage
                                 src={ravena}
                                 alt="Picture of the author"
@@ -167,7 +168,10 @@ const StepConfirmed = (appointment: IAppointmentVet) => {
                             </RadioGroup.Description>
                             
                           </div>
-                        </div>
+                          <div className="flex mobile:hidden flex-col">
+                              <QRcode url="#" />
+                          </div>
+                        </div>                        
                         {checked && (
                           <div className="flex justify-end text-white">
                             <CheckIcon className="h-6 w-8" />
