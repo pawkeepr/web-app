@@ -21,7 +21,7 @@ const VeterinaryAppointmentsTab = () => {
     const cards = (veterinaryAppointments: Data[]) => veterinaryAppointments?.map(veterinaryAppointment => (<CardVeterinaryAppointments key={veterinaryAppointment.id} veterinaryAppointments={veterinaryAppointment} />))
 
     const filter = useCallback((deferredVeterinaryAppointments: Data[], search: string) => {
-        if (!search.trim()) return veterinaryAppointments;
+        // if (!search.trim()) return veterinaryAppointments;
 
         return deferredVeterinaryAppointments.filter(veterinaryAppointment => {
             const lowerSearch = search.toLowerCase();
