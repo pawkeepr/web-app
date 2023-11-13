@@ -7,6 +7,7 @@ import { useAppSelector } from "~/store/hooks";
 import ravena from "~/assets/images/ravena.jpeg";
 import { CheckIcon } from "@heroicons/react/24/solid";
 import { IAppointmentVet } from "~/store/slices/appointment-vet/types";
+import ViewAppointment from "~/Components/modals/view-appointment/modal-view-appointment";
 
 const plans = [
     {
@@ -66,10 +67,10 @@ const StepAll = (appointment: IAppointmentVet) => {
         <RadioGroup.Label className="sr-only ">Server size</RadioGroup.Label>
         <div className="space-y-10 w-full">
        
-          {plans.map((plan) => (
+          {plans.map((appointment) => (
             <RadioGroup.Option
-              key={plan.name}
-              value={plan}
+              key={appointment.name}
+              value={appointment}
               className={({ active, checked }) =>
                 `${
                   active
@@ -168,7 +169,7 @@ const StepAll = (appointment: IAppointmentVet) => {
                     </div>
                     {checked && (
                       <div className="flex justify-end text-white">
-                        <CheckIcon className="h-6 w-8" />
+                        <ViewAppointment props={appointment} />
                       </div>
                     )}
                   </div>
