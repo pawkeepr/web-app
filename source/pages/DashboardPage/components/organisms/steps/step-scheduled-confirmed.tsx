@@ -10,7 +10,7 @@ import { useAppSelector } from "~/store/hooks";
 import useModal from "~/hooks/use-modal";
 import ViewAppointment from "~/Components/modals/view-appointment/modal-view-appointment";
 
-const plans = [
+export const plans = [
     {
         name: 'Franciellem',
         pet: 'Ravena',
@@ -72,7 +72,8 @@ const plans = [
 const StepConfirmed = (appointment: IAppointmentVet) => {
     const [selected, setSelected] = useState(plans[0])
 
-    const pet = useAppSelector(state => state.scheduled.all_scheduled_confirmed);
+    const data = useAppSelector(state => state.scheduled.all_scheduled_confirmed);
+    console.log(data);
 
     
     return (
