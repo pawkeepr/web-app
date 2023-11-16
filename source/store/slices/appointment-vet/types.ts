@@ -233,7 +233,7 @@ export interface IAppointmentVet extends IAnamnesis, ITreatment {
     anamnesis: IAnamnesisAppointment;
     info_required: IInfo_required;
     payments: IPaymentsAppointment;
-    dates_consults: IDates_consultsAppointment;
+    dates_consults: IDates_consultsAppointment[];
     appointment_status: IStatusAppointment;
     appointment_signature: ISignatureAppointment;
     appointment_geolocation: IGeolocationAppointment;

@@ -15,27 +15,28 @@ type InitialValues = Partial<Nullable<Data>>
 import FieldTextArea from '~/Components/molecules/field-text-area/field-text-area';
 import Modal from "~/Components/organism/modal";
 import useModal from '~/hooks/use-modal';
+import { Appointments } from '~/entities/Appointments';
+import { geolocation } from '~/utils/geolocation';
+import useAppointment from '~/store/hooks/appointment/use-appointment';
 
 
 const AddNewAppointment = ({ children, item }: AddModalProps) => {
     const { closeModal, open, showModal } = useModal()
+    const { handleSubmit } = useAppointment();
 
-    const dispatch = useAppDispatch();
-
-    const onSubmit = (
-        values: InitialValues,
-        { resetForm }: FormikHelpers<InitialValues>
-    ) => {
-        dispatch(addNew(values));
-        resetForm()
-    }
+    const onSubmit = async (values: InitialValues) => {
+        
+        const appointment = Appointments.build(values);
+        console.log(appointment.defineDatesConsults(values));
+        
+        await handleSubmit(appointment as any);
+    };
 
     const initialValues: InitialValues = {
-        date: '',
-        time: '',
-        type: '',
-        reason: '',
-        observations: '',
+        date_consultation: '',
+        time_consultation: '',
+        type_consultation: '',
+        reason_consultation: '',
     }
 
     return (
@@ -78,7 +79,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                 <div className='flex justify-around gap-3'>
                                     <FieldControl
                                         label="Data da consulta"
-                                        name="date"
+                                        name="date_consultation"
                                         required
                                         className=" "
                                         placeholder="exemplo='05/12/2023'"
@@ -88,7 +89,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                     <FieldControl
                                         label="Hora da consulta"
                                         required
-                                        name="time"
+                                        name="time_consultation"
                                         className=" "
                                         placeholder="exemplo='14:00'"
                                         type="text"
@@ -97,7 +98,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
 
                                 <FieldControl
                                     label="Tipo da consulta"
-                                    name="type"
+                                    name="type_consultation"
                                     required
                                     className=" "
                                     placeholder="exemplo='exame'"
@@ -105,7 +106,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                 />
                                 <FieldControl
                                     label="Razão da consulta"
-                                    name="reason"
+                                    name="reason_consultation"
                                     required
                                     className=" "
                                     placeholder="exemplo='consulta de rotina'"
