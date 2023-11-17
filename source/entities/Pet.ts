@@ -1,9 +1,9 @@
 import { Breed } from "~/store/slices/pets/breedType";
 import { Gender, Species } from "~/store/slices/pets/speciesType";
-import { GenericSelect, IPetV2 } from "~/types/pet-v2";
+import { GenericSelect, IPetV2, PetData } from "~/types/pet-v2";
 
 export class Pet implements IPetV2 {
-    id: string;
+    id: string | null;
     name_tutor: string
     phone_tutor: string;
     contact_tutor: {
@@ -81,7 +81,7 @@ export class Pet implements IPetV2 {
         };
     }
 
-    defineID(id: string): this {
+    defineID(id: string | null = null): this {
         this.id = id;
         return this;
     }
@@ -129,7 +129,7 @@ export class Pet implements IPetV2 {
         return this;
     }
 
-    definePetData(pet_data: any): this {
+    definePetData(pet_data: PetData): this {
         this.pet_data = pet_data;
         return this;
     }
@@ -157,20 +157,14 @@ export class Pet implements IPetV2 {
 
     static build(params: IPetV2): Pet {
         return new Pet()
-            .defineID(params.id)
+            .defineID(params.id as string)
             .defineNameTutor(params.name_tutor)
             .definePhoneTutor(params.phone_tutor)
             .defineContactTutor(params.contact_tutor)
             .defineCpfTutor(params.cpf_tutor)
             .defineVetsData(params.vets_data)
             .defineLocationTutor(params.location_tutor)
-            .definePetData({
-                ...params.pet_data,
-                specie: params.pet_data.specie as any,
-                race: params.pet_data.race as any,
-                blood_type: params.pet_data.blood_type as any,
-                sex: params.pet_data.blood_type as any,
-            })
+            .definePetData(params.pet_data)
             .defineHealthInsurance(params.health_insurance)
             .defineResponsibleTutors(params.responsible_tutors, params.has_second_tutor)
     }

@@ -6,8 +6,22 @@ type GenericSelect = {
     value: string;
 }
 
+export interface PetData {
+    name_pet: string;
+    specie: Species | null | GenericSelect;
+    race: Breed | null | GenericSelect;
+    sex: Gender | null | GenericSelect;
+    castrated: boolean | null;
+    microchip: string | null;
+    identification_number: string | null;
+    blood_type: string | null | GenericSelect;
+    blood_donator: string | null;
+    organ_donor: string | null;
+    date_birth: string | null;
+}
+
 export interface IPetV2 {
-    id: string;
+    id?: string;
     name_tutor: string
     phone_tutor: string;
     contact_tutor: {
@@ -28,19 +42,7 @@ export interface IPetV2 {
         number: string | null;
         complement: string | null;
     };
-    pet_data: {
-        name_pet: string;
-        specie: Species | null | GenericSelect;
-        race: Breed | null | GenericSelect;
-        sex: Gender | null | GenericSelect;
-        castrated: boolean | null;
-        microchip: string | null;
-        identification_number: string | null;
-        blood_type: string | null | GenericSelect;
-        blood_donator: string | null;
-        organ_donor: string | null;
-        date_birth: string | null;
-    };
+    pet_data: PetData;
     health_insurance: {
         name: string | null;
         type_health: string | null;

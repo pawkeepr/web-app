@@ -1,9 +1,11 @@
 import { Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
-import { Pet } from '~/entities/pet';
+import { Pet } from '~/entities/Pet';
 import usePetsByDocument from '~/store/hooks/list-pets-of-tutor';
-import { IPetV2 } from '~/types/pet-v2';
+import { Breed } from '~/store/slices/pets/breedType';
+import { Gender, Species } from '~/store/slices/pets/speciesType';
+import { GenericSelect, IPetV2 } from '~/types/pet-v2';
 import DashboardLayouts from '../_layouts/dashboard/dashboard';
 import Tabs from './components/templates/vertical-tabs';
 
@@ -92,11 +94,18 @@ const NewPetPage = ({ document }: PetPageProps) => {
     const onSubmit = useCallback(async (values: IPetV2) => {
         const petData = Pet.build({
             ...values,
-            vets_data: []
+            pet_data: {
+                ...values.pet_data,
+                race: (values.pet_data.race as GenericSelect).value as Breed,
+                sex: (values.pet_data.sex as GenericSelect).value as Gender,
+                specie: (values.pet_data.specie as GenericSelect).value as Species,
+                blood_type: (values.pet_data.blood_type as GenericSelect).value as string,
+            }
         })
+
         try {
-            await handleSubmit(petData)
-            router.push('/dashboard')
+            const data = await handleSubmit(petData as IPetV2)
+            if (data) router.push('/dashboard')
         } catch (error) {
             console.log(error)
         }

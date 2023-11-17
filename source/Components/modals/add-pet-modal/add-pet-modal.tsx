@@ -74,7 +74,6 @@ const AddNewPetModal = ({ children, item }: AddModalProps) => {
         },
         castrated: false,
         avatar: null,
-        dateOfBirth: null,
         gender: Gender.unknown,
         bloodType: {
             value: '',
