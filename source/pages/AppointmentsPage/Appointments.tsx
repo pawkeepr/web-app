@@ -1,6 +1,6 @@
 import DashboardLayouts from "../_layouts/dashboard";
 
-import { IAppointmentVet } from "~/store/slices/appointment-vet/types";
+import { BOOL_STATUS, IAppointmentVet } from "~/store/slices/appointment-vet/types";
 import VerticalTabs from "./components/templates/vertical-tabs";
 
 import { Formik } from "formik";
@@ -133,11 +133,11 @@ const initialValues = (
         time_next_consultation: ""
     },
     appointment_status: {
-        scheduled: "",
-        confirmed: "",
-        done: "",
-        canceled: "",
-        reason_canceled: ""
+        scheduled: BOOL_STATUS.TRUE,
+        confirmed: BOOL_STATUS.TRUE,
+        done: BOOL_STATUS.FALSE,
+        canceled: BOOL_STATUS.FALSE,
+        reason_canceled: BOOL_STATUS.FALSE,
     },
     appointment_signature: {
         ip_address: "",

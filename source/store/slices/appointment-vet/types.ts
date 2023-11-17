@@ -150,12 +150,17 @@ export interface IDates_consultsAppointment {
     time_next_consultation: string
 }
 
+export enum BOOL_STATUS {
+    TRUE = 'yes',
+    FALSE = 'no',
+    UNFORESEEN = 'unforeseen'
+}
 export interface IStatusAppointment {
-    scheduled: string,
-    confirmed: string,
-    done: string,
-    canceled: string,
-    reason_canceled: string
+    scheduled: BOOL_STATUS,
+    confirmed: BOOL_STATUS,
+    done: BOOL_STATUS,
+    canceled: BOOL_STATUS,
+    reason_canceled: BOOL_STATUS
 }
 
 export interface ISignatureAppointment {
