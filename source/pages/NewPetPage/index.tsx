@@ -101,8 +101,6 @@ const NewPetPage = ({ document }: PetPageProps) => {
             console.log(error)
         }
 
-
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [handleSubmit])
 

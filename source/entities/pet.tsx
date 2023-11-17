@@ -147,7 +147,10 @@ export class Pet implements IPetV2 {
     defineResponsibleTutors(responsible_tutors: {
         name_tutor: string | null;
         cpf_tutor: string | null;
-    }): this {
+    },
+        has_second_tutor?: boolean
+    ): this {
+        if (!has_second_tutor) return this;
         this.responsible_tutors = responsible_tutors;
         return this;
     }
@@ -169,6 +172,6 @@ export class Pet implements IPetV2 {
                 sex: params.pet_data.blood_type as any,
             })
             .defineHealthInsurance(params.health_insurance)
-            .defineResponsibleTutors(params.responsible_tutors)
+            .defineResponsibleTutors(params.responsible_tutors, params.has_second_tutor)
     }
 }

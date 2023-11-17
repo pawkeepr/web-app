@@ -4,10 +4,10 @@ import FieldPhone from "~/Components/molecules/field-phone/field-phone";
 
 import { useFormikContext } from "formik";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
-import ControlSwitch from "~/Components/molecules/control-switch-div/switch";
 
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
+import ControlSwitchDiv from "~/Components/molecules/control-switch-div";
 import { StepProps } from "~/types/helpers";
 import usePetById from "../hooks/use-pet-by-id";
 import useTutorByDocument from "../hooks/use-tutor-by-document";
@@ -38,6 +38,8 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
         const regex = /[^a-zA-Z ]/g;
         e.target.value = e.target.value.replace(regex, "");
     };
+
+    console.log(values)
 
     return (
         <div className="card card-body shadow-lg">
@@ -85,7 +87,7 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
                     />
                     <AddressTutor disabled={tutorExists} />
                 </div>
-                <ControlSwitch
+                <ControlSwitchDiv
                     name="has_second_tutor"
                     label="O pet possui um segundo Tutor?"
                 >
@@ -110,7 +112,7 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
                         onChange={onlyWords}
                     />
 
-                </ControlSwitch>
+                </ControlSwitchDiv>
 
             </div>
             <div className="flex align-items-center justify-center gap-3 mt-4">

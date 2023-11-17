@@ -113,9 +113,6 @@ const VerticalTabs = () => {
                                             toggleVerticalTab(item.id);
                                         }}
                                     >
-                                        {/* <span className="step-title me-2">
-                                                                <i className="ri-close-circle-fill step-icon me-2"/>
-                                                            </span> */}
                                         {item.title}
                                     </NavLink>
                                 </NavItem>
