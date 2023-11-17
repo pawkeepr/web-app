@@ -74,7 +74,18 @@ export class Appointments implements IAppointmentVet {
     constructor() {
         this.id = null;
         this.id_pet = "";
-        this.pet_data = {} as any;
+        this.pet_data = {
+            blood_type: "",
+            name_pet: "",
+            race: "",
+            sex: "",
+            blood_donator: '',
+            date_birth: "",
+            identification_number: "",
+            microchip: "",
+            organ_donor: '',
+            specie: "",
+        } as IPetAppointment;
         this.cpf_tutor = "";
         this.tutor_data = {} as any;
         this.crmv_vet = "";
@@ -89,7 +100,13 @@ export class Appointments implements IAppointmentVet {
         this.info_required = {} as any;
         this.payments = {} as any;
         this.dates_consults = {} as any;
-        this.appointment_status = {} as any;
+        this.appointment_status = {
+            canceled: 'no',
+            confirmed: 'no',
+            done: 'no',
+            reason_canceled: 'no',
+            scheduled: 'yes',
+        } as IStatusAppointment;
         this.appointment_signature = {} as any;
         this.appointment_geolocation = {} as any;
         this.tests_fasts = [] as any;
@@ -127,7 +144,6 @@ export class Appointments implements IAppointmentVet {
     }
 
     definePetData(pet_data: IPetAppointment): this {
-
         this.pet_data = pet_data;
         return this;
     }

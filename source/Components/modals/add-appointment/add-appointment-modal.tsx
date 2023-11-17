@@ -1,38 +1,31 @@
-import 'react-toastify/dist/ReactToastify.css';
 
-// Formik
-import { Formik, FormikHelpers } from "formik";
+import { Formik } from "formik";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
-import { useAppDispatch } from '~/store/hooks';
-import { addNew } from '~/store/slices/newSchedule/actions';
 
-// import ComboBoxFields from "./components/organisms/combo-box-fields/combo-box-fields";
-
-type InitialValues = Partial<Nullable<Data>>
-
+import FieldDocument from "~/Components/molecules/field-document";
 import FieldTextArea from '~/Components/molecules/field-text-area/field-text-area';
 import Modal from "~/Components/organism/modal";
-import useModal from '~/hooks/use-modal';
 import { Appointments } from '~/entities/Appointments';
-import { geolocation } from '~/utils/geolocation';
+import useModal from '~/hooks/use-modal';
 import useAppointment from '~/store/hooks/appointment/use-appointment';
 
+type AddNewAppointmentProps = {
+    children?: (showModal: () => void) => JSX.Element;
+};
 
-const AddNewAppointment = ({ children, item }: AddModalProps) => {
+const AddNewAppointment = ({ children }: AddNewAppointmentProps) => {
+
     const { closeModal, open, showModal } = useModal()
     const { handleSubmit } = useAppointment();
 
-    const onSubmit = async (values: InitialValues) => {
-        
+    const onSubmit = async (values: any) => {
         const appointment = Appointments.build(values);
-        console.log(appointment.defineDatesConsults(values));
-        
-        await handleSubmit(appointment as any);
+        await handleSubmit(appointment);
     };
 
-    const initialValues: InitialValues = {
+    const initialValues = {
         date_consultation: '',
         time_consultation: '',
         type_consultation: '',
@@ -75,7 +68,11 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                         ({ isValid, handleSubmit }) => (
                             <>
 
-
+                                <FieldDocument
+                                    name="cpf_tutor"
+                                    label="CPF do tutor"
+                                    required
+                                />
                                 <div className='flex justify-around gap-3'>
                                     <FieldControl
                                         label="Data da consulta"
@@ -92,7 +89,7 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                         name="time_consultation"
                                         className=" "
                                         placeholder="exemplo='14:00'"
-                                        type="text"
+                                        type="time"
                                     />
                                 </div>
 
@@ -119,13 +116,14 @@ const AddNewAppointment = ({ children, item }: AddModalProps) => {
                                     name="observations"
                                     type="text"
                                 />
-                                <div className='flex justify-center mt-3'>  
+                                <div className='flex justify-center mt-3'>
                                     <BtnCancel
                                         label="Voltar"
                                         onClick={() => closeModal()}
                                     />
                                     <BtnPrimary
                                         label="Agendar"
+                                        disabled={!isValid}
                                         onClick={() => handleSubmit()}
                                     />
                                 </div>
