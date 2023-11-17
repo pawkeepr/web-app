@@ -10,10 +10,10 @@ import { AuthProvider } from "~/contexts/auth-context";
 import LayoutProvider from "~/contexts/layout-context";
 
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '~/aws';
 import ErrorBoundary from '~/contexts/error-boundary';
 import fakebackend from '~/helpers/AuthType/fakeBackend';
-
 
 import VLibras from '@djpfs/react-vlibras';
 
@@ -30,8 +30,8 @@ function App({ Component, pageProps }: AppProps) {
             <Provider>
                 <AuthProvider>
                     <LayoutProvider>
+                        <ToastContainer theme='colored' />
                         <Component {...pageProps} />
-                        <ToastContainer />
                     </LayoutProvider>
                 </AuthProvider>
             </Provider>
