@@ -192,6 +192,7 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
             .defineAppointmentGeolocation(geolocationData)
             .defineAppointmentSignature(signature);
         await handleSubmit(appointment as any);
+        router.push("/dashboard");
     };
 
     if (isError) return router.back();

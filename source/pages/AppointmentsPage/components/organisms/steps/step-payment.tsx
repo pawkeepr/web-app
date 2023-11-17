@@ -97,7 +97,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                 />
             </div>
 
-            <div className="flex align-items-center justify-center gap-3 mt-4">
+            <div className="flex items-center justify-center gap-3 mt-4">
                 <BtnCancel
                     label="Voltar"
                     onClick={() => {
@@ -110,13 +110,13 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     label="Concluir Consulta"
                 />
             </div>
-            <div>
+            {/* <div>
                 <BtnPrimary
                     onClick={() => console.log(send)
                     }
                     label="Enviar PDF por Whatsapp"
                 />
-            </div>
+            </div> */}
 
         </Form>
     );

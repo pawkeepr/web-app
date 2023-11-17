@@ -63,6 +63,7 @@ const ConfirmAccountForm = () => {
                                     name={'digit' + index}
                                     moveToNext={moveToNext(index)}
                                     id={'digit' + index + '-input'}
+                                    className="text-dark-600"
                                 />
                             </div>
                         ))
