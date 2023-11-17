@@ -50,13 +50,13 @@ const initialValues = (
     id_pet: id_pet as string,
     cpf_tutor,
     tutor_data: {
-        name: '',
-        email: '',
-        phone: '',
-        country: '',
-        zipCode: '',
-        state: '',
-        city: ''
+        name: name_tutor as string,
+        email: contact_tutor.email as string,
+        phone: phone_tutor as string,
+        country: location_tutor.country as string,
+        zipCode: location_tutor.zipCode as string,
+        state: location_tutor.state as string,
+        city: location_tutor.city as string
     },
     crmv_vet: '',
     cpf_cnpj_vet: '',
