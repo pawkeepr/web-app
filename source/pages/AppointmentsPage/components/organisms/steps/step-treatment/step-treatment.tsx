@@ -53,63 +53,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         name="observations"
                         type="text"
                     />
-                    {/* <FieldArray name="tests">
-                            {(arrayHelpers) => (
-                                <>
-                                    {values?.tests?.map(
-                                        (test, index) =>
-                                            <><><div
-                                                key={index}
-                                                className="flex gap-2   items-center col-span-2  "
-                                            >
-                                                <ComboBoxAutocomplete
-                                                    label={`Teste ${index + 1}`}
-                                                    name={`test${index}`}
-                                                    items={tests} />
-                                                {index == 0 && (
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => arrayHelpers.push(
-                                                            {
-                                                                type: "",
-                                                                result: "",
-                                                                comments: "",
-                                                            }
-                                                        )}
-                                                    >
-                                                        <BsPlusCircleFill
-                                                            title="Adicionar teste rápido"
-                                                            className="w-8 h-5 hover:scale-110 mt-2 text-secondary-500 transition cursor-pointer" />
-                                                    </button>
-                                                )}
 
-                                                {index > 0 && (
-                                                    <BsFillTrash3Fill
-                                                        title="Remover teste rápido"
-                                                        className="w-8 h-5 mt-2 hover:scale-110 text-red-500 cursor-pointer"
-                                                        onClick={() => arrayHelpers.remove(
-                                                            index
-                                                        )}
-                                                        type="button" />
-                                                )}
-                                            </div><div className="flex flex-col col-span-2">
-                                                    <FieldControl
-                                                        label={`Resultado do teste ${index + 1}`}
-                                                        className="form-control"
-                                                        name={`test[${index}].test_Result`}
-                                                        type="text" />
-                                                </div></><div className="flex flex-col col-span-2">
-                                                    <FieldControl
-                                                        label={`Descrições adicionais ${index + 1}`}
-                                                        className="form-control"
-                                                        name={`test[${index}].test_Comments`}
-                                                        type="text" />
-                                                </div></>
-                                    )
-                                    }
-                                </>
-                            )}
-                        </FieldArray> */}
                 </div>
             </ControlSwitchDiv>
             <ControlSwitchDiv

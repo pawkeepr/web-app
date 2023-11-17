@@ -3,6 +3,7 @@ import FieldControl from "~/Components/molecules/field-control/field-control";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 
 import MenuMultipleSelection, { CardProps } from "~/Components/organism/menu-multiple-selection/menu-multiple-selection";
+import { NUTRITION } from "~/constants/treatment-items";
 
 type Nutrition = {
     value: string
@@ -93,23 +94,7 @@ const MenuSelectionsNutritions = () => {
     return (
         <MenuMultipleSelection
             card={CardNutrition}
-            options={[
-                {
-                    value: "raçao",
-                    label: "Raçao",
-                    color: 'rgb(255 200 107);',
-                },
-                {
-                    value: "carne",
-                    label: "Carne",
-                    color: 'rgb(255 200 107);',
-                },
-                {
-                    value: "frango",
-                    label: "Frango",
-                    color: 'rgb(255 200 107);',
-                }
-            ]}
+            options={NUTRITION}
             name="nutritions"
             label="Nome do Alimento"
             items={values.nutritions}

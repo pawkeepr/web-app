@@ -1,6 +1,7 @@
 import { useFormikContext } from "formik";
 
 import MenuMultipleSelection, { CardProps } from "~/Components/organism/menu-multiple-selection";
+import { VACCINES } from "~/constants/treatment-items";
 
 type Vaccines = {
     value: string
@@ -26,11 +27,7 @@ const MenuSelection = () => {
     return (
         <MenuMultipleSelection
             card={CardVaccines}
-            options={[{
-                value: "1",
-                label: "Medicação",
-                color: 'rgb(255 200 107);',
-            }]}
+            options={VACCINES}
             name="Vaccines"
             label="Medicação"
             items={values.vaccines}

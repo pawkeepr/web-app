@@ -3,6 +3,7 @@ import FieldControl from "~/Components/molecules/field-control/field-control";
 import FieldTextArea from "~/Components/molecules/field-text-area";
 
 import MenuMultipleSelection, { CardProps } from "~/Components/organism/menu-multiple-selection";
+import { DISEASES } from "~/constants/treatment-items";
 
 type Diseases = {
     value: string
@@ -48,11 +49,7 @@ const MenuSelection = () => {
     return (
         <MenuMultipleSelection
             card={CardDiseases}
-            options={[{
-                value: "1",
-                label: "Medicação",
-                color: 'rgb(255 200 107);',
-            }]}
+            options={DISEASES}
             name="diseases"
             label="Doenças Detectadas"
             items={values.diseases}

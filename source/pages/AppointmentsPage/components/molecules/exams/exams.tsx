@@ -1,6 +1,7 @@
 import { useFormikContext } from "formik";
 
 import MenuMultipleSelection, { CardProps } from "~/Components/organism/menu-multiple-selection";
+import { EXAMS } from "~/constants/treatment-items";
 
 type Exams = {
     value: string
@@ -26,11 +27,7 @@ const MenuSelection = () => {
     return (
         <MenuMultipleSelection
             card={CardExams}
-            options={[{
-                value: "1",
-                label: "Exames",
-                color: 'rgb(255 200 107);',
-            }]}
+            options={EXAMS}
             name="Exams"
             label="Exames"
             items={values.exams}
