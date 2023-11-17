@@ -154,20 +154,21 @@ export class Pet implements IPetV2 {
 
     static build(params: IPetV2): Pet {
         return new Pet()
-        .defineID(params.id)
-        .defineNameTutor(params.name_tutor)
-        .definePhoneTutor(params.phone_tutor)
-        .defineContactTutor(params.contact_tutor)
-        .defineCpfTutor(params.cpf_tutor)
-        .defineVetsData(params.vets_data)
-        .defineLocationTutor(params.location_tutor)
-        .definePetData({...params.pet_data,
-            specie: params.pet_data.specie as any,
-            race: params.pet_data.race as any,
-            blood_type: params.pet_data.blood_type as any,
-            sex: params.pet_data.blood_type as any,
-        })
-        .defineHealthInsurance(params.health_insurance)
-        .defineResponsibleTutors(params.responsible_tutors)
+            .defineID(params.id)
+            .defineNameTutor(params.name_tutor)
+            .definePhoneTutor(params.phone_tutor)
+            .defineContactTutor(params.contact_tutor)
+            .defineCpfTutor(params.cpf_tutor)
+            .defineVetsData(params.vets_data)
+            .defineLocationTutor(params.location_tutor)
+            .definePetData({
+                ...params.pet_data,
+                specie: params.pet_data.specie as any,
+                race: params.pet_data.race as any,
+                blood_type: params.pet_data.blood_type as any,
+                sex: params.pet_data.blood_type as any,
+            })
+            .defineHealthInsurance(params.health_insurance)
+            .defineResponsibleTutors(params.responsible_tutors)
     }
 }

@@ -15,6 +15,7 @@ export interface IPetV2 {
         phone: string | null
         whatsapp: string | null
     };
+    has_second_tutor?: boolean;
     cpf_tutor: string;
     vets_data: string[];
     location_tutor: {

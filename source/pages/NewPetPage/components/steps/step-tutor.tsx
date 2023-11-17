@@ -86,6 +86,7 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
                     <AddressTutor disabled={tutorExists} />
                 </div>
                 <ControlSwitch
+                    name="has_second_tutor"
                     label="O pet possui um segundo Tutor?"
                 >
                     <div className="left mb-2">Preencha as Informações do segundo Tutor</div>
