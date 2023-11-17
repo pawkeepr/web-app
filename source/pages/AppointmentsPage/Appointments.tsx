@@ -135,7 +135,7 @@ const initialValues = (
     appointment_status: {
         scheduled: BOOL_STATUS.TRUE,
         confirmed: BOOL_STATUS.TRUE,
-        done: BOOL_STATUS.FALSE,
+        done: BOOL_STATUS.TRUE,
         canceled: BOOL_STATUS.FALSE,
         reason_canceled: BOOL_STATUS.FALSE,
     },

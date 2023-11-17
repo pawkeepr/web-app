@@ -180,13 +180,7 @@ export class Appointments implements IAppointmentVet {
     }
 
     defineAppointmentStatus(appointment_status: IStatusAppointment): this {
-        this.appointment_status = {
-            "scheduled": "yes",
-            "confirmed": "yes",
-            "done": "no",
-            "canceled": "no",
-            "reason_canceled": "unforeseen",
-        };
+        this.appointment_status = appointment_status;
         return this;
     }
 
