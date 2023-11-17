@@ -39,8 +39,6 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
         e.target.value = e.target.value.replace(regex, "");
     };
 
-    console.log(values)
-
     return (
         <div className="card card-body shadow-lg">
             <div className="p-1 m-2 mb-4">

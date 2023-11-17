@@ -33,15 +33,15 @@ const AddressTutor = ({ disabled }: StepTutorProps) => {
             const { uf, localidade, bairro, logradouro, complemento } = params
 
             startTransition(() => {
-                setFieldValue('location_tutor.address.state', uf || '')
+                setFieldValue('location_tutor.state', uf || '')
 
-                setFieldValue('location_tutor.address.city', localidade || '')
+                setFieldValue('location_tutor.city', localidade || '')
 
-                setFieldValue('location_tutor.address.neighborhood', bairro || '')
+                setFieldValue('location_tutor.neighborhood', bairro || '')
 
-                setFieldValue('location_tutor.address.street', logradouro || '')
+                setFieldValue('location_tutor.street', logradouro || '')
 
-                setFieldValue('location_tutor.address.complement', complemento || '')
+                setFieldValue('location_tutor.complement', complemento || '')
 
                 setDisabledInputs({
                     state: !!uf,
