@@ -63,6 +63,7 @@ const slice = createSlice({
             state.isLoading = LOADING.PENDING;
         },
         [SCHEDULED_CONFIRMED(GET_ALL_SUCCESS)]: (state, action: PayloadAction<Data[]>) => {
+            console.log('entra aki')
             state.all_scheduled_confirmed = action.payload;
             state.isLoading = LOADING.SUCCESS;
         },

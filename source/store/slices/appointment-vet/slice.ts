@@ -20,15 +20,21 @@ import {
 import { LOADING } from '~/helpers/loading';
 import {
     Data,
+    IAppointmentVetData,
     InitialState,
     name,
 } from './types';
 
 const initialState: InitialState = {
+    all_scheduled: [],
+    all_scheduled_canceled: [],
+    all_scheduled_confirmed: [],
+    all_scheduled_confirmed_done: [],
     error: null,
     isLoading: LOADING.IDLE,
     isLoadingOnlyOne: LOADING.IDLE
 }
+
 const slice = createSlice({
     name,
     initialState,
@@ -36,8 +42,12 @@ const slice = createSlice({
         [GET_ALL]: (state) => {
             state.isLoading = LOADING.PENDING;
         },
-        [GET_ALL_SUCCESS]: (state, action: PayloadAction<Data[]>) => {
+        [GET_ALL_SUCCESS]: (state, action: PayloadAction<IAppointmentVetData>) => {
             state.isLoading = LOADING.SUCCESS;
+            state.all_scheduled = action.payload.all_scheduled;
+            state.all_scheduled_canceled = action.payload.all_scheduled_canceled;
+            state.all_scheduled_confirmed = action.payload.all_scheduled_confirmed;
+            state.all_scheduled_confirmed_done = action.payload.all_scheduled_confirmed_done;
         },
         [GET_ALL_FAIL]: (state, action: PayloadAction<{ error: any }>) => {
             state.error = action.payload.error;

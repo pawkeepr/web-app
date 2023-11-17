@@ -9,7 +9,6 @@ import ProfileSaga from "./slices/auth/profile/sagas";
 import AccountSaga from "./slices/auth/register/sagas";
 
 import AppointmentVetSagas from './slices/appointment-vet/sagas';
-import schedule from './slices/newSchedule/sagas';
 import PetsSagas from './slices/pets/sagas';
 import TutorsSagas from './slices/tutors/sagas';
 
@@ -26,6 +25,5 @@ export default function* rootSaga() {
         fork(PetsSagas),
         fork(AppointmentVetSagas),
         fork(LoginSagas),
-        fork(schedule),
     ]);
 }

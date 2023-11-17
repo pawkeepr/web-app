@@ -308,6 +308,10 @@ export type IAppointmentVetData = {
 }
 
 export type InitialState = {
+    all_scheduled: Data[],
+    all_scheduled_canceled: Data[],
+    all_scheduled_confirmed: Data[],
+    all_scheduled_confirmed_done: Data[]
     isLoading: LOADING;
     isLoadingOnlyOne: LOADING;
     error: string | null;
