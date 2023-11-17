@@ -1,9 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 import { StaticImageData } from "next/image";
 import React from "react";
 import HeaderTitle from "~/Components/atoms/header-title";
 import Footer from "~/Layouts/Footer";
 
 import cn from 'classnames';
+import Img from "~/Components/atoms/img";
 
 type AuthLayoutProps = {
     children: React.ReactNode;
@@ -35,19 +37,19 @@ const AuthLayout = ({
                 <section className={cn(
                     "grid mobile:flex mobile:flex-1 mobile:min-h-screen mobile:flex-col mobile:!grid-cols-1 mobile:!h-full mobile:!w-full z-10 shadow-2xl rounded-lg mobile:rounded-none mobile:shadow-none mobile:overflow-hidden mobile:bg-white",
                     {
-                        "w-[60%] grid-cols-1": !image,
-                        "w-[60%] grid-cols-2": image,
+                        "w-[80%] grid-cols-1": !image,
+                        "w-[80%] grid-cols-2": image,
                     }
                 )}>
                     {image && (
                         <div className="flex flex-1 overflow-hidden !w-full !h-full relative rounded-l-xl mobile:rounded-l-none">
-                            <div
+                            <Img
+                                alt={alt}
+                                src={image as string}
                                 className=
-                                "flex-1 w-full h-full bg-no-repeat !bg-cover mobile:w-32 mobile:h-1/2 mobile:!bg-contain"
-                                style={{
-                                    background: `url(${image})`,
-                                }}
+                                "flex flex-1 w-full h-full bg-no-repeat !bg-cover  mobile:w-40 mobile:h-40 mobile:!bg-contain"
                             />
+                            <Img src={image as string} alt={alt} className="hidden mobile:block absolute inset-0 w-full h-full object-fill " />
                         </div>
                         // {/* <picture className={cn("col-span-1 ", {
                         //     "block mobile:hidden": !hasImage,
