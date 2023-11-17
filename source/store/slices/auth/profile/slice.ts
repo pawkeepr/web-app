@@ -16,7 +16,7 @@ import { ADD_FAIL, ADD_NEW, ADD_SUCCESS } from '~/store/helpers/constants';
 const initialState: InitialStateProfile = {
     isLoading: LOADING.IDLE,
     user: null,
-    error: "",
+    error: null,
 };
 
 const profileSlice = createSlice({
@@ -27,7 +27,7 @@ const profileSlice = createSlice({
             state.isLoading = LOADING.PENDING;
         },
         [ADD_SUCCESS]: (state, action) => {
-            state.error = "";
+            state.error = null;
             state.isLoading = LOADING.SUCCESS;
             state.user = action.payload.data;
         },
@@ -42,9 +42,9 @@ const profileSlice = createSlice({
             state.isLoading = LOADING.PENDING;
         },
         [EDIT_PROFILE_SUCCESS]: (state, action) => {
-            state.error = "";
+            state.error = null;
             state.isLoading = LOADING.SUCCESS;
-            state.user = action.payload.data;
+            state.user = action.payload;
         },
         [EDIT_PROFILE_ERROR]: (state, action) => {
             state.error = action.payload;

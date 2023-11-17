@@ -4,7 +4,7 @@ import {
     IAnamnesis,
     IAnamnesisAppointment,
     IAppointmentVet,
-    IDates_consultsAppointment,
+    IDatesConsultsAppointment,
     IDental_treatmentAppointment,
     IExamsAppointment,
     IGeolocationAppointment,
@@ -46,7 +46,7 @@ export class Appointments implements IAppointmentVet {
     illnesses: IllnessesAppointment[]
     info_required: IInfo_required
     payments: IPaymentsAppointment
-    dates_consults: IDates_consultsAppointment
+    dates_consults: IDatesConsultsAppointment
     appointment_status: IStatusAppointment
     appointment_signature: ISignatureAppointment
     appointment_geolocation: IGeolocationAppointment
@@ -80,14 +80,21 @@ export class Appointments implements IAppointmentVet {
             race: "",
             sex: "",
             blood_donator: '',
-            date_birth: "",
             identification_number: "",
             microchip: "",
             organ_donor: '',
             specie: "",
         } as IPetAppointment;
         this.cpf_tutor = "";
-        this.tutor_data = {} as any;
+        this.tutor_data = {
+            zipCode: "",
+            city: "",
+            country: "",
+            email: "",
+            name: "",
+            phone: "",
+            state: "",
+        } as ITutorAppointment;
         this.crmv_vet = "";
         this.cpf_cnpj_vet = "";
         this.vet_data = {} as any;
@@ -144,6 +151,7 @@ export class Appointments implements IAppointmentVet {
     }
 
     definePetData(pet_data: IPetAppointment): this {
+        if (!pet_data) return this
         this.pet_data = pet_data;
         return this;
     }
@@ -154,6 +162,7 @@ export class Appointments implements IAppointmentVet {
     }
 
     defineTutorData(tutor_data: ITutorAppointment): this {
+        if (!tutor_data) return this
         this.tutor_data = tutor_data;
         return this;
     }
@@ -190,12 +199,13 @@ export class Appointments implements IAppointmentVet {
         return this;
     }
 
-    defineDatesConsults(dates_consults: IDates_consultsAppointment): this {
+    defineDatesConsults(dates_consults: IDatesConsultsAppointment): this {
         this.dates_consults = dates_consults;
         return this;
     }
 
     defineAppointmentStatus(appointment_status: IStatusAppointment): this {
+        if (!appointment_status) return this
         this.appointment_status = appointment_status;
         return this;
     }

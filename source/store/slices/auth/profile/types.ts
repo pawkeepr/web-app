@@ -67,6 +67,6 @@ export type Profile = {
 
 export type InitialStateProfile = {
     isLoading: LOADING;
-    error?: string;
+    error?: string | null;
     user: Profile | null;
 }

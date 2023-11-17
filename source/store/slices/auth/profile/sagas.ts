@@ -29,6 +29,7 @@ function* onGetProfile() {
         const { data } = yield call(getVetProfile);
         yield put(editProfileSuccess(data));
     } catch (error) {
+        console.log(error)
         yield call([Router, Router.push], '/activation');
     }
 }

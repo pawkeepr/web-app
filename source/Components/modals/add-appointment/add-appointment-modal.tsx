@@ -11,25 +11,56 @@ import { Appointments } from '~/entities/Appointments';
 import useModal from '~/hooks/use-modal';
 import useAppointment from '~/store/hooks/appointment/use-appointment';
 
+import { useEffect } from "react";
+import * as Yup from 'yup';
+import { getProfileSession } from "~/store/actions";
+import { useAppDispatch, useAppSelector } from "~/store/hooks";
+import { Profile } from "~/store/slices/auth/profile/types";
+
 type AddNewAppointmentProps = {
     children?: (showModal: () => void) => JSX.Element;
 };
+
+const validationSchema = Yup.object().shape({
+    dates_consults: Yup.object().shape({
+        date_consultation: Yup.string().required('Campo obrigatório'),
+        time_consultation: Yup.string().required('Campo obrigatório'),
+        type_consultation: Yup.string().required('Campo obrigatório'),
+        reason_consultation: Yup.string().required('Campo obrigatório'),
+    })
+});
+
 
 const AddNewAppointment = ({ children }: AddNewAppointmentProps) => {
 
     const { closeModal, open, showModal } = useModal()
     const { handleSubmit } = useAppointment();
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(getProfileSession())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const data = useAppSelector(state => state.Profile.user) as Profile
 
     const onSubmit = async (values: any) => {
-        const appointment = Appointments.build(values);
+        const appointment = Appointments.build({
+            ...values,
+            crmv_vet: data.crmv,
+            cpf_cnpj_vet: data.cpf_cnpj,
+            vet_data: data,
+        });
         await handleSubmit(appointment);
     };
 
     const initialValues = {
-        date_consultation: '',
-        time_consultation: '',
-        type_consultation: '',
-        reason_consultation: '',
+        dates_consults: {
+            date_consultation: '',
+            time_consultation: '',
+            type_consultation: '',
+            reason_consultation: '',
+        }
     }
 
     return (
@@ -60,13 +91,13 @@ const AddNewAppointment = ({ children }: AddNewAppointmentProps) => {
 
                 <Formik
                     initialValues={initialValues}
-                    // validationSchema={validationPet}
+                    validationSchema={validationSchema}
                     onSubmit={onSubmit}
                     enableReinitialize
                 >
                     {
                         ({ isValid, handleSubmit }) => (
-                            <>
+                            <div>
 
                                 <FieldDocument
                                     name="cpf_tutor"
@@ -76,7 +107,7 @@ const AddNewAppointment = ({ children }: AddNewAppointmentProps) => {
                                 <div className='flex justify-around gap-3'>
                                     <FieldControl
                                         label="Data da consulta"
-                                        name="date_consultation"
+                                        name="dates_consults.date_consultation"
                                         required
                                         className=" "
                                         placeholder="exemplo='05/12/2023'"
@@ -86,7 +117,7 @@ const AddNewAppointment = ({ children }: AddNewAppointmentProps) => {
                                     <FieldControl
                                         label="Hora da consulta"
                                         required
-                                        name="time_consultation"
+                                        name="dates_consults.time_consultation"
                                         className=" "
                                         placeholder="exemplo='14:00'"
                                         type="time"
@@ -95,7 +126,7 @@ const AddNewAppointment = ({ children }: AddNewAppointmentProps) => {
 
                                 <FieldControl
                                     label="Tipo da consulta"
-                                    name="type_consultation"
+                                    name="dates_consults.type_consultation"
                                     required
                                     className=" "
                                     placeholder="exemplo='exame'"
@@ -103,7 +134,7 @@ const AddNewAppointment = ({ children }: AddNewAppointmentProps) => {
                                 />
                                 <FieldControl
                                     label="Razão da consulta"
-                                    name="reason_consultation"
+                                    name="dates_consults.reason_consultation"
                                     required
                                     className=" "
                                     placeholder="exemplo='consulta de rotina'"
@@ -113,7 +144,7 @@ const AddNewAppointment = ({ children }: AddNewAppointmentProps) => {
                                     label="Orientações e Anotações"
                                     className="form-control"
                                     component="textarea"
-                                    name="observations"
+                                    name="dates_consults.observations"
                                     type="text"
                                 />
                                 <div className='flex justify-center mt-3'>
@@ -127,7 +158,7 @@ const AddNewAppointment = ({ children }: AddNewAppointmentProps) => {
                                         onClick={() => handleSubmit()}
                                     />
                                 </div>
-                            </>
+                            </div>
                         )
                     }
 
