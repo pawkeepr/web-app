@@ -51,6 +51,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
             <CardPet />
 
             <ControlSwitchDiv
+                name="activities_carry"
                 label="O pet está praticando atividade física ?"
             >
                 <FieldControlSelect

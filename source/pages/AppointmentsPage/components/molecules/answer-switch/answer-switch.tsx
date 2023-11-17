@@ -62,23 +62,27 @@ const AnswerSwitch = ({
                                 <strong>{(index + 1).toString().padStart(2, '0')}. </strong>
                                 {answer.question}
                             </h6>
-                            <div className="align-middle lg:w-16 lg:h-7 w-[3.72rem] h-6">
-                                <Switch
-                                    onClick={onClick}
-                                    checked={enabled.includes(answer.name)}
-                                    onChange={(e) => onChange(e, answer.name)}
-                                    className={`${enabled.includes(answer.name) ? `bg-${color}-500` : `bg-gray-300`
-                                        }
-                        relative inline-flex h-full w-full shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
-                                >
-                                    <span className="sr-only">Use setting</span>
-                                    <span
-                                        aria-hidden="true"
-                                        className={`${enabled.includes(answer.name) ? "translate-x-9" : "translate-x-0"
+                            <div className="flex flex-row gap-1 justify-center items-center">
+                                <span className="text-xs font-semibold text-gray-500">Não</span>
+                                <div className="align-middle lg:w-16 lg:h-7 w-[3.72rem] h-6">
+                                    <Switch
+                                        onClick={onClick}
+                                        checked={enabled.includes(answer.name)}
+                                        onChange={(e) => onChange(e, answer.name)}
+                                        className={`${enabled.includes(answer.name) ? `bg-${color}-500` : `bg-gray-300`
                                             }
+                        relative inline-flex h-full w-full shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+                                    >
+                                        <span className="sr-only">Use setting</span>
+                                        <span
+                                            aria-hidden="true"
+                                            className={`${enabled.includes(answer.name) ? "translate-x-9" : "translate-x-0"
+                                                }
                         pointer-events-none inline-block lg:h-[24px] lg:w-[24px] h-[20px] w-[20px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
-                                    />
-                                </Switch>
+                                        />
+                                    </Switch>
+                                </div>
+                                <span className="text-xs font-semibold text-gray-500">Sim</span>
                             </div>
                         </div>
                     ))
