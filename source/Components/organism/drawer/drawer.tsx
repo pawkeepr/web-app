@@ -1,16 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image"
 import ArrowLeftCircleIcon from "@heroicons/react/20/solid/ArrowLeftCircleIcon";
 import Cog8ToothIcon from "@heroicons/react/24/solid/Cog8ToothIcon";
 import DashboardIcon from '@heroicons/react/24/solid/HomeIcon';
-import UserIcon from "@heroicons/react/24/solid/UserIcon";
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
+import Image from "next/image";
 import { MdPets } from 'react-icons/md';
 import { layoutModeTypes } from "~/Components/constants/layout";
 import useChangeLayoutMode from "~/hooks/use-change-layout-mode";
 
-import lightLogo from '../../../../public/logo-light.png'
-import darkLogo from '../../../../public/logo-dark.png'
+import darkLogo from '../../../../public/logo-dark.png';
+import lightLogo from '../../../../public/logo-light.png';
 
 import { button } from '~/Components/atoms/btn';
 
@@ -30,11 +29,6 @@ const items = [
         name: 'Consultas',
         icon: <DashboardIcon className="w-5 h-5" />,
         href: '/dashboard'
-    },
-    {
-        name: 'Tutores',
-        icon: <UserIcon className="w-5 h-5" />,
-        href: '/dashboard/tutors'
     },
     {
         name: 'Pets',
@@ -81,13 +75,13 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
             <div className="flex justify-between px-4">
                 <Link href="/">
                     <Image
-                        src={isLightMode? lightLogo: darkLogo}
+                        src={isLightMode ? lightLogo : darkLogo}
                         alt="Logo Pawkeepr Mode Light"
                         className="w-auto h-8"
                         height={120}
                         width={120}
-                    />        
-                   
+                    />
+
                 </Link>
                 <XMarkIcon
                     onClick={closeDrawer}

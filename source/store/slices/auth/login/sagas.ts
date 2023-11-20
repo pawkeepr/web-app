@@ -61,7 +61,7 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
 const checkTokenExpiration = (exp: number, iat: number) => {
     const currentUnixTime = new Date().getTime() / 1000
 
-    return currentUnixTime > exp || currentUnixTime > iat
+    return currentUnixTime > exp
 };
 
 export function* recoverUserByTokenSaga() {

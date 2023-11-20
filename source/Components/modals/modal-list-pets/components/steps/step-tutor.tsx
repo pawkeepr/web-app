@@ -8,6 +8,7 @@ import { InitialValues, StepProps } from '../../types'
 
 const StepTutor = ({
     previousStep,
+    isLoading,
 }: StepProps) => {
 
     const { isValid, handleSubmit, isSubmitting } = useFormikContext<InitialValues>()
@@ -37,22 +38,19 @@ const StepTutor = ({
                     placeholder="Email"
                 />
             </div>
-
             <BoxButtons
                 isValid={isValid}
                 link={false}
+                isLoading={isSubmitting || isLoading}
                 onClickCancel={previousStep}
-                success={null}
+                onClickSuccess={() => null}
+                success={({ disabled }) => <BtnPrimary
+                    isLoading={isSubmitting || isLoading}
+                    label="Concluir"
+                    type="submit"
+                    disabled={disabled || isSubmitting}
+                />}
             />
-
-            <BtnPrimary
-                isLoading={isSubmitting}
-                label="Concluir"
-                className="mt-2"
-                type="submit"
-                disabled={!isValid || isSubmitting}
-            />
-
         </Form>
     )
 }

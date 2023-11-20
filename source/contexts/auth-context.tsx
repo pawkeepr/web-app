@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { createContext, useEffect } from "react";
 import cookies from '~/constants/cookies';
 import LOADING from '~/constants/loading';
@@ -42,6 +42,7 @@ interface AuthProviderProps {
     children: React.ReactNode;
 }
 
+const PUBLIC_ROUTES = ['/', '/sign-in', '/sign-up', '/forgot-password', 'activation', 'logout', 'confirm-account']
 
 export function AuthProvider({ children }: AuthProviderProps) {
     const dispatch = useAppDispatch()
@@ -54,9 +55,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
         username,
     } = useAppSelector(state => state.Login as LoginState)
     const router = useRouter()
+    const pathname = usePathname()
+    console.log('pathname', pathname)
 
     useEffect(() => {
         const token = getCookie(cookies.token.name)
+        const isPublicRoute = PUBLIC_ROUTES.includes(pathname)
+
+        if (!token && isPublicRoute) return
 
         if (!token) {
             dispatch(signOutUser())
@@ -67,7 +73,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         dispatch(recoverUserByToken(token))
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [pathname])
 
     useEffect(() => {
         getRememberInfo()

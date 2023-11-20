@@ -5,9 +5,10 @@ import React, {
     useEffect,
     useState,
 } from "react";
+import AddNewAppointment from "~/Components/modals/add-appointment/add-appointment-modal";
 import SearchInput from "~/Components/molecules/search-input";
-import AddNewAppointment from "../modals/add-appointment/add-appointment-modal";
 
+import HorizontalTabs from "./components/organisms/templates/Horizontal-List";
 
 interface ListTabProps<T> {
     items: T[];
@@ -58,6 +59,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                     </div>
                 </div>
             </div>
+            <HorizontalTabs />
             {cards(deferredItems)}
         </React.Fragment>
     );
