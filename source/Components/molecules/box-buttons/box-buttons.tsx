@@ -23,6 +23,7 @@ type BoxButtonsProps = {
     type?: 'button' | 'submit';
     isValid?: boolean;
     link?: boolean;
+    isLoading?: boolean;
 } & hasBtnCancel & hasBtnSuccess;
 
 
@@ -30,13 +31,15 @@ type BoxButtonsProps = {
 const BoxButtons = ({
     onClickCancel,
     onClickSuccess,
+    isLoading = false,
     link = true,
     type = 'submit',
     cancel = ({
         label = 'Voltar',
         onClick,
+        isLoading,
         ...props
-    }) => <BtnCancel label={label} onClick={onClick} {...props} />,
+    }) => <BtnCancel condition={!isLoading} label={label} onClick={onClick} {...props} />,
     success = ({
         label = 'Prosseguir',
         onClick,
@@ -47,14 +50,15 @@ const BoxButtons = ({
 }: BoxButtonsProps) => {
     return (
         <div className="gap-2 justify-center flex w-full">
-            {cancel?.({ onClick: onClickCancel as Fn })}
+            {cancel?.({ onClick: onClickCancel as Fn, isLoading })}
 
 
             {success?.({
                 onClick: onClickSuccess as Fn,
                 disabled: !isValid,
                 type,
-                link
+                link,
+                isLoading
             })}
 
         </div>
