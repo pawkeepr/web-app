@@ -53,7 +53,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
 
                 <div className="flex col-span-4 items-center gap-2">
                     <Modal />
-                    <div style={{ marginTop: 10 }}>
+                    <div>
                         <AddNewAppointment />
                     </div>
                 </div>

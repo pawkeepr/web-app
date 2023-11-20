@@ -1,76 +1,101 @@
-import Link from 'next/link';
-
-import { sample } from 'lodash';
-import {
-    Card,
-    CardBody,
-    Col,
-    Row
-} from 'reactstrap';
 import MyImage from '~/Components/atoms/my-image/my-image';
+import ravena from '~/assets/images/ravena.jpeg';
 
 import { Pet } from '~/store/slices/pets/types';
+import { RadioGroup } from '@headlessui/react';
+import ViewAppointment from '~/Components/modals/view-appointment/modal-view-appointment';
 
 type CardPetsProps = {
     pet: Pet
+    checked: boolean
 }
 
-const CardPets = ({ pet }: CardPetsProps) => {
+const CardPets = ({ pet, checked}: CardPetsProps) => {
 
     if (!pet) {
         return null;
     }
 
     return (
-        <Card className="team-box">
-            <CardBody className="px-4">
-                <Row className="align-items-center team-row">
-                    <div className="col team-settings">
-                    </div>
-                    <Col lg={4}>
-                        <div className="team-profile-img">
-                            <div className="avatar-md w-24 h-24">
-                                <div className="avatar-title bg-white rounded-circle relative">
-                                    <MyImage
-                                        src={pet?.avatar}
-                                        alt={`Foto de Perfil de ${pet?.name}`}
-                                        className="img-fluid d-block rounded-circle"
-                                        fill
-                                    />
+        <div className="space-y-10 w-full">
+                <RadioGroup.Option
+                  key={pet?.name_pet}
+                  value={pet}
+                  className={({ active }) =>
+                    `${
+                      active
+                        ? 'ring-2 ring-white/20 ring-offset-2'
+                        : ''
+                    }
+                    ${checked ? 'bg-primary-500 bg-opacity-60 text-white' : 'bg-white'}
+                      relative flex cursor-pointer rounded-lg px-2 py-2 shadow-md focus:outline-none`
+                  }
+                >
+                    <>
+                      <div className="flex flex-col w-full">
+                        <div className="flex mobile:gap-3 justify-around items-center">
+                            <MyImage
+                                src={ravena}
+                                alt="Picture of the author"
+                                width={150}
+                                height={150}
+                                className="h-32 mt-3 w-32 rounded-full"
+                            />
+    
+                          <div className="flex flex-col mobile:hidden items-center">
+                            <RadioGroup.Label
+                              as="p"
+                              className={`font-medium  ${
+                                checked ? 'text-white' : 'text-gray-900'
+                              }`}
+                            >
+                              {'Informações Do Pet:'}
+                            </RadioGroup.Label>
+                            <RadioGroup.Description
+                              as="span"
+                              className={`inline ${
+                                checked ? 'text-sky-100' : 'text-gray-500'
+                              }`}
+                            >   
+                              <div className="p-2 ">
+                                    <p className="text-gray-700">Nome do pet: {pet?.pet_data.name_pet}</p>
+                                    <p className="text-gray-700">Especie: { pet?.pet_data.specie}</p>
+                                    <p className="text-gray-700">Sexo: {pet?.pet_data.sex}</p>
                                 </div>
-                            </div>
-                            <div className="team-content">
-                                <Link href="#" className="d-block"><h5 className="fs-16 mb-1">{pet?.name}</h5></Link>
-                                <p className="text-muted mb-0">
-                                    <strong>Tutor: </strong> {pet?.ownerEmergencyContact?.name}
-                                </p>
-                                {/* <p className="text-muted mb-0">{pet?.ownerEmergencyContact.phone}</p> */}
-                            </div>
+                            </RadioGroup.Description>
+                          </div>
+                          <div className="flex mobile:hidden flex-col">
+                            <RadioGroup.Label
+                              as="p"
+                              className={`font-medium  ${
+                                checked ? 'text-white' : 'text-gray-900'
+                              }`}
+                            >
+                              {'Informações Do Tutor:'}
+                            </RadioGroup.Label>
+                            <RadioGroup.Description
+                              as="span"
+                              className={`inline ${
+                                checked ? 'text-sky-100' : 'text-gray-500'
+                              }`}
+                            >
+                              <div className="p-2">
+                                    <p className="text-gray-700">Nome: {pet?.tutor_data.email}</p>
+                                    <p className="text-gray-700">Contato: {pet?.tutor_data.phone}</p>
+                                </div>
+                            </RadioGroup.Description>
+                            
+                          </div>
                         </div>
-                    </Col>
-                    <Col lg={4}>
-                        <Row className="text-muted text-center">
-                            <Col xs={6} className="border-end border-end-dashed">
-                                <h5 className="mb-1">{
-                                    sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
-                                }</h5>
-                                <p className="text-muted mb-0">Consultas</p>
-                            </Col>
-                            <Col xs={6}>
-                                <p className="text-muted mb-0">{pet.species}</p>
-                                <p className="text-muted mb-0">{pet.breed}</p>
-                            </Col>
-                        </Row>
-                    </Col>
-                    {/* <Col lg={2} className="col">
-                        <div className="text-end">
-                            <Link href="/pages-profile" className="btn btn-light view-btn">Ver Perfil</Link>
-                        </div>
-                    </Col> */}
-
-                </Row>
-            </CardBody>
-        </Card>
+                        {checked && (
+                          <div className="flex justify-end text-white">
+                            <ViewAppointment props={pet} />
+                          </div>
+                        )}
+                      </div>
+                    </>
+                </RadioGroup.Option>
+            </div>
     )
 }
 
