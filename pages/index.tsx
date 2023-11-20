@@ -1,4 +1,3 @@
-import getServerSidePropsPagesPublics from '~/helpers/get-server-side-props-pages-publics'
 import LadingPage from '~/pages/LandingPage'
 
 const LadingPagePage = () => {
@@ -9,4 +8,3 @@ const LadingPagePage = () => {
 
 export default LadingPagePage
 
-export const getServerSideProps = getServerSidePropsPagesPublics()
