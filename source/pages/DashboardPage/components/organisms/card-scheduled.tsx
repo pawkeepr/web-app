@@ -26,7 +26,6 @@ const CardScheduled = ({ checked, appointment }: CardScheduledProps) => {
                       relative flex cursor-pointer rounded-lg px-2 py-2 shadow-md focus:outline-none`
                   }
                 >
-                  {({ active }) => (
                     <>
                       <div className="flex flex-col w-full">
                         <div className="flex mobile:gap-3 justify-around items-center">
@@ -117,7 +116,6 @@ const CardScheduled = ({ checked, appointment }: CardScheduledProps) => {
                         )}
                       </div>
                     </>
-                  )}
                 </RadioGroup.Option>
             </div>
     );
