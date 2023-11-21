@@ -8,7 +8,8 @@ import { Gender, Species } from '~/store/slices/pets/speciesType';
 import { GenericSelect, IPetV2 } from '~/types/pet-v2';
 import DashboardLayouts from '../_layouts/dashboard/dashboard';
 import Tabs from './components/templates/vertical-tabs';
-
+import ModalConfirm from '~/Components/modals/modal-confirm';
+import { BtnCancel } from '~/Components/atoms/btn';
 export type InitialValues = Nullable<IPetV2>;
 
 type MakeInitialValuesProps = {
@@ -120,7 +121,26 @@ const NewPetPage = ({ document }: PetPageProps) => {
                 enableReinitialize
                 initialValues={initialValues}
             >
-                <Tabs />
+                <>
+                    <ModalConfirm
+                            title="Cancelar Consulta!"
+                            onConfirm={() => router.push("/dashboard")}
+                            description="Importante!"
+                            message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
+                        >
+                            {({ onChangeOpen }) => {
+                                return (
+                                    <BtnCancel
+                                        type="button"
+                                        label="Cancelar Consulta"
+                                        onClick={() => onChangeOpen(true)}
+                                    />
+
+                                );
+                            }}
+                    </ModalConfirm>
+                    <Tabs />
+                </>
             </Formik>
         </DashboardLayouts>
     )
