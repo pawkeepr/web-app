@@ -12,11 +12,9 @@ export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps)
         <Form className="mb-4" onSubmit={handleSubmit}>
 
             <div className="flex justify-center mb-2">Preencha as Informações do plano de saúde do Pet</div>
-            <span className="flex justify-center items-center text-secondary-500 font-semibold">Obrigatório(*)</span>
             <div className="grid grid-cols-2 mobile:grid-cols-1 gap-3 m-2 p-2">
                 <FieldControl
                     label="Nome do plano"
-                    required
                     name="health_insurance.name"
                     placeholder="Digite o nome do plano"
                 />
