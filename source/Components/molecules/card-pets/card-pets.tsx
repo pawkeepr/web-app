@@ -1,25 +1,21 @@
 import MyImage from '~/Components/atoms/my-image/my-image';
 import ravena from '~/assets/images/ravena.jpeg';
 
-import { Pet } from '~/store/slices/pets/types';
+import { Data } from '~/store/slices/pets/types';
 import { RadioGroup } from '@headlessui/react';
 import ViewAppointment from '~/Components/modals/view-appointment/modal-view-appointment';
 
 type CardPetsProps = {
-    pet: Pet
+    pet: Data
     checked: boolean
 }
 
 const CardPets = ({ pet, checked}: CardPetsProps) => {
 
-    if (!pet) {
-        return null;
-    }
-
     return (
-        <div className="space-y-10 w-full">
+        <div className="space-y-10 mt-3 w-full">
                 <RadioGroup.Option
-                  key={pet?.name_pet}
+                  key={pet?.name_tutor}
                   value={pet}
                   className={({ active }) =>
                     `${
@@ -40,9 +36,11 @@ const CardPets = ({ pet, checked}: CardPetsProps) => {
                                 width={150}
                                 height={150}
                                 className="h-32 mt-3 w-32 rounded-full"
-                            />
+                                />
+                            <div className='flex justify-center items-center gap-3'>
+
     
-                          <div className="flex flex-col mobile:hidden items-center">
+                          <div className="flex flex-col items-center">
                             <RadioGroup.Label
                               as="p"
                               className={`font-medium  ${
@@ -58,12 +56,15 @@ const CardPets = ({ pet, checked}: CardPetsProps) => {
                               }`}
                             >   
                               <div className="p-2 ">
-                                    <p className="text-gray-700">Nome do pet: {pet?.pet_data.name_pet}</p>
-                                    <p className="text-gray-700">Especie: { pet?.pet_data.specie}</p>
-                                    <p className="text-gray-700">Sexo: {pet?.pet_data.sex}</p>
+                                    <p className="text-gray-700"><span className='font-semibold'>Nome do pet</span>: {pet?.pet_data.name_pet}</p>
+                                    <p className="text-gray-700"><span className='font-semibold'>Especie:</span>{ pet?.pet_data.specie} Vira-Lata</p>
+                                    <p className="text-gray-700"><span className='font-semibold'>Sexo:</span>{pet?.pet_data.sex}</p>
+                                    <p className="text-gray-700"><span className='font-semibold'>Castrado:</span>{pet?.pet_data.castrated} Sim</p>
                                 </div>
                             </RadioGroup.Description>
+                            </div>
                           </div>
+                          
                           <div className="flex mobile:hidden flex-col">
                             <RadioGroup.Label
                               as="p"
@@ -80,8 +81,9 @@ const CardPets = ({ pet, checked}: CardPetsProps) => {
                               }`}
                             >
                               <div className="p-2">
-                                    <p className="text-gray-700">Nome: {pet?.tutor_data.email}</p>
-                                    <p className="text-gray-700">Contato: {pet?.tutor_data.phone}</p>
+                                    <p className="text-gray-700"><span className='font-semibold'>Nome:</span> {pet?.name_tutor}</p>
+                                    <p className="text-gray-700"><span className='font-semibold'>Contato: </span>{pet?.contact_tutor.phone}</p>
+                                    <p className="text-gray-700"><span className='font-semibold'>Email: </span>{pet?.contact_tutor.email}</p>
                                 </div>
                             </RadioGroup.Description>
                             

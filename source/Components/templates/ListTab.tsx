@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import SearchInput from "~/Components/molecules/search-input";
 import AddNewAppointment from "../modals/add-appointment/add-appointment-modal";
+import HorizontalTabs from "~/pages/DashboardPage/components/organisms/templates/Horizontal-List";
 
 
 interface ListTabProps<T> {
