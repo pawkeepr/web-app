@@ -7,7 +7,6 @@ import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
 import routes from '~/routes'
 import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor'
-import { Gender } from '~/store/slices/pets/speciesType'
 import { IPet } from '~/types/pet'
 import { IPetV2 } from '~/types/pet-v2'
 import StepDocument from './components/steps/step-document'
@@ -74,8 +73,8 @@ const ModalListPets = ({
     const initialValues: IPet = {
         id: null,
         name: '',
-        species: '' as any,
-        breed: '' as any,
+        species: null,
+        breed: null,
         ownerEmergencyContact: {
             cpf_cnpj: document,
             phone: pets.length > 0 ? pets[0].contact_tutor.phone as string : '',
@@ -84,7 +83,7 @@ const ModalListPets = ({
         },
         castrated: false,
         date_birth: '',
-        gender: Gender.unknown,
+        gender: null as any,
     }
 
 
