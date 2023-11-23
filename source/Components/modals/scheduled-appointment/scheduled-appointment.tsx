@@ -235,6 +235,7 @@ const ModalListPets = ({
                                                 onChangeStep={onChangeSelectedTab}
                                                 pets={pets}
                                                 handleNavigate={handleNavigate}
+                                                closeModal={closeModal}
                                                 nextStep={nextStep}
                                                 isLoading={isLoading}
                                                 previousStep={previousStep}

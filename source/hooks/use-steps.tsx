@@ -1,7 +1,13 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 const useSteps = (steps: unknown[] = [], selectedTabInitial = 0) => {
     const [selectedTab, setSelectedTab] = useState(selectedTabInitial)
+
+    useEffect(() => {
+        return () => {
+            setSelectedTab(0)
+        }
+    }, [])
 
     const onChangeSelectedTab = (index: number) => {
         setSelectedTab(index)

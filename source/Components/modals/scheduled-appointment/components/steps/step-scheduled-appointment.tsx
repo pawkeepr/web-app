@@ -8,7 +8,7 @@ import FieldTextArea from '~/Components/molecules/field-text-area/field-text-are
 import { Appointments } from '~/entities/Appointments';
 import useAppointment from '~/store/hooks/appointment/use-appointment';
 
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import * as Yup from 'yup';
 import { StepProps } from "~/Components/modals/modal-list-pets/types";
 import BoxButtons from "~/Components/molecules/box-buttons";
@@ -29,7 +29,11 @@ const validationSchema = Yup.object().shape({
     })
 });
 
-const StepScheduledAppointment = ({ onChangeStep, pet }: StepProps & { pet: IPetV2 }) => {
+const StepScheduledAppointment = ({
+    onChangeStep,
+    pet,
+    closeModal,
+}: StepProps & { pet: IPetV2 }) => {
 
     const initialValues = useMemo(() => ({
         dates_consults: {
@@ -69,28 +73,34 @@ const StepScheduledAppointment = ({ onChangeStep, pet }: StepProps & { pet: IPet
 
     const data = useAppSelector(state => state.Profile.user) as IProfile
 
-    const onSubmit = async (values: any) => {
-        const appointment = Appointments.build({
-            ...values,
-            crmv_vet: data.crmv,
-            cpf_cnpj_vet: data.cpf_cnpj,
-            vet_data: {
-                city: data.location.city,
-                country: data.location.country,
-                email: data.contact.email,
-                name: data.firstName + ' ' + data.lastName,
-                phone: data.contact.phone,
-                state: data.location.state,
-                zipCode: data.location.zipCode,
-            },
-        });
-        const [geolocationData, signature] = await geolocation();
-        appointment
-            .defineAppointmentGeolocation(geolocationData)
-            .defineAppointmentSignature(signature)
+    const onSubmit = useCallback(
+        async (values: any) => {
+            const appointment = Appointments.build({
+                ...values,
+                crmv_vet: data.crmv,
+                cpf_cnpj_vet: data.cpf_cnpj,
+                vet_data: {
+                    city: data.location.city,
+                    country: data.location.country,
+                    email: data.contact.email,
+                    name: data.firstName + ' ' + data.lastName,
+                    phone: data.contact.phone,
+                    state: data.location.state,
+                    zipCode: data.location.zipCode,
+                },
+            });
+            const [geolocationData, signature] = await geolocation();
+            appointment
+                .defineAppointmentGeolocation(geolocationData)
+                .defineAppointmentSignature(signature)
 
-        await handleSubmit(appointment);
-    };
+            await handleSubmit(appointment);
+
+            closeModal?.()
+        },
+        [handleSubmit, closeModal, data],
+    )
+
 
 
     return (
