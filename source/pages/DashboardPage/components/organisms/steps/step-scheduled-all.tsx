@@ -2,7 +2,7 @@ import { RadioGroup } from "@headlessui/react";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import { getAll } from "~/store/slices/appointment-vet/actions";
-import CardScheduled from "../card-scheduled";
+import CardScheduled from "../organisms/card-scheduled";
 
 
 const StepAll = () => {

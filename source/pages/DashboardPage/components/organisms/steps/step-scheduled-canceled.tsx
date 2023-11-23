@@ -1,7 +1,7 @@
 import { RadioGroup } from "@headlessui/react";
 import { useState } from "react";
 import { useAppSelector } from "~/store/hooks";
-import CardScheduled from "../card-scheduled";
+import CardScheduled from "../organisms/card-scheduled";
 
 const StepCanceled = () => {
     const data = useAppSelector(state => state.AppointmentVet.all_scheduled_canceled);
