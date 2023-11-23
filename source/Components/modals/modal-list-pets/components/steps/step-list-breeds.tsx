@@ -55,7 +55,7 @@ const StepListBreeds = ({
             </div>
 
             <BoxButtons
-                isValid={!!values.species}
+                isValid={!!values.breed}
                 link={false}
                 onClickCancel={previousStep}
                 onClickSuccess={nextStep}

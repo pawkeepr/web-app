@@ -1,11 +1,17 @@
 import { RadioGroup } from "@headlessui/react";
-import { useState } from "react";
-import { useAppSelector } from "~/store/hooks";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "~/store/hooks";
+import { getAll } from "~/store/slices/appointment-vet/actions";
 import CardScheduled from "../card-scheduled";
 
 
 const StepAll = () => {
     const data = useAppSelector(state => state.AppointmentVet.all_scheduled);
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(getAll());
+    }, [dispatch]);
 
     const [selected, setSelected] = useState(null)
 

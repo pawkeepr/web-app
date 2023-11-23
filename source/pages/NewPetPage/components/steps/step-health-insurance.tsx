@@ -16,7 +16,6 @@ export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps)
             <div className="grid grid-cols-2 mobile:grid-cols-1 gap-3 m-2 p-2">
                 <FieldControl
                     label="Nome do plano"
-                    required
                     name="health_insurance.name"
                     placeholder="Digite o nome do plano"
                 />

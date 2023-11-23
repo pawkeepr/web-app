@@ -21,7 +21,7 @@ export interface PetData {
 }
 
 export interface IPetV2 {
-    id?: string;
+    id?: string | null;
     name_tutor: string
     phone_tutor: string;
     contact_tutor: {
@@ -31,7 +31,13 @@ export interface IPetV2 {
     };
     has_second_tutor?: boolean;
     cpf_tutor: string;
-    vets_data: string[];
+    vets_data: {
+        name_vet: string | null;
+        phone_vet: string | null;
+        email_vet: string | null;
+        crmv_vet: string | null;
+        cpf_cnpj_vet: string | null;
+    }[];
     location_tutor: {
         country: string | null;
         zipCode: string | null;

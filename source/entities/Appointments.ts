@@ -104,7 +104,15 @@ export class Appointments implements IAppointmentVet {
         this.exams = [] as any;
         this.nutritions = [] as any;
         this.illnesses = [] as any;
-        this.info_required = {} as any;
+        this.info_required = {
+            age: '',
+            guidelines_notes: '',
+            height: '',
+            imc: '',
+            length: '',
+            type_weight: '',
+            weight: '',
+        } as IInfo_required;
         this.payments = {} as any;
         this.dates_consults = {} as any;
         this.appointment_status = {
@@ -117,8 +125,16 @@ export class Appointments implements IAppointmentVet {
         this.appointment_signature = {} as any;
         this.appointment_geolocation = {} as any;
         this.tests_fasts = [] as any;
-        this.dental_treatment = {} as any;
-        this.well_being = {} as any;
+        this.dental_treatment = {
+            oral_examination: "",
+            reason_query: "",
+            recommendations: "",
+            treatments_performed: []
+        } as any;
+        this.well_being = {
+            activities_carry: [],
+            perform_activity: ""
+        } as any;
         this.vets_data = [] as any;
         this.name_tutor = "";
         this.contact_tutor = {} as any;
@@ -161,6 +177,12 @@ export class Appointments implements IAppointmentVet {
         return this;
     }
 
+
+    defineContactTutor(contact_tutor: ContactTutor): this {
+        this.contact_tutor = contact_tutor;
+        return this;
+    }
+
     defineTutorData(tutor_data: ITutorAppointment): this {
         if (!tutor_data) return this
         this.tutor_data = tutor_data;
@@ -190,11 +212,13 @@ export class Appointments implements IAppointmentVet {
 
 
     defineInfoRequired(info_required: IInfo_required): this {
+        if (!info_required) return this
         this.info_required = info_required;
         return this;
     }
 
     definePayments(payments: IPaymentsAppointment): this {
+        if (!payments) return this
         this.payments = payments;
         return this;
     }
@@ -221,11 +245,13 @@ export class Appointments implements IAppointmentVet {
     }
 
     defineDentalTreatment(dental_treatment: IDental_treatmentAppointment): this {
+        if (!dental_treatment) return this
         this.dental_treatment = dental_treatment;
         return this;
     }
 
     defineWellBeing(well_being: IWell_beingAppointment): this {
+        if (!well_being) return this
         this.well_being = well_being;
         return this;
     }
@@ -242,6 +268,7 @@ export class Appointments implements IAppointmentVet {
         this.tests_fasts = entity.tests_fasts
         return this
     }
+
 
     static build(params: IAppointmentVet): Appointments {
         return new Appointments()
@@ -263,5 +290,6 @@ export class Appointments implements IAppointmentVet {
             .defineTutorData(params.tutor_data)
             .defineVetData(params.vet_data)
             .defineWellBeing(params.well_being)
+            .defineContactTutor(params.contact_tutor)
     }
 };
