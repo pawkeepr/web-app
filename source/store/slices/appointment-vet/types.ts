@@ -274,7 +274,7 @@ export interface ContactTutor {
 
 export interface LocationTutor {
     country: string | null
-    zipCode: string | null
+    zipCode: string
     state: string | null
     city: string | null
     neighborhood: string | null

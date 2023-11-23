@@ -55,9 +55,9 @@ const CardScheduled = ({ checked, appointment }: CardScheduledProps) => {
                                 >
                                <div className="p-2">
                                     <p className="text-gray-700 md:hidden">Nome do pet: { appointment?.pet_data.name_pet }</p>
-                                    <p className="text-gray-700">Data: {appointment?.dates_consults.date_consultation}</p>
-                                    <p className="text-gray-700">Horário: { appointment?.dates_consults.time_consultation}</p>
-                                    <p className="text-gray-700 md:hidden">Contato:{ appointment?.tutor_data.phone}</p>
+                                    <p className="text-gray-700">Data: {appointment?.dates_consults?.date_consultation}</p>
+                                    <p className="text-gray-700">Horário: { appointment?.dates_consults?.time_consultation}</p>
+                                    <p className="text-gray-700 md:hidden">Contato:{ appointment?.tutor_data?.phone}</p>
                                 </div>
                                 </RadioGroup.Description>
                             </div>
@@ -79,10 +79,10 @@ const CardScheduled = ({ checked, appointment }: CardScheduledProps) => {
                               }`}
                             >   
                               <div className="p-2 ">
-                                    <p className="text-gray-700">Nome do pet: {appointment?.pet_data.name_pet}</p>
-                                    <p className="text-gray-700">Especie: { appointment?.pet_data.specie}</p>
-                                    <p className="text-gray-700">Sexo: {appointment?.pet_data.sex}</p>
-                                    <p className="text-gray-700">Microchip: 1294</p>
+                                    <p className="text-gray-700">Nome do pet: {appointment?.pet_data?.name_pet}</p>
+                                    <p className="text-gray-700">Especie: { appointment?.pet_data?.specie}</p>
+                                    <p className="text-gray-700">Sexo: {appointment?.pet_data?.sex}</p>
+                                    <p className="text-gray-700">Microchip: {appointment.pet_data?.microchip}</p>
                                 </div>
                             </RadioGroup.Description>
                           </div>
@@ -102,8 +102,8 @@ const CardScheduled = ({ checked, appointment }: CardScheduledProps) => {
                               }`}
                             >
                               <div className="p-2">
-                                    <p className="text-gray-700">Nome: {appointment?.tutor_data.email}</p>
-                                    <p className="text-gray-700">Contato: {appointment?.tutor_data.phone}</p>
+                                    <p className="text-gray-700">Nome: {appointment?.tutor_data?.name}</p>
+                                    <p className="text-gray-700">Contato: {appointment?.contact_tutor?.phone}</p>
                                 </div>
                             </RadioGroup.Description>
                             

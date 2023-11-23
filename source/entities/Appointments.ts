@@ -152,27 +152,32 @@ export class Appointments implements IAppointmentVet {
 
     definePetData(pet_data: IPetAppointment): this {
         if (!pet_data) return this
-        this.pet_data = pet_data;
+        this.pet_data = pet_data
         return this;
     }
 
     defineCpfTutor(cpf_tutor: string): this {
-        this.cpf_tutor = cpf_tutor;
+        this.cpf_tutor = cpf_tutor.replace(/[.-]/g, '');
         return this;
     }
 
     defineTutorData(tutor_data: ITutorAppointment): this {
+        this.tutor_data = {
+            ...tutor_data,
+           zipCode:  tutor_data.zipCode.replace(/\D/g, '')
+           }
         if (!tutor_data) return this
-        this.tutor_data = tutor_data;
         return this;
     }
 
     defineCrmvVet(crmv_vet: string): this {
+        crmv_vet = crmv_vet.replace(/[a-z]/g, '');
         this.crmv_vet = crmv_vet;
         return this;
     }
 
     defineCpfCnpjVet(cpf_cnpj_vet: string): this {
+        cpf_cnpj_vet = cpf_cnpj_vet.replace(/[.-]/g, '');
         this.cpf_cnpj_vet = cpf_cnpj_vet;
         return this;
     }
@@ -220,6 +225,15 @@ export class Appointments implements IAppointmentVet {
         return this;
     }
 
+    defineLocationTutor(location_tutor: LocationTutor): this {
+        this.location_tutor = {
+            ...location_tutor,
+           zipCode:  location_tutor.zipCode.replace(/[-]/g, '')
+           }
+        this.location_tutor = location_tutor;
+        return this;
+    }
+
     defineDentalTreatment(dental_treatment: IDental_treatmentAppointment): this {
         this.dental_treatment = dental_treatment;
         return this;
@@ -248,6 +262,7 @@ export class Appointments implements IAppointmentVet {
             .defineAnamnesis(params)
             .defineTreatment(params)
             .defineAppointmentGeolocation(params.appointment_geolocation)
+            .defineLocationTutor(params.location_tutor)
             .defineAppointmentSignature(params.appointment_signature)
             .defineAppointmentStatus(params.appointment_status)
             .defineCpfCnpjVet(params.cpf_cnpj_vet)
