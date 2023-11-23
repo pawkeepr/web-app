@@ -55,7 +55,7 @@ const STEPS_HIDDEN = [
     {
         id: 7,
         title: 'Agendar Consulta',
-        component: (props: StepProps) => <StepScheduledAppointment {...props} />
+        component: (props: StepProps & { pet: IPetV2 }) => <StepScheduledAppointment {...props} />
     }
 ]
 
@@ -64,6 +64,7 @@ const ModalListPets = ({
     children,
     selectedTabInitial = 1
 }: ModalConfirmProps) => {
+    const [pet, setPet] = useState<IPetV2 | null>(null)
     const [document, setDocument] = useState('')
     const { closeModal, open, showModal } = useModal()
 
@@ -145,9 +146,12 @@ const ModalListPets = ({
 
         if (!pet) return
 
+        setPet(pet)
+
     }, [handleSubmit])
 
     const handleNavigate = useCallback((pet: IPetV2) => {
+        setPet(pet)
         onChangeSelectedTab(STEPS.length)
     }, [onChangeSelectedTab])
 
@@ -159,9 +163,7 @@ const ModalListPets = ({
                     label="Agendar Consulta"
                     id="button-new-consult"
                     style={{ height: 42 }}
-                >
-
-                </BtnPrimary>
+                />
             )}
 
 
@@ -175,14 +177,14 @@ const ModalListPets = ({
                 nested
                 open={open}
                 lockScroll
-                className="py-4 min-h-[calc(100vh-4rem)] !overflow-x-hidden"
+                className="py-4 min-h-[calc(100vh-4rem)] "
             >
                 <Tab.Group selectedIndex={selectedTab} onChange={onChangeSelectedTab} defaultIndex={selectedTabInitial} >
                     <h1 className='text-center font-bold text-2xl'>
-                        Adicionar Pet
+                        Agendar Consulta
                     </h1>
                     <h5 className='text-center text-gray-500 mb-2'>
-                        Selecione ou Adicione um Pet para prosseguir na consulta.
+                        Selecione ou Adicione um Pet para prosseguir no agendamento da consulta.
                     </h5>
                     <Tab.List className="flex flex-row w-full justify-between">
                         {
@@ -229,6 +231,7 @@ const ModalListPets = ({
                                     ({ component: Component, id }, index) => (
                                         <Tab.Panel key={id} tabIndex={index}>
                                             <Component
+                                                pet={pet as IPetV2}
                                                 onChangeStep={onChangeSelectedTab}
                                                 pets={pets}
                                                 handleNavigate={handleNavigate}

@@ -161,6 +161,12 @@ export class Appointments implements IAppointmentVet {
         return this;
     }
 
+
+    defineContactTutor(contact_tutor: ContactTutor): this {
+        this.contact_tutor = contact_tutor;
+        return this;
+    }
+
     defineTutorData(tutor_data: ITutorAppointment): this {
         if (!tutor_data) return this
         this.tutor_data = tutor_data;
@@ -263,5 +269,6 @@ export class Appointments implements IAppointmentVet {
             .defineTutorData(params.tutor_data)
             .defineVetData(params.vet_data)
             .defineWellBeing(params.well_being)
+            .defineContactTutor(params.contact_tutor)
     }
 };

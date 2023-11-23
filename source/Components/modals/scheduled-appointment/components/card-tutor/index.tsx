@@ -5,9 +5,9 @@ type CardTutorProps = {
         name_tutor: string
         cpf_tutor: string
         contact_tutor: {
-            email: string
-            phone: string
-            whatsapp: string
+            email: string | null
+            phone: string | null
+            whatsapp: string | null
         }
     }
 }
@@ -16,8 +16,8 @@ const CardTutor = ({ tutor }: CardTutorProps) => {
 
 
     return (
-        <section className=" flex flex-col justify-start p-4">
-            <div className="gap-2 flex-wrap flex flex-col mt-2 w-full justify-between">
+        <section className=" flex flex-col justify-start">
+            <div className="gap-2 flex-wrap flex flex-col w-full justify-between">
                 <p className="text-gray-500 flex justify-between">
                     <strong className="mr-2">Tutor:</strong>
                     {tutor.name_tutor}

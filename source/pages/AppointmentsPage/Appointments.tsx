@@ -40,11 +40,11 @@ const initialValues = (
 ): InitialValues => ({
     pet_data: pet_data as any,
     vets_data: [{
-        name_vet: profile.firstName + ' ' + profile.lastName,
-        crmv_vet: profile.crmv,
-        cpf_cnpj_vet: profile.cpf_cnpj,
-        email_vet: profile.contact.email,
-        phone_vet: profile.contact.phone,
+        name_vet: profile?.firstName + ' ' + profile?.lastName,
+        crmv_vet: profile?.crmv,
+        cpf_cnpj_vet: profile?.cpf_cnpj,
+        email_vet: profile?.contact.email,
+        phone_vet: profile?.contact.phone,
     }],
     contact_tutor,
     location_tutor,
@@ -64,13 +64,13 @@ const initialValues = (
     crmv_vet: profile.crmv,
     cpf_cnpj_vet: profile.cpf_cnpj,
     vet_data: {
-        name: profile.firstName + ' ' + profile.lastName,
-        email: profile.contact.email,
-        phone: profile.contact.phone,
-        country: profile.location.country,
-        zipCode: profile.location.zipCode,
-        state: profile.location.state,
-        city: profile.location.city
+        name: profile?.firstName + ' ' + profile.lastName,
+        email: profile?.contact?.email,
+        phone: profile?.contact?.phone,
+        country: profile?.location?.country,
+        zipCode: profile?.location?.zipCode,
+        state: profile?.location?.state,
+        city: profile?.location?.city
     },
     medicines: [],
     anamnesis: {
