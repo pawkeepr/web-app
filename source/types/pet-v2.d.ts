@@ -21,7 +21,7 @@ export interface PetData {
 }
 
 export interface IPetV2 {
-    id?: string;
+    id?: string | null;
     name_tutor: string
     phone_tutor: string;
     contact_tutor: {

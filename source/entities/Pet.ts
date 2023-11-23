@@ -12,7 +12,7 @@ export class Pet implements IPetV2 {
         whatsapp: string | null
     };
     cpf_tutor: string;
-    vets_data: string[];
+    vets_data: [];
     location_tutor: {
         country: string | null;
         zipCode: string | null;
@@ -110,7 +110,7 @@ export class Pet implements IPetV2 {
         return this;
     }
 
-    defineVetsData(vets_data: string[]): this {
+    defineVetsData(vets_data: []): this {
         this.vets_data = vets_data;
         return this;
     }
@@ -162,7 +162,7 @@ export class Pet implements IPetV2 {
             .definePhoneTutor(params.phone_tutor)
             .defineContactTutor(params.contact_tutor)
             .defineCpfTutor(params.cpf_tutor)
-            .defineVetsData(params.vets_data)
+            .defineVetsData(params.vets_data as any)
             .defineLocationTutor(params.location_tutor)
             .definePetData(params.pet_data)
             .defineHealthInsurance(params.health_insurance)
