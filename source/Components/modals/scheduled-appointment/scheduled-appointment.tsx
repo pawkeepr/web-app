@@ -5,8 +5,10 @@ import { useCallback, useMemo, useState } from 'react'
 import { BtnPrimary } from '~/Components/atoms/btn'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
+import useSteps from '~/hooks/use-steps'
 import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor'
 import { IPet } from '~/types/pet'
+import { IPetV2 } from '~/types/pet-v2'
 import StepDocument from '../modal-list-pets/components/steps/step-document'
 import StepListBreeds from '../modal-list-pets/components/steps/step-list-breeds'
 import StepListGender from '../modal-list-pets/components/steps/step-list-gender'
@@ -14,6 +16,7 @@ import StepListPets from '../modal-list-pets/components/steps/step-list-pets'
 import StepListSpecies from '../modal-list-pets/components/steps/step-list-species'
 import StepTutor from '../modal-list-pets/components/steps/step-tutor'
 import { ModalConfirmProps, StepProps } from '../modal-list-pets/types'
+import StepScheduledAppointment from './components/steps/step-scheduled-appointment'
 
 const STEPS = [
     {
@@ -48,13 +51,20 @@ const STEPS = [
     },
 ]
 
+const STEPS_HIDDEN = [
+    {
+        id: 7,
+        title: 'Agendar Consulta',
+        component: (props: StepProps) => <StepScheduledAppointment {...props} />
+    }
+]
+
 
 const ModalListPets = ({
     children,
     selectedTabInitial = 1
 }: ModalConfirmProps) => {
     const [document, setDocument] = useState('')
-    const [selectedTab, setSelectedTab] = useState(selectedTabInitial)
     const { closeModal, open, showModal } = useModal()
 
     const { activeData: pets, handleSubmit, isLoading } = useListPetsOfTutor(document)
@@ -75,21 +85,17 @@ const ModalListPets = ({
         gender: null as any,
     }), [document, pets])
 
-    const onChangeSelectedTab = (index: number) => {
-        setSelectedTab(index)
-    }
+    const {
+        nextStep,
+        onChangeSelectedTab,
+        previousStep,
+        selectedTab,
+    } = useSteps(STEPS, selectedTabInitial)
+
 
     const onChangeDocument = (doc: string) => {
         setDocument(doc)
     }
-
-    const nextStep = useCallback(() => {
-        setSelectedTab(state => Math.min(state + 1, STEPS.length - 1))
-    }, [])
-
-    const previousStep = useCallback(() => {
-        setSelectedTab(state => Math.max(state - 1, 0))
-    }, [])
 
     const onSubmit = useCallback(async (values: IPet) => {
         const pet = await handleSubmit({
@@ -141,6 +147,10 @@ const ModalListPets = ({
 
     }, [handleSubmit])
 
+    const handleNavigate = useCallback((pet: IPetV2) => {
+        onChangeSelectedTab(STEPS.length)
+    }, [onChangeSelectedTab])
+
     return (
         <>
             {children?.({ onChangeOpen: showModal, onChangeDocument }) || (
@@ -158,7 +168,7 @@ const ModalListPets = ({
             <Modal
                 onOpen={() => showModal()}
                 onClose={() => {
-                    setSelectedTab(selectedTabInitial)
+                    onChangeSelectedTab(selectedTabInitial)
                     closeModal()
                 }}
                 modal
@@ -176,7 +186,7 @@ const ModalListPets = ({
                     </h5>
                     <Tab.List className="flex flex-row w-full justify-between">
                         {
-                            STEPS.map(
+                            [...STEPS, ...STEPS_HIDDEN].map(
                                 (item, index) => (
                                     <Tab
 
@@ -215,12 +225,13 @@ const ModalListPets = ({
                     >
                         <Tab.Panels className="w-full h-full relative">
                             {
-                                STEPS.map(
+                                [...STEPS, ...STEPS_HIDDEN].map(
                                     ({ component: Component, id }, index) => (
                                         <Tab.Panel key={id} tabIndex={index}>
                                             <Component
+                                                onChangeStep={onChangeSelectedTab}
                                                 pets={pets}
-                                                handleNavigate={() => { setSelectedTab(5) }}
+                                                handleNavigate={handleNavigate}
                                                 nextStep={nextStep}
                                                 isLoading={isLoading}
                                                 previousStep={previousStep}

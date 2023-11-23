@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
+import useSteps from '~/hooks/use-steps'
 import routes from '~/routes'
 import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor'
 import { IPet } from '~/types/pet'
@@ -57,10 +58,16 @@ const ModalListPets = ({
     selectedTabInitial = 1
 }: ModalConfirmProps) => {
     const [document, setDocument] = useState('')
-    const [selectedTab, setSelectedTab] = useState(selectedTabInitial)
     const { closeModal, open, showModal } = useModal()
 
     const router = useRouter()
+
+    const {
+        nextStep,
+        onChangeSelectedTab,
+        previousStep,
+        selectedTab,
+    } = useSteps(STEPS, selectedTabInitial)
 
     const handleNavigate = useCallback((pet: IPetV2) => {
         setTimeout(() => {
@@ -87,21 +94,11 @@ const ModalListPets = ({
         gender: null as any,
     }
 
-    const onChangeSelectedTab = (index: number) => {
-        setSelectedTab(index)
-    }
+
 
     const onChangeDocument = (doc: string) => {
         setDocument(doc)
     }
-
-    const nextStep = useCallback(() => {
-        setSelectedTab(state => Math.min(state + 1, STEPS.length - 1))
-    }, [])
-
-    const previousStep = useCallback(() => {
-        setSelectedTab(state => Math.max(state - 1, 0))
-    }, [])
 
     const onSubmit = useCallback(async (values: IPet) => {
         const pet = await handleSubmit({
@@ -189,7 +186,7 @@ const ModalListPets = ({
             <Modal
                 onOpen={() => showModal()}
                 onClose={() => {
-                    setSelectedTab(selectedTabInitial)
+                    onChangeSelectedTab(selectedTabInitial)
                     closeModal()
                 }}
                 modal
@@ -250,6 +247,7 @@ const ModalListPets = ({
                                     ({ component: Component, id }, index) => (
                                         <Tab.Panel key={id} tabIndex={index}>
                                             <Component
+                                                onChangeStep={onChangeSelectedTab}
                                                 pets={pets}
                                                 onChangeDocument={onChangeDocument}
                                                 handleNavigate={handleNavigate}
