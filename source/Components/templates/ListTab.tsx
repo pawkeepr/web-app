@@ -6,7 +6,6 @@ import React, {
     useState,
 } from "react";
 import SearchInput from "~/Components/molecules/search-input";
-import AddNewAppointment from "../modals/add-appointment/add-appointment-modal";
 
 
 interface ListTabProps<T> {
@@ -53,9 +52,6 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
 
                 <div className="flex col-span-4 items-center gap-2">
                     <Modal />
-                    <div>
-                        <AddNewAppointment />
-                    </div>
                 </div>
             </div>
             {cards(deferredItems)}
