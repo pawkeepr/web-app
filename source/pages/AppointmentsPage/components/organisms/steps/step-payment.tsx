@@ -5,12 +5,10 @@ import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldNumber from "~/Components/molecules/field-number/field-number";
 import { StepProps } from "~/types/helpers";
-import SendWhatsapp from "~/utils/pdf-generator/SendWhatsapp";
 import CardTutor from "../../molecules/card-tutor";
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit, isSubmitting } = useFormikContext();
-    const send = new SendWhatsapp('pdfAppointment');
 
     const [event, setEvent] = useState<string>('credit');
 
@@ -32,7 +30,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="credit"
-                            name="form_payment"
+                            name="payments.form_payment"
                             type="radio"
                             className="form-check-input"
                             defaultChecked
@@ -46,7 +44,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="debit"
-                            name="form_payment"
+                            name="payments.form_payment"
                             type="radio"
                             onChange={(e) => { setEvent('debit') }}
                             className="form-check-input"
@@ -59,7 +57,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="pix"
-                            name="form_payment"
+                            name="payments.form_payment"
                             onChange={(e) => { setEvent('pix') }}
                             type="radio"
                             className="form-check-input"
@@ -72,7 +70,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="cash"
-                            name="form_payment"
+                            name="payments.form_payment"
                             onChange={(e) => { setEvent('cash') }}
                             type="radio"
                             className="form-check-input"
@@ -87,13 +85,13 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                 <FieldControlSelect
                     label="Quantidade de Parcelas"
                     placeholder="Selecione a quantidade de parcelas"
-                    name="installments"
+                    name="payments.number_installments"
                     options={options}
                     isDisabled={event !== 'credit'}
                 />
                 <FieldNumber
                     label="Valor do Pagamento? (R$)"
-                    name="value_payment"
+                    name="payments.value_payment"
                 />
             </div>
 
