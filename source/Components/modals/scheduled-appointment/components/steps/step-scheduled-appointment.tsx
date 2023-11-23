@@ -16,6 +16,7 @@ import { getProfileSession } from "~/store/actions";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import { IPetV2 } from "~/types/pet-v2";
 import { IProfile } from "~/types/profile";
+import { geolocation } from "~/utils/geolocation";
 import CardPet from "../card-pet";
 import CardTutor from "../card-tutor";
 
@@ -32,16 +33,28 @@ const StepScheduledAppointment = ({ onChangeStep, pet }: StepProps & { pet: IPet
 
     const initialValues = useMemo(() => ({
         dates_consults: {
-            date_consultation: '',
-            time_consultation: '',
-            type_consultation: '',
-            reason_consultation: '',
+            additional_remarks: "",
+            date_consultation: "",
+            date_next_consultation: "",
+            reason_consultation: "",
+            time_consultation: "",
+            time_next_consultation: "",
+            type_consultation: ""
         },
         contact_tutor: pet?.contact_tutor,
         cpf_tutor: pet?.cpf_tutor,
         id_pet: pet?.id,
         pet_data: pet?.pet_data,
         name_tutor: pet?.name_tutor,
+        tutor_data: {
+            city: pet?.location_tutor.city,
+            country: pet?.location_tutor.country,
+            email: pet?.contact_tutor.email,
+            name: pet?.name_tutor,
+            phone: pet?.contact_tutor.phone,
+            state: pet?.location_tutor.state,
+            zipCode: pet?.location_tutor.zipCode,
+        }
     }),
         [pet]
     )
@@ -61,8 +74,21 @@ const StepScheduledAppointment = ({ onChangeStep, pet }: StepProps & { pet: IPet
             ...values,
             crmv_vet: data.crmv,
             cpf_cnpj_vet: data.cpf_cnpj,
-            vet_data: data,
+            vet_data: {
+                city: data.location.city,
+                country: data.location.country,
+                email: data.contact.email,
+                name: data.firstName + ' ' + data.lastName,
+                phone: data.contact.phone,
+                state: data.location.state,
+                zipCode: data.location.zipCode,
+            },
         });
+        const [geolocationData, signature] = await geolocation();
+        appointment
+            .defineAppointmentGeolocation(geolocationData)
+            .defineAppointmentSignature(signature)
+
         await handleSubmit(appointment);
     };
 
