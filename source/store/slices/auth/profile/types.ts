@@ -2,6 +2,7 @@ import LOADING from "~/constants/loading";
 import {
     ADD_FAIL, ADD_NEW, ADD_SUCCESS,
 } from "~/store/helpers/constants";
+import { IProfile } from "~/types/profile";
 
 export const name = "profile";
 
@@ -29,44 +30,9 @@ export enum RULES {
     TUTOR = 3,
 }
 
-type Specialty = {
-    type: string;
-    name_specialty: string;
-}
-
-type Contact = {
-    email: string;
-    phone: string;
-    whatsapp: string;
-}
-
-type Location = {
-    country: string;
-    zipCode: string;
-    state: string;
-    city: string;
-    neighborhood: string;
-    street: string;
-    number: string;
-    complement: string;
-}
-
-export type Profile = {
-    id?: string
-    firstName: string;
-    lastName: string;
-    crmv: string;
-    cpf_cnpj: string;
-    specialty: string;
-    list_service_type: string[];
-    list_specialty: Specialty[];
-    type: number;
-    contact: Contact;
-    location: Location;
-}
 
 export type InitialStateProfile = {
     isLoading: LOADING;
     error?: string | null;
-    user: Profile | null;
+    user: IProfile | null;
 }

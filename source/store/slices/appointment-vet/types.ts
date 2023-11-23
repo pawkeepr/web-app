@@ -264,6 +264,8 @@ export interface VetsData {
     name_vet: string | null
     crmv_vet: string | null
     cpf_cnpj_vet: string | null
+    phone_vet: string | null
+    email_vet: string | null
 }
 
 export interface ContactTutor {

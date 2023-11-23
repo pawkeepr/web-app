@@ -50,6 +50,14 @@ const STEPS = [
     },
 ]
 
+const STEPS_HIDDEN = [
+    {
+        id: 7,
+        title: 'Consulta',
+        component: (props: StepProps) => <StepDocument {...props} />
+    },
+]
+
 const ModalListPets = ({
     children,
     label,
@@ -85,8 +93,6 @@ const ModalListPets = ({
         date_birth: '',
         gender: null as any,
     }
-
-
 
     const onChangeSelectedTab = (index: number) => {
         setSelectedTab(index)
@@ -225,7 +231,6 @@ const ModalListPets = ({
                             STEPS.map(
                                 (item, index) => (
                                     <div
-
                                         key={item.id}
                                         className={cn(
                                             "p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full",
