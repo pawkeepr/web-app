@@ -80,7 +80,6 @@ const ModalListPets = ({
     }
 
     const onChangeDocument = (doc: string) => {
-        console.log(doc)
         setDocument(doc)
     }
 

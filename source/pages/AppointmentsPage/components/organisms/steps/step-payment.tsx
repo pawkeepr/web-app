@@ -110,13 +110,6 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     label="Concluir Consulta"
                 />
             </div>
-            {/* <div>
-                <BtnPrimary
-                    onClick={() => console.log(send)
-                    }
-                    label="Enviar PDF por Whatsapp"
-                />
-            </div> */}
 
         </Form>
     );
