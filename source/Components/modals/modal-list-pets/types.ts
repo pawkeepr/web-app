@@ -32,6 +32,7 @@ export type InitialValues = {
 export type StepProps = {
     nextStep: () => void
     previousStep: () => void
+    onChangeDocument: (doc: string) => void
     pets: IPetV2[]
     handleNavigate: (pet: IPetV2) => void
     isLoading?: boolean

@@ -5,7 +5,7 @@ import React, {
     useEffect,
     useState,
 } from "react";
-import AddNewAppointment from "~/Components/modals/add-appointment/add-appointment-modal";
+import ScheduledNewAppointment from "~/Components/modals/scheduled-appointment";
 import SearchInput from "~/Components/molecules/search-input";
 
 import HorizontalTabs from "./components/organisms/templates/Horizontal-List";
@@ -55,7 +55,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                 <div className="flex col-span-4 items-center gap-2">
                     <Modal />
                     <div style={{ marginTop: 10 }}>
-                        <AddNewAppointment />
+                        <ScheduledNewAppointment selectedTabInitial={0} />
                     </div>
                 </div>
             </div>

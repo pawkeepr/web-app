@@ -37,7 +37,7 @@ export interface IPetV2 {
         email_vet: string | null;
         crmv_vet: string | null;
         cpf_cnpj_vet: string | null;
-    };
+    }[];
     location_tutor: {
         country: string | null;
         zipCode: string | null;

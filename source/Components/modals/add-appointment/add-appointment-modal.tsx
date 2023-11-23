@@ -15,7 +15,7 @@ import { useEffect } from "react";
 import * as Yup from 'yup';
 import { getProfileSession } from "~/store/actions";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
-import { Profile } from "~/store/slices/auth/profile/types";
+import { IProfile } from "~/types/profile";
 
 type AddNewAppointmentProps = {
     children?: (showModal: () => void) => JSX.Element;
@@ -42,7 +42,7 @@ const AddNewAppointment = ({ children }: AddNewAppointmentProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const data = useAppSelector(state => state.Profile.user) as Profile
+    const data = useAppSelector(state => state.Profile.user) as IProfile
 
     const onSubmit = async (values: any) => {
         const appointment = Appointments.build({
@@ -98,7 +98,6 @@ const AddNewAppointment = ({ children }: AddNewAppointmentProps) => {
                     {
                         ({ isValid, handleSubmit }) => (
                             <div>
-
                                 <FieldDocument
                                     name="cpf_tutor"
                                     label="CPF do tutor"

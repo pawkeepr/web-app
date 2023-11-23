@@ -1,21 +1,19 @@
 import { Tab } from '@headlessui/react'
 import cn from 'classnames'
 import { Formik } from 'formik'
-import { useRouter } from 'next/navigation'
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
+import { BtnPrimary } from '~/Components/atoms/btn'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
-import routes from '~/routes'
 import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor'
 import { IPet } from '~/types/pet'
-import { IPetV2 } from '~/types/pet-v2'
-import StepDocument from './components/steps/step-document'
-import StepListBreeds from './components/steps/step-list-breeds'
-import StepListGender from './components/steps/step-list-gender'
-import StepListPets from './components/steps/step-list-pets'
-import StepListSpecies from './components/steps/step-list-species'
-import StepTutor from './components/steps/step-tutor'
-import { ModalConfirmProps, StepProps } from './types'
+import StepDocument from '../modal-list-pets/components/steps/step-document'
+import StepListBreeds from '../modal-list-pets/components/steps/step-list-breeds'
+import StepListGender from '../modal-list-pets/components/steps/step-list-gender'
+import StepListPets from '../modal-list-pets/components/steps/step-list-pets'
+import StepListSpecies from '../modal-list-pets/components/steps/step-list-species'
+import StepTutor from '../modal-list-pets/components/steps/step-tutor'
+import { ModalConfirmProps, StepProps } from '../modal-list-pets/types'
 
 const STEPS = [
     {
@@ -53,25 +51,15 @@ const STEPS = [
 
 const ModalListPets = ({
     children,
-    label,
     selectedTabInitial = 1
 }: ModalConfirmProps) => {
     const [document, setDocument] = useState('')
     const [selectedTab, setSelectedTab] = useState(selectedTabInitial)
     const { closeModal, open, showModal } = useModal()
 
-    const router = useRouter()
-
-    const handleNavigate = useCallback((pet: IPetV2) => {
-        setTimeout(() => {
-            router.push(`${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`)
-        }, 300)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [document])
-
     const { activeData: pets, handleSubmit, isLoading } = useListPetsOfTutor(document)
 
-    const initialValues: IPet = {
+    const initialValues: IPet = useMemo(() => ({
         id: null,
         name: '',
         species: null,
@@ -85,13 +73,14 @@ const ModalListPets = ({
         castrated: false,
         date_birth: '',
         gender: null as any,
-    }
+    }), [document, pets])
 
     const onChangeSelectedTab = (index: number) => {
         setSelectedTab(index)
     }
 
     const onChangeDocument = (doc: string) => {
+        console.log(doc)
         setDocument(doc)
     }
 
@@ -151,39 +140,20 @@ const ModalListPets = ({
 
         if (!pet) return
 
-        handleNavigate(pet)
-
-    }, [handleSubmit, handleNavigate])
+    }, [handleSubmit])
 
     return (
         <>
-            {
-                children && children({ onChangeOpen: showModal, onChangeDocument })
-            }
-            {
-                !children && (
-                    <div className="flex items-center justify-center">
-                        <button
-                            type="button"
-                            onClick={() => showModal()}
-                            className="
-                                rounded-md 
-                                bg-secondary-500 bg-opacity-20 
-                                px-4 py-2 text-sm 
-                                font-medium 
-                                text-white 
-                                hover:bg-opacity-30 
-                                focus:outline-none 
-                                focus-visible:ring-2 
-                                focus-visible:ring-white 
-                                focus-visible:ring-opacity-75
-                            "
-                        >
-                            {label}
-                        </button>
-                    </div>
-                )
-            }
+            {children?.({ onChangeOpen: showModal, onChangeDocument }) || (
+                <BtnPrimary
+                    onClick={showModal}
+                    label="Agendar Consulta"
+                    id="button-new-consult"
+                    style={{ height: 42 }}
+                >
+
+                </BtnPrimary>
+            )}
 
 
             <Modal
@@ -251,11 +221,11 @@ const ModalListPets = ({
                                         <Tab.Panel key={id} tabIndex={index}>
                                             <Component
                                                 pets={pets}
-                                                onChangeDocument={onChangeDocument}
-                                                handleNavigate={handleNavigate}
+                                                handleNavigate={() => { setSelectedTab(5) }}
                                                 nextStep={nextStep}
                                                 isLoading={isLoading}
                                                 previousStep={previousStep}
+                                                onChangeDocument={onChangeDocument}
                                             />
                                         </Tab.Panel>
                                     )
