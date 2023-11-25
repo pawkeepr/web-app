@@ -33,7 +33,7 @@ export const WHATSAPP_SEND_MESSAGE = () => "/2010-04-01/Accounts/ACb33f50f8531ff
 
 // Appointment Vet
 
-export const APPOINTMENT_GET_ALL_DONE = () => '/api-appointment/fetch-all-appointment-done'
-export const APPOINTMENT_GET_ALL_CANCELED = () => '/api-appointment/fetch-all-appointment-canceled'
-export const APPOINTMENT_GET_ALL_SCHEDULED = () => '/api-appointment/fetch-all-appointment-scheduled'
-export const APPOINTMENT_GET_ALL_CONFIRMED = () => '/api-appointment/fetch-all-appointment-confirmed'
+export const APPOINTMENT_GET_ALL_DONE = () => '/api-appointment/fetch-all-appointment-done-vet'
+export const APPOINTMENT_GET_ALL_CANCELED = () => '/api-appointment/fetch-all-appointment-canceled-vet'
+export const APPOINTMENT_GET_ALL_SCHEDULED = () => '/api-appointment/fetch-all-appointment-scheduled-vet'
+export const APPOINTMENT_GET_ALL_CONFIRMED = () => '/api-appointment/fetch-all-appointment-confirmed-vet'
