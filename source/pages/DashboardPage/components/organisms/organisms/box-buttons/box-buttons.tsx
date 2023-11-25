@@ -1,5 +1,6 @@
 import { BtnCancel, BtnLabel, BtnPrimary } from '~/Components/atoms/btn';
 import withLoading from '~/Components/helpers/with-loading';
+import CanceledScheduledModal from '~/Components/modals/canceled-scheduled-modal';
 
 type BoxButtonsProps = {
     isLoading?: boolean;
@@ -11,12 +12,20 @@ const BoxButtons = ({
 }: BoxButtonsProps) => {
     return (
         <div className="gap-1 justify-end flex w-full mobile:grid mobile:grid-cols-1 flex-wrap">
-            <BtnLabel
-                condition={!isLoading}
-                label='Cancelar Consulta'
-                onClick={() => { }}
-                className='text-red-500 border-none mobile:col-span-1'
-            />
+
+            <CanceledScheduledModal>
+                {
+                    ({ showModal }) => (
+                        <BtnLabel
+                            condition={!isLoading}
+                            label='Cancelar Consulta'
+                            onClick={showModal.bind(null, true)}
+                            className='text-red-500 border-none mobile:col-span-1'
+                        />
+                    )
+                }
+            </CanceledScheduledModal>
+
             <BtnCancel
                 condition={!isLoading}
                 label='Reagendar Consulta'
