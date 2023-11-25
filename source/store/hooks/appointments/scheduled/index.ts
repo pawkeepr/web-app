@@ -5,7 +5,7 @@ import useAppStore from '../../use-app-store'
 
 const NAME = 'appointment-scheduled'
 
-const useAppointmentScheduled = (
+export const useAppointmentScheduled = (
 ) => {
     const superKeys = [NAME]
 
