@@ -4,7 +4,6 @@ import {
     useQueryClient
 } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
-import { isArray } from 'lodash'
 import { useCallback, useMemo } from 'react'
 import useAppQuery, { Fn } from '~/hooks/use-app-query'
 import { errorToast, successToast } from '../helpers/toast'
@@ -46,7 +45,7 @@ const useAppStore = <T,>({
 }: Stores<T>) => {
     const superKeys = ['active', ...keys]
 
-    const { isLoading, data, error, isError } = useAppQuery<T[]>(superKeys, get!, {
+    const { isLoading, data, error, isError } = useAppQuery<T>(superKeys, get!, {
         ...options,
         initialData: [],
         keepPreviousData: true,
@@ -139,7 +138,7 @@ const useAppStore = <T,>({
 
     return {
         isLoading,
-        activeData: isArray(data) ? data : [],
+        activeData: data,
         error,
         addData,
         isError,
