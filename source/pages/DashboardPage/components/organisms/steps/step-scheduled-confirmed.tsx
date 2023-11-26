@@ -6,9 +6,11 @@ import CardScheduled from "../organisms/card-scheduled";
 const StepConfirmed = () => {
 
 
-    const { activeData } = useAppointmentConfirmed()
+    const { activeData, isLoading } = useAppointmentConfirmed()
 
     const [selected, setSelected] = useState(null)
+
+    if (isLoading) return <div>Loading...</div>
 
     return (
 
@@ -16,7 +18,7 @@ const StepConfirmed = () => {
             <RadioGroup.Label className="sr-only ">Server size</RadioGroup.Label>
             <div className="space-y-10 w-full">
 
-                {activeData.map((appointment) => (
+                {activeData?.scheduled?.map((appointment) => (
                     <CardScheduled key={appointment.id} checked={selected === appointment} appointment={appointment} />
                 ))}
             </div>
