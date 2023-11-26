@@ -1,95 +1,51 @@
 
 import { Tab } from '@headlessui/react';
-import { useState } from "react";
-
+import cn from 'classnames';
 import StepScheduledAll from "../steps/step-scheduled-all";
 import StepScheduledCanceled from "../steps/step-scheduled-canceled";
 import StepScheduledConfirmed from "../steps/step-scheduled-confirmed";
 import StepScheduledDone from "../steps/step-scheduled-done";
 
-function classNames(...classes: any[]) {
-    return classes.filter(Boolean).join(' ')
-}
-
+const Tabs = () => [
+    {
+        id: 1,
+        title: 'Consultas Agendadas',
+        href: '#scheduled',
+        tab: <StepScheduledAll />,
+    },
+    {
+        id: 2,
+        title: 'Consultas Canceladas',
+        href: '#canceled',
+        tab: <StepScheduledCanceled />,
+    },
+    {
+        id: 3,
+        title: 'Consultas Confirmadas',
+        href: '#confirmed',
+        tab: <StepScheduledConfirmed />,
+    },
+    {
+        id: 4,
+        title: 'Consultas Finalizadas',
+        href: '#done',
+        tab: <StepScheduledDone />,
+    },
+]
 
 const HorizontalTabs = () => {
 
-    let [categories] = useState({
-        'Consultas Agendadas': [
-            {
-                id: 1,
-                title: 'Consultas Agendadas',
-                date: '5h ago',
-                commentCount: 5,
-                shareCount: 2,
-            },
-            {
-                id: 2,
-                title: "So you've bought coffee... now what?",
-                date: '2h ago',
-                commentCount: 3,
-                shareCount: 2,
-            },
-        ],
-        'Consultas Canceladas': [
-            {
-                id: 1,
-                title: 'Consultas Canceladas',
-                date: 'Jan 7',
-                commentCount: 29,
-                shareCount: 16,
-            },
-            {
-                id: 2,
-                title: 'The most innovative things happening in coffee',
-                date: 'Mar 19',
-                commentCount: 24,
-                shareCount: 12,
-            },
-        ],
-        'Consultas Confirmadas': [
-            {
-                id: 1,
-                title: 'Consultas Confirmadas',
-                date: '2d ago',
-                commentCount: 9,
-                shareCount: 5,
-            },
-            {
-                id: 2,
-                title: "The worst advice we've ever heard about coffee",
-                date: '4d ago',
-                commentCount: 1,
-                shareCount: 2,
-            },
-        ],
-        'Consultas Finalizadas': [
-            {
-                id: 1,
-                title: 'Consultas Finalizadas',
-                date: '2d ago',
-                commentCount: 9,
-                shareCount: 5,
-            },
-            {
-                id: 2,
-                title: "The worst advice we've ever heard about coffee",
-                date: '4d ago',
-                commentCount: 1,
-                shareCount: 2,
-            },
-        ],
-    })
+    const categories = Tabs()
 
     return (
         <div className="w-full mt-2 rounded-md">
             <Tab.Group>
                 <Tab.List className="flex  rounded-xl bg-primary-500 p-1">
-                    {Object.keys(categories).map((category) => (
+                    {categories.map((category) => (
                         <Tab
-                            key={category}
+                            key={category.id}
                             className={({ selected }) =>
-                                classNames(
+                                cn(
                                     'w-full rounded-lg py-2.5 text-sm leading-5 font-bold text-white',
                                     'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
                                     selected
@@ -98,30 +54,20 @@ const HorizontalTabs = () => {
                                 )
                             }
                         >
-                            {category}
+                            {category.title}
                         </Tab>
                     ))}
                 </Tab.List>
                 <Tab.Panels className="mt-2">
-                    {Object.values(categories).map((posts, idx) => (
+                    {categories.map((item, idx) => (
                         <Tab.Panel
                             key={idx}
-                            className={classNames(
+                            className={cn(
                                 'rounded-xl bg-white p-3',
                                 'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2'
                             )}
                         >
-                            <ul>
-                                {posts.map((post) => (
-                                    <li key={'swka'}>
-                                        {post.title === 'Consultas Confirmadas' && <StepScheduledConfirmed />}
-                                        {post.title === 'Consultas Canceladas' && <StepScheduledCanceled />}
-                                        {post.title === 'Consultas Agendadas' && <StepScheduledAll />}
-                                        {post.title === 'Consultas Finalizadas' && <StepScheduledDone />}
-                                    </li>
-
-                                ))}
-                            </ul>
+                            {item.tab}
                         </Tab.Panel>
                     ))}
                 </Tab.Panels>

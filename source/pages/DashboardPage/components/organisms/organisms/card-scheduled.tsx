@@ -13,17 +13,15 @@ type CardScheduledProps = {
 
 const CardScheduled = ({ checked, appointment }: CardScheduledProps) => {
     return (
-        <RadioGroup.Option
+        <div
             key={appointment?.name_tutor}
-            value={appointment}
-            className={({ active }) => (
+            className={
                 cn(
                     'bg-white relative flex flex-col cursor-pointer rounded-lg px-2 py-2 shadow-md focus:outline-none`',
                     {
-                        'ring-2 ring-white/20 ring-offset-2': active,
                         '!bg-primary-500 bg-opacity-60 text-white': checked,
                     })
-            )
+
             }
         >
             <div className="mb-2">
@@ -110,10 +108,9 @@ const CardScheduled = ({ checked, appointment }: CardScheduledProps) => {
                     )}
 
                 </div>
-
             </div>
             <BoxButtons item={appointment} />
-        </RadioGroup.Option>
+        </div>
     );
 }
 

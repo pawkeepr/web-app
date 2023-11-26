@@ -45,7 +45,7 @@ const useAppStore = <T, G = unknown>({
 }: Stores<T, G>) => {
     const superKeys = ['active', ...keys]
 
-    const { isLoading, data, error, isError } = useAppQuery<T[]>(superKeys, get!, {
+    const { isLoading, data, error, isError } = useAppQuery<T>(superKeys, get!, {
         ...options,
         initialData: [],
         keepPreviousData: true,
