@@ -1,8 +1,7 @@
-import { Dialog, Transition } from '@headlessui/react'
 import { Form, Formik } from 'formik'
-import { Fragment } from 'react'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldTextArea from '~/Components/molecules/field-text-area'
+import Modal from "~/Components/organism/modal"
 import DateConsults from '~/entities/DatesConsults'
 import useModal from '~/hooks/use-modal'
 import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
@@ -72,111 +71,81 @@ const CanceledScheduledModal = ({
             }
 
 
-            <Transition appear show={open} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+            <Modal
+                onOpen={() => showModal}
+                onClose={() => closeModal()}
+                modal
+                nested
+                open={open}
+                lockScroll
+                className=" 
+                w-fit
+                h-fit
+                flex
+                flex-col     
+                "
+            >
 
-                    <Transition.Child
-                        as={Fragment}
-                        enter="ease-out duration-300"
-                        enterFrom="opacity-0"
-                        enterTo="opacity-100"
-                        leave="ease-in duration-200"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                    >
-                        <div className="fixed inset-0 bg-black bg-opacity-25" />
-                    </Transition.Child>
-
-                    <Formik
-                        initialValues={{
-                            ...item,
-                            reason_canceled: '',
-                        }}
-                        validationSchema={validationSchema}
-                        onSubmit={onSubmit}
-                    >
-                        {
-                            ({
-                                isValid,
-                                isSubmitting,
-                                handleSubmit,
-                            }) => (
-                                <Form className="fixed inset-0 overflow-y-auto" onSubmit={handleSubmit}>
-                                    <div className="flex min-h-full items-center justify-center p-4 text-center">
-                                        <Transition.Child
-                                            as={Fragment}
-                                            enter="ease-out duration-300"
-                                            enterFrom="opacity-0 scale-95"
-                                            enterTo="opacity-100 scale-100"
-                                            leave="ease-in duration-200"
-                                            leaveFrom="opacity-100 scale-100"
-                                            leaveTo="opacity-0 scale-95"
-                                        >
-                                            <Dialog.Panel className="
-                                        w-full 
-                                        max-w-md 
-                                        transform 
-                                        overflow-hidden 
-                                        rounded-2xl 
-                                        bg-white 
-                                        p-6 
-                                        text-left 
-                                        align-middle 
-                                        shadow-xl 
-                                        transition-all
-                                        dark:!bg-dark-500
-                                        dark:!text-gray-200
-                                        !font-sans
-                                    ">
-                                                <Dialog.Title
-                                                    as="h2"
-                                                    className="text-xl font-semibold leading-6 text-gray-600 dark:!text-gray-200 text-center"
-                                                >
-                                                    {'Cancelar Agendamento'}
-                                                </Dialog.Title>
-
-                                                <Dialog.Description
-                                                    as="p"
-                                                    className="text-xs font-bold text-primary-500 dark:!text-secondary-500 text-center mb-2"
-                                                >
-                                                    {'Esta ação não poderá ser desfeita.'}
-                                                </Dialog.Description>
-
-                                                <FieldTextArea
-                                                    required
-                                                    label="Motivo do cancelamento"
-                                                    name="reason_canceled"
-
-                                                />
-
-                                                <div className="mt-4 flex justify-center items-center">
-                                                    <BtnCancel
-                                                        type="button"
-                                                        onClick={closeModal}
-                                                        label="Desistir"
-                                                        condition={!isSubmitting}
-                                                        className='text-gray-600'
-                                                    />
-
-                                                    <BtnPrimary
-                                                        type="submit"
-                                                        label="Cancelar Agendamento"
-                                                        isLoading={isSubmitting}
-                                                        disabled={!isValid}
-                                                    />
-                                                </div>
+                <Formik
+                    initialValues={{
+                        ...item,
+                        reason_canceled: '',
+                    }}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                >
+                    {
+                        ({
+                            isValid,
+                            isSubmitting,
+                            handleSubmit,
+                        }) => (
+                            <Form className="w-full h-full flex  " onSubmit={handleSubmit}>
+                                <div className="flex flex-col min-h-full items-center justify-center p-4 text-center">
 
 
-                                            </Dialog.Panel>
-                                        </Transition.Child>
+                                    <h2
+                                        className="text-xl font-semibold leading-6 text-gray-600 dark:!text-gray-200 text-center"
+                                    >
+                                        {'Cancelar Agendamento'}
+                                    </h2>
+
+                                    <p
+                                        className="text-xs font-bold text-primary-500 dark:!text-secondary-500 text-center mb-2"
+                                    >
+                                        {'Esta ação não poderá ser desfeita.'}
+                                    </p>
+
+                                    <FieldTextArea
+                                        required
+                                        label="Motivo do cancelamento"
+                                        name="reason_canceled"
+
+                                    />
+
+                                    <div className="mt-4 flex justify-center items-center">
+                                        <BtnCancel
+                                            type="button"
+                                            onClick={closeModal}
+                                            label="Desistir"
+                                            condition={!isSubmitting}
+                                            className='text-gray-600'
+                                        />
+
+                                        <BtnPrimary
+                                            type="submit"
+                                            label="Cancelar Agendamento"
+                                            isLoading={isSubmitting}
+                                            disabled={!isValid}
+                                        />
                                     </div>
-                                </Form>
-                            )
-                        }
+                                </div>
+                            </Form>
+                        )
+                    }
 
-                    </Formik>
-                </Dialog>
-            </Transition>
+                </Formik>
+            </Modal >
         </>
     )
 }
