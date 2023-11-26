@@ -6,7 +6,6 @@ import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 
 import FieldTextArea from '~/Components/molecules/field-text-area/field-text-area';
 import { Appointments } from '~/entities/Appointments';
-import useAppointment from '~/store/hooks/appointment/use-appointment';
 
 import { useCallback, useEffect, useMemo } from "react";
 import * as Yup from 'yup';
@@ -14,6 +13,7 @@ import { StepProps } from "~/Components/modals/modal-list-pets/types";
 import BoxButtons from "~/Components/molecules/box-buttons";
 import { getProfileSession } from "~/store/actions";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
+import { useAppointmentScheduled } from "~/store/hooks/appointments";
 import { IPetV2 } from "~/types/pet-v2";
 import { IProfile } from "~/types/profile";
 import { geolocation } from "~/utils/geolocation";
@@ -63,7 +63,7 @@ const StepScheduledAppointment = ({
         [pet]
     )
 
-    const { handleSubmit, isLoading } = useAppointment();
+    const { handleSubmit, isLoading } = useAppointmentScheduled();
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -94,7 +94,7 @@ const StepScheduledAppointment = ({
                 .defineAppointmentGeolocation(geolocationData)
                 .defineAppointmentSignature(signature)
 
-            await handleSubmit(appointment);
+            await handleSubmit(appointment as any);
 
             closeModal?.()
         },

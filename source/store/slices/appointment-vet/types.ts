@@ -160,7 +160,7 @@ export interface IStatusAppointment {
     confirmed: BOOL_STATUS,
     done: BOOL_STATUS,
     canceled: BOOL_STATUS,
-    reason_canceled: BOOL_STATUS
+    reason_canceled: string
 }
 
 export interface ISignatureAppointment {

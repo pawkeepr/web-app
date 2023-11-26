@@ -7,7 +7,7 @@ import { IAppointmentVet } from "~/store/slices/appointment-vet/types";
 import BoxButtons from "./box-buttons";
 
 type CardScheduledProps = {
-    checked: boolean;
+    checked?: boolean;
     appointment: IAppointmentVet;
 }
 
@@ -26,7 +26,7 @@ const CardScheduled = ({ checked, appointment }: CardScheduledProps) => {
             )
             }
         >
-            <div>
+            <div className="mb-2">
                 <div className="flex flex-col w-full">
                     <div className="flex mobile:gap-3 justify-around items-center">
                         <MyImage
@@ -112,7 +112,7 @@ const CardScheduled = ({ checked, appointment }: CardScheduledProps) => {
                 </div>
 
             </div>
-            <BoxButtons />
+            <BoxButtons item={appointment} />
         </RadioGroup.Option>
     );
 }

@@ -30,3 +30,21 @@ export const PET_UPDATE_HEALTH = () => '/api-pet/update-pet-health'
 // whatsapp
 
 export const WHATSAPP_SEND_MESSAGE = () => "/2010-04-01/Accounts/ACb33f50f8531ffd88ddace8c7a84c10d7/Messages/SM4668463cf786f5123705e3675c00f8aa.json"
+
+// Appointment Vet
+
+export const APPOINTMENT_GET_ALL_DONE = () => '/api-appointment/fetch-all-appointment-done-vet'
+export const APPOINTMENT_GET_ALL_CANCELED = () => '/api-appointment/fetch-all-appointment-canceled-vet'
+export const APPOINTMENT_GET_ALL_SCHEDULED = () => '/api-appointment/fetch-all-appointment-scheduled-vet'
+export const APPOINTMENT_GET_ALL_CONFIRMED = () => '/api-appointment/fetch-all-appointment-confirmed-vet'
+
+
+// Appointment Update
+
+export const APPOINTMENT_UPDATE_CONFIRMED = (id_appointment: string) => `/api-appointment/update-confirmed-appointment?id_appointment=${id_appointment}`
+export const APPOINTMENT_UPDATE_CANCELED = (id_appointment: string) => `/api-appointment/update-canceled-appointment?id_appointment=${id_appointment}`
+export const APPOINTMENT_UPDATE_RESCHEDULED = (id_appointment: string) => `/api-appointment/update-rescheduled-appointment?id_appointment=${id_appointment}`
+
+// Appointment 
+
+export const APPOINTMENT_CREATE_SCHEDULED_VET = () => '/api-appointment/create-scheduled-vet'

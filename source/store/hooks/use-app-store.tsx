@@ -4,7 +4,6 @@ import {
     useQueryClient
 } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
-import { isArray } from 'lodash'
 import { useCallback, useMemo } from 'react'
 import useAppQuery, { Fn } from '~/hooks/use-app-query'
 import { errorToast, successToast } from '../helpers/toast'
@@ -12,7 +11,7 @@ import { errorToast, successToast } from '../helpers/toast'
 
 type Data<T> = T & { id?: string }
 
-type Stores<T> = {
+type Stores<T, G> = {
     keys: (string | number)[]
     name: string
     enabled?: boolean
@@ -21,7 +20,7 @@ type Stores<T> = {
         data: Partial<Data<T>>
     ) => Promise<AxiosResponse<Data<T>>>
     del?: (id: string) => Promise<AxiosResponse<Data<T>>>
-    add?: (data: Data<T>) => Promise<AxiosResponse<Data<T>>>
+    add?: (data: Data<T> | Data<G>) => Promise<AxiosResponse<Data<T>>>
     get?: Fn<T[]>
     handleCloseModal?: () => void
     entity?: {
@@ -32,7 +31,7 @@ type Stores<T> = {
 
 const TIME = 1000 * 60 * 5 // 5 min
 
-const useAppStore = <T,>({
+const useAppStore = <T, G = unknown>({
     keys,
     add,
     update,
@@ -43,7 +42,7 @@ const useAppStore = <T,>({
     handleCloseModal,
     enabled = true,
     name
-}: Stores<T>) => {
+}: Stores<T, G>) => {
     const superKeys = ['active', ...keys]
 
     const { isLoading, data, error, isError } = useAppQuery<T[]>(superKeys, get!, {
@@ -69,39 +68,26 @@ const useAppStore = <T,>({
         handleCloseModal?.()
     }, [handleCloseModal])
 
-    const onAddMutation = async (data: Data<T>) => {
-        await queryClient.cancelQueries(superKeys)
-        const oldData = queryClient.getQueryData<Data<T>[]>(superKeys)
-
-        const setOldData = (oldData: Data<T>[]) => [
-            ...oldData,
-            data,
-        ]
-
-        queryClient.setQueryData(superKeys, setOldData as any)
-
-        return { oldData }
-    }
 
     const addData = useMutation({
-        mutationFn: async (data: Data<T>) => {
-            const res = await add!(data)
-            return res.data
+        mutationFn: async (data: Data<T> | Data<G>) => {
+            const res = await add?.(data)
+
+            return res?.data as Data<T>
         },
-        onMutate: onAddMutation,
         onSuccess,
         onSettled,
         onError,
     })
 
     const handleSubmit = useCallback(
-        async (data: Data<T>) => {
+        async (data: Data<T> | Data<G>) => {
             try {
                 if (entity) {
-                    data = entity.build(data)
+                    data = entity.build(data as Data<T>)
                 }
 
-                const response = await addData.mutateAsync(data)
+                const response = await addData.mutateAsync(data as Data<T>)
                 successToast('Adicionado com sucesso')
                 return response
 
@@ -139,7 +125,7 @@ const useAppStore = <T,>({
 
     return {
         isLoading,
-        activeData: isArray(data) ? data : [],
+        activeData: data,
         error,
         addData,
         isError,

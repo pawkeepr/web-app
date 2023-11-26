@@ -15,7 +15,7 @@ const Modal = ({
     <Popup
         position="bottom center"
         className='mt-2'
-        overlayStyle={{ background: 'rgba(0,0,0,0.1)' }} closeOnEscape={false} {...props}>
+        overlayStyle={{ background: 'rgba(0,0,0,0.4)' }} closeOnEscape={false} {...props}>
         <div
             className={twMerge(`
                 relative

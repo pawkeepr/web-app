@@ -1,12 +1,16 @@
 import { RadioGroup } from '@headlessui/react';
 import { useState } from 'react';
-import { useAppSelector } from "~/store/hooks";
+import { useAppointmentConfirmed } from '~/store/hooks/appointments';
 import CardScheduled from "../organisms/card-scheduled";
 
 const StepConfirmed = () => {
 
-    const data = useAppSelector(state => state.AppointmentVet.all_scheduled_confirmed);
+
+    const { activeData, isLoading } = useAppointmentConfirmed()
+
     const [selected, setSelected] = useState(null)
+
+    if (isLoading) return <div>Loading...</div>
 
     return (
 
@@ -14,7 +18,7 @@ const StepConfirmed = () => {
             <RadioGroup.Label className="sr-only ">Server size</RadioGroup.Label>
             <div className="space-y-10 w-full">
 
-                {data.map((appointment) => (
+                {activeData?.scheduled?.map((appointment) => (
                     <CardScheduled key={appointment.id} checked={selected === appointment} appointment={appointment} />
                 ))}
             </div>
