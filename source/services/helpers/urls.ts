@@ -45,3 +45,6 @@ export const APPOINTMENT_UPDATE_CONFIRMED = (id_appointment: string) => `/api-ap
 export const APPOINTMENT_UPDATE_CANCELED = (id_appointment: string) => `/api-appointment/update-canceled-appointment?id_appointment=${id_appointment}`
 export const APPOINTMENT_UPDATE_RESCHEDULED = (id_appointment: string) => `/api-appointment/update-rescheduled-appointment?id_appointment=${id_appointment}`
 
+// Appointment 
+
+export const APPOINTMENT_CREATE_SCHEDULED_VET = () => '/api-appointment/create-scheduled-vet'
