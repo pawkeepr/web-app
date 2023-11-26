@@ -1,7 +1,7 @@
 
 import { getAllAppointmentsConfirmed } from '~/services/helpers'
-import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
 import useAppStore from '../../use-app-store'
+import { ScheduledResponseAxios } from '../types'
 
 const NAME = 'appointment-confirmed'
 
@@ -9,7 +9,7 @@ export const useAppointmentConfirmed = (
 ) => {
     const superKeys = [NAME]
 
-    return useAppStore<IAppointmentVet>({
+    return useAppStore<ScheduledResponseAxios>({
         get: getAllAppointmentsConfirmed.bind(null),
         keys: superKeys,
         name: NAME,
