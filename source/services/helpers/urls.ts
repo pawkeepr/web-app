@@ -37,3 +37,11 @@ export const APPOINTMENT_GET_ALL_DONE = () => '/api-appointment/fetch-all-appoin
 export const APPOINTMENT_GET_ALL_CANCELED = () => '/api-appointment/fetch-all-appointment-canceled-vet'
 export const APPOINTMENT_GET_ALL_SCHEDULED = () => '/api-appointment/fetch-all-appointment-scheduled-vet'
 export const APPOINTMENT_GET_ALL_CONFIRMED = () => '/api-appointment/fetch-all-appointment-confirmed-vet'
+
+
+// Appointment Update
+
+export const APPOINTMENT_UPDATE_CONFIRMED = (id_appointment: string) => `/api-appointment/update-confirmed-appointment?id_appointment=${id_appointment}`
+export const APPOINTMENT_UPDATE_CANCELED = (id_appointment: string) => `/api-appointment/update-canceled-appointment?id_appointment=${id_appointment}`
+export const APPOINTMENT_UPDATE_RESCHEDULED = (id_appointment: string) => `/api-appointment/update-rescheduled-appointment?id_appointment=${id_appointment}`
+
