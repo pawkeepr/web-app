@@ -112,7 +112,7 @@ const CardScheduled = ({ checked, appointment }: CardScheduledProps) => {
                 </div>
 
             </div>
-            <BoxButtons />
+            <BoxButtons item={appointment} />
         </RadioGroup.Option>
     );
 }

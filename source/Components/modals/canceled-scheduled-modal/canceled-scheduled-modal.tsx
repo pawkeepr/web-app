@@ -1,10 +1,18 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import { Fragment } from 'react'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldTextArea from '~/Components/molecules/field-text-area'
+import DateConsults from '~/entities/DatesConsults'
 import useModal from '~/hooks/use-modal'
 import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
+
+import * as Yup from 'yup'
+
+const validationSchema = Yup.object().shape({
+    id: Yup.string().required('Campo obrigatório'),
+    reason_canceled: Yup.string().required('Campo obrigatório')
+})
 
 type onChangeOpen = (arg: boolean) => void
 
@@ -22,6 +30,15 @@ const CanceledScheduledModal = ({
     item,
 }: CanceledScheduledModalProps) => {
     const { closeModal, open, showModal } = useModal()
+
+    const onSubmit = async (values: IAppointmentVet) => {
+        const item = DateConsults.build(values)
+        console.log(item)
+
+        setTimeout(() => {
+            closeModal()
+        }, 3000)
+    }
 
     return (
         <>
@@ -71,23 +88,31 @@ const CanceledScheduledModal = ({
                     </Transition.Child>
 
                     <Formik
-                        initialValues={item}
-                        onSubmit={async (values) => {
-                            console.log(values)
+                        initialValues={{
+                            ...item,
+                            reason_canceled: '',
                         }}
+                        validationSchema={validationSchema}
+                        onSubmit={onSubmit}
                     >
-                        <div className="fixed inset-0 overflow-y-auto">
-                            <div className="flex min-h-full items-center justify-center p-4 text-center">
-                                <Transition.Child
-                                    as={Fragment}
-                                    enter="ease-out duration-300"
-                                    enterFrom="opacity-0 scale-95"
-                                    enterTo="opacity-100 scale-100"
-                                    leave="ease-in duration-200"
-                                    leaveFrom="opacity-100 scale-100"
-                                    leaveTo="opacity-0 scale-95"
-                                >
-                                    <Dialog.Panel className="
+                        {
+                            ({
+                                isValid,
+                                isSubmitting,
+                                handleSubmit,
+                            }) => (
+                                <Form className="fixed inset-0 overflow-y-auto" onSubmit={handleSubmit}>
+                                    <div className="flex min-h-full items-center justify-center p-4 text-center">
+                                        <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0 scale-95"
+                                            enterTo="opacity-100 scale-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100 scale-100"
+                                            leaveTo="opacity-0 scale-95"
+                                        >
+                                            <Dialog.Panel className="
                                         w-full 
                                         max-w-md 
                                         transform 
@@ -103,46 +128,52 @@ const CanceledScheduledModal = ({
                                         dark:!text-gray-200
                                         !font-sans
                                     ">
-                                        <Dialog.Title
-                                            as="h2"
-                                            className="text-xl font-semibold leading-6 text-gray-600 dark:!text-gray-200 text-center"
-                                        >
-                                            {'Cancelar Agendamento'}
-                                        </Dialog.Title>
+                                                <Dialog.Title
+                                                    as="h2"
+                                                    className="text-xl font-semibold leading-6 text-gray-600 dark:!text-gray-200 text-center"
+                                                >
+                                                    {'Cancelar Agendamento'}
+                                                </Dialog.Title>
 
-                                        <Dialog.Description
-                                            as="p"
-                                            className="text-xs font-bold text-primary-500 dark:!text-secondary-500 text-center mb-2"
-                                        >
-                                            {'Esta ação não poderá ser desfeita.'}
-                                        </Dialog.Description>
+                                                <Dialog.Description
+                                                    as="p"
+                                                    className="text-xs font-bold text-primary-500 dark:!text-secondary-500 text-center mb-2"
+                                                >
+                                                    {'Esta ação não poderá ser desfeita.'}
+                                                </Dialog.Description>
 
-                                        <FieldTextArea
-                                            required
-                                            label="Motivo do cancelamento"
-                                            name="appointment_status.reason_canceled"
+                                                <FieldTextArea
+                                                    required
+                                                    label="Motivo do cancelamento"
+                                                    name="reason_canceled"
 
-                                        />
+                                                />
 
-                                        <div className="mt-4 flex justify-center items-center">
-                                            <BtnCancel
-                                                type="button"
-                                                onClick={closeModal}
-                                                label="Desistir"
-                                                className='text-gray-600'
-                                            />
+                                                <div className="mt-4 flex justify-center items-center">
+                                                    <BtnCancel
+                                                        type="button"
+                                                        onClick={closeModal}
+                                                        label="Desistir"
+                                                        condition={!isSubmitting}
+                                                        className='text-gray-600'
+                                                    />
 
-                                            <BtnPrimary
-                                                type="submit"
-                                                label="Cancelar Agendamento"
-                                            />
-                                        </div>
+                                                    <BtnPrimary
+                                                        type="submit"
+                                                        label="Cancelar Agendamento"
+                                                        isLoading={isSubmitting}
+                                                        disabled={!isValid}
+                                                    />
+                                                </div>
 
 
-                                    </Dialog.Panel>
-                                </Transition.Child>
-                            </div>
-                        </div>
+                                            </Dialog.Panel>
+                                        </Transition.Child>
+                                    </div>
+                                </Form>
+                            )
+                        }
+
                     </Formik>
                 </Dialog>
             </Transition>

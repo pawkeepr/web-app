@@ -1,19 +1,22 @@
 import { BtnCancel, BtnLabel, BtnPrimary } from '~/Components/atoms/btn';
 import withLoading from '~/Components/helpers/with-loading';
 import CanceledScheduledModal from '~/Components/modals/canceled-scheduled-modal';
+import { IAppointmentVet } from '~/store/slices/appointment-vet/types';
 
 type BoxButtonsProps = {
     isLoading?: boolean;
+    item: IAppointmentVet;
 }
 
 
 const BoxButtons = ({
     isLoading = false,
+    item,
 }: BoxButtonsProps) => {
     return (
         <div className="gap-1 justify-end flex w-full mobile:grid mobile:grid-cols-1 flex-wrap">
 
-            <CanceledScheduledModal>
+            <CanceledScheduledModal item={item}>
                 {
                     ({ showModal }) => (
                         <BtnLabel
