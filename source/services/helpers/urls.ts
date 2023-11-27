@@ -1,5 +1,6 @@
 // Appointment Vet
 export const APPOINTMENT_GET_ALL = () => '/api-appointment/fetch-all-appointment-vet'
+export const APPOINTMENT_FINISHED = () => '/api-appointment/update-start-appointment'
 export const APPOINTMENT_UPDATE = () => '/api-appointment/update-appointment'
 export const APPOINTMENT_CREATE = () => '/api-appointment/create-appointment'
 export const APPOINTMENT_GET_BY_ID = () => '/api-appointment/search-appointment'
