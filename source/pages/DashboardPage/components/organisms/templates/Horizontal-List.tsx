@@ -5,6 +5,7 @@ import StepScheduledAll from "../steps/step-scheduled-all";
 import StepScheduledCanceled from "../steps/step-scheduled-canceled";
 import StepScheduledConfirmed from "../steps/step-scheduled-confirmed";
 import StepScheduledDone from "../steps/step-scheduled-done";
+import StepScheduledRescheduled from "../steps/step-scheduled-rescheduled";
 
 const Tabs = () => [
     {
@@ -14,19 +15,24 @@ const Tabs = () => [
         tab: <StepScheduledAll />,
     },
     {
-        id: 2,
+        title: 'Consultas Reagendadas',
+        href: '#rescheduled',
+        tab: <StepScheduledRescheduled />,
+    },
+    {
+        id: 3,
         title: 'Consultas Canceladas',
         href: '#canceled',
         tab: <StepScheduledCanceled />,
     },
     {
-        id: 3,
+        id: 4,
         title: 'Consultas Confirmadas',
         href: '#confirmed',
         tab: <StepScheduledConfirmed />,
     },
     {
-        id: 4,
+        id: 5,
         title: 'Consultas Finalizadas',
         href: '#done',
         tab: <StepScheduledDone />,

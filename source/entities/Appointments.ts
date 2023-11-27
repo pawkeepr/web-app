@@ -30,7 +30,7 @@ import Anamnesis from "./Anamnesis"
 import Treatment from "./Treatment"
 
 export class Appointments implements IAppointmentVet {
-    id: string | null
+    id?: string | null
     id_pet: string
     pet_data: IPetAppointment
     cpf_tutor: string
