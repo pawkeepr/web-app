@@ -12,6 +12,7 @@ const FieldNumber = ({
     return (
         <FieldControl
             {...props}
+            maximumFractionDigits={2}
             placeholder={placeholder || "Digite aqui..."}
             name={name}
             component={InputNumberFormat as any}

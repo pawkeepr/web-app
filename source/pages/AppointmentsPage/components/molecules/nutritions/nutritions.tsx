@@ -27,7 +27,7 @@ const CardNutrition = ({ label, index }: CardProps<Nutrition>) => {
                 divClassName="col-span-full"
                 label="Horário que começa a alimentação"
                 name={`nutritions[${index}].time_food`}
-                type="text"
+                type="time"
             />
 
             <FieldControl
@@ -55,7 +55,7 @@ const CardNutrition = ({ label, index }: CardProps<Nutrition>) => {
             <FieldControl
                 label="Intervalo"
                 name={`nutritions[${index}].interval`}
-                type="text"
+                type="number"
             />
             <FieldControlSelect
                 label="Período"
