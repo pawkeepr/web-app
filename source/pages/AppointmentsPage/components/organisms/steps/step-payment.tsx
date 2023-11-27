@@ -2,10 +2,10 @@ import { Form, useFormikContext } from "formik";
 import { useState } from "react";
 import { Input, Label } from "reactstrap";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
+import CardTutor from "~/Components/molecules/card-tutor";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldNumber from "~/Components/molecules/field-number/field-number";
 import { StepProps } from "~/types/helpers";
-import CardTutor from "../../molecules/card-tutor";
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit, isSubmitting } = useFormikContext();

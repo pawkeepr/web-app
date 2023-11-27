@@ -17,7 +17,7 @@ type Stores<T, G> = {
     enabled?: boolean
     update?: (
         id: string,
-        data: Partial<Data<T>>
+        data: Partial<Data<T> | Data<G>>
     ) => Promise<AxiosResponse<Data<T>>>
     del?: (id: string) => Promise<AxiosResponse<Data<T>>>
     add?: (data: Data<T> | Data<G>) => Promise<AxiosResponse<Data<T>>>
@@ -80,6 +80,17 @@ const useAppStore = <T, G = unknown>({
         onError,
     })
 
+    const updateData = useMutation({
+        mutationFn: async (data: Data<T> | Data<G>) => {
+            const res = await update!(data.id as string, data)
+            return res.data
+        },
+        onSuccess,
+        onSettled,
+        onError,
+    })
+
+
     const handleSubmit = useCallback(
         async (data: Data<T> | Data<G>) => {
             try {
@@ -87,7 +98,14 @@ const useAppStore = <T, G = unknown>({
                     data = entity.build(data as Data<T>)
                 }
 
-                const response = await addData.mutateAsync(data as Data<T>)
+                let response;
+
+                if (data.id) {
+                    response = await updateData.mutateAsync(data)
+                } else {
+                    response = await addData.mutateAsync(data)
+                }
+
                 successToast('Adicionado com sucesso')
                 return response
 
@@ -112,14 +130,16 @@ const useAppStore = <T, G = unknown>({
 
             }
         },
-        [addData, entity]
+        [addData, entity, updateData]
     )
 
     const submitLoading = useMemo(
         () =>
-            addData?.isLoading,
+            addData?.isLoading ||
+            updateData?.isLoading,
         [
             addData?.isLoading,
+            updateData?.isLoading
         ]
     )
 
