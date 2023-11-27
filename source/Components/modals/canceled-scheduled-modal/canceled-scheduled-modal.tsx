@@ -2,15 +2,18 @@ import { Form, Formik } from 'formik'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import Modal from "~/Components/organism/modal"
-import DateConsults from '~/entities/DatesConsults'
-import useModal from '~/hooks/use-modal'
-import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
 
 import * as Yup from 'yup'
+import CardTutor from '~/Components/molecules/card-tutor'
+import { usePlusModal } from '~/hooks/use-plus-modal'
+import { useAppointmentCanceled } from '~/store/hooks/appointments'
+import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
 
 const validationSchema = Yup.object().shape({
     id: Yup.string().required('Campo obrigatório'),
-    reason_canceled: Yup.string().required('Campo obrigatório')
+    appointment_status: Yup.object().shape({
+        reason_canceled: Yup.string().required('Campo obrigatório'),
+    })
 })
 
 type onChangeOpen = (arg: boolean) => void
@@ -20,24 +23,23 @@ type ChildrenProps = {
 }
 
 type CanceledScheduledModalProps = {
-    children?: (params: ChildrenProps) => React.ReactNode
-    item: IAppointmentVet
+    children?: (params: ChildrenProps) => React.ReactNode,
+    closeModal: () => void,
+    showModal: () => void,
+    isOpen?: boolean,
 }
 
 const CanceledScheduledModal = ({
     children,
-    item,
+    closeModal,
+    showModal,
+    isOpen,
 }: CanceledScheduledModalProps) => {
-    const { closeModal, open, showModal } = useModal()
 
-    const onSubmit = async (values: IAppointmentVet) => {
-        const item = DateConsults.build(values)
-        console.log(item)
-
-        setTimeout(() => {
-            closeModal()
-        }, 3000)
-    }
+    const { item, close, keys } = usePlusModal();
+    const { handleSubmit, isLoading } = useAppointmentCanceled({
+        handleClose: () => close(keys.CanceledScheduled)
+    })
 
     return (
         <>
@@ -64,7 +66,7 @@ const CanceledScheduledModal = ({
                                 focus-visible:ring-opacity-75
                             "
                         >
-                            {'label'}
+                            Cancelar Agendamento
                         </button>
                     </div>
                 )
@@ -76,31 +78,29 @@ const CanceledScheduledModal = ({
                 onClose={() => closeModal()}
                 modal
                 nested
-                open={open}
+                open={isOpen}
                 lockScroll
                 className=" 
-                w-fit
-                h-fit
-                flex
-                flex-col     
+                    h-fit
+                    min-w-fit
+                    flex
+                    flex-col     
                 "
             >
 
                 <Formik
-                    initialValues={{
-                        ...item,
-                        reason_canceled: '',
-                    }}
+                    initialValues={item as any}
                     validationSchema={validationSchema}
-                    onSubmit={onSubmit}
+                    onSubmit={handleSubmit}
                 >
                     {
                         ({
                             isValid,
                             isSubmitting,
                             handleSubmit,
+                            values
                         }) => (
-                            <Form className="w-full h-full flex  " onSubmit={handleSubmit}>
+                            <Form className="w-full h-full flex flex-col " onSubmit={handleSubmit}>
                                 <div className="flex flex-col min-h-full items-center justify-center p-4 text-center">
 
 
@@ -116,26 +116,28 @@ const CanceledScheduledModal = ({
                                         {'Esta ação não poderá ser desfeita.'}
                                     </p>
 
+                                    <CardTutor pet={(values as IAppointmentVet).pet_data} />
+
                                     <FieldTextArea
                                         required
                                         label="Motivo do cancelamento"
-                                        name="reason_canceled"
+                                        name="appointment_status.reason_canceled"
 
                                     />
 
-                                    <div className="mt-4 flex justify-center items-center">
+                                    <div className="mt-4 flex justify-center items-center w-3/6">
                                         <BtnCancel
                                             type="button"
                                             onClick={closeModal}
                                             label="Desistir"
-                                            condition={!isSubmitting}
+                                            condition={!isSubmitting && !isLoading}
                                             className='text-gray-600'
                                         />
 
                                         <BtnPrimary
                                             type="submit"
                                             label="Cancelar Agendamento"
-                                            isLoading={isSubmitting}
+                                            isLoading={isSubmitting || isLoading}
                                             disabled={!isValid}
                                         />
                                     </div>
