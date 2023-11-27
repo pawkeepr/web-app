@@ -34,8 +34,10 @@ export const getAllAppointmentsCanceled = async () => api.get(urls.APPOINTMENT_G
 export const getAllAppointmentsScheduled = async () => api.get(urls.APPOINTMENT_GET_ALL_SCHEDULED());
 export const getAllAppointmentsConfirmed = async () => api.get(urls.APPOINTMENT_GET_ALL_CONFIRMED());
 
-export const updateAppointmentConfirmed = async (id_appointment: string, data: Pick<IAppointmentVet, 'dates_consults'>) => api.post(urls.APPOINTMENT_UPDATE_CONFIRMED(id_appointment), data);
-export const updateAppointmentCanceled = async (id_appointment: string, data: Pick<IAppointmentVet, 'dates_consults'>) => api.post(urls.APPOINTMENT_UPDATE_CANCELED(id_appointment), data);
-export const updateAppointmentRescheduled = async (id_appointment: string, data: Pick<IAppointmentVet, 'dates_consults'>) => api.post(urls.APPOINTMENT_UPDATE_RESCHEDULED(id_appointment), data);
+type IDateConsult = Pick<IAppointmentVet, 'dates_consults'>
+
+export const updateAppointmentConfirmed = async (id_appointment: string, data: IDateConsult) => api.put(urls.APPOINTMENT_UPDATE_CONFIRMED(id_appointment), data);
+export const updateAppointmentCanceled = async (id_appointment: string, data: IDateConsult) => api.put(urls.APPOINTMENT_UPDATE_CANCELED(id_appointment), data);
+export const updateAppointmentRescheduled = async (id_appointment: string, data: IDateConsult) => api.put(urls.APPOINTMENT_UPDATE_RESCHEDULED(id_appointment), data);
 
 export const createScheduledVet = async (data: any) => api.post(urls.APPOINTMENT_CREATE_SCHEDULED_VET(), data);

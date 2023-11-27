@@ -4,23 +4,23 @@ import { AxiosResponse } from 'axios'
 export type Fn<T> = () => Promise<AxiosResponse<T>>
 
 const useAppQuery = <T,>(
-  key: QueryKey,
-  fn: Fn<T>,
-  options?: UseQueryOptions<T>
+    key: QueryKey,
+    fn: Fn<T>,
+    options?: UseQueryOptions<T>
 ) => {
-  const Fn = () => fn?.() as any
+    const Fn = () => fn?.() as any
 
-  return useQuery<T>(
-    key,
-    async () => {
-      const res = await Fn()
-      return res.data
-    },
-    {
-      ...options,
-      cacheTime: 60 * 1000 * 60 * 24,
-    }
-  )
+    return useQuery<T>(
+        key,
+        async () => {
+            const res = await Fn()
+            return res.data
+        },
+        {
+            ...options,
+            cacheTime: 60 * 1000 * 60 * 24,
+        }
+    )
 
 }
 

@@ -2,24 +2,18 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Formik
 import { Formik, FormikHelpers } from "formik";
-import FieldControl from "~/Components/molecules/field-control/field-control";
 
-import { BtnAvatar, BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
+import { BtnAvatar } from "~/Components/atoms/btn";
 import { useAppDispatch } from '~/store/hooks';
 import { addNew } from '~/store/slices/newSchedule/actions';
 // import ComboBoxFields from "./components/organisms/combo-box-fields/combo-box-fields";
 
 type InitialValues = Partial<Nullable<Data>>
 
-import FieldTextArea from '~/Components/molecules/field-text-area/field-text-area';
-import Modal from "~/Components/organism/modal";
-import useModal from '~/hooks/use-modal';
-import MyImage from '~/Components/atoms/my-image';
-import ravena from "~/assets/images/ravena.jpeg";
-import FieldDocument from '~/Components/molecules/field-document';
-import ComboBoxFields from '../add-pet-modal/components/organisms/combo-box-fields';
-import ModalConfirm from '../modal-confirm';
 import { EyeIcon } from '@heroicons/react/24/solid';
+import Modal from "~/Components/organism/modal";
+import ravena from "~/assets/images/ravena.jpeg";
+import useModal from '~/hooks/use-modal';
 
 
 const ViewAppointment = ({ children, item }: AddModalProps) => {
@@ -46,12 +40,12 @@ const ViewAppointment = ({ children, item }: AddModalProps) => {
     return (
         <>
             {children?.(showModal) || (
-               <div className="flex justify-end text-white">
+                <div className="flex justify-end text-white">
                     <EyeIcon
-                        className="h-8 w-8" 
+                        className="h-8 w-8"
                         onClick={() => showModal()}
-                    />   
-                </div>    
+                    />
+                </div>
             )}
             <Modal
                 onOpen={() => showModal}
@@ -122,7 +116,7 @@ const ViewAppointment = ({ children, item }: AddModalProps) => {
                                         <p className="text-gray-700">CPF ou CNPJ: Simsd sad</p>
                                         <p className="text-gray-700">Email: jainefranciellen@gmail.com</p>
                                         <p className="text-gray-700">Contato: 79996733389</p>
-                                        
+
                                     </div>
 
                                     <div className="p-2 mb-2">
@@ -145,7 +139,7 @@ const ViewAppointment = ({ children, item }: AddModalProps) => {
                                         <p className="text-gray-700">Sitema urinário: Simsdsad</p>
                                         <p className="text-gray-700">Sistema locomotor: Sasdasidm </p>
                                         <p className="text-gray-700">Sistema cardiovascular: Sisdsam </p>
-                                        
+
                                     </div>
                                     <div className="p-2 mb-2">
                                         <h3 className='font-extrabold'>Tratamento:</h3>
@@ -168,7 +162,7 @@ const ViewAppointment = ({ children, item }: AddModalProps) => {
 
 
                                 </div>
-                               
+
                             </>
                         )
                     }
