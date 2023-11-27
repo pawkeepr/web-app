@@ -12,7 +12,7 @@ export const getVetProfile = async () => api.get(urls.VET_GET_PROFILE());
 export const getAllAppointmentsVet = async () => api.get<IAppointmentVetData[]>(urls.APPOINTMENT_GET_ALL());
 export const getAppointmentVet = async (id_appointment: string) => api.get(urls.APPOINTMENT_GET_BY_ID(), { params: { id_appointment } });
 export const createAppointmentVet = async (data: any) => api.post(urls.APPOINTMENT_CREATE(), data);
-export const finishedAppointmentVet = async (id_appointment: string, data: any) => api.post(urls.APPOINTMENT_FINISHED(), data, { params: { id_appointment } });
+export const finishedAppointmentVet = async (id_appointment: string, data: any) => api.put(urls.APPOINTMENT_FINISHED(), data, { params: { id_appointment } });
 
 export const createScheduled = async (data: any,) => api.post(urls.SCHEDULED_CREATE(), data);
 
@@ -32,6 +32,7 @@ export const sendMessageWhatsapp = async (data: any) => api.post(urls.WHATSAPP_S
 export const getAllAppointmentsDone = async () => api.get(urls.APPOINTMENT_GET_ALL_DONE());
 export const getAllAppointmentsCanceled = async () => api.get(urls.APPOINTMENT_GET_ALL_CANCELED());
 export const getAllAppointmentsScheduled = async () => api.get(urls.APPOINTMENT_GET_ALL_SCHEDULED());
+export const getAllAppointmentsRescheduled = async () => api.get(urls.APPOINTMENT_GET_ALL_RESCHEDULED());
 export const getAllAppointmentsConfirmed = async () => api.get(urls.APPOINTMENT_GET_ALL_CONFIRMED());
 
 type IDateConsult = Pick<IAppointmentVet, 'dates_consults'>

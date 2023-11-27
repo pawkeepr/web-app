@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import CardTutor from '~/Components/molecules/card-tutor'
 import FieldControl from '~/Components/molecules/field-control'
 import { usePlusModal } from '~/hooks/use-plus-modal'
-import { useAppointmentCanceled } from '~/store/hooks/appointments'
+import useAppointmentRescheduled from '~/store/hooks/appointments/rescheduled'
 import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
 
 const validationSchema = Yup.object().shape({
@@ -37,7 +37,8 @@ const ReScheduledModal = ({
 }: ReScheduledModalProps) => {
 
     const { item, close, keys } = usePlusModal();
-    const { handleSubmit, isLoading } = useAppointmentCanceled({
+
+    const { handleSubmit, isLoading } = useAppointmentRescheduled({
         handleClose: () => close(keys.Rescheduled)
     })
 
@@ -87,16 +88,16 @@ const ReScheduledModal = ({
 
                                     <CardTutor pet={(values as IAppointmentVet).pet_data} />
                                     {item && (
-                                        <>
+                                        <div className='flex justify-around gap-3'>
                                             <p className="text-gray-500 flex justify-between">
-                                                <strong className="mr-2">Tutor:</strong>
+                                                <strong className="mr-2">Tipo da Consulta:</strong>
                                                 {item.dates_consults.type_consultation}
                                             </p>
                                             <p className="text-gray-500 flex justify-between">
-                                                <strong className="mr-2">Tutor:</strong>
+                                                <strong className="mr-2">Razão da Consulta:</strong>
                                                 {item.dates_consults.reason_consultation}
                                             </p>
-                                        </>
+                                        </div>
                                     )}
                                     <section className="my-2">
                                         <div className='flex justify-around gap-3'>

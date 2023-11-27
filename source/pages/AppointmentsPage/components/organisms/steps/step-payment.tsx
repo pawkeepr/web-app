@@ -98,6 +98,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
             <div className="flex items-center justify-center gap-3 mt-4">
                 <BtnCancel
                     label="Voltar"
+                    condition={!isSubmitting}
                     onClick={() => {
                         toggleTab(activeTab - 1);
                     }}
