@@ -17,12 +17,19 @@ const BoxButtons = ({
     item,
 }: BoxButtonsProps) => {
     const router = useRouter()
-    const { setItem, open } = usePlusModal();
+    const { setItem, open, close } = usePlusModal();
 
     const onClickCancel = useCallback(() => {
         setItem(item);
+        close(ModalPlus.Rescheduled)
         open(ModalPlus.CanceledScheduled)
     }, [item])
+
+    const onClickReScheduled = useCallback(() => {
+        setItem(item);
+        close(ModalPlus.CanceledScheduled)
+        open(ModalPlus.Rescheduled)
+    }, [])
 
     const startAppointment = useCallback(() => {
         router.push(`/dashboard/appointments?appointment_id=${item.id}&document=${item.cpf_tutor}&pet=${item.id_pet}`)
@@ -41,7 +48,7 @@ const BoxButtons = ({
             <BtnCancel
                 condition={!isLoading}
                 label='Reagendar Consulta'
-                onClick={() => { }}
+                onClick={onClickReScheduled}
                 className='border-none mobile:!w-full mobile:col-span-1'
             />
 

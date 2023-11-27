@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import CanceledScheduledModal from '~/Components/modals/canceled-scheduled-modal';
+import ReScheduledModal from '~/Components/modals/re-scheduled-modal';
 import { IAppointmentVet } from '~/store/slices/appointment-vet/types';
 
 
@@ -42,6 +43,16 @@ const ContextModalPlus = () => {
                     () => (<div className="hidden" />)
                 }
             </CanceledScheduledModal>
+
+            <ReScheduledModal
+                closeModal={() => close(ModalPlus.Rescheduled)}
+                isOpen={isOpen[ModalPlus.Rescheduled]}
+                showModal={() => open(ModalPlus.Rescheduled)}
+            >
+                {
+                    () => (<div className="hidden" />)
+                }
+            </ReScheduledModal>
         </>
     )
 }
