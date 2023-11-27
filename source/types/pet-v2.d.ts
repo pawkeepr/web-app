@@ -11,9 +11,9 @@ export interface PetData {
     specie: Species | null | GenericSelect;
     race: Breed | null | GenericSelect;
     sex: Gender | null | GenericSelect;
-    castrated: boolean | null;
+    castrated?: boolean | null;
     microchip: string | null;
-    identification_number: string | null;
+    identification_number?: string | null;
     blood_type: string | null | GenericSelect;
     blood_donator: string | null;
     organ_donor: string | null;
