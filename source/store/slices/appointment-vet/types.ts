@@ -11,6 +11,7 @@ import {
     TOGGLE_STATUS, TOGGLE_STATUS_FAIL, TOGGLE_STATUS_SUCCESS,
     UPDATE, UPDATE_FAIL, UPDATE_SUCCESS
 } from "~/store/helpers/constants";
+import { GenericObject } from "~/store/helpers/types";
 
 export interface IPetAppointment {
     name_pet: string,
@@ -135,7 +136,7 @@ export interface IPaymentsAppointment {
     form_payment: string,
     value_payment: string,
     coin: string,
-    number_installments: string,
+    number_installments: string | GenericObject,
     status_payment: string,
     date_payment: string
 }
@@ -160,7 +161,7 @@ export interface IStatusAppointment {
     confirmed: BOOL_STATUS,
     done: BOOL_STATUS,
     canceled: BOOL_STATUS,
-    reason_canceled: BOOL_STATUS
+    reason_canceled: string
 }
 
 export interface ISignatureAppointment {
@@ -246,6 +247,32 @@ export interface IAppointmentVet extends IAnamnesis, ITreatment {
     well_being: IWell_beingAppointment;
 }
 
+export interface IScheduledAppointmentVet {
+    id?: string | null;
+    pet_data: PetData
+    vets_data: VetsData[]
+    cpf_tutor: string
+    name_tutor: string
+    contact_tutor: ContactTutor
+    location_tutor: LocationTutor
+    responsible_tutors: never
+    health_insurance: HealthInsurance
+    id_pet: string;
+    tutor_data: ITutorAppointment;
+    crmv_vet: string;
+    cpf_cnpj_vet: string;
+    vet_data: IVetAppointment;
+    anamnesis: never;
+    info_required: IInfo_required;
+    payments: never;
+    dates_consults: IDatesConsultsAppointment;
+    appointment_status: IStatusAppointment;
+    appointment_signature: ISignatureAppointment;
+    appointment_geolocation: IGeolocationAppointment;
+    dental_treatment: never;
+    well_being: never;
+}
+
 export interface PetData {
     id?: string | null
     name_pet: string | null
@@ -264,6 +291,8 @@ export interface VetsData {
     name_vet: string | null
     crmv_vet: string | null
     cpf_cnpj_vet: string | null
+    phone_vet: string | null
+    email_vet: string | null
 }
 
 export interface ContactTutor {

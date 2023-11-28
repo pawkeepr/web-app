@@ -49,6 +49,7 @@ const FieldTextArea = <T,>({
                         twMerge(
                             cn(
                                 {
+                                    '!border-secondary-500': required,
                                     'bg-slate-100': disabled,
                                     '!pl-8': startIcon,
                                     '!pr-8': endIcon,

@@ -11,9 +11,9 @@ export interface PetData {
     specie: Species | null | GenericSelect;
     race: Breed | null | GenericSelect;
     sex: Gender | null | GenericSelect;
-    castrated: boolean | null;
+    castrated?: boolean | null;
     microchip: string | null;
-    identification_number: string | null;
+    identification_number?: string | null;
     blood_type: string | null | GenericSelect;
     blood_donator: string | null;
     organ_donor: string | null;
@@ -21,7 +21,7 @@ export interface PetData {
 }
 
 export interface IPetV2 {
-    id?: string;
+    id?: string | null;
     name_tutor: string
     phone_tutor: string;
     contact_tutor: {
@@ -31,7 +31,13 @@ export interface IPetV2 {
     };
     has_second_tutor?: boolean;
     cpf_tutor: string;
-    vets_data: string[];
+    vets_data: {
+        name_vet: string | null;
+        phone_vet: string | null;
+        email_vet: string | null;
+        crmv_vet: string | null;
+        cpf_cnpj_vet: string | null;
+    }[];
     location_tutor: {
         country: string | null;
         zipCode: string | null;
@@ -53,4 +59,20 @@ export interface IPetV2 {
         name_tutor: string | null;
         cpf_tutor: string | null;
     };
+}
+
+
+export type IPetV2Data = {
+    id: string
+    name_pet: string;
+    microchip: string;
+    identification_number: string;
+    specie: string;
+    race: string;
+    blood_type: string;
+    blood_donator: string;
+    organ_donor: string;
+    sex: string;
+    castrated: boolean;
+    date_birth: string;
 }

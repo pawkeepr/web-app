@@ -56,7 +56,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     } = useAppSelector(state => state.Login as LoginState)
     const router = useRouter()
     const pathname = usePathname()
-    console.log('pathname', pathname)
 
     useEffect(() => {
         const token = getCookie(cookies.token.name)

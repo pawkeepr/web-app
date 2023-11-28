@@ -1,68 +1,58 @@
 import React, {
-    ReactElement,
     useCallback,
     useDeferredValue,
     useEffect,
-    useState,
+    useState
 } from "react";
-import AddNewAppointment from "~/Components/modals/add-appointment/add-appointment-modal";
+import ScheduledNewAppointment from "~/Components/modals/scheduled-appointment";
+import FieldDocumentAppointment from '~/Components/molecules/field-document-appointment';
 import SearchInput from "~/Components/molecules/search-input";
+import DefaultLayout from "../_layouts/dashboard/dashboard";
 
+import ContextModalPlus from "~/hooks/use-plus-modal";
 import HorizontalTabs from "./components/organisms/templates/Horizontal-List";
 
-interface ListTabProps<T> {
-    items: T[];
-    filter: (items: T[], search: string) => T[];
-    cards: (
-        items: T[]
-    ) => JSX.Element | JSX.Element[] | React.ReactNode | ReactElement[] | null;
-    Modal: () => JSX.Element;
+interface AppointmentsTabsProps<T> {
+
 }
 
-const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
+const AppointmentsTabs = <T,>() => {
     const [search, setSearch] = useState("");
     const [filteredItems, setFilteredItems] = useState<T[]>([] as T[]);
     const deferredItems = useDeferredValue(filteredItems);
 
     useEffect(() => {
-        setFilteredItems(items);
-    }, [items]);
+        setFilteredItems([]);
+    }, []);
 
     const handleSearch = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             const search = e.target.value.toLowerCase();
             setSearch(search);
-            setFilteredItems((state) => filter(state, search));
         },
-        [filter]
+        []
     );
 
     return (
-        <React.Fragment>
-            <div className="flex justify-between items-center">
-                <div
-                    className="team-list w-1/2 list-view-filter col-span-8"
-                    style={{ marginTop: 12 }}
-                >
-                    <SearchInput
-                        value={search}
-                        onChange={handleSearch}
-                        placeholder="Busque a Consulta..."
-                        className="rounded-md"
-                    />
-                </div>
+        <DefaultLayout title="Dashboard">
+            <div className="flex justify-end items-center">
 
-                <div className="flex col-span-4 items-center gap-2">
-                    <Modal />
-                    <div style={{ marginTop: 10 }}>
-                        <AddNewAppointment />
-                    </div>
+                <SearchInput
+                    value={search}
+                    onChange={handleSearch}
+                    placeholder="Busque a Consulta..."
+                    className="rounded-md w-1/2"
+                />
+
+                <div className="w-1/2 flex-row flex items-center ">
+                    <FieldDocumentAppointment />
+                    <ScheduledNewAppointment selectedTabInitial={0} />
                 </div>
             </div>
             <HorizontalTabs />
-            {cards(deferredItems)}
-        </React.Fragment>
+            <ContextModalPlus />
+        </DefaultLayout>
     );
 };
 
-export default ListTab;
+export default AppointmentsTabs;

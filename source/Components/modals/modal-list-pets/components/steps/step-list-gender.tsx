@@ -1,6 +1,6 @@
 import { useFormikContext } from 'formik'
 import BoxButtons from '~/Components/molecules/box-buttons'
-import { Gender } from '~/store/slices/pets/speciesType'
+import { Gender, GenderBR } from '~/store/slices/pets/speciesType'
 import { InitialValues, StepProps } from '../../types'
 import { option } from '../helpers'
 
@@ -33,7 +33,7 @@ const StepListGender = ({
                             >
                                 <div className="grid grid-cols-4 justify-center items-center">
                                     <span className="align-middle col-span-full">
-                                        {Gender[gender as Key]}
+                                        {GenderBR[gender as Key]}
                                     </span>
                                 </div>
                             </button>

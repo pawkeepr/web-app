@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
+import useSteps from '~/hooks/use-steps'
 import routes from '~/routes'
 import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor'
-import { Gender } from '~/store/slices/pets/speciesType'
 import { IPet } from '~/types/pet'
 import { IPetV2 } from '~/types/pet-v2'
 import StepDocument from './components/steps/step-document'
@@ -51,16 +51,23 @@ const STEPS = [
     },
 ]
 
+
 const ModalListPets = ({
     children,
     label,
     selectedTabInitial = 1
 }: ModalConfirmProps) => {
     const [document, setDocument] = useState('')
-    const [selectedTab, setSelectedTab] = useState(selectedTabInitial)
     const { closeModal, open, showModal } = useModal()
 
     const router = useRouter()
+
+    const {
+        nextStep,
+        onChangeSelectedTab,
+        previousStep,
+        selectedTab,
+    } = useSteps(STEPS, selectedTabInitial)
 
     const handleNavigate = useCallback((pet: IPetV2) => {
         setTimeout(() => {
@@ -74,36 +81,22 @@ const ModalListPets = ({
     const initialValues: IPet = {
         id: null,
         name: '',
-        species: '' as any,
-        breed: '' as any,
+        species: null,
+        breed: null,
         ownerEmergencyContact: {
             cpf_cnpj: document,
-            phone: pets.length > 0 ? pets[0].contact_tutor.phone as string : '',
-            email: pets.length > 0 ? pets[0].contact_tutor.email as string : '',
-            name: pets.length > 0 ? pets[0].name_tutor : '',
+            phone: pets?.length > 0 ? pets[0].contact_tutor.phone as string : '',
+            email: pets?.length > 0 ? pets[0].contact_tutor.email as string : '',
+            name: pets?.length > 0 ? pets[0].name_tutor : '',
         },
         castrated: false,
         date_birth: '',
-        gender: Gender.unknown,
-    }
-
-
-
-    const onChangeSelectedTab = (index: number) => {
-        setSelectedTab(index)
+        gender: null as any,
     }
 
     const onChangeDocument = (doc: string) => {
         setDocument(doc)
     }
-
-    const nextStep = useCallback(() => {
-        setSelectedTab(state => Math.min(state + 1, STEPS.length - 1))
-    }, [])
-
-    const previousStep = useCallback(() => {
-        setSelectedTab(state => Math.max(state - 1, 0))
-    }, [])
 
     const onSubmit = useCallback(async (values: IPet) => {
         const pet = await handleSubmit({
@@ -191,7 +184,7 @@ const ModalListPets = ({
             <Modal
                 onOpen={() => showModal()}
                 onClose={() => {
-                    setSelectedTab(selectedTabInitial)
+                    onChangeSelectedTab(selectedTabInitial)
                     closeModal()
                 }}
                 modal
@@ -226,7 +219,6 @@ const ModalListPets = ({
                             STEPS.map(
                                 (item, index) => (
                                     <div
-
                                         key={item.id}
                                         className={cn(
                                             "p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full",
@@ -253,7 +245,9 @@ const ModalListPets = ({
                                     ({ component: Component, id }, index) => (
                                         <Tab.Panel key={id} tabIndex={index}>
                                             <Component
+                                                onChangeStep={onChangeSelectedTab}
                                                 pets={pets}
+                                                onChangeDocument={onChangeDocument}
                                                 handleNavigate={handleNavigate}
                                                 nextStep={nextStep}
                                                 isLoading={isLoading}

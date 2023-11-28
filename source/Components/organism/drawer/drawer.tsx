@@ -4,7 +4,7 @@ import Cog8ToothIcon from "@heroicons/react/24/solid/Cog8ToothIcon";
 import DashboardIcon from '@heroicons/react/24/solid/HomeIcon';
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
 import Image from "next/image";
-import { MdPets } from 'react-icons/md';
+import { MdPerson, MdPets } from 'react-icons/md';
 import { layoutModeTypes } from "~/Components/constants/layout";
 import useChangeLayoutMode from "~/hooks/use-change-layout-mode";
 
@@ -34,6 +34,11 @@ const items = [
         name: 'Pets',
         icon: <MdPets className="w-5 h-5" />,
         href: '/dashboard/pets'
+    },
+    {
+        name: 'Tutores',
+        icon: <MdPerson className="w-5 h-5" />,
+        href: '/dashboard/tutors'
     },
     {
         name: 'Configurações',

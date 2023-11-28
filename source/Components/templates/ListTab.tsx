@@ -6,8 +6,6 @@ import React, {
     useState,
 } from "react";
 import SearchInput from "~/Components/molecules/search-input";
-import AddNewAppointment from "../modals/add-appointment/add-appointment-modal";
-import HorizontalTabs from "~/pages/DashboardPage/components/organisms/templates/Horizontal-List";
 
 
 interface ListTabProps<T> {
@@ -39,7 +37,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
 
     return (
         <React.Fragment>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mb-2">
                 <div
                     className="team-list w-1/2 list-view-filter col-span-8"
                     style={{ marginTop: 12 }}
@@ -52,12 +50,6 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                     />
                 </div>
 
-                <div className="flex col-span-4 items-center gap-2">
-                    <Modal />
-                    <div>
-                        <AddNewAppointment />
-                    </div>
-                </div>
             </div>
             {cards(deferredItems)}
         </React.Fragment>

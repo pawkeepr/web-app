@@ -6,10 +6,13 @@ import usePetsByDocument from '~/store/hooks/list-pets-of-tutor';
 import { Breed } from '~/store/slices/pets/breedType';
 import { Gender, Species } from '~/store/slices/pets/speciesType';
 import { GenericSelect, IPetV2 } from '~/types/pet-v2';
-import DashboardLayouts from '../_layouts/dashboard/dashboard';
+import DashboardLayouts from "../_layouts/dashboard";
 import Tabs from './components/templates/vertical-tabs';
-import ModalConfirm from '~/Components/modals/modal-confirm';
-import { BtnCancel } from '~/Components/atoms/btn';
+
+
+import { BtnCancel } from "~/Components/atoms/btn";
+import ModalConfirm from "~/Components/modals/modal-confirm";
+
 export type InitialValues = Nullable<IPetV2>;
 
 type MakeInitialValuesProps = {
@@ -105,7 +108,7 @@ const NewPetPage = ({ document }: PetPageProps) => {
         })
 
         try {
-            const data = await handleSubmit(petData as IPetV2)
+            const data = await handleSubmit(petData as any)
             if (data) router.push('/dashboard')
         } catch (error) {
             console.log(error)
@@ -121,26 +124,27 @@ const NewPetPage = ({ document }: PetPageProps) => {
                 enableReinitialize
                 initialValues={initialValues}
             >
-                <>
+                <div className="gap-2 mt-2 mobile:py-6">
                     <ModalConfirm
-                            title="Cancelar Consulta!"
-                            onConfirm={() => router.push("/dashboard")}
-                            description="Importante!"
-                            message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
-                        >
-                            {({ onChangeOpen }) => {
-                                return (
-                                    <BtnCancel
-                                        type="button"
-                                        label="Cancelar Consulta"
-                                        onClick={() => onChangeOpen(true)}
-                                    />
+                        title="Cancelar Novo Pet!"
+                        onConfirm={() => router.push("/dashboard")}
+                        description="Importante!"
+                        message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
+                    >
+                        {({ onChangeOpen }) => {
+                            return (
+                                <BtnCancel
+                                    type="button"
+                                    label="Cancelar"
+                                    onClick={() => onChangeOpen(true)}
+                                />
 
-                                );
-                            }}
+
+                            );
+                        }}
                     </ModalConfirm>
                     <Tabs />
-                </>
+                </div>
             </Formik>
         </DashboardLayouts>
     )

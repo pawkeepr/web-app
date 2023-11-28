@@ -5,12 +5,15 @@ import VerticalTabs from "./components/templates/vertical-tabs";
 
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
+import { useEffect, useMemo } from "react";
 import { BtnCancel } from "~/Components/atoms/btn";
 import ModalConfirm from "~/Components/modals/modal-confirm";
 import { Appointments } from "~/entities/Appointments";
 import useAppointment from "~/store/hooks/appointment/use-appointment";
 import usePetById from "~/store/hooks/pet/use-pets";
+import useProfile from "~/store/hooks/profile";
 import { IPetV2 } from "~/types/pet-v2";
+import { IProfile } from "~/types/profile";
 import { geolocation } from "~/utils/geolocation";
 
 export type InitialValues = IAppointmentVet;
@@ -18,6 +21,7 @@ export type InitialValues = IAppointmentVet;
 type AppointmentsPageProps = {
     document: string;
     pet: string;
+    appointment_id: string;
 };
 
 const initialValues = (
@@ -33,20 +37,21 @@ const initialValues = (
         responsible_tutors,
         vets_data,
     }: IPetV2,
+    profile: IProfile,
+    appointment_id: string,
 ): InitialValues => ({
     pet_data: pet_data as any,
-    vets_data: [
-        // dados mockados, retirar quando estiver os dados com o retorno da Api
-        {
-            "name_vet": "Veterinary guy",
-            "crmv_vet": "SP12345",
-            "cpf_cnpj_vet": "00100200352"
-        }
-    ],
+    vets_data: [{
+        name_vet: profile?.firstName + ' ' + profile?.lastName,
+        crmv_vet: profile?.crmv,
+        cpf_cnpj_vet: profile?.cpf_cnpj,
+        email_vet: profile?.contact?.email,
+        phone_vet: profile?.contact?.phone,
+    }],
     contact_tutor,
     location_tutor,
     responsible_tutors,
-    id: null,
+    id: appointment_id || null,
     id_pet: id_pet as string,
     cpf_tutor,
     tutor_data: {
@@ -58,16 +63,16 @@ const initialValues = (
         state: location_tutor?.state as string,
         city: location_tutor?.city as string
     },
-    crmv_vet: '',
-    cpf_cnpj_vet: '',
+    crmv_vet: profile.crmv,
+    cpf_cnpj_vet: profile.cpf_cnpj,
     vet_data: {
-        name: '',
-        email: '',
-        phone: '',
-        country: '',
-        zipCode: '',
-        state: '',
-        city: ''
+        name: profile?.firstName + ' ' + profile.lastName,
+        email: profile?.contact?.email,
+        phone: profile?.contact?.phone,
+        country: profile?.location?.country,
+        zipCode: profile?.location?.zipCode,
+        state: profile?.location?.state,
+        city: profile?.location?.city
     },
     medicines: [],
     anamnesis: {
@@ -178,12 +183,24 @@ const initialValues = (
 });
 
 
-const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
+const AppointmentsPage = ({ document, pet, appointment_id }: AppointmentsPageProps) => {
 
     const router = useRouter();
 
     const { data, isLoading: isLoadingPet, isError } = usePetById(document, pet)
+    const { isLoading: isLoadingProfile, data: profile } = useProfile()
+
     const { handleSubmit } = useAppointment();
+    const values = useMemo(() => initialValues(
+        data as IPetV2,
+        profile as IProfile,
+        appointment_id,
+    ), [data, profile, appointment_id]
+    );
+
+    useEffect(() => {
+        geolocation();
+    }, []);
 
     const onSubmit = async (values: InitialValues) => {
         const appointment = Appointments.build(values);
@@ -195,15 +212,16 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
         router.push("/dashboard");
     };
 
-    if (isError) return router.back();
+    if (isError) {
+        router.back()
+        return null
+    };
 
     return (
-
-
         <Formik
             onSubmit={onSubmit}
             enableReinitialize
-            initialValues={initialValues(data as IPetV2)}
+            initialValues={values}
         >
             <DashboardLayouts title="Nova Consulta" >
                 <div className="gap-2 mt-2 mobile:py-6">
@@ -221,8 +239,6 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
                                     label="Cancelar Consulta"
                                     onClick={() => onChangeOpen(true)}
                                 />
-
-
                             );
                         }}
                     </ModalConfirm>

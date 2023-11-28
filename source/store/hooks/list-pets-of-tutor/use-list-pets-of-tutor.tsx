@@ -9,7 +9,7 @@ const usePetsByTutor = (
 ) => {
     const superKeys = [NAME, document]
 
-    return useAppStore<IPetV2>({
+    return useAppStore<IPetV2[]>({
         get: getAllPets.bind(null, document),
         add: createPet,
         keys: superKeys,

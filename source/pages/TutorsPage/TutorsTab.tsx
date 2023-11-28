@@ -2,13 +2,13 @@ import React, { useCallback } from 'react';
 import AddTutorModal from '~/Components/modals/add-tutor-modal';
 import CardTutors from '~/Components/molecules/card-tutors';
 
-import { useAppSelector } from '~/store/hooks';
 
 import ListTab from '~/Components/templates/ListTab';
+import useListTutors from '~/store/hooks/tutors/use-list-tutors';
 import { Data } from '~/store/slices/tutors/types';
 
 const TutorsTab = () => {
-    const tutors = useAppSelector((state) => state.Tutor.data);
+    const { data: tutors } = useListTutors()
 
     const Modal = () => <AddTutorModal />
     const cards = (tutors: Data[]) => tutors?.map(tutor => (<CardTutors key={tutor.id} tutor={tutor} />))

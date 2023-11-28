@@ -58,7 +58,7 @@ const BoxButtons = ({
                 disabled: !isValid,
                 type,
                 link,
-                isLoading
+                isLoading,
             })}
 
         </div>

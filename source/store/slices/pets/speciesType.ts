@@ -30,10 +30,17 @@ export enum Species {
 export type KeyOfSpecies = keyof typeof Species;
 
 export enum Gender {
+    male = 'male',
+    female = 'female',
+    unknown = 'unknown',
+}
+
+export enum GenderBR {
     male = 'Macho',
     female = 'Fêmea',
     unknown = 'Desconhecido',
 }
+
 
 export type KeyOfGender = keyof typeof Gender
 
