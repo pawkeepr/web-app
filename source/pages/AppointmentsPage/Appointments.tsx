@@ -21,6 +21,7 @@ export type InitialValues = IAppointmentVet;
 type AppointmentsPageProps = {
     document: string;
     pet: string;
+    appointment_id: string;
 };
 
 const initialValues = (
@@ -37,6 +38,7 @@ const initialValues = (
         vets_data,
     }: IPetV2,
     profile: IProfile,
+    appointment_id: string,
 ): InitialValues => ({
     pet_data: pet_data as any,
     vets_data: [{
@@ -49,7 +51,7 @@ const initialValues = (
     contact_tutor,
     location_tutor,
     responsible_tutors,
-    id: null,
+    id: appointment_id || null,
     id_pet: id_pet as string,
     cpf_tutor,
     tutor_data: {
@@ -181,7 +183,7 @@ const initialValues = (
 });
 
 
-const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
+const AppointmentsPage = ({ document, pet, appointment_id }: AppointmentsPageProps) => {
 
     const router = useRouter();
 
@@ -189,7 +191,12 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
     const { isLoading: isLoadingProfile, data: profile } = useProfile()
 
     const { handleSubmit } = useAppointment();
-    const values = useMemo(() => initialValues(data as IPetV2, profile as IProfile), [data, profile]);
+    const values = useMemo(() => initialValues(
+        data as IPetV2,
+        profile as IProfile,
+        appointment_id,
+    ), [data, profile, appointment_id]
+    );
 
     useEffect(() => {
         geolocation();
@@ -201,11 +208,14 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
         appointment
             .defineAppointmentGeolocation(geolocationData)
             .defineAppointmentSignature(signature);
-        await handleSubmit(appointment);
+        await handleSubmit(appointment as any);
         router.push("/dashboard");
     };
 
-    if (isError) return router.back();
+    if (isError) {
+        router.back()
+        return null
+    };
 
     return (
         <Formik
@@ -229,8 +239,6 @@ const AppointmentsPage = ({ document, pet }: AppointmentsPageProps) => {
                                     label="Cancelar Consulta"
                                     onClick={() => onChangeOpen(true)}
                                 />
-
-
                             );
                         }}
                     </ModalConfirm>

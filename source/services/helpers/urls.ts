@@ -1,5 +1,6 @@
 // Appointment Vet
 export const APPOINTMENT_GET_ALL = () => '/api-appointment/fetch-all-appointment-vet'
+export const APPOINTMENT_FINISHED = () => '/api-appointment/update-start-appointment'
 export const APPOINTMENT_UPDATE = () => '/api-appointment/update-appointment'
 export const APPOINTMENT_CREATE = () => '/api-appointment/create-appointment'
 export const APPOINTMENT_GET_BY_ID = () => '/api-appointment/search-appointment'
@@ -37,7 +38,7 @@ export const APPOINTMENT_GET_ALL_DONE = () => '/api-appointment/fetch-all-appoin
 export const APPOINTMENT_GET_ALL_CANCELED = () => '/api-appointment/fetch-all-appointment-canceled-vet'
 export const APPOINTMENT_GET_ALL_SCHEDULED = () => '/api-appointment/fetch-all-appointment-scheduled-vet'
 export const APPOINTMENT_GET_ALL_CONFIRMED = () => '/api-appointment/fetch-all-appointment-confirmed-vet'
-
+export const APPOINTMENT_GET_ALL_RESCHEDULED = () => '/api-appointment/fetch-all-appointment-rescheduled-vet'
 
 // Appointment Update
 

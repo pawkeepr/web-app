@@ -1,4 +1,3 @@
-import { RadioGroup } from "@headlessui/react";
 import cn from 'classnames';
 import MyImage from "~/Components/atoms/my-image";
 import ViewAppointment from "~/Components/modals/view-appointment/modal-view-appointment";
@@ -6,24 +5,34 @@ import ravena from "~/assets/images/ravena.jpeg";
 import { IAppointmentVet } from "~/store/slices/appointment-vet/types";
 import BoxButtons from "./box-buttons";
 
+type BoxButtonsProps = {
+    item: IAppointmentVet
+}
+
 type CardScheduledProps = {
     checked?: boolean;
     appointment: IAppointmentVet;
+    boxButtons?: null | ((props: BoxButtonsProps) => JSX.Element);
 }
 
-const CardScheduled = ({ checked, appointment }: CardScheduledProps) => {
+const CardScheduled = ({
+    checked,
+    appointment,
+    boxButtons = (props) => <BoxButtons {...props} />
+}: CardScheduledProps) => {
+
+    const BoxButtons = boxButtons
+
     return (
-        <RadioGroup.Option
+        <div
             key={appointment?.name_tutor}
-            value={appointment}
-            className={({ active }) => (
+            className={
                 cn(
                     'bg-white relative flex flex-col cursor-pointer rounded-lg px-2 py-2 shadow-md focus:outline-none`',
                     {
-                        'ring-2 ring-white/20 ring-offset-2': active,
                         '!bg-primary-500 bg-opacity-60 text-white': checked,
                     })
-            )
+
             }
         >
             <div className="mb-2">
@@ -38,68 +47,38 @@ const CardScheduled = ({ checked, appointment }: CardScheduledProps) => {
                         />
 
                         <div className="flex flex-col items-center">
-                            <RadioGroup.Label
-                                as="p"
-                                className={`font-medium  ${checked ? 'text-white' : 'text-gray-900'
-                                    }`}
-                            >
-                                {'Informações Do Agendamento:'}
-                            </RadioGroup.Label>
+
+                            {'Informações Do Agendamento:'}
                             <div className="">
-                                <RadioGroup.Description
-                                    as="span"
-                                    className={`inline ${checked ? 'text-sky-100' : 'text-gray-500'
-                                        }`}
-                                >
-                                    <div className="p-2">
-                                        <p className="text-gray-700 md:hidden">Nome do pet: {appointment?.pet_data.name_pet}</p>
-                                        <p className="text-gray-700">Data: {appointment?.dates_consults.date_consultation}</p>
-                                        <p className="text-gray-700">Horário: {appointment?.dates_consults.time_consultation}</p>
-                                        <p className="text-gray-700 md:hidden">Contato:{appointment?.tutor_data.phone}</p>
-                                    </div>
-                                </RadioGroup.Description>
+
+                                <div className="p-2">
+                                    <p className="text-gray-700 md:hidden">Nome do pet: {appointment?.pet_data.name_pet}</p>
+                                    <p className="text-gray-700">Data: {appointment?.dates_consults.date_consultation}</p>
+                                    <p className="text-gray-700">Horário: {appointment?.dates_consults.time_consultation}</p>
+                                    <p className="text-gray-700 md:hidden">Contato:{appointment?.tutor_data.phone}</p>
+                                </div>
                             </div>
 
                         </div>
                         <div className="flex flex-col mobile:hidden items-center">
-                            <RadioGroup.Label
-                                as="p"
-                                className={`font-medium  ${checked ? 'text-white' : 'text-gray-900'
-                                    }`}
-                            >
-                                {'Informações Do Pet:'}
-                            </RadioGroup.Label>
-                            <RadioGroup.Description
-                                as="span"
-                                className={`inline ${checked ? 'text-sky-100' : 'text-gray-500'
-                                    }`}
-                            >
-                                <div className="p-2 ">
-                                    <p className="text-gray-700">Nome do pet: {appointment?.pet_data.name_pet}</p>
-                                    <p className="text-gray-700">Especie: {appointment?.pet_data.specie}</p>
-                                    <p className="text-gray-700">Sexo: {appointment?.pet_data.sex}</p>
-                                    <p className="text-gray-700">Microchip: 1294</p>
-                                </div>
-                            </RadioGroup.Description>
+
+                            {'Informações Do Pet:'}
+
+                            <div className="p-2 ">
+                                <p className="text-gray-700">Nome do pet: {appointment?.pet_data.name_pet}</p>
+                                <p className="text-gray-700">Especie: {appointment?.pet_data.specie}</p>
+                                <p className="text-gray-700">Sexo: {appointment?.pet_data.sex}</p>
+                                <p className="text-gray-700">Microchip: 1294</p>
+                            </div>
                         </div>
                         <div className="flex mobile:hidden flex-col">
-                            <RadioGroup.Label
-                                as="p"
-                                className={`font-medium  ${checked ? 'text-white' : 'text-gray-900'
-                                    }`}
-                            >
-                                {'Informações Do Tutor:'}
-                            </RadioGroup.Label>
-                            <RadioGroup.Description
-                                as="span"
-                                className={`inline ${checked ? 'text-sky-100' : 'text-gray-500'
-                                    }`}
-                            >
-                                <div className="p-2">
-                                    <p className="text-gray-700">Nome: {appointment?.tutor_data.email}</p>
-                                    <p className="text-gray-700">Contato: {appointment?.tutor_data.phone}</p>
-                                </div>
-                            </RadioGroup.Description>
+
+                            {'Informações Do Tutor:'}
+
+                            <div className="p-2">
+                                <p className="text-gray-700">Nome: {appointment?.tutor_data.email}</p>
+                                <p className="text-gray-700">Contato: {appointment?.tutor_data.phone}</p>
+                            </div>
 
                         </div>
                     </div>
@@ -110,10 +89,10 @@ const CardScheduled = ({ checked, appointment }: CardScheduledProps) => {
                     )}
 
                 </div>
-
             </div>
-            <BoxButtons item={appointment} />
-        </RadioGroup.Option>
+
+            {BoxButtons && <BoxButtons item={appointment} />}
+        </div>
     );
 }
 

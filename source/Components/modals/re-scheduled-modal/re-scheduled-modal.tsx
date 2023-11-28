@@ -1,12 +1,12 @@
 import { Form, Formik } from 'formik'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
-import FieldTextArea from '~/Components/molecules/field-text-area'
 import Modal from "~/Components/organism/modal"
 
 import * as Yup from 'yup'
 import CardTutor from '~/Components/molecules/card-tutor'
+import FieldControl from '~/Components/molecules/field-control'
 import { usePlusModal } from '~/hooks/use-plus-modal'
-import { useAppointmentCanceled } from '~/store/hooks/appointments'
+import useAppointmentRescheduled from '~/store/hooks/appointments/rescheduled'
 import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
 
 const validationSchema = Yup.object().shape({
@@ -22,23 +22,24 @@ type ChildrenProps = {
     showModal: onChangeOpen
 }
 
-type CanceledScheduledModalProps = {
+type ReScheduledModalProps = {
     children?: (params: ChildrenProps) => React.ReactNode,
     closeModal: () => void,
     showModal: () => void,
     isOpen?: boolean,
 }
 
-const CanceledScheduledModal = ({
+const ReScheduledModal = ({
     children,
     closeModal,
     showModal,
     isOpen,
-}: CanceledScheduledModalProps) => {
+}: ReScheduledModalProps) => {
 
     const { item, close, keys } = usePlusModal();
-    const { handleSubmit, isLoading } = useAppointmentCanceled({
-        handleClose: () => close(keys.CanceledScheduled)
+
+    const { handleSubmit, isLoading } = useAppointmentRescheduled({
+        handleClose: () => close(keys.Rescheduled)
     })
 
     return (
@@ -47,31 +48,6 @@ const CanceledScheduledModal = ({
             {
                 children && children({ showModal })
             }
-            {
-                !children && (
-                    <div className="flex items-center justify-center">
-                        <button
-                            type="button"
-                            onClick={showModal}
-                            className="
-                                rounded-md 
-                                bg-secondary-500 bg-opacity-20 
-                                px-4 py-2 text-sm 
-                                font-medium 
-                                text-white 
-                                hover:bg-opacity-30 
-                                focus:outline-none 
-                                focus-visible:ring-2 
-                                focus-visible:ring-white 
-                                focus-visible:ring-opacity-75
-                            "
-                        >
-                            Cancelar Agendamento
-                        </button>
-                    </div>
-                )
-            }
-
 
             <Modal
                 onOpen={() => showModal}
@@ -107,36 +83,57 @@ const CanceledScheduledModal = ({
                                     <h2
                                         className="text-xl font-semibold leading-6 text-gray-600 dark:!text-gray-200 text-center"
                                     >
-                                        {'Cancelar Agendamento'}
+                                        {'Reagendar Consulta'}
                                     </h2>
 
-                                    <p
-                                        className="text-xs font-bold text-primary-500 dark:!text-secondary-500 text-center mb-2"
-                                    >
-                                        {'Esta ação não poderá ser desfeita.'}
-                                    </p>
-
                                     <CardTutor pet={(values as IAppointmentVet).pet_data} />
+                                    {item && (
+                                        <div className='flex justify-around gap-3'>
+                                            <p className="text-gray-500 flex justify-between">
+                                                <strong className="mr-2">Tipo da Consulta:</strong>
+                                                {item.dates_consults.type_consultation}
+                                            </p>
+                                            <p className="text-gray-500 flex justify-between">
+                                                <strong className="mr-2">Razão da Consulta:</strong>
+                                                {item.dates_consults.reason_consultation}
+                                            </p>
+                                        </div>
+                                    )}
+                                    <section className="my-2">
+                                        <div className='flex justify-around gap-3'>
+                                            <FieldControl
+                                                label="Data da consulta"
+                                                name="dates_consults.date_consultation"
+                                                required
+                                                className=" "
+                                                placeholder="exemplo='05/12/2023'"
+                                                type="date"
+                                            />
 
-                                    <FieldTextArea
-                                        required
-                                        label="Motivo do cancelamento"
-                                        name="appointment_status.reason_canceled"
+                                            <FieldControl
+                                                label="Hora da consulta"
+                                                required
+                                                name="dates_consults.time_consultation"
+                                                className=" "
+                                                placeholder="exemplo='14:00'"
+                                                type="time"
+                                            />
+                                        </div>
 
-                                    />
+                                    </section>
 
                                     <div className="mt-4 flex justify-center items-center w-3/6">
                                         <BtnCancel
                                             type="button"
                                             onClick={closeModal}
-                                            label="Desistir"
+                                            label="Cancelar"
                                             condition={!isSubmitting && !isLoading}
                                             className='text-gray-600'
                                         />
 
                                         <BtnPrimary
                                             type="submit"
-                                            label="Cancelar Agendamento"
+                                            label="Reagendar"
                                             isLoading={isSubmitting || isLoading}
                                             disabled={!isValid}
                                         />
@@ -152,4 +149,4 @@ const CanceledScheduledModal = ({
     )
 }
 
-export default CanceledScheduledModal
+export default ReScheduledModal

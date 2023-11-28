@@ -1,9 +1,9 @@
-import { useAppointmentConfirmed } from '~/store/hooks/appointments';
+import useAppointmentRescheduled from "~/store/hooks/appointments/rescheduled";
 import CardScheduled from "../organisms/card-scheduled";
 
-const StepConfirmed = () => {
 
-    const { activeData, isLoading } = useAppointmentConfirmed()
+const StepAll = () => {
+    const { activeData, isLoading } = useAppointmentRescheduled()
 
     if (isLoading) return <div>Loading...</div>
 
@@ -16,4 +16,4 @@ const StepConfirmed = () => {
     );
 };
 
-export default StepConfirmed;
+export default StepAll;
