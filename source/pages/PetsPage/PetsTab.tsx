@@ -1,31 +1,37 @@
+import { RadioGroup } from '@headlessui/react';
 import { useCallback } from 'react';
 import ModalAddPet from '~/Components/modals/add-pet-modal';
 import CardPets from '~/Components/molecules/card-pets';
 import ListTab from '~/Components/templates/ListTab';
-import { useAppSelector } from '~/store/hooks';
-import { Data } from '~/store/slices/pets/types';
+import useListPets from '~/store/hooks/pets/use-list-pets';
+import { IPetV2Data } from '~/types/pet-v2';
 
 const PetsTab = () => {
 
-    const pets = useAppSelector((state) => state.Pets.data);
-
+    const { data: pets, isLoading, isError } = useListPets()
 
     const Modal = () => <ModalAddPet />
-    const cards = (pets: Data[]) => pets?.map(pet => (<CardPets key={pet?.id} pet={pet} checked={false} />))
+    const cards = (pets: IPetV2Data[]) => pets?.map(pet => (<CardPets key={pet?.id} pet={pet} checked={false} />))
 
-    const filter = useCallback((deferredPets: Data[], search: string) => {
+    const filter = useCallback((deferredPets: IPetV2Data[], search: string) => {
 
         if (!search.trim()) return pets;
 
         return deferredPets.filter(pet => {
             const lowerSearch = search.toLowerCase();
-            return pet.name.toLowerCase().includes(lowerSearch) || pet.breed.toLowerCase().includes(lowerSearch)
+            return pet.name_pet.toLowerCase().includes(lowerSearch) || pet.race.toLowerCase().includes(lowerSearch)
         })
 
     }, [pets])
 
+    if (isLoading) return <div>Loading...</div>
+
+    if (isError) return <div>Error</div>
+
     return (
-        <ListTab items={pets} Modal={Modal} cards={cards} filter={filter} />
+        <RadioGroup>
+            <ListTab items={pets} Modal={Modal} cards={cards} filter={filter} />
+        </RadioGroup>
     );
 };
 
