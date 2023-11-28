@@ -37,7 +37,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
 
     return (
         <React.Fragment>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mb-2">
                 <div
                     className="team-list w-1/2 list-view-filter col-span-8"
                     style={{ marginTop: 12 }}
@@ -50,9 +50,6 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                     />
                 </div>
 
-                <div className="flex col-span-4 items-center gap-2">
-                    <Modal />
-                </div>
             </div>
             {cards(deferredItems)}
         </React.Fragment>
