@@ -42,3 +42,7 @@ export const updateAppointmentCanceled = async (id_appointment: string, data: ID
 export const updateAppointmentRescheduled = async (id_appointment: string, data: IDateConsult) => api.put(urls.APPOINTMENT_UPDATE_RESCHEDULED(id_appointment), data);
 
 export const createScheduledVet = async (data: any) => api.post(urls.APPOINTMENT_CREATE_SCHEDULED_VET(), data);
+
+
+export const getAllPetsOfClinic = async () => api.get(urls.PET_FETCH_ALL_CLINIC());
+export const getAllTutorsOfClinic = async () => api.get(urls.TUTORS_FETCH_ALL_CLINIC());
