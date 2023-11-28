@@ -60,3 +60,19 @@ export interface IPetV2 {
         cpf_tutor: string | null;
     };
 }
+
+
+export type IPetV2Data = {
+    id: string
+    name_pet: string;
+    microchip: string;
+    identification_number: string;
+    specie: string;
+    race: string;
+    blood_type: string;
+    blood_donator: string;
+    organ_donor: string;
+    sex: string;
+    castrated: boolean;
+    date_birth: string;
+}
