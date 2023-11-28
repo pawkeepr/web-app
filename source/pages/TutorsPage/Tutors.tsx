@@ -1,18 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
-import { useAppDispatch } from "~/store/hooks";
 import DefaultLayout from "../_layouts/dashboard/dashboard";
 import Tab from "./TutorsTab";
 
-import { getAll } from '~/store/slices/tutors/actions';
 
-const PetsPage = () => {
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(getAll())
-    }, []);
+const TutorsPage = () => {
 
     return (
         <DefaultLayout title="Tutores">
@@ -21,4 +13,4 @@ const PetsPage = () => {
     );
 };
 
-export default PetsPage;
+export default TutorsPage;
