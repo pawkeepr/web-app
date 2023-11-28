@@ -12,10 +12,6 @@ type CardPetsProps = {
 
 const CardPets = ({ pet, checked }: CardPetsProps) => {
 
-    if (!pet) {
-        return null;
-    }
-
     return (
         <div className="space-y-10 w-full">
             <RadioGroup.Option

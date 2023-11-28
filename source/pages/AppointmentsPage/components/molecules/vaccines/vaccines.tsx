@@ -29,7 +29,7 @@ const MenuSelection = () => {
             card={CardVaccines}
             options={VACCINES}
             name="Vaccines"
-            label="Medicação"
+            label="Vacinas"
             items={values.vaccines}
         />
     )

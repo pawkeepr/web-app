@@ -3,6 +3,7 @@ import {
 } from './bloodType';
 
 import {
+    Gender,
     Species
 } from './speciesType';
 
@@ -19,7 +20,7 @@ import {
     TOGGLE_STATUS, TOGGLE_STATUS_FAIL, TOGGLE_STATUS_SUCCESS,
     UPDATE, UPDATE_FAIL, UPDATE_SUCCESS
 } from "~/store/helpers/constants";
-import { IPet } from '~/types/pet';
+import { IPetV2 } from '~/types/pet-v2';
 import {
     Breed
 } from './breedType';
@@ -28,8 +29,52 @@ import {
 export const name = "Pet"
 
 
-export interface Data extends IPet {
-
+export interface Data extends IPetV2 {
+    id: "123456789",
+    name_tutor: "João Silva",
+    phone_tutor: "(11) 91234-5678",
+    contact_tutor: {
+        email: "joao@example.com",
+        phone: "(11) 98765-4321",
+        whatsapp: "5511987654321"
+    },
+    has_second_tutor: true,
+    cpf_tutor: "123.456.789-00",
+    vets_data: ["Veterinário 1", "Veterinário 2"],
+    location_tutor: {
+        country: "Brasil",
+        zipCode: "01234-567",
+        state: "São Paulo",
+        city: "São Paulo",
+        neighborhood: "Centro",
+        street: "Rua Exemplo",
+        number: "123",
+        complement: "Apto 101"
+    },
+    pet_data: {
+        name_pet: 'Rex',
+        specie: Species.cat,
+        race: Breed,
+        sex: Gender.female,
+        castrated: true,
+        microchip: '123456789012345',
+        identification_number: 'ID123',
+        blood_type: 'AB+',
+        blood_donator: 'No',
+        organ_donor: 'No',
+        date_birth: '2019-05-15'
+    
+    },
+    health_insurance: {
+        name: "Seguradora Pet",
+        type_health: "Plano de Saúde Pet",
+        number_health: "ABC123XYZ",
+        validity: "01/2024"
+    },
+    responsible_tutors: {
+        name_tutor: "Maria Silva",
+        cpf_tutor: "987.654.321-00"
+    }
 }
 
 export type InitialState = {

@@ -78,6 +78,7 @@ const MenuMultipleSelection = <T,>({
                 <div className="flex flex-col col-span-2 w-full">
                     <FieldControlSelect
                         isMulti
+                        isSearchable={true}
                         options={options}
                         divClassName="w-full mb-2"
                         label={label}
