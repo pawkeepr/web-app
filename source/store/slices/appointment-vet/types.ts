@@ -11,6 +11,7 @@ import {
     TOGGLE_STATUS, TOGGLE_STATUS_FAIL, TOGGLE_STATUS_SUCCESS,
     UPDATE, UPDATE_FAIL, UPDATE_SUCCESS
 } from "~/store/helpers/constants";
+import { GenericObject } from "~/store/helpers/types";
 
 export interface IPetAppointment {
     name_pet: string,
@@ -135,7 +136,7 @@ export interface IPaymentsAppointment {
     form_payment: string,
     value_payment: string,
     coin: string,
-    number_installments: string,
+    number_installments: string | GenericObject,
     status_payment: string,
     date_payment: string
 }

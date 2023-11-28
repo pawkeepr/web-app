@@ -27,6 +27,7 @@ import {
     VetsData
 } from "~/store/slices/appointment-vet/types"
 import Anamnesis from "./Anamnesis"
+import PaymentAppointment from "./PaymentsAppointment"
 import Treatment from "./Treatment"
 
 export class Appointments implements IAppointmentVet {
@@ -219,7 +220,7 @@ export class Appointments implements IAppointmentVet {
 
     definePayments(payments: IPaymentsAppointment): this {
         if (!payments) return this
-        this.payments = payments;
+        this.payments = PaymentAppointment.build(payments);
         return this;
     }
 
