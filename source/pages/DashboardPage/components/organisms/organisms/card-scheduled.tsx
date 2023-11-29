@@ -76,6 +76,7 @@ const CardScheduled = ({
                             {'Informações Do Tutor:'}
 
                             <div className="p-2">
+                                <p className="text-gray-700">Nome: {appointment?.tutor_data.name}</p>
                                 <p className="text-gray-700">Nome: {appointment?.tutor_data.email}</p>
                                 <p className="text-gray-700">Contato: {appointment?.tutor_data.phone}</p>
                             </div>
