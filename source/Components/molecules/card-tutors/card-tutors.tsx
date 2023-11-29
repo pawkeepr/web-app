@@ -39,9 +39,9 @@ const CardTutor = ({ tutor, checked}: CardTutorsProps) => {
                             <h3 className='font-semibold mobile:hidden'>Informações Do Tutor:</h3>
 
                             <div className="p-2">
-                                <p className="text-gray-700">Nome: {tutor?.name}</p>
-                                <p className="text-gray-700">Email: {tutor?.email}</p>
-                                <p className="text-gray-700">Contato: {tutor?.phone}
+                                <p className="text-gray-700"><strong>Nome: </strong>{tutor?.name}</p>
+                                <p className="text-gray-700"><strong>Email: </strong> {tutor?.email}</p>
+                                <p className="text-gray-700"><strong>Contato: </strong>{tutor?.phone}
                                 <span className="d-inline-block align-middle ml-2 mb-1">
                                     <FaWhatsapp className="text-green-600 text-lg align-middle" />
                                 </span>
@@ -53,9 +53,9 @@ const CardTutor = ({ tutor, checked}: CardTutorsProps) => {
                         <div className="flex flex-col mobile:hidden">
                         <h3 className='font-semibold mobile:hidden'>Logradouro:</h3>
                             <div className="p-2 ">
-                                <p className="text-gray-700">País: {tutor?.country}</p>
-                                <p className="text-gray-700">Cidade: {tutor?.city}-{tutor?.state}</p>
-                                <p className="text-gray-700">Cep: {tutor?.zipCode}</p>
+                                <p className="text-gray-700"><strong>País: </strong>{tutor?.country}</p>
+                                <p className="text-gray-700"><strong>Cidade: </strong>{tutor?.city}-{tutor?.state}</p>
+                                <p className="text-gray-700"><strong>Cep: </strong>{tutor?.zipCode}</p>
                             </div>
                         </div>
                     </div>

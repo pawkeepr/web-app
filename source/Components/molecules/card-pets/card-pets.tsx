@@ -11,6 +11,8 @@ type CardPetsProps = {
 }
 
 const CardPets = ({ pet, checked }: CardPetsProps) => {
+    console.log(pet, 'pet');
+    
 
     return (
         <div className="space-y-10 w-full">
@@ -28,22 +30,22 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
             >
                 <>
                     <div className="flex flex-col w-full">
-                        <div className="flex mobile:gap-3 justify-around items-center">
+                        <div className="flex justify-around items-center">
                             <MyImage
                                 src={ravena}
                                 alt="Picture of the author"
                                 width={150}
                                 height={150}
-                                className="h-32 mt-3 w-32 rounded-full"
+                                className="h-32 w-32 rounded-full"
                             />
 
-                            <div className="flex flex-col mobile:hidden items-center">
+                            <div className="flex flex-col items-center">
                                 <RadioGroup.Label
                                     as="p"
                                     className={`font-medium  ${checked ? 'text-white' : 'text-gray-900'
                                         }`}
                                 >
-                                    {'Informações Do Pet:'}
+                                    <h3 className='font-semibold mobile:hidden'>Informações do pet</h3>
                                 </RadioGroup.Label>
                                 <RadioGroup.Description
                                     as="span"
@@ -51,15 +53,16 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                         }`}
                                 >
                                     <div className="p-2 ">
-                                        <p className="text-gray-700">Nome do pet: {
+                                        <p className="text-gray-700"><strong>Nome do pet:</strong> {
                                             pet?.pet_data?.name_pet || pet?.name_pet
                                         }</p>
-                                        <p className="text-gray-700">Especie: {
+                                        <p className="text-gray-700"><strong>Especie:</strong> {
                                             pet?.pet_data?.specie || pet?.specie
                                         }</p>
-                                        <p className="text-gray-700">Sexo: {
+                                        <p className="text-gray-700"><strong>Sexo:</strong> {
                                             pet?.pet_data?.sex || pet?.sex
                                         }</p>
+                                         <p className="text-gray-700 md:hidden"><strong>Raça: </strong> {pet?.race}</p>
                                     </div>
                                 </RadioGroup.Description>
                             </div>
@@ -69,7 +72,7 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                     className={`font-medium  ${checked ? 'text-white' : 'text-gray-900'
                                         }`}
                                 >
-                                    {'Informações Do Tutor:'}
+                                    <h3 className='font-semibold mobile:hidden'>Informações adicionais</h3>
                                 </RadioGroup.Label>
                                 <RadioGroup.Description
                                     as="span"
@@ -77,8 +80,10 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                         }`}
                                 >
                                     <div className="p-2">
-                                        <p className="text-gray-700">Nome: {pet?.tutor_data?.email}</p>
-                                        <p className="text-gray-700">Contato: {pet?.tutor_data?.phone}</p>
+                                        <p className="text-gray-700"><strong>Ano de Nascimento: </strong>{pet?.date_birth}</p>
+                                        <p className="text-gray-700"><strong>Raça: </strong> {pet?.race}</p>
+                                        <p className="text-gray-700"><strong>Tipo sanguíneo: </strong>{pet?.blood_type}</p>
+
                                     </div>
                                 </RadioGroup.Description>
 
