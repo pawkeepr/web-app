@@ -11,9 +11,9 @@ import { useEffect, useState } from "react";
 
 import withLoading from "~/Components/helpers/with-loading";
 import { useAppSelector } from "~/store/hooks";
+import CardPet from "../molecules/card-pet";
 import StepAnamneses from "../organisms/steps/step-anamnese";
 import StepPayment from "../organisms/steps/step-payment";
-import StepPet from "../organisms/steps/step-pet";
 import StepTreatment from "../organisms/steps/step-treatment";
 
 type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
@@ -28,24 +28,18 @@ type TabItem = {
 const items: TabItem[] = [
     {
         id: 1,
-        title: "Bem Estar",
-        href: "#Pet",
-        Component: StepPet
-    },
-    {
-        id: 2,
         title: "Anamnese",
         href: "#Anamnese",
         Component: StepAnamneses
     },
     {
-        id: 3,
+        id: 2,
         title: "Tratamento",
         href: "#Treatment",
         Component: StepTreatment
     },
     {
-        id: 4,
+        id: 3,
         title: "Finalizar",
         href: "#Finalizar",
         Component: StepPayment
@@ -87,7 +81,7 @@ const VerticalTabs = () => {
 
         <section className="card card-body shadow-lg gap-2 mt-2">
             <h4 className="card-title mb-0">Nova Consulta</h4>
-
+            <CardPet />
             <section className="form-steps">
                 <div className="flex flex-col relative">
                     <div
