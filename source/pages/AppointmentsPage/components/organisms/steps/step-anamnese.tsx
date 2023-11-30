@@ -1,6 +1,9 @@
 /* eslint-disable react/jsx-no-undef */
 
+import { useState } from "react";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
+import FieldNumber from "~/Components/molecules/field-number";
+import FieldTextArea from "~/Components/molecules/field-text-area";
 import {
     questions_digestive_system,
     questions_locomotive_system,
@@ -12,7 +15,19 @@ import { StepProps } from "~/types/helpers";
 import AnswerSwitch from "../../molecules/answer-switch/answer-switch";
 
 
+// Função para calcular o IMC de um animal
+function calcularIMC(height: number, weight: number): number {
+    if (height === 0 || weight === 0) {
+        return 0; // Evita divisão por zero
+    }
+    const imc = weight / ((height / 100) * (height / 100)); // Converter altura para metros
+    return imc;
+}
+
+
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
+    const [heightPet, setHeightPet] = useState(0);
+    const [weightPet, setWeightPet] = useState(0);
 
     return (
         <section className="card card-body shadow-lg">
@@ -21,6 +36,46 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 <br />
                 <span className="text-xs font-bold text-secondary-500">Obrigatório (*)</span>
             </h4>
+
+            <div className="grid grid-cols-3 gap-3">
+
+                <FieldNumber
+                    label="Peso"
+                    placeholder="Peso do pet em quilos, exemplo = 0.5 (500 gramas)"
+                    required
+                    onChange={(e: any) => { setWeightPet(e.target.value) }}
+                    name="weight"
+                    type="number"
+                />
+
+                <FieldNumber
+                    label="Altura"
+                    placeholder="Altura do pet em centímetros, exemplo = 32"
+                    onChange={(e: any) => { setHeightPet(e.target.value) }}
+                    name="height"
+                    type="number"
+                />
+
+                <FieldNumber
+                    label="Comprimento"
+                    placeholder="Comprimento do pet em centímetros "
+                    className="border-gray-300"
+                    name="length"
+                    type="number"
+                />
+
+                <div>
+                    {weightPet > 0 && heightPet > 0 && (
+                        <h2
+                            className="m-4 font-bold"
+                        >
+                            O IMC do animal é: {calcularIMC(heightPet, weightPet).toFixed(2)}
+                        </h2>
+                    )}
+                </div>
+
+
+            </div>
 
             <AnswerSwitch
                 title="Sistema Digestivo"
@@ -51,6 +106,14 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 title="Sistema Locomotor"
                 name='locomotor_system'
                 answers={questions_locomotive_system}
+            />
+
+            <FieldTextArea
+                label="Orientações e Anotações"
+                div={{ className: "col-span-full" }}
+                className="rounded-md w-full border-gray-300"
+                component="textarea"
+                name="guidelines_notes"
             />
 
             <div className="flex align-items-center justify-center gap-3 mt-4">
