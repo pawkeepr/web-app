@@ -20,7 +20,7 @@ const CardScheduled = ({
     appointment,
     boxButtons = (props) => <BoxButtons {...props} />
 }: CardScheduledProps) => {
-
+    
     const BoxButtons = boxButtons
 
     return (
