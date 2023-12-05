@@ -12,7 +12,6 @@ import {
 import {
     createAppointmentVet,
     getAllAppointmentsVet,
-    updateAppointmentVet,
 } from '~/services/helpers';
 
 //Include Both Helper File with needed methods
@@ -36,7 +35,8 @@ export function* onGetAll() {
 export function* onUpdate({ payload }: PayloadAction<{ appointment_id: string, data: Partial<Data> }>) {
     try {
         const { appointment_id, data: appointment } = payload
-        const { data } = yield call(updateAppointmentVet, appointment, appointment_id);
+        const cb = async () => { }
+        const { data } = yield call(cb);
         yield put(updateSuccess(data));
         yield successToast('Alterado com sucesso!')
     } catch (error) {
