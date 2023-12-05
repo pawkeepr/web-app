@@ -7,11 +7,6 @@ import ControlSwitchDiv from "~/Components/molecules/control-switch-div";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldTextArea from "~/Components/molecules/field-text-area";
 import { StepProps } from "~/types/helpers";
-import Diseases from "../../../molecules/diseases";
-import Exams from "../../../molecules/exams";
-import Medicines from "../../../molecules/medicines";
-import Nutritions from "../../../molecules/nutritions";
-import Vaccines from "../../../molecules/vaccines";
 
 const physical_activity = ['Caminhadas', 'Corridas', 'Natação', 'Passeios', 'Cabo-de-guerra', 'Varetinhas', 'Bolinhas']
 
@@ -40,7 +35,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
 
             <ControlSwitchDiv
                 name="activities_carry"
-                label="O pet está praticando atividade física ?"
+                label="Recomendações de atividades físicas"
             >
                 <FieldControlSelect
                     label="Selecione uma ou mais opções:"
@@ -49,6 +44,13 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     name="activities_carry"
                     options={options_physical_activity}
                 />
+                <FieldTextArea
+                    label="Orientações e Anotações"
+                    className="rounded-md w-full border-gray-300"
+                    component="textarea"
+                    name="activities_carry.observations"
+                    type="text"
+                />
             </ControlSwitchDiv>
 
             <ControlSwitchDiv
@@ -56,56 +58,65 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 label="Testes rápidos?"
                 className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
             >
-                <div className="mt-2">
-                    <FieldControlSelect
-                        label="Selecione uma ou mais opções:"
-                        placeholder="Selecione uma ou mais atividades"
-                        isMulti
-                        name="activity"
-                        options={options}
-                    />
+                <FieldTextArea
+                    label="Orientações e Anotações"
+                    className="rounded-md w-full border-gray-300"
+                    component="textarea"
+                    name="observations"
+                    type="text"
+                />
 
-                    <FieldTextArea
-                        label="Orientações e Anotações"
-                        className="rounded-md w-full border-gray-300"
-                        component="textarea"
-                        name="observations"
-                        type="text"
-                    />
-
-                </div>
             </ControlSwitchDiv>
             <ControlSwitchDiv
                 name="apply_medicine"
                 label="Aplicar Medicação"
             >
-                <Medicines />
+                <FieldTextArea
+                    label="Orientações e Anotações"
+                    className="rounded-md w-full border-gray-300"
+                    component="textarea"
+                    name="medicines"
+                    type="text"
+                />
             </ControlSwitchDiv>
 
             <ControlSwitchDiv
                 name="apply_vaccine"
                 label="Aplicar vacina?"
             >
-                <Vaccines />
+                <FieldTextArea
+                    label="Orientações e Anotações"
+                    className="rounded-md w-full border-gray-300"
+                    component="textarea"
+                    name="vacines"
+                    type="text"
+                />
             </ControlSwitchDiv>
             <ControlSwitchDiv
                 name="apply_exam"
                 label="Aplicar exame?"
             >
-                <Exams />
+                <FieldTextArea
+                    label="Orientações e Anotações"
+                    className="rounded-md w-full border-gray-300"
+                    component="textarea"
+                    name="exams"
+                    type="text"
+                />
             </ControlSwitchDiv>
 
-            <ControlSwitchDiv
-                name="apply_disease"
-                label="Possui doença?"
-            >
-                <Diseases />
-            </ControlSwitchDiv>
+
             <ControlSwitchDiv
                 name="apply_nutrition"
                 label="Aplicar nutrição alimentar?"
             >
-                <Nutritions />
+                <FieldTextArea
+                    label="Orientações e Anotações"
+                    className="rounded-md w-full border-gray-300"
+                    component="textarea"
+                    name="nutritions"
+                    type="text"
+                />
             </ControlSwitchDiv>
 
 

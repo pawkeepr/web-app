@@ -66,6 +66,7 @@ export type IQuestionAnamnesis = {
 }
 
 export interface IAnamnesisAppointment {
+    physical_activity: IQuestionAnamnesis[],
     digestive_system: IQuestionAnamnesis[],
     respiratory_system: IQuestionAnamnesis[],
     locomotor_system: IQuestionAnamnesis[],

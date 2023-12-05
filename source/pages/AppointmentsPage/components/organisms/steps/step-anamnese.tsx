@@ -2,14 +2,16 @@
 
 import { useState } from "react";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
+import ControlSwitchDiv from "~/Components/molecules/control-switch-div";
 import FieldNumber from "~/Components/molecules/field-number";
 import FieldTextArea from "~/Components/molecules/field-text-area";
 import {
     questions_digestive_system,
     questions_locomotive_system,
     questions_nervous_system,
+    questions_physical_activity,
     questions_respiratory_system,
-    questions_urinary_system,
+    questions_urinary_system
 } from "~/constants/anamnese-questions";
 import { StepProps } from "~/types/helpers";
 import AnswerSwitch from "../../molecules/answer-switch/answer-switch";
@@ -78,6 +80,12 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
             </div>
 
             <AnswerSwitch
+                title="Atividade Física"
+                name='physical_activity'
+                answers={questions_physical_activity}
+            />
+
+            <AnswerSwitch
                 title="Sistema Digestivo"
                 name='digestive_system'
                 answers={questions_digestive_system}
@@ -108,13 +116,19 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 answers={questions_locomotive_system}
             />
 
-            <FieldTextArea
-                label="Orientações e Anotações"
-                div={{ className: "col-span-full" }}
-                className="rounded-md w-full border-gray-300"
-                component="textarea"
-                name="guidelines_notes"
-            />
+            <ControlSwitchDiv
+                name="apply_disease"
+                label="Apresenta alguma doença?"
+            >
+                <FieldTextArea
+                    label="Orientações e Anotações"
+                    className="rounded-md w-full border-gray-300"
+                    component="textarea"
+                    name="exams"
+                    type="text"
+                />
+            </ControlSwitchDiv>
+
 
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnCancel
