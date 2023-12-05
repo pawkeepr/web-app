@@ -76,6 +76,12 @@ const initialValues = (
     },
     medicines: [],
     anamnesis: {
+        physical_activity: [
+            {
+                question: "",
+                options: ""
+            }
+        ],
         digestive_system: [
             {
                 question: "",

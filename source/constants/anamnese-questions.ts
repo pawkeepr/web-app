@@ -90,3 +90,36 @@ export const questions_locomotive_system = [
         name: 'questions_locomotive_system_5',
     },
 ]
+
+// const physical_activity = ['Caminhadas', 'Corridas', 'Natação', 'Passeios', 'Cabo-de-guerra', 'Varetinhas', 'Bolinhas']
+
+export const questions_physical_activity = [
+    {
+        question: 'Varetinhas',
+        name: 'questions_physical_activity_1',
+    },
+    {
+        question: 'Bolinhas',
+        name: 'questions_physical_activity_2',
+    },
+    {
+        question: 'Cabo-de-guerra',
+        name: 'questions_physical_activity_3',
+    },
+    {
+        question: 'Passeios',
+        name: 'questions_physical_activity_4',
+    },
+    {
+        question: 'Natação',
+        name: 'questions_physical_activity_5',
+    },
+    {
+        question: 'Corridas',
+        name: 'questions_physical_activity_6',
+    },
+    {
+        question: 'Caminhadas',
+        name: 'questions_physical_activity_7',
+    },
+]

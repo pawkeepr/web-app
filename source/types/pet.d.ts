@@ -4,6 +4,7 @@ import { ITutor } from './tutor';
 export type IPet = {
     id?: string | null;
     name: string;
+    cpf_tutor: string;
     species: Species;
     breed: Breed;
     plain_type?: string;
