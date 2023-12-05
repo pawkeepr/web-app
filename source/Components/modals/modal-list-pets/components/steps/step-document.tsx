@@ -15,16 +15,16 @@ const StepDocument = ({
     const { values } = useFormikContext<InitialValues>()
 
     const validateDocument = useMemo(() => {
-        const document = values.ownerEmergencyContact.cpf_cnpj
+        const document = values.cpf_tutor
         return cpf.isValid(document) || cnpj.isValid(document)
-    }, [values.ownerEmergencyContact.cpf_cnpj])
+    }, [values.cpf_tutor])
 
     return (
         <div className="mt-3 p-1 gap-2 ">
 
             <FieldDocument
                 required
-                name="document"
+                name="cpf_tutor"
                 className="w-full flex-1 mt-2"
                 placeholder="CPF/CNPJ"
                 onChange={(e) => onChangeDocument?.(e.target.value)}

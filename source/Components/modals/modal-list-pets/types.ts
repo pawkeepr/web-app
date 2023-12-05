@@ -18,6 +18,7 @@ export type ModalConfirmProps = {
 export type InitialValues = {
     id?: string | null
     name: string
+    cpf_tutor: string
     species: Species
     breed: Breed
     gender: Gender
