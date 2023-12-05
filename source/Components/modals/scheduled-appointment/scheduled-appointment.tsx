@@ -73,6 +73,7 @@ const ModalListPets = ({
     const initialValues: IPet = useMemo(() => ({
         id: null,
         name: '',
+        cpf_tutor: document,
         species: null,
         breed: null,
         ownerEmergencyContact: {

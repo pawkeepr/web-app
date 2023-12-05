@@ -148,8 +148,9 @@ const ModalListPets = ({
         if (!pet) return
 
         handleNavigate(pet)
+        closeModal()
 
-    }, [handleSubmit, handleNavigate])
+    }, [handleSubmit, handleNavigate, closeModal])
 
     return (
         <>
