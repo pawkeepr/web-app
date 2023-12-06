@@ -42,7 +42,15 @@ interface AuthProviderProps {
     children: React.ReactNode;
 }
 
-const PUBLIC_ROUTES = ['/', '/sign-in', '/sign-up', '/forgot-password', 'activation', 'logout', 'confirm-account']
+const PUBLIC_ROUTES = [
+    '/',
+    '/sign-in',
+    '/sign-up',
+    '/forgot-password',
+    '/activation',
+    '/logout',
+    '/confirm-account'
+]
 
 export function AuthProvider({ children }: AuthProviderProps) {
     const dispatch = useAppDispatch()

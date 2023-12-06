@@ -13,7 +13,6 @@ type FieldDocumentProps<T> = InputControlProps<T> & {
 const FieldDocument = <T,>({ typeDocument = 'all', ...props }: FieldDocumentProps<T>) => {
     const { values } = useFormikContext()
     const [isValid, setIsValid] = useState(false)
-    const [target, setTarget] = useState("")
 
     const document = (values as any)[props.name] || ""
 
@@ -34,17 +33,17 @@ const FieldDocument = <T,>({ typeDocument = 'all', ...props }: FieldDocumentProp
 
 
     return (
-    <div className=''>
-        <FieldMasked
-            {...props}
-            name={props.name}
-            mask={mask}
-            replacement={{ _: /\d/ }}
-        />
-    {
-        !isValid && document.length > 0 && <p className='flex justify-center font-semibold text-secondary-500 items-center text-xs'>CPF/CNPJ inválido!</p>
-    }
-    </div>
+        <div className=''>
+            <FieldMasked
+                {...props}
+                name={props.name}
+                mask={mask}
+                replacement={{ _: /\d/ }}
+            />
+            {
+                !isValid && document.length > 0 && <p className='flex justify-center font-semibold text-secondary-500 items-center text-xs'>CPF/CNPJ inválido!</p>
+            }
+        </div>
     );
 };
 

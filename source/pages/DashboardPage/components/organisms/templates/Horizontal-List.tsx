@@ -1,6 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+'use client';
 
 import { Tab } from '@headlessui/react';
 import cn from 'classnames';
+import { useEffect, useState } from 'react';
+import useResizeMobile from '~/hooks/use-resize-mobile';
 import StepScheduledAll from "../steps/step-scheduled-all";
 import StepScheduledCanceled from "../steps/step-scheduled-canceled";
 import StepScheduledConfirmed from "../steps/step-scheduled-confirmed";
@@ -41,10 +45,20 @@ const Tabs = () => [
 
 const HorizontalTabs = () => {
 
-    const categories = Tabs()
+    const [categories, setCategories] = useState(() => Tabs())
+
+    const { isMobile } = useResizeMobile()
+
+    useEffect(() => {
+        if (isMobile) {
+            setCategories(Tabs().slice(0, 3))
+        } else {
+            setCategories(Tabs())
+        }
+    }, [isMobile])
 
     return (
-        <div className="w-full mt-2 rounded-md">
+        <div className="w-full mt-2 rounded-md" >
             <Tab.Group>
                 <Tab.List className="flex  rounded-xl bg-primary-500 p-1">
                     {categories.map((category) => (

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
-import { BtnCancel, BtnLabel, BtnPrimary } from '~/Components/atoms/btn';
+import { BtnCancel, BtnConfirm, BtnLabel, BtnPrimary } from '~/Components/atoms/btn';
 import withLoading from '~/Components/helpers/with-loading';
 import { ModalPlus, usePlusModal } from '~/hooks/use-plus-modal';
 import { IAppointmentVet } from '~/store/slices/appointment-vet/types';
@@ -31,6 +31,12 @@ const BoxButtons = ({
         open(ModalPlus.Rescheduled)
     }, [])
 
+    const onClickConfirmed = useCallback(() => {
+        setItem(item);
+        close(ModalPlus.ConfirmedScheduled)
+        open(ModalPlus.ConfirmedScheduled)
+    }, [])
+
     const startAppointment = useCallback(() => {
         router.push(`/dashboard/appointments?appointment_id=${item.id}&document=${item.cpf_tutor}&pet=${item.id_pet}`)
     }, [item])
@@ -49,7 +55,13 @@ const BoxButtons = ({
                 condition={!isLoading}
                 label='Reagendar Consulta'
                 onClick={onClickReScheduled}
-                className='border-none mobile:!w-full mobile:col-span-1'
+                className='border-none mobile:!w-full mobile:col-span-1 text-gray-500'
+            />
+
+            <BtnConfirm
+                label='Confirmar Consulta'
+                className='border-none mobile:!w-full mobile:col-span-1 text-gray-200'
+                onClick={onClickConfirmed}
             />
 
             <BtnPrimary
