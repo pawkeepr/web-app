@@ -21,12 +21,12 @@ function* registerUserSaga({ payload: user }: PayloadAction<AccountSignUp>) {
             'Um e-mail de confirmação foi enviado para o seu e-mail.',
             'Registro realizado com sucesso!',
             {
-                autoClose: 5000,
+                autoClose: 3000,
             })
-        yield delay(5000);
+        yield delay(4000);
         yield put(registerUserSuccessful());
         infoToast(
-            'Tente acessar sua conta, e informe o código enviado ao seu email para que possamos ativar sua conta',
+            'Tente acessar sua conta com o email cadastrado, você será redirecionado para a página de ativação. Onde deverá digitar o número enviado para o seu email!".',
             'Ative sua Conta',
             {
                 autoClose: 5000,
