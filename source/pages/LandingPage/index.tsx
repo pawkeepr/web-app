@@ -7,6 +7,7 @@ import Footer from "../../Layouts/Footer";
 import Home from "./home";
 
 const LandingPage = () => {
+
     useEffect(() => {
         window.onscroll = function () {
             scrollFunction();
