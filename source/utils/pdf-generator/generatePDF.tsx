@@ -1,89 +1,227 @@
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-import { IAppointmentVet } from '~/store/slices/appointment-vet/types';
+import React from 'react';
+import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
+// Estilos para o PDF
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+    padding: 20,
+  },
+  sectionLeft: {
+    width: '30%',
+    marginRight: '5%',
+    textAlign: 'center',
+  },
+  sectionLeft2: {
+    textAlign: 'center',
+    alignItems: 'flex-end',
+    width: '50%',
+  },
+  sectionRight: {
+    width: '70%',
+    textAlign: 'left',
+  },
+  sectionCenter: {
+    width: '100%',
+    textAlign: 'center',
+    marginTop: 20,
+  },
+  image: {
+    width: '27%',
+    borderRadius: 50,
+    alignItems: 'center',
+    height: 'auto',
+    backgroundColor: '#23b757',
+    marginBottom: 10,
+  },
+  title: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  info: {
+    fontSize: 12,
+    marginBottom: 5,
+  },
+  h2: {
+    fontSize: 14,
+    marginTop: 15,
+    marginBottom: 5,
+  },
+  flex: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+});
 
-
-
-export const generatePDF = async (appointment: IAppointmentVet) => {
-    pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
-   
-
-    // const dadosVeterinario = {
-    //     nome: 'Dr. Veterinário',
-    //     especialidade: 'Especialidade Veterinária',
-    //     telefone: '123-456-789',
-    //     email: 'veterinario@example.com',
-    //     // logo: '' // Insira o link para a imagem da logo aqui
-    //   };
-      
-    //   const dadosConsulta = {
-    //     nomePet: 'Nome do Pet',
-    //     especie: 'Espécie do Pet',
-    //     raça: 'Raça do Pet',
-    //     sexo: 'Sexo do Pet',
-    //     dataNascimento: '01/01/2020',
-    //     tutor: {
-    //       nome: 'Nome do Tutor',
-    //       endereco: 'Endereço do Tutor',
-    //       telefone: '987-654-321',
-    //       email: 'tutor@example.com'
-    //     }
-    //   };
-      
-   // Criando o documento PDF
-const docDefinition = {
-    header: {
-      columns: [
-        // { 
-        // image: 'sampleImage.jpg',
-        // width: 150,
-        // opacity: 0.5,
-        // alignment: 'right' }, // Logo da clínica à direita
-      ],
-      margin: [0, 0, 0, 0] // Margem: superior, direita, inferior, esquerda
+const mockAppointment = {
+    id: 'd5babb48-dd33-48e5-8a54-46103beaf5ae',
+    pet_data: {
+      name_pet: 'Ravena Dias Duarte',
+      microchip: null,
+      identification_number: null,
+      specie: 'Gato',
+      race: 'Siamês',
+      blood_type: 'DEA_1.1_Positive',
+      blood_donator: null,
+      organ_donor: '',
+      sex: 'Femea',
+      date_birth: '0003-12-23'
     },
-    content: [
-        { text: 'Consulta Veterinária', style: 'header', alignment: 'center', bold: true, fontSize: 16, margin: [0, 0, 0, 20] }, // Subheader 'Consulta Veterinária'
-        {
-            table: {
-            widths: ['33%', '33%', '33%'], // Distribuição igual de largura para as três colunas
-            styles: {
-                subheader: {
-                  fontSize: 18,
-                  bold: true,
-                  margin: [0, 0, 0, 0] // Margem: superior, direita, inferior, esquerda
-                }
-              },
-            body: [
-              [
-                { text: 'Informações do Pet', bold: true, margin: [0, 0, 0, 5], fontSize: 13 },
-                { text: 'Informações do Tutor', bold: true, margin: [0, 0, 0, 5], fontSize: 13 },
-                { text: 'Informações do Veterinário', bold: true, margin: [0, 0, 0, 5], fontSize: 13 }
-              ],
-              [
-                {
-                    text: `Nome: ${appointment?.pet_data.name_pet}\nEspécie: ${appointment?.pet_data.specie}\nRaça: ${appointment?.pet_data.race}\nSexo: ${appointment?.pet_data.sex}\nNascimento: ${appointment?.pet_data.date_birth}`,
-                    fontSize: 11 // Definindo tamanho da fonte para as informações do Pet
-                  },
-                [
-                  { text: `Nome: ${appointment.tutor_data.name}\nEndereço: ${appointment.tutor_data.city +'-'+ appointment.tutor_data.state}\nTelefone: ${appointment.tutor_data.phone}\nEmail: ${appointment.tutor_data.email}\n`, alignment: 'left', fontSize: 11 }
-                ],
-                [
-                  { text: `Nome: ${appointment.vet_data.name}\nTelefone: ${appointment.vet_data.phone}\nEmail: ${appointment.vet_data.email}\n`, alignment: 'left', fontSize: 11  }
-                ]
-              ]
-            ],
-          },
-          layout: 'noBorders',
-        },
-        
-      ]
-  };
-  
-  // Gerando o PDF
-  const pdfDoc = pdfMake.createPdf(docDefinition);
-  
-  // Visualizando o PDF (substitua esta parte com o método correto para seu ambiente)
-  pdfDoc.open();
-}
+    vets_data: {
+      name: 'Jaine dias',
+      email: 'jainefranciellen@gmail.com',
+      phone: '+55 (79) 9 9673-3389',
+      country: '',
+      zipCode: '49037-620',
+      state: 'SE',
+      city: 'Aracaju'
+    },
+    cpf_tutor: '09029941588',
+    name_tutor: 'Jaine Franciellem',
+    contact_tutor: 'ContactTutor',
+    location_tutor: 'LocationTutor',
+    responsible_tutors: 'ResponsibleTutors',
+    health_insurance: 'HealthInsurance',
+    id_pet: 'string',
+    tutor_data: {
+      name: 'Jaine franciellem santos dias',
+      email: 'jainefranciellen@gmail.com',
+      phone: '+55 (79) 9 9673-3389',
+      country: 'Brasil',
+      zipCode: '49037-620',
+      state: 'SE',
+      city: 'Aracaju'
+    },
+    crmv_vet: 'hg654694',
+    cpf_cnpj_vet: '09029941588',
+    vet_data:  {
+        name: 'Dr Laercio Mota',
+        email: 'laerciomota@gmail.com',
+        phone: '+55 (79) 9 9673-3389',
+        country: 'Brasil',
+        zipCode: '49037-620',
+        state: 'SE',
+        city: 'Aracaju'
+      },
+    anamnesis: {
+      digestive_system: [ {} ],
+      respiratory_system: [ {} ],
+      locomotor_system: [ {} ],
+      urinary_system: [ {} ],
+      nervous_system: [ {} ]
+    },
+    info_required: {
+        age: 7,
+        height: 20,
+        length: 30,
+        weight: 5,
+        type_weight: null,
+        imc: 2.000,
+        guidelines_notes: null
+      },
+    payments: {
+        form_payment: null,
+        value_payment: null,
+        coin: null,
+        number_installments: null,
+        status_payment: null,
+        date_payment: null
+    },
+    dates_consults: {
+        date_consultation: '0067-07-06',
+        time_consultation: '06:57',
+        type_consultation: '65756',
+        reason_consultation: '65756',
+        additional_remarks: '',
+        date_next_consultation: '',
+        time_next_consultation: ''
+    },
+    appointment_status: {
+      scheduled: 'yes',
+      confirmed: 'no',
+      done: 'no',
+      canceled: 'no',
+      rescheduled: 'no',
+      reason_canceled: 'unforeseen'
+    },
+    appointment_signature: {
+      signature_data: null,
+      date_signature: null,
+      type_signature: null,
+      status_signature: null,
+      ip_address: null,
+      browser_device: null,
+      operational_system: null
+    },
+    appointment_geolocation: {
+      latitude: null,
+      longitude: null,
+      precision: null,
+      altitude: null,
+      speed: null
+    },
+    dental_treatment: {
+      reason_query: null,
+      oral_examination: null,
+      treatments_performed: [],
+      recommendations: null
+    },
+    well_being: { perform_activity: null, activities_carry: [] },
+  }
+
+const MyDocument = () => {
+  const clinicImage = '/home/usuario/Documentos/Pawkeeprs/web-app/styles/assets/images/faq-img.png'; // Substitua 'url_da_imagem_da_clinica_veterinaria.jpg' pela URL da imagem da clínica veterinária
+
+  return (
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <div className='flex'>
+                    <View style={styles.flex}>
+                        <View style={styles.sectionRight}>
+                            <Text style={styles.title}>Veterinário</Text>
+                            <Text style={styles.info}>Nome: Dr. Exemplo</Text>
+                            <Text style={styles.info}>Telefone: (XX) XXXX-XXXX</Text>
+                            <Text style={styles.info}>Endereço: Endereço da Clínica</Text>
+                        </View>
+                        <View style={styles.sectionLeft2}>
+                            <Image src={clinicImage} style={styles.image} />
+                        </View>
+                    </View>
+            <View style={styles.sectionCenter}>
+                <Text style={styles.title}>Consulta</Text>
+            </View>
+                <View style={styles.sectionRight}>
+                    {/* Adicione informações do pet*/}
+                    <Text style={styles.h2}>Pet</Text>
+                    <Text style={styles.info}>Nome..........................................{mockAppointment.pet_data.name_pet}</Text>
+                    <Text style={styles.info}>Espécie........................................{mockAppointment.pet_data.specie}</Text>
+                    <Text style={styles.info}>Raça.................................................{mockAppointment.pet_data.race }</Text>
+                    <Text style={styles.info}>Sexo................................................{mockAppointment.pet_data.sex }</Text>
+                    <Text style={styles.info}>Idade...............................................{mockAppointment.pet_data.date_birth }</Text>
+
+                </View>
+
+                <View style={styles.sectionRight}>
+                    {/* Adicione informações do tutor*/}
+                    <Text style={styles.h2}>Tutor</Text>
+                    <Text style={styles.info}>Nome.................................{mockAppointment.tutor_data.name}</Text>
+                    <Text style={styles.info}>Email................................{mockAppointment.tutor_data.email}</Text>
+                    <Text style={styles.info}>Telefone.............................{mockAppointment.tutor_data.phone}</Text>
+                </View>
+                <View>
+                    {/* Anamnese*/}
+                    <Text style={styles.h2}>Anamnese</Text>
+                    <Text style={styles.info}>Peso...........................................{mockAppointment.info_required.weight}</Text>
+                    <Text style={styles.info}>Altura.........................................{mockAppointment.info_required.length}</Text>
+                    <Text style={styles.info}>IMC..........................................{mockAppointment.info_required?.imc}</Text>
+                    <Text style={styles.info}>Observações....................................Nenhuma</Text>
+                    
+                </View>
+        </div>
+      </Page>
+    </Document>
+  );
+};
+
+export default MyDocument;
