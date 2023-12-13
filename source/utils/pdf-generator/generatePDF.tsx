@@ -1,7 +1,30 @@
 import React from 'react';
-import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
-// Estilos para o PDF
+import { Document, Page, Text, View, StyleSheet, Image, Font } from '@react-pdf/renderer';
+import { IScheduledAppointmentVet } from "~/store/slices/appointment-vet/types"
+
+type mockAppointment = {
+    question: string;
+    answer: string;
+    treatment: string;
+    idx: any;
+    system: string;
+}
+
+
+const font = '/home/usuario/Documentos/Pawkeeprs/web-app/styles/assets/fonts/Kalnia-Regular.ttf'; // Substitua 'url_da_fonte.ttf' pela URL da fonte
+
+Font.register({
+    family: 'Kalnia', 
+    src: font,
+    format: 'truetype',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+  });
+  
 const styles = StyleSheet.create({
+  globalStyles: {
+    fontFamily: 'Kalnia',
+        },
   page: {
     flexDirection: 'row',
     backgroundColor: '#ffffff',
@@ -24,7 +47,7 @@ const styles = StyleSheet.create({
   sectionCenter: {
     width: '100%',
     textAlign: 'center',
-    marginTop: 20,
+    marginTop: 10,
   },
   image: {
     width: '27%',
@@ -37,6 +60,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     marginBottom: 10,
+    marginTop: 10,
   },
   info: {
     fontSize: 12,
@@ -45,12 +69,15 @@ const styles = StyleSheet.create({
   h2: {
     fontSize: 14,
     marginTop: 15,
-    marginBottom: 5,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
   flex: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between', 
+    fontSize: 12,
+    marginBottom: 5,
   },
 });
 
@@ -105,19 +132,44 @@ const mockAppointment = {
         city: 'Aracaju'
       },
     anamnesis: {
-      digestive_system: [ {} ],
-      respiratory_system: [ {} ],
-      locomotor_system: [ {} ],
-      urinary_system: [ {} ],
-      nervous_system: [ {} ]
+      digestive_system: [ {
+        'O Animal está se alimentando normalmente?': 'Sim',
+        'O Animal está bebendo água normalmente?': 'Sim',
+        'O Animal está defecando?': 'Sim',
+        'O Animal está vomitando?': 'Não',
+      } ],
+      respiratory_system: [ {
+        'O Animal está espirrando?': 'Não',
+        'O Animal está tossindo?': 'Não',
+        'O Animal está com secreção nasal?': 'Não',
+        'O Animal está com secreção ocular?': 'Não',
+        'O Animal está com dificuldade respiratória?': 'Não',
+      } ],
+      locomotor_system: [ {
+        'O Animal está mancando?': 'Não',
+        'O Animal está com dificuldade de se locomover?': 'Não',
+        'O Animal está com dificuldade de se levantar?': 'Não',
+        'O Animal está com dificuldade de subir escadas?': 'Não',
+      } ],
+      urinary_system: [ {
+        'O Animal está urinando normalmente?': 'Sim',
+        'O Animal está com dificuldade para urinar?': 'Não',
+        'O Animal está com urina escura?': 'Não',
+        'O Animal está com urina com sangue?': 'Não',
+      } ],
+      nervous_system: [ {
+        'O Animal está com convulsão?': 'Não',
+        'O Animal está com tremores?': 'Não',
+        'O Animal está com desmaios?': 'Não',
+      } ]
     },
     info_required: {
-        age: 7,
-        height: 20,
-        length: 30,
-        weight: 5,
+        age: '7 anos',
+        height: '20 cm',
+        length: '30 cm',
+        weight: '5 kg',
         type_weight: null,
-        imc: 2.000,
+        imc: '0.5',
         guidelines_notes: null
       },
     payments: {
@@ -161,6 +213,42 @@ const mockAppointment = {
       altitude: null,
       speed: null
     },
+    treatment: {
+        'Testes Rápidos': [{'Teste 1': 'Positivo'}],
+        'Aplicar Medicamentos': [
+            {
+                'Medicamento': 'Gaviz 10mg 1/4 do comprimido, de 12 em 12 horas, por 15 dias',
+            },
+            {
+                'Medicamento': 'glutamina 4 gotas via oral, de 8 em 8 horas, por 30 dias',
+            }
+        ],
+        'Aplicar Vacinas': [
+            {
+                'Vacina': 'V8 Subcutânea, 1/2 da dose 1 vez ao ano',
+            },
+            {
+                'Vacina': 'Antirrábica Subcutânea, 1/2 da dose 1 vez ao ano',
+            }
+        ],
+        'Aplicar Exames': [
+            {
+                'Exame': 'Hemograma',
+            },
+            {
+                'Exame': 'Ultrassom',
+            }
+        ],
+        'Aplicar nutrição alimentar': [
+            {
+                'Nutrição': 'Ração Premium 3 vezes ao dia',
+            },
+            {
+                'Nutrição': 'Sachê 1 vez ao dia',
+            }
+        ],
+
+    },
     dental_treatment: {
       reason_query: null,
       oral_examination: null,
@@ -170,7 +258,7 @@ const mockAppointment = {
     well_being: { perform_activity: null, activities_carry: [] },
   }
 
-const MyDocument = () => {
+const MyDocument = (Appointment: IScheduledAppointmentVet) => {
   const clinicImage = '/home/usuario/Documentos/Pawkeeprs/web-app/styles/assets/images/faq-img.png'; // Substitua 'url_da_imagem_da_clinica_veterinaria.jpg' pela URL da imagem da clínica veterinária
 
   return (
@@ -180,9 +268,9 @@ const MyDocument = () => {
                     <View style={styles.flex}>
                         <View style={styles.sectionRight}>
                             <Text style={styles.title}>Veterinário</Text>
-                            <Text style={styles.info}>Nome: Dr. Exemplo</Text>
-                            <Text style={styles.info}>Telefone: (XX) XXXX-XXXX</Text>
-                            <Text style={styles.info}>Endereço: Endereço da Clínica</Text>
+                            <Text style={styles.info}>Nome: {mockAppointment.vet_data.name}</Text>
+                            <Text style={styles.info}>Telefone: {mockAppointment.vet_data.phone}</Text>
+                            <Text style={styles.info}>Email: {mockAppointment.vet_data.email}</Text>
                         </View>
                         <View style={styles.sectionLeft2}>
                             <Image src={clinicImage} style={styles.image} />
@@ -194,30 +282,65 @@ const MyDocument = () => {
                 <View style={styles.sectionRight}>
                     {/* Adicione informações do pet*/}
                     <Text style={styles.h2}>Pet</Text>
-                    <Text style={styles.info}>Nome..........................................{mockAppointment.pet_data.name_pet}</Text>
-                    <Text style={styles.info}>Espécie........................................{mockAppointment.pet_data.specie}</Text>
-                    <Text style={styles.info}>Raça.................................................{mockAppointment.pet_data.race }</Text>
-                    <Text style={styles.info}>Sexo................................................{mockAppointment.pet_data.sex }</Text>
-                    <Text style={styles.info}>Idade...............................................{mockAppointment.pet_data.date_birth }</Text>
+                    <Text style={styles.flex}>Nome..........................................{mockAppointment.pet_data.name_pet}</Text>
+                    <Text style={styles.flex}>Espécie........................................{mockAppointment.pet_data.specie}</Text>
+                    <Text style={styles.flex}>Raça.................................................{mockAppointment.pet_data.race }</Text>
+                    <Text style={styles.flex}>Sexo................................................{mockAppointment.pet_data.sex }</Text>
+                    <Text style={styles.flex}>Idade...............................................{mockAppointment.pet_data.date_birth }</Text>
 
                 </View>
 
                 <View style={styles.sectionRight}>
-                    {/* Adicione informações do tutor*/}
+                    {/* Adicione flexrmações do tutor*/}
                     <Text style={styles.h2}>Tutor</Text>
-                    <Text style={styles.info}>Nome.................................{mockAppointment.tutor_data.name}</Text>
-                    <Text style={styles.info}>Email................................{mockAppointment.tutor_data.email}</Text>
-                    <Text style={styles.info}>Telefone.............................{mockAppointment.tutor_data.phone}</Text>
+                    <Text style={styles.flex}>Nome.................................{mockAppointment.tutor_data.name}</Text>
+                    <Text style={styles.flex}>Email................................{mockAppointment.tutor_data.email}</Text>
+                    <Text style={styles.flex}>Telefone.............................{mockAppointment.tutor_data.phone}</Text>
                 </View>
-                <View>
-                    {/* Anamnese*/}
-                    <Text style={styles.h2}>Anamnese</Text>
-                    <Text style={styles.info}>Peso...........................................{mockAppointment.info_required.weight}</Text>
-                    <Text style={styles.info}>Altura.........................................{mockAppointment.info_required.length}</Text>
-                    <Text style={styles.info}>IMC..........................................{mockAppointment.info_required?.imc}</Text>
-                    <Text style={styles.info}>Observações....................................Nenhuma</Text>
-                    
-                </View>
+         <div className='flex'>
+            <View style={styles.sectionCenter}>
+                <Text style={styles.title}>Anamnese</Text>
+            </View>
+            <View>
+                {Object.keys(mockAppointment?.anamnesis).map((system, index) => (
+                    <View key={index}>
+                        {mockAppointment?.anamnesis[system].map((questions: mockAppointment, idx: mockAppointment) => (
+                        <View key={idx}>
+                            {Object.entries(questions).map(([question, answer], i) => (
+                                <div key={i} style={styles.flex}>
+                                    <Text>{question}</Text>
+                                    <Text>{answer}</Text>
+                                </div>
+                            ))}
+                        </View>
+                        ))}
+                    </View>
+                ))}    
+            </View>
+         </div>
+        </div>
+      </Page>
+      <Page size="A4" style={styles.page}>
+        <div className='flex'>
+            <View style={styles.sectionCenter}>
+                <Text style={styles.title}>Tratamento</Text>
+            </View>
+            <View>
+                {Object.keys(mockAppointment?.treatment).map((treatmentType, index) => (
+                    <View key={index}>
+                        <Text style={styles.h2}>{treatmentType}</Text>
+                        {mockAppointment?.treatment[treatmentType].map((treatment: mockAppointment, idx: mockAppointment) => (
+                            <View key={idx}>
+                                {Object.entries(treatment).map(([treatment, answer], i) => (
+                                    <div key={i} >
+                                        <Text style={styles.info}> {treatment}: {answer}</Text>
+                                    </div>
+                                ))}
+                            </View>
+                        ))}
+                    </View>
+                ))}
+            </View>
         </div>
       </Page>
     </Document>

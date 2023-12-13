@@ -243,6 +243,7 @@ export interface IAppointmentVet extends IAnamnesis, ITreatment {
     appointment_status: IStatusAppointment;
     appointment_signature: ISignatureAppointment;
     appointment_geolocation: IGeolocationAppointment;
+    treatment: ITreatment;
     dental_treatment: IDental_treatmentAppointment;
     well_being: IWell_beingAppointment;
 }
