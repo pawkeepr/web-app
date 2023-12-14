@@ -43,8 +43,6 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
     
             return requiredFieldSecondoTutor.every((field) => {
                 const value = field.split('.').reduce((obj, key) => obj?.[key], values);
-                console.log('VALUE',!!value);
-                
                 return !!value;
             });
         }
@@ -57,23 +55,20 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
             "name_tutor",
             "cpf_tutor",
             "contact_tutor.phone",
-
         ];
 
         return requiredFields.every((field) => {
             const value = field.split(".").reduce((obj, key) => obj?.[key], values);
-            console.log('VALUE2',!!value);
-            
             return !!value;
         });
     }
 
     const disableNextButton = !areFieldsFilled() || !areFieldsFilledSecondTutor(); // Desabilita o botão se algum campo estiver vazio
-
+    
     const isPending =
-        isPendingTutors ||
-        isPendingPetById;
-
+    isPendingTutors ||
+    isPendingPetById;
+    
     const onlyWords = (e: React.ChangeEvent<HTMLInputElement>) => {
         const regex = /[^a-zA-Z ]/g;
         e.target.value = e.target.value.replace(regex, "");
