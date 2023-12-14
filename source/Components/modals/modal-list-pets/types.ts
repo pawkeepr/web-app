@@ -23,6 +23,7 @@ export type InitialValues = {
     gender: Gender
     document: string
     ownerEmergencyContact: {
+        name: string
         email: string
         cpf_cnpj: string
         phone: string

@@ -41,6 +41,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     <FieldControlSelect
                         label="Selecione uma ou mais opções:"
                         placeholder="Selecione uma ou mais atividades"
+                        required
                         isMulti
                         name="activity"
                         options={options}
