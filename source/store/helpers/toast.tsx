@@ -1,13 +1,22 @@
-import { Theme, ToastPosition, toast } from "react-toastify";
+import { Theme, ToastOptions, ToastPosition, toast } from "react-toastify";
 
 export const OptionsDefault = {
-    position: "top-right" as ToastPosition,
+    position: "bottom-center" as ToastPosition,
     autoClose: 2000,
     closeButton: true,
     closeOnClick: true,
     theme: 'colored' as Theme,
     icon: true,
-}
+    pauseOnVisibilityChange: true,
+    draggable: true,
+    pauseOnHover: true,
+    style: {
+        width: '50%',
+        textAlign: 'center',
+        padding: '2rem',
+        minWidth: '450px',
+    } // Estilo para ocupar a tela toda e centralizar
+} as ToastOptions
 
 type Options = Partial<typeof OptionsDefault>;
 
@@ -26,17 +35,26 @@ export const buildToast = async ({ type, description = '' }: ToastMessage, optio
         </>
     )
 
-
+    const textStyle = '!font-semibold !text-base'
 
     if (type === 'success') {
-        return toast.success(msg, { ...optionsDefault, className: '!bg-primary-500 text-white ' });
+        return toast.success(msg, {
+            ...optionsDefault,
+            className: '!bg-primary-500 text-white ' + textStyle,
+        });
     }
 
     if (type === 'error') {
-        return toast.error(msg, { ...optionsDefault, className: '!bg-secondary-500 text-white ' });
+        return toast.error(msg, {
+            ...optionsDefault,
+            className: '!bg-secondary-500 !text-gray-500 ' + textStyle,
+        });
     }
 
-    return toast.info(msg, { ...optionsDefault, className: '!bg-secondary-500 text-white ' });
+    return toast.info(msg, {
+        ...optionsDefault,
+        className: '!bg-secondary-500 !text-gray-500 ' + textStyle,
+    });
 
 }
 

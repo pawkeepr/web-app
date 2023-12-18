@@ -7,7 +7,7 @@ import FieldDocument from "~/Components/molecules/field-document/field-document"
 import isValidCPF from "~/validations/cpf";
 
 type InitialValues = {
-    document: string;
+    cpf_tutor: string;
 };
 
 type onChangeOpen = (arg: boolean) => void;
@@ -22,11 +22,12 @@ type FieldDocumentAppointmentProps = {
     children?: (props: HandleProps) => JSX.Element;
 }
 
+const initialValues: InitialValues = { cpf_tutor: "" };
+
 const FieldDocumentAppointment = ({
     selectedTabInitial = 1,
     children,
 }: FieldDocumentAppointmentProps) => {
-    const initialValues: InitialValues = { document: "" };
     const [isOpen, setIsOpen] = useState(false);
 
     const onHandleSubmit = ({
@@ -34,13 +35,13 @@ const FieldDocumentAppointment = ({
         onChangeOpen,
     }: HandleProps) => {
         return async (values: InitialValues) => {
-            if (!isValidCPF(values.document) && selectedTabInitial === 1) {
+            if (!isValidCPF(values.cpf_tutor) && selectedTabInitial === 1) {
                 setIsOpen(true);
                 return;
             }
 
             startTransition(() => {
-                onChangeDocument(values.document);
+                onChangeDocument(values.cpf_tutor);
                 onChangeOpen(true);
             });
         };
@@ -66,29 +67,34 @@ const FieldDocumentAppointment = ({
                         })}
                         enableReinitialize
                     >
-                        <Form className=" flex flex-row items-center justify-end ">
-                            {
-                                children?.({ onChangeOpen, onChangeDocument }) ||
-                                <div className="w-full mb-3 ml-3 hidden lg:block xl:block">
-                                    <FieldDocument
-                                        name="document"
-                                        placeholder="Nova Consulta"
-                                        label="CPF"
-                                        className="rounded-md"
-                                        onlyCPF
-                                        endIcon={
-                                            <button
-                                                className="focus:outline-none flex h-full items-center justify-center"
-                                                data-bs-target="#addVeterinaryAppointmentModal"
-                                                type="submit"
-                                            >
-                                                <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
-                                            </button>
-                                        }
-                                    />
-                                </div>
-                            }
-                        </Form>
+                        {
+                            ({ handleSubmit }) => (
+                                <Form className=" flex flex-row items-center justify-end" onSubmit={handleSubmit}>
+                                    {
+                                        children?.({ onChangeOpen, onChangeDocument }) ||
+                                        <div className="w-full mb-3 ml-3 hidden lg:block xl:block">
+                                            <FieldDocument
+                                                name="cpf_tutor"
+                                                placeholder="Nova Consulta"
+                                                label="CPF"
+                                                className="rounded-md"
+                                                onlyCPF
+                                                endIcon={
+                                                    <button
+                                                        className="focus:outline-none flex h-full items-center justify-center"
+                                                        data-bs-target="#addVeterinaryAppointmentModal"
+                                                        type="submit"
+                                                    >
+                                                        <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
+                                                    </button>
+                                                }
+                                            />
+                                        </div>
+                                    }
+                                </Form>
+                            )
+                        }
+
                     </Formik>
                 )}
             </ModalListPets>

@@ -81,6 +81,7 @@ const ModalListPets = ({
     const initialValues: IPet = {
         id: null,
         name: '',
+        cpf_tutor: document,
         species: null,
         breed: null,
         ownerEmergencyContact: {
@@ -147,8 +148,9 @@ const ModalListPets = ({
         if (!pet) return
 
         handleNavigate(pet)
+        closeModal()
 
-    }, [handleSubmit, handleNavigate])
+    }, [handleSubmit, handleNavigate, closeModal])
 
     return (
         <>

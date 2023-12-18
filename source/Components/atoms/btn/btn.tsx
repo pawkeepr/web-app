@@ -30,10 +30,10 @@ export const button = tv({
             true: "bg-green-500"
         },
         confirm: {
-            true: "bg-blue-600 hover:bg-blue-700 enabled:focus:bg-blue-800 enabled:hover:bg-btn-blue-700"
+            true: "bg-[#0971B3]"
         },
         cancel: {
-            true: "bg-secondary-500 text-white"
+            true: "bg-secondary-500 text-gray-500"
         },
         text: {
             true: "bg-transparent border-2 border-secondary-500 text-secondary-500 hover:!bg-gray-100"

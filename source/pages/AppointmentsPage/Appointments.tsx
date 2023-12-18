@@ -74,8 +74,13 @@ const initialValues = (
         state: profile?.location?.state,
         city: profile?.location?.city
     },
-    medicines: [],
     anamnesis: {
+        physical_activity: [
+            {
+                question: "",
+                options: ""
+            }
+        ],
         digestive_system: [
             {
                 question: "",
@@ -107,10 +112,6 @@ const initialValues = (
             }
         ]
     },
-    vaccines: [],
-    exams: [],
-    nutritions: [],
-    illnesses: [],
     info_required: {
         age: "",
         height: "",
@@ -156,30 +157,18 @@ const initialValues = (
         altitude: "",
         speed: ""
     },
-    dental_treatment: {
-        reason_query: "",
-        oral_examination: "",
-        treatments_performed: [],
-        recommendations: ""
-    },
     well_being: {
         perform_activity: "",
         activities_carry: []
     },
     health_insurance,
     name_tutor: name_tutor as string,
-    tests_fasts: [],
     digestive_system: false,
     locomotor_system: false,
     nervous_system: false,
     respiratory_system: false,
     urinary_system: false,
-    apply_disease: false,
-    apply_exam: false,
-    apply_fast_test: false,
-    apply_medicine: false,
-    apply_nutrition: false,
-    apply_vaccine: false,
+    treatments: [],
 });
 
 
@@ -191,6 +180,7 @@ const AppointmentsPage = ({ document, pet, appointment_id }: AppointmentsPagePro
     const { isLoading: isLoadingProfile, data: profile } = useProfile()
 
     const { handleSubmit } = useAppointment();
+
     const values = useMemo(() => initialValues(
         data as IPetV2,
         profile as IProfile,

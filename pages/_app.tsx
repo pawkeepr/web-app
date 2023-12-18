@@ -30,7 +30,10 @@ function App({ Component, pageProps }: AppProps) {
             <Provider>
                 <AuthProvider>
                     <LayoutProvider>
-                        <ToastContainer theme='colored' />
+                        <ToastContainer
+                            theme='colored'
+                            className="!w-full p-4 bg-dark bg-opacity-50 !h-screen  flex flex-1 items-center justify-center absolute top-0"
+                        />
                         <Component {...pageProps} />
                     </LayoutProvider>
                 </AuthProvider>

@@ -47,6 +47,9 @@ const items = [
     },
 ]
 
+
+
+
 const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
     const pathname = usePathname();
     const { mode } = useChangeLayoutMode()

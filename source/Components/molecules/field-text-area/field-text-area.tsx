@@ -71,8 +71,8 @@ const FieldTextArea = <T,>({
                 )}
             </div>
 
-            {error && (
-                <div className="w-full text-xs text-center text-red-700">
+            {meta.error && (
+                <div className="w-full text-xs text-center text-secondary-500 font-semibold">
                     {meta.error}
                 </div>
             )}

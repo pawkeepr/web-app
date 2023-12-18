@@ -1,28 +1,39 @@
-
-//Import images
-
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 
-import ControlSwitchDiv from "~/Components/molecules/control-switch-div";
-import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
-import FieldTextArea from "~/Components/molecules/field-text-area";
+import { FieldArray, useFormikContext } from 'formik';
+import CardInput from "~/Components/organism/card-input";
+import { ItemTreatment, OptionSelect } from "~/store/slices/appointment-vet/types";
 import { StepProps } from "~/types/helpers";
-import Diseases from "../../../molecules/diseases";
-import Exams from "../../../molecules/exams";
-import Medicines from "../../../molecules/medicines";
-import Nutritions from "../../../molecules/nutritions";
-import Vaccines from "../../../molecules/vaccines";
+
+const items: OptionSelect[] = [
+    {
+        value: 'activities_carry',
+        label: 'Recomendações de atividades físicas'
+    },
+    {
+        value: 'fast_test',
+        label: 'Testes rápidos'
+    },
+    {
+        value: 'medicine',
+        label: 'Medicação'
+    },
+    {
+        value: 'vaccine',
+        label: 'Vacina'
+    },
+    {
+        value: 'exam',
+        label: 'Exame'
+    },
+    {
+        value: 'nutrition',
+        label: 'Nutrição Alimentar'
+    }
+]
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
-    const tests = ['Teste 1', 'Teste 2', 'Teste 3', 'Teste 4', 'Teste 5']
-
-    const options = tests.map((item) => ({
-        value: item,
-        label: item,
-        color: 'rgb(255 200 107);',
-    }));
-
-
+    const { values } = useFormikContext<{ treatments: ItemTreatment[] }>();
 
     return (
         <section className="card card-body shadow-lg">
@@ -31,65 +42,51 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                 <br />
                 <span className="text-xs font-bold text-secondary-500">Obrigatório (*)</span>
             </h4>
-
-            <ControlSwitchDiv
-                name="fast_test"
-                label="Testes rápidos?"
-                className="mt-2 lg:w-16 lg:h-7 w-[3.72rem] h-6"
+            <FieldArray
+                name="treatments"
             >
-                <div className="mt-2">
-                    <FieldControlSelect
-                        label="Selecione uma ou mais opções:"
-                        placeholder="Selecione uma ou mais atividades"
-                        required
-                        isMulti
-                        name="activity"
-                        options={options}
-                    />
+                {
+                    ({ push, remove }) => (
+                        <>
+                            {
+                                values.treatments.map((treatment, index) => (
+                                    <div key={index} className="w-full bg-secondary rounded-md text-xs py-1 px-2" >
+                                        <div className="w-full flex flex-row bg-secondary px-2 rounded-sm border-dashed border border-primary">
+                                            <div className="grid grid-cols-6 w-full">
+                                                <h6 className="col-span-1 font-mono font-semibold  capitalize">
+                                                    {(treatment.type as OptionSelect).label}
+                                                </h6>
+                                                <h6 className="col-span-2 font-mono font-semibold  capitalize">
+                                                    {treatment.name}
+                                                </h6>
 
-                    <FieldTextArea
-                        label="Orientações e Anotações"
-                        className="rounded-md w-full border-gray-300"
-                        component="textarea"
-                        name="observations"
-                        type="text"
-                    />
-
-                </div>
-            </ControlSwitchDiv>
-            <ControlSwitchDiv
-                name="apply_medicine"
-                label="Aplicar Medicação"
-            >
-                <Medicines />
-            </ControlSwitchDiv>
-
-            <ControlSwitchDiv
-                name="apply_vaccine"
-                label="Aplicar vacina?"
-            >
-                <Vaccines />
-            </ControlSwitchDiv>
-            <ControlSwitchDiv
-                name="apply_exam"
-                label="Aplicar exame?"
-            >
-                <Exams />
-            </ControlSwitchDiv>
-
-            <ControlSwitchDiv
-                name="apply_disease"
-                label="Possui doença?"
-            >
-                <Diseases />
-            </ControlSwitchDiv>
-            <ControlSwitchDiv
-                name="apply_nutrition"
-                label="Aplicar nutrição alimentar?"
-            >
-                <Nutritions />
-            </ControlSwitchDiv>
-
+                                                <p className="col-span-3 font-mono  capitalize">
+                                                    {treatment.notes}
+                                                </p>
+                                            </div>
+                                            <button
+                                                type="button"
+                                                className="text-red-500"
+                                                onClick={() => remove(index)}
+                                            >
+                                                X
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                            <CardInput
+                                items={items}
+                                handleSubmit={async (data, formikHelpers) => {
+                                    await new Promise((resolve) => setTimeout(resolve, 300))
+                                    push(data)
+                                    formikHelpers.resetForm()
+                                }}
+                            />
+                        </>
+                    )
+                }
+            </FieldArray>
 
             <div className="flex items-center justify-center">
                 <BtnCancel
