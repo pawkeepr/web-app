@@ -31,29 +31,6 @@ const FieldControlSelect = ({
 }: FieldSelectControl) => {
     const { values, setFieldValue, } = useFormikContext<any>();
 
-    // useEffect(() => {
-
-    //     const item = options.find((option: Option) => option?.value === values?.[name]?.value)
-
-    //     if (!item && values?.[name]?.value) {
-    //         setFieldValue(
-    //             name,
-    //             null,
-    //         )
-
-    //         return
-    //     }
-
-    //     if (!item) return
-
-    //     setFieldValue(
-    //         name,
-    //         item,
-    //     )
-
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [options])
-
     const onChange = useCallback(
         (option: any) => {
             onChangeValue?.(option);
