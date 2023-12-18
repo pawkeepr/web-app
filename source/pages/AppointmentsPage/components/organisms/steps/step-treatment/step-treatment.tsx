@@ -1,14 +1,9 @@
-
-//Import images
-
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 
 import { FieldArray, useFormikContext } from 'formik';
 import CardInput from "~/Components/organism/card-input";
 import { ItemTreatment, OptionSelect } from "~/store/slices/appointment-vet/types";
 import { StepProps } from "~/types/helpers";
-
-
 
 const items: OptionSelect[] = [
     {
@@ -83,8 +78,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                             <CardInput
                                 items={items}
                                 handleSubmit={async (data, formikHelpers) => {
-                                    console.log('handleSubmit', data)
-                                    await new Promise((resolve) => setTimeout(resolve, 1000))
+                                    await new Promise((resolve) => setTimeout(resolve, 300))
                                     push(data)
                                     formikHelpers.resetForm()
                                 }}
