@@ -21,7 +21,7 @@ import { useAppDispatch } from '~/store/hooks';
 
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid';
 import { BtnLink } from '~/Components/atoms/btn';
-import { Profile, RULES } from '~/store/slices/auth/profile/types';
+import { Profile } from '~/store/slices/auth/profile/types';
 
 import { layoutModeTypes } from '~/Components/constants/layout';
 import StepActivationAddress from './components/organism/steps-activation/step-address';
@@ -30,17 +30,33 @@ import StepActivationPerson from './components/organism/steps-activation/step-pe
 import StepActivationSpecialty from './components/organism/steps-activation/step-specialty';
 
 const initialValues = (email: string): ActivateAccount => ({
-    firstName: '',
-    lastName: '',
-    crmv: '',
-    contact: {
-        email,
-        phone: '',
-        whatsapp: '',
+    specialty_information: {
+         specialty: {
+            label: '',
+            value: '',
+        },
+        list_specialty: [],
     },
-    type: RULES.ADMIN as any,
+    crmv: '',
+    user_information: {
+        fisrtName: '',
+        lastName: '',
+        name: '',
+        url_img: '',
+        contact: {
+            email: '',
+            phone: '',
+            whatsapp: '',
+            facebook: '',
+            instagram: '',
+            twitter: '',
+            linkedin: '',
+            youtube: '',
+        },
+
+    },
     cpf_cnpj: '',
-    location: {
+    adress: {
         country: '',
         street: '',
         number: '',
@@ -50,13 +66,6 @@ const initialValues = (email: string): ActivateAccount => ({
         state: '',
         zipCode: '',
     },
-
-    list_service_type: [],
-    list_specialty: [],
-    specialty: {
-        label: '',
-        value: '',
-    }
 });
 
 
@@ -88,12 +97,12 @@ const ActivationAccount = () => {
     const dispatch = useAppDispatch()
 
     const onSubmit = async (values: ActivateAccount) => {
-        const { list_specialty, ...rest } = values
+        const { specialty_information, ...rest } = values
 
         const profile: Profile = {
             ...rest,
-            specialty: values.specialty.value,
-            list_specialty: list_specialty.map(item => ({
+            specialty: values.specialty_information.specialty.value,
+            list_specialty: specialty_information.list_specialty.map(item => ({
                 name_specialty: item.label,
                 type: item.value,
             }))

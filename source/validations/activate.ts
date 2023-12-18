@@ -19,6 +19,11 @@ type Contact = {
     email: string;
     phone: string;
     whatsapp: string;
+    facebook: string;
+    instagram: string;
+    twitter: string;
+    linkedin: string;
+    youtube: string;
 }
 
 type Location = {
@@ -32,20 +37,23 @@ type Location = {
     complement: string;
 }
 
-export type ActivateAccount = {
-    firstName: string;
+export type UserInformation = {
+    fisrtName: string;
     lastName: string;
-    crmv: string;
-    cpf_cnpj: string;
-    specialty: {
-        value: string;
-        label: string;
-    };
-    list_service_type: string[];
-    list_specialty: Specialty[];
-    type: number;
+    name: string;
+    url_img: string;
     contact: Contact;
-    location: Location;
+};
+
+export type ActivateAccount = {
+    cpf_cnpj: string;
+    crmv: string;
+    specialty_information: {
+        specialty: Specialty;
+        list_specialty: Specialty[];
+    };
+    user_information: UserInformation;
+    adress: Location;
 }
 
 const validate = Yup.object().shape({
