@@ -207,22 +207,17 @@ export interface IAnamnesis {
     anamnesis?: IAnamnesisAppointment
 }
 
-export interface ITreatment {
-    apply_medicine: boolean
-    medicines: IMedicineAppointment[];
-    apply_vaccine: boolean
-    vaccines: IVaccineAppointment[];
-    apply_exam: boolean
-    exams: IExamsAppointment[];
-    apply_nutrition: boolean
-    nutritions: INutritionsAppointment[];
-    apply_disease: boolean
-    illnesses: IllnessesAppointment[];
-    apply_fast_test: boolean
-    tests_fasts: ITests_FastsAppointment[];
+export type OptionSelect = {
+    value: string;
+    label: string;
+}
+export interface ItemTreatment {
+    type: string | OptionSelect,
+    name: string,
+    notes: string
 }
 
-export interface IAppointmentVet extends IAnamnesis, ITreatment {
+export interface IAppointmentVet extends IAnamnesis {
     id?: string | null;
     pet_data: PetData
     vets_data: VetsData[]
@@ -244,8 +239,9 @@ export interface IAppointmentVet extends IAnamnesis, ITreatment {
     appointment_status: IStatusAppointment;
     appointment_signature: ISignatureAppointment;
     appointment_geolocation: IGeolocationAppointment;
-    dental_treatment: IDental_treatmentAppointment;
+    dental_treatment?: IDental_treatmentAppointment;
     well_being: IWell_beingAppointment;
+    treatments: ItemTreatment[];
 }
 
 export interface IScheduledAppointmentVet {
@@ -304,7 +300,7 @@ export interface ContactTutor {
 
 export interface LocationTutor {
     country: string | null
-    zipCode: string
+    zipCode: string | null
     state: string | null
     city: string | null
     neighborhood: string | null

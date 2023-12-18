@@ -88,7 +88,7 @@ const ModalListPets = ({
             cpf_cnpj: document,
             phone: pets?.length > 0 ? pets[0].contact_tutor.phone as string : '',
             email: pets?.length > 0 ? pets[0].contact_tutor.email as string : '',
-            name: pets?.length > 0 ? pets[0].name_tutor : '',
+            name: pets?.length > 0 ? pets[0].name_tutor as string : '',
         },
         castrated: false,
         date_birth: '',

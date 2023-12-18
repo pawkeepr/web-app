@@ -1,96 +1,68 @@
-import Link from 'next/link';
-
-import {
-    Card,
-    CardBody,
-    Col,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    Row,
-    UncontrolledDropdown
-} from 'reactstrap';
-import MyImage from '~/Components/atoms/my-image/my-image';
-
-import { sample } from 'lodash';
-
+import cn from 'classnames';
+import MyImage from "~/Components/atoms/my-image";
+import { FaWhatsapp } from 'react-icons/fa';
 import { Tutor } from '~/store/slices/tutors/types';
 
 type CardTutorsProps = {
     tutor: Tutor
+    checked?: boolean;
 }
 
-const CardTutors = ({ tutor }: CardTutorsProps) => {
 
-    if (!tutor) {
-        return null;
-    }
+const CardTutor = ({ tutor, checked}: CardTutorsProps) => {
+    console.log(tutor, 'tutor');
 
     return (
-        <Card className="team-box">
-            <CardBody className="px-4">
-                <Row className="align-items-center team-row">
-                    <div className="col team-settings">
-                        <Row className="align-items-center">
-                            <div className="col">
+        <div
+            key={tutor?.name}
+            className={
+                cn(
+                    'bg-white relative flex flex-col cursor-pointer rounded-lg px-2 py-2 shadow-md focus:outline-none`',
+                    {
+                        '!bg-primary-500 bg-opacity-60 text-white': checked,
+                    })
 
+            }
+        >
+            <div className="mb-2">
+                <div className="flex flex-col w-full">
+                    <div className="flex mobile:gap-3 justify-around items-center">
+                        <MyImage
+                            src={tutor?.avatar}
+                            alt={`Foto de Perfil de ${tutor?.name}`}
+                            width={150}
+                            height={150}
+                            className="h-32 mt-3 w-32 rounded-full"
+                        />
+                        <div className="flex flex-col">
+
+                            <h3 className='font-semibold mobile:hidden'>Informações Do Tutor:</h3>
+
+                            <div className="p-2">
+                                <p className="text-gray-700"><strong>Nome: </strong>{tutor?.name}</p>
+                                <p className="text-gray-700"><strong>Email: </strong> {tutor?.email}</p>
+                                <p className="text-gray-700"><strong>Contato: </strong>{tutor?.phone}
+                                <span className="d-inline-block align-middle ml-2 mb-1">
+                                    <FaWhatsapp className="text-green-600 text-lg align-middle" />
+                                </span>
+                                </p>
+                               
                             </div>
-                            <UncontrolledDropdown className="col text-end">
-                                <DropdownToggle tag="a" role="button">
-                                    <i className="ri-more-fill fs-17"></i>
-                                </DropdownToggle>
-                                <DropdownMenu className="dropdown-menu-end">
-                                    <li><DropdownItem><i className="ri-eye-fill text-muted me-2 align-bottom"></i>Ver</DropdownItem></li>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
-                        </Row>
+
+                        </div>
+                        <div className="flex flex-col mobile:hidden">
+                        <h3 className='font-semibold mobile:hidden'>Logradouro:</h3>
+                            <div className="p-2 ">
+                                <p className="text-gray-700"><strong>País: </strong>{tutor?.country}</p>
+                                <p className="text-gray-700"><strong>Cidade: </strong>{tutor?.city}-{tutor?.state}</p>
+                                <p className="text-gray-700"><strong>Cep: </strong>{tutor?.zipCode}</p>
+                            </div>
+                        </div>
                     </div>
-                    <Col lg={4}>
-                        <div className="team-profile-img">
-                            <div className="avatar-md w-24 h-24">
-                                <div className="avatar-title bg-white rounded-circle relative">
-                                    <MyImage
-                                        src={tutor?.avatar}
-                                        alt={`Foto de Perfil de ${tutor?.name}`}
-                                        className="img-fluid d-block rounded-circle"
-                                        fill
-                                    />
-                                </div>
-                            </div>
-                            <div className="team-content">
-                                <Link href="#" className="d-block"><h5 className="fs-16 mb-1">{tutor?.name}</h5></Link>
-                                <p className="text-muted mb-0">{tutor?.phone}</p>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col lg={4}>
-                        <Row className="text-muted text-center">
-                            <Col xs={6} className="border-end border-end-dashed">
-                                <h5 className="mb-1">{
-                                    sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
-                                }</h5>
-                                <p className="text-muted mb-0">Consultas</p>
-                            </Col>
-                            <Col xs={6}>
-                                <i className="emoji" data-emoji="🐱"></i>
-                                <i className="emoji" data-emoji="🐶"></i>
-                                <i className="emoji" data-emoji="🐰"></i>
-                                <i className="emoji" data-emoji="🐹"></i>
-                                <i className="emoji" data-emoji="🐠"></i>
-                                <p className="text-muted mb-0">Pets</p>
-                            </Col>
-                        </Row>
-                    </Col>
-                    {/* <Col lg={2} className="col">
-                        <div className="text-end">
-                            <Link href="/pages-profile" className="btn btn-light view-btn">Ver Perfil</Link>
-                        </div>
-                    </Col> */}
-
-                </Row>
-            </CardBody>
-        </Card>
-    )
+                </div>
+            </div>
+        </div>
+    );
 }
 
-export default CardTutors
+export default CardTutor

@@ -33,7 +33,7 @@ export const button = tv({
             true: "bg-[#0971B3]"
         },
         cancel: {
-            true: "bg-secondary-500 text-white"
+            true: "bg-secondary-500 text-gray-500"
         },
         text: {
             true: "bg-transparent border-2 border-secondary-500 text-secondary-500 hover:!bg-gray-100"

@@ -11,8 +11,14 @@ const StepTutor = ({
     isLoading,
 }: StepProps) => {
 
-    const { isValid, handleSubmit, isSubmitting } = useFormikContext<InitialValues>()
+    const { isValid, handleSubmit, isSubmitting, values } = useFormikContext<InitialValues>()
 
+    const areFieldsFilled = !!(
+        values.ownerEmergencyContact.name &&
+        values.ownerEmergencyContact.phone &&
+        values.ownerEmergencyContact.email
+    );
+    
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -46,9 +52,10 @@ const StepTutor = ({
                 onClickSuccess={() => null}
                 success={({ disabled }) => <BtnPrimary
                     isLoading={isSubmitting || isLoading}
+                    
                     label="Concluir"
                     type="submit"
-                    disabled={disabled || isSubmitting}
+                    disabled={disabled || isSubmitting || !areFieldsFilled}
                 />}
             />
         </Form>

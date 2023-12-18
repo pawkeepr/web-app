@@ -118,7 +118,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
 
             <ControlSwitchDiv
                 name="apply_disease"
-                label="Apresenta alguma doença?"
+                label="Doenças"
             >
                 <FieldTextArea
                     label="Orientações e Anotações"
@@ -129,7 +129,16 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 />
             </ControlSwitchDiv>
 
-
+            <div className="flex justify-between flex-col items-start gap-2 mb-2">
+                <span className="font-bold">Anotações Gerais</span>
+                <FieldTextArea
+                    label=""
+                    className="rounded-md w-full border-gray-300"
+                    component="textarea"
+                    name="notes"
+                    type="text"
+                />
+            </div>
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnCancel
                     label="Voltar"

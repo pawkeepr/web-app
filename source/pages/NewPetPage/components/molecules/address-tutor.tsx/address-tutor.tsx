@@ -87,7 +87,7 @@ const AddressTutor = ({ disabled }: StepTutorProps) => {
                 type="text"
                 label="Estado"
                 name="location_tutor.state"
-                disabled={(disabledInputs.state || disabled) || isLoading}
+                disabled={( disabled) || isLoading}
                 placeholder={isLoading ? 'Carregando...' : 'Digite o nome do estado'}
                 required
             />
@@ -96,7 +96,7 @@ const AddressTutor = ({ disabled }: StepTutorProps) => {
                 type="text"
                 label="Cidade"
                 name="location_tutor.city"
-                disabled={(disabledInputs.city || disabled) || isLoading}
+                disabled={( disabled) || isLoading}
                 placeholder={isLoading ? 'Carregando...' : 'Digite o nome da cidade'}
                 required
             />
@@ -104,7 +104,7 @@ const AddressTutor = ({ disabled }: StepTutorProps) => {
                 type="text"
                 label="Rua"
                 name="location_tutor.street"
-                disabled={(disabledInputs.street || disabled) || isLoading}
+                disabled={( disabled) || isLoading}
                 placeholder={isLoading ? 'Carregando...' : 'Digite o nome da rua'}
                 required
             />

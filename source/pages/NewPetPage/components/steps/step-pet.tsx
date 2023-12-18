@@ -19,6 +19,19 @@ import { InitialValues } from "../../index";
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const { values } = useFormikContext<InitialValues>();
 
+    const areFieldsFilled = () => {
+        const requiredFields = [
+            'pet_data.name_pet',
+            'pet_data.date_birth',
+            'pet_data.sex',
+        ];
+
+        return requiredFields.every((field) => {
+            const value = field.split('.').reduce((obj, key) => obj?.[key], values);
+            return !!value;
+        });
+    };
+
     return (
         <div className="card card-body shadow-lg">
             <div className="p-1 m-2 mb-4">
@@ -83,6 +96,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 />
                 <BtnPrimary
                     label="Próximo"
+                    disabled={!areFieldsFilled()}
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}

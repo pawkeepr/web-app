@@ -6,9 +6,15 @@ import CardTutor from "~/Components/molecules/card-tutor";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldNumber from "~/Components/molecules/field-number/field-number";
 import { StepProps } from "~/types/helpers";
+import { PDFViewer } from '@react-pdf/renderer';
+
+import MyDocument from "~/utils/pdf-generator/generatePDF";
+
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit, isSubmitting } = useFormikContext();
+    
+   
 
     const [event, setEvent] = useState<string>('credit');
 
@@ -109,7 +115,11 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     label="Concluir Consulta"
                 />
             </div>
-
+            <div>
+                <PDFViewer>
+                    <MyDocument />
+                </PDFViewer>
+            </div>
         </Form>
     );
 };
