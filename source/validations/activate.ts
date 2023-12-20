@@ -15,7 +15,7 @@ type Specialty = {
     label: string;
 }
 
-type Contact = {
+export type Contact = {
     email: string;
     phone: string;
     whatsapp: string;
@@ -26,7 +26,7 @@ type Contact = {
     youtube: string;
 }
 
-type Location = {
+export type Location = {
     country: string;
     zipCode: string;
     state: string;
