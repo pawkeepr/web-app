@@ -79,16 +79,17 @@ const ModalListPets = ({
     const { activeData: pets, handleSubmit, isLoading } = useListPetsOfTutor(document)
 
     const initialValues: IPet = {
-        id: null,
         name: '',
         cpf_tutor: document,
-        species: null,
+        specie: null,
         breed: null,
         ownerEmergencyContact: {
             cpf_cnpj: document,
-            phone: pets?.length > 0 ? pets[0].contact_tutor.phone as string : '',
-            email: pets?.length > 0 ? pets[0].contact_tutor.email as string : '',
-            name: pets?.length > 0 ? pets[0].name_tutor as string : '',
+            phone: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.user_information.contact.phone as string : '',
+            email: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.user_information.contact.email as string : '',
+            name: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.user_information.name as string : '',
+            lastName: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.user_information.lastName as string : '',
+            whatsapp: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.user_information.contact.whatsapp as string : '',
         },
         castrated: false,
         date_birth: '',
@@ -100,50 +101,7 @@ const ModalListPets = ({
     }
 
     const onSubmit = useCallback(async (values: IPet) => {
-        const pet = await handleSubmit({
-            name_tutor: values.ownerEmergencyContact.name as string,
-            phone_tutor: values.ownerEmergencyContact.phone,
-            contact_tutor: {
-                email: values.ownerEmergencyContact.email,
-                phone: values.ownerEmergencyContact.phone,
-                whatsapp: values.ownerEmergencyContact.phone,
-            },
-            cpf_tutor: values.ownerEmergencyContact.cpf_cnpj,
-            vets_data: [],
-            location_tutor: {
-                country: 'Brasil',
-                zipCode: null,
-                state: null,
-                city: null,
-                neighborhood: null,
-                street: null,
-                number: null,
-                complement: null,
-            },
-            pet_data: {
-                name_pet: values.name,
-                specie: values.species,
-                race: values.breed,
-                castrated: values.castrated,
-                sex: values.gender,
-                microchip: null,
-                identification_number: null,
-                blood_type: null,
-                blood_donator: null,
-                organ_donor: null,
-                date_birth: null,
-            },
-            health_insurance: {
-                name: null,
-                type_health: null,
-                number_health: null,
-                validity: null,
-            },
-            responsible_tutors: {
-                name_tutor: null,
-                cpf_tutor: null
-            },
-        })
+        const pet = await handleSubmit(values)
 
         if (!pet) return
 
@@ -248,7 +206,7 @@ const ModalListPets = ({
                                         <Tab.Panel key={id} tabIndex={index}>
                                             <Component
                                                 onChangeStep={onChangeSelectedTab}
-                                                pets={pets}
+                                                pets={pets || []}
                                                 onChangeDocument={onChangeDocument}
                                                 handleNavigate={handleNavigate}
                                                 nextStep={nextStep}
