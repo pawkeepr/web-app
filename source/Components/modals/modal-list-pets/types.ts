@@ -1,5 +1,4 @@
-import { Gender, Species } from '~/store/slices/pets/speciesType'
-import { Breed } from '~/store/slices/pets/types'
+import { IPet } from '~/types/pet'
 import { IPetV2 } from '~/types/pet-v2'
 
 export type onChangeOpen = (arg: boolean) => void
@@ -15,21 +14,7 @@ export type ModalConfirmProps = {
     selectedTabInitial?: number
 }
 
-export type InitialValues = {
-    id?: string | null
-    name: string
-    cpf_tutor: string
-    species: Species
-    breed: Breed
-    gender: Gender
-    document: string
-    ownerEmergencyContact: {
-        name: string
-        email: string
-        cpf_cnpj: string
-        phone: string
-    }
-}
+export type InitialValues = IPet
 
 export type StepProps = {
     nextStep: () => void
