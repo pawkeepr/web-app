@@ -1,15 +1,9 @@
+import { Contact } from "~/validations/activate";
 
 type Specialty = {
     type: string;
     name_specialty: string;
 }
-
-type Contact = {
-    email: string;
-    phone: string;
-    whatsapp: string;
-}
-
 type Location = {
     country: string;
     zipCode: string;
