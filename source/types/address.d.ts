@@ -6,4 +6,5 @@ export type IAddress = {
     neighborhood: string;
     city: string;
     state: string;
+    country: string;
 }
