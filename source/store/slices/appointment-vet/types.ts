@@ -123,16 +123,6 @@ export interface IllnessesAppointment {
     date_identified: string
 }
 
-export interface IInfo_required {
-    age: string,
-    height: string,
-    length: string,
-    weight: string,
-    type_weight: string,
-    imc: string,
-    guidelines_notes: string
-}
-
 export interface IPaymentsAppointment {
     form_payment: string,
     value_payment: string,
@@ -233,7 +223,6 @@ export interface IAppointmentVet extends IAnamnesis {
     cpf_cnpj_vet: string;
     vet_data: IVetAppointment;
     anamnesis: IAnamnesisAppointment;
-    info_required: IInfo_required;
     payments: IPaymentsAppointment;
     dates_consults: IDatesConsultsAppointment;
     appointment_status: IStatusAppointment;
@@ -260,7 +249,6 @@ export interface IScheduledAppointmentVet {
     cpf_cnpj_vet: string;
     vet_data: IVetAppointment;
     anamnesis: never;
-    info_required: IInfo_required;
     payments: never;
     dates_consults: IDatesConsultsAppointment;
     appointment_status: IStatusAppointment;
@@ -282,6 +270,13 @@ export interface PetData {
     organ_donor: string | null
     sex: string | null
     date_birth: string | null
+    age: string,
+    height: string,
+    length: string,
+    weight: string,
+    type_weight: string,
+    imc: string,
+    guidelines_notes: string
 }
 
 export interface VetsData {

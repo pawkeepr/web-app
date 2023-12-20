@@ -45,19 +45,19 @@ const StepScheduledAppointment = ({
             time_next_consultation: "",
             type_consultation: ""
         },
-        contact_tutor: pet?.contact_tutor,
+        contact_tutor: pet?.main_responsible_guardian.user_information.contact,
         cpf_tutor: pet?.cpf_tutor,
         id_pet: pet?.id,
-        pet_data: pet?.pet_data,
-        name_tutor: pet?.name_tutor,
+        pet_data: pet?.pet_information,
+        name_tutor: pet?.main_responsible_guardian.user_information.name,
         tutor_data: {
-            city: pet?.location_tutor.city,
-            country: pet?.location_tutor.country,
-            email: pet?.contact_tutor.email,
-            name: pet?.name_tutor,
-            phone: pet?.contact_tutor.phone,
-            state: pet?.location_tutor.state,
-            zipCode: pet?.location_tutor.zipCode,
+            city: pet?.main_responsible_guardian.adress.city,
+            country: pet?.main_responsible_guardian.adress.country,
+            email: pet?.main_responsible_guardian.user_information.contact.email,
+            name: pet?.main_responsible_guardian.user_information.name,
+            phone: pet?.main_responsible_guardian.user_information.contact.phone,
+            state: pet?.main_responsible_guardian.adress.state,
+            zipCode: pet?.main_responsible_guardian.adress.zipCode
         }
     }),
         [pet]
