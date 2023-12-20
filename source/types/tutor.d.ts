@@ -3,6 +3,7 @@ import { IAddress } from "./address";
 export type ITutor = {
     id?: string;
     name: string;
+    lastName: string;
     email: string;
     cpf_cnpj: string;
     created_at?: string;
@@ -10,4 +11,5 @@ export type ITutor = {
     avatar?: string;
     phone: string;
     address?: IAddress
+    whatsapp?: string;
 }
