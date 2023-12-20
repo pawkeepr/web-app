@@ -1,83 +1,63 @@
-import { Breed } from "~/store/slices/pets/breedType";
-import { Gender, Species } from "~/store/slices/pets/speciesType";
-import { GenericSelect, IPetV2, PetData } from "~/types/pet-v2";
+import { IPet } from "~/types/pet";
+import { IHealthInsurance, IPetV2, ISecondaryTutor, PetData } from "~/types/pet-v2";
+import { Contact, IMainTutor, Location, UserInformation } from "~/validations/activate";
 
 export class Pet implements IPetV2 {
+
     id: string | null;
-    name_tutor: string
-    phone_tutor: string;
-    contact_tutor: {
-        email: string | null;
-        phone: string | null
-        whatsapp: string | null
-    };
     cpf_tutor: string;
-    vets_data: [];
-    location_tutor: {
-        country: string | null;
-        zipCode: string | null;
-        state: string | null;
-        city: string | null;
-        neighborhood: string | null;
-        street: string | null;
-        number: string | null;
-        complement: string | null;
+    pet_information: PetData;
+    main_responsible_guardian: {
+        user_information: UserInformation;
+        address: Location
     };
-    pet_data: {
-        name_pet: string;
-        specie: Species | null | GenericSelect;
-        race: Breed | null | GenericSelect;
-        sex: Gender | null | GenericSelect;
-        castrated: boolean | null;
-        microchip: string | null;
-        identification_number: string | null;
-        blood_type: string | null | GenericSelect;
-        blood_donator: string | null;
-        organ_donor: string | null;
-        date_birth: string | null;
-    };
-    health_insurance: {
-        name: string | null;
-        type_health: string | null;
-        number_health: string | null;
-        validity: string | null;
-    };
-    responsible_tutors: {
-        name_tutor: string | null;
-        cpf_tutor: string | null;
-    };
+    secondary_responsible_guardian: ISecondaryTutor;
+    health_insurance: IHealthInsurance;
+
 
     constructor() {
         this.id = '';
-        this.name_tutor = '';
-        this.phone_tutor = '';
-        this.contact_tutor = {
-            email: '',
-            phone: '',
-            whatsapp: ''
-        };
         this.cpf_tutor = '';
-        this.vets_data = [];
-        this.location_tutor = {
-            country: '',
-            zipCode: '',
-            state: '',
-            city: '',
-            neighborhood: '',
-            street: '',
-            number: '',
-            complement: ''
-        };
-        this.pet_data = {} as any;
+
+        this.pet_information = {} as any;
         this.health_insurance = {
             name: '',
             type_health: '',
             number_health: '',
             validity: ''
         };
-        this.responsible_tutors = {
+        this.main_responsible_guardian = {
+            address: {
+                city: '',
+                complement: '',
+                country: '',
+                neighborhood: '',
+                number: '',
+                state: '',
+                street: '',
+                zipCode: ''
+            },
+            user_information: {
+                contact: {
+                    email: '',
+                    phone: '',
+                    whatsapp: '',
+                    facebook: '',
+                    instagram: '',
+                    linkedIn: '',
+                    twitter: '',
+                    youtube: ''
+                },
+                first_name: '',
+                last_name: '',
+                url_img: ''
+            }
+        };
+        this.secondary_responsible_guardian = {
             name_tutor: '',
-            cpf_tutor: ''
+            cpf_tutor: '',
+            phone_tutor: '',
+            email_tutor: ''
         };
     }
 
@@ -86,86 +66,100 @@ export class Pet implements IPetV2 {
         return this;
     }
 
-    defineNameTutor(name_tutor: string): this {
-        this.name_tutor = name_tutor;
-        return this;
-    }
-
-    definePhoneTutor(phone_tutor: string): this {
-        this.phone_tutor = phone_tutor;
-        return this;
-    }
-
-    defineContactTutor(contact_tutor: {
-        email: string | null;
-        phone: string | null
-        whatsapp: string | null
-    }): this {
-        this.contact_tutor = contact_tutor;
-        return this;
-    }
-
     defineCpfTutor(cpf_tutor: string): this {
         this.cpf_tutor = cpf_tutor;
         return this;
     }
 
-    defineVetsData(vets_data: []): this {
-        this.vets_data = vets_data;
+    definePetInformation(pet_information: PetData): this {
+        // #TODO: deve-se criar uma entidade para pet_information
+        this.pet_information = pet_information;
         return this;
     }
 
-    defineLocationTutor(location_tutor: {
-        country: string | null;
-        zipCode: string | null;
-        state: string | null;
-        city: string | null;
-        neighborhood: string | null;
-        street: string | null;
-        number: string | null;
-        complement: string | null;
-    }): this {
-        this.location_tutor = location_tutor;
+    defineTutorInformation(main_responsible_guardian: IMainTutor): this {
+        this.main_responsible_guardian.user_information = {
+            ...this.main_responsible_guardian.user_information,
+            ...main_responsible_guardian
+        };
         return this;
     }
 
-    definePetData(pet_data: PetData): this {
-        this.pet_data = pet_data;
+    defineContactTutor(contact: Contact): this {
+        // #TODO: deve-se criar uma entidade para main_responsible_guardian.user_information.contact
+        this.main_responsible_guardian.user_information.contact = contact;
         return this;
     }
 
-    defineHealthInsurance(health_insurance: {
-        name: string | null;
-        type_health: string | null;
-        number_health: string | null;
-        validity: string | null;
-    }): this {
+    defineLocationTutor(location: Partial<Location>): this {
+        // #TODO: deve-se criar uma entidade para endereço
+        this.main_responsible_guardian.address = location as Location;
+        return this;
+    }
+
+    defineHealthInsurance(health_insurance: IHealthInsurance): this {
+        // #TODO: deve-se criar uma entidade para health_insurance
         this.health_insurance = health_insurance;
         return this;
     }
 
-    defineResponsibleTutors(responsible_tutors: {
-        name_tutor: string | null;
-        cpf_tutor: string | null;
-    },
-        has_second_tutor?: boolean
-    ): this {
-        if (!has_second_tutor) return this;
-        this.responsible_tutors = responsible_tutors;
+    defineSecondaryTutor(secondary_responsible_guardian: ISecondaryTutor): this {
+        // #TODO: deve-se criar uma entidade para secondary_responsible_guardian
+        this.secondary_responsible_guardian = secondary_responsible_guardian;
         return this;
     }
 
-    static build(params: IPetV2): Pet {
+
+    static build(params: IPet): Pet {
         return new Pet()
             .defineID(params.id as string)
-            .defineNameTutor(params.name_tutor)
-            .definePhoneTutor(params.phone_tutor)
-            .defineContactTutor(params.contact_tutor)
             .defineCpfTutor(params.cpf_tutor)
-            .defineVetsData(params.vets_data as any)
-            .defineLocationTutor(params.location_tutor)
-            .definePetData(params.pet_data)
-            .defineHealthInsurance(params.health_insurance)
-            .defineResponsibleTutors(params.responsible_tutors, params.has_second_tutor)
+            .definePetInformation({
+                blood_donator: params.blood_donator || false,
+                blood_type: params.bloodType,
+                color: params.color || '',
+                date_birth: params.date_birth as string,
+                microchip: params.chip_number || '',
+                name_pet: params.name,
+                organ_donor: params.organ_donor || 'no',
+                pedigree: params.pedigree || false,
+                pedigree_registry: params.pedigree_registry || '',
+                race: params.breed,
+                sex: params.gender,
+                size: params.size || '',
+                specie: params.specie,
+                weight: params.weight || ''
+            })
+            .defineContactTutor({
+                email: params.ownerEmergencyContact.email,
+                facebook: '',
+                instagram: '',
+                linkedIn: '',
+                phone: params.ownerEmergencyContact.phone,
+                twitter: '',
+                whatsapp: params.ownerEmergencyContact.whatsapp || '',
+                youtube: ''
+            })
+            .defineHealthInsurance({
+                name: params.health_insurance || '',
+                number_health: params.card_number || '',
+                type_health: params.plain_type || '',
+                validity: params.wallet_validity || ''
+            })
+            .defineLocationTutor({
+                city: params.ownerEmergencyContact.address?.city || '',
+                complement: params.ownerEmergencyContact.address?.complement || '',
+                country: params.ownerEmergencyContact.address?.country || '',
+                neighborhood: params.ownerEmergencyContact.address?.neighborhood || '',
+                number: params.ownerEmergencyContact.address?.number || '',
+                state: params.ownerEmergencyContact.address?.state || '',
+                street: params.ownerEmergencyContact.address?.street || '',
+                zipCode: params.ownerEmergencyContact.address?.zipCode || ''
+            })
+            .defineTutorInformation({
+                first_name: params.ownerEmergencyContact.name,
+                last_name: params.ownerEmergencyContact.lastName || '',
+                url_img: ''
+            })
     }
 }
