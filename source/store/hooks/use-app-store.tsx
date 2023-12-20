@@ -24,7 +24,7 @@ type Stores<T, G> = {
     get?: Fn<T[]>
     handleCloseModal?: () => void
     entity?: {
-        build: (data: Data<T>) => Data<T>
+        build: (data: Data<T> | Data<G>) => Data<T>
     }
     options?: UseQueryOptions<T[]>
 }
@@ -45,7 +45,7 @@ const useAppStore = <T, G = unknown>({
 }: Stores<T, G>) => {
     const superKeys = ['active', ...keys]
 
-    const { isLoading, data, error, isError } = useAppQuery<T>(superKeys, get!, {
+    const { isLoading, data, error, isError } = useAppQuery<T[]>(superKeys, get!, {
         ...options,
         initialData: [],
         keepPreviousData: true,
@@ -95,7 +95,7 @@ const useAppStore = <T, G = unknown>({
         async (data: Data<T> | Data<G>) => {
             try {
                 if (entity) {
-                    data = entity.build(data as Data<T>)
+                    data = entity.build(data)
                 }
 
                 let response;
