@@ -51,8 +51,8 @@ const StepListPets = ({
                         >
                             <div className="grid grid-cols-4 justify-center items-center">
                                 <span className="align-middle col-span-1">{
-                                    EmojiPet[MapOptionSpecies[pet.pet_data.specie as KeyOfMapOptionSpecies] as Key]}</span>
-                                <span className="align-middle col-span-2">{pet.pet_data.name_pet}</span>
+                                    EmojiPet[MapOptionSpecies[pet.pet_information?.specie as KeyOfMapOptionSpecies] as Key]}</span>
+                                <span className="align-middle col-span-2">{pet.pet_information?.name_pet}</span>
                             </div>
                         </button>
                     ))
