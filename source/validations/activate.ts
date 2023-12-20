@@ -1,4 +1,3 @@
-import { cnpj, cpf } from "cpf-cnpj-validator";
 import * as Yup from "yup";
 
 import Address from './address';
@@ -22,7 +21,7 @@ export type Contact = {
     facebook: string;
     instagram: string;
     twitter: string;
-    linkedin: string;
+    linkedIn: string;
     youtube: string;
 }
 
@@ -37,13 +36,16 @@ export type Location = {
     complement: string;
 }
 
+export type IMainTutor = {
+    first_name: string,
+    last_name: string,
+    name: string
+    url_img: string
+}
+
 export type UserInformation = {
-    fisrtName: string;
-    lastName: string;
-    name: string;
-    url_img: string;
     contact: Contact;
-};
+} & IMainTutor;
 
 export type ActivateAccount = {
     cpf_cnpj: string;
@@ -53,7 +55,7 @@ export type ActivateAccount = {
         list_specialty: Specialty[];
     };
     user_information: UserInformation;
-    adress: Location;
+    address: Location;
 }
 
 const validate = Yup.object().shape({
@@ -105,10 +107,10 @@ const validate = Yup.object().shape({
     cpf_cnpj: Yup.string()
         .required("Este campo é obrigatório")
         .transform((value) => value.replace(/[^\d]/g, "")),
-        // .test("cpf-cnpj-validator", "CPF/CNPJ inválido", (value) => {
-        //     if (!value) return false;
-        //     return cpf.isValid(value) || cnpj.isValid(value);
-        // }),
+    // .test("cpf-cnpj-validator", "CPF/CNPJ inválido", (value) => {
+    //     if (!value) return false;
+    //     return cpf.isValid(value) || cnpj.isValid(value);
+    // }),
     location: Address
 });
 
