@@ -1,16 +1,13 @@
 import { IPet } from "~/types/pet";
-import { IHealthInsurance, IPetV2, ISecondaryTutor, PetData } from "~/types/pet-v2";
-import { Contact, IMainTutor, Location, UserInformation } from "~/validations/activate";
+import { IHealthInsurance, IMainResponsibleGuardian, IPetV2, ISecondaryTutor, PetData } from "~/types/pet-v2";
+import { Contact, IMainTutor, Location } from "~/validations/activate";
 
 export class Pet implements IPetV2 {
 
     id: string | null;
     cpf_tutor: string;
     pet_information: PetData;
-    main_responsible_guardian: {
-        user_information: UserInformation;
-        address: Location
-    };
+    main_responsible_guardian: IMainResponsibleGuardian;
     secondary_responsible_guardian: ISecondaryTutor;
     health_insurance: IHealthInsurance;
 
@@ -48,10 +45,11 @@ export class Pet implements IPetV2 {
                     twitter: '',
                     youtube: ''
                 },
-                first_name: '',
-                last_name: '',
-                url_img: ''
-            }
+            },
+            name: '',
+            first_name: '',
+            last_name: '',
+            url_img: ''
         };
         this.secondary_responsible_guardian = {
             name_tutor: '',
@@ -78,10 +76,11 @@ export class Pet implements IPetV2 {
     }
 
     defineTutorInformation(main_responsible_guardian: IMainTutor): this {
-        this.main_responsible_guardian.user_information = {
-            ...this.main_responsible_guardian.user_information,
-            ...main_responsible_guardian
-        };
+        this.main_responsible_guardian.first_name = main_responsible_guardian.first_name;
+        this.main_responsible_guardian.last_name = main_responsible_guardian.last_name;
+        this.main_responsible_guardian.name = main_responsible_guardian.name;
+        this.main_responsible_guardian.url_img = main_responsible_guardian.url_img;
+
         return this;
     }
 
@@ -159,7 +158,8 @@ export class Pet implements IPetV2 {
             .defineTutorInformation({
                 first_name: params.ownerEmergencyContact.name,
                 last_name: params.ownerEmergencyContact.lastName || '',
-                url_img: ''
+                url_img: '',
+                name: params.ownerEmergencyContact.name
             })
     }
 }
