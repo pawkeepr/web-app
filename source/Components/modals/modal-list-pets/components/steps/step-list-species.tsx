@@ -25,7 +25,7 @@ const StepListSpecies = ({
     const { setFieldValue, values } = useFormikContext<InitialValues>()
 
     const handleSelectedSpecie = (specie: Species) => {
-        setFieldValue('species', specie)
+        setFieldValue('specie', specie)
         nextStep()
     }
 
@@ -38,7 +38,7 @@ const StepListSpecies = ({
                             key={specie.value}
                             type="button"
                             onClick={() => handleSelectedSpecie(specie.value as Species)}
-                            className={option({ selected: values.species === specie.value })}
+                            className={option({ selected: values.specie === specie.value })}
                         >
                             <div className="flex justify-around gap-2 items-center w-40 ">
                                 <span className="align-middle col-span-1">{EmojiPet[specie.name as Key]}</span>
@@ -48,7 +48,7 @@ const StepListSpecies = ({
                     ))}
             </div>
             <BoxButtons
-                isValid={!!values.species}
+                isValid={!!values.specie}
                 link={false}
                 onClickCancel={previousStep}
                 onClickSuccess={nextStep}
