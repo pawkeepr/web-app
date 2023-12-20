@@ -1,6 +1,6 @@
 import { Breed } from "~/store/slices/pets/breedType";
 import { Gender, Species } from "~/store/slices/pets/speciesType";
-import { Location, UserInformation } from "~/validations/activate";
+import { IMainTutor, Location, UserInformation } from "~/validations/activate";
 
 type GenericSelect = {
     label: string;
@@ -40,14 +40,16 @@ export type ISecondaryTutor = {
     email_tutor: string | null;
 }
 
+export type IMainResponsibleGuardian = {
+    user_information: UserInformation;
+    address: Location;
+} & IMainTutor;
+
 export interface IPetV2 {
     id?: string | null;
     cpf_tutor: string;
     pet_information: PetData;
-    main_responsible_guardian: {
-        user_information: UserInformation;
-        address: Location;
-    };
+    main_responsible_guardian: IMainResponsibleGuardian
     secondary_responsible_guardian: ISecondaryTutor;
     health_insurance: IHealthInsurance
 }

@@ -45,7 +45,7 @@ export type IMainTutor = {
 
 export type UserInformation = {
     contact: Contact;
-} & IMainTutor;
+}
 
 export type ActivateAccount = {
     cpf_cnpj: string;
