@@ -1,6 +1,6 @@
 import { Breed } from "~/store/slices/pets/breedType";
 import { Gender, Species } from "~/store/slices/pets/speciesType";
-import { UserInformation, Contact, Location } from "~/validations/activate";
+import { Location, UserInformation } from "~/validations/activate";
 
 type GenericSelect = {
     label: string;
@@ -15,37 +15,41 @@ export interface PetData {
     race: Breed | null | GenericSelect;
     castrated?: boolean | null;
     blood_type: string | null | GenericSelect;
-    blood_donator: string | null;
+    blood_donator: boolean | null;
     sex: Gender | null | GenericSelect;
     organ_donor: string | null;
     date_birth: string | null;
     color: string | null,
-    size: string | null ,
+    size: string | null,
     weight: string | null,
     pedigree: boolean | null;
     pedigree_registry: string | null;
+}
+
+export type IHealthInsurance = {
+    name: string | null;
+    type_health: string | null;
+    number_health: string | null;
+    validity: string | null;
+};
+
+export type ISecondaryTutor = {
+    name_tutor: string | null;
+    cpf_tutor: string | null;
+    phone_tutor: string | null;
+    email_tutor: string | null;
 }
 
 export interface IPetV2 {
     id?: string | null;
     cpf_tutor: string;
     pet_information: PetData;
-    main_responsible_guardian:  {
+    main_responsible_guardian: {
         user_information: UserInformation;
-        adress: Location;
+        address: Location;
     };
-    secondary_responsible_guardian: {
-        name_tutor: string | null;
-        cpf_tutor: string | null;
-        phone_tutor: string | null;
-        email_tutor: string | null;
-    };
-    health_insurance: {
-        name: string | null;
-        type_health: string | null;
-        number_health: string | null;
-        validity: string | null;
-    };
+    secondary_responsible_guardian: ISecondaryTutor;
+    health_insurance: IHealthInsurance
 }
 
 
