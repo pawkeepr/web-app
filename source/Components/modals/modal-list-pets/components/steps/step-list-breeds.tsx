@@ -26,7 +26,7 @@ const StepListBreeds = ({
     }
 
     useEffect(() => {
-        const specie = species.find(specie => (specie.value as any) === values.species)
+        const specie = species.find(specie => (specie.value as any) === values.specie)
 
         if (!specie) return
 
@@ -34,7 +34,7 @@ const StepListBreeds = ({
             setBreeds(specie.breedType)
         })
 
-    }, [values.species])
+    }, [values.specie])
 
     return (
         <div className="mt-3 p-1 gap-2">
