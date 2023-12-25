@@ -3,7 +3,7 @@ import ravena from '~/assets/images/ravena.jpeg';
 
 import { RadioGroup } from '@headlessui/react';
 import ViewAppointment from '~/Components/modals/view-appointment/modal-view-appointment';
-import { IPetV2, IPetV2Data } from '~/types/pet-v2';
+import { IPetV2 } from '~/types/pet-v2';
 
 type CardPetsProps = {
     pet: IPetV2
@@ -11,8 +11,6 @@ type CardPetsProps = {
 }
 
 const CardPets = ({ pet, checked }: CardPetsProps) => {
-    console.log(pet, 'pet');
-    
 
     return (
         <div className="space-y-10 w-full">
@@ -62,7 +60,7 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                         <p className="text-gray-700"><strong>Sexo:</strong> {
                                             pet?.pet_data?.sex || pet?.sex
                                         }</p>
-                                         <p className="text-gray-700 md:hidden"><strong>Raça: </strong> {pet?.race}</p>
+                                        <p className="text-gray-700 md:hidden"><strong>Raça: </strong> {pet?.race}</p>
                                     </div>
                                 </RadioGroup.Description>
                             </div>

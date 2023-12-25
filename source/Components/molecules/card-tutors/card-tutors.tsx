@@ -1,6 +1,6 @@
 import cn from 'classnames';
-import MyImage from "~/Components/atoms/my-image";
 import { FaWhatsapp } from 'react-icons/fa';
+import MyImage from "~/Components/atoms/my-image";
 import { Tutor } from '~/store/slices/tutors/types';
 
 type CardTutorsProps = {
@@ -9,8 +9,7 @@ type CardTutorsProps = {
 }
 
 
-const CardTutor = ({ tutor, checked}: CardTutorsProps) => {
-    console.log(tutor, 'tutor');
+const CardTutor = ({ tutor, checked }: CardTutorsProps) => {
 
     return (
         <div
@@ -42,16 +41,16 @@ const CardTutor = ({ tutor, checked}: CardTutorsProps) => {
                                 <p className="text-gray-700"><strong>Nome: </strong>{tutor?.name}</p>
                                 <p className="text-gray-700"><strong>Email: </strong> {tutor?.email}</p>
                                 <p className="text-gray-700"><strong>Contato: </strong>{tutor?.phone}
-                                <span className="d-inline-block align-middle ml-2 mb-1">
-                                    <FaWhatsapp className="text-green-600 text-lg align-middle" />
-                                </span>
+                                    <span className="d-inline-block align-middle ml-2 mb-1">
+                                        <FaWhatsapp className="text-green-600 text-lg align-middle" />
+                                    </span>
                                 </p>
-                               
+
                             </div>
 
                         </div>
                         <div className="flex flex-col mobile:hidden">
-                        <h3 className='font-semibold mobile:hidden'>Logradouro:</h3>
+                            <h3 className='font-semibold mobile:hidden'>Logradouro:</h3>
                             <div className="p-2 ">
                                 <p className="text-gray-700"><strong>País: </strong>{tutor?.country}</p>
                                 <p className="text-gray-700"><strong>Cidade: </strong>{tutor?.city}-{tutor?.state}</p>
