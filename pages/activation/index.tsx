@@ -1,4 +1,4 @@
-import getServerSidePropsPages from '~/helpers/get-server-side-props-pages-privates'
+import getServerSidePropsActivation from '~/helpers/get-server-side-props-page-activation'
 import ActivationAccount from '~/pages/Authentication/ActivationAccount'
 
 const Activation = () => {
@@ -9,4 +9,4 @@ const Activation = () => {
 
 export default Activation
 
-export const getServerSideProps = getServerSidePropsPages()
+export const getServerSideProps = getServerSidePropsActivation()
