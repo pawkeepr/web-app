@@ -31,7 +31,7 @@ import StepActivationSpecialty from './components/organism/steps-activation/step
 
 const initialValues = (email: string): ActivateAccount => ({
     specialty_information: {
-         specialty: {
+        specialty: {
             label: '',
             value: '',
         },
@@ -39,7 +39,7 @@ const initialValues = (email: string): ActivateAccount => ({
     },
     crmv: '',
     user_information: {
-        fisrtName: '',
+        firstName: '',
         lastName: '',
         name: '',
         url_img: '',
@@ -50,13 +50,13 @@ const initialValues = (email: string): ActivateAccount => ({
             facebook: '',
             instagram: '',
             twitter: '',
-            linkedin: '',
+            linkedIn: '',
             youtube: '',
         },
 
     },
     cpf_cnpj: '',
-    adress: {
+    address: {
         country: '',
         street: '',
         number: '',

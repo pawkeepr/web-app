@@ -1,4 +1,5 @@
 import { Gender } from '~/store/slices/pets/speciesType';
+import { On_Off } from './pet-v2';
 import { ITutor } from './tutor';
 
 export type IPet = {
@@ -15,17 +16,17 @@ export type IPet = {
     id_office_register?: string;
     date_birth: string | Date;
     bloodType?: BloodType;
-    blood_donator?: boolean | null;
+    blood_donator?: On_Off | null;
     color?: string;
     allergies?: string[];
     preexistingConditions?: string[];
     medicationsInUse?: string[];
-    castrated: boolean;
+    castrated: On_Off;
     dateOfCastration?: string;
     organ_donor?: 'yes' | 'no';
     size?: string;
     weight?: string;
-    pedigree?: boolean;
+    pedigree?: On_Off;
     pedigree_registry?: string;
     dateOfAdoption?: string;
     healthHistory?: string[];

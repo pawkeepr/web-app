@@ -27,22 +27,22 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
     })
 
     const { values, setFieldValue } = useFormikContext<ActivateAccount>()
-    const { zipCode } = values.location
+    const { zipCode } = values.address
 
     const updateAddressFields = useCallback(
         (params: IAddress) => {
             if (!params) return
 
             const { uf, localidade, bairro, logradouro, complemento } = params
-            setFieldValue('location.state', uf || '')
+            setFieldValue('address.state', uf || '')
 
-            setFieldValue('location.city', localidade || '')
+            setFieldValue('address.city', localidade || '')
 
-            setFieldValue('location.neighborhood', bairro || '')
+            setFieldValue('address.neighborhood', bairro || '')
 
-            setFieldValue('location.street', logradouro || '')
+            setFieldValue('address.street', logradouro || '')
 
-            setFieldValue('location.complement', complemento || '')
+            setFieldValue('address.complement', complemento || '')
 
             setDisabledInputs({
                 state: !!uf,
@@ -59,14 +59,14 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     const onChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target
-        setFieldValue('location.number', value)
+        setFieldValue('address.number', value)
     }
 
     const requiredValid = useMemo((): boolean => {
-        const isValid = validateAddress.isValidSync(values?.location) && !cepInvalid
+        const isValid = validateAddress.isValidSync(values?.address) && !cepInvalid
 
         return isValid
-    }, [cepInvalid, values?.location])
+    }, [cepInvalid, values?.address])
 
     useNextStep(nextStep, requiredValid, 1000)
 
@@ -76,7 +76,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
             <FieldMasked
                 label="CEP"
-                name="location.zipCode"
+                name="address.zipCode"
                 placeholder="Digite o CEP"
                 mask={"_____-___"}
                 required
@@ -86,7 +86,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 className=" "
                 type="text"
                 label="Estado"
-                name="location.state"
+                name="address.state"
                 disabled={disabledInputs.state || loading}
                 placeholder={loading ? 'Carregando...' : 'Digite o nome do estado'}
                 required
@@ -94,7 +94,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <FieldControl
                 type="text"
                 label="Cidade"
-                name="location.city"
+                name="address.city"
                 disabled={disabledInputs.city || loading}
                 placeholder={loading ? 'Carregando...' : 'Digite o nome da cidade'}
                 required
@@ -102,7 +102,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <FieldControl
                 type="text"
                 label="Bairro"
-                name="location.neighborhood"
+                name="address.neighborhood"
                 disabled={loading}
                 placeholder={loading ? 'Carregando...' : 'Digite o nome do bairro'}
                 required
@@ -112,7 +112,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <FieldControl
                     divClassName="col-span-3"
                     label='Rua'
-                    name="location.street"
+                    name="address.street"
                     aria-label="street"
                     disabled={loading}
                     placeholder={loading ? 'Carregando...' : 'Digite o nome da rua'}
@@ -123,7 +123,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <FieldControl
                     divClassName="col-span-1"
                     label='N°'
-                    name="location.number"
+                    name="address.number"
                     aria-label="number"
                     disabled={loading}
                     placeholder="N°"
@@ -136,7 +136,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <FieldControl
                     type="text"
                     label="Complemento"
-                    name="location.complement"
+                    name="address.complement"
                     disabled={loading}
                     placeholder={loading ? 'Carregando...' : "Digite o complemento (opcional)"}
                 />

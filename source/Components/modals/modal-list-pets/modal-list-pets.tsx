@@ -87,12 +87,12 @@ const ModalListPets = ({
             cpf_cnpj: document,
             phone: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.user_information.contact.phone as string : '',
             email: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.user_information.contact.email as string : '',
-            name: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.user_information.name as string : '',
-            lastName: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.user_information.lastName as string : '',
+            name: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.name as string : '',
+            lastName: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.last_name as string : '',
             whatsapp: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.user_information.contact.whatsapp as string : '',
         },
         castrated: false,
-        date_birth: '',
+        date_birth: '2021-01-01', // dado falso para não dar erro no backend
         gender: null as any,
     }
 

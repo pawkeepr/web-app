@@ -1,6 +1,6 @@
 import { IPet } from "~/types/pet";
-import { IHealthInsurance, IMainResponsibleGuardian, IPetV2, ISecondaryTutor, PetData } from "~/types/pet-v2";
-import { Contact, IMainTutor, Location } from "~/validations/activate";
+import { IHealthInsurance, IMainResponsibleGuardian, IPetV2, ISecondaryTutor, ITutor, PetData } from "~/types/pet-v2";
+import { Contact, Location } from "~/validations/activate";
 
 export class Pet implements IPetV2 {
 
@@ -16,7 +16,24 @@ export class Pet implements IPetV2 {
         this.id = '';
         this.cpf_tutor = '';
 
-        this.pet_information = {} as any;
+        this.pet_information = {
+            name_pet: '',
+            microchip: '',
+            identification_number: '',
+            race: null,
+            specie: null,
+            blood_type: '',
+            blood_donator: 'no',
+            color: '',
+            date_birth: '',
+            organ_donor: 'no',
+            pedigree: 'no',
+            pedigree_registry: '',
+            sex: null,
+            size: '',
+            weight: '',
+            castrated: 'no',
+        };
         this.health_insurance = {
             name: '',
             type_health: '',
@@ -34,28 +51,26 @@ export class Pet implements IPetV2 {
                 street: '',
                 zipCode: ''
             },
-            user_information: {
-                contact: {
-                    email: '',
-                    phone: '',
-                    whatsapp: '',
-                    facebook: '',
-                    instagram: '',
-                    linkedIn: '',
-                    twitter: '',
-                    youtube: ''
-                },
+            contact: {
+                email: '',
+                phone: '',
+                whatsapp: '',
+                facebook: '',
+                instagram: '',
+                linkedIn: '',
+                twitter: '',
+                youtube: ''
             },
             name: '',
             first_name: '',
             last_name: '',
-            url_img: ''
+            url_img: '',
         };
         this.secondary_responsible_guardian = {
             name_tutor: '',
             cpf_tutor: '',
             phone_tutor: '',
-            email_tutor: ''
+            emaiL_tutor: '',
         };
     }
 
@@ -75,10 +90,10 @@ export class Pet implements IPetV2 {
         return this;
     }
 
-    defineTutorInformation(main_responsible_guardian: IMainTutor): this {
+    defineTutorInformation(main_responsible_guardian: ITutor): this {
+        this.main_responsible_guardian.name = main_responsible_guardian.name;
         this.main_responsible_guardian.first_name = main_responsible_guardian.first_name;
         this.main_responsible_guardian.last_name = main_responsible_guardian.last_name;
-        this.main_responsible_guardian.name = main_responsible_guardian.name;
         this.main_responsible_guardian.url_img = main_responsible_guardian.url_img;
 
         return this;
@@ -86,7 +101,7 @@ export class Pet implements IPetV2 {
 
     defineContactTutor(contact: Contact): this {
         // #TODO: deve-se criar uma entidade para main_responsible_guardian.user_information.contact
-        this.main_responsible_guardian.user_information.contact = contact;
+        this.main_responsible_guardian.contact = contact;
         return this;
     }
 
@@ -114,20 +129,22 @@ export class Pet implements IPetV2 {
             .defineID(params.id as string)
             .defineCpfTutor(params.cpf_tutor)
             .definePetInformation({
-                blood_donator: params.blood_donator || false,
-                blood_type: params.bloodType,
+                blood_donator: params.blood_donator || 'no',
+                blood_type: params.bloodType || '',
                 color: params.color || '',
-                date_birth: params.date_birth as string,
+                date_birth: params.date_birth as string || '',
                 microchip: params.chip_number || '',
                 name_pet: params.name,
                 organ_donor: params.organ_donor || 'no',
-                pedigree: params.pedigree || false,
+                pedigree: params.pedigree || 'no',
                 pedigree_registry: params.pedigree_registry || '',
                 race: params.breed,
                 sex: params.gender,
                 size: params.size || '',
                 specie: params.specie,
-                weight: params.weight || ''
+                weight: params.weight || '',
+                castrated: params.castrated || 'no',
+                identification_number: ''
             })
             .defineContactTutor({
                 email: params.ownerEmergencyContact.email,
@@ -156,10 +173,10 @@ export class Pet implements IPetV2 {
                 zipCode: params.ownerEmergencyContact.address?.zipCode || ''
             })
             .defineTutorInformation({
+                name: params.ownerEmergencyContact.name,
                 first_name: params.ownerEmergencyContact.name,
-                last_name: params.ownerEmergencyContact.lastName || '',
-                url_img: '',
-                name: params.ownerEmergencyContact.name
+                last_name: params.ownerEmergencyContact.name,
+                url_img: ''
             })
     }
 }
