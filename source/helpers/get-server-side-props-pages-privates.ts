@@ -4,26 +4,37 @@ import type { GetServerSideProps, GetServerSidePropsContext, PreviewData } from 
 import type { ParsedUrlQuery } from "querystring";
 import { api } from "~/services/api";
 import { getVetProfile } from "~/services/helpers";
-import { getCookie } from "~/utils/cookies-utils";
+import { getCookie, setCookie } from "~/utils/cookies-utils";
 
-type Context = GetServerSidePropsContext<ParsedUrlQuery, PreviewData> | undefined
+export type Context = GetServerSidePropsContext<ParsedUrlQuery, PreviewData> | undefined
 
-const fetchProfile = async (token: string, ctx: Context) => {
+export const fetchProfile = async (token: string, ctx: Context) => {
     const profileKey = `${optionsCookies.profile.name}-${token}`
 
     const profile = getCookie(profileKey, ctx)
 
-    if (profile) {
-        return JSON.parse(profile)
-    }
+    if (profile) return profile
 
     api.defaults.headers['Authorization'] = `Bearer ${token}`
 
-    return await getVetProfile()
+    try {
+        const profile = await getVetProfile()
+        setCookie(profileKey, JSON.stringify(profile), optionsCookies.profile.expires)
+        return profile
+    } catch (error: unknown) {
+
+        const { response } = error as { response: { status: number } }
+
+        if (response.status === 404) {
+            return null
+        }
+
+        return "Erro interno ao buscar perfil"
+    }
 
 }
 
-const PUBLIC_ROUTES = [
+export const PUBLIC_ROUTES = [
     '/sign-in',
     '/sign-up',
     '/forgot-password',
@@ -58,8 +69,7 @@ const getServerSidePropsPagesPrivates =
             }
 
             const route = ctx.resolvedUrl
-            const hasProfile = fetchProfile(token, ctx)
-
+            const hasProfile = await fetchProfile(token, ctx)
 
             if (PUBLIC_ROUTES.includes(route)) {
                 return {
@@ -70,7 +80,14 @@ const getServerSidePropsPagesPrivates =
                 }
             }
 
-
+            if (!hasProfile) {
+                return {
+                    redirect: {
+                        destination: '/activation',
+                        permanent: false,
+                    }
+                }
+            }
 
             if (callback) return callback(ctx)
 
