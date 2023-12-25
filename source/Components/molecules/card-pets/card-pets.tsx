@@ -6,7 +6,7 @@ import ViewAppointment from '~/Components/modals/view-appointment/modal-view-app
 import { IPetV2, IPetV2Data } from '~/types/pet-v2';
 
 type CardPetsProps = {
-    pet: IPetV2 | IPetV2Data
+    pet: IPetV2
     checked: boolean
 }
 

@@ -201,7 +201,7 @@ export type OptionSelect = {
     value: string;
     label: string;
 }
-export interface ItemTreatment {
+export interface ITreatment {
     type: string | OptionSelect,
     name: string,
     notes: string
@@ -209,7 +209,7 @@ export interface ItemTreatment {
 
 export interface IAppointmentVet extends IAnamnesis {
     id?: string | null;
-    pet_data: PetData
+    pet_data: IPetData
     vets_data: VetsData[]
     cpf_tutor: string
     name_tutor: string
@@ -228,14 +228,14 @@ export interface IAppointmentVet extends IAnamnesis {
     appointment_status: IStatusAppointment;
     appointment_signature: ISignatureAppointment;
     appointment_geolocation: IGeolocationAppointment;
-    dental_treatment?: IDental_treatmentAppointment;
+    dental_treatment: IDental_treatmentAppointment;
     well_being: IWell_beingAppointment;
-    treatments: ItemTreatment[];
+    treatments: ITreatment[];
 }
 
 export interface IScheduledAppointmentVet {
     id?: string | null;
-    pet_data: PetData
+    pet_data: IPetData
     vets_data: VetsData[]
     cpf_tutor: string
     name_tutor: string
@@ -258,7 +258,7 @@ export interface IScheduledAppointmentVet {
     well_being: never;
 }
 
-export interface PetData {
+export interface IPetData {
     id?: string | null
     name_pet: string | null
     microchip: string | null
