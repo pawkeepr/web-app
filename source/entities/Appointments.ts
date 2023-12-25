@@ -8,7 +8,7 @@ import {
     IDental_treatmentAppointment,
     IExamsAppointment,
     IGeolocationAppointment,
-    IInfo_required,
+    IPetData,
     IMedicineAppointment,
     INutritionsAppointment,
     IPaymentsAppointment,
@@ -24,16 +24,16 @@ import {
     IllnessesAppointment,
     LocationTutor,
     ResponsibleTutors,
-    VetsData
+    VetsData,
 } from "~/store/slices/appointment-vet/types"
 import Anamnesis from "./Anamnesis"
 import PaymentAppointment from "./PaymentsAppointment"
-import Treatment from "./Treatment"
+import { IPet } from "~/types/pet"
 
 export class Appointments implements IAppointmentVet {
     id?: string | null
     id_pet: string
-    pet_data: IPetAppointment
+    pet_data: IPetData
     cpf_tutor: string
     tutor_data: ITutorAppointment
     crmv_vet: string
@@ -45,7 +45,6 @@ export class Appointments implements IAppointmentVet {
     exams: IExamsAppointment[]
     nutritions: INutritionsAppointment[]
     illnesses: IllnessesAppointment[]
-    info_required: IInfo_required
     payments: IPaymentsAppointment
     dates_consults: IDatesConsultsAppointment
     appointment_status: IStatusAppointment
@@ -55,6 +54,7 @@ export class Appointments implements IAppointmentVet {
     dental_treatment: IDental_treatmentAppointment
     well_being: IWell_beingAppointment
     vets_data: VetsData[]
+    treatments: ITreatment[]
     name_tutor: string
     contact_tutor: ContactTutor
     location_tutor: LocationTutor
@@ -76,16 +76,24 @@ export class Appointments implements IAppointmentVet {
         this.id = null;
         this.id_pet = "";
         this.pet_data = {
-            blood_type: "",
-            name_pet: "",
-            race: "",
-            sex: "",
-            blood_donator: '',
-            identification_number: "",
-            microchip: "",
-            organ_donor: '',
-            specie: "",
-        } as IPetAppointment;
+            name_pet: '',
+            microchip:'',
+            identification_number:'',
+            specie:   '',
+            race: '',
+            blood_type:   '',
+            blood_donator:'',
+            organ_donor:  '',
+            sex:  '',
+            date_birth:   '',
+            age: '',
+            height: '',
+            length: '',
+            weight: '',
+            type_weight: '',
+            imc: '',
+            guidelines_notes: ''
+        } as IPetData;
         this.cpf_tutor = "";
         this.tutor_data = {
             zipCode: "",
@@ -105,15 +113,7 @@ export class Appointments implements IAppointmentVet {
         this.exams = [] as any;
         this.nutritions = [] as any;
         this.illnesses = [] as any;
-        this.info_required = {
-            age: '',
-            guidelines_notes: '',
-            height: '',
-            imc: '',
-            length: '',
-            type_weight: '',
-            weight: '',
-        } as IInfo_required;
+        this.treatments = [] as any;
         this.payments = {} as any;
         this.dates_consults = {} as any;
         this.appointment_status = {
@@ -167,7 +167,7 @@ export class Appointments implements IAppointmentVet {
         return this;
     }
 
-    definePetData(pet_data: IPetAppointment): this {
+    definePetData(pet_data: IPetData): this {
         if (!pet_data) return this
         this.pet_data = pet_data
         return this;
@@ -217,12 +217,6 @@ export class Appointments implements IAppointmentVet {
     }
 
 
-    defineInfoRequired(info_required: IInfo_required): this {
-        if (!info_required) return this
-        this.info_required = info_required;
-        return this;
-    }
-
     definePayments(payments: IPaymentsAppointment): this {
         if (!payments) return this
         this.payments = PaymentAppointment.build(payments);
@@ -253,7 +247,7 @@ export class Appointments implements IAppointmentVet {
     defineLocationTutor(location_tutor: LocationTutor): this {
         this.location_tutor = {
             ...location_tutor,
-           zipCode:  location_tutor.zipCode.replace(/[-]/g, '')
+           zipCode:  location_tutor?.zipCode.replace(/[-]/g, '')
            }
         this.location_tutor = location_tutor;
         return this;
@@ -272,15 +266,9 @@ export class Appointments implements IAppointmentVet {
     }
 
     defineTreatment(
-        treatment: ITreatment
+        treatment: ITreatment[]
     ): this {
-        const entity = Treatment.build(treatment)
-        this.medicines = entity.medicines
-        this.vaccines = entity.vaccines
-        this.exams = entity.exams
-        this.nutritions = entity.nutritions
-        this.illnesses = entity.illnesses
-        this.tests_fasts = entity.tests_fasts
+        this.treatments = treatment
         return this
     }
 
@@ -288,7 +276,7 @@ export class Appointments implements IAppointmentVet {
     static build(params: IAppointmentVet): Appointments {
         return new Appointments()
             .defineAnamnesis(params)
-            .defineTreatment(params)
+            .defineTreatment(params.treatments)
             .defineAppointmentGeolocation(params.appointment_geolocation)
             .defineLocationTutor(params.location_tutor)
             .defineAppointmentSignature(params.appointment_signature)
@@ -300,9 +288,8 @@ export class Appointments implements IAppointmentVet {
             .defineDentalTreatment(params.dental_treatment)
             .defineId(params.id)
             .defineIdPet(params.id_pet)
-            .defineInfoRequired(params.info_required)
             .definePayments(params.payments)
-            .definePetData(params.pet_data as IPetAppointment)
+            .definePetData(params.pet_data as IPetData)
             .defineTutorData(params.tutor_data)
             .defineVetData(params.vet_data)
             .defineWellBeing(params.well_being)
