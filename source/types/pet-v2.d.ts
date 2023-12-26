@@ -1,3 +1,4 @@
+import { IVetAppointment } from "~/store/slices/appointment-vet/types";
 import { Breed } from "~/store/slices/pets/breedType";
 import { Gender, Species } from "~/store/slices/pets/speciesType";
 import { Location } from "~/validations/activate";
@@ -61,6 +62,7 @@ export interface IPetV2 {
     main_responsible_guardian: IMainResponsibleGuardian
     secondary_responsible_guardian: ISecondaryTutor;
     health_insurance: IHealthInsurance
+    veterinary: IVetAppointment;
 }
 
 

@@ -35,7 +35,7 @@ const initialValues = (
         name_tutor,
         phone_tutor,
         responsible_tutors,
-        vets_data,
+        veterinary,
     }: IPetV2,
     profile: IProfile,
     appointment_id: string,

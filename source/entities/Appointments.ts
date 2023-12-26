@@ -290,7 +290,7 @@ export class Appointments implements IAppointmentVet {
             .definePayments(params.payments)
             .definePetData(params.pet_data as IPetData)
             .defineTutorData(params.tutor_data)
-            .defineVetData(params.vet_data)
+            .defineVetData(params.veterinary)
             .defineWellBeing(params.well_being)
             .defineContactTutor(params.contact_tutor)
     }
