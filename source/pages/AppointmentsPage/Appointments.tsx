@@ -65,14 +65,19 @@ const initialValues = (
     },
     crmv_vet: profile.crmv,
     cpf_cnpj_vet: profile.cpf_cnpj,
-    vet_data: {
-        name: profile?.firstName + ' ' + profile.lastName,
-        email: profile?.contact?.email,
-        phone: profile?.contact?.phone,
-        country: profile?.location?.country,
-        zipCode: profile?.location?.zipCode,
-        state: profile?.location?.state,
-        city: profile?.location?.city
+    veterinary: {
+        cpf_cnpj:  profile.cpf_cnpj,
+        crmv: profile.crmv,
+        name_veterinary: profile.firstName + ' ' + profile.lastName,
+        specialty: profile.specialty,
+        email: profile.contact.email,
+        phone: profile.contact.phone,
+        whatsapp: profile.contact.whatsapp,
+        country: profile.location.country,
+        state: profile.location.state,
+        city: profile.location.city,
+        neighborhood: profile.location.neighborhood,
+        street: profile.location.street,
     },
     anamnesis: {
         physical_activity: [
