@@ -11,7 +11,7 @@ import TabPane from 'react-bootstrap/TabPane';
 //formik
 import { Formik } from 'formik';
 
-import validate, { ActivateAccount } from '~/validations/activate';
+import validate, { ActivateAccount, Location } from '~/validations/activate';
 
 import { signOutUser } from '~/store/slices/auth/login/actions';
 import { addNew } from '~/store/slices/auth/profile/actions';
@@ -21,43 +21,32 @@ import { useAppDispatch } from '~/store/hooks';
 
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid';
 import { BtnLink } from '~/Components/atoms/btn';
-import { Profile } from '~/store/slices/auth/profile/types';
 
 import { layoutModeTypes } from '~/Components/constants/layout';
 import StepActivationAddress from './components/organism/steps-activation/step-address';
 import StepActivationFinally from './components/organism/steps-activation/step-finally';
 import StepActivationPerson from './components/organism/steps-activation/step-person';
 import StepActivationSpecialty from './components/organism/steps-activation/step-specialty';
+import { IProfile } from '~/types/profile';
 
 const initialValues = (email: string): ActivateAccount => ({
-    specialty_information: {
-        specialty: {
-            label: '',
-            value: '',
-        },
-        list_specialty: [],
-    },
-    crmv: '',
-    user_information: {
-        firstName: '',
-        lastName: '',
-        name: '',
-        url_img: '',
-        contact: {
-            email: '',
-            phone: '',
-            whatsapp: '',
-            facebook: '',
-            instagram: '',
-            twitter: '',
-            linkedIn: '',
-            youtube: '',
-        },
-
+    email,
+    contact: {
+        email,
+        phone: '',
+        whatsapp: '',
     },
     cpf_cnpj: '',
-    address: {
-        country: '',
+    crmv: '',
+    firstName: '',
+    lastName: '',
+    list_service_type: [],
+    list_specialty: [],
+    specialty: {
+        value: '',
+        label: '',
+    },
+    location: {
         street: '',
         number: '',
         complement: '',
@@ -97,15 +86,40 @@ const ActivationAccount = () => {
     const dispatch = useAppDispatch()
 
     const onSubmit = async (values: ActivateAccount) => {
-        const { specialty_information, ...rest } = values
+        const { 
+            list_specialty, 
+            specialty,
+            list_service_type, 
+            ...rest 
+        } = values
 
-        const profile: Profile = {
+        const profile: IProfile = {
             ...rest,
-            specialty: values.specialty_information.specialty.value,
-            list_specialty: specialty_information.list_specialty.map(item => ({
-                name_specialty: item.label,
-                type: item.value,
-            }))
+            user_information: {
+                address: { ...values.location  as Location },
+                first_name: values.firstName,
+                last_name: values.lastName,
+                contact: { 
+                    email: values.contact.email,
+                    phone: values.contact.phone,
+                    whatsapp: values.contact.whatsapp,
+                    facebook: '',
+                    instagram: '',
+                    linkedIn: '',
+                    twitter: '',
+                    youtube: '',
+                },
+                name: `${values.firstName} ${values.lastName}`,
+                url_img: '',
+            },
+            specialty_information: {
+                list_service_type,
+                specialty: specialty.value,
+                list_specialty: list_specialty.map(item => ({
+                    name_specialty: item.label,
+                    type: item.value,
+                }))
+            }
         }
 
         dispatch(addNew(profile))
