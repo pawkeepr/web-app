@@ -1,7 +1,8 @@
-import { IVetAppointment } from "~/store/slices/appointment-vet/types";
 import { IPet } from "~/types/pet";
 import { IHealthInsurance, IMainResponsibleGuardian, IPetV2, ISecondaryTutor, ITutor, PetData } from "~/types/pet-v2";
 import { Contact, Location } from "~/validations/activate";
+import { Veterinary } from "./Veterinary";
+import { DTOProfile } from "~/types/profile";
 
 export class Pet implements IPetV2 {
 
@@ -11,7 +12,7 @@ export class Pet implements IPetV2 {
     main_responsible_guardian: IMainResponsibleGuardian;
     secondary_responsible_guardian: ISecondaryTutor;
     health_insurance: IHealthInsurance;
-    veterinary: IVetAppointment;
+    veterinary: DTOProfile;
 
 
     constructor() {
@@ -86,7 +87,8 @@ export class Pet implements IPetV2 {
             state: '',
             city: '',
             neighborhood: '',
-            street: '', 
+            street: '',
+            id: '',
         }
     }
 
@@ -138,9 +140,9 @@ export class Pet implements IPetV2 {
         this.secondary_responsible_guardian = secondary_responsible_guardian;
         return this;
     }
-    defineVeterinary(veterinary: IVetAppointment): this {
+    defineVeterinary(veterinary: DTOProfile): this {
         // #TODO: deve-se criar uma entidade para veterinary
-        this.veterinary = veterinary;
+        this.veterinary = Veterinary.build(veterinary);
         return this;
     }
 
@@ -199,19 +201,7 @@ export class Pet implements IPetV2 {
                 last_name: params.ownerEmergencyContact.name,
                 url_img: ''
             })
-            .defineVeterinary({
-                cpf_cnpj: params.cpf_cnpj,
-                crmv: params.crmv,
-                name_veterinary: params.name_veterinary,
-                specialty: params.specialty,
-                email: params.email,
-                phone: params.phone,
-                whatsapp: params.whatsapp,
-                country: params.country,
-                state: params.state,
-                city: params.city,
-                neighborhood: params.neighborhood,
-                street: params.street,
-            })
+            .defineVeterinary(params.veterinary)
+
     }
 }

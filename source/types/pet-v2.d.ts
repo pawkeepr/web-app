@@ -1,7 +1,7 @@
-import { IVetAppointment } from "~/store/slices/appointment-vet/types";
 import { Breed } from "~/store/slices/pets/breedType";
 import { Gender, Species } from "~/store/slices/pets/speciesType";
 import { Location } from "~/validations/activate";
+import { DTOProfile } from "./profile";
 
 type GenericSelect = {
     label: string;
@@ -62,7 +62,30 @@ export interface IPetV2 {
     main_responsible_guardian: IMainResponsibleGuardian
     secondary_responsible_guardian: ISecondaryTutor;
     health_insurance: IHealthInsurance
-    veterinary: IVetAppointment;
+    veterinary: DTOProfile;
+}
+
+
+export type PetDataSimplified = Pick<PetData, 'name_pet' | 'specie' | 'race' | 'sex' | 'date_birth' | 'castrated'>;
+export type IMainResponsibleGuardianSimplified = {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone: string;
+    whatsapp: string;
+    country: string;
+    state: string;
+    city: string;
+    neighborhood: string;
+    street: string;
+};
+  
+export interface IPetV2Simplified {
+    id?: string | null;
+    cpf_tutor: string;
+    pet_information: PetDataSimplified;
+    main_responsible_guardian: IMainResponsibleGuardianSimplified
+    veterinary: DTOProfile;
 }
 
 

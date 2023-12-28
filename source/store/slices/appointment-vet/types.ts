@@ -12,6 +12,7 @@ import {
     UPDATE, UPDATE_FAIL, UPDATE_SUCCESS
 } from "~/store/helpers/constants";
 import { GenericObject } from "~/store/helpers/types";
+import { DTOProfile } from "~/types/profile";
 
 export interface IPetAppointment {
     name_pet: string,
@@ -34,21 +35,6 @@ export interface ITutorAppointment {
     zipCode: string,
     state: string,
     city: string
-}
-
-export interface IVetAppointment {
-    cpf_cnpj: string,
-    crmv: string,
-    name_veterinary: string,
-    specialty: string,
-    email: string,
-    phone: string,
-    whatsapp: string,
-    country: string,
-    state: string,
-    city: string,
-    neighborhood: string,
-    street: string,
 }
 
 export interface IMedicineAppointment {
@@ -226,7 +212,7 @@ export interface IAppointmentVet extends IAnamnesis {
     tutor_data: ITutorAppointment;
     crmv_vet: string;
     cpf_cnpj_vet: string;
-    veterinary: IVetAppointment;
+    veterinary: DTOProfile;
     anamnesis: IAnamnesisAppointment;
     payments: IPaymentsAppointment;
     dates_consults: IDatesConsultsAppointment;
@@ -252,7 +238,7 @@ export interface IScheduledAppointmentVet {
     tutor_data: ITutorAppointment;
     crmv_vet: string;
     cpf_cnpj_vet: string;
-    veterinary: IVetAppointment;
+    veterinary: DTOProfile;
     anamnesis: never;
     payments: never;
     dates_consults: IDatesConsultsAppointment;

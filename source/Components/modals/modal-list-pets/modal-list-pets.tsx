@@ -17,6 +17,7 @@ import StepListPets from './components/steps/step-list-pets'
 import StepListSpecies from './components/steps/step-list-species'
 import StepTutor from './components/steps/step-tutor'
 import { ModalConfirmProps, StepProps } from './types'
+import useProfileVeterinary from '~/hooks/use-veterinary'
 
 const STEPS = [
     {
@@ -77,6 +78,7 @@ const ModalListPets = ({
     }, [document])
 
     const { activeData: pets, handleSubmit, isLoading } = useListPetsOfTutor(document)
+    const veterinary = useProfileVeterinary()
 
     const initialValues: IPet = {
         name: '',
@@ -85,15 +87,16 @@ const ModalListPets = ({
         breed: null,
         ownerEmergencyContact: {
             cpf_cnpj: document,
-            phone: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.user_information.contact.phone as string : '',
-            email: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.user_information.contact.email as string : '',
+            phone: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.contact.phone as string : '',
+            email: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.contact.email as string : '',
             name: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.name as string : '',
             lastName: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.last_name as string : '',
-            whatsapp: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.user_information.contact.whatsapp as string : '',
+            whatsapp: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.contact.whatsapp as string : '',
         },
-        castrated: false,
+        castrated: 'no',
         date_birth: '2021-01-01', // dado falso para não dar erro no backend
         gender: null as any,
+        veterinary,
     }
 
     const onChangeDocument = (doc: string) => {

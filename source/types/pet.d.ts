@@ -1,6 +1,8 @@
 import { Gender } from '~/store/slices/pets/speciesType';
 import { On_Off } from './pet-v2';
 import { ITutor } from './tutor';
+import { Veterinary } from '~/entities/Veterinary';
+import { DTOProfile } from './profile';
 
 export type IPet = {
     id?: string;
@@ -23,7 +25,7 @@ export type IPet = {
     medicationsInUse?: string[];
     castrated: On_Off;
     dateOfCastration?: string;
-    organ_donor?: 'yes' | 'no';
+    organ_donor?: On_Off;
     size?: string;
     weight?: string;
     pedigree?: On_Off;
@@ -40,4 +42,5 @@ export type IPet = {
     created_at?: string;
     updated_at?: string;
     gender: Gender;
+    veterinary: DTOProfile
 }

@@ -19,7 +19,6 @@ import {
     ITreatment,
     ITutorAppointment,
     IVaccineAppointment,
-    IVetAppointment,
     IWell_beingAppointment,
     IllnessesAppointment,
     LocationTutor,
@@ -28,6 +27,7 @@ import {
 } from "~/store/slices/appointment-vet/types"
 import Anamnesis from "./Anamnesis"
 import PaymentAppointment from "./PaymentsAppointment"
+import { DTOProfile } from "~/types/profile"
 
 export class Appointments implements IAppointmentVet {
     id?: string | null
@@ -37,7 +37,7 @@ export class Appointments implements IAppointmentVet {
     tutor_data: ITutorAppointment
     crmv_vet: string
     cpf_cnpj_vet: string
-    veterinary: IVetAppointment
+    veterinary: DTOProfile
     medicines: IMedicineAppointment[]
     anamnesis: IAnamnesisAppointment
     vaccines: IVaccineAppointment[]
@@ -204,7 +204,7 @@ export class Appointments implements IAppointmentVet {
         return this;
     }
 
-    defineVetData(veterinary: IVetAppointment): this {
+    defineVetData(veterinary: DTOProfile): this {
         this.veterinary = veterinary;
         return this;
     }
@@ -246,7 +246,7 @@ export class Appointments implements IAppointmentVet {
     defineLocationTutor(location_tutor: LocationTutor): this {
         this.location_tutor = {
             ...location_tutor,
-           zipCode:  location_tutor?.zipCode.replace(/[-]/g, '')
+           zipCode:  location_tutor?.zipCode?.replace(/[-]/g, '') || ''
            }
         this.location_tutor = location_tutor;
         return this;

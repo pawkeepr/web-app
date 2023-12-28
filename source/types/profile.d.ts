@@ -37,3 +37,19 @@ export type IProfile = {
     specialty_information: SpecialtyInformation;
     user_information: ProfileUserInformation;
 }
+
+export type DTOProfile = {
+    cpf_cnpj:  string
+    crmv: string
+    name_veterinary: string
+    specialty: string
+    email: string
+    phone: string
+    whatsapp: string
+    country: string
+    state: string 
+    city:string 
+    neighborhood: string
+    street: string
+    id?: string
+}
