@@ -47,6 +47,7 @@ const initialValues = (email: string): ActivateAccount => ({
         label: '',
     },
     location: {
+        country: 'BR',
         street: '',
         number: '',
         complement: '',
@@ -96,7 +97,7 @@ const ActivationAccount = () => {
         const profile: IProfile = {
             ...rest,
             user_information: {
-                address: { ...values.location  as Location },
+                address: { ...values.location  as Location, },
                 first_name: values.firstName,
                 last_name: values.lastName,
                 contact: { 
