@@ -2,14 +2,12 @@ import { useFormikContext } from 'formik';
 
 import { useCallback, useMemo, useState } from 'react';
 
-import validateAddress from '~/validations/address';
+import validateLocation from '~/validations/address';
 
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
 import FieldControl from '~/Components/molecules/field-control/field-control';
 import { IAddress } from '~/helpers/fetch-address-by-cep';
 import useFetchAddress from '~/hooks/use-fetch-address';
-
-
 
 import FieldMasked from '~/Components/molecules/field-masked';
 import useNextStep from '~/hooks/use-next-step';
@@ -27,22 +25,22 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
     })
 
     const { values, setFieldValue } = useFormikContext<ActivateAccount>()
-    const { zipCode } = values.address
+    const { zipCode } = values.location
 
     const updateAddressFields = useCallback(
         (params: IAddress) => {
             if (!params) return
 
             const { uf, localidade, bairro, logradouro, complemento } = params
-            setFieldValue('address.state', uf || '')
+            setFieldValue('location.state', uf || '')
 
-            setFieldValue('address.city', localidade || '')
+            setFieldValue('location.city', localidade || '')
 
-            setFieldValue('address.neighborhood', bairro || '')
+            setFieldValue('location.neighborhood', bairro || '')
 
-            setFieldValue('address.street', logradouro || '')
+            setFieldValue('location.street', logradouro || '')
 
-            setFieldValue('address.complement', complemento || '')
+            setFieldValue('location.complement', complemento || '')
 
             setDisabledInputs({
                 state: !!uf,
@@ -59,14 +57,14 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     const onChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target
-        setFieldValue('address.number', value)
+        setFieldValue('location.number', value)
     }
 
     const requiredValid = useMemo((): boolean => {
-        const isValid = validateAddress.isValidSync(values?.address) && !cepInvalid
+        const isValid = validateLocation.isValidSync(values?.location) && !cepInvalid
 
         return isValid
-    }, [cepInvalid, values?.address])
+    }, [cepInvalid, values?.location])
 
     useNextStep(nextStep, requiredValid, 1000)
 
@@ -76,7 +74,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
             <FieldMasked
                 label="CEP"
-                name="address.zipCode"
+                name="location.zipCode"
                 placeholder="Digite o CEP"
                 mask={"_____-___"}
                 required
@@ -86,7 +84,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 className=" "
                 type="text"
                 label="Estado"
-                name="address.state"
+                name="location.state"
                 disabled={disabledInputs.state || loading}
                 placeholder={loading ? 'Carregando...' : 'Digite o nome do estado'}
                 required
@@ -94,7 +92,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <FieldControl
                 type="text"
                 label="Cidade"
-                name="address.city"
+                name="location.city"
                 disabled={disabledInputs.city || loading}
                 placeholder={loading ? 'Carregando...' : 'Digite o nome da cidade'}
                 required
@@ -102,7 +100,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <FieldControl
                 type="text"
                 label="Bairro"
-                name="address.neighborhood"
+                name="location.neighborhood"
                 disabled={loading}
                 placeholder={loading ? 'Carregando...' : 'Digite o nome do bairro'}
                 required
@@ -112,7 +110,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <FieldControl
                     divClassName="col-span-3"
                     label='Rua'
-                    name="address.street"
+                    name="location.street"
                     aria-label="street"
                     disabled={loading}
                     placeholder={loading ? 'Carregando...' : 'Digite o nome da rua'}
@@ -123,7 +121,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <FieldControl
                     divClassName="col-span-1"
                     label='N°'
-                    name="address.number"
+                    name="location.number"
                     aria-label="number"
                     disabled={loading}
                     placeholder="N°"
@@ -136,7 +134,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <FieldControl
                     type="text"
                     label="Complemento"
-                    name="address.complement"
+                    name="location.complement"
                     disabled={loading}
                     placeholder={loading ? 'Carregando...' : "Digite o complemento (opcional)"}
                 />
