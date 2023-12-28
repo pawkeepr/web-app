@@ -103,7 +103,8 @@ const useAppStore = <T, G = unknown>({
                 if (data.id) {
                     response = await updateData.mutateAsync(data)
                 } else {
-                    response = await addData.mutateAsync(data)
+                    const { id, ...aux } = data
+                    response = await addData.mutateAsync(aux as any)
                 }
 
                 successToast('Adicionado com sucesso')

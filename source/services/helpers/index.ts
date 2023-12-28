@@ -23,6 +23,7 @@ export const getTutorProfile = async () => api.get(urls.TUTOR_GET_PROFILE());
 export const getAllPets = async (cpf_tutor: string) => api.get(urls.PET_FETCH_ALL(), { params: { cpf_tutor } });
 export const getPet = async (cpf_tutor: string, id_pet: string) => api.get(urls.PET_GET_PROFILE(), { params: { id_pet, cpf_tutor } });
 export const createPet = async (data: any,) => api.post(urls.PET_CREATE_PROFILE(), data);
+export const createPetSimplified = async (data: any,) => api.post(urls.PET_CREATE_SIMPLIFIED_PROFILE(), data);
 export const updatePet = async (data: any, cpf_tutor: string, id_pet: string) => api.post(urls.PET_UPDATE_PROFILE(), data, { params: { id_pet, cpf_tutor } });
 export const updateHealthPet = async (data: any, cpf_tutor: string, id_pet: string) => api.post(urls.PET_UPDATE_HEALTH(), data, { params: { id_pet, cpf_tutor } });
 
