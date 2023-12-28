@@ -6,6 +6,7 @@ import { useCallback, useState } from 'react'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
 import useSteps from '~/hooks/use-steps'
+import useProfileVeterinary from '~/hooks/use-veterinary'
 import routes from '~/routes'
 import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor'
 import { IPet } from '~/types/pet'
@@ -17,7 +18,6 @@ import StepListPets from './components/steps/step-list-pets'
 import StepListSpecies from './components/steps/step-list-species'
 import StepTutor from './components/steps/step-tutor'
 import { ModalConfirmProps, StepProps } from './types'
-import useProfileVeterinary from '~/hooks/use-veterinary'
 
 const STEPS = [
     {
@@ -77,7 +77,7 @@ const ModalListPets = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [document])
 
-    const { activeData: pets, handleSubmit, isLoading } = useListPetsOfTutor(document)
+    const { activeData: pets, handleSubmit, isLoading } = useListPetsOfTutor(document, 'simple', closeModal)
     const veterinary = useProfileVeterinary()
 
     const initialValues: IPet = {
@@ -104,6 +104,7 @@ const ModalListPets = ({
     }
 
     const onSubmit = useCallback(async (values: IPet) => {
+
         const pet = await handleSubmit(values)
 
         if (!pet) return
