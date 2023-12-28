@@ -3,7 +3,7 @@ import { IMainResponsibleGuardianSimplified, IPetV2Simplified, PetData, PetDataS
 import { DTOProfile } from "~/types/profile";
 import { Veterinary } from "./Veterinary";
 
-export class Pet implements IPetV2Simplified {
+export class PetSimplified implements IPetV2Simplified {
 
     id?: string | null | undefined;
     cpf_tutor: string;
@@ -11,26 +11,16 @@ export class Pet implements IPetV2Simplified {
     main_responsible_guardian: IMainResponsibleGuardianSimplified;
     veterinary: DTOProfile;
 
-    constructor() {
+    private constructor() {
         this.id = '';
         this.cpf_tutor = '';
 
         this.pet_information = {
             name_pet: '',
-            microchip: '',
-            identification_number: '',
             race: null,
             specie: null,
-            blood_type: '',
-            blood_donator: 'no',
-            color: '',
             date_birth: '',
-            organ_donor: 'no',
-            pedigree: 'no',
-            pedigree_registry: '',
             sex: null,
-            size: '',
-            weight: '',
             castrated: 'no',
         };
 
@@ -64,7 +54,6 @@ export class Pet implements IPetV2Simplified {
         }
     }
 
-
     defineID(id: string | null = null): this {
         this.id = id;
         return this;
@@ -94,8 +83,8 @@ export class Pet implements IPetV2Simplified {
     }
 
 
-    static build(params: IPet): Pet {
-        return new Pet()
+    static build(params: IPet): PetSimplified {
+        return new PetSimplified()
             .defineID(params.id as string)
             .defineCpfTutor(params.cpf_tutor)
             .definePetInformation({
