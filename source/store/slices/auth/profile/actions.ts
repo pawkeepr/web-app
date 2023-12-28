@@ -10,16 +10,16 @@ import {
     ACTION_GET_PROFILE_SESSION,
     ACTION_RESET_PROFILE_FLAG,
     ACTION_SET_PROFILE,
-    Profile,
 } from './types';
+import { IProfile } from '~/types/profile';
 
-export const setProfile = createAction<Profile>(ACTION_SET_PROFILE);
-export const editProfile = createAction<Profile>(ACTION_EDIT_PROFILE);
+export const setProfile = createAction<IProfile>(ACTION_SET_PROFILE);
+export const editProfile = createAction<IProfile>(ACTION_EDIT_PROFILE);
 export const editProfileSuccess = createAction(ACTION_EDIT_PROFILE_SUCCESS);
 export const editProfileError = createAction(ACTION_EDIT_PROFILE_ERROR);
 export const resetProfileFlag = createAction(ACTION_RESET_PROFILE_FLAG);
 export const getProfileSession = createAction(ACTION_GET_PROFILE_SESSION);
 
-export const addNew = createAction<Profile>(ACTION_ADD_NEW);
+export const addNew = createAction<IProfile>(ACTION_ADD_NEW);
 export const addSuccess = createAction(ACTION_ADD_SUCCESS);
 export const addFail = createAction(ACTION_ADD_FAIL);

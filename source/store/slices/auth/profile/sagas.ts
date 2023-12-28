@@ -11,7 +11,6 @@ import {
     ACTION_ADD_NEW,
     ACTION_EDIT_PROFILE,
     ACTION_GET_PROFILE_SESSION,
-    Profile
 } from './types';
 //Include Both Helper File with needed methods
 import { PayloadAction } from "@reduxjs/toolkit";
@@ -23,10 +22,14 @@ import {
     updateProfileVet
 } from "~/services/helpers";
 import { errorToast, successToast } from "~/store/helpers/toast";
+import { IProfile } from "~/types/profile";
+import { setCookie } from "~/utils/cookies-utils";
+import cookies from "~/constants/cookies";
 
 function* onGetProfile() {
     try {
         const { data } = yield call(getVetProfile);
+        yield setCookie(cookies.profile.name, data);        
         yield put(editProfileSuccess(data));
     } catch (error) {
         console.log(error)
@@ -35,7 +38,7 @@ function* onGetProfile() {
 }
 
 
-function* onAddProfile({ payload: profile }: PayloadAction<Profile>) {
+function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
     try {
         const { data } = yield call(createProfileVet, profile);
         yield delay(1000);
@@ -48,7 +51,7 @@ function* onAddProfile({ payload: profile }: PayloadAction<Profile>) {
     }
 }
 
-function* onUpdateProfile({ payload: user }: PayloadAction<Profile>) {
+function* onUpdateProfile({ payload: user }: PayloadAction<IProfile>) {
     try {
         const { data } = yield call(updateProfileVet, user, user.id as string);
         // yield call(createProfile, user)

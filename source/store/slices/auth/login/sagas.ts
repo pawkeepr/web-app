@@ -23,9 +23,9 @@ import { layoutModeTypes } from "~/Components/constants/layout";
 import { errorToast } from '~/store/helpers/toast';
 import { getCookie, removeCookie, setCookie } from "~/utils/cookies-utils";
 import { getProfileSession, resetProfileFlag, setProfile } from '../profile/actions';
-import { Profile } from "../profile/types";
 
 import { setEmailAccount, setPasswordAccount } from '../activate-account/actions';
+import { IProfile } from "~/types/profile";
 
 export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
     try {
@@ -77,7 +77,7 @@ export function* recoverUserByTokenSaga() {
 
 
         yield put(setAuthorization({ token: access_token }));
-        yield put(setProfile(userData as Profile));
+        yield put(setProfile(userData as IProfile));
 
     } catch (error) {
         yield put(signOutUser());
