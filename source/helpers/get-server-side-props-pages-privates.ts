@@ -18,14 +18,14 @@ export const fetchProfile = async (token: string, ctx: Context) => {
     const api = getAPIClient(ctx)
 
     try {
-        const profile = await getVetProfile(api)
+        const { data: profile } = await getVetProfile(api)
         setCookie(profileKey, JSON.stringify(profile), optionsCookies.profile.expires)
         return profile
     } catch (error: unknown) {
 
         const { response } = error as { response: { status: number } }
-
-        switch (response.status) {
+    
+        switch (response?.status) {
             case 401:
                 removeCookie(optionsCookies.token.name, ctx)
                 return "Erro interno ao buscar perfil"
