@@ -47,18 +47,9 @@ export type UserInformation = {
     contact: Contact;
 }
 
-export type ActivateAccount = {
-    cpf_cnpj: string;
-    crmv: string;
-    specialty_information: {
-        specialty: Specialty;
-        list_specialty: Specialty[];
-    };
-    user_information: UserInformation;
-    address: Location;
-}
 
 const validate = Yup.object().shape({
+    email: Yup.string().email("O email deve ser válido").required("O campo de email é obrigatório"),
     firstName: Yup.string()
         .transform(transformTrim)
         .min(2, "O nome deve ter pelo menos 2 caracteres")
@@ -114,5 +105,7 @@ const validate = Yup.object().shape({
     location: Address
 });
 
+
+export type ActivateAccount = Yup.InferType<typeof validate>;
 
 export default validate;
