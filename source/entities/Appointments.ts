@@ -28,7 +28,6 @@ import {
 } from "~/store/slices/appointment-vet/types"
 import Anamnesis from "./Anamnesis"
 import PaymentAppointment from "./PaymentsAppointment"
-import { IPet } from "~/types/pet"
 
 export class Appointments implements IAppointmentVet {
     id?: string | null
@@ -38,7 +37,7 @@ export class Appointments implements IAppointmentVet {
     tutor_data: ITutorAppointment
     crmv_vet: string
     cpf_cnpj_vet: string
-    vet_data: IVetAppointment
+    veterinary: IVetAppointment
     medicines: IMedicineAppointment[]
     anamnesis: IAnamnesisAppointment
     vaccines: IVaccineAppointment[]
@@ -106,7 +105,7 @@ export class Appointments implements IAppointmentVet {
         } as ITutorAppointment;
         this.crmv_vet = "";
         this.cpf_cnpj_vet = "";
-        this.vet_data = {} as any;
+        this.veterinary= {} as any;
         this.medicines = [] as any;
         this.anamnesis = {} as any;
         this.vaccines = [] as any;
@@ -205,8 +204,8 @@ export class Appointments implements IAppointmentVet {
         return this;
     }
 
-    defineVetData(vet_data: IVetAppointment): this {
-        this.vet_data = vet_data;
+    defineVetData(veterinary: IVetAppointment): this {
+        this.veterinary = veterinary;
         return this;
     }
 
@@ -291,7 +290,7 @@ export class Appointments implements IAppointmentVet {
             .definePayments(params.payments)
             .definePetData(params.pet_data as IPetData)
             .defineTutorData(params.tutor_data)
-            .defineVetData(params.vet_data)
+            .defineVetData(params.veterinary)
             .defineWellBeing(params.well_being)
             .defineContactTutor(params.contact_tutor)
     }

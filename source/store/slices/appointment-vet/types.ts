@@ -37,13 +37,18 @@ export interface ITutorAppointment {
 }
 
 export interface IVetAppointment {
-    name: string,
+    cpf_cnpj: string,
+    crmv: string,
+    name_veterinary: string,
+    specialty: string,
     email: string,
     phone: string,
+    whatsapp: string,
     country: string,
-    zipCode: string,
     state: string,
-    city: string
+    city: string,
+    neighborhood: string,
+    street: string,
 }
 
 export interface IMedicineAppointment {
@@ -221,7 +226,7 @@ export interface IAppointmentVet extends IAnamnesis {
     tutor_data: ITutorAppointment;
     crmv_vet: string;
     cpf_cnpj_vet: string;
-    vet_data: IVetAppointment;
+    veterinary: IVetAppointment;
     anamnesis: IAnamnesisAppointment;
     payments: IPaymentsAppointment;
     dates_consults: IDatesConsultsAppointment;
@@ -247,7 +252,7 @@ export interface IScheduledAppointmentVet {
     tutor_data: ITutorAppointment;
     crmv_vet: string;
     cpf_cnpj_vet: string;
-    vet_data: IVetAppointment;
+    veterinary: IVetAppointment;
     anamnesis: never;
     payments: never;
     dates_consults: IDatesConsultsAppointment;

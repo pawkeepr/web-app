@@ -1,3 +1,4 @@
+import { IVetAppointment } from "~/store/slices/appointment-vet/types";
 import { IPet } from "~/types/pet";
 import { IHealthInsurance, IMainResponsibleGuardian, IPetV2, ISecondaryTutor, ITutor, PetData } from "~/types/pet-v2";
 import { Contact, Location } from "~/validations/activate";
@@ -10,6 +11,7 @@ export class Pet implements IPetV2 {
     main_responsible_guardian: IMainResponsibleGuardian;
     secondary_responsible_guardian: ISecondaryTutor;
     health_insurance: IHealthInsurance;
+    veterinary: IVetAppointment;
 
 
     constructor() {
@@ -71,7 +73,21 @@ export class Pet implements IPetV2 {
             cpf_tutor: '',
             phone_tutor: '',
             emaiL_tutor: '',
-        };
+        },
+        this.veterinary = {
+            cpf_cnpj: '',
+            crmv: '',
+            name_veterinary: '',
+            specialty: '',
+            email: '',
+            phone: '',
+            whatsapp: '',
+            country: '',
+            state: '',
+            city: '',
+            neighborhood: '',
+            street: '', 
+        }
     }
 
     defineID(id: string | null = null): this {
@@ -120,6 +136,11 @@ export class Pet implements IPetV2 {
     defineSecondaryTutor(secondary_responsible_guardian: ISecondaryTutor): this {
         // #TODO: deve-se criar uma entidade para secondary_responsible_guardian
         this.secondary_responsible_guardian = secondary_responsible_guardian;
+        return this;
+    }
+    defineVeterinary(veterinary: IVetAppointment): this {
+        // #TODO: deve-se criar uma entidade para veterinary
+        this.veterinary = veterinary;
         return this;
     }
 
@@ -177,6 +198,20 @@ export class Pet implements IPetV2 {
                 first_name: params.ownerEmergencyContact.name,
                 last_name: params.ownerEmergencyContact.name,
                 url_img: ''
+            })
+            .defineVeterinary({
+                cpf_cnpj: params.cpf_cnpj,
+                crmv: params.crmv,
+                name_veterinary: params.name_veterinary,
+                specialty: params.specialty,
+                email: params.email,
+                phone: params.phone,
+                whatsapp: params.whatsapp,
+                country: params.country,
+                state: params.state,
+                city: params.city,
+                neighborhood: params.neighborhood,
+                street: params.street,
             })
     }
 }

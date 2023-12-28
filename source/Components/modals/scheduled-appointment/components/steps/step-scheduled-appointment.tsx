@@ -79,7 +79,7 @@ const StepScheduledAppointment = ({
                 ...values,
                 crmv_vet: data.crmv,
                 cpf_cnpj_vet: data.cpf_cnpj,
-                vet_data: {
+                vaterinary: {
                     city: data.location.city,
                     country: data.location.country,
                     email: data.contact.email,
