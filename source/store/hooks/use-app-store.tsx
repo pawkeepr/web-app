@@ -5,6 +5,7 @@ import {
 } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
 import { useCallback, useMemo } from 'react'
+import { BuilderEntity } from '~/entities/BuilderEntity'
 import useAppQuery, { Fn } from '~/hooks/use-app-query'
 import { errorToast, successToast } from '../helpers/toast'
 
@@ -23,9 +24,7 @@ type Stores<T, G> = {
     add?: (data: Data<T> | Data<G>) => Promise<AxiosResponse<Data<T>>>
     get?: Fn<T[]>
     handleCloseModal?: () => void
-    entity?: {
-        build: (data: Data<T> | Data<G>) => Data<T>
-    }
+    entity?: BuilderEntity
     options?: UseQueryOptions<T[]>
 }
 
@@ -64,7 +63,8 @@ const useAppStore = <T, G = unknown>({
         await queryClient.invalidateQueries(superKeys)
     }
 
-    const onSuccess = useCallback(async (data: Data<T>) => {
+    const onSuccess = useCallback(async () => {
+        successToast('Adicionado com sucesso')
         handleCloseModal?.()
     }, [handleCloseModal])
 
@@ -98,17 +98,13 @@ const useAppStore = <T, G = unknown>({
                     data = entity.build(data)
                 }
 
-                let response;
-
                 if (data.id) {
-                    response = await updateData.mutateAsync(data)
-                } else {
-                    const { id, ...aux } = data
-                    response = await addData.mutateAsync(aux as any)
+                    return await updateData.mutateAsync(data)
                 }
 
-                successToast('Adicionado com sucesso')
-                return response
+                const { id, ...aux } = data
+                return await addData.mutateAsync(aux as any)
+
 
             } catch (err) {
 
