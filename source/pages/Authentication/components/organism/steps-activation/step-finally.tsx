@@ -5,22 +5,25 @@ import LOADING from "~/constants/loading";
 import { useAppSelector } from "~/store/hooks";
 import { ActivateAccount } from "~/validations/activate";
 import { StepProps } from "./types";
+import { Specialty } from "~/types/profile";
 
 const listItem = "flex gap-1 font-semibold text-gray-500 p-1 text-center w-full";
 const strongText = "text-gray-700 mr-2";
 const pStyle = "text-center w-full text-sm flex flex-row";
 
-enum Specialty {
-    "domestics" = "Animais Domésticos",
-    "large" = "Animais de Grande Porte",
-    "midsize" = "Animais de Médio Porte",
-}
+const Specialty = {
+    domestics: "Animais Domésticos",
+    large: "Animais de Grande Porte",
+    midsize: "Animais de Médio Porte",
+} as const
+
+type KeysSpecialty = keyof typeof Specialty
 
 const StepFinally = ({ prevStep, nextStep }: StepProps) => {
     const { values, isValid,  errors, handleSubmit } =
         useFormikContext<ActivateAccount>();
-    console.log({ errors: errors })
-    const isLoading = useAppSelector(state =>
+
+        const isLoading = useAppSelector(state =>
         state.Profile.isLoading === LOADING.PENDING ||
         state.Profile.isLoading === LOADING.SUCCESS
     )
@@ -85,7 +88,7 @@ const StepFinally = ({ prevStep, nextStep }: StepProps) => {
                 <li className={twMerge(listItem, 'w-full col-span-full')}>
                     <p className={pStyle}>
                         <strong className={strongText}>Serviços:</strong>
-                        <span className="">{values?.list_service_type?.map((item) => Specialty[item]).join(', ')}</span>
+                        <span className="">{values?.list_service_type?.map((item: KeysSpecialty) => Specialty[item]).join(', ')}</span>
 
                     </p>
                 </li>
