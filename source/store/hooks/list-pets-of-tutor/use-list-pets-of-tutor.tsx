@@ -1,4 +1,4 @@
-import { AbstractEntity } from '~/entities/BuilderEntity'
+import { BuilderEntity } from '~/entities/BuilderEntity'
 import { Pet } from '~/entities/Pet'
 import { PetSimplified } from '~/entities/PetSimplified'
 import { createPet, createPetSimplified, getAllPets } from '~/services/helpers'
@@ -13,7 +13,7 @@ const createStrategy = new Map([
     ['full', createPet],
 ])
 
-const entityStrategy = new Map<string, AbstractEntity>([
+const entityStrategy = new Map<string, BuilderEntity>([
     ['simple', PetSimplified],
     ['full', Pet],
 ])
