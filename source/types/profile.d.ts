@@ -1,4 +1,4 @@
-import { Contact } from "~/validations/activate";
+import { Contact, UserInformation } from "~/validations/activate";
 
 type Specialty = {
     type: string;
@@ -15,16 +15,25 @@ type Location = {
     complement: string;
 }
 
+export type SpecialtyInformation = {
+    specialty: string;
+    list_specialty: Specialty[];
+    list_service_type: string[];
+}
+
+export type ProfileUserInformation = {
+    first_name: string;
+    last_name: string;
+    name: string;
+    url_img: string;
+    contact: Contact;
+    address: Location;
+}
+
 export type IProfile = {
     id?: string
-    firstName: string;
-    lastName: string;
-    crmv: string;
     cpf_cnpj: string;
-    specialty: string;
-    list_service_type: string[];
-    list_specialty: Specialty[];
-    type: number;
-    contact: Contact;
-    location: Location;
+    crmv: string;
+    specialty_information: SpecialtyInformation;
+    user_information: ProfileUserInformation;
 }
