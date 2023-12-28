@@ -2,9 +2,9 @@ import optionsCookies from "~/constants/cookies";
 
 import type { GetServerSideProps, GetServerSidePropsContext, PreviewData } from "next";
 import type { ParsedUrlQuery } from "querystring";
-import { api } from "~/services/api";
 import { getVetProfile } from "~/services/helpers";
-import { getCookie, setCookie } from "~/utils/cookies-utils";
+import { getCookie, setCookie, removeCookie } from "~/utils/cookies-utils";
+import { getAPIClient } from "~/services/axios";
 
 export type Context = GetServerSidePropsContext<ParsedUrlQuery, PreviewData> | undefined
 
@@ -15,21 +15,25 @@ export const fetchProfile = async (token: string, ctx: Context) => {
 
     if (profile) return profile
 
-    api.defaults.headers['Authorization'] = `Bearer ${token}`
+    const api = getAPIClient(ctx)
 
     try {
-        const profile = await getVetProfile()
+        const profile = await getVetProfile(api)
         setCookie(profileKey, JSON.stringify(profile), optionsCookies.profile.expires)
         return profile
     } catch (error: unknown) {
 
         const { response } = error as { response: { status: number } }
 
-        if (response.status === 404) {
-            return null
+        switch (response.status) {
+            case 401:
+                removeCookie(optionsCookies.token.name, ctx)
+                return "Erro interno ao buscar perfil"
+            case 404:
+                return null
+            default:
+                return "Erro interno ao buscar perfil"
         }
-
-        return "Erro interno ao buscar perfil"
     }
 
 }

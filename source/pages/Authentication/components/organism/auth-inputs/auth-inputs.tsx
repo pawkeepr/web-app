@@ -12,6 +12,7 @@ import { SignInCredentials } from "~/services/helpers/auth";
 import * as Yup from "yup";
 import { BtnLink, BtnPrimary } from "~/Components/atoms/btn";
 import FieldPassword from "~/Components/molecules/field-password/field-password";
+import LOADING from "~/constants/loading";
 
 const initialValues: SignInCredentials = {
     username: "",
@@ -31,6 +32,7 @@ const Auth = () => {
         password,
         username,
         isAuthenticated,
+        isLoading,
     } = useAuth();
 
     const handleSubmit = () => {
@@ -51,6 +53,8 @@ const Auth = () => {
     const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(onChangePassword(e.target.value));
     };
+
+    const loading = useMemo(() => isLoading === LOADING.SUCCESS && isAuthenticated, [isLoading, isAuthenticated]);
 
     return (
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
@@ -101,7 +105,7 @@ const Auth = () => {
                         className="!w-full"
                         type="submit"
                         data-testid="submit-button"
-                        disabled={!isValid || isAuthenticated}
+                        disabled={!isValid || loading}
                     />
 
 

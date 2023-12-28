@@ -7,7 +7,7 @@ import * as urls from './urls';
 
 export const createProfileVet = async (data: IProfile) => api.post(urls.VET_CREATE_PROFILE(), data);
 export const updateProfileVet = async (data: IProfile, user_id: string) => api.put(urls.VET_UPDATE_PROFILE(), data, { params: { user_id } });
-export const getVetProfile = async () => api.get(urls.VET_GET_PROFILE());
+export const getVetProfile = async (app = api) => app.get(urls.VET_GET_PROFILE());
 
 export const getAllAppointmentsVet = async () => api.get<IAppointmentVetData[]>(urls.APPOINTMENT_GET_ALL());
 export const getAppointmentVet = async (id_appointment: string) => api.get(urls.APPOINTMENT_GET_BY_ID(), { params: { id_appointment } });
