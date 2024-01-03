@@ -17,49 +17,52 @@ import {
     ReptileBreed,
 } from './breedType';
 
-export enum Species {
-    'dog' = 'Cachorro',
-    'cat' = 'Gato',
-    'horse' = 'Cavalo',
-    'rabbit' = 'Coelho',
-    'bird' = 'Pássaro',
-    'fish' = 'Peixe',
-    'reptile' = 'Réptil',
-}
+export const Species = {
+    'dog': 'Cachorro',
+    'cat': 'Gato',
+    'horse': 'Cavalo',
+    'rabbit': 'Coelho',
+    'bird': 'Pássaro',
+    'fish': 'Peixe',
+    'reptile': 'Réptil',
+    'unknown': 'Desconhecido',
+} as const;
 
-export type KeyOfSpecies = keyof typeof Species;
+export type Species = keyof typeof Species;
 
-export enum Gender {
-    male = 'male',
-    female = 'female',
-    unknown = 'unknown',
-}
+export const Gender = {
+    male: 'male',
+    female: 'female',
+    unknown: 'unknown',
+} as const;
 
-export enum GenderBR {
-    male = 'Macho',
-    female = 'Fêmea',
-    unknown = 'Desconhecido',
-}
+export type Gender = keyof typeof Gender
+
+export const GenderBR = {
+    male: 'Macho',
+    female: 'Fêmea',
+    unknown: 'Desconhecido',
+} as const;
 
 
 export type KeyOfGender = keyof typeof Gender
 
-export enum MapOptionSpecies {
-    'dog' = 'dog',
-    'cat' = 'cat',
-    'horse' = 'horse',
-    'rabbit' = 'rabbit',
-    'bird' = 'bird',
-    'fish' = 'fish',
-    'reptile' = 'reptile',
-    'Cachorro' = 'dog',
-    'Gato' = 'cat',
-    'Cavalo' = 'horse',
-    'Coelho' = 'rabbit',
-    'Pássaro' = 'bird',
-    'Peixe' = 'fish',
-    'Réptil' = 'reptile',
-}
+export const MapOptionSpecies = {
+    'dog': 'dog',
+    'cat': 'cat',
+    'horse': 'horse',
+    'rabbit': 'rabbit',
+    'bird': 'bird',
+    'fish': 'fish',
+    'reptile': 'reptile',
+    'Cachorro': 'dog',
+    'Gato': 'cat',
+    'Cavalo': 'horse',
+    'Coelho': 'rabbit',
+    'Pássaro': 'bird',
+    'Peixe': 'fish',
+    'Réptil': 'reptile',
+} as const;
 
 export type KeyOfMapOptionSpecies = keyof typeof MapOptionSpecies;
 
