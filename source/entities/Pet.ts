@@ -2,6 +2,7 @@ import { IPet } from "~/types/pet";
 import { IHealthInsurance, IMainResponsibleGuardian, IPetV2, ISecondaryTutor, ITutor, PetData } from "~/types/pet-v2";
 import { DTOProfile } from "~/types/profile";
 import { Contact, Location } from "~/validations/activate";
+import { PetInformation } from "./PetInformation";
 import { Veterinary } from "./Veterinary";
 
 export class Pet implements IPetV2 {
@@ -103,8 +104,8 @@ export class Pet implements IPetV2 {
     }
 
     definePetInformation(pet_information: PetData): this {
-        // #TODO: deve-se criar uma entidade para pet_information
-        this.pet_information = pet_information;
+        const data = PetInformation.build(pet_information)
+        this.pet_information = data;
         return this;
     }
 
