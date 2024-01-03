@@ -1,6 +1,6 @@
 import { Breed } from "~/store/slices/pets/breedType";
 import { Gender, Species } from "~/store/slices/pets/speciesType";
-import { Location } from "~/validations/activate";
+import { Contact, Location } from "~/validations/activate";
 import { DTOProfile } from "./profile";
 
 type GenericSelect = {
