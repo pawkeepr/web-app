@@ -11,26 +11,34 @@ import FieldMasked from "~/Components/molecules/field-masked";
 import { genderValues } from "~/store/slices/pets/sexType";
 import { StepProps } from "~/types/helpers";
 import { InitialValues } from "../../index";
+import * as yup from "yup";
+import { useMemo } from "react";
+import { is } from "cypress/types/bluebird";
 
 
 
+const schema = yup.object().shape({
+    pet_data: yup.object().shape({
+        name_pet: yup.string().required("Campo obrigatório"),
+        sex: yup.object().shape({
+            label: yup.string().required("Campo obrigatório"),
+            value: yup.string().required("Campo obrigatório"),
+        }).required("Campo obrigatório"),
+        date_birth: yup.date()
+            .nullable()
+            .required("Campo obrigatório")
+    }),
+
+});
 
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const { values } = useFormikContext<InitialValues>();
 
-    const areFieldsFilled = () => {
-        const requiredFields = [
-            'pet_data.name_pet',
-            'pet_data.date_birth',
-            'pet_data.sex',
-        ];
+    const isValid = useMemo(() => {     
+        return schema.isValidSync(values);
+    },[values]);
 
-        return requiredFields.every((field) => {
-            const value = field.split('.').reduce((obj, key) => obj?.[key], values);
-            return !!value;
-        });
-    };
 
     return (
         <div className="card card-body shadow-lg">
@@ -96,7 +104,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 />
                 <BtnPrimary
                     label="Próximo"
-                    disabled={!areFieldsFilled()}
+                    disabled={!isValid}
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}

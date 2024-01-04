@@ -14,7 +14,6 @@ import useTutorByDocument from "../hooks/use-tutor-by-document";
 import AddressTutor from "../molecules/address-tutor.tsx";
 import { useMemo, useState } from "react";
 import * as yup from "yup";
-import { s } from "vitest/dist/reporters-5f784f42";
 
 const schema = yup.object().shape({
     name_tutor: yup.string().max(255).required("Campo obrigatório"),
@@ -41,7 +40,8 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
 
             return secondTutorSchema.isValidSync(values);
         }
-
+        console.log(schema.isValidSync(values));
+        
         return schema.isValidSync(values);
     }, [values, secondTutorActive]);
     
