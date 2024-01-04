@@ -12,12 +12,39 @@ import { StepProps } from "~/types/helpers";
 import usePetById from "../hooks/use-pet-by-id";
 import useTutorByDocument from "../hooks/use-tutor-by-document";
 import AddressTutor from "../molecules/address-tutor.tsx";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import * as yup from "yup";
+import { s } from "vitest/dist/reporters-5f784f42";
+
+const schema = yup.object().shape({
+    name_tutor: yup.string().max(255).required("Campo obrigatório"),
+    cpf_tutor: yup.string().length(14).required("Campo obrigatório"),
+    contact_tutor: yup.object().shape({
+    phone: yup.string().length(20).required("Campo obrigatório"),
+    }).required("Campo obrigatório"),
+});
+
 
 
 const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<any>();
     const [secondTutorActive, setSecondTutorActive] = useState(false);
+    
+    const isValid = useMemo(() => {
+        if (secondTutorActive) {
+            const secondTutorSchema = schema.shape({
+                responsible_tutors: yup.object().shape({
+                    name_tutor: yup.string().max(255).required("Campo obrigatório"),
+                    cpf_tutor: yup.string().length(14).required("Campo obrigatório"),
+                }).required("Campo obrigatório"),
+            });
+
+            return secondTutorSchema.isValidSync(values);
+        }
+
+        return schema.isValidSync(values);
+    }, [values, secondTutorActive]);
+    
 
     const { isPending: isPendingPetById } = usePetById({
         onChangeField: setFieldValue,
@@ -33,37 +60,6 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
     });
 
 
-    const areFieldsFilledSecondTutor = () => {
-        if(secondTutorActive){
-            const requiredFieldSecondoTutor = [
-                'responsible_tutors.cpf_tutor',
-                'responsible_tutors.name_tutor',
-                
-            ];
-    
-            return requiredFieldSecondoTutor.every((field) => {
-                const value = field.split('.').reduce((obj, key) => obj?.[key], values);
-                return !!value;
-            });
-        }
-       
-        return true;
-    };
-
-    const areFieldsFilled = () => {
-        const requiredFields = [
-            "name_tutor",
-            "cpf_tutor",
-            "contact_tutor.phone",
-        ];
-
-        return requiredFields.every((field) => {
-            const value = field.split(".").reduce((obj, key) => obj?.[key], values);
-            return !!value;
-        });
-    }
-
-    const disableNextButton = !areFieldsFilled() || !areFieldsFilledSecondTutor(); // Desabilita o botão se algum campo estiver vazio
     
     const isPending =
     isPendingTutors ||
@@ -123,7 +119,7 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
                 <ControlSwitchDiv
                     name="has_second_tutor"
                     label="O pet possui um segundo Tutor?"
-                    onClick={(value: boolean) => setSecondTutorActive(value)}
+                    onClick={() => setSecondTutorActive(!secondTutorActive)}
                 >
                     <div className="left mb-2">Preencha as Informações do segundo Tutor</div>
                     <FieldDocument
@@ -158,7 +154,7 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
                 />
                 <BtnPrimary
                     label="Próximo"
-                    disabled={disableNextButton}
+                    disabled={!isValid}
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}
