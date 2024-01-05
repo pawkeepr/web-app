@@ -1,6 +1,6 @@
 import { Breed } from '~/store/slices/pets/breedType';
 import { Gender, Species } from '~/store/slices/pets/speciesType';
-import { On_Off } from './pet-v2';
+import { IHealthInsurance, On_Off } from './pet-v2';
 import { DTOProfile } from './profile';
 import { ITutor } from './tutor';
 
@@ -13,7 +13,7 @@ export type IPet = {
     plain_type?: string;
     microchip?: string
     identification_number?: string;
-    health_insurance?: string;
+    health_insurance?: IHealthInsurance;
     card_number?: string;
     wallet_validity?: string;
     chip_number?: string;
