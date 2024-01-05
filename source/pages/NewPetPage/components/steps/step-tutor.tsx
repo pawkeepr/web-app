@@ -2,7 +2,6 @@
 import FieldDocument from "~/Components/molecules/field-document/field-document";
 import FieldPhone from "~/Components/molecules/field-phone/field-phone";
 
-import { useFormikContext } from "formik";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 
 import FieldControl from "~/Components/molecules/field-control/field-control";
@@ -13,19 +12,22 @@ import AddressTutor from "../molecules/address-tutor.tsx";
 
 import { useMemo } from "react";
 import * as yup from "yup";
+import useFormikContextSafe from "~/hooks/use-formik-context-safe";
 
-type StepTutorsKeys = Pick<InitialValues, 'ownerEmergencyContact'>;
+type StepTutorsKeys = Pick<InitialValues, 'ownerEmergencyContact' | 'cpf_tutor'>;
 
 const schema = yup.object().shape({
     name_tutor: yup.string().max(255).required("Campo obrigatório"),
-    cpf_tutor: yup.string().length(14).required("Campo obrigatório"),
-    contact_tutor: yup.object().shape({
-        phone: yup.string().length(20).required("Campo obrigatório"),
+    ownerEmergencyContact: yup.object().shape({
+        cpf_tutor: yup.string().length(14).required("Campo obrigatório"),
+        contact_tutor: yup.object().shape({
+            phone: yup.string().length(20).required("Campo obrigatório"),
+        }).required("Campo obrigatório"),
     }).required("Campo obrigatório"),
 });
 
 const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) => {
-    const { values } = useFormikContext<StepTutorsKeys>();
+    const { values } = useFormikContextSafe<StepTutorsKeys>();
     // const [secondTutorActive, setSecondTutorActive] = useState(false);
 
 
@@ -41,7 +43,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
         //     return secondTutorSchema.isValidSync(values);
         // }
 
-        return schema.isValidSync(values);
+        return schema.isValidSync(values.ownerEmergencyContact);
     }, [values]);
 
 
@@ -59,7 +61,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                 <div className="mb-2">Preencha as Informações do Tutor</div>
                 <div className="grid grid-cols-3 mobile:grid-cols-1 gap-2">
                     <FieldDocument
-
+                        ctx={{} as StepTutorsKeys}
                         label="CPF"
                         name="cpf_tutor"
                         disabled={isPending || tutorExist}
@@ -70,6 +72,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                     />
                     <FieldControl
                         initialFocus
+                        ctx={{} as StepTutorsKeys}
                         label="Nome Completo"
                         name="ownerEmergencyContact.name"
                         disabled={isPending || tutorExist}
