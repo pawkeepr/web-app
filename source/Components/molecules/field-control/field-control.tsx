@@ -8,7 +8,7 @@ import { twMerge } from 'tailwind-merge';
 import Input from "~/Components/atoms/input/input";
 import Label from "~/Components/atoms/label";
 
-const FieldControl = <T,>({
+const FieldControl = <T, Ctx = any>({
     label,
     children,
     required = false,
@@ -22,7 +22,7 @@ const FieldControl = <T,>({
     initialFocus = false,
     divClassName,
     ...props
-}: InputControlProps<T>) => {
+}: InputControlProps<T, Ctx>) => {
 
     const [inputProps, meta] = useField(props);
     const id = props.name || props.id;
@@ -51,7 +51,7 @@ const FieldControl = <T,>({
                         twMerge(
                             cn(
                                 {
-                                    'border-secondary-500' : required,
+                                    'border-secondary-500': required,
                                     'bg-slate-100': props.disabled,
                                     '!pl-8': startIcon,
                                     '!pr-8': endIcon,
