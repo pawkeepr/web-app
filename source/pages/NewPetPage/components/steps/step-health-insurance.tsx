@@ -1,11 +1,11 @@
 import { Form, useFormikContext } from "formik";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control";
+import { InitialValues } from "~/pages/NewPetPage";
 import { StepProps } from "~/types/helpers";
 
-
 export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps) {
-    const { handleSubmit, isSubmitting } = useFormikContext()
+    const { handleSubmit, isSubmitting } = useFormikContext<InitialValues>()
 
     return (
 

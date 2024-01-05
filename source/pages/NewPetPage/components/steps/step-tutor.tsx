@@ -7,72 +7,26 @@ import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
-import ControlSwitchDiv from "~/Components/molecules/control-switch-div";
 import { StepProps } from "~/types/helpers";
-import usePetById from "../hooks/use-pet-by-id";
-import useTutorByDocument from "../hooks/use-tutor-by-document";
+import { InitialValues } from "../../index";
 import AddressTutor from "../molecules/address-tutor.tsx";
-import { useState } from "react";
+
+import { useMemo } from "react";
+import * as Yup from 'yup';
+
+const tutorValidationSchema = Yup.object().shape({
+    cpf_tutor: Yup.string().required('Obrigatório'),
+    name_tutor: Yup.string().required('Obrigatório'),
+});
+
+const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) => {
+    const { values, setFieldValue } = useFormikContext<InitialValues>();
 
 
-const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
-    const { values, setFieldValue } = useFormikContext<any>();
-    const [secondTutorActive, setSecondTutorActive] = useState(false);
+    const isValid = useMemo(() => {
+        return tutorValidationSchema.isValidSync(values)
+    }, [values])
 
-    const { isPending: isPendingPetById } = usePetById({
-        onChangeField: setFieldValue,
-        id: values.pet_data?.id,
-    });
-
-    const {
-        isPending: isPendingTutors,
-        tutorExists,
-    } = useTutorByDocument({
-        document: values.cpf_tutor || "",
-        onChangeField: setFieldValue,
-    });
-
-
-    const areFieldsFilledSecondTutor = () => {
-        if(secondTutorActive){
-            const requiredFieldSecondoTutor = [
-                'responsible_tutors.cpf_tutor',
-                'responsible_tutors.name_tutor',
-                
-            ];
-    
-            return requiredFieldSecondoTutor.every((field) => {
-                const value = field.split('.').reduce((obj, key) => obj?.[key], values);
-                return !!value;
-            });
-        }
-       
-        return true;
-    };
-
-    const areFieldsFilled = () => {
-        const requiredFields = [
-            "name_tutor",
-            "cpf_tutor",
-            "contact_tutor.phone",
-        ];
-
-        return requiredFields.every((field) => {
-            const value = field.split(".").reduce((obj, key) => obj?.[key], values);
-            return !!value;
-        });
-    }
-
-    const disableNextButton = !areFieldsFilled() || !areFieldsFilledSecondTutor(); // Desabilita o botão se algum campo estiver vazio
-    
-    const isPending =
-    isPendingTutors ||
-    isPendingPetById;
-    
-    const onlyWords = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const regex = /[^a-zA-Z ]/g;
-        e.target.value = e.target.value.replace(regex, "");
-    };
 
     return (
         <div className="card card-body shadow-lg">
@@ -90,7 +44,7 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
                     <FieldDocument
                         label="CPF"
                         name="cpf_tutor"
-                        disabled={isPending || tutorExists}
+                        disabled={isPending || tutorExist}
                         aria-label="document"
                         typeDocument="cpf"
                         placeholder="CPF"
@@ -99,18 +53,17 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
                     <FieldControl
                         initialFocus
                         label="Nome Completo"
-                        name="name_tutor"
-                        disabled={isPending || tutorExists}
+                        name="ownerEmergencyContact.name"
+                        disabled={isPending || tutorExist}
                         aria-label="name"
                         placeholder="Digite o nome do Tutor"
                         required
                         disabledError
-                        onChange={onlyWords}
                     />
                     <FieldPhone
                         label="Telefone/Celular"
-                        name="contact_tutor.phone"
-                        disabled={isPending || tutorExists}
+                        name="ownerEmergencyContact.phone"
+                        disabled={isPending || tutorExist}
                         placeholder={
                             isPending
                                 ? "Carregando..."
@@ -118,19 +71,29 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
                         }
                         required
                     />
-                    <AddressTutor disabled={tutorExists} />
+                    <FieldControl
+                        initialFocus
+                        label='Email'
+                        name="ownerEmergencyContact.email"
+                        aria-label="email"
+                        disabled={isPending || tutorExist}
+                        className=" "
+                        placeholder="Digite o email do tutor"
+                        required
+                        disabledError
+                    />
+                    <AddressTutor disabled={tutorExist} />
                 </div>
-                <ControlSwitchDiv
+                {/* <ControlSwitchDiv
                     name="has_second_tutor"
                     label="O pet possui um segundo Tutor?"
-                    onClick={(value: boolean) => setSecondTutorActive(value)}
                 >
                     <div className="left mb-2">Preencha as Informações do segundo Tutor</div>
                     <FieldDocument
                         label="CPF"
                         name="responsible_tutors.cpf_tutor"
                         aria-label="document"
-                        disabled={isPending || tutorExists}
+                        disabled={isPending}
                         typeDocument="cpf"
                         placeholder="CPF"
                         required
@@ -138,15 +101,14 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
                     <FieldControl
                         label="Nome Completo"
                         name="responsible_tutors.name_tutor"
-                        disabled={isPending || tutorExists}
+                        disabled={isPending}
                         aria-label="name"
                         placeholder="Digite o nome do Tutor"
                         required
                         disabledError
-                        onChange={onlyWords}
                     />
 
-                </ControlSwitchDiv>
+                </ControlSwitchDiv> */}
 
             </div>
             <div className="flex align-items-center justify-center gap-3 mt-4">
@@ -157,8 +119,8 @@ const StepTutor = ({ toggleTab, activeTab }: StepProps) => {
                     }}
                 />
                 <BtnPrimary
+                    disabled={!isValid}
                     label="Próximo"
-                    disabled={disableNextButton}
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}
