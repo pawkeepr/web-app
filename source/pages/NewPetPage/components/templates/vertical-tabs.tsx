@@ -12,6 +12,7 @@ import cn from "classnames";
 import { useEffect, useState } from "react";
 
 import { useAppSelector } from "~/store/hooks";
+import { StepProps } from "~/types/helpers";
 import {
     StepHealthInsurance,
     StepPet,
@@ -24,7 +25,7 @@ type TabItem = {
     id: Tabs;
     title: string;
     href: string;
-    Component: (props: any) => JSX.Element;
+    Component: (props: StepProps) => JSX.Element;
 }
 
 const items: TabItem[] = [
@@ -48,7 +49,9 @@ const items: TabItem[] = [
     }
 ]
 
-const VerticalTabs = () => {
+type VerticalTabsProps = Pick<StepProps, 'isPending' | 'tutorExist'>
+
+const VerticalTabs = ({ isPending, tutorExist }: VerticalTabsProps) => {
 
     const [isFixed, setIsFixed] = useState(false);
     const [activeVerticalTab, setActiveVerticalTab] = useState(1);
@@ -129,7 +132,12 @@ const VerticalTabs = () => {
                         items.map(({ id, Component }, index) => {
                             return (
                                 <TabPane tabId={id} key={index}>
-                                    <Component activeTab={activeVerticalTab} toggleTab={toggleVerticalTab} />
+                                    <Component
+                                        activeTab={activeVerticalTab}
+                                        toggleTab={toggleVerticalTab}
+                                        isPending={isPending}
+                                        tutorExist={tutorExist}
+                                    />
                                 </TabPane>
                             )
                         })
