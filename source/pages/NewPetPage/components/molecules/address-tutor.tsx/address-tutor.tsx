@@ -4,25 +4,21 @@ import FieldCep from "~/Components/molecules/field-cep/field-cep";
 import FieldControl from "~/Components/molecules/field-control/field-control";
 
 
-import { useFormikContext } from 'formik';
-import { useCallback, useMemo, useState, useTransition } from 'react';
+import { useCallback, useMemo, useTransition } from 'react';
 import { IAddress } from '~/helpers/fetch-address-by-cep';
 import useFetchAddress from '~/hooks/use-fetch-address';
+import useFormikContextSafe from "~/hooks/use-formik-context-safe";
+import { InitialValues } from "~/pages/NewPetPage";
+
+type CtxAddress = Pick<InitialValues, 'ownerEmergencyContact'>
 
 type StepTutorProps = {
     disabled?: boolean
 }
 
 const AddressTutor = ({ disabled }: StepTutorProps) => {
-    const [disabledInputs, setDisabledInputs] = useState({
-        state: false,
-        city: false,
-        neighborhood: false,
-        street: false,
-        complement: false
-    })
 
-    const { values, setFieldValue } = useFormikContext<any>()
+    const { values, setFieldValue } = useFormikContextSafe<CtxAddress>()
 
     const [isPending, startTransition] = useTransition()
 
@@ -33,78 +29,62 @@ const AddressTutor = ({ disabled }: StepTutorProps) => {
             const { uf, localidade, bairro, logradouro, complemento } = params
 
             startTransition(() => {
-                setFieldValue('location_tutor.state', uf || '')
+                setFieldValue('ownerEmergencyContact.address.state', uf || '')
 
-                setFieldValue('location_tutor.city', localidade || '')
+                setFieldValue('ownerEmergencyContact.address.city', localidade || '')
 
-                setFieldValue('location_tutor.neighborhood', bairro || '')
+                setFieldValue('ownerEmergencyContact.address.neighborhood', bairro || '')
 
-                setFieldValue('location_tutor.street', logradouro || '')
+                setFieldValue('ownerEmergencyContact.address.street', logradouro || '')
 
-                setFieldValue('location_tutor.complement', complemento || '')
+                setFieldValue('ownerEmergencyContact.address.complement', complemento || '')
 
-                setDisabledInputs({
-                    state: !!uf,
-                    city: !!localidade,
-                    neighborhood: !!bairro,
-                    street: !!logradouro,
-                    complement: !!complemento,
-                })
             })
         },
         [setFieldValue],
     )
 
-    const { loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode: values.location_tutor?.zipCode || '' })
+    const { loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode: values.ownerEmergencyContact?.address?.zipCode || '' })
 
 
     const isLoading = useMemo(() => isPending || loading, [isPending, loading])
 
     return (
         <>
-            <FieldControl
-                initialFocus
-                label='Email'
-                name="contact_tutor.email"
-                aria-label="email"
-                disabled={disabled}
-                className=" "
-                placeholder="Digite o email do location_tutor"
-                required
-                disabledError
-            />
-
             <FieldCep
                 className=" "
                 label="CEP"
-                name="location_tutor.zipCode"
-                disabled={disabled || isLoading}
+                name="ownerEmergencyContact.address.zipCode"
+                disabled={isLoading}
                 placeholder="Digite o CEP"
                 required
             />
 
             <FieldControl
+                ctx={{} as CtxAddress}
                 type="text"
                 label="Estado"
-                name="location_tutor.state"
-                disabled={( disabled) || isLoading}
+                name="ownerEmergencyContact.address.state"
+                disabled={isLoading}
                 placeholder={isLoading ? 'Carregando...' : 'Digite o nome do estado'}
                 required
             />
 
             <FieldControl
+                ctx={{} as CtxAddress}
                 type="text"
                 label="Cidade"
-                name="location_tutor.city"
-                disabled={( disabled) || isLoading}
+                name="ownerEmergencyContact.address.city"
+                disabled={isLoading}
                 placeholder={isLoading ? 'Carregando...' : 'Digite o nome da cidade'}
                 required
             />
             <FieldControl
+                ctx={{} as CtxAddress}
                 type="text"
                 label="Rua"
-                name="location_tutor.street"
-                disabled={( disabled) || isLoading}
+                name="ownerEmergencyContact.address.street"
+                disabled={isLoading}
                 placeholder={isLoading ? 'Carregando...' : 'Digite o nome da rua'}
                 required
             />
