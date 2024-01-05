@@ -1,10 +1,12 @@
 import { FieldHookConfig } from "formik";
+import { ObjPaths } from "~/types/helpers";
 
-export type InputControlProps<T> = FieldHookConfig<string> & T & {
+export type InputControlProps<T, Ctx = any> = FieldHookConfig<string> & T & {
     [key: string]: any
     endIcon?: React.ReactNode;
     label?: string;
-    name: string;
+    ctx?: Ctx;
+    name: ObjPaths<Ctx>;
     input?: Omit<React.ElementType, 'name'> | 'input';
     startIcon?: React.ReactNode;
     required?: boolean;

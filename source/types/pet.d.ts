@@ -1,8 +1,8 @@
-import { Gender } from '~/store/slices/pets/speciesType';
+import { Breed } from '~/store/slices/pets/breedType';
+import { Gender, Species } from '~/store/slices/pets/speciesType';
 import { On_Off } from './pet-v2';
-import { ITutor } from './tutor';
-import { Veterinary } from '~/entities/Veterinary';
 import { DTOProfile } from './profile';
+import { ITutor } from './tutor';
 
 export type IPet = {
     id?: string;
@@ -15,13 +15,11 @@ export type IPet = {
     card_number?: string;
     wallet_validity?: string;
     chip_number?: string;
-    id_office_register?: string;
     date_birth: string | Date;
     bloodType?: BloodType;
     blood_donator?: On_Off | null;
     color?: string;
     allergies?: string[];
-    preexistingConditions?: string[];
     medicationsInUse?: string[];
     castrated: On_Off;
     dateOfCastration?: string;
@@ -30,14 +28,8 @@ export type IPet = {
     weight?: string;
     pedigree?: On_Off;
     pedigree_registry?: string;
-    dateOfAdoption?: string;
-    healthHistory?: string[];
     diet?: Diet;
-    specialPhysicalFeatures?: string[];
-    behavior?: string;
-    activityLevel?: string;
     ownerEmergencyContact: ITutor;
-    address?: string;
     avatar?: string;
     created_at?: string;
     updated_at?: string;

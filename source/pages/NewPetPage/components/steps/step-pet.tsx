@@ -4,6 +4,8 @@ import { useFormikContext } from "formik";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 
 
+import { useMemo } from "react";
+import * as yup from "yup";
 import ComboBoxFields from "~/Components/modals/add-pet-modal/components/organisms/combo-box-fields";
 import FieldControl from "~/Components/molecules/field-control";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
@@ -11,9 +13,6 @@ import FieldMasked from "~/Components/molecules/field-masked";
 import { genderValues } from "~/store/slices/pets/sexType";
 import { StepProps } from "~/types/helpers";
 import { InitialValues } from "../../index";
-import * as yup from "yup";
-import { useMemo } from "react";
-import { is } from "cypress/types/bluebird";
 
 
 
@@ -35,9 +34,9 @@ const schema = yup.object().shape({
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const { values } = useFormikContext<InitialValues>();
 
-    const isValid = useMemo(() => {     
+    const isValid = useMemo(() => {
         return schema.isValidSync(values);
-    },[values]);
+    }, [values]);
 
 
     return (
@@ -55,17 +54,17 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 <FieldControl
                     label={`Nome do PET`}
                     required
-                    name={`pet_data.name_pet`}
+                    name={`name`}
                     placeholder="Digite o nome do PET"
                     divClassName="col-span-full"
                 />
 
-                <ComboBoxFields name="pet_data" />
+                <ComboBoxFields />
 
                 <FieldControlSelect
-                    options={genderValues as any}
+                    options={genderValues}
                     disabled={!!values.id}
-                    name="pet_data.sex"
+                    name="gender"
                     required
                     label="Sexo do Pet"
                     placeholder="Macho/Fêmea..."
@@ -75,20 +74,20 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 <FieldControl
                     label={`Data de nascimento`}
                     required
-                    name={`pet_data.date_birth`}
+                    name={`date_birth`}
                     type="date"
                 />
 
                 <FieldMasked
                     label={`Número do microchip`}
-                    name={`pet_data.microchip`}
+                    name={`microchip`}
                     mask="_____"
                     placeholder="Digite o número do microchip (opcional)"
                 />
 
                 <FieldMasked
                     label={`Número de registro cartório`}
-                    name={`pet_data.identification_number`}
+                    name={`identification_number`}
                     mask="_____"
                     placeholder="Digite o número do registro (opcional)"
                 />

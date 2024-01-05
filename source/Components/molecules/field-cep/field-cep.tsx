@@ -6,19 +6,14 @@ import { InputControlProps } from '~/Components/molecules/field-control';
 
 import FieldMasked from '../field-masked';
 
-type FieldDocumentProps<T> = Omit<InputControlProps<T>, 'ref'>
+type FieldDocumentProps<T, Ctx = any> = Omit<InputControlProps<T, Ctx>, 'ref'>
 
-const FieldCep = <T,>({ ...props }: FieldDocumentProps<T>) => {
+const FieldCep = <T, Ctx = unknown>({ ...props }: FieldDocumentProps<T, Ctx>) => {
     const { values } = useFormikContext()
 
-    const cep = (values as any)[props.name] || ""
-
     const mask = useMemo(() => {
-        // somente os números
-        const numbers = cep.replace(/\D/g, '')
-
         return '_____-___'
-    }, [cep])
+    }, [])
 
     return (
         <FieldMasked
