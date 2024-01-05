@@ -1,25 +1,18 @@
-import { FormikContextType, useFormikContext as useOriginalFormikContext } from 'formik'
+import { FormikContextType, FormikErrors, useFormikContext as useOriginalFormikContext } from 'formik';
+import { ObjPaths } from '~/types/helpers';
 
-function useFormikContextSafe<T>(): FormikContextType<T> {
-    try {
-        const formikContext = useOriginalFormikContext<T>()
-        return formikContext
-    } catch (error) {
-        console.info('Context not found, using default context')
-    }
+// Modify FormikContextTypeSafe to ensure setFieldValue uses keys from type T
+type FormikContextTypeSafe<T = unknown> = Omit<FormikContextType<T>, 'setFieldValue'> & {
+    setFieldValue: (
+        field: ObjPaths<T>,  // use ObjPaths to get the string paths of the object T
+        value: any,
+        shouldValidate?: boolean | undefined
+    ) => Promise<void | FormikErrors<T>>;
+}
 
-    const defaultContext = {
-        values: {} as T,
-        errors: {},
-        touched: {},
-        handleChange: () => { },
-        handleBlur: () => { },
-        setFieldValue: (name: string, value: string) => { },
-        dirty: false,
-        isValid: false,
-        initialValues: {} as T,
-    }
-    return defaultContext
+const useFormikContextSafe = <T extends unknown>(): FormikContextTypeSafe<T> => {
+    const formikContext: FormikContextTypeSafe<T> = useOriginalFormikContext()
+    return formikContext
 }
 
 export default useFormikContextSafe
