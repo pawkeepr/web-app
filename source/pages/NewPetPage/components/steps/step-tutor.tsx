@@ -11,8 +11,10 @@ import { StepProps } from "~/types/helpers";
 import { InitialValues } from "../../index";
 import AddressTutor from "../molecules/address-tutor.tsx";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import * as yup from "yup";
+
+type StepTutorsKeys = Pick<InitialValues, 'ownerEmergencyContact'>;
 
 const schema = yup.object().shape({
     name_tutor: yup.string().max(255).required("Campo obrigatório"),
@@ -23,24 +25,24 @@ const schema = yup.object().shape({
 });
 
 const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) => {
-    const { values, setFieldValue } = useFormikContext<InitialValues>();
-    const [secondTutorActive, setSecondTutorActive] = useState(false);
+    const { values } = useFormikContext<StepTutorsKeys>();
+    // const [secondTutorActive, setSecondTutorActive] = useState(false);
 
 
     const isValid = useMemo(() => {
-        if (secondTutorActive) {
-            const secondTutorSchema = schema.shape({
-                responsible_tutors: yup.object().shape({
-                    name_tutor: yup.string().max(255).required("Campo obrigatório"),
-                    cpf_tutor: yup.string().length(14).required("Campo obrigatório"),
-                }).required("Campo obrigatório"),
-            });
+        // if (secondTutorActive) {
+        //     const secondTutorSchema = schema.shape({
+        //         responsible_tutors: yup.object().shape({
+        //             name_tutor: yup.string().max(255).required("Campo obrigatório"),
+        //             cpf_tutor: yup.string().length(14).required("Campo obrigatório"),
+        //         }).required("Campo obrigatório"),
+        //     });
 
-            return secondTutorSchema.isValidSync(values);
-        }
+        //     return secondTutorSchema.isValidSync(values);
+        // }
 
         return schema.isValidSync(values);
-    }, [values, secondTutorActive]);
+    }, [values]);
 
 
     return (
@@ -57,6 +59,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                 <div className="mb-2">Preencha as Informações do Tutor</div>
                 <div className="grid grid-cols-3 mobile:grid-cols-1 gap-2">
                     <FieldDocument
+
                         label="CPF"
                         name="cpf_tutor"
                         disabled={isPending || tutorExist}

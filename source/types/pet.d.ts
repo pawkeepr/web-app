@@ -11,6 +11,8 @@ export type IPet = {
     specie: Species;
     breed: Breed;
     plain_type?: string;
+    microchip?: string
+    identification_number?: string;
     health_insurance?: string;
     card_number?: string;
     wallet_validity?: string;
