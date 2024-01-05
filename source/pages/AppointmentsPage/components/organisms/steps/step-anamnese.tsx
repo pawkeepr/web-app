@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 import ControlSwitchDiv from "~/Components/molecules/control-switch-div";
 import FieldNumber from "~/Components/molecules/field-number";
@@ -15,6 +15,13 @@ import {
 } from "~/constants/anamnese-questions";
 import { StepProps } from "~/types/helpers";
 import AnswerSwitch from "../../molecules/answer-switch/answer-switch";
+import * as yup from "yup";
+import { useFormikContext } from "formik";
+import { InitialValues } from "~/pages/NewPetPage";
+
+const schema = yup.object().shape({
+    weight: yup.number().max(100).required("Campo obrigatório"),
+});
 
 
 // Função para calcular o IMC de um animal
@@ -30,6 +37,14 @@ function calcularIMC(height: number, weight: number): number {
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
     const [heightPet, setHeightPet] = useState(0);
     const [weightPet, setWeightPet] = useState(0);
+    const { values } = useFormikContext<InitialValues>();
+
+
+    const isValid = useMemo(() => {
+        console.log(schema.isValidSync(values), values);
+             
+        return schema.isValidSync(values);
+    },[values]);
 
     return (
         <section className="card card-body shadow-lg">
@@ -148,6 +163,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 />
                 <BtnPrimary
                     label="Próximo"
+                    disabled={!isValid}
                     onClick={() => {
                         toggleTab(activeTab + 1);
                     }}
