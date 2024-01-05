@@ -110,10 +110,10 @@ export class Pet implements IPetV2 {
     }
 
     defineTutorInformation(main_responsible_guardian: ITutor): this {
-        this.main_responsible_guardian.name = main_responsible_guardian.name;
-        this.main_responsible_guardian.first_name = main_responsible_guardian.first_name;
-        this.main_responsible_guardian.last_name = main_responsible_guardian.last_name;
-        this.main_responsible_guardian.url_img = main_responsible_guardian.url_img;
+        this.main_responsible_guardian.name = main_responsible_guardian?.name;
+        this.main_responsible_guardian.first_name = main_responsible_guardian?.first_name;
+        this.main_responsible_guardian.last_name = main_responsible_guardian?.last_name;
+        this.main_responsible_guardian.url_img = main_responsible_guardian?.url_img;
 
         return this;
     }
@@ -150,56 +150,56 @@ export class Pet implements IPetV2 {
 
     static build(params: IPet): Pet {
         return new Pet()
-            .defineID(params.id as string)
-            .defineCpfTutor(params.cpf_tutor)
+            .defineID(params?.id as string)
+            .defineCpfTutor(params?.cpf_tutor)
             .definePetInformation({
-                blood_donator: params.blood_donator || 'no',
-                blood_type: params.bloodType || '',
-                color: params.color || '',
-                date_birth: params.date_birth as string || '',
-                microchip: params.chip_number || '',
-                name_pet: params.name,
-                organ_donor: params.organ_donor || 'no',
-                pedigree: params.pedigree || 'no',
-                pedigree_registry: params.pedigree_registry || '',
-                race: params.breed,
-                sex: params.gender,
-                size: params.size || '',
-                specie: params.specie,
-                weight: params.weight || '',
-                castrated: params.castrated || 'no',
+                blood_donator: params?.blood_donator || 'no',
+                blood_type: params?.bloodType || '',
+                color: params?.color || '',
+                date_birth: params?.date_birth as string || '',
+                microchip: params?.chip_number || '',
+                name_pet: params?.name,
+                organ_donor: params?.organ_donor || 'no',
+                pedigree: params?.pedigree || 'no',
+                pedigree_registry: params?.pedigree_registry || '',
+                race: params?.breed,
+                sex: params?.gender,
+                size: params?.size || '',
+                specie: params?.specie,
+                weight: params?.weight || '',
+                castrated: params?.castrated || 'no',
                 identification_number: ''
             })
             .defineContactTutor({
-                email: params.ownerEmergencyContact.email,
+                email: params?.ownerEmergencyContact?.email,
                 facebook: '',
                 instagram: '',
                 linkedIn: '',
-                phone: params.ownerEmergencyContact.phone,
+                phone: params?.ownerEmergencyContact?.phone,
                 twitter: '',
-                whatsapp: params.ownerEmergencyContact.whatsapp || '',
+                whatsapp: params?.ownerEmergencyContact?.whatsapp || '',
                 youtube: ''
             })
             .defineHealthInsurance({
-                name: params.health_insurance || '',
-                number_health: params.card_number || '',
-                type_health: params.plain_type || '',
-                validity: params.wallet_validity || ''
+                name: params?.health_insurance || '',
+                number_health: params?.card_number || '',
+                type_health: params?.plain_type || '',
+                validity: params?.wallet_validity || ''
             })
             .defineLocationTutor({
-                city: params.ownerEmergencyContact.address?.city || '',
-                complement: params.ownerEmergencyContact.address?.complement || '',
-                country: params.ownerEmergencyContact.address?.country || '',
-                neighborhood: params.ownerEmergencyContact.address?.neighborhood || '',
-                number: params.ownerEmergencyContact.address?.number || '',
-                state: params.ownerEmergencyContact.address?.state || '',
-                street: params.ownerEmergencyContact.address?.street || '',
-                zipCode: params.ownerEmergencyContact.address?.zipCode || ''
+                city: params?.ownerEmergencyContact.address?.city || '',
+                complement: params?.ownerEmergencyContact.address?.complement || '',
+                country: params?.ownerEmergencyContact.address?.country || '',
+                neighborhood: params?.ownerEmergencyContact.address?.neighborhood || '',
+                number: params?.ownerEmergencyContact.address?.number || '',
+                state: params?.ownerEmergencyContact.address?.state || '',
+                street: params?.ownerEmergencyContact.address?.street || '',
+                zipCode: params?.ownerEmergencyContact.address?.zipCode || ''
             })
             .defineTutorInformation({
-                name: params.ownerEmergencyContact.name,
-                first_name: params.ownerEmergencyContact.name,
-                last_name: params.ownerEmergencyContact.name,
+                name: params?.ownerEmergencyContact.name,
+                first_name: params?.ownerEmergencyContact.name,
+                last_name: params?.ownerEmergencyContact.name,
                 url_img: ''
             })
             .defineVeterinary(params.veterinary)
