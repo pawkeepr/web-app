@@ -17,20 +17,16 @@ import useFormikContextSafe from "~/hooks/use-formik-context-safe";
 type StepTutorsKeys = Pick<InitialValues, 'ownerEmergencyContact' | 'cpf_tutor'>;
 
 const schema = yup.object().shape({
-    cpf_tutor: yup.string().length(11).required("Campo obrigatório"),
+    cpf_tutor: yup.string().required("Campo obrigatório"),
     ownerEmergencyContact: yup.object().shape({
         name: yup.string()
             .min(2)
             .max(255)
-            .test('name', 'Nome inválido', (value) => {
-                if (!value) return false
-                const name = value.split(' ')
-                return name.length >= 2
-            }).required("Campo obrigatório"),
+            .required("Campo obrigatório"),
         phone: yup.string().length(20).required("Campo obrigatório"),
         email: yup.string().email().required("Campo obrigatório"),
         address: yup.object().shape({
-            zipCode: yup.string().length(9).required("Campo obrigatório"),
+            zipCode: yup.string().required("Campo obrigatório"),
             state: yup.string().required("Campo obrigatório"),
             city: yup.string().required("Campo obrigatório"),
             street: yup.string().required("Campo obrigatório"),
