@@ -111,8 +111,6 @@ const useAppStore = <T, G = unknown>({
                 const error = err as AxiosError;
                 const statusCode = error?.response?.status
 
-                console.info('error', error)
-
                 const msg =
                     typeof error?.response?.data === 'string'
                         ? error?.response?.data
