@@ -18,7 +18,15 @@ type StepPetKeys = Pick<InitialValues, KeysInitial>;
 
 const schema = yup.object().shape({
     name: yup.string().required("Campo obrigatório"),
-    gender: yup.object().shape({
+    sex: yup.object().shape({
+        label: yup.string().required("Campo obrigatório"),
+        value: yup.string().required("Campo obrigatório"),
+    }).required("Campo obrigatório"),
+    race: yup.object().shape({
+        label: yup.string().required("Campo obrigatório"),
+        value: yup.string().required("Campo obrigatório"),
+    }).required("Campo obrigatório"),
+    specie: yup.object().shape({
         label: yup.string().required("Campo obrigatório"),
         value: yup.string().required("Campo obrigatório"),
     }).required("Campo obrigatório"),
