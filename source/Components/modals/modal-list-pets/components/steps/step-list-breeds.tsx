@@ -1,9 +1,9 @@
-import { useFormikContext } from 'formik'
 import { startTransition, useEffect, useState } from 'react'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import { species } from '~/store/slices/pets/speciesType'
 import { Breed } from '~/store/slices/pets/types'
-import { InitialValues, StepProps } from '../../types'
+import { CtxSimplifiedPedFields, StepProps } from '../../types'
 import { option } from '../helpers'
 
 type Item = {
@@ -11,17 +11,18 @@ type Item = {
     value: Breed;
 }
 
+
 const StepListBreeds = ({
     nextStep,
     previousStep
 }: StepProps) => {
 
     const [breeds, setBreeds] = useState<Item[]>([])
-    const { values, setFieldValue } = useFormikContext<InitialValues>()
+    const { values, setFieldValue } = useFormikContextSafe<CtxSimplifiedPedFields>()
 
 
     const handleSelectBreed = (breed: Breed) => {
-        setFieldValue('breed', breed)
+        setFieldValue('race', breed)
         nextStep()
     }
 
@@ -45,7 +46,7 @@ const StepListBreeds = ({
                             key={breed.value}
                             type="button"
                             onClick={handleSelectBreed.bind(null, breed.value)}
-                            className={option({ selected: values.breed === breed.value })}
+                            className={option({ selected: values.race === breed.value })}
                         >
                             <div className="grid grid-cols-4 justify-center items-center">
                                 <span className="align-middle col-span-full">{breed.name}</span>
@@ -55,7 +56,7 @@ const StepListBreeds = ({
             </div>
 
             <BoxButtons
-                isValid={!!values.breed}
+                isValid={!!values.race}
                 link={false}
                 onClickCancel={previousStep}
                 onClickSuccess={nextStep}

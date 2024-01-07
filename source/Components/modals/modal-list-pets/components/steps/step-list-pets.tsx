@@ -1,9 +1,9 @@
-import { useFormikContext } from 'formik'
 import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldControl from '~/Components/molecules/field-control/field-control'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import { KeyOfMapOptionSpecies, MapOptionSpecies } from '~/store/slices/pets/speciesType'
-import { InitialValues, StepProps } from '../../types'
+import { CtxSimplifiedPedFields, StepProps } from '../../types'
 import { option } from '../helpers'
 
 enum EmojiPet {
@@ -27,7 +27,7 @@ const StepListPets = ({
     isLoading,
 }: StepProps) => {
 
-    const { values } = useFormikContext<InitialValues>()
+    const { values } = useFormikContextSafe<CtxSimplifiedPedFields>()
 
     return (
         <div className="mt-3 gap-2">
@@ -60,6 +60,7 @@ const StepListPets = ({
             </div>
 
             <FieldControl
+                ctx={{} as CtxSimplifiedPedFields}
                 name="name"
                 label='Caso o pet não esteja na lista, digite o nome dele para prosseguir:'
                 className=" w-full mb-4"
