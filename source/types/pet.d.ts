@@ -10,12 +10,9 @@ export type IPet = {
     cpf_tutor: string;
     specie: Species;
     breed: Breed;
-    plain_type?: string;
     microchip?: string
     identification_number?: string;
     health_insurance?: IHealthInsurance;
-    card_number?: string;
-    wallet_validity?: string;
     chip_number?: string;
     date_birth: string | Date;
     bloodType?: BloodType;

@@ -1,9 +1,9 @@
 import { IPet } from "~/types/pet";
 import { IHealthInsurance, IMainResponsibleGuardian, IPetV2, ISecondaryTutor, ITutor, PetData } from "~/types/pet-v2";
+import { DTOProfile } from "~/types/profile";
 import { Contact, Location } from "~/validations/activate";
 import { PetInformation } from "./PetInformation";
 import { Veterinary } from "./Veterinary";
-import { DTOProfile } from "~/types/profile";
 
 export class Pet implements IPetV2 {
 
@@ -76,20 +76,20 @@ export class Pet implements IPetV2 {
             phone_tutor: '',
             emaiL_tutor: '',
         },
-        this.veterinary = {
-            cpf_cnpj: '',
-            crmv: '',
-            name_veterinary: '',
-            specialty: '',
-            email: '',
-            phone: '',
-            whatsapp: '',
-            country: '',
-            state: '',
-            city: '',
-            neighborhood: '',
-            street: '', 
-        }
+            this.veterinary = {
+                cpf_cnpj: '',
+                crmv: '',
+                name_veterinary: '',
+                specialty: '',
+                email: '',
+                phone: '',
+                whatsapp: '',
+                country: '',
+                state: '',
+                city: '',
+                neighborhood: '',
+                street: '',
+            }
     }
 
     defineID(id: string | null = null): this {
@@ -180,10 +180,10 @@ export class Pet implements IPetV2 {
                 youtube: ''
             })
             .defineHealthInsurance({
-                name: params?.health_insurance || '',
-                number_health: params?.card_number || '',
-                type_health: params?.plain_type || '',
-                validity: params?.wallet_validity || ''
+                name: params?.health_insurance?.name || '',
+                number_health: params?.health_insurance?.number_health || '',
+                type_health: params?.health_insurance?.type_health || '',
+                validity: params?.health_insurance?.validity || ''
             })
             .defineLocationTutor({
                 city: params?.ownerEmergencyContact.address?.city || '',
