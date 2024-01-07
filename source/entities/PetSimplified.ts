@@ -106,16 +106,16 @@ export class PetSimplified implements IPetV2Simplified {
                 identification_number: ''
             })
             .defineTutorInformation({
-                city: params.ownerEmergencyContact.address?.city || '',
-                country: params.ownerEmergencyContact.address?.country || '',
-                neighborhood: params.ownerEmergencyContact.address?.neighborhood || '',
-                state: params.ownerEmergencyContact.address?.state || '',
-                street: params.ownerEmergencyContact.address?.street || '',
-                email: params.ownerEmergencyContact.email,
-                phone: params.ownerEmergencyContact.phone,
-                whatsapp: params.ownerEmergencyContact.whatsapp || '',
-                first_name: params.ownerEmergencyContact.name,
-                last_name: params.ownerEmergencyContact.lastName,
+                city: params.ownerEmergencyContact?.address?.city || '',
+                country: params.ownerEmergencyContact?.address?.country || '',
+                neighborhood: params.ownerEmergencyContact?.address?.neighborhood || '',
+                state: params.ownerEmergencyContact?.address?.state || '',
+                street: params.ownerEmergencyContact?.address?.street || '',
+                email: params.ownerEmergencyContact?.email,
+                phone: params.ownerEmergencyContact?.phone,
+                whatsapp: params.ownerEmergencyContact?.whatsapp || '',
+                first_name: params.ownerEmergencyContact?.name,
+                last_name: params.ownerEmergencyContact?.lastName,
             })
             .defineVeterinary(params.veterinary)
 
