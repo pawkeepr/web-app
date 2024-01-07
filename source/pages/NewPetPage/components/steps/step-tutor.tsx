@@ -2,7 +2,6 @@
 import FieldDocument from "~/Components/molecules/field-document/field-document";
 import FieldPhone from "~/Components/molecules/field-phone/field-phone";
 
-import { useFormikContext } from "formik";
 import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
 
 import FieldControl from "~/Components/molecules/field-control/field-control";
@@ -12,21 +11,35 @@ import { InitialValues } from "../../index";
 import AddressTutor from "../molecules/address-tutor.tsx";
 
 import { useMemo } from "react";
-import * as Yup from 'yup';
+import * as yup from "yup";
+import useFormikContextSafe from "~/hooks/use-formik-context-safe";
 
-const tutorValidationSchema = Yup.object().shape({
-    cpf_tutor: Yup.string().required('Obrigatório'),
-    name_tutor: Yup.string().required('Obrigatório'),
+type StepTutorsKeys = Pick<InitialValues, 'ownerEmergencyContact' | 'cpf_tutor'>;
+
+const schema = yup.object().shape({
+    cpf_tutor: yup.string().required("Campo obrigatório"),
+    ownerEmergencyContact: yup.object().shape({
+        name: yup.string()
+            .min(2)
+            .max(255)
+            .required("Campo obrigatório"),
+        phone: yup.string().length(20).required("Campo obrigatório"),
+        email: yup.string().email().required("Campo obrigatório"),
+        address: yup.object().shape({
+            zipCode: yup.string().required("Campo obrigatório"),
+            state: yup.string().required("Campo obrigatório"),
+            city: yup.string().required("Campo obrigatório"),
+            street: yup.string().required("Campo obrigatório"),
+        }),
+    }).required("Campo obrigatório"),
 });
 
 const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) => {
-    const { values, setFieldValue } = useFormikContext<InitialValues>();
-
+    const { values } = useFormikContextSafe<StepTutorsKeys>();
 
     const isValid = useMemo(() => {
-        return tutorValidationSchema.isValidSync(values)
-    }, [values])
-
+        return schema.isValidSync(values);
+    }, [values]);
 
     return (
         <div className="card card-body shadow-lg">
@@ -42,6 +55,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                 <div className="mb-2">Preencha as Informações do Tutor</div>
                 <div className="grid grid-cols-3 mobile:grid-cols-1 gap-2">
                     <FieldDocument
+                        ctx={{} as StepTutorsKeys}
                         label="CPF"
                         name="cpf_tutor"
                         disabled={isPending || tutorExist}
@@ -52,6 +66,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                     />
                     <FieldControl
                         initialFocus
+                        ctx={{} as StepTutorsKeys}
                         label="Nome Completo"
                         name="ownerEmergencyContact.name"
                         disabled={isPending || tutorExist}
@@ -87,6 +102,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                 {/* <ControlSwitchDiv
                     name="has_second_tutor"
                     label="O pet possui um segundo Tutor?"
+                    onClick={() => setSecondTutorActive(!secondTutorActive)}
                 >
                     <div className="left mb-2">Preencha as Informações do segundo Tutor</div>
                     <FieldDocument

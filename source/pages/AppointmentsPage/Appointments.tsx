@@ -13,8 +13,9 @@ import useAppointment from "~/store/hooks/appointment/use-appointment";
 import usePetById from "~/store/hooks/pet/use-pets";
 import useProfile from "~/store/hooks/profile";
 import { IPetV2 } from "~/types/pet-v2";
-import { IProfile } from "~/types/profile";
+import { DTOProfile, IProfile } from "~/types/profile";
 import { geolocation } from "~/utils/geolocation";
+import useProfileVeterinary from "~/hooks/use-veterinary";
 
 export type InitialValues = IAppointmentVet;
 
@@ -27,57 +28,51 @@ type AppointmentsPageProps = {
 const initialValues = (
     {
         id: id_pet,
-        pet_data,
-        contact_tutor,
+        pet_information, 
+        main_responsible_guardian,
         cpf_tutor,
         health_insurance,
-        location_tutor,
-        name_tutor,
-        phone_tutor,
-        responsible_tutors,
-        veterinary,
     }: IPetV2,
-    profile: IProfile,
+    profile: DTOProfile,
     appointment_id: string,
 ): InitialValues => ({
-    pet_data: pet_data as any,
+    pet_data: pet_information as any,
     vets_data: [{
-        name_vet: profile?.firstName + ' ' + profile?.lastName,
+        name_vet: profile?.name_veterinary,
         crmv_vet: profile?.crmv,
         cpf_cnpj_vet: profile?.cpf_cnpj,
-        email_vet: profile?.contact?.email,
-        phone_vet: profile?.contact?.phone,
+        email_vet: profile?.email,
+        phone_vet: profile?.phone,
     }],
-    contact_tutor,
-    location_tutor,
-    responsible_tutors,
+    contact_tutor: main_responsible_guardian?.contact,
+    location_tutor: main_responsible_guardian?.address,
     id: appointment_id || null,
     id_pet: id_pet as string,
     cpf_tutor,
     tutor_data: {
-        name: name_tutor as string,
-        email: contact_tutor?.email as string || '',
-        phone: phone_tutor as string,
-        country: location_tutor?.country as string,
-        zipCode: location_tutor?.zipCode as string,
-        state: location_tutor?.state as string,
-        city: location_tutor?.city as string
+        name: main_responsible_guardian?.name as string,
+        email: main_responsible_guardian?.contact?.email || '',
+        phone: main_responsible_guardian?.contact?.phone as string,
+        country: main_responsible_guardian?.address?.country as string,
+        zipCode: main_responsible_guardian?.address?.zipCode as string,
+        state: main_responsible_guardian?.address?.state as string,
+        city: main_responsible_guardian?.address?.city as string
     },
-    crmv_vet: profile.crmv,
-    cpf_cnpj_vet: profile.cpf_cnpj,
+    crmv_vet: profile?.crmv,
+    cpf_cnpj_vet: profile?.cpf_cnpj,
     veterinary: {
-        cpf_cnpj:  profile.cpf_cnpj,
-        crmv: profile.crmv,
-        name_veterinary: profile.firstName + ' ' + profile.lastName,
-        specialty: profile.specialty,
-        email: profile.contact.email,
-        phone: profile.contact.phone,
-        whatsapp: profile.contact.whatsapp,
-        country: profile.location.country,
-        state: profile.location.state,
-        city: profile.location.city,
-        neighborhood: profile.location.neighborhood,
-        street: profile.location.street,
+        cpf_cnpj:  profile?.cpf_cnpj,
+        crmv: profile?.crmv,
+        name_veterinary: profile?.name_veterinary,
+        specialty: profile?.specialty,
+        email: profile?.email,
+        phone: profile?.phone,
+        whatsapp: profile?.whatsapp,
+        country: profile?.country,
+        state: profile?.state,
+        city: profile?.city,
+        neighborhood: profile?.neighborhood,
+        street: profile?.street,
     },
     anamnesis: {
         physical_activity: [
@@ -116,15 +111,6 @@ const initialValues = (
                 options: ""
             }
         ]
-    },
-    info_required: {
-        age: "",
-        height: "",
-        length: "",
-        weight: "",
-        type_weight: "",
-        imc: "",
-        guidelines_notes: ""
     },
     payments: {
         form_payment: "",
@@ -167,13 +153,23 @@ const initialValues = (
         activities_carry: []
     },
     health_insurance,
-    name_tutor: name_tutor as string,
+    name_tutor: main_responsible_guardian?.name as string,
     digestive_system: false,
     locomotor_system: false,
     nervous_system: false,
     respiratory_system: false,
     urinary_system: false,
     treatments: [],
+    dental_treatment: {
+        treatments_performed: [],
+        oral_examination: '',
+        reason_query: '',
+        recommendations: '',
+    },
+    responsible_tutors: {
+        cpf_tutor: '',
+        name_tutor: '',
+    },
 });
 
 
@@ -182,13 +178,13 @@ const AppointmentsPage = ({ document, pet, appointment_id }: AppointmentsPagePro
     const router = useRouter();
 
     const { data, isLoading: isLoadingPet, isError } = usePetById(document, pet)
-    const { isLoading: isLoadingProfile, data: profile } = useProfile()
+    const profile = useProfileVeterinary()
 
     const { handleSubmit } = useAppointment();
 
     const values = useMemo(() => initialValues(
         data as IPetV2,
-        profile as IProfile,
+        profile,
         appointment_id,
     ), [data, profile, appointment_id]
     );

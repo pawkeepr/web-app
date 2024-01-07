@@ -53,6 +53,11 @@ const STEPS = [
 ]
 
 
+const getNameTutor = (pets: Pick<IPetV2, 'main_responsible_guardian'>) => {
+    const { name, last_name, first_name } = pets.main_responsible_guardian
+    return name || `${first_name} ${last_name}`
+}
+
 const ModalListPets = ({
     children,
     label,
@@ -80,22 +85,24 @@ const ModalListPets = ({
     const { activeData: pets, handleSubmit, isLoading } = useListPetsOfTutor(document, 'simple', closeModal)
     const veterinary = useProfileVeterinary()
 
+    console.log('pets', pets)
+
     const initialValues: IPet = {
         name: '',
         cpf_tutor: document,
-        specie: null,
-        breed: null,
+        specie: 'unknown',
+        race: 'unknown',
         ownerEmergencyContact: {
             cpf_cnpj: document,
             phone: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.contact.phone as string : '',
             email: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.contact.email as string : '',
-            name: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.name as string : '',
+            name: pets && pets?.length > 0 ? getNameTutor(pets[0]) : '',
             lastName: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.last_name as string : '',
             whatsapp: pets && pets?.length > 0 ? pets[0].main_responsible_guardian.contact.whatsapp as string : '',
         },
         castrated: 'no',
         date_birth: '2021-01-01', // dado falso para não dar erro no backend
-        gender: null as any,
+        sex: 'unknown',
         veterinary,
     }
 

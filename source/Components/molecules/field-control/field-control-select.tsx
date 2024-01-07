@@ -12,14 +12,14 @@ type Option = {
     [key: string]: any;
 }
 
-type FieldSelectControl = InputControlProps<Props> & {
+type FieldSelectControl<Ctx = any> = InputControlProps<Props, Ctx> & {
     name: string
     deps?: any[]
     onChangeValue?: (item: any) => void;
     options?: Option[]
 }
 
-const FieldControlSelect = ({
+const FieldControlSelect = <Ctx extends unknown>({
     label,
     required = false,
     className,
@@ -28,7 +28,7 @@ const FieldControlSelect = ({
     options = [],
     onChangeValue = () => { },
     ...props
-}: FieldSelectControl) => {
+}: FieldSelectControl<Ctx>) => {
     const { values, setFieldValue, } = useFormikContext<any>();
 
     const onChange = useCallback(

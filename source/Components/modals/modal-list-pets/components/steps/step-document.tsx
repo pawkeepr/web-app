@@ -1,10 +1,9 @@
 import { cnpj, cpf } from 'cpf-cnpj-validator'
-import { useFormikContext } from 'formik'
 import { useMemo } from 'react'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldDocument from '~/Components/molecules/field-document'
-import { InitialValues, StepProps } from '../../types'
-
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { CtxSimplifiedPedFields, StepProps } from '../../types'
 
 
 const StepDocument = ({
@@ -12,7 +11,7 @@ const StepDocument = ({
     onChangeDocument,
 }: StepProps) => {
 
-    const { values } = useFormikContext<InitialValues>()
+    const { values } = useFormikContextSafe<CtxSimplifiedPedFields>()
 
     const validateDocument = useMemo(() => {
         const document = values.cpf_tutor
@@ -23,6 +22,7 @@ const StepDocument = ({
         <div className="mt-3 p-1 gap-2 ">
 
             <FieldDocument
+                ctx={{} as CtxSimplifiedPedFields}
                 required
                 name="cpf_tutor"
                 className="w-full flex-1 mt-2"

@@ -17,10 +17,10 @@ export class PetSimplified implements IPetV2Simplified {
 
         this.pet_information = {
             name_pet: '',
-            race: null,
-            specie: null,
+            race: 'unknown',
+            specie: 'unknown',
             date_birth: '',
-            sex: null,
+            sex: 'unknown',
             castrated: 'no',
         };
 
@@ -97,8 +97,8 @@ export class PetSimplified implements IPetV2Simplified {
                 organ_donor: params.organ_donor || 'no',
                 pedigree: params.pedigree || 'no',
                 pedigree_registry: params.pedigree_registry || '',
-                race: params.breed,
-                sex: params.gender,
+                race: params.race,
+                sex: params.sex,
                 size: params.size || '',
                 specie: params.specie,
                 weight: params.weight || '',
@@ -106,16 +106,16 @@ export class PetSimplified implements IPetV2Simplified {
                 identification_number: ''
             })
             .defineTutorInformation({
-                city: params.ownerEmergencyContact.address?.city || '',
-                country: params.ownerEmergencyContact.address?.country || '',
-                neighborhood: params.ownerEmergencyContact.address?.neighborhood || '',
-                state: params.ownerEmergencyContact.address?.state || '',
-                street: params.ownerEmergencyContact.address?.street || '',
-                email: params.ownerEmergencyContact.email,
-                phone: params.ownerEmergencyContact.phone,
-                whatsapp: params.ownerEmergencyContact.whatsapp || '',
-                first_name: params.ownerEmergencyContact.name,
-                last_name: params.ownerEmergencyContact.lastName,
+                city: params.ownerEmergencyContact?.address?.city || '',
+                country: params.ownerEmergencyContact?.address?.country || '',
+                neighborhood: params.ownerEmergencyContact?.address?.neighborhood || '',
+                state: params.ownerEmergencyContact?.address?.state || '',
+                street: params.ownerEmergencyContact?.address?.street || '',
+                email: params.ownerEmergencyContact?.email,
+                phone: params.ownerEmergencyContact?.phone,
+                whatsapp: params.ownerEmergencyContact?.whatsapp || '',
+                first_name: params.ownerEmergencyContact?.name,
+                last_name: params.ownerEmergencyContact?.lastName,
             })
             .defineVeterinary(params.veterinary)
 

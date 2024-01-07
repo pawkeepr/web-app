@@ -4,12 +4,12 @@ import FieldControl, { InputControlProps } from '~/Components/molecules/field-co
 
 import { input } from '~/Components/atoms/input';
 
-const FieldMasked = ({
+const FieldMasked = <Ctx extends any>({
     placeholder,
     name,
     replacement = { _: /\d/ },
     ...props
-}: InputControlProps<InputMaskProps>) => {
+}: InputControlProps<InputMaskProps, Ctx>) => {
     return (
         <FieldControl
             {...props}

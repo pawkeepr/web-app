@@ -16,7 +16,7 @@ export class Pet implements IPetV2 {
     veterinary: DTOProfile;
 
 
-    private constructor() {
+    constructor() {
         this.id = '';
         this.cpf_tutor = '';
 
@@ -24,8 +24,8 @@ export class Pet implements IPetV2 {
             name_pet: '',
             microchip: '',
             identification_number: '',
-            race: null,
-            specie: null,
+            race: 'unknown',
+            specie: 'unknown',
             blood_type: '',
             blood_donator: 'no',
             color: '',
@@ -33,7 +33,7 @@ export class Pet implements IPetV2 {
             organ_donor: 'no',
             pedigree: 'no',
             pedigree_registry: '',
-            sex: null,
+            sex: 'unknown',
             size: '',
             weight: '',
             castrated: 'no',
@@ -89,7 +89,6 @@ export class Pet implements IPetV2 {
                 city: '',
                 neighborhood: '',
                 street: '',
-                id: '',
             }
     }
 
@@ -149,6 +148,7 @@ export class Pet implements IPetV2 {
 
 
     static build(params: IPet): Pet {
+        console.log(params)
         return new Pet()
             .defineID(params?.id as string)
             .defineCpfTutor(params?.cpf_tutor)
@@ -162,8 +162,8 @@ export class Pet implements IPetV2 {
                 organ_donor: params?.organ_donor || 'no',
                 pedigree: params?.pedigree || 'no',
                 pedigree_registry: params?.pedigree_registry || '',
-                race: params?.breed,
-                sex: params?.gender,
+                race: params?.race,
+                sex: params?.sex,
                 size: params?.size || '',
                 specie: params?.specie,
                 weight: params?.weight || '',
@@ -181,28 +181,27 @@ export class Pet implements IPetV2 {
                 youtube: ''
             })
             .defineHealthInsurance({
-                name: params?.health_insurance || '',
-                number_health: params?.card_number || '',
-                type_health: params?.plain_type || '',
-                validity: params?.wallet_validity || ''
+                name: params?.health_insurance?.name || '',
+                number_health: params?.health_insurance?.number_health || '',
+                type_health: params?.health_insurance?.type_health || '',
+                validity: params?.health_insurance?.validity || ''
             })
             .defineLocationTutor({
-                city: params?.ownerEmergencyContact.address?.city || '',
-                complement: params?.ownerEmergencyContact.address?.complement || '',
-                country: params?.ownerEmergencyContact.address?.country || '',
-                neighborhood: params?.ownerEmergencyContact.address?.neighborhood || '',
-                number: params?.ownerEmergencyContact.address?.number || '',
-                state: params?.ownerEmergencyContact.address?.state || '',
-                street: params?.ownerEmergencyContact.address?.street || '',
-                zipCode: params?.ownerEmergencyContact.address?.zipCode || ''
+                city: params?.ownerEmergencyContact?.address?.city || '',
+                complement: params?.ownerEmergencyContact?.address?.complement || '',
+                country: params?.ownerEmergencyContact?.address?.country || '',
+                neighborhood: params?.ownerEmergencyContact?.address?.neighborhood || '',
+                number: params?.ownerEmergencyContact?.address?.number || '',
+                state: params?.ownerEmergencyContact?.address?.state || '',
+                street: params?.ownerEmergencyContact?.address?.street || '',
+                zipCode: params?.ownerEmergencyContact?.address?.zipCode || ''
             })
             .defineTutorInformation({
-                name: params?.ownerEmergencyContact.name,
-                first_name: params?.ownerEmergencyContact.name,
-                last_name: params?.ownerEmergencyContact.name,
+                name: params?.ownerEmergencyContact?.name,
+                first_name: params?.ownerEmergencyContact?.name,
+                last_name: params?.ownerEmergencyContact?.name,
                 url_img: ''
             })
             .defineVeterinary(params.veterinary)
-
     }
 }

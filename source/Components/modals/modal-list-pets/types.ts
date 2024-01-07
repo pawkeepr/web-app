@@ -15,6 +15,7 @@ export type ModalConfirmProps = {
 }
 
 export type InitialValues = IPet
+export type CtxSimplifiedPedFields = Pick<IPet, 'race' | 'specie' | 'sex' | 'bloodType' | 'cpf_tutor' | 'name' | 'ownerEmergencyContact'>
 
 export type StepProps = {
     nextStep: () => void

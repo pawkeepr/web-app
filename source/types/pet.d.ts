@@ -1,6 +1,7 @@
+import { BloodType } from '~/store/slices/pets/bloodType';
 import { Breed } from '~/store/slices/pets/breedType';
 import { Gender, Species } from '~/store/slices/pets/speciesType';
-import { On_Off } from './pet-v2';
+import { IHealthInsurance, On_Off } from './pet-v2';
 import { DTOProfile } from './profile';
 import { ITutor } from './tutor';
 
@@ -9,11 +10,10 @@ export type IPet = {
     name: string;
     cpf_tutor: string;
     specie: Species;
-    breed: Breed;
-    plain_type?: string;
-    health_insurance?: string;
-    card_number?: string;
-    wallet_validity?: string;
+    race: Breed;
+    microchip?: string
+    identification_number?: string;
+    health_insurance?: IHealthInsurance;
     chip_number?: string;
     date_birth: string | Date;
     bloodType?: BloodType;
@@ -33,6 +33,6 @@ export type IPet = {
     avatar?: string;
     created_at?: string;
     updated_at?: string;
-    gender: Gender;
+    sex: Gender;
     veterinary: DTOProfile
 }

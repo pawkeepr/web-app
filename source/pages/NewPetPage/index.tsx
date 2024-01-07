@@ -1,7 +1,6 @@
 import { Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
-import { Pet } from '~/entities/Pet';
 import usePetsByDocument from '~/store/hooks/list-pets-of-tutor';
 import DashboardLayouts from "../_layouts/dashboard";
 import Tabs from './components/templates/vertical-tabs';
@@ -45,8 +44,8 @@ export const makeInitialValues: MakeInitialValues = ({
     microchip: null,
     name_pet: '',
     organ_donor: 'no',
-    breed: null,
-    gender: null,
+    race: 'unknown',
+    sex: 'unknown',
     specie: null,
     date_birth: null,
     phone_tutor: phone,
@@ -81,7 +80,7 @@ type PetPageProps = {
 
 const NewPetPage = ({ document }: PetPageProps) => {
 
-    const { activeData, handleSubmit, isLoading } = usePetsByDocument(document)
+    const { activeData, handleSubmit, isLoading } = usePetsByDocument(document, 'full')
     const pets = useMemo(() => activeData || [], [activeData])
     const veterinary = useProfileVeterinary()
     const router = useRouter()
@@ -102,16 +101,12 @@ const NewPetPage = ({ document }: PetPageProps) => {
     }, [pets, document, veterinary]) as IPet
 
     const onSubmit = useCallback(async (values: IPet) => {
-
-        const petData = Pet.build(values)
-
         try {
-            const data = await handleSubmit(petData as any)
+            const data = await handleSubmit(values)
             if (data) router.push('/dashboard')
         } catch (error) {
             console.log(error)
         }
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [handleSubmit])
 

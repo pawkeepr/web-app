@@ -1,21 +1,20 @@
-import { useFormikContext } from 'formik'
 import BoxButtons from '~/Components/molecules/box-buttons'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import { Gender, GenderBR } from '~/store/slices/pets/speciesType'
-import { InitialValues, StepProps } from '../../types'
+import { CtxSimplifiedPedFields, StepProps } from '../../types'
 import { option } from '../helpers'
 
 type Key = keyof typeof Gender
-
 
 const StepListGender = ({
     previousStep,
     nextStep
 }: StepProps) => {
 
-    const { values, setFieldValue } = useFormikContext<InitialValues>()
+    const { values, setFieldValue } = useFormikContextSafe<CtxSimplifiedPedFields>()
 
     const handleSelected = (gender: string) => {
-        setFieldValue('gender', gender)
+        setFieldValue('sex', gender)
         nextStep()
     }
 
@@ -29,7 +28,7 @@ const StepListGender = ({
                                 key={gender}
                                 type="button"
                                 onClick={handleSelected.bind(null, gender)}
-                                className={option({ selected: values.gender === gender })}
+                                className={option({ selected: values.sex === gender })}
                             >
                                 <div className="grid grid-cols-4 justify-center items-center">
                                     <span className="align-middle col-span-full">
@@ -43,7 +42,7 @@ const StepListGender = ({
             </div>
 
             <BoxButtons
-                isValid={!!values.gender}
+                isValid={!!values.sex}
                 link={false}
                 onClickCancel={previousStep}
                 onClickSuccess={nextStep}

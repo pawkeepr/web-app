@@ -6,11 +6,11 @@ import { InputControlProps } from '~/Components/molecules/field-control';
 
 import FieldMasked from '../field-masked';
 
-type FieldDocumentProps<T> = InputControlProps<T> & {
+type FieldDocumentProps<T, Ctx = any> = InputControlProps<T, Ctx> & {
     typeDocument?: 'all' | 'cpf' | 'cnpj'
 }
 
-const FieldDocument = <T,>({ typeDocument = 'all', ...props }: FieldDocumentProps<T>) => {
+const FieldDocument = <T, Ctx extends any>({ typeDocument = 'all', ...props }: FieldDocumentProps<T, Ctx>) => {
     const { values } = useFormikContext()
     const [isValid, setIsValid] = useState(false)
 

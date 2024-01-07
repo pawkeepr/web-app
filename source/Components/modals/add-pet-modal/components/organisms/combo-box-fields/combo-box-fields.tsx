@@ -1,29 +1,18 @@
-import { useFormikContext } from "formik"
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react"
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select"
-import { BloodType } from "~/store/slices/pets/bloodType"
-import { Breed } from "~/store/slices/pets/breedType"
-import { Gender, SpeciesType, species } from '~/store/slices/pets/speciesType'
+import useFormikContextSafe from "~/hooks/use-formik-context-safe"
+import { InitialValues } from "~/pages/NewPetPage"
+import { SpeciesType, species } from '~/store/slices/pets/speciesType'
 
-type AuxSpeciesFormikProps = {
-    id?: string
-    specie: SpeciesType
-    breed: Breed
-    bloodType: BloodType
-    sex: Gender
-}
+type AuxSpeciesFormikProps = Pick<InitialValues, 'id' | 'sex' | 'race' | 'specie' | 'bloodType'>
 
-type ComboBoxFieldsProps = {
-    name?: string
-}
-
-const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
+const ComboBoxFields = () => {
 
     const [specie, setSpecie] = useState<SpeciesType>({} as SpeciesType)
     const [breedValue, setBreedValue] = useState('')
     const [bloodTypeValue, setBloodTypeValue] = useState('')
 
-    const { setFieldValue, values: pet } = useFormikContext<AuxSpeciesFormikProps>()
+    const { setFieldValue, values: pet } = useFormikContextSafe<AuxSpeciesFormikProps>()
 
     const [isPending, startTransition] = useTransition()
 
@@ -41,29 +30,24 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
         startTransition(() => {
             setSpecie(specie)
             setFieldValue('specie', specie.name)
-            setFieldValue('race', pet.breed)
-            setFieldValue('blood_type', pet.bloodType)
+            setFieldValue('race', pet.race)
+            setFieldValue('bloodType', pet.bloodType)
         })
 
 
     }, [pet, setFieldValue])
 
-    const memoNameSpecies = !name ? 'specie' : `${name}.specie`
-    const memoNameBreed = !name ? 'race' : `${name}.race`
-    const memoNameBloodType = !name ? 'blood_type' : `${name}.blood_type`
-
-
     const onChangeSpecie = useCallback((specie: SpeciesType) => {
         startTransition(() => {
             setSpecie(specie)
-            setFieldValue(memoNameBreed, null)
-            setFieldValue(memoNameBloodType, null)
+            setFieldValue('race', null)
+            setFieldValue('bloodType', null)
             setBreedValue('')
             setBloodTypeValue('')
 
         })
 
-    }, [setFieldValue, memoNameBreed, memoNameBloodType])
+    }, [setFieldValue])
 
     const memoSpecies = useMemo(() => {
         return species.map(({ name, value, ...specie }) => ({ label: name, value: value, ...specie }))
@@ -80,32 +64,36 @@ const ComboBoxFields = ({ name }: ComboBoxFieldsProps) => {
     return (
         <>
             <FieldControlSelect
+                ctx={{} as AuxSpeciesFormikProps}
                 options={memoSpecies}
                 required
                 disabled={isPending || !!pet.id}
                 onChangeValue={onChangeSpecie}
-                name={memoNameSpecies}
+                name="specie"
                 placeholder="Ex: Cachorro, Gato, etc..."
-                label="Espécie" />
+                label="Espécie"
+            />
 
 
             <FieldControlSelect
+                ctx={{} as AuxSpeciesFormikProps}
                 options={memoBreed}
                 disabled={!specie.breedType || isPending || !!pet.id}
                 onChangeValue={e => setBreedValue(e)}
                 value={breedValue}
                 required
-                name={memoNameBreed}
+                name='race'
                 label="Raça"
                 placeholder="Ex: Vira-lata, Poodle, etc..." />
 
             <FieldControlSelect
+                ctx={{} as AuxSpeciesFormikProps}
                 options={memoBloodType}
                 onChangeValue={e => setBloodTypeValue(e)}
                 value={bloodTypeValue}
                 disabled={!specie.bloodType || isPending || !!pet.id}
                 required
-                name={memoNameBloodType}
+                name='bloodType'
                 label="Tipo Sanguíneo"
                 placeholder="Ex: A, B, etc..." />
         </>
