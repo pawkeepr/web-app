@@ -150,6 +150,8 @@ export class PetInformation implements PetData {
             .definePedigreeRegistry(params.pedigree_registry || '')
             .defineSize(params.size || 'unknown')
             .defineSpecie(params.specie || 'unknown')
-
+            .defineRace(params.race || 'unknown')
+            .defineSex(params.sex || 'unknown')
+            .defineWeight(params.weight || 'unknown')
     }
 }
