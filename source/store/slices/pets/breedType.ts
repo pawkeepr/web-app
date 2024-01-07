@@ -110,4 +110,4 @@ export enum RabbitBreed {
     Outros = 'Não Informado',
 }
 
-export type Breed = DogBreed | CatBreed | HorseBreed | FishBreed | ReptileBreed | BirdBreed | RabbitBreed;
+export type Breed = DogBreed | CatBreed | HorseBreed | FishBreed | ReptileBreed | BirdBreed | RabbitBreed | 'unknown';
