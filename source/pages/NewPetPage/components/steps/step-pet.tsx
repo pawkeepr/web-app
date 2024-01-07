@@ -13,7 +13,7 @@ import { genderValues } from "~/store/slices/pets/sexType";
 import { StepProps } from "~/types/helpers";
 import { InitialValues } from "../../index";
 
-type KeysInitial = 'name' | 'date_birth' | 'gender' | 'microchip' | 'identification_number' | 'id';
+type KeysInitial = 'name' | 'date_birth' | 'sex' | 'microchip' | 'identification_number' | 'id' | 'race' | 'specie';
 type StepPetKeys = Pick<InitialValues, KeysInitial>;
 
 const schema = yup.object().shape({
@@ -61,7 +61,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     ctx={{} as StepPetKeys}
                     options={genderValues}
                     disabled={!!values.id}
-                    name="gender"
+                    name="sex"
                     required
                     label="Sexo do Pet"
                     placeholder="Macho/Fêmea..."
