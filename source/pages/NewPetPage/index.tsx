@@ -81,7 +81,7 @@ type PetPageProps = {
 
 const NewPetPage = ({ document }: PetPageProps) => {
 
-    const { activeData, handleSubmit, isLoading } = usePetsByDocument(document)
+    const { activeData, handleSubmit, isLoading } = usePetsByDocument(document, 'full')
     const pets = useMemo(() => activeData || [], [activeData])
     const veterinary = useProfileVeterinary()
     const router = useRouter()
