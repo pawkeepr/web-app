@@ -46,7 +46,7 @@ const makeOptions = (items: Option[]) => {
     }));
 };
 
-const CardInput = ({
+const CardInputTreatment = ({
     items = [],
     handleSubmit = async (data: QuestionTreatment) => {
         console.log('handleSubmit');
@@ -105,4 +105,4 @@ const CardInput = ({
     );
 };
 
-export default CardInput;
+export default CardInputTreatment;

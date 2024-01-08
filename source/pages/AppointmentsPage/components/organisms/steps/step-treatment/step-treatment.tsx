@@ -1,7 +1,7 @@
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
 
 import { FieldArray, useFormikContext } from 'formik';
-import CardInput from '~/Components/organism/card-input-treatment';
+import CardInputTreatment from '~/Components/organism/card-input-treatment';
 import { OptionSelect } from '~/store/slices/appointment-vet/types';
 import { VeterinaryConsultation } from '~/types/appointment';
 import { StepProps, Tabs } from '~/types/helpers';
@@ -84,7 +84,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                 </div>
                             ),
                         )}
-                        <CardInput
+                        <CardInputTreatment
                             items={items}
                             handleSubmit={async (data, formikHelpers) => {
                                 await new Promise((resolve) =>
