@@ -1,6 +1,5 @@
 import DashboardLayouts from '../_layouts/dashboard';
 
-import { BOOL_STATUS } from '~/store/slices/appointment-vet/types';
 import VerticalTabs from './components/templates/vertical-tabs';
 
 import { Formik } from 'formik';
@@ -8,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
 import { BtnCancel } from '~/Components/atoms/btn';
 import ModalConfirm from '~/Components/modals/confirm-modal';
-import { Appointments } from '~/entities/Appointments';
 import useProfileVeterinary from '~/hooks/use-veterinary';
 import useAppointment from '~/store/hooks/appointment/use-appointment';
 import usePetById from '~/store/hooks/pet/use-pets';
@@ -16,8 +14,6 @@ import { VeterinaryConsultation } from '~/types/appointment';
 import { IPetV2 } from '~/types/pet-v2';
 import { DTOProfile } from '~/types/profile';
 import { geolocation } from '~/utils/geolocation';
-
-export type InitialValues = VeterinaryConsultation;
 
 type AppointmentsPageProps = {
     document: string;
@@ -34,8 +30,9 @@ const initialValues = (
         health_insurance,
     }: IPetV2,
     profile: DTOProfile,
-    appointment_id: string,
-): InitialValues => ({
+    appointment_id: string | null = null,
+): VeterinaryConsultation => ({
+    id: appointment_id,
     anamnesis: {
         note: '',
         questions_anamnesis: [],
@@ -58,7 +55,7 @@ const initialValues = (
     details_pet_consultation: {
         age: '',
         height: '',
-        imc: '',
+        imc: 0,
         length: '',
         type_weight: '',
         weight: '',
@@ -123,13 +120,19 @@ const AppointmentsPage = ({
         geolocation();
     }, []);
 
-    const onSubmit = async (values: InitialValues) => {
-        const appointment = Appointments.build(values);
-        const [geolocationData, signature] = await geolocation();
-        appointment
-            .defineAppointmentGeolocation(geolocationData)
-            .defineAppointmentSignature(signature);
-        await handleSubmit(appointment as any);
+    const onSubmit = async (values: VeterinaryConsultation) => {
+        const [appointment_geolocation, appointment_signature] =
+            await geolocation();
+
+        await handleSubmit({
+            ...values,
+            appointment_details: {
+                ...values.appointment_details,
+                appointment_geolocation,
+                appointment_signature,
+            },
+        });
+
         router.push('/dashboard');
     };
 
