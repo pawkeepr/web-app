@@ -48,13 +48,16 @@ export interface Anamnesis {
     note: string;
 }
 
+export type OptionAnamnesis = 'yes' | 'no' | 'other';
+export type LogicalListDefaultAnamnesis = 'logical';
+
 export interface QuestionAnamnesis {
     type_anamnesis: string | OptionSelect;
-    name_anamnesis: string;
-    notes_anamnesis: string;
+    name_anamnesis: string; // Pergunta "Ele nadou?"
+    notes_anamnesis: string; // Observação
+    options_anamnesis: OptionAnamnesis;
+    logical_list_default_anamnesis: LogicalListDefaultAnamnesis;
     list_notes_anamnesis: string[];
-    options_anamnesis: string;
-    logical_list_default_anamnesis: string;
 }
 
 export interface Treatments {
