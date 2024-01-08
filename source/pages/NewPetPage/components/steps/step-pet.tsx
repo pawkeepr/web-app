@@ -4,7 +4,7 @@ import { BtnPrimary } from "~/Components/atoms/btn";
 
 import { useMemo } from "react";
 import * as yup from "yup";
-import ComboBoxFields from "~/Components/modals/add-pet-modal/components/organisms/combo-box-fields";
+import ComboBoxFields from "~/Components/molecules/combo-box-fields";
 import FieldControl from "~/Components/molecules/field-control";
 import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
 import FieldMasked from "~/Components/molecules/field-masked";

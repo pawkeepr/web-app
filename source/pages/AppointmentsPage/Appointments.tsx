@@ -1,23 +1,23 @@
 import DashboardLayouts from "../_layouts/dashboard";
 
-import { BOOL_STATUS, IAppointmentVet } from "~/store/slices/appointment-vet/types";
+import { BOOL_STATUS } from "~/store/slices/appointment-vet/types";
 import VerticalTabs from "./components/templates/vertical-tabs";
 
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
 import { BtnCancel } from "~/Components/atoms/btn";
-import ModalConfirm from "~/Components/modals/modal-confirm";
+import ModalConfirm from "~/Components/modals/confirm-modal";
 import { Appointments } from "~/entities/Appointments";
+import useProfileVeterinary from "~/hooks/use-veterinary";
 import useAppointment from "~/store/hooks/appointment/use-appointment";
 import usePetById from "~/store/hooks/pet/use-pets";
-import useProfile from "~/store/hooks/profile";
+import { VeterinaryConsultation } from "~/types/appointment";
 import { IPetV2 } from "~/types/pet-v2";
-import { DTOProfile, IProfile } from "~/types/profile";
+import { DTOProfile } from "~/types/profile";
 import { geolocation } from "~/utils/geolocation";
-import useProfileVeterinary from "~/hooks/use-veterinary";
 
-export type InitialValues = IAppointmentVet;
+export type InitialValues = VeterinaryConsultation;
 
 type AppointmentsPageProps = {
     document: string;
@@ -28,7 +28,7 @@ type AppointmentsPageProps = {
 const initialValues = (
     {
         id: id_pet,
-        pet_information, 
+        pet_information,
         main_responsible_guardian,
         cpf_tutor,
         health_insurance,
@@ -61,7 +61,7 @@ const initialValues = (
     crmv_vet: profile?.crmv,
     cpf_cnpj_vet: profile?.cpf_cnpj,
     veterinary: {
-        cpf_cnpj:  profile?.cpf_cnpj,
+        cpf_cnpj: profile?.cpf_cnpj,
         crmv: profile?.crmv,
         name_veterinary: profile?.name_veterinary,
         specialty: profile?.specialty,

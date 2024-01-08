@@ -13,19 +13,6 @@ import Login from "./slices/auth/login/slice";
 import Profile from "./slices/auth/profile/slice";
 import Account from "./slices/auth/register/slice";
 
-//Tutor
-import Tutor from "./slices/tutors/slice";
-
-// Pets
-import Pets from "./slices/pets/slice";
-
-import AppointmentVet from "./slices/appointment-vet/slice";
-
-// schedule
-import schedule from "./slices/newSchedule/slice";
-
-import scheduled from "./slices/scheduled/slice";
-
 const persistConfig = {
     key: '@pawkeepr/session',
     storage,
@@ -42,12 +29,7 @@ const rootReducer = combineReducers({
     Login: persistedReducersSession,
     Account,
     ForgetPassword,
-    AppointmentVet,
     Profile,
-    Tutor,
-    Pets,
-    schedule,
-    scheduled,
     ActivateAccount,
 });
 

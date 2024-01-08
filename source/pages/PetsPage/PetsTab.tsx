@@ -1,6 +1,5 @@
 import { RadioGroup } from '@headlessui/react';
 import { useCallback } from 'react';
-import ModalAddPet from '~/Components/modals/add-pet-modal';
 import CardPets from '~/Components/molecules/card-pets';
 import ListTab from '~/Components/templates/ListTab';
 import useListPets from '~/store/hooks/pets/use-list-pets';
@@ -10,7 +9,6 @@ const PetsTab = () => {
 
     const { data: pets, isLoading, isError } = useListPets()
 
-    const Modal = () => <ModalAddPet />
     const cards = (pets: IPetV2Data[]) => pets?.map(pet => (<CardPets key={pet?.id} pet={pet} checked={false} />))
 
     const filter = useCallback((deferredPets: IPetV2Data[], search: string) => {
@@ -30,7 +28,7 @@ const PetsTab = () => {
 
     return (
         <RadioGroup>
-            <ListTab items={pets} Modal={Modal} cards={cards} filter={filter} />
+            <ListTab items={pets} cards={cards} filter={filter} />
         </RadioGroup>
     );
 };

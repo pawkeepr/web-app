@@ -8,10 +8,6 @@ import ForgetSaga from "./slices/auth/forget-pwd/sagas";
 import ProfileSaga from "./slices/auth/profile/sagas";
 import AccountSaga from "./slices/auth/register/sagas";
 
-import AppointmentVetSagas from './slices/appointment-vet/sagas';
-import PetsSagas from './slices/pets/sagas';
-import TutorsSagas from './slices/tutors/sagas';
-
 
 export default function* rootSaga() {
     yield all([
@@ -21,9 +17,6 @@ export default function* rootSaga() {
         fork(ForgetSaga),
         fork(ProfileSaga),
         fork(ActivateAccountSaga),
-        fork(TutorsSagas),
-        fork(PetsSagas),
-        fork(AppointmentVetSagas),
         fork(LoginSagas),
     ]);
 }

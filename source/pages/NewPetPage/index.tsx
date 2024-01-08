@@ -7,7 +7,7 @@ import Tabs from './components/templates/vertical-tabs';
 
 
 import { BtnCancel } from "~/Components/atoms/btn";
-import ModalConfirm from "~/Components/modals/modal-confirm";
+import ModalConfirm from "~/Components/modals/confirm-modal";
 import { Veterinary } from '~/entities/Veterinary';
 import useProfileVeterinary from '~/hooks/use-veterinary';
 import { IPet } from '~/types/pet';

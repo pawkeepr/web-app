@@ -5,10 +5,9 @@ import { Formik, FormikHelpers } from "formik";
 
 import { BtnAvatar } from "~/Components/atoms/btn";
 import { useAppDispatch } from '~/store/hooks';
-import { addNew } from '~/store/slices/newSchedule/actions';
 // import ComboBoxFields from "./components/organisms/combo-box-fields/combo-box-fields";
 
-type InitialValues = Partial<Nullable<Data>>
+type InitialValues = Partial<Nullable<any>>
 
 import { EyeIcon } from '@heroicons/react/24/solid';
 import Modal from "~/Components/organism/modal";
@@ -16,7 +15,7 @@ import ravena from "~/assets/images/ravena.jpeg";
 import useModal from '~/hooks/use-modal';
 
 
-const ViewAppointment = ({ children, item }: AddModalProps) => {
+const ViewAppointment = ({ children, item }) => {
     const { closeModal, open, showModal } = useModal()
 
     const dispatch = useAppDispatch();
@@ -25,7 +24,6 @@ const ViewAppointment = ({ children, item }: AddModalProps) => {
         values: InitialValues,
         { resetForm }: FormikHelpers<InitialValues>
     ) => {
-        dispatch(addNew(values));
         resetForm()
     }
 

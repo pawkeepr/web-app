@@ -9,7 +9,7 @@ import { Appointments } from '~/entities/Appointments';
 
 import { useCallback, useEffect, useMemo } from "react";
 import * as Yup from 'yup';
-import { StepProps } from "~/Components/modals/modal-list-pets/types";
+import { StepProps } from "~/Components/modals/list-pets-modal/types";
 import BoxButtons from "~/Components/molecules/box-buttons";
 import { getProfileSession } from "~/store/actions";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";

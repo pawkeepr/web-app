@@ -1,8 +1,8 @@
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import { Form, Formik } from "formik";
 import { startTransition, useState } from "react";
-import ModalListPets from "~/Components/modals/modal-list-pets/modal-list-pets";
-import ModalWarning from "~/Components/modals/modal-warning/modal-warning";
+import ModalListPets from "~/Components/modals/list-pets-modal/modal-list-pets";
+import ModalWarning from "~/Components/modals/warning-modal/modal-warning";
 import FieldDocument from "~/Components/molecules/field-document/field-document";
 import isValidCPF from "~/validations/cpf";
 
