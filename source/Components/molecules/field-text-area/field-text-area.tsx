@@ -7,6 +7,7 @@ import Input from '../../atoms/text-area';
 import { ChangeEvent } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Label from '~/Components/atoms/label';
+import withControl from '~/Components/helpers/with-control';
 import { InputControlProps } from '../field-control';
 
 const FieldTextArea = <T, Ctx>({
@@ -85,4 +86,4 @@ const FieldTextArea = <T, Ctx>({
     );
 };
 
-export default FieldTextArea;
+export default withControl(FieldTextArea);
