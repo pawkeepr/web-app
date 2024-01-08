@@ -20,8 +20,8 @@ export interface IAddress {
 export async function fetchAddressByCep(cep: string) {
     try {
         const zipCodeNumber = cep.replace(/\D/g, '')
-        const response = await axios.get(`${BASE_URL}/${zipCodeNumber}/json`);
-        return response as unknown as IAddress;
+        const { data } = await axios.get<IAddress>(`${BASE_URL}/${zipCodeNumber}/json`);
+        return data
     } catch (error) {
         console.error(error);
         return null;
