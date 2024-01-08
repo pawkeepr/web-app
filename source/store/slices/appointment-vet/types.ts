@@ -1,213 +1,229 @@
-import { LOADING } from "~/helpers/loading";
+import { LOADING } from '~/helpers/loading';
 import {
-    ADD_FAIL, ADD_NEW, ADD_SUCCESS,
-    DELETE, DELETE_FAIL, DELETE_SUCCESS,
+    ADD_FAIL,
+    ADD_NEW,
+    ADD_SUCCESS,
+    DELETE,
+    DELETE_FAIL,
+    DELETE_SUCCESS,
     GET_ALL,
-    GET_ALL_ATIVES, GET_ALL_ATIVES_FAIL, GET_ALL_ATIVES_SUCCESS,
+    GET_ALL_ATIVES,
+    GET_ALL_ATIVES_FAIL,
+    GET_ALL_ATIVES_SUCCESS,
     GET_ALL_FAIL,
-    GET_ALL_INATIVES, GET_ALL_INATIVES_FAIL, GET_ALL_INATIVES_SUCCESS,
+    GET_ALL_INATIVES,
+    GET_ALL_INATIVES_FAIL,
+    GET_ALL_INATIVES_SUCCESS,
     GET_ALL_SUCCESS,
     STOP_LOADING,
-    TOGGLE_STATUS, TOGGLE_STATUS_FAIL, TOGGLE_STATUS_SUCCESS,
-    UPDATE, UPDATE_FAIL, UPDATE_SUCCESS
-} from "~/store/helpers/constants";
-import { GenericObject } from "~/store/helpers/types";
-import { DTOProfile } from "~/types/profile";
+    TOGGLE_STATUS,
+    TOGGLE_STATUS_FAIL,
+    TOGGLE_STATUS_SUCCESS,
+    UPDATE,
+    UPDATE_FAIL,
+    UPDATE_SUCCESS,
+} from '~/store/helpers/constants';
+import { GenericObject } from '~/store/helpers/types';
+import { DTOProfile } from '~/types/profile';
 
 export interface IPetAppointment {
-    name_pet: string,
-    microchip: string,
-    identification_number: string,
-    specie: string,
-    race: string,
-    blood_type: string,
-    blood_donator: string,
-    organ_donor: string,
-    sex: string,
-    date_birth: string
+    name_pet: string;
+    microchip: string;
+    identification_number: string;
+    specie: string;
+    race: string;
+    blood_type: string;
+    blood_donator: string;
+    organ_donor: string;
+    sex: string;
+    date_birth: string;
 }
 
 export interface ITutorAppointment {
-    name: string,
-    email: string,
-    phone: string,
-    country: string,
-    zipCode: string,
-    state: string,
-    city: string
+    name: string;
+    email: string;
+    phone: string;
+    country: string;
+    zipCode: string;
+    state: string;
+    city: string;
 }
 
 export interface IMedicineAppointment {
-    name_medicine: string,
-    brand: string,
-    continuous_use: string,
-    amount: string,
-    type_medicine: string,
-    interval: string,
-    period: string,
-    date_init: string,
-    date_end: string,
-    value_medicine: string,
-    coin_medicine: string
+    name_medicine: string;
+    brand: string;
+    continuous_use: string;
+    amount: string;
+    type_medicine: string;
+    interval: string;
+    period: string;
+    date_init: string;
+    date_end: string;
+    value_medicine: string;
+    coin_medicine: string;
 }
 
 export type IQuestionAnamnesis = {
-    question: string,
-    options: string
-}
+    question: string;
+    options: string;
+};
 
 export interface IAnamnesisAppointment {
-    physical_activity: IQuestionAnamnesis[],
-    digestive_system: IQuestionAnamnesis[],
-    respiratory_system: IQuestionAnamnesis[],
-    locomotor_system: IQuestionAnamnesis[],
-    urinary_system: IQuestionAnamnesis[],
-    nervous_system: IQuestionAnamnesis[]
+    physical_activity: IQuestionAnamnesis[];
+    digestive_system: IQuestionAnamnesis[];
+    respiratory_system: IQuestionAnamnesis[];
+    locomotor_system: IQuestionAnamnesis[];
+    urinary_system: IQuestionAnamnesis[];
+    nervous_system: IQuestionAnamnesis[];
 }
 
 export interface IVaccineAppointment {
-    name_vaccine: string
-    brand: string
-    batch: string
-    local: string
-    dose: string
-    date_application: string
-    date_next_application: string
-    who_applied: string
-    health_insurance: string
-    value_vaccine: string
-    coin_vaccine: string
+    name_vaccine: string;
+    brand: string;
+    batch: string;
+    local: string;
+    dose: string;
+    date_application: string;
+    date_next_application: string;
+    who_applied: string;
+    health_insurance: string;
+    value_vaccine: string;
+    coin_vaccine: string;
 }
 
 export interface IExamsAppointment {
-    name_exame: string,
-    local: string,
-    realization_date: string,
-    appointment_date: string,
-    time_date: string,
-    who_applied: string,
-    health_insurance: string,
-    type_exame: string,
-    value_exam: string,
-    coin_exam: string
+    name_exame: string;
+    local: string;
+    realization_date: string;
+    appointment_date: string;
+    time_date: string;
+    who_applied: string;
+    health_insurance: string;
+    type_exame: string;
+    value_exam: string;
+    coin_exam: string;
 }
 
-
 export interface INutritionsAppointment {
-    food_name: string,
-    food_start_time: string,
-    amount: string,
-    measure: string,
-    interval: string,
-    period: string,
-    starting_date: string,
-    type_nutrition: string,
-    value_nutrition: string,
-    coin_nutrition: string
+    food_name: string;
+    food_start_time: string;
+    amount: string;
+    measure: string;
+    interval: string;
+    period: string;
+    starting_date: string;
+    type_nutrition: string;
+    value_nutrition: string;
+    coin_nutrition: string;
 }
 
 export interface IllnessesAppointment {
-    name_illness: string,
-    symptoms: string,
-    prevention: string,
-    treatment: string,
-    date_identified: string
+    name_illness: string;
+    symptoms: string;
+    prevention: string;
+    treatment: string;
+    date_identified: string;
 }
 
 export interface IPaymentsAppointment {
-    form_payment: string,
-    value_payment: string,
-    coin: string,
-    number_installments: string | GenericObject,
-    status_payment: string,
-    date_payment: string
+    form_payment: string;
+    value_payment: string;
+    coin: string;
+    number_installments: string | GenericObject;
+    status_payment: string;
+    date_payment: string;
 }
 
 export interface IDatesConsultsAppointment {
-    date_consultation: string,
-    time_consultation: string,
-    type_consultation: string,
-    reason_consultation: string,
-    additional_remarks: string,
-    date_next_consultation: string,
-    time_next_consultation: string
+    date_consultation: string;
+    time_consultation: string;
+    type_consultation: string;
+    reason_consultation: string;
+    additional_remarks: string;
+    date_next_consultation: string;
+    time_next_consultation: string;
 }
 
 export enum BOOL_STATUS {
     TRUE = 'yes',
     FALSE = 'no',
-    UNFORESEEN = 'unforeseen'
+    UNFORESEEN = 'unforeseen',
 }
 export interface IStatusAppointment {
-    scheduled: BOOL_STATUS,
-    confirmed: BOOL_STATUS,
-    done: BOOL_STATUS,
-    canceled: BOOL_STATUS,
-    reason_canceled: string
+    scheduled: BOOL_STATUS;
+    confirmed: BOOL_STATUS;
+    done: BOOL_STATUS;
+    canceled: BOOL_STATUS;
+    reason_canceled: string;
 }
 
 export interface ISignatureAppointment {
-    ip_address: string,
-    browser_device: string,
-    operational_system: string
+    signature_data: string;
+    date_signature: string;
+    type_signature: string;
+    status_signature: string;
+    ip_address: string;
+    browser_device: string;
+    operational_system: string;
 }
 
-
 export interface IGeolocationAppointment {
-    latitude: string,
-    longitude: string,
-    precision: string,
-    altitude: string,
-    speed: string
+    latitude: string;
+    longitude: string;
+    precision: string;
+    altitude: string;
+    speed: string;
+    heading: string;
+    date_geolocation: string;
 }
 
 export interface ITests_FastsAppointment {
-    test_type: string,
-    result: string,
-    notes: string
+    test_type: string;
+    result: string;
+    notes: string;
 }
 
 export interface IDental_treatmentAppointment {
-    reason_query: string,
-    oral_examination: string,
-    treatments_performed: Record<string, string>[],
-    recommendations: string
+    reason_query: string;
+    oral_examination: string;
+    treatments_performed: Record<string, string>[];
+    recommendations: string;
 }
 
 export interface IWell_beingAppointment {
-    perform_activity: string,
-    activities_carry: []
+    perform_activity: string;
+    activities_carry: [];
 }
 
 export interface IAnamnesis {
-    digestive_system: boolean
-    respiratory_system: boolean
-    urinary_system: boolean
-    nervous_system: boolean
-    locomotor_system: boolean
-    anamnesis?: IAnamnesisAppointment
+    digestive_system: boolean;
+    respiratory_system: boolean;
+    urinary_system: boolean;
+    nervous_system: boolean;
+    locomotor_system: boolean;
+    anamnesis?: IAnamnesisAppointment;
 }
 
 export type OptionSelect = {
     value: string;
     label: string;
-}
+};
 export interface ITreatment {
-    type: string | OptionSelect,
-    name: string,
-    notes: string
+    type: string | OptionSelect;
+    name: string;
+    notes: string;
 }
 
 export interface IAppointmentVet extends IAnamnesis {
     id?: string | null;
-    pet_data: IPetData
-    vets_data: VetsData[]
-    cpf_tutor: string
-    name_tutor: string
-    contact_tutor: ContactTutor
-    location_tutor: LocationTutor
-    responsible_tutors: ResponsibleTutors
-    health_insurance: HealthInsurance
+    pet_data: IPetData;
+    vets_data: VetsData[];
+    cpf_tutor: string;
+    name_tutor: string;
+    contact_tutor: ContactTutor;
+    location_tutor: LocationTutor;
+    responsible_tutors: ResponsibleTutors;
+    health_insurance: HealthInsurance;
     id_pet: string;
     tutor_data: ITutorAppointment;
     crmv_vet: string;
@@ -226,14 +242,14 @@ export interface IAppointmentVet extends IAnamnesis {
 
 export interface IScheduledAppointmentVet {
     id?: string | null;
-    pet_data: IPetData
-    vets_data: VetsData[]
-    cpf_tutor: string
-    name_tutor: string
-    contact_tutor: ContactTutor
-    location_tutor: LocationTutor
-    responsible_tutors: never
-    health_insurance: HealthInsurance
+    pet_data: IPetData;
+    vets_data: VetsData[];
+    cpf_tutor: string;
+    name_tutor: string;
+    contact_tutor: ContactTutor;
+    location_tutor: LocationTutor;
+    responsible_tutors: never;
+    health_insurance: HealthInsurance;
     id_pet: string;
     tutor_data: ITutorAppointment;
     crmv_vet: string;
@@ -250,80 +266,77 @@ export interface IScheduledAppointmentVet {
 }
 
 export interface IPetData {
-    id?: string | null
-    name_pet: string | null
-    microchip: string | null
-    identification_number: string | null
-    specie: string | null
-    race: string | null
-    blood_type: string | null
-    blood_donator: string | null
-    organ_donor: string | null
-    sex: string | null
-    date_birth: string | null
-    age: string,
-    height: string,
-    length: string,
-    weight: string,
-    type_weight: string,
-    imc: string,
-    guidelines_notes: string
+    id?: string | null;
+    name_pet: string | null;
+    microchip: string | null;
+    identification_number: string | null;
+    specie: string | null;
+    race: string | null;
+    blood_type: string | null;
+    blood_donator: string | null;
+    organ_donor: string | null;
+    sex: string | null;
+    date_birth: string | null;
+    age: string;
+    height: string;
+    length: string;
+    weight: string;
+    type_weight: string;
+    imc: string;
+    guidelines_notes: string;
 }
 
 export interface VetsData {
-    name_vet: string | null
-    crmv_vet: string | null
-    cpf_cnpj_vet: string | null
-    phone_vet: string | null
-    email_vet: string | null
+    name_vet: string | null;
+    crmv_vet: string | null;
+    cpf_cnpj_vet: string | null;
+    phone_vet: string | null;
+    email_vet: string | null;
 }
 
 export interface ContactTutor {
-    email: string | null
-    phone: string | null
-    whatsapp: string | null
+    email: string | null;
+    phone: string | null;
+    whatsapp: string | null;
 }
 
 export interface LocationTutor {
-    country: string | null
-    zipCode: string | null
-    state: string | null
-    city: string | null
-    neighborhood: string | null
-    street: string | null
-    number: string | null
-    complement: string | null
+    country: string | null;
+    zipCode: string | null;
+    state: string | null;
+    city: string | null;
+    neighborhood: string | null;
+    street: string | null;
+    number: string | null;
+    complement: string | null;
 }
 
 export interface ResponsibleTutors {
-    name_tutor: string | null
-    cpf_tutor: string | null
+    name_tutor: string | null;
+    cpf_tutor: string | null;
 }
 
 export interface HealthInsurance {
-    name: string | null
-    type_health: string | null
-    number_health: string | null
-    validity: string | null
+    name: string | null;
+    type_health: string | null;
+    number_health: string | null;
+    validity: string | null;
 }
 
-
-export interface Data extends IAppointmentVet {
-
-}
+export type Data = IAppointmentVet;
 
 export type IAppointmentVetData = {
     all_scheduled: Data[];
     all_scheduled_confirmed: Data[];
     all_scheduled_canceled: Data[];
     all_scheduled_confirmed_done: Data[];
-}
+};
 
 export type InitialState = {
-    all_scheduled: Data[],
-    all_scheduled_canceled: Data[],
-    all_scheduled_confirmed: Data[],
-    all_scheduled_confirmed_done: Data[]
+    all_scheduled: Data[];
+    all_scheduled_canceled: Data[];
+    all_scheduled_confirmed: Data[];
+    all_scheduled_confirmed_done: Data[];
     isLoading: LOADING;
     isLoadingOnlyOne: LOADING;
     error: string | null;

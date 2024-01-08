@@ -1,7 +1,12 @@
+import {
+    IGeolocationAppointment,
+    ISignatureAppointment,
+} from '~/store/slices/appointment-vet/types';
 import { IMainResponsibleGuardian, PetData } from './pet-v2';
 import { DTOProfile } from './profile';
 
 export interface VeterinaryConsultation {
+    id: string | null;
     id_pet: string;
     cpf_tutor: string;
     crmv_vet: string;
@@ -68,36 +73,16 @@ export interface QuestionTreatment {
 }
 
 export interface AppointmentDetails {
-    payment: Payment;
-    appointment_signature: AppointmentSignature;
-    appointment_geolocation: AppointmentGeolocation;
+    payment: IPayment;
+    appointment_signature: ISignatureAppointment;
+    appointment_geolocation: IGeolocationAppointment;
 }
 
-export interface Payment {
+export interface IPayment {
     form_payment: string;
     value_payment: string;
     coin: string;
     number_installments: string;
     status_payment: string;
     date_payment: string;
-}
-
-export interface AppointmentSignature {
-    signature_data: string;
-    date_signature: string;
-    type_signature: string;
-    status_signature: string;
-    ip_address: string;
-    browser_device: string;
-    operational_system: string;
-}
-
-export interface AppointmentGeolocation {
-    latitude: string;
-    longitude: string;
-    precision: string;
-    altitude: string;
-    speed: string;
-    heading: string;
-    date_geolocation: string;
 }
