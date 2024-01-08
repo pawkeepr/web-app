@@ -1,3 +1,4 @@
+import { Appointments } from '~/entities/Appointments';
 import {
     createAppointmentVet,
     finishedAppointmentVet,
@@ -13,6 +14,7 @@ const useAppointment = () => {
     return useAppStore<VeterinaryConsultation>({
         keys: superKeys,
         name: NAME,
+        entity: Appointments,
         add: createAppointmentVet,
         update: finishedAppointmentVet,
     });

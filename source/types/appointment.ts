@@ -1,12 +1,13 @@
 import {
     IGeolocationAppointment,
     ISignatureAppointment,
+    OptionSelect,
 } from '~/store/slices/appointment-vet/types';
 import { IMainResponsibleGuardian, PetData } from './pet-v2';
 import { DTOProfile } from './profile';
 
 export interface VeterinaryConsultation {
-    id: string | null;
+    id?: string | null;
     id_pet: string;
     cpf_tutor: string;
     crmv_vet: string;
@@ -39,7 +40,7 @@ export interface DetailsPetConsultation {
     length: string;
     weight: string;
     type_weight: string;
-    imc: string;
+    imc: number;
 }
 
 export interface Anamnesis {
@@ -62,7 +63,7 @@ export interface Treatments {
 }
 
 export interface QuestionTreatment {
-    type_treatment: string;
+    type_treatment: string | OptionSelect;
     name_treatment: string;
     notes_treatment: string;
     list_notes_treatment: string[];
