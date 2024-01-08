@@ -1,9 +1,13 @@
+import { FieldArray } from 'formik';
 import { useEffect, useMemo } from 'react';
 import * as yup from 'yup';
 import { BtnPrimary } from '~/Components/atoms/btn';
 import FieldNumber from '~/Components/molecules/field-number';
 import FieldTextArea from '~/Components/molecules/field-text-area';
+import CardInputAnamnese from '~/Components/organism/card-input-anamnese';
+import { questions_digestive_system } from '~/constants/anamnese-questions';
 import useFormikContextSafe from '~/hooks/use-formik-context-safe';
+import { OptionSelect } from '~/store/slices/appointment-vet/types';
 import { VeterinaryConsultation } from '~/types/appointment';
 import { StepProps, Tabs } from '~/types/helpers';
 
@@ -88,7 +92,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 />
 
                 <div>
-                    {values.details_pet_consultation?.imc && (
+                    {values.details_pet_consultation?.imc > 0 && (
                         <h2 className="m-4 font-bold">
                             O IMC do animal é:{' '}
                             {values.details_pet_consultation?.imc?.toFixed(2)}
@@ -96,18 +100,72 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                     )}
                 </div>
             </div>
-
             <div className="flex justify-between flex-col items-start gap-2 mb-2">
                 <span className="font-bold">Anotações Gerais</span>
                 <FieldTextArea
                     ctx={values}
-                    label=""
                     className="rounded-md w-full border-gray-300"
                     component="textarea"
                     name="anamnesis.note"
                     type="text"
                 />
             </div>
+
+            <FieldArray name="anamnese.questions_treatment">
+                {({ push, remove }) => (
+                    <>
+                        {values.anamnesis?.questions_anamnesis?.map(
+                            (treatment, index) => (
+                                <div
+                                    key={`treatment-${index}`}
+                                    className="w-full bg-secondary rounded-md text-xs py-1 px-2"
+                                >
+                                    <div className="w-full flex flex-row bg-secondary px-2 rounded-sm border-dashed border border-primary">
+                                        <div className="grid grid-cols-6 w-full">
+                                            <h6 className="col-span-1 font-mono font-semibold  capitalize">
+                                                {
+                                                    (
+                                                        treatment.type_anamnesis as OptionSelect
+                                                    ).label
+                                                }
+                                            </h6>
+                                            <h6 className="col-span-2 font-mono font-semibold  capitalize">
+                                                {treatment.name_anamnesis}
+                                            </h6>
+
+                                            <p className="col-span-3 font-mono  capitalize">
+                                                {treatment.notes_anamnesis}
+                                            </p>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            className="text-red-500"
+                                            onClick={() => remove(index)}
+                                        >
+                                            X
+                                        </button>
+                                    </div>
+                                </div>
+                            ),
+                        )}
+                        <CardInputAnamnese
+                            items={questions_digestive_system.map((item) => ({
+                                value: item.type,
+                                label: item.question,
+                                color: 'rgb(255 200 107);',
+                            }))}
+                            handleSubmit={async (data, formikHelpers) => {
+                                await new Promise((resolve) =>
+                                    setTimeout(resolve, 300),
+                                );
+                                push(data);
+                                formikHelpers.resetForm();
+                            }}
+                        />
+                    </>
+                )}
+            </FieldArray>
+
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnPrimary
                     label="Próximo"
