@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 export type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
 export type StepProps = {
-    toggleTab: (tab: Tabs) => void;
+    toggleTab: (tab: Tabs | number) => void;
     activeTab: number;
     isPending?: boolean;
     tutorExist?: boolean;
