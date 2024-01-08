@@ -85,8 +85,6 @@ const ModalListPets = ({
     const { activeData: pets, handleSubmit, isLoading } = useListPetsOfTutor(document, 'simple', closeModal)
     const veterinary = useProfileVeterinary()
 
-    console.log('pets', pets)
-
     const initialValues: IPet = {
         name: '',
         cpf_tutor: document,
