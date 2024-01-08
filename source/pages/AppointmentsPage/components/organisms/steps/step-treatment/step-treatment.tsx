@@ -1,10 +1,10 @@
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
 
 import { FieldArray, useFormikContext } from 'formik';
-import CardInput from '~/Components/organism/card-input';
+import CardInput from '~/Components/organism/card-input-treatment';
 import { OptionSelect } from '~/store/slices/appointment-vet/types';
 import { VeterinaryConsultation } from '~/types/appointment';
-import { StepProps } from '~/types/helpers';
+import { StepProps, Tabs } from '~/types/helpers';
 
 type CtxStepTreatment = Pick<VeterinaryConsultation, 'treatments'>;
 
@@ -103,14 +103,14 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     type="button"
                     label="Voltar"
                     onClick={() => {
-                        toggleTab(activeTab - 1);
+                        toggleTab((activeTab - 1) as Tabs);
                     }}
                 />
                 <BtnPrimary
                     type="button"
                     label="Próximo"
                     onClick={() => {
-                        toggleTab(activeTab + 1);
+                        toggleTab((activeTab + 1) as Tabs);
                     }}
                 />
             </div>

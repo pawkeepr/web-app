@@ -5,7 +5,7 @@ import FieldNumber from '~/Components/molecules/field-number';
 import FieldTextArea from '~/Components/molecules/field-text-area';
 import useFormikContextSafe from '~/hooks/use-formik-context-safe';
 import { VeterinaryConsultation } from '~/types/appointment';
-import { StepProps } from '~/types/helpers';
+import { StepProps, Tabs } from '~/types/helpers';
 
 type CtxStepAnamnese = Pick<
     VeterinaryConsultation,
@@ -113,7 +113,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                     label="Próximo"
                     disabled={!isValid}
                     onClick={() => {
-                        toggleTab(activeTab + 1);
+                        toggleTab((activeTab + 1) as Tabs);
                     }}
                 />
             </div>

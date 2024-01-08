@@ -5,40 +5,34 @@ import { BtnConfirm } from '~/Components/atoms/btn';
 import FieldControl from '~/Components/molecules/field-control';
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select';
 import FieldTextArea from '~/Components/molecules/field-text-area';
-import { QuestionTreatment } from '~/types/appointment';
+import { OptionSelect } from '~/store/slices/appointment-vet/types';
+import { QuestionAnamnesis } from '~/types/appointment';
 import { RecordsShapeYup } from '~/types/helpers';
 
-type Option = {
-    value: string;
-    label: string;
-};
-
 type CardInputProps = {
-    items?: Option[];
+    items?: OptionSelect[];
     handleSubmit?: (
-        data: QuestionTreatment,
+        data: QuestionAnamnesis,
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         formikHelpers: FormikHelpers<any>,
     ) => Promise<unknown>;
 };
 
-const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionTreatment>>(
+const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionAnamnesis>>(
     {
-        type_treatment: Yup.object().shape({
+        name_anamnesis: Yup.string().required('Campo obrigatório'),
+        type_anamnesis: Yup.object().shape({
             value: Yup.string().required('Campo obrigatório'),
             label: Yup.string().required('Campo obrigatório'),
         }),
-        name_treatment: Yup.string().required('Campo obrigatório'),
-        coin_treatment: Yup.string().required('Campo obrigatório'),
-        notes_treatment: Yup.string().optional(),
-        list_notes_treatment: Yup.array().optional(),
+        notes_anamnesis: Yup.string().optional(),
+        list_notes_anamnesis: Yup.array().optional(),
+        options_anamnesis: Yup.string().optional(),
         logical_list_default_anamnesis: Yup.array().optional(),
-        options_anamnesis: Yup.array().optional(),
-        value_coin_treatment: Yup.number().optional(),
     },
 );
 
-const makeOptions = (items: Option[]) => {
+const makeOptions = (items: OptionSelect[]) => {
     return items.map((item) => ({
         value: item.value,
         label: item.label,
@@ -46,9 +40,9 @@ const makeOptions = (items: Option[]) => {
     }));
 };
 
-const CardInput = ({
+const CardInputAnamnese = ({
     items = [],
-    handleSubmit = async (data: QuestionTreatment) => {
+    handleSubmit = async (data: QuestionAnamnesis) => {
         console.log('handleSubmit');
     },
 }: CardInputProps) => {
@@ -57,14 +51,15 @@ const CardInput = ({
     return (
         <Formik
             initialValues={{
-                coin_treatment: '',
-                name_treatment: '',
-                notes_treatment: '',
-                type_treatment: '',
-                list_notes_treatment: [] as string[],
-                value_coin_treatment: '',
+                list_notes_anamnesis: [] as string[],
                 logical_list_default_anamnesis: '',
+                name_anamnesis: '',
+                notes_anamnesis: '',
                 options_anamnesis: '',
+                type_anamnesis: {
+                    value: '',
+                    label: '',
+                },
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -72,24 +67,24 @@ const CardInput = ({
             {({ isValid, handleSubmit, values }) => (
                 <Form
                     onSubmit={handleSubmit}
-                    className="gap-2 flex flex-col card shadow-2xl p-8"
+                    className="gap-2 flex flex-col card shadow-2xl p-8 border-primary-500 border-2"
                 >
                     <FieldControlSelect
                         ctx={values}
-                        name="type_treatment"
+                        name="type_anamnesis"
                         required
                         label="Tipo"
                         options={options}
                     />
                     <FieldControl
                         ctx={values}
-                        name="name_treatment"
+                        name="name_anamnesis"
                         label="Nome"
                         required
                     />
                     <FieldTextArea
                         ctx={values}
-                        name={'notes_treatment' as ''}
+                        name={'notes_anamnesis'}
                         label="Observações"
                     />
 
@@ -105,4 +100,4 @@ const CardInput = ({
     );
 };
 
-export default CardInput;
+export default CardInputAnamnese;

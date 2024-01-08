@@ -49,7 +49,7 @@ export interface Anamnesis {
 }
 
 export interface QuestionAnamnesis {
-    type_anamnesis: string;
+    type_anamnesis: string | OptionSelect;
     name_anamnesis: string;
     notes_anamnesis: string;
     list_notes_anamnesis: string[];
