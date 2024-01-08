@@ -18,14 +18,14 @@ import {
 } from './breedType';
 
 export const Species = {
-    'dog': 'Cachorro',
-    'cat': 'Gato',
-    'horse': 'Cavalo',
-    'rabbit': 'Coelho',
-    'bird': 'Pássaro',
-    'fish': 'Peixe',
-    'reptile': 'Réptil',
-    'unknown': 'Desconhecido',
+    dog: 'Cachorro',
+    cat: 'Gato',
+    horse: 'Cavalo',
+    rabbit: 'Coelho',
+    bird: 'Pássaro',
+    fish: 'Peixe',
+    reptile: 'Réptil',
+    unknown: 'Desconhecido',
 } as const;
 
 export type Species = keyof typeof Species;
@@ -36,7 +36,7 @@ export const Gender = {
     unknown: 'unknown',
 } as const;
 
-export type Gender = keyof typeof Gender
+export type Gender = keyof typeof Gender;
 
 export const GenderBR = {
     male: 'Macho',
@@ -44,24 +44,23 @@ export const GenderBR = {
     unknown: 'Desconhecido',
 } as const;
 
-
-export type KeyOfGender = keyof typeof Gender
+export type KeyOfGender = keyof typeof Gender;
 
 export const MapOptionSpecies = {
-    'dog': 'dog',
-    'cat': 'cat',
-    'horse': 'horse',
-    'rabbit': 'rabbit',
-    'bird': 'bird',
-    'fish': 'fish',
-    'reptile': 'reptile',
-    'Cachorro': 'dog',
-    'Gato': 'cat',
-    'Cavalo': 'horse',
-    'Coelho': 'rabbit',
-    'Pássaro': 'bird',
-    'Peixe': 'fish',
-    'Réptil': 'reptile',
+    dog: 'dog',
+    cat: 'cat',
+    horse: 'horse',
+    rabbit: 'rabbit',
+    bird: 'bird',
+    fish: 'fish',
+    reptile: 'reptile',
+    Cachorro: 'dog',
+    Gato: 'cat',
+    Cavalo: 'horse',
+    Coelho: 'rabbit',
+    Pássaro: 'bird',
+    Peixe: 'fish',
+    Réptil: 'reptile',
 } as const;
 
 export type KeyOfMapOptionSpecies = keyof typeof MapOptionSpecies;
@@ -77,7 +76,7 @@ export const dog = {
         name: breedType,
         value: breedType,
     })),
-}
+};
 
 export const cat = {
     name: 'Gato',
@@ -90,7 +89,7 @@ export const cat = {
         name: breedType,
         value: breedType,
     })),
-}
+};
 
 export const horse = {
     name: 'Cavalo',
@@ -103,7 +102,7 @@ export const horse = {
         name: breedType,
         value: breedType,
     })),
-}
+};
 
 export const rabbit = {
     name: 'Coelho',
@@ -116,7 +115,7 @@ export const rabbit = {
         name: breedType,
         value: breedType,
     })),
-}
+};
 
 export const bird = {
     name: 'Pássaro',
@@ -129,7 +128,7 @@ export const bird = {
         name: breedType,
         value: breedType,
     })),
-}
+};
 
 export const fish = {
     name: 'Peixe',
@@ -142,7 +141,7 @@ export const fish = {
         name: breedType,
         value: breedType,
     })),
-}
+};
 
 export const reptile = {
     name: 'Réptil',
@@ -155,16 +154,15 @@ export const reptile = {
         name: breedType,
         value: breedType,
     })),
-}
+};
 
-export type SpeciesType = typeof dog | typeof cat | typeof horse | typeof rabbit | typeof bird | typeof fish | typeof reptile;
+export type SpeciesType =
+    | typeof dog
+    | typeof cat
+    | typeof horse
+    | typeof rabbit
+    | typeof bird
+    | typeof fish
+    | typeof reptile;
 
-export const species = [
-    dog,
-    cat,
-    horse,
-    rabbit,
-    bird,
-    fish,
-    reptile,
-];
+export const species = [dog, cat, horse, rabbit, bird, fish, reptile];
