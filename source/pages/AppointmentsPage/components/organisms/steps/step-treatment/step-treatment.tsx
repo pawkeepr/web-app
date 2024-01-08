@@ -47,7 +47,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     Obrigatório (*)
                 </span>
             </h4>
-            <FieldArray name="treatments">
+            <FieldArray name="treatments.questions_treatment">
                 {({ push, remove }) => (
                     <>
                         {values.treatments?.questions_treatment?.map(
