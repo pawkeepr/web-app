@@ -15,7 +15,7 @@ import {
 import { DTOProfile } from '~/types/profile';
 
 export class Appointments implements VeterinaryConsultation {
-    id: string | null;
+    id?: string | null;
     id_pet: string;
     cpf_tutor: string;
     crmv_vet: string;
