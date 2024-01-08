@@ -1,4 +1,5 @@
 import { FieldHookConfig } from 'formik';
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
 import { ObjPaths } from '~/types/helpers';
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -16,4 +17,5 @@ export type InputControlProps<T, Ctx = any> = FieldHookConfig<string> &
         mask?: string | Array<string | RegExp>;
         onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
         divClassName?: string;
+        div?: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
     };

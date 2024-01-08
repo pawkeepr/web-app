@@ -3,6 +3,7 @@ import { useField } from 'formik';
 import type { InputControlProps } from './types';
 
 import cn from 'classnames';
+import { ChangeEvent } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Input from '~/Components/atoms/input/input';
 import Label from '~/Components/atoms/label';
@@ -21,15 +22,16 @@ const FieldControl = <T, Ctx = any>({
     className,
     initialFocus = false,
     divClassName,
+    onChange: onChangeDefault,
     ...props
 }: InputControlProps<T, Ctx>) => {
-    const [inputProps, meta] = useField(props);
+    const [inputProps, meta] = useField(props.name as string);
     const id = props.name || props.id;
 
     const InputComponent = component as JSX.ElementType;
 
-    const onChange = (e) => {
-        props.onChange?.(e);
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        onChangeDefault?.(e);
         inputProps.onChange(e);
     };
 
