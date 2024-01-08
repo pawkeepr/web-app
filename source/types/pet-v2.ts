@@ -1,7 +1,6 @@
 import { Breed } from '~/store/slices/pets/breedType';
 import { Gender, Species } from '~/store/slices/pets/speciesType';
-import { Contact, Location } from '~/validations/activate';
-import { DTOProfile } from './profile';
+import { Contact, DTOProfile, Location } from './profile';
 
 type GenericSelect = {
     label: string;
