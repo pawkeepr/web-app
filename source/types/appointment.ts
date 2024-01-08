@@ -1,5 +1,5 @@
-import { Contact } from "~/validations/activate";
-import { Address } from "~/validations/address";
+import { IMainResponsibleGuardian, PetData } from './pet-v2';
+import { DTOProfile } from './profile';
 
 export interface VeterinaryConsultation {
     id_pet: string;
@@ -14,7 +14,7 @@ export interface VeterinaryConsultation {
     appointment_details: AppointmentDetails;
 }
 
-interface DateConsults {
+export interface DateConsults {
     date_consultation: string;
     time_consultation: string;
     type_consultation: string;
@@ -22,41 +22,13 @@ interface DateConsults {
     additional_remarks: string;
 }
 
-interface TutorPetVet {
-    tutor: Person;
-    pet: Pet;
-    veterinary: Person;
+export interface TutorPetVet {
+    tutor: IMainResponsibleGuardian;
+    pet: PetData;
+    veterinary: DTOProfile;
 }
 
-interface Person {
-    first_name: string;
-    last_name: string;
-    name: string;
-    url_img: string;
-    contact: Contact;
-    address: Address;
-}
-
-interface Pet {
-    name_pet: string;
-    microchip: string;
-    identification_number: string;
-    specie: string;
-    race: string;
-    blood_type: string;
-    blood_donator: string;
-    organ_donor: string;
-    sex: string;
-    date_birth: string;
-    color: string;
-    size: string;
-    weight: string;
-    castrated: string;
-    pedigree: string;
-    pedigree_registry: string;
-}
-
-interface DetailsPetConsultation {
+export interface DetailsPetConsultation {
     age: string;
     height: string;
     length: string;
@@ -70,7 +42,7 @@ export interface Anamnesis {
     note: string;
 }
 
-interface QuestionAnamnesis {
+export interface QuestionAnamnesis {
     type_anamnesis: string;
     name_anamnesis: string;
     notes_anamnesis: string;
@@ -84,7 +56,7 @@ export interface Treatments {
     note: string;
 }
 
-interface QuestionTreatment {
+export interface QuestionTreatment {
     type_treatment: string;
     name_treatment: string;
     notes_treatment: string;
@@ -95,13 +67,13 @@ interface QuestionTreatment {
     coin_treatment: string;
 }
 
-interface AppointmentDetails {
+export interface AppointmentDetails {
     payment: Payment;
     appointment_signature: AppointmentSignature;
     appointment_geolocation: AppointmentGeolocation;
 }
 
-interface Payment {
+export interface Payment {
     form_payment: string;
     value_payment: string;
     coin: string;
@@ -110,7 +82,7 @@ interface Payment {
     date_payment: string;
 }
 
-interface AppointmentSignature {
+export interface AppointmentSignature {
     signature_data: string;
     date_signature: string;
     type_signature: string;
@@ -120,7 +92,7 @@ interface AppointmentSignature {
     operational_system: string;
 }
 
-interface AppointmentGeolocation {
+export interface AppointmentGeolocation {
     latitude: string;
     longitude: string;
     precision: string;
