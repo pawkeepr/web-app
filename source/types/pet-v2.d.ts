@@ -79,7 +79,7 @@ export type IMainResponsibleGuardianSimplified = {
     neighborhood: string;
     street: string;
 };
-  
+
 export interface IPetV2Simplified {
     id?: string | null;
     cpf_tutor: string;

@@ -65,7 +65,7 @@ interface DetailsPetConsultation {
     imc: string;
 }
 
-interface Anamnesis {
+export interface Anamnesis {
     questions_anamnesis: QuestionAnamnesis[];
     note: string;
 }
@@ -79,7 +79,7 @@ interface QuestionAnamnesis {
     logical_list_default_anamnesis: string;
 }
 
-interface Treatments {
+export interface Treatments {
     questions_treatment: QuestionTreatment[];
     note: string;
 }

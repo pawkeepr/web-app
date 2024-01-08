@@ -9,20 +9,15 @@ const transformTrim = (value: any, originalValue: string) => {
         : originalValue;
 };
 
-type Specialty = {
-    value: string;
-    label: string;
-}
-
 export type Contact = {
-    email: string;
-    phone: string;
-    whatsapp: string;
-    facebook: string;
-    instagram: string;
-    twitter: string;
-    linkedIn: string;
-    youtube: string;
+    email: string | null;
+    phone: string | null;
+    whatsapp: string | null
+    facebook: string | null
+    instagram: string | null
+    twitter: string | null
+    linkedIn: string | null
+    youtube: string | null
 }
 
 export type Location = {
