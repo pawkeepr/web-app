@@ -100,10 +100,11 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
             <div className="flex justify-between flex-col items-start gap-2 mb-2">
                 <span className="font-bold">Anotações Gerais</span>
                 <FieldTextArea
+                    ctx={values}
                     label=""
                     className="rounded-md w-full border-gray-300"
                     component="textarea"
-                    name="notes"
+                    name="anamnesis.note"
                     type="text"
                 />
             </div>

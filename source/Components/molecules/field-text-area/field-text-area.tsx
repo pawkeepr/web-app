@@ -7,11 +7,9 @@ import Input from '../../atoms/text-area';
 import { ChangeEvent } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Label from '~/Components/atoms/label';
-import withControl from '~/Components/helpers/with-control';
 import { InputControlProps } from '../field-control';
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-const FieldTextArea = <T, Ctx = any>({
+const FieldTextArea = <T, Ctx>({
     endIcon,
     input = Input,
     required = false,
@@ -87,4 +85,4 @@ const FieldTextArea = <T, Ctx = any>({
     );
 };
 
-export default withControl(FieldTextArea);
+export default FieldTextArea;

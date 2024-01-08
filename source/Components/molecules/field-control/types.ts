@@ -2,8 +2,7 @@ import { FieldHookConfig } from 'formik';
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 import { ObjPaths } from '~/types/helpers';
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export type InputControlProps<T, Ctx = any> = FieldHookConfig<string> &
+export type InputControlProps<T, Ctx = unknown> = FieldHookConfig<string> &
     T & {
         [key: string]: unknown;
         endIcon?: React.ReactNode;
@@ -13,6 +12,8 @@ export type InputControlProps<T, Ctx = any> = FieldHookConfig<string> &
         input?: Omit<React.ElementType, 'name'> | 'input';
         startIcon?: React.ReactNode;
         required?: boolean;
+        condition?: boolean;
+        isLoading?: boolean;
         pattern?: string;
         mask?: string | Array<string | RegExp>;
         onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
