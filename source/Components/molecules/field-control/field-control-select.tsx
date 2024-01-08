@@ -1,48 +1,53 @@
-import { useFormikContext } from "formik";
+import { useFormikContext } from 'formik';
 
-import { useCallback } from "react";
+import { useCallback } from 'react';
 import { Props } from 'react-select';
-import Label from "~/Components/atoms/label";
-import Select from "~/Components/atoms/select";
-import type { InputControlProps } from "./types";
+import Label from '~/Components/atoms/label';
+import Select from '~/Components/atoms/select';
+import type { InputControlProps } from './types';
 
 type Option = {
     value: string | number;
     label: string;
-    [key: string]: any;
-}
+    [key: string]: unknown;
+};
 
-type FieldSelectControl<Ctx = any> = InputControlProps<Props, Ctx> & {
-    name: string
-    deps?: any[]
-    onChangeValue?: (item: any) => void;
-    options?: Option[]
-}
+type FieldSelectControl<Ctx> = InputControlProps<Props, Ctx> & {
+    name: string;
+    deps?: unknown[];
+    onChangeValue?: (item: unknown) => void;
+    options?: Option[];
+};
 
-const FieldControlSelect = <Ctx extends unknown>({
+const FieldControlSelect = <Ctx,>({
     label,
     required = false,
     className,
     name,
     divClassName,
     options = [],
-    onChangeValue = () => { },
+    onChangeValue = () => {},
     ...props
 }: FieldSelectControl<Ctx>) => {
-    const { values, setFieldValue, } = useFormikContext<any>();
+    const { values, setFieldValue } = useFormikContext<Ctx>();
 
     const onChange = useCallback(
-        (option: any) => {
+        (option: unknown) => {
             onChangeValue?.(option);
             setFieldValue(name, option, true);
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [setFieldValue]
+        [setFieldValue],
     );
 
     return (
         <div className={divClassName}>
-            <Label label={label} required={required} id={name} separator={':'} />
+            <Label
+                label={label}
+                required={required}
+                id={name}
+                separator={':'}
+            />
             <Select
                 {...props}
                 id={name}
