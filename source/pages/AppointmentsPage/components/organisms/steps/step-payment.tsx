@@ -1,20 +1,20 @@
-import { Form, useFormikContext } from "formik";
-import { useState } from "react";
-import { Input, Label } from "reactstrap";
-import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
-import CardTutor from "~/Components/molecules/card-tutor";
-import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
-import FieldNumber from "~/Components/molecules/field-number/field-number";
-import { StepProps } from "~/types/helpers";
-import { PDFViewer } from '@react-pdf/renderer';
+import { Form } from 'formik';
+import { useState } from 'react';
+import { Input, Label } from 'reactstrap';
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
+import CardTutor from '~/Components/molecules/card-tutor';
+import FieldControlSelect from '~/Components/molecules/field-control/field-control-select';
+import FieldNumber from '~/Components/molecules/field-number/field-number';
+import { StepProps } from '~/types/helpers';
 
-import MyDocument from "~/utils/pdf-generator/generatePDF";
+import useFormikContextSafe from '~/hooks/use-formik-context-safe';
+import { VeterinaryConsultation } from '~/types/appointment';
 
+type CtxStepPayment = Pick<VeterinaryConsultation, 'appointment_details'>;
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
-    const { handleSubmit, isSubmitting } = useFormikContext();
-    
-   
+    const { handleSubmit, isSubmitting, values } =
+        useFormikContextSafe<CtxStepPayment>();
 
     const [event, setEvent] = useState<string>('credit');
 
@@ -36,11 +36,13 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="credit"
-                            name="payments.form_payment"
+                            name="appointment_details.payment.form_payment"
                             type="radio"
                             className="form-check-input"
                             defaultChecked
-                            onChange={(e) => { setEvent('credit') }}
+                            onChange={(e) => {
+                                setEvent('credit');
+                            }}
                             required
                         />
                         <Label className="form-check-label" htmlFor="credit">
@@ -50,9 +52,11 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="debit"
-                            name="payments.form_payment"
+                            name="appointment_details.payment.form_payment"
                             type="radio"
-                            onChange={(e) => { setEvent('debit') }}
+                            onChange={(e) => {
+                                setEvent('debit');
+                            }}
                             className="form-check-input"
                             required
                         />
@@ -63,8 +67,10 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="pix"
-                            name="payments.form_payment"
-                            onChange={(e) => { setEvent('pix') }}
+                            name="appointment_details.payment.form_payment"
+                            onChange={(e) => {
+                                setEvent('pix');
+                            }}
                             type="radio"
                             className="form-check-input"
                             required
@@ -76,8 +82,10 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     <div className="form-check form-check-inline">
                         <Input
                             id="cash"
-                            name="payments.form_payment"
-                            onChange={(e) => { setEvent('cash') }}
+                            name="appointment_details.payment.form_payment"
+                            onChange={(e) => {
+                                setEvent('cash');
+                            }}
                             type="radio"
                             className="form-check-input"
                             required
@@ -89,15 +97,19 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                 </div>
 
                 <FieldControlSelect
+                    ctx={values}
                     label="Quantidade de Parcelas"
                     placeholder="Selecione a quantidade de parcelas"
-                    name="payments.number_installments"
+                    name="appointment_details.payment.number_installments"
                     options={options}
                     isDisabled={event !== 'credit'}
                 />
                 <FieldNumber
+                    ctx={values}
+                    locales="pt-BR"
+                    currency="BRL"
                     label="Valor do Pagamento? (R$)"
-                    name="payments.value_payment"
+                    name="appointment_details.payment.value_payment"
                 />
             </div>
 
@@ -115,11 +127,11 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     label="Concluir Consulta"
                 />
             </div>
-            <div>
+            {/* <div>
                 <PDFViewer>
                     <MyDocument />
                 </PDFViewer>
-            </div>
+            </div> */}
         </Form>
     );
 };
