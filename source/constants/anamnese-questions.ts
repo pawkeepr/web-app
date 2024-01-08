@@ -1,125 +1,103 @@
-export const questions_digestive_system = [
+export type Question = {
+    question: string;
+    type: string;
+};
+
+export const questions_digestive_system: Question[] = [
     {
         question: 'O Animal está se alimentando normalmente?',
-        name: 'questions_digestive_system_1',
+        type: 'digestive_system',
     },
     {
         question: 'O Animal está bebendo água normalmente?',
-        name: 'questions_digestive_system_2',
+        type: 'digestive_system',
     },
     {
         question: 'O Animal está defecando normalmente?',
-        name: 'questions_digestive_system_3',
+        type: 'digestive_system',
     },
     {
         question: 'O Animal está vomitando?',
-        name: 'questions_digestive_system_4',
+        type: 'digestive_system',
     },
-]
+];
 
-export const questions_respiratory_system = [
+export const questions_respiratory_system: Question[] = [
     {
         question: 'O Animal apresenta secreção nasal ou ocular?',
-        name: 'questions_respiratory_system_1',
+        type: 'questions_respiratory',
     },
     {
         question: 'O Animal apresenta tosse?',
-        name: 'questions_respiratory_system_2',
+        type: 'questions_respiratory',
     },
     {
         question: 'O Animal apresenta espirros frequentes?',
-        name: 'questions_respiratory_system_3',
+        type: 'questions_respiratory',
     },
     {
         question: 'O Animal apresenta dificuldade para respirar?',
-        name: 'questions_respiratory_system_4',
+        type: 'questions_respiratory',
     },
-]
+];
 
-export const questions_urinary_system = [
+export const questions_urinary_system: Question[] = [
     {
         question: 'O Animal apresenta dificuldade para urinar?',
-        name: 'questions_urinary_system_1',
+        type: 'questions_urinary',
     },
     {
-        id: 2,
         question: 'O Animal apresenta sangue na urina?',
-        name: 'questions_urinary_system_2',
+        type: 'questions_urinary',
     },
-]
+];
 
-export const questions_nervous_system = [
+export const questions_nervous_system: Question[] = [
     {
         question: 'O Animal apresenta convulsões?',
-        name: 'questions_nervous_system_1',
+        type: 'questions_nervous',
     },
     {
-        question: 'O Animal apresenta alterações de comportamento e/ou hábitos?',
-        name: 'questions_nervous_system_2',
+        question:
+            'O Animal apresenta alterações de comportamento e/ou hábitos?',
+        type: 'questions_nervous',
     },
     {
         question: 'O Animal apresenta dificuldade visual ou auditiva?',
-        name: 'questions_nervous_system_3',
+        type: 'questions_nervous',
     },
     {
         question: 'O Animal apresenta alguma alteração na sua movimentação?',
-        name: 'questions_nervous_system_4',
+        type: 'questions_nervous',
     },
-]
+];
 
-export const questions_locomotive_system = [
+export const questions_locomotive_system: Question[] = [
     {
         question: 'O Animal apresenta dificuldade para andar?',
-        name: 'questions_locomotive_system_1',
+        type: 'questions_locomotive',
     },
     {
         question: 'O Animal apresenta dor ao toque?',
-        name: 'questions_locomotive_system_2',
+        type: 'questions_locomotive',
     },
     {
-
         question: 'O Animal apresenta dificuldade para se levantar?',
-        name: 'questions_locomotive_system_3',
+        type: 'questions_locomotive',
     },
     {
         question: 'Apresenta alguma deformidade na região da coluna?',
-        name: 'questions_locomotive_system_4',
+        type: 'questions_locomotive',
     },
     {
         question: 'Ocorreu algum tipo de trauma?',
-        name: 'questions_locomotive_system_5',
+        type: 'questions_locomotive',
     },
-]
-
-// const physical_activity = ['Caminhadas', 'Corridas', 'Natação', 'Passeios', 'Cabo-de-guerra', 'Varetinhas', 'Bolinhas']
+];
 
 export const questions_physical_activity = [
     {
-        question: 'Varetinhas',
-        name: 'questions_physical_activity_1',
+        question: 'O Animal pratica alguma atividade física?',
+        name: 'physical_activity',
     },
-    {
-        question: 'Bolinhas',
-        name: 'questions_physical_activity_2',
-    },
-    {
-        question: 'Cabo-de-guerra',
-        name: 'questions_physical_activity_3',
-    },
-    {
-        question: 'Passeios',
-        name: 'questions_physical_activity_4',
-    },
-    {
-        question: 'Natação',
-        name: 'questions_physical_activity_5',
-    },
-    {
-        question: 'Corridas',
-        name: 'questions_physical_activity_6',
-    },
-    {
-        question: 'Caminhadas',
-        name: 'questions_physical_activity_7',
-    },
-]
+];
