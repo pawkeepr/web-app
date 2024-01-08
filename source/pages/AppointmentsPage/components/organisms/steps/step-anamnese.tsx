@@ -1,148 +1,101 @@
-/* eslint-disable react/jsx-no-undef */
+import { useEffect, useMemo } from 'react';
+import * as yup from 'yup';
+import { BtnPrimary } from '~/Components/atoms/btn';
+import FieldNumber from '~/Components/molecules/field-number';
+import FieldTextArea from '~/Components/molecules/field-text-area';
+import useFormikContextSafe from '~/hooks/use-formik-context-safe';
+import { VeterinaryConsultation } from '~/types/appointment';
+import { StepProps } from '~/types/helpers';
 
-import { useMemo, useState } from "react";
-import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
-import ControlSwitchDiv from "~/Components/molecules/control-switch-div";
-import FieldNumber from "~/Components/molecules/field-number";
-import FieldTextArea from "~/Components/molecules/field-text-area";
-import {
-    questions_digestive_system,
-    questions_locomotive_system,
-    questions_nervous_system,
-    questions_physical_activity,
-    questions_respiratory_system,
-    questions_urinary_system
-} from "~/constants/anamnese-questions";
-import { StepProps } from "~/types/helpers";
-import AnswerSwitch from "../../molecules/answer-switch/answer-switch";
-import * as yup from "yup";
-import { useFormikContext } from "formik";
-import { InitialValues } from "~/pages/NewPetPage";
+type CtxStepAnamnese = Pick<
+    VeterinaryConsultation,
+    'anamnesis' | 'details_pet_consultation'
+>;
 
 const schema = yup.object().shape({
-    weight: yup.number().max(100).required("Campo obrigatório"),
+    weight: yup.number().max(100).required('Campo obrigatório'),
 });
 
-
 // Função para calcular o IMC de um animal
+// height: altura em centímetros
+// weight: peso em quilos
 function calcularIMC(height: number, weight: number): number {
     if (height === 0 || weight === 0) {
         return 0; // Evita divisão por zero
     }
-    const imc = weight / ((height / 100) * (height / 100)); // Converter altura para metros
+
+    const heightInMeters = height / 100; // Converter altura para metros
+
+    const imc = weight / (heightInMeters * heightInMeters); // Converter altura para metros
     return imc;
 }
 
-
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
-    const [heightPet, setHeightPet] = useState(0);
-    const [weightPet, setWeightPet] = useState(0);
-    const { values } = useFormikContext<InitialValues>();
+    const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>();
 
+    const height = useMemo(
+        () => values.details_pet_consultation?.height,
+        [values],
+    );
+    const weight = useMemo(
+        () => values.details_pet_consultation?.weight,
+        [values],
+    );
+
+    useEffect(() => {
+        if (height && weight) {
+            const imc = calcularIMC(Number(height), Number(weight));
+            setFieldValue('details_pet_consultation.imc', imc);
+        }
+    }, [height, weight]);
 
     const isValid = useMemo(() => {
-        console.log(schema.isValidSync(values), values);
-             
         return schema.isValidSync(values);
-    },[values]);
+    }, [values]);
 
     return (
         <section className="card card-body shadow-lg">
             <h4 className="text-center font-sans font-semibold text-base capitalize">
                 Anamnese
                 <br />
-                <span className="text-xs font-bold text-secondary-500">Obrigatório (*)</span>
+                <span className="text-xs font-bold text-secondary-500">
+                    Obrigatório (*)
+                </span>
             </h4>
 
             <div className="grid grid-cols-3 gap-3">
-
                 <FieldNumber
+                    ctx={values}
                     label="Peso"
                     placeholder="Peso do pet em quilos, exemplo = 0.5 (500 gramas)"
                     required
-                    onChange={(e: any) => { setWeightPet(e.target.value) }}
-                    name="weight"
-                    type="number"
+                    name="details_pet_consultation.weight"
                 />
 
                 <FieldNumber
+                    ctx={values}
                     label="Altura"
                     placeholder="Altura do pet em centímetros, exemplo = 32"
-                    onChange={(e: any) => { setHeightPet(e.target.value) }}
-                    name="height"
-                    type="number"
+                    name="details_pet_consultation.height"
                 />
 
                 <FieldNumber
+                    ctx={values}
                     label="Comprimento"
                     placeholder="Comprimento do pet em centímetros "
                     className="border-gray-300"
-                    name="length"
-                    type="number"
+                    name="details_pet_consultation.length"
                 />
 
                 <div>
-                    {weightPet > 0 && heightPet > 0 && (
-                        <h2
-                            className="m-4 font-bold"
-                        >
-                            O IMC do animal é: {calcularIMC(heightPet, weightPet).toFixed(2)}
+                    {values.details_pet_consultation?.imc && (
+                        <h2 className="m-4 font-bold">
+                            O IMC do animal é:{' '}
+                            {values.details_pet_consultation?.imc?.toFixed(2)}
                         </h2>
                     )}
                 </div>
-
-
             </div>
-
-            <AnswerSwitch
-                title="Atividade Física"
-                name='physical_activity'
-                answers={questions_physical_activity}
-            />
-
-            <AnswerSwitch
-                title="Sistema Digestivo"
-                name='digestive_system'
-                answers={questions_digestive_system}
-            />
-
-            <AnswerSwitch
-                title="Sistema Respiratório"
-                name='respiratory_system'
-                answers={questions_respiratory_system}
-            />
-
-
-            <AnswerSwitch
-                title="Sistema Urinário"
-                name='urinary_system'
-                answers={questions_urinary_system}
-            />
-
-            <AnswerSwitch
-                title="Sistema Nervoso"
-                name='nervous_system'
-                answers={questions_nervous_system}
-            />
-
-            <AnswerSwitch
-                title="Sistema Locomotor"
-                name='locomotor_system'
-                answers={questions_locomotive_system}
-            />
-
-            <ControlSwitchDiv
-                name="apply_disease"
-                label="Doenças"
-            >
-                <FieldTextArea
-                    label="Orientações e Anotações"
-                    className="rounded-md w-full border-gray-300"
-                    component="textarea"
-                    name="exams"
-                    type="text"
-                />
-            </ControlSwitchDiv>
 
             <div className="flex justify-between flex-col items-start gap-2 mb-2">
                 <span className="font-bold">Anotações Gerais</span>
@@ -155,12 +108,6 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 />
             </div>
             <div className="flex align-items-center justify-center gap-3 mt-4">
-                <BtnCancel
-                    label="Voltar"
-                    onClick={() => {
-                        toggleTab(activeTab - 1);
-                    }}
-                />
                 <BtnPrimary
                     label="Próximo"
                     disabled={!isValid}
