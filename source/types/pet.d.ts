@@ -11,7 +11,7 @@ export type IPet = {
     cpf_tutor: string;
     specie: Species;
     race: Breed;
-    microchip?: string
+    microchip?: string;
     identification_number?: string;
     health_insurance?: IHealthInsurance;
     chip_number?: string;
@@ -34,5 +34,5 @@ export type IPet = {
     created_at?: string;
     updated_at?: string;
     sex: Gender;
-    veterinary: DTOProfile
-}
+    veterinary: DTOProfile;
+};
