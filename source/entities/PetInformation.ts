@@ -55,11 +55,7 @@ export class PetInformation implements PetData {
     }
 
     defineSpecie(specie: Species | GenericSelect): PetInformation {
-        if (typeof specie === 'object') {
-            specie = specie.value as Species
-        }
-
-        this.specie = specie
+        this.specie = typeof specie === 'string' ? specie : specie.value as Species
         return this
     }
 
@@ -69,11 +65,7 @@ export class PetInformation implements PetData {
     }
 
     defineBloodType(bloodType: string | GenericSelect): PetInformation {
-        if (typeof bloodType === 'object') {
-            bloodType = bloodType.value as string
-        }
-
-        this.blood_type = bloodType
+        this.blood_type = typeof bloodType === 'string' ? bloodType : bloodType.value as string
         return this
     }
 
@@ -113,20 +105,12 @@ export class PetInformation implements PetData {
     }
 
     defineRace(race: Breed | GenericSelect) {
-        if (typeof race === 'object') {
-            race = race.value as Breed
-        }
-
-        this.race = race
+        this.race = typeof race === 'string' ? race : race.value as Breed
         return this
     }
 
     defineSex(sex: Gender | GenericSelect) {
-        if (typeof sex === 'object') {
-            sex = sex.value as Gender
-        }
-
-        this.sex = sex
+        this.sex = typeof sex === 'string' ? sex : sex.value as Gender
         return this
     }
 

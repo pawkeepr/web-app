@@ -22,33 +22,33 @@ export class Pet implements IPetV2 {
 
         this.pet_information = {
             name_pet: '',
-            microchip: '',
-            identification_number: '',
+            microchip: null,
+            identification_number: null,
             race: 'unknown',
             specie: 'unknown',
             blood_type: '',
             blood_donator: 'no',
-            color: '',
+            color: 'unknown',
             date_birth: '',
             organ_donor: 'no',
             pedigree: 'no',
             pedigree_registry: '',
             sex: 'unknown',
-            size: '',
-            weight: '',
+            size: null,
+            weight: null,
             castrated: 'no',
         };
         this.health_insurance = {
-            name: '',
-            type_health: '',
-            number_health: '',
-            validity: ''
+            name: null,
+            type_health: null,
+            number_health: null,
+            validity: null
         };
         this.main_responsible_guardian = {
             address: {
                 city: '',
                 complement: '',
-                country: '',
+                country: 'BR',
                 neighborhood: '',
                 number: '',
                 state: '',
@@ -59,11 +59,11 @@ export class Pet implements IPetV2 {
                 email: '',
                 phone: '',
                 whatsapp: '',
-                facebook: '',
-                instagram: '',
-                linkedIn: '',
-                twitter: '',
-                youtube: ''
+                facebook: null,
+                instagram: null,
+                linkedIn: null,
+                twitter: null,
+                youtube: null
             },
             name: '',
             first_name: '',
@@ -71,10 +71,10 @@ export class Pet implements IPetV2 {
             url_img: '',
         };
         this.secondary_responsible_guardian = {
-            name_tutor: '',
-            cpf_tutor: '',
-            phone_tutor: '',
-            emaiL_tutor: '',
+            name_tutor: null,
+            cpf_tutor: null,
+            phone_tutor: null,
+            emaiL_tutor: null,
         },
             this.veterinary = {
                 cpf_cnpj: '',
@@ -103,8 +103,7 @@ export class Pet implements IPetV2 {
     }
 
     definePetInformation(pet_information: PetData): this {
-        const data = PetInformation.build(pet_information)
-        this.pet_information = data;
+        this.pet_information = PetInformation.build(pet_information);
         return this;
     }
 
@@ -141,20 +140,18 @@ export class Pet implements IPetV2 {
         return this;
     }
     defineVeterinary(veterinary: DTOProfile): this {
-        // #TODO: deve-se criar uma entidade para veterinary
         this.veterinary = Veterinary.build(veterinary);
         return this;
     }
 
 
     static build(params: IPet): Pet {
-        console.log(params)
         return new Pet()
             .defineID(params?.id as string)
             .defineCpfTutor(params?.cpf_tutor)
             .definePetInformation({
                 blood_donator: params?.blood_donator || 'no',
-                blood_type: params?.bloodType || '',
+                blood_type: params?.bloodType || 'unknown',
                 color: params?.color || '',
                 date_birth: params?.date_birth as string || '',
                 microchip: params?.chip_number || '',
@@ -189,12 +186,12 @@ export class Pet implements IPetV2 {
             .defineLocationTutor({
                 city: params?.ownerEmergencyContact?.address?.city || '',
                 complement: params?.ownerEmergencyContact?.address?.complement || '',
-                country: params?.ownerEmergencyContact?.address?.country || '',
+                country: params?.ownerEmergencyContact?.address?.country || 'BR',
                 neighborhood: params?.ownerEmergencyContact?.address?.neighborhood || '',
                 number: params?.ownerEmergencyContact?.address?.number || '',
                 state: params?.ownerEmergencyContact?.address?.state || '',
                 street: params?.ownerEmergencyContact?.address?.street || '',
-                zipCode: params?.ownerEmergencyContact?.address?.zipCode || ''
+                zipCode: params?.ownerEmergencyContact?.address?.zipCode || '',
             })
             .defineTutorInformation({
                 name: params?.ownerEmergencyContact?.name,
