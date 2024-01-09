@@ -27,8 +27,6 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
         color: 'rgb(255 200 107);',
     }));
 
-    console.log(errors);
-
     return (
         <Form className="card card-body shadow-lg" onSubmit={handleSubmit}>
             <h4 className="text-center font-sans font-semibold text-base capitalize">

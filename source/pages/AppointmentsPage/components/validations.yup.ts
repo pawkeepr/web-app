@@ -74,10 +74,18 @@ export const schemaStepAppointmentDetails = yup
             .shape<ShapeAppointmentDetailsPayment>({
                 coin: yup.string().optional(),
                 date_payment: yup.string().optional(),
-                form_payment: yup.string().required(),
+                form_payment: yup
+                    .string()
+                    .oneOf(['cash', 'credit', 'debit', 'pix'])
+                    .required(),
                 number_installments: yup.number().optional(),
                 status_payment: yup.string().optional(),
-                value_payment: yup.number().required(),
+                value_payment: yup
+                    .number()
+                    .transform((value) =>
+                        Number.isNaN(value) ? undefined : Number(value),
+                    )
+                    .required(),
             })
             .required(),
     });
@@ -95,7 +103,7 @@ export const schemaStepAppointment = yup
         details_pet_consultation: schemaValidationDetailsPetConsultation,
         anamnesis: yup.object().optional(),
         treatments: schemaStepTreatmentValidation,
-        appointment_details: yup.object().optional(),
+        appointment_details: schemaStepAppointmentDetails,
     });
 
 export type SchemaYupAppointment = yup.InferType<typeof schemaStepAppointment>;

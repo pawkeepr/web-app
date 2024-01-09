@@ -86,10 +86,10 @@ const initialValues = (
         payment: {
             coin: '',
             date_payment: '',
-            form_payment: '',
+            form_payment: 'unknown',
             number_installments: '',
             status_payment: '',
-            value_payment: '',
+            value_payment: '0',
         },
     },
     tutor_pet_vet: {
