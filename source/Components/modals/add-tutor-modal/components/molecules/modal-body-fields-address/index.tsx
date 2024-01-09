@@ -1,6 +1,6 @@
 import { useFormikContext } from 'formik';
 import { useCallback, useState } from 'react';
-import MaskedInput from 'react-input-mask';
+import FieldCep from '~/Components/molecules/field-cep';
 import FieldControl from '~/Components/molecules/field-control/field-control';
 import { IAddress } from '~/helpers/fetch-address-by-cep';
 import useFetchAddress from '~/hooks/use-fetch-address';
@@ -45,12 +45,11 @@ const ModalBodyFieldsAddress = () => {
 
     return (
         <div className="grid grid-cols-3 ">
-            <FieldControl
+            <FieldCep
                 label="CEP"
                 name="cep"
                 placeholder="Cep"
                 type="text"
-                component={MaskedInput as any}
                 mask={'99999-999'}
                 required
             />

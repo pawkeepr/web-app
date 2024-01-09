@@ -1,13 +1,4 @@
-// Import Images
-
-//Import actions
-//redux
-
-import 'react-toastify/dist/ReactToastify.css';
-
-// Formik
 import { Form, Formik } from 'formik';
-import MaskedInput from 'react-input-mask';
 import * as Yup from 'yup';
 import { BtnAvatar, BtnPrimary } from '~/Components/atoms/btn';
 import FieldControl from '~/Components/molecules/field-control';
@@ -99,18 +90,6 @@ const AddTutorModal = ({ children, item }: AddModalProps) => {
                                     className=" "
                                     placeholder="Email"
                                     type="text"
-                                />
-
-                                <FieldControl
-                                    label="Telefone/Celular"
-                                    name="phone"
-                                    className=" "
-                                    placeholder="Telefone/Celular"
-                                    type="text"
-                                    component={MaskedInput as any}
-                                    mask={'(99) 99999-9999'}
-                                    maskChar={null}
-                                    required
                                 />
                             </div>
                             <ModalBodyFieldsAddress />
