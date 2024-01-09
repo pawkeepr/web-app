@@ -1,7 +1,7 @@
+import { OptionSelect } from '~/Components/molecules/field-control';
 import {
     IGeolocationAppointment,
     ISignatureAppointment,
-    OptionSelect,
 } from '~/store/slices/appointment-vet/types';
 import { IMainResponsibleGuardian, PetData } from './pet-v2';
 import { DTOProfile } from './profile';

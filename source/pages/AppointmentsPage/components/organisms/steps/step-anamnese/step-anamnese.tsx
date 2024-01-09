@@ -2,12 +2,11 @@ import { FieldArray } from 'formik';
 import { useEffect, useMemo } from 'react';
 import * as yup from 'yup';
 import { BtnPrimary } from '~/Components/atoms/btn';
+import { OptionSelect } from '~/Components/molecules/field-control';
 import FieldNumber from '~/Components/molecules/field-number';
-import FieldTextArea from '~/Components/molecules/field-text-area';
 import CardInputAnamnese from '~/Components/organism/card-input-anamnese';
-import { questions_digestive_system } from '~/constants/anamnese-questions';
+import { questions } from '~/constants/anamnese-questions';
 import useFormikContextSafe from '~/hooks/use-formik-context-safe';
-import { OptionSelect } from '~/store/slices/appointment-vet/types';
 import { VeterinaryConsultation } from '~/types/appointment';
 import { StepProps, Tabs } from '~/types/helpers';
 
@@ -100,16 +99,6 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                     )}
                 </div>
             </div>
-            <div className="flex justify-between flex-col items-start gap-2 mb-2">
-                <span className="font-bold">Anotações Gerais</span>
-                <FieldTextArea
-                    ctx={values}
-                    className="rounded-md w-full border-gray-300"
-                    component="textarea"
-                    name="anamnesis.note"
-                    type="text"
-                />
-            </div>
 
             <FieldArray name="anamnese.questions_treatment">
                 {({ push, remove }) => (
@@ -149,8 +138,8 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                             ),
                         )}
                         <CardInputAnamnese
-                            items={questions_digestive_system.map((item) => ({
-                                value: item.type,
+                            items={questions.map((item) => ({
+                                value: item.id,
                                 label: item.question,
                                 color: 'rgb(255 200 107);',
                             }))}

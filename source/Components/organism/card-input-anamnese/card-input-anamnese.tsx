@@ -1,11 +1,11 @@
 import { Form, Formik, FormikHelpers } from 'formik';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
-import { BtnConfirm } from '~/Components/atoms/btn';
+import { BtnConfirm, BtnSecondary } from '~/Components/atoms/btn';
+import { OptionSelect } from '~/Components/molecules/field-control';
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select';
 import FieldTextArea from '~/Components/molecules/field-text-area';
 import RadioGroup from '~/Components/molecules/radio-group';
-import { OptionSelect } from '~/store/slices/appointment-vet/types';
 import { QuestionAnamnesis } from '~/types/appointment';
 import { RecordsShapeYup } from '~/types/helpers';
 
@@ -47,77 +47,76 @@ const CardInputAnamnese = ({
     },
 }: CardInputProps) => {
     const options = useMemo(() => makeOptions(items), [items]);
+    const [selected, setSelected] = useState<OptionSelect>(options[0]);
 
     return (
-        <Formik
-            initialValues={{
-                list_notes_anamnesis: [] as string[],
-                logical_list_default_anamnesis: 'logical',
-                name_anamnesis: '',
-                notes_anamnesis: '',
-                options_anamnesis: 'yes',
-                type_anamnesis: {
-                    value: '',
-                    label: '',
-                },
-            }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-        >
-            {({ isValid, handleSubmit, values }) => (
-                <Form
-                    onSubmit={handleSubmit}
-                    className="gap-2 flex flex-col card shadow-2xl p-8 border-primary-500 border-2"
-                >
-                    <h1 className="text-center font-sans font-semibold text-base capitalize">
-                        Questão de Anamnese
-                        <br />
-                    </h1>
-                    <FieldControlSelect
-                        ctx={values}
-                        name="type_anamnesis"
-                        required
-                        label="Questão"
-                        options={options}
-                    />
-                    <RadioGroup
-                        ctx={values}
-                        title="Resposta"
-                        checked={values.options_anamnesis}
-                        name="options_anamnesis"
-                        items={[
-                            {
-                                id: 'yes',
-                                name: 'Sim',
-                                value: 'yes',
-                            },
-                            {
-                                id: 'no',
-                                name: 'Não',
-                                value: 'no',
-                            },
-                            {
-                                id: 'other',
-                                name: 'Outro',
-                                value: 'other',
-                            },
-                        ]}
-                    />
-                    <FieldTextArea
-                        ctx={values}
-                        name="notes_anamnesis"
-                        label="Anotações"
-                    />
-
-                    <BtnConfirm
-                        disabled={!isValid}
-                        className="w-full text-white"
-                        label="Responder"
-                        type="submit"
-                    />
-                </Form>
-            )}
-        </Formik>
+        <div className="gap-2 flex flex-col card shadow-2xl p-8 border-primary-500 border-2">
+            <Formik
+                initialValues={{
+                    list_notes_anamnesis: [] as string[],
+                    logical_list_default_anamnesis: 'logical',
+                    name_anamnesis: '',
+                    notes_anamnesis: '',
+                    options_anamnesis: 'yes',
+                    type_anamnesis: '',
+                }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+            >
+                {({ isValid, handleSubmit, values }) => (
+                    <Form onSubmit={handleSubmit}>
+                        <FieldControlSelect
+                            ctx={values}
+                            name="type_anamnesis"
+                            required
+                            label="Questão"
+                            value={selected}
+                            onChangeValue={(value) =>
+                                setSelected(value as OptionSelect)
+                            }
+                            options={options}
+                        />
+                        <RadioGroup
+                            ctx={values}
+                            title="Resposta"
+                            checked={values.options_anamnesis}
+                            name="options_anamnesis"
+                            items={[
+                                {
+                                    id: 'yes',
+                                    name: 'Sim',
+                                    value: 'yes',
+                                },
+                                {
+                                    id: 'no',
+                                    name: 'Não',
+                                    value: 'no',
+                                },
+                                {
+                                    id: 'other',
+                                    name: 'Outro',
+                                    value: 'other',
+                                },
+                            ]}
+                        />
+                        <FieldTextArea
+                            ctx={values}
+                            name="notes_anamnesis"
+                            label="Anotações"
+                        />
+                        <div className="flex align-items-center justify-center gap-3 mt-4">
+                            <BtnSecondary label="Pular" type="submit" />
+                            <BtnConfirm
+                                disabled={!isValid}
+                                className="text-white"
+                                label="Responder"
+                                type="submit"
+                            />
+                        </div>
+                    </Form>
+                )}
+            </Formik>
+        </div>
     );
 };
 

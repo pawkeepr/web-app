@@ -1,8 +1,8 @@
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
 
 import { FieldArray, useFormikContext } from 'formik';
+import { OptionSelect } from '~/Components/molecules/field-control';
 import CardInputTreatment from '~/Components/organism/card-input-treatment';
-import { OptionSelect } from '~/store/slices/appointment-vet/types';
 import { VeterinaryConsultation } from '~/types/appointment';
 import { StepProps, Tabs } from '~/types/helpers';
 

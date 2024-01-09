@@ -1,3 +1,4 @@
+import { OptionSelect } from '~/Components/molecules/field-control';
 import { LOADING } from '~/helpers/loading';
 import {
     ADD_FAIL,
@@ -204,10 +205,6 @@ export interface IAnamnesis {
     anamnesis?: IAnamnesisAppointment;
 }
 
-export type OptionSelect = {
-    value: string;
-    label: string;
-};
 export interface ITreatment {
     type: string | OptionSelect;
     name: string;

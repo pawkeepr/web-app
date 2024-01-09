@@ -2,19 +2,16 @@ import { Form, Formik, FormikHelpers } from 'formik';
 import { useMemo } from 'react';
 import * as Yup from 'yup';
 import { BtnConfirm } from '~/Components/atoms/btn';
-import FieldControl from '~/Components/molecules/field-control';
+import FieldControl, {
+    OptionSelect,
+} from '~/Components/molecules/field-control';
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select';
 import FieldTextArea from '~/Components/molecules/field-text-area';
 import { QuestionTreatment } from '~/types/appointment';
 import { RecordsShapeYup } from '~/types/helpers';
 
-type Option = {
-    value: string;
-    label: string;
-};
-
 type CardInputProps = {
-    items?: Option[];
+    items?: OptionSelect[];
     handleSubmit?: (
         data: QuestionTreatment,
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -38,7 +35,7 @@ const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionTreatment>>(
     },
 );
 
-const makeOptions = (items: Option[]) => {
+const makeOptions = (items: OptionSelect[]) => {
     return items.map((item) => ({
         value: item.value,
         label: item.label,

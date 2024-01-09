@@ -1,22 +1,20 @@
-import { useFormikContext } from 'formik';
-
 import { useCallback } from 'react';
 import { Props } from 'react-select';
 import Label from '~/Components/atoms/label';
 import Select from '~/Components/atoms/select';
-import type { InputControlProps } from './types';
+import useFormikContextSafe from '~/hooks/use-formik-context-safe';
+import { ObjPaths } from '~/types/helpers';
+import type { InputControlProps, OptionSelect } from './types';
 
-type Option = {
-    value: string | number;
-    label: string;
-    [key: string]: unknown;
-};
-
-type FieldSelectControl<Ctx> = InputControlProps<Props, Ctx> & {
+type FieldSelectControl<Ctx> = Omit<InputControlProps<Props, Ctx>, 'value'> & {
     name: string;
     deps?: unknown[];
     onChangeValue?: (item: unknown) => void;
-    options?: Option[];
+    options?: OptionSelect[];
+    value?: OptionSelect | null;
+    required?: boolean;
+    label: string;
+    divClassName?: string;
 };
 
 const FieldControlSelect = <Ctx,>({
@@ -29,12 +27,14 @@ const FieldControlSelect = <Ctx,>({
     onChangeValue = () => {},
     ...props
 }: FieldSelectControl<Ctx>) => {
-    const { values, setFieldValue } = useFormikContext<Ctx>();
+    const { values: defaultValues, setFieldValue } =
+        useFormikContextSafe<Ctx>();
+    const values = defaultValues as Ctx & { [key: string]: unknown };
 
     const onChange = useCallback(
-        (option: unknown) => {
+        (option: unknown | OptionSelect) => {
             onChangeValue?.(option);
-            setFieldValue(name, option, true);
+            setFieldValue(name as ObjPaths<Ctx>, option, true);
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [setFieldValue],
