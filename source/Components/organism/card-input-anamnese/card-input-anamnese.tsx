@@ -1,19 +1,13 @@
-import { Form, Formik, FormikHelpers } from 'formik';
+import cn from 'classnames';
+import { Formik, FormikHelpers } from 'formik';
 import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
-import { BtnConfirm, BtnSecondary } from '~/Components/atoms/btn';
-import { OptionSelect } from '~/Components/molecules/field-control';
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select';
-import FieldTextArea from '~/Components/molecules/field-text-area';
-import RadioGroup from '~/Components/molecules/radio-group';
-import {
-    KeyOfQuestionTypes,
-    Question,
-    questions as defaultQuestions,
-} from '~/constants/anamnese-questions';
+import { KeyOfQuestionTypes, Question } from '~/constants/anamnese-questions';
+import useFormikContextSafe from '~/hooks/use-formik-context-safe';
+import { CtxStepAnamnese } from '~/pages/AppointmentsPage/components/organisms/steps/step-anamnese/step-anamnese';
 import { QuestionAnamnesis } from '~/types/appointment';
 import { RecordsShapeYup } from '~/types/helpers';
-
+import QuestionsAnamnese from './questions-anamnese';
 const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionAnamnesis>>(
     {
         name_anamnesis: Yup.string().required('Campo obrigatório'),
@@ -29,112 +23,102 @@ const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionAnamnesis>>(
 );
 
 type CardInputProps = {
-    items?: OptionSelect[];
-    handleSubmit?: (
+    items?: Question[];
+    handleSubmit: (
         data: Yup.InferType<typeof validationSchema>,
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         formikHelpers: FormikHelpers<any>,
     ) => Promise<unknown>;
 };
 
-const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => {
-    const filtered = items.reduce(
-        (acc, item) => {
-            if (item.type === category) {
-                acc.push({
-                    value: item.id,
-                    label: item.question,
-                    color: 'rgb(255 200 107);',
-                });
-            }
-            return acc;
-        },
-        [] as OptionSelect[],
-    );
-
-    return filtered;
-};
-
-const CardInputAnamnese = ({
-    handleSubmit = async (data) => {
-        console.log('handleSubmit');
+const STEPS: {
+    title: string;
+    value: KeyOfQuestionTypes;
+}[] = [
+    {
+        title: 'Sistema Digestório',
+        value: 'digestive_system',
     },
-}: CardInputProps) => {
+    {
+        title: 'Sistema Respiratório',
+        value: 'respiratory_system',
+    },
+    {
+        title: 'Sistema Urinário',
+        value: 'urinary_system',
+    },
+    {
+        title: 'Sistema Nervoso',
+        value: 'nervous_system',
+    },
+    {
+        value: 'locomotive_system',
+        title: 'Sistema Locomotor',
+    },
+    {
+        value: 'physical_activity',
+        title: 'Atividade Física',
+    },
+];
+
+const CardInputAnamnese = ({ items = [], handleSubmit }: CardInputProps) => {
+    const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>();
+
     const [category, setCategory] =
         useState<KeyOfQuestionTypes>('digestive_system');
 
-    const options = useMemo(
-        () => makeOptions(defaultQuestions, category),
-        [category],
-    );
+    const filtered = useMemo(() => {
+        if (!values?.anamnesis?.questions_anamnesis) return items;
 
-    const [selected, setSelected] = useState<OptionSelect>(options[0]);
+        // filtra items eliminando os que já estão no array de anamnese
+        return items.filter((item) => {
+            const exists = values?.anamnesis?.questions_anamnesis?.find(
+                (question) => {
+                    return question.name_anamnesis === item.question;
+                },
+            );
+
+            return !exists;
+        });
+    }, []);
 
     return (
         <div className="gap-2 flex flex-col card shadow-2xl p-8 border-primary-500 border-2">
+            <div className="flex flex-row w-full justify-between flex-wrap">
+                {STEPS.map((item) => (
+                    <button
+                        type="button"
+                        onClick={() => setCategory(item.value)}
+                        key={item.value}
+                        className={cn(
+                            'p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full',
+                            {
+                                'text-primary-500': category === item.value,
+                                'text-gray-400': category !== item.value,
+                            },
+                        )}
+                    >
+                        {item.title}
+                    </button>
+                ))}
+            </div>
             <Formik
                 initialValues={{
                     list_notes_anamnesis: [] as string[],
                     logical_list_default_anamnesis: 'logical',
                     name_anamnesis: '',
-                    notes_anamnesis: '',
-                    options_anamnesis: 'yes',
                     type_anamnesis: '',
+                    notes_anamnesis: '',
+                    options_anamnesis: 'no',
                 }}
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                {({ isValid, handleSubmit, values }) => (
-                    <Form onSubmit={handleSubmit}>
-                        <FieldControlSelect
-                            ctx={values}
-                            name="type_anamnesis"
-                            required
-                            label="Questão"
-                            value={selected}
-                            onChangeValue={(value) =>
-                                setSelected(value as OptionSelect)
-                            }
-                            options={options}
-                        />
-                        <RadioGroup
-                            ctx={values}
-                            title="Resposta"
-                            checked={values.options_anamnesis}
-                            name="options_anamnesis"
-                            items={[
-                                {
-                                    id: 'yes',
-                                    name: 'Sim',
-                                    value: 'yes',
-                                },
-                                {
-                                    id: 'no',
-                                    name: 'Não',
-                                    value: 'no',
-                                },
-                                {
-                                    id: 'other',
-                                    name: 'Outro',
-                                    value: 'other',
-                                },
-                            ]}
-                        />
-                        <FieldTextArea
-                            ctx={values}
-                            name="notes_anamnesis"
-                            label="Anotações"
-                        />
-                        <div className="flex align-items-center justify-center gap-3 mt-4">
-                            <BtnSecondary label="Pular" type="submit" />
-                            <BtnConfirm
-                                disabled={!isValid}
-                                className="text-white"
-                                label="Responder"
-                                type="submit"
-                            />
-                        </div>
-                    </Form>
+                {() => (
+                    <QuestionsAnamnese
+                        category={category}
+                        questions={filtered}
+                    />
                 )}
             </Formik>
         </div>

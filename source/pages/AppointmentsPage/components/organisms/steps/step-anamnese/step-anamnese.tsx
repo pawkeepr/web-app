@@ -9,7 +9,7 @@ import useFormikContextSafe from '~/hooks/use-formik-context-safe';
 import { VeterinaryConsultation } from '~/types/appointment';
 import { StepProps, Tabs } from '~/types/helpers';
 
-type CtxStepAnamnese = Pick<
+export type CtxStepAnamnese = Pick<
     VeterinaryConsultation,
     'anamnesis' | 'details_pet_consultation'
 >;
@@ -99,7 +99,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 </div>
             </div>
 
-            <FieldArray name="anamnese.questions_treatment">
+            <FieldArray name="anamnese.questions_anamnesis">
                 {({ push, remove }) => (
                     <>
                         {values.anamnesis?.questions_anamnesis?.map(
@@ -111,11 +111,11 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                                     <div className="w-full flex flex-row bg-secondary px-2 rounded-sm border-dashed border border-primary">
                                         <div className="grid grid-cols-6 w-full">
                                             <h6 className="col-span-1 font-mono font-semibold  capitalize">
-                                                {
-                                                    (
-                                                        treatment.type_anamnesis as OptionSelect
-                                                    ).label
-                                                }
+                                                {typeof treatment.type_anamnesis ===
+                                                'string'
+                                                    ? treatment.type_anamnesis
+                                                    : treatment.type_anamnesis
+                                                          ?.label}
                                             </h6>
                                             <h6 className="col-span-2 font-mono font-semibold  capitalize">
                                                 {treatment.name_anamnesis}
@@ -141,7 +141,14 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                                 await new Promise((resolve) =>
                                     setTimeout(resolve, 300),
                                 );
-                                push(data);
+                                const { label, value } =
+                                    data.type_anamnesis as OptionSelect;
+
+                                push({
+                                    ...data,
+                                    name_anamnesis: label,
+                                    type_anamnesis: value,
+                                });
                                 formikHelpers.resetForm();
                             }}
                         />
