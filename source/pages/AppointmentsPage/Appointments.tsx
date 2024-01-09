@@ -4,7 +4,7 @@ import VerticalTabs from './components/templates/vertical-tabs';
 
 import { Formik } from 'formik';
 import { useRouter } from 'next/navigation';
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { BtnCancel } from '~/Components/atoms/btn';
 import ModalConfirm from '~/Components/modals/confirm-modal';
 import useProfileVeterinary from '~/hooks/use-veterinary';
@@ -120,21 +120,32 @@ const AppointmentsPage = ({
         geolocation();
     }, []);
 
-    const onSubmit = async (values: VeterinaryConsultation) => {
-        const [appointment_geolocation, appointment_signature] =
-            await geolocation();
+    const veterinary = useProfileVeterinary();
 
-        await handleSubmit({
-            ...values,
-            appointment_details: {
-                ...values.appointment_details,
-                appointment_geolocation,
-                appointment_signature,
-            },
-        });
+    const onSubmit = useCallback(
+        async (values: VeterinaryConsultation) => {
+            const [appointment_geolocation, appointment_signature] =
+                await geolocation();
 
-        router.push('/dashboard');
-    };
+            try {
+                await handleSubmit({
+                    ...values,
+                    tutor_pet_vet: {
+                        ...values.tutor_pet_vet,
+                        veterinary,
+                    },
+                    appointment_details: {
+                        ...values.appointment_details,
+                        appointment_geolocation,
+                        appointment_signature,
+                    },
+                });
+            } catch {
+                router.push('/dashboard');
+            }
+        },
+        [handleSubmit, veterinary],
+    );
 
     if (isError) {
         router.back();

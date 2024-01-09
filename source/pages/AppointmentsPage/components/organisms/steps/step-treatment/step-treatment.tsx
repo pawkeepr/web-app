@@ -35,6 +35,15 @@ const items: OptionSelect[] = [
     },
 ];
 
+const KeyTreatment = {
+    activities_carry: 'Recomendações de atividades físicas',
+    fast_test: 'Testes rápidos',
+    medicine: 'Medicação',
+    vaccine: 'Vacina',
+    exam: 'Exame',
+    nutrition: 'Nutrição Alimentar',
+} as const;
+
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const { values } = useFormikContext<CtxStepTreatment>();
 
@@ -58,15 +67,16 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                 >
                                     <div className="w-full flex flex-row bg-secondary px-2 rounded-sm border-dashed border border-primary">
                                         <div className="grid grid-cols-6 w-full">
-                                            <h6 className="col-span-1 font-mono font-semibold  capitalize">
-                                                {
-                                                    (
-                                                        treatment.type_treatment as OptionSelect
-                                                    ).label
-                                                }
-                                            </h6>
                                             <h6 className="col-span-2 font-mono font-semibold  capitalize">
                                                 {treatment.name_treatment}
+                                            </h6>
+
+                                            <h6 className="col-span-1 font-mono font-semibold  capitalize">
+                                                {
+                                                    KeyTreatment[
+                                                        treatment.type_treatment as keyof typeof KeyTreatment
+                                                    ]
+                                                }
                                             </h6>
 
                                             <p className="col-span-3 font-mono  capitalize">
@@ -87,10 +97,12 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         <CardInputTreatment
                             items={items}
                             handleSubmit={async (data, formikHelpers) => {
-                                await new Promise((resolve) =>
-                                    setTimeout(resolve, 300),
-                                );
-                                push(data);
+                                const { label, value } =
+                                    data.type_treatment as OptionSelect;
+                                push({
+                                    ...data,
+                                    type_treatment: value,
+                                });
                                 formikHelpers.resetForm();
                             }}
                         />
