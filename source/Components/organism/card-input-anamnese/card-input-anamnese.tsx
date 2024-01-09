@@ -6,6 +6,12 @@ import { OptionSelect } from '~/Components/molecules/field-control';
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select';
 import FieldTextArea from '~/Components/molecules/field-text-area';
 import RadioGroup from '~/Components/molecules/radio-group';
+import {
+    Question,
+    questions as defaultQuestions,
+    keyOfQuestionTypes,
+} from '~/constants/anamnese-questions';
+import useTranslationSafe from '~/hooks/use-translation-safe';
 import { QuestionAnamnesis } from '~/types/appointment';
 import { RecordsShapeYup } from '~/types/helpers';
 
@@ -32,21 +38,26 @@ type CardInputProps = {
     ) => Promise<unknown>;
 };
 
-const makeOptions = (items: OptionSelect[]) => {
+const makeOptions = (items: Question[], category: keyOfQuestionTypes) => {
     return items.map((item) => ({
-        value: item.value,
-        label: item.label,
+        value: item.id,
+        label: item.question,
         color: 'rgb(255 200 107);',
     }));
 };
 
 const CardInputAnamnese = ({
-    items = [],
     handleSubmit = async (data) => {
         console.log('handleSubmit');
     },
 }: CardInputProps) => {
-    const options = useMemo(() => makeOptions(items), [items]);
+    const [category, setCategory] = useState('');
+    const t = useTranslationSafe();
+    console.log('t', t('digestive_system'));
+    const options = useMemo(
+        () => makeOptions(defaultQuestions, 'digestive_system'),
+        [],
+    );
     const [selected, setSelected] = useState<OptionSelect>(options[0]);
 
     return (

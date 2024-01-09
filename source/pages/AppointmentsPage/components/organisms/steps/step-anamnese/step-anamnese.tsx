@@ -5,7 +5,6 @@ import { BtnPrimary } from '~/Components/atoms/btn';
 import { OptionSelect } from '~/Components/molecules/field-control';
 import FieldNumber from '~/Components/molecules/field-number';
 import CardInputAnamnese from '~/Components/organism/card-input-anamnese';
-import { questions } from '~/constants/anamnese-questions';
 import useFormikContextSafe from '~/hooks/use-formik-context-safe';
 import { VeterinaryConsultation } from '~/types/appointment';
 import { StepProps, Tabs } from '~/types/helpers';
@@ -138,11 +137,6 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                             ),
                         )}
                         <CardInputAnamnese
-                            items={questions.map((item) => ({
-                                value: item.id,
-                                label: item.question,
-                                color: 'rgb(255 200 107);',
-                            }))}
                             handleSubmit={async (data, formikHelpers) => {
                                 await new Promise((resolve) =>
                                     setTimeout(resolve, 300),
