@@ -1,29 +1,32 @@
 {
-    "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
-    "organizeImports": {
-        "enabled": true,
-        "ignore": ["node_modules"]
-    },
-    "linter": {
-        "enabled": true,
-        "rules": {
-            "recommended": true,
-            "correctness": {
-                "useExhaustiveDependencies": "off"
-            }
-        },
+	"$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+	"organizeImports": {
+		"enabled": true,
+		"ignore": ["node_modules"]
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"useExhaustiveDependencies": "off"
+			}
+		},
 
-        "ignore": ["node_modules"]
-    },
-    "javascript": {
-        "formatter": {
-            "enabled": true,
-            "indentStyle": "space",
-            "indentWidth": 4,
-            "lineWidth": 80,
-            "lineEnding": "lf",
-            "semicolons": "always",
-            "quoteStyle": "single"
-        }
-    }
+		"ignore": ["node_modules", "coverage", "dist", "build", "out", ".next"]
+	},
+	"javascript": {
+		"formatter": {
+			"enabled": true,
+			"indentStyle": "space",
+			"indentWidth": 4,
+			"lineWidth": 80,
+			"lineEnding": "lf",
+			"semicolons": "always",
+			"quoteStyle": "single"
+		}
+	},
+	"formatter": {
+		"ignore": ["node_modules", "coverage", "dist", "build", "out", ".next"]
+	}
 }
