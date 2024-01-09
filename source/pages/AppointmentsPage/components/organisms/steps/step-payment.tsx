@@ -16,7 +16,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit, isSubmitting, values } =
         useFormikContextSafe<CtxStepPayment>();
 
-    const event = useMemo(
+    const form_payment = useMemo(
         () => values.appointment_details?.payment?.form_payment,
         [values],
     );
@@ -38,6 +38,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                 <RadioGroup
                     name="appointment_details.payment.form_payment"
                     title="Forma de Pagamento"
+                    checked={form_payment}
                     items={[
                         {
                             id: 'credit',
@@ -67,7 +68,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     placeholder="Selecione a quantidade de parcelas"
                     name="appointment_details.payment.number_installments"
                     options={options}
-                    isDisabled={event !== 'credit'}
+                    isDisabled={form_payment !== 'credit'}
                 />
                 <FieldNumber
                     ctx={values}
