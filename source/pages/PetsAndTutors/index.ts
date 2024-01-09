@@ -1,1 +1,1 @@
-export { default } from './AppointmentTab';
+export { default } from './PetsAndTutors';
