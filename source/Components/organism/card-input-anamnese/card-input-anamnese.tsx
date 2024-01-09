@@ -82,9 +82,6 @@ const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
         });
     }, [items, values?.anamnesis?.questions_anamnesis]);
 
-    console.log('items', items);
-    console.log(filtered);
-
     return (
         <div className="gap-2 flex flex-col card shadow-2xl p-8 border-primary-500 border-2">
             <div className="flex flex-row w-full justify-between flex-wrap">
