@@ -7,7 +7,7 @@ const QuestionTypes = {
     physical_activity: 'physical_activity',
 } as const;
 
-export type keyOfQuestionTypes = keyof typeof QuestionTypes;
+export type KeyOfQuestionTypes = keyof typeof QuestionTypes;
 
 export type Question = {
     id: number;
