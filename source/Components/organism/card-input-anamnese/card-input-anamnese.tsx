@@ -8,17 +8,22 @@ import { CtxStepAnamnese } from '~/pages/AppointmentsPage/components/organisms/s
 import { QuestionAnamnesis } from '~/types/appointment';
 import { RecordsShapeYup } from '~/types/helpers';
 import QuestionsAnamnese from './questions-anamnese';
+
 const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionAnamnesis>>(
     {
-        name_anamnesis: Yup.string().required('Campo obrigatório'),
+        name_anamnesis: Yup.string().optional(),
         type_anamnesis: Yup.object().shape({
             value: Yup.string().required('Campo obrigatório'),
             label: Yup.string().required('Campo obrigatório'),
         }),
         notes_anamnesis: Yup.string().optional(),
         list_notes_anamnesis: Yup.array().optional(),
-        options_anamnesis: Yup.string().optional(),
-        logical_list_default_anamnesis: Yup.array().optional(),
+        options_anamnesis: Yup.string()
+            .oneOf(['no', 'yes', 'other'])
+            .required('Campo obrigatório'),
+        logical_list_default_anamnesis: Yup.string()
+            .oneOf(['logical'])
+            .optional(),
     },
 );
 

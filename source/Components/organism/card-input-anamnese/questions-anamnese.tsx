@@ -19,6 +19,7 @@ const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => {
         (acc, item) => {
             if (item.type === category) {
                 acc.push({
+                    type: item.type,
                     value: item.id,
                     label: item.question,
                     color: 'rgb(255 200 107);',
@@ -33,7 +34,7 @@ const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => {
 };
 
 const QuestionsAnamnese = ({ category, questions }: QuestionAnamneseProps) => {
-    const { values, handleSubmit, isValid, setFieldValue } =
+    const { values, handleSubmit, isValid, setFieldValue, errors } =
         useFormikContextSafe<QuestionAnamnesis>();
 
     const options = useMemo(
