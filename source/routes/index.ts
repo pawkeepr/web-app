@@ -11,6 +11,6 @@ const routes = {
     resetPassword: '/reset-password',
     profile: '/profile',
     settings: '/settings',
-}
+};
 
-export default routes
+export default routes;

@@ -1,8 +1,7 @@
-import { Switch } from "@headlessui/react";
-import { ComponentProps, useState } from "react";
+import { Switch } from '@headlessui/react';
+import { ComponentProps, useState } from 'react';
 
 import { VariantProps, tv } from 'tailwind-variants';
-
 
 const switchStyled = tv({
     base: `
@@ -16,9 +15,9 @@ const switchStyled = tv({
         enabled: {
             true: 'bg-primary-600',
             false: 'bg-secondary-600',
-        }
+        },
     },
-})
+});
 
 const circleStyled = tv({
     base: `
@@ -31,14 +30,15 @@ const circleStyled = tv({
         enabled: {
             true: 'translate-x-4',
             false: 'translate-x-0',
-        }
+        },
     },
-})
+});
 
 type SwitchProps = {
     onChange?: (checked: boolean) => void;
     label?: string;
-} & Omit<ComponentProps<'input'>, 'onChange'> & VariantProps<typeof switchStyled>
+} & Omit<ComponentProps<'input'>, 'onChange'> &
+    VariantProps<typeof switchStyled>;
 
 const ControlSwitch = ({
     className,
@@ -49,11 +49,11 @@ const ControlSwitch = ({
     const [enabled, setEnabled] = useState<boolean>(false);
 
     const handleChange = () => {
-        setEnabled(state => {
+        setEnabled((state) => {
             onChange && onChange(!state);
             return !state;
         });
-    }
+    };
 
     return (
         <div className="w-full flex justify-center items-center gap-2">

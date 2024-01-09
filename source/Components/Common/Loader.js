@@ -10,7 +10,12 @@ const Loader = (props) => {
             <div className="d-flex justify-content-center mx-2 mt-2">
                 <Spinner color="primary"> Loading... </Spinner>
             </div>
-            {toast.error(props.error, { position: "top-right", hideProgressBar: false, progress: undefined, toastId: "" })}
+            {toast.error(props.error, {
+                position: 'top-right',
+                hideProgressBar: false,
+                progress: undefined,
+                toastId: '',
+            })}
         </React.Fragment>
     );
 };

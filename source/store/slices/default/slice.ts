@@ -21,24 +21,19 @@ import {
     TOGGLE_STATUS_SUCCESS,
     UPDATE,
     UPDATE_FAIL,
-    UPDATE_SUCCESS
+    UPDATE_SUCCESS,
 } from '~/store/helpers/constants';
-
 
 import { LOADING } from '~/helpers/loading';
 import { toggleStatus } from '../../helpers/toggle-status';
-import {
-    Data,
-    InitialState,
-    name,
-} from './types';
+import { Data, InitialState, name } from './types';
 
 const initialState: InitialState = {
     error: null,
     isLoading: LOADING.IDLE,
     isLoadingOnlyOne: LOADING.IDLE,
     data: [],
-    inatives: []
+    inatives: [],
 };
 
 const slice = createSlice({
@@ -62,7 +57,10 @@ const slice = createSlice({
             state.data = action.payload;
             state.isLoading = LOADING.SUCCESS;
         },
-        [GET_ALL_ATIVES_FAIL]: (state, action: PayloadAction<{ error: any }>) => {
+        [GET_ALL_ATIVES_FAIL]: (
+            state,
+            action: PayloadAction<{ error: any }>,
+        ) => {
             state.error = action.payload.error;
             state.isLoading = LOADING.FAILED;
         },
@@ -73,7 +71,10 @@ const slice = createSlice({
             state.inatives = action.payload;
             state.isLoading = LOADING.SUCCESS;
         },
-        [GET_ALL_INATIVES_FAIL]: (state, action: PayloadAction<{ error: any }>) => {
+        [GET_ALL_INATIVES_FAIL]: (
+            state,
+            action: PayloadAction<{ error: any }>,
+        ) => {
             state.error = action.payload.error;
             state.isLoading = LOADING.FAILED;
         },
@@ -92,8 +93,11 @@ const slice = createSlice({
             state.isLoadingOnlyOne = LOADING.PENDING;
         },
         [UPDATE_SUCCESS]: (state, action: PayloadAction<Data>) => {
-            const index = state.data.findIndex((data) => data._id.toString() === action.payload._id?.toString())
-            state.data[index] = action.payload
+            const index = state.data.findIndex(
+                (data) =>
+                    data._id.toString() === action.payload._id?.toString(),
+            );
+            state.data[index] = action.payload;
             state.isLoadingOnlyOne = LOADING.SUCCESS;
         },
         [UPDATE_FAIL]: (state, action) => {
@@ -103,7 +107,7 @@ const slice = createSlice({
 
         [DELETE_SUCCESS]: (state, action: PayloadAction<{ id: string }>) => {
             state.data = state.data.filter(
-                data => data._id.toString() !== action.payload.id
+                (data) => data._id.toString() !== action.payload.id,
             );
             state.isLoading = LOADING.SUCCESS;
         },
@@ -114,8 +118,11 @@ const slice = createSlice({
         [TOGGLE_STATUS]: (state) => {
             state.isLoadingOnlyOne = LOADING.PENDING;
         },
-        [TOGGLE_STATUS_SUCCESS]: (state, action: PayloadAction<{ _id: string }>) => {
-            toggleStatus(action.payload._id, state.data, state.inatives)
+        [TOGGLE_STATUS_SUCCESS]: (
+            state,
+            action: PayloadAction<{ _id: string }>,
+        ) => {
+            toggleStatus(action.payload._id, state.data, state.inatives);
             state.isLoadingOnlyOne = LOADING.SUCCESS;
         },
         [TOGGLE_STATUS_FAIL]: (state, action) => {
@@ -129,11 +136,9 @@ const slice = createSlice({
         resetValue: (state) => {
             return initialState;
         },
-    }
+    },
 });
 
-export const {
-    resetValue
-} = slice.actions;
+export const { resetValue } = slice.actions;
 
 export default slice.reducer;

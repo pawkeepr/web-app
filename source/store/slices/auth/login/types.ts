@@ -1,18 +1,18 @@
 import LOADING from '~/constants/loading';
 
-export const name = 'Auth/Login'
+export const name = 'Auth/Login';
 
 export type IUser = {
-    id: number,
-    username: string,
-    email: string,
-    eh_admin: boolean,
-    tipo_perfil: number,
-    autenticado: boolean,
-    ativo: boolean,
-    data_cadastro: string,
-    nome?: string,
-    sobrenome?: string
+    id: number;
+    username: string;
+    email: string;
+    eh_admin: boolean;
+    tipo_perfil: number;
+    autenticado: boolean;
+    ativo: boolean;
+    data_cadastro: string;
+    nome?: string;
+    sobrenome?: string;
 } | null;
 
 interface UserAuthenticationData {
@@ -40,4 +40,4 @@ export type LoginState = {
     isLoading: LOADING;
     username: string;
     password: string;
-}
+};

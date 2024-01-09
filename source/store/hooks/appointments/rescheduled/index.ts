@@ -1,20 +1,21 @@
+import DateConsults from '~/entities/DatesConsults';
+import {
+    getAllAppointmentsRescheduled,
+    updateAppointmentRescheduled,
+} from '~/services/helpers';
+import { IAppointmentVet } from '~/store/slices/appointment-vet/types';
+import useAppStore from '../../use-app-store';
+import { ScheduledResponseAxios } from '../types';
 
-import DateConsults from '~/entities/DatesConsults'
-import { getAllAppointmentsRescheduled, updateAppointmentRescheduled } from '~/services/helpers'
-import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
-import useAppStore from '../../use-app-store'
-import { ScheduledResponseAxios } from '../types'
-
-const NAME = 'appointment-rescheduled'
-
+const NAME = 'appointment-rescheduled';
 
 type UseAppointmentCanceledProps = {
-    handleClose?: (() => void)
-}
+    handleClose?: () => void;
+};
 export const useAppointmentRescheduled = (
     props: UseAppointmentCanceledProps = {},
 ) => {
-    const superKeys = [NAME]
+    const superKeys = [NAME];
 
     return useAppStore<ScheduledResponseAxios, IAppointmentVet>({
         get: getAllAppointmentsRescheduled,
@@ -23,7 +24,7 @@ export const useAppointmentRescheduled = (
         handleCloseModal: props.handleClose,
         keys: superKeys,
         name: NAME,
-    })
-}
+    });
+};
 
-export default useAppointmentRescheduled
+export default useAppointmentRescheduled;

@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-import LOADING from "~/constants/loading";
+import LOADING from '~/constants/loading';
 import {
     ACTIVATE_ACCOUNT,
     ACTIVATE_ACCOUNT_ERROR,
@@ -9,15 +9,15 @@ import {
     RESET_PROFILE_FLAG,
     SET_EMAIL_ACCOUNT,
     SET_PASSWORD_ACCOUNT,
-    name
+    name,
 } from './types';
 
 const initialState: InitialStateProfile = {
-    error: "",
+    error: '',
     user: null,
-    password: "",
-    email: "",
-    isLoading: LOADING.IDLE
+    password: '',
+    email: '',
+    isLoading: LOADING.IDLE,
 };
 
 const profileSlice = createSlice({
@@ -43,10 +43,10 @@ const profileSlice = createSlice({
         },
         [RESET_PROFILE_FLAG]: (state) => {
             state.isLoading = LOADING.IDLE;
-            state.error = "";
+            state.error = '';
             state.user = null;
-        }
-    }
+        },
+    },
 });
 
 export default profileSlice.reducer;

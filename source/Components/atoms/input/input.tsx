@@ -19,23 +19,19 @@ export const input = tv({
         },
         center: {
             true: 'text-center',
-        }
+        },
     },
-})
+});
 
-export type InputProps = ComponentProps<'input'> & VariantProps<typeof input>
+export type InputProps = ComponentProps<'input'> & VariantProps<typeof input>;
 
-const Input = ({
-    className,
-    required = false,
-    ...props
-}: InputProps) => {
+const Input = ({ className, required = false, ...props }: InputProps) => {
     return (
         <input
             placeholder={props.placeholder || 'Digite aqui ...'}
             className={input({ className, required })}
             {...props}
         />
-    )
-}
-export default Input
+    );
+};
+export default Input;

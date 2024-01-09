@@ -1,18 +1,18 @@
+import Image from 'next/image';
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
-import Image from "next/image"
+import Link from 'next/link';
 
 //import Components
-import { useEffect, useRef, useState } from "react";
-import { changeHeaderSize } from "~/store/actions";
-import { useAppDispatch } from "~/store/hooks";
-import FullScreenDropdown from "../Components/Common/full-screen-dropdown";
-import LightDark from "../Components/Common/light-dark";
-import lightLogo from '../../public/logo-light.png'
+import { useEffect, useRef, useState } from 'react';
+import { changeHeaderSize } from '~/store/actions';
+import { useAppDispatch } from '~/store/hooks';
+import lightLogo from '../../public/logo-light.png';
+import FullScreenDropdown from '../Components/Common/full-screen-dropdown';
+import LightDark from '../Components/Common/light-dark';
 
-import Bars3CenterLeftIcon from "@heroicons/react/24/solid/Bars3CenterLeftIcon";
+import Bars3CenterLeftIcon from '@heroicons/react/24/solid/Bars3CenterLeftIcon';
 
-import Drawer from "~/Components/organism/drawer";
+import Drawer from '~/Components/organism/drawer';
 
 type HeaderProps = {
     headerClass: string;
@@ -31,7 +31,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                 changeHeaderSize({
                     width: divRef.current.offsetWidth,
                     height: divRef.current.offsetHeight,
-                })
+                }),
             );
         }
     }, [dispatch]);
@@ -85,21 +85,15 @@ const Header = ({ headerClass }: HeaderProps) => {
                     <Bars3CenterLeftIcon className="h-6 w-6 text-white " />
                 </button>
 
-                <Drawer
-                    closeDrawer={handleClose}
-                    visibleDrawer={show}
-                />        
+                <Drawer closeDrawer={handleClose} visibleDrawer={show} />
                 <div className="flex items-center justify-center">
-                    <Link
-                        href="/"
-                        className="logo-light justify-center block"
-                    >
+                    <Link href="/" className="logo-light justify-center block">
                         <Image
                             src={lightLogo}
                             alt="Logo Pawkeepr Mode Light"
                             height={120}
                             width={120}
-                        />   
+                        />
 
                         {/* <Image
                             src={darkLogo}
@@ -110,7 +104,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                         />                             */}
                     </Link>
                 </div>
-                
+
                 <div className="flex align-center">
                     {/* LanguageDropdown */}
                     {/* <LanguageDropdown /> */}

@@ -1,12 +1,12 @@
-import { useMemo } from 'react'
-import { Veterinary } from '~/entities/Veterinary'
-import useProfile from '~/store/hooks/profile/use-profile'
+import { useMemo } from 'react';
+import { Veterinary } from '~/entities/Veterinary';
+import useProfile from '~/store/hooks/profile/use-profile';
 
 const useProfileVeterinary = () => {
-    const { data: profile } = useProfile()
+    const { data: profile } = useProfile();
 
     const veterinary = useMemo(() => {
-        if (!profile) return {} as Veterinary
+        if (!profile) return {} as Veterinary;
 
         return Veterinary.build({
             id: profile.id,
@@ -22,11 +22,10 @@ const useProfileVeterinary = () => {
             crmv: profile.crmv,
             neighborhood: profile.user_information?.address.neighborhood,
             specialty: profile.specialty_information?.specialty,
-        })
-    }, [profile])
+        });
+    }, [profile]);
 
+    return veterinary;
+};
 
-    return veterinary
-}
-
-export default useProfileVeterinary
+export default useProfileVeterinary;

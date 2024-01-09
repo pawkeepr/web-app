@@ -8,13 +8,13 @@ import {
     leftSidebarTypes,
     leftSidebarViewTypes,
     preloaderTypes,
-    topBarThemeTypes
-} from "../../../Components/constants/layout";
+    topBarThemeTypes,
+} from '../../../Components/constants/layout';
 
 export type DivSize = {
     height: number;
     width: number;
-}
+};
 
 export type LayoutState = {
     layoutType: layoutTypes;

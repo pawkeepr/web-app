@@ -1,4 +1,3 @@
-
 const LoaderSuccess = () => {
     return (
         <div className="flex items-center space-y-4 ">
@@ -22,13 +21,17 @@ const LoaderSuccess = () => {
                         d="M20,32l8,8l16,-16"
                     />
                 </svg>
-                <h2 className="text-lg font-bold text-center text-gray-800">{"Conta Criada com Sucesso!"}</h2>
+                <h2 className="text-lg font-bold text-center text-gray-800">
+                    {'Conta Criada com Sucesso!'}
+                </h2>
                 <h4 className="text-md font-bold text-center text-gray-800">
-                    {"Um Email de Confirmação foi enviado, verifique seu email!"}
+                    {
+                        'Um Email de Confirmação foi enviado, verifique seu email!'
+                    }
                 </h4>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default LoaderSuccess
+export default LoaderSuccess;

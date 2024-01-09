@@ -1,16 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import Slide from "react-reveal/Slide";
-import Zoom from "react-reveal/Zoom";
-
+import Slide from 'react-reveal/Slide';
+import Zoom from 'react-reveal/Zoom';
 
 // Import Images
 
-import HeaderTitle from "~/Components/atoms/header-title";
+import HeaderTitle from '~/Components/atoms/header-title';
 
 const Home = () => {
     return (
         <>
-            <HeaderTitle title='Bem Vindo' />
+            <HeaderTitle title="Bem Vindo" />
 
             <section className="section hero-section bg-primary" id="hero">
                 <div className="bg-overlay bg-overlay-pattern"></div>
@@ -18,15 +17,11 @@ const Home = () => {
                 <div className="grid grid-cols-1 items-swiper-centered mt-5 md:mt-0 md:grid-cols-2 p-4">
                     <Slide left>
                         <div className="col-span-1">
-
-
                             <img
                                 src="/landing-page-01.jpg"
                                 className="w-100"
                                 alt="..."
-
                             />
-
                         </div>
                     </Slide>
                     <Zoom>
@@ -62,7 +57,7 @@ const Home = () => {
                     <Slide left>
                         <div className="col-span-1">
                             <img
-                                src='/landing-page-02.webp'
+                                src="/landing-page-02.webp"
                                 className="w-100 h-[90%] !border-none rounded-3xl"
                                 alt="..."
                             />
@@ -79,7 +74,7 @@ const Home = () => {
                     <Slide left>
                         <div className="col-span-1">
                             <img
-                                src='/bg-three.webp'
+                                src="/bg-three.webp"
                                 className="w-full  !border-none"
                                 alt="..."
                             />

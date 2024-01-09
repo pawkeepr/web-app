@@ -1,26 +1,25 @@
-import { Form } from 'formik'
-import * as Yup from 'yup'
-import { BtnPrimary } from '~/Components/atoms/btn'
-import BoxButtons from '~/Components/molecules/box-buttons'
-import FieldControl from '~/Components/molecules/field-control'
-import FieldPhone from '~/Components/molecules/field-phone'
-import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { CtxSimplifiedPedFields, StepProps } from '../../types'
+import { Form } from 'formik';
+import * as Yup from 'yup';
+import { BtnPrimary } from '~/Components/atoms/btn';
+import BoxButtons from '~/Components/molecules/box-buttons';
+import FieldControl from '~/Components/molecules/field-control';
+import FieldPhone from '~/Components/molecules/field-phone';
+import useFormikContextSafe from '~/hooks/use-formik-context-safe';
+import { CtxSimplifiedPedFields, StepProps } from '../../types';
 
 export const validationSchema = Yup.object().shape({
     ownerEmergencyContact: Yup.object().shape({
         name: Yup.string().required('Campo obrigatório'),
         phone: Yup.string().required('Campo obrigatório'),
-        email: Yup.string().email('Email inválido').required('Campo obrigatório'),
+        email: Yup.string()
+            .email('Email inválido')
+            .required('Campo obrigatório'),
     }),
-})
+});
 
-const StepTutor = ({
-    previousStep,
-    isLoading,
-}: StepProps) => {
-
-    const { isValid, handleSubmit, isSubmitting, values } = useFormikContextSafe<CtxSimplifiedPedFields>()
+const StepTutor = ({ previousStep, isLoading }: StepProps) => {
+    const { isValid, handleSubmit, isSubmitting, values } =
+        useFormikContextSafe<CtxSimplifiedPedFields>();
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -55,15 +54,17 @@ const StepTutor = ({
                 isLoading={isSubmitting || isLoading}
                 onClickCancel={previousStep}
                 onClickSuccess={() => null}
-                success={({ disabled }) => <BtnPrimary
-                    isLoading={isSubmitting || isLoading}
-                    label="Concluir"
-                    type="submit"
-                    disabled={disabled || isSubmitting || isLoading}
-                />}
+                success={({ disabled }) => (
+                    <BtnPrimary
+                        isLoading={isSubmitting || isLoading}
+                        label="Concluir"
+                        type="submit"
+                        disabled={disabled || isSubmitting || isLoading}
+                    />
+                )}
             />
         </Form>
-    )
-}
+    );
+};
 
-export default StepTutor
+export default StepTutor;

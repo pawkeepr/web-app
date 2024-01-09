@@ -3,30 +3,33 @@ import withLoading from '~/Components/helpers/with-loading';
 
 type Fn = () => void;
 
-type hasBtnCancel = {
-    onClickCancel?: Fn;
-    cancel?: (props: BtnProps) => JSX.Element;
-} | {
-    cancel: null;
-    onClickCancel?: null;
-}
+type hasBtnCancel =
+    | {
+          onClickCancel?: Fn;
+          cancel?: (props: BtnProps) => JSX.Element;
+      }
+    | {
+          cancel: null;
+          onClickCancel?: null;
+      };
 
-type hasBtnSuccess = {
-    onClickSuccess: Fn;
-    success?: (props: BtnProps) => JSX.Element;
-} | {
-    success: null;
-    onClickSuccess?: null;
-}
+type hasBtnSuccess =
+    | {
+          onClickSuccess: Fn;
+          success?: (props: BtnProps) => JSX.Element;
+      }
+    | {
+          success: null;
+          onClickSuccess?: null;
+      };
 
 type BoxButtonsProps = {
     type?: 'button' | 'submit';
     isValid?: boolean;
     link?: boolean;
     isLoading?: boolean;
-} & hasBtnCancel & hasBtnSuccess;
-
-
+} & hasBtnCancel &
+    hasBtnSuccess;
 
 const BoxButtons = ({
     onClickCancel,
@@ -34,24 +37,27 @@ const BoxButtons = ({
     isLoading = false,
     link = true,
     type = 'submit',
-    cancel = ({
-        label = 'Voltar',
-        onClick,
-        isLoading,
-        ...props
-    }) => <BtnCancel condition={!isLoading} label={label} onClick={onClick} {...props} />,
-    success = ({
-        label = 'Prosseguir',
-        onClick,
-        disabled,
-        ...props
-    }) => <BtnPrimary label={label} onClick={onClick} disabled={disabled}  {...props} />,
+    cancel = ({ label = 'Voltar', onClick, isLoading, ...props }) => (
+        <BtnCancel
+            condition={!isLoading}
+            label={label}
+            onClick={onClick}
+            {...props}
+        />
+    ),
+    success = ({ label = 'Prosseguir', onClick, disabled, ...props }) => (
+        <BtnPrimary
+            label={label}
+            onClick={onClick}
+            disabled={disabled}
+            {...props}
+        />
+    ),
     isValid = false,
 }: BoxButtonsProps) => {
     return (
         <div className="gap-2 justify-center flex w-full">
             {cancel?.({ onClick: onClickCancel as Fn, isLoading })}
-
 
             {success?.({
                 onClick: onClickSuccess as Fn,
@@ -60,9 +66,8 @@ const BoxButtons = ({
                 link,
                 isLoading,
             })}
-
         </div>
-    )
-}
+    );
+};
 
-export default withLoading(BoxButtons)
+export default withLoading(BoxButtons);

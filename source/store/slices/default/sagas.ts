@@ -1,26 +1,19 @@
-import { all, call, fork, put, takeEvery } from "redux-saga/effects";
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
 
-import {
-  getAllFail,
-  getAllSuccess
-} from "./actions";
+import { getAllFail, getAllSuccess } from './actions';
 
-import {
-  getConsults,
-} from '~/services/helpers';
+import { getConsults } from '~/services/helpers';
 
 //Include Both Helper File with needed methods
-import {
-  ACTION_GET_ALL
-} from "./types";
+import { ACTION_GET_ALL } from './types';
 
 export function* onGetAll() {
-  try {
-    const { data: actives } = yield call(getConsults);
-    yield put(getAllSuccess(actives));
-  } catch (error) {
-    yield put(getAllFail(error as any));
-  }
+    try {
+        const { data: actives } = yield call(getConsults);
+        yield put(getAllSuccess(actives));
+    } catch (error) {
+        yield put(getAllFail(error as any));
+    }
 }
 
 // export function* onUpdate({ payload }: PayloadAction<{ id: string, data: Partial<Data> }>) {
@@ -68,7 +61,7 @@ export function* onGetAll() {
 // }
 
 export function* watchGetAll() {
-  yield takeEvery(ACTION_GET_ALL, onGetAll);
+    yield takeEvery(ACTION_GET_ALL, onGetAll);
 }
 
 // export function* watchUpdate() {
@@ -87,15 +80,14 @@ export function* watchGetAll() {
 //   yield takeEvery(ACTION_TOGGLE_STATUS, onToggleStatus);
 // }
 
-
 function* crmSaga() {
-  yield all([
-    fork(watchGetAll),
-    // fork(watchUpdate),
-    // // fork(watchDelete),
-    // fork(watchAddNew),
-    // fork(watchToggleStatus),
-  ]);
+    yield all([
+        fork(watchGetAll),
+        // fork(watchUpdate),
+        // // fork(watchDelete),
+        // fork(watchAddNew),
+        // fork(watchToggleStatus),
+    ]);
 }
 
 export default crmSaga;

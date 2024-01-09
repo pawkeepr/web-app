@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-import LOADING from "~/constants/loading";
+import LOADING from '~/constants/loading';
 import {
     EDIT_PROFILE,
     EDIT_PROFILE_ERROR,
@@ -8,7 +8,7 @@ import {
     InitialStateProfile,
     RESET_PROFILE_FLAG,
     SET_PROFILE,
-    name
+    name,
 } from './types';
 
 import { ADD_FAIL, ADD_NEW, ADD_SUCCESS } from '~/store/helpers/constants';
@@ -53,8 +53,8 @@ const profileSlice = createSlice({
         [RESET_PROFILE_FLAG]: (state) => {
             state.isLoading = LOADING.IDLE;
             state.user = null;
-        }
-    }
+        },
+    },
 });
 
 export default profileSlice.reducer;

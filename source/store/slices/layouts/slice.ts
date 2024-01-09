@@ -9,8 +9,8 @@ import {
     leftSidebarTypes,
     leftSidebarViewTypes,
     preloaderTypes,
-    topBarThemeTypes
-} from "~/Components/constants/layout";
+    topBarThemeTypes,
+} from '~/Components/constants/layout';
 
 import { LayoutState, name } from './types';
 
@@ -27,8 +27,8 @@ const initialState: LayoutState = {
     preloader: preloaderTypes.DISABLE,
     headerSize: {
         height: 80,
-        width: 80
-    }
+        width: 80,
+    },
 };
 
 const layoutSlice = createSlice({
@@ -70,8 +70,8 @@ const layoutSlice = createSlice({
         },
         changePreloader: (state, action) => {
             state.preloader = action.payload;
-        }
-    }
+        },
+    },
 });
 
 export const {

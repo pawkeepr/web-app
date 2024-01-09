@@ -1,21 +1,20 @@
 import {
     IAppointmentVet,
     IDatesConsultsAppointment,
-    IStatusAppointment
-} from "~/store/slices/appointment-vet/types";
+    IStatusAppointment,
+} from '~/store/slices/appointment-vet/types';
 
-
-type DateConsultsProps = Pick<IAppointmentVet, 'dates_consults' | 'id' | 'appointment_status'>;
+type DateConsultsProps = Pick<
+    IAppointmentVet,
+    'dates_consults' | 'id' | 'appointment_status'
+>;
 
 class DateConsults implements DateConsultsProps {
-
     id: string | null;
     appointment_status: IStatusAppointment;
     dates_consults: IDatesConsultsAppointment;
 
-    private constructor(
-
-    ) {
+    private constructor() {
         this.id = null;
         this.dates_consults = {
             additional_remarks: '',
@@ -25,7 +24,7 @@ class DateConsults implements DateConsultsProps {
             time_consultation: '',
             time_next_consultation: '',
             type_consultation: '',
-        }
+        };
 
         this.appointment_status = {
             canceled: 'no',
@@ -41,20 +40,16 @@ class DateConsults implements DateConsultsProps {
         return this;
     }
 
-    defineDateConsultas(
-        date_consultation: IDatesConsultsAppointment
-    ): this {
+    defineDateConsultas(date_consultation: IDatesConsultsAppointment): this {
         this.dates_consults = date_consultation;
         return this;
     }
 
     defineAppointmentStatus(appointment_status: IStatusAppointment): this {
-        if (!appointment_status) return this
+        if (!appointment_status) return this;
         this.appointment_status = appointment_status;
         return this;
     }
-
-
 
     static build(props: DateConsultsProps): DateConsults {
         const entity = new DateConsults();
@@ -62,7 +57,7 @@ class DateConsults implements DateConsultsProps {
         return entity
             .defineId(props.id as string)
             .defineDateConsultas(props.dates_consults)
-            .defineAppointmentStatus(props.appointment_status)
+            .defineAppointmentStatus(props.appointment_status);
     }
 }
 

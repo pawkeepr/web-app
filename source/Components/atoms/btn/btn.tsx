@@ -21,35 +21,35 @@ export const button = tv({
     `,
     variants: {
         primary: {
-            true: "bg-primary-500 dark:bg-secondary-500 text-gray-50 dark:text-gray-600 border border-secondary-600"
+            true: 'bg-primary-500 dark:bg-secondary-500 text-gray-50 dark:text-gray-600 border border-secondary-600',
         },
         secondary: {
-            true: "bg-secondary-500 text-white dark:bg-primary-500"
+            true: 'bg-secondary-500 text-white dark:bg-primary-500',
         },
         success: {
-            true: "bg-green-500"
+            true: 'bg-green-500',
         },
         confirm: {
-            true: "bg-[#0971B3]"
+            true: 'bg-[#0971B3]',
         },
         cancel: {
-            true: "bg-secondary-500 text-gray-500"
+            true: 'bg-secondary-500 text-gray-500',
         },
         text: {
-            true: "bg-transparent border-2 border-secondary-500 text-secondary-500 hover:!bg-gray-100"
+            true: 'bg-transparent border-2 border-secondary-500 text-secondary-500 hover:!bg-gray-100',
         },
         link: {
-            true: "text-secondary-500 dark:text-primary-600 hover:no-underline capitalize w-fit"
-        }
+            true: 'text-secondary-500 dark:text-primary-600 hover:no-underline capitalize w-fit',
+        },
     },
-})
+});
 
 const styledIcon = tv({
     base: `
         flex justify-center items-center
         w-5 h-5
     `,
-})
+});
 
 export type BtnProps = {
     icon?: React.ReactNode | string;
@@ -58,7 +58,9 @@ export type BtnProps = {
     children?: React.ReactNode;
     isLoading?: boolean;
     condition?: boolean;
-} & ComponentProps<'button'> & VariantProps<typeof button> & VariantProps<typeof styledIcon>
+} & ComponentProps<'button'> &
+    VariantProps<typeof button> &
+    VariantProps<typeof styledIcon>;
 
 const Btn = ({
     label,
@@ -72,57 +74,50 @@ const Btn = ({
     return (
         <button
             type={type}
-            className={button({ ...props, className })} {...props}>
+            className={button({ ...props, className })}
+            {...props}
+        >
             {icon && <span className={styledIcon({ ...props })}>{icon}</span>}
-            {children && <span className={styledIcon({ ...props })}>{children}</span>}
+            {children && (
+                <span className={styledIcon({ ...props })}>{children}</span>
+            )}
             <span>{label}</span>
         </button>
-    )
-}
+    );
+};
 
 const BtnCompose = withLoading(withControl(Btn));
 
-const BtnPrimary = ({ label = "Primário", ...props }: BtnProps) => {
-    return (
-        <BtnCompose primary label={label} {...props} />
-    )
-}
+const BtnPrimary = ({ label = 'Primário', ...props }: BtnProps) => {
+    return <BtnCompose primary label={label} {...props} />;
+};
 
-const BtnSecondary = ({ label = "Secundário", ...props }: BtnProps) => {
-    return (
-        <BtnCompose secondary label={label} {...props} />
-    )
-}
+const BtnSecondary = ({ label = 'Secundário', ...props }: BtnProps) => {
+    return <BtnCompose secondary label={label} {...props} />;
+};
 
-const BtnSuccess = ({ label = "Sucesso", ...props }: BtnProps) => {
-    return (
-        <BtnCompose success label={label} {...props} />
-    )
-}
+const BtnSuccess = ({ label = 'Sucesso', ...props }: BtnProps) => {
+    return <BtnCompose success label={label} {...props} />;
+};
 
-const BtnConfirm = ({ label = "Confirmar", ...props }: BtnProps) => {
-    return (
-        <BtnCompose confirm label={label} {...props} />
-    )
-}
+const BtnConfirm = ({ label = 'Confirmar', ...props }: BtnProps) => {
+    return <BtnCompose confirm label={label} {...props} />;
+};
 
-const BtnCancel = ({ label = "Cancelar", ...props }: BtnProps) => {
-    return (
-        <BtnCompose cancel label={label} {...props} />
-    )
-}
+const BtnCancel = ({ label = 'Cancelar', ...props }: BtnProps) => {
+    return <BtnCompose cancel label={label} {...props} />;
+};
 
-const BtnLabel = ({ label = "Texto", ...props }: BtnProps) => {
-    return (
-        <BtnCompose text label={label} {...props} />
-    )
-}
+const BtnLabel = ({ label = 'Texto', ...props }: BtnProps) => {
+    return <BtnCompose text label={label} {...props} />;
+};
 
 type BtnLinkProps = {
     message?: string;
     children?: React.ReactNode;
     className?: string;
-} & VariantProps<typeof button> & LinkProps
+} & VariantProps<typeof button> &
+    LinkProps;
 
 const BtnLink = ({
     href,
@@ -136,17 +131,24 @@ const BtnLink = ({
         <Link
             href={href}
             className={button({ ...props, link, className })}
-            {...props as any}
+            {...(props as any)}
         >
-            {children && <span className={styledIcon({ ...props })}>{children}</span>}
+            {children && (
+                <span className={styledIcon({ ...props })}>{children}</span>
+            )}
             {message}
         </Link>
-    )
-}
-
-export {
-    Btn, BtnAvatar, BtnCancel,
-    BtnConfirm, BtnLabel,
-    BtnLink, BtnPrimary, BtnSecondary, BtnSuccess
+    );
 };
 
+export {
+    Btn,
+    BtnAvatar,
+    BtnCancel,
+    BtnConfirm,
+    BtnLabel,
+    BtnLink,
+    BtnPrimary,
+    BtnSecondary,
+    BtnSuccess,
+};

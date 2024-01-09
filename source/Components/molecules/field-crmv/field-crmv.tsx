@@ -1,15 +1,10 @@
-
-
 import { InputControlProps } from '~/Components/molecules/field-control';
 
 import FieldMasked from '../field-masked';
 
-type FieldDocumentProps<T> = Omit<InputControlProps<T>, 'ref'>
+type FieldDocumentProps<T> = Omit<InputControlProps<T>, 'ref'>;
 
 const FieldCRMV = <T,>({ ...props }: FieldDocumentProps<T>) => {
-
-
-
     return (
         <FieldMasked
             {...props}
@@ -18,7 +13,7 @@ const FieldCRMV = <T,>({ ...props }: FieldDocumentProps<T>) => {
             mask={'--______'}
             replacement={{
                 _: /\d/,
-                '-': /[A-Za-z]/ // letras maiusculas
+                '-': /[A-Za-z]/, // letras maiusculas
             }}
         />
     );

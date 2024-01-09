@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import HeaderTitle from "~/Components/atoms/header-title";
+import HeaderTitle from '~/Components/atoms/header-title';
 
 type DashboardLayoutsProps = {
     children: React.ReactNode;
@@ -11,9 +11,8 @@ type DashboardLayoutsProps = {
 
 const DashboardLayouts = ({
     children,
-    title = "Dashboard",
+    title = 'Dashboard',
 }: DashboardLayoutsProps) => {
-
     return (
         <main className="min-h-screen">
             <HeaderTitle title={title} />

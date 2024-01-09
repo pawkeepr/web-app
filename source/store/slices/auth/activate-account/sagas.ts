@@ -1,37 +1,36 @@
-import { all, call, fork, put, takeEvery } from "redux-saga/effects";
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
 
+//Include Both Helper File with needed methods
+import { PayloadAction } from '@reduxjs/toolkit';
 // Login Redux States
 import {
     activateAccountError,
     activateAccountSuccess,
     resendConfirmationCodeError,
-    resendConfirmationCodeSuccess
-} from "./actions";
+    resendConfirmationCodeSuccess,
+} from './actions';
 import {
     ACTION_ACTIVATE_ACCOUNT,
     ACTION_RESEND_CONFIRMATION_CODE,
-    ActivateAccount
+    ActivateAccount,
 } from './types';
-//Include Both Helper File with needed methods
-import { PayloadAction } from "@reduxjs/toolkit";
 
-import {
-    confirmSignUp,
-    resendConfirmationCode,
-} from "~/services/helpers/auth";
+import { confirmSignUp, resendConfirmationCode } from '~/services/helpers/auth';
 
 import { signInUser } from '../login/actions';
 
-import { errorToast, successToast } from "~/store/helpers/toast";
+import { errorToast, successToast } from '~/store/helpers/toast';
 
-function* onResendConfirmationCode({ payload }: PayloadAction<{ username: string }>) {
+function* onResendConfirmationCode({
+    payload,
+}: PayloadAction<{ username: string }>) {
     const { username } = payload;
     try {
         const { data } = yield call(resendConfirmationCode, username);
         yield put(resendConfirmationCodeSuccess(data));
-        successToast("Código de confirmação reenviado com sucesso")
+        successToast('Código de confirmação reenviado com sucesso');
     } catch (error) {
-        errorToast('Error resending confirmation code')
+        errorToast('Error resending confirmation code');
         yield put(resendConfirmationCodeError((error as any).message));
     }
 }
@@ -41,10 +40,10 @@ function* onActiveAccount({ payload }: PayloadAction<ActivateAccount>) {
     try {
         const { data } = yield call(confirmSignUp, username, code);
         yield put(activateAccountSuccess(data));
-        successToast("Conta ativada com sucesso")
+        successToast('Conta ativada com sucesso');
         yield put(signInUser({ username, password }));
     } catch (error) {
-        errorToast('Erro na ativação da conta, código inválido ou expirado!')
+        errorToast('Erro na ativação da conta, código inválido ou expirado!');
         yield put(activateAccountError((error as any).message));
     }
 }
@@ -58,10 +57,7 @@ export function* watchResendConfirmation() {
 }
 
 function* ActivateAccountSaga() {
-    yield all([
-        fork(watchResendConfirmation),
-        fork(watchActivateAccount),
-    ]);
+    yield all([fork(watchResendConfirmation), fork(watchActivateAccount)]);
 }
 
 export default ActivateAccountSaga;

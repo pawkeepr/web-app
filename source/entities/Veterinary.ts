@@ -1,33 +1,33 @@
-import { DTOProfile } from "~/types/profile"
+import { DTOProfile } from '~/types/profile';
 
 export class Veterinary implements DTOProfile {
-    id?: string
-    cpf_cnpj: string
-    crmv: string
-    name_veterinary: string
-    specialty: string
-    email: string
-    phone: string
-    whatsapp: string
-    country: string
-    state: string
-    city: string
-    neighborhood: string
-    street: string 
+    id?: string;
+    cpf_cnpj: string;
+    crmv: string;
+    name_veterinary: string;
+    specialty: string;
+    email: string;
+    phone: string;
+    whatsapp: string;
+    country: string;
+    state: string;
+    city: string;
+    neighborhood: string;
+    street: string;
 
     private constructor() {
-        this.cpf_cnpj = ''
-        this.crmv = ''
-        this.name_veterinary = ''
-        this.specialty = ''
-        this.email = ''
-        this.phone = ''
-        this.whatsapp = ''
-        this.country = ''
-        this.state = ''
-        this.city = ''
-        this.neighborhood = ''
-        this.street = ''
+        this.cpf_cnpj = '';
+        this.crmv = '';
+        this.name_veterinary = '';
+        this.specialty = '';
+        this.email = '';
+        this.phone = '';
+        this.whatsapp = '';
+        this.country = '';
+        this.state = '';
+        this.city = '';
+        this.neighborhood = '';
+        this.street = '';
     }
 
     defineID(id?: string): this {
@@ -109,7 +109,6 @@ export class Veterinary implements DTOProfile {
             .defineState(values.state)
             .defineCity(values.city)
             .defineNeighborhood(values.neighborhood)
-            .defineStreet(values.street)
+            .defineStreet(values.street);
     }
-
 }

@@ -1,4 +1,4 @@
- const  isValidCPF = (cpf: string) => {
+const isValidCPF = (cpf: string) => {
     cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
 
     if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {

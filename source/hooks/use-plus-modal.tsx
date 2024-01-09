@@ -4,7 +4,6 @@ import ConfirmedScheduledModal from '~/Components/modals/confirmed-scheduled-mod
 import ReScheduledModal from '~/Components/modals/re-scheduled-modal';
 import { IAppointmentVet } from '~/store/slices/appointment-vet/types';
 
-
 export enum ModalPlus {
     CanceledScheduled = 'CanceledScheduled',
     Rescheduled = 'Rescheduled',
@@ -17,8 +16,8 @@ interface PlusModalState {
     };
     open: (key: ModalPlus) => void;
     close: (key: ModalPlus) => void;
-    item: IAppointmentVet,
-    setItem: (item: IAppointmentVet) => void
+    item: IAppointmentVet;
+    setItem: (item: IAppointmentVet) => void;
     keys: typeof ModalPlus;
 }
 
@@ -41,9 +40,7 @@ const ContextModalPlus = () => {
                 isOpen={isOpen[ModalPlus.CanceledScheduled]}
                 showModal={() => open(ModalPlus.CanceledScheduled)}
             >
-                {
-                    () => (<div className="hidden" />)
-                }
+                {() => <div className="hidden" />}
             </CanceledScheduledModal>
 
             <ReScheduledModal
@@ -51,9 +48,7 @@ const ContextModalPlus = () => {
                 isOpen={isOpen[ModalPlus.Rescheduled]}
                 showModal={() => open(ModalPlus.Rescheduled)}
             >
-                {
-                    () => (<div className="hidden" />)
-                }
+                {() => <div className="hidden" />}
             </ReScheduledModal>
 
             <ConfirmedScheduledModal
@@ -61,12 +56,10 @@ const ContextModalPlus = () => {
                 isOpen={isOpen[ModalPlus.ConfirmedScheduled]}
                 showModal={() => open(ModalPlus.ConfirmedScheduled)}
             >
-                {
-                    () => (<div className="hidden" />)
-                }
+                {() => <div className="hidden" />}
             </ConfirmedScheduledModal>
         </>
-    )
-}
+    );
+};
 
 export default ContextModalPlus;

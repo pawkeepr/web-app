@@ -26,4 +26,4 @@ export const TOGGLE_STATUS = 'toggleActive';
 export const TOGGLE_STATUS_SUCCESS = 'toggleActiveSuccess';
 export const TOGGLE_STATUS_FAIL = 'toggleActiveFail';
 
-export const STOP_LOADING = 'stopLoading'
+export const STOP_LOADING = 'stopLoading';

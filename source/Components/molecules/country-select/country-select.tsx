@@ -12,17 +12,21 @@ type MemoCountries = {
     promise: Promise<country[]>;
     data: country[] | undefined;
     error: Error | undefined;
-}
+};
 
-const CountrySelect = ({ onChangeCountry, onChangeValueCountry, className, ...rest }: CountrySelectProps) => {
-
+const CountrySelect = ({
+    onChangeCountry,
+    onChangeValueCountry,
+    className,
+    ...rest
+}: CountrySelectProps) => {
     const [selectedCountry, setSelectedCountry] = useState<string>('');
 
     const getCountries = async () => {
         const countries = await axios.get('https://restcountries.com/v3.1/all');
 
-        return (countries as unknown as country[])
-            .sort((a: country, b: country) => {
+        return (countries as unknown as country[]).sort(
+            (a: country, b: country) => {
                 const nameA = a.translations?.['por']?.common.toUpperCase();
                 const nameB = b.translations?.['por']?.common.toUpperCase();
                 if (nameA < nameB) {
@@ -32,7 +36,8 @@ const CountrySelect = ({ onChangeCountry, onChangeValueCountry, className, ...re
                     return 1;
                 }
                 return 0;
-            });
+            },
+        );
     };
 
     const countries: MemoCountries = useMemo(() => {
@@ -44,7 +49,13 @@ const CountrySelect = ({ onChangeCountry, onChangeValueCountry, className, ...re
         };
     }, []);
 
-    const findCountry = useCallback((value: string) => countries.data?.find((country: country) => country.name.common === value), [countries]);
+    const findCountry = useCallback(
+        (value: string) =>
+            countries.data?.find(
+                (country: country) => country.name.common === value,
+            ),
+        [countries],
+    );
 
     useEffect(() => {
         let isMounted = true;
@@ -58,26 +69,26 @@ const CountrySelect = ({ onChangeCountry, onChangeValueCountry, className, ...re
                 if (isMounted) {
                     countries.error = error;
                 }
-            }
+            },
         );
         return () => {
             isMounted = false;
         };
     }, [countries]);
 
-
     useEffect(() => {
         if (!countries.data) return;
 
-        const findBrazil = findCountry('Brazil')
+        const findBrazil = findCountry('Brazil');
 
         if (!findBrazil) return;
 
         setSelectedCountry(findBrazil.name.common);
-
     }, [countries.data, findCountry]);
 
-    const handleCountryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleCountryChange = (
+        event: React.ChangeEvent<HTMLSelectElement>,
+    ) => {
         setSelectedCountry(event.target.value);
         onChangeValueCountry?.(event.target.value);
     };
@@ -85,9 +96,9 @@ const CountrySelect = ({ onChangeCountry, onChangeValueCountry, className, ...re
     if (countries.error) {
         return (
             <div {...rest} className={`${className}`}>
-            <select className="form-select" disabled>
-                <option value="">🇧🇷 Brasil</option>
-            </select>
+                <select className="form-select" disabled>
+                    <option value="">🇧🇷 Brasil</option>
+                </select>
             </div>
         );
     }
@@ -95,24 +106,32 @@ const CountrySelect = ({ onChangeCountry, onChangeValueCountry, className, ...re
     if (!countries.data) {
         return (
             <div {...rest} className={`${className}`}>
-            <select className="form-select" disabled>
-                <option value="">Carregando...</option>
-            </select>
+                <select className="form-select" disabled>
+                    <option value="">Carregando...</option>
+                </select>
             </div>
         );
     }
 
     return (
-        <div className={`form-group ${className}`} {...rest} >
+        <div className={`form-group ${className}`} {...rest}>
             <label htmlFor="country">País:</label>
-            <select id="country" name="country" className="form-select" value={selectedCountry} onChange={handleCountryChange} disabled>
+            <select
+                id="country"
+                name="country"
+                className="form-select"
+                value={selectedCountry}
+                onChange={handleCountryChange}
+                disabled
+            >
                 <option value="">Selecione um país...</option>
                 {countries.data?.map((country, index) => (
                     <option key={index} value={country.name.common}>
                         {country.flag}
                         <p className="ps-4">
-                            {"   "}
-                            {country.translations['por'].common || country.name.common}
+                            {'   '}
+                            {country.translations['por'].common ||
+                                country.name.common}
                         </p>
                     </option>
                 ))}

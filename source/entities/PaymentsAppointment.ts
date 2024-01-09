@@ -1,13 +1,9 @@
-import { GenericObject } from "~/store/helpers/types";
-import {
-    IPaymentsAppointment
-} from "~/store/slices/appointment-vet/types";
-
+import { GenericObject } from '~/store/helpers/types';
+import { IPaymentsAppointment } from '~/store/slices/appointment-vet/types';
 
 type PaymentAppointmentProps = IPaymentsAppointment;
 
 class PaymentAppointment implements PaymentAppointmentProps {
-
     form_payment: string;
     value_payment: string;
     coin: string;
@@ -15,15 +11,13 @@ class PaymentAppointment implements PaymentAppointmentProps {
     status_payment: string;
     date_payment: string;
 
-    private constructor(
-
-    ) {
-        this.form_payment = "";
-        this.value_payment = "";
-        this.coin = "";
-        this.number_installments = "";
-        this.status_payment = "";
-        this.date_payment = "";
+    private constructor() {
+        this.form_payment = '';
+        this.value_payment = '';
+        this.coin = '';
+        this.number_installments = '';
+        this.status_payment = '';
+        this.date_payment = '';
     }
 
     defineFormPayment(form_payment: string): PaymentAppointment {
@@ -41,8 +35,13 @@ class PaymentAppointment implements PaymentAppointmentProps {
         return this;
     }
 
-    defineNumberInstallments(number_installments: string | GenericObject): PaymentAppointment {
-        this.number_installments = typeof number_installments === "object" ? number_installments.value : number_installments;
+    defineNumberInstallments(
+        number_installments: string | GenericObject,
+    ): PaymentAppointment {
+        this.number_installments =
+            typeof number_installments === 'object'
+                ? number_installments.value
+                : number_installments;
         return this;
     }
 
@@ -56,7 +55,6 @@ class PaymentAppointment implements PaymentAppointmentProps {
         return this;
     }
 
-
     static build(props: PaymentAppointmentProps): PaymentAppointment {
         const entity = new PaymentAppointment();
 
@@ -66,7 +64,7 @@ class PaymentAppointment implements PaymentAppointmentProps {
             .defineCoin(props.coin)
             .defineNumberInstallments(props.number_installments)
             .defineStatusPayment(props.status_payment)
-            .defineDatePayment(props.date_payment)
+            .defineDatePayment(props.date_payment);
     }
 }
 

@@ -13,8 +13,8 @@ const FullScreenDropdown = () => {
     full screen
     */
     const toggleFullscreen = () => {
-        let document: any = window.document;
-        document.body.classList.add("fullscreen-enable");
+        const document: any = window.document;
+        document.body.classList.add('fullscreen-enable');
 
         if (
             !document.fullscreenElement &&
@@ -48,11 +48,11 @@ const FullScreenDropdown = () => {
                 !document.mozFullScreen &&
                 !document.msFullscreenElement
             )
-                document.body.classList.remove("fullscreen-enable");
+                document.body.classList.remove('fullscreen-enable');
         };
-        document.addEventListener("fullscreenchange", exitHandler);
-        document.addEventListener("webkitfullscreenchange", exitHandler);
-        document.addEventListener("mozfullscreenchange", exitHandler);
+        document.addEventListener('fullscreenchange', exitHandler);
+        document.addEventListener('webkitfullscreenchange', exitHandler);
+        document.addEventListener('mozfullscreenchange', exitHandler);
     };
     return (
         <React.Fragment>
@@ -62,14 +62,12 @@ const FullScreenDropdown = () => {
                     type="button"
                     className="text-white"
                 >
-                    {
-                        isFullScreenMode &&
+                    {isFullScreenMode && (
                         <ArrowsPointingOutIcon className="w-5 h-5" />
-                    }
-                    {
-                        !isFullScreenMode &&
+                    )}
+                    {!isFullScreenMode && (
                         <ArrowsPointingInIcon className="w-5 h-5" />
-                    }
+                    )}
                 </button>
             </div>
         </React.Fragment>

@@ -1,4 +1,4 @@
-import Input from "~/Components/atoms/input"
+import Input from '~/Components/atoms/input';
 
 type SearchInputProps = {
     value?: string;

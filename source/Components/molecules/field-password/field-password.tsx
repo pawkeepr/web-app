@@ -3,9 +3,15 @@ import VisibilityOff from '@heroicons/react/24/outline/EyeSlashIcon';
 import { useState } from 'react';
 
 import VpnKey from '@heroicons/react/24/outline/KeyIcon';
-import InputWithIcon, { InputControlProps } from '~/Components/molecules/field-control';
+import InputWithIcon, {
+    InputControlProps,
+} from '~/Components/molecules/field-control';
 
-const InputPassword = <T,>({ name = 'password', label = 'Senha', ...rest }: InputControlProps<T>) => {
+const InputPassword = <T,>({
+    name = 'password',
+    label = 'Senha',
+    ...rest
+}: InputControlProps<T>) => {
     const [visiblePassword, setVisiblePassword] = useState(false);
 
     return (
@@ -29,7 +35,7 @@ const InputPassword = <T,>({ name = 'password', label = 'Senha', ...rest }: Inpu
                     )}
                 </button>
             }
-            size='lg'
+            size="lg"
             {...rest}
         />
     );

@@ -1,13 +1,15 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { all, call, delay, fork, put, takeEvery, } from "redux-saga/effects";
+import { PayloadAction } from '@reduxjs/toolkit';
+import { all, call, delay, fork, put, takeEvery } from 'redux-saga/effects';
 
 //Account Redux states
-import { registerUser, registerUserFailed, registerUserSuccessful } from "./actions";
+import {
+    registerUser,
+    registerUserFailed,
+    registerUserSuccessful,
+} from './actions';
 
 //Include Both Helper File with needed methods
-import {
-    singUpAws
-} from "~/services/helpers/auth";
+import { singUpAws } from '~/services/helpers/auth';
 
 import { AccountSignUp } from './types';
 
@@ -22,7 +24,8 @@ function* registerUserSaga({ payload: user }: PayloadAction<AccountSignUp>) {
             'Registro realizado com sucesso!',
             {
                 autoClose: 3000,
-            })
+            },
+        );
         yield delay(4000);
         yield put(registerUserSuccessful());
         infoToast(
@@ -30,11 +33,15 @@ function* registerUserSaga({ payload: user }: PayloadAction<AccountSignUp>) {
             'Ative sua Conta',
             {
                 autoClose: 5000,
-                position: 'bottom-center'
-            })
+                position: 'bottom-center',
+            },
+        );
     } catch (error) {
-        console.log(error)
-        errorToast('Não foi possível realizar o registro.', 'Erro ao realizar o registro!')
+        console.log(error);
+        errorToast(
+            'Não foi possível realizar o registro.',
+            'Erro ao realizar o registro!',
+        );
         yield put(registerUserFailed(error as string));
     }
 }

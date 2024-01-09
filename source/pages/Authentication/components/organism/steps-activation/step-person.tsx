@@ -1,20 +1,19 @@
-import { useFormikContext } from "formik";
+import { useFormikContext } from 'formik';
 
+import { useMemo } from 'react';
 
-import { useMemo } from "react";
+import { BtnPrimary } from '~/Components/atoms/btn';
+import FieldControl from '~/Components/molecules/field-control';
+import validatePerson from '~/validations/person';
 
-import { BtnPrimary } from "~/Components/atoms/btn";
-import FieldControl from "~/Components/molecules/field-control";
-import validatePerson from "~/validations/person";
-
-import { FaWhatsapp } from "react-icons/fa";
-import ControlSwitch from "~/Components/atoms/switch-v2/switch";
-import FieldCrmv from "~/Components/molecules/field-crmv";
-import FieldDocument from "~/Components/molecules/field-document";
-import FieldPhone from "~/Components/molecules/field-phone";
-import useNextStep from "~/hooks/use-next-step";
-import { ActivateAccount } from "~/validations/activate";
-import { StepProps } from "./types";
+import { FaWhatsapp } from 'react-icons/fa';
+import ControlSwitch from '~/Components/atoms/switch-v2/switch';
+import FieldCrmv from '~/Components/molecules/field-crmv';
+import FieldDocument from '~/Components/molecules/field-document';
+import FieldPhone from '~/Components/molecules/field-phone';
+import useNextStep from '~/hooks/use-next-step';
+import { ActivateAccount } from '~/validations/activate';
+import { StepProps } from './types';
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<ActivateAccount>();
@@ -29,11 +28,11 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
     const copyPhoneToWhatsApp = (checked: boolean) => {
         if (!checked) {
-            setFieldValue("contact.whatsapp", "");
+            setFieldValue('contact.whatsapp', '');
             return;
         }
 
-        setFieldValue("contact.whatsapp", values.contact.phone);
+        setFieldValue('contact.whatsapp', values.contact.phone);
     };
 
     return (
@@ -52,7 +51,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <FieldControl
                     label="Sobrenome"
                     required
-                    separator={""}
+                    separator={''}
                     name="lastName"
                     aria-label="lastName"
                     placeholder="Sobrenome"
@@ -86,33 +85,34 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                     required
                 />
                 <div className="w-full hidden mobile:flex col-span-full justify-center items-center">
-                    <ControlSwitch onChange={copyPhoneToWhatsApp} >
+                    <ControlSwitch onChange={copyPhoneToWhatsApp}>
                         <p className="text-xs font-semibold flex flex-row justify-center items-center gap-1">
-                            Clique aqui para duplicar o telefone no campo ao lado:
+                            Clique aqui para duplicar o telefone no campo ao
+                            lado:
                             <FaWhatsapp className="text-green-600 text-xl cursor-pointer" />
                         </p>
                     </ControlSwitch>
                 </div>
                 <FieldPhone
-                    divClassName="col-span-1 mobile:col-span-full"t
+                    divClassName="col-span-1 mobile:col-span-full"
+                    t
                     label="WhatsApp"
                     name="contact.whatsapp"
                     placeholder="Digite o seu Número do WhatsApp"
                     required
                 />
                 <div className="w-full flex mobile:hidden col-span-full justify-center items-center">
-                    <ControlSwitch onChange={copyPhoneToWhatsApp} >
+                    <ControlSwitch onChange={copyPhoneToWhatsApp}>
                         <p className="text-xs font-semibold flex flex-row justify-center items-center gap-1">
-                            Clique aqui para duplicar o telefone no campo ao lado:
+                            Clique aqui para duplicar o telefone no campo ao
+                            lado:
                             <FaWhatsapp className="text-green-600 text-xl" />
                         </p>
                     </ControlSwitch>
                 </div>
             </div>
 
-
             <div className="flex items-center justify-center mt-1 col-span-full">
-
                 <BtnPrimary
                     onClick={nextStep}
                     disabled={!requiredValid}

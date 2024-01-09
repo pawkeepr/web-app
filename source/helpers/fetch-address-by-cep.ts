@@ -13,18 +13,18 @@ export interface IAddress {
     gia: string;
     ddd: string;
     siafi: string;
-    erro?: boolean
+    erro?: boolean;
 }
-
 
 export async function fetchAddressByCep(cep: string) {
     try {
-        const zipCodeNumber = cep.replace(/\D/g, '')
-        const { data } = await axios.get<IAddress>(`${BASE_URL}/${zipCodeNumber}/json`);
-        return data
+        const zipCodeNumber = cep.replace(/\D/g, '');
+        const { data } = await axios.get<IAddress>(
+            `${BASE_URL}/${zipCodeNumber}/json`,
+        );
+        return data;
     } catch (error) {
         console.error(error);
         return null;
     }
 }
-

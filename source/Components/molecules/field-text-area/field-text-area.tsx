@@ -86,4 +86,4 @@ const FieldTextArea = <T, Ctx>({
     );
 };
 
-export default withControl(FieldTextArea) as typeof FieldTextArea;
+export default (withControl(FieldTextArea) as typeof FieldTextArea);

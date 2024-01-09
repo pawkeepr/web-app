@@ -3,16 +3,15 @@ import { Formik } from 'formik';
 import { describe, expect } from 'vitest';
 import FieldControl from './field-control';
 
-
 const Wrapper = ({ validate, ...props }: any) => (
     <Formik
         initialValues={{ [props.name]: '' }}
-        onSubmit={() => { }}
+        onSubmit={() => {}}
         validate={validate}
     >
         <FieldControl {...props} />
     </Formik>
-)
+);
 
 describe('FieldControl component (Unit)', () => {
     const fieldName = 'test-field';
@@ -20,7 +19,9 @@ describe('FieldControl component (Unit)', () => {
     const errorMessage = 'Test error message';
 
     it('FieldControl matches snapshot', () => {
-        const { container } = render(<Wrapper name="test" label="Test Label" />);
+        const { container } = render(
+            <Wrapper name="test" label="Test Label" />,
+        );
         expect(container).toMatchSnapshot();
     });
 
@@ -31,7 +32,9 @@ describe('FieldControl component (Unit)', () => {
 
     it('should render label correctly', () => {
         render(<Wrapper name={fieldName} label={fieldLabel} />);
-        expect(screen.getByTestId(`label-${fieldName}`)).toHaveTextContent(fieldLabel);
+        expect(screen.getByTestId(`label-${fieldName}`)).toHaveTextContent(
+            fieldLabel,
+        );
     });
 
     // it('should show error message with correct text when there is a validation error', async () => {
@@ -53,5 +56,4 @@ describe('FieldControl component (Unit)', () => {
     //     rerender(<Wrapper name={fieldName} disabledError={true} />);
     //     expect(errMessage).not.toBeVisible();
     // });
-
 });

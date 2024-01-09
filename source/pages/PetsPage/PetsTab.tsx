@@ -6,25 +6,31 @@ import useListPets from '~/store/hooks/pets/use-list-pets';
 import { IPetV2Data } from '~/types/pet-v2';
 
 const PetsTab = () => {
+    const { data: pets, isLoading, isError } = useListPets();
 
-    const { data: pets, isLoading, isError } = useListPets()
+    const cards = (pets: IPetV2Data[]) =>
+        pets?.map((pet) => (
+            <CardPets key={pet?.id} pet={pet} checked={false} />
+        ));
 
-    const cards = (pets: IPetV2Data[]) => pets?.map(pet => (<CardPets key={pet?.id} pet={pet} checked={false} />))
+    const filter = useCallback(
+        (deferredPets: IPetV2Data[], search: string) => {
+            if (!search.trim()) return pets;
 
-    const filter = useCallback((deferredPets: IPetV2Data[], search: string) => {
+            return deferredPets.filter((pet) => {
+                const lowerSearch = search.toLowerCase();
+                return (
+                    pet.name_pet.toLowerCase().includes(lowerSearch) ||
+                    pet.race.toLowerCase().includes(lowerSearch)
+                );
+            });
+        },
+        [pets],
+    );
 
-        if (!search.trim()) return pets;
+    if (isLoading) return <div>Loading...</div>;
 
-        return deferredPets.filter(pet => {
-            const lowerSearch = search.toLowerCase();
-            return pet.name_pet.toLowerCase().includes(lowerSearch) || pet.race.toLowerCase().includes(lowerSearch)
-        })
-
-    }, [pets])
-
-    if (isLoading) return <div>Loading...</div>
-
-    if (isError) return <div>Error</div>
+    if (isError) return <div>Error</div>;
 
     return (
         <RadioGroup>

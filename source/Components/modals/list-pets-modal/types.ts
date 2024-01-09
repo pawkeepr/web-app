@@ -1,29 +1,38 @@
-import { IPet } from '~/types/pet'
-import { IPetV2 } from '~/types/pet-v2'
+import { IPet } from '~/types/pet';
+import { IPetV2 } from '~/types/pet-v2';
 
-export type onChangeOpen = (arg: boolean) => void
+export type onChangeOpen = (arg: boolean) => void;
 
 export type ChildrenProps = {
-    onChangeOpen: onChangeOpen
-    onChangeDocument: (doc: string) => void
-}
+    onChangeOpen: onChangeOpen;
+    onChangeDocument: (doc: string) => void;
+};
 
 export type ModalConfirmProps = {
-    label?: string
-    children?: (params: ChildrenProps) => React.ReactNode
-    selectedTabInitial?: number
-}
+    label?: string;
+    children?: (params: ChildrenProps) => React.ReactNode;
+    selectedTabInitial?: number;
+};
 
-export type InitialValues = IPet
-export type CtxSimplifiedPedFields = Pick<IPet, 'race' | 'specie' | 'sex' | 'bloodType' | 'cpf_tutor' | 'name' | 'ownerEmergencyContact'>
+export type InitialValues = IPet;
+export type CtxSimplifiedPedFields = Pick<
+    IPet,
+    | 'race'
+    | 'specie'
+    | 'sex'
+    | 'bloodType'
+    | 'cpf_tutor'
+    | 'name'
+    | 'ownerEmergencyContact'
+>;
 
 export type StepProps = {
-    nextStep: () => void
-    previousStep: () => void
-    onChangeDocument: (doc: string) => void
-    closeModal?: () => void
-    pets: IPetV2[]
-    handleNavigate: (pet: IPetV2) => void
-    onChangeStep: (step: number) => void
-    isLoading?: boolean
-}
+    nextStep: () => void;
+    previousStep: () => void;
+    onChangeDocument: (doc: string) => void;
+    closeModal?: () => void;
+    pets: IPetV2[];
+    handleNavigate: (pet: IPetV2) => void;
+    onChangeStep: (step: number) => void;
+    isLoading?: boolean;
+};

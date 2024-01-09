@@ -2,22 +2,20 @@ import React, {
     useCallback,
     useDeferredValue,
     useEffect,
-    useState
-} from "react";
-import ScheduledNewAppointment from "~/Components/modals/scheduled-appointment";
+    useState,
+} from 'react';
+import ScheduledNewAppointment from '~/Components/modals/scheduled-appointment';
 import FieldDocumentAppointment from '~/Components/molecules/field-document-appointment';
-import SearchInput from "~/Components/molecules/search-input";
-import DefaultLayout from "../_layouts/dashboard/dashboard";
+import SearchInput from '~/Components/molecules/search-input';
+import DefaultLayout from '../_layouts/dashboard/dashboard';
 
-import ContextModalPlus from "~/hooks/use-plus-modal";
-import HorizontalTabs from "./components/organisms/templates/Horizontal-List";
+import ContextModalPlus from '~/hooks/use-plus-modal';
+import HorizontalTabs from './components/organisms/templates/Horizontal-List';
 
-interface AppointmentsTabsProps<T> {
-
-}
+type AppointmentsTabsProps<T> = {};
 
 const AppointmentsTabs = <T,>() => {
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState('');
     const [filteredItems, setFilteredItems] = useState<T[]>([] as T[]);
     const deferredItems = useDeferredValue(filteredItems);
 
@@ -30,13 +28,12 @@ const AppointmentsTabs = <T,>() => {
             const search = e.target.value.toLowerCase();
             setSearch(search);
         },
-        []
+        [],
     );
 
     return (
         <DefaultLayout title="Dashboard">
             <div className="flex justify-end items-center">
-
                 <SearchInput
                     value={search}
                     onChange={handleSearch}

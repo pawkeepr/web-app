@@ -41,7 +41,13 @@ export const useRouterMock = () => {
 };
 
 const RouterProvider = ({ children }: { children: React.ReactNode }) => {
-    return <RouterContext.Provider value={useRouterMock() as unknown as NextRouter}>{children}</RouterContext.Provider>;
+    return (
+        <RouterContext.Provider
+            value={useRouterMock() as unknown as NextRouter}
+        >
+            {children}
+        </RouterContext.Provider>
+    );
 };
 
 export default RouterProvider;

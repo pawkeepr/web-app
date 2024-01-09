@@ -1,12 +1,12 @@
-import { Combobox, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
-import { FaArrowAltCircleDown, FaCheck } from "react-icons/fa";
-import FieldControl from "../field-control/field-control";
+import { Combobox, Transition } from '@headlessui/react';
+import { Fragment, useEffect, useState } from 'react';
+import { FaArrowAltCircleDown, FaCheck } from 'react-icons/fa';
+import FieldControl from '../field-control/field-control';
 
-import { useFormikContext } from "formik";
-import { InputControlProps } from "../field-control/types";
+import { useFormikContext } from 'formik';
+import { InputControlProps } from '../field-control/types';
 
-import cn from "classnames";
+import cn from 'classnames';
 
 type Item = {
     item: string[];
@@ -28,9 +28,9 @@ const ComboBoxAutocomplete = <T,>({
     ...rest
 }: ComboBoxAutocompleteProps<T>) => {
     const [selected, setSelected] = useState<Item & T>(
-        option || ({} as Item & T)
+        option || ({} as Item & T),
     );
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState('');
 
     const { setFieldValue, values } =
         useFormikContext<{ [key in string]: any }>();
@@ -47,14 +47,14 @@ const ComboBoxAutocomplete = <T,>({
     };
 
     const filteredItems =
-        query === "" || query === undefined || query === null
+        query === '' || query === undefined || query === null
             ? items
             : items.filter((item) =>
-                item
-                    .toLowerCase()
-                    .replace(/\s+/g, "")
-                    .includes(query?.toLowerCase().replace(/\s+/g, ""))
-            );
+                  item
+                      .toLowerCase()
+                      .replace(/\s+/g, '')
+                      .includes(query?.toLowerCase().replace(/\s+/g, '')),
+              );
 
     return (
         <Combobox value={selected} onChange={onChangeValue}>
@@ -80,7 +80,7 @@ const ComboBoxAutocomplete = <T,>({
                     leave="transition ease-in duration-100"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
-                    afterLeave={() => setQuery("")}
+                    afterLeave={() => setQuery('')}
                 >
                     <Combobox.Options
                         className="
@@ -97,7 +97,7 @@ const ComboBoxAutocomplete = <T,>({
                             bg-white 
                         "
                     >
-                        {filteredItems.length === 0 && query !== "" ? (
+                        {filteredItems.length === 0 && query !== '' ? (
                             <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                                 {query}
                             </div>
@@ -107,18 +107,18 @@ const ComboBoxAutocomplete = <T,>({
                                     key={item}
                                     className={({ active }) =>
                                         cn(
-                                            "relative cursor-default select-none py-2 pl-10 pr-4 font-normal",
+                                            'relative cursor-default select-none py-2 pl-10 pr-4 font-normal',
                                             {
-                                                "bg-primary-600 text-white":
+                                                'bg-primary-600 text-white':
                                                     active,
-                                                "text-gray-900": !active,
+                                                'text-gray-900': !active,
                                             },
-                                            "dark:text-gray-200 "
+                                            'dark:text-gray-200 ',
                                         )
                                     }
                                     value={item}
                                     onClick={() => {
-                                        if (typeof onChange === "function") {
+                                        if (typeof onChange === 'function') {
                                             onChange(item);
                                         }
                                     }}
@@ -127,19 +127,20 @@ const ComboBoxAutocomplete = <T,>({
                                         <div>
                                             <span
                                                 className={cn({
-                                                    "block truncate": true,
-                                                    "font-medium": selected,
-                                                    "font-normal": !selected,
+                                                    'block truncate': true,
+                                                    'font-medium': selected,
+                                                    'font-normal': !selected,
                                                 })}
                                             >
                                                 {item}
                                             </span>
                                             {selected && (
                                                 <span
-                                                    className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active
-                                                        ? "text-white"
-                                                        : "text-teal-600"
-                                                        }`}
+                                                    className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                                        active
+                                                            ? 'text-white'
+                                                            : 'text-teal-600'
+                                                    }`}
                                                 >
                                                     <FaCheck />
                                                 </span>

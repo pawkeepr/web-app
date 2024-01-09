@@ -89,32 +89,40 @@ export const BirdBreed = {
 export type BirdBreedKeys = keyof typeof BirdBreed;
 
 export const RabbitBreed = {
-    AngoraIngles: "Angorá Inglês",
-    AngoraFrances: "Angorá Francês",
-    AngoraGigante: "Angorá Gigante",
-    Argente: "Argente",
-    BelgianHare: "Belgian Hare",
-    Californiano: "Californiano",
-    CabeçaDeLeão: "Cabeça de Leão",
-    CastorRex: "Castor Rex",
-    Chinchila: "Chinchila",
-    CoelhoHolandes: "Coelho Holandês",
-    CoelhoLebreBelga: "Coelho Lebre Belga",
-    CoelhoLebreEuropeu: "Coelho Lebre Europeu",
-    FlemishGiant: "Flemish Giant",
-    Hotot: "Hotot",
-    LopIngles: "Lop Inglês",
-    LopFrances: "Lop Francês",
-    LopHolland: "Lop Holland",
-    MiniLop: "Mini Lop",
-    MiniRex: "Mini Rex",
-    NetherlandDwarf: "Netherland Dwarf",
-    NovaZelandia: "Nova Zelândia",
-    Polish: "Polish",
-    Silver: "Silver",
-    SilverFox: "Silver Fox",
+    AngoraIngles: 'Angorá Inglês',
+    AngoraFrances: 'Angorá Francês',
+    AngoraGigante: 'Angorá Gigante',
+    Argente: 'Argente',
+    BelgianHare: 'Belgian Hare',
+    Californiano: 'Californiano',
+    CabeçaDeLeão: 'Cabeça de Leão',
+    CastorRex: 'Castor Rex',
+    Chinchila: 'Chinchila',
+    CoelhoHolandes: 'Coelho Holandês',
+    CoelhoLebreBelga: 'Coelho Lebre Belga',
+    CoelhoLebreEuropeu: 'Coelho Lebre Europeu',
+    FlemishGiant: 'Flemish Giant',
+    Hotot: 'Hotot',
+    LopIngles: 'Lop Inglês',
+    LopFrances: 'Lop Francês',
+    LopHolland: 'Lop Holland',
+    MiniLop: 'Mini Lop',
+    MiniRex: 'Mini Rex',
+    NetherlandDwarf: 'Netherland Dwarf',
+    NovaZelandia: 'Nova Zelândia',
+    Polish: 'Polish',
+    Silver: 'Silver',
+    SilverFox: 'Silver Fox',
     Outros: 'Não Informado',
 } as const;
 export type RabbitBreedKeys = keyof typeof RabbitBreed;
 
-export type Breed = DogBreedKeys | CatBreedKeys | HorseBreedKeys | FishBreedKeys | ReptileBreedKeys | BirdBreedKeys | RabbitBreedKeys | 'unknown';
+export type Breed =
+    | DogBreedKeys
+    | CatBreedKeys
+    | HorseBreedKeys
+    | FishBreedKeys
+    | ReptileBreedKeys
+    | BirdBreedKeys
+    | RabbitBreedKeys
+    | 'unknown';

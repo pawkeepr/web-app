@@ -1,23 +1,35 @@
-import { LOADING } from "~/helpers/loading";
+import { LOADING } from '~/helpers/loading';
 import {
-    ADD_FAIL, ADD_NEW, ADD_SUCCESS,
-    DELETE, DELETE_FAIL, DELETE_SUCCESS,
+    ADD_FAIL,
+    ADD_NEW,
+    ADD_SUCCESS,
+    DELETE,
+    DELETE_FAIL,
+    DELETE_SUCCESS,
     GET_ALL,
-    GET_ALL_ATIVES, GET_ALL_ATIVES_FAIL, GET_ALL_ATIVES_SUCCESS,
+    GET_ALL_ATIVES,
+    GET_ALL_ATIVES_FAIL,
+    GET_ALL_ATIVES_SUCCESS,
     GET_ALL_FAIL,
-    GET_ALL_INATIVES, GET_ALL_INATIVES_FAIL, GET_ALL_INATIVES_SUCCESS,
+    GET_ALL_INATIVES,
+    GET_ALL_INATIVES_FAIL,
+    GET_ALL_INATIVES_SUCCESS,
     GET_ALL_SUCCESS,
     STOP_LOADING,
-    TOGGLE_STATUS, TOGGLE_STATUS_FAIL, TOGGLE_STATUS_SUCCESS,
-    UPDATE, UPDATE_FAIL, UPDATE_SUCCESS
-} from "~/store/helpers/constants";
+    TOGGLE_STATUS,
+    TOGGLE_STATUS_FAIL,
+    TOGGLE_STATUS_SUCCESS,
+    UPDATE,
+    UPDATE_FAIL,
+    UPDATE_SUCCESS,
+} from '~/store/helpers/constants';
 
 export interface IDefault {
-    _id: string
-    active: boolean
+    _id: string;
+    active: boolean;
 }
 
-export interface Data extends IDefault { }
+export type Data = IDefault;
 
 export type InitialState = {
     data: Data[];

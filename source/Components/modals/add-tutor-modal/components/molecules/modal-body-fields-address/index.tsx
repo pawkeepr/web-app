@@ -1,13 +1,19 @@
-import { useFormikContext } from "formik";
+import { useFormikContext } from 'formik';
 import { useCallback, useState } from 'react';
 import MaskedInput from 'react-input-mask';
-import FieldControl from "~/Components/molecules/field-control/field-control";
-import { IAddress } from "~/helpers/fetch-address-by-cep";
-import useFetchAddress from "~/hooks/use-fetch-address";
+import FieldControl from '~/Components/molecules/field-control/field-control';
+import { IAddress } from '~/helpers/fetch-address-by-cep';
+import useFetchAddress from '~/hooks/use-fetch-address';
 
 const ModalBodyFieldsAddress = () => {
     const { values, setFieldValue } = useFormikContext<any>();
-    const [disabledInputs, setDisabledInputs] = useState({ state: false, city: false, neighborhood: false, street: false, complement: false })
+    const [disabledInputs, setDisabledInputs] = useState({
+        state: false,
+        city: false,
+        neighborhood: false,
+        street: false,
+        complement: false,
+    });
 
     const updateAddressFields = useCallback(
         (address: IAddress) => {
@@ -15,27 +21,27 @@ const ModalBodyFieldsAddress = () => {
 
             const { uf, localidade, bairro, logradouro, complemento } = address;
 
-            setFieldValue('state', uf || '')
-            setFieldValue('city', localidade || '')
-            setFieldValue('neighborhood', bairro || '')
-            setFieldValue('street', logradouro || '')
-            setFieldValue('complement', complemento || '')
+            setFieldValue('state', uf || '');
+            setFieldValue('city', localidade || '');
+            setFieldValue('neighborhood', bairro || '');
+            setFieldValue('street', logradouro || '');
+            setFieldValue('complement', complemento || '');
 
             setDisabledInputs({
                 state: !!uf,
                 city: !!localidade,
                 neighborhood: !!bairro,
                 street: !!logradouro,
-                complement: !!complemento
-            })
+                complement: !!complemento,
+            });
         },
-        [setFieldValue]
-    )
+        [setFieldValue],
+    );
 
     const { loading } = useFetchAddress({
         zipCode: values?.cep || '',
         onChangeAddress: updateAddressFields,
-    })
+    });
 
     return (
         <div className="grid grid-cols-3 ">
@@ -45,13 +51,12 @@ const ModalBodyFieldsAddress = () => {
                 placeholder="Cep"
                 type="text"
                 component={MaskedInput as any}
-                mask={"99999-999"}
+                mask={'99999-999'}
                 required
             />
 
-
             <FieldControl
-                divClassName='my-1'
+                divClassName="my-1"
                 className=" "
                 type="text"
                 label="Estado"
@@ -62,7 +67,7 @@ const ModalBodyFieldsAddress = () => {
             />
 
             <FieldControl
-                divClassName='my-1'
+                divClassName="my-1"
                 className=" "
                 type="text"
                 label="Cidade"
@@ -73,7 +78,7 @@ const ModalBodyFieldsAddress = () => {
             />
 
             <FieldControl
-                divClassName='my-1'
+                divClassName="my-1"
                 className=" "
                 type="text"
                 label="Bairro"
@@ -84,8 +89,8 @@ const ModalBodyFieldsAddress = () => {
             />
 
             <FieldControl
-                divClassName='my-1'
-                label='Rua'
+                divClassName="my-1"
+                label="Rua"
                 name="street"
                 aria-label="street"
                 className="  w-70"
@@ -96,7 +101,7 @@ const ModalBodyFieldsAddress = () => {
             />
 
             <FieldControl
-                divClassName='my-1'
+                divClassName="my-1"
                 className=" "
                 type="text"
                 label="Complemento"
@@ -105,7 +110,7 @@ const ModalBodyFieldsAddress = () => {
                 placeholder={loading ? 'buscando...' : 'Complemento (opcional)'}
             />
         </div>
-    )
+    );
 };
 
 export default ModalBodyFieldsAddress;

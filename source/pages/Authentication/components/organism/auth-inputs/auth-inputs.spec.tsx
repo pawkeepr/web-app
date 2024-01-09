@@ -15,16 +15,15 @@ const Wrapper = () => (
             </AuthProvider>
         </ProviderClient>
     </RouterProvider>
-)
+);
 
 describe('Auth Unit (Unit)', () => {
-
     afterEach(() => {
-        vi.clearAllMocks()
-    })
+        vi.clearAllMocks();
+    });
 
     it('should render without errors', () => {
-        const { baseElement } = render(<Wrapper />)
+        const { baseElement } = render(<Wrapper />);
 
         expect(baseElement).toMatchSnapshot();
     });
@@ -58,11 +57,10 @@ describe('Auth Unit (Unit)', () => {
         await userEvent.click(eyeIcon);
 
         expect(passwordInput).toHaveAttribute('type', 'password');
-
     });
 
     it('should disable button when form is invalid', async () => {
-        render(<Wrapper />)
+        render(<Wrapper />);
         const usernameInput = screen.getByTestId('email-input');
         const passwordInput = screen.getByTestId('password-input');
         const submitButton = screen.getByTestId('submit-button');
@@ -72,6 +70,4 @@ describe('Auth Unit (Unit)', () => {
 
         expect(submitButton).toBeDisabled();
     });
-
 });
-

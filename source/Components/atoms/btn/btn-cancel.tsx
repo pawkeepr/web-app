@@ -1,6 +1,11 @@
-import { BtnProps } from './types'
+import { BtnProps } from './types';
 
-const BtnCancel = ({ onClick, label = 'Cancelar', className, ...rest }: BtnProps) => {
+const BtnCancel = ({
+    onClick,
+    label = 'Cancelar',
+    className,
+    ...rest
+}: BtnProps) => {
     return (
         <button
             className={`
@@ -19,7 +24,7 @@ const BtnCancel = ({ onClick, label = 'Cancelar', className, ...rest }: BtnProps
         >
             {label}
         </button>
-    )
-}
+    );
+};
 
-export default BtnCancel
+export default BtnCancel;

@@ -10,7 +10,7 @@ const Plans = () => {
 
     return (
         <>
-            <section className="section bg-light" id="plans" data-logo-green >
+            <section className="section bg-light" id="plans" data-logo-green>
                 <div className="bg-overlay bg-overlay-pattern"></div>
                 {/* <div className="text-gray-600 body-font overflow-hidden py-5">
                     <div className="container px-5 mx-auto">
@@ -98,19 +98,37 @@ const Plans = () => {
                                     Escolha o plano ideal para você
                                 </h3>
                                 <p className="text-muted mb-4 text-sm md:text-lg">
-                                    Preços simples. Sem taxas escondidas. Sempre pensando em você e no seu Pet.
+                                    Preços simples. Sem taxas escondidas. Sempre
+                                    pensando em você e no seu Pet.
                                 </p>
 
                                 <div className="d-flex justify-content-center align-items-center">
                                     <div>
-                                        <h5 className="text-base font-medium mb-0">Mês</h5>
+                                        <h5 className="text-base font-medium mb-0">
+                                            Mês
+                                        </h5>
                                     </div>
-                                    <div className="form-check form-switch fs-20 ms-3 " onClick={toggle} >
-                                        <input className="form-check-input" type="checkbox" id="plan-switch" />
-                                        <label className="form-check-label" htmlFor="plan-switch"></label>
+                                    <div
+                                        className="form-check form-switch fs-20 ms-3 "
+                                        onClick={toggle}
+                                    >
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            id="plan-switch"
+                                        />
+                                        <label
+                                            className="form-check-label"
+                                            htmlFor="plan-switch"
+                                        ></label>
                                     </div>
                                     <div>
-                                        <h5 className="text-base font-medium mb-0">Ano<span className="badge badge-soft-success ml-1">Save 20%</span></h5>
+                                        <h5 className="text-base font-medium mb-0">
+                                            Ano
+                                            <span className="badge badge-soft-success ml-1">
+                                                Save 20%
+                                            </span>
+                                        </h5>
                                     </div>
                                 </div>
                             </div>
@@ -123,8 +141,12 @@ const Plans = () => {
                                 <CardBody className="p-4 m-2 text-base md:text-lg">
                                     <div className="d-flex align-items-center">
                                         <div className="flex-grow-1">
-                                            <h5 className="mb-1 fw-semibold">Grátis</h5>
-                                            <p className="text-muted mb-0">Experimente Agora!</p>
+                                            <h5 className="mb-1 fw-semibold">
+                                                Grátis
+                                            </h5>
+                                            <p className="text-muted mb-0">
+                                                Experimente Agora!
+                                            </p>
                                         </div>
                                         <div className="avatar-sm">
                                             <div className="avatar-title bg-light rounded-circle text-primary">
@@ -133,8 +155,17 @@ const Plans = () => {
                                         </div>
                                     </div>
                                     <div className="py-4 text-center">
-                                        <h1 className="annual"><sup><small>R$</small></sup><span className="ff-secondary fw-bold">0,00</span> <span
-                                            className="fs-13 text-muted">/Mês</span></h1>
+                                        <h1 className="annual">
+                                            <sup>
+                                                <small>R$</small>
+                                            </sup>
+                                            <span className="ff-secondary fw-bold">
+                                                0,00
+                                            </span>{' '}
+                                            <span className="fs-13 text-muted">
+                                                /Mês
+                                            </span>
+                                        </h1>
                                     </div>
 
                                     <div>
@@ -145,14 +176,19 @@ const Plans = () => {
                                                         <i className="ri-checkbox-circle-fill fs-15 align-middle"></i>
                                                     </div>
                                                     <div className="flex-grow-1">
-                                                    <b>10</b> Consultas por mês
+                                                        <b>10</b> Consultas por
+                                                        mês
                                                     </div>
                                                 </div>
                                             </li>
-
                                         </ul>
                                         <div className="mt-4">
-                                            <Link href="#" className="btn btn-soft-success w-100">Testar</Link>
+                                            <Link
+                                                href="#"
+                                                className="btn btn-soft-success w-100"
+                                            >
+                                                Testar
+                                            </Link>
                                         </div>
                                     </div>
                                 </CardBody>
@@ -164,10 +200,14 @@ const Plans = () => {
                             <Pulse>
                                 <Card className="plan-box mb-0 ribbon-box right bg-primary !text-white">
                                     <CardBody className="p-4 m-2 h-42 text-base md:text-lg">
-                                        <div className="ribbon-two ribbon-two-danger "><span>Popular</span></div>
+                                        <div className="ribbon-two ribbon-two-danger ">
+                                            <span>Popular</span>
+                                        </div>
                                         <div className="d-flex align-items-center">
                                             <div className="flex-grow-1">
-                                                <h5 className="mb-1 fw-semibold !text-white">Básico</h5>
+                                                <h5 className="mb-1 fw-semibold !text-white">
+                                                    Básico
+                                                </h5>
                                                 <p className="text-muted mb-0"></p>
                                             </div>
                                             <div className="avatar-sm">
@@ -177,10 +217,31 @@ const Plans = () => {
                                             </div>
                                         </div>
                                         <div className="py-4 text-center">
-                                            {plan ? <h1 className="month !text-white"><sup><small>R$</small></sup><span className="ff-secondary fw-bold">49,90</span> <span
-                                                className="fs-13 text-muted !text-white">/Mês</span></h1> :
-                                                <h1 className="annual !text-white"><sup><small>R$</small></sup><span className="ff-secondary fw-bold">479,00</span> <span
-                                                    className="fs-13 text-muted !text-white">/Ano</span></h1>}
+                                            {plan ? (
+                                                <h1 className="month !text-white">
+                                                    <sup>
+                                                        <small>R$</small>
+                                                    </sup>
+                                                    <span className="ff-secondary fw-bold">
+                                                        49,90
+                                                    </span>{' '}
+                                                    <span className="fs-13 text-muted !text-white">
+                                                        /Mês
+                                                    </span>
+                                                </h1>
+                                            ) : (
+                                                <h1 className="annual !text-white">
+                                                    <sup>
+                                                        <small>R$</small>
+                                                    </sup>
+                                                    <span className="ff-secondary fw-bold">
+                                                        479,00
+                                                    </span>{' '}
+                                                    <span className="fs-13 text-muted !text-white">
+                                                        /Ano
+                                                    </span>
+                                                </h1>
+                                            )}
                                         </div>
 
                                         <div>
@@ -191,14 +252,19 @@ const Plans = () => {
                                                             <i className="ri-checkbox-circle-fill fs-15 align-middle text-white"></i>
                                                         </div>
                                                         <div className="flex-grow-1 !text-white">
-                                                        <b>50</b> Consultas por mês
+                                                            <b>50</b> Consultas
+                                                            por mês
                                                         </div>
                                                     </div>
                                                 </li>
-
                                             </ul>
                                             <div className="mt-4">
-                                                <Link href="#" className="btn btn-secondary w-100 text-black font-bold">Adquirir Agora</Link>
+                                                <Link
+                                                    href="#"
+                                                    className="btn btn-secondary w-100 text-black font-bold"
+                                                >
+                                                    Adquirir Agora
+                                                </Link>
                                             </div>
                                         </div>
                                     </CardBody>
@@ -211,7 +277,9 @@ const Plans = () => {
                                 <CardBody className="p-4 m-2 text-base md:text-lg">
                                     <div className="d-flex align-items-center">
                                         <div className="flex-grow-1">
-                                            <h5 className="mb-1 fw-semibold">Prêmio</h5>
+                                            <h5 className="mb-1 fw-semibold">
+                                                Prêmio
+                                            </h5>
                                             <p className="text-muted mb-0"></p>
                                         </div>
                                         <div className="avatar-sm">
@@ -221,10 +289,31 @@ const Plans = () => {
                                         </div>
                                     </div>
                                     <div className="py-4 text-center">
-                                        {plan ? <h1 className="month"><sup><small>R$</small></sup><span className="ff-secondary fw-bold">149,90</span> <span
-                                            className="fs-13 text-muted">/Mês</span></h1> :
-                                            <h1 className="annual"><sup><small>R$</small></sup><span className="ff-secondary fw-bold">1439,00</span> <span
-                                                className="fs-13 text-muted">/Ano</span></h1>}
+                                        {plan ? (
+                                            <h1 className="month">
+                                                <sup>
+                                                    <small>R$</small>
+                                                </sup>
+                                                <span className="ff-secondary fw-bold">
+                                                    149,90
+                                                </span>{' '}
+                                                <span className="fs-13 text-muted">
+                                                    /Mês
+                                                </span>
+                                            </h1>
+                                        ) : (
+                                            <h1 className="annual">
+                                                <sup>
+                                                    <small>R$</small>
+                                                </sup>
+                                                <span className="ff-secondary fw-bold">
+                                                    1439,00
+                                                </span>{' '}
+                                                <span className="fs-13 text-muted">
+                                                    /Ano
+                                                </span>
+                                            </h1>
+                                        )}
                                     </div>
 
                                     <div>
@@ -235,25 +324,29 @@ const Plans = () => {
                                                         <i className="ri-checkbox-circle-fill fs-15 align-middle"></i>
                                                     </div>
                                                     <div className="flex-grow-1">
-                                                        <b>100</b> Consultas por mês
+                                                        <b>100</b> Consultas por
+                                                        mês
                                                     </div>
                                                 </div>
                                             </li>
-
-
                                         </ul>
                                         <div className="mt-4">
-                                            <Link href="#" className="btn btn-soft-success w-100">Adquirir</Link>
+                                            <Link
+                                                href="#"
+                                                className="btn btn-soft-success w-100"
+                                            >
+                                                Adquirir
+                                            </Link>
                                         </div>
                                     </div>
                                 </CardBody>
                             </Card>
                         </Col>
-
                     </Row>
                     <div className="d-flex mt-4">
                         <div className="flex-grow-1 text-center italic text-base font-medium">
-                            Para mais de 100 consultas, fale com nossos atendentes!
+                            Para mais de 100 consultas, fale com nossos
+                            atendentes!
                         </div>
                     </div>
                 </Container>

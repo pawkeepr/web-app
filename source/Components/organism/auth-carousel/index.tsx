@@ -1,7 +1,7 @@
-import React from "react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Col } from "reactstrap";
+import React from 'react';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Col } from 'reactstrap';
 
 // Import Images
 
@@ -13,9 +13,10 @@ type AuthSliderProps = {
 const AuthSlider = ({ bg = 'auth-bg-image', classNames }: AuthSliderProps) => {
     return (
         <React.Fragment>
-
             <Col lg={6}>
-                <div className={`p-4 auth-one-bg ${bg} ${classNames} h-100 mobile:hidden block !bg-cover `}>
+                <div
+                    className={`p-4 auth-one-bg ${bg} ${classNames} h-100 mobile:hidden block !bg-cover `}
+                >
                     <div className="position-relative h-100 d-flex flex-column">
                         {/* <div className="mb-4">
                             <Link href="/dashboard" className="d-block">
@@ -23,14 +24,18 @@ const AuthSlider = ({ bg = 'auth-bg-image', classNames }: AuthSliderProps) => {
                             </Link>
                         </div> */}
                         <div className="mt-auto w-full">
-
-
-                            <Carousel showThumbs={false} autoPlay={true} showArrows={false} showStatus={false} infiniteLoop={true} className="carousel slide" id="qoutescarouselIndicators" >
+                            <Carousel
+                                showThumbs={false}
+                                autoPlay={true}
+                                showArrows={false}
+                                showStatus={false}
+                                infiniteLoop={true}
+                                className="carousel slide"
+                                id="qoutescarouselIndicators"
+                            >
                                 <div className="carousel-inner text-center text-white pb-5">
                                     <div className="item">
-                                        <p className="fs-15 fst-italic">
-
-                                        </p>
+                                        <p className="fs-15 fst-italic"></p>
                                     </div>
                                 </div>
                                 {/* <div className="carousel-inner text-center text-white pb-5">
@@ -39,7 +44,6 @@ const AuthSlider = ({ bg = 'auth-bg-image', classNames }: AuthSliderProps) => {
                                     </div>
                                 </div> */}
                             </Carousel>
-
                         </div>
                     </div>
                 </div>

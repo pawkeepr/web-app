@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import Prism from "prismjs";
+import Prism from 'prismjs';
+import React, { useEffect, useRef } from 'react';
 
 const PrismCode = (props) => {
     const ref = useRef();
@@ -27,4 +27,3 @@ const PrismCode = (props) => {
 };
 
 export default PrismCode;
-

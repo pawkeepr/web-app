@@ -14,33 +14,32 @@ import useNextStep from '~/hooks/use-next-step';
 import { ActivateAccount } from '~/validations/activate';
 import { StepProps } from './types';
 
-
 const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const [disabledInputs, setDisabledInputs] = useState({
         state: false,
         city: false,
         neighborhood: false,
         street: false,
-        complement: false
-    })
+        complement: false,
+    });
 
-    const { values, setFieldValue } = useFormikContext<ActivateAccount>()
-    const { zipCode } = values.location
+    const { values, setFieldValue } = useFormikContext<ActivateAccount>();
+    const { zipCode } = values.location;
 
     const updateAddressFields = useCallback(
         (params: IAddress) => {
-            if (!params) return
+            if (!params) return;
 
-            const { uf, localidade, bairro, logradouro, complemento } = params
-            setFieldValue('location.state', uf || '')
+            const { uf, localidade, bairro, logradouro, complemento } = params;
+            setFieldValue('location.state', uf || '');
 
-            setFieldValue('location.city', localidade || '')
+            setFieldValue('location.city', localidade || '');
 
-            setFieldValue('location.neighborhood', bairro || '')
+            setFieldValue('location.neighborhood', bairro || '');
 
-            setFieldValue('location.street', logradouro || '')
+            setFieldValue('location.street', logradouro || '');
 
-            setFieldValue('location.complement', complemento || '')
+            setFieldValue('location.complement', complemento || '');
 
             setDisabledInputs({
                 state: !!uf,
@@ -48,35 +47,37 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 neighborhood: !!bairro,
                 street: !!logradouro,
                 complement: !!complemento,
-            })
+            });
         },
         [setFieldValue],
-    )
+    );
 
-    const { cepInvalid, loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode })
+    const { cepInvalid, loading } = useFetchAddress({
+        onChangeAddress: updateAddressFields,
+        zipCode,
+    });
 
     const onChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target
-        setFieldValue('location.number', value)
-    }
+        const { value } = e.target;
+        setFieldValue('location.number', value);
+    };
 
     const requiredValid = useMemo((): boolean => {
-        const isValid = validateLocation.isValidSync(values?.location) && !cepInvalid
+        const isValid =
+            validateLocation.isValidSync(values?.location) && !cepInvalid;
 
-        return isValid
-    }, [cepInvalid, values?.location])
+        return isValid;
+    }, [cepInvalid, values?.location]);
 
-    useNextStep(nextStep, requiredValid, 1000)
+    useNextStep(nextStep, requiredValid, 1000);
 
     return (
-
         <div className="container grid grid-cols-2 mobile:grid-cols-1 gap-1">
-
             <FieldMasked
                 label="CEP"
                 name="location.zipCode"
                 placeholder="Digite o CEP"
-                mask={"_____-___"}
+                mask={'_____-___'}
                 required
             />
 
@@ -86,7 +87,9 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 label="Estado"
                 name="location.state"
                 disabled={disabledInputs.state || loading}
-                placeholder={loading ? 'Carregando...' : 'Digite o nome do estado'}
+                placeholder={
+                    loading ? 'Carregando...' : 'Digite o nome do estado'
+                }
                 required
             />
             <FieldControl
@@ -94,7 +97,9 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 label="Cidade"
                 name="location.city"
                 disabled={disabledInputs.city || loading}
-                placeholder={loading ? 'Carregando...' : 'Digite o nome da cidade'}
+                placeholder={
+                    loading ? 'Carregando...' : 'Digite o nome da cidade'
+                }
                 required
             />
             <FieldControl
@@ -102,44 +107,49 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 label="Bairro"
                 name="location.neighborhood"
                 disabled={loading}
-                placeholder={loading ? 'Carregando...' : 'Digite o nome do bairro'}
+                placeholder={
+                    loading ? 'Carregando...' : 'Digite o nome do bairro'
+                }
                 required
             />
 
             <div className="grid grid-cols-4 mobile:grid-cols-1 col-span-full w-full gap-1">
                 <FieldControl
                     divClassName="col-span-3"
-                    label='Rua'
+                    label="Rua"
                     name="location.street"
                     aria-label="street"
                     disabled={loading}
-                    placeholder={loading ? 'Carregando...' : 'Digite o nome da rua'}
+                    placeholder={
+                        loading ? 'Carregando...' : 'Digite o nome da rua'
+                    }
                     required
                     disabledError
                 />
 
                 <FieldControl
                     divClassName="col-span-1"
-                    label='N°'
+                    label="N°"
                     name="location.number"
                     aria-label="number"
                     disabled={loading}
                     placeholder="N°"
                 />
-
             </div>
 
             <div className="col-span-full">
-
                 <FieldControl
                     type="text"
                     label="Complemento"
                     name="location.complement"
                     disabled={loading}
-                    placeholder={loading ? 'Carregando...' : "Digite o complemento (opcional)"}
+                    placeholder={
+                        loading
+                            ? 'Carregando...'
+                            : 'Digite o complemento (opcional)'
+                    }
                 />
             </div>
-
 
             <div className="mt-1 flex justify-center items-center col-span-full">
                 <BtnCancel onClick={prevStep} label="Voltar" />
@@ -150,8 +160,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 />
             </div>
         </div>
+    );
+};
 
-    )
-}
-
-export default StepSignUpAddress
+export default StepSignUpAddress;

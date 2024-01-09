@@ -1,11 +1,9 @@
-"use client";
+'use client';
 
-import DefaultLayout from "../_layouts/dashboard/dashboard";
-import Tab from "./TutorsTab";
-
+import DefaultLayout from '../_layouts/dashboard/dashboard';
+import Tab from './TutorsTab';
 
 const TutorsPage = () => {
-
     return (
         <DefaultLayout title="Tutores">
             <Tab />

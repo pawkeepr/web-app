@@ -26,11 +26,10 @@ type LoadingProps = {
     type?: KeysLoading;
     color?: string;
     height?: string;
-}
+};
 
-const Loading = ({ size, type = 'Audio', color = "#09b285" }: LoadingProps) => {
-    const Component = ReactLoader[type]
-
+const Loading = ({ size, type = 'Audio', color = '#09b285' }: LoadingProps) => {
+    const Component = ReactLoader[type];
 
     return (
         <div className={`flex w-full justify-center items-center`}>

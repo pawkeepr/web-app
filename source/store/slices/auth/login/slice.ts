@@ -1,5 +1,4 @@
-
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import LOADING from '~/constants/loading';
 
 import { api } from '~/services/api';
@@ -15,7 +14,6 @@ const initialState: LoginState = {
     password: '',
     isLoading: LOADING.IDLE,
 };
-
 
 const loginSlice = createSlice({
     name,
@@ -46,15 +44,20 @@ const loginSlice = createSlice({
         },
         signOutUserFailed: (state, action: PayloadAction<string>) => {
             state.error = action.payload;
-            state.isLoading = LOADING.SUCCESS
+            state.isLoading = LOADING.SUCCESS;
         },
 
-        signInUser: (state, action: PayloadAction<{ username: string; password: string }>) => {
+        signInUser: (
+            state,
+            action: PayloadAction<{ username: string; password: string }>,
+        ) => {
             state.isLoading = LOADING.PENDING;
         },
         setAuthorization: (state, action: PayloadAction<{ token: string }>) => {
             if (api.defaults.headers) {
-                api.defaults.headers['Authorization'] = `${action.payload.token}`;
+                api.defaults.headers[
+                    'Authorization'
+                ] = `${action.payload.token}`;
             }
 
             state.token = action.payload.token;
@@ -71,7 +74,10 @@ const loginSlice = createSlice({
         recoverUserByToken: (state, action: PayloadAction<string>) => {
             state.isLoading = LOADING.PENDING;
         },
-        recoverUserByTokenSuccess: (state, action: PayloadAction<{ user: IUser, access_token: string }>) => {
+        recoverUserByTokenSuccess: (
+            state,
+            action: PayloadAction<{ user: IUser; access_token: string }>,
+        ) => {
             state.token = action.payload.access_token;
             state.isAuthenticated = true;
             state.isLoading = LOADING.SUCCESS;
@@ -86,10 +92,7 @@ const loginSlice = createSlice({
         },
     },
     initialState,
-
-})
-
-
+});
 
 export default loginSlice.reducer;
 
@@ -100,11 +103,5 @@ export const {
     onSetRememberMe,
 } = loginSlice.actions;
 
-export {
-    name
-};
-export type {
-    LoginState
-};
-
-
+export { name };
+export type { LoginState };

@@ -11,12 +11,11 @@ const useModal = () => {
         setOpen(true);
     }, []);
 
-
     return {
         open,
         closeModal,
-        showModal
-    }
-}
+        showModal,
+    };
+};
 
-export default useModal
+export default useModal;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export const MOBILE_SIZE = 767;
 
@@ -30,7 +30,7 @@ const useResizeMobile = () => {
     return {
         isMobile: sizeScreen.width < MOBILE_SIZE,
         sizeScreen,
-    }
-}
+    };
+};
 
-export default useResizeMobile
+export default useResizeMobile;

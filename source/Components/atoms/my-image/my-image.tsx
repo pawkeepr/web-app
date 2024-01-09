@@ -9,7 +9,7 @@ type MyImageProps = {
     height?: number;
     fill?: boolean;
     src: string | StaticImageData;
-} & ImageProps
+} & ImageProps;
 
 const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
     const [error, setError] = useState(false);
@@ -24,7 +24,7 @@ const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
                 className={className}
                 style={{
                     display: error ? 'none' : 'block',
-                    ...style
+                    ...style,
                 }}
             />
             {error && (

@@ -1,6 +1,6 @@
-import { Breed } from "~/store/slices/pets/breedType";
-import { Gender, Species } from "~/store/slices/pets/speciesType";
-import { GenericSelect, On_Off, PetData } from "~/types/pet-v2";
+import { Breed } from '~/store/slices/pets/breedType';
+import { Gender, Species } from '~/store/slices/pets/speciesType';
+import { GenericSelect, On_Off, PetData } from '~/types/pet-v2';
 
 export class PetInformation implements PetData {
     name_pet: string;
@@ -33,90 +33,94 @@ export class PetInformation implements PetData {
         this.organ_donor = '';
         this.pedigree = null;
         this.pedigree_registry = '';
-        this.size = ''
-        this.race = null
-        this.sex = null
-        this.weight = ''
+        this.size = '';
+        this.race = null;
+        this.sex = null;
+        this.weight = '';
     }
 
     defineName(name: string): PetInformation {
-        this.name_pet = name
-        return this
+        this.name_pet = name;
+        return this;
     }
 
     defineMicrochip(microchip: string): PetInformation {
-        this.microchip = microchip
-        return this
+        this.microchip = microchip;
+        return this;
     }
 
     defineIdentificationNumber(identificationNumber: string): PetInformation {
-        this.identification_number = identificationNumber
-        return this
+        this.identification_number = identificationNumber;
+        return this;
     }
 
     defineSpecie(specie: Species | GenericSelect): PetInformation {
-        this.specie = typeof specie === 'string' ? specie : specie.value as Species
-        return this
+        this.specie =
+            typeof specie === 'string' ? specie : (specie.value as Species);
+        return this;
     }
 
     defineBloodDonator(bloodDonator: On_Off): PetInformation {
-        this.blood_donator = bloodDonator
-        return this
+        this.blood_donator = bloodDonator;
+        return this;
     }
 
     defineBloodType(bloodType: string | GenericSelect): PetInformation {
-        this.blood_type = typeof bloodType === 'string' ? bloodType : bloodType.value as string
-        return this
+        this.blood_type =
+            typeof bloodType === 'string'
+                ? bloodType
+                : (bloodType.value as string);
+        return this;
     }
 
     defineCastrated(castrated: On_Off): PetInformation {
-        this.castrated = castrated
-        return this
+        this.castrated = castrated;
+        return this;
     }
 
     defineColor(color: string): PetInformation {
-        this.color = color
-        return this
+        this.color = color;
+        return this;
     }
 
     defineDateBirth(dateBirth: string): PetInformation {
-        this.date_birth = dateBirth
-        return this
+        this.date_birth = dateBirth;
+        return this;
     }
 
     defineOrganDonor(organDonor: string): PetInformation {
-        this.organ_donor = organDonor
-        return this
+        this.organ_donor = organDonor;
+        return this;
     }
 
     definePedigree(pedigree: On_Off): PetInformation {
-        this.pedigree = pedigree
-        return this
+        this.pedigree = pedigree;
+        return this;
     }
 
     definePedigreeRegistry(pedigreeRegistry: string): PetInformation {
-        this.pedigree_registry = pedigreeRegistry
-        return this
+        this.pedigree_registry = pedigreeRegistry;
+        return this;
     }
 
     defineSize(size: string): PetInformation {
-        this.size = size
-        return this
+        this.size = size;
+        return this;
     }
 
     defineRace(race: Breed | GenericSelect) {
-        this.race = typeof race === 'string' ? race : race.value as Breed
-        return this
+        this.race = typeof race === 'string' ? race : (race.value as Breed);
+        return this;
     }
 
     defineSex(sex: Gender | GenericSelect) {
-        this.sex = typeof sex === 'string' ? sex : sex.value as Gender
-        return this
+        this.sex = typeof sex === 'string' ? sex : (sex.value as Gender);
+        return this;
     }
 
     defineWeight(weight: string): PetInformation {
-        this.weight = weight
-        return this
+        this.weight = weight;
+        return this;
     }
 
     static build(params: PetData): PetInformation {
@@ -136,6 +140,6 @@ export class PetInformation implements PetData {
             .defineSpecie(params.specie || 'unknown')
             .defineRace(params.race || 'unknown')
             .defineSex(params.sex || 'unknown')
-            .defineWeight(params.weight || 'unknown')
+            .defineWeight(params.weight || 'unknown');
     }
 }

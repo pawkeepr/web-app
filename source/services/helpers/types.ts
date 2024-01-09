@@ -2,7 +2,7 @@ interface Payload {
     sub: string;
     email_verified: boolean;
     iss: string;
-    "cognito:username": string;
+    'cognito:username': string;
     origin_jti: string;
     aud: string;
     event_id: string;

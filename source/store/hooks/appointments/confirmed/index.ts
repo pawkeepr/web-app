@@ -1,25 +1,24 @@
+import { getAllAppointmentsConfirmed } from '~/services/helpers';
+import useAppStore from '../../use-app-store';
+import { ScheduledResponseAxios } from '../types';
 
-import { getAllAppointmentsConfirmed } from '~/services/helpers'
-import useAppStore from '../../use-app-store'
-import { ScheduledResponseAxios } from '../types'
-
-const NAME = 'appointment-confirmed'
+const NAME = 'appointment-confirmed';
 
 type UseAppointmentConfirmedProps = {
-    handleClose?: (() => void)
-}
+    handleClose?: () => void;
+};
 
 export const useAppointmentConfirmed = (
     props: UseAppointmentConfirmedProps = {},
 ) => {
-    const superKeys = [NAME]
+    const superKeys = [NAME];
 
     return useAppStore<ScheduledResponseAxios>({
         get: getAllAppointmentsConfirmed.bind(null),
         handleCloseModal: props.handleClose,
         keys: superKeys,
         name: NAME,
-    })
-}
+    });
+};
 
-export default useAppointmentConfirmed
+export default useAppointmentConfirmed;

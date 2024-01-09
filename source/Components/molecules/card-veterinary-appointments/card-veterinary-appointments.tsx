@@ -8,17 +8,17 @@ import {
     DropdownMenu,
     DropdownToggle,
     Row,
-    UncontrolledDropdown
+    UncontrolledDropdown,
 } from 'reactstrap';
 import MyImage from '~/Components/atoms/my-image/my-image';
 
-
 type CardVeterinaryAppointmentsProps = {
-    veterinaryAppointments: any
-}
+    veterinaryAppointments: any;
+};
 
-const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAppointmentsProps) => {
-
+const CardVeterinaryAppointments = ({
+    veterinaryAppointments,
+}: CardVeterinaryAppointmentsProps) => {
     if (!veterinaryAppointments) {
         return null;
     }
@@ -34,7 +34,12 @@ const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAp
                                     <i className="ri-more-fill fs-17"></i>
                                 </DropdownToggle>
                                 <DropdownMenu className="dropdown-menu-end">
-                                    <li><DropdownItem><i className="ri-eye-fill text-muted me-2 align-bottom"></i>Ver</DropdownItem></li>
+                                    <li>
+                                        <DropdownItem>
+                                            <i className="ri-eye-fill text-muted me-2 align-bottom"></i>
+                                            Ver
+                                        </DropdownItem>
+                                    </li>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                         </Row>
@@ -44,7 +49,10 @@ const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAp
                             <div className="avatar-md w-24 h-24">
                                 <div className="avatar-title bg-white rounded-circle relative">
                                     <MyImage
-                                        src={veterinaryAppointments?.pet.avatar as any}
+                                        src={
+                                            veterinaryAppointments?.pet
+                                                .avatar as any
+                                        }
                                         alt={`Foto de Perfil de ${veterinaryAppointments?.pet.name}`}
                                         className="img-fluid d-block rounded-circle"
                                         fill
@@ -52,38 +60,54 @@ const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAp
                                 </div>
                             </div>
                             <div className="team-content">
-                                <Link href="#" className="d-block"><h5 className="fs-16 mb-1">{veterinaryAppointments?.pet.name}</h5></Link>
+                                <Link href="#" className="d-block">
+                                    <h5 className="fs-16 mb-1">
+                                        {veterinaryAppointments?.pet.name}
+                                    </h5>
+                                </Link>
                                 <p className="text-muted mb-0">
                                     <strong>Tutor: </strong>
                                     {veterinaryAppointments?.tutor.name}
                                 </p>
-                                <p className="text-muted mb-0">{veterinaryAppointments?.tutor.phone}</p>
+                                <p className="text-muted mb-0">
+                                    {veterinaryAppointments?.tutor.phone}
+                                </p>
                             </div>
                         </div>
                     </Col>
                     <Col lg={4}>
                         <Row className="text-center">
-                            <Col xs={6} className="border-end border-end-dashed gap-1">
-                                <p className="font-bold font-sans uppercase mb-2">Doenças:</p>
-                                {
-                                    veterinaryAppointments?.diseases?.map((disease, index) => {
+                            <Col
+                                xs={6}
+                                className="border-end border-end-dashed gap-1"
+                            >
+                                <p className="font-bold font-sans uppercase mb-2">
+                                    Doenças:
+                                </p>
+                                {veterinaryAppointments?.diseases?.map(
+                                    (disease, index) => {
                                         return (
-                                            <h5 key={index} className="mb-0 ">{disease.name}</h5>
-                                        )
-                                    })
-                                }
-
+                                            <h5 key={index} className="mb-0 ">
+                                                {disease.name}
+                                            </h5>
+                                        );
+                                    },
+                                )}
                             </Col>
                             <Col xs={6}>
-                                <p className="font-bold font-sans uppercase mb-2">Tratamento:</p>
+                                <p className="font-bold font-sans uppercase mb-2">
+                                    Tratamento:
+                                </p>
 
-                                {
-                                    veterinaryAppointments?.treatments.map((treatment, index) => {
+                                {veterinaryAppointments?.treatments.map(
+                                    (treatment, index) => {
                                         return (
-                                            <h5 key={index} className="mb-0">{treatment.medicine}</h5>
-                                        )
-                                    })
-                                }
+                                            <h5 key={index} className="mb-0">
+                                                {treatment.medicine}
+                                            </h5>
+                                        );
+                                    },
+                                )}
                             </Col>
                         </Row>
                     </Col>
@@ -92,11 +116,10 @@ const CardVeterinaryAppointments = ({ veterinaryAppointments }: CardVeterinaryAp
                             <Link href="/pages-profile" className="btn btn-light view-btn">Ver Perfil</Link>
                         </div>
                     </Col> */}
-
                 </Row>
             </CardBody>
         </Card>
-    )
-}
+    );
+};
 
-export default CardVeterinaryAppointments
+export default CardVeterinaryAppointments;

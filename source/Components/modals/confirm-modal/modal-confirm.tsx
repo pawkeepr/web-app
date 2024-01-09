@@ -1,22 +1,22 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
 
-type onChangeOpen = (arg: boolean) => void
+type onChangeOpen = (arg: boolean) => void;
 
 type ChildrenProps = {
-    onChangeOpen: onChangeOpen
-}
+    onChangeOpen: onChangeOpen;
+};
 
 type ModalConfirmProps = {
-    title: string
-    description?: string
-    message?: string
-    label?: string
-    onConfirm?: () => void
-    onCancel?: () => void
-    children?: (params: ChildrenProps) => React.ReactNode
-}
+    title: string;
+    description?: string;
+    message?: string;
+    label?: string;
+    onConfirm?: () => void;
+    onCancel?: () => void;
+    children?: (params: ChildrenProps) => React.ReactNode;
+};
 
 const ModalConfirm = ({
     message = 'Esta ação não poderá ser desfeita.',
@@ -27,43 +27,39 @@ const ModalConfirm = ({
     description,
     children,
 }: ModalConfirmProps) => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleConfirm = () => {
-        onConfirm?.()
-        setIsOpen(false)
-    }
+        onConfirm?.();
+        setIsOpen(false);
+    };
 
     const handleCancel = () => {
-        onCancel?.()
-        setIsOpen(false)
-    }
+        onCancel?.();
+        setIsOpen(false);
+    };
 
     const onChangeOpen = (arg: boolean) => {
-        setIsOpen(arg)
-    }
+        setIsOpen(arg);
+    };
 
     const closeModal = () => {
-        onChangeOpen(false)
-    }
+        onChangeOpen(false);
+    };
 
     const openModal = () => {
-        onChangeOpen(true)
-    }
+        onChangeOpen(true);
+    };
 
     return (
         <>
-
-            {
-                children && children({ onChangeOpen })
-            }
-            {
-                !children && (
-                    <div className="flex items-center justify-center">
-                        <button
-                            type="button"
-                            onClick={openModal}
-                            className="
+            {children && children({ onChangeOpen })}
+            {!children && (
+                <div className="flex items-center justify-center">
+                    <button
+                        type="button"
+                        onClick={openModal}
+                        className="
                                 rounded-md 
                                 bg-secondary-500 bg-opacity-20 
                                 px-4 py-2 text-sm 
@@ -75,13 +71,11 @@ const ModalConfirm = ({
                                 focus-visible:ring-white 
                                 focus-visible:ring-opacity-75
                             "
-                        >
-                            {label}
-                        </button>
-                    </div>
-                )
-            }
-
+                    >
+                        {label}
+                    </button>
+                </div>
+            )}
 
             <Transition appear show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -108,7 +102,8 @@ const ModalConfirm = ({
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="
+                                <Dialog.Panel
+                                    className="
                                     w-full 
                                     max-w-md 
                                     transform 
@@ -123,7 +118,8 @@ const ModalConfirm = ({
                                     dark:!bg-dark-500
                                     dark:!text-gray-200
                                     !font-sans
-                                ">
+                                "
+                                >
                                     <Dialog.Title
                                         as="h2"
                                         className="text-xl font-semibold leading-6 text-gray-900 dark:!text-gray-200 text-center"
@@ -156,8 +152,6 @@ const ModalConfirm = ({
                                             onClick={handleConfirm}
                                         />
                                     </div>
-
-
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>
@@ -165,7 +159,7 @@ const ModalConfirm = ({
                 </Dialog>
             </Transition>
         </>
-    )
-}
+    );
+};
 
-export default ModalConfirm
+export default ModalConfirm;

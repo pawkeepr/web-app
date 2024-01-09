@@ -1,11 +1,9 @@
-"use client";
+'use client';
 
-import DefaultLayout from "../_layouts/dashboard/dashboard";
-import PetsTab from "./PetsTab";
-
+import DefaultLayout from '../_layouts/dashboard/dashboard';
+import PetsTab from './PetsTab';
 
 const PetsPage = () => {
-
     return (
         <DefaultLayout title="Dashboard">
             <PetsTab />

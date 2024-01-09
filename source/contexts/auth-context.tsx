@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { createContext, useEffect } from "react";
+import { createContext, useEffect } from 'react';
 import cookies from '~/constants/cookies';
 import LOADING from '~/constants/loading';
 import { decrypt, encrypt } from '~/helpers/encrypt-and-decrypt';
@@ -36,7 +36,9 @@ interface AuthContextType {
     signIn: (data: SignInData) => Promise<void>;
 }
 
-export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+export const AuthContext = createContext<AuthContextType>(
+    {} as AuthContextType,
+);
 
 interface AuthProviderProps {
     children: React.ReactNode;
@@ -49,75 +51,75 @@ const PUBLIC_ROUTES = [
     '/forgot-password',
     '/activation',
     '/logout',
-    '/confirm-account'
-]
+    '/confirm-account',
+];
 
 export function AuthProvider({ children }: AuthProviderProps) {
-    const dispatch = useAppDispatch()
-    const {
-        user,
-        isAuthenticated,
-        isLoading,
-        password,
-        rememberMe,
-        username,
-    } = useAppSelector(state => state.Login as LoginState)
-    const router = useRouter()
-    const pathname = usePathname()
+    const dispatch = useAppDispatch();
+    const { user, isAuthenticated, isLoading, password, rememberMe, username } =
+        useAppSelector((state) => state.Login as LoginState);
+    const router = useRouter();
+    const pathname = usePathname();
 
     useEffect(() => {
-        const token = getCookie(cookies.token.name)
-        const isPublicRoute = PUBLIC_ROUTES.includes(pathname)
+        const token = getCookie(cookies.token.name);
+        const isPublicRoute = PUBLIC_ROUTES.includes(pathname);
 
-        if (!token && isPublicRoute) return
+        if (!token && isPublicRoute) return;
 
         if (!token) {
-            dispatch(signOutUser())
-            router.prefetch('/sign-in')
-            return
+            dispatch(signOutUser());
+            router.prefetch('/sign-in');
+            return;
         }
 
-        dispatch(recoverUserByToken(token))
+        dispatch(recoverUserByToken(token));
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pathname])
+    }, [pathname]);
 
     useEffect(() => {
-        getRememberInfo()
+        getRememberInfo();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, []);
 
     async function signIn({ username, password }: SignInData) {
-        await setRememberInfo()
-        dispatch(signInUser({ username, password }))
+        await setRememberInfo();
+        dispatch(signInUser({ username, password }));
     }
 
     async function setRememberInfo() {
-        const JSON_REMEMBER = JSON.stringify({ username, password: encrypt(password) })
+        const JSON_REMEMBER = JSON.stringify({
+            username,
+            password: encrypt(password),
+        });
 
         if (rememberMe) {
-            setCookie(cookies.remember.name, JSON_REMEMBER, cookies.remember.expires)
+            setCookie(
+                cookies.remember.name,
+                JSON_REMEMBER,
+                cookies.remember.expires,
+            );
         }
     }
 
     async function getRememberInfo() {
-        const rememberInfo = getCookie(cookies.remember.name)
+        const rememberInfo = getCookie(cookies.remember.name);
 
         if (!rememberInfo) {
-            return
+            return;
         }
 
-        const { username, password } = rememberInfo
+        const { username, password } = rememberInfo;
 
-        dispatch(onSetRememberMe(true))
-        dispatch(onChangeUsername(username))
-        dispatch(onChangePassword(decrypt(password)))
-
+        dispatch(onSetRememberMe(true));
+        dispatch(onChangeUsername(username));
+        dispatch(onChangePassword(decrypt(password)));
     }
 
     const onToggleRememberMe = () => {
-        dispatch(onChangeRememberMe())
-    }
+        dispatch(onChangeRememberMe());
+    };
 
     return (
         <AuthContext.Provider
@@ -136,4 +138,3 @@ export function AuthProvider({ children }: AuthProviderProps) {
         </AuthContext.Provider>
     );
 }
-

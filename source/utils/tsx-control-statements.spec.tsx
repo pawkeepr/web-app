@@ -3,29 +3,28 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Choose, For, If, When } from './tsx-control-statements';
 
-
 describe('Snap Components (Unit)', () => {
     it('should snap render For (Unit)', () => {
-        const items = [1, 2, 3]
+        const items = [1, 2, 3];
 
         const { asFragment } = render(
             <For items={items}>
                 {(item, index) => <li key={index}>{item}</li>}
             </For>,
-        )
+        );
 
-        expect(asFragment()).toMatchSnapshot()
-    })
+        expect(asFragment()).toMatchSnapshot();
+    });
 
     it('should snap render If (Unit)', () => {
         const { asFragment } = render(
             <If condition={true}>
                 <div>test</div>
             </If>,
-        )
+        );
 
-        expect(asFragment()).toMatchSnapshot()
-    })
+        expect(asFragment()).toMatchSnapshot();
+    });
 
     it('should snap render Choose (Unit)', () => {
         const { asFragment } = render(
@@ -34,11 +33,11 @@ describe('Snap Components (Unit)', () => {
                     <div>test</div>
                 </When>
             </Choose>,
-        )
+        );
 
-        expect(asFragment()).toMatchSnapshot()
-    })
-})
+        expect(asFragment()).toMatchSnapshot();
+    });
+});
 
 describe('For component (Unit)', () => {
     it('should render list items', async () => {
@@ -47,7 +46,7 @@ describe('For component (Unit)', () => {
         render(
             <For items={items}>
                 {(item, index) => <li key={index}>{item}</li>}
-            </For>
+            </For>,
         );
 
         const elements = screen.getAllByRole('listitem');
@@ -64,7 +63,7 @@ describe('For component (Unit)', () => {
         render(
             <For items={items}>
                 {(item, index) => <div key={index}>{item}</div>}
-            </For>
+            </For>,
         );
 
         expect(screen.queryByText(/test/i)).not.toBeInTheDocument();
@@ -76,7 +75,7 @@ describe('If component (Unit)', () => {
         render(
             <If condition={true}>
                 <div>test</div>
-            </If>
+            </If>,
         );
 
         const element = screen.getByText(/test/i);
@@ -87,10 +86,13 @@ describe('If component (Unit)', () => {
         render(
             <If condition={false}>
                 <label htmlFor="username">Username</label>
-            </If>
+            </If>,
         );
 
-        const element = screen.queryByRole('textbox', { name: /test/i, hidden: true });
+        const element = screen.queryByRole('textbox', {
+            name: /test/i,
+            hidden: true,
+        });
         expect(element).not.toBeInTheDocument();
     });
 });
@@ -102,7 +104,7 @@ describe('Choose component (Unit)', () => {
                 <When value={1}>
                     <div>test</div>
                 </When>
-            </Choose>
+            </Choose>,
         );
 
         const element = screen.getByText(/test/i);
@@ -115,7 +117,7 @@ describe('Choose component (Unit)', () => {
                 <When value={2}>
                     <div>test</div>
                 </When>
-            </Choose>
+            </Choose>,
         );
 
         const element = screen.queryByText(/test/i);

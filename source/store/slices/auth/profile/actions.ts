@@ -1,5 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
+import { IProfile } from '~/types/profile';
 import {
     ACTION_ADD_FAIL,
     ACTION_ADD_NEW,
@@ -11,7 +12,6 @@ import {
     ACTION_RESET_PROFILE_FLAG,
     ACTION_SET_PROFILE,
 } from './types';
-import { IProfile } from '~/types/profile';
 
 export const setProfile = createAction<IProfile>(ACTION_SET_PROFILE);
 export const editProfile = createAction<IProfile>(ACTION_EDIT_PROFILE);

@@ -1,11 +1,10 @@
 import { useAppointmentConfirmed } from '~/store/hooks/appointments';
-import CardScheduled from "../organisms/card-scheduled";
+import CardScheduled from '../organisms/card-scheduled';
 
 const StepConfirmed = () => {
+    const { activeData, isLoading } = useAppointmentConfirmed();
 
-    const { activeData, isLoading } = useAppointmentConfirmed()
-
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return <div>Loading...</div>;
 
     return (
         <div className="space-y-10 w-full">

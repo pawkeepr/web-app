@@ -12,5 +12,5 @@ describe('Test FooterAuth component', () => {
         render(<FooterAuth />);
         // Verifica se PawKeeprs está no footer
         expect(screen.getByText(/PawKeeprs/i)).toBeInTheDocument();
-    })
-})
+    });
+});

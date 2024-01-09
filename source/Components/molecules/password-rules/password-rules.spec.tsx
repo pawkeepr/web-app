@@ -1,15 +1,14 @@
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it, } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import PasswordRules from './password-rules';
 
 describe('PasswordRules component', () => {
-
     it('should match snapshot (Unit)', () => {
-        const { container } = render(<PasswordRules value="abcd1234" />)
+        const { container } = render(<PasswordRules value="abcd1234" />);
 
-        expect(container).toMatchSnapshot()
-    })
+        expect(container).toMatchSnapshot();
+    });
 
     it('renders password rules list (Unit)', () => {
         render(<PasswordRules value="" />);
@@ -71,7 +70,9 @@ describe('PasswordRules component', () => {
 
     it('should render correctly (Unit)', () => {
         render(<PasswordRules value="" />);
-        expect(screen.getByRole('heading', { level: 4 })).toHaveTextContent('Senha deve conter:');
+        expect(screen.getByRole('heading', { level: 4 })).toHaveTextContent(
+            'Senha deve conter:',
+        );
         expect(screen.getByRole('list')).toBeInTheDocument();
     });
 
@@ -92,11 +93,18 @@ describe('PasswordRules component', () => {
 
         rerender(<PasswordRules value="senhaValida1@" />);
 
-        expect(screen.getByText('Mínimo 8 caracteres')).toHaveClass('text-success');
-        expect(screen.getByText('Uma letra minúscula (a-z)')).toHaveClass('text-success');
-        expect(screen.getByText('Uma letra maiúscula (A-Z)')).toHaveClass('text-success');
+        expect(screen.getByText('Mínimo 8 caracteres')).toHaveClass(
+            'text-success',
+        );
+        expect(screen.getByText('Uma letra minúscula (a-z)')).toHaveClass(
+            'text-success',
+        );
+        expect(screen.getByText('Uma letra maiúscula (A-Z)')).toHaveClass(
+            'text-success',
+        );
         expect(screen.getByText('Um número (0-9)')).toHaveClass('text-success');
-        expect(screen.getByText('Um caractere especial (!@#$%^&*()_+)')).toHaveClass('text-success');
-
+        expect(
+            screen.getByText('Um caractere especial (!@#$%^&*()_+)'),
+        ).toHaveClass('text-success');
     });
 });

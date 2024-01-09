@@ -4,21 +4,20 @@ import React, {
     useDeferredValue,
     useEffect,
     useState,
-} from "react";
-import SearchInput from "~/Components/molecules/search-input";
-
+} from 'react';
+import SearchInput from '~/Components/molecules/search-input';
 
 interface ListTabProps<T> {
     items: T[];
     filter: (items: T[], search: string) => T[];
     cards: (
-        items: T[]
+        items: T[],
     ) => JSX.Element | JSX.Element[] | React.ReactNode | ReactElement[] | null;
     Modal: () => JSX.Element;
 }
 
 const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState('');
     const [filteredItems, setFilteredItems] = useState<T[]>([] as T[]);
     const deferredItems = useDeferredValue(filteredItems);
 
@@ -32,7 +31,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
             setSearch(search);
             setFilteredItems((state) => filter(state, search));
         },
-        [filter]
+        [filter],
     );
 
     return (
@@ -49,7 +48,6 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                         className="rounded-md"
                     />
                 </div>
-
             </div>
             {cards(deferredItems)}
         </React.Fragment>

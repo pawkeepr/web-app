@@ -5,11 +5,11 @@ import { Tab } from '@headlessui/react';
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import useResizeMobile from '~/hooks/use-resize-mobile';
-import StepScheduledAll from "../steps/step-scheduled-all";
-import StepScheduledCanceled from "../steps/step-scheduled-canceled";
-import StepScheduledConfirmed from "../steps/step-scheduled-confirmed";
-import StepScheduledDone from "../steps/step-scheduled-done";
-import StepScheduledRescheduled from "../steps/step-scheduled-rescheduled";
+import StepScheduledAll from '../steps/step-scheduled-all';
+import StepScheduledCanceled from '../steps/step-scheduled-canceled';
+import StepScheduledConfirmed from '../steps/step-scheduled-confirmed';
+import StepScheduledDone from '../steps/step-scheduled-done';
+import StepScheduledRescheduled from '../steps/step-scheduled-rescheduled';
 
 const Tabs = () => [
     {
@@ -41,24 +41,23 @@ const Tabs = () => [
         href: '#done',
         tab: <StepScheduledDone />,
     },
-]
+];
 
 const HorizontalTabs = () => {
+    const [categories, setCategories] = useState(() => Tabs());
 
-    const [categories, setCategories] = useState(() => Tabs())
-
-    const { isMobile } = useResizeMobile()
+    const { isMobile } = useResizeMobile();
 
     useEffect(() => {
         if (isMobile) {
-            setCategories(Tabs().slice(0, 3))
+            setCategories(Tabs().slice(0, 3));
         } else {
-            setCategories(Tabs())
+            setCategories(Tabs());
         }
-    }, [isMobile])
+    }, [isMobile]);
 
     return (
-        <div className="w-full mt-2 rounded-md" >
+        <div className="w-full mt-2 rounded-md">
             <Tab.Group>
                 <Tab.List className="flex  rounded-xl bg-primary-500 p-1">
                     {categories.map((category) => (
@@ -70,7 +69,7 @@ const HorizontalTabs = () => {
                                     'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
                                     selected
                                         ? 'bg-white !text-secondary-500 shadow'
-                                        : 'text-blue-100 hover:bg-white/[0.12]  hover:text-white'
+                                        : 'text-blue-100 hover:bg-white/[0.12]  hover:text-white',
                                 )
                             }
                         >
@@ -84,7 +83,7 @@ const HorizontalTabs = () => {
                             key={idx}
                             className={cn(
                                 'rounded-xl bg-white p-3',
-                                'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2'
+                                'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
                             )}
                         >
                             {item.tab}
@@ -93,7 +92,7 @@ const HorizontalTabs = () => {
                 </Tab.Panels>
             </Tab.Group>
         </div>
-    )
-}
+    );
+};
 
-export default HorizontalTabs
+export default HorizontalTabs;

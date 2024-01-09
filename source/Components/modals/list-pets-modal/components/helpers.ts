@@ -1,4 +1,4 @@
-import { tv } from 'tailwind-variants'
+import { tv } from 'tailwind-variants';
 
 export const option = tv({
     base: `
@@ -8,8 +8,8 @@ export const option = tv({
     `,
     variants: {
         selected: {
-            true: "bg-secondary-500 dark:!bg-secondary-600 text-gray-600",
-            false: "text-gray-600",
+            true: 'bg-secondary-500 dark:!bg-secondary-600 text-gray-600',
+            false: 'text-gray-600',
         },
-    }
-})
+    },
+});
