@@ -25,7 +25,7 @@ const Modal = ({
                 relative
                 z-50
                 popup-content
-                w-[800px] flex flex-col 
+                w-[80vw] flex flex-col 
                 h-fit
                 mobile:!w-screen mobile:!h-screen mobile:rounded-none 
 	            overflow-auto px-4 py-10 bg-gray-100 dark:bg-dark-500
@@ -35,6 +35,7 @@ const Modal = ({
             )}
         >
             <button
+                type="button"
                 className="absolute top-4 right-4"
                 onClick={() => props.onClose?.()}
                 aria-label="Close modal"
