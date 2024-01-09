@@ -12,6 +12,18 @@
                 "useExhaustiveDependencies": "off"
             }
         },
+
         "ignore": ["node_modules"]
+    },
+    "javascript": {
+        "formatter": {
+            "enabled": true,
+            "indentStyle": "space",
+            "indentWidth": 4,
+            "lineWidth": 80,
+            "lineEnding": "lf",
+            "semicolons": "always",
+            "quoteStyle": "single"
+        }
     }
 }

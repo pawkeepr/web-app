@@ -1,4 +1,4 @@
-import { IAddress } from "./address";
+import { Location } from './profile';
 
 export type ITutor = {
     id?: string;
@@ -10,6 +10,6 @@ export type ITutor = {
     updated_at?: string;
     avatar?: string;
     phone: string;
-    address?: IAddress
+    address?: Location;
     whatsapp?: string;
-}
+};
