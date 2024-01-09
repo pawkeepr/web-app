@@ -20,3 +20,9 @@ export type InputControlProps<T, Ctx = undefined> = FieldHookConfig<string> &
         divClassName?: string;
         div?: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
     };
+
+export type OptionSelect = {
+    value: string | number;
+    label: string;
+    [key: string]: unknown;
+};
