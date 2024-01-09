@@ -9,7 +9,7 @@ const SearchInput = ({ ...rest }: SearchInputProps) => {
         <div className="flex w-full">
             <div className="search-box w-full">
                 <Input type="text" {...rest} />
-                <i className="ri-search-line search-icon"></i>
+                <i className="ri-search-line search-icon" />
             </div>
         </div>
     );

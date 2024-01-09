@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 const UiContent = () => {
     useEffect(() => {
-        var checkbox = document.getElementsByClassName('code-switcher');
+        const checkbox = document.getElementsByClassName('code-switcher');
         Array.from(checkbox).forEach((check) => {
             check.addEventListener('change', () => {
-                var card = check.closest('.card');
-                var preview = card.querySelector('.live-preview');
-                var code = card.querySelector('.code-view');
+                const card = check.closest('.card');
+                const preview = card.querySelector('.live-preview');
+                const code = card.querySelector('.code-view');
                 if (check.checked) {
                     // do this
                     preview.classList.add('d-none');
@@ -19,6 +19,6 @@ const UiContent = () => {
             });
         });
     }, []);
-    return <div></div>;
+    return <div />;
 };
 export default UiContent;

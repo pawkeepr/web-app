@@ -110,7 +110,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
 
                 <FieldMasked
                     ctx={{} as StepPetKeys}
-                    label={`Número de registro cartório`}
+                    label={'Número de registro cartório'}
                     name="identification_number"
                     mask="_____"
                     placeholder="Digite o número do registro (opcional)"

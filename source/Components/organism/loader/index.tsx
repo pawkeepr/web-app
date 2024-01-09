@@ -32,7 +32,7 @@ const Loading = ({ size, type = 'Audio', color = '#09b285' }: LoadingProps) => {
     const Component = ReactLoader[type];
 
     return (
-        <div className={`flex w-full justify-center items-center`}>
+        <div className={'flex w-full justify-center items-center'}>
             <Component color={color} height={size} width={size} />
         </div>
     );

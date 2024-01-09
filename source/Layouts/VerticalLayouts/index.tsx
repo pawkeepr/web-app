@@ -108,7 +108,7 @@ const VerticalLayout = (props) => {
                 return (
                     <React.Fragment key={key}>
                         {/* Main Header */}
-                        {item['isHeader'] ? (
+                        {item.isHeader ? (
                             <li className="menu-title">
                                 <span data-key="t-menu">
                                     {props.t(item.label)}{' '}
@@ -122,15 +122,14 @@ const VerticalLayout = (props) => {
                                     href={item.link ? item.link : '/#'}
                                     data-bs-toggle="collapse"
                                 >
-                                    <i className={item.icon}></i>
+                                    <i className={item.icon} />
                                     <span data-key="t-apps">
                                         {props.t(item.label)}
                                     </span>
                                     {item.badgeName ? (
                                         <span
                                             className={
-                                                'badge badge-pill bg-' +
-                                                item.badgeColor
+                                                `badge badge-pill bg-${item.badgeColor}`
                                             }
                                             data-key="t-new"
                                         >
@@ -165,8 +164,7 @@ const VerticalLayout = (props) => {
                                                                     {subItem.badgeName ? (
                                                                         <span
                                                                             className={
-                                                                                'badge badge-pill bg-' +
-                                                                                subItem.badgeColor
+                                                                                `badge badge-pill bg-${subItem.badgeColor}`
                                                                             }
                                                                             data-key="t-new"
                                                                         >
@@ -300,13 +298,12 @@ const VerticalLayout = (props) => {
                                     className="nav-link menu-link"
                                     href={item.link ? item.link : '/#'}
                                 >
-                                    <i className={item.icon}></i>{' '}
+                                    <i className={item.icon} />{' '}
                                     <span>{props.t(item.label)}</span>
                                     {item.badgeName ? (
                                         <span
                                             className={
-                                                'badge badge-pill bg-' +
-                                                item.badgeColor
+                                                `badge badge-pill bg-${item.badgeColor}`
                                             }
                                             data-key="t-new"
                                         >

@@ -13,7 +13,7 @@ const Pagination = () => {
                     <li className="page-item disabled">
                         {' '}
                         <Link href="#" className="page-link">
-                            <i className="mdi mdi-chevron-left"></i>
+                            <i className="mdi mdi-chevron-left" />
                         </Link>{' '}
                     </li>
                     <li className="page-item active">
@@ -49,7 +49,7 @@ const Pagination = () => {
                     <li className="page-item">
                         {' '}
                         <Link href="#" className="page-link">
-                            <i className="mdi mdi-chevron-right"></i>
+                            <i className="mdi mdi-chevron-right" />
                         </Link>{' '}
                     </li>
                 </ul>

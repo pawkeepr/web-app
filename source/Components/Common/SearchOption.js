@@ -17,12 +17,12 @@ const SearchOption = () => {
     };
 
     useEffect(() => {
-        var searchOptions = document.getElementById('search-close-options');
-        var dropdown = document.getElementById('search-dropdown');
-        var searchInput = document.getElementById('search-options');
+        const searchOptions = document.getElementById('search-close-options');
+        const dropdown = document.getElementById('search-dropdown');
+        const searchInput = document.getElementById('search-options');
 
         searchInput.addEventListener('focus', () => {
-            var inputLength = searchInput.value.length;
+            const inputLength = searchInput.value.length;
             if (inputLength > 0) {
                 dropdown.classList.add('show');
                 searchOptions.classList.remove('d-none');
@@ -33,7 +33,7 @@ const SearchOption = () => {
         });
 
         searchInput.addEventListener('keyup', () => {
-            var inputLength = searchInput.value.length;
+            const inputLength = searchInput.value.length;
             if (inputLength > 0) {
                 dropdown.classList.add('show');
                 searchOptions.classList.remove('d-none');
@@ -71,11 +71,11 @@ const SearchOption = () => {
                             onChangeData(e.target.value);
                         }}
                     />
-                    <span className="mdi mdi-magnify search-widget-icon"></span>
+                    <span className="mdi mdi-magnify search-widget-icon" />
                     <span
                         className="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none"
                         id="search-close-options"
-                    ></span>
+                    />
                 </div>
                 <div
                     className="dropdown-menu dropdown-menu-lg"
@@ -94,13 +94,13 @@ const SearchOption = () => {
                                 className="btn btn-soft-secondary btn-sm btn-rounded"
                             >
                                 how to setup{' '}
-                                <i className="mdi mdi-magnify ms-1"></i>
+                                <i className="mdi mdi-magnify ms-1" />
                             </Link>
                             <Link
                                 href="/"
                                 className="btn btn-soft-secondary btn-sm btn-rounded"
                             >
-                                buttons <i className="mdi mdi-magnify ms-1"></i>
+                                buttons <i className="mdi mdi-magnify ms-1" />
                             </Link>
                         </div>
 
@@ -111,17 +111,17 @@ const SearchOption = () => {
                         </div>
 
                         <Link href="#" className="dropdown-item notify-item">
-                            <i className="ri-bubble-chart-line align-middle fs-18 text-muted me-2"></i>
+                            <i className="ri-bubble-chart-line align-middle fs-18 text-muted me-2" />
                             <span>Analytics Dashboard</span>
                         </Link>
 
                         <Link href="#" className="dropdown-item notify-item">
-                            <i className="ri-lifebuoy-line align-middle fs-18 text-muted me-2"></i>
+                            <i className="ri-lifebuoy-line align-middle fs-18 text-muted me-2" />
                             <span>Help Center</span>
                         </Link>
 
                         <Link href="#" className="dropdown-item notify-item">
-                            <i className="ri-user-settings-line align-middle fs-18 text-muted me-2"></i>
+                            <i className="ri-user-settings-line align-middle fs-18 text-muted me-2" />
                             <span>My account settings</span>
                         </Link>
 
@@ -197,7 +197,7 @@ const SearchOption = () => {
                             className="btn btn-primary btn-sm"
                         >
                             View All Results{' '}
-                            <i className="ri-arrow-right-line ms-1"></i>
+                            <i className="ri-arrow-right-line ms-1" />
                         </Link>
                     </div>
                 </div>

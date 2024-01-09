@@ -20,7 +20,7 @@ const factoryTreatments = (n: number): any[] => {
         .map(() => ({
             id: faker.string.uuid(),
             medicine: sample(treatments) || 'Medicamento',
-            dose: faker.number.int(1000).toString() + 'mg',
+            dose: `${faker.number.int(1000).toString()}mg`,
             continuos: faker.datatype.boolean(),
             frequency: faker.number.int(1000).toString(),
             duration: faker.number.int(1000).toString(),
@@ -112,7 +112,7 @@ function factoryMockVeterinaryAppointments(adapter: MockAdapter) {
     });
 
     adapter.onPost(url.ADD_VETERINARY_APPOINTMENTS).reply((config) => {
-        const veterinary_appointment = JSON.parse(config['data']);
+        const veterinary_appointment = JSON.parse(config.data);
 
         const veterinary_appointments = getVeterinaryAppointments();
 

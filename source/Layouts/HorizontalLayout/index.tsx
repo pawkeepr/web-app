@@ -15,14 +15,14 @@ const HorizontalLayout = (props) => {
     const splitMenuItems = [];
     let menuSplitContainer = 6;
     navData.forEach((value, key) => {
-        if (value['isHeader']) {
+        if (value.isHeader) {
             menuSplitContainer++;
         }
         if (key >= menuSplitContainer) {
             const val = value;
             val.childItems = value.subItems;
             val.isChildItem = value.subItems ? true : false;
-            delete val.subItems;
+            val.subItems = undefined;
             splitMenuItems.push(val);
         } else {
             menuItems.push(value);
@@ -79,7 +79,7 @@ const HorizontalLayout = (props) => {
                 parentCollapseDiv.parentElement
                     .closest('.collapse')
                     .classList.add('show');
-                var parentElementDiv =
+                const parentElementDiv =
                     parentCollapseDiv.parentElement.closest(
                         '.collapse',
                     ).previousElementSibling;
@@ -89,7 +89,7 @@ const HorizontalLayout = (props) => {
                             .closest('.collapse')
                             .classList.add('show');
                 parentElementDiv.classList.add('active');
-                var parentElementSibling =
+                const parentElementSibling =
                     parentElementDiv.parentElement.parentElement.parentElement
                         .previousElementSibling;
                 if (parentElementSibling) {
@@ -129,7 +129,7 @@ const HorizontalLayout = (props) => {
                 return (
                     <React.Fragment key={key}>
                         {/* Main Header */}
-                        {!item['isHeader'] ? (
+                        {!item.isHeader ? (
                             item.subItems ? (
                                 <li className="nav-item">
                                     <Link
@@ -138,7 +138,7 @@ const HorizontalLayout = (props) => {
                                         href={item.link ? item.link : '/#'}
                                         data-bs-toggle="collapse"
                                     >
-                                        <i className={item.icon}></i>{' '}
+                                        <i className={item.icon} />{' '}
                                         <span data-key="t-apps">
                                             {props.t(item.label)}
                                         </span>
@@ -383,7 +383,7 @@ const HorizontalLayout = (props) => {
                                         className="nav-link menu-link"
                                         href={item.link ? item.link : '/#'}
                                     >
-                                        <i className={item.icon}></i>{' '}
+                                        <i className={item.icon} />{' '}
                                         <span>{props.t(item.label)}</span>
                                     </Link>
                                 </li>

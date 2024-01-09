@@ -71,7 +71,7 @@ const TwoColumnLayout = (props) => {
             activateParentDropdown(matchingMenuItem);
         } else {
             if (process.env.PUBLIC_URL) {
-                var id = pathName.replace(process.env.PUBLIC_URL, '');
+                let id = pathName.replace(process.env.PUBLIC_URL, '');
                 id = id.replace('/', '');
             } else {
                 id = pathName.replace('/', '');
@@ -87,10 +87,8 @@ const TwoColumnLayout = (props) => {
     }, [pathname, initMenu]);
 
     function activateIconSidebarActive(id) {
-        var menu = document.querySelector(
-            "#two-column-menu .simplebar-content-wrapper a[subitems='" +
-                id +
-                "'].nav-icon",
+        const menu = document.querySelector(
+            `#two-column-menu .simplebar-content-wrapper a[subitems='${id}'].nav-icon`,
         );
         if (menu !== null) {
             menu.classList.add('active');
@@ -123,7 +121,7 @@ const TwoColumnLayout = (props) => {
         );
         activeIconItems.forEach((item) => {
             item.classList.remove('active');
-            var id = item.getAttribute('subitems');
+            const id = item.getAttribute('subitems');
             if (document.getElementById(id))
                 document.getElementById(id).classList.remove('show');
         });
@@ -133,7 +131,7 @@ const TwoColumnLayout = (props) => {
     const [isMenu, setIsMenu] = useState('twocolumn');
     const windowResizeHover = () => {
         initMenu();
-        var windowSize = document.documentElement.clientWidth;
+        const windowSize = document.documentElement.clientWidth;
         if (windowSize < 767) {
             document.documentElement.setAttribute('data-layout', 'vertical');
             setIsMenu('vertical');
@@ -180,7 +178,7 @@ const TwoColumnLayout = (props) => {
                                                             className={
                                                                 item.icon
                                                             }
-                                                        ></i>
+                                                        />
                                                     </Link>
                                                 </li>
                                             ) : (
@@ -200,7 +198,7 @@ const TwoColumnLayout = (props) => {
                                                             className={
                                                                 item.icon
                                                             }
-                                                        ></i>
+                                                        />
                                                     </Link>
                                                 </>
                                             ))}
@@ -244,8 +242,7 @@ const TwoColumnLayout = (props) => {
                                                                                 {subItem.badgeName ? (
                                                                                     <span
                                                                                         className={
-                                                                                            'badge badge-pill bg-' +
-                                                                                            subItem.badgeColor
+                                                                                            `badge badge-pill bg-${subItem.badgeColor}`
                                                                                         }
                                                                                         data-key="t-new"
                                                                                     >
@@ -377,7 +374,7 @@ const TwoColumnLayout = (props) => {
             ) : (
                 <SimpleBar id="scrollbar" className="h-100">
                     <Container fluid>
-                        <div id="two-column-menu"></div>
+                        <div id="two-column-menu" />
                         <ul className="navbar-nav" id="navbar-nav">
                             <VerticalLayout />
                         </ul>

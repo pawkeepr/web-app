@@ -23,7 +23,7 @@ const ConfirmAccountForm = () => {
     );
 
     const getInputElement = (index: number) => {
-        return document.getElementById('digit' + index + '-input');
+        return document.getElementById(`digit${index}-input`);
     };
 
     const moveToNext = (index: number) => () => {
@@ -65,9 +65,9 @@ const ConfirmAccountForm = () => {
                             <div className="col-span-1" key={index}>
                                 <FieldCode
                                     required
-                                    name={'digit' + index}
+                                    name={`digit${index}`}
                                     moveToNext={moveToNext(index)}
-                                    id={'digit' + index + '-input'}
+                                    id={`digit${index}-input`}
                                     className="text-dark-600"
                                 />
                             </div>

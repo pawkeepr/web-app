@@ -1,7 +1,7 @@
-var date = new Date();
-var d = date.getDate();
-var m = date.getMonth();
-var y = date.getFullYear();
+const date = new Date();
+const d = date.getDate();
+const m = date.getMonth();
+const y = date.getFullYear();
 
 const defaultevent = [
     {

@@ -66,7 +66,7 @@ const Profile = () => {
                                                     className="profile-photo-edit avatar-xs"
                                                 >
                                                     <span className="avatar-title rounded-circle bg-light text-body">
-                                                        <i className="ri-camera-fill"></i>
+                                                        <i className="ri-camera-fill" />
                                                     </span>
                                                 </Label>
                                             </div>
@@ -83,7 +83,7 @@ const Profile = () => {
                                 <div className="mb-3 d-flex">
                                     <div className="avatar-xs d-block flex-shrink-0 me-3">
                                         <span className="avatar-title rounded-circle fs-16 bg-dark text-light">
-                                            <i className="ri-github-fill"></i>
+                                            <i className="ri-github-fill" />
                                         </span>
                                     </div>
                                     <Input
@@ -97,7 +97,7 @@ const Profile = () => {
                                 <div className="mb-3 d-flex">
                                     <div className="avatar-xs d-block flex-shrink-0 me-3">
                                         <span className="avatar-title rounded-circle fs-16 bg-primary">
-                                            <i className="ri-global-fill"></i>
+                                            <i className="ri-global-fill" />
                                         </span>
                                     </div>
                                     <Input
@@ -111,7 +111,7 @@ const Profile = () => {
                                 <div className="mb-3 d-flex">
                                     <div className="avatar-xs d-block flex-shrink-0 me-3">
                                         <span className="avatar-title rounded-circle fs-16 bg-success">
-                                            <i className="ri-dribbble-fill"></i>
+                                            <i className="ri-dribbble-fill" />
                                         </span>
                                     </div>
                                     <Input
@@ -125,7 +125,7 @@ const Profile = () => {
                                 <div className="d-flex">
                                     <div className="avatar-xs d-block flex-shrink-0 me-3">
                                         <span className="avatar-title rounded-circle fs-16 bg-danger">
-                                            <i className="ri-pinterest-fill"></i>
+                                            <i className="ri-pinterest-fill" />
                                         </span>
                                     </div>
                                     <Input
@@ -155,7 +155,7 @@ const Profile = () => {
                                                     tabChange('1');
                                                 }}
                                             >
-                                                <i className="fas fa-home"></i>
+                                                <i className="fas fa-home" />
                                                 Informações Pessoais
                                             </NavLink>
                                         </NavItem>
@@ -170,7 +170,7 @@ const Profile = () => {
                                                 }}
                                                 type="button"
                                             >
-                                                <i className="far fa-user"></i>
+                                                <i className="far fa-user" />
                                                 Alterar Senha
                                             </NavLink>
                                         </NavItem>
@@ -185,7 +185,7 @@ const Profile = () => {
                                                 }}
                                                 type="button"
                                             >
-                                                <i className="far fa-envelope"></i>
+                                                <i className="far fa-envelope" />
                                                 Experiências e Especializações
                                             </NavLink>
                                         </NavItem>
@@ -200,7 +200,7 @@ const Profile = () => {
                                                 }}
                                                 type="button"
                                             >
-                                                <i className="far fa-envelope"></i>
+                                                <i className="far fa-envelope" />
                                                 Configurações
                                             </NavLink>
                                         </NavItem>

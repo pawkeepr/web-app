@@ -141,8 +141,7 @@ const ModalListPets = ({
 
     return (
         <>
-            {children &&
-                children({ onChangeOpen: showModal, onChangeDocument })}
+            {children?.({ onChangeOpen: showModal, onChangeDocument })}
             {!children && (
                 <div className="flex items-center justify-center">
                     <button

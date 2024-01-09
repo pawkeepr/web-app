@@ -21,7 +21,7 @@ const ProductsGlobalFilter = () => {
                         to="/apps-ecommerce-add-product"
                         className="btn btn-success"
                     >
-                        <i className="ri-add-line align-bottom me-1"></i> Add
+                        <i className="ri-add-line align-bottom me-1" /> Add
                         Product
                     </Link>
                 </div>
@@ -77,7 +77,7 @@ const CustomersGlobalFilter = () => {
                                 options={customerstatus}
                                 name="choices-single-default"
                                 id="idStatus"
-                            ></Select>
+                            />
                         </div>
                     </Col>
 
@@ -88,7 +88,7 @@ const CustomersGlobalFilter = () => {
                                 className="btn btn-info w-100"
                             >
                                 {' '}
-                                <i className="ri-equalizer-fill me-2 align-bottom"></i>
+                                <i className="ri-equalizer-fill me-2 align-bottom" />
                                 Filters
                             </button>
                         </div>
@@ -166,7 +166,7 @@ const OrderGlobalFilter = () => {
                         options={orderstatus}
                         name="choices-single-default"
                         id="idStatus"
-                    ></Select>
+                    />
                 </div>
             </Col>
 
@@ -180,7 +180,7 @@ const OrderGlobalFilter = () => {
                         options={orderpayement}
                         name="choices-payment-default"
                         id="idPayment"
-                    ></Select>
+                    />
                 </div>
             </Col>
 
@@ -188,7 +188,7 @@ const OrderGlobalFilter = () => {
                 <div>
                     <button type="button" className="btn btn-primary w-100">
                         {' '}
-                        <i className="ri-equalizer-fill me-1 align-bottom"></i>
+                        <i className="ri-equalizer-fill me-1 align-bottom" />
                         Filters
                     </button>
                 </div>
@@ -226,7 +226,7 @@ const ContactsGlobalFilter = () => {
                         }}
                         options={sortbyname}
                         id="choices-single-default"
-                    ></Select>
+                    />
                 </div>
             </div>
         </React.Fragment>
@@ -262,7 +262,7 @@ const CompaniesGlobalFilter = () => {
                         }}
                         options={sortbyname}
                         id="choices-single-default"
-                    ></Select>
+                    />
                 </div>
             </div>
         </React.Fragment>
@@ -275,7 +275,7 @@ const CryptoOrdersGlobalFilter = () => {
             <Col xl={2} md={6}>
                 <div className="input-group">
                     <span className="input-group-text" id="basic-addon1">
-                        <i className="ri-calendar-2-line"></i>
+                        <i className="ri-calendar-2-line" />
                     </span>
                     <Flatpickr
                         placeholder="Select date"
@@ -365,13 +365,13 @@ const InvoiceListGlobalSearch = () => {
                         options={allstatus}
                         name="choices-single-default"
                         id="idStatus"
-                    ></Select>
+                    />
                 </div>
             </Col>
 
             <Col sm={4} xxl={1}>
                 <Button color="primary" className="w-100">
-                    <i className="ri-equalizer-fill me-1 align-bottom"></i>{' '}
+                    <i className="ri-equalizer-fill me-1 align-bottom" />{' '}
                     Filters
                 </Button>
             </Col>
@@ -413,7 +413,7 @@ const TicketsListGlobalFilter = () => {
             <Col xxl={1} sm={4}>
                 <button type="button" className="btn btn-primary w-100">
                     {' '}
-                    <i className="ri-equalizer-fill me-1 align-bottom"></i>
+                    <i className="ri-equalizer-fill me-1 align-bottom" />
                     Filters
                 </button>
             </Col>
@@ -483,7 +483,7 @@ const TaskListGlobalFilter = () => {
             <div className="col-xxl-1 col-sm-4">
                 <button type="button" className="btn btn-primary w-100">
                     {' '}
-                    <i className="ri-equalizer-fill me-1 align-bottom"></i>
+                    <i className="ri-equalizer-fill me-1 align-bottom" />
                     Filters
                 </button>
             </div>
@@ -500,14 +500,14 @@ const LeadsGlobalFilter = ({ onClickDelete }) => {
                         className="btn btn-soft-danger"
                         onClick={onClickDelete}
                     >
-                        <i className="ri-delete-bin-2-line"></i>
+                        <i className="ri-delete-bin-2-line" />
                     </button>
                     <button
                         type="button"
                         className="btn btn-info"
                         //  onClick={toggleInfo}
                     >
-                        <i className="ri-filter-3-line align-bottom me-1"></i>{' '}
+                        <i className="ri-filter-3-line align-bottom me-1" />{' '}
                         Fliters
                     </button>
                     <button
@@ -516,7 +516,7 @@ const LeadsGlobalFilter = ({ onClickDelete }) => {
                         id="create-btn"
                         // onClick={() => { setIsEdit(false); toggle(); }}
                     >
-                        <i className="ri-add-line align-bottom me-1"></i> Add
+                        <i className="ri-add-line align-bottom me-1" /> Add
                         Leads
                     </button>
                     <UncontrolledDropdown>
@@ -527,7 +527,7 @@ const LeadsGlobalFilter = ({ onClickDelete }) => {
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                         >
-                            <i className="ri-settings-4-line"></i>
+                            <i className="ri-settings-4-line" />
                         </DropdownToggle>
                         <DropdownMenu>
                             <li>

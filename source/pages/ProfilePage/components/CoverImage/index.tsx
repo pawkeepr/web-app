@@ -21,7 +21,7 @@ const CoverImage = () => {
                                 htmlFor="profile-foreground-img-file-input"
                                 className="profile-photo-edit btn btn-light"
                             >
-                                <i className="ri-image-edit-line align-bottom me-1"></i>
+                                <i className="ri-image-edit-line align-bottom me-1" />
                                 Change Cover
                             </Label>
                         </div>

@@ -85,7 +85,7 @@ const StepScheduledAppointment = ({
                     city: data.location.city,
                     country: data.location.country,
                     email: data.contact.email,
-                    name: data.firstName + ' ' + data.lastName,
+                    name: `${data.firstName} ${data.lastName}`,
                     phone: data.contact.phone,
                     state: data.location.state,
                     zipCode: data.location.zipCode,

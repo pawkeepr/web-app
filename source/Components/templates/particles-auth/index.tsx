@@ -14,7 +14,7 @@ const ParticlesAuth = ({ children }: ParticlesAuthProps) => {
                     className="auth-one-bg-position auth-one-bg h-full shadow-2xl"
                     id="auth-particles"
                 >
-                    <div className="bg-overlay"></div>
+                    <div className="bg-overlay" />
                 </div>
 
                 {children}

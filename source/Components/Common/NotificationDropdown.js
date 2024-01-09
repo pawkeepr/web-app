@@ -51,7 +51,7 @@ const NotificationDropdown = () => {
                     tag="button"
                     className="btn btn-icon btn-topBar btn-ghost-secondary rounded-circle"
                 >
-                    <i className="bx bx-bell fs-22"></i>
+                    <i className="bx bx-bell fs-22" />
                     <span className="position-absolute topBar-badge fs-10 translate-middle badge rounded-pill bg-danger">
                         3
                         <span className="visually-hidden">unread messages</span>
@@ -131,7 +131,7 @@ const NotificationDropdown = () => {
                                     <div className="d-flex">
                                         <div className="avatar-xs me-3">
                                             <span className="avatar-title bg-soft-info text-info rounded-circle fs-16">
-                                                <i className="bx bx-badge-check"></i>
+                                                <i className="bx bx-badge-check" />
                                             </span>
                                         </div>
                                         <div className="flex-1">
@@ -150,7 +150,7 @@ const NotificationDropdown = () => {
                                             </Link>
                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                 <span>
-                                                    <i className="mdi mdi-clock-outline"></i>{' '}
+                                                    <i className="mdi mdi-clock-outline" />{' '}
                                                     Just 30 sec ago
                                                 </span>
                                             </p>
@@ -166,7 +166,7 @@ const NotificationDropdown = () => {
                                                 <label
                                                     className="form-check-label"
                                                     htmlFor="all-notification-check01"
-                                                ></label>
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -197,7 +197,7 @@ const NotificationDropdown = () => {
                                             </div>
                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                 <span>
-                                                    <i className="mdi mdi-clock-outline"></i>{' '}
+                                                    <i className="mdi mdi-clock-outline" />{' '}
                                                     48 min ago
                                                 </span>
                                             </p>
@@ -213,7 +213,7 @@ const NotificationDropdown = () => {
                                                 <label
                                                     className="form-check-label"
                                                     htmlFor="all-notification-check02"
-                                                ></label>
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -223,7 +223,7 @@ const NotificationDropdown = () => {
                                     <div className="d-flex">
                                         <div className="avatar-xs me-3">
                                             <span className="avatar-title bg-soft-danger text-danger rounded-circle fs-16">
-                                                <i className="bx bx-message-square-dots"></i>
+                                                <i className="bx bx-message-square-dots" />
                                             </span>
                                         </div>
                                         <div className="flex-1">
@@ -242,7 +242,7 @@ const NotificationDropdown = () => {
                                             </Link>
                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                 <span>
-                                                    <i className="mdi mdi-clock-outline"></i>{' '}
+                                                    <i className="mdi mdi-clock-outline" />{' '}
                                                     2 hrs ago
                                                 </span>
                                             </p>
@@ -258,7 +258,7 @@ const NotificationDropdown = () => {
                                                 <label
                                                     className="form-check-label"
                                                     htmlFor="all-notification-check03"
-                                                ></label>
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -288,7 +288,7 @@ const NotificationDropdown = () => {
                                             </div>
                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                 <span>
-                                                    <i className="mdi mdi-clock-outline"></i>{' '}
+                                                    <i className="mdi mdi-clock-outline" />{' '}
                                                     4 hrs ago
                                                 </span>
                                             </p>
@@ -304,7 +304,7 @@ const NotificationDropdown = () => {
                                                 <label
                                                     className="form-check-label"
                                                     htmlFor="all-notification-check04"
-                                                ></label>
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -316,7 +316,7 @@ const NotificationDropdown = () => {
                                         className="btn btn-soft-success waves-effect waves-light"
                                     >
                                         View All Notifications{' '}
-                                        <i className="ri-arrow-right-line align-middle"></i>
+                                        <i className="ri-arrow-right-line align-middle" />
                                     </button>
                                 </div>
                             </SimpleBar>
@@ -351,7 +351,7 @@ const NotificationDropdown = () => {
                                             </div>
                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                 <span>
-                                                    <i className="mdi mdi-clock-outline"></i>{' '}
+                                                    <i className="mdi mdi-clock-outline" />{' '}
                                                     30 min ago
                                                 </span>
                                             </p>
@@ -367,7 +367,7 @@ const NotificationDropdown = () => {
                                                 <label
                                                     className="form-check-label"
                                                     htmlFor="all-notification-check01"
-                                                ></label>
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -398,7 +398,7 @@ const NotificationDropdown = () => {
                                             </div>
                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                 <span>
-                                                    <i className="mdi mdi-clock-outline"></i>{' '}
+                                                    <i className="mdi mdi-clock-outline" />{' '}
                                                     2 hrs ago
                                                 </span>
                                             </p>
@@ -414,7 +414,7 @@ const NotificationDropdown = () => {
                                                 <label
                                                     className="form-check-label"
                                                     htmlFor="all-notification-check02"
-                                                ></label>
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -445,7 +445,7 @@ const NotificationDropdown = () => {
                                             </div>
                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                 <span>
-                                                    <i className="mdi mdi-clock-outline"></i>{' '}
+                                                    <i className="mdi mdi-clock-outline" />{' '}
                                                     10 hrs ago
                                                 </span>
                                             </p>
@@ -461,7 +461,7 @@ const NotificationDropdown = () => {
                                                 <label
                                                     className="form-check-label"
                                                     htmlFor="all-notification-check03"
-                                                ></label>
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -491,7 +491,7 @@ const NotificationDropdown = () => {
                                             </div>
                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                 <span>
-                                                    <i className="mdi mdi-clock-outline"></i>{' '}
+                                                    <i className="mdi mdi-clock-outline" />{' '}
                                                     3 days ago
                                                 </span>
                                             </p>
@@ -507,7 +507,7 @@ const NotificationDropdown = () => {
                                                 <label
                                                     className="form-check-label"
                                                     htmlFor="all-notification-check04"
-                                                ></label>
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -519,7 +519,7 @@ const NotificationDropdown = () => {
                                         className="btn btn-soft-success waves-effect waves-light"
                                     >
                                         View All Messages{' '}
-                                        <i className="ri-arrow-right-line align-middle"></i>
+                                        <i className="ri-arrow-right-line align-middle" />
                                     </button>
                                 </div>
                             </SimpleBar>

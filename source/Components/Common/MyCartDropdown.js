@@ -67,10 +67,10 @@ const MyCartDropdown = () => {
     };
 
     const removeItem = (ele) => {
-        var price = ele
+        const price = ele
             .closest('.dropdown-item-cart')
             .querySelector('.cart-item-price').innerHTML;
-        var subTotal = document.getElementById('cart-item-total').innerHTML;
+        const subTotal = document.getElementById('cart-item-total').innerHTML;
         document.getElementById('cart-item-total').innerHTML = subTotal - price;
 
         ele.closest('.dropdown-item-cart').remove();
@@ -98,7 +98,7 @@ const MyCartDropdown = () => {
                     tag="button"
                     className="btn btn-icon btn-topBar btn-ghost-secondary rounded-circle"
                 >
-                    <i className="bx bx-shopping-bag fs-22"></i>
+                    <i className="bx bx-shopping-bag fs-22" />
                     <span className="position-absolute topBar-badge fs-10 translate-middle badge rounded-pill bg-info">
                         {cartItem}
                         <span className="visually-hidden">unread messages</span>
@@ -137,7 +137,7 @@ const MyCartDropdown = () => {
                             >
                                 <div className="avatar-md mx-auto my-3">
                                     <div className="avatar-title bg-soft-info text-info fs-36 rounded-circle">
-                                        <i className="bx bx-cart"></i>
+                                        <i className="bx bx-cart" />
                                     </div>
                                 </div>
                                 <h5 className="mb-3">Your Cart is Empty!</h5>
@@ -192,7 +192,7 @@ const MyCartDropdown = () => {
                                                     removeItem(e.target);
                                                 }}
                                             >
-                                                <i className="ri-close-fill fs-16"></i>
+                                                <i className="ri-close-fill fs-16" />
                                             </button>
                                         </div>
                                     </div>

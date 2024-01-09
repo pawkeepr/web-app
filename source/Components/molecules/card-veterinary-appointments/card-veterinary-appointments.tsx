@@ -31,12 +31,12 @@ const CardVeterinaryAppointments = ({
                         <Row className="align-items-center">
                             <UncontrolledDropdown className="w-full text-end">
                                 <DropdownToggle tag="a" role="button">
-                                    <i className="ri-more-fill fs-17"></i>
+                                    <i className="ri-more-fill fs-17" />
                                 </DropdownToggle>
                                 <DropdownMenu className="dropdown-menu-end">
                                     <li>
                                         <DropdownItem>
-                                            <i className="ri-eye-fill text-muted me-2 align-bottom"></i>
+                                            <i className="ri-eye-fill text-muted me-2 align-bottom" />
                                             Ver
                                         </DropdownItem>
                                     </li>

@@ -49,7 +49,7 @@ const VerticalTabs = ({ isPending, tutorExist }: VerticalTabsProps) => {
 
     function toggleVerticalTab(tab: Tabs) {
         if (activeVerticalTab !== tab) {
-            var modifiedSteps = [...passedVerticalSteps, tab];
+            const modifiedSteps = [...passedVerticalSteps, tab];
 
             if (tab >= 1 && tab <= items.length) {
                 setActiveVerticalTab(tab);

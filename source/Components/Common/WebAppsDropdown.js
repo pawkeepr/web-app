@@ -28,7 +28,7 @@ const WebAppsDropdown = () => {
                     type="button"
                     className="btn btn-icon btn-topBar btn-ghost-secondary rounded-circle"
                 >
-                    <i className="bx bx-category-alt fs-22"></i>
+                    <i className="bx bx-category-alt fs-22" />
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-menu-lg p-0 dropdown-menu-end">
                     <div className="p-3 border-top-0 border-start-0 border-end-0 border-dashed border">
@@ -46,7 +46,7 @@ const WebAppsDropdown = () => {
                                 >
                                     {' '}
                                     View All Apps
-                                    <i className="ri-arrow-right-s-line align-middle"></i>
+                                    <i className="ri-arrow-right-s-line align-middle" />
                                 </Link>
                             </div>
                         </Row>

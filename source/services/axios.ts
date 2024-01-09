@@ -11,7 +11,7 @@ export function getAPIClient(ctx?: any) {
 
     api.defaults.headers['Content-Type'] = 'application/json';
     if (token) {
-        api.defaults.headers['Authorization'] = `${token}`;
+        api.defaults.headers.Authorization = `${token}`;
     }
 
     return api;

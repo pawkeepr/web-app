@@ -27,8 +27,8 @@ const CountrySelect = ({
 
         return (countries as unknown as country[]).sort(
             (a: country, b: country) => {
-                const nameA = a.translations?.['por']?.common.toUpperCase();
-                const nameB = b.translations?.['por']?.common.toUpperCase();
+                const nameA = a.translations?.por?.common.toUpperCase();
+                const nameB = b.translations?.por?.common.toUpperCase();
                 if (nameA < nameB) {
                     return -1;
                 }
@@ -130,7 +130,7 @@ const CountrySelect = ({
                         {country.flag}
                         <p className="ps-4">
                             {'   '}
-                            {country.translations['por'].common ||
+                            {country.translations.por.common ||
                                 country.name.common}
                         </p>
                     </option>

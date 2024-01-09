@@ -50,7 +50,7 @@ const ControlSwitch = ({
 
     const handleChange = () => {
         setEnabled((state) => {
-            onChange && onChange(!state);
+            onChange?.(!state);
             return !state;
         });
     };

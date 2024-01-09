@@ -43,7 +43,7 @@ const ReScheduledModal = ({
 
     return (
         <>
-            {children && children({ showModal })}
+            {children?.({ showModal })}
 
             <Modal
                 onOpen={() => showModal}

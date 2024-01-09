@@ -11,7 +11,7 @@ const Plans = () => {
     return (
         <>
             <section className="section bg-light" id="plans" data-logo-green>
-                <div className="bg-overlay bg-overlay-pattern"></div>
+                <div className="bg-overlay bg-overlay-pattern" />
                 {/* <div className="text-gray-600 body-font overflow-hidden py-5">
                     <div className="container px-5 mx-auto">
                         <div className="flex flex-col text-center w-full mb-20">
@@ -120,7 +120,7 @@ const Plans = () => {
                                         <label
                                             className="form-check-label"
                                             htmlFor="plan-switch"
-                                        ></label>
+                                        />
                                     </div>
                                     <div>
                                         <h5 className="text-base font-medium mb-0">
@@ -150,7 +150,7 @@ const Plans = () => {
                                         </div>
                                         <div className="avatar-sm">
                                             <div className="avatar-title bg-light rounded-circle text-primary">
-                                                <i className="ri-book-mark-line fs-20"></i>
+                                                <i className="ri-book-mark-line fs-20" />
                                             </div>
                                         </div>
                                     </div>
@@ -173,7 +173,7 @@ const Plans = () => {
                                             <li>
                                                 <div className="d-flex">
                                                     <div className="flex-shrink-0 text-success me-1">
-                                                        <i className="ri-checkbox-circle-fill fs-15 align-middle"></i>
+                                                        <i className="ri-checkbox-circle-fill fs-15 align-middle" />
                                                     </div>
                                                     <div className="flex-grow-1">
                                                         <b>10</b> Consultas por
@@ -208,11 +208,11 @@ const Plans = () => {
                                                 <h5 className="mb-1 fw-semibold !text-white">
                                                     Básico
                                                 </h5>
-                                                <p className="text-muted mb-0"></p>
+                                                <p className="text-muted mb-0" />
                                             </div>
                                             <div className="avatar-sm">
                                                 <div className="avatar-title bg-light rounded-circle text-primary">
-                                                    <i className="ri-medal-fill fs-20"></i>
+                                                    <i className="ri-medal-fill fs-20" />
                                                 </div>
                                             </div>
                                         </div>
@@ -249,7 +249,7 @@ const Plans = () => {
                                                 <li>
                                                     <div className="d-flex">
                                                         <div className="flex-shrink-0 text-success me-1">
-                                                            <i className="ri-checkbox-circle-fill fs-15 align-middle text-white"></i>
+                                                            <i className="ri-checkbox-circle-fill fs-15 align-middle text-white" />
                                                         </div>
                                                         <div className="flex-grow-1 !text-white">
                                                             <b>50</b> Consultas
@@ -280,11 +280,11 @@ const Plans = () => {
                                             <h5 className="mb-1 fw-semibold">
                                                 Prêmio
                                             </h5>
-                                            <p className="text-muted mb-0"></p>
+                                            <p className="text-muted mb-0" />
                                         </div>
                                         <div className="avatar-sm">
                                             <div className="avatar-title bg-light rounded-circle text-primary">
-                                                <i className="ri-stack-fill fs-20"></i>
+                                                <i className="ri-stack-fill fs-20" />
                                             </div>
                                         </div>
                                     </div>
@@ -321,7 +321,7 @@ const Plans = () => {
                                             <li>
                                                 <div className="d-flex">
                                                     <div className="flex-shrink-0 text-success me-1">
-                                                        <i className="ri-checkbox-circle-fill fs-15 align-middle"></i>
+                                                        <i className="ri-checkbox-circle-fill fs-15 align-middle" />
                                                     </div>
                                                     <div className="flex-grow-1">
                                                         <b>100</b> Consultas por

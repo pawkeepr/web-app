@@ -27,7 +27,9 @@ const CustomToggle = ({ onClick, name, avatar }: CustomToggleProps) => (
 
         <span className="text-start ms-xl-2">
             <span
-                className={`d-none d-xl-inline-block ms-1 fw-medium text-white dark:!text-gray-200`}
+                className={
+                    'd-none d-xl-inline-block ms-1 fw-medium text-white dark:!text-gray-200'
+                }
             >
                 {name}
             </span>
@@ -159,7 +161,7 @@ const ProfileDropdownTailwind = () => {
                                     'light-dark-mode',
                                 )}
                             >
-                                <i className="bx bx-moon fs-16"></i>
+                                <i className="bx bx-moon fs-16" />
                                 <span className="align-middle">Modo</span>
                             </button>
                         )}

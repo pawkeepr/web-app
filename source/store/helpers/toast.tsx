@@ -39,20 +39,20 @@ export const buildToast = async (
     if (type === 'success') {
         return toast.success(msg, {
             ...optionsDefault,
-            className: '!bg-primary-500 text-white ' + textStyle,
+            className: `!bg-primary-500 text-white ${textStyle}`,
         });
     }
 
     if (type === 'error') {
         return toast.error(msg, {
             ...optionsDefault,
-            className: '!bg-secondary-500 !text-gray-500 ' + textStyle,
+            className: `!bg-secondary-500 !text-gray-500 ${textStyle}`,
         });
     }
 
     return toast.info(msg, {
         ...optionsDefault,
-        className: '!bg-secondary-500 !text-gray-500 ' + textStyle,
+        className: `!bg-secondary-500 !text-gray-500 ${textStyle}`,
     });
 };
 

@@ -20,7 +20,7 @@ type SidebarProps = {
 
 const Sidebar = ({ layoutType }: SidebarProps) => {
     useEffect(() => {
-        var verticalOverlay =
+        const verticalOverlay =
             document.getElementsByClassName('vertical-overlay');
         if (verticalOverlay) {
             verticalOverlay[0].addEventListener('click', () => {
@@ -82,14 +82,14 @@ const Sidebar = ({ layoutType }: SidebarProps) => {
                         className="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
                         id="vertical-hover"
                     >
-                        <i className="ri-record-circle-line"></i>
+                        <i className="ri-record-circle-line" />
                     </button>
                 </div>
 
                 {layoutType === layoutTypes.HORIZONTAL && (
                     <div id="scrollbar">
                         <Container fluid>
-                            <div id="two-column-menu"></div>
+                            <div id="two-column-menu" />
                             <ul className="navbar-nav" id="navbar-nav">
                                 <HorizontalLayout />
                             </ul>
@@ -100,7 +100,7 @@ const Sidebar = ({ layoutType }: SidebarProps) => {
                 {layoutType === layoutTypes.TWO_COLUMN && (
                     <React.Fragment>
                         <TwoColumnLayout layoutType={layoutType} />
-                        <div className="sidebar-background"></div>
+                        <div className="sidebar-background" />
                     </React.Fragment>
                 )}
 
@@ -108,17 +108,17 @@ const Sidebar = ({ layoutType }: SidebarProps) => {
                     <React.Fragment>
                         <SimpleBar id="scrollbar" className="h-100">
                             <Container fluid>
-                                <div id="two-column-menu"></div>
+                                <div id="two-column-menu" />
                                 <ul className="navbar-nav" id="navbar-nav">
                                     <VerticalLayout layoutType={layoutType} />
                                 </ul>
                             </Container>
                         </SimpleBar>
-                        <div className="sidebar-background"></div>
+                        <div className="sidebar-background" />
                     </React.Fragment>
                 )}
             </div>
-            <div className="vertical-overlay"></div>
+            <div className="vertical-overlay" />
         </React.Fragment>
     );
 };

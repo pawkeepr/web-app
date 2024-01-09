@@ -41,7 +41,7 @@ const ConfirmedScheduledModal = ({
 
     return (
         <>
-            {children && children({ showModal })}
+            {children?.({ showModal })}
             {!children && (
                 <div className="flex items-center justify-center">
                     <button

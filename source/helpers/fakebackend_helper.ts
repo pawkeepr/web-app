@@ -22,9 +22,9 @@ export const isUserAuthenticated = () => {
 export const getTutors = () => api.get(url.GET_TUTORS);
 export const postTutor = (data: any) => api.create(url.ADD_TUTORS, data);
 export const updateTutor = (data: any, id: string) =>
-    api.update(url.UPDATE_TUTORS + '/' + id, data);
+    api.update(`${url.UPDATE_TUTORS}/${id}`, data);
 export const deleteTutor = (id: string) =>
-    api.delete(url.DELETE_TUTORS + '/' + id);
+    api.delete(`${url.DELETE_TUTORS}/${id}`);
 
 // Veterinary Appointment methods
 
@@ -33,17 +33,17 @@ export const getVeterinaryAppointment = () =>
 export const postVeterinaryAppointment = (data: any) =>
     api.create(url.ADD_VETERINARY_APPOINTMENTS, data);
 export const updateVeterinaryAppointment = (data: { id: string }) =>
-    api.update(url.UPDATE_VETERINARY_APPOINTMENTS + '/' + data.id, data);
+    api.update(`${url.UPDATE_VETERINARY_APPOINTMENTS}/${data.id}`, data);
 export const deleteVeterinaryAppointment = (id: string) =>
-    api.delete(url.DELETE_VETERINARY_APPOINTMENTS + '/' + id);
+    api.delete(`${url.DELETE_VETERINARY_APPOINTMENTS}/${id}`);
 
 // perspectiveOrigin:  methods
 
 export const getPets = () => api.get(url.GET_PETS);
 export const postPet = (data: any) => api.create(url.ADD_PETS, data);
 export const updatePet = (data: any) =>
-    api.update(url.UPDATE_PETS + '/' + data.id, data);
-export const deletePet = (id: string) => api.delete(url.DELETE_PETS + '/' + id);
+    api.update(`${url.UPDATE_PETS}/${data.id}`, data);
+export const deletePet = (id: string) => api.delete(`${url.DELETE_PETS}/${id}`);
 
 // Login Method
 export const postFakeLogin = (data: any) =>
@@ -58,13 +58,13 @@ export const postJwtProfile = (data: any) =>
     api.create(url.POST_EDIT_JWT_PROFILE, data);
 
 export const postFakeProfile = (data: { idx: string }) =>
-    api.update(url.POST_EDIT_PROFILE + '/' + data.idx, data);
+    api.update(`${url.POST_EDIT_PROFILE}/${data.idx}`, data);
 
 // Register Method
 export const postJwtRegister = (data: any) => {
     return api.create(url.POST_FAKE_REGISTER, data).catch((err) => {
-        var message;
-        if (err.response && err.response.status) {
+        let message;
+        if (err.response?.status) {
             switch (err.response.status) {
                 case 404:
                     message =
@@ -154,7 +154,7 @@ export const getProducts = () => api.get(url.GET_PRODUCTS);
 
 // delete Product
 export const deleteProducts = (product: string) =>
-    api.delete(url.DELETE_PRODUCT + '/' + product);
+    api.delete(`${url.DELETE_PRODUCT}/${product}`);
 
 // add Products
 export const addNewProduct = (product: any) =>
@@ -162,7 +162,7 @@ export const addNewProduct = (product: any) =>
 
 // update Products
 export const updateProduct = (product: { _id: string }) =>
-    api.update(url.UPDATE_PRODUCT + '/' + product._id, product);
+    api.update(`${url.UPDATE_PRODUCT}/${product._id}`, product);
 
 // get Orders
 export const getOrders = () => api.get(url.GET_ORDERS);
@@ -172,11 +172,11 @@ export const addNewOrder = (order: any) => api.create(url.ADD_NEW_ORDER, order);
 
 // update Order
 export const updateOrder = (order: { _id: string }) =>
-    api.update(url.UPDATE_ORDER + '/' + order._id, order);
+    api.update(`${url.UPDATE_ORDER}/${order._id}`, order);
 
 // delete Order
 export const deleteOrder = (order: string) =>
-    api.delete(url.DELETE_ORDER + '/' + order);
+    api.delete(`${url.DELETE_ORDER}/${order}`);
 
 // get Customers
 export const getCustomers = () => api.get(url.GET_CUSTOMERS);
@@ -187,11 +187,11 @@ export const addNewCustomer = (customer: any) =>
 
 // update Customers
 export const updateCustomer = (customer: { _id: string }) =>
-    api.update(url.UPDATE_CUSTOMER + '/' + customer._id, customer);
+    api.update(`${url.UPDATE_CUSTOMER}/${customer._id}`, customer);
 
 // delete Customers
 export const deleteCustomer = (customer: string) =>
-    api.delete(url.DELETE_CUSTOMER + '/' + customer);
+    api.delete(`${url.DELETE_CUSTOMER}/${customer}`);
 
 // get Sellers
 export const getSellers = () => api.get(url.GET_SELLERS);
@@ -209,11 +209,11 @@ export const addNewTask = (task: any) => api.create(url.ADD_NEW_TASK, task);
 
 // update Task
 export const updateTask = (task: { _id: string }) =>
-    api.update(url.UPDATE_TASK + '/' + task._id, task);
+    api.update(`${url.UPDATE_TASK}/${task._id}`, task);
 
 // delete Task
 export const deleteTask = (task: string) =>
-    api.delete(url.DELETE_TASK + '/' + task);
+    api.delete(`${url.DELETE_TASK}/${task}`);
 
 // CRM
 // get Contacts
@@ -225,11 +225,11 @@ export const addNewContact = (contact: any) =>
 
 // update Contact
 export const updateContact = (contact: { _id: string }) =>
-    api.update(url.UPDATE_CONTACT + '/' + contact._id, contact);
+    api.update(`${url.UPDATE_CONTACT}/${contact._id}`, contact);
 
 // delete Contact
 export const deleteContact = (contact: string) =>
-    api.delete(url.DELETE_CONTACT + '/' + contact);
+    api.delete(`${url.DELETE_CONTACT}/${contact}`);
 
 // get Companies
 export const getCompanies = () => api.get(url.GET_COMPANIES);
@@ -240,11 +240,11 @@ export const addNewCompanies = (company: any) =>
 
 // update Companies
 export const updateCompanies = (company: { _id: string }) =>
-    api.update(url.UPDATE_COMPANIES + '/' + company._id, company);
+    api.update(`${url.UPDATE_COMPANIES}/${company._id}`, company);
 
 // delete Companies
 export const deleteCompanies = (company: string) =>
-    api.delete(url.DELETE_COMPANIES + '/' + company);
+    api.delete(`${url.DELETE_COMPANIES}/${company}`);
 
 // get Deals
 export const getDeals = () => api.get(url.GET_DEALS);
@@ -257,11 +257,11 @@ export const addNewLead = (lead: any) => api.create(url.ADD_NEW_LEAD, lead);
 
 // update Lead
 export const updateLead = (lead: { _id: string }) =>
-    api.update(url.UPDATE_LEAD + '/' + lead._id, lead);
+    api.update(`${url.UPDATE_LEAD}/${lead._id}`, lead);
 
 // delete Lead
 export const deleteLead = (lead: string) =>
-    api.delete(url.DELETE_LEAD + '/' + lead);
+    api.delete(`${url.DELETE_LEAD}/${lead}`);
 
 // Crypto
 // Transation
@@ -280,11 +280,11 @@ export const addNewInvoice = (invoice: any) =>
 
 // update Invoice
 export const updateInvoice = (invoice: { _id: string }) =>
-    api.update(url.UPDATE_INVOICE + '/' + invoice._id, invoice);
+    api.update(`${url.UPDATE_INVOICE}/${invoice._id}`, invoice);
 
 // delete Invoice
 export const deleteInvoice = (invoice: string) =>
-    api.delete(url.DELETE_INVOICE + '/' + invoice);
+    api.delete(`${url.DELETE_INVOICE}/${invoice}`);
 
 // Support Tickets
 // Tickets
@@ -296,11 +296,11 @@ export const addNewTicket = (ticket: any) =>
 
 // update Tickets
 export const updateTicket = (ticket: { _id: string }) =>
-    api.update(url.UPDATE_TICKET + '/' + ticket._id, ticket);
+    api.update(`${url.UPDATE_TICKET}/${ticket._id}`, ticket);
 
 // delete Tickets
 export const deleteTicket = (ticket: string) =>
-    api.delete(url.DELETE_TICKET + '/' + ticket);
+    api.delete(`${url.DELETE_TICKET}/${ticket}`);
 
 // Dashboard Analytics
 

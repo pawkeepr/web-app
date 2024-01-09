@@ -9,7 +9,7 @@ const PrismCode = (props) => {
     }, []);
 
     const highlight = () => {
-        if (ref && ref.current) {
+        if (ref?.current) {
             Prism.highlightElement(ref.current);
         }
     };

@@ -35,7 +35,7 @@ const AuthSlider = ({ bg = 'auth-bg-image', classNames }: AuthSliderProps) => {
                             >
                                 <div className="carousel-inner text-center text-white pb-5">
                                     <div className="item">
-                                        <p className="fs-15 fst-italic"></p>
+                                        <p className="fs-15 fst-italic" />
                                     </div>
                                 </div>
                                 {/* <div className="carousel-inner text-center text-white pb-5">

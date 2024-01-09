@@ -53,7 +53,7 @@ const ModalConfirm = ({
 
     return (
         <>
-            {children && children({ onChangeOpen })}
+            {children?.({ onChangeOpen })}
             {!children && (
                 <div className="flex items-center justify-center">
                     <button

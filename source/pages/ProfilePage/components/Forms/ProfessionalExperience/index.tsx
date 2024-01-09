@@ -249,13 +249,13 @@ const ProfessionalExperience = () => {
                                     id="jobDescription"
                                     rows={3}
                                     placeholder="crie uma breve descrição sobre o cargo"
-                                ></Form.Control>
+                                />
                             </div>
                         </Col>
                     </Row>
                 </div>
             </div>
-            <div id="newForm" style={{ display: 'none' }}></div>
+            <div id="newForm" style={{ display: 'none' }} />
 
             <Col lg={12}>
                 <div className="hstack gap-2">

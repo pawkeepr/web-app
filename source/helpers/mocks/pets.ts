@@ -104,7 +104,7 @@ function factoryMockPets(adapter: MockAdapter) {
     });
 
     adapter.onPost(url.ADD_PETS).reply((config) => {
-        const pet = JSON.parse(config['data']);
+        const pet = JSON.parse(config.data);
 
         const pets = getPets();
 

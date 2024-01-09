@@ -16,7 +16,7 @@ const FieldCurrency = ({
                 decimalScale={2}
                 placeholder={'R$ 0,00'}
                 className={input({
-                    className: props.className + ' resize-none h-[38px]',
+                    className: `${props.className} resize-none h-[38px]`,
                 })}
                 {...props}
             />

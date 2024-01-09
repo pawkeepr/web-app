@@ -132,7 +132,7 @@ const fakeBackend = () => {
     factoryMockVeterinaryAppointments(mock);
 
     mock.onPost(url.POST_FAKE_REGISTER).reply((config) => {
-        const user = JSON.parse(config['data']);
+        const user = JSON.parse(config.data);
 
         const usersCookies = getUsers();
 
@@ -176,7 +176,7 @@ const fakeBackend = () => {
     });
 
     mock.onPost(url.POST_FAKE_JWT_LOGIN).reply((config) => {
-        const user = JSON.parse(config['data']);
+        const user = JSON.parse(config.data);
 
         const usersCookies = getUsers();
 
@@ -206,7 +206,7 @@ const fakeBackend = () => {
     });
 
     mock.onPost('/post-jwt-profile').reply((config) => {
-        const user = JSON.parse(config['data']);
+        const user = JSON.parse(config.data);
 
         const one = config.headers;
 
@@ -218,7 +218,7 @@ const fakeBackend = () => {
             setTimeout(() => {
                 // Verify Jwt token from header.Authorization
                 if (finalToken === accessToken) {
-                    if (validUser['length'] === 1) {
+                    if (validUser.length === 1) {
                         let objIndex;
 
                         //Find index of specific object using findIndex method.
@@ -248,15 +248,15 @@ const fakeBackend = () => {
     });
 
     mock.onPost('/social-login').reply((config) => {
-        const user = JSON.parse(config['data']);
+        const user = JSON.parse(config.data);
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (user && user.token) {
+                if (user?.token) {
                     // You have to generate AccessToken by jwt. but this is fakeBackend so, right now its dummy
                     const token = accessToken;
                     const first_name = user.name;
                     const nodeapiToken = nodeApiToken;
-                    delete user.name;
+                    user.name = undefined;
 
                     // JWT AccessToken
                     const tokenObj = {
@@ -322,7 +322,7 @@ const fakeBackend = () => {
     mock.onPost(url.ADD_NEW_EVENT).reply((event) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (event && event.data) {
+                if (event?.data) {
                     // Passing fake JSON data as response
                     resolve([200, event.data]);
                 } else {
@@ -335,7 +335,7 @@ const fakeBackend = () => {
     mock.onPut(url.UPDATE_EVENT).reply((event) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (event && event.data) {
+                if (event?.data) {
                     // Passing fake JSON data as response
                     resolve([200, event.data]);
                 } else {
@@ -348,7 +348,7 @@ const fakeBackend = () => {
     mock.onDelete(url.DELETE_EVENT).reply((config) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (config && config.headers) {
+                if (config?.headers) {
                     // Passing fake JSON data as response
                     resolve([200, config.headers.event]);
                 } else {
@@ -406,7 +406,7 @@ const fakeBackend = () => {
     mock.onDelete(url.DELETE_MESSAGE).reply((config) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (config && config.headers) {
+                if (config?.headers) {
                     // Passing fake JSON data as response
                     resolve([200, config.headers.message]);
                 } else {
@@ -460,7 +460,7 @@ const fakeBackend = () => {
     mock.onDelete(url.DELETE_MAIL).reply((config) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (config && config.headers) {
+                if (config?.headers) {
                     // Passing fake JSON data as response
                     resolve([200, config.headers.forId]);
                 } else {
@@ -1214,7 +1214,7 @@ const fakeBackend = () => {
     mock.onPost(url.ADD_NEW_PROJECT).reply((project) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (project && project.data) {
+                if (project?.data) {
                     // Passing fake JSON data as response
                     resolve([200, project.data]);
                 } else {
@@ -1227,7 +1227,7 @@ const fakeBackend = () => {
     mock.onPut(url.UPDATE_PROJECT).reply((project) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (project && project.data) {
+                if (project?.data) {
                     // Passing fake JSON data as response
                     resolve([200, project.data]);
                 } else {
@@ -1240,7 +1240,7 @@ const fakeBackend = () => {
     mock.onDelete(url.DELETE_PROJECT).reply((config) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (config && config.headers) {
+                if (config?.headers) {
                     // Passing fake JSON data as response
                     resolve([200, config.headers.project]);
                 } else {
@@ -1266,7 +1266,7 @@ const fakeBackend = () => {
     mock.onDelete(url.DELETE_TEAMDATA).reply((config) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (config && config.headers) {
+                if (config?.headers) {
                     // Passing fake JSON data as response
                     resolve([200, config.headers.team]);
                 } else {
@@ -1279,7 +1279,7 @@ const fakeBackend = () => {
     mock.onPost(url.ADD_NEW_TEAMDATA).reply((team) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (team && team.data) {
+                if (team?.data) {
                     // Passing fake JSON data as response
                     resolve([200, team.data]);
                 } else {
@@ -1292,7 +1292,7 @@ const fakeBackend = () => {
     mock.onPut(url.UPDATE_TEAMDATA).reply((team) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (team && team.data) {
+                if (team?.data) {
                     // Passing fake JSON data as response
                     resolve([200, team.data]);
                 } else {
@@ -1320,7 +1320,7 @@ const fakeBackend = () => {
     mock.onDelete(url.DELETE_FOLDER).reply((config) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (config && config.headers) {
+                if (config?.headers) {
                     // Passing fake JSON data as response
                     resolve([200, config.headers.folder]);
                 } else {
@@ -1333,7 +1333,7 @@ const fakeBackend = () => {
     mock.onPost(url.ADD_NEW_FOLDER).reply((folder) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (folder && folder.data) {
+                if (folder?.data) {
                     // Passing fake JSON data as response
                     resolve([200, folder.data]);
                 } else {
@@ -1346,7 +1346,7 @@ const fakeBackend = () => {
     mock.onPut(url.UPDATE_FOLDER).reply((folder) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (folder && folder.data) {
+                if (folder?.data) {
                     // Passing fake JSON data as response
                     resolve([200, folder.data]);
                 } else {
@@ -1373,7 +1373,7 @@ const fakeBackend = () => {
     mock.onDelete(url.DELETE_FILE).reply((config) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (config && config.headers) {
+                if (config?.headers) {
                     // Passing fake JSON data as response
                     resolve([200, config.headers.file]);
                 } else {
@@ -1386,7 +1386,7 @@ const fakeBackend = () => {
     mock.onPost(url.ADD_NEW_FILE).reply((file) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (file && file.data) {
+                if (file?.data) {
                     // Passing fake JSON data as response
                     resolve([200, file.data]);
                 } else {
@@ -1399,7 +1399,7 @@ const fakeBackend = () => {
     mock.onPut(url.UPDATE_FILE).reply((file) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (file && file.data) {
+                if (file?.data) {
                     // Passing fake JSON data as response
                     resolve([200, file.data]);
                 } else {
@@ -1426,7 +1426,7 @@ const fakeBackend = () => {
     mock.onDelete(url.DELETE_TODO).reply((config) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (config && config.headers) {
+                if (config?.headers) {
                     // Passing fake JSON data as response
                     resolve([200, config.headers.todo]);
                 } else {
@@ -1439,7 +1439,7 @@ const fakeBackend = () => {
     mock.onPost(url.ADD_NEW_TODO).reply((todo) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (todo && todo.data) {
+                if (todo?.data) {
                     // Passing fake JSON data as response
                     resolve([200, todo.data]);
                 } else {
@@ -1452,7 +1452,7 @@ const fakeBackend = () => {
     mock.onPut(url.UPDATE_TODO).reply((todo) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (todo && todo.data) {
+                if (todo?.data) {
                     // Passing fake JSON data as response
                     resolve([200, todo.data]);
                 } else {
@@ -1478,7 +1478,7 @@ const fakeBackend = () => {
     mock.onPost(url.ADD_NEW_TODO_PROJECT).reply((project) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (project && project.data) {
+                if (project?.data) {
                     // Passing fake JSON data as response
                     resolve([200, project.data]);
                 } else {

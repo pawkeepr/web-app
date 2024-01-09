@@ -128,7 +128,7 @@ const PersonalData = () => {
                             className="form-control"
                             id="exampleFormControlTextarea"
                             rows={3}
-                        ></Form.Control>
+                        />
                     </div>
                 </Col>
                 <Col lg={12}>

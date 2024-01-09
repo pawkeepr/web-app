@@ -53,7 +53,7 @@ function factoryTutors(adapter: MockAdapter) {
     });
 
     adapter.onPost(url.ADD_TUTORS).reply((config) => {
-        const tutor = JSON.parse(config['data']);
+        const tutor = JSON.parse(config.data);
 
         const tutors = getTutors();
 

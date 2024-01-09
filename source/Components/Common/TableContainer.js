@@ -76,7 +76,7 @@ function GlobalFilter({
                                     placeholder={`${count} Search...`}
                                     value={value || ''}
                                 />
-                                <i className="bx bx-search-alt search-icon"></i>
+                                <i className="bx bx-search-alt search-icon" />
                             </div>
                         </Col>
                         {isProductsFilter && <ProductsGlobalFilter />}
