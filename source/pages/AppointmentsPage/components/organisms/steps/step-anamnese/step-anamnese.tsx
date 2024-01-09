@@ -1,5 +1,4 @@
 import { useEffect, useMemo } from 'react';
-import * as yup from 'yup';
 import { BtnPrimary } from '~/Components/atoms/btn';
 import FieldArraySafe from '~/Components/molecules/field-array-safe';
 import { OptionSelect } from '~/Components/molecules/field-control';
@@ -7,23 +6,17 @@ import FieldNumber from '~/Components/molecules/field-number';
 import CardInputAnamnese from '~/Components/organism/card-input-anamnese';
 import { questions } from '~/constants/anamnese-questions';
 import useFormikContextSafe from '~/hooks/use-formik-context-safe';
-import { VeterinaryConsultation } from '~/types/appointment';
 import { StepProps, Tabs } from '~/types/helpers';
-
-export type CtxStepAnamnese = Pick<
-    VeterinaryConsultation,
-    'anamnesis' | 'details_pet_consultation'
->;
+import {
+    CtxStepAnamnese,
+    schemaStepAnamneseValidation,
+} from '../../../validations.yup';
 
 const TranslationOptions = {
     yes: 'Sim',
     no: 'Não',
     other: 'Outro',
 } as const;
-
-const schema = yup.object().shape({
-    weight: yup.number().max(100).required('Campo obrigatório'),
-});
 
 // Função para calcular o IMC de um animal
 // height: altura em centímetros
@@ -40,7 +33,8 @@ function calcularIMC(height: number, weight: number): number {
 }
 
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
-    const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>();
+    const { values, setFieldValue, errors } =
+        useFormikContextSafe<CtxStepAnamnese>();
 
     const height = useMemo(
         () => values.details_pet_consultation?.height,
@@ -59,7 +53,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
     }, [height, weight]);
 
     const isValid = useMemo(() => {
-        return schema.isValidSync(values);
+        return schemaStepAnamneseValidation.isValidSync(values);
     }, [values]);
 
     return (

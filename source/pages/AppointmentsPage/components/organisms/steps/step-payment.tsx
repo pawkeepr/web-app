@@ -13,7 +13,7 @@ import { VeterinaryConsultation } from '~/types/appointment';
 type CtxStepPayment = Pick<VeterinaryConsultation, 'appointment_details'>;
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
-    const { handleSubmit, isSubmitting, values } =
+    const { handleSubmit, isSubmitting, values, isValid, errors } =
         useFormikContextSafe<CtxStepPayment>();
 
     const form_payment = useMemo(
@@ -26,6 +26,8 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
         label: `${index + 1} Parcela${index + 1 > 1 ? 's' : ''}`,
         color: 'rgb(255 200 107);',
     }));
+
+    console.log(errors);
 
     return (
         <Form className="card card-body shadow-lg" onSubmit={handleSubmit}>
@@ -88,6 +90,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     }}
                 />
                 <BtnPrimary
+                    disabled={!isValid}
                     isLoading={isSubmitting}
                     type="submit"
                     label="Concluir Consulta"

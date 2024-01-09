@@ -14,6 +14,10 @@ import { VeterinaryConsultation } from '~/types/appointment';
 import { IPetV2 } from '~/types/pet-v2';
 import { DTOProfile } from '~/types/profile';
 import { geolocation } from '~/utils/geolocation';
+import {
+    SchemaYupAppointment,
+    schemaStepAppointment,
+} from './components/validations.yup';
 
 type AppointmentsPageProps = {
     document: string;
@@ -123,7 +127,7 @@ const AppointmentsPage = ({
     const veterinary = useProfileVeterinary();
 
     const onSubmit = useCallback(
-        async (values: VeterinaryConsultation) => {
+        async (values: SchemaYupAppointment) => {
             const [appointment_geolocation, appointment_signature] =
                 await geolocation();
 
@@ -131,15 +135,15 @@ const AppointmentsPage = ({
                 await handleSubmit({
                     ...values,
                     tutor_pet_vet: {
-                        ...values.tutor_pet_vet,
+                        ...(values.tutor_pet_vet as VeterinaryConsultation['tutor_pet_vet']),
                         veterinary,
                     },
                     appointment_details: {
-                        ...values.appointment_details,
+                        ...(values.appointment_details as VeterinaryConsultation['appointment_details']),
                         appointment_geolocation,
                         appointment_signature,
                     },
-                });
+                } as VeterinaryConsultation);
             } catch {
                 router.push('/dashboard');
             }
@@ -153,7 +157,12 @@ const AppointmentsPage = ({
     }
 
     return (
-        <Formik onSubmit={onSubmit} enableReinitialize initialValues={values}>
+        <Formik
+            onSubmit={onSubmit}
+            enableReinitialize
+            initialValues={values}
+            validationSchema={schemaStepAppointment}
+        >
             <DashboardLayouts title="Nova Consulta">
                 <div className="gap-2 mt-2 mobile:py-6">
                     <ModalConfirm

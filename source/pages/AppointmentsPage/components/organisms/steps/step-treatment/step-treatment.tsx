@@ -1,12 +1,14 @@
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
 
 import { FieldArray, useFormikContext } from 'formik';
+import { useMemo } from 'react';
 import { OptionSelect } from '~/Components/molecules/field-control';
 import CardInputTreatment from '~/Components/organism/card-input-treatment';
-import { VeterinaryConsultation } from '~/types/appointment';
 import { StepProps, Tabs } from '~/types/helpers';
-
-type CtxStepTreatment = Pick<VeterinaryConsultation, 'treatments'>;
+import {
+    CtxStepTreatment,
+    schemaStepTreatmentValidation,
+} from '../../../validations.yup';
 
 const items: OptionSelect[] = [
     {
@@ -46,6 +48,10 @@ const KeyTreatment = {
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
     const { values } = useFormikContext<CtxStepTreatment>();
+
+    const isValid = useMemo(() => {
+        return schemaStepTreatmentValidation.isValidSync(values.treatments);
+    }, [values]);
 
     return (
         <section className="card card-body shadow-lg">
@@ -119,6 +125,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     }}
                 />
                 <BtnPrimary
+                    disabled={!isValid}
                     type="button"
                     label="Próximo"
                     onClick={() => {
