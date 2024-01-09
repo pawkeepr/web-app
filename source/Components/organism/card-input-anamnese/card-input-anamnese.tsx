@@ -81,7 +81,9 @@ const CardInputAnamnese = ({
                         options={options}
                     />
                     <RadioGroup
+                        ctx={values}
                         title="Resposta"
+                        checked={values.options_anamnesis}
                         name="options_anamnesis"
                         items={[
                             {
@@ -103,14 +105,14 @@ const CardInputAnamnese = ({
                     />
                     <FieldTextArea
                         ctx={values}
-                        name={'notes_anamnesis'}
+                        name="notes_anamnesis"
                         label="Anotações"
                     />
 
                     <BtnConfirm
                         disabled={!isValid}
                         className="w-full text-white"
-                        label="Adicionar"
+                        label="Responder"
                         type="submit"
                     />
                 </Form>
