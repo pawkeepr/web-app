@@ -32,6 +32,9 @@ export type SpecialtyInformation = {
 }
 
 export type ProfileUserInformation = {
+    cpf_cnpj?: string
+    crmv?: string
+    specialty?: string
     first_name: string
     last_name: string
     name: string
@@ -48,18 +51,4 @@ export type IProfile = {
     user_information: ProfileUserInformation
 }
 
-export type DTOProfile = {
-    cpf_cnpj: string
-    crmv: string
-    name_veterinary: string
-    specialty: string
-    email: string
-    phone: string
-    whatsapp: string
-    country: string
-    state: string
-    city: string
-    neighborhood: string
-    street: string
-    id?: string
-}
+export type DTOProfile = ProfileUserInformation & { id: string; name: string }
