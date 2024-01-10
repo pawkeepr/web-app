@@ -15,7 +15,8 @@
 		"prebuild": "npx tailwindcss -o build.css --minify",
 		"build": "next build",
 		"start": "next start -p 3333",
-		"lint": "npx @biomejs/biome check --apply-unsafe ./source"
+		"lint": "npx @biomejs/biome check --apply-unsafe ./source",
+		"format": "npx @biomejs/biome format --write ./source"
 	},
 	"dependencies": {
 		"@djpfs/react-vlibras": "^2.0.2",
