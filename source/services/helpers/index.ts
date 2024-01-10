@@ -1,9 +1,6 @@
 import { api } from '../api'
 
-import type {
-    IAppointmentVet,
-    IAppointmentVetData,
-} from '~/store/slices/appointment-vet/types'
+import type { VeterinaryConsultation } from '~/types/appointment'
 import type { IProfile } from '~/types/profile'
 import * as urls from './urls'
 
@@ -13,8 +10,7 @@ export const updateProfileVet = async (data: IProfile, user_id: string) =>
     api.put(urls.VET_UPDATE_PROFILE(), data, { params: { user_id } })
 export const getVetProfile = async (app = api) => app.get(urls.VET_GET_PROFILE())
 
-export const getAllAppointmentsVet = async () =>
-    api.get<IAppointmentVetData[]>(urls.APPOINTMENT_GET_ALL())
+export const getAllAppointmentsVet = async () => api.get(urls.APPOINTMENT_GET_ALL())
 export const getAppointmentVet = async (id_appointment: string) =>
     api.get(urls.APPOINTMENT_GET_BY_ID(), { params: { id_appointment } })
 export const createAppointmentVet = async (data: any) =>
@@ -63,7 +59,7 @@ export const getAllAppointmentsRescheduled = async () =>
 export const getAllAppointmentsConfirmed = async () =>
     api.get(urls.APPOINTMENT_GET_ALL_CONFIRMED())
 
-export type IDateConsult = Pick<IAppointmentVet, 'dates_consults'>
+export type IDateConsult = Pick<VeterinaryConsultation, 'dates_consults'>
 
 export const updateAppointmentConfirmed = async (
     id_appointment: string,

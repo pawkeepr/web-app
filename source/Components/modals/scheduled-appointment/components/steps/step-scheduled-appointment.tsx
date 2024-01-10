@@ -3,18 +3,18 @@ import FieldControl from '~/Components/molecules/field-control/field-control'
 
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
-import FieldTextArea from '~/Components/molecules/field-text-area/field-text-area'
 import { Appointments } from '~/entities/Appointments'
 
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import * as Yup from 'yup'
 import type { StepProps } from '~/Components/modals/list-pets-modal/types'
 import BoxButtons from '~/Components/molecules/box-buttons'
-import { getProfileSession } from '~/store/actions'
-import { useAppDispatch, useAppSelector } from '~/store/hooks'
-import { useAppointmentScheduled } from '~/store/hooks/list-appointments'
+import useProfileVeterinary from '~/hooks/use-profile-veterinary'
+import type { IDateConsult } from '~/services/helpers'
+import useListAppointments from '~/store/hooks/list-appointments'
+import type { VeterinaryConsultation } from '~/types/appointment'
 import type { IPetV2 } from '~/types/pet-v2'
-import type { IProfile } from '~/types/profile'
+import { calcAge } from '~/utils/calc-age'
 import { geolocation } from '~/utils/geolocation'
 import CardPet from '../card-pet'
 import CardTutor from '../card-tutor'
@@ -33,73 +33,74 @@ const StepScheduledAppointment = ({
     pet,
     closeModal,
 }: StepProps & { pet: IPetV2 }) => {
-    const initialValues = useMemo(
+    const initialValues: VeterinaryConsultation = useMemo(
         () => ({
-            dates_consults: {
-                additional_remarks: '',
-                date_consultation: '',
-                date_next_consultation: '',
-                reason_consultation: '',
-                time_consultation: '',
-                time_next_consultation: '',
-                type_consultation: '',
+            anamnesis: {
+                note: '',
+                questions_anamnesis: [],
             },
-            contact_tutor: pet?.main_responsible_guardian.user_information.contact,
-            cpf_tutor: pet?.cpf_tutor,
-            id_pet: pet?.id,
-            pet_data: pet?.pet_information,
-            name_tutor: pet?.main_responsible_guardian.user_information.name,
-            tutor_data: {
-                city: pet?.main_responsible_guardian.adress.city,
-                country: pet?.main_responsible_guardian.adress.country,
-                email: pet?.main_responsible_guardian.user_information.contact
-                    .email,
-                name: pet?.main_responsible_guardian.user_information.name,
-                phone: pet?.main_responsible_guardian.user_information.contact
-                    .phone,
-                state: pet?.main_responsible_guardian.adress.state,
-                zipCode: pet?.main_responsible_guardian.adress.zipCode,
+            cpf_cnpj_vet: pet.veterinary.cpf_cnpj,
+            crmv_vet: pet.veterinary.crmv,
+            dates_consults: {
+                date_consultation: '',
+                time_consultation: '',
+                type_consultation: '',
+                reason_consultation: '',
+                additional_remarks: '',
+            },
+            id_pet: pet.id as string,
+            treatments: {
+                note: '',
+                questions_treatment: [],
+            },
+            cpf_tutor: pet.cpf_tutor,
+            appointment_details: {
+                appointment_geolocation: {},
+                appointment_signature: {},
+                payment: {
+                    coin: '',
+                    date_payment: '',
+                    form_payment: '',
+                    number_installments: '',
+                    status_payment: '',
+                    value_payment: '',
+                },
+            },
+            details_pet_consultation: {
+                age: calcAge(pet.pet_information?.date_birth).toString(),
+                height: '',
+                weight: pet.pet_information?.weight as string,
+                imc: 0,
+                length: '',
+                type_weight: '',
+            },
+            tutor_pet_vet: {
+                pet: pet.pet_information,
+                tutor: pet.main_responsible_guardian,
+                veterinary: pet.veterinary,
             },
         }),
         [pet],
     )
 
-    const { handleSubmit, isLoading } = useAppointmentScheduled()
-    const dispatch = useAppDispatch()
+    const { handleSubmit, isLoading } = useListAppointments({
+        mode: 'scheduled',
+        handleClose: closeModal,
+    })
 
-    useEffect(() => {
-        dispatch(getProfileSession())
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    const data = useAppSelector((state) => state.Profile.user) as IProfile
+    const veterinary = useProfileVeterinary()
 
     const onSubmit = useCallback(
-        async (values: any) => {
-            const appointment = Appointments.build({
-                ...values,
-                crmv_vet: data.crmv,
-                cpf_cnpj_vet: data.cpf_cnpj,
-                vaterinary: {
-                    city: data.location.city,
-                    country: data.location.country,
-                    email: data.contact.email,
-                    name: `${data.firstName} ${data.lastName}`,
-                    phone: data.contact.phone,
-                    state: data.location.state,
-                    zipCode: data.location.zipCode,
-                },
-            })
+        async (values: VeterinaryConsultation) => {
+            const appointment = Appointments.build(values)
             const [geolocationData, signature] = await geolocation()
             appointment
                 .defineAppointmentGeolocation(geolocationData)
                 .defineAppointmentSignature(signature)
 
-            await handleSubmit(appointment as any)
-
-            closeModal?.()
+            await handleSubmit(appointment)
         },
-        [handleSubmit, closeModal, data],
+        [handleSubmit, veterinary],
     )
 
     return (
@@ -112,12 +113,16 @@ const StepScheduledAppointment = ({
             {({ isValid, handleSubmit, values, isSubmitting }) => (
                 <div className="p-4">
                     <div className="gap-1">
-                        <CardPet pet={values.pet_data} />
-                        <CardTutor tutor={values} />
+                        <CardPet pet={values.tutor_pet_vet?.pet} />
+                        <CardTutor
+                            tutor={values.tutor_pet_vet?.tutor}
+                            document={values.cpf_tutor}
+                        />
                     </div>
                     <section className="my-2">
                         <div className="flex justify-around gap-3">
                             <FieldControl
+                                ctx={{} as IDateConsult}
                                 label="Data da consulta"
                                 name="dates_consults.date_consultation"
                                 required
@@ -127,6 +132,7 @@ const StepScheduledAppointment = ({
                             />
 
                             <FieldControl
+                                ctx={{} as IDateConsult}
                                 label="Hora da consulta"
                                 required
                                 name="dates_consults.time_consultation"
@@ -137,6 +143,7 @@ const StepScheduledAppointment = ({
                         </div>
                         <div className="flex justify-around gap-3">
                             <FieldControl
+                                ctx={{} as IDateConsult}
                                 label="Tipo da consulta"
                                 name="dates_consults.type_consultation"
                                 required
@@ -145,6 +152,7 @@ const StepScheduledAppointment = ({
                                 type="text"
                             />
                             <FieldControl
+                                ctx={{} as IDateConsult}
                                 label="Razão da consulta"
                                 name="dates_consults.reason_consultation"
                                 required
@@ -153,13 +161,14 @@ const StepScheduledAppointment = ({
                                 type="text"
                             />
                         </div>
-                        <FieldTextArea
+                        {/* <FieldTextArea
+                            ctx={{} as IDateConsult}
                             label="Orientações e Anotações"
                             className="form-control"
                             component="textarea"
-                            name="dates_consults.observations"
+                            name="dates_consults"
                             type="text"
-                        />
+                        /> */}
                     </section>
 
                     <BoxButtons

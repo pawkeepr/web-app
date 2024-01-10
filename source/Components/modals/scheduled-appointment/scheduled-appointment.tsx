@@ -5,6 +5,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { BtnPrimary } from '~/Components/atoms/btn'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
+import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import useSteps from '~/hooks/use-steps'
 import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor'
 import type { IPet } from '~/types/pet'
@@ -71,6 +72,7 @@ const ModalListPets = ({ children, selectedTabInitial = 1 }: ModalConfirmProps) 
         handleSubmit,
         isLoading,
     } = useListPetsOfTutor(document)
+    const veterinary = useProfileVeterinary()
 
     const initialValues: IPet = useMemo(
         () => ({
@@ -104,20 +106,7 @@ const ModalListPets = ({ children, selectedTabInitial = 1 }: ModalConfirmProps) 
             specie: 'cat',
             race: 'Angora',
             sex: 'female',
-            veterinary: {
-                name_veterinary: '',
-                phone: '',
-                email: '',
-                cpf_cnpj: '',
-                crmv: '',
-                specialty: '',
-                whatsapp: '',
-                country: 'Brasil',
-                state: '',
-                city: '',
-                neighborhood: '',
-                street: '',
-            },
+            veterinary,
             date_birth: '',
             microchip: '',
             identification_number: '',
@@ -132,7 +121,7 @@ const ModalListPets = ({ children, selectedTabInitial = 1 }: ModalConfirmProps) 
                 cpf_tutor: '',
             },
         }),
-        [document, pets],
+        [document, pets, veterinary],
     )
 
     const { nextStep, onChangeSelectedTab, previousStep, selectedTab } = useSteps(
@@ -201,7 +190,7 @@ const ModalListPets = ({ children, selectedTabInitial = 1 }: ModalConfirmProps) 
                         da consulta.
                     </h5>
                     <Tab.List className="flex flex-row w-full justify-between">
-                        {[...STEPS, ...STEPS_HIDDEN].map((item, index) => (
+                        {[...STEPS, ...STEPS_HIDDEN].map((item) => (
                             <Tab key={item.id} className="hidden" />
                         ))}
                     </Tab.List>

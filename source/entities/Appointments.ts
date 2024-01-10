@@ -1,8 +1,8 @@
-import {
+import type {
     IGeolocationAppointment,
     ISignatureAppointment,
 } from '~/store/slices/appointment-vet/types'
-import {
+import type {
     Anamnesis,
     AppointmentDetails,
     DateConsults,
@@ -12,7 +12,7 @@ import {
     TutorPetVet,
     VeterinaryConsultation,
 } from '~/types/appointment'
-import { DTOProfile } from '~/types/profile'
+import type { DTOProfile } from '~/types/profile'
 
 export class Appointments implements VeterinaryConsultation {
     id?: string | null

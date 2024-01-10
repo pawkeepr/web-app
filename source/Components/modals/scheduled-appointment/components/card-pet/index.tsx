@@ -1,5 +1,5 @@
-import { KeyOfSpecies, Species } from '~/store/slices/pets/speciesType'
-import { PetData } from '~/types/pet-v2'
+import { Species } from '~/store/slices/pets/speciesType'
+import type { PetData } from '~/types/pet-v2'
 
 type CardPetProps = {
     pet: PetData
@@ -12,11 +12,9 @@ const CardPet = ({ pet }: CardPetProps) => {
                 <p className="text-gray-500 flex justify-between">
                     <strong className="mr-2">Pet:</strong>
                     <span>
-                        {`${pet.name_pet}, ${
-                            Species[
-                                pet.specie as Species as unknown as KeyOfSpecies
-                            ]
-                        }, ${pet.race as string}`}
+                        {`${pet.name_pet}, ${Species[pet.specie]}, ${
+                            pet.race as string
+                        }`}
                     </span>
                 </p>
             </div>

@@ -9,15 +9,15 @@ import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import useSteps from '~/hooks/use-steps'
 import routes from '~/routes'
 import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor'
-import { IPet } from '~/types/pet'
-import { IPetV2 } from '~/types/pet-v2'
+import type { IPet } from '~/types/pet'
+import type { IPetV2 } from '~/types/pet-v2'
 import StepDocument from './components/steps/step-document'
 import StepListBreeds from './components/steps/step-list-breeds'
 import StepListGender from './components/steps/step-list-gender'
 import StepListPets from './components/steps/step-list-pets'
 import StepListSpecies from './components/steps/step-list-species'
 import StepTutor from './components/steps/step-tutor'
-import { ModalConfirmProps, StepProps } from './types'
+import type { ModalConfirmProps, StepProps } from './types'
 
 const STEPS = [
     {
@@ -188,7 +188,7 @@ const ModalListPets = ({
                         Selecione ou Adicione um Pet para prosseguir na consulta.
                     </h5>
                     <Tab.List className="flex flex-row w-full justify-between">
-                        {STEPS.map((item, index) => (
+                        {STEPS.map((item) => (
                             <Tab key={item.id} className="hidden" />
                         ))}
                     </Tab.List>
