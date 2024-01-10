@@ -13,16 +13,22 @@
 				"useExhaustiveDependencies": "off",
 				"noUnusedVariables": "error"
 			},
-			"complexity": {
-				"recommended": true
-			},
 			"style": {
 				"recommended": true,
 				"noUselessElse": "warn",
 				"noVar": "error"
 			},
 			"nursery": {
+				"recommended": true,
 				"noUnusedImports": "error"
+			},
+			"suspicious": {
+				"recommended": true,
+				"noConsoleLog": "error"
+			},
+			"complexity": {
+				"recommended": true,
+				"noForEach": "warn"
 			}
 		},
 
