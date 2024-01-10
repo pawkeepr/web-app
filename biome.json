@@ -39,7 +39,7 @@
 			"enabled": true,
 			"indentStyle": "space",
 			"indentWidth": 4,
-			"lineWidth": 100,
+			"lineWidth": 84,
 			"lineEnding": "lf",
 			"semicolons": "asNeeded",
 			"quoteStyle": "single"
