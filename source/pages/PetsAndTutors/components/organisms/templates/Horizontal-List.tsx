@@ -5,23 +5,20 @@ import { Tab } from '@headlessui/react';
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import useResizeMobile from '~/hooks/use-resize-mobile';
-import StepScheduledAll from '../steps/step-scheduled-all';
-import StepScheduledCanceled from '../steps/step-scheduled-canceled';
-import StepScheduledConfirmed from '../steps/step-scheduled-confirmed';
-import StepScheduledDone from '../steps/step-scheduled-done';
-import StepScheduledRescheduled from '../steps/step-scheduled-rescheduled';
+import PetsTab from '~/pages/PetsPage/PetsTab';
+import TutorsTab from '~/pages/TutorsPage/TutorsTab';
 
 const Tabs = () => [
     {
         id: 1,
         title: 'Pets',
-        href: '#scheduled',
-        tab: <StepScheduledAll />,
+        href: '#pets',
+        tab: <PetsTab />,
     },
     {
         title: 'Tutores',
-        href: '#rescheduled',
-        tab: <StepScheduledRescheduled />,
+        href: '#tutors',
+        tab: <TutorsTab />,
     },
 ];
 

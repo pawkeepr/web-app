@@ -31,7 +31,7 @@ const items = [
         href: '/dashboard',
     },
     {
-        name: 'Pets e Tutores',
+        name: 'Pets/Tutores',
         icon: (
             <div className="flex justify-start">
                 <MdPets className="w-5 h-5" />
