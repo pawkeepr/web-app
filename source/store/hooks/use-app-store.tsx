@@ -53,7 +53,7 @@ const useAppStore = <T, G = unknown>({
             ...options,
             initialData: [],
             keepPreviousData: true,
-            cacheTime: TIME, // 1 min
+            staleTime: TIME, // 1 min
             enabled: !!get && enabled,
             // staleTime: TIME // 1 min
         },
@@ -68,7 +68,6 @@ const useAppStore = <T, G = unknown>({
 
     const onSettled = async () => {
         await queryClient.invalidateQueries({
-            queryKey: superKeys,
             predicate: (query) => {
                 return query.queryKey.includes(name)
             },
