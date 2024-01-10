@@ -90,7 +90,7 @@ export class Appointments implements VeterinaryConsultation {
         this.details_pet_consultation = {
             age: '',
             height: '',
-            imc: '',
+            imc: 0,
             length: '',
             type_weight: '',
             weight: '',
