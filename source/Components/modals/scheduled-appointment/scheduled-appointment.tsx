@@ -74,22 +74,63 @@ const ModalListPets = ({ children, selectedTabInitial = 1 }: ModalConfirmProps) 
 
     const initialValues: IPet = useMemo(
         () => ({
-            id: null,
+            id: '',
             name: '',
             cpf_tutor: document,
-            species: null,
-            breed: null,
+            species: '',
+            breed: '',
             ownerEmergencyContact: {
                 cpf_cnpj: document,
                 phone:
-                    pets.length > 0 ? (pets[0].contact_tutor.phone as string) : '',
+                    pets && pets.length > 0
+                        ? (pets[0].main_responsible_guardian.contact
+                              .phone as string)
+                        : '',
                 email:
-                    pets.length > 0 ? (pets[0].contact_tutor.email as string) : '',
-                name: pets.length > 0 ? pets[0].name_tutor : '',
+                    pets && pets.length > 0
+                        ? (pets[0].main_responsible_guardian.contact
+                              .email as string)
+                        : '',
+                name:
+                    pets && pets.length > 0
+                        ? (pets[0].main_responsible_guardian.name as string)
+                        : '',
+                lastName:
+                    pets && pets.length > 0
+                        ? (pets[0].main_responsible_guardian.last_name as string)
+                        : '',
             },
-            castrated: false,
+            castrated: 'no',
+            specie: 'cat',
+            race: 'Angora',
+            sex: 'female',
+            veterinary: {
+                name_veterinary: '',
+                phone: '',
+                email: '',
+                cpf_cnpj: '',
+                crmv: '',
+                specialty: '',
+                whatsapp: '',
+                country: 'Brasil',
+                state: '',
+                city: '',
+                neighborhood: '',
+                street: '',
+            },
             date_birth: '',
-            gender: null as any,
+            microchip: '',
+            identification_number: '',
+            health_insurance: {
+                name: '',
+                type_health: '',
+                number_health: '',
+                validity: '',
+            },
+            responsible_tutors: {
+                name_tutor: '',
+                cpf_tutor: '',
+            },
         }),
         [document, pets],
     )
@@ -106,48 +147,7 @@ const ModalListPets = ({ children, selectedTabInitial = 1 }: ModalConfirmProps) 
     const onSubmit = useCallback(
         async (values: IPet) => {
             const pet = await handleSubmit({
-                name_tutor: values.ownerEmergencyContact.name as string,
-                phone_tutor: values.ownerEmergencyContact.phone,
-                contact_tutor: {
-                    email: values.ownerEmergencyContact.email,
-                    phone: values.ownerEmergencyContact.phone,
-                    whatsapp: values.ownerEmergencyContact.phone,
-                },
-                cpf_tutor: values.ownerEmergencyContact.cpf_cnpj,
-                vets_data: [],
-                location_tutor: {
-                    country: 'Brasil',
-                    zipCode: null,
-                    state: null,
-                    city: null,
-                    neighborhood: null,
-                    street: null,
-                    number: null,
-                    complement: null,
-                },
-                pet_data: {
-                    name_pet: values.name,
-                    specie: values.species,
-                    race: values.breed,
-                    castrated: values.castrated,
-                    sex: values.gender,
-                    microchip: null,
-                    identification_number: null,
-                    blood_type: null,
-                    blood_donator: null,
-                    organ_donor: null,
-                    date_birth: null,
-                },
-                health_insurance: {
-                    name: null,
-                    type_health: null,
-                    number_health: null,
-                    validity: null,
-                },
-                responsible_tutors: {
-                    name_tutor: null,
-                    cpf_tutor: null,
-                },
+                ...values,
             })
 
             if (!pet) return
@@ -233,7 +233,7 @@ const ModalListPets = ({ children, selectedTabInitial = 1 }: ModalConfirmProps) 
                                         <Component
                                             pet={pet as IPetV2}
                                             onChangeStep={onChangeSelectedTab}
-                                            pets={pets}
+                                            pets={pets || []}
                                             handleNavigate={handleNavigate}
                                             closeModal={closeModal}
                                             nextStep={nextStep}

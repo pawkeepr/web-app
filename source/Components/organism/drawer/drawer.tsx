@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import ArrowLeftCircleIcon from '@heroicons/react/20/solid/ArrowLeftCircleIcon'
 import Cog8ToothIcon from '@heroicons/react/24/solid/Cog8ToothIcon'
 import DashboardIcon from '@heroicons/react/24/solid/HomeIcon'
@@ -31,14 +30,14 @@ const items = [
         href: '/dashboard',
     },
     {
-        name: 'Pets',
-        icon: <MdPets className="w-5 h-5" />,
-        href: '/dashboard/pets',
-    },
-    {
-        name: 'Tutores',
-        icon: <MdPerson className="w-5 h-5" />,
-        href: '/dashboard/tutors',
+        name: 'Pets / Tutores',
+        icon: (
+            <div className="flex justify-start">
+                <MdPets className="w-5 h-5" />
+                <MdPerson className="w-5 h-5" />
+            </div>
+        ),
+        href: '/dashboard/pets-and-tutors',
     },
     {
         name: 'Configurações',
@@ -104,7 +103,7 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                 <nav className="gap-1">
                     {items.map((item, index) => (
                         <Link
-                            key={index}
+                            key={index.toString()}
                             className={cn(buttonStyled, {
                                 'bg-gray-200 dark:bg-dark-600':
                                     pathname === item.href,
