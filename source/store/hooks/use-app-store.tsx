@@ -67,7 +67,12 @@ const useAppStore = <T, G = unknown>({
     }
 
     const onSettled = async () => {
-        await queryClient.invalidateQueries(superKeys)
+        await queryClient.invalidateQueries({
+            queryKey: superKeys,
+            predicate: (query) => {
+                return query.queryKey.includes(name)
+            },
+        })
     }
 
     const onSuccess = useCallback(async () => {
