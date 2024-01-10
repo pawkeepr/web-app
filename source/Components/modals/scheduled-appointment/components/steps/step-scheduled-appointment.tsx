@@ -33,14 +33,15 @@ const StepScheduledAppointment = ({
     pet,
     closeModal,
 }: StepProps & { pet: IPetV2 }) => {
+    const veterinary = useProfileVeterinary()
     const initialValues: VeterinaryConsultation = useMemo(
         () => ({
             anamnesis: {
                 note: '',
                 questions_anamnesis: [],
             },
-            cpf_cnpj_vet: pet.veterinary?.cpf_cnpj,
-            crmv_vet: pet.veterinary?.crmv,
+            cpf_cnpj_vet: veterinary?.cpf_cnpj,
+            crmv_vet: veterinary?.crmv,
             dates_consults: {
                 date_consultation: '',
                 time_consultation: '',
@@ -77,18 +78,15 @@ const StepScheduledAppointment = ({
             tutor_pet_vet: {
                 pet: pet.pet_information,
                 tutor: pet.main_responsible_guardian,
-                veterinary: pet.veterinary,
+                veterinary,
             },
         }),
-        [pet],
+        [pet, veterinary],
     )
-
     const { handleSubmit, isLoading } = useListAppointments({
         mode: 'scheduled',
         handleClose: closeModal,
     })
-
-    const veterinary = useProfileVeterinary()
 
     const onSubmit = useCallback(
         async (values: VeterinaryConsultation) => {
@@ -97,10 +95,11 @@ const StepScheduledAppointment = ({
             appointment
                 .defineAppointmentGeolocation(geolocationData)
                 .defineAppointmentSignature(signature)
+                .defineVeterinary(veterinary)
 
             await handleSubmit(appointment)
         },
-        [handleSubmit, veterinary],
+        [handleSubmit],
     )
 
     return (
