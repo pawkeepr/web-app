@@ -5,8 +5,7 @@ import Modal from '~/Components/organism/modal'
 import * as Yup from 'yup'
 import CardTutor from '~/Components/molecules/card-tutor'
 import { usePlusModal } from '~/hooks/use-plus-modal'
-import { useAppointmentConfirmed } from '~/store/hooks/appointments'
-import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
+import useListAppointments from '~/store/hooks/list-appointments'
 
 const validationSchema = Yup.object().shape({
     id: Yup.string().required('Campo obrigatório'),
@@ -35,7 +34,8 @@ const ConfirmedScheduledModal = ({
     isOpen,
 }: ConfirmedScheduledModalProps) => {
     const { item, close, keys } = usePlusModal()
-    const { handleSubmit, isLoading } = useAppointmentConfirmed({
+    const { handleSubmit, isLoading } = useListAppointments({
+        mode: 'confirmed',
         handleClose: () => close(keys.ConfirmedScheduled),
     })
 

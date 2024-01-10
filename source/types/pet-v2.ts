@@ -1,6 +1,6 @@
-import { Breed } from '~/store/slices/pets/breedType'
-import { Gender, Species } from '~/store/slices/pets/speciesType'
-import { Contact, DTOProfile, Location } from './profile'
+import type { Breed } from '~/store/slices/pets/breedType'
+import type { Gender, Species } from '~/store/slices/pets/speciesType'
+import type { Contact, DTOProfile, Location } from './profile'
 
 type GenericSelect = {
     label: string

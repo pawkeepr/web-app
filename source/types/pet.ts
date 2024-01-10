@@ -1,9 +1,9 @@
-import { BloodType } from '~/store/slices/pets/bloodType'
-import { Breed } from '~/store/slices/pets/breedType'
-import { Gender, Species } from '~/store/slices/pets/speciesType'
-import { IHealthInsurance, On_Off } from './pet-v2'
-import { DTOProfile } from './profile'
-import { ITutor } from './tutor'
+import type { BloodType } from '~/store/slices/pets/bloodType'
+import type { Breed } from '~/store/slices/pets/breedType'
+import type { Gender, Species } from '~/store/slices/pets/speciesType'
+import type { IHealthInsurance, On_Off } from './pet-v2'
+import type { DTOProfile } from './profile'
+import type { ITutor } from './tutor'
 
 export type IPet = {
     id?: string

@@ -1,10 +1,6 @@
-import { OptionSelect } from '~/Components/molecules/field-control'
-import {
-    IGeolocationAppointment,
-    ISignatureAppointment,
-} from '~/store/slices/appointment-vet/types'
-import { IMainResponsibleGuardian, PetData } from './pet-v2'
-import { DTOProfile } from './profile'
+import type { OptionSelect } from '~/Components/molecules/field-control'
+import type { IMainResponsibleGuardian, PetData } from './pet-v2'
+import type { DTOProfile } from './profile'
 
 export interface VeterinaryConsultation {
     id?: string | null

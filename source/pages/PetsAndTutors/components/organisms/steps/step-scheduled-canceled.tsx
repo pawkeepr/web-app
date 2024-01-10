@@ -1,5 +1,5 @@
-import { useAppointmentCanceled } from "~/store/hooks/appointments";
-import CardScheduled from "../organisms/card-scheduled";
+import { useAppointmentCanceled } from '~/store/hooks/list-appointments'
+import CardScheduled from '../organisms/card-scheduled'
 
 const StepCanceled = () => {
     const { activeData, isLoading } = useAppointmentCanceled()
@@ -9,10 +9,14 @@ const StepCanceled = () => {
     return (
         <div className="space-y-10 w-full">
             {activeData?.scheduled?.map((appointment) => (
-                <CardScheduled key={appointment.id} appointment={appointment} boxButtons={null} />
+                <CardScheduled
+                    key={appointment.id}
+                    appointment={appointment}
+                    boxButtons={null}
+                />
             ))}
         </div>
-    );
-};
+    )
+}
 
-export default StepCanceled;
+export default StepCanceled

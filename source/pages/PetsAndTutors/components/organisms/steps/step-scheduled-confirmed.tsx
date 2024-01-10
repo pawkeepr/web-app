@@ -1,8 +1,7 @@
-import { useAppointmentConfirmed } from '~/store/hooks/appointments';
-import CardScheduled from "../organisms/card-scheduled";
+import { useAppointmentConfirmed } from '~/store/hooks/list-appointments'
+import CardScheduled from '../organisms/card-scheduled'
 
 const StepConfirmed = () => {
-
     const { activeData, isLoading } = useAppointmentConfirmed()
 
     if (isLoading) return <div>Loading...</div>
@@ -13,7 +12,7 @@ const StepConfirmed = () => {
                 <CardScheduled key={appointment.id} appointment={appointment} />
             ))}
         </div>
-    );
-};
+    )
+}
 
-export default StepConfirmed;
+export default StepConfirmed

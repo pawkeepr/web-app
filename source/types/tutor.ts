@@ -1,4 +1,4 @@
-import { Location } from './profile'
+import type { Location } from './profile'
 
 export type ITutor = {
     id?: string

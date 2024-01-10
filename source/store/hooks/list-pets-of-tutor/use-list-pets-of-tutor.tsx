@@ -1,9 +1,9 @@
-import { BuilderEntity } from '~/entities/BuilderEntity'
+import type { BuilderEntity } from '~/entities/BuilderEntity'
 import { Pet } from '~/entities/Pet'
 import { PetSimplified } from '~/entities/PetSimplified'
 import { createPet, createPetSimplified, getAllPets } from '~/services/helpers'
-import { IPet } from '~/types/pet'
-import { IPetV2 } from '~/types/pet-v2'
+import type { IPet } from '~/types/pet'
+import type { IPetV2 } from '~/types/pet-v2'
 import useAppStore from '../use-app-store'
 
 export const NAME = 'list-pets-of-tutor'

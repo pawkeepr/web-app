@@ -1,6 +1,6 @@
 import { Appointments } from '~/entities/Appointments'
 import { createAppointmentVet, finishedAppointmentVet } from '~/services/helpers'
-import { VeterinaryConsultation } from '~/types/appointment'
+import type { VeterinaryConsultation } from '~/types/appointment'
 import useAppStore from '../use-app-store'
 
 export const NAME = 'appointments-vet'

@@ -1,10 +1,10 @@
 import { api } from '../api'
 
-import {
+import type {
     IAppointmentVet,
     IAppointmentVetData,
 } from '~/store/slices/appointment-vet/types'
-import { IProfile } from '~/types/profile'
+import type { IProfile } from '~/types/profile'
 import * as urls from './urls'
 
 export const createProfileVet = async (data: IProfile) =>
@@ -63,7 +63,7 @@ export const getAllAppointmentsRescheduled = async () =>
 export const getAllAppointmentsConfirmed = async () =>
     api.get(urls.APPOINTMENT_GET_ALL_CONFIRMED())
 
-type IDateConsult = Pick<IAppointmentVet, 'dates_consults'>
+export type IDateConsult = Pick<IAppointmentVet, 'dates_consults'>
 
 export const updateAppointmentConfirmed = async (
     id_appointment: string,

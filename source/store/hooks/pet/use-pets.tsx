@@ -1,6 +1,6 @@
 import useAppQuery from '~/hooks/use-app-query'
 import { getPet } from '~/services/helpers'
-import { IPetV2 } from '~/types/pet-v2'
+import type { IPetV2 } from '~/types/pet-v2'
 
 export const NAME = 'pet'
 const TIME = 1000 * 60 * 1 // 1 min

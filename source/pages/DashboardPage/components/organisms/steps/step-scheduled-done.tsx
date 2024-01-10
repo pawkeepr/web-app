@@ -1,8 +1,8 @@
-import { useAppointmentDone } from '~/store/hooks/appointments'
+import useListAppointments from '~/store/hooks/list-appointments'
 import CardScheduled from '../organisms/card-scheduled'
 
 const StepDone = () => {
-    const { activeData, isLoading } = useAppointmentDone()
+    const { activeData, isLoading } = useListAppointments({ mode: 'done' })
 
     if (isLoading) return <div>Loading...</div>
 

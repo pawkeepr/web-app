@@ -1,14 +1,14 @@
-import useAppointmentRescheduled from '~/store/hooks/appointments/rescheduled'
+import useListAppointments from '~/store/hooks/list-appointments'
 import CardScheduled from '../organisms/card-scheduled'
 
 const StepAll = () => {
-    const { activeData, isLoading } = useAppointmentRescheduled()
+    const { activeData, isLoading } = useListAppointments({ mode: 'rescheduled' })
 
     if (isLoading) return <div>Loading...</div>
 
     return (
         <div className="space-y-10 w-full">
-            {activeData?.scheduled?.map((appointment) => (
+            {activeData?.map((appointment) => (
                 <CardScheduled key={appointment.id} appointment={appointment} />
             ))}
         </div>

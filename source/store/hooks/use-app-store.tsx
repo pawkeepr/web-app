@@ -1,22 +1,30 @@
-import { UseQueryOptions, useMutation, useQueryClient } from '@tanstack/react-query'
-import { AxiosError, AxiosResponse } from 'axios'
+import {
+    useMutation,
+    useQueryClient,
+    type UseQueryOptions,
+} from '@tanstack/react-query'
+import type { AxiosError, AxiosResponse } from 'axios'
 import { useCallback, useMemo } from 'react'
-import { BuilderEntity } from '~/entities/BuilderEntity'
-import useAppQuery, { Fn } from '~/hooks/use-app-query'
+import type { BuilderEntity } from '~/entities/BuilderEntity'
+import useAppQuery, { type Fn } from '~/hooks/use-app-query'
 import { errorToast, successToast } from '../helpers/toast'
 
-type Data<T> = T & { id?: string | null }
+export type FAxiosPost<T = unknown, G = undefined> = (
+    data: G extends undefined ? T : T | G,
+) => Promise<AxiosResponse<T>>
+export type FAxiosUpdate<T = unknown, G = unknown> = (
+    id: string,
+    data: Partial<T | G>,
+) => Promise<AxiosResponse<T>>
+export type FAxiosDelete<T = unknown> = (id: string) => Promise<AxiosResponse<T>>
 
 type Stores<T, G> = {
     keys: (string | number)[]
     name: string
     enabled?: boolean
-    update?: (
-        id: string,
-        data: Partial<Data<T> | Data<G>>,
-    ) => Promise<AxiosResponse<Data<T>>>
-    del?: (id: string) => Promise<AxiosResponse<Data<T>>>
-    add?: (data: Data<T> | Data<G>) => Promise<AxiosResponse<Data<T>>>
+    update?: FAxiosUpdate<T, G>
+    del?: FAxiosDelete<T>
+    add?: FAxiosPost<T, G>
     get?: Fn<T[]>
     handleCloseModal?: () => void
     entity?: BuilderEntity
@@ -30,7 +38,6 @@ const useAppStore = <T, G = unknown>({
     add,
     update,
     get,
-    del,
     entity,
     options,
     handleCloseModal,
@@ -64,15 +71,15 @@ const useAppStore = <T, G = unknown>({
     }
 
     const onSuccess = useCallback(async () => {
-        successToast('Adicionado com sucesso')
+        await successToast('Adicionado com sucesso')
         handleCloseModal?.()
     }, [handleCloseModal])
 
     const addData = useMutation({
-        mutationFn: async (data: Data<T> | Data<G>) => {
+        mutationFn: async (data: G extends undefined ? T : T | G) => {
             const res = await add?.(data)
 
-            return res?.data as Data<T>
+            return res?.data as T
         },
         onSuccess,
         onSettled,
@@ -80,8 +87,12 @@ const useAppStore = <T, G = unknown>({
     })
 
     const updateData = useMutation({
-        mutationFn: async (data: Data<T> | Data<G>) => {
-            const res = await update?.(data.id as string, data)
+        mutationFn: async (data: T | G) => {
+            const newData = data as { id?: string } & (T | G)
+            if (!newData.id) {
+                throw new Error('Id não encontrado')
+            }
+            const res = await update?.(newData.id, data)
             return res?.data
         },
         onSuccess,
@@ -90,7 +101,7 @@ const useAppStore = <T, G = unknown>({
     })
 
     const handleSubmit = useCallback(
-        async (data: Data<T> | Data<G>) => {
+        async (data: T | G) => {
             try {
                 const newData = entity ? entity.build(data) : data
 
@@ -98,7 +109,7 @@ const useAppStore = <T, G = unknown>({
                     return await updateData.mutateAsync(data)
                 }
 
-                const { id, ...aux } = newData
+                const { id: _id, ...aux } = newData
                 return await addData.mutateAsync(aux)
             } catch (err) {
                 const error = err as AxiosError
