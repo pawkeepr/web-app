@@ -39,8 +39,8 @@ const StepScheduledAppointment = ({
                 note: '',
                 questions_anamnesis: [],
             },
-            cpf_cnpj_vet: pet.veterinary.cpf_cnpj,
-            crmv_vet: pet.veterinary.crmv,
+            cpf_cnpj_vet: pet.veterinary?.cpf_cnpj,
+            crmv_vet: pet.veterinary?.crmv,
             dates_consults: {
                 date_consultation: '',
                 time_consultation: '',
@@ -67,7 +67,7 @@ const StepScheduledAppointment = ({
                 },
             },
             details_pet_consultation: {
-                age: calcAge(pet.pet_information?.date_birth).toString(),
+                age: calcAge(pet.pet_information?.date_birth).toString() || '',
                 height: '',
                 weight: pet.pet_information?.weight as string,
                 imc: 0,

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 import withLoading from '~/Components/helpers/with-loading'
 import { useAppSelector } from '~/store/hooks'
-import { StepProps, Tabs } from '~/types/helpers'
+import type { StepProps, Tabs } from '~/types/helpers'
 import CardPet from '../molecules/card-pet'
 import StepAnamneses from '../organisms/steps/step-anamnese'
 import StepPayment from '../organisms/steps/step-payment'

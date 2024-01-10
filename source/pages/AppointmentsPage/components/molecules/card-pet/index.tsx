@@ -1,9 +1,10 @@
 import { useMemo } from 'react'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { Breed } from '~/store/slices/pets/breedType'
+import type { Breed } from '~/store/slices/pets/breedType'
 import { Gender, Species } from '~/store/slices/pets/speciesType'
-import { VeterinaryConsultation } from '~/types/appointment'
+import type { VeterinaryConsultation } from '~/types/appointment'
 import { calcAge } from '~/utils/calc-age'
+import { getNameTutor } from '../../../../../utils/get-name-tutors'
 
 type CtxCard = Pick<VeterinaryConsultation, 'tutor_pet_vet'>
 
@@ -42,7 +43,7 @@ const CardPet = () => {
             <div className="gap-2 flex-wrap flex mt-2">
                 <p className="text-gray-500">
                     <strong className="mr-2">Tutor:</strong>
-                    {values.tutor_pet_vet?.tutor?.name}
+                    {getNameTutor(values.tutor_pet_vet?.tutor)}
                 </p>
             </div>
         </section>

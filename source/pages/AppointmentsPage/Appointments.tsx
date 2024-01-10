@@ -8,14 +8,14 @@ import ModalConfirm from '~/Components/modals/confirm-modal'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import useAppointment from '~/store/hooks/appointment/use-appointment'
 import usePetById from '~/store/hooks/pet/use-pets'
-import { VeterinaryConsultation } from '~/types/appointment'
-import { IPetV2 } from '~/types/pet-v2'
-import { DTOProfile } from '~/types/profile'
+import type { VeterinaryConsultation } from '~/types/appointment'
+import type { IPetV2 } from '~/types/pet-v2'
+import type { DTOProfile } from '~/types/profile'
 import { geolocation } from '~/utils/geolocation'
 import VerticalTabs from './components/templates/vertical-tabs'
 import {
-    SchemaYupAppointment,
     schemaStepAppointment,
+    type SchemaYupAppointment,
 } from './components/validations.yup'
 
 type AppointmentsPageProps = {

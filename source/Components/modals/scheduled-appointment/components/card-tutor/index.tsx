@@ -1,5 +1,6 @@
 import { FaWhatsapp } from 'react-icons/fa'
 import type { IMainResponsibleGuardian } from '~/types/pet-v2'
+import { getNameTutor } from '~/utils/get-name-tutors'
 
 type CardTutorProps = {
     tutor: IMainResponsibleGuardian
@@ -12,7 +13,7 @@ const CardTutor = ({ tutor, document }: CardTutorProps) => {
             <div className="gap-2 flex-wrap flex flex-col w-full justify-between">
                 <p className="text-gray-500 flex justify-between">
                     <strong className="mr-2">Tutor:</strong>
-                    {tutor.name}
+                    {getNameTutor(tutor)}
                 </p>
                 <p className="text-gray-500 flex justify-between">
                     <strong className="mr-2">CPF:</strong>
