@@ -7,11 +7,11 @@ type HeaderTitleProps = {
 const HeaderTitle = ({ title }: HeaderTitleProps) => {
     return (
         <Head>
-            <title>{process.env.NEXT_PUBLIC_APP_NAME || 'Pawkeepr'} - {title}</title>
+            <title>
+                {process.env.NEXT_PUBLIC_APP_NAME || 'Pawkeepr'} - {title}
+            </title>
         </Head>
     )
 }
-
-
 
 export default HeaderTitle

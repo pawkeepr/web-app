@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from 'react'
 
 const useSteps = (steps: unknown[] = [], selectedTabInitial = 0) => {
     const [selectedTab, setSelectedTab] = useState(selectedTabInitial)
@@ -14,11 +14,11 @@ const useSteps = (steps: unknown[] = [], selectedTabInitial = 0) => {
     }
 
     const nextStep = useCallback(() => {
-        setSelectedTab(state => Math.min(state + 1, steps.length - 1))
+        setSelectedTab((state) => Math.min(state + 1, steps.length - 1))
     }, [steps])
 
     const previousStep = useCallback(() => {
-        setSelectedTab(state => Math.max(state - 1, 0))
+        setSelectedTab((state) => Math.max(state - 1, 0))
     }, [])
 
     return {

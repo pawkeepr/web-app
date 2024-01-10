@@ -11,12 +11,13 @@ const FieldCurrency = ({
         <div>
             <Label label={label} id={props.name} required={props.required} />
 
-
             <CurrencyInput
                 prefix="R$ "
                 decimalScale={2}
                 placeholder={'R$ 0,00'}
-                className={input({ className: props.className + ' resize-none h-[38px]' })}
+                className={input({
+                    className: `${props.className} resize-none h-[38px]`,
+                })}
                 {...props}
             />
         </div>

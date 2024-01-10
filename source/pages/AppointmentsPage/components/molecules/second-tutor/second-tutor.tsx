@@ -1,16 +1,16 @@
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 //Import images
 
-import FieldControl from "~/Components/molecules/field-control/field-control";
+import FieldControl from '~/Components/molecules/field-control/field-control'
 
-import { useFormikContext } from 'formik';
-import { useCallback, useMemo, useState, useTransition } from 'react';
-import MaskedInput from 'react-input-mask';
-import { IAddress } from '~/helpers/fetch-address-by-cep';
-import useFetchAddress from '~/hooks/use-fetch-address';
-import { InitialValues } from '../../../Appointments';
-import FieldCep from "~/Components/molecules/field-cep/field-cep";
+import { useFormikContext } from 'formik'
+import { useCallback, useMemo, useState, useTransition } from 'react'
+import MaskedInput from 'react-input-mask'
+import FieldCep from '~/Components/molecules/field-cep/field-cep'
+import { IAddress } from '~/helpers/fetch-address-by-cep'
+import useFetchAddress from '~/hooks/use-fetch-address'
+import { InitialValues } from '../../../Appointments'
 type StepsecondTutorProps = {
     disabled?: boolean
 }
@@ -21,7 +21,7 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
         city: false,
         neighborhood: false,
         street: false,
-        complement: false
+        complement: false,
     })
 
     const { values, setFieldValue } = useFormikContext<InitialValues>()
@@ -57,22 +57,21 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
         [setFieldValue],
     )
 
-    const { loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode: '' })
-
+    const { loading } = useFetchAddress({
+        onChangeAddress: updateAddressFields,
+        zipCode: '',
+    })
 
     const isLoading = useMemo(() => isPending || loading, [isPending, loading])
 
     return (
         <div>
-
             <Row className="g-3">
-
-
                 <Col xs={12}>
                     <FieldControl
                         initialFocus
-                        divClassName='my-1'
-                        label='Email'
+                        divClassName="my-1"
+                        label="Email"
                         name="second_tutor.email"
                         aria-label="email"
                         disabled={disabled}
@@ -82,8 +81,6 @@ const StepsecondTutor = ({ disabled }: StepsecondTutorProps) => {
                 </Col>
             </Row>
         </div>
-
-
     )
 }
 

@@ -1,6 +1,6 @@
-import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { NextRouter } from 'next/router';
-import { vi } from 'vitest';
+import { RouterContext } from 'next/dist/shared/lib/router-context'
+import { NextRouter } from 'next/router'
+import { vi } from 'vitest'
 
 export const useRouterMock = () => {
     const router = {
@@ -35,13 +35,17 @@ export const useRouterMock = () => {
         isReadyLocale: true,
         scroll: {},
         localeConfig: {},
-    };
+    }
 
-    return router;
-};
+    return router
+}
 
 const RouterProvider = ({ children }: { children: React.ReactNode }) => {
-    return <RouterContext.Provider value={useRouterMock() as unknown as NextRouter}>{children}</RouterContext.Provider>;
-};
+    return (
+        <RouterContext.Provider value={useRouterMock() as unknown as NextRouter}>
+            {children}
+        </RouterContext.Provider>
+    )
+}
 
-export default RouterProvider;
+export default RouterProvider

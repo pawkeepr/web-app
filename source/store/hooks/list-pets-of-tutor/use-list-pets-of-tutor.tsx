@@ -21,7 +21,7 @@ const entityStrategy = new Map<string, BuilderEntity>([
 const usePetsByTutor = (
     document: string,
     strategy: 'simple' | 'full' = 'full',
-    handleCloseModal?: () => void
+    handleCloseModal?: () => void,
 ) => {
     const superKeys = [NAME, document]
 

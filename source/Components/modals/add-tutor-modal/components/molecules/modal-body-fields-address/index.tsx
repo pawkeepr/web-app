@@ -1,19 +1,25 @@
-import { useFormikContext } from "formik";
-import { useCallback, useState } from 'react';
-import MaskedInput from 'react-input-mask';
-import FieldControl from "~/Components/molecules/field-control/field-control";
-import { IAddress } from "~/helpers/fetch-address-by-cep";
-import useFetchAddress from "~/hooks/use-fetch-address";
+import { useFormikContext } from 'formik'
+import { useCallback, useState } from 'react'
+import FieldCep from '~/Components/molecules/field-cep'
+import FieldControl from '~/Components/molecules/field-control/field-control'
+import { IAddress } from '~/helpers/fetch-address-by-cep'
+import useFetchAddress from '~/hooks/use-fetch-address'
 
 const ModalBodyFieldsAddress = () => {
-    const { values, setFieldValue } = useFormikContext<any>();
-    const [disabledInputs, setDisabledInputs] = useState({ state: false, city: false, neighborhood: false, street: false, complement: false })
+    const { values, setFieldValue } = useFormikContext<any>()
+    const [disabledInputs, setDisabledInputs] = useState({
+        state: false,
+        city: false,
+        neighborhood: false,
+        street: false,
+        complement: false,
+    })
 
     const updateAddressFields = useCallback(
         (address: IAddress) => {
-            if (!address) return;
+            if (!address) return
 
-            const { uf, localidade, bairro, logradouro, complemento } = address;
+            const { uf, localidade, bairro, logradouro, complemento } = address
 
             setFieldValue('state', uf || '')
             setFieldValue('city', localidade || '')
@@ -26,10 +32,10 @@ const ModalBodyFieldsAddress = () => {
                 city: !!localidade,
                 neighborhood: !!bairro,
                 street: !!logradouro,
-                complement: !!complemento
+                complement: !!complemento,
             })
         },
-        [setFieldValue]
+        [setFieldValue],
     )
 
     const { loading } = useFetchAddress({
@@ -39,19 +45,17 @@ const ModalBodyFieldsAddress = () => {
 
     return (
         <div className="grid grid-cols-3 ">
-            <FieldControl
+            <FieldCep
                 label="CEP"
                 name="cep"
                 placeholder="Cep"
                 type="text"
-                component={MaskedInput as any}
-                mask={"99999-999"}
+                mask={'99999-999'}
                 required
             />
 
-
             <FieldControl
-                divClassName='my-1'
+                divClassName="my-1"
                 className=" "
                 type="text"
                 label="Estado"
@@ -62,7 +66,7 @@ const ModalBodyFieldsAddress = () => {
             />
 
             <FieldControl
-                divClassName='my-1'
+                divClassName="my-1"
                 className=" "
                 type="text"
                 label="Cidade"
@@ -73,7 +77,7 @@ const ModalBodyFieldsAddress = () => {
             />
 
             <FieldControl
-                divClassName='my-1'
+                divClassName="my-1"
                 className=" "
                 type="text"
                 label="Bairro"
@@ -84,8 +88,8 @@ const ModalBodyFieldsAddress = () => {
             />
 
             <FieldControl
-                divClassName='my-1'
-                label='Rua'
+                divClassName="my-1"
+                label="Rua"
                 name="street"
                 aria-label="street"
                 className="  w-70"
@@ -96,7 +100,7 @@ const ModalBodyFieldsAddress = () => {
             />
 
             <FieldControl
-                divClassName='my-1'
+                divClassName="my-1"
                 className=" "
                 type="text"
                 label="Complemento"
@@ -106,6 +110,6 @@ const ModalBodyFieldsAddress = () => {
             />
         </div>
     )
-};
+}
 
-export default ModalBodyFieldsAddress;
+export default ModalBodyFieldsAddress

@@ -1,38 +1,21 @@
-import React, {
-    ReactElement,
-    useCallback,
-    useDeferredValue,
-    useEffect,
-    useState,
-} from 'react';
-import SearchInput from '~/Components/molecules/search-input';
+import React, { ReactElement, useDeferredValue, useEffect, useState } from 'react'
 
 interface ListTabProps<T> {
-    items: T[];
-    filter: (items: T[], search: string) => T[];
+    items: T[]
+    filter: (items: T[], search: string) => T[]
     cards: (
         items: T[],
-    ) => JSX.Element | JSX.Element[] | React.ReactNode | ReactElement[] | null;
-    Modal: () => JSX.Element;
+    ) => JSX.Element | JSX.Element[] | React.ReactNode | ReactElement[] | null
+    Modal: () => JSX.Element
 }
 
-const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
-    const [search, setSearch] = useState('');
-    const [filteredItems, setFilteredItems] = useState<T[]>([] as T[]);
-    const deferredItems = useDeferredValue(filteredItems);
+const ListTab = <T,>({ cards, items }: ListTabProps<T>) => {
+    const [filteredItems, setFilteredItems] = useState<T[]>([] as T[])
+    const deferredItems = useDeferredValue(filteredItems)
 
     useEffect(() => {
-        setFilteredItems(items);
-    }, [items]);
-
-    const handleSearch = useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-            const search = e.target.value.toLowerCase();
-            setSearch(search);
-            setFilteredItems((state) => filter(state, search));
-        },
-        [filter],
-    );
+        setFilteredItems(items)
+    }, [items])
 
     return (
         <React.Fragment>
@@ -40,7 +23,7 @@ const ListTab = <T,>({ cards, items, Modal, filter }: ListTabProps<T>) => {
                 {cards(deferredItems)}
             </div>
         </React.Fragment>
-    );
-};
+    )
+}
 
-export default ListTab;
+export default ListTab

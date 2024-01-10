@@ -1,6 +1,8 @@
 type HandleReject = [Error, null]
 type HandleResolve<T> = [null, T]
-type PromiseHandleErr = <T>(cb: Promise<T>) => Promise<HandleReject | HandleResolve<T>>
+type PromiseHandleErr = <T>(
+    cb: Promise<T>,
+) => Promise<HandleReject | HandleResolve<T>>
 
 const promiseHandleErr: PromiseHandleErr = async (cb) => {
     try {

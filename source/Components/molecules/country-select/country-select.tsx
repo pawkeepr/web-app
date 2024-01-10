@@ -1,124 +1,140 @@
-import axios from 'axios';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import axios from 'axios'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { country } from './types';
+import { country } from './types'
 
 type CountrySelectProps = {
-    onChangeCountry?: (country: country) => void;
-    onChangeValueCountry?: (country: string) => void;
-} & React.InputHTMLAttributes<HTMLDivElement>;
+    onChangeCountry?: (country: country) => void
+    onChangeValueCountry?: (country: string) => void
+} & React.InputHTMLAttributes<HTMLDivElement>
 
 type MemoCountries = {
-    promise: Promise<country[]>;
-    data: country[] | undefined;
-    error: Error | undefined;
+    promise: Promise<country[]>
+    data: country[] | undefined
+    error: Error | undefined
 }
 
-const CountrySelect = ({ onChangeCountry, onChangeValueCountry, className, ...rest }: CountrySelectProps) => {
-
-    const [selectedCountry, setSelectedCountry] = useState<string>('');
+const CountrySelect = ({
+    onChangeCountry,
+    onChangeValueCountry,
+    className,
+    ...rest
+}: CountrySelectProps) => {
+    const [selectedCountry, setSelectedCountry] = useState<string>('')
 
     const getCountries = async () => {
-        const countries = await axios.get('https://restcountries.com/v3.1/all');
+        const countries = await axios.get('https://restcountries.com/v3.1/all')
 
-        return (countries as unknown as country[])
-            .sort((a: country, b: country) => {
-                const nameA = a.translations?.['por']?.common.toUpperCase();
-                const nameB = b.translations?.['por']?.common.toUpperCase();
+        return (countries as unknown as country[]).sort(
+            (a: country, b: country) => {
+                const nameA = a.translations?.por?.common.toUpperCase()
+                const nameB = b.translations?.por?.common.toUpperCase()
                 if (nameA < nameB) {
-                    return -1;
+                    return -1
                 }
                 if (nameA > nameB) {
-                    return 1;
+                    return 1
                 }
-                return 0;
-            });
-    };
+                return 0
+            },
+        )
+    }
 
     const countries: MemoCountries = useMemo(() => {
-        const promise = getCountries();
+        const promise = getCountries()
         return {
             promise,
             data: undefined,
             error: undefined,
-        };
-    }, []);
+        }
+    }, [])
 
-    const findCountry = useCallback((value: string) => countries.data?.find((country: country) => country.name.common === value), [countries]);
+    const findCountry = useCallback(
+        (value: string) =>
+            countries.data?.find(
+                (country: country) => country.name.common === value,
+            ),
+        [countries],
+    )
 
     useEffect(() => {
-        let isMounted = true;
+        let isMounted = true
         countries.promise.then(
             (data) => {
                 if (isMounted) {
-                    countries.data = data;
+                    countries.data = data
                 }
             },
             (error) => {
                 if (isMounted) {
-                    countries.error = error;
+                    countries.error = error
                 }
-            }
-        );
+            },
+        )
         return () => {
-            isMounted = false;
-        };
-    }, [countries]);
-
+            isMounted = false
+        }
+    }, [countries])
 
     useEffect(() => {
-        if (!countries.data) return;
+        if (!countries.data) return
 
         const findBrazil = findCountry('Brazil')
 
-        if (!findBrazil) return;
+        if (!findBrazil) return
 
-        setSelectedCountry(findBrazil.name.common);
-
-    }, [countries.data, findCountry]);
+        setSelectedCountry(findBrazil.name.common)
+    }, [countries.data, findCountry])
 
     const handleCountryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedCountry(event.target.value);
-        onChangeValueCountry?.(event.target.value);
-    };
+        setSelectedCountry(event.target.value)
+        onChangeValueCountry?.(event.target.value)
+    }
 
     if (countries.error) {
         return (
             <div {...rest} className={`${className}`}>
-            <select className="form-select" disabled>
-                <option value="">🇧🇷 Brasil</option>
-            </select>
+                <select className="form-select" disabled>
+                    <option value="">🇧🇷 Brasil</option>
+                </select>
             </div>
-        );
+        )
     }
 
     if (!countries.data) {
         return (
             <div {...rest} className={`${className}`}>
-            <select className="form-select" disabled>
-                <option value="">Carregando...</option>
-            </select>
+                <select className="form-select" disabled>
+                    <option value="">Carregando...</option>
+                </select>
             </div>
-        );
+        )
     }
 
     return (
-        <div className={`form-group ${className}`} {...rest} >
+        <div className={`form-group ${className}`} {...rest}>
             <label htmlFor="country">País:</label>
-            <select id="country" name="country" className="form-select" value={selectedCountry} onChange={handleCountryChange} disabled>
+            <select
+                id="country"
+                name="country"
+                className="form-select"
+                value={selectedCountry}
+                onChange={handleCountryChange}
+                disabled
+            >
                 <option value="">Selecione um país...</option>
                 {countries.data?.map((country, index) => (
                     <option key={index} value={country.name.common}>
                         {country.flag}
                         <p className="ps-4">
-                            {"   "}
-                            {country.translations['por'].common || country.name.common}
+                            {'   '}
+                            {country.translations.por.common || country.name.common}
                         </p>
                     </option>
                 ))}
             </select>
         </div>
-    );
-};
+    )
+}
 
-export default CountrySelect;
+export default CountrySelect

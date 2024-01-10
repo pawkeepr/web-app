@@ -1,1 +1,1 @@
-export { default } from './re-scheduled-modal';
+export { default } from './re-scheduled-modal'

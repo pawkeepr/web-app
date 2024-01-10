@@ -5,12 +5,7 @@ import FieldDocument from '~/Components/molecules/field-document'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import { CtxSimplifiedPedFields, StepProps } from '../../types'
 
-
-const StepDocument = ({
-    nextStep,
-    onChangeDocument,
-}: StepProps) => {
-
+const StepDocument = ({ nextStep, onChangeDocument }: StepProps) => {
     const { values } = useFormikContextSafe<CtxSimplifiedPedFields>()
 
     const validateDocument = useMemo(() => {
@@ -20,7 +15,6 @@ const StepDocument = ({
 
     return (
         <div className="mt-3 p-1 gap-2 ">
-
             <FieldDocument
                 ctx={{} as CtxSimplifiedPedFields}
                 required

@@ -1,38 +1,38 @@
-import { Breed } from "~/store/slices/pets/breedType";
-import { Gender, Species } from "~/store/slices/pets/speciesType";
-import { GenericSelect, On_Off, PetData } from "~/types/pet-v2";
+import { Breed } from '~/store/slices/pets/breedType'
+import { Gender, Species } from '~/store/slices/pets/speciesType'
+import { GenericSelect, On_Off, PetData } from '~/types/pet-v2'
 
 export class PetInformation implements PetData {
-    name_pet: string;
-    microchip: string | null;
-    identification_number: string | null;
-    specie: Species | null;
-    race: Breed | null;
-    castrated: On_Off | null;
-    blood_type: string | null;
-    blood_donator: On_Off | null;
-    sex: Gender | null;
-    organ_donor: string | null;
-    date_birth: string | null;
-    color: string | null;
-    size: string | null;
-    weight: string | null;
-    pedigree: On_Off | null;
-    pedigree_registry: string | null;
+    name_pet: string
+    microchip: string | null
+    identification_number: string | null
+    specie: Species | null
+    race: Breed | null
+    castrated: On_Off | null
+    blood_type: string | null
+    blood_donator: On_Off | null
+    sex: Gender | null
+    organ_donor: string | null
+    date_birth: string | null
+    color: string | null
+    size: string | null
+    weight: string | null
+    pedigree: On_Off | null
+    pedigree_registry: string | null
 
     constructor() {
-        this.name_pet = '';
-        this.microchip = '';
-        this.identification_number = '';
-        this.specie = null;
-        this.blood_donator = null;
-        this.blood_type = '';
-        this.castrated = null;
-        this.color = '';
-        this.date_birth = '';
-        this.organ_donor = '';
-        this.pedigree = null;
-        this.pedigree_registry = '';
+        this.name_pet = ''
+        this.microchip = ''
+        this.identification_number = ''
+        this.specie = null
+        this.blood_donator = null
+        this.blood_type = ''
+        this.castrated = null
+        this.color = ''
+        this.date_birth = ''
+        this.organ_donor = ''
+        this.pedigree = null
+        this.pedigree_registry = ''
         this.size = ''
         this.race = null
         this.sex = null
@@ -55,7 +55,8 @@ export class PetInformation implements PetData {
     }
 
     defineSpecie(specie: Species | GenericSelect): PetInformation {
-        this.specie = typeof specie === 'string' ? specie : specie.value as Species
+        this.specie =
+            typeof specie === 'string' ? specie : (specie.value as Species)
         return this
     }
 
@@ -65,7 +66,8 @@ export class PetInformation implements PetData {
     }
 
     defineBloodType(bloodType: string | GenericSelect): PetInformation {
-        this.blood_type = typeof bloodType === 'string' ? bloodType : bloodType.value as string
+        this.blood_type =
+            typeof bloodType === 'string' ? bloodType : (bloodType.value as string)
         return this
     }
 
@@ -105,12 +107,12 @@ export class PetInformation implements PetData {
     }
 
     defineRace(race: Breed | GenericSelect) {
-        this.race = typeof race === 'string' ? race : race.value as Breed
+        this.race = typeof race === 'string' ? race : (race.value as Breed)
         return this
     }
 
     defineSex(sex: Gender | GenericSelect) {
-        this.sex = typeof sex === 'string' ? sex : sex.value as Gender
+        this.sex = typeof sex === 'string' ? sex : (sex.value as Gender)
         return this
     }
 

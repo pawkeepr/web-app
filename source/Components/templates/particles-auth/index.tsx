@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import React from "react";
+import React from 'react'
 
 type ParticlesAuthProps = {
-    children: React.ReactNode;
-};
+    children: React.ReactNode
+}
 
 const ParticlesAuth = ({ children }: ParticlesAuthProps) => {
     return (
@@ -14,7 +14,7 @@ const ParticlesAuth = ({ children }: ParticlesAuthProps) => {
                     className="auth-one-bg-position auth-one-bg h-full shadow-2xl"
                     id="auth-particles"
                 >
-                    <div className="bg-overlay"></div>
+                    <div className="bg-overlay" />
                 </div>
 
                 {children}
@@ -23,7 +23,7 @@ const ParticlesAuth = ({ children }: ParticlesAuthProps) => {
                 {/* <FooterAuth /> */}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default ParticlesAuth;
+export default ParticlesAuth

@@ -1,4 +1,4 @@
-import { FaWhatsapp } from "react-icons/fa"
+import { FaWhatsapp } from 'react-icons/fa'
 
 type CardTutorProps = {
     tutor: {
@@ -13,8 +13,6 @@ type CardTutorProps = {
 }
 
 const CardTutor = ({ tutor }: CardTutorProps) => {
-
-
     return (
         <section className=" flex flex-col justify-start">
             <div className="gap-2 flex-wrap flex flex-col w-full justify-between">

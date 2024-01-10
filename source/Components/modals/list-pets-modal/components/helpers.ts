@@ -8,8 +8,8 @@ export const option = tv({
     `,
     variants: {
         selected: {
-            true: "bg-secondary-500 dark:!bg-secondary-600 text-gray-600",
-            false: "text-gray-600",
+            true: 'bg-secondary-500 dark:!bg-secondary-600 text-gray-600',
+            false: 'text-gray-600',
         },
-    }
+    },
 })

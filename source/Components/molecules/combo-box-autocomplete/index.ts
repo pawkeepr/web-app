@@ -1,1 +1,1 @@
-export { default } from './combo-box-autocomplete';
+export { default } from './combo-box-autocomplete'

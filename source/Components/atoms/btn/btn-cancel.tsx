@@ -1,6 +1,11 @@
 import { BtnProps } from './types'
 
-const BtnCancel = ({ onClick, label = 'Cancelar', className, ...rest }: BtnProps) => {
+const BtnCancel = ({
+    onClick,
+    label = 'Cancelar',
+    className,
+    ...rest
+}: BtnProps) => {
     return (
         <button
             className={`

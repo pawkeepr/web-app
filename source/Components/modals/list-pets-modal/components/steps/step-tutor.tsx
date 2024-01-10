@@ -15,12 +15,9 @@ export const validationSchema = Yup.object().shape({
     }),
 })
 
-const StepTutor = ({
-    previousStep,
-    isLoading,
-}: StepProps) => {
-
-    const { isValid, handleSubmit, isSubmitting, values } = useFormikContextSafe<CtxSimplifiedPedFields>()
+const StepTutor = ({ previousStep, isLoading }: StepProps) => {
+    const { isValid, handleSubmit, isSubmitting, values } =
+        useFormikContextSafe<CtxSimplifiedPedFields>()
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -55,12 +52,14 @@ const StepTutor = ({
                 isLoading={isSubmitting || isLoading}
                 onClickCancel={previousStep}
                 onClickSuccess={() => null}
-                success={({ disabled }) => <BtnPrimary
-                    isLoading={isSubmitting || isLoading}
-                    label="Concluir"
-                    type="submit"
-                    disabled={disabled || isSubmitting || isLoading}
-                />}
+                success={({ disabled }) => (
+                    <BtnPrimary
+                        isLoading={isSubmitting || isLoading}
+                        label="Concluir"
+                        type="submit"
+                        disabled={disabled || isSubmitting || isLoading}
+                    />
+                )}
             />
         </Form>
     )

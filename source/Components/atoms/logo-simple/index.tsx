@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
 type LogoSimpleProps = {
     size?: number
@@ -7,12 +7,23 @@ type LogoSimpleProps = {
     mb?: string
 } & React.HTMLAttributes<HTMLDivElement>
 
-const LogoSimple = ({ href = '/dashboard', mb = 'mb-4', size = 62, className, ...rest }: LogoSimpleProps) => {
-
+const LogoSimple = ({
+    href = '/dashboard',
+    mb = 'mb-4',
+    size = 62,
+    className,
+    ...rest
+}: LogoSimpleProps) => {
     return (
         <div className={`${mb} ${className}`} {...rest}>
             <Link href={href} className="block">
-                <Image src="/logo-sm.png" alt="Logo Pawkeepr" height={size} width={size} draggable="false" />
+                <Image
+                    src="/logo-sm.png"
+                    alt="Logo Pawkeepr"
+                    height={size}
+                    width={size}
+                    draggable="false"
+                />
             </Link>
         </div>
     )

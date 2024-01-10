@@ -1,6 +1,5 @@
-import useAppointmentRescheduled from "~/store/hooks/appointments/rescheduled";
-import CardScheduled from "../organisms/card-scheduled";
-
+import useAppointmentRescheduled from '~/store/hooks/appointments/rescheduled'
+import CardScheduled from '../organisms/card-scheduled'
 
 const StepAll = () => {
     const { activeData, isLoading } = useAppointmentRescheduled()
@@ -13,7 +12,7 @@ const StepAll = () => {
                 <CardScheduled key={appointment.id} appointment={appointment} />
             ))}
         </div>
-    );
-};
+    )
+}
 
-export default StepAll;
+export default StepAll

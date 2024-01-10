@@ -14,26 +14,32 @@ const Modal = ({
     RefAttributes<PopupActions> & { maxHeight?: number; width?: number }) => (
     <Popup
         position="bottom center"
-        className='mt-2'
-        overlayStyle={{ background: 'rgba(0,0,0,0.4)' }} closeOnEscape={false} {...props}>
+        className="mt-2"
+        overlayStyle={{ background: 'rgba(0,0,0,0.4)' }}
+        closeOnEscape={false}
+        {...props}
+    >
         <div
-            className={twMerge(`
+            className={twMerge(
+                `
                 relative
                 z-50
                 popup-content
-                w-[800px] flex flex-col 
+                w-[80vw] flex flex-col 
                 h-fit
                 mobile:!w-screen mobile:!h-screen mobile:rounded-none 
 	            overflow-auto px-4 py-10 bg-gray-100 dark:bg-dark-500
 	            shadow-2xl rounded-md
                 `,
-                className
+                className,
             )}
         >
             <button
+                type="button"
                 className="absolute top-4 right-4"
                 onClick={() => props.onClose?.()}
-                aria-label="Close modal">
+                aria-label="Close modal"
+            >
                 <XMarkIcon className="w-8 h-8 text-gray-800 font-extrabold" />
             </button>
             {props.children}

@@ -1,19 +1,18 @@
-import { useFormikContext } from 'formik';
+import { useFormikContext } from 'formik'
 
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react'
 
-import validateLocation from '~/validations/address';
+import validateLocation from '~/validations/address'
 
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
-import FieldControl from '~/Components/molecules/field-control/field-control';
-import { IAddress } from '~/helpers/fetch-address-by-cep';
-import useFetchAddress from '~/hooks/use-fetch-address';
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import FieldControl from '~/Components/molecules/field-control/field-control'
+import { IAddress } from '~/helpers/fetch-address-by-cep'
+import useFetchAddress from '~/hooks/use-fetch-address'
 
-import FieldMasked from '~/Components/molecules/field-masked';
-import useNextStep from '~/hooks/use-next-step';
-import { ActivateAccount } from '~/validations/activate';
-import { StepProps } from './types';
-
+import FieldMasked from '~/Components/molecules/field-masked'
+import useNextStep from '~/hooks/use-next-step'
+import { ActivateAccount } from '~/validations/activate'
+import { StepProps } from './types'
 
 const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
     const [disabledInputs, setDisabledInputs] = useState({
@@ -21,7 +20,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
         city: false,
         neighborhood: false,
         street: false,
-        complement: false
+        complement: false,
     })
 
     const { values, setFieldValue } = useFormikContext<ActivateAccount>()
@@ -53,7 +52,10 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
         [setFieldValue],
     )
 
-    const { cepInvalid, loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode })
+    const { cepInvalid, loading } = useFetchAddress({
+        onChangeAddress: updateAddressFields,
+        zipCode,
+    })
 
     const onChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target
@@ -61,7 +63,8 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
     }
 
     const requiredValid = useMemo((): boolean => {
-        const isValid = validateLocation.isValidSync(values?.location) && !cepInvalid
+        const isValid =
+            validateLocation.isValidSync(values?.location) && !cepInvalid
 
         return isValid
     }, [cepInvalid, values?.location])
@@ -69,14 +72,12 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
     useNextStep(nextStep, requiredValid, 1000)
 
     return (
-
         <div className="container grid grid-cols-2 mobile:grid-cols-1 gap-1">
-
             <FieldMasked
                 label="CEP"
                 name="location.zipCode"
                 placeholder="Digite o CEP"
-                mask={"_____-___"}
+                mask={'_____-___'}
                 required
             />
 
@@ -109,7 +110,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             <div className="grid grid-cols-4 mobile:grid-cols-1 col-span-full w-full gap-1">
                 <FieldControl
                     divClassName="col-span-3"
-                    label='Rua'
+                    label="Rua"
                     name="location.street"
                     aria-label="street"
                     disabled={loading}
@@ -120,26 +121,27 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
                 <FieldControl
                     divClassName="col-span-1"
-                    label='N°'
+                    label="N°"
                     name="location.number"
                     aria-label="number"
                     disabled={loading}
                     placeholder="N°"
                 />
-
             </div>
 
             <div className="col-span-full">
-
                 <FieldControl
                     type="text"
                     label="Complemento"
                     name="location.complement"
                     disabled={loading}
-                    placeholder={loading ? 'Carregando...' : "Digite o complemento (opcional)"}
+                    placeholder={
+                        loading
+                            ? 'Carregando...'
+                            : 'Digite o complemento (opcional)'
+                    }
                 />
             </div>
-
 
             <div className="mt-1 flex justify-center items-center col-span-full">
                 <BtnCancel onClick={prevStep} label="Voltar" />
@@ -150,7 +152,6 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 />
             </div>
         </div>
-
     )
 }
 

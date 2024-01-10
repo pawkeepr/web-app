@@ -1,16 +1,11 @@
-import {
-    UseQueryOptions,
-    useMutation,
-    useQueryClient
-} from '@tanstack/react-query'
+import { UseQueryOptions, useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
 import { useCallback, useMemo } from 'react'
 import { BuilderEntity } from '~/entities/BuilderEntity'
 import useAppQuery, { Fn } from '~/hooks/use-app-query'
 import { errorToast, successToast } from '../helpers/toast'
 
-
-type Data<T> = T & { id?: string }
+type Data<T> = T & { id?: string | null }
 
 type Stores<T, G> = {
     keys: (string | number)[]
@@ -18,7 +13,7 @@ type Stores<T, G> = {
     enabled?: boolean
     update?: (
         id: string,
-        data: Partial<Data<T> | Data<G>>
+        data: Partial<Data<T> | Data<G>>,
     ) => Promise<AxiosResponse<Data<T>>>
     del?: (id: string) => Promise<AxiosResponse<Data<T>>>
     add?: (data: Data<T> | Data<G>) => Promise<AxiosResponse<Data<T>>>
@@ -40,23 +35,28 @@ const useAppStore = <T, G = unknown>({
     options,
     handleCloseModal,
     enabled = true,
-    name
+    name,
 }: Stores<T, G>) => {
     const superKeys = ['active', ...keys]
 
-    const { isLoading, data, error, isError } = useAppQuery<T[]>(superKeys, get!, {
-        ...options,
-        initialData: [],
-        keepPreviousData: true,
-        cacheTime: TIME, // 1 min
-        enabled: !!get && enabled,
-        // staleTime: TIME // 1 min
-    })
+    const { isLoading, data, error, isError } = useAppQuery<T[]>(
+        superKeys,
+        get?.bind(null) as Fn<T[]>,
+        {
+            ...options,
+            initialData: [],
+            keepPreviousData: true,
+            cacheTime: TIME, // 1 min
+            enabled: !!get && enabled,
+            // staleTime: TIME // 1 min
+        },
+    )
 
     const queryClient = useQueryClient()
 
-    const onError = (_err: any, _newData: any, context: any) => {
-        queryClient.setQueryData(superKeys, context.oldData)
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    const onError = (_err: unknown, _newData: unknown, context: any) => {
+        queryClient.setQueryData(superKeys, context?.oldData)
     }
 
     const onSettled = async () => {
@@ -67,7 +67,6 @@ const useAppStore = <T, G = unknown>({
         successToast('Adicionado com sucesso')
         handleCloseModal?.()
     }, [handleCloseModal])
-
 
     const addData = useMutation({
         mutationFn: async (data: Data<T> | Data<G>) => {
@@ -82,33 +81,27 @@ const useAppStore = <T, G = unknown>({
 
     const updateData = useMutation({
         mutationFn: async (data: Data<T> | Data<G>) => {
-            const res = await update!(data.id as string, data)
-            return res.data
+            const res = await update?.(data.id as string, data)
+            return res?.data
         },
         onSuccess,
         onSettled,
         onError,
     })
 
-
     const handleSubmit = useCallback(
         async (data: Data<T> | Data<G>) => {
             try {
-                if (entity) {
-                    data = entity.build(data)
-                }
+                const newData = entity ? entity.build(data) : data
 
-                if (data.id) {
+                if (newData.id) {
                     return await updateData.mutateAsync(data)
                 }
 
-                const { id, ...aux } = data
-                return await addData.mutateAsync(aux as any)
-
-
+                const { id, ...aux } = newData
+                return await addData.mutateAsync(aux)
             } catch (err) {
-
-                const error = err as AxiosError;
+                const error = err as AxiosError
                 const statusCode = error?.response?.status
 
                 const msg =
@@ -122,20 +115,14 @@ const useAppStore = <T, G = unknown>({
                 }
 
                 errorToast(msg, 'Tente novamente')
-
             }
         },
-        [addData, entity, updateData]
+        [addData, entity, updateData],
     )
 
     const submitLoading = useMemo(
-        () =>
-            addData?.isLoading ||
-            updateData?.isLoading,
-        [
-            addData?.isLoading,
-            updateData?.isLoading
-        ]
+        () => addData?.isLoading || updateData?.isLoading,
+        [addData?.isLoading, updateData?.isLoading],
     )
 
     return {
@@ -146,7 +133,7 @@ const useAppStore = <T, G = unknown>({
         isError,
         handleSubmit,
         submitLoading,
-        name
+        name,
     }
 }
 

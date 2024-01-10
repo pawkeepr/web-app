@@ -1,18 +1,19 @@
-import { useField } from "formik";
+import { useField } from 'formik'
 
-import InputCode from "~/Components/atoms/input-code";
+import InputCode from '~/Components/atoms/input-code'
 
-import { FieldHookConfig } from "formik";
+import { FieldHookConfig } from 'formik'
 
-type InputFieldProps<T> = FieldHookConfig<string> & T & {
-    [key: string]: any
-    label?: string;
-    name: string;
-    required?: boolean;
-    moveToNext?: (index: number) => void;
-    component?: (...args: any[]) => JSX.Element;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+type InputFieldProps<T> = FieldHookConfig<string> &
+    T & {
+        [key: string]: any
+        label?: string
+        name: string
+        required?: boolean
+        moveToNext?: (index: number) => void
+        component?: (...args: any[]) => JSX.Element
+        onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+    }
 
 const FieldCode = <T,>({
     label,
@@ -22,16 +23,15 @@ const FieldCode = <T,>({
     moveToNext,
     ...props
 }: InputFieldProps<T>) => {
+    const [inputProps, meta] = useField(props)
+    const id = props.name || props.id
 
-    const [inputProps, meta] = useField(props);
-    const id = props.name || props.id;
-
-    const InputComponent = component as any;
+    const InputComponent = component as any
 
     const onChange = (e: any) => {
-        props.onChange?.(e);
-        inputProps.onChange(e);
-    };
+        props.onChange?.(e)
+        inputProps.onChange(e)
+    }
 
     return (
         <InputComponent
@@ -43,7 +43,7 @@ const FieldCode = <T,>({
             {...props}
             onChange={onChange}
         />
-    );
-};
+    )
+}
 
-export default FieldCode;
+export default FieldCode

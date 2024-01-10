@@ -1,1 +1,1 @@
-export { default } from './modal-list-pets';
+export { default } from './modal-list-pets'

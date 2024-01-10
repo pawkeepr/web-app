@@ -1,1 +1,1 @@
-export { default } from './profile-dropdown';
+export { default } from './profile-dropdown'

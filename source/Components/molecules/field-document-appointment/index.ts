@@ -1,1 +1,1 @@
-export { default } from './field-document-appointment';
+export { default } from './field-document-appointment'

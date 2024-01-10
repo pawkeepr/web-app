@@ -1,2 +1,2 @@
-export * from './input';
-export { default } from './input';
+export * from './input'
+export { default } from './input'

@@ -1,14 +1,21 @@
-require('dotenv').config()
+require('dotenv').config();
 
 /**@type {import('next').NextConfig} */
 const nextConfig = ((phase) => {
-    const isProduction = phase === 'production'
+    const isProduction = phase === 'production';
 
-    const _currentURL = 'https://z4etzps20a.execute-api.us-east-1.amazonaws.com/development'
+    const _currentURL =
+        'https://z4etzps20a.execute-api.us-east-1.amazonaws.com/development';
 
     return {
         publicRuntimeConfig: {
-            publicRoutes: ['/sign-in', '/sign-up', '/forget-password', '/reset-password', '/'],
+            publicRoutes: [
+                '/sign-in',
+                '/sign-up',
+                '/forget-password',
+                '/reset-password',
+                '/',
+            ],
         },
         images: {
             remotePatterns: [
@@ -34,7 +41,11 @@ const nextConfig = ((phase) => {
             USER_POOL_ID: process.env.USER_POOL_ID,
             USER_POOL_WEB_CLIENT_ID: process.env.USER_POOL_WEB_CLIENT_ID,
         },
-    }
-})(process.env.NODE_ENV)
+        i18n: {
+            locales: ['pt-BR', 'en'],
+            defaultLocale: 'pt-BR',
+        },
+    };
+})(process.env.NODE_ENV);
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -1,10 +1,11 @@
+import { InputMask, InputMaskProps } from '@react-input/mask'
+import FieldControl, {
+    InputControlProps,
+} from '~/Components/molecules/field-control'
 
-import { InputMask, InputMaskProps } from '@react-input/mask';
-import FieldControl, { InputControlProps } from '~/Components/molecules/field-control';
+import { input } from '~/Components/atoms/input'
 
-import { input } from '~/Components/atoms/input';
-
-const FieldMasked = <Ctx extends any>({
+const FieldMasked = <Ctx,>({
     placeholder,
     name,
     replacement = { _: /\d/ },
@@ -13,11 +14,14 @@ const FieldMasked = <Ctx extends any>({
     return (
         <FieldControl
             {...props}
-            placeholder={placeholder || "Digite aqui..."}
+            placeholder={placeholder || 'Digite aqui...'}
             name={name}
             replacement={replacement}
-            component={InputMask as any}
-            className={input({ className: props.className, required: props.required })}
+            component={InputMask}
+            className={input({
+                className: props.className,
+                required: props.required,
+            })}
         />
     )
 }

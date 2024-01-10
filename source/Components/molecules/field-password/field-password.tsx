@@ -1,12 +1,18 @@
-import Visibility from '@heroicons/react/24/outline/EyeIcon';
-import VisibilityOff from '@heroicons/react/24/outline/EyeSlashIcon';
-import { useState } from 'react';
+import Visibility from '@heroicons/react/24/outline/EyeIcon'
+import VisibilityOff from '@heroicons/react/24/outline/EyeSlashIcon'
+import { useState } from 'react'
 
-import VpnKey from '@heroicons/react/24/outline/KeyIcon';
-import InputWithIcon, { InputControlProps } from '~/Components/molecules/field-control';
+import VpnKey from '@heroicons/react/24/outline/KeyIcon'
+import InputWithIcon, {
+    InputControlProps,
+} from '~/Components/molecules/field-control'
 
-const InputPassword = <T,>({ name = 'password', label = 'Senha', ...rest }: InputControlProps<T>) => {
-    const [visiblePassword, setVisiblePassword] = useState(false);
+const InputPassword = <T,>({
+    name = 'password',
+    label = 'Senha',
+    ...rest
+}: InputControlProps<T>) => {
+    const [visiblePassword, setVisiblePassword] = useState(false)
 
     return (
         <InputWithIcon
@@ -29,10 +35,10 @@ const InputPassword = <T,>({ name = 'password', label = 'Senha', ...rest }: Inpu
                     )}
                 </button>
             }
-            size='lg'
+            size="lg"
             {...rest}
         />
-    );
-};
+    )
+}
 
-export default InputPassword;
+export default InputPassword

@@ -1,4 +1,3 @@
-
 const LoaderError = () => {
     return (
         <div className="flex items-center space-y-4">
@@ -23,10 +22,10 @@ const LoaderError = () => {
                     />
                 </svg>
                 <h2 className="text-lg font-bold text-center text-gray-800">
-                    {"Ocorreu um Erro!"}
+                    {'Ocorreu um Erro!'}
                 </h2>
                 <h4 className="text-md font-bold text-center text-gray-800">
-                    {"Por favor, tente novamente."}
+                    {'Por favor, tente novamente.'}
                 </h4>
             </div>
         </div>

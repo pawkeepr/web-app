@@ -1,115 +1,113 @@
-import { DTOProfile } from "~/types/profile"
+import { Contact, DTOProfile, IProfile, Location } from '~/types/profile'
 
 export class Veterinary implements DTOProfile {
-    id?: string
+    id: string
     cpf_cnpj: string
     crmv: string
-    name_veterinary: string
+    name: string
     specialty: string
-    email: string
-    phone: string
-    whatsapp: string
-    country: string
-    state: string
-    city: string
-    neighborhood: string
-    street: string 
+    url_img: string
+    contact: Contact
+    address: Location
+    first_name: string
+    last_name: string
 
     private constructor() {
+        this.id = ''
         this.cpf_cnpj = ''
         this.crmv = ''
-        this.name_veterinary = ''
+        this.name = ''
         this.specialty = ''
-        this.email = ''
-        this.phone = ''
-        this.whatsapp = ''
-        this.country = ''
-        this.state = ''
-        this.city = ''
-        this.neighborhood = ''
-        this.street = ''
+        this.url_img = ''
+        this.contact = {
+            email: '',
+            phone: '',
+            facebook: '',
+            instagram: '',
+            linkedIn: '',
+            twitter: '',
+            whatsapp: '',
+            youtube: '',
+        }
+        this.address = {
+            city: '',
+            complement: '',
+            country: '',
+            neighborhood: '',
+            number: '',
+            state: '',
+            street: '',
+            zipCode: '',
+        }
+        this.first_name = ''
+        this.last_name = ''
     }
 
-    defineID(id?: string): this {
-        this.id = id;
-        return this;
+    defineId(id: string): Veterinary {
+        this.id = id
+        return this
     }
 
-    defineCpfCnpj(cpf_cnpj: string): this {
-        this.cpf_cnpj = cpf_cnpj;
-        return this;
+    defineCpfCnpj(cpf_cnpj: string): Veterinary {
+        this.cpf_cnpj = cpf_cnpj
+        return this
     }
 
-    defineCrmv(crmv: string): this {
-        this.crmv = crmv;
-        return this;
+    defineCrmv(crmv: string): Veterinary {
+        this.crmv = crmv
+        return this
     }
 
-    defineNameVeterinary(name_veterinary: string): this {
-        this.name_veterinary = name_veterinary;
-        return this;
+    defineName(name: string): Veterinary {
+        this.name = name
+        return this
     }
 
-    defineSpecialty(specialty: string): this {
-        this.specialty = specialty;
-        return this;
+    defineSpecialty(specialty: string): Veterinary {
+        this.specialty = specialty
+        return this
     }
 
-    defineEmail(email: string): this {
-        this.email = email;
-        return this;
+    defineUrlImg(url_img: string): Veterinary {
+        this.url_img = url_img
+        return this
     }
 
-    definePhone(phone: string): this {
-        this.phone = phone;
-        return this;
+    defineContact(contact: Contact): Veterinary {
+        this.contact = contact
+        return this
     }
 
-    defineWhatsapp(whatsapp: string): this {
-        this.whatsapp = whatsapp;
-        return this;
+    defineAddress(address: Location): Veterinary {
+        this.address = address
+        return this
     }
 
-    defineCountry(country: string): this {
-        this.country = country;
-        return this;
+    private update(params: DTOProfile) {
+        return this.defineAddress(params.address)
+            .defineContact(params.contact)
+            .defineCpfCnpj(params.cpf_cnpj as string)
+            .defineCrmv(params.crmv as string)
+            .defineName(params.name)
+            .defineSpecialty(params.specialty as string)
+            .defineUrlImg(params.url_img)
     }
 
-    defineState(state: string): this {
-        this.state = state;
-        return this;
-    }
+    static build(profile: IProfile | DTOProfile): Veterinary {
+        const veterinary = new Veterinary()
 
-    defineCity(city: string): this {
-        this.city = city;
-        return this;
-    }
+        if ((profile as IProfile).user_information) {
+            const user_information = (profile as IProfile).user_information
+            const specialty_information = (profile as IProfile)
+                .specialty_information
+            return veterinary.update({
+                ...user_information,
+                ...profile,
+                id: profile.id as string,
+                specialty: specialty_information.specialty,
+            })
+        }
 
-    defineNeighborhood(neighborhood: string): this {
-        this.neighborhood = neighborhood;
-        return this;
+        return veterinary.update(profile as DTOProfile)
     }
-
-    defineStreet(street: string): this {
-        this.street = street;
-        return this;
-    }
-
-    static build(values: DTOProfile): Veterinary {
-        return new Veterinary()
-            .defineID(values.id)
-            .defineCpfCnpj(values.cpf_cnpj)
-            .defineCrmv(values.crmv)
-            .defineNameVeterinary(values.name_veterinary)
-            .defineSpecialty(values.specialty)
-            .defineEmail(values.email)
-            .definePhone(values.phone)
-            .defineWhatsapp(values.whatsapp)
-            .defineCountry(values.country)
-            .defineState(values.state)
-            .defineCity(values.city)
-            .defineNeighborhood(values.neighborhood)
-            .defineStreet(values.street)
-    }
-
 }

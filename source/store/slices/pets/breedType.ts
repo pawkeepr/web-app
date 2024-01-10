@@ -20,8 +20,8 @@ export const DogBreed = {
     Chihuahua: 'Chihuahua',
     Maltes: 'Maltês',
     // ...
-} as const;
-export type DogBreedKeys = keyof typeof DogBreed;
+} as const
+export type DogBreedKeys = keyof typeof DogBreed
 
 export const CatBreed = {
     ViraLata: 'Vira-Lata',
@@ -40,8 +40,8 @@ export const CatBreed = {
     NorueguesDaFloresta: 'Norueguês da Floresta',
     Ocicat: 'Ocicat',
     // ...
-} as const;
-export type CatBreedKeys = keyof typeof CatBreed;
+} as const
+export type CatBreedKeys = keyof typeof CatBreed
 
 export const HorseBreed = {
     MangalargaMarchador: 'Mangalarga Marchador',
@@ -51,8 +51,8 @@ export const HorseBreed = {
     BrasileiroDeHipismo: 'Brasileiro de Hipismo',
     Outros: 'Outros',
     // ...
-} as const;
-export type HorseBreedKeys = keyof typeof HorseBreed;
+} as const
+export type HorseBreedKeys = keyof typeof HorseBreed
 
 export const FishBreed = {
     Betta: 'Betta',
@@ -62,8 +62,8 @@ export const FishBreed = {
     Molly: 'Molly',
     Outros: 'Outros',
     // ...
-} as const;
-export type FishBreedKeys = keyof typeof FishBreed;
+} as const
+export type FishBreedKeys = keyof typeof FishBreed
 
 export const ReptileBreed = {
     Iguana: 'Iguana',
@@ -73,8 +73,8 @@ export const ReptileBreed = {
     Jiboia: 'Jiboia',
     Outros: 'Outros',
     // ...
-} as const;
-export type ReptileBreedKeys = keyof typeof ReptileBreed;
+} as const
+export type ReptileBreedKeys = keyof typeof ReptileBreed
 
 export const BirdBreed = {
     CanarioBelga: 'Canário Belga',
@@ -85,36 +85,44 @@ export const BirdBreed = {
     Papagaio: 'Papagaio',
     Outros: 'Outros',
     // ...
-} as const;
-export type BirdBreedKeys = keyof typeof BirdBreed;
+} as const
+export type BirdBreedKeys = keyof typeof BirdBreed
 
 export const RabbitBreed = {
-    AngoraIngles: "Angorá Inglês",
-    AngoraFrances: "Angorá Francês",
-    AngoraGigante: "Angorá Gigante",
-    Argente: "Argente",
-    BelgianHare: "Belgian Hare",
-    Californiano: "Californiano",
-    CabeçaDeLeão: "Cabeça de Leão",
-    CastorRex: "Castor Rex",
-    Chinchila: "Chinchila",
-    CoelhoHolandes: "Coelho Holandês",
-    CoelhoLebreBelga: "Coelho Lebre Belga",
-    CoelhoLebreEuropeu: "Coelho Lebre Europeu",
-    FlemishGiant: "Flemish Giant",
-    Hotot: "Hotot",
-    LopIngles: "Lop Inglês",
-    LopFrances: "Lop Francês",
-    LopHolland: "Lop Holland",
-    MiniLop: "Mini Lop",
-    MiniRex: "Mini Rex",
-    NetherlandDwarf: "Netherland Dwarf",
-    NovaZelandia: "Nova Zelândia",
-    Polish: "Polish",
-    Silver: "Silver",
-    SilverFox: "Silver Fox",
+    AngoraIngles: 'Angorá Inglês',
+    AngoraFrances: 'Angorá Francês',
+    AngoraGigante: 'Angorá Gigante',
+    Argente: 'Argente',
+    BelgianHare: 'Belgian Hare',
+    Californiano: 'Californiano',
+    CabeçaDeLeão: 'Cabeça de Leão',
+    CastorRex: 'Castor Rex',
+    Chinchila: 'Chinchila',
+    CoelhoHolandes: 'Coelho Holandês',
+    CoelhoLebreBelga: 'Coelho Lebre Belga',
+    CoelhoLebreEuropeu: 'Coelho Lebre Europeu',
+    FlemishGiant: 'Flemish Giant',
+    Hotot: 'Hotot',
+    LopIngles: 'Lop Inglês',
+    LopFrances: 'Lop Francês',
+    LopHolland: 'Lop Holland',
+    MiniLop: 'Mini Lop',
+    MiniRex: 'Mini Rex',
+    NetherlandDwarf: 'Netherland Dwarf',
+    NovaZelandia: 'Nova Zelândia',
+    Polish: 'Polish',
+    Silver: 'Silver',
+    SilverFox: 'Silver Fox',
     Outros: 'Não Informado',
-} as const;
-export type RabbitBreedKeys = keyof typeof RabbitBreed;
+} as const
+export type RabbitBreedKeys = keyof typeof RabbitBreed
 
-export type Breed = DogBreedKeys | CatBreedKeys | HorseBreedKeys | FishBreedKeys | ReptileBreedKeys | BirdBreedKeys | RabbitBreedKeys | 'unknown';
+export type Breed =
+    | DogBreedKeys
+    | CatBreedKeys
+    | HorseBreedKeys
+    | FishBreedKeys
+    | ReptileBreedKeys
+    | BirdBreedKeys
+    | RabbitBreedKeys
+    | 'unknown'

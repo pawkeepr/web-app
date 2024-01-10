@@ -1,8 +1,7 @@
-import { Switch } from "@headlessui/react";
-import { ComponentProps, useState } from "react";
+import { Switch } from '@headlessui/react'
+import { ComponentProps, useState } from 'react'
 
-import { VariantProps, tv } from 'tailwind-variants';
-
+import { VariantProps, tv } from 'tailwind-variants'
 
 const switchStyled = tv({
     base: `
@@ -16,7 +15,7 @@ const switchStyled = tv({
         enabled: {
             true: 'bg-primary-600',
             false: 'bg-secondary-600',
-        }
+        },
     },
 })
 
@@ -31,28 +30,24 @@ const circleStyled = tv({
         enabled: {
             true: 'translate-x-4',
             false: 'translate-x-0',
-        }
+        },
     },
 })
 
 type SwitchProps = {
-    onChange?: (checked: boolean) => void;
-    label?: string;
-} & Omit<ComponentProps<'input'>, 'onChange'> & VariantProps<typeof switchStyled>
+    onChange?: (checked: boolean) => void
+    label?: string
+} & Omit<ComponentProps<'input'>, 'onChange'> &
+    VariantProps<typeof switchStyled>
 
-const ControlSwitch = ({
-    className,
-    children,
-    onChange,
-    ...rest
-}: SwitchProps) => {
-    const [enabled, setEnabled] = useState<boolean>(false);
+const ControlSwitch = ({ className, children, onChange, ...rest }: SwitchProps) => {
+    const [enabled, setEnabled] = useState<boolean>(false)
 
     const handleChange = () => {
-        setEnabled(state => {
-            onChange && onChange(!state);
-            return !state;
-        });
+        setEnabled((state) => {
+            onChange?.(!state)
+            return !state
+        })
     }
 
     return (
@@ -62,14 +57,11 @@ const ControlSwitch = ({
                 onChange={handleChange}
                 className={switchStyled({ className, enabled })}
             >
-                <span
-                    aria-hidden="true"
-                    className={circleStyled({ enabled })}
-                />
+                <span aria-hidden="true" className={circleStyled({ enabled })} />
             </Switch>
             {children}
         </div>
-    );
-};
+    )
+}
 
-export default ControlSwitch;
+export default ControlSwitch

@@ -1,14 +1,13 @@
 //Import images
 
-import FieldCep from "~/Components/molecules/field-cep/field-cep";
-import FieldControl from "~/Components/molecules/field-control/field-control";
+import FieldCep from '~/Components/molecules/field-cep/field-cep'
+import FieldControl from '~/Components/molecules/field-control/field-control'
 
-
-import { useCallback, useMemo, useTransition } from 'react';
-import { IAddress } from '~/helpers/fetch-address-by-cep';
-import useFetchAddress from '~/hooks/use-fetch-address';
-import useFormikContextSafe from "~/hooks/use-formik-context-safe";
-import { InitialValues } from "~/pages/NewPetPage";
+import { useCallback, useMemo, useTransition } from 'react'
+import { IAddress } from '~/helpers/fetch-address-by-cep'
+import useFetchAddress from '~/hooks/use-fetch-address'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { InitialValues } from '~/pages/NewPetPage'
 
 type CtxAddress = Pick<InitialValues, 'ownerEmergencyContact'>
 
@@ -17,7 +16,6 @@ type StepTutorProps = {
 }
 
 const AddressTutor = ({ disabled }: StepTutorProps) => {
-
     const { values, setFieldValue } = useFormikContextSafe<CtxAddress>()
 
     const [isPending, startTransition] = useTransition()
@@ -31,21 +29,34 @@ const AddressTutor = ({ disabled }: StepTutorProps) => {
             startTransition(() => {
                 setFieldValue('ownerEmergencyContact.address.state', uf || '')
 
-                setFieldValue('ownerEmergencyContact.address.city', localidade || '')
+                setFieldValue(
+                    'ownerEmergencyContact.address.city',
+                    localidade || '',
+                )
 
-                setFieldValue('ownerEmergencyContact.address.neighborhood', bairro || '')
+                setFieldValue(
+                    'ownerEmergencyContact.address.neighborhood',
+                    bairro || '',
+                )
 
-                setFieldValue('ownerEmergencyContact.address.street', logradouro || '')
+                setFieldValue(
+                    'ownerEmergencyContact.address.street',
+                    logradouro || '',
+                )
 
-                setFieldValue('ownerEmergencyContact.address.complement', complemento || '')
-
+                setFieldValue(
+                    'ownerEmergencyContact.address.complement',
+                    complemento || '',
+                )
             })
         },
         [setFieldValue],
     )
 
-    const { loading } = useFetchAddress({ onChangeAddress: updateAddressFields, zipCode: values.ownerEmergencyContact?.address?.zipCode || '' })
-
+    const { loading } = useFetchAddress({
+        onChangeAddress: updateAddressFields,
+        zipCode: values.ownerEmergencyContact?.address?.zipCode || '',
+    })
 
     const isLoading = useMemo(() => isPending || loading, [isPending, loading])
 
@@ -66,7 +77,9 @@ const AddressTutor = ({ disabled }: StepTutorProps) => {
                 label="Estado"
                 name="ownerEmergencyContact.address.state"
                 disabled={isLoading}
-                placeholder={isLoading ? 'Carregando...' : 'Digite o nome do estado'}
+                placeholder={
+                    isLoading ? 'Carregando...' : 'Digite o nome do estado'
+                }
                 required
             />
 
@@ -76,7 +89,9 @@ const AddressTutor = ({ disabled }: StepTutorProps) => {
                 label="Cidade"
                 name="ownerEmergencyContact.address.city"
                 disabled={isLoading}
-                placeholder={isLoading ? 'Carregando...' : 'Digite o nome da cidade'}
+                placeholder={
+                    isLoading ? 'Carregando...' : 'Digite o nome da cidade'
+                }
                 required
             />
             <FieldControl

@@ -1,1 +1,1 @@
-export { default } from './step-treatment';
+export { default } from './step-treatment'

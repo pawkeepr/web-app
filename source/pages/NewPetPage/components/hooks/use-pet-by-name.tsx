@@ -1,9 +1,9 @@
-import { useEffect, useTransition } from "react"
-import { Data } from "~/store/slices/pets/types"
+import { useEffect, useTransition } from 'react'
+import { Data } from '~/store/slices/pets/types'
 
 type UsePetByNameProps = {
-    name?: string | null,
-    pets: Data[],
+    name?: string | null
+    pets: Data[]
     onChangeField: (field: string, value: any) => void
 }
 
@@ -15,7 +15,7 @@ const usePetByName = ({ onChangeField, pets, name }: UsePetByNameProps) => {
             return
         }
 
-        const pet = pets.find(pet => pet.name === name)
+        const pet = pets.find((pet) => pet.name === name)
 
         if (pet) return
 
@@ -35,10 +35,9 @@ const usePetByName = ({ onChangeField, pets, name }: UsePetByNameProps) => {
         })
     }
 
-
     return {
         isPending,
-        onChangePet
+        onChangePet,
     }
 }
 

@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '~/aws';
 
+import { appWithTranslation } from 'next-i18next';
 import ErrorBoundary from '~/contexts/error-boundary';
 
 import VLibras from '@djpfs/react-vlibras';
@@ -35,4 +36,4 @@ function App({ Component, pageProps }: AppProps) {
     );
 }
 
-export default App;
+export default appWithTranslation(App);

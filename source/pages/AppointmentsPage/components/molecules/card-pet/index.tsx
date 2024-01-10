@@ -1,36 +1,48 @@
-import { useFormikContext } from "formik"
-import { InitialValues } from "~/pages/AppointmentsPage/Appointments"
-import { Gender, KeyOfGender, KeyOfSpecies, Species } from "~/store/slices/pets/speciesType"
-import { calcAge } from "~/utils/calc-age"
+import { useMemo } from 'react'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { Breed } from '~/store/slices/pets/breedType'
+import { Gender, Species } from '~/store/slices/pets/speciesType'
+import { VeterinaryConsultation } from '~/types/appointment'
+import { calcAge } from '~/utils/calc-age'
+
+type CtxCard = Pick<VeterinaryConsultation, 'tutor_pet_vet'>
 
 const CardPet = () => {
+    const { values } = useFormikContextSafe<CtxCard>()
 
-    const { values } = useFormikContext<InitialValues>()
+    const specie = useMemo(
+        () => Species[values.tutor_pet_vet?.pet?.specie as keyof typeof Species],
+        [values.tutor_pet_vet?.pet?.specie],
+    )
+    const race = useMemo(
+        () => values.tutor_pet_vet?.pet?.race as Breed,
+        [values.tutor_pet_vet?.pet?.race],
+    )
+    const gender = useMemo(
+        () => Gender[values.tutor_pet_vet?.pet?.sex as Gender],
+        [values.tutor_pet_vet?.pet?.sex],
+    )
 
     return (
         <section className=" flex flex-col justify-start p-4">
             <div className="gap-2 flex-wrap flex mt-2">
                 <p className="text-gray-500 flex justify-start">
                     <strong className="mr-2">Pet:</strong>
-                    <span>
-                        {
-                            `${values.pet_data?.name_pet}, ${Species[(values.pet_data?.specie as Species) as unknown as KeyOfSpecies]}, ${values.pet_data?.race as string}`
-                        }
-                    </span>
+                    <span>{`${values.tutor_pet_vet?.pet?.name_pet}, ${specie}, ${race}`}</span>
                 </p>
                 <p className="text-gray-500">
                     <strong className="mr-2">Idade:</strong>
-                    {calcAge(values.pet_data?.date_birth)} Anos
+                    {calcAge(values.tutor_pet_vet?.pet?.date_birth)} Anos
                 </p>
                 <p className="text-gray-500">
                     <strong className="mr-2">Sexo:</strong>
-                    {Gender[values.pet_data?.sex as KeyOfGender]}
+                    {gender}
                 </p>
             </div>
             <div className="gap-2 flex-wrap flex mt-2">
                 <p className="text-gray-500">
                     <strong className="mr-2">Tutor:</strong>
-                    {values.name_tutor}
+                    {values.tutor_pet_vet?.tutor?.name}
                 </p>
             </div>
         </section>

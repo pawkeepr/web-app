@@ -53,17 +53,13 @@ const ModalConfirm = ({
 
     return (
         <>
-
-            {
-                children && children({ onChangeOpen })
-            }
-            {
-                !children && (
-                    <div className="flex items-center justify-center">
-                        <button
-                            type="button"
-                            onClick={openModal}
-                            className="
+            {children?.({ onChangeOpen })}
+            {!children && (
+                <div className="flex items-center justify-center">
+                    <button
+                        type="button"
+                        onClick={openModal}
+                        className="
                                 rounded-md 
                                 bg-secondary-500 bg-opacity-20 
                                 px-4 py-2 text-sm 
@@ -75,13 +71,11 @@ const ModalConfirm = ({
                                 focus-visible:ring-white 
                                 focus-visible:ring-opacity-75
                             "
-                        >
-                            {label}
-                        </button>
-                    </div>
-                )
-            }
-
+                    >
+                        {label}
+                    </button>
+                </div>
+            )}
 
             <Transition appear show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -108,7 +102,8 @@ const ModalConfirm = ({
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="
+                                <Dialog.Panel
+                                    className="
                                     w-full 
                                     max-w-md 
                                     transform 
@@ -123,7 +118,8 @@ const ModalConfirm = ({
                                     dark:!bg-dark-500
                                     dark:!text-gray-200
                                     !font-sans
-                                ">
+                                "
+                                >
                                     <Dialog.Title
                                         as="h2"
                                         className="text-xl font-semibold leading-6 text-gray-900 dark:!text-gray-200 text-center"
@@ -156,8 +152,6 @@ const ModalConfirm = ({
                                             onClick={handleConfirm}
                                         />
                                     </div>
-
-
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>

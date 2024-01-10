@@ -1,4 +1,4 @@
 export type GenericObject = {
-  value: string;
-  label: string;
+    value: string
+    label: string
 }

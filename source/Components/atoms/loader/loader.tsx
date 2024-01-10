@@ -1,12 +1,13 @@
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from 'react-bootstrap/Spinner'
 
 type LoaderProps = {
-    loading: boolean;
+    loading: boolean
 }
 
 const Loader = ({ loading }: LoaderProps) => {
     return (
-        <div className={`
+        <div
+            className={`
             position-fixed 
             top-0 
             left-0 
@@ -15,9 +16,9 @@ const Loader = ({ loading }: LoaderProps) => {
             d-flex 
             align-items-center 
             justify-content-center 
-            ${loading ? 'visible' : 'invisible'}`
-        }>
+            ${loading ? 'visible' : 'invisible'}`}
+        >
             <Spinner animation="border" variant="primary" />
         </div>
-    );
-};
+    )
+}

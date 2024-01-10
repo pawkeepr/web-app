@@ -1,45 +1,44 @@
+import FieldDocument from '~/Components/molecules/field-document/field-document'
+import FieldPhone from '~/Components/molecules/field-phone/field-phone'
 
-import FieldDocument from "~/Components/molecules/field-document/field-document";
-import FieldPhone from "~/Components/molecules/field-phone/field-phone";
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
-import { BtnCancel, BtnPrimary } from "~/Components/atoms/btn";
+import FieldControl from '~/Components/molecules/field-control/field-control'
 
-import FieldControl from "~/Components/molecules/field-control/field-control";
+import { StepProps } from '~/types/helpers'
+import { InitialValues } from '../../index'
+import AddressTutor from '../molecules/address-tutor.tsx'
 
-import { StepProps } from "~/types/helpers";
-import { InitialValues } from "../../index";
-import AddressTutor from "../molecules/address-tutor.tsx";
+import { useMemo } from 'react'
+import * as yup from 'yup'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 
-import { useMemo } from "react";
-import * as yup from "yup";
-import useFormikContextSafe from "~/hooks/use-formik-context-safe";
-
-type StepTutorsKeys = Pick<InitialValues, 'ownerEmergencyContact' | 'cpf_tutor'>;
+type StepTutorsKeys = Pick<InitialValues, 'ownerEmergencyContact' | 'cpf_tutor'>
 
 const schema = yup.object().shape({
-    cpf_tutor: yup.string().required("Campo obrigatório"),
-    ownerEmergencyContact: yup.object().shape({
-        name: yup.string()
-            .min(2)
-            .max(255)
-            .required("Campo obrigatório"),
-        phone: yup.string().length(20).required("Campo obrigatório"),
-        email: yup.string().email().required("Campo obrigatório"),
-        address: yup.object().shape({
-            zipCode: yup.string().required("Campo obrigatório"),
-            state: yup.string().required("Campo obrigatório"),
-            city: yup.string().required("Campo obrigatório"),
-            street: yup.string().required("Campo obrigatório"),
-        }),
-    }).required("Campo obrigatório"),
-});
+    cpf_tutor: yup.string().required('Campo obrigatório'),
+    ownerEmergencyContact: yup
+        .object()
+        .shape({
+            name: yup.string().min(2).max(255).required('Campo obrigatório'),
+            phone: yup.string().length(20).required('Campo obrigatório'),
+            email: yup.string().email().required('Campo obrigatório'),
+            address: yup.object().shape({
+                zipCode: yup.string().required('Campo obrigatório'),
+                state: yup.string().required('Campo obrigatório'),
+                city: yup.string().required('Campo obrigatório'),
+                street: yup.string().required('Campo obrigatório'),
+            }),
+        })
+        .required('Campo obrigatório'),
+})
 
 const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) => {
-    const { values } = useFormikContextSafe<StepTutorsKeys>();
+    const { values } = useFormikContextSafe<StepTutorsKeys>()
 
     const isValid = useMemo(() => {
-        return schema.isValidSync(values);
-    }, [values]);
+        return schema.isValidSync(values)
+    }, [values])
 
     return (
         <div className="card card-body shadow-lg">
@@ -48,7 +47,9 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                     Informações do Tutor
                     <br />
 
-                    <span className="text-sm font-bold text-secondary-500">Obrigatório (*)</span>
+                    <span className="text-sm font-bold text-secondary-500">
+                        Obrigatório (*)
+                    </span>
                 </h4>
             </div>
             <div className="flex flex-col flex-1 gap-2">
@@ -81,14 +82,14 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                         disabled={isPending || tutorExist}
                         placeholder={
                             isPending
-                                ? "Carregando..."
-                                : "Digite o seu Número de Telefone"
+                                ? 'Carregando...'
+                                : 'Digite o seu Número de Telefone'
                         }
                         required
                     />
                     <FieldControl
                         initialFocus
-                        label='Email'
+                        label="Email"
                         name="ownerEmergencyContact.email"
                         aria-label="email"
                         disabled={isPending || tutorExist}
@@ -125,25 +126,24 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                     />
 
                 </ControlSwitchDiv> */}
-
             </div>
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnCancel
                     label="Voltar"
                     onClick={() => {
-                        toggleTab(activeTab - 1);
+                        toggleTab(activeTab - 1)
                     }}
                 />
                 <BtnPrimary
                     disabled={!isValid}
                     label="Próximo"
                     onClick={() => {
-                        toggleTab(activeTab + 1);
+                        toggleTab(activeTab + 1)
                     }}
                 />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default StepTutor;
+export default StepTutor

@@ -1,10 +1,10 @@
-import ParticlesAuth from "~/Components/templates/particles-auth";
+import ParticlesAuth from '~/Components/templates/particles-auth'
 
-import { usePathname } from 'next/navigation';
-import VerticalLayouts from "~/Layouts";
+import { usePathname } from 'next/navigation'
+import VerticalLayouts from '~/Layouts'
 
 type LayoutProps = {
-    children: React.ReactNode;
+    children: React.ReactNode
 }
 
 const routesAuth = [
@@ -16,24 +16,16 @@ const routesAuth = [
     '/confirm-account',
 ]
 
-const routesPrivates = [
-    '/activation'
-]
+const routesPrivates = ['/activation']
 
 const LayoutAuth = ({ children }: LayoutProps) => {
-    return (
-        <ParticlesAuth>
-            {children}
-        </ParticlesAuth>
-    )
+    return <ParticlesAuth>{children}</ParticlesAuth>
 }
 
 const LayoutDefault = ({ children }: LayoutProps) => {
     const pathname = usePathname()
     if (pathname === '/' || !pathname) {
-        return (
-            <>{children}</>
-        )
+        return <>{children}</>
     }
 
     if (routesAuth.includes(pathname as string)) {
@@ -44,11 +36,7 @@ const LayoutDefault = ({ children }: LayoutProps) => {
         return <LayoutAuth>{children}</LayoutAuth>
     }
 
-    return (
-        <VerticalLayouts>
-            {children as any}
-        </VerticalLayouts>
-    )
-};
+    return <VerticalLayouts>{children as any}</VerticalLayouts>
+}
 
-export default LayoutDefault;
+export default LayoutDefault

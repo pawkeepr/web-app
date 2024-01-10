@@ -7,19 +7,13 @@ import { CtxSimplifiedPedFields, StepProps } from '../../types'
 import { option } from '../helpers'
 
 type Item = {
-    name: Breed;
-    value: Breed;
+    name: Breed
+    value: Breed
 }
 
-
-const StepListBreeds = ({
-    nextStep,
-    previousStep
-}: StepProps) => {
-
+const StepListBreeds = ({ nextStep, previousStep }: StepProps) => {
     const [breeds, setBreeds] = useState<Item[]>([])
     const { values, setFieldValue } = useFormikContextSafe<CtxSimplifiedPedFields>()
-
 
     const handleSelectBreed = (breed: Breed) => {
         setFieldValue('race', breed)
@@ -27,32 +21,36 @@ const StepListBreeds = ({
     }
 
     useEffect(() => {
-        const specie = species.find(specie => (specie.value as any) === values.specie)
+        const specie = species.find(
+            (specie) => (specie.value as any) === values.specie,
+        )
 
         if (!specie) return
 
         startTransition(() => {
             setBreeds(specie.breedType)
         })
-
     }, [values.specie])
 
     return (
         <div className="mt-3 p-1 gap-2">
             <div className="pb-1 h-[calc(100vh-20rem)] overflow-auto">
-                {
-                    breeds.map(breed => (
-                        <button
-                            key={breed.value}
-                            type="button"
-                            onClick={handleSelectBreed.bind(null, breed.value)}
-                            className={option({ selected: values.race === breed.value })}
-                        >
-                            <div className="grid grid-cols-4 justify-center items-center">
-                                <span className="align-middle col-span-full">{breed.name}</span>
-                            </div>
-                        </button>
-                    ))}
+                {breeds.map((breed) => (
+                    <button
+                        key={breed.value}
+                        type="button"
+                        onClick={handleSelectBreed.bind(null, breed.value)}
+                        className={option({
+                            selected: values.race === breed.value,
+                        })}
+                    >
+                        <div className="grid grid-cols-4 justify-center items-center">
+                            <span className="align-middle col-span-full">
+                                {breed.name}
+                            </span>
+                        </div>
+                    </button>
+                ))}
             </div>
 
             <BoxButtons
@@ -61,7 +59,6 @@ const StepListBreeds = ({
                 onClickCancel={previousStep}
                 onClickSuccess={nextStep}
             />
-
         </div>
     )
 }

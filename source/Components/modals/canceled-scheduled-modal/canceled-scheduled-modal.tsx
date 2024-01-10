@@ -1,7 +1,7 @@
 import { Form, Formik } from 'formik'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldTextArea from '~/Components/molecules/field-text-area'
-import Modal from "~/Components/organism/modal"
+import Modal from '~/Components/organism/modal'
 
 import * as Yup from 'yup'
 import CardTutor from '~/Components/molecules/card-tutor'
@@ -13,7 +13,7 @@ const validationSchema = Yup.object().shape({
     id: Yup.string().required('Campo obrigatório'),
     appointment_status: Yup.object().shape({
         reason_canceled: Yup.string().required('Campo obrigatório'),
-    })
+    }),
 })
 
 type onChangeOpen = (arg: boolean) => void
@@ -23,10 +23,10 @@ type ChildrenProps = {
 }
 
 type CanceledScheduledModalProps = {
-    children?: (params: ChildrenProps) => React.ReactNode,
-    closeModal: () => void,
-    showModal: () => void,
-    isOpen?: boolean,
+    children?: (params: ChildrenProps) => React.ReactNode
+    closeModal: () => void
+    showModal: () => void
+    isOpen?: boolean
 }
 
 const CanceledScheduledModal = ({
@@ -35,25 +35,20 @@ const CanceledScheduledModal = ({
     showModal,
     isOpen,
 }: CanceledScheduledModalProps) => {
-
-    const { item, close, keys } = usePlusModal();
+    const { item, close, keys } = usePlusModal()
     const { handleSubmit, isLoading } = useAppointmentCanceled({
-        handleClose: () => close(keys.CanceledScheduled)
+        handleClose: () => close(keys.CanceledScheduled),
     })
 
     return (
         <>
-
-            {
-                children && children({ showModal })
-            }
-            {
-                !children && (
-                    <div className="flex items-center justify-center">
-                        <button
-                            type="button"
-                            onClick={showModal}
-                            className="
+            {children?.({ showModal })}
+            {!children && (
+                <div className="flex items-center justify-center">
+                    <button
+                        type="button"
+                        onClick={showModal}
+                        className="
                                 rounded-md 
                                 bg-secondary-500 bg-opacity-20 
                                 px-4 py-2 text-sm 
@@ -65,13 +60,11 @@ const CanceledScheduledModal = ({
                                 focus-visible:ring-white 
                                 focus-visible:ring-opacity-75
                             "
-                        >
-                            Cancelar Agendamento
-                        </button>
-                    </div>
-                )
-            }
-
+                    >
+                        Cancelar Agendamento
+                    </button>
+                </div>
+            )}
 
             <Modal
                 onOpen={() => showModal}
@@ -87,67 +80,56 @@ const CanceledScheduledModal = ({
                     flex-col     
                 "
             >
-
                 <Formik
                     initialValues={item as any}
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
                 >
-                    {
-                        ({
-                            isValid,
-                            isSubmitting,
-                            handleSubmit,
-                            values
-                        }) => (
-                            <Form className="w-full h-full flex flex-col " onSubmit={handleSubmit}>
-                                <div className="flex flex-col min-h-full items-center justify-center p-4 text-center">
+                    {({ isValid, isSubmitting, handleSubmit, values }) => (
+                        <Form
+                            className="w-full h-full flex flex-col "
+                            onSubmit={handleSubmit}
+                        >
+                            <div className="flex flex-col min-h-full items-center justify-center p-4 text-center">
+                                <h2 className="text-xl font-semibold leading-6 text-gray-600 dark:!text-gray-200 text-center">
+                                    {'Cancelar Agendamento'}
+                                </h2>
 
+                                <p className="text-xs font-bold text-primary-500 dark:!text-secondary-500 text-center mb-2">
+                                    {'Esta ação não poderá ser desfeita.'}
+                                </p>
 
-                                    <h2
-                                        className="text-xl font-semibold leading-6 text-gray-600 dark:!text-gray-200 text-center"
-                                    >
-                                        {'Cancelar Agendamento'}
-                                    </h2>
+                                <CardTutor
+                                    pet={(values as IAppointmentVet).pet_data}
+                                />
 
-                                    <p
-                                        className="text-xs font-bold text-primary-500 dark:!text-secondary-500 text-center mb-2"
-                                    >
-                                        {'Esta ação não poderá ser desfeita.'}
-                                    </p>
+                                <FieldTextArea
+                                    required
+                                    label="Motivo do cancelamento"
+                                    name="appointment_status.reason_canceled"
+                                />
 
-                                    <CardTutor pet={(values as IAppointmentVet).pet_data} />
-
-                                    <FieldTextArea
-                                        required
-                                        label="Motivo do cancelamento"
-                                        name="appointment_status.reason_canceled"
-
+                                <div className="mt-4 flex justify-center items-center w-3/6">
+                                    <BtnCancel
+                                        type="button"
+                                        onClick={closeModal}
+                                        label="Desistir"
+                                        condition={!isSubmitting && !isLoading}
+                                        className="text-gray-600"
                                     />
 
-                                    <div className="mt-4 flex justify-center items-center w-3/6">
-                                        <BtnCancel
-                                            type="button"
-                                            onClick={closeModal}
-                                            label="Desistir"
-                                            condition={!isSubmitting && !isLoading}
-                                            className='text-gray-600'
-                                        />
-
-                                        <BtnPrimary
-                                            type="submit"
-                                            label="Cancelar Agendamento"
-                                            isLoading={isSubmitting || isLoading}
-                                            disabled={!isValid}
-                                        />
-                                    </div>
+                                    <BtnPrimary
+                                        type="submit"
+                                        label="Cancelar Agendamento"
+                                        isLoading={isSubmitting || isLoading}
+                                        disabled={!isValid}
+                                    />
                                 </div>
-                            </Form>
-                        )
-                    }
-
+                            </div>
+                        </Form>
+                    )}
                 </Formik>
-            </Modal >
+            </Modal>
         </>
     )
 }

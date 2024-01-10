@@ -3,7 +3,7 @@ import { useState } from 'react'
 export default function useDebounce() {
     const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout>()
 
-    const debounce = async (func: () => any, wait: number = 1000) => {
+    const debounce = async (func: () => any, wait = 1000) => {
         clearTimeout(typingTimeout!)
 
         const timeout = setTimeout(() => {

@@ -1,23 +1,22 @@
-import { Tab } from '@headlessui/react';
-import cn from 'classnames';
-import { Formik } from 'formik';
-import { useCallback, useMemo, useState } from 'react';
-import { BtnPrimary } from '~/Components/atoms/btn';
-import Modal from '~/Components/organism/modal';
-import useFormikContextSafe from '~/hooks/use-formik-context-safe';
-import useModal from '~/hooks/use-modal';
-import useSteps from '~/hooks/use-steps';
-import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor';
-import { IPet } from '~/types/pet';
-import { IPetV2 } from '~/types/pet-v2';
-import StepDocument from '../list-pets-modal/components/steps/step-document';
-import StepListBreeds from '../list-pets-modal/components/steps/step-list-breeds';
-import StepListGender from '../list-pets-modal/components/steps/step-list-gender';
-import StepListPets from '../list-pets-modal/components/steps/step-list-pets';
-import StepListSpecies from '../list-pets-modal/components/steps/step-list-species';
-import StepTutor from '../list-pets-modal/components/steps/step-tutor';
-import { ModalConfirmProps, StepProps } from '../list-pets-modal/types';
-import StepScheduledAppointment from './components/steps/step-scheduled-appointment';
+import { Tab } from '@headlessui/react'
+import cn from 'classnames'
+import { Formik } from 'formik'
+import { useCallback, useMemo, useState } from 'react'
+import { BtnPrimary } from '~/Components/atoms/btn'
+import Modal from '~/Components/organism/modal'
+import useModal from '~/hooks/use-modal'
+import useSteps from '~/hooks/use-steps'
+import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor'
+import { IPet } from '~/types/pet'
+import { IPetV2 } from '~/types/pet-v2'
+import StepDocument from '../list-pets-modal/components/steps/step-document'
+import StepListBreeds from '../list-pets-modal/components/steps/step-list-breeds'
+import StepListGender from '../list-pets-modal/components/steps/step-list-gender'
+import StepListPets from '../list-pets-modal/components/steps/step-list-pets'
+import StepListSpecies from '../list-pets-modal/components/steps/step-list-species'
+import StepTutor from '../list-pets-modal/components/steps/step-tutor'
+import { ModalConfirmProps, StepProps } from '../list-pets-modal/types'
+import StepScheduledAppointment from './components/steps/step-scheduled-appointment'
 
 const STEPS = [
     {
@@ -50,7 +49,7 @@ const STEPS = [
         title: 'Tutor',
         component: (props: StepProps) => <StepTutor {...props} />,
     },
-];
+]
 
 const STEPS_HIDDEN = [
     {
@@ -60,21 +59,18 @@ const STEPS_HIDDEN = [
             <StepScheduledAppointment {...props} />
         ),
     },
-];
+]
 
-const ModalListPets = ({
-    children,
-    selectedTabInitial = 1,
-}: ModalConfirmProps) => {
-    const [pet, setPet] = useState<IPetV2 | null>(null);
-    const [document, setDocument] = useState('');
-    const { closeModal, open, showModal } = useModal();
+const ModalListPets = ({ children, selectedTabInitial = 1 }: ModalConfirmProps) => {
+    const [pet, setPet] = useState<IPetV2 | null>(null)
+    const [document, setDocument] = useState('')
+    const { closeModal, open, showModal } = useModal()
 
     const {
         activeData: pets,
         handleSubmit,
         isLoading,
-    } = useListPetsOfTutor(document);
+    } = useListPetsOfTutor(document)
 
     const initialValues: IPet = useMemo(
         () => ({
@@ -101,8 +97,7 @@ const ModalListPets = ({
                         : '',
                 lastName:
                     pets && pets.length > 0
-                        ? (pets[0].main_responsible_guardian
-                              .last_name as string)
+                        ? (pets[0].main_responsible_guardian.last_name as string)
                         : '',
             },
             castrated: 'no',
@@ -138,35 +133,37 @@ const ModalListPets = ({
             },
         }),
         [document, pets],
-    );
+    )
 
-    const { nextStep, onChangeSelectedTab, previousStep, selectedTab } =
-        useSteps(STEPS, selectedTabInitial);
+    const { nextStep, onChangeSelectedTab, previousStep, selectedTab } = useSteps(
+        STEPS,
+        selectedTabInitial,
+    )
 
     const onChangeDocument = (doc: string) => {
-        setDocument(doc);
-    };
+        setDocument(doc)
+    }
 
     const onSubmit = useCallback(
         async (values: IPet) => {
             const pet = await handleSubmit({
                 ...values,
-            });
+            })
 
-            if (!pet) return;
+            if (!pet) return
 
-            setPet(pet);
+            setPet(pet)
         },
         [handleSubmit],
-    );
+    )
 
     const handleNavigate = useCallback(
         (pet: IPetV2) => {
-            setPet(pet);
-            onChangeSelectedTab(STEPS.length);
+            setPet(pet)
+            onChangeSelectedTab(STEPS.length)
         },
         [onChangeSelectedTab],
-    );
+    )
 
     return (
         <>
@@ -182,8 +179,8 @@ const ModalListPets = ({
             <Modal
                 onOpen={() => showModal()}
                 onClose={() => {
-                    onChangeSelectedTab(selectedTabInitial);
-                    closeModal();
+                    onChangeSelectedTab(selectedTabInitial)
+                    closeModal()
                 }}
                 modal
                 nested
@@ -200,8 +197,8 @@ const ModalListPets = ({
                         Agendar Consulta
                     </h1>
                     <h5 className="text-center text-gray-500 mb-2">
-                        Selecione ou Adicione um Pet para prosseguir no
-                        agendamento da consulta.
+                        Selecione ou Adicione um Pet para prosseguir no agendamento
+                        da consulta.
                     </h5>
                     <Tab.List className="flex flex-row w-full justify-between">
                         {[...STEPS, ...STEPS_HIDDEN].map((item, index) => (
@@ -215,8 +212,7 @@ const ModalListPets = ({
                                 className={cn(
                                     'p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full',
                                     {
-                                        'text-primary-500':
-                                            selectedTab === index,
+                                        'text-primary-500': selectedTab === index,
                                         'text-gray-400': selectedTab !== index,
                                     },
                                 )}
@@ -253,7 +249,7 @@ const ModalListPets = ({
                 </Tab.Group>
             </Modal>
         </>
-    );
-};
+    )
+}
 
-export default ModalListPets;
+export default ModalListPets

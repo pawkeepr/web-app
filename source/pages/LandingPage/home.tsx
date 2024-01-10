@@ -1,32 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
-import Slide from "react-reveal/Slide";
-import Zoom from "react-reveal/Zoom";
-
+import Slide from 'react-reveal/Slide'
+import Zoom from 'react-reveal/Zoom'
 
 // Import Images
 
-import HeaderTitle from "~/Components/atoms/header-title";
+import HeaderTitle from '~/Components/atoms/header-title'
 
 const Home = () => {
     return (
         <>
-            <HeaderTitle title='Bem Vindo' />
+            <HeaderTitle title="Bem Vindo" />
 
             <section className="section hero-section bg-primary" id="hero">
-                <div className="bg-overlay bg-overlay-pattern"></div>
+                <div className="bg-overlay bg-overlay-pattern" />
 
                 <div className="grid grid-cols-1 items-swiper-centered mt-5 md:mt-0 md:grid-cols-2 p-4">
                     <Slide left>
                         <div className="col-span-1">
-
-
                             <img
                                 src="/landing-page-01.jpg"
                                 className="w-100"
                                 alt="..."
-
                             />
-
                         </div>
                     </Slide>
                     <Zoom>
@@ -50,19 +45,21 @@ const Home = () => {
             </section>
 
             <section className="section pb-0 hero-section bg-white" id="hero2">
-                <div className="bg-overlay bg-overlay-pattern"></div>
+                <div className="bg-overlay bg-overlay-pattern" />
                 <div className="grid grid-cols-1 place-items-center md:mt-0 md:grid-cols-2 p-4">
                     <Zoom>
                         <div className="flex items-center text-center col-span-1">
                             <p className="text-lg lg:text-2xl font-semibold font-sans p-4">
-                                {`Desperte a revolução veterinária em suas mãos! Agora você pode ter acesso a todos os registros de seus pacientes de forma prática, simples e rápida. Desde o registro inicial até o histórico médico completo, todas as informações estarão ao alcance de seus dedos, de forma instantânea e conveniente. Cuide dos seus pacientes com eficiência e agilidade, proporcionando um atendimento excepcional com a tecnologia mais avançada ao seu lado!`}
+                                {
+                                    'Desperte a revolução veterinária em suas mãos! Agora você pode ter acesso a todos os registros de seus pacientes de forma prática, simples e rápida. Desde o registro inicial até o histórico médico completo, todas as informações estarão ao alcance de seus dedos, de forma instantânea e conveniente. Cuide dos seus pacientes com eficiência e agilidade, proporcionando um atendimento excepcional com a tecnologia mais avançada ao seu lado!'
+                                }
                             </p>
                         </div>
                     </Zoom>
                     <Slide left>
                         <div className="col-span-1">
                             <img
-                                src='/landing-page-02.webp'
+                                src="/landing-page-02.webp"
                                 className="w-100 h-[90%] !border-none rounded-3xl"
                                 alt="..."
                             />
@@ -70,16 +67,13 @@ const Home = () => {
                     </Slide>
                 </div>
             </section>
-            <section
-                className="section pb-0 hero-section bg-primary"
-                id="hero3"
-            >
-                <div className="bg-overlay bg-overlay-pattern"></div>
+            <section className="section pb-0 hero-section bg-primary" id="hero3">
+                <div className="bg-overlay bg-overlay-pattern" />
                 <div className="grid grid-cols-1 mt-5 md:mt-0 md:grid-cols-2 p-4">
                     <Slide left>
                         <div className="col-span-1">
                             <img
-                                src='/bg-three.webp'
+                                src="/bg-three.webp"
                                 className="w-full  !border-none"
                                 alt="..."
                             />
@@ -105,7 +99,7 @@ const Home = () => {
                 </div>
             </section>
         </>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home

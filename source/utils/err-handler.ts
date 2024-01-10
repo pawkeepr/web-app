@@ -1,4 +1,3 @@
-
 /**
  * @name promiseErrorHandler<T>
  * @typedef {any | null} MyTupleIndex0
@@ -8,10 +7,10 @@
  * @returns {Promise<MyTuple>}
  */
 export async function promiseErrorHandler(promise: any) {
-  try {
-    const data = await promise;
-    return [null, data];
-  } catch (error) {
-    return [error, null];
-  }
+    try {
+        const data = await promise
+        return [null, data]
+    } catch (error) {
+        return [error, null]
+    }
 }

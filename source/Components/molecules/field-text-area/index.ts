@@ -1,3 +1,3 @@
-export { default } from './field-text-area';
-export * from './types';
+import FieldTextArea from './field-text-area'
 
+export default FieldTextArea

@@ -1,14 +1,51 @@
 {
-    "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
-    "organizeImports": {
-        "enabled": true,
-        "ignore": ["node_modules"]
-    },
-    "linter": {
-        "enabled": true,
-        "rules": {
-            "recommended": true
-        },
-        "ignore": ["node_modules"]
-    }
+	"$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+	"organizeImports": {
+		"enabled": true,
+		"ignore": ["node_modules"]
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"recommended": true,
+				"useExhaustiveDependencies": "off",
+				"noUnusedVariables": "error"
+			},
+			"style": {
+				"recommended": true,
+				"noUselessElse": "warn",
+				"noVar": "error"
+			},
+			"nursery": {
+				"recommended": true,
+				"noUnusedImports": "error"
+			},
+			"suspicious": {
+				"recommended": true,
+				"noConsoleLog": "error"
+			},
+			"complexity": {
+				"recommended": true,
+				"noForEach": "warn"
+			}
+		},
+
+		"ignore": ["node_modules", "coverage", "dist", "build", "out", ".next"]
+	},
+	"javascript": {
+		"formatter": {
+			"enabled": true,
+			"indentStyle": "space",
+			"indentWidth": 4,
+			"lineWidth": 84,
+			"lineEnding": "lf",
+			"semicolons": "asNeeded",
+			"quoteStyle": "single"
+		}
+	},
+	"formatter": {
+		"ignore": ["node_modules", "coverage", "dist", "build", "out", ".next"]
+	}
 }

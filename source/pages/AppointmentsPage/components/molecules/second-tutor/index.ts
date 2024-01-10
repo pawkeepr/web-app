@@ -1,1 +1,1 @@
-export { default } from './second-tutor';
+export { default } from './second-tutor'

@@ -7,7 +7,7 @@ type AvatarPetProps = {
 const AvatarPet = ({ name }: AvatarPetProps) => {
     return (
         <div>
-            <BtnAvatar alt='Avatar do Pet' name="pet.avatar" disabled size={40} />
+            <BtnAvatar alt="Avatar do Pet" name="pet.avatar" disabled size={40} />
             <h5 className="text-center text-muted">{name}</h5>
         </div>
     )

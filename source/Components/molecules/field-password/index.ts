@@ -1,1 +1,1 @@
-export { default } from './field-password';
+export { default } from './field-password'

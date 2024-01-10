@@ -1,37 +1,38 @@
-import { useFormikContext } from "formik";
-import { twMerge } from "tailwind-merge";
-import { BtnLabel, BtnPrimary } from "~/Components/atoms/btn";
-import LOADING from "~/constants/loading";
-import { useAppSelector } from "~/store/hooks";
-import { ActivateAccount } from "~/validations/activate";
-import { StepProps } from "./types";
-import { Specialty } from "~/types/profile";
+import { useFormikContext } from 'formik'
+import { twMerge } from 'tailwind-merge'
+import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn'
+import LOADING from '~/constants/loading'
+import { useAppSelector } from '~/store/hooks'
+import { Specialty } from '~/types/profile'
+import { ActivateAccount } from '~/validations/activate'
+import { StepProps } from './types'
 
-const listItem = "flex gap-1 font-semibold text-gray-500 p-1 text-center w-full";
-const strongText = "text-gray-700 mr-2";
-const pStyle = "text-center w-full text-sm flex flex-row";
+const listItem = 'flex gap-1 font-semibold text-gray-500 p-1 text-center w-full'
+const strongText = 'text-gray-700 mr-2'
+const pStyle = 'text-center w-full text-sm flex flex-row'
 
 const Specialty = {
-    domestics: "Animais Domésticos",
-    large: "Animais de Grande Porte",
-    midsize: "Animais de Médio Porte",
+    domestics: 'Animais Domésticos',
+    large: 'Animais de Grande Porte',
+    midsize: 'Animais de Médio Porte',
 } as const
 
 type KeysSpecialty = keyof typeof Specialty
 
 const StepFinally = ({ prevStep, nextStep }: StepProps) => {
-    const { values, isValid,  errors, handleSubmit } =
-        useFormikContext<ActivateAccount>();
+    const { values, isValid, errors, handleSubmit } =
+        useFormikContext<ActivateAccount>()
 
-        const isLoading = useAppSelector(state =>
-        state.Profile.isLoading === LOADING.PENDING ||
-        state.Profile.isLoading === LOADING.SUCCESS
+    const isLoading = useAppSelector(
+        (state) =>
+            state.Profile.isLoading === LOADING.PENDING ||
+            state.Profile.isLoading === LOADING.SUCCESS,
     )
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        handleSubmit();
-    };
+        e.preventDefault()
+        handleSubmit()
+    }
 
     return (
         <div>
@@ -81,23 +82,28 @@ const StepFinally = ({ prevStep, nextStep }: StepProps) => {
                     <p className={pStyle}>
                         <strong className={strongText}>Especialidade:</strong>
                         <span className="">{values?.specialty?.label}</span>
-
                     </p>
                 </li>
 
                 <li className={twMerge(listItem, 'w-full col-span-full')}>
                     <p className={pStyle}>
                         <strong className={strongText}>Serviços:</strong>
-                        <span className="">{values?.list_service_type?.map((item: KeysSpecialty) => Specialty[item]).join(', ')}</span>
-
+                        <span className="">
+                            {values?.list_service_type
+                                ?.map((item: KeysSpecialty) => Specialty[item])
+                                .join(', ')}
+                        </span>
                     </p>
                 </li>
 
                 <li className={twMerge(listItem, 'w-full col-span-full')}>
                     <p className={pStyle}>
                         <strong className={strongText}>Sub-Especialidade:</strong>
-                        <span className="">{values?.list_specialty?.map((item) => item.label).join(', ')}</span>
-
+                        <span className="">
+                            {values?.list_specialty
+                                ?.map((item) => item.label)
+                                .join(', ')}
+                        </span>
                     </p>
                 </li>
             </ul>
@@ -156,12 +162,11 @@ const StepFinally = ({ prevStep, nextStep }: StepProps) => {
                     <p className={pStyle}>
                         <strong className={strongText}>Complemento:</strong>
                         <span className="text-capitalize ">
-                            {values?.location?.complement || "Não informado"}
+                            {values?.location?.complement || 'Não informado'}
                         </span>
                     </p>
                 </li>
             </ul>
-
 
             <div className="flex gap-2 justify-center items-center mt-2">
                 <div>
@@ -183,7 +188,7 @@ const StepFinally = ({ prevStep, nextStep }: StepProps) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default StepFinally;
+export default StepFinally

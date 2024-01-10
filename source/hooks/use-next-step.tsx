@@ -1,11 +1,11 @@
 /* eslint-disable testing-library/await-async-utils */
-import { useEffect, useMemo, useState } from "react"
-import useDebounce from "./use-debounce"
-import useThrottle from "./use-throttle"
+import { useEffect, useMemo, useState } from 'react'
+import useDebounce from './use-debounce'
+import useThrottle from './use-throttle'
 
 type NextStep = () => void
 
-const useNextStep = (nextStep: NextStep, condition: boolean, wait: number = 100) => {
+const useNextStep = (nextStep: NextStep, condition: boolean, wait = 100) => {
     const [step, setStep] = useState(true)
 
     const debounce = useDebounce()

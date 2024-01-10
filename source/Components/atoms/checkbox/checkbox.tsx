@@ -1,6 +1,6 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes } from 'react'
 
-import { VariantProps, tv } from 'tailwind-variants';
+import { VariantProps, tv } from 'tailwind-variants'
 
 export const checkbox = tv({
     base: `
@@ -20,18 +20,15 @@ export const checkbox = tv({
   `,
     variants: {
         radio: {
-            true: "rounded-full",
+            true: 'rounded-full',
         },
-    }
+    },
 })
 
-type CheckboxProps = VariantProps<typeof checkbox> & InputHTMLAttributes<HTMLInputElement>
+type CheckboxProps = VariantProps<typeof checkbox> &
+    InputHTMLAttributes<HTMLInputElement>
 
-const Checkbox = ({
-    className,
-    ...props
-}: CheckboxProps
-) => {
+const Checkbox = ({ className, ...props }: CheckboxProps) => {
     return (
         <input
             type="checkbox"

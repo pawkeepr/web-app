@@ -1,39 +1,39 @@
- const  isValidCPF = (cpf: string) => {
-    cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
+const isValidCPF = (cpf: string) => {
+    cpf = cpf.replace(/\D/g, '') // Remove caracteres não numéricos
 
     if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
-        return false;
+        return false
     }
 
-    let sum = 0;
+    let sum = 0
     for (let i = 1; i <= 9; i++) {
-        sum += parseInt(cpf[i - 1]) * (11 - i);
+        sum += parseInt(cpf[i - 1]) * (11 - i)
     }
 
-    let remainder = (sum * 10) % 11;
+    let remainder = (sum * 10) % 11
     if (remainder === 10 || remainder === 11) {
-        remainder = 0;
+        remainder = 0
     }
 
     if (remainder !== parseInt(cpf[9])) {
-        return false;
+        return false
     }
 
-    sum = 0;
+    sum = 0
     for (let i = 1; i <= 10; i++) {
-        sum += parseInt(cpf[i - 1]) * (12 - i);
+        sum += parseInt(cpf[i - 1]) * (12 - i)
     }
 
-    remainder = (sum * 10) % 11;
+    remainder = (sum * 10) % 11
     if (remainder === 10 || remainder === 11) {
-        remainder = 0;
+        remainder = 0
     }
 
     if (remainder !== parseInt(cpf[10])) {
-        return false;
+        return false
     }
 
-    return true;
-};
+    return true
+}
 
-export default isValidCPF;
+export default isValidCPF

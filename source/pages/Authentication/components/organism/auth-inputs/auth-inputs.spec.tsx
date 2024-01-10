@@ -1,11 +1,11 @@
 /* eslint-disable testing-library/no-unnecessary-act */
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
-import RouterProvider from '~/__mocks__/next-router';
-import { AuthProvider } from '~/contexts/auth-context';
-import ProviderClient from '~/store/slices';
-import Auth from './auth-inputs';
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { describe, expect, it, vi } from 'vitest'
+import RouterProvider from '~/__mocks__/next-router'
+import { AuthProvider } from '~/contexts/auth-context'
+import ProviderClient from '~/store/slices'
+import Auth from './auth-inputs'
 
 const Wrapper = () => (
     <RouterProvider>
@@ -18,7 +18,6 @@ const Wrapper = () => (
 )
 
 describe('Auth Unit (Unit)', () => {
-
     afterEach(() => {
         vi.clearAllMocks()
     })
@@ -26,8 +25,8 @@ describe('Auth Unit (Unit)', () => {
     it('should render without errors', () => {
         const { baseElement } = render(<Wrapper />)
 
-        expect(baseElement).toMatchSnapshot();
-    });
+        expect(baseElement).toMatchSnapshot()
+    })
 
     // it('should enable button when form is valid', async () => {
     //     render(<Wrapper />)
@@ -45,33 +44,30 @@ describe('Auth Unit (Unit)', () => {
     // });
 
     it('should toggle visible password when clicking the eye icon', async () => {
-        render(<Wrapper />);
-        const passwordInput = screen.getByTestId('password-input');
-        const eyeIcon = screen.getByTestId('toggle-password');
+        render(<Wrapper />)
+        const passwordInput = screen.getByTestId('password-input')
+        const eyeIcon = screen.getByTestId('toggle-password')
 
-        expect(passwordInput).toHaveAttribute('type', 'password');
+        expect(passwordInput).toHaveAttribute('type', 'password')
 
-        await userEvent.click(eyeIcon);
+        await userEvent.click(eyeIcon)
 
-        expect(passwordInput).toHaveAttribute('type', 'text');
+        expect(passwordInput).toHaveAttribute('type', 'text')
 
-        await userEvent.click(eyeIcon);
+        await userEvent.click(eyeIcon)
 
-        expect(passwordInput).toHaveAttribute('type', 'password');
-
-    });
+        expect(passwordInput).toHaveAttribute('type', 'password')
+    })
 
     it('should disable button when form is invalid', async () => {
         render(<Wrapper />)
-        const usernameInput = screen.getByTestId('email-input');
-        const passwordInput = screen.getByTestId('password-input');
-        const submitButton = screen.getByTestId('submit-button');
+        const usernameInput = screen.getByTestId('email-input')
+        const passwordInput = screen.getByTestId('password-input')
+        const submitButton = screen.getByTestId('submit-button')
 
-        await userEvent.type(usernameInput, ' ');
-        await userEvent.type(passwordInput, ' ');
+        await userEvent.type(usernameInput, ' ')
+        await userEvent.type(passwordInput, ' ')
 
-        expect(submitButton).toBeDisabled();
-    });
-
-});
-
+        expect(submitButton).toBeDisabled()
+    })
+})

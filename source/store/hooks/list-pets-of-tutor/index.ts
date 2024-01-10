@@ -1,1 +1,1 @@
-export { default } from './use-list-pets-of-tutor';
+export { default } from './use-list-pets-of-tutor'

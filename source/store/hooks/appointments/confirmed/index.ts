@@ -1,4 +1,3 @@
-
 import { getAllAppointmentsConfirmed } from '~/services/helpers'
 import useAppStore from '../../use-app-store'
 import { ScheduledResponseAxios } from '../types'
@@ -6,7 +5,7 @@ import { ScheduledResponseAxios } from '../types'
 const NAME = 'appointment-confirmed'
 
 type UseAppointmentConfirmedProps = {
-    handleClose?: (() => void)
+    handleClose?: () => void
 }
 
 export const useAppointmentConfirmed = (

@@ -1,14 +1,14 @@
-import MockAdapter from "axios-mock-adapter/types";
-import { getCookie, setCookie } from "~/utils/cookies-utils";
+import MockAdapter from 'axios-mock-adapter/types'
+import { getCookie, setCookie } from '~/utils/cookies-utils'
 
-import { faker } from '@faker-js/faker';
-import { CatBloodType } from "~/store/slices/pets/bloodType";
-import { CatBreed } from "~/store/slices/pets/breedType";
-import { Species } from "~/store/slices/pets/speciesType";
-import { Pet } from "~/store/slices/pets/types";
-import * as url from '../url_helper';
+import { faker } from '@faker-js/faker'
+import { CatBloodType } from '~/store/slices/pets/bloodType'
+import { CatBreed } from '~/store/slices/pets/breedType'
+import { Species } from '~/store/slices/pets/speciesType'
+import { Pet } from '~/store/slices/pets/types'
+import * as url from '../url_helper'
 
-import _ from 'lodash';
+import _ from 'lodash'
 
 const factoryBreeds = (species: Species): string => {
     if (species === Species.cat) {
@@ -16,7 +16,7 @@ const factoryBreeds = (species: Species): string => {
         const breed = _.sample(Object.values(CatBreed))
         return breed || CatBreed.ViraLata
     }
-    return CatBreed.ViraLata;
+    return CatBreed.ViraLata
 }
 
 const factoryBloodType = (): string => {
@@ -54,7 +54,7 @@ const factoryPet = (document?: string, name?: string): Pet => ({
             city: faker.location.city(),
             state: faker.location.state(),
             zipCode: faker.location.zipCode('###########'),
-        }
+        },
     },
     diet: {
         foodType: 'Ração Premium',
@@ -74,12 +74,15 @@ const factoryPet = (document?: string, name?: string): Pet => ({
 })
 
 const pets: Array<Pet> = [
-    ...Array(10).fill(0).map(() => factoryPet()),
-    ...Array(3).fill(0).map(() => factoryPet('00000000000', 'Murilo Montino')),
+    ...Array(10)
+        .fill(0)
+        .map(() => factoryPet()),
+    ...Array(3)
+        .fill(0)
+        .map(() => factoryPet('00000000000', 'Murilo Montino')),
 ]
 
 const getPets = () => {
-
     try {
         const cookie = getCookie('pets-mock')
         return (cookie || pets) as Array<any>
@@ -87,41 +90,41 @@ const getPets = () => {
         console.log(error)
         return pets
     }
-
 }
 
 function factoryMockPets(adapter: MockAdapter) {
-    adapter.onGet(url.GET_PETS).reply(config => {
-
+    adapter.onGet(url.GET_PETS).reply((config) => {
         const pets = getPets()
 
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                return resolve([200, { data: pets }]);
+                return resolve([200, { data: pets }])
             }, 1000)
         })
     })
 
     adapter.onPost(url.ADD_PETS).reply((config) => {
-
-        const pet = JSON.parse(config["data"]);
+        const pet = JSON.parse(config.data)
 
         const pets = getPets()
 
         return new Promise((resolve, reject) => {
-            const newPet = { id: faker.string.uuid(), created_at: Date.now().toLocaleString(), ...pet }
+            const newPet = {
+                id: faker.string.uuid(),
+                created_at: Date.now().toLocaleString(),
+                ...pet,
+            }
             pets.push(newPet)
 
             try {
                 const maxAge = 60 * 60 * 24 * 30
                 setCookie('pets-mock', JSON.stringify(pets), maxAge)
-
             } catch (error) {
                 console.log(error)
             }
 
             setTimeout(() => {
-                return resolve([200, { data: newPet }]);
+                return resolve([200, { data: newPet }])
             }, 2500)
         })
     })

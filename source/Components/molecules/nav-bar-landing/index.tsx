@@ -1,32 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
+'use client'
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { BtnLink } from "~/Components/atoms/btn";
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { BtnLink } from '~/Components/atoms/btn'
 
-import ArrowRightOnRectangleIcon from '@heroicons/react/24/solid/ArrowRightOnRectangleIcon';
-
+import ArrowRightOnRectangleIcon from '@heroicons/react/24/solid/ArrowRightOnRectangleIcon'
 
 const NavbarLanding = () => {
     // const [isOpenMenu, setIsOpenMenu] = useState(false);
-    const [actionScroll, setActionScroll] = useState(false);
+    const [actionScroll, setActionScroll] = useState(false)
 
     // const toggle = () => setIsOpenMenu(!isOpenMenu);
 
     useEffect(() => {
-        window.addEventListener("scroll", scrollNavigation, true);
-    }, []);
+        window.addEventListener('scroll', scrollNavigation, true)
+    }, [])
 
     const scrollNavigation = () => {
-        const scrollUp = document.documentElement.scrollTop;
+        const scrollUp = document.documentElement.scrollTop
 
         if (scrollUp > 100) {
-            setActionScroll(true);
+            setActionScroll(true)
         } else {
-            setActionScroll(false);
+            setActionScroll(false)
         }
-    };
+    }
 
     return (
         <header>
@@ -37,7 +36,7 @@ const NavbarLanding = () => {
                 <div className="container flex flex-wrap justify-center gap-2 md:gap-0 md:justify-between">
                     <Link href="/">
                         <img
-                            src='/logo-rgb-04.png'
+                            src="/logo-rgb-04.png"
                             className="hidden h-12 w-40  data-[logo-light=false]:flex"
                             data-logo-light={actionScroll}
                             alt="logo light"
@@ -45,7 +44,7 @@ const NavbarLanding = () => {
                             width={120}
                         />
                         <img
-                            src='/logo-rgb-21.png'
+                            src="/logo-rgb-21.png"
                             className="hidden h-12 w-40 data-[logo-light=true]:flex"
                             data-logo-light={actionScroll}
                             alt="logo dark"
@@ -126,7 +125,7 @@ const NavbarLanding = () => {
                 </div>
             </nav>
         </header>
-    );
-};
+    )
+}
 
-export default NavbarLanding;
+export default NavbarLanding

@@ -1,7 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-type JsxChild = string | boolean | number | null | undefined | JSX.Element | React.ReactNode
-type JsxChildren = JsxChild | JsxChild[];
+type JsxChild =
+    | string
+    | boolean
+    | number
+    | null
+    | undefined
+    | JSX.Element
+    | React.ReactNode
+type JsxChildren = JsxChild | JsxChild[]
 
 type PropsFor<T> = {
     items: T[]
@@ -11,11 +18,9 @@ type PropsFor<T> = {
 export function For<T>({ children, items }: PropsFor<T>) {
     return (
         <React.Fragment>
-            {
-                items.map((item, index) => {
-                    return children(item, index)
-                })
-            }
+            {items.map((item, index) => {
+                return children(item, index)
+            })}
         </React.Fragment>
     )
 }
@@ -39,13 +44,11 @@ type PropsChoose = {
 export function Choose({ value, children }: PropsChoose) {
     return (
         <React.Fragment>
-            {
-                React.Children.map(children, (child: any) => {
-                    if (child.props.value === value) {
-                        return child.props.children
-                    }
-                })
-            }
+            {React.Children.map(children, (child: any) => {
+                if (child.props.value === value) {
+                    return child.props.children
+                }
+            })}
         </React.Fragment>
     )
 }

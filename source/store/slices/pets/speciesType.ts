@@ -6,7 +6,7 @@ import {
     HorseBloodType,
     RabbitBloodType,
     ReptileBloodType,
-} from './bloodType';
+} from './bloodType'
 import {
     BirdBreed,
     CatBreed,
@@ -15,26 +15,26 @@ import {
     HorseBreed,
     RabbitBreed,
     ReptileBreed,
-} from './breedType';
+} from './breedType'
 
 export const Species = {
-    'dog': 'Cachorro',
-    'cat': 'Gato',
-    'horse': 'Cavalo',
-    'rabbit': 'Coelho',
-    'bird': 'Pássaro',
-    'fish': 'Peixe',
-    'reptile': 'Réptil',
-    'unknown': 'Desconhecido',
-} as const;
+    dog: 'Cachorro',
+    cat: 'Gato',
+    horse: 'Cavalo',
+    rabbit: 'Coelho',
+    bird: 'Pássaro',
+    fish: 'Peixe',
+    reptile: 'Réptil',
+    unknown: 'Desconhecido',
+} as const
 
-export type Species = keyof typeof Species;
+export type Species = keyof typeof Species
 
 export const Gender = {
     male: 'male',
     female: 'female',
     unknown: 'unknown',
-} as const;
+} as const
 
 export type Gender = keyof typeof Gender
 
@@ -42,29 +42,28 @@ export const GenderBR = {
     male: 'Macho',
     female: 'Fêmea',
     unknown: 'Desconhecido',
-} as const;
-
+} as const
 
 export type KeyOfGender = keyof typeof Gender
 
 export const MapOptionSpecies = {
-    'dog': 'dog',
-    'cat': 'cat',
-    'horse': 'horse',
-    'rabbit': 'rabbit',
-    'bird': 'bird',
-    'fish': 'fish',
-    'reptile': 'reptile',
-    'Cachorro': 'dog',
-    'Gato': 'cat',
-    'Cavalo': 'horse',
-    'Coelho': 'rabbit',
-    'Pássaro': 'bird',
-    'Peixe': 'fish',
-    'Réptil': 'reptile',
-} as const;
+    dog: 'dog',
+    cat: 'cat',
+    horse: 'horse',
+    rabbit: 'rabbit',
+    bird: 'bird',
+    fish: 'fish',
+    reptile: 'reptile',
+    Cachorro: 'dog',
+    Gato: 'cat',
+    Cavalo: 'horse',
+    Coelho: 'rabbit',
+    Pássaro: 'bird',
+    Peixe: 'fish',
+    Réptil: 'reptile',
+} as const
 
-export type KeyOfMapOptionSpecies = keyof typeof MapOptionSpecies;
+export type KeyOfMapOptionSpecies = keyof typeof MapOptionSpecies
 
 export const dog = {
     name: 'Cachorro',
@@ -157,14 +156,13 @@ export const reptile = {
     })),
 }
 
-export type SpeciesType = typeof dog | typeof cat | typeof horse | typeof rabbit | typeof bird | typeof fish | typeof reptile;
+export type SpeciesType =
+    | typeof dog
+    | typeof cat
+    | typeof horse
+    | typeof rabbit
+    | typeof bird
+    | typeof fish
+    | typeof reptile
 
-export const species = [
-    dog,
-    cat,
-    horse,
-    rabbit,
-    bird,
-    fish,
-    reptile,
-];
+export const species = [dog, cat, horse, rabbit, bird, fish, reptile]

@@ -1,31 +1,30 @@
 /* eslint-disable react/display-name */
-import { ComponentType } from 'react';
+import { ComponentType } from 'react'
 
 // Estas são as props que o HOC irá adicionar
 export type ControlProps = {
     condition?: boolean | string | number | null | undefined
 }
 
-// Este é o nosso HOC. Ele aceita um componente e retorna um novo componente.
-function withIf<T extends {}>(WrappedComponent: ComponentType<T & ControlProps>) {
-    // E este é o novo componente.
-    return ({ condition = true, ...props }: T & ControlProps) => {
-        // Verifica a prop "if".
+function withIf<T>(WrappedComponent: ComponentType<T & ControlProps>) {
+    return (props: T & ControlProps) => {
+        // A propriedade 'condition' agora é verificada dentro do HOC withIf
+        const { condition = true, ...restProps } = props
         if (!condition) {
-            // Se a prop "if" é falsa, não renderiza o componente.
-            return null;
+            return <div />
         }
 
-        // Adiciona uma prop "condition".
-        return <WrappedComponent {...(props as T)} condition={condition} />;
-    };
+        // Passando todas as props, incluindo 'ctx', para o WrappedComponent
+        return <WrappedComponent {...(restProps as T)} condition={condition} />
+    }
 }
 
-function withControl<T extends {}>(WrappedComponent: ComponentType<T & ControlProps>) {
+const withControl = <T,>(WrappedComponent: ComponentType<T & ControlProps>) => {
     // E este é o novo componente.
     return (props: T & ControlProps) => {
+        // withIf é aplicado aqui
         return withIf(WrappedComponent)(props)
-    };
+    }
 }
 
 export default withControl

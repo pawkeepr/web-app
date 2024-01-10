@@ -1,29 +1,29 @@
+import Image from 'next/image'
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
-import Image from "next/image"
+import Link from 'next/link'
 
 //import Components
-import { useEffect, useRef, useState } from "react";
-import { changeHeaderSize } from "~/store/actions";
-import { useAppDispatch } from "~/store/hooks";
-import FullScreenDropdown from "../Components/Common/full-screen-dropdown";
-import LightDark from "../Components/Common/light-dark";
+import { useEffect, useRef, useState } from 'react'
+import { changeHeaderSize } from '~/store/actions'
+import { useAppDispatch } from '~/store/hooks'
 import lightLogo from '../../public/logo-light.png'
+import FullScreenDropdown from '../Components/Common/full-screen-dropdown'
+import LightDark from '../Components/Common/light-dark'
 
-import Bars3CenterLeftIcon from "@heroicons/react/24/solid/Bars3CenterLeftIcon";
+import Bars3CenterLeftIcon from '@heroicons/react/24/solid/Bars3CenterLeftIcon'
 
-import Drawer from "~/Components/organism/drawer";
+import Drawer from '~/Components/organism/drawer'
 
 type HeaderProps = {
-    headerClass: string;
-};
+    headerClass: string
+}
 
 const Header = ({ headerClass }: HeaderProps) => {
-    const [show, setShow] = useState<boolean>(false);
+    const [show, setShow] = useState<boolean>(false)
 
-    const divRef = useRef<HTMLDivElement>(null);
+    const divRef = useRef<HTMLDivElement>(null)
 
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         if (divRef?.current) {
@@ -31,10 +31,10 @@ const Header = ({ headerClass }: HeaderProps) => {
                 changeHeaderSize({
                     width: divRef.current.offsetWidth,
                     height: divRef.current.offsetHeight,
-                })
-            );
+                }),
+            )
         }
-    }, [dispatch]);
+    }, [dispatch])
 
     // const toggleMenuBtn = () => {
     //     var windowSize = document.documentElement.clientWidth;
@@ -67,12 +67,14 @@ const Header = ({ headerClass }: HeaderProps) => {
     //     }
     // };
 
-    const handleShow = () => setShow(!show);
-    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(!show)
+    const handleClose = () => setShow(false)
 
     return (
         <header
-            className={`dark:!bg-primary-700 mb-2 !bg-primary-500 mobile:fixed mobile:z-50 w-full `}
+            className={
+                'dark:!bg-primary-700 mb-2 !bg-primary-500 mobile:fixed mobile:z-50 w-full '
+            }
             ref={divRef}
         >
             <div className="flex w-full justify-between items-center px-4 mobile:px-2">
@@ -85,21 +87,15 @@ const Header = ({ headerClass }: HeaderProps) => {
                     <Bars3CenterLeftIcon className="h-6 w-6 text-white " />
                 </button>
 
-                <Drawer
-                    closeDrawer={handleClose}
-                    visibleDrawer={show}
-                />        
+                <Drawer closeDrawer={handleClose} visibleDrawer={show} />
                 <div className="flex items-center justify-center">
-                    <Link
-                        href="/"
-                        className="logo-light justify-center block"
-                    >
+                    <Link href="/" className="logo-light justify-center block">
                         <Image
                             src={lightLogo}
                             alt="Logo Pawkeepr Mode Light"
                             height={120}
                             width={120}
-                        />   
+                        />
 
                         {/* <Image
                             src={darkLogo}
@@ -110,7 +106,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                         />                             */}
                     </Link>
                 </div>
-                
+
                 <div className="flex align-center">
                     {/* LanguageDropdown */}
                     {/* <LanguageDropdown /> */}
@@ -135,7 +131,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                 {/* <SearchOption /> */}
             </div>
         </header>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

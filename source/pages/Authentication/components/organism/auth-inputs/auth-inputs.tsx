@@ -1,60 +1,56 @@
+import useAuth from '~/hooks/use-auth'
+import { useAppDispatch } from '~/store/hooks'
+import { onChangePassword, onChangeUsername } from '~/store/slices/auth/login/slice'
 
-import useAuth from "~/hooks/use-auth";
-import { useAppDispatch } from "~/store/hooks";
-import { onChangePassword, onChangeUsername } from "~/store/slices/auth/login/slice";
+import { ChangeEvent, useMemo } from 'react'
+import FieldControl from '~/Components/molecules/field-control'
 
-import { ChangeEvent, useMemo } from "react";
-import FieldControl from "~/Components/molecules/field-control";
+import { Form, Formik } from 'formik'
+import { SignInCredentials } from '~/services/helpers/auth'
 
-import { Form, Formik } from "formik";
-import { SignInCredentials } from "~/services/helpers/auth";
-
-import * as Yup from "yup";
-import { BtnLink, BtnPrimary } from "~/Components/atoms/btn";
-import FieldPassword from "~/Components/molecules/field-password/field-password";
-import LOADING from "~/constants/loading";
+import * as Yup from 'yup'
+import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'
+import FieldPassword from '~/Components/molecules/field-password/field-password'
+import LOADING from '~/constants/loading'
 
 const initialValues: SignInCredentials = {
-    username: "",
-    password: "",
-};
+    username: '',
+    password: '',
+}
 
 const validationSchema = Yup.object({
-    username: Yup.string().email().required("Este campo é obrigatório"),
-    password: Yup.string().required("Este campo é obrigatório"),
-});
+    username: Yup.string().email().required('Este campo é obrigatório'),
+    password: Yup.string().required('Este campo é obrigatório'),
+})
 
 const Auth = () => {
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch()
 
-    const {
-        signIn,
-        password,
-        username,
-        isAuthenticated,
-        isLoading,
-    } = useAuth();
+    const { signIn, password, username, isAuthenticated, isLoading } = useAuth()
 
     const handleSubmit = () => {
         signIn({
             username,
             password,
-        });
-    };
+        })
+    }
 
     const isValid: boolean = useMemo(() => {
-        return validationSchema.isValidSync({ password, username });
-    }, [password, username]);
+        return validationSchema.isValidSync({ password, username })
+    }, [password, username])
 
     const handleChangeUsername = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(onChangeUsername(e.target.value));
-    };
+        dispatch(onChangeUsername(e.target.value))
+    }
 
     const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(onChangePassword(e.target.value));
-    };
+        dispatch(onChangePassword(e.target.value))
+    }
 
-    const loading = useMemo(() => isLoading === LOADING.SUCCESS && isAuthenticated, [isLoading, isAuthenticated]);
+    const loading = useMemo(
+        () => isLoading === LOADING.SUCCESS && isAuthenticated,
+        [isLoading, isAuthenticated],
+    )
 
     return (
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
@@ -107,12 +103,10 @@ const Auth = () => {
                         data-testid="submit-button"
                         disabled={!isValid || loading}
                     />
-
-
                 </Form>
             )}
         </Formik>
-    );
-};
+    )
+}
 
-export default Auth;
+export default Auth

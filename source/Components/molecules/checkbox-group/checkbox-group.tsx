@@ -18,10 +18,18 @@ interface CheckboxGroupProps<T> extends React.HTMLAttributes<HTMLDivElement> {
     divClassName?: string
 }
 
-export default function CheckboxGroup<T>({ items = [], name, label, required, className, id, disabledError, divClassName, ...rest }: CheckboxGroupProps<T>) {
-
+export default function CheckboxGroup<T>({
+    items = [],
+    name,
+    label,
+    required,
+    className,
+    id,
+    disabledError,
+    divClassName,
+    ...rest
+}: CheckboxGroupProps<T>) {
     const [field, meta, helpers] = useField(name)
-
 
     const { setValue } = helpers
 
@@ -29,15 +37,15 @@ export default function CheckboxGroup<T>({ items = [], name, label, required, cl
 
     function setCheckboxValue(name: string) {
         if (!checkedValues.includes(name)) {
-            return setCheckedValues(values => {
+            return setCheckedValues((values) => {
                 const result = [...values, name]
                 setValue(result)
                 return result
             })
         }
 
-        setCheckedValues(values => {
-            const result = values.filter(element => element !== name)
+        setCheckedValues((values) => {
+            const result = values.filter((element) => element !== name)
             setValue(result)
             return result
         })
@@ -45,28 +53,23 @@ export default function CheckboxGroup<T>({ items = [], name, label, required, cl
 
     return (
         <div className={divClassName}>
-            <Label
-                label={label}
-                required={required}
-                id={id}
-                separator=':'
-            />
+            <Label label={label} required={required} id={id} separator=":" />
             <div className="flex items-center justify-center">
-                {
-                    items.map((item, index) => (
-                        <div className="flex flex-row items-center justify-center" key={index}>
-                            <Checkbox
-                                id={item.value}
-                                type="checkbox"
-                                checked={checkedValues.includes(item.value)}
-                                {...field}
-                                onChange={() => setCheckboxValue(item.value)}
-                            />
-                            <Label htmlFor={item.value} label={item.label} />
-
-                        </div>
-                    ))
-                }
+                {items.map((item, index) => (
+                    <div
+                        className="flex flex-row items-center justify-center"
+                        key={index}
+                    >
+                        <Checkbox
+                            id={item.value}
+                            type="checkbox"
+                            checked={checkedValues.includes(item.value)}
+                            {...field}
+                            onChange={() => setCheckboxValue(item.value)}
+                        />
+                        <Label htmlFor={item.value} label={item.label} />
+                    </div>
+                ))}
             </div>
         </div>
     )

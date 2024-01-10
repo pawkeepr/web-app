@@ -1,1 +1,1 @@
-export { default } from './confirm-account-form';
+export { default } from './confirm-account-form'

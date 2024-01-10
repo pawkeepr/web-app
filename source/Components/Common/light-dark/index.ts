@@ -1,1 +1,1 @@
-export { default } from './light-dark';
+export { default } from './light-dark'

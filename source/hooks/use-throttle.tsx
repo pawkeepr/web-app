@@ -1,22 +1,19 @@
-import { useRef } from 'react';
+import { useRef } from 'react'
 
-function useThrottle<T extends (...args: any[]) => any>(
-    func: T,
-    delay: number,
-): T {
-    const timeoutRef = useRef<NodeJS.Timeout>();
+function useThrottle<T extends (...args: any[]) => any>(func: T, delay: number): T {
+    const timeoutRef = useRef<NodeJS.Timeout>()
 
     function throttledFunc(this: any, ...args: any[]) {
         if (!timeoutRef.current) {
             timeoutRef.current = setTimeout(() => {
-                timeoutRef.current = undefined;
-            }, delay);
+                timeoutRef.current = undefined
+            }, delay)
 
-            return func.apply(this, args);
+            return func.apply(this, args)
         }
     }
 
-    return throttledFunc as T;
+    return throttledFunc as T
 }
 
-export default useThrottle;
+export default useThrottle

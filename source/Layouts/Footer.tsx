@@ -1,9 +1,9 @@
 // Import Images
-import Link from "next/link";
+import Link from 'next/link'
 
-import { FaInstagram } from "react-icons/fa";
-import { GrFacebookOption } from "react-icons/gr";
-import { RiLinkedinFill } from "react-icons/ri";
+import { FaInstagram } from 'react-icons/fa'
+import { GrFacebookOption } from 'react-icons/gr'
+import { RiLinkedinFill } from 'react-icons/ri'
 
 const Footer = () => {
     return (
@@ -41,7 +41,7 @@ const Footer = () => {
                 </div>
             </div>
         </footer>
-    );
-};
+    )
+}
 
-export default Footer;
+export default Footer

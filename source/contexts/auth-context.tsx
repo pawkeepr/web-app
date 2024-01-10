@@ -1,45 +1,45 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation';
-import { createContext, useEffect } from "react";
-import cookies from '~/constants/cookies';
-import LOADING from '~/constants/loading';
-import { decrypt, encrypt } from '~/helpers/encrypt-and-decrypt';
-import { useAppDispatch, useAppSelector } from '~/store/hooks';
+import { usePathname, useRouter } from 'next/navigation'
+import { createContext, useEffect } from 'react'
+import cookies from '~/constants/cookies'
+import LOADING from '~/constants/loading'
+import { decrypt, encrypt } from '~/helpers/encrypt-and-decrypt'
+import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import {
     recoverUserByToken,
     signInUser,
     signOutUser,
-} from '~/store/slices/auth/login/actions';
+} from '~/store/slices/auth/login/actions'
 import {
     LoginState,
     onChangePassword,
     onChangeRememberMe,
     onChangeUsername,
     onSetRememberMe,
-} from '~/store/slices/auth/login/slice';
-import { getCookie, setCookie } from '~/utils/cookies-utils';
+} from '~/store/slices/auth/login/slice'
+import { getCookie, setCookie } from '~/utils/cookies-utils'
 
 interface SignInData {
-    username: string;
-    password: string;
+    username: string
+    password: string
 }
 
 interface AuthContextType {
-    isAuthenticated: boolean;
-    user: any;
-    password: string;
-    username: string;
-    isLoading: LOADING;
-    rememberMe: boolean;
-    onToggleRememberMe: () => void;
-    signIn: (data: SignInData) => Promise<void>;
+    isAuthenticated: boolean
+    user: any
+    password: string
+    username: string
+    isLoading: LOADING
+    rememberMe: boolean
+    onToggleRememberMe: () => void
+    signIn: (data: SignInData) => Promise<void>
 }
 
-export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
 interface AuthProviderProps {
-    children: React.ReactNode;
+    children: React.ReactNode
 }
 
 const PUBLIC_ROUTES = [
@@ -49,19 +49,13 @@ const PUBLIC_ROUTES = [
     '/forgot-password',
     '/activation',
     '/logout',
-    '/confirm-account'
+    '/confirm-account',
 ]
 
 export function AuthProvider({ children }: AuthProviderProps) {
     const dispatch = useAppDispatch()
-    const {
-        user,
-        isAuthenticated,
-        isLoading,
-        password,
-        rememberMe,
-        username,
-    } = useAppSelector(state => state.Login as LoginState)
+    const { user, isAuthenticated, isLoading, password, rememberMe, username } =
+        useAppSelector((state) => state.Login as LoginState)
     const router = useRouter()
     const pathname = usePathname()
 
@@ -93,10 +87,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     async function setRememberInfo() {
-        const JSON_REMEMBER = JSON.stringify({ username, password: encrypt(password) })
+        const JSON_REMEMBER = JSON.stringify({
+            username,
+            password: encrypt(password),
+        })
 
         if (rememberMe) {
-            setCookie(cookies.remember.name, JSON_REMEMBER, cookies.remember.expires)
+            setCookie(
+                cookies.remember.name,
+                JSON_REMEMBER,
+                cookies.remember.expires,
+            )
         }
     }
 
@@ -112,7 +113,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         dispatch(onSetRememberMe(true))
         dispatch(onChangeUsername(username))
         dispatch(onChangePassword(decrypt(password)))
-
     }
 
     const onToggleRememberMe = () => {
@@ -134,6 +134,5 @@ export function AuthProvider({ children }: AuthProviderProps) {
         >
             {children}
         </AuthContext.Provider>
-    );
+    )
 }
-

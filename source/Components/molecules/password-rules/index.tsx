@@ -1,1 +1,1 @@
-export { default } from './password-rules';
+export { default } from './password-rules'
