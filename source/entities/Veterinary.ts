@@ -1,10 +1,4 @@
-import {
-    Contact,
-    DTOProfile,
-    IProfile,
-    Location,
-    ProfileUserInformation,
-} from '~/types/profile'
+import { Contact, DTOProfile, IProfile, Location } from '~/types/profile'
 
 export class Veterinary implements DTOProfile {
     id: string
@@ -89,7 +83,7 @@ export class Veterinary implements DTOProfile {
         return this
     }
 
-    private update(params: ProfileUserInformation) {
+    private update(params: DTOProfile) {
         return this.defineAddress(params.address)
             .defineContact(params.contact)
             .defineCpfCnpj(params.cpf_cnpj as string)
@@ -103,7 +97,15 @@ export class Veterinary implements DTOProfile {
         const veterinary = new Veterinary()
 
         if ((profile as IProfile).user_information) {
-            return veterinary.update((profile as IProfile).user_information)
+            const user_information = (profile as IProfile).user_information
+            const specialty_information = (profile as IProfile)
+                .specialty_information
+            return veterinary.update({
+                ...user_information,
+                ...profile,
+                id: profile.id as string,
+                specialty: specialty_information.specialty,
+            })
         }
 
         return veterinary.update(profile as DTOProfile)

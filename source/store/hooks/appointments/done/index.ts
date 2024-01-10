@@ -1,13 +1,13 @@
 import { getAllAppointmentsDone } from '~/services/helpers'
+import { VeterinaryConsultation } from '~/types/appointment'
 import useAppStore from '../../use-app-store'
-import { ScheduledResponseAxios } from '../types'
 
 const NAME = 'appointment-done'
 
 export const useAppointmentDone = () => {
     const superKeys = [NAME]
 
-    return useAppStore<ScheduledResponseAxios>({
+    return useAppStore<VeterinaryConsultation>({
         get: getAllAppointmentsDone.bind(null),
         keys: superKeys,
         name: NAME,

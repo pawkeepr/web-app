@@ -1,6 +1,5 @@
 import cn from 'classnames'
 import MyImage from '~/Components/atoms/my-image'
-import ViewAppointment from '~/Components/modals/view-appointment/modal-view-appointment'
 import ravena from '~/assets/images/ravena.jpeg'
 import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
 import BoxButtons from './box-buttons'
@@ -24,7 +23,7 @@ const CardScheduled = ({
 
     return (
         <div
-            key={appointment?.name_tutor}
+            key={appointment?.id}
             className={cn(
                 'bg-white relative flex flex-col cursor-pointer rounded-lg px-2 py-2 shadow-md focus:outline-none`',
                 {
@@ -49,7 +48,7 @@ const CardScheduled = ({
                                 <div className="p-2">
                                     <p className="text-gray-700 md:hidden">
                                         Nome do pet:{' '}
-                                        {appointment?.pet_data.name_pet}
+                                        {appointment?.tutor_pet_vet.pet?.name_pet}
                                     </p>
                                     <p className="text-gray-700">
                                         Data:{' '}
@@ -66,7 +65,11 @@ const CardScheduled = ({
                                         }
                                     </p>
                                     <p className="text-gray-700 md:hidden">
-                                        Contato:{appointment?.tutor_data.phone}
+                                        Contato:
+                                        {
+                                            appointment?.tutor_pet_vet.tutor
+                                                ?.contact?.phone
+                                        }
                                     </p>
                                 </div>
                             </div>
@@ -76,13 +79,19 @@ const CardScheduled = ({
 
                             <div className="p-2 ">
                                 <p className="text-gray-700">
-                                    Nome do pet: {appointment?.pet_data.name_pet}
+                                    Nome do pet:{' '}
+                                    {appointment?.tutor_pet_vet.pet?.name_pet}
                                 </p>
                                 <p className="text-gray-700">
-                                    Especie: {appointment?.pet_data.specie}
+                                    Especie:{' '}
+                                    {
+                                        appointment?.tutor_pet_vet.pet
+                                            ?.specie as string
+                                    }
                                 </p>
                                 <p className="text-gray-700">
-                                    Sexo: {appointment?.pet_data.sex}
+                                    Sexo:{' '}
+                                    {appointment?.tutor_pet_vet.pet?.sex as string}
                                 </p>
                                 <p className="text-gray-700">Microchip: 1294</p>
                             </div>
@@ -92,22 +101,25 @@ const CardScheduled = ({
 
                             <div className="p-2">
                                 <p className="text-gray-700">
-                                    Nome: {appointment?.tutor_data.name}
+                                    Nome: {appointment?.tutor_pet_vet.tutor?.name}
                                 </p>
                                 <p className="text-gray-700">
-                                    Nome: {appointment?.tutor_data.email}
+                                    Nome:{' '}
+                                    {
+                                        appointment?.tutor_pet_vet.tutor?.contact
+                                            ?.email
+                                    }
                                 </p>
                                 <p className="text-gray-700">
-                                    Contato: {appointment?.tutor_data.phone}
+                                    Contato:{' '}
+                                    {
+                                        appointment?.tutor_pet_vet.tutor?.contact
+                                            ?.phone
+                                    }
                                 </p>
                             </div>
                         </div>
                     </div>
-                    {checked && (
-                        <div className="flex justify-end text-white">
-                            <ViewAppointment props={appointment} />
-                        </div>
-                    )}
                 </div>
             </div>
 

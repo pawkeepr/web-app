@@ -8,7 +8,7 @@ const StepDone = () => {
 
     return (
         <div className="space-y-10 w-full">
-            {activeData?.scheduled?.map((appointment) => (
+            {activeData?.map((appointment) => (
                 <CardScheduled
                     key={appointment.id}
                     appointment={appointment}
