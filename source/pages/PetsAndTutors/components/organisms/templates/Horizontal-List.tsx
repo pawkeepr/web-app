@@ -59,7 +59,7 @@ const HorizontalTabs = () => {
                 <Tab.Panels className="mt-2 w-full">
                     {categories.map((item, idx) => (
                         <Tab.Panel
-                            key={idx}
+                            key={idx.toString()}
                             className={cn(
                                 'rounded-xl bg-white p-3',
                                 'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',

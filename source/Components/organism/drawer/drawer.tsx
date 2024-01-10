@@ -31,7 +31,7 @@ const items = [
         href: '/dashboard',
     },
     {
-        name: 'Pets/Tutores',
+        name: 'Pets / Tutores',
         icon: (
             <div className="flex justify-start">
                 <MdPets className="w-5 h-5" />
@@ -40,16 +40,6 @@ const items = [
         ),
         href: '/dashboard/pets-and-tutors',
     },
-    // {
-    //     name: 'Pets',
-    //     icon: <MdPets className="w-5 h-5" />,
-    //     href: '/dashboard/pets',
-    // },
-    // {
-    //     name: 'Tutores',
-    //     icon: <MdPerson className="w-5 h-5" />,
-    //     href: '/dashboard/tutors',
-    // },
     {
         name: 'Configurações',
         icon: <Cog8ToothIcon className="w-5 h-5" />,
@@ -114,7 +104,7 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                 <nav className="gap-1">
                     {items.map((item, index) => (
                         <Link
-                            key={index}
+                            key={index.toString()}
                             className={cn(buttonStyled, {
                                 'bg-gray-200 dark:bg-dark-600':
                                     pathname === item.href,
