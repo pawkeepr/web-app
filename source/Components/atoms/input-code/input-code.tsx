@@ -1,8 +1,8 @@
-import { InputProps, input } from '../input';
+import { InputProps, input } from '../input'
 
 type InputCodeProps = {
-    moveToNext: () => void;
-} & InputProps;
+    moveToNext: () => void
+} & InputProps
 
 const InputCode = ({
     moveToNext,
@@ -29,7 +29,7 @@ const InputCode = ({
                 {...rest}
             />
         </div>
-    );
-};
+    )
+}
 
-export default InputCode;
+export default InputCode

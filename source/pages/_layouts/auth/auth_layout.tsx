@@ -1,26 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
-import { StaticImageData } from 'next/image';
-import React from 'react';
-import HeaderTitle from '~/Components/atoms/header-title';
-import Footer from '~/Layouts/Footer';
+import { StaticImageData } from 'next/image'
+import React from 'react'
+import HeaderTitle from '~/Components/atoms/header-title'
+import Footer from '~/Layouts/Footer'
 
-import cn from 'classnames';
-import Img from '~/Components/atoms/img';
+import cn from 'classnames'
+import Img from '~/Components/atoms/img'
 
 type AuthLayoutProps = {
-    children: React.ReactNode;
-    title: string;
-    hasImage?: boolean;
+    children: React.ReactNode
+    title: string
+    hasImage?: boolean
 } & (
     | {
-          image: StaticImageData | string;
-          alt: string;
+          image: StaticImageData | string
+          alt: string
       }
     | {
-          image?: never;
-          alt?: never;
+          image?: never
+          alt?: never
       }
-);
+)
 
 const AuthLayout = ({
     children,
@@ -102,7 +102,7 @@ const AuthLayout = ({
             </main>
             <Footer />
         </div>
-    );
-};
+    )
+}
 
-export default AuthLayout;
+export default AuthLayout

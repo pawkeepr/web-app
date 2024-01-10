@@ -1,42 +1,39 @@
-import { BtnPrimary } from '~/Components/atoms/btn';
-import FieldControl from '~/Components/molecules/field-control/field-control';
-import LOADING from '~/constants/loading';
-import { useAppDispatch, useAppSelector } from '~/store/hooks';
+import { BtnPrimary } from '~/Components/atoms/btn'
+import FieldControl from '~/Components/molecules/field-control/field-control'
+import LOADING from '~/constants/loading'
+import { useAppDispatch, useAppSelector } from '~/store/hooks'
 
-import { FormEventHandler, useEffect } from 'react';
-import {
-    forgetPwd,
-    resetLoading,
-} from '~/store/slices/auth/forget-pwd/actions';
+import { FormEventHandler, useEffect } from 'react'
+import { forgetPwd, resetLoading } from '~/store/slices/auth/forget-pwd/actions'
 
-import Alert from '~/Components/atoms/alert';
-import validateEmail from '~/validations/email';
+import Alert from '~/Components/atoms/alert'
+import validateEmail from '~/validations/email'
 
 type StepEmailProps = {
-    email: string;
-    onChangeNextTab: () => void;
-};
+    email: string
+    onChangeNextTab: () => void
+}
 
 const StepEmail = ({ email, onChangeNextTab }: StepEmailProps) => {
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch()
 
-    const isLoading = useAppSelector((state) => state.ForgetPassword.isLoading);
+    const isLoading = useAppSelector((state) => state.ForgetPassword.isLoading)
 
     useEffect(() => {
         if (isLoading === LOADING.SUCCESS) {
-            dispatch(resetLoading());
+            dispatch(resetLoading())
             setTimeout(() => {
-                onChangeNextTab();
-            }, 1000);
+                onChangeNextTab()
+            }, 1000)
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading]);
+    }, [isLoading])
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-        e.preventDefault();
-        dispatch(forgetPwd({ email }));
-    };
+        e.preventDefault()
+        dispatch(forgetPwd({ email }))
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -68,7 +65,7 @@ const StepEmail = ({ email, onChangeNextTab }: StepEmailProps) => {
                 />
             </div>
         </form>
-    );
-};
+    )
+}
 
-export default StepEmail;
+export default StepEmail

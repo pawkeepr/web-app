@@ -1,1 +1,1 @@
-export { default } from './add-tutor-modal';
+export { default } from './add-tutor-modal'

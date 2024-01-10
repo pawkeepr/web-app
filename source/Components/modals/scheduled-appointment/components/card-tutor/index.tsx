@@ -1,16 +1,16 @@
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp } from 'react-icons/fa'
 
 type CardTutorProps = {
     tutor: {
-        name_tutor: string;
-        cpf_tutor: string;
+        name_tutor: string
+        cpf_tutor: string
         contact_tutor: {
-            email: string | null;
-            phone: string | null;
-            whatsapp: string | null;
-        };
-    };
-};
+            email: string | null
+            phone: string | null
+            whatsapp: string | null
+        }
+    }
+}
 
 const CardTutor = ({ tutor }: CardTutorProps) => {
     return (
@@ -41,7 +41,7 @@ const CardTutor = ({ tutor }: CardTutorProps) => {
                 </p>
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default CardTutor;
+export default CardTutor

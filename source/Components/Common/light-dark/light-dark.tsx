@@ -1,13 +1,13 @@
-import { layoutModeTypes } from '~/Components/constants/layout';
+import { layoutModeTypes } from '~/Components/constants/layout'
 
-import useChangeLayoutMode from '~/hooks/use-change-layout-mode';
+import useChangeLayoutMode from '~/hooks/use-change-layout-mode'
 
-import MoonIcon from '@heroicons/react/24/solid/MoonIcon';
-import SunIcon from '@heroicons/react/24/solid/SunIcon';
+import MoonIcon from '@heroicons/react/24/solid/MoonIcon'
+import SunIcon from '@heroicons/react/24/solid/SunIcon'
 
 const LightDark = () => {
-    const { mode, onHandleChangeLayout } = useChangeLayoutMode();
-    const isLightMode = mode === layoutModeTypes.LIGHT_MODE;
+    const { mode, onHandleChangeLayout } = useChangeLayoutMode()
+    const isLightMode = mode === layoutModeTypes.LIGHT_MODE
 
     return (
         <div className="flex">
@@ -21,7 +21,7 @@ const LightDark = () => {
                 </span>
             </button>
         </div>
-    );
-};
+    )
+}
 
-export default LightDark;
+export default LightDark

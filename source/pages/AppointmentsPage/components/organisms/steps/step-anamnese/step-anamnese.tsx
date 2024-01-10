@@ -1,60 +1,54 @@
-import { useEffect, useMemo } from 'react';
-import { BtnPrimary } from '~/Components/atoms/btn';
-import FieldArraySafe from '~/Components/molecules/field-array-safe';
-import { OptionSelect } from '~/Components/molecules/field-control';
-import FieldNumber from '~/Components/molecules/field-number';
-import CardInputAnamnese from '~/Components/organism/card-input-anamnese';
-import { questions } from '~/constants/anamnese-questions';
-import useFormikContextSafe from '~/hooks/use-formik-context-safe';
-import { StepProps, Tabs } from '~/types/helpers';
+import { useEffect, useMemo } from 'react'
+import { BtnPrimary } from '~/Components/atoms/btn'
+import FieldArraySafe from '~/Components/molecules/field-array-safe'
+import { OptionSelect } from '~/Components/molecules/field-control'
+import FieldNumber from '~/Components/molecules/field-number'
+import CardInputAnamnese from '~/Components/organism/card-input-anamnese'
+import { questions } from '~/constants/anamnese-questions'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { StepProps, Tabs } from '~/types/helpers'
 import {
     CtxStepAnamnese,
     schemaStepAnamneseValidation,
-} from '../../../validations.yup';
+} from '../../../validations.yup'
 
 const TranslationOptions = {
     yes: 'Sim',
     no: 'Não',
     other: 'Outro',
-} as const;
+} as const
 
 // Função para calcular o IMC de um animal
 // height: altura em centímetros
 // weight: peso em quilos
 function calcularIMC(height: number, weight: number): number {
     if (height === 0 || weight === 0) {
-        return 0; // Evita divisão por zero
+        return 0 // Evita divisão por zero
     }
 
-    const heightInMeters = height / 100; // Converter altura para metros
+    const heightInMeters = height / 100 // Converter altura para metros
 
-    const imc = weight / (heightInMeters * heightInMeters); // Converter altura para metros
-    return imc;
+    const imc = weight / (heightInMeters * heightInMeters) // Converter altura para metros
+    return imc
 }
 
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setFieldValue, errors } =
-        useFormikContextSafe<CtxStepAnamnese>();
+        useFormikContextSafe<CtxStepAnamnese>()
 
-    const height = useMemo(
-        () => values.details_pet_consultation?.height,
-        [values],
-    );
-    const weight = useMemo(
-        () => values.details_pet_consultation?.weight,
-        [values],
-    );
+    const height = useMemo(() => values.details_pet_consultation?.height, [values])
+    const weight = useMemo(() => values.details_pet_consultation?.weight, [values])
 
     useEffect(() => {
         if (height && weight) {
-            const imc = calcularIMC(Number(height), Number(weight));
-            setFieldValue('details_pet_consultation.imc', imc);
+            const imc = calcularIMC(Number(height), Number(weight))
+            setFieldValue('details_pet_consultation.imc', imc)
         }
-    }, [height, weight]);
+    }, [height, weight])
 
     const isValid = useMemo(() => {
-        return schemaStepAnamneseValidation.isValidSync(values);
-    }, [values]);
+        return schemaStepAnamneseValidation.isValidSync(values)
+    }, [values])
 
     return (
         <section className="card card-body shadow-lg">
@@ -148,15 +142,15 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                             items={questions}
                             handleSubmit={async (data, formikHelpers) => {
                                 const { label, type } =
-                                    data.type_anamnesis as OptionSelect;
+                                    data.type_anamnesis as OptionSelect
 
                                 push({
                                     ...data,
                                     name_anamnesis: label,
                                     type_anamnesis: type,
-                                });
+                                })
 
-                                formikHelpers.resetForm();
+                                formikHelpers.resetForm()
                             }}
                         />
                     </>
@@ -168,12 +162,12 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                     label="Próximo"
                     disabled={!isValid}
                     onClick={() => {
-                        toggleTab((activeTab + 1) as Tabs);
+                        toggleTab((activeTab + 1) as Tabs)
                     }}
                 />
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default StepAnamnese;
+export default StepAnamnese

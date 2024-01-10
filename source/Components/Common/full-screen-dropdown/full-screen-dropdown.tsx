@@ -1,20 +1,20 @@
-import ArrowsPointingInIcon from '@heroicons/react/24/solid/ArrowsPointingInIcon';
-import ArrowsPointingOutIcon from '@heroicons/react/24/solid/ArrowsPointingOutIcon';
+import ArrowsPointingInIcon from '@heroicons/react/24/solid/ArrowsPointingInIcon'
+import ArrowsPointingOutIcon from '@heroicons/react/24/solid/ArrowsPointingOutIcon'
 
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 const FullScreenDropdown = () => {
     /*
     mode
     */
-    const [isFullScreenMode, setIsFullScreenMode] = useState(true);
+    const [isFullScreenMode, setIsFullScreenMode] = useState(true)
 
     /*
     full screen
     */
     const toggleFullscreen = () => {
-        const document: any = window.document;
-        document.body.classList.add('fullscreen-enable');
+        const document: any = window.document
+        document.body.classList.add('fullscreen-enable')
 
         if (
             !document.fullscreenElement &&
@@ -22,22 +22,22 @@ const FullScreenDropdown = () => {
             !document.webkitFullscreenElement
         ) {
             // current working methods
-            setIsFullScreenMode(false);
+            setIsFullScreenMode(false)
             if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
+                document.documentElement.requestFullscreen()
             } else if (document.documentElement.mozRequestFullScreen) {
-                document.documentElement.mozRequestFullScreen();
+                document.documentElement.mozRequestFullScreen()
             } else if (document.documentElement.webkitRequestFullscreen) {
-                document.documentElement.webkitRequestFullscreen();
+                document.documentElement.webkitRequestFullscreen()
             }
         } else {
-            setIsFullScreenMode(true);
+            setIsFullScreenMode(true)
             if (document.cancelFullScreen) {
-                document.cancelFullScreen();
+                document.cancelFullScreen()
             } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen();
+                document.mozCancelFullScreen()
             } else if (document.webkitCancelFullScreen) {
-                document.webkitCancelFullScreen();
+                document.webkitCancelFullScreen()
             }
         }
 
@@ -48,12 +48,12 @@ const FullScreenDropdown = () => {
                 !document.mozFullScreen &&
                 !document.msFullscreenElement
             )
-                document.body.classList.remove('fullscreen-enable');
-        };
-        document.addEventListener('fullscreenchange', exitHandler);
-        document.addEventListener('webkitfullscreenchange', exitHandler);
-        document.addEventListener('mozfullscreenchange', exitHandler);
-    };
+                document.body.classList.remove('fullscreen-enable')
+        }
+        document.addEventListener('fullscreenchange', exitHandler)
+        document.addEventListener('webkitfullscreenchange', exitHandler)
+        document.addEventListener('mozfullscreenchange', exitHandler)
+    }
     return (
         <React.Fragment>
             <div className="flex mobile:hidden">
@@ -71,7 +71,7 @@ const FullScreenDropdown = () => {
                 </button>
             </div>
         </React.Fragment>
-    );
-};
+    )
+}
 
-export default FullScreenDropdown;
+export default FullScreenDropdown

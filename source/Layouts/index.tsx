@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import image from '../../styles/assets/images/landing/bg-pattern.png';
+import PlusIcon from '@heroicons/react/24/solid/PlusIcon'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
+import image from '../../styles/assets/images/landing/bg-pattern.png'
 
-import cookies from '~/constants/cookies';
+import cookies from '~/constants/cookies'
 
 //import Components
-import Footer from './Footer';
-import Header from './Header';
+import Footer from './Footer'
+import Header from './Header'
 
 //import actions
 import {
@@ -22,20 +22,20 @@ import {
     changeSidebarImageType,
     changeSidebarTheme,
     changeTopBarTheme,
-} from '../store/slices/layouts/slice';
+} from '../store/slices/layouts/slice'
 
 //redux
-import cn from 'classnames';
-import FieldDocumentAppointment from '~/Components/molecules/field-document-appointment';
-import { useAppDispatch, useAppSelector } from '~/store/hooks';
-import { getCookie } from '~/utils/cookies-utils';
+import cn from 'classnames'
+import FieldDocumentAppointment from '~/Components/molecules/field-document-appointment'
+import { useAppDispatch, useAppSelector } from '~/store/hooks'
+import { getCookie } from '~/utils/cookies-utils'
 
 type LayoutProps = {
-    children: React.ReactNode;
-};
+    children: React.ReactNode
+}
 
 const Layout = ({ children }: LayoutProps) => {
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch()
     const {
         layoutType,
         leftSidebarType,
@@ -46,13 +46,12 @@ const Layout = ({ children }: LayoutProps) => {
         leftSideBarSizeType,
         leftSidebarViewType,
         leftSidebarImageType,
-        headerSize,
-    } = useAppSelector((state) => state.Layout);
+    } = useAppSelector((state) => state.Layout)
 
     useEffect(() => {
-        const mode = getCookie(cookies.layoutMode.name);
-        dispatch(changeLayoutMode(mode));
-    }, []);
+        const mode = getCookie(cookies.layoutMode.name)
+        dispatch(changeLayoutMode(mode))
+    }, [])
 
     /*
     layout settings
@@ -69,15 +68,15 @@ const Layout = ({ children }: LayoutProps) => {
             leftSidebarViewType ||
             leftSidebarImageType
         ) {
-            dispatch(changeSideBarView(leftSidebarViewType));
-            dispatch(changeSideBarSizeType(leftSideBarSizeType));
-            dispatch(changeSidebarTheme(leftSidebarType));
-            dispatch(changeLayoutMode(layoutModeType));
-            dispatch(changeLayoutWidth(layoutWidthType));
-            dispatch(changeLayoutPosition(layoutPositionType));
-            dispatch(changeTopBarTheme(topBarThemeType));
-            dispatch(changeLayout(layoutType));
-            dispatch(changeSidebarImageType(leftSidebarImageType));
+            dispatch(changeSideBarView(leftSidebarViewType))
+            dispatch(changeSideBarSizeType(leftSideBarSizeType))
+            dispatch(changeSidebarTheme(leftSidebarType))
+            dispatch(changeLayoutMode(layoutModeType))
+            dispatch(changeLayoutWidth(layoutWidthType))
+            dispatch(changeLayoutPosition(layoutPositionType))
+            dispatch(changeTopBarTheme(topBarThemeType))
+            dispatch(changeLayout(layoutType))
+            dispatch(changeSidebarImageType(leftSidebarImageType))
         }
     }, [
         layoutType,
@@ -90,20 +89,20 @@ const Layout = ({ children }: LayoutProps) => {
         leftSidebarViewType,
         leftSidebarImageType,
         dispatch,
-    ]);
+    ])
 
-    const [headerClass, setHeaderClass] = useState('');
+    const [headerClass, setHeaderClass] = useState('')
     // class add remove in header
     useEffect(() => {
-        window.addEventListener('scroll', scrollNavigation, true);
-    });
+        window.addEventListener('scroll', scrollNavigation, true)
+    })
 
     function scrollNavigation() {
-        const scrollUp = document.documentElement.scrollTop;
+        const scrollUp = document.documentElement.scrollTop
         if (scrollUp > 50) {
-            setHeaderClass('topBar-shadow');
+            setHeaderClass('topBar-shadow')
         } else {
-            setHeaderClass('');
+            setHeaderClass('')
         }
     }
 
@@ -128,6 +127,7 @@ const Layout = ({ children }: LayoutProps) => {
                 <FieldDocumentAppointment selectedTabInitial={0}>
                     {({ onChangeOpen }) => (
                         <button
+                            type="button"
                             onClick={() => onChangeOpen(true)}
                             className="
                                 bg-primary-600 p-3 rounded-full 
@@ -146,11 +146,11 @@ const Layout = ({ children }: LayoutProps) => {
                 <Footer />
             </div>
         </div>
-    );
-};
+    )
+}
 
 Layout.propTypes = {
     children: PropTypes.object,
-};
+}
 
-export default Layout;
+export default Layout

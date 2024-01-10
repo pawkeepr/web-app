@@ -1,3 +1,3 @@
-import FieldTextArea from './field-text-area';
+import FieldTextArea from './field-text-area'
 
-export default FieldTextArea;
+export default FieldTextArea

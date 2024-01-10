@@ -14,7 +14,7 @@ const LoaderPending = () => {
                 </h2>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default LoaderPending;
+export default LoaderPending

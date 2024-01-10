@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Modal, ModalBody } from 'reactstrap';
+import PropTypes from 'prop-types'
+import React from 'react'
+import { Modal, ModalBody } from 'reactstrap'
 
 const DeleteModal = ({ show, onDeleteClick, onCloseClick }) => {
     return (
@@ -40,13 +40,13 @@ const DeleteModal = ({ show, onDeleteClick, onCloseClick }) => {
                 </div>
             </ModalBody>
         </Modal>
-    );
-};
+    )
+}
 
 DeleteModal.propTypes = {
     onCloseClick: PropTypes.func,
     onDeleteClick: PropTypes.func,
     show: PropTypes.any,
-};
+}
 
-export default DeleteModal;
+export default DeleteModal

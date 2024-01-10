@@ -1,18 +1,15 @@
-import { Form } from 'formik';
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
-import FieldControl from '~/Components/molecules/field-control';
-import useFormikContextSafe from '~/hooks/use-formik-context-safe';
-import { InitialValues } from '~/pages/NewPetPage';
-import { StepProps } from '~/types/helpers';
+import { Form } from 'formik'
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import FieldControl from '~/Components/molecules/field-control'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { InitialValues } from '~/pages/NewPetPage'
+import { StepProps } from '~/types/helpers'
 
-type StepHealthInsuranceKeys = Pick<InitialValues, 'health_insurance'>;
+type StepHealthInsuranceKeys = Pick<InitialValues, 'health_insurance'>
 
-export default function StepHealthInsurance({
-    toggleTab,
-    activeTab,
-}: StepProps) {
+export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps) {
     const { handleSubmit, isSubmitting } =
-        useFormikContextSafe<StepHealthInsuranceKeys>();
+        useFormikContextSafe<StepHealthInsuranceKeys>()
 
     return (
         <Form className="mb-4" onSubmit={handleSubmit}>
@@ -51,7 +48,7 @@ export default function StepHealthInsurance({
                     condition={!isSubmitting}
                     label="Voltar"
                     onClick={() => {
-                        toggleTab(activeTab - 1);
+                        toggleTab(activeTab - 1)
                     }}
                 />
                 <BtnPrimary
@@ -61,5 +58,5 @@ export default function StepHealthInsurance({
                 />
             </div>
         </Form>
-    );
+    )
 }

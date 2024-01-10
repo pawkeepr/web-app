@@ -1,1 +1,1 @@
-export { default } from './card-input-treatment';
+export { default } from './card-input-treatment'

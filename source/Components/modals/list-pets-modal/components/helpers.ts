@@ -1,4 +1,4 @@
-import { tv } from 'tailwind-variants';
+import { tv } from 'tailwind-variants'
 
 export const option = tv({
     base: `
@@ -12,4 +12,4 @@ export const option = tv({
             false: 'text-gray-600',
         },
     },
-});
+})

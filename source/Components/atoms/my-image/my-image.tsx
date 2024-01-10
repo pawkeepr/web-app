@@ -1,18 +1,18 @@
-import type { ImageProps, StaticImageData } from 'next/image';
-import Image from 'next/image';
-import { useState } from 'react';
+import type { ImageProps, StaticImageData } from 'next/image'
+import Image from 'next/image'
+import { useState } from 'react'
 
-import user from '~/assets/images/users/user-dummy-img.jpg';
+import user from '~/assets/images/users/user-dummy-img.jpg'
 
 type MyImageProps = {
-    width?: number;
-    height?: number;
-    fill?: boolean;
-    src: string | StaticImageData;
-} & ImageProps;
+    width?: number
+    height?: number
+    fill?: boolean
+    src: string | StaticImageData
+} & ImageProps
 
 const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(false)
 
     return (
         <>
@@ -36,7 +36,7 @@ const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
                 />
             )}
         </>
-    );
-};
+    )
+}
 
-export default MyImage;
+export default MyImage

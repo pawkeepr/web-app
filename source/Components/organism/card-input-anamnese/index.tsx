@@ -1,1 +1,1 @@
-export { default } from './card-input-anamnese';
+export { default } from './card-input-anamnese'

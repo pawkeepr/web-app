@@ -21,7 +21,7 @@ export const exams = [
     'Exame oftalmológico',
     'Exame de imagem por ressonância magnética (MRI)',
     'Exame de imagem por tomografia computadorizada (TC)',
-];
+]
 
 export enum Exams {
     HemogramaCompleto = 'Hemograma Completo',

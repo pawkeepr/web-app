@@ -1,1 +1,1 @@
-export { default } from './answer-radio';
+export { default } from './answer-radio'

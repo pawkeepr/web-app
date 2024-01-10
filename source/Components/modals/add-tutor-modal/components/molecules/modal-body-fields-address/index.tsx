@@ -1,31 +1,31 @@
-import { useFormikContext } from 'formik';
-import { useCallback, useState } from 'react';
-import FieldCep from '~/Components/molecules/field-cep';
-import FieldControl from '~/Components/molecules/field-control/field-control';
-import { IAddress } from '~/helpers/fetch-address-by-cep';
-import useFetchAddress from '~/hooks/use-fetch-address';
+import { useFormikContext } from 'formik'
+import { useCallback, useState } from 'react'
+import FieldCep from '~/Components/molecules/field-cep'
+import FieldControl from '~/Components/molecules/field-control/field-control'
+import { IAddress } from '~/helpers/fetch-address-by-cep'
+import useFetchAddress from '~/hooks/use-fetch-address'
 
 const ModalBodyFieldsAddress = () => {
-    const { values, setFieldValue } = useFormikContext<any>();
+    const { values, setFieldValue } = useFormikContext<any>()
     const [disabledInputs, setDisabledInputs] = useState({
         state: false,
         city: false,
         neighborhood: false,
         street: false,
         complement: false,
-    });
+    })
 
     const updateAddressFields = useCallback(
         (address: IAddress) => {
-            if (!address) return;
+            if (!address) return
 
-            const { uf, localidade, bairro, logradouro, complemento } = address;
+            const { uf, localidade, bairro, logradouro, complemento } = address
 
-            setFieldValue('state', uf || '');
-            setFieldValue('city', localidade || '');
-            setFieldValue('neighborhood', bairro || '');
-            setFieldValue('street', logradouro || '');
-            setFieldValue('complement', complemento || '');
+            setFieldValue('state', uf || '')
+            setFieldValue('city', localidade || '')
+            setFieldValue('neighborhood', bairro || '')
+            setFieldValue('street', logradouro || '')
+            setFieldValue('complement', complemento || '')
 
             setDisabledInputs({
                 state: !!uf,
@@ -33,15 +33,15 @@ const ModalBodyFieldsAddress = () => {
                 neighborhood: !!bairro,
                 street: !!logradouro,
                 complement: !!complemento,
-            });
+            })
         },
         [setFieldValue],
-    );
+    )
 
     const { loading } = useFetchAddress({
         zipCode: values?.cep || '',
         onChangeAddress: updateAddressFields,
-    });
+    })
 
     return (
         <div className="grid grid-cols-3 ">
@@ -109,7 +109,7 @@ const ModalBodyFieldsAddress = () => {
                 placeholder={loading ? 'buscando...' : 'Complemento (opcional)'}
             />
         </div>
-    );
-};
+    )
+}
 
-export default ModalBodyFieldsAddress;
+export default ModalBodyFieldsAddress

@@ -1,12 +1,12 @@
-import cn from 'classnames';
-import { FaWhatsapp } from 'react-icons/fa';
-import MyImage from '~/Components/atoms/my-image';
-import { Tutor } from '~/store/slices/tutors/types';
+import cn from 'classnames'
+import { FaWhatsapp } from 'react-icons/fa'
+import MyImage from '~/Components/atoms/my-image'
+import { Tutor } from '~/store/slices/tutors/types'
 
 type CardTutorsProps = {
-    tutor: Tutor;
-    checked?: boolean;
-};
+    tutor: Tutor
+    checked?: boolean
+}
 
 const CardTutor = ({ tutor, checked }: CardTutorsProps) => {
     return (
@@ -74,7 +74,7 @@ const CardTutor = ({ tutor, checked }: CardTutorsProps) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default CardTutor;
+export default CardTutor

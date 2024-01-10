@@ -1,7 +1,7 @@
-const date = new Date();
-const d = date.getDate();
-const m = date.getMonth();
-const y = date.getFullYear();
+const date = new Date()
+const d = date.getDate()
+const m = date.getMonth()
+const y = date.getFullYear()
 
 const defaultevent = [
     {
@@ -103,7 +103,7 @@ const defaultevent = [
         description: 'N.A.',
         location: 'N.A.',
     },
-];
+]
 
 const events = [
     {
@@ -220,7 +220,7 @@ const events = [
         },
         description: 'Tell how to boost website traffic',
     },
-];
+]
 
 const calenderDefaultCategories = [
     {
@@ -243,6 +243,6 @@ const calenderDefaultCategories = [
         title: 'Create New theme',
         type: 'danger',
     },
-];
+]
 
-export { calenderDefaultCategories, events, defaultevent };
+export { calenderDefaultCategories, events, defaultevent }

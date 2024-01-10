@@ -1,22 +1,22 @@
-import { useFormikContext } from 'formik';
+import { useFormikContext } from 'formik'
 
-import { useMemo } from 'react';
+import { useMemo } from 'react'
 
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select';
-import { sub_specialty } from '~/common/data/sub-specialtys';
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
+import { sub_specialty } from '~/common/data/sub-specialtys'
 
-import CheckboxGroup from '~/Components/molecules/checkbox-group';
-import { ActivateAccount } from '~/validations/activate';
-import { StepProps } from './types';
+import CheckboxGroup from '~/Components/molecules/checkbox-group'
+import { ActivateAccount } from '~/validations/activate'
+import { StepProps } from './types'
 
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 
 const options = sub_specialty.map((item) => ({
     value: item,
     label: item,
     color: 'rgb(255 200 107);',
-}));
+}))
 
 const validate = Yup.object().shape({
     specialty: Yup.object({
@@ -30,28 +30,20 @@ const validate = Yup.object().shape({
         .min(1, 'Selecione pelo menos uma sub especialidade')
         .of(
             Yup.object().shape({
-                value: Yup.string().required(
-                    'O campo especialidade é obrigatório',
-                ),
-                label: Yup.string().required(
-                    'O campo especialidade é obrigatório',
-                ),
+                value: Yup.string().required('O campo especialidade é obrigatório'),
+                label: Yup.string().required('O campo especialidade é obrigatório'),
             }),
         ),
-});
+})
 
-const StepActivationSpecialty = ({
-    nextStep,
-    prevStep,
-    ...rest
-}: StepProps) => {
-    const { values } = useFormikContext<ActivateAccount>();
+const StepActivationSpecialty = ({ nextStep, prevStep, ...rest }: StepProps) => {
+    const { values } = useFormikContext<ActivateAccount>()
 
     const requiredValid = useMemo((): boolean => {
-        const isValid = validate.isValidSync(values);
+        const isValid = validate.isValidSync(values)
 
-        return isValid;
-    }, [values]);
+        return isValid
+    }, [values])
 
     // useNextStep(nextStep, requiredValid);
 
@@ -101,7 +93,7 @@ const StepActivationSpecialty = ({
                 />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default StepActivationSpecialty;
+export default StepActivationSpecialty

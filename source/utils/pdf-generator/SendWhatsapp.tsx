@@ -1,9 +1,9 @@
-import axios from 'axios';
-import { Component } from 'react';
+import axios from 'axios'
+import { Component } from 'react'
 
 class SendWhatsapp extends Component {
-    accountSid = 'sua-account-sid'; // Substituir com valor real
-    authToken = 'seu-auth-token'; // Substituir com valor real
+    accountSid = 'sua-account-sid' // Substituir com valor real
+    authToken = 'seu-auth-token' // Substituir com valor real
     // client =  require('twilio')(this.accountSid, this.authToken);
 
     send = (pdfAppointment: any) => {
@@ -19,8 +19,8 @@ class SendWhatsapp extends Component {
                 body: pdfAppointment,
                 to: 'whatsapp:+557996733389',
             },
-        });
-    };
+        })
+    }
 }
 
-export default SendWhatsapp;
+export default SendWhatsapp

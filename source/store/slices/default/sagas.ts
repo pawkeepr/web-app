@@ -1,18 +1,18 @@
-import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
 
-import { getAllFail, getAllSuccess } from './actions';
+import { getAllFail, getAllSuccess } from './actions'
 
-import { getConsults } from '~/services/helpers';
+import { getConsults } from '~/services/helpers'
 
 //Include Both Helper File with needed methods
-import { ACTION_GET_ALL } from './types';
+import { ACTION_GET_ALL } from './types'
 
 export function* onGetAll() {
     try {
-        const { data: actives } = yield call(getConsults);
-        yield put(getAllSuccess(actives));
+        const { data: actives } = yield call(getConsults)
+        yield put(getAllSuccess(actives))
     } catch (error) {
-        yield put(getAllFail(error as any));
+        yield put(getAllFail(error as any))
     }
 }
 
@@ -61,7 +61,7 @@ export function* onGetAll() {
 // }
 
 export function* watchGetAll() {
-    yield takeEvery(ACTION_GET_ALL, onGetAll);
+    yield takeEvery(ACTION_GET_ALL, onGetAll)
 }
 
 // export function* watchUpdate() {
@@ -87,7 +87,7 @@ function* crmSaga() {
         // // fork(watchDelete),
         // fork(watchAddNew),
         // fork(watchToggleStatus),
-    ]);
+    ])
 }
 
-export default crmSaga;
+export default crmSaga

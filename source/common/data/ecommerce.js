@@ -1,21 +1,21 @@
 /** Product 1 */
-import product2 from '~/assets/images/products/img-2.png';
-import product3 from '~/assets/images/products/img-3.png';
-import product7 from '~/assets/images/products/img-7.png';
-import product8 from '~/assets/images/products/img-8.png';
+import product2 from '~/assets/images/products/img-2.png'
+import product3 from '~/assets/images/products/img-3.png'
+import product7 from '~/assets/images/products/img-7.png'
+import product8 from '~/assets/images/products/img-8.png'
 
-import img10 from '~/assets/images/small/img-10.jpg';
-import img11 from '~/assets/images/small/img-11.jpg';
-import img12 from '~/assets/images/small/img-12.jpg';
+import img10 from '~/assets/images/small/img-10.jpg'
+import img11 from '~/assets/images/small/img-11.jpg'
+import img12 from '~/assets/images/small/img-12.jpg'
 
-import company1 from '~/assets/images/companies/img-1.png';
-import company2 from '~/assets/images/companies/img-2.png';
-import company3 from '~/assets/images/companies/img-3.png';
-import company4 from '~/assets/images/companies/img-4.png';
-import company5 from '~/assets/images/companies/img-5.png';
-import company6 from '~/assets/images/companies/img-6.png';
-import company7 from '~/assets/images/companies/img-7.png';
-import company8 from '~/assets/images/companies/img-8.png';
+import company1 from '~/assets/images/companies/img-1.png'
+import company2 from '~/assets/images/companies/img-2.png'
+import company3 from '~/assets/images/companies/img-3.png'
+import company4 from '~/assets/images/companies/img-4.png'
+import company5 from '~/assets/images/companies/img-5.png'
+import company6 from '~/assets/images/companies/img-6.png'
+import company7 from '~/assets/images/companies/img-7.png'
+import company8 from '~/assets/images/companies/img-8.png'
 
 const productsData = [
     {
@@ -174,7 +174,7 @@ const productsData = [
         publishedDate: ['06 Jan, 2021', '01:31 PM'],
         categories: 'furniture',
     },
-];
+]
 
 // Ecommerce > Product Details
 const productDetailsWidgets = [
@@ -202,7 +202,7 @@ const productDetailsWidgets = [
         label: 'Total Revenue',
         labelDetail: '$60,645',
     },
-];
+]
 
 const reviews = [
     {
@@ -238,7 +238,7 @@ const reviews = [
         name: 'Jimmy',
         date: '24 Jun, 21',
     },
-];
+]
 
 // Ecommerce > Orders
 
@@ -399,7 +399,7 @@ const orders = [
         status: 'Cancelled',
         statusClass: 'danger',
     },
-];
+]
 
 // Ecommerce > Order Details
 
@@ -434,7 +434,7 @@ const productDetails = [
         quantity: '01',
         amount: '$24.99',
     },
-];
+]
 
 // Ecommerce > Customers
 
@@ -559,7 +559,7 @@ const customerList = [
         status: 'Active',
         statusClass: 'success',
     },
-];
+]
 
 // Ecommerce > Shopping Cart
 
@@ -594,7 +594,7 @@ const shoppingCart = [
         price: 24.99,
         total: 24.99,
     },
-];
+]
 
 // Ecommerce > Checkout
 
@@ -623,7 +623,7 @@ const orderSummary = [
         quantity: 1,
         total: 24.99,
     },
-];
+]
 
 // Ecommerce > Sellers
 
@@ -724,7 +724,7 @@ const sellersList = [
         balance: '$97,642',
         category: 'Retailer',
     },
-];
+]
 
 // Ecommerce > Seller Details > Revenue
 
@@ -766,7 +766,7 @@ const revenueWidgets = [
         separator: '',
         suffix: '%',
     },
-];
+]
 
 // Ecommerce > Seller Details > Products Review
 
@@ -823,7 +823,7 @@ const productsReview = [
             { id: 5, icon: 'ri-star-line' },
         ],
     },
-];
+]
 
 export {
     productsData,
@@ -837,4 +837,4 @@ export {
     sellersList,
     revenueWidgets,
     productsReview,
-};
+}

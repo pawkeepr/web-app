@@ -1,12 +1,12 @@
 // Import Images
-import avatar1 from '~/assets/images/users/avatar-1.jpg';
-import avatar2 from '~/assets/images/users/avatar-2.jpg';
-import avatar3 from '~/assets/images/users/avatar-3.jpg';
-import avatar4 from '~/assets/images/users/avatar-4.jpg';
-import avatar5 from '~/assets/images/users/avatar-5.jpg';
-import avatar6 from '~/assets/images/users/avatar-6.jpg';
-import avatar7 from '~/assets/images/users/avatar-7.jpg';
-import avatar8 from '~/assets/images/users/avatar-8.jpg';
+import avatar1 from '~/assets/images/users/avatar-1.jpg'
+import avatar2 from '~/assets/images/users/avatar-2.jpg'
+import avatar3 from '~/assets/images/users/avatar-3.jpg'
+import avatar4 from '~/assets/images/users/avatar-4.jpg'
+import avatar5 from '~/assets/images/users/avatar-5.jpg'
+import avatar6 from '~/assets/images/users/avatar-6.jpg'
+import avatar7 from '~/assets/images/users/avatar-7.jpg'
+import avatar8 from '~/assets/images/users/avatar-8.jpg'
 
 const crmWidgets = [
     {
@@ -61,7 +61,7 @@ const crmWidgets = [
         suffix: '',
         prefix: '',
     },
-];
+]
 
 const dealsStatus = [
     {
@@ -114,7 +114,7 @@ const dealsStatus = [
         status: 'New Lead',
         statusValue: '$78.9K',
     },
-];
+]
 
 const tasks = [
     {
@@ -153,7 +153,7 @@ const tasks = [
         text: 'Styling wireframe design and documentation for velzon admin',
         date: '27 Sep, 2021',
     },
-];
+]
 
 const activities = [
     {
@@ -213,7 +213,7 @@ const activities = [
         imgNumber: '9',
         bgcolor: 'bg-warning',
     },
-];
+]
 
 const closingDeals = [
     {
@@ -256,7 +256,7 @@ const closingDeals = [
         amount: '89.5',
         closeDate: '20 Sep 2021',
     },
-];
+]
 
 const todayBalanceData = [
     {
@@ -267,7 +267,7 @@ const todayBalanceData = [
         name: 'Expenses',
         data: [12, 17, 75, 82, 44, 35, 52, 75, 112, 108, 56, 289],
     },
-];
+]
 
 const lastWeekBalanceData = [
     {
@@ -278,7 +278,7 @@ const lastWeekBalanceData = [
         name: 'Expenses',
         data: [32, 37, 65, 22, 44, 85, 42, 75, 122, 118, 156, 199],
     },
-];
+]
 
 const lastMonthBalanceData = [
     {
@@ -289,7 +289,7 @@ const lastMonthBalanceData = [
         name: 'Expenses',
         data: [22, 37, 25, 62, 34, 75, 142, 145, 122, 108, 136, 199],
     },
-];
+]
 
 const currentYearBalanceData = [
     {
@@ -300,7 +300,7 @@ const currentYearBalanceData = [
         name: 'Expenses',
         data: [12, 17, 45, 42, 24, 35, 42, 75, 102, 108, 156, 199],
     },
-];
+]
 
 // Deal Type
 
@@ -317,7 +317,7 @@ const todayDealData = [
         name: 'Won',
         data: [22, 37, 39, 3, 23, 5],
     },
-];
+]
 
 const weeklyDealData = [
     {
@@ -332,7 +332,7 @@ const weeklyDealData = [
         name: 'Won',
         data: [24, 56, 58, 43, 23, 30],
     },
-];
+]
 
 const monthlyDealData = [
     {
@@ -347,7 +347,7 @@ const monthlyDealData = [
         name: 'Won',
         data: [44, 76, 78, 13, 43, 10],
     },
-];
+]
 
 const yealyDealData = [
     {
@@ -362,7 +362,7 @@ const yealyDealData = [
         name: 'Won',
         data: [14, 56, 48, 33, 63, 50],
     },
-];
+]
 
 const octData = [
     {
@@ -377,7 +377,7 @@ const octData = [
         name: 'Revenue',
         data: [37],
     },
-];
+]
 
 const novData = [
     {
@@ -392,7 +392,7 @@ const novData = [
         name: 'Revenue',
         data: [18],
     },
-];
+]
 
 const decData = [
     {
@@ -407,7 +407,7 @@ const decData = [
         name: 'Revenue',
         data: [27],
     },
-];
+]
 
 const janData = [
     {
@@ -422,7 +422,7 @@ const janData = [
         name: 'Revenue',
         data: [32],
     },
-];
+]
 
 export {
     crmWidgets,
@@ -442,4 +442,4 @@ export {
     novData,
     decData,
     janData,
-};
+}

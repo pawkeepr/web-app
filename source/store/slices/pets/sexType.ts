@@ -11,4 +11,4 @@ export const genderValues = [
         label: 'Desconhecido',
         value: 'unknown',
     },
-];
+]

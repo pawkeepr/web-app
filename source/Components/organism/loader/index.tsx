@@ -1,5 +1,5 @@
-import * as ReactLoader from 'react-loader-spinner';
-import withControl from '~/Components/helpers/with-control';
+import * as ReactLoader from 'react-loader-spinner'
+import withControl from '~/Components/helpers/with-control'
 
 export type KeysLoading =
     | 'Audio'
@@ -19,23 +19,23 @@ export type KeysLoading =
     | 'TailSpin'
     | 'ThreeDots'
     | 'Triangle'
-    | 'Watch';
+    | 'Watch'
 
 type LoadingProps = {
-    size?: string | number;
-    type?: KeysLoading;
-    color?: string;
-    height?: string;
-};
+    size?: string | number
+    type?: KeysLoading
+    color?: string
+    height?: string
+}
 
 const Loading = ({ size, type = 'Audio', color = '#09b285' }: LoadingProps) => {
-    const Component = ReactLoader[type];
+    const Component = ReactLoader[type]
 
     return (
         <div className={'flex w-full justify-center items-center'}>
             <Component color={color} height={size} width={size} />
         </div>
-    );
-};
+    )
+}
 
-export default withControl(Loading);
+export default withControl(Loading)

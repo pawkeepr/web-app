@@ -1,26 +1,26 @@
 // Import Images
-import smallImage1 from '~/assets/images/small/img-1.jpg';
-import smallImage2 from '~/assets/images/small/img-2.jpg';
-import smallImage3 from '~/assets/images/small/img-3.jpg';
-import smallImage4 from '~/assets/images/small/img-4.jpg';
-import smallImage5 from '~/assets/images/small/img-5.jpg';
-import smallImage6 from '~/assets/images/small/img-6.jpg';
-import smallImage7 from '~/assets/images/small/img-7.jpg';
-import smallImage8 from '~/assets/images/small/img-8.jpg';
-import smallImage9 from '~/assets/images/small/img-9.jpg';
-import smallImage10 from '~/assets/images/small/img-10.jpg';
-import smallImage11 from '~/assets/images/small/img-11.jpg';
-import smallImage12 from '~/assets/images/small/img-12.jpg';
+import smallImage1 from '~/assets/images/small/img-1.jpg'
+import smallImage2 from '~/assets/images/small/img-2.jpg'
+import smallImage3 from '~/assets/images/small/img-3.jpg'
+import smallImage4 from '~/assets/images/small/img-4.jpg'
+import smallImage5 from '~/assets/images/small/img-5.jpg'
+import smallImage6 from '~/assets/images/small/img-6.jpg'
+import smallImage7 from '~/assets/images/small/img-7.jpg'
+import smallImage8 from '~/assets/images/small/img-8.jpg'
+import smallImage9 from '~/assets/images/small/img-9.jpg'
+import smallImage10 from '~/assets/images/small/img-10.jpg'
+import smallImage11 from '~/assets/images/small/img-11.jpg'
+import smallImage12 from '~/assets/images/small/img-12.jpg'
 
 //User Images
-import avatar1 from '~/assets/images/users/avatar-1.jpg';
-import avatar2 from '~/assets/images/users/avatar-2.jpg';
-import avatar3 from '~/assets/images/users/avatar-3.jpg';
-import avatar4 from '~/assets/images/users/avatar-4.jpg';
-import avatar5 from '~/assets/images/users/avatar-5.jpg';
-import avatar6 from '~/assets/images/users/avatar-6.jpg';
-import avatar7 from '~/assets/images/users/avatar-7.jpg';
-import avatar8 from '~/assets/images/users/avatar-8.jpg';
+import avatar1 from '~/assets/images/users/avatar-1.jpg'
+import avatar2 from '~/assets/images/users/avatar-2.jpg'
+import avatar3 from '~/assets/images/users/avatar-3.jpg'
+import avatar4 from '~/assets/images/users/avatar-4.jpg'
+import avatar5 from '~/assets/images/users/avatar-5.jpg'
+import avatar6 from '~/assets/images/users/avatar-6.jpg'
+import avatar7 from '~/assets/images/users/avatar-7.jpg'
+import avatar8 from '~/assets/images/users/avatar-8.jpg'
 
 const gallery = [
     {
@@ -140,15 +140,14 @@ const gallery = [
         comments: '1.3K',
         category: 'Photography',
     },
-];
+]
 
 const pricing1 = [
     {
         id: 1,
         type: 'Starter',
         rate: 19,
-        description:
-            'The perfect way to get started and get used to our tools.',
+        description: 'The perfect way to get started and get used to our tools.',
         projects: 3,
         Customers: 299,
         FTP: 5,
@@ -227,7 +226,7 @@ const pricing1 = [
         rateYear: '441',
         delrateYear: '588',
     },
-];
+]
 
 const pricing2 = [
     {
@@ -290,7 +289,7 @@ const pricing2 = [
         icon: 'ri-stack-line',
         btntxt: 'Get started',
     },
-];
+]
 
 const pricing3 = [
     {
@@ -337,7 +336,7 @@ const pricing3 = [
         support: 'Yes',
         ribbon: false,
     },
-];
+]
 
 const projects = [
     {
@@ -608,7 +607,7 @@ const projects = [
         ],
         cardBorderColor: 'primary',
     },
-];
+]
 
 const document = [
     {
@@ -665,7 +664,7 @@ const document = [
         fileSize: '879 KB',
         updatedDate: '02 Nov 2021',
     },
-];
+]
 
 const SearchGallery = [
     {
@@ -764,7 +763,7 @@ const SearchGallery = [
         likes: '2.2K',
         comments: '1.3K',
     },
-];
+]
 
 const news = [
     {
@@ -839,7 +838,7 @@ const news = [
         auther: 'Elwood Arter',
         date: '10 Aug, 2021',
     },
-];
+]
 
 const video = [
     {
@@ -875,7 +874,7 @@ const video = [
         comments: 51,
         auther: 'Themesbrand',
     },
-];
+]
 
 const swiper = [
     {
@@ -923,7 +922,7 @@ const swiper = [
         img: smallImage3,
         title: 'Dark',
     },
-];
+]
 
 const team = [
     {
@@ -1049,7 +1048,7 @@ const team = [
         bgColor: 'success',
         textColor: 'success',
     },
-];
+]
 
 export {
     gallery,
@@ -1063,4 +1062,4 @@ export {
     video,
     swiper,
     team,
-};
+}

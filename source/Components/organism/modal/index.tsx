@@ -1,10 +1,10 @@
-import { RefAttributes } from 'react';
-import Popup from 'reactjs-popup';
-import { PopupActions, PopupProps } from 'reactjs-popup/dist/types';
+import { RefAttributes } from 'react'
+import Popup from 'reactjs-popup'
+import { PopupActions, PopupProps } from 'reactjs-popup/dist/types'
 
-import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon';
+import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
 
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge'
 
 const Modal = ({
     className,
@@ -45,6 +45,6 @@ const Modal = ({
             {props.children}
         </div>
     </Popup>
-);
+)
 
-export default Modal;
+export default Modal

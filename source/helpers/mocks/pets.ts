@@ -1,29 +1,29 @@
-import MockAdapter from 'axios-mock-adapter/types';
-import { getCookie, setCookie } from '~/utils/cookies-utils';
+import MockAdapter from 'axios-mock-adapter/types'
+import { getCookie, setCookie } from '~/utils/cookies-utils'
 
-import { faker } from '@faker-js/faker';
-import { CatBloodType } from '~/store/slices/pets/bloodType';
-import { CatBreed } from '~/store/slices/pets/breedType';
-import { Species } from '~/store/slices/pets/speciesType';
-import { Pet } from '~/store/slices/pets/types';
-import * as url from '../url_helper';
+import { faker } from '@faker-js/faker'
+import { CatBloodType } from '~/store/slices/pets/bloodType'
+import { CatBreed } from '~/store/slices/pets/breedType'
+import { Species } from '~/store/slices/pets/speciesType'
+import { Pet } from '~/store/slices/pets/types'
+import * as url from '../url_helper'
 
-import _ from 'lodash';
+import _ from 'lodash'
 
 const factoryBreeds = (species: Species): string => {
     if (species === Species.cat) {
         // escolha aleatória de uma raça de gato com lodash
-        const breed = _.sample(Object.values(CatBreed));
-        return breed || CatBreed.ViraLata;
+        const breed = _.sample(Object.values(CatBreed))
+        return breed || CatBreed.ViraLata
     }
-    return CatBreed.ViraLata;
-};
+    return CatBreed.ViraLata
+}
 
 const factoryBloodType = (): string => {
     // escolha aleatória de um tipo sanguíneo de gato
-    const bloodType = _.sample(Object.values(CatBloodType));
-    return bloodType || CatBloodType.A;
-};
+    const bloodType = _.sample(Object.values(CatBloodType))
+    return bloodType || CatBloodType.A
+}
 
 const factoryPet = (document?: string, name?: string): Pet => ({
     id: faker.string.uuid(),
@@ -71,7 +71,7 @@ const factoryPet = (document?: string, name?: string): Pet => ({
     castrated: faker.datatype.boolean(),
     dateOfCastration: faker.date.past().toLocaleString(),
     dateOfAdoption: faker.date.past().toLocaleString(),
-});
+})
 
 const pets: Array<Pet> = [
     ...Array(10)
@@ -80,54 +80,54 @@ const pets: Array<Pet> = [
     ...Array(3)
         .fill(0)
         .map(() => factoryPet('00000000000', 'Murilo Montino')),
-];
+]
 
 const getPets = () => {
     try {
-        const cookie = getCookie('pets-mock');
-        return (cookie || pets) as Array<any>;
+        const cookie = getCookie('pets-mock')
+        return (cookie || pets) as Array<any>
     } catch (error) {
-        console.log(error);
-        return pets;
+        console.log(error)
+        return pets
     }
-};
+}
 
 function factoryMockPets(adapter: MockAdapter) {
     adapter.onGet(url.GET_PETS).reply((config) => {
-        const pets = getPets();
+        const pets = getPets()
 
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                return resolve([200, { data: pets }]);
-            }, 1000);
-        });
-    });
+                return resolve([200, { data: pets }])
+            }, 1000)
+        })
+    })
 
     adapter.onPost(url.ADD_PETS).reply((config) => {
-        const pet = JSON.parse(config.data);
+        const pet = JSON.parse(config.data)
 
-        const pets = getPets();
+        const pets = getPets()
 
         return new Promise((resolve, reject) => {
             const newPet = {
                 id: faker.string.uuid(),
                 created_at: Date.now().toLocaleString(),
                 ...pet,
-            };
-            pets.push(newPet);
+            }
+            pets.push(newPet)
 
             try {
-                const maxAge = 60 * 60 * 24 * 30;
-                setCookie('pets-mock', JSON.stringify(pets), maxAge);
+                const maxAge = 60 * 60 * 24 * 30
+                setCookie('pets-mock', JSON.stringify(pets), maxAge)
             } catch (error) {
-                console.log(error);
+                console.log(error)
             }
 
             setTimeout(() => {
-                return resolve([200, { data: newPet }]);
-            }, 2500);
-        });
-    });
+                return resolve([200, { data: newPet }])
+            }, 2500)
+        })
+    })
 }
 
-export default factoryMockPets;
+export default factoryMockPets

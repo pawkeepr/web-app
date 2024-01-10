@@ -7,7 +7,7 @@ const FooterAuth = () => {
                 </div>
             </div>
         </footer>
-    );
-};
+    )
+}
 
-export default FooterAuth;
+export default FooterAuth

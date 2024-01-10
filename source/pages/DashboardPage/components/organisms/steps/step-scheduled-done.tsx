@@ -1,10 +1,10 @@
-import { useAppointmentDone } from '~/store/hooks/appointments';
-import CardScheduled from '../organisms/card-scheduled';
+import { useAppointmentDone } from '~/store/hooks/appointments'
+import CardScheduled from '../organisms/card-scheduled'
 
 const StepDone = () => {
-    const { activeData, isLoading } = useAppointmentDone();
+    const { activeData, isLoading } = useAppointmentDone()
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <div>Loading...</div>
 
     return (
         <div className="space-y-10 w-full">
@@ -16,7 +16,7 @@ const StepDone = () => {
                 />
             ))}
         </div>
-    );
-};
+    )
+}
 
-export default StepDone;
+export default StepDone

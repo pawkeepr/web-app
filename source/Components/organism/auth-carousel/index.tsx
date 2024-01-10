@@ -1,14 +1,14 @@
-import React from 'react';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { Col } from 'reactstrap';
+import React from 'react'
+import { Carousel } from 'react-responsive-carousel'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import { Col } from 'reactstrap'
 
 // Import Images
 
 type AuthSliderProps = {
-    bg?: 'auth-bg-image' | 'auth-bg-image-2' | 'auth-bg-image-3';
-    classNames?: string;
-};
+    bg?: 'auth-bg-image' | 'auth-bg-image-2' | 'auth-bg-image-3'
+    classNames?: string
+}
 
 const AuthSlider = ({ bg = 'auth-bg-image', classNames }: AuthSliderProps) => {
     return (
@@ -49,7 +49,7 @@ const AuthSlider = ({ bg = 'auth-bg-image', classNames }: AuthSliderProps) => {
                 </div>
             </Col>
         </React.Fragment>
-    );
-};
+    )
+}
 
-export default AuthSlider;
+export default AuthSlider

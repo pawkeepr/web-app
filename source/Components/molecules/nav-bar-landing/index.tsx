@@ -1,31 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { BtnLink } from '~/Components/atoms/btn';
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { BtnLink } from '~/Components/atoms/btn'
 
-import ArrowRightOnRectangleIcon from '@heroicons/react/24/solid/ArrowRightOnRectangleIcon';
+import ArrowRightOnRectangleIcon from '@heroicons/react/24/solid/ArrowRightOnRectangleIcon'
 
 const NavbarLanding = () => {
     // const [isOpenMenu, setIsOpenMenu] = useState(false);
-    const [actionScroll, setActionScroll] = useState(false);
+    const [actionScroll, setActionScroll] = useState(false)
 
     // const toggle = () => setIsOpenMenu(!isOpenMenu);
 
     useEffect(() => {
-        window.addEventListener('scroll', scrollNavigation, true);
-    }, []);
+        window.addEventListener('scroll', scrollNavigation, true)
+    }, [])
 
     const scrollNavigation = () => {
-        const scrollUp = document.documentElement.scrollTop;
+        const scrollUp = document.documentElement.scrollTop
 
         if (scrollUp > 100) {
-            setActionScroll(true);
+            setActionScroll(true)
         } else {
-            setActionScroll(false);
+            setActionScroll(false)
         }
-    };
+    }
 
     return (
         <header>
@@ -125,7 +125,7 @@ const NavbarLanding = () => {
                 </div>
             </nav>
         </header>
-    );
-};
+    )
+}
 
-export default NavbarLanding;
+export default NavbarLanding

@@ -1,17 +1,17 @@
 // Import Images
-import avatar1 from '~/assets/images/users/avatar-1.jpg';
-import avatar2 from '~/assets/images/users/avatar-2.jpg';
-import avatar3 from '~/assets/images/users/avatar-3.jpg';
-import avatar4 from '~/assets/images/users/avatar-4.jpg';
-import avatar5 from '~/assets/images/users/avatar-5.jpg';
-import avatar6 from '~/assets/images/users/avatar-6.jpg';
-import avatar7 from '~/assets/images/users/avatar-7.jpg';
-import avatar8 from '~/assets/images/users/avatar-8.jpg';
+import avatar1 from '~/assets/images/users/avatar-1.jpg'
+import avatar2 from '~/assets/images/users/avatar-2.jpg'
+import avatar3 from '~/assets/images/users/avatar-3.jpg'
+import avatar4 from '~/assets/images/users/avatar-4.jpg'
+import avatar5 from '~/assets/images/users/avatar-5.jpg'
+import avatar6 from '~/assets/images/users/avatar-6.jpg'
+import avatar7 from '~/assets/images/users/avatar-7.jpg'
+import avatar8 from '~/assets/images/users/avatar-8.jpg'
 
-import btcCoin from '~/assets/images/svg/crypto-icons/btc.svg';
-import dashCoin from '~/assets/images/svg/crypto-icons/dash.svg';
-import ethCoin from '~/assets/images/svg/crypto-icons/eth.svg';
-import ltcCoin from '~/assets/images/svg/crypto-icons/ltc.svg';
+import btcCoin from '~/assets/images/svg/crypto-icons/btc.svg'
+import dashCoin from '~/assets/images/svg/crypto-icons/dash.svg'
+import ethCoin from '~/assets/images/svg/crypto-icons/eth.svg'
+import ltcCoin from '~/assets/images/svg/crypto-icons/ltc.svg'
 
 const tileBoxs1 = [
     {
@@ -78,7 +78,7 @@ const tileBoxs1 = [
         separator: ',',
         suffix: 'k',
     },
-];
+]
 
 const tileBoxs2 = [
     {
@@ -133,7 +133,7 @@ const tileBoxs2 = [
         suffix: '',
         prefix: '',
     },
-];
+]
 
 const tileBoxs3 = [
     {
@@ -224,7 +224,7 @@ const tileBoxs3 = [
             },
         ],
     },
-];
+]
 
 const tileBoxes4 = [
     {
@@ -297,7 +297,7 @@ const tileBoxes4 = [
         suffix: 'k',
         prefix: '',
     },
-];
+]
 
 const otherWidgets2 = [
     {
@@ -390,7 +390,7 @@ const otherWidgets2 = [
             { id: 3, width: '15%' },
         ],
     },
-];
+]
 
 const widgetsActivities = [
     {
@@ -446,7 +446,7 @@ const widgetsActivities = [
             { id: 4, imgNumber: '9', bgcolor: 'bg-warning' },
         ],
     },
-];
+]
 
 const widgetsTasks = [
     {
@@ -485,7 +485,7 @@ const widgetsTasks = [
         text: 'Styling wireframe design and documentation for velzon admin',
         date: '27 Sep, 2021',
     },
-];
+]
 
 const widgetsAudiences = [
     {
@@ -529,7 +529,7 @@ const widgetsAudiences = [
         ],
         caption: 'Avg. Ses. Duration',
     },
-];
+]
 
 const widgetsPortfolio = [
     {
@@ -576,7 +576,7 @@ const widgetsPortfolio = [
         priceClass: 'success',
         coinNameClass: 'success',
     },
-];
+]
 
 export {
     tileBoxs1,
@@ -588,4 +588,4 @@ export {
     widgetsAudiences,
     widgetsPortfolio,
     otherWidgets2,
-};
+}

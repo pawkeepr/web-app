@@ -1,8 +1,8 @@
-import { useFormikContext } from 'formik';
-import BoxButtons from '~/Components/molecules/box-buttons/box-buttons';
-import { Species, species } from '~/store/slices/pets/speciesType';
-import { InitialValues, StepProps } from '../../types';
-import { option } from '../helpers';
+import { useFormikContext } from 'formik'
+import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
+import { Species, species } from '~/store/slices/pets/speciesType'
+import { InitialValues, StepProps } from '../../types'
+import { option } from '../helpers'
 
 enum EmojiPet {
     Gato = '🐱',
@@ -14,15 +14,15 @@ enum EmojiPet {
     Cavalo = '🐴',
 }
 
-type Key = keyof typeof EmojiPet;
+type Key = keyof typeof EmojiPet
 
 const StepListSpecies = ({ nextStep, previousStep }: StepProps) => {
-    const { setFieldValue, values } = useFormikContext<InitialValues>();
+    const { setFieldValue, values } = useFormikContext<InitialValues>()
 
     const handleSelectedSpecie = (specie: Species) => {
-        setFieldValue('specie', specie);
-        nextStep();
-    };
+        setFieldValue('specie', specie)
+        nextStep()
+    }
 
     return (
         <div className="mt-3 p-1 gap-2">
@@ -56,7 +56,7 @@ const StepListSpecies = ({ nextStep, previousStep }: StepProps) => {
                 onClickSuccess={nextStep}
             />
         </div>
-    );
-};
+    )
+}
 
-export default StepListSpecies;
+export default StepListSpecies

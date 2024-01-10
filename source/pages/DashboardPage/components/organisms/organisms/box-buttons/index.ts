@@ -1,1 +1,1 @@
-export { default } from './box-buttons';
+export { default } from './box-buttons'

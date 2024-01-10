@@ -1,11 +1,11 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
 type LogoSimpleProps = {
-    size?: number;
-    href?: string;
-    mb?: string;
-} & React.HTMLAttributes<HTMLDivElement>;
+    size?: number
+    href?: string
+    mb?: string
+} & React.HTMLAttributes<HTMLDivElement>
 
 const LogoSimple = ({
     href = '/dashboard',
@@ -26,7 +26,7 @@ const LogoSimple = ({
                 />
             </Link>
         </div>
-    );
-};
+    )
+}
 
-export default LogoSimple;
+export default LogoSimple

@@ -1,17 +1,17 @@
-import { Field } from 'formik';
-import { checkbox } from '~/Components/atoms/checkbox';
-import Label from '~/Components/atoms/label';
-import { ObjPaths } from '~/types/helpers';
+import { Field } from 'formik'
+import { checkbox } from '~/Components/atoms/checkbox'
+import Label from '~/Components/atoms/label'
+import { ObjPaths } from '~/types/helpers'
 
 interface RadioGroupProps<T, Ctx = undefined>
     extends React.HTMLAttributes<HTMLDivElement> {
-    items: (T & { name: string; value: unknown })[];
-    ctx?: Ctx extends undefined ? never : Ctx;
-    name: Ctx extends undefined ? string : ObjPaths<Ctx>;
-    title: string;
-    required?: boolean;
-    separator?: string;
-    checked?: string | number | object;
+    items: (T & { name: string; value: unknown })[]
+    ctx?: Ctx extends undefined ? never : Ctx
+    name: Ctx extends undefined ? string : ObjPaths<Ctx>
+    title: string
+    required?: boolean
+    separator?: string
+    checked?: string | number | object
 }
 
 export default function RadioGroup<T, Ctx = undefined>({
@@ -63,5 +63,5 @@ export default function RadioGroup<T, Ctx = undefined>({
                 ))}
             </div>
         </div>
-    );
+    )
 }

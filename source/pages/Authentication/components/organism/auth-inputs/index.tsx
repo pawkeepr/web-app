@@ -1,1 +1,1 @@
-export { default } from './auth-inputs';
+export { default } from './auth-inputs'

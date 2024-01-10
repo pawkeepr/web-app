@@ -1,15 +1,15 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
+import Row from 'react-bootstrap/Row'
 
 const ProfessionalExperience = () => {
-    const currentYear = new Date().getFullYear();
+    const currentYear = new Date().getFullYear()
     const listOfYears = Array.from(
         { length: 100 },
         (_, index) => currentYear - index,
-    );
+    )
     return (
         <Form>
             <div id="newlink">
@@ -70,30 +70,18 @@ const ProfessionalExperience = () => {
                                                     id="experienceYear"
                                                     defaultValue=""
                                                 >
-                                                    <option value="">
-                                                        Mês
-                                                    </option>
+                                                    <option value="">Mês</option>
                                                     <option value="1">
                                                         Janeiro
                                                     </option>
                                                     <option value="2">
                                                         Fevereiro
                                                     </option>
-                                                    <option value="3">
-                                                        Março
-                                                    </option>
-                                                    <option value="4">
-                                                        Abril
-                                                    </option>
-                                                    <option value="5">
-                                                        Maio
-                                                    </option>
-                                                    <option value="6">
-                                                        Junho
-                                                    </option>
-                                                    <option value="7">
-                                                        Julho
-                                                    </option>
+                                                    <option value="3">Março</option>
+                                                    <option value="4">Abril</option>
+                                                    <option value="5">Maio</option>
+                                                    <option value="6">Junho</option>
+                                                    <option value="7">Julho</option>
                                                     <option value="8">
                                                         Agosto
                                                     </option>
@@ -124,19 +112,15 @@ const ProfessionalExperience = () => {
                                                     name="choices-single-default2"
                                                     defaultValue=""
                                                 >
-                                                    <option value="">
-                                                        Ano
-                                                    </option>
-                                                    {listOfYears?.map(
-                                                        (year) => (
-                                                            <option
-                                                                key={year}
-                                                                value={year}
-                                                            >
-                                                                {year}
-                                                            </option>
-                                                        ),
-                                                    )}
+                                                    <option value="">Ano</option>
+                                                    {listOfYears?.map((year) => (
+                                                        <option
+                                                            key={year}
+                                                            value={year}
+                                                        >
+                                                            {year}
+                                                        </option>
+                                                    ))}
                                                 </Form.Select>
                                             </Col>
                                         </Row>
@@ -161,30 +145,18 @@ const ProfessionalExperience = () => {
                                                     id="experienceYear"
                                                     defaultValue=""
                                                 >
-                                                    <option value="">
-                                                        Mês
-                                                    </option>
+                                                    <option value="">Mês</option>
                                                     <option value="1">
                                                         Janeiro
                                                     </option>
                                                     <option value="2">
                                                         Fevereiro
                                                     </option>
-                                                    <option value="3">
-                                                        Março
-                                                    </option>
-                                                    <option value="4">
-                                                        Abril
-                                                    </option>
-                                                    <option value="5">
-                                                        Maio
-                                                    </option>
-                                                    <option value="6">
-                                                        Junho
-                                                    </option>
-                                                    <option value="7">
-                                                        Julho
-                                                    </option>
+                                                    <option value="3">Março</option>
+                                                    <option value="4">Abril</option>
+                                                    <option value="5">Maio</option>
+                                                    <option value="6">Junho</option>
+                                                    <option value="7">Julho</option>
                                                     <option value="8">
                                                         Agosto
                                                     </option>
@@ -214,19 +186,15 @@ const ProfessionalExperience = () => {
                                                     data-choices-search-false
                                                     name="choices-single-default2"
                                                 >
-                                                    <option value="">
-                                                        Ano
-                                                    </option>
-                                                    {listOfYears?.map(
-                                                        (year) => (
-                                                            <option
-                                                                key={year}
-                                                                value={year}
-                                                            >
-                                                                {year}
-                                                            </option>
-                                                        ),
-                                                    )}
+                                                    <option value="">Ano</option>
+                                                    {listOfYears?.map((year) => (
+                                                        <option
+                                                            key={year}
+                                                            value={year}
+                                                        >
+                                                            {year}
+                                                        </option>
+                                                    ))}
                                                 </Form.Select>
                                             </Col>
                                         </Row>
@@ -268,7 +236,7 @@ const ProfessionalExperience = () => {
                 </div>
             </Col>
         </Form>
-    );
-};
+    )
+}
 
-export default ProfessionalExperience;
+export default ProfessionalExperience

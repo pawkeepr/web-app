@@ -1,14 +1,14 @@
-import { useField } from 'formik';
+import { useField } from 'formik'
 
-import cn from 'classnames';
+import cn from 'classnames'
 
-import Input from '../../atoms/text-area';
+import Input from '../../atoms/text-area'
 
-import { ChangeEvent } from 'react';
-import { twMerge } from 'tailwind-merge';
-import Label from '~/Components/atoms/label';
-import withControl from '~/Components/helpers/with-control';
-import { InputControlProps } from '../field-control';
+import { ChangeEvent } from 'react'
+import { twMerge } from 'tailwind-merge'
+import Label from '~/Components/atoms/label'
+import withControl from '~/Components/helpers/with-control'
+import { InputControlProps } from '../field-control'
 
 const FieldTextArea = <T, Ctx>({
     endIcon,
@@ -24,19 +24,19 @@ const FieldTextArea = <T, Ctx>({
     ctx,
     ...rest
 }: InputControlProps<T, Ctx>) => {
-    const [field, meta] = useField(rest.name as string);
-    const id = rest.id || rest.name;
-    const ComponentInput = input as JSX.ElementType;
-    const error = meta.touched && meta.error;
+    const [field, meta] = useField(rest.name as string)
+    const id = rest.id || rest.name
+    const ComponentInput = input as JSX.ElementType
+    const error = meta.touched && meta.error
 
     const handleChange = (
         e: ChangeEvent<HTMLInputElement> &
             ChangeEvent<HTMLSelectElement> &
             ChangeEvent<HTMLTextAreaElement>,
     ) => {
-        onChange?.(e);
-        field.onChange(e);
-    };
+        onChange?.(e)
+        field.onChange(e)
+    }
 
     return (
         <div {...div} className={twMerge('w-full', div?.className)}>
@@ -83,7 +83,7 @@ const FieldTextArea = <T, Ctx>({
                 </div>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default (withControl(FieldTextArea) as typeof FieldTextArea);
+export default (withControl(FieldTextArea) as typeof FieldTextArea)

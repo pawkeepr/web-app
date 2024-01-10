@@ -1,8 +1,8 @@
-import ReactSelect, { Props } from 'react-select';
+import ReactSelect, { Props } from 'react-select'
 
-import cn from 'classnames';
+import cn from 'classnames'
 
-export type SelectProps = Props;
+export type SelectProps = Props
 
 export const colorStyles = {
     multiValue: (styles: any, { data }: any) => {
@@ -10,9 +10,9 @@ export const colorStyles = {
             ...styles,
             backgroundColor: data.color,
             color: '#fff',
-        };
+        }
     },
-};
+}
 
 const Select = ({ isSearchable = false, ...props }: Props) => {
     return (
@@ -55,7 +55,7 @@ const Select = ({ isSearchable = false, ...props }: Props) => {
             }}
             {...props}
         />
-    );
-};
+    )
+}
 
-export default Select;
+export default Select

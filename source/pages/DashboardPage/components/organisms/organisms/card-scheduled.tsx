@@ -1,26 +1,26 @@
-import cn from 'classnames';
-import MyImage from '~/Components/atoms/my-image';
-import ViewAppointment from '~/Components/modals/view-appointment/modal-view-appointment';
-import ravena from '~/assets/images/ravena.jpeg';
-import { IAppointmentVet } from '~/store/slices/appointment-vet/types';
-import BoxButtons from './box-buttons';
+import cn from 'classnames'
+import MyImage from '~/Components/atoms/my-image'
+import ViewAppointment from '~/Components/modals/view-appointment/modal-view-appointment'
+import ravena from '~/assets/images/ravena.jpeg'
+import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
+import BoxButtons from './box-buttons'
 
 type BoxButtonsProps = {
-    item: IAppointmentVet;
-};
+    item: IAppointmentVet
+}
 
 type CardScheduledProps = {
-    checked?: boolean;
-    appointment: IAppointmentVet;
-    boxButtons?: null | ((props: BoxButtonsProps) => JSX.Element);
-};
+    checked?: boolean
+    appointment: IAppointmentVet
+    boxButtons?: null | ((props: BoxButtonsProps) => JSX.Element)
+}
 
 const CardScheduled = ({
     checked,
     appointment,
     boxButtons = (props) => <BoxButtons {...props} />,
 }: CardScheduledProps) => {
-    const BoxButtons = boxButtons;
+    const BoxButtons = boxButtons
 
     return (
         <div
@@ -76,8 +76,7 @@ const CardScheduled = ({
 
                             <div className="p-2 ">
                                 <p className="text-gray-700">
-                                    Nome do pet:{' '}
-                                    {appointment?.pet_data.name_pet}
+                                    Nome do pet: {appointment?.pet_data.name_pet}
                                 </p>
                                 <p className="text-gray-700">
                                     Especie: {appointment?.pet_data.specie}
@@ -114,7 +113,7 @@ const CardScheduled = ({
 
             {BoxButtons && <BoxButtons item={appointment} />}
         </div>
-    );
-};
+    )
+}
 
-export default CardScheduled;
+export default CardScheduled

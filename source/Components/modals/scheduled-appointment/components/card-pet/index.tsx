@@ -1,9 +1,9 @@
-import { KeyOfSpecies, Species } from '~/store/slices/pets/speciesType';
-import { PetData } from '~/types/pet-v2';
+import { KeyOfSpecies, Species } from '~/store/slices/pets/speciesType'
+import { PetData } from '~/types/pet-v2'
 
 type CardPetProps = {
-    pet: PetData;
-};
+    pet: PetData
+}
 
 const CardPet = ({ pet }: CardPetProps) => {
     return (
@@ -21,7 +21,7 @@ const CardPet = ({ pet }: CardPetProps) => {
                 </p>
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default CardPet;
+export default CardPet

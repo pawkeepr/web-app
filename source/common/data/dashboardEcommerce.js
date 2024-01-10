@@ -1,21 +1,21 @@
 // Import Images
-import product1 from '~/assets/images/products/img-1.png';
-import product2 from '~/assets/images/products/img-2.png';
-import product3 from '~/assets/images/products/img-3.png';
-import product4 from '~/assets/images/products/img-4.png';
-import product5 from '~/assets/images/products/img-5.png';
+import product1 from '~/assets/images/products/img-1.png'
+import product2 from '~/assets/images/products/img-2.png'
+import product3 from '~/assets/images/products/img-3.png'
+import product4 from '~/assets/images/products/img-4.png'
+import product5 from '~/assets/images/products/img-5.png'
 
-import company1 from '~/assets/images/companies/img-1.png';
-import company2 from '~/assets/images/companies/img-2.png';
-import company3 from '~/assets/images/companies/img-3.png';
-import company5 from '~/assets/images/companies/img-5.png';
-import company8 from '~/assets/images/companies/img-8.png';
+import company1 from '~/assets/images/companies/img-1.png'
+import company2 from '~/assets/images/companies/img-2.png'
+import company3 from '~/assets/images/companies/img-3.png'
+import company5 from '~/assets/images/companies/img-5.png'
+import company8 from '~/assets/images/companies/img-8.png'
 
-import avatar1 from '~/assets/images/users/avatar-1.jpg';
-import avatar2 from '~/assets/images/users/avatar-2.jpg';
-import avatar3 from '~/assets/images/users/avatar-3.jpg';
-import avatar4 from '~/assets/images/users/avatar-4.jpg';
-import avatar6 from '~/assets/images/users/avatar-6.jpg';
+import avatar1 from '~/assets/images/users/avatar-1.jpg'
+import avatar2 from '~/assets/images/users/avatar-2.jpg'
+import avatar3 from '~/assets/images/users/avatar-3.jpg'
+import avatar4 from '~/assets/images/users/avatar-4.jpg'
+import avatar6 from '~/assets/images/users/avatar-6.jpg'
 
 const ecomWidgets = [
     {
@@ -78,7 +78,7 @@ const ecomWidgets = [
         prefix: '$',
         suffix: 'k',
     },
-];
+]
 
 const bestSellingProducts = [
     {
@@ -129,7 +129,7 @@ const bestSellingProducts = [
         stock: 805,
         amount: 3996,
     },
-];
+]
 
 const topSellers = [
     {
@@ -182,7 +182,7 @@ const topSellers = [
         amount: 11260,
         percentage: 57,
     },
-];
+]
 
 const recentOrders = [
     {
@@ -250,7 +250,7 @@ const recentOrders = [
         rating: 4.7,
         votes: '161',
     },
-];
+]
 
 const topCategories = [
     {
@@ -303,7 +303,7 @@ const topCategories = [
         category: 'Toys & Games',
         total: '239',
     },
-];
+]
 
 // Revenue Chart Data
 const allRevenueData = [
@@ -316,8 +316,8 @@ const allRevenueData = [
         name: 'Earnings',
         type: 'bar',
         data: [
-            89.25, 98.58, 68.74, 108.87, 77.54, 84.03, 51.24, 28.57, 92.57,
-            42.36, 88.51, 36.57,
+            89.25, 98.58, 68.74, 108.87, 77.54, 84.03, 51.24, 28.57, 92.57, 42.36,
+            88.51, 36.57,
         ],
     },
     {
@@ -325,7 +325,7 @@ const allRevenueData = [
         type: 'line',
         data: [8, 12, 7, 17, 21, 11, 5, 9, 7, 29, 12, 35],
     },
-];
+]
 
 const monthRevenueData = [
     {
@@ -337,8 +337,8 @@ const monthRevenueData = [
         name: 'Earnings',
         type: 'bar',
         data: [
-            89.25, 98.58, 68.74, 108.87, 77.54, 84.03, 51.24, 28.57, 92.57,
-            42.36, 88.51, 36.57,
+            89.25, 98.58, 68.74, 108.87, 77.54, 84.03, 51.24, 28.57, 92.57, 42.36,
+            88.51, 36.57,
         ],
     },
     {
@@ -346,7 +346,7 @@ const monthRevenueData = [
         type: 'line',
         data: [18, 22, 27, 37, 41, 21, 15, 19, 27, 19, 22, 45],
     },
-];
+]
 
 const halfYearRevenueData = [
     {
@@ -358,8 +358,8 @@ const halfYearRevenueData = [
         name: 'Earnings',
         type: 'bar',
         data: [
-            89.25, 98.58, 68.74, 108.87, 77.54, 84.03, 51.24, 28.57, 92.57,
-            42.36, 88.51, 36.57,
+            89.25, 98.58, 68.74, 108.87, 77.54, 84.03, 51.24, 28.57, 92.57, 42.36,
+            88.51, 36.57,
         ],
     },
     {
@@ -367,7 +367,7 @@ const halfYearRevenueData = [
         type: 'line',
         data: [8, 22, 87, 47, 41, 31, 5, 9, 47, 49, 32, 55],
     },
-];
+]
 
 const yearRevenueData = [
     {
@@ -379,8 +379,8 @@ const yearRevenueData = [
         name: 'Earnings',
         type: 'bar',
         data: [
-            99.25, 88.58, 78.74, 118.87, 87.54, 94.03, 61.24, 58.57, 102.57,
-            62.36, 48.51, 66.57,
+            99.25, 88.58, 78.74, 118.87, 87.54, 94.03, 61.24, 58.57, 102.57, 62.36,
+            48.51, 66.57,
         ],
     },
     {
@@ -388,7 +388,7 @@ const yearRevenueData = [
         type: 'line',
         data: [58, 42, 47, 57, 71, 21, 15, 69, 17, 39, 52, 55],
     },
-];
+]
 
 export {
     ecomWidgets,
@@ -400,4 +400,4 @@ export {
     monthRevenueData,
     halfYearRevenueData,
     yearRevenueData,
-};
+}

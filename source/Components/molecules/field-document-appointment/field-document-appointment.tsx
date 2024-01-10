@@ -1,51 +1,48 @@
-import { PlusCircleIcon } from '@heroicons/react/24/solid';
-import { Form, Formik } from 'formik';
-import { startTransition, useState } from 'react';
-import ModalListPets from '~/Components/modals/list-pets-modal/modal-list-pets';
-import ModalWarning from '~/Components/modals/warning-modal/modal-warning';
-import FieldDocument from '~/Components/molecules/field-document/field-document';
-import isValidCPF from '~/validations/cpf';
+import { PlusCircleIcon } from '@heroicons/react/24/solid'
+import { Form, Formik } from 'formik'
+import { startTransition, useState } from 'react'
+import ModalListPets from '~/Components/modals/list-pets-modal/modal-list-pets'
+import ModalWarning from '~/Components/modals/warning-modal/modal-warning'
+import FieldDocument from '~/Components/molecules/field-document/field-document'
+import isValidCPF from '~/validations/cpf'
 
 type InitialValues = {
-    cpf_tutor: string;
-};
+    cpf_tutor: string
+}
 
-type onChangeOpen = (arg: boolean) => void;
+type onChangeOpen = (arg: boolean) => void
 
 type HandleProps = {
-    onChangeOpen: onChangeOpen;
-    onChangeDocument: (doc: string) => void;
-};
+    onChangeOpen: onChangeOpen
+    onChangeDocument: (doc: string) => void
+}
 
 type FieldDocumentAppointmentProps = {
-    selectedTabInitial?: number;
-    children?: (props: HandleProps) => JSX.Element;
-};
+    selectedTabInitial?: number
+    children?: (props: HandleProps) => JSX.Element
+}
 
-const initialValues: InitialValues = { cpf_tutor: '' };
+const initialValues: InitialValues = { cpf_tutor: '' }
 
 const FieldDocumentAppointment = ({
     selectedTabInitial = 1,
     children,
 }: FieldDocumentAppointmentProps) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)
 
-    const onHandleSubmit = ({
-        onChangeDocument,
-        onChangeOpen,
-    }: HandleProps) => {
+    const onHandleSubmit = ({ onChangeDocument, onChangeOpen }: HandleProps) => {
         return async (values: InitialValues) => {
             if (!isValidCPF(values.cpf_tutor) && selectedTabInitial === 1) {
-                setIsOpen(true);
-                return;
+                setIsOpen(true)
+                return
             }
 
             startTransition(() => {
-                onChangeDocument(values.cpf_tutor);
-                onChangeOpen(true);
-            });
-        };
-    };
+                onChangeDocument(values.cpf_tutor)
+                onChangeOpen(true)
+            })
+        }
+    }
 
     return (
         <>
@@ -54,7 +51,7 @@ const FieldDocumentAppointment = ({
                 description="Por favor, cadastrar um CPF válido para prosseguir."
                 isOpen={isOpen}
                 closeModal={() => {
-                    setIsOpen(false);
+                    setIsOpen(false)
                 }}
             />
             <ModalListPets selectedTabInitial={selectedTabInitial}>
@@ -101,7 +98,7 @@ const FieldDocumentAppointment = ({
                 )}
             </ModalListPets>
         </>
-    );
-};
+    )
+}
 
-export default FieldDocumentAppointment;
+export default FieldDocumentAppointment

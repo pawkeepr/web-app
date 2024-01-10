@@ -21,4 +21,4 @@ export const sub_specialty = [
     'Ortopedia',
     'Pneumologia',
     'Reprodução e Neonatologia',
-];
+]

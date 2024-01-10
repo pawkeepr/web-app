@@ -1,22 +1,22 @@
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment, useState } from 'react'
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
-type onChangeOpen = (arg: boolean) => void;
+type onChangeOpen = (arg: boolean) => void
 
 type ChildrenProps = {
-    onChangeOpen: onChangeOpen;
-};
+    onChangeOpen: onChangeOpen
+}
 
 type ModalConfirmProps = {
-    title: string;
-    description?: string;
-    message?: string;
-    label?: string;
-    onConfirm?: () => void;
-    onCancel?: () => void;
-    children?: (params: ChildrenProps) => React.ReactNode;
-};
+    title: string
+    description?: string
+    message?: string
+    label?: string
+    onConfirm?: () => void
+    onCancel?: () => void
+    children?: (params: ChildrenProps) => React.ReactNode
+}
 
 const ModalConfirm = ({
     message = 'Esta ação não poderá ser desfeita.',
@@ -27,29 +27,29 @@ const ModalConfirm = ({
     description,
     children,
 }: ModalConfirmProps) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)
 
     const handleConfirm = () => {
-        onConfirm?.();
-        setIsOpen(false);
-    };
+        onConfirm?.()
+        setIsOpen(false)
+    }
 
     const handleCancel = () => {
-        onCancel?.();
-        setIsOpen(false);
-    };
+        onCancel?.()
+        setIsOpen(false)
+    }
 
     const onChangeOpen = (arg: boolean) => {
-        setIsOpen(arg);
-    };
+        setIsOpen(arg)
+    }
 
     const closeModal = () => {
-        onChangeOpen(false);
-    };
+        onChangeOpen(false)
+    }
 
     const openModal = () => {
-        onChangeOpen(true);
-    };
+        onChangeOpen(true)
+    }
 
     return (
         <>
@@ -159,7 +159,7 @@ const ModalConfirm = ({
                 </Dialog>
             </Transition>
         </>
-    );
-};
+    )
+}
 
-export default ModalConfirm;
+export default ModalConfirm

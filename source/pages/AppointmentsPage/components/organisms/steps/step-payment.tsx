@@ -1,31 +1,31 @@
-import { Form } from 'formik';
-import { useMemo } from 'react';
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
-import CardTutor from '~/Components/molecules/card-tutor';
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select';
-import FieldNumber from '~/Components/molecules/field-number/field-number';
-import { StepProps, Tabs } from '~/types/helpers';
+import { Form } from 'formik'
+import { useMemo } from 'react'
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import CardTutor from '~/Components/molecules/card-tutor'
+import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
+import FieldNumber from '~/Components/molecules/field-number/field-number'
+import { StepProps, Tabs } from '~/types/helpers'
 
-import RadioGroup from '~/Components/molecules/radio-group';
-import useFormikContextSafe from '~/hooks/use-formik-context-safe';
-import { VeterinaryConsultation } from '~/types/appointment';
+import RadioGroup from '~/Components/molecules/radio-group'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { VeterinaryConsultation } from '~/types/appointment'
 
-type CtxStepPayment = Pick<VeterinaryConsultation, 'appointment_details'>;
+type CtxStepPayment = Pick<VeterinaryConsultation, 'appointment_details'>
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
-    const { handleSubmit, isSubmitting, values, isValid, errors } =
-        useFormikContextSafe<CtxStepPayment>();
+    const { handleSubmit, isSubmitting, values, isValid } =
+        useFormikContextSafe<CtxStepPayment>()
 
     const form_payment = useMemo(
         () => values.appointment_details?.payment?.form_payment,
         [values],
-    );
+    )
 
     const options = new Array(12).fill(0).map((item, index) => ({
         value: index + 1,
         label: `${index + 1} Parcela${index + 1 > 1 ? 's' : ''}`,
         color: 'rgb(255 200 107);',
-    }));
+    }))
 
     return (
         <Form className="card card-body shadow-lg" onSubmit={handleSubmit}>
@@ -84,7 +84,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     label="Voltar"
                     condition={!isSubmitting}
                     onClick={() => {
-                        toggleTab((activeTab - 1) as Tabs);
+                        toggleTab((activeTab - 1) as Tabs)
                     }}
                 />
                 <BtnPrimary
@@ -100,7 +100,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                 </PDFViewer>
             </div> */}
         </Form>
-    );
-};
+    )
+}
 
-export default StepPayment;
+export default StepPayment

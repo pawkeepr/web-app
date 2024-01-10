@@ -1,10 +1,10 @@
-'use client';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { BtnPrimary } from '~/Components/atoms/btn';
-import { resetLoading } from '~/store/actions';
-import { useAppDispatch } from '~/store/hooks';
-import DefaultLayout from '../_layouts/dashboard/dashboard';
+'use client'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { BtnPrimary } from '~/Components/atoms/btn'
+import { resetLoading } from '~/store/actions'
+import { useAppDispatch } from '~/store/hooks'
+import DefaultLayout from '../_layouts/dashboard/dashboard'
 
 const ConfirmationPage = () => {
     return (
@@ -27,7 +27,7 @@ const ConfirmationPage = () => {
                 />
             </div>
         </DefaultLayout>
-    );
-};
+    )
+}
 
-export default ConfirmationPage;
+export default ConfirmationPage

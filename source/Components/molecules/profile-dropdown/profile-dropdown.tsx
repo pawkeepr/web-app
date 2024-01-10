@@ -1,19 +1,19 @@
-import { Menu, Transition } from '@headlessui/react';
-import Link from 'next/link';
-import { Fragment } from 'react';
-import MyImage from '~/Components/atoms/my-image/my-image';
-import { useAppSelector } from '~/store/hooks';
+import { Menu, Transition } from '@headlessui/react'
+import Link from 'next/link'
+import { Fragment } from 'react'
+import MyImage from '~/Components/atoms/my-image/my-image'
+import { useAppSelector } from '~/store/hooks'
 
-import cn from 'classnames';
-import { StaticImageData } from 'next/image';
-import useChangeLayoutMode from '~/hooks/use-change-layout-mode';
+import cn from 'classnames'
+import { StaticImageData } from 'next/image'
+import useChangeLayoutMode from '~/hooks/use-change-layout-mode'
 
 type CustomToggleProps = {
-    onClick: () => void;
-    name: string;
-    avatar: string | StaticImageData;
-    color?: string;
-};
+    onClick: () => void
+    name: string
+    avatar: string | StaticImageData
+    color?: string
+}
 
 const CustomToggle = ({ onClick, name, avatar }: CustomToggleProps) => (
     <div className="btn d-flex items-center" onClick={onClick}>
@@ -35,7 +35,7 @@ const CustomToggle = ({ onClick, name, avatar }: CustomToggleProps) => (
             </span>
         </span>
     </div>
-);
+)
 
 const options = [
     {
@@ -57,28 +57,22 @@ const options = [
         href: '/logout',
         icon: (active: boolean) => (
             <i
-                className={cn(
-                    'mdi mdi-logout text-muted fs-16 align-middle mx-2',
-                    {
-                        '!text-white': active,
-                    },
-                )}
+                className={cn('mdi mdi-logout text-muted fs-16 align-middle mx-2', {
+                    '!text-white': active,
+                })}
             />
         ),
         label: 'Logout',
         dataKey: 'logout',
     },
-];
+]
 
 const ProfileDropdownTailwind = () => {
-    const profile = useAppSelector((state) => state.Profile.user);
-    const { onHandleChangeLayout } = useChangeLayoutMode();
+    const profile = useAppSelector((state) => state.Profile.user)
+    const { onHandleChangeLayout } = useChangeLayoutMode()
 
     return (
-        <Menu
-            as="div"
-            className="relative inline-block text-left mobile:hidden"
-        >
+        <Menu as="div" className="relative inline-block text-left mobile:hidden">
             <div>
                 <Menu.Button
                     className="
@@ -193,10 +187,10 @@ const ProfileDropdownTailwind = () => {
                 </Menu.Items>
             </Transition>
         </Menu>
-    );
-};
+    )
+}
 
-export default ProfileDropdownTailwind;
+export default ProfileDropdownTailwind
 
 // Outros Items
 {

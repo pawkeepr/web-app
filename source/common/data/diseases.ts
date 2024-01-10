@@ -19,7 +19,7 @@ export const diseases = [
     'Osteoartrite',
     'Displasia coxofemoral',
     'Obesidade',
-];
+]
 
 export enum Diseases {
     Parvovirose = 'Parvovirose',

@@ -1,12 +1,12 @@
 import {
     InputNumberFormat,
     InputNumberFormatProps,
-} from '@react-input/number-format';
+} from '@react-input/number-format'
 import FieldControl, {
     InputControlProps,
-} from '~/Components/molecules/field-control';
+} from '~/Components/molecules/field-control'
 
-import { input } from '~/Components/atoms/input';
+import { input } from '~/Components/atoms/input'
 
 const FieldNumber = <Ctx,>({
     placeholder,
@@ -27,7 +27,7 @@ const FieldNumber = <Ctx,>({
             component={InputNumberFormat}
             className={input({ className: props.className })}
         />
-    );
-};
+    )
+}
 
-export default FieldNumber;
+export default FieldNumber

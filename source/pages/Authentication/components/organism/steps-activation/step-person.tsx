@@ -1,39 +1,39 @@
-import { useFormikContext } from 'formik';
+import { useFormikContext } from 'formik'
 
-import { useMemo } from 'react';
+import { useMemo } from 'react'
 
-import { BtnPrimary } from '~/Components/atoms/btn';
-import FieldControl from '~/Components/molecules/field-control';
-import validatePerson from '~/validations/person';
+import { BtnPrimary } from '~/Components/atoms/btn'
+import FieldControl from '~/Components/molecules/field-control'
+import validatePerson from '~/validations/person'
 
-import { FaWhatsapp } from 'react-icons/fa';
-import ControlSwitch from '~/Components/atoms/switch-v2/switch';
-import FieldCrmv from '~/Components/molecules/field-crmv';
-import FieldDocument from '~/Components/molecules/field-document';
-import FieldPhone from '~/Components/molecules/field-phone';
-import useNextStep from '~/hooks/use-next-step';
-import { ActivateAccount } from '~/validations/activate';
-import { StepProps } from './types';
+import { FaWhatsapp } from 'react-icons/fa'
+import ControlSwitch from '~/Components/atoms/switch-v2/switch'
+import FieldCrmv from '~/Components/molecules/field-crmv'
+import FieldDocument from '~/Components/molecules/field-document'
+import FieldPhone from '~/Components/molecules/field-phone'
+import useNextStep from '~/hooks/use-next-step'
+import { ActivateAccount } from '~/validations/activate'
+import { StepProps } from './types'
 
 const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
-    const { values, setFieldValue } = useFormikContext<ActivateAccount>();
+    const { values, setFieldValue } = useFormikContext<ActivateAccount>()
 
     const requiredValid = useMemo((): boolean => {
-        const isValid = validatePerson.isValidSync(values);
+        const isValid = validatePerson.isValidSync(values)
 
-        return isValid;
-    }, [values]);
+        return isValid
+    }, [values])
 
-    useNextStep(nextStep, requiredValid);
+    useNextStep(nextStep, requiredValid)
 
     const copyPhoneToWhatsApp = (checked: boolean) => {
         if (!checked) {
-            setFieldValue('contact.whatsapp', '');
-            return;
+            setFieldValue('contact.whatsapp', '')
+            return
         }
 
-        setFieldValue('contact.whatsapp', values.contact.phone);
-    };
+        setFieldValue('contact.whatsapp', values.contact.phone)
+    }
 
     return (
         <div className="container grid grid-cols-2 gap-1 mobile:grid-cols-1">
@@ -87,8 +87,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <div className="w-full hidden mobile:flex col-span-full justify-center items-center">
                     <ControlSwitch onChange={copyPhoneToWhatsApp}>
                         <p className="text-xs font-semibold flex flex-row justify-center items-center gap-1">
-                            Clique aqui para duplicar o telefone no campo ao
-                            lado:
+                            Clique aqui para duplicar o telefone no campo ao lado:
                             <FaWhatsapp className="text-green-600 text-xl cursor-pointer" />
                         </p>
                     </ControlSwitch>
@@ -104,8 +103,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 <div className="w-full flex mobile:hidden col-span-full justify-center items-center">
                     <ControlSwitch onChange={copyPhoneToWhatsApp}>
                         <p className="text-xs font-semibold flex flex-row justify-center items-center gap-1">
-                            Clique aqui para duplicar o telefone no campo ao
-                            lado:
+                            Clique aqui para duplicar o telefone no campo ao lado:
                             <FaWhatsapp className="text-green-600 text-xl" />
                         </p>
                     </ControlSwitch>
@@ -120,7 +118,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default StepSignUpPerson;
+export default StepSignUpPerson

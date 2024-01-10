@@ -1,10 +1,10 @@
-import { useAppointmentScheduled } from '~/store/hooks/appointments';
-import CardScheduled from '../organisms/card-scheduled';
+import { useAppointmentScheduled } from '~/store/hooks/appointments'
+import CardScheduled from '../organisms/card-scheduled'
 
 const StepAll = () => {
-    const { activeData, isLoading } = useAppointmentScheduled();
+    const { activeData, isLoading } = useAppointmentScheduled()
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <div>Loading...</div>
 
     return (
         <div className="space-y-10 w-full">
@@ -12,7 +12,7 @@ const StepAll = () => {
                 <CardScheduled key={appointment.id} appointment={appointment} />
             ))}
         </div>
-    );
-};
+    )
+}
 
-export default StepAll;
+export default StepAll

@@ -5,15 +5,15 @@ const QuestionTypes = {
     nervous_system: 'nervous_system',
     locomotive_system: 'locomotive_system',
     physical_activity: 'physical_activity',
-} as const;
+} as const
 
-export type KeyOfQuestionTypes = keyof typeof QuestionTypes;
+export type KeyOfQuestionTypes = keyof typeof QuestionTypes
 
 export type Question = {
-    id: number;
-    question: string;
-    type: keyof typeof QuestionTypes;
-};
+    id: number
+    question: string
+    type: keyof typeof QuestionTypes
+}
 
 export const questions: Question[] = [
     {
@@ -73,8 +73,7 @@ export const questions: Question[] = [
     },
     {
         id: 12,
-        question:
-            'O Animal apresenta alterações de comportamento e/ou hábitos?',
+        question: 'O Animal apresenta alterações de comportamento e/ou hábitos?',
         type: 'nervous_system',
     },
     {
@@ -117,4 +116,4 @@ export const questions: Question[] = [
         question: 'O Animal pratica alguma atividade física?',
         type: 'physical_activity',
     },
-];
+]

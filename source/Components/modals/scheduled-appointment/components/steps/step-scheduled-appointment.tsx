@@ -1,23 +1,23 @@
-import { Formik } from 'formik';
-import FieldControl from '~/Components/molecules/field-control/field-control';
+import { Formik } from 'formik'
+import FieldControl from '~/Components/molecules/field-control/field-control'
 
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
-import FieldTextArea from '~/Components/molecules/field-text-area/field-text-area';
-import { Appointments } from '~/entities/Appointments';
+import FieldTextArea from '~/Components/molecules/field-text-area/field-text-area'
+import { Appointments } from '~/entities/Appointments'
 
-import { useCallback, useEffect, useMemo } from 'react';
-import * as Yup from 'yup';
-import { StepProps } from '~/Components/modals/list-pets-modal/types';
-import BoxButtons from '~/Components/molecules/box-buttons';
-import { getProfileSession } from '~/store/actions';
-import { useAppDispatch, useAppSelector } from '~/store/hooks';
-import { useAppointmentScheduled } from '~/store/hooks/appointments';
-import { IPetV2 } from '~/types/pet-v2';
-import { IProfile } from '~/types/profile';
-import { geolocation } from '~/utils/geolocation';
-import CardPet from '../card-pet';
-import CardTutor from '../card-tutor';
+import { useCallback, useEffect, useMemo } from 'react'
+import * as Yup from 'yup'
+import { StepProps } from '~/Components/modals/list-pets-modal/types'
+import BoxButtons from '~/Components/molecules/box-buttons'
+import { getProfileSession } from '~/store/actions'
+import { useAppDispatch, useAppSelector } from '~/store/hooks'
+import { useAppointmentScheduled } from '~/store/hooks/appointments'
+import { IPetV2 } from '~/types/pet-v2'
+import { IProfile } from '~/types/profile'
+import { geolocation } from '~/utils/geolocation'
+import CardPet from '../card-pet'
+import CardTutor from '../card-tutor'
 
 const validationSchema = Yup.object().shape({
     dates_consults: Yup.object().shape({
@@ -26,7 +26,7 @@ const validationSchema = Yup.object().shape({
         type_consultation: Yup.string().required('Campo obrigatório'),
         reason_consultation: Yup.string().required('Campo obrigatório'),
     }),
-});
+})
 
 const StepScheduledAppointment = ({
     onChangeStep,
@@ -44,8 +44,7 @@ const StepScheduledAppointment = ({
                 time_next_consultation: '',
                 type_consultation: '',
             },
-            contact_tutor:
-                pet?.main_responsible_guardian.user_information.contact,
+            contact_tutor: pet?.main_responsible_guardian.user_information.contact,
             cpf_tutor: pet?.cpf_tutor,
             id_pet: pet?.id,
             pet_data: pet?.pet_information,
@@ -63,17 +62,17 @@ const StepScheduledAppointment = ({
             },
         }),
         [pet],
-    );
+    )
 
-    const { handleSubmit, isLoading } = useAppointmentScheduled();
-    const dispatch = useAppDispatch();
+    const { handleSubmit, isLoading } = useAppointmentScheduled()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(getProfileSession());
+        dispatch(getProfileSession())
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [])
 
-    const data = useAppSelector((state) => state.Profile.user) as IProfile;
+    const data = useAppSelector((state) => state.Profile.user) as IProfile
 
     const onSubmit = useCallback(
         async (values: any) => {
@@ -90,18 +89,18 @@ const StepScheduledAppointment = ({
                     state: data.location.state,
                     zipCode: data.location.zipCode,
                 },
-            });
-            const [geolocationData, signature] = await geolocation();
+            })
+            const [geolocationData, signature] = await geolocation()
             appointment
                 .defineAppointmentGeolocation(geolocationData)
-                .defineAppointmentSignature(signature);
+                .defineAppointmentSignature(signature)
 
-            await handleSubmit(appointment as any);
+            await handleSubmit(appointment as any)
 
-            closeModal?.();
+            closeModal?.()
         },
         [handleSubmit, closeModal, data],
-    );
+    )
 
     return (
         <Formik
@@ -172,14 +171,12 @@ const StepScheduledAppointment = ({
                         success={(props) => (
                             <BtnPrimary {...props} label="Agendar" />
                         )}
-                        cancel={(props) => (
-                            <BtnCancel {...props} label="Voltar" />
-                        )}
+                        cancel={(props) => <BtnCancel {...props} label="Voltar" />}
                     />
                 </div>
             )}
         </Formik>
-    );
-};
+    )
+}
 
-export default StepScheduledAppointment;
+export default StepScheduledAppointment

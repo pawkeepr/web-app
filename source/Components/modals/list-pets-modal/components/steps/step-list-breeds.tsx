@@ -1,37 +1,36 @@
-import { startTransition, useEffect, useState } from 'react';
-import BoxButtons from '~/Components/molecules/box-buttons/box-buttons';
-import useFormikContextSafe from '~/hooks/use-formik-context-safe';
-import { species } from '~/store/slices/pets/speciesType';
-import { Breed } from '~/store/slices/pets/types';
-import { CtxSimplifiedPedFields, StepProps } from '../../types';
-import { option } from '../helpers';
+import { startTransition, useEffect, useState } from 'react'
+import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { species } from '~/store/slices/pets/speciesType'
+import { Breed } from '~/store/slices/pets/types'
+import { CtxSimplifiedPedFields, StepProps } from '../../types'
+import { option } from '../helpers'
 
 type Item = {
-    name: Breed;
-    value: Breed;
-};
+    name: Breed
+    value: Breed
+}
 
 const StepListBreeds = ({ nextStep, previousStep }: StepProps) => {
-    const [breeds, setBreeds] = useState<Item[]>([]);
-    const { values, setFieldValue } =
-        useFormikContextSafe<CtxSimplifiedPedFields>();
+    const [breeds, setBreeds] = useState<Item[]>([])
+    const { values, setFieldValue } = useFormikContextSafe<CtxSimplifiedPedFields>()
 
     const handleSelectBreed = (breed: Breed) => {
-        setFieldValue('race', breed);
-        nextStep();
-    };
+        setFieldValue('race', breed)
+        nextStep()
+    }
 
     useEffect(() => {
         const specie = species.find(
             (specie) => (specie.value as any) === values.specie,
-        );
+        )
 
-        if (!specie) return;
+        if (!specie) return
 
         startTransition(() => {
-            setBreeds(specie.breedType);
-        });
-    }, [values.specie]);
+            setBreeds(specie.breedType)
+        })
+    }, [values.specie])
 
     return (
         <div className="mt-3 p-1 gap-2">
@@ -61,7 +60,7 @@ const StepListBreeds = ({ nextStep, previousStep }: StepProps) => {
                 onClickSuccess={nextStep}
             />
         </div>
-    );
-};
+    )
+}
 
-export default StepListBreeds;
+export default StepListBreeds

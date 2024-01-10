@@ -1,23 +1,23 @@
-import { Tab } from '@headlessui/react';
-import cn from 'classnames';
-import { Formik } from 'formik';
-import { useRouter } from 'next/navigation';
-import { useCallback, useState } from 'react';
-import Modal from '~/Components/organism/modal';
-import useModal from '~/hooks/use-modal';
-import useSteps from '~/hooks/use-steps';
-import useProfileVeterinary from '~/hooks/use-veterinary';
-import routes from '~/routes';
-import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor';
-import { IPet } from '~/types/pet';
-import { IPetV2 } from '~/types/pet-v2';
-import StepDocument from './components/steps/step-document';
-import StepListBreeds from './components/steps/step-list-breeds';
-import StepListGender from './components/steps/step-list-gender';
-import StepListPets from './components/steps/step-list-pets';
-import StepListSpecies from './components/steps/step-list-species';
-import StepTutor from './components/steps/step-tutor';
-import { ModalConfirmProps, StepProps } from './types';
+import { Tab } from '@headlessui/react'
+import cn from 'classnames'
+import { Formik } from 'formik'
+import { useRouter } from 'next/navigation'
+import { useCallback, useState } from 'react'
+import Modal from '~/Components/organism/modal'
+import useModal from '~/hooks/use-modal'
+import useSteps from '~/hooks/use-steps'
+import useProfileVeterinary from '~/hooks/use-veterinary'
+import routes from '~/routes'
+import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor'
+import { IPet } from '~/types/pet'
+import { IPetV2 } from '~/types/pet-v2'
+import StepDocument from './components/steps/step-document'
+import StepListBreeds from './components/steps/step-list-breeds'
+import StepListGender from './components/steps/step-list-gender'
+import StepListPets from './components/steps/step-list-pets'
+import StepListSpecies from './components/steps/step-list-species'
+import StepTutor from './components/steps/step-tutor'
+import { ModalConfirmProps, StepProps } from './types'
 
 const STEPS = [
     {
@@ -50,44 +50,46 @@ const STEPS = [
         title: 'Tutor',
         component: (props: StepProps) => <StepTutor {...props} />,
     },
-];
+]
 
 const getNameTutor = (pets: Pick<IPetV2, 'main_responsible_guardian'>) => {
-    const { name, last_name, first_name } = pets.main_responsible_guardian;
-    return name || `${first_name} ${last_name}`;
-};
+    const { name, last_name, first_name } = pets.main_responsible_guardian
+    return name || `${first_name} ${last_name}`
+}
 
 const ModalListPets = ({
     children,
     label,
     selectedTabInitial = 1,
 }: ModalConfirmProps) => {
-    const [document, setDocument] = useState('');
-    const { closeModal, open, showModal } = useModal();
+    const [document, setDocument] = useState('')
+    const { closeModal, open, showModal } = useModal()
 
-    const router = useRouter();
+    const router = useRouter()
 
-    const { nextStep, onChangeSelectedTab, previousStep, selectedTab } =
-        useSteps(STEPS, selectedTabInitial);
+    const { nextStep, onChangeSelectedTab, previousStep, selectedTab } = useSteps(
+        STEPS,
+        selectedTabInitial,
+    )
 
     const handleNavigate = useCallback(
         (pet: IPetV2) => {
             setTimeout(() => {
                 router.push(
                     `${routes.dashboard.new.appointments}?document=${document}&pet=${pet.id}`,
-                );
-            }, 300);
+                )
+            }, 300)
             // eslint-disable-next-line react-hooks/exhaustive-deps
         },
         [document],
-    );
+    )
 
     const {
         activeData: pets,
         handleSubmit,
         isLoading,
-    } = useListPetsOfTutor(document, 'simple', closeModal);
-    const veterinary = useProfileVeterinary();
+    } = useListPetsOfTutor(document, 'simple', closeModal)
+    const veterinary = useProfileVeterinary()
 
     const initialValues: IPet = {
         name: '',
@@ -98,13 +100,11 @@ const ModalListPets = ({
             cpf_cnpj: document,
             phone:
                 pets && pets?.length > 0
-                    ? (pets[0].main_responsible_guardian.contact
-                          .phone as string)
+                    ? (pets[0].main_responsible_guardian.contact.phone as string)
                     : '',
             email:
                 pets && pets?.length > 0
-                    ? (pets[0].main_responsible_guardian.contact
-                          .email as string)
+                    ? (pets[0].main_responsible_guardian.contact.email as string)
                     : '',
             name: pets && pets?.length > 0 ? getNameTutor(pets[0]) : '',
             lastName:
@@ -113,31 +113,30 @@ const ModalListPets = ({
                     : '',
             whatsapp:
                 pets && pets?.length > 0
-                    ? (pets[0].main_responsible_guardian.contact
-                          .whatsapp as string)
+                    ? (pets[0].main_responsible_guardian.contact.whatsapp as string)
                     : '',
         },
         castrated: 'no',
         date_birth: '2021-01-01', // dado falso para não dar erro no backend
         sex: 'unknown',
         veterinary,
-    };
+    }
 
     const onChangeDocument = (doc: string) => {
-        setDocument(doc);
-    };
+        setDocument(doc)
+    }
 
     const onSubmit = useCallback(
         async (values: IPet) => {
-            const pet = await handleSubmit(values);
+            const pet = await handleSubmit(values)
 
-            if (!pet) return;
+            if (!pet) return
 
-            handleNavigate(pet);
-            closeModal();
+            handleNavigate(pet)
+            closeModal()
         },
         [handleSubmit, handleNavigate, closeModal],
-    );
+    )
 
     return (
         <>
@@ -168,8 +167,8 @@ const ModalListPets = ({
             <Modal
                 onOpen={() => showModal()}
                 onClose={() => {
-                    onChangeSelectedTab(selectedTabInitial);
-                    closeModal();
+                    onChangeSelectedTab(selectedTabInitial)
+                    closeModal()
                 }}
                 modal
                 nested
@@ -186,8 +185,7 @@ const ModalListPets = ({
                         Adicionar Pet
                     </h1>
                     <h5 className="text-center text-gray-500 mb-2">
-                        Selecione ou Adicione um Pet para prosseguir na
-                        consulta.
+                        Selecione ou Adicione um Pet para prosseguir na consulta.
                     </h5>
                     <Tab.List className="flex flex-row w-full justify-between">
                         {STEPS.map((item, index) => (
@@ -201,8 +199,7 @@ const ModalListPets = ({
                                 className={cn(
                                     'p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full',
                                     {
-                                        'text-primary-500':
-                                            selectedTab === index,
+                                        'text-primary-500': selectedTab === index,
                                         'text-gray-400': selectedTab !== index,
                                     },
                                 )}
@@ -217,27 +214,25 @@ const ModalListPets = ({
                         onSubmit={onSubmit}
                     >
                         <Tab.Panels className="w-full h-full relative">
-                            {STEPS.map(
-                                ({ component: Component, id }, index) => (
-                                    <Tab.Panel key={id} tabIndex={index}>
-                                        <Component
-                                            onChangeStep={onChangeSelectedTab}
-                                            pets={pets || []}
-                                            onChangeDocument={onChangeDocument}
-                                            handleNavigate={handleNavigate}
-                                            nextStep={nextStep}
-                                            isLoading={isLoading}
-                                            previousStep={previousStep}
-                                        />
-                                    </Tab.Panel>
-                                ),
-                            )}
+                            {STEPS.map(({ component: Component, id }, index) => (
+                                <Tab.Panel key={id} tabIndex={index}>
+                                    <Component
+                                        onChangeStep={onChangeSelectedTab}
+                                        pets={pets || []}
+                                        onChangeDocument={onChangeDocument}
+                                        handleNavigate={handleNavigate}
+                                        nextStep={nextStep}
+                                        isLoading={isLoading}
+                                        previousStep={previousStep}
+                                    />
+                                </Tab.Panel>
+                            ))}
                         </Tab.Panels>
                     </Formik>
                 </Tab.Group>
             </Modal>
         </>
-    );
-};
+    )
+}
 
-export default ModalListPets;
+export default ModalListPets

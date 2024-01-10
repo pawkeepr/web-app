@@ -1,24 +1,24 @@
-import { combineReducers } from '@reduxjs/toolkit';
+import { combineReducers } from '@reduxjs/toolkit'
 
-import { persistReducer } from 'redux-persist';
-import storage from './storage';
+import { persistReducer } from 'redux-persist'
+import storage from './storage'
 
 // Front
-import Layout from './slices/layouts/slice';
+import Layout from './slices/layouts/slice'
 
 // Authentication
-import ActivateAccount from './slices/auth/activate-account/slice';
-import ForgetPassword from './slices/auth/forget-pwd/slice';
-import Login from './slices/auth/login/slice';
-import Profile from './slices/auth/profile/slice';
-import Account from './slices/auth/register/slice';
+import ActivateAccount from './slices/auth/activate-account/slice'
+import ForgetPassword from './slices/auth/forget-pwd/slice'
+import Login from './slices/auth/login/slice'
+import Profile from './slices/auth/profile/slice'
+import Account from './slices/auth/register/slice'
 
 const persistConfig = {
     key: '@pawkeepr/session',
     storage,
-};
+}
 
-const persistedReducersSession = persistReducer(persistConfig, Login);
+const persistedReducersSession = persistReducer(persistConfig, Login)
 
 const rootReducer = combineReducers({
     // public
@@ -28,6 +28,6 @@ const rootReducer = combineReducers({
     ForgetPassword,
     Profile,
     ActivateAccount,
-});
+})
 
-export default rootReducer;
+export default rootReducer

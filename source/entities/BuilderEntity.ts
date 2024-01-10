@@ -1,3 +1,3 @@
 export interface BuilderEntity {
-    build(args: any): any;
+    build(args: any): any
 }

@@ -1,20 +1,15 @@
-import { Dialog, Tab, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
-import { BtnSecondary } from '~/Components/atoms/btn';
+import { Dialog, Tab, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
+import { BtnSecondary } from '~/Components/atoms/btn'
 
 type ModalInvalid = {
-    isOpen: boolean;
-    closeModal: () => void;
-    title: string;
-    description: string;
-};
+    isOpen: boolean
+    closeModal: () => void
+    title: string
+    description: string
+}
 
-const ModalWarning = ({
-    isOpen,
-    closeModal,
-    title,
-    description,
-}: ModalInvalid) => {
+const ModalWarning = ({ isOpen, closeModal, title, description }: ModalInvalid) => {
     return (
         <>
             <Transition appear show={isOpen} as={Fragment}>
@@ -87,7 +82,7 @@ const ModalWarning = ({
                 </Dialog>
             </Transition>
         </>
-    );
-};
+    )
+}
 
-export default ModalWarning;
+export default ModalWarning

@@ -1,13 +1,13 @@
-import { BtnLink, BtnPrimary } from '~/Components/atoms/btn';
-import BoxButtons from '~/Components/molecules/box-buttons/box-buttons';
-import FieldControl from '~/Components/molecules/field-control/field-control';
-import useFormikContextSafe from '~/hooks/use-formik-context-safe';
+import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'
+import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
+import FieldControl from '~/Components/molecules/field-control/field-control'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import {
     KeyOfMapOptionSpecies,
     MapOptionSpecies,
-} from '~/store/slices/pets/speciesType';
-import { CtxSimplifiedPedFields, StepProps } from '../../types';
-import { option } from '../helpers';
+} from '~/store/slices/pets/speciesType'
+import { CtxSimplifiedPedFields, StepProps } from '../../types'
+import { option } from '../helpers'
 
 enum EmojiPet {
     cat = '🐱',
@@ -19,15 +19,10 @@ enum EmojiPet {
     horse = '🐴',
 }
 
-type Key = keyof typeof EmojiPet;
+type Key = keyof typeof EmojiPet
 
-const StepListPets = ({
-    nextStep,
-    pets,
-    handleNavigate,
-    isLoading,
-}: StepProps) => {
-    const { values } = useFormikContextSafe<CtxSimplifiedPedFields>();
+const StepListPets = ({ nextStep, pets, handleNavigate, isLoading }: StepProps) => {
+    const { values } = useFormikContextSafe<CtxSimplifiedPedFields>()
 
     return (
         <div className="mt-3 gap-2">
@@ -35,9 +30,7 @@ const StepListPets = ({
                 {pets?.length === 0 && (
                     <div className="flex justify-center items-center  ">
                         <span className="text-gray-500 text-center font-semibold text-base">
-                            {isLoading
-                                ? 'Carregando...'
-                                : 'Nenhum pet encontrado'}
+                            {isLoading ? 'Carregando...' : 'Nenhum pet encontrado'}
                         </span>
                     </div>
                 )}
@@ -91,7 +84,7 @@ const StepListPets = ({
                 onClickSuccess={nextStep}
             />
         </div>
-    );
-};
+    )
+}
 
-export default StepListPets;
+export default StepListPets

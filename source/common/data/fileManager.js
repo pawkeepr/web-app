@@ -49,13 +49,13 @@ const recentFile = [
         size: '1.7 MB',
         createDate: '06 Apr, 2022',
     },
-];
+]
 
 const folderList = [
     { id: 1, folderName: 'Projects', folderFile: '349', size: '4.10' },
     { id: 2, folderName: 'Documents', folderFile: '2349', size: '27.01' },
     { id: 3, folderName: 'Media', folderFile: '12480', size: '20.87' },
     { id: 4, folderName: 'Velzon v1.7.0', folderFile: '180', size: '478.65' },
-];
+]
 
-export { recentFile, folderList };
+export { recentFile, folderList }

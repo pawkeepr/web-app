@@ -1,5 +1,5 @@
-import React from 'react';
-import { CardHeader, Input, Label } from 'reactstrap';
+import React from 'react'
+import { CardHeader, Input, Label } from 'reactstrap'
 
 const PreviewCardHeader = ({ title }) => {
     return (
@@ -8,9 +8,7 @@ const PreviewCardHeader = ({ title }) => {
                 <h4 className="card-title mb-0 flex-grow-1">{title}</h4>
                 <div className="flex-shrink-0">
                     <div className="form-check form-switch form-switch-right form-switch-md">
-                        <Label className="form-label text-muted">
-                            Show Code
-                        </Label>
+                        <Label className="form-label text-muted">Show Code</Label>
                         <Input
                             className="form-check-input code-switcher"
                             type="checkbox"
@@ -19,7 +17,7 @@ const PreviewCardHeader = ({ title }) => {
                 </div>
             </CardHeader>
         </React.Fragment>
-    );
-};
+    )
+}
 
-export default PreviewCardHeader;
+export default PreviewCardHeader

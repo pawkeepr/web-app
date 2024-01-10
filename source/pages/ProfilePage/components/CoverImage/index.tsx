@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import profileBG from '~/assets/images/profile-bg.jpg';
+import Image from 'next/image'
+import profileBG from '~/assets/images/profile-bg.jpg'
 
-import { Input, Label } from 'reactstrap';
+import { Input, Label } from 'reactstrap'
 
 const CoverImage = () => {
     return (
@@ -29,7 +29,7 @@ const CoverImage = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default CoverImage;
+export default CoverImage

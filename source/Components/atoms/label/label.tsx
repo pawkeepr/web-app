@@ -1,21 +1,21 @@
-import { LabelHTMLAttributes } from 'react';
-import withControl from '~/Components/helpers/with-control';
+import { LabelHTMLAttributes } from 'react'
+import withControl from '~/Components/helpers/with-control'
 
-import { tv } from 'tailwind-variants';
+import { tv } from 'tailwind-variants'
 
 export const labelStyled = tv({
     base: `
         text-xs font-semibold text-gray-500 gap-1 text-start items-center label justify-start pb-1 mb-0
     `,
-});
+})
 
 type LabelProps = {
-    id?: string;
-    required?: boolean;
-    name?: string;
-    label?: string;
-    separator?: string;
-} & LabelHTMLAttributes<HTMLLabelElement>;
+    id?: string
+    required?: boolean
+    name?: string
+    label?: string
+    separator?: string
+} & LabelHTMLAttributes<HTMLLabelElement>
 
 const Label = ({
     id,
@@ -26,7 +26,7 @@ const Label = ({
     children,
     ...props
 }: LabelProps) => {
-    if (!label) return null;
+    if (!label) return null
     return (
         <label
             {...props}
@@ -36,11 +36,9 @@ const Label = ({
         >
             {!!children && children}
             {label.trim() ? label + separator : ''}
-            {required && (
-                <abbr className="text-secondary-500 font-bold">*</abbr>
-            )}
+            {required && <abbr className="text-secondary-500 font-bold">*</abbr>}
         </label>
-    );
-};
+    )
+}
 
-export default withControl(Label);
+export default withControl(Label)

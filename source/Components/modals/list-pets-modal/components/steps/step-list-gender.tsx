@@ -1,19 +1,18 @@
-import BoxButtons from '~/Components/molecules/box-buttons';
-import useFormikContextSafe from '~/hooks/use-formik-context-safe';
-import { Gender, GenderBR } from '~/store/slices/pets/speciesType';
-import { CtxSimplifiedPedFields, StepProps } from '../../types';
-import { option } from '../helpers';
+import BoxButtons from '~/Components/molecules/box-buttons'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { Gender, GenderBR } from '~/store/slices/pets/speciesType'
+import { CtxSimplifiedPedFields, StepProps } from '../../types'
+import { option } from '../helpers'
 
-type Key = keyof typeof Gender;
+type Key = keyof typeof Gender
 
 const StepListGender = ({ previousStep, nextStep }: StepProps) => {
-    const { values, setFieldValue } =
-        useFormikContextSafe<CtxSimplifiedPedFields>();
+    const { values, setFieldValue } = useFormikContextSafe<CtxSimplifiedPedFields>()
 
     const handleSelected = (gender: string) => {
-        setFieldValue('sex', gender);
-        nextStep();
-    };
+        setFieldValue('sex', gender)
+        nextStep()
+    }
 
     return (
         <div className="mt-3 p-1 gap-2">
@@ -41,7 +40,7 @@ const StepListGender = ({ previousStep, nextStep }: StepProps) => {
                 onClickSuccess={nextStep}
             />
         </div>
-    );
-};
+    )
+}
 
-export default StepListGender;
+export default StepListGender

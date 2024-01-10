@@ -1,7 +1,7 @@
-import classnames from 'classnames';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useState } from 'react';
+import classnames from 'classnames'
+import Image from 'next/image'
+import Link from 'next/link'
+import React, { useState } from 'react'
 import {
     Card,
     CardBody,
@@ -17,26 +17,26 @@ import {
     Row,
     TabContent,
     TabPane,
-} from 'reactstrap';
+} from 'reactstrap'
 
-import CardContainer from './components/CardContainer';
-import CoverImage from './components/CoverImage';
-import FormChangePass from './components/Forms/ChangePass';
-import FormPersonalData from './components/Forms/PersonalData';
-import FormProfissionalExperiencie from './components/Forms/ProfessionalExperience';
+import CardContainer from './components/CardContainer'
+import CoverImage from './components/CoverImage'
+import FormChangePass from './components/Forms/ChangePass'
+import FormPersonalData from './components/Forms/PersonalData'
+import FormProfissionalExperiencie from './components/Forms/ProfessionalExperience'
 
-import { useAppSelector } from '~/store/hooks';
+import { useAppSelector } from '~/store/hooks'
 
 //import images
-import avatar1 from '~/assets/images/users/avatar-1.jpg';
+import avatar1 from '~/assets/images/users/avatar-1.jpg'
 
 const Profile = () => {
-    const [activeTab, setActiveTab] = useState('1');
-    const profile = useAppSelector((state) => state.Profile.user);
+    const [activeTab, setActiveTab] = useState('1')
+    const profile = useAppSelector((state) => state.Profile.user)
 
     const tabChange = (tab: string) => {
-        if (activeTab !== tab) setActiveTab(tab);
-    };
+        if (activeTab !== tab) setActiveTab(tab)
+    }
 
     return (
         <React.Fragment>
@@ -152,7 +152,7 @@ const Profile = () => {
                                                     active: activeTab === '1',
                                                 })}
                                                 onClick={() => {
-                                                    tabChange('1');
+                                                    tabChange('1')
                                                 }}
                                             >
                                                 <i className="fas fa-home" />
@@ -166,7 +166,7 @@ const Profile = () => {
                                                     active: activeTab === '2',
                                                 })}
                                                 onClick={() => {
-                                                    tabChange('2');
+                                                    tabChange('2')
                                                 }}
                                                 type="button"
                                             >
@@ -181,7 +181,7 @@ const Profile = () => {
                                                     active: activeTab === '3',
                                                 })}
                                                 onClick={() => {
-                                                    tabChange('3');
+                                                    tabChange('3')
                                                 }}
                                                 type="button"
                                             >
@@ -196,7 +196,7 @@ const Profile = () => {
                                                     active: activeTab === '4',
                                                 })}
                                                 onClick={() => {
-                                                    tabChange('4');
+                                                    tabChange('4')
                                                 }}
                                                 type="button"
                                             >
@@ -278,9 +278,8 @@ const Profile = () => {
                                                                 Direct messages
                                                             </label>
                                                             <p className="text-muted">
-                                                                Messages from
-                                                                people you
-                                                                follow
+                                                                Messages from people
+                                                                you follow
                                                             </p>
                                                         </div>
                                                         <div className="flex-shrink-0">
@@ -305,14 +304,12 @@ const Profile = () => {
                                                                 notifications
                                                             </Label>
                                                             <p className="text-muted">
-                                                                Choose the
-                                                                option you want
-                                                                as your default
-                                                                setting. Block a
-                                                                site: Next to
-                                                                Not allowed to
-                                                                send
-                                                                notifications,
+                                                                Choose the option
+                                                                you want as your
+                                                                default setting.
+                                                                Block a site: Next
+                                                                to Not allowed to
+                                                                send notifications,
                                                                 click Add.
                                                             </p>
                                                         </div>
@@ -341,13 +338,11 @@ const Profile = () => {
                                                                 {' '}
                                                                 Under Settings,
                                                                 choose
-                                                                Notifications.
-                                                                Under Select an
-                                                                account, choose
-                                                                the account to
-                                                                enable
-                                                                notifications
-                                                                for.{' '}
+                                                                Notifications. Under
+                                                                Select an account,
+                                                                choose the account
+                                                                to enable
+                                                                notifications for.{' '}
                                                             </p>
                                                         </div>
                                                         <div className="flex-shrink-0">
@@ -371,14 +366,12 @@ const Profile = () => {
                                                                 notifications
                                                             </Label>
                                                             <p className="text-muted">
-                                                                To prevent
-                                                                duplicate mobile
-                                                                notifications
-                                                                from the Gmail
-                                                                and Chat apps,
-                                                                in settings,
-                                                                turn off Chat
-                                                                notifications.
+                                                                To prevent duplicate
+                                                                mobile notifications
+                                                                from the Gmail and
+                                                                Chat apps, in
+                                                                settings, turn off
+                                                                Chat notifications.
                                                             </p>
                                                         </div>
                                                         <div className="flex-shrink-0">
@@ -403,10 +396,9 @@ const Profile = () => {
                                                             </Label>
                                                             <p className="text-muted">
                                                                 Get real-time
-                                                                purchase alerts
-                                                                to protect
-                                                                yourself from
-                                                                fraudulent
+                                                                purchase alerts to
+                                                                protect yourself
+                                                                from fraudulent
                                                                 charges.
                                                             </p>
                                                         </div>
@@ -428,13 +420,12 @@ const Profile = () => {
                                                     Delete This Account:
                                                 </h5>
                                                 <p className="text-muted">
-                                                    Go to the Data & Privacy
-                                                    section of your profile
-                                                    Account. Scroll to "Your
-                                                    data & privacy options."
-                                                    Delete your Profile Account.
-                                                    Follow the instructions to
-                                                    delete your account :
+                                                    Go to the Data & Privacy section
+                                                    of your profile Account. Scroll
+                                                    to "Your data & privacy
+                                                    options." Delete your Profile
+                                                    Account. Follow the instructions
+                                                    to delete your account :
                                                 </p>
                                                 <div>
                                                     <Input
@@ -468,7 +459,7 @@ const Profile = () => {
                 </Container>
             </div>
         </React.Fragment>
-    );
-};
+    )
+}
 
-export default Profile;
+export default Profile

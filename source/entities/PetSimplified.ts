@@ -1,23 +1,23 @@
-import { IPet } from '~/types/pet';
+import { IPet } from '~/types/pet'
 import {
     IMainResponsibleGuardianSimplified,
     IPetV2Simplified,
     PetData,
     PetDataSimplified,
-} from '~/types/pet-v2';
-import { DTOProfile } from '~/types/profile';
-import { Veterinary } from './Veterinary';
+} from '~/types/pet-v2'
+import { DTOProfile } from '~/types/profile'
+import { Veterinary } from './Veterinary'
 
 export class PetSimplified implements IPetV2Simplified {
-    id?: string | null | undefined;
-    cpf_tutor: string;
-    pet_information: PetDataSimplified;
-    main_responsible_guardian: IMainResponsibleGuardianSimplified;
-    veterinary: DTOProfile;
+    id?: string | null | undefined
+    cpf_tutor: string
+    pet_information: PetDataSimplified
+    main_responsible_guardian: IMainResponsibleGuardianSimplified
+    veterinary: DTOProfile
 
     private constructor() {
-        this.id = '';
-        this.cpf_tutor = '';
+        this.id = ''
+        this.cpf_tutor = ''
 
         this.pet_information = {
             name_pet: '',
@@ -26,7 +26,7 @@ export class PetSimplified implements IPetV2Simplified {
             date_birth: '',
             sex: 'unknown',
             castrated: 'no',
-        };
+        }
 
         this.main_responsible_guardian = {
             city: '',
@@ -39,7 +39,7 @@ export class PetSimplified implements IPetV2Simplified {
             state: '',
             street: '',
             whatsapp: '',
-        };
+        }
 
         this.veterinary = {
             cpf_cnpj: '',
@@ -55,36 +55,36 @@ export class PetSimplified implements IPetV2Simplified {
             neighborhood: '',
             street: '',
             id: '',
-        };
+        }
     }
 
     defineID(id: string | null = null): this {
-        this.id = id;
-        return this;
+        this.id = id
+        return this
     }
 
     defineCpfTutor(cpf_tutor: string): this {
-        this.cpf_tutor = cpf_tutor;
-        return this;
+        this.cpf_tutor = cpf_tutor
+        return this
     }
 
     definePetInformation(pet_information: PetData): this {
         // #TODO: deve-se criar uma entidade para pet_information
-        this.pet_information = pet_information;
-        return this;
+        this.pet_information = pet_information
+        return this
     }
 
     defineVeterinary(veterinary: DTOProfile): this {
         // #TODO: deve-se criar uma entidade para veterinary
-        this.veterinary = Veterinary.build(veterinary);
-        return this;
+        this.veterinary = Veterinary.build(veterinary)
+        return this
     }
 
     defineTutorInformation(
         main_responsible_guardian: IMainResponsibleGuardianSimplified,
     ): this {
-        this.main_responsible_guardian = main_responsible_guardian;
-        return this;
+        this.main_responsible_guardian = main_responsible_guardian
+        return this
     }
 
     static build(params: IPet): PetSimplified {
@@ -122,6 +122,6 @@ export class PetSimplified implements IPetV2Simplified {
                 first_name: params.ownerEmergencyContact?.name,
                 last_name: params.ownerEmergencyContact?.lastName,
             })
-            .defineVeterinary(params.veterinary);
+            .defineVeterinary(params.veterinary)
     }
 }

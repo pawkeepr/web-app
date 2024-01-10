@@ -15,7 +15,7 @@ export const treatments = [
     'Fisioterapia',
     'Cirurgia',
     'Terapia comportamental',
-];
+]
 
 export enum Treatments {
     Antibióticos = 'Antibióticos',

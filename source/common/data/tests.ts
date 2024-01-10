@@ -8,7 +8,7 @@ export const tests = [
     'Teste de dirofilariose',
     'Teste de hemagasometria',
     'Teste de cinomose',
-];
+]
 
 export enum Tests {
     Testedeglicemia = 'Teste de glicemia',

@@ -1,73 +1,73 @@
-'use client';
+'use client'
 
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 //redux
-import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux'
 
 // Formik Validation
-import { Formik } from 'formik';
-import * as Yup from 'yup';
+import { Formik } from 'formik'
+import * as Yup from 'yup'
 
 // action
-import { updatePwd } from '~/store/slices/auth/forget-pwd/actions';
+import { updatePwd } from '~/store/slices/auth/forget-pwd/actions'
 
 // 187913
 
-import { Tab } from '@headlessui/react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { BtnLink } from '~/Components/atoms/btn';
-import LOADING from '~/constants/loading';
-import { useAppSelector } from '~/store/hooks';
-import validatePassword from '~/validations/password';
-import AuthLayout from '../_layouts/auth/auth_layout';
-import StepEmail from './components/organism/steps-forget-password/step-email';
-import StepPassword from './components/organism/steps-forget-password/step-password';
+import { Tab } from '@headlessui/react'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { BtnLink } from '~/Components/atoms/btn'
+import LOADING from '~/constants/loading'
+import { useAppSelector } from '~/store/hooks'
+import validatePassword from '~/validations/password'
+import AuthLayout from '../_layouts/auth/auth_layout'
+import StepEmail from './components/organism/steps-forget-password/step-email'
+import StepPassword from './components/organism/steps-forget-password/step-password'
 const validationSchema = Yup.object({
     email: Yup.string()
         .required('Por favor, digite seu email!')
         .email('Email inválido'),
     password: validatePassword,
     code: Yup.string().required('Por favor, digite o código de verificação!'),
-});
+})
 
-export type InitialValues = Yup.InferType<typeof validationSchema>;
+export type InitialValues = Yup.InferType<typeof validationSchema>
 
 const initialValues: InitialValues = {
     email: '',
     password: '',
     code: '',
-};
+}
 
 const ForgetPasswordPage = (props: { history: any }) => {
-    const [selectedTab, setSelectedTab] = useState(0);
-    const router = useRouter();
-    const dispatch = useDispatch();
+    const [selectedTab, setSelectedTab] = useState(0)
+    const router = useRouter()
+    const dispatch = useDispatch()
     const isLoading = useAppSelector(
         (state) => state.ForgetPassword.isLoadingUpdate,
-    );
+    )
 
     useEffect(() => {
         if (isLoading === LOADING.SUCCESS) {
             setTimeout(() => {
-                router.push('/sign-in');
-            });
+                router.push('/sign-in')
+            })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading]);
+    }, [isLoading])
 
     const onChangeSelectedTab = (index: number) => {
-        setSelectedTab(index);
-    };
+        setSelectedTab(index)
+    }
 
     const onChangeTab = (index: number) => () => {
-        setSelectedTab(index);
-    };
+        setSelectedTab(index)
+    }
 
     const handleSubmit = (values: InitialValues) => {
-        dispatch(updatePwd(values));
-    };
+        dispatch(updatePwd(values))
+    }
 
     return (
         <AuthLayout title="Forgot Password">
@@ -123,11 +123,11 @@ const ForgetPasswordPage = (props: { history: any }) => {
                 <BtnLink href="/sign-in" message="Clique Aqui!" />
             </div>
         </AuthLayout>
-    );
-};
+    )
+}
 
 ForgetPasswordPage.propTypes = {
     history: PropTypes.object,
-};
+}
 
-export default ForgetPasswordPage;
+export default ForgetPasswordPage

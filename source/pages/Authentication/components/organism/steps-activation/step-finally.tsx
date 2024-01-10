@@ -1,39 +1,38 @@
-import { useFormikContext } from 'formik';
-import { twMerge } from 'tailwind-merge';
-import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn';
-import LOADING from '~/constants/loading';
-import { useAppSelector } from '~/store/hooks';
-import { Specialty } from '~/types/profile';
-import { ActivateAccount } from '~/validations/activate';
-import { StepProps } from './types';
+import { useFormikContext } from 'formik'
+import { twMerge } from 'tailwind-merge'
+import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn'
+import LOADING from '~/constants/loading'
+import { useAppSelector } from '~/store/hooks'
+import { Specialty } from '~/types/profile'
+import { ActivateAccount } from '~/validations/activate'
+import { StepProps } from './types'
 
-const listItem =
-    'flex gap-1 font-semibold text-gray-500 p-1 text-center w-full';
-const strongText = 'text-gray-700 mr-2';
-const pStyle = 'text-center w-full text-sm flex flex-row';
+const listItem = 'flex gap-1 font-semibold text-gray-500 p-1 text-center w-full'
+const strongText = 'text-gray-700 mr-2'
+const pStyle = 'text-center w-full text-sm flex flex-row'
 
 const Specialty = {
     domestics: 'Animais Domésticos',
     large: 'Animais de Grande Porte',
     midsize: 'Animais de Médio Porte',
-} as const;
+} as const
 
-type KeysSpecialty = keyof typeof Specialty;
+type KeysSpecialty = keyof typeof Specialty
 
 const StepFinally = ({ prevStep, nextStep }: StepProps) => {
     const { values, isValid, errors, handleSubmit } =
-        useFormikContext<ActivateAccount>();
+        useFormikContext<ActivateAccount>()
 
     const isLoading = useAppSelector(
         (state) =>
             state.Profile.isLoading === LOADING.PENDING ||
             state.Profile.isLoading === LOADING.SUCCESS,
-    );
+    )
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        handleSubmit();
-    };
+        e.preventDefault()
+        handleSubmit()
+    }
 
     return (
         <div>
@@ -99,9 +98,7 @@ const StepFinally = ({ prevStep, nextStep }: StepProps) => {
 
                 <li className={twMerge(listItem, 'w-full col-span-full')}>
                     <p className={pStyle}>
-                        <strong className={strongText}>
-                            Sub-Especialidade:
-                        </strong>
+                        <strong className={strongText}>Sub-Especialidade:</strong>
                         <span className="">
                             {values?.list_specialty
                                 ?.map((item) => item.label)
@@ -191,7 +188,7 @@ const StepFinally = ({ prevStep, nextStep }: StepProps) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default StepFinally;
+export default StepFinally

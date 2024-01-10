@@ -1,8 +1,8 @@
 export type TreatmentItem = {
-    value: string;
-    label: string;
-    color: string;
-};
+    value: string
+    label: string
+    color: string
+}
 
 export const VACCINES: TreatmentItem[] = [
     {
@@ -10,7 +10,7 @@ export const VACCINES: TreatmentItem[] = [
         label: 'Vacina',
         color: 'rgb(255 200 107);',
     },
-];
+]
 
 export const MEDICINES: TreatmentItem[] = [
     {
@@ -18,7 +18,7 @@ export const MEDICINES: TreatmentItem[] = [
         label: 'Medicação',
         color: 'rgb(255 200 107);',
     },
-];
+]
 
 export const EXAMS: TreatmentItem[] = [
     {
@@ -26,7 +26,7 @@ export const EXAMS: TreatmentItem[] = [
         label: 'Exame',
         color: 'rgb(255 200 107);',
     },
-];
+]
 
 export const DISEASES: TreatmentItem[] = [
     {
@@ -34,7 +34,7 @@ export const DISEASES: TreatmentItem[] = [
         label: 'Doença',
         color: 'rgb(255 200 107);',
     },
-];
+]
 
 export const NUTRITION: TreatmentItem[] = [
     {
@@ -52,7 +52,7 @@ export const NUTRITION: TreatmentItem[] = [
         label: 'Frango',
         color: 'rgb(255 200 107);',
     },
-];
+]
 
 export const FAST_TESTS: TreatmentItem[] = [
     {
@@ -60,4 +60,4 @@ export const FAST_TESTS: TreatmentItem[] = [
         label: 'Teste rápido',
         color: 'rgb(255 200 107);',
     },
-];
+]

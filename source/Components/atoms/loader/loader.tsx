@@ -1,8 +1,8 @@
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from 'react-bootstrap/Spinner'
 
 type LoaderProps = {
-    loading: boolean;
-};
+    loading: boolean
+}
 
 const Loader = ({ loading }: LoaderProps) => {
     return (
@@ -20,5 +20,5 @@ const Loader = ({ loading }: LoaderProps) => {
         >
             <Spinner animation="border" variant="primary" />
         </div>
-    );
-};
+    )
+}

@@ -1,18 +1,18 @@
-import optionsCookies from '~/constants/cookies';
+import optionsCookies from '~/constants/cookies'
 
-import type { ParsedUrlQuery } from 'querystring';
+import type { ParsedUrlQuery } from 'querystring'
 import type {
     GetServerSideProps,
     GetServerSidePropsContext,
     PreviewData,
-} from 'next';
-import { getCookie } from '~/utils/cookies-utils';
+} from 'next'
+import { getCookie } from '~/utils/cookies-utils'
 
 const getServerSidePropsPagesPublics =
     (callback?: GetServerSideProps) =>
     async (ctx: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
-        const name = optionsCookies.token.name;
-        const token = getCookie(name, ctx);
+        const name = optionsCookies.token.name
+        const token = getCookie(name, ctx)
 
         if (token) {
             return {
@@ -20,16 +20,16 @@ const getServerSidePropsPagesPublics =
                     destination: '/dashboard',
                     permanent: false,
                 },
-            };
+            }
         }
 
         if (callback) {
-            return callback(ctx);
+            return callback(ctx)
         }
 
         return {
             props: {},
-        };
-    };
+        }
+    }
 
-export default getServerSidePropsPagesPublics;
+export default getServerSidePropsPagesPublics

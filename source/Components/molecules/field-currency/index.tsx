@@ -1,7 +1,7 @@
-import CurrencyInput, { CurrencyInputProps } from 'react-currency-input-field';
-import Label from '../../atoms/label';
+import CurrencyInput, { CurrencyInputProps } from 'react-currency-input-field'
+import Label from '../../atoms/label'
 
-import { input } from '../../atoms/input';
+import { input } from '../../atoms/input'
 
 const FieldCurrency = ({
     label,
@@ -21,7 +21,7 @@ const FieldCurrency = ({
                 {...props}
             />
         </div>
-    );
-};
+    )
+}
 
-export default FieldCurrency;
+export default FieldCurrency

@@ -1,22 +1,22 @@
-import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
+import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
 
-import cn from 'classnames';
-import { useEffect, useState } from 'react';
+import cn from 'classnames'
+import { useEffect, useState } from 'react'
 
-import withLoading from '~/Components/helpers/with-loading';
-import { useAppSelector } from '~/store/hooks';
-import { StepProps, Tabs } from '~/types/helpers';
-import CardPet from '../molecules/card-pet';
-import StepAnamneses from '../organisms/steps/step-anamnese';
-import StepPayment from '../organisms/steps/step-payment';
-import StepTreatment from '../organisms/steps/step-treatment';
+import withLoading from '~/Components/helpers/with-loading'
+import { useAppSelector } from '~/store/hooks'
+import { StepProps, Tabs } from '~/types/helpers'
+import CardPet from '../molecules/card-pet'
+import StepAnamneses from '../organisms/steps/step-anamnese'
+import StepPayment from '../organisms/steps/step-payment'
+import StepTreatment from '../organisms/steps/step-treatment'
 
 type TabItem = {
-    id: Tabs;
-    title: string;
-    href: string;
-    Component: (props: StepProps) => JSX.Element;
-};
+    id: Tabs
+    title: string
+    href: string
+    Component: (props: StepProps) => JSX.Element
+}
 
 const items: TabItem[] = [
     {
@@ -37,35 +37,35 @@ const items: TabItem[] = [
         href: '#Finalizar',
         Component: StepPayment,
     },
-];
+]
 
 const VerticalTabs = () => {
-    const [isFixed, setIsFixed] = useState(false);
-    const [activeVerticalTab, setActiveVerticalTab] = useState(1);
-    const [passedVerticalSteps, setPassedVerticalSteps] = useState([1]);
+    const [isFixed, setIsFixed] = useState(false)
+    const [activeVerticalTab, setActiveVerticalTab] = useState(1)
+    const [passedVerticalSteps, setPassedVerticalSteps] = useState([1])
 
-    const { height } = useAppSelector((state) => state.Layout.headerSize);
+    const { height } = useAppSelector((state) => state.Layout.headerSize)
 
     function toggleVerticalTab(tab: Tabs) {
         if (activeVerticalTab !== tab) {
-            const modifiedSteps = [...passedVerticalSteps, tab];
+            const modifiedSteps = [...passedVerticalSteps, tab]
 
             if (tab >= 1 && tab <= items.length) {
-                setActiveVerticalTab(tab);
-                setPassedVerticalSteps(modifiedSteps);
+                setActiveVerticalTab(tab)
+                setPassedVerticalSteps(modifiedSteps)
             }
         }
     }
 
     useEffect(() => {
         if (window.innerWidth < 768) {
-            setIsFixed(window.innerWidth < 768);
+            setIsFixed(window.innerWidth < 768)
         }
 
         return () => {
-            setIsFixed(false);
-        };
-    }, []);
+            setIsFixed(false)
+        }
+    }, [])
 
     return (
         <section className="card card-body shadow-lg gap-2 mt-2">
@@ -96,16 +96,14 @@ const VerticalTabs = () => {
                                             id="steparrow-gen-info-tab"
                                             className={cn({
                                                 active:
-                                                    activeVerticalTab ===
-                                                    item.id,
+                                                    activeVerticalTab === item.id,
                                                 done:
                                                     activeVerticalTab <=
                                                         items.length &&
-                                                    activeVerticalTab ===
-                                                        item.id,
+                                                    activeVerticalTab === item.id,
                                             })}
                                             onClick={() => {
-                                                toggleVerticalTab(item.id);
+                                                toggleVerticalTab(item.id)
                                             }}
                                         >
                                             {/* <span className="step-title me-2">
@@ -114,7 +112,7 @@ const VerticalTabs = () => {
                                             {item.title}
                                         </NavLink>
                                     </NavItem>
-                                );
+                                )
                             })}
                         </Nav>
                     </div>
@@ -128,13 +126,13 @@ const VerticalTabs = () => {
                                         toggleTab={toggleVerticalTab}
                                     />
                                 </TabPane>
-                            );
+                            )
                         })}
                     </TabContent>
                 </div>
             </section>
         </section>
-    );
-};
+    )
+}
 
-export default withLoading(VerticalTabs);
+export default withLoading(VerticalTabs)

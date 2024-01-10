@@ -1,19 +1,19 @@
-import aaveCoin from '~/assets/images/svg/crypto-icons/aave.svg';
-import bnbCoin from '~/assets/images/svg/crypto-icons/bnb.svg';
+import aaveCoin from '~/assets/images/svg/crypto-icons/aave.svg'
+import bnbCoin from '~/assets/images/svg/crypto-icons/bnb.svg'
 // Import Images
-import btcCoin from '~/assets/images/svg/crypto-icons/btc.svg';
-import dashCoin from '~/assets/images/svg/crypto-icons/dash.svg';
-import dogeCoin from '~/assets/images/svg/crypto-icons/doge.svg';
-import etcCoin from '~/assets/images/svg/crypto-icons/etc.svg';
-import ethCoin from '~/assets/images/svg/crypto-icons/eth.svg';
-import ltcCoin from '~/assets/images/svg/crypto-icons/ltc.svg';
-import neoCoin from '~/assets/images/svg/crypto-icons/neo.svg';
-import usdtCoin from '~/assets/images/svg/crypto-icons/usdt.svg';
+import btcCoin from '~/assets/images/svg/crypto-icons/btc.svg'
+import dashCoin from '~/assets/images/svg/crypto-icons/dash.svg'
+import dogeCoin from '~/assets/images/svg/crypto-icons/doge.svg'
+import etcCoin from '~/assets/images/svg/crypto-icons/etc.svg'
+import ethCoin from '~/assets/images/svg/crypto-icons/eth.svg'
+import ltcCoin from '~/assets/images/svg/crypto-icons/ltc.svg'
+import neoCoin from '~/assets/images/svg/crypto-icons/neo.svg'
+import usdtCoin from '~/assets/images/svg/crypto-icons/usdt.svg'
 
-import img1 from '~/assets/images/small/img-1.jpg';
-import img2 from '~/assets/images/small/img-2.jpg';
-import img3 from '~/assets/images/small/img-3.jpg';
-import img6 from '~/assets/images/small/img-6.jpg';
+import img1 from '~/assets/images/small/img-1.jpg'
+import img2 from '~/assets/images/small/img-2.jpg'
+import img3 from '~/assets/images/small/img-3.jpg'
+import img6 from '~/assets/images/small/img-6.jpg'
 
 const cyptoWidgets = [
     {
@@ -52,7 +52,7 @@ const cyptoWidgets = [
         prefix: '$',
         separator: ',',
     },
-];
+]
 
 const cryptoSlider = [
     {
@@ -167,7 +167,7 @@ const cryptoSlider = [
             },
         ],
     },
-];
+]
 
 const currencies = [
     {
@@ -258,7 +258,7 @@ const currencies = [
         balance: '54,843.173',
         totalCoin: '0.95632087',
     },
-];
+]
 
 const recentActivity = [
     { id: 1, date: '25 Dec 2021', isDate: true },
@@ -348,7 +348,7 @@ const recentActivity = [
         coinName: 'Btc',
         price: '+878.52',
     },
-];
+]
 
 const topPerformers = [
     {
@@ -411,7 +411,7 @@ const topPerformers = [
         textColor: 'success',
         percentage: '+4.92%',
     },
-];
+]
 
 const newsFeed = [
     {
@@ -446,12 +446,12 @@ const newsFeed = [
         date: 'Nov 18, 2021',
         time: '06:13 PM',
     },
-];
+]
 
 // My Portfolio
-const btcPortfolioData = [19405, 40552, 15824, 30635];
-const usdPortfolioData = [9405, 20552, 5824, 20635];
-const euroPortfolioData = [29405, 50552, 25824, 40635];
+const btcPortfolioData = [19405, 40552, 15824, 30635]
+const usdPortfolioData = [9405, 20552, 5824, 20635]
+const euroPortfolioData = [29405, 50552, 25824, 40635]
 
 // Market Graph
 const MarketGraphAll = [
@@ -699,7 +699,7 @@ const MarketGraphAll = [
             },
         ],
     },
-];
+]
 
 const MarketGraphYear = [
     {
@@ -946,7 +946,7 @@ const MarketGraphYear = [
             },
         ],
     },
-];
+]
 
 const MarketGraphMonth = [
     {
@@ -1193,7 +1193,7 @@ const MarketGraphMonth = [
             },
         ],
     },
-];
+]
 
 const MarketGraphWeek = [
     {
@@ -1440,7 +1440,7 @@ const MarketGraphWeek = [
             },
         ],
     },
-];
+]
 
 const MarketGraphHour = [
     {
@@ -1687,7 +1687,7 @@ const MarketGraphHour = [
             },
         ],
     },
-];
+]
 
 export {
     cyptoWidgets,
@@ -1704,4 +1704,4 @@ export {
     MarketGraphMonth,
     MarketGraphWeek,
     MarketGraphHour,
-};
+}

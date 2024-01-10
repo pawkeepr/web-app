@@ -1,21 +1,21 @@
 import {
     IGeolocationAppointment,
     ISignatureAppointment,
-} from '~/store/slices/appointment-vet/types';
-import { browser } from './navigator.utils';
+} from '~/store/slices/appointment-vet/types'
+import { browser } from './navigator.utils'
 
-type Geolocation = [IGeolocationAppointment, ISignatureAppointment];
+type Geolocation = [IGeolocationAppointment, ISignatureAppointment]
 
 export const geolocation = (): Promise<Geolocation> => {
     return new Promise((resolve, reject) => {
         if ('geolocation' in navigator) {
-            const browserUser = browser();
+            const browserUser = browser()
 
             const signature = {
                 ip_address: '',
                 browser_device: browserUser,
                 operational_system: navigator.platform,
-            };
+            }
 
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -29,12 +29,12 @@ export const geolocation = (): Promise<Geolocation> => {
                         speed: position.coords.speed
                             ? position.coords.speed.toString()
                             : '',
-                    };
+                    }
 
-                    return resolve([geolocationData, signature]);
+                    return resolve([geolocationData, signature])
                 },
                 (error) => reject(error),
-            );
+            )
         }
-    });
-};
+    })
+}

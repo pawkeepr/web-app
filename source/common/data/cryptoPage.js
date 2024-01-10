@@ -1,45 +1,45 @@
-import btc from '~/assets/images/svg/crypto-icons/btc.svg';
-import eth from '~/assets/images/svg/crypto-icons/eth.svg';
-import eur from '~/assets/images/svg/crypto-icons/eur.svg';
-import gbp from '~/assets/images/svg/crypto-icons/gbp.svg';
-import jpy from '~/assets/images/svg/crypto-icons/jpy.svg';
-import ltc from '~/assets/images/svg/crypto-icons/ltc.svg';
-import ppt from '~/assets/images/svg/crypto-icons/ppt.svg';
-import xmr from '~/assets/images/svg/crypto-icons/xmr.svg';
-import xpm from '~/assets/images/svg/crypto-icons/xpm.svg';
-import xrp from '~/assets/images/svg/crypto-icons/xrp.svg';
+import btc from '~/assets/images/svg/crypto-icons/btc.svg'
+import eth from '~/assets/images/svg/crypto-icons/eth.svg'
+import eur from '~/assets/images/svg/crypto-icons/eur.svg'
+import gbp from '~/assets/images/svg/crypto-icons/gbp.svg'
+import jpy from '~/assets/images/svg/crypto-icons/jpy.svg'
+import ltc from '~/assets/images/svg/crypto-icons/ltc.svg'
+import ppt from '~/assets/images/svg/crypto-icons/ppt.svg'
+import xmr from '~/assets/images/svg/crypto-icons/xmr.svg'
+import xpm from '~/assets/images/svg/crypto-icons/xpm.svg'
+import xrp from '~/assets/images/svg/crypto-icons/xrp.svg'
 
-import img6 from '~/assets/images/companies/img-6.png';
-import img8 from '~/assets/images/companies/img-8.png';
+import img6 from '~/assets/images/companies/img-6.png'
+import img8 from '~/assets/images/companies/img-8.png'
 
-import addCoin from '~/assets/images/svg/crypto-icons/add.svg';
-import arkCoin from '~/assets/images/svg/crypto-icons/ark.svg';
-import arnCoin from '~/assets/images/svg/crypto-icons/arn.svg';
-import atmCoin from '~/assets/images/svg/crypto-icons/atm.svg';
-import bcbcCoin from '~/assets/images/svg/crypto-icons/bcbc.svg';
-import belaCoin from '~/assets/images/svg/crypto-icons/bela.svg';
-import bixCoin from '~/assets/images/svg/crypto-icons/bix.svg';
-import csCoin from '~/assets/images/svg/crypto-icons/cs.svg';
-import riseCoin from '~/assets/images/svg/crypto-icons/rise.svg';
-import vtcCoin from '~/assets/images/svg/crypto-icons/vtc.svg';
-import xsgCoin from '~/assets/images/svg/crypto-icons/xsg.svg';
+import addCoin from '~/assets/images/svg/crypto-icons/add.svg'
+import arkCoin from '~/assets/images/svg/crypto-icons/ark.svg'
+import arnCoin from '~/assets/images/svg/crypto-icons/arn.svg'
+import atmCoin from '~/assets/images/svg/crypto-icons/atm.svg'
+import bcbcCoin from '~/assets/images/svg/crypto-icons/bcbc.svg'
+import belaCoin from '~/assets/images/svg/crypto-icons/bela.svg'
+import bixCoin from '~/assets/images/svg/crypto-icons/bix.svg'
+import csCoin from '~/assets/images/svg/crypto-icons/cs.svg'
+import riseCoin from '~/assets/images/svg/crypto-icons/rise.svg'
+import vtcCoin from '~/assets/images/svg/crypto-icons/vtc.svg'
+import xsgCoin from '~/assets/images/svg/crypto-icons/xsg.svg'
 
-import aaveCoin from '~/assets/images/svg/crypto-icons/aave.svg';
-import adaCoin from '~/assets/images/svg/crypto-icons/ada.svg';
-import antCoin from '~/assets/images/svg/crypto-icons/ant.svg';
+import aaveCoin from '~/assets/images/svg/crypto-icons/aave.svg'
+import adaCoin from '~/assets/images/svg/crypto-icons/ada.svg'
+import antCoin from '~/assets/images/svg/crypto-icons/ant.svg'
 // Import Images
-import btcCoin from '~/assets/images/svg/crypto-icons/btc.svg';
-import dashCoin from '~/assets/images/svg/crypto-icons/dash.svg';
-import dotCoin from '~/assets/images/svg/crypto-icons/dot.svg';
-import ethCoin from '~/assets/images/svg/crypto-icons/eth.svg';
-import fillCoin from '~/assets/images/svg/crypto-icons/fil.svg';
-import ltcCoin from '~/assets/images/svg/crypto-icons/ltc.svg';
-import makerCoin from '~/assets/images/svg/crypto-icons/mkr.svg';
-import enzymeCoin from '~/assets/images/svg/crypto-icons/mln.svg';
-import neoCoin from '~/assets/images/svg/crypto-icons/neo.svg';
-import solCoin from '~/assets/images/svg/crypto-icons/sol.svg';
-import moneroCoin from '~/assets/images/svg/crypto-icons/xmr.svg';
-import yearnCoin from '~/assets/images/svg/crypto-icons/yfi.svg';
+import btcCoin from '~/assets/images/svg/crypto-icons/btc.svg'
+import dashCoin from '~/assets/images/svg/crypto-icons/dash.svg'
+import dotCoin from '~/assets/images/svg/crypto-icons/dot.svg'
+import ethCoin from '~/assets/images/svg/crypto-icons/eth.svg'
+import fillCoin from '~/assets/images/svg/crypto-icons/fil.svg'
+import ltcCoin from '~/assets/images/svg/crypto-icons/ltc.svg'
+import makerCoin from '~/assets/images/svg/crypto-icons/mkr.svg'
+import enzymeCoin from '~/assets/images/svg/crypto-icons/mln.svg'
+import neoCoin from '~/assets/images/svg/crypto-icons/neo.svg'
+import solCoin from '~/assets/images/svg/crypto-icons/sol.svg'
+import moneroCoin from '~/assets/images/svg/crypto-icons/xmr.svg'
+import yearnCoin from '~/assets/images/svg/crypto-icons/yfi.svg'
 
 const transactions = [
     {
@@ -212,7 +212,7 @@ const transactions = [
         status: 'Success',
         category: 'USD',
     },
-];
+]
 
 const buysellWidgets = [
     {
@@ -247,7 +247,7 @@ const buysellWidgets = [
         icon: 'ri-arrow-right-up-fill',
         iconClass: 'success',
     },
-];
+]
 
 const market = [
     {
@@ -390,7 +390,7 @@ const market = [
         icon: 'mdi mdi-trending-up',
         iconClass: 'success',
     },
-];
+]
 
 const CryptoOrders = [
     {
@@ -573,7 +573,7 @@ const CryptoOrders = [
         status: 'Cancelled',
         statusClass: 'danger',
     },
-];
+]
 
 const watchlist = [
     {
@@ -688,7 +688,7 @@ const watchlist = [
             },
         ],
     },
-];
+]
 
 const marketStatus = [
     {
@@ -795,7 +795,7 @@ const marketStatus = [
         percentage: '3.96%',
         percentageClass: 'success',
     },
-];
+]
 
 const CryptoicoWidgets = [
     {
@@ -833,7 +833,7 @@ const CryptoicoWidgets = [
         icon: 'ri-donut-chart-line',
         iconClass: 'primary',
     },
-];
+]
 
 const icoWidgetsList = [
     {
@@ -1020,7 +1020,7 @@ const icoWidgetsList = [
             },
         ],
     },
-];
+]
 
 export {
     transactions,
@@ -1031,4 +1031,4 @@ export {
     marketStatus,
     CryptoicoWidgets,
     icoWidgetsList,
-};
+}

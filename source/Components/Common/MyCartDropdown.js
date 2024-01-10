@@ -1,17 +1,17 @@
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { Col, Dropdown, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
+import Link from 'next/link'
+import React, { useState } from 'react'
+import { Col, Dropdown, DropdownMenu, DropdownToggle, Row } from 'reactstrap'
 
 //SimpleBar
-import SimpleBar from 'simplebar-react';
+import SimpleBar from 'simplebar-react'
 
 //import images
-import Image from 'next/image';
-import image1 from '~/assets/images/products/img-1.png';
-import image2 from '~/assets/images/products/img-2.png';
-import image3 from '~/assets/images/products/img-3.png';
-import image5 from '~/assets/images/products/img-5.png';
-import image6 from '~/assets/images/products/img-6.png';
+import Image from 'next/image'
+import image1 from '~/assets/images/products/img-1.png'
+import image2 from '~/assets/images/products/img-2.png'
+import image3 from '~/assets/images/products/img-3.png'
+import image5 from '~/assets/images/products/img-5.png'
+import image6 from '~/assets/images/products/img-6.png'
 
 const MyCartDropdown = () => {
     const cartData = [
@@ -55,36 +55,36 @@ const MyCartDropdown = () => {
             price: 495,
             total: 990,
         },
-    ];
+    ]
 
-    const [isCartDropdown, setIsCartDropdown] = useState(false);
+    const [isCartDropdown, setIsCartDropdown] = useState(false)
 
-    const [cartItem, setCartItem] = useState(cartData.length);
+    const [cartItem, setCartItem] = useState(cartData.length)
 
     const toggleCartDropdown = () => {
-        setIsCartDropdown(!isCartDropdown);
-        setCartItem(cartData.length);
-    };
+        setIsCartDropdown(!isCartDropdown)
+        setCartItem(cartData.length)
+    }
 
     const removeItem = (ele) => {
         const price = ele
             .closest('.dropdown-item-cart')
-            .querySelector('.cart-item-price').innerHTML;
-        const subTotal = document.getElementById('cart-item-total').innerHTML;
-        document.getElementById('cart-item-total').innerHTML = subTotal - price;
+            .querySelector('.cart-item-price').innerHTML
+        const subTotal = document.getElementById('cart-item-total').innerHTML
+        document.getElementById('cart-item-total').innerHTML = subTotal - price
 
-        ele.closest('.dropdown-item-cart').remove();
-        const element = document.querySelectorAll('.dropdown-item-cart').length;
-        const ecart = document.getElementById('empty-cart');
+        ele.closest('.dropdown-item-cart').remove()
+        const element = document.querySelectorAll('.dropdown-item-cart').length
+        const ecart = document.getElementById('empty-cart')
 
         if (element === 0) {
-            ecart.style.display = 'block';
+            ecart.style.display = 'block'
         } else {
-            ecart.style.display = 'none';
+            ecart.style.display = 'none'
         }
 
-        setCartItem(element);
-    };
+        setCartItem(element)
+    }
 
     return (
         <React.Fragment>
@@ -111,10 +111,7 @@ const MyCartDropdown = () => {
                     <div className="p-3 border-top-0 border-start-0 border-end-0 border-dashed border">
                         <Row className="align-items-center">
                             <Col>
-                                <h6 className="m-0 fs-16 fw-semibold">
-                                    {' '}
-                                    My Cart
-                                </h6>
+                                <h6 className="m-0 fs-16 fw-semibold"> My Cart</h6>
                             </Col>
                             <div className="col-auto">
                                 <span className="badge badge-soft-warning fs-13">
@@ -171,8 +168,7 @@ const MyCartDropdown = () => {
                                             <p className="mb-0 fs-12 text-muted">
                                                 Quantity:{' '}
                                                 <span>
-                                                    {item.quantity} x $
-                                                    {item.price}
+                                                    {item.quantity} x ${item.price}
                                                 </span>
                                             </p>
                                         </div>
@@ -189,7 +185,7 @@ const MyCartDropdown = () => {
                                                 type="button"
                                                 className="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn"
                                                 onClick={(e) => {
-                                                    removeItem(e.target);
+                                                    removeItem(e.target)
                                                 }}
                                             >
                                                 <i className="ri-close-fill fs-16" />
@@ -223,7 +219,7 @@ const MyCartDropdown = () => {
                 </DropdownMenu>
             </Dropdown>
         </React.Fragment>
-    );
-};
+    )
+}
 
-export default MyCartDropdown;
+export default MyCartDropdown

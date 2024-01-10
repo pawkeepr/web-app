@@ -1,6 +1,6 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes } from 'react'
 
-import { VariantProps, tv } from 'tailwind-variants';
+import { VariantProps, tv } from 'tailwind-variants'
 
 export const checkbox = tv({
     base: `
@@ -23,10 +23,10 @@ export const checkbox = tv({
             true: 'rounded-full',
         },
     },
-});
+})
 
 type CheckboxProps = VariantProps<typeof checkbox> &
-    InputHTMLAttributes<HTMLInputElement>;
+    InputHTMLAttributes<HTMLInputElement>
 
 const Checkbox = ({ className, ...props }: CheckboxProps) => {
     return (
@@ -35,7 +35,7 @@ const Checkbox = ({ className, ...props }: CheckboxProps) => {
             className={checkbox({ className, ...props })}
             {...props}
         />
-    );
-};
+    )
+}
 
-export default Checkbox;
+export default Checkbox

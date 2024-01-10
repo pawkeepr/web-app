@@ -1,37 +1,32 @@
-import { get, map } from 'lodash';
-import React, { useEffect, useState } from 'react';
-import {
-    Dropdown,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-} from 'reactstrap';
+import { get, map } from 'lodash'
+import React, { useEffect, useState } from 'react'
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
 
 //i18n
-import Image from 'next/image';
-import languages from '../../common/languages';
-import useLanguage from '../../i18n';
+import Image from 'next/image'
+import languages from '../../common/languages'
+import useLanguage from '../../i18n'
 
 const LanguageDropdown = () => {
     // Declare a new state variable, which we'll call "menu"
-    const [selectedLang, setSelectedLang] = useState('');
-    const i18n = useLanguage();
+    const [selectedLang, setSelectedLang] = useState('')
+    const i18n = useLanguage()
     useEffect(() => {
-        const currentLanguage = localStorage.getItem('I18N_LANGUAGE');
-        setSelectedLang(currentLanguage);
-    }, []);
+        const currentLanguage = localStorage.getItem('I18N_LANGUAGE')
+        setSelectedLang(currentLanguage)
+    }, [])
 
     const changeLanguageAction = (lang) => {
         //set language as i18n
-        i18n.changeLanguage(lang);
-        localStorage.setItem('I18N_LANGUAGE', lang);
-        setSelectedLang(lang);
-    };
+        i18n.changeLanguage(lang)
+        localStorage.setItem('I18N_LANGUAGE', lang)
+        setSelectedLang(lang)
+    }
 
-    const [isLanguageDropdown, setIsLanguageDropdown] = useState(false);
+    const [isLanguageDropdown, setIsLanguageDropdown] = useState(false)
     const toggleLanguageDropdown = () => {
-        setIsLanguageDropdown(!isLanguageDropdown);
-    };
+        setIsLanguageDropdown(!isLanguageDropdown)
+    }
     return (
         <React.Fragment>
             <Dropdown
@@ -73,7 +68,7 @@ const LanguageDropdown = () => {
                 </DropdownMenu>
             </Dropdown>
         </React.Fragment>
-    );
-};
+    )
+}
 
-export default LanguageDropdown;
+export default LanguageDropdown

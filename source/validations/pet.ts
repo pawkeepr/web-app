@@ -1,5 +1,5 @@
-import { cnpj, cpf } from 'cpf-cnpj-validator';
-import * as Yup from 'yup';
+import { cnpj, cpf } from 'cpf-cnpj-validator'
+import * as Yup from 'yup'
 
 const validateOwnerEmergencyContact = Yup.object({
     // phoneNumber: Yup.string().matches(/^[\d()-\s]+$/)
@@ -21,7 +21,7 @@ const validateOwnerEmergencyContact = Yup.object({
     //     if (!value) return false;
     //     return cpf.isValid(value) || cnpj.isValid(value);
     // }),
-});
+})
 
 const validate = Yup.object({
     name: Yup.string().required('Campo Obrigatório'),
@@ -30,6 +30,6 @@ const validate = Yup.object({
     bloodType: Yup.string(),
     ownerEmergencyContact: validateOwnerEmergencyContact,
     dateOfBirth: Yup.string(),
-});
+})
 
-export default validate;
+export default validate

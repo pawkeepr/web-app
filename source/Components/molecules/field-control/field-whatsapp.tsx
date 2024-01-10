@@ -1,32 +1,30 @@
-import { useState } from 'react';
-import { FaWhatsapp } from 'react-icons/fa';
-import MaskedInput from 'react-input-mask';
-import FieldControl from '~/Components/molecules/field-control/';
+import { useState } from 'react'
+import { FaWhatsapp } from 'react-icons/fa'
+import MaskedInput from 'react-input-mask'
+import FieldControl from '~/Components/molecules/field-control/'
 // ... Existing code ...
 
 type NumberWhatsAppProps = {
-    name: string;
-};
+    name: string
+}
 
 const NumberWhatsapp = ({ name }: NumberWhatsAppProps) => {
-    const [phoneValue, setPhoneValue] = useState<string | any>(undefined);
-    const [showWhatsAppInput, setShowWhatsAppInput] = useState(false);
-    const [clickAppInput, setClickAppInput] = useState(false);
+    const [phoneValue, setPhoneValue] = useState<string | any>(undefined)
+    const [showWhatsAppInput, setShowWhatsAppInput] = useState(false)
+    const [clickAppInput, setClickAppInput] = useState(false)
 
     // guarda o valor do input de telefone
-    const handlePhoneInputChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ) => {
-        setPhoneValue(event.target.value);
-    };
+    const handlePhoneInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPhoneValue(event.target.value)
+    }
 
     // atualiza o estado do input de whatsapp para true
     const copyPhoneToWhatsapp = () => {
         if (phoneValue !== undefined) {
-            setClickAppInput(true);
+            setClickAppInput(true)
             // setShowWhatsAppInput(true);
         }
-    };
+    }
 
     return (
         <div>
@@ -50,8 +48,8 @@ const NumberWhatsapp = ({ name }: NumberWhatsAppProps) => {
                         className="flex justify-center items-center"
                     >
                         <p className="text-xs mr-2 mb-2 md:m-2">
-                            Clique no ícone do whatsapp para duplicar o telefone
-                            no campo abaixo:
+                            Clique no ícone do whatsapp para duplicar o telefone no
+                            campo abaixo:
                         </p>
                         <FaWhatsapp
                             onClick={copyPhoneToWhatsapp}
@@ -95,7 +93,7 @@ const NumberWhatsapp = ({ name }: NumberWhatsAppProps) => {
                 }
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default NumberWhatsapp;
+export default NumberWhatsapp

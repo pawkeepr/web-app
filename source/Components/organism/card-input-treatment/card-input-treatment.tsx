@@ -1,55 +1,51 @@
-import { Form, Formik, FormikHelpers } from 'formik';
-import { useMemo } from 'react';
-import * as Yup from 'yup';
-import { BtnConfirm } from '~/Components/atoms/btn';
-import FieldControl, {
-    OptionSelect,
-} from '~/Components/molecules/field-control';
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select';
-import FieldTextArea from '~/Components/molecules/field-text-area';
-import { QuestionTreatment } from '~/types/appointment';
-import { RecordsShapeYup } from '~/types/helpers';
+import { Form, Formik, FormikHelpers } from 'formik'
+import { useMemo } from 'react'
+import * as Yup from 'yup'
+import { BtnConfirm } from '~/Components/atoms/btn'
+import FieldControl, { OptionSelect } from '~/Components/molecules/field-control'
+import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
+import FieldTextArea from '~/Components/molecules/field-text-area'
+import { QuestionTreatment } from '~/types/appointment'
+import { RecordsShapeYup } from '~/types/helpers'
 
 type CardInputProps = {
-    items?: OptionSelect[];
+    items?: OptionSelect[]
     handleSubmit?: (
         data: QuestionTreatment,
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         formikHelpers: FormikHelpers<any>,
-    ) => Promise<unknown>;
-};
+    ) => Promise<unknown>
+}
 
-const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionTreatment>>(
-    {
-        type_treatment: Yup.object().shape({
-            value: Yup.string().required('Campo obrigatório'),
-            label: Yup.string().required('Campo obrigatório'),
-        }),
-        name_treatment: Yup.string().required('Campo obrigatório'),
-        coin_treatment: Yup.string().optional(),
-        notes_treatment: Yup.string().optional(),
-        list_notes_treatment: Yup.array().optional(),
-        logical_list_default_anamnesis: Yup.array().optional(),
-        options_anamnesis: Yup.array().optional(),
-        value_coin_treatment: Yup.number().optional(),
-    },
-);
+const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionTreatment>>({
+    type_treatment: Yup.object().shape({
+        value: Yup.string().required('Campo obrigatório'),
+        label: Yup.string().required('Campo obrigatório'),
+    }),
+    name_treatment: Yup.string().required('Campo obrigatório'),
+    coin_treatment: Yup.string().optional(),
+    notes_treatment: Yup.string().optional(),
+    list_notes_treatment: Yup.array().optional(),
+    logical_list_default_anamnesis: Yup.array().optional(),
+    options_anamnesis: Yup.array().optional(),
+    value_coin_treatment: Yup.number().optional(),
+})
 
 const makeOptions = (items: OptionSelect[]) => {
     return items.map((item) => ({
         value: item.value,
         label: item.label,
         color: 'rgb(255 200 107);',
-    }));
-};
+    }))
+}
 
 const CardInputTreatment = ({
     items = [],
     handleSubmit = async (data: QuestionTreatment) => {
-        console.log('handleSubmit');
+        console.log('handleSubmit')
     },
 }: CardInputProps) => {
-    const options = useMemo(() => makeOptions(items), [items]);
+    const options = useMemo(() => makeOptions(items), [items])
 
     return (
         <Formik
@@ -99,7 +95,7 @@ const CardInputTreatment = ({
                 </Form>
             )}
         </Formik>
-    );
-};
+    )
+}
 
-export default CardInputTreatment;
+export default CardInputTreatment

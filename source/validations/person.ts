@@ -1,12 +1,10 @@
-import { cnpj, cpf } from 'cpf-cnpj-validator';
-import * as Yup from 'yup';
+import { cnpj, cpf } from 'cpf-cnpj-validator'
+import * as Yup from 'yup'
 
 const transformTrim = (value: any, originalValue: string) => {
     // Remover espaços em branco extras da string
-    return typeof originalValue === 'string'
-        ? originalValue.trim()
-        : originalValue;
-};
+    return typeof originalValue === 'string' ? originalValue.trim() : originalValue
+}
 
 const validate = Yup.object().shape({
     firstName: Yup.string()
@@ -28,14 +26,10 @@ const validate = Yup.object().shape({
         .shape({
             phone: Yup.string()
                 .matches(/^\+55 \(\d{2}\) \d \d{4}-\d{4}$/)
-                .test(
-                    'phone-validator',
-                    'Número de telefone inválido',
-                    (value) => {
-                        if (!value) return false;
-                        return value.length >= 10;
-                    },
-                )
+                .test('phone-validator', 'Número de telefone inválido', (value) => {
+                    if (!value) return false
+                    return value.length >= 10
+                })
                 .required(),
             email: Yup.string()
                 .email('E-mail inválido')
@@ -46,8 +40,8 @@ const validate = Yup.object().shape({
                     'whatsapp-validator',
                     'Número de telefone inválido',
                     (value) => {
-                        if (!value) return false;
-                        return value.length >= 10;
+                        if (!value) return false
+                        return value.length >= 10
                     },
                 )
                 .required(),
@@ -60,8 +54,8 @@ const validate = Yup.object().shape({
     //     if (!value) return false;
     //     return cpf.isValid(value) || cnpj.isValid(value);
     // })
-});
+})
 
-export type Person = Yup.InferType<typeof validate>;
+export type Person = Yup.InferType<typeof validate>
 
-export default validate;
+export default validate

@@ -1,1 +1,1 @@
-export { default } from './confirmed-scheduled-modal';
+export { default } from './confirmed-scheduled-modal'

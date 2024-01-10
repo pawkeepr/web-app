@@ -1,1 +1,1 @@
-export { default } from './input-code';
+export { default } from './input-code'

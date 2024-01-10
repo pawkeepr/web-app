@@ -1,64 +1,62 @@
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
-import { Collapse } from 'reactstrap';
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
+import { Collapse } from 'reactstrap'
 
 //i18n
-import { withTranslation } from 'react-i18next';
+import { withTranslation } from 'react-i18next'
 // Import Data
-import navdata from '../LayoutMenuData';
+import navdata from '../LayoutMenuData'
 
 const VerticalLayout = (props) => {
-    const navData = navdata().props.children;
-    const pathnameNext = usePathname();
+    const navData = navdata().props.children
+    const pathnameNext = usePathname()
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' })
         const initMenu = () => {
-            const pathName = process.env.PUBLIC_URL + pathnameNext;
-            const ul = document.getElementById('navbar-nav');
-            const items = ul.getElementsByTagName('a');
-            const itemsArray = [...items]; // converts NodeList to Array
-            removeActivation(itemsArray);
+            const pathName = process.env.PUBLIC_URL + pathnameNext
+            const ul = document.getElementById('navbar-nav')
+            const items = ul.getElementsByTagName('a')
+            const itemsArray = [...items] // converts NodeList to Array
+            removeActivation(itemsArray)
             const matchingMenuItem = itemsArray.find((x) => {
-                return x.pathname === pathName;
-            });
+                return x.pathname === pathName
+            })
             if (matchingMenuItem) {
-                activateParentDropdown(matchingMenuItem);
+                activateParentDropdown(matchingMenuItem)
             }
-        };
-        if (props.layoutType === 'vertical') {
-            initMenu();
         }
-    }, [pathnameNext, props.layoutType]);
+        if (props.layoutType === 'vertical') {
+            initMenu()
+        }
+    }, [pathnameNext, props.layoutType])
 
     function activateParentDropdown(item) {
-        item.classList.add('active');
-        const parentCollapseDiv = item.closest('.collapse.menu-dropdown');
+        item.classList.add('active')
+        const parentCollapseDiv = item.closest('.collapse.menu-dropdown')
 
         if (parentCollapseDiv) {
             // to set aria expand true remaining
-            parentCollapseDiv.classList.add('show');
-            parentCollapseDiv.parentElement.children[0].classList.add('active');
+            parentCollapseDiv.classList.add('show')
+            parentCollapseDiv.parentElement.children[0].classList.add('active')
             parentCollapseDiv.parentElement.children[0].setAttribute(
                 'aria-expanded',
                 'true',
-            );
+            )
             if (
-                parentCollapseDiv.parentElement.closest(
-                    '.collapse.menu-dropdown',
-                )
+                parentCollapseDiv.parentElement.closest('.collapse.menu-dropdown')
             ) {
                 parentCollapseDiv.parentElement
                     .closest('.collapse')
-                    .classList.add('show');
+                    .classList.add('show')
                 if (
                     parentCollapseDiv.parentElement.closest('.collapse')
                         .previousElementSibling
                 )
                     parentCollapseDiv.parentElement
                         .closest('.collapse')
-                        .previousElementSibling.classList.add('active');
+                        .previousElementSibling.classList.add('active')
                 if (
                     parentCollapseDiv.parentElement
                         .closest('.collapse')
@@ -67,39 +65,39 @@ const VerticalLayout = (props) => {
                     parentCollapseDiv.parentElement
                         .closest('.collapse')
                         .previousElementSibling.closest('.collapse')
-                        .classList.add('show');
+                        .classList.add('show')
                     parentCollapseDiv.parentElement
                         .closest('.collapse')
                         .previousElementSibling.closest('.collapse')
-                        .previousElementSibling.classList.add('active');
+                        .previousElementSibling.classList.add('active')
                 }
             }
-            return false;
+            return false
         }
-        return false;
+        return false
     }
 
     const removeActivation = (items) => {
-        const actiItems = items.filter((x) => x.classList.contains('active'));
+        const actiItems = items.filter((x) => x.classList.contains('active'))
 
         actiItems.forEach((item) => {
             if (item.classList.contains('menu-link')) {
                 if (!item.classList.contains('active')) {
-                    item.setAttribute('aria-expanded', false);
+                    item.setAttribute('aria-expanded', false)
                 }
                 if (item.nextElementSibling) {
-                    item.nextElementSibling.classList.remove('show');
+                    item.nextElementSibling.classList.remove('show')
                 }
             }
             if (item.classList.contains('nav-link')) {
                 if (item.nextElementSibling) {
-                    item.nextElementSibling.classList.remove('show');
+                    item.nextElementSibling.classList.remove('show')
                 }
-                item.setAttribute('aria-expanded', false);
+                item.setAttribute('aria-expanded', false)
             }
-            item.classList.remove('active');
-        });
-    };
+            item.classList.remove('active')
+        })
+    }
 
     return (
         <React.Fragment>
@@ -317,12 +315,12 @@ const VerticalLayout = (props) => {
                 );
             })}
         </React.Fragment>
-    );
-};
+    )
+}
 
 VerticalLayout.propTypes = {
     location: PropTypes.object,
     t: PropTypes.any,
-};
+}
 
-export default withTranslation()(VerticalLayout);
+export default withTranslation()(VerticalLayout)

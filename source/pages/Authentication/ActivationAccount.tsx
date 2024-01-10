@@ -1,32 +1,32 @@
-import AuthLayout from '../_layouts/auth/auth_layout';
+import AuthLayout from '../_layouts/auth/auth_layout'
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
-import { useAppSelector } from '~/store/hooks';
+import { useAppSelector } from '~/store/hooks'
 
 //formik
-import { Formik } from 'formik';
-import TabContainer from 'react-bootstrap/TabContainer';
-import TabContent from 'react-bootstrap/TabContent';
-import TabPane from 'react-bootstrap/TabPane';
+import { Formik } from 'formik'
+import TabContainer from 'react-bootstrap/TabContainer'
+import TabContent from 'react-bootstrap/TabContent'
+import TabPane from 'react-bootstrap/TabPane'
 
-import validate, { ActivateAccount, Location } from '~/validations/activate';
+import validate, { ActivateAccount, Location } from '~/validations/activate'
 
-import { signOutUser } from '~/store/slices/auth/login/actions';
-import { addNew } from '~/store/slices/auth/profile/actions';
-import { changeLayoutMode } from '~/store/slices/layouts/actions';
+import { signOutUser } from '~/store/slices/auth/login/actions'
+import { addNew } from '~/store/slices/auth/profile/actions'
+import { changeLayoutMode } from '~/store/slices/layouts/actions'
 
-import { useAppDispatch } from '~/store/hooks';
+import { useAppDispatch } from '~/store/hooks'
 
-import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid';
-import { BtnLink } from '~/Components/atoms/btn';
+import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
+import { BtnLink } from '~/Components/atoms/btn'
 
-import { layoutModeTypes } from '~/Components/constants/layout';
-import { IProfile } from '~/types/profile';
-import StepActivationAddress from './components/organism/steps-activation/step-address';
-import StepActivationFinally from './components/organism/steps-activation/step-finally';
-import StepActivationPerson from './components/organism/steps-activation/step-person';
-import StepActivationSpecialty from './components/organism/steps-activation/step-specialty';
+import { layoutModeTypes } from '~/Components/constants/layout'
+import { IProfile } from '~/types/profile'
+import StepActivationAddress from './components/organism/steps-activation/step-address'
+import StepActivationFinally from './components/organism/steps-activation/step-finally'
+import StepActivationPerson from './components/organism/steps-activation/step-person'
+import StepActivationSpecialty from './components/organism/steps-activation/step-specialty'
 
 const initialValues = (email: string): ActivateAccount => ({
     email,
@@ -55,7 +55,7 @@ const initialValues = (email: string): ActivateAccount => ({
         state: '',
         zipCode: '',
     },
-});
+})
 
 const Tabs = [
     {
@@ -74,18 +74,17 @@ const Tabs = [
         id: '4',
         component: (props: any) => <StepActivationFinally {...props} />,
     },
-];
+]
 
 const ActivationAccount = () => {
-    const email = useAppSelector((state) => state.Login.username);
+    const email = useAppSelector((state) => state.Login.username)
 
-    const [tab, setTab] = useState('1');
+    const [tab, setTab] = useState('1')
 
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch()
 
     const onSubmit = async (values: ActivateAccount) => {
-        const { list_specialty, specialty, list_service_type, ...rest } =
-            values;
+        const { list_specialty, specialty, list_service_type, ...rest } = values
 
         const profile: IProfile = {
             ...rest,
@@ -114,46 +113,46 @@ const ActivationAccount = () => {
                     type: item.value,
                 })),
             },
-        };
+        }
 
-        dispatch(addNew(profile));
-    };
+        dispatch(addNew(profile))
+    }
 
     useEffect(() => {
-        dispatch(changeLayoutMode(layoutModeTypes.LIGHT_MODE));
+        dispatch(changeLayoutMode(layoutModeTypes.LIGHT_MODE))
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [])
 
     useEffect(() => {
         if (!email) {
-            dispatch(signOutUser());
+            dispatch(signOutUser())
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [email]);
+    }, [email])
 
     const onChangeNextStep = () => {
         setTab((state) => {
-            const stateNumber = Number(state);
+            const stateNumber = Number(state)
 
             if (stateNumber === Tabs.length) {
-                return state;
+                return state
             }
 
-            return (stateNumber + 1).toString();
-        });
-    };
+            return (stateNumber + 1).toString()
+        })
+    }
 
     const onChangePrevStep = () => {
         setTab((state) => {
-            const stateNumber = Number(state);
+            const stateNumber = Number(state)
 
             if (stateNumber === 1) {
-                return state;
+                return state
             }
 
-            return (stateNumber - 1).toString();
-        });
-    };
+            return (stateNumber - 1).toString()
+        })
+    }
 
     return (
         <AuthLayout title="Activation Profile">
@@ -163,8 +162,8 @@ const ActivationAccount = () => {
                         Olá, Seja Bem-Vindo(a)!
                     </h5>
                     <p>
-                        Para seu primeiro acesso, você deve completar seu
-                        cadastro na plataforma.
+                        Para seu primeiro acesso, você deve completar seu cadastro
+                        na plataforma.
                         <br />
                         <span className="mx-2 font-semibold">
                             {email || 'email@teste.com'}
@@ -207,7 +206,7 @@ const ActivationAccount = () => {
                 <ArrowLeftCircleIcon />
             </BtnLink>
         </AuthLayout>
-    );
-};
+    )
+}
 
-export default ActivationAccount;
+export default ActivationAccount

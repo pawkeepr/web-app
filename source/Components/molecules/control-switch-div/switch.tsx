@@ -1,13 +1,13 @@
-import { Switch } from '@headlessui/react';
-import { useField } from 'formik';
+import { Switch } from '@headlessui/react'
+import { useField } from 'formik'
 
 type SwitchProps = {
-    className?: string;
-    name: string;
-    children?: React.ReactNode;
-    label: string;
-    onClick?: () => void;
-};
+    className?: string
+    name: string
+    children?: React.ReactNode
+    label: string
+    onClick?: () => void
+}
 
 const ControlSwitch = ({
     className,
@@ -16,7 +16,7 @@ const ControlSwitch = ({
     name,
     onClick,
 }: SwitchProps) => {
-    const [field, meta, helpers] = useField(name);
+    const [field, meta, helpers] = useField(name)
 
     return (
         <div className="mb-2">
@@ -27,12 +27,10 @@ const ControlSwitch = ({
                         onClick={onClick}
                         checked={field.value}
                         onChange={(e) => {
-                            helpers.setValue(e);
+                            helpers.setValue(e)
                         }}
                         className={`${
-                            field.value
-                                ? 'bg-secondary-500'
-                                : '  bg-secondary-600'
+                            field.value ? 'bg-secondary-500' : '  bg-secondary-600'
                         }
             relative inline-flex h-full w-full shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
                     >
@@ -49,7 +47,7 @@ const ControlSwitch = ({
             </div>
             {field.value && children}
         </div>
-    );
-};
+    )
+}
 
-export default ControlSwitch;
+export default ControlSwitch

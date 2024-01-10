@@ -1,15 +1,12 @@
-import { Appointments } from '~/entities/Appointments';
-import {
-    createAppointmentVet,
-    finishedAppointmentVet,
-} from '~/services/helpers';
-import { VeterinaryConsultation } from '~/types/appointment';
-import useAppStore from '../use-app-store';
+import { Appointments } from '~/entities/Appointments'
+import { createAppointmentVet, finishedAppointmentVet } from '~/services/helpers'
+import { VeterinaryConsultation } from '~/types/appointment'
+import useAppStore from '../use-app-store'
 
-export const NAME = 'appointments-vet';
+export const NAME = 'appointments-vet'
 
 const useAppointment = () => {
-    const superKeys = [NAME];
+    const superKeys = [NAME]
 
     return useAppStore<VeterinaryConsultation>({
         keys: superKeys,
@@ -17,7 +14,7 @@ const useAppointment = () => {
         entity: Appointments,
         add: createAppointmentVet,
         update: finishedAppointmentVet,
-    });
-};
+    })
+}
 
-export default useAppointment;
+export default useAppointment

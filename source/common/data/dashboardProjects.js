@@ -1,15 +1,15 @@
 // Import Images
-import avatar1 from '~/assets/images/users/avatar-1.jpg';
-import avatar2 from '~/assets/images/users/avatar-2.jpg';
-import avatar3 from '~/assets/images/users/avatar-3.jpg';
-import avatar4 from '~/assets/images/users/avatar-4.jpg';
-import avatar5 from '~/assets/images/users/avatar-5.jpg';
-import avatar6 from '~/assets/images/users/avatar-6.jpg';
-import avatar7 from '~/assets/images/users/avatar-7.jpg';
-import avatar8 from '~/assets/images/users/avatar-8.jpg';
+import avatar1 from '~/assets/images/users/avatar-1.jpg'
+import avatar2 from '~/assets/images/users/avatar-2.jpg'
+import avatar3 from '~/assets/images/users/avatar-3.jpg'
+import avatar4 from '~/assets/images/users/avatar-4.jpg'
+import avatar5 from '~/assets/images/users/avatar-5.jpg'
+import avatar6 from '~/assets/images/users/avatar-6.jpg'
+import avatar7 from '~/assets/images/users/avatar-7.jpg'
+import avatar8 from '~/assets/images/users/avatar-8.jpg'
 
-import img1 from '~/assets/images/small/img-1.jpg';
-import img2 from '~/assets/images/small/img-2.jpg';
+import img1 from '~/assets/images/small/img-1.jpg'
+import img2 from '~/assets/images/small/img-2.jpg'
 
 const projectsWidgets = [
     {
@@ -48,7 +48,7 @@ const projectsWidgets = [
             { id: 1, counter: '40', suffix: 'm' },
         ],
     },
-];
+]
 
 const overviewCounter = [
     {
@@ -88,7 +88,7 @@ const overviewCounter = [
         suffix: 'h',
         counterClass: 'success',
     },
-];
+]
 
 const activeProjects = [
     {
@@ -160,7 +160,7 @@ const activeProjects = [
         badgeClass: 'warning',
         dueDate: '21 Dec 2021',
     },
-];
+]
 
 const projectTasks = [
     {
@@ -217,7 +217,7 @@ const projectTasks = [
         statusClass: 'danger',
         img: avatar4,
     },
-];
+]
 
 const teamMembers = [
     {
@@ -290,7 +290,7 @@ const teamMembers = [
         series: '70',
         chartsColor: '#405189',
     },
-];
+]
 
 const dashboardChat = [
     {
@@ -310,8 +310,7 @@ const dashboardChat = [
         id: 3,
         isLeft: true,
         img: avatar2,
-        message:
-            'Yeah everything is fine. Our next meeting tomorrow at 10.00 AM',
+        message: 'Yeah everything is fine. Our next meeting tomorrow at 10.00 AM',
         time: '09:10 am',
     },
     {
@@ -327,7 +326,7 @@ const dashboardChat = [
         message: 'Good morning 😊',
         time: '09:30 am',
     },
-];
+]
 
 const allProjectData = [
     {
@@ -339,8 +338,8 @@ const allProjectData = [
         name: 'Revenue',
         type: 'area',
         data: [
-            89.25, 98.58, 68.74, 108.87, 77.54, 84.03, 51.24, 28.57, 92.57,
-            42.36, 88.51, 36.57,
+            89.25, 98.58, 68.74, 108.87, 77.54, 84.03, 51.24, 28.57, 92.57, 42.36,
+            88.51, 36.57,
         ],
     },
     {
@@ -348,7 +347,7 @@ const allProjectData = [
         type: 'bar',
         data: [8, 12, 7, 17, 21, 11, 5, 9, 7, 29, 12, 35],
     },
-];
+]
 
 const monthProjectData = [
     {
@@ -369,7 +368,7 @@ const monthProjectData = [
         type: 'bar',
         data: [18, 22, 17, 47, 71, 31, 5, 9, 7, 29, 22, 75],
     },
-];
+]
 
 const halfyearProjectData = [
     {
@@ -381,8 +380,8 @@ const halfyearProjectData = [
         name: 'Revenue',
         type: 'area',
         data: [
-            109.25, 48.58, 38.74, 78.87, 57.54, 44.03, 21.24, 18.57, 92.57,
-            42.36, 48.51, 56.57,
+            109.25, 48.58, 38.74, 78.87, 57.54, 44.03, 21.24, 18.57, 92.57, 42.36,
+            48.51, 56.57,
         ],
     },
     {
@@ -390,7 +389,7 @@ const halfyearProjectData = [
         type: 'bar',
         data: [38, 22, 27, 47, 61, 41, 15, 89, 27, 49, 32, 75],
     },
-];
+]
 
 const yearProjectData = [
     {
@@ -402,8 +401,8 @@ const yearProjectData = [
         name: 'Revenue',
         type: 'area',
         data: [
-            59.25, 68.58, 48.74, 78.87, 57.54, 64.03, 21.24, 18.57, 52.57,
-            22.36, 68.51, 16.57,
+            59.25, 68.58, 48.74, 78.87, 57.54, 64.03, 21.24, 18.57, 52.57, 22.36,
+            68.51, 16.57,
         ],
     },
     {
@@ -411,16 +410,16 @@ const yearProjectData = [
         type: 'bar',
         data: [38, 32, 27, 37, 41, 51, 35, 29, 17, 59, 32, 45],
     },
-];
+]
 
 // Project Status
-const allTimeData = [225, 152, 178, 189];
+const allTimeData = [225, 152, 178, 189]
 
-const lastWeekData = [145, 62, 68, 79];
+const lastWeekData = [145, 62, 68, 79]
 
-const lastMonthData = [155, 82, 78, 99];
+const lastMonthData = [155, 82, 78, 99]
 
-const lastquarterData = [185, 142, 158, 149];
+const lastquarterData = [185, 142, 158, 149]
 
 export {
     projectsWidgets,
@@ -437,4 +436,4 @@ export {
     lastMonthData,
     lastquarterData,
     dashboardChat,
-};
+}

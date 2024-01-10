@@ -6,20 +6,20 @@ import {
     StyleSheet,
     Text,
     View,
-} from '@react-pdf/renderer';
-import React from 'react';
-import { IScheduledAppointmentVet } from '~/store/slices/appointment-vet/types';
+} from '@react-pdf/renderer'
+import React from 'react'
+import { IScheduledAppointmentVet } from '~/store/slices/appointment-vet/types'
 
 type mockAppointment = {
-    question: string;
-    answer: string;
-    treatment: string;
-    idx: any;
-    system: string;
-};
+    question: string
+    answer: string
+    treatment: string
+    idx: any
+    system: string
+}
 
 const font =
-    '/home/usuario/Documentos/Pawkeeprs/web-app/styles/assets/fonts/Kalnia-Regular.ttf'; // Substitua 'url_da_fonte.ttf' pela URL da fonte
+    '/home/usuario/Documentos/Pawkeeprs/web-app/styles/assets/fonts/Kalnia-Regular.ttf' // Substitua 'url_da_fonte.ttf' pela URL da fonte
 
 Font.register({
     family: 'Kalnia',
@@ -27,7 +27,7 @@ Font.register({
     format: 'truetype',
     fontStyle: 'normal',
     fontWeight: 'normal',
-});
+})
 
 const styles = StyleSheet.create({
     globalStyles: {
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
         marginBottom: 5,
     },
-});
+})
 
 const mockAppointment = {
     id: 'd5babb48-dd33-48e5-8a54-46103beaf5ae',
@@ -275,11 +275,11 @@ const mockAppointment = {
         recommendations: null,
     },
     well_being: { perform_activity: null, activities_carry: [] },
-};
+}
 
 const MyDocument = (Appointment: IScheduledAppointmentVet) => {
     const clinicImage =
-        '/home/usuario/Documentos/Pawkeeprs/web-app/styles/assets/images/faq-img.png'; // Substitua 'url_da_imagem_da_clinica_veterinaria.jpg' pela URL da imagem da clínica veterinária
+        '/home/usuario/Documentos/Pawkeeprs/web-app/styles/assets/images/faq-img.png' // Substitua 'url_da_imagem_da_clinica_veterinaria.jpg' pela URL da imagem da clínica veterinária
 
     return (
         <Document>
@@ -441,6 +441,6 @@ const MyDocument = (Appointment: IScheduledAppointmentVet) => {
             </Page>
         </Document>
     );
-};
+}
 
-export default MyDocument;
+export default MyDocument

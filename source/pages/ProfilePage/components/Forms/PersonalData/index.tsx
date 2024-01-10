@@ -1,7 +1,7 @@
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
+import Row from 'react-bootstrap/Row'
 
 const PersonalData = () => {
     return (
@@ -9,10 +9,7 @@ const PersonalData = () => {
             <Row>
                 <Col lg={6}>
                     <div className="mb-3">
-                        <Form.Label
-                            htmlFor="firstnameInput"
-                            className="form-label"
-                        >
+                        <Form.Label htmlFor="firstnameInput" className="form-label">
                             First Name
                         </Form.Label>
                         <Form.Control
@@ -25,10 +22,7 @@ const PersonalData = () => {
                 </Col>
                 <Col lg={6}>
                     <div className="mb-3">
-                        <Form.Label
-                            htmlFor="lastnameInput"
-                            className="form-label"
-                        >
+                        <Form.Label htmlFor="lastnameInput" className="form-label">
                             Last Name
                         </Form.Label>
                         <Form.Control
@@ -83,10 +77,7 @@ const PersonalData = () => {
                 </Col>
                 <Col lg={4}>
                     <div className="mb-3">
-                        <Form.Label
-                            htmlFor="countryInput"
-                            className="form-label"
-                        >
+                        <Form.Label htmlFor="countryInput" className="form-label">
                             Country
                         </Form.Label>
                         <Form.Control
@@ -99,10 +90,7 @@ const PersonalData = () => {
                 </Col>
                 <Col lg={4}>
                     <div className="mb-3">
-                        <Form.Label
-                            htmlFor="zipcodeInput"
-                            className="form-label"
-                        >
+                        <Form.Label htmlFor="zipcodeInput" className="form-label">
                             Zip Code
                         </Form.Label>
                         <Form.Control
@@ -143,7 +131,7 @@ const PersonalData = () => {
                 </Col>
             </Row>
         </Form>
-    );
-};
+    )
+}
 
-export default PersonalData;
+export default PersonalData

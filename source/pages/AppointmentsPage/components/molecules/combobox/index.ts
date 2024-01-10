@@ -1,1 +1,1 @@
-export { default } from './combobox';
+export { default } from './combobox'

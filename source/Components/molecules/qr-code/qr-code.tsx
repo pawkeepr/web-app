@@ -1,7 +1,7 @@
-import QRCode from 'qrcode.react';
+import QRCode from 'qrcode.react'
 
 interface Props {
-    url: string;
+    url: string
 }
 
 const QRCodeGenerator = ({ url }: Props) => {
@@ -9,7 +9,7 @@ const QRCodeGenerator = ({ url }: Props) => {
         <div>
             <QRCode value={url} />
         </div>
-    );
-};
+    )
+}
 
-export default QRCodeGenerator;
+export default QRCodeGenerator

@@ -25,13 +25,11 @@ const LoaderSuccess = () => {
                     {'Conta Criada com Sucesso!'}
                 </h2>
                 <h4 className="text-md font-bold text-center text-gray-800">
-                    {
-                        'Um Email de Confirmação foi enviado, verifique seu email!'
-                    }
+                    {'Um Email de Confirmação foi enviado, verifique seu email!'}
                 </h4>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default LoaderSuccess;
+export default LoaderSuccess

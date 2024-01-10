@@ -1,4 +1,4 @@
-import { IPet } from '~/types/pet';
+import { IPet } from '~/types/pet'
 import {
     IHealthInsurance,
     IMainResponsibleGuardian,
@@ -6,24 +6,24 @@ import {
     ISecondaryTutor,
     ITutor,
     PetData,
-} from '~/types/pet-v2';
-import { DTOProfile } from '~/types/profile';
-import { Contact, Location } from '~/validations/activate';
-import { PetInformation } from './PetInformation';
-import { Veterinary } from './Veterinary';
+} from '~/types/pet-v2'
+import { DTOProfile } from '~/types/profile'
+import { Contact, Location } from '~/validations/activate'
+import { PetInformation } from './PetInformation'
+import { Veterinary } from './Veterinary'
 
 export class Pet implements IPetV2 {
-    id: string | null;
-    cpf_tutor: string;
-    pet_information: PetData;
-    main_responsible_guardian: IMainResponsibleGuardian;
-    secondary_responsible_tutor: ISecondaryTutor;
-    health_insurance: IHealthInsurance;
-    veterinary: DTOProfile;
+    id: string | null
+    cpf_tutor: string
+    pet_information: PetData
+    main_responsible_guardian: IMainResponsibleGuardian
+    secondary_responsible_tutor: ISecondaryTutor
+    health_insurance: IHealthInsurance
+    veterinary: DTOProfile
 
     constructor() {
-        this.id = '';
-        this.cpf_tutor = '';
+        this.id = ''
+        this.cpf_tutor = ''
 
         this.pet_information = {
             name_pet: '',
@@ -42,13 +42,13 @@ export class Pet implements IPetV2 {
             size: null,
             weight: null,
             castrated: 'no',
-        };
+        }
         this.health_insurance = {
             name: null,
             type_health: null,
             number_health: null,
             validity: null,
-        };
+        }
         this.main_responsible_guardian = {
             address: {
                 city: '',
@@ -74,7 +74,7 @@ export class Pet implements IPetV2 {
             first_name: '',
             last_name: '',
             url_img: '',
-        };
+        }
 
         this.veterinary = {
             cpf_cnpj: '',
@@ -89,71 +89,68 @@ export class Pet implements IPetV2 {
             city: '',
             neighborhood: '',
             street: '',
-        };
+        }
 
         this.secondary_responsible_tutor = {
             name_tutor: null,
             cpf_tutor: null,
             phone_tutor: null,
             emaiL_tutor: null,
-        };
+        }
     }
 
     defineID(id: string | null = null): this {
-        this.id = id;
-        return this;
+        this.id = id
+        return this
     }
 
     defineCpfTutor(cpf_tutor: string): this {
-        this.cpf_tutor = cpf_tutor;
-        return this;
+        this.cpf_tutor = cpf_tutor
+        return this
     }
 
     definePetInformation(pet_information: PetData): this {
-        this.pet_information = PetInformation.build(pet_information);
-        return this;
+        this.pet_information = PetInformation.build(pet_information)
+        return this
     }
 
     defineTutorInformation(main_responsible_guardian: ITutor): this {
-        this.main_responsible_guardian.name = main_responsible_guardian?.name;
+        this.main_responsible_guardian.name = main_responsible_guardian?.name
         this.main_responsible_guardian.first_name =
-            main_responsible_guardian?.first_name;
+            main_responsible_guardian?.first_name
         this.main_responsible_guardian.last_name =
-            main_responsible_guardian?.last_name;
-        this.main_responsible_guardian.url_img =
-            main_responsible_guardian?.url_img;
+            main_responsible_guardian?.last_name
+        this.main_responsible_guardian.url_img = main_responsible_guardian?.url_img
 
-        return this;
+        return this
     }
 
     defineContactTutor(contact: Contact): this {
         // #TODO: deve-se criar uma entidade para main_responsible_guardian.user_information.contact
-        this.main_responsible_guardian.contact = contact;
-        return this;
+        this.main_responsible_guardian.contact = contact
+        return this
     }
 
     defineLocationTutor(location: Partial<Location>): this {
         // #TODO: deve-se criar uma entidade para endereço
-        this.main_responsible_guardian.address = location as Location;
-        return this;
+        this.main_responsible_guardian.address = location as Location
+        return this
     }
 
     defineHealthInsurance(health_insurance: IHealthInsurance): this {
         // #TODO: deve-se criar uma entidade para health_insurance
-        this.health_insurance = health_insurance;
-        return this;
+        this.health_insurance = health_insurance
+        return this
     }
 
-    defineSecondaryTutor(
-        secondary_responsible_guardian: ISecondaryTutor,
-    ): this {
+    defineSecondaryTutor(secondary_responsible_guardian: ISecondaryTutor): this {
         // #TODO: deve-se criar uma entidade para secondary_responsible_guardian
-        this.secondary_responsible_tutor = secondary_responsible_guardian;
-        return this;
+        this.secondary_responsible_tutor = secondary_responsible_guardian
+        return this
     }
     defineVeterinary(veterinary: DTOProfile): this {
-        this.veterinary = Veterinary.build(veterinary);
-        return this;
+        this.veterinary = Veterinary.build(veterinary)
+        return this
     }
 
     static build(params: IPet): Pet {
@@ -198,8 +195,7 @@ export class Pet implements IPetV2 {
                 city: params?.ownerEmergencyContact?.address?.city || '',
                 complement:
                     params?.ownerEmergencyContact?.address?.complement || '',
-                country:
-                    params?.ownerEmergencyContact?.address?.country || 'BR',
+                country: params?.ownerEmergencyContact?.address?.country || 'BR',
                 neighborhood:
                     params?.ownerEmergencyContact?.address?.neighborhood || '',
                 number: params?.ownerEmergencyContact?.address?.number || '',
@@ -213,6 +209,6 @@ export class Pet implements IPetV2 {
                 last_name: params?.ownerEmergencyContact?.name,
                 url_img: '',
             })
-            .defineVeterinary(params.veterinary);
+            .defineVeterinary(params.veterinary)
     }
 }

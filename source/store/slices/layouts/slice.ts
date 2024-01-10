@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 import {
     layoutModeTypes,
     layoutPositionTypes,
@@ -10,9 +10,9 @@ import {
     leftSidebarViewTypes,
     preloaderTypes,
     topBarThemeTypes,
-} from '~/Components/constants/layout';
+} from '~/Components/constants/layout'
 
-import { LayoutState, name } from './types';
+import { LayoutState, name } from './types'
 
 const initialState: LayoutState = {
     layoutType: layoutTypes.HORIZONTAL,
@@ -29,50 +29,50 @@ const initialState: LayoutState = {
         height: 80,
         width: 80,
     },
-};
+}
 
 const layoutSlice = createSlice({
     name,
     initialState,
     reducers: {
         changeLayout: (state, action) => {
-            state.layoutType = action.payload;
+            state.layoutType = action.payload
         },
         changeLayoutMode: (state, action) => {
-            state.layoutModeType = action.payload;
+            state.layoutModeType = action.payload
         },
         changeSidebarTheme: (state, action) => {
-            state.leftSidebarType = action.payload;
+            state.leftSidebarType = action.payload
         },
         changeLayoutWidth: (state, action) => {
-            state.layoutWidthType = action.payload;
+            state.layoutWidthType = action.payload
         },
         changeLayoutPosition: (state, action) => {
-            state.layoutPositionType = action.payload;
+            state.layoutPositionType = action.payload
         },
         changeTopBarTheme: (state, action) => {
-            state.topBarThemeType = action.payload;
+            state.topBarThemeType = action.payload
         },
         changeSideBarSizeType: (state, action) => {
-            state.leftSideBarSizeType = action.payload;
+            state.leftSideBarSizeType = action.payload
         },
         changeSideBarView: (state, action) => {
-            state.leftSidebarViewType = action.payload;
+            state.leftSidebarViewType = action.payload
         },
         changeSidebarImageType: (state, action) => {
-            state.leftSidebarImageType = action.payload;
+            state.leftSidebarImageType = action.payload
         },
         changeHeaderSize: (state, action) => {
-            state.headerSize = action.payload;
+            state.headerSize = action.payload
         },
         resetValue: (state) => {
-            return initialState;
+            return initialState
         },
         changePreloader: (state, action) => {
-            state.preloader = action.payload;
+            state.preloader = action.payload
         },
     },
-});
+})
 
 export const {
     changeLayout,
@@ -87,6 +87,6 @@ export const {
     resetValue,
     changePreloader,
     changeHeaderSize,
-} = layoutSlice.actions;
+} = layoutSlice.actions
 
-export default layoutSlice.reducer;
+export default layoutSlice.reducer

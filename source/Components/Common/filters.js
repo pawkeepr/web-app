@@ -1,13 +1,13 @@
-import React from 'react';
-import { Input } from 'reactstrap';
+import React from 'react'
+import { Input } from 'reactstrap'
 
 export const Filter = ({ column }) => {
     return (
         <div style={{ marginTop: 5 }}>
             {column.canFilter && column.render('Filter')}
         </div>
-    );
-};
+    )
+}
 
 export const DefaultColumnFilter = ({
     column: { filterValue, setFilter, preFilteredRows: { length } },
@@ -16,23 +16,23 @@ export const DefaultColumnFilter = ({
         <Input
             value={filterValue || ''}
             onChange={(e) => {
-                setFilter(e.target.value || undefined);
+                setFilter(e.target.value || undefined)
             }}
             placeholder={`search (${length}) ...`}
         />
-    );
-};
+    )
+}
 
 export const SelectColumnFilter = ({
     column: { filterValue, setFilter, preFilteredRows, id },
 }) => {
     const options = React.useMemo(() => {
-        const options = new Set();
+        const options = new Set()
         preFilteredRows.forEach((row) => {
-            options.add(row.values[id]);
-        });
-        return [...options.values()];
-    }, [id, preFilteredRows]);
+            options.add(row.values[id])
+        })
+        return [...options.values()]
+    }, [id, preFilteredRows])
 
     return (
         <select
@@ -40,7 +40,7 @@ export const SelectColumnFilter = ({
             className="form-select"
             value={filterValue}
             onChange={(e) => {
-                setFilter(e.target.value || undefined);
+                setFilter(e.target.value || undefined)
             }}
         >
             <option value="">All</option>
@@ -50,5 +50,5 @@ export const SelectColumnFilter = ({
                 </option>
             ))}
         </select>
-    );
-};
+    )
+}

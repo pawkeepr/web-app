@@ -1,1 +1,1 @@
-export { default } from './step-anamnese';
+export { default } from './step-anamnese'

@@ -1,8 +1,8 @@
-import { create } from 'zustand';
-import CanceledScheduledModal from '~/Components/modals/canceled-scheduled-modal';
-import ConfirmedScheduledModal from '~/Components/modals/confirmed-scheduled-modal';
-import ReScheduledModal from '~/Components/modals/re-scheduled-modal';
-import { IAppointmentVet } from '~/store/slices/appointment-vet/types';
+import { create } from 'zustand'
+import CanceledScheduledModal from '~/Components/modals/canceled-scheduled-modal'
+import ConfirmedScheduledModal from '~/Components/modals/confirmed-scheduled-modal'
+import ReScheduledModal from '~/Components/modals/re-scheduled-modal'
+import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
 
 export enum ModalPlus {
     CanceledScheduled = 'CanceledScheduled',
@@ -12,13 +12,13 @@ export enum ModalPlus {
 
 interface PlusModalState {
     isOpen: {
-        [key in ModalPlus]?: boolean;
-    };
-    open: (key: ModalPlus) => void;
-    close: (key: ModalPlus) => void;
-    item: IAppointmentVet;
-    setItem: (item: IAppointmentVet) => void;
-    keys: typeof ModalPlus;
+        [key in ModalPlus]?: boolean
+    }
+    open: (key: ModalPlus) => void
+    close: (key: ModalPlus) => void
+    item: IAppointmentVet
+    setItem: (item: IAppointmentVet) => void
+    keys: typeof ModalPlus
 }
 
 export const usePlusModal = create<PlusModalState>((set) => ({
@@ -28,10 +28,10 @@ export const usePlusModal = create<PlusModalState>((set) => ({
     item: {} as IAppointmentVet,
     setItem: (item: IAppointmentVet) => set({ item }),
     keys: ModalPlus,
-}));
+}))
 
 const ContextModalPlus = () => {
-    const { isOpen, close, open } = usePlusModal();
+    const { isOpen, close, open } = usePlusModal()
 
     return (
         <>
@@ -59,7 +59,7 @@ const ContextModalPlus = () => {
                 {() => <div className="hidden" />}
             </ConfirmedScheduledModal>
         </>
-    );
-};
+    )
+}
 
-export default ContextModalPlus;
+export default ContextModalPlus

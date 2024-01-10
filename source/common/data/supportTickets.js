@@ -47,7 +47,7 @@ const ticketsWidgets = [
         prefix: '',
         suffix: '%',
     },
-];
+]
 
 const ticketsTable = [
     {
@@ -193,6 +193,6 @@ const ticketsTable = [
         priority: 'Medium',
         priorityClass: 'warning',
     },
-];
+]
 
-export { ticketsWidgets, ticketsTable };
+export { ticketsWidgets, ticketsTable }

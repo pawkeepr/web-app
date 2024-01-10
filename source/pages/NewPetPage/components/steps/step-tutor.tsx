@@ -1,22 +1,19 @@
-import FieldDocument from '~/Components/molecules/field-document/field-document';
-import FieldPhone from '~/Components/molecules/field-phone/field-phone';
+import FieldDocument from '~/Components/molecules/field-document/field-document'
+import FieldPhone from '~/Components/molecules/field-phone/field-phone'
 
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
-import FieldControl from '~/Components/molecules/field-control/field-control';
+import FieldControl from '~/Components/molecules/field-control/field-control'
 
-import { StepProps } from '~/types/helpers';
-import { InitialValues } from '../../index';
-import AddressTutor from '../molecules/address-tutor.tsx';
+import { StepProps } from '~/types/helpers'
+import { InitialValues } from '../../index'
+import AddressTutor from '../molecules/address-tutor.tsx'
 
-import { useMemo } from 'react';
-import * as yup from 'yup';
-import useFormikContextSafe from '~/hooks/use-formik-context-safe';
+import { useMemo } from 'react'
+import * as yup from 'yup'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 
-type StepTutorsKeys = Pick<
-    InitialValues,
-    'ownerEmergencyContact' | 'cpf_tutor'
->;
+type StepTutorsKeys = Pick<InitialValues, 'ownerEmergencyContact' | 'cpf_tutor'>
 
 const schema = yup.object().shape({
     cpf_tutor: yup.string().required('Campo obrigatório'),
@@ -34,19 +31,14 @@ const schema = yup.object().shape({
             }),
         })
         .required('Campo obrigatório'),
-});
+})
 
-const StepTutor = ({
-    toggleTab,
-    activeTab,
-    isPending,
-    tutorExist,
-}: StepProps) => {
-    const { values } = useFormikContextSafe<StepTutorsKeys>();
+const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) => {
+    const { values } = useFormikContextSafe<StepTutorsKeys>()
 
     const isValid = useMemo(() => {
-        return schema.isValidSync(values);
-    }, [values]);
+        return schema.isValidSync(values)
+    }, [values])
 
     return (
         <div className="card card-body shadow-lg">
@@ -139,19 +131,19 @@ const StepTutor = ({
                 <BtnCancel
                     label="Voltar"
                     onClick={() => {
-                        toggleTab(activeTab - 1);
+                        toggleTab(activeTab - 1)
                     }}
                 />
                 <BtnPrimary
                     disabled={!isValid}
                     label="Próximo"
                     onClick={() => {
-                        toggleTab(activeTab + 1);
+                        toggleTab(activeTab + 1)
                     }}
                 />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default StepTutor;
+export default StepTutor

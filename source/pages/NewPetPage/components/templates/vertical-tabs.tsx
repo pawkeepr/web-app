@@ -1,21 +1,21 @@
-import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
+import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
 //Import images
 
-import cn from 'classnames';
-import { useEffect, useState } from 'react';
+import cn from 'classnames'
+import { useEffect, useState } from 'react'
 
-import { useAppSelector } from '~/store/hooks';
-import { StepProps } from '~/types/helpers';
-import { StepHealthInsurance, StepPet, StepTutor } from '../steps';
+import { useAppSelector } from '~/store/hooks'
+import { StepProps } from '~/types/helpers'
+import { StepHealthInsurance, StepPet, StepTutor } from '../steps'
 
-type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
 
 type TabItem = {
-    id: Tabs;
-    title: string;
-    href: string;
-    Component: (props: StepProps) => JSX.Element;
-};
+    id: Tabs
+    title: string
+    href: string
+    Component: (props: StepProps) => JSX.Element
+}
 
 const items: TabItem[] = [
     {
@@ -36,37 +36,37 @@ const items: TabItem[] = [
         href: '#NewPet',
         Component: StepHealthInsurance,
     },
-];
+]
 
-type VerticalTabsProps = Pick<StepProps, 'isPending' | 'tutorExist'>;
+type VerticalTabsProps = Pick<StepProps, 'isPending' | 'tutorExist'>
 
 const VerticalTabs = ({ isPending, tutorExist }: VerticalTabsProps) => {
-    const [isFixed, setIsFixed] = useState(false);
-    const [activeVerticalTab, setActiveVerticalTab] = useState(1);
-    const [passedVerticalSteps, setPassedVerticalSteps] = useState([1]);
+    const [isFixed, setIsFixed] = useState(false)
+    const [activeVerticalTab, setActiveVerticalTab] = useState(1)
+    const [passedVerticalSteps, setPassedVerticalSteps] = useState([1])
 
-    const { height } = useAppSelector((state) => state.Layout.headerSize);
+    const { height } = useAppSelector((state) => state.Layout.headerSize)
 
     function toggleVerticalTab(tab: Tabs) {
         if (activeVerticalTab !== tab) {
-            const modifiedSteps = [...passedVerticalSteps, tab];
+            const modifiedSteps = [...passedVerticalSteps, tab]
 
             if (tab >= 1 && tab <= items.length) {
-                setActiveVerticalTab(tab);
-                setPassedVerticalSteps(modifiedSteps);
+                setActiveVerticalTab(tab)
+                setPassedVerticalSteps(modifiedSteps)
             }
         }
     }
 
     useEffect(() => {
         if (window.innerWidth < 768) {
-            setIsFixed(window.innerWidth < 768);
+            setIsFixed(window.innerWidth < 768)
         }
 
         return () => {
-            setIsFixed(false);
-        };
-    }, []);
+            setIsFixed(false)
+        }
+    }, [])
 
     return (
         <div className="px-2 py-4 card  h-fit overflow-auto">
@@ -85,10 +85,7 @@ const VerticalTabs = ({ isPending, tutorExist }: VerticalTabsProps) => {
                     'md:static',
                 )}
             >
-                <Nav
-                    className="nav-pills custom-nav nav-justified"
-                    role="tablist"
-                >
+                <Nav className="nav-pills custom-nav nav-justified" role="tablist">
                     {items.map((item, index) => {
                         return (
                             <NavItem key={index}>
@@ -102,13 +99,13 @@ const VerticalTabs = ({ isPending, tutorExist }: VerticalTabsProps) => {
                                             activeVerticalTab === item.id,
                                     })}
                                     onClick={() => {
-                                        toggleVerticalTab(item.id);
+                                        toggleVerticalTab(item.id)
                                     }}
                                 >
                                     {item.title}
                                 </NavLink>
                             </NavItem>
-                        );
+                        )
                     })}
                 </Nav>
             </div>
@@ -125,12 +122,12 @@ const VerticalTabs = ({ isPending, tutorExist }: VerticalTabsProps) => {
                                     tutorExist={tutorExist}
                                 />
                             </TabPane>
-                        );
+                        )
                     })}
                 </TabContent>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default VerticalTabs;
+export default VerticalTabs

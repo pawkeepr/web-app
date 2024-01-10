@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 import {
     Card,
@@ -9,18 +9,18 @@ import {
     DropdownToggle,
     Row,
     UncontrolledDropdown,
-} from 'reactstrap';
-import MyImage from '~/Components/atoms/my-image/my-image';
+} from 'reactstrap'
+import MyImage from '~/Components/atoms/my-image/my-image'
 
 type CardVeterinaryAppointmentsProps = {
-    veterinaryAppointments: any;
-};
+    veterinaryAppointments: any
+}
 
 const CardVeterinaryAppointments = ({
     veterinaryAppointments,
 }: CardVeterinaryAppointmentsProps) => {
     if (!veterinaryAppointments) {
-        return null;
+        return null
     }
 
     return (
@@ -90,7 +90,7 @@ const CardVeterinaryAppointments = ({
                                             <h5 key={index} className="mb-0 ">
                                                 {disease.name}
                                             </h5>
-                                        );
+                                        )
                                     },
                                 )}
                             </Col>
@@ -105,7 +105,7 @@ const CardVeterinaryAppointments = ({
                                             <h5 key={index} className="mb-0">
                                                 {treatment.medicine}
                                             </h5>
-                                        );
+                                        )
                                     },
                                 )}
                             </Col>
@@ -119,7 +119,7 @@ const CardVeterinaryAppointments = ({
                 </Row>
             </CardBody>
         </Card>
-    );
-};
+    )
+}
 
-export default CardVeterinaryAppointments;
+export default CardVeterinaryAppointments

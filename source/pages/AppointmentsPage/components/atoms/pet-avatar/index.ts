@@ -1,1 +1,1 @@
-export { default } from './pet-avatar';
+export { default } from './pet-avatar'

@@ -1,9 +1,9 @@
-import { InputMask, InputMaskProps } from '@react-input/mask';
+import { InputMask, InputMaskProps } from '@react-input/mask'
 import FieldControl, {
     InputControlProps,
-} from '~/Components/molecules/field-control';
+} from '~/Components/molecules/field-control'
 
-import { input } from '~/Components/atoms/input';
+import { input } from '~/Components/atoms/input'
 
 const FieldMasked = <Ctx,>({
     placeholder,
@@ -23,7 +23,7 @@ const FieldMasked = <Ctx,>({
                 required: props.required,
             })}
         />
-    );
-};
+    )
+}
 
-export default FieldMasked;
+export default FieldMasked

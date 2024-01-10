@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-'use client';
+'use client'
 
-import { Tab } from '@headlessui/react';
-import cn from 'classnames';
-import { useEffect, useState } from 'react';
-import useResizeMobile from '~/hooks/use-resize-mobile';
-import StepScheduledAll from '../steps/step-scheduled-all';
-import StepScheduledCanceled from '../steps/step-scheduled-canceled';
-import StepScheduledConfirmed from '../steps/step-scheduled-confirmed';
-import StepScheduledDone from '../steps/step-scheduled-done';
-import StepScheduledRescheduled from '../steps/step-scheduled-rescheduled';
+import { Tab } from '@headlessui/react'
+import cn from 'classnames'
+import { useEffect, useState } from 'react'
+import useResizeMobile from '~/hooks/use-resize-mobile'
+import StepScheduledAll from '../steps/step-scheduled-all'
+import StepScheduledCanceled from '../steps/step-scheduled-canceled'
+import StepScheduledConfirmed from '../steps/step-scheduled-confirmed'
+import StepScheduledDone from '../steps/step-scheduled-done'
+import StepScheduledRescheduled from '../steps/step-scheduled-rescheduled'
 
 const Tabs = () => [
     {
@@ -41,20 +41,20 @@ const Tabs = () => [
         href: '#done',
         tab: <StepScheduledDone />,
     },
-];
+]
 
 const HorizontalTabs = () => {
-    const [categories, setCategories] = useState(() => Tabs());
+    const [categories, setCategories] = useState(() => Tabs())
 
-    const { isMobile } = useResizeMobile();
+    const { isMobile } = useResizeMobile()
 
     useEffect(() => {
         if (isMobile) {
-            setCategories(Tabs().slice(0, 3));
+            setCategories(Tabs().slice(0, 3))
         } else {
-            setCategories(Tabs());
+            setCategories(Tabs())
         }
-    }, [isMobile]);
+    }, [isMobile])
 
     return (
         <div className="w-full mt-2 rounded-md">
@@ -92,7 +92,7 @@ const HorizontalTabs = () => {
                 </Tab.Panels>
             </Tab.Group>
         </div>
-    );
-};
+    )
+}
 
-export default HorizontalTabs;
+export default HorizontalTabs

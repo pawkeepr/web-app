@@ -1,10 +1,10 @@
-import React, { ReactNode } from 'react';
-import Card from 'react-bootstrap/Card';
+import React, { ReactNode } from 'react'
+import Card from 'react-bootstrap/Card'
 
 interface CardContainerProps {
-    className?: string;
-    children: ReactNode;
-    title?: string;
+    className?: string
+    children: ReactNode
+    title?: string
 }
 
 const CardContainer: React.FC<CardContainerProps> = ({
@@ -21,7 +21,7 @@ const CardContainer: React.FC<CardContainerProps> = ({
                 {children}
             </Card.Body>
         </Card>
-    );
-};
+    )
+}
 
-export default CardContainer;
+export default CardContainer

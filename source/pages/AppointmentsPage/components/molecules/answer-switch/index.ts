@@ -1,1 +1,1 @@
-export { default } from './answer-switch';
+export { default } from './answer-switch'

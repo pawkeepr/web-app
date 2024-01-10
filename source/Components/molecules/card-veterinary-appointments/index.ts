@@ -1,1 +1,1 @@
-export { default } from './card-veterinary-appointments';
+export { default } from './card-veterinary-appointments'

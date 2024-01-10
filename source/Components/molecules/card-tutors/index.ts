@@ -1,1 +1,1 @@
-export { default } from './card-tutors';
+export { default } from './card-tutors'

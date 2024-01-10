@@ -1,16 +1,16 @@
-import { Combobox, Transition } from '@headlessui/react';
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
-import { Fragment, useState } from 'react';
+import { Combobox, Transition } from '@headlessui/react'
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { Fragment, useState } from 'react'
 
 type ComboboxProps = {
-    items: string[];
-    zIndex: string;
-    onChange: (item: string) => void;
-};
+    items: string[]
+    zIndex: string
+    onChange: (item: string) => void
+}
 
 const ComboboxSelect = ({ items, zIndex, onChange }: ComboboxProps) => {
-    const [selected, setSelected] = useState([]);
-    const [query, setQuery] = useState('');
+    const [selected, setSelected] = useState([])
+    const [query, setQuery] = useState('')
 
     const filteredItems =
         query === ''
@@ -20,7 +20,7 @@ const ComboboxSelect = ({ items, zIndex, onChange }: ComboboxProps) => {
                       .toLowerCase()
                       .replace(/\s+/g, '')
                       .includes(query.toLowerCase().replace(/\s+/g, '')),
-              );
+              )
 
     return (
         <div className={`relative ${zIndex} w-full h-[35px] `}>
@@ -64,10 +64,8 @@ const ComboboxSelect = ({ items, zIndex, onChange }: ComboboxProps) => {
                                         }
                                         value={item}
                                         onClick={() => {
-                                            if (
-                                                typeof onChange === 'function'
-                                            ) {
-                                                onChange(item);
+                                            if (typeof onChange === 'function') {
+                                                onChange(item)
                                             }
                                         }}
                                     >
@@ -106,7 +104,7 @@ const ComboboxSelect = ({ items, zIndex, onChange }: ComboboxProps) => {
                 </div>
             </Combobox>
         </div>
-    );
-};
+    )
+}
 
-export default ComboboxSelect;
+export default ComboboxSelect

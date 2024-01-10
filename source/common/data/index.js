@@ -15,7 +15,7 @@ import {
     todayaudiencesCountryData,
     topPages,
     yaeraudiencesMetricsData,
-} from './analytics';
+} from './analytics'
 import {
     MarketGraphAll,
     MarketGraphHour,
@@ -31,7 +31,7 @@ import {
     recentActivity,
     topPerformers,
     usdPortfolioData,
-} from './crypto';
+} from './crypto'
 import {
     allRevenueData,
     bestSellingProducts,
@@ -42,7 +42,7 @@ import {
     topCategories,
     topSellers,
     yearRevenueData,
-} from './dashboardEcommerce';
+} from './dashboardEcommerce'
 import {
     allMarketplaceData,
     featuredNFTData,
@@ -54,7 +54,7 @@ import {
     topCollectionData,
     topartWork,
     yearMarketplaceData,
-} from './dashboardNFT';
+} from './dashboardNFT'
 import {
     activeProjects,
     allProjectData,
@@ -70,7 +70,7 @@ import {
     projectsWidgets,
     teamMembers,
     yearProjectData,
-} from './dashboardProjects';
+} from './dashboardProjects'
 import {
     activities,
     closingDeals,
@@ -89,10 +89,10 @@ import {
     todayDealData,
     weeklyDealData,
     yealyDealData,
-} from './dashboardcrm';
-import { invoiceTable, invoiceWidgets } from './invoiceList';
-import { projectList } from './projectList';
-import { allTask, kanbanBoardData, taskWidgets } from './taskList';
+} from './dashboardcrm'
+import { invoiceTable, invoiceWidgets } from './invoiceList'
+import { projectList } from './projectList'
+import { allTask, kanbanBoardData, taskWidgets } from './taskList'
 import {
     otherWidgets2,
     tileBoxes4,
@@ -103,15 +103,10 @@ import {
     widgetsAudiences,
     widgetsPortfolio,
     widgetsTasks,
-} from './widgets';
+} from './widgets'
 
-import { events, calenderDefaultCategories, defaultevent } from './calender';
-import {
-    channelsList,
-    chatContactData,
-    direactContact,
-    messages,
-} from './chat';
+import { events, calenderDefaultCategories, defaultevent } from './calender'
+import { channelsList, chatContactData, direactContact, messages } from './chat'
 import {
     CryptoOrders,
     CryptoicoWidgets,
@@ -121,9 +116,9 @@ import {
     marketStatus,
     transactions,
     watchlist,
-} from './cryptoPage';
-import { mailbox } from './mailbox';
-import { ticketsTable, ticketsWidgets } from './supportTickets';
+} from './cryptoPage'
+import { mailbox } from './mailbox'
+import { ticketsTable, ticketsWidgets } from './supportTickets'
 
 // Pages
 import {
@@ -138,7 +133,7 @@ import {
     swiper,
     team,
     video,
-} from './pagesData';
+} from './pagesData'
 
 //Ecommerce
 import {
@@ -153,9 +148,9 @@ import {
     reviews,
     sellersList,
     shoppingCart,
-} from './ecommerce';
+} from './ecommerce'
 
-import { companies, crmcontacts, deals, leads } from './crm';
+import { companies, crmcontacts, deals, leads } from './crm'
 
 import {
     NFTRanking,
@@ -171,7 +166,7 @@ import {
     topDrop,
     tradingArtworkData,
     walletConnectData,
-} from './NFTMarketplace';
+} from './NFTMarketplace'
 
 import {
     connectData,
@@ -179,11 +174,11 @@ import {
     featuresData,
     productData,
     topCreatorData,
-} from './LandingNFT';
+} from './LandingNFT'
 
-import { folderList, recentFile } from './fileManager';
+import { folderList, recentFile } from './fileManager'
 
-import { todoCollapse, todoTaskList } from './todoData';
+import { todoCollapse, todoTaskList } from './todoData'
 
 export {
     topPages,
@@ -347,4 +342,4 @@ export {
     todoTaskList,
     chatContactData,
     todoCollapse,
-};
+}

@@ -1,33 +1,33 @@
 // Import Images
-import Img1 from '~/assets/images/nft/img-01.jpg';
-import Img2 from '~/assets/images/nft/img-02.jpg';
-import Img3 from '~/assets/images/nft/img-03.jpg';
-import Img4 from '~/assets/images/nft/img-04.jpg';
-import Img5 from '~/assets/images/nft/img-05.jpg';
-import Img6 from '~/assets/images/nft/img-06.jpg';
+import Img1 from '~/assets/images/nft/img-01.jpg'
+import Img2 from '~/assets/images/nft/img-02.jpg'
+import Img3 from '~/assets/images/nft/img-03.jpg'
+import Img4 from '~/assets/images/nft/img-04.jpg'
+import Img5 from '~/assets/images/nft/img-05.jpg'
+import Img6 from '~/assets/images/nft/img-06.jpg'
 
-import ImgGif1 from '~/assets/images/nft/gif/img-1.gif';
-import ImgGif2 from '~/assets/images/nft/gif/img-2.gif';
-import ImgGif3 from '~/assets/images/nft/gif/img-3.gif';
-import ImgGif4 from '~/assets/images/nft/gif/img-4.gif';
-import ImgGif5 from '~/assets/images/nft/gif/img-5.gif';
+import ImgGif1 from '~/assets/images/nft/gif/img-1.gif'
+import ImgGif2 from '~/assets/images/nft/gif/img-2.gif'
+import ImgGif3 from '~/assets/images/nft/gif/img-3.gif'
+import ImgGif4 from '~/assets/images/nft/gif/img-4.gif'
+import ImgGif5 from '~/assets/images/nft/gif/img-5.gif'
 
-import avatar1 from '~/assets/images/users/avatar-1.jpg';
-import avatar2 from '~/assets/images/users/avatar-2.jpg';
-import avatar3 from '~/assets/images/users/avatar-3.jpg';
-import avatar5 from '~/assets/images/users/avatar-5.jpg';
-import avatar6 from '~/assets/images/users/avatar-6.jpg';
-import avatar8 from '~/assets/images/users/avatar-8.jpg';
-import avatar9 from '~/assets/images/users/avatar-9.jpg';
-import avatar10 from '~/assets/images/users/avatar-10.jpg';
+import avatar1 from '~/assets/images/users/avatar-1.jpg'
+import avatar2 from '~/assets/images/users/avatar-2.jpg'
+import avatar3 from '~/assets/images/users/avatar-3.jpg'
+import avatar5 from '~/assets/images/users/avatar-5.jpg'
+import avatar6 from '~/assets/images/users/avatar-6.jpg'
+import avatar8 from '~/assets/images/users/avatar-8.jpg'
+import avatar9 from '~/assets/images/users/avatar-9.jpg'
+import avatar10 from '~/assets/images/users/avatar-10.jpg'
 
-import alpha from '~/assets/images/nft/wallet/alpha.png';
-import binance from '~/assets/images/nft/wallet/binance.png';
-import coinbase from '~/assets/images/nft/wallet/coinbase.png';
-import enjin from '~/assets/images/nft/wallet/enjin.png';
-import kukai from '~/assets/images/nft/wallet/kukai.png';
-import math from '~/assets/images/nft/wallet/math.png';
-import metaMask from '~/assets/images/nft/wallet/metamask.png';
+import alpha from '~/assets/images/nft/wallet/alpha.png'
+import binance from '~/assets/images/nft/wallet/binance.png'
+import coinbase from '~/assets/images/nft/wallet/coinbase.png'
+import enjin from '~/assets/images/nft/wallet/enjin.png'
+import kukai from '~/assets/images/nft/wallet/kukai.png'
+import math from '~/assets/images/nft/wallet/math.png'
+import metaMask from '~/assets/images/nft/wallet/metamask.png'
 
 const expolreNow = [
     {
@@ -210,7 +210,7 @@ const expolreNow = [
         fileType: 'mp3',
         sales: 'Has Offers',
     },
-];
+]
 
 const aution = [
     {
@@ -317,7 +317,7 @@ const aution = [
         size: '97%',
         category: 'upto-15',
     },
-];
+]
 
 const NFTRanking = [
     {
@@ -430,7 +430,7 @@ const NFTRanking = [
         item: '10k',
         floor_price: '33.02',
     },
-];
+]
 
 const creatorsData = [
     {
@@ -481,7 +481,7 @@ const creatorsData = [
         title: 'James Morris',
         price: '63,710 ETH',
     },
-];
+]
 
 const creatorsListData = [
     {
@@ -564,7 +564,7 @@ const creatorsListData = [
         products: '7809',
         isFollowBtn: false,
     },
-];
+]
 
 const walletConnectData = [
     {
@@ -616,7 +616,7 @@ const walletConnectData = [
         textContent:
             'Math DApp Factory gives users tools that can simplify the development of exchanges, games',
     },
-];
+]
 
 const topDrop = [
     {
@@ -661,7 +661,7 @@ const topDrop = [
         price: '643.19',
         time: '3 hrs ago',
     },
-];
+]
 
 const topCreator = [
     {
@@ -699,7 +699,7 @@ const topCreator = [
         products: '318',
         isFollow: false,
     },
-];
+]
 
 const topCollection = [
     {
@@ -870,7 +870,7 @@ const topCollection = [
             },
         ],
     },
-];
+]
 
 const marketPlacewidget = [
     {
@@ -936,7 +936,7 @@ const marketPlacewidget = [
             },
         ],
     },
-];
+]
 
 const tradingArtworkData = [
     {
@@ -994,7 +994,7 @@ const tradingArtworkData = [
         category: 'Creative Filtered Portrait',
         isActive: false,
     },
-];
+]
 
 const nftArtworkData = [
     {
@@ -1042,7 +1042,7 @@ const nftArtworkData = [
         highest: '122.34ETH',
         price: '97.8 ETH',
     },
-];
+]
 const popularCreatorsNFT = [
     {
         id: 1,
@@ -1082,7 +1082,7 @@ const popularCreatorsNFT = [
         products: 745,
         isFollow: true,
     },
-];
+]
 export {
     expolreNow,
     aution,
@@ -1097,4 +1097,4 @@ export {
     nftArtworkData,
     popularCreatorsNFT,
     marketPlacewidget,
-};
+}

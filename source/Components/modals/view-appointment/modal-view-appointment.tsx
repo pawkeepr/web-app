@@ -1,30 +1,30 @@
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
 
 // Formik
-import { Formik, FormikHelpers } from 'formik';
+import { Formik, FormikHelpers } from 'formik'
 
-import { BtnAvatar } from '~/Components/atoms/btn';
-import { useAppDispatch } from '~/store/hooks';
+import { BtnAvatar } from '~/Components/atoms/btn'
+import { useAppDispatch } from '~/store/hooks'
 // import ComboBoxFields from "./components/organisms/combo-box-fields/combo-box-fields";
 
-type InitialValues = Partial<Nullable<any>>;
+type InitialValues = Partial<Nullable<any>>
 
-import { EyeIcon } from '@heroicons/react/24/solid';
-import Modal from '~/Components/organism/modal';
-import ravena from '~/assets/images/ravena.jpeg';
-import useModal from '~/hooks/use-modal';
+import { EyeIcon } from '@heroicons/react/24/solid'
+import Modal from '~/Components/organism/modal'
+import ravena from '~/assets/images/ravena.jpeg'
+import useModal from '~/hooks/use-modal'
 
 const ViewAppointment = ({ children, item }) => {
-    const { closeModal, open, showModal } = useModal();
+    const { closeModal, open, showModal } = useModal()
 
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch()
 
     const onSubmit = (
         values: InitialValues,
         { resetForm }: FormikHelpers<InitialValues>,
     ) => {
-        resetForm();
-    };
+        resetForm()
+    }
 
     const initialValues: InitialValues = {
         date: '',
@@ -32,7 +32,7 @@ const ViewAppointment = ({ children, item }) => {
         type: '',
         reason: '',
         observations: '',
-    };
+    }
 
     return (
         <>
@@ -77,9 +77,7 @@ const ViewAppointment = ({ children, item }) => {
                                     <p className="text-gray-700">
                                         Data: 12/03/2023
                                     </p>
-                                    <p className="text-gray-700">
-                                        Horário: 17:00
-                                    </p>
+                                    <p className="text-gray-700">Horário: 17:00</p>
                                     <p className="text-gray-700">
                                         Razão da consulta: Vacinação
                                     </p>
@@ -99,9 +97,7 @@ const ViewAppointment = ({ children, item }) => {
                                         Sintomas: Vomitos
                                     </p>
                                     <p className="text-gray-700">Prevenção: </p>
-                                    <p className="text-gray-700">
-                                        Tratamento:{' '}
-                                    </p>
+                                    <p className="text-gray-700">Tratamento: </p>
                                     <p className="text-gray-700">
                                         Data identificada: 12/12/2023
                                     </p>
@@ -113,20 +109,12 @@ const ViewAppointment = ({ children, item }) => {
                                     <p className="text-gray-700">
                                         Nome do pet: Ravena
                                     </p>
-                                    <p className="text-gray-700">
-                                        Especie: Gato
-                                    </p>
-                                    <p className="text-gray-700">
-                                        Sexo: feminino
-                                    </p>
-                                    <p className="text-gray-700">
-                                        Microchip: 1294
-                                    </p>
+                                    <p className="text-gray-700">Especie: Gato</p>
+                                    <p className="text-gray-700">Sexo: feminino</p>
+                                    <p className="text-gray-700">Microchip: 1294</p>
                                     <p className="text-gray-700">idade: 7</p>
                                     <p className="text-gray-700">Peso: 3kg</p>
-                                    <p className="text-gray-700">
-                                        Altura: 30cm
-                                    </p>
+                                    <p className="text-gray-700">Altura: 30cm</p>
                                     <p className="text-gray-700">
                                         Comprimento: 45cm
                                     </p>
@@ -171,24 +159,14 @@ const ViewAppointment = ({ children, item }) => {
                                 </div>
 
                                 <div className="p-2 mb-2">
-                                    <h3 className="font-extrabold">
-                                        Endereço:
-                                    </h3>
-                                    <p className="text-gray-700">
-                                        Cidade: Aracaju
-                                    </p>
-                                    <p className="text-gray-700">
-                                        Estado: Sergipe
-                                    </p>
-                                    <p className="text-gray-700">
-                                        Bairro: Atalaia
-                                    </p>
+                                    <h3 className="font-extrabold">Endereço:</h3>
+                                    <p className="text-gray-700">Cidade: Aracaju</p>
+                                    <p className="text-gray-700">Estado: Sergipe</p>
+                                    <p className="text-gray-700">Bairro: Atalaia</p>
                                     <p className="text-gray-700">
                                         Rua: João carvalho de aragão
                                     </p>
-                                    <p className="text-gray-700">
-                                        Número: 1205
-                                    </p>
+                                    <p className="text-gray-700">Número: 1205</p>
                                     {/* <p className="text-gray-700">latutude: 12</p>
                                         <p className="text-gray-700">longitude: 105</p>
                                         <p className="text-gray-700">precisão: 12</p>
@@ -196,9 +174,7 @@ const ViewAppointment = ({ children, item }) => {
                                         <p className="text-gray-700">velocidade: 05</p> */}
                                 </div>
                                 <div className="p-2 mb-2">
-                                    <h3 className="font-extrabold">
-                                        Anamnese:
-                                    </h3>
+                                    <h3 className="font-extrabold">Anamnese:</h3>
                                     <p className="text-gray-700">
                                         Sistema digestivo: Sasdasim{' '}
                                     </p>
@@ -216,9 +192,7 @@ const ViewAppointment = ({ children, item }) => {
                                     </p>
                                 </div>
                                 <div className="p-2 mb-2">
-                                    <h3 className="font-extrabold">
-                                        Tratamento:
-                                    </h3>
+                                    <h3 className="font-extrabold">Tratamento:</h3>
                                     <p className="text-gray-700">
                                         Medicamentos: sdfsdfsdf{' '}
                                     </p>
@@ -239,9 +213,7 @@ const ViewAppointment = ({ children, item }) => {
                                     </p>
                                 </div>
                                 <div className="p-2 mb-2">
-                                    <h3 className="font-extrabold">
-                                        Pagamento:
-                                    </h3>
+                                    <h3 className="font-extrabold">Pagamento:</h3>
                                     <p className="text-gray-700">
                                         Forma de pagamento: crédito
                                     </p>
@@ -250,9 +222,7 @@ const ViewAppointment = ({ children, item }) => {
                                     <p className="text-gray-700">
                                         Número de parcelas: 1
                                     </p>
-                                    <p className="text-gray-700">
-                                        Status: pago
-                                    </p>
+                                    <p className="text-gray-700">Status: pago</p>
                                     <p className="text-gray-700">
                                         Data: 12/12/2023
                                     </p>
@@ -263,7 +233,7 @@ const ViewAppointment = ({ children, item }) => {
                 </Formik>
             </Modal>
         </>
-    );
-};
+    )
+}
 
-export default ViewAppointment;
+export default ViewAppointment

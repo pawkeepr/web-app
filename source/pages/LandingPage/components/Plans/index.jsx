@@ -1,12 +1,12 @@
 // import { BsArrowRightShort, BsFillCheckCircleFill } from 'react-icons/bs';
-import Link from 'next/link';
-import { useState } from 'react';
-import Pulse from 'react-reveal/Pulse';
-import { Card, CardBody, Col, Container, Row } from 'reactstrap';
+import Link from 'next/link'
+import { useState } from 'react'
+import Pulse from 'react-reveal/Pulse'
+import { Card, CardBody, Col, Container, Row } from 'reactstrap'
 
 const Plans = () => {
-    const [plan, setPlan] = useState(true);
-    const toggle = () => setPlan(!plan);
+    const [plan, setPlan] = useState(true)
+    const toggle = () => setPlan(!plan)
 
     return (
         <>
@@ -176,8 +176,7 @@ const Plans = () => {
                                                         <i className="ri-checkbox-circle-fill fs-15 align-middle" />
                                                     </div>
                                                     <div className="flex-grow-1">
-                                                        <b>10</b> Consultas por
-                                                        mês
+                                                        <b>10</b> Consultas por mês
                                                     </div>
                                                 </div>
                                             </li>
@@ -252,8 +251,8 @@ const Plans = () => {
                                                             <i className="ri-checkbox-circle-fill fs-15 align-middle text-white" />
                                                         </div>
                                                         <div className="flex-grow-1 !text-white">
-                                                            <b>50</b> Consultas
-                                                            por mês
+                                                            <b>50</b> Consultas por
+                                                            mês
                                                         </div>
                                                     </div>
                                                 </li>
@@ -324,8 +323,7 @@ const Plans = () => {
                                                         <i className="ri-checkbox-circle-fill fs-15 align-middle" />
                                                     </div>
                                                     <div className="flex-grow-1">
-                                                        <b>100</b> Consultas por
-                                                        mês
+                                                        <b>100</b> Consultas por mês
                                                     </div>
                                                 </div>
                                             </li>
@@ -345,14 +343,13 @@ const Plans = () => {
                     </Row>
                     <div className="d-flex mt-4">
                         <div className="flex-grow-1 text-center italic text-base font-medium">
-                            Para mais de 100 consultas, fale com nossos
-                            atendentes!
+                            Para mais de 100 consultas, fale com nossos atendentes!
                         </div>
                     </div>
                 </Container>
             </section>
         </>
-    );
-};
+    )
+}
 
-export default Plans;
+export default Plans

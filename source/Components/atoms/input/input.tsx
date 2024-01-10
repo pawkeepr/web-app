@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import { ComponentProps } from 'react'
 
-import { VariantProps, tv } from 'tailwind-variants';
+import { VariantProps, tv } from 'tailwind-variants'
 
 export const input = tv({
     base: `
@@ -21,9 +21,9 @@ export const input = tv({
             true: 'text-center',
         },
     },
-});
+})
 
-export type InputProps = ComponentProps<'input'> & VariantProps<typeof input>;
+export type InputProps = ComponentProps<'input'> & VariantProps<typeof input>
 
 const Input = ({ className, required = false, ...props }: InputProps) => {
     return (
@@ -32,6 +32,6 @@ const Input = ({ className, required = false, ...props }: InputProps) => {
             className={input({ className, required })}
             {...props}
         />
-    );
-};
-export default Input;
+    )
+}
+export default Input

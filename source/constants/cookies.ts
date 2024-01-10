@@ -15,6 +15,6 @@ const cookies = {
         name: 'pawkeepr.layout-mode',
         expires: 60 * 60 * 24 * 30 * 12 * 10, // 10 years
     },
-};
+}
 
-export default cookies;
+export default cookies

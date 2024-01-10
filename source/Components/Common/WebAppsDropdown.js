@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import { Col, Dropdown, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
+import React, { useState } from 'react'
+import { Col, Dropdown, DropdownMenu, DropdownToggle, Row } from 'reactstrap'
 
 //import images
-import Image from 'next/image';
-import Link from 'next/link';
-import bitbucket from '~/assets/images/brands/bitbucket.png';
-import dribbble from '~/assets/images/brands/dribbble.png';
-import dropbox from '~/assets/images/brands/dropbox.png';
-import github from '~/assets/images/brands/github.png';
-import mail_chimp from '~/assets/images/brands/mail_chimp.png';
-import slack from '~/assets/images/brands/slack.png';
+import Image from 'next/image'
+import Link from 'next/link'
+import bitbucket from '~/assets/images/brands/bitbucket.png'
+import dribbble from '~/assets/images/brands/dribbble.png'
+import dropbox from '~/assets/images/brands/dropbox.png'
+import github from '~/assets/images/brands/github.png'
+import mail_chimp from '~/assets/images/brands/mail_chimp.png'
+import slack from '~/assets/images/brands/slack.png'
 
 const WebAppsDropdown = () => {
-    const [isWebAppDropdown, setIsWebAppDropdown] = useState(false);
+    const [isWebAppDropdown, setIsWebAppDropdown] = useState(false)
     const toggleWebAppDropdown = () => {
-        setIsWebAppDropdown(!isWebAppDropdown);
-    };
+        setIsWebAppDropdown(!isWebAppDropdown)
+    }
     return (
         <React.Fragment>
             <Dropdown
@@ -40,10 +40,7 @@ const WebAppsDropdown = () => {
                                 </h6>
                             </Col>
                             <div className="col-auto">
-                                <Link
-                                    href="#"
-                                    className="btn btn-sm btn-soft-info"
-                                >
+                                <Link href="#" className="btn btn-sm btn-soft-info">
                                     {' '}
                                     View All Apps
                                     <i className="ri-arrow-right-s-line align-middle" />
@@ -98,7 +95,7 @@ const WebAppsDropdown = () => {
                 </DropdownMenu>
             </Dropdown>
         </React.Fragment>
-    );
-};
+    )
+}
 
-export default WebAppsDropdown;
+export default WebAppsDropdown

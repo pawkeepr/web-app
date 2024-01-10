@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import {
-    Collapse,
-    Offcanvas,
-    OffcanvasBody,
-    OffcanvasHeader,
-} from 'reactstrap';
+import React, { useEffect, useState } from 'react'
+import { Collapse, Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap'
 
 //redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
 import {
     changeLayout,
     changeLayoutMode,
@@ -20,7 +15,7 @@ import {
     changeSidebarImageType,
     changeSidebarTheme,
     changeTopbarTheme,
-} from '~/store/actions';
+} from '~/store/actions'
 
 //import Constant
 import {
@@ -34,24 +29,24 @@ import {
     leftsidbarSizeTypes,
     preloaderTypes,
     topBarThemeTypes,
-} from '../constants/layout';
+} from '../constants/layout'
 
 //SimpleBar
-import classnames from 'classnames';
-import SimpleBar from 'simplebar-react';
+import classnames from 'classnames'
+import SimpleBar from 'simplebar-react'
 
 //import Images
-import img01 from '~/assets/images/sidebar/img-1.jpg';
-import img02 from '~/assets/images/sidebar/img-2.jpg';
-import img03 from '~/assets/images/sidebar/img-3.jpg';
-import img04 from '~/assets/images/sidebar/img-4.jpg';
+import img01 from '~/assets/images/sidebar/img-1.jpg'
+import img02 from '~/assets/images/sidebar/img-2.jpg'
+import img03 from '~/assets/images/sidebar/img-3.jpg'
+import img04 from '~/assets/images/sidebar/img-4.jpg'
 
 const RightSidebar = () => {
-    const dispatch = useDispatch();
-    const [show, setShow] = useState(false);
+    const dispatch = useDispatch()
+    const [show, setShow] = useState(false)
     function tog_show() {
-        setShow(!show);
-        dispatch(changeSidebarTheme('gradient'));
+        setShow(!show)
+        dispatch(changeSidebarTheme('gradient'))
     }
 
     useEffect(() => {
@@ -60,10 +55,10 @@ const RightSidebar = () => {
             document.getElementById('sidebar-color-dark') &&
             document.getElementById('sidebar-color-light')
         ) {
-            document.getElementById('sidebar-color-dark').checked = false;
-            document.getElementById('sidebar-color-light').checked = false;
+            document.getElementById('sidebar-color-dark').checked = false
+            document.getElementById('sidebar-color-light').checked = false
         }
-    });
+    })
     const {
         layoutType,
         leftSidebarType,
@@ -86,57 +81,56 @@ const RightSidebar = () => {
         leftSidebarViewType: state.Layout.leftSidebarViewType,
         leftSidebarImageType: state.Layout.leftSidebarImageType,
         preloader: state.Layout.preloader,
-    }));
+    }))
 
     // open offcanvas
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(true)
     const toggleLeftCanvas = () => {
-        setOpen(!open);
-    };
+        setOpen(!open)
+    }
 
     useEffect(() => {
         window.onscroll = () => {
-            scrollFunction();
-        };
-    }, []);
+            scrollFunction()
+        }
+    }, [])
 
     const scrollFunction = () => {
-        const element = document.getElementById('back-to-top');
+        const element = document.getElementById('back-to-top')
         if (element) {
             if (
                 document.body.scrollTop > 100 ||
                 document.documentElement.scrollTop > 100
             ) {
-                element.style.display = 'block';
+                element.style.display = 'block'
             } else {
-                element.style.display = 'none';
+                element.style.display = 'none'
             }
         }
-    };
+    }
 
     const toTop = () => {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    };
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+    }
 
-    let pathName;
-
-    useEffect(() => {
-        pathName = window.location.pathname;
-    }, []);
+    let pathName
 
     useEffect(() => {
-        const preloader = document.getElementById('preloader');
+        pathName = window.location.pathname
+    }, [])
+
+    useEffect(() => {
+        const preloader = document.getElementById('preloader')
         if (preloader) {
-            document.getElementById('preloader').style.opacity = '1';
-            document.getElementById('preloader').style.visibility = 'visible';
+            document.getElementById('preloader').style.opacity = '1'
+            document.getElementById('preloader').style.visibility = 'visible'
             setTimeout(() => {
-                document.getElementById('preloader').style.opacity = '0';
-                document.getElementById('preloader').style.visibility =
-                    'hidden';
-            }, 1000);
+                document.getElementById('preloader').style.opacity = '0'
+                document.getElementById('preloader').style.visibility = 'hidden'
+            }, 1000)
         }
-    }, [preloader, pathName]);
+    }, [preloader, pathName])
 
     return (
         <React.Fragment>
@@ -210,7 +204,7 @@ const RightSidebar = () => {
                                                             changeLayout(
                                                                 e.target.value,
                                                             ),
-                                                        );
+                                                        )
                                                     }
                                                 }}
                                                 className="form-check-input"
@@ -258,7 +252,7 @@ const RightSidebar = () => {
                                                             changeLayout(
                                                                 e.target.value,
                                                             ),
-                                                        );
+                                                        )
                                                     }
                                                 }}
                                                 className="form-check-input"
@@ -299,7 +293,7 @@ const RightSidebar = () => {
                                                             changeLayout(
                                                                 e.target.value,
                                                             ),
-                                                        );
+                                                        )
                                                     }
                                                 }}
                                                 className="form-check-input"
@@ -367,10 +361,9 @@ const RightSidebar = () => {
                                                         if (e.target.checked) {
                                                             dispatch(
                                                                 changeLayoutMode(
-                                                                    e.target
-                                                                        .value,
+                                                                    e.target.value,
                                                                 ),
-                                                            );
+                                                            )
                                                         }
                                                     }}
                                                 />
@@ -408,9 +401,7 @@ const RightSidebar = () => {
                                                     type="radio"
                                                     name="data-layout-mode"
                                                     id="layout-mode-dark"
-                                                    value={
-                                                        layoutModeTypes.DARKMODE
-                                                    }
+                                                    value={layoutModeTypes.DARKMODE}
                                                     checked={
                                                         layoutModeType ===
                                                         layoutModeTypes.DARKMODE
@@ -419,10 +410,9 @@ const RightSidebar = () => {
                                                         if (e.target.checked) {
                                                             dispatch(
                                                                 changeLayoutMode(
-                                                                    e.target
-                                                                        .value,
+                                                                    e.target.value,
                                                                 ),
-                                                            );
+                                                            )
                                                         }
                                                     }}
                                                 />
@@ -481,21 +471,19 @@ const RightSidebar = () => {
                                                             }
                                                             onChange={(e) => {
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeLayoutWidth(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                     dispatch(
                                                                         changeLeftsidebarSizeType(
                                                                             'lg',
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -541,21 +529,19 @@ const RightSidebar = () => {
                                                             }
                                                             onChange={(e) => {
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeLayoutWidth(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                     dispatch(
                                                                         changeLeftsidebarSizeType(
                                                                             'sm-hover',
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -593,8 +579,8 @@ const RightSidebar = () => {
                                                 Layout Position
                                             </h6>
                                             <p className="text-muted">
-                                                Choose Fixed or Scrollable
-                                                Layout Position.
+                                                Choose Fixed or Scrollable Layout
+                                                Position.
                                             </p>
 
                                             <div
@@ -617,10 +603,9 @@ const RightSidebar = () => {
                                                         if (e.target.checked) {
                                                             dispatch(
                                                                 changeLayoutPosition(
-                                                                    e.target
-                                                                        .value,
+                                                                    e.target.value,
                                                                 ),
-                                                            );
+                                                            )
                                                         }
                                                     }}
                                                 />
@@ -647,10 +632,9 @@ const RightSidebar = () => {
                                                         if (e.target.checked) {
                                                             dispatch(
                                                                 changeLayoutPosition(
-                                                                    e.target
-                                                                        .value,
+                                                                    e.target.value,
                                                                 ),
-                                                            );
+                                                            )
                                                         }
                                                     }}
                                                 />
@@ -691,7 +675,7 @@ const RightSidebar = () => {
                                                             changeTopbarTheme(
                                                                 e.target.value,
                                                             ),
-                                                        );
+                                                        )
                                                     }
                                                 }}
                                             />
@@ -739,7 +723,7 @@ const RightSidebar = () => {
                                                             changeTopbarTheme(
                                                                 e.target.value,
                                                             ),
-                                                        );
+                                                        )
                                                     }
                                                 }}
                                             />
@@ -798,16 +782,14 @@ const RightSidebar = () => {
                                                             }
                                                             onChange={(e) => {
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeLeftsidebarSizeType(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -854,16 +836,14 @@ const RightSidebar = () => {
                                                             }
                                                             onChange={(e) => {
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeLeftsidebarSizeType(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -910,16 +890,14 @@ const RightSidebar = () => {
                                                             }
                                                             onChange={(e) => {
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeLeftsidebarSizeType(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -966,16 +944,14 @@ const RightSidebar = () => {
                                                             }
                                                             onChange={(e) => {
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeLeftsidebarSizeType(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -1013,8 +989,8 @@ const RightSidebar = () => {
                                                 Sidebar View
                                             </h6>
                                             <p className="text-muted">
-                                                Choose Default or Detached
-                                                Sidebar view.
+                                                Choose Default or Detached Sidebar
+                                                view.
                                             </p>
 
                                             <div className="row">
@@ -1034,16 +1010,14 @@ const RightSidebar = () => {
                                                             }
                                                             onChange={(e) => {
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeLeftsidebarViewType(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -1089,16 +1063,14 @@ const RightSidebar = () => {
                                                             }
                                                             onChange={(e) => {
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeLeftsidebarViewType(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -1141,8 +1113,7 @@ const RightSidebar = () => {
                                                 Sidebar Color
                                             </h6>
                                             <p className="text-muted">
-                                                Choose Ligth or Dark Sidebar
-                                                Color.
+                                                Choose Ligth or Dark Sidebar Color.
                                             </p>
 
                                             <div className="row">
@@ -1161,18 +1132,16 @@ const RightSidebar = () => {
                                                                 leftSidebarTypes.LIGHT
                                                             }
                                                             onChange={(e) => {
-                                                                setShow(false);
+                                                                setShow(false)
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeSidebarTheme(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -1217,18 +1186,16 @@ const RightSidebar = () => {
                                                                 leftSidebarTypes.DARK
                                                             }
                                                             onChange={(e) => {
-                                                                setShow(false);
+                                                                setShow(false)
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeSidebarTheme(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -1263,11 +1230,9 @@ const RightSidebar = () => {
                                                         className={classnames(
                                                             'btn btn-link avatar-md w-100 p-0 overflow-hidden border ',
                                                             {
-                                                                collapsed:
-                                                                    !show,
+                                                                collapsed: !show,
                                                                 active:
-                                                                    show ===
-                                                                    true,
+                                                                    show === true,
                                                             },
                                                         )}
                                                         type="button"
@@ -1323,16 +1288,14 @@ const RightSidebar = () => {
                                                             }
                                                             onChange={(e) => {
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeSidebarTheme(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -1358,16 +1321,14 @@ const RightSidebar = () => {
                                                             }
                                                             onChange={(e) => {
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeSidebarTheme(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -1393,16 +1354,14 @@ const RightSidebar = () => {
                                                             }
                                                             onChange={(e) => {
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeSidebarTheme(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -1428,16 +1387,14 @@ const RightSidebar = () => {
                                                             }
                                                             onChange={(e) => {
                                                                 if (
-                                                                    e.target
-                                                                        .checked
+                                                                    e.target.checked
                                                                 ) {
                                                                     dispatch(
                                                                         changeSidebarTheme(
-                                                                            e
-                                                                                .target
+                                                                            e.target
                                                                                 .value,
                                                                         ),
-                                                                    );
+                                                                    )
                                                                 }
                                                             }}
                                                         />
@@ -1474,15 +1431,13 @@ const RightSidebar = () => {
                                                             leftSidebarImageTypes.NONE
                                                         }
                                                         onChange={(e) => {
-                                                            if (
-                                                                e.target.checked
-                                                            ) {
+                                                            if (e.target.checked) {
                                                                 dispatch(
                                                                     changeSidebarImageType(
                                                                         e.target
                                                                             .value,
                                                                     ),
-                                                                );
+                                                                )
                                                             }
                                                         }}
                                                     />
@@ -1510,15 +1465,13 @@ const RightSidebar = () => {
                                                             leftSidebarImageTypes.IMG1
                                                         }
                                                         onChange={(e) => {
-                                                            if (
-                                                                e.target.checked
-                                                            ) {
+                                                            if (e.target.checked) {
                                                                 dispatch(
                                                                     changeSidebarImageType(
                                                                         e.target
                                                                             .value,
                                                                     ),
-                                                                );
+                                                                )
                                                             }
                                                         }}
                                                     />
@@ -1548,15 +1501,13 @@ const RightSidebar = () => {
                                                             leftSidebarImageTypes.IMG2
                                                         }
                                                         onChange={(e) => {
-                                                            if (
-                                                                e.target.checked
-                                                            ) {
+                                                            if (e.target.checked) {
                                                                 dispatch(
                                                                     changeSidebarImageType(
                                                                         e.target
                                                                             .value,
                                                                     ),
-                                                                );
+                                                                )
                                                             }
                                                         }}
                                                     />
@@ -1585,15 +1536,13 @@ const RightSidebar = () => {
                                                             leftSidebarImageTypes.IMG3
                                                         }
                                                         onChange={(e) => {
-                                                            if (
-                                                                e.target.checked
-                                                            ) {
+                                                            if (e.target.checked) {
                                                                 dispatch(
                                                                     changeSidebarImageType(
                                                                         e.target
                                                                             .value,
                                                                     ),
-                                                                );
+                                                                )
                                                             }
                                                         }}
                                                     />
@@ -1622,15 +1571,13 @@ const RightSidebar = () => {
                                                             leftSidebarImageTypes.IMG4
                                                         }
                                                         onChange={(e) => {
-                                                            if (
-                                                                e.target.checked
-                                                            ) {
+                                                            if (e.target.checked) {
                                                                 dispatch(
                                                                     changeSidebarImageType(
                                                                         e.target
                                                                             .value,
                                                                     ),
-                                                                );
+                                                                )
                                                             }
                                                         }}
                                                     />
@@ -1665,9 +1612,7 @@ const RightSidebar = () => {
                                                     type="radio"
                                                     name="data-preloader"
                                                     id="preloader-view-custom"
-                                                    value={
-                                                        preloaderTypes.ENABLE
-                                                    }
+                                                    value={preloaderTypes.ENABLE}
                                                     checked={
                                                         preloader ===
                                                         preloaderTypes.ENABLE
@@ -1676,10 +1621,9 @@ const RightSidebar = () => {
                                                         if (e.target.checked) {
                                                             dispatch(
                                                                 changePreLoader(
-                                                                    e.target
-                                                                        .value,
+                                                                    e.target.value,
                                                                 ),
-                                                            );
+                                                            )
                                                         }
                                                     }}
                                                 />
@@ -1732,9 +1676,7 @@ const RightSidebar = () => {
                                                     type="radio"
                                                     name="data-preloader"
                                                     id="preloader-view-none"
-                                                    value={
-                                                        preloaderTypes.DISABLE
-                                                    }
+                                                    value={preloaderTypes.DISABLE}
                                                     checked={
                                                         preloader ===
                                                         preloaderTypes.DISABLE
@@ -1743,10 +1685,9 @@ const RightSidebar = () => {
                                                         if (e.target.checked) {
                                                             dispatch(
                                                                 changePreLoader(
-                                                                    e.target
-                                                                        .value,
+                                                                    e.target.value,
                                                                 ),
-                                                            );
+                                                            )
                                                         }
                                                     }}
                                                 />
@@ -1784,7 +1725,7 @@ const RightSidebar = () => {
                 </Offcanvas>
             </div>
         </React.Fragment>
-    );
-};
+    )
+}
 
-export default RightSidebar;
+export default RightSidebar

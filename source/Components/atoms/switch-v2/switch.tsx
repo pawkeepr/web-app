@@ -1,7 +1,7 @@
-import { Switch } from '@headlessui/react';
-import { ComponentProps, useState } from 'react';
+import { Switch } from '@headlessui/react'
+import { ComponentProps, useState } from 'react'
 
-import { VariantProps, tv } from 'tailwind-variants';
+import { VariantProps, tv } from 'tailwind-variants'
 
 const switchStyled = tv({
     base: `
@@ -17,7 +17,7 @@ const switchStyled = tv({
             false: 'bg-secondary-600',
         },
     },
-});
+})
 
 const circleStyled = tv({
     base: `
@@ -32,28 +32,23 @@ const circleStyled = tv({
             false: 'translate-x-0',
         },
     },
-});
+})
 
 type SwitchProps = {
-    onChange?: (checked: boolean) => void;
-    label?: string;
+    onChange?: (checked: boolean) => void
+    label?: string
 } & Omit<ComponentProps<'input'>, 'onChange'> &
-    VariantProps<typeof switchStyled>;
+    VariantProps<typeof switchStyled>
 
-const ControlSwitch = ({
-    className,
-    children,
-    onChange,
-    ...rest
-}: SwitchProps) => {
-    const [enabled, setEnabled] = useState<boolean>(false);
+const ControlSwitch = ({ className, children, onChange, ...rest }: SwitchProps) => {
+    const [enabled, setEnabled] = useState<boolean>(false)
 
     const handleChange = () => {
         setEnabled((state) => {
-            onChange?.(!state);
-            return !state;
-        });
-    };
+            onChange?.(!state)
+            return !state
+        })
+    }
 
     return (
         <div className="w-full flex justify-center items-center gap-2">
@@ -62,14 +57,11 @@ const ControlSwitch = ({
                 onChange={handleChange}
                 className={switchStyled({ className, enabled })}
             >
-                <span
-                    aria-hidden="true"
-                    className={circleStyled({ enabled })}
-                />
+                <span aria-hidden="true" className={circleStyled({ enabled })} />
             </Switch>
             {children}
         </div>
-    );
-};
+    )
+}
 
-export default ControlSwitch;
+export default ControlSwitch

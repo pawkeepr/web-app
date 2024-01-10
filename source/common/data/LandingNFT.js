@@ -1,27 +1,27 @@
-import binance from '~/assets/images/nft/wallet/binance.png';
-import coinbase from '~/assets/images/nft/wallet/coinbase.png';
+import binance from '~/assets/images/nft/wallet/binance.png'
+import coinbase from '~/assets/images/nft/wallet/coinbase.png'
 //import Images
-import metamask from '~/assets/images/nft/wallet/metamask.png';
+import metamask from '~/assets/images/nft/wallet/metamask.png'
 
-import add from '~/assets/images/nft/add.png';
-import money from '~/assets/images/nft/money.png';
-import sell from '~/assets/images/nft/sell.png';
-import wallet from '~/assets/images/nft/wallet.png';
+import add from '~/assets/images/nft/add.png'
+import money from '~/assets/images/nft/money.png'
+import sell from '~/assets/images/nft/sell.png'
+import wallet from '~/assets/images/nft/wallet.png'
 
-import avatar02 from '~/assets/images/users/avatar-2.jpg';
-import avatar05 from '~/assets/images/users/avatar-5.jpg';
-import avatar08 from '~/assets/images/users/avatar-8.jpg';
-import avatar09 from '~/assets/images/users/avatar-9.jpg';
-import avatar10 from '~/assets/images/users/avatar-10.jpg';
+import avatar02 from '~/assets/images/users/avatar-2.jpg'
+import avatar05 from '~/assets/images/users/avatar-5.jpg'
+import avatar08 from '~/assets/images/users/avatar-8.jpg'
+import avatar09 from '~/assets/images/users/avatar-9.jpg'
+import avatar10 from '~/assets/images/users/avatar-10.jpg'
 
-import img04 from '~/assets/images/nft/gif/img-4.gif';
-import img01 from '~/assets/images/nft/img-01.jpg';
-import img02 from '~/assets/images/nft/img-02.jpg';
-import img03 from '~/assets/images/nft/img-03.jpg';
-import img05 from '~/assets/images/nft/img-05.jpg';
-import img06 from '~/assets/images/nft/img-06.jpg';
+import img04 from '~/assets/images/nft/gif/img-4.gif'
+import img01 from '~/assets/images/nft/img-01.jpg'
+import img02 from '~/assets/images/nft/img-02.jpg'
+import img03 from '~/assets/images/nft/img-03.jpg'
+import img05 from '~/assets/images/nft/img-05.jpg'
+import img06 from '~/assets/images/nft/img-06.jpg'
 
-import gifImg01 from '~/assets/images/nft/gif/img-1.gif';
+import gifImg01 from '~/assets/images/nft/gif/img-1.gif'
 
 const connectData = [
     {
@@ -43,7 +43,7 @@ const connectData = [
         textContent:
             'Binance is considered a safe exchange that allows user account protection via the use of Two Authentication.',
     },
-];
+]
 
 const discoverItemsData = [
     {
@@ -77,14 +77,13 @@ const discoverItemsData = [
         price: '701.38 ETH',
         category: 'Long-tailed macaque',
     },
-];
+]
 
 const featuresData = [
     {
         img: wallet,
         title: 'Set up your wallet',
-        textConent:
-            'You have to choose whether to use a hot wallet a cold wallet.',
+        textConent: 'You have to choose whether to use a hot wallet a cold wallet.',
     },
     {
         img: money,
@@ -94,16 +93,14 @@ const featuresData = [
     {
         img: add,
         title: "Add your NFT's",
-        textConent:
-            'Go to your profile icon and top right corner creation page.',
+        textConent: 'Go to your profile icon and top right corner creation page.',
     },
     {
         img: sell,
         title: "Sell Your NFT's",
-        textConent:
-            'Create a collection in Opensea and give Add items and art.',
+        textConent: 'Create a collection in Opensea and give Add items and art.',
     },
-];
+]
 
 const productData = [
     {
@@ -172,7 +169,7 @@ const productData = [
         isClass: 'artwork music crypto-card',
         categories: 'games',
     },
-];
+]
 
 const topCreatorData = [
     {
@@ -211,12 +208,6 @@ const topCreatorData = [
         title: 'James Morris',
         price: '63,710 ETH',
     },
-];
+]
 
-export {
-    connectData,
-    discoverItemsData,
-    featuresData,
-    productData,
-    topCreatorData,
-};
+export { connectData, discoverItemsData, featuresData, productData, topCreatorData }

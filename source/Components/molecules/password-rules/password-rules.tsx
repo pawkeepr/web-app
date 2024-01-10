@@ -1,14 +1,14 @@
-import cn from 'classnames';
+import cn from 'classnames'
 
 type PasswordRulesProps = {
-    value: string;
-};
+    value: string
+}
 
-const rulePassLength = RegExp('(.{8,})');
-const rulePassLower = RegExp('(.*[a-z].*)');
-const rulePassUpper = RegExp('(.*[A-Z].*)');
-const rulePassNumber = RegExp('(.*[0-9].*)');
-const rulePassSpecial = RegExp('(.*[!@#$%^&*()_+].*)');
+const rulePassLength = RegExp('(.{8,})')
+const rulePassLower = RegExp('(.*[a-z].*)')
+const rulePassUpper = RegExp('(.*[A-Z].*)')
+const rulePassNumber = RegExp('(.*[0-9].*)')
+const rulePassSpecial = RegExp('(.*[!@#$%^&*()_+].*)')
 
 const rules = [
     {
@@ -36,7 +36,7 @@ const rules = [
         condition: rulePassSpecial,
         text: 'e um caractere especial (!@#$%^&*()_+)',
     },
-];
+]
 
 const PasswordRules = ({ value }: PasswordRulesProps) => {
     return (
@@ -49,9 +49,7 @@ const PasswordRules = ({ value }: PasswordRulesProps) => {
                         data-testid={rule.name}
                         id={rule.name}
                         className={cn('text-xs font-sans font-semibold mr-1', {
-                            'text-primary-500': rule.condition.test(
-                                value.trim(),
-                            ),
+                            'text-primary-500': rule.condition.test(value.trim()),
                             'text-gray-500': !rule.condition.test(value.trim()),
                         })}
                     >
@@ -60,7 +58,7 @@ const PasswordRules = ({ value }: PasswordRulesProps) => {
                 ))}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default PasswordRules;
+export default PasswordRules

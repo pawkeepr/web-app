@@ -1,64 +1,64 @@
 //Import images
 
-import FieldCep from '~/Components/molecules/field-cep/field-cep';
-import FieldControl from '~/Components/molecules/field-control/field-control';
+import FieldCep from '~/Components/molecules/field-cep/field-cep'
+import FieldControl from '~/Components/molecules/field-control/field-control'
 
-import { useCallback, useMemo, useTransition } from 'react';
-import { IAddress } from '~/helpers/fetch-address-by-cep';
-import useFetchAddress from '~/hooks/use-fetch-address';
-import useFormikContextSafe from '~/hooks/use-formik-context-safe';
-import { InitialValues } from '~/pages/NewPetPage';
+import { useCallback, useMemo, useTransition } from 'react'
+import { IAddress } from '~/helpers/fetch-address-by-cep'
+import useFetchAddress from '~/hooks/use-fetch-address'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { InitialValues } from '~/pages/NewPetPage'
 
-type CtxAddress = Pick<InitialValues, 'ownerEmergencyContact'>;
+type CtxAddress = Pick<InitialValues, 'ownerEmergencyContact'>
 
 type StepTutorProps = {
-    disabled?: boolean;
-};
+    disabled?: boolean
+}
 
 const AddressTutor = ({ disabled }: StepTutorProps) => {
-    const { values, setFieldValue } = useFormikContextSafe<CtxAddress>();
+    const { values, setFieldValue } = useFormikContextSafe<CtxAddress>()
 
-    const [isPending, startTransition] = useTransition();
+    const [isPending, startTransition] = useTransition()
 
     const updateAddressFields = useCallback(
         (params: IAddress) => {
-            if (!params) return;
+            if (!params) return
 
-            const { uf, localidade, bairro, logradouro, complemento } = params;
+            const { uf, localidade, bairro, logradouro, complemento } = params
 
             startTransition(() => {
-                setFieldValue('ownerEmergencyContact.address.state', uf || '');
+                setFieldValue('ownerEmergencyContact.address.state', uf || '')
 
                 setFieldValue(
                     'ownerEmergencyContact.address.city',
                     localidade || '',
-                );
+                )
 
                 setFieldValue(
                     'ownerEmergencyContact.address.neighborhood',
                     bairro || '',
-                );
+                )
 
                 setFieldValue(
                     'ownerEmergencyContact.address.street',
                     logradouro || '',
-                );
+                )
 
                 setFieldValue(
                     'ownerEmergencyContact.address.complement',
                     complemento || '',
-                );
-            });
+                )
+            })
         },
         [setFieldValue],
-    );
+    )
 
     const { loading } = useFetchAddress({
         onChangeAddress: updateAddressFields,
         zipCode: values.ownerEmergencyContact?.address?.zipCode || '',
-    });
+    })
 
-    const isLoading = useMemo(() => isPending || loading, [isPending, loading]);
+    const isLoading = useMemo(() => isPending || loading, [isPending, loading])
 
     return (
         <>
@@ -100,13 +100,11 @@ const AddressTutor = ({ disabled }: StepTutorProps) => {
                 label="Rua"
                 name="ownerEmergencyContact.address.street"
                 disabled={isLoading}
-                placeholder={
-                    isLoading ? 'Carregando...' : 'Digite o nome da rua'
-                }
+                placeholder={isLoading ? 'Carregando...' : 'Digite o nome da rua'}
                 required
             />
         </>
-    );
-};
+    )
+}
 
-export default AddressTutor;
+export default AddressTutor

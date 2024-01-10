@@ -1,14 +1,14 @@
-import MyImage from '~/Components/atoms/my-image/my-image';
-import ravena from '~/assets/images/ravena.jpeg';
+import MyImage from '~/Components/atoms/my-image/my-image'
+import ravena from '~/assets/images/ravena.jpeg'
 
-import { RadioGroup } from '@headlessui/react';
-import ViewAppointment from '~/Components/modals/view-appointment/modal-view-appointment';
-import { IPetV2 } from '~/types/pet-v2';
+import { RadioGroup } from '@headlessui/react'
+import ViewAppointment from '~/Components/modals/view-appointment/modal-view-appointment'
+import { IPetV2 } from '~/types/pet-v2'
 
 type CardPetsProps = {
-    pet: IPetV2;
-    checked: boolean;
-};
+    pet: IPetV2
+    checked: boolean
+}
 
 const CardPets = ({ pet, checked }: CardPetsProps) => {
     return (
@@ -51,9 +51,7 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                 <RadioGroup.Description
                                     as="span"
                                     className={`inline ${
-                                        checked
-                                            ? 'text-sky-100'
-                                            : 'text-gray-500'
+                                        checked ? 'text-sky-100' : 'text-gray-500'
                                     }`}
                                 >
                                     <div className="p-2 ">
@@ -64,8 +62,7 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                         </p>
                                         <p className="text-gray-700">
                                             <strong>Especie:</strong>{' '}
-                                            {pet?.pet_data?.specie ||
-                                                pet?.specie}
+                                            {pet?.pet_data?.specie || pet?.specie}
                                         </p>
                                         <p className="text-gray-700">
                                             <strong>Sexo:</strong>{' '}
@@ -91,9 +88,7 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                 <RadioGroup.Description
                                     as="span"
                                     className={`inline ${
-                                        checked
-                                            ? 'text-sky-100'
-                                            : 'text-gray-500'
+                                        checked ? 'text-sky-100' : 'text-gray-500'
                                     }`}
                                 >
                                     <div className="p-2">
@@ -121,7 +116,7 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                 </>
             </RadioGroup.Option>
         </div>
-    );
-};
+    )
+}
 
-export default CardPets;
+export default CardPets

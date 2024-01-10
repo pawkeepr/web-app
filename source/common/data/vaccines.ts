@@ -7,7 +7,7 @@ export const vaccines = [
     'Vacina contra giardíase (para cães)',
     'Vacina contra FeLV (para gatos)',
     'Vacina contra FIV (para gatos)',
-];
+]
 
 export enum Vaccines {
     VacinaAntirrábica = 'Vacina antirrábica',

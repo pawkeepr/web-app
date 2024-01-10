@@ -1,6 +1,6 @@
-import classnames from 'classnames';
-import Link from 'next/link';
-import React, { useState } from 'react';
+import classnames from 'classnames'
+import Link from 'next/link'
+import React, { useState } from 'react'
 import {
     Col,
     Dropdown,
@@ -12,33 +12,33 @@ import {
     Row,
     TabContent,
     TabPane,
-} from 'reactstrap';
+} from 'reactstrap'
 
 //import images
-import bell from '~/assets/images/svg/bell.svg';
-import avatar2 from '~/assets/images/users/avatar-2.jpg';
-import avatar3 from '~/assets/images/users/avatar-3.jpg';
-import avatar6 from '~/assets/images/users/avatar-6.jpg';
-import avatar8 from '~/assets/images/users/avatar-8.jpg';
+import bell from '~/assets/images/svg/bell.svg'
+import avatar2 from '~/assets/images/users/avatar-2.jpg'
+import avatar3 from '~/assets/images/users/avatar-3.jpg'
+import avatar6 from '~/assets/images/users/avatar-6.jpg'
+import avatar8 from '~/assets/images/users/avatar-8.jpg'
 
 //SimpleBar
-import Image from 'next/image';
-import SimpleBar from 'simplebar-react';
+import Image from 'next/image'
+import SimpleBar from 'simplebar-react'
 
 const NotificationDropdown = () => {
     //Dropdown Toggle
-    const [isNotificationDropdown, setIsNotificationDropdown] = useState(false);
+    const [isNotificationDropdown, setIsNotificationDropdown] = useState(false)
     const toggleNotificationDropdown = () => {
-        setIsNotificationDropdown(!isNotificationDropdown);
-    };
+        setIsNotificationDropdown(!isNotificationDropdown)
+    }
 
     //Tab
-    const [activeTab, setActiveTab] = useState('1');
+    const [activeTab, setActiveTab] = useState('1')
     const toggleTab = (tab) => {
         if (activeTab !== tab) {
-            setActiveTab(tab);
+            setActiveTab(tab)
         }
-    };
+    }
     return (
         <React.Fragment>
             <Dropdown
@@ -85,7 +85,7 @@ const NotificationDropdown = () => {
                                             active: activeTab === '1',
                                         })}
                                         onClick={() => {
-                                            toggleTab('1');
+                                            toggleTab('1')
                                         }}
                                     >
                                         All (4)
@@ -98,7 +98,7 @@ const NotificationDropdown = () => {
                                             active: activeTab === '2',
                                         })}
                                         onClick={() => {
-                                            toggleTab('2');
+                                            toggleTab('2')
                                         }}
                                     >
                                         Messages
@@ -111,7 +111,7 @@ const NotificationDropdown = () => {
                                             active: activeTab === '3',
                                         })}
                                         onClick={() => {
-                                            toggleTab('3');
+                                            toggleTab('3')
                                         }}
                                     >
                                         Alerts
@@ -140,8 +140,8 @@ const NotificationDropdown = () => {
                                                 className="stretched-link"
                                             >
                                                 <h6 className="mt-0 mb-2 lh-base">
-                                                    Your <b>Elite</b> author
-                                                    Graphic Optimization{' '}
+                                                    Your <b>Elite</b> author Graphic
+                                                    Optimization{' '}
                                                     <span className="text-secondary">
                                                         reward
                                                     </span>{' '}
@@ -190,9 +190,8 @@ const NotificationDropdown = () => {
                                             </Link>
                                             <div className="fs-13 text-muted">
                                                 <p className="mb-1">
-                                                    Answered to your comment on
-                                                    the cash flow forecast's
-                                                    graph 🔔.
+                                                    Answered to your comment on the
+                                                    cash flow forecast's graph 🔔.
                                                 </p>
                                             </div>
                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
@@ -236,8 +235,7 @@ const NotificationDropdown = () => {
                                                     <b className="text-success">
                                                         20
                                                     </b>{' '}
-                                                    new messages in the
-                                                    conversation
+                                                    new messages in the conversation
                                                 </h6>
                                             </Link>
                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
@@ -391,9 +389,8 @@ const NotificationDropdown = () => {
                                             </Link>
                                             <div className="fs-13 text-muted">
                                                 <p className="mb-1">
-                                                    Answered to your comment on
-                                                    the cash flow forecast's
-                                                    graph 🔔.
+                                                    Answered to your comment on the
+                                                    cash flow forecast's graph 🔔.
                                                 </p>
                                             </div>
                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
@@ -438,9 +435,8 @@ const NotificationDropdown = () => {
                                             </Link>
                                             <div className="fs-13 text-muted">
                                                 <p className="mb-1">
-                                                    Mentionned you in his
-                                                    comment on 📃 invoice
-                                                    #12501.{' '}
+                                                    Mentionned you in his comment on
+                                                    📃 invoice #12501.{' '}
                                                 </p>
                                             </div>
                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
@@ -542,7 +538,7 @@ const NotificationDropdown = () => {
                 </DropdownMenu>
             </Dropdown>
         </React.Fragment>
-    );
-};
+    )
+}
 
-export default NotificationDropdown;
+export default NotificationDropdown

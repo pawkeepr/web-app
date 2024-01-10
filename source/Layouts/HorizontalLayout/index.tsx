@@ -1,33 +1,33 @@
-import Link from 'next/link';
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import { Col, Collapse, Row } from 'reactstrap';
+import Link from 'next/link'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
+import { Col, Collapse, Row } from 'reactstrap'
 
 //i18n
-import { withTranslation } from 'react-i18next';
+import { withTranslation } from 'react-i18next'
 // Import Data
-import navdata from '../LayoutMenuData';
+import navdata from '../LayoutMenuData'
 
 const HorizontalLayout = (props) => {
-    const [isMoreMenu, setIsMoreMenu] = useState(false);
-    const navData = navdata().props.children;
-    const menuItems = [];
-    const splitMenuItems = [];
-    let menuSplitContainer = 6;
+    const [isMoreMenu, setIsMoreMenu] = useState(false)
+    const navData = navdata().props.children
+    const menuItems = []
+    const splitMenuItems = []
+    let menuSplitContainer = 6
     navData.forEach((value, key) => {
         if (value.isHeader) {
-            menuSplitContainer++;
+            menuSplitContainer++
         }
         if (key >= menuSplitContainer) {
-            const val = value;
-            val.childItems = value.subItems;
-            val.isChildItem = value.subItems ? true : false;
-            val.subItems = undefined;
-            splitMenuItems.push(val);
+            const val = value
+            val.childItems = value.subItems
+            val.isChildItem = value.subItems ? true : false
+            val.subItems = undefined
+            splitMenuItems.push(val)
         } else {
-            menuItems.push(value);
+            menuItems.push(value)
         }
-    });
+    })
     menuItems.push({
         id: 'more',
         label: 'More',
@@ -36,92 +36,88 @@ const HorizontalLayout = (props) => {
         stateVariables: isMoreMenu,
         subItems: splitMenuItems,
         click: (e) => {
-            e.preventDefault();
-            setIsMoreMenu(!isMoreMenu);
+            e.preventDefault()
+            setIsMoreMenu(!isMoreMenu)
         },
-    });
+    })
 
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' })
         const initMenu = () => {
-            const pathName = process.env.PUBLIC_URL + props.location.pathname;
-            const ul = document.getElementById('navbar-nav');
-            const items = ul.getElementsByTagName('a');
-            const itemsArray = [...items]; // converts NodeList to Array
-            removeActivation(itemsArray);
+            const pathName = process.env.PUBLIC_URL + props.location.pathname
+            const ul = document.getElementById('navbar-nav')
+            const items = ul.getElementsByTagName('a')
+            const itemsArray = [...items] // converts NodeList to Array
+            removeActivation(itemsArray)
             const matchingMenuItem = itemsArray.find((x) => {
-                return x.pathname === pathName;
-            });
+                return x.pathname === pathName
+            })
             if (matchingMenuItem) {
-                activateParentDropdown(matchingMenuItem);
+                activateParentDropdown(matchingMenuItem)
             }
-        };
-        initMenu();
-    }, [props.location.pathname, props.layoutType]);
+        }
+        initMenu()
+    }, [props.location.pathname, props.layoutType])
 
     function activateParentDropdown(item) {
-        item.classList.add('active');
-        const parentCollapseDiv = item.closest('.collapse.menu-dropdown');
+        item.classList.add('active')
+        const parentCollapseDiv = item.closest('.collapse.menu-dropdown')
 
         if (parentCollapseDiv) {
             // to set aria expand true remaining
-            parentCollapseDiv.classList.add('show');
-            parentCollapseDiv.parentElement.children[0].classList.add('active');
+            parentCollapseDiv.classList.add('show')
+            parentCollapseDiv.parentElement.children[0].classList.add('active')
             parentCollapseDiv.parentElement.children[0].setAttribute(
                 'aria-expanded',
                 'true',
-            );
+            )
             if (
-                parentCollapseDiv.parentElement.closest(
-                    '.collapse.menu-dropdown',
-                )
+                parentCollapseDiv.parentElement.closest('.collapse.menu-dropdown')
             ) {
                 parentCollapseDiv.parentElement
                     .closest('.collapse')
-                    .classList.add('show');
+                    .classList.add('show')
                 const parentElementDiv =
                     parentCollapseDiv.parentElement.closest(
                         '.collapse',
-                    ).previousElementSibling;
+                    ).previousElementSibling
                 if (parentElementDiv)
                     if (parentElementDiv.closest('.collapse'))
-                        parentElementDiv
-                            .closest('.collapse')
-                            .classList.add('show');
-                parentElementDiv.classList.add('active');
+                        parentElementDiv.closest('.collapse').classList.add('show')
+                parentElementDiv.classList.add('active')
                 const parentElementSibling =
                     parentElementDiv.parentElement.parentElement.parentElement
-                        .previousElementSibling;
+                        .previousElementSibling
                 if (parentElementSibling) {
-                    parentElementSibling.classList.add('active');
+                    parentElementSibling.classList.add('active')
                 }
             }
-            return false;
+            return false
         }
-        return false;
+        return false
     }
 
     const removeActivation = (items) => {
-        const actiItems = items.filter((x) => x.classList.contains('active'));
+        const actiItems = items.filter((x) => x.classList.contains('active'))
 
         actiItems.forEach((item) => {
             if (item.classList.contains('menu-link')) {
                 if (!item.classList.contains('active')) {
-                    item.setAttribute('aria-expanded', false);
+                    item.setAttribute('aria-expanded', false)
                 }
                 if (item.nextElementSibling) {
-                    item.nextElementSibling.classList.remove('show');
+                    item.nextElementSibling.classList.remove('show')
                 }
             }
             if (item.classList.contains('nav-link')) {
                 if (item.nextElementSibling) {
-                    item.nextElementSibling.classList.remove('show');
+                    item.nextElementSibling.classList.remove('show')
                 }
-                item.setAttribute('aria-expanded', false);
+                item.setAttribute('aria-expanded', false)
             }
-            item.classList.remove('active');
-        });
-    };
+            item.classList.remove('active')
+        })
+    }
 
     return (
         <React.Fragment>
@@ -400,12 +396,12 @@ const HorizontalLayout = (props) => {
             })}
             {/* menu Items */}
         </React.Fragment>
-    );
-};
+    )
+}
 
 HorizontalLayout.propTypes = {
     location: PropTypes.object,
     t: PropTypes.any,
-};
+}
 
-export default withTranslation()(HorizontalLayout);
+export default withTranslation()(HorizontalLayout)

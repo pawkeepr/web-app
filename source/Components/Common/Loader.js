@@ -1,8 +1,8 @@
-import React from 'react';
-import { Spinner } from 'reactstrap';
+import React from 'react'
+import { Spinner } from 'reactstrap'
 
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Loader = (props) => {
     return (
@@ -17,7 +17,7 @@ const Loader = (props) => {
                 toastId: '',
             })}
         </React.Fragment>
-    );
-};
+    )
+}
 
-export default Loader;
+export default Loader

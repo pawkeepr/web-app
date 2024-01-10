@@ -1,29 +1,29 @@
-import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import { BtnAvatar, BtnPrimary } from '~/Components/atoms/btn';
-import FieldControl from '~/Components/molecules/field-control';
+import { Form, Formik } from 'formik'
+import * as Yup from 'yup'
+import { BtnAvatar, BtnPrimary } from '~/Components/atoms/btn'
+import FieldControl from '~/Components/molecules/field-control'
 
-import UserCircleIcon from '@heroicons/react/24/solid/UserCircleIcon';
-import BoxButtons from '~/Components/molecules/box-buttons';
-import Modal from '~/Components/organism/modal';
-import useModal from '~/hooks/use-modal';
-import ModalBodyFieldsAddress from './components/molecules/modal-body-fields-address';
+import UserCircleIcon from '@heroicons/react/24/solid/UserCircleIcon'
+import BoxButtons from '~/Components/molecules/box-buttons'
+import Modal from '~/Components/organism/modal'
+import useModal from '~/hooks/use-modal'
+import ModalBodyFieldsAddress from './components/molecules/modal-body-fields-address'
 
 type AddModalProps = {
-    children?: (showModal: () => void) => JSX.Element;
-    item?: any;
-};
+    children?: (showModal: () => void) => JSX.Element
+    item?: any
+}
 
 const validationSchema = Yup.object({
     name: Yup.string().required('Please Enter Name'),
     email: Yup.string().required('Please Enter Email'),
     phone: Yup.string().required('Please Enter Phone'),
-});
+})
 
 const AddTutorModal = ({ children, item }: AddModalProps) => {
-    const { closeModal, open, showModal } = useModal();
+    const { closeModal, open, showModal } = useModal()
 
-    const onSubmit = (values: any) => {};
+    const onSubmit = (values: any) => {}
 
     return (
         <>
@@ -104,7 +104,7 @@ const AddTutorModal = ({ children, item }: AddModalProps) => {
                 </Formik>
             </Modal>
         </>
-    );
-};
+    )
+}
 
-export default AddTutorModal;
+export default AddTutorModal

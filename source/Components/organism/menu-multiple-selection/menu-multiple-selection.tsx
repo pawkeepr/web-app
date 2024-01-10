@@ -1,30 +1,30 @@
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select';
+import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 
-import { Tab } from '@headlessui/react';
-import cn from 'classnames';
-import { useEffect, useState } from 'react';
+import { Tab } from '@headlessui/react'
+import cn from 'classnames'
+import { useEffect, useState } from 'react'
 
 export type ItemProps<T> = {
-    value: string;
-    label: string;
-} & T;
+    value: string
+    label: string
+} & T
 
 export type CardProps<T> = {
-    index: number;
-    name: string;
-} & ItemProps<T>;
+    index: number
+    name: string
+} & ItemProps<T>
 
 type MenuMultipleSelectionProps<T> = {
-    label: string;
-    name: string;
+    label: string
+    name: string
     options: {
-        value: string;
-        label: string;
-        color: string;
-    }[];
-    items: ItemProps<T>[];
-    card: (props: CardProps<T>) => JSX.Element;
-};
+        value: string
+        label: string
+        color: string
+    }[]
+    items: ItemProps<T>[]
+    card: (props: CardProps<T>) => JSX.Element
+}
 
 const MenuMultipleSelection = <T,>({
     options,
@@ -33,12 +33,12 @@ const MenuMultipleSelection = <T,>({
     name,
     card,
 }: MenuMultipleSelectionProps<T>) => {
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const Card = card;
+    const [selectedIndex, setSelectedIndex] = useState(0)
+    const Card = card
 
     useEffect(() => {
-        setSelectedIndex(0);
-    }, [items]);
+        setSelectedIndex(0)
+    }, [items])
 
     return (
         <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
@@ -89,7 +89,7 @@ const MenuMultipleSelection = <T,>({
                 </div>
             </div>
         </Tab.Group>
-    );
-};
+    )
+}
 
-export default MenuMultipleSelection;
+export default MenuMultipleSelection

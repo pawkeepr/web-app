@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 const Dropdown = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)
 
     const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
+        setIsOpen(!isOpen)
+    }
 
     const closeDropdown = (event) => {
         if (!event.target.closest('#dropdownMenuButton')) {
-            setIsOpen(false);
+            setIsOpen(false)
         }
-    };
+    }
 
     return (
         <div
@@ -52,7 +52,7 @@ const Dropdown = () => {
                 </div>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default Dropdown;
+export default Dropdown

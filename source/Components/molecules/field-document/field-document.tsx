@@ -1,37 +1,36 @@
-import { cpf } from 'cpf-cnpj-validator';
-import { useFormikContext } from 'formik';
-import { useMemo, useState } from 'react';
-import { InputControlProps } from '~/Components/molecules/field-control';
+import { cpf } from 'cpf-cnpj-validator'
+import { useFormikContext } from 'formik'
+import { useMemo, useState } from 'react'
+import { InputControlProps } from '~/Components/molecules/field-control'
 
-import FieldMasked from '../field-masked';
+import FieldMasked from '../field-masked'
 
 type FieldDocumentProps<T, Ctx = any> = InputControlProps<T, Ctx> & {
-    typeDocument?: 'all' | 'cpf' | 'cnpj';
-};
+    typeDocument?: 'all' | 'cpf' | 'cnpj'
+}
 
 const FieldDocument = <T, Ctx>({
     typeDocument = 'all',
     ...props
 }: FieldDocumentProps<T, Ctx>) => {
-    const { values } = useFormikContext();
-    const [isValid, setIsValid] = useState(false);
+    const { values } = useFormikContext()
+    const [isValid, setIsValid] = useState(false)
 
-    const document = (values as any)[props.name] || '';
+    const document = (values as any)[props.name] || ''
 
     const mask = useMemo(() => {
         // somente os números
-        const numbers = document.replace(/\D/g, '');
-        setIsValid(cpf.isValid(numbers));
+        const numbers = document.replace(/\D/g, '')
+        setIsValid(cpf.isValid(numbers))
 
-        if (typeDocument === 'cpf') return '___.___.___-__';
-        if (typeDocument === 'cnpj') return '__.___.___/____-__';
+        if (typeDocument === 'cpf') return '___.___.___-__'
+        if (typeDocument === 'cnpj') return '__.___.___/____-__'
 
         // verifica se é CPF ou CNPJ
-        if (numbers.length === 11 && cpf.isValid(numbers))
-            return '___.___.___-__';
+        if (numbers.length === 11 && cpf.isValid(numbers)) return '___.___.___-__'
 
-        return numbers.length >= 11 ? '__.___.___/____-__' : '___.___.___-__';
-    }, [document, typeDocument]);
+        return numbers.length >= 11 ? '__.___.___/____-__' : '___.___.___-__'
+    }, [document, typeDocument])
 
     return (
         <div className="">
@@ -47,7 +46,7 @@ const FieldDocument = <T, Ctx>({
                 </p>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default FieldDocument;
+export default FieldDocument

@@ -1,21 +1,21 @@
-import { useFormikContext } from 'formik';
-import { FaWhatsapp } from 'react-icons/fa';
-import { InitialValues } from '~/pages/AppointmentsPage/Appointments';
-import { PetData } from '~/store/slices/appointment-vet/types';
-import { KeyOfSpecies, Species } from '~/store/slices/pets/speciesType';
+import { useFormikContext } from 'formik'
+import { FaWhatsapp } from 'react-icons/fa'
+import { InitialValues } from '~/pages/AppointmentsPage/Appointments'
+import { PetData } from '~/store/slices/appointment-vet/types'
+import { KeyOfSpecies, Species } from '~/store/slices/pets/speciesType'
 
 type CardPetProps = {
-    pet?: PetData | null;
-};
+    pet?: PetData | null
+}
 
 const CardTutor = ({ pet = null }: CardPetProps) => {
-    const { values } = useFormikContext<InitialValues>();
+    const { values } = useFormikContext<InitialValues>()
 
-    const name_tutor = values.name_tutor || values.tutor_data?.name;
-    const cpf_tutor = values.cpf_tutor;
-    const email_tutor = values.contact_tutor?.email || values.tutor_data?.email;
-    const phone_tutor = values.contact_tutor?.phone || values.tutor_data?.phone;
-    const whatsapp_tutor = values.contact_tutor?.whatsapp;
+    const name_tutor = values.name_tutor || values.tutor_data?.name
+    const cpf_tutor = values.cpf_tutor
+    const email_tutor = values.contact_tutor?.email || values.tutor_data?.email
+    const phone_tutor = values.contact_tutor?.phone || values.tutor_data?.phone
+    const whatsapp_tutor = values.contact_tutor?.whatsapp
 
     return (
         <section className="flex flex-col justify-start p-4 w-full">
@@ -67,7 +67,7 @@ const CardTutor = ({ pet = null }: CardPetProps) => {
                 )}
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default CardTutor;
+export default CardTutor

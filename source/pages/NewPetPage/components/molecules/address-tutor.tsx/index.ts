@@ -1,1 +1,1 @@
-export { default } from './address-tutor';
+export { default } from './address-tutor'

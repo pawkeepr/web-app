@@ -1,35 +1,35 @@
-import { BtnCancel, BtnPrimary, BtnProps } from '~/Components/atoms/btn';
-import withLoading from '~/Components/helpers/with-loading';
+import { BtnCancel, BtnPrimary, BtnProps } from '~/Components/atoms/btn'
+import withLoading from '~/Components/helpers/with-loading'
 
-type Fn = () => void;
+type Fn = () => void
 
 type hasBtnCancel =
     | {
-          onClickCancel?: Fn;
-          cancel?: (props: BtnProps) => JSX.Element;
+          onClickCancel?: Fn
+          cancel?: (props: BtnProps) => JSX.Element
       }
     | {
-          cancel: null;
-          onClickCancel?: null;
-      };
+          cancel: null
+          onClickCancel?: null
+      }
 
 type hasBtnSuccess =
     | {
-          onClickSuccess: Fn;
-          success?: (props: BtnProps) => JSX.Element;
+          onClickSuccess: Fn
+          success?: (props: BtnProps) => JSX.Element
       }
     | {
-          success: null;
-          onClickSuccess?: null;
-      };
+          success: null
+          onClickSuccess?: null
+      }
 
 type BoxButtonsProps = {
-    type?: 'button' | 'submit';
-    isValid?: boolean;
-    link?: boolean;
-    isLoading?: boolean;
+    type?: 'button' | 'submit'
+    isValid?: boolean
+    link?: boolean
+    isLoading?: boolean
 } & hasBtnCancel &
-    hasBtnSuccess;
+    hasBtnSuccess
 
 const BoxButtons = ({
     onClickCancel,
@@ -67,7 +67,7 @@ const BoxButtons = ({
                 isLoading,
             })}
         </div>
-    );
-};
+    )
+}
 
-export default withLoading(BoxButtons);
+export default withLoading(BoxButtons)

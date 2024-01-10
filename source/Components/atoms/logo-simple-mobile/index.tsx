@@ -1,11 +1,11 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
 type LogoSimpleMobileProps = {
-    size?: number;
-    href?: string;
-    mb?: string;
-} & React.HTMLAttributes<HTMLDivElement>;
+    size?: number
+    href?: string
+    mb?: string
+} & React.HTMLAttributes<HTMLDivElement>
 
 const LogoSimpleMobile = ({
     href = '/dashboard',
@@ -26,7 +26,7 @@ const LogoSimpleMobile = ({
                 />
             </Link>
         </div>
-    );
-};
+    )
+}
 
-export default LogoSimpleMobile;
+export default LogoSimpleMobile

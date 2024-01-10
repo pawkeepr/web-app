@@ -1,25 +1,23 @@
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 
-import { Contact } from '~/types/profile';
-import Address from './address';
+import { Contact } from '~/types/profile'
+import Address from './address'
 
 const transformTrim = (value: any, originalValue: string) => {
     // Remover espaços em branco extras da string
-    return typeof originalValue === 'string'
-        ? originalValue.trim()
-        : originalValue;
-};
+    return typeof originalValue === 'string' ? originalValue.trim() : originalValue
+}
 
 export type IMainTutor = {
-    first_name: string;
-    last_name: string;
-    name: string;
-    url_img: string;
-};
+    first_name: string
+    last_name: string
+    name: string
+    url_img: string
+}
 
 export type UserInformation = {
-    contact: Contact;
-};
+    contact: Contact
+}
 
 const validate = Yup.object().shape({
     email: Yup.string()
@@ -51,12 +49,8 @@ const validate = Yup.object().shape({
         .min(1, 'Selecione pelo menos uma especialidade')
         .of(
             Yup.object().shape({
-                value: Yup.string().required(
-                    'O campo especialidade é obrigatório',
-                ),
-                label: Yup.string().required(
-                    'O campo especialidade é obrigatório',
-                ),
+                value: Yup.string().required('O campo especialidade é obrigatório'),
+                label: Yup.string().required('O campo especialidade é obrigatório'),
             }),
         )
         .required(),
@@ -70,8 +64,8 @@ const validate = Yup.object().shape({
                 'Número de telefone inválido',
             )
             .test('phone-validator', 'Número de telefone inválido', (value) => {
-                if (!value) return false;
-                return value.length >= 10;
+                if (!value) return false
+                return value.length >= 10
             })
             .required('O campo de telefone é obrigatório'),
         whatsapp: Yup.string()
@@ -80,8 +74,8 @@ const validate = Yup.object().shape({
                 'Número de telefone inválido',
             )
             .test('phone-validator', 'Número de telefone inválido', (value) => {
-                if (!value) return false;
-                return value.length >= 10;
+                if (!value) return false
+                return value.length >= 10
             })
             .required('O campo de whatsapp é obrigatório'),
     }),
@@ -93,8 +87,8 @@ const validate = Yup.object().shape({
     //     return cpf.isValid(value) || cnpj.isValid(value);
     // }),
     location: Address,
-});
+})
 
-export type ActivateAccount = Yup.InferType<typeof validate>;
+export type ActivateAccount = Yup.InferType<typeof validate>
 
-export default validate;
+export default validate

@@ -1,61 +1,61 @@
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { Input } from 'reactstrap';
+import Link from 'next/link'
+import React, { useEffect, useState } from 'react'
+import { Input } from 'reactstrap'
 
 //SimpleBar
-import SimpleBar from 'simplebar-react';
+import SimpleBar from 'simplebar-react'
 
 //import images
-import image2 from '~/assets/images/users/avatar-2.jpg';
-import image3 from '~/assets/images/users/avatar-3.jpg';
-import image5 from '~/assets/images/users/avatar-5.jpg';
+import image2 from '~/assets/images/users/avatar-2.jpg'
+import image3 from '~/assets/images/users/avatar-3.jpg'
+import image5 from '~/assets/images/users/avatar-5.jpg'
 
 const SearchOption = () => {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState('')
     const onChangeData = (value) => {
-        setValue(value);
-    };
+        setValue(value)
+    }
 
     useEffect(() => {
-        const searchOptions = document.getElementById('search-close-options');
-        const dropdown = document.getElementById('search-dropdown');
-        const searchInput = document.getElementById('search-options');
+        const searchOptions = document.getElementById('search-close-options')
+        const dropdown = document.getElementById('search-dropdown')
+        const searchInput = document.getElementById('search-options')
 
         searchInput.addEventListener('focus', () => {
-            const inputLength = searchInput.value.length;
+            const inputLength = searchInput.value.length
             if (inputLength > 0) {
-                dropdown.classList.add('show');
-                searchOptions.classList.remove('d-none');
+                dropdown.classList.add('show')
+                searchOptions.classList.remove('d-none')
             } else {
-                dropdown.classList.remove('show');
-                searchOptions.classList.add('d-none');
+                dropdown.classList.remove('show')
+                searchOptions.classList.add('d-none')
             }
-        });
+        })
 
         searchInput.addEventListener('keyup', () => {
-            const inputLength = searchInput.value.length;
+            const inputLength = searchInput.value.length
             if (inputLength > 0) {
-                dropdown.classList.add('show');
-                searchOptions.classList.remove('d-none');
+                dropdown.classList.add('show')
+                searchOptions.classList.remove('d-none')
             } else {
-                dropdown.classList.remove('show');
-                searchOptions.classList.add('d-none');
+                dropdown.classList.remove('show')
+                searchOptions.classList.add('d-none')
             }
-        });
+        })
 
         searchOptions.addEventListener('click', () => {
-            searchInput.value = '';
-            dropdown.classList.remove('show');
-            searchOptions.classList.add('d-none');
-        });
+            searchInput.value = ''
+            dropdown.classList.remove('show')
+            searchOptions.classList.add('d-none')
+        })
 
         document.body.addEventListener('click', (e) => {
             if (e.target.getAttribute('id') !== 'search-options') {
-                dropdown.classList.remove('show');
-                searchOptions.classList.add('d-none');
+                dropdown.classList.remove('show')
+                searchOptions.classList.add('d-none')
             }
-        });
-    }, []);
+        })
+    }, [])
 
     return (
         <React.Fragment>
@@ -68,7 +68,7 @@ const SearchOption = () => {
                         id="search-options"
                         value={value}
                         onChange={(e) => {
-                            onChangeData(e.target.value);
+                            onChangeData(e.target.value)
                         }}
                     />
                     <span className="mdi mdi-magnify search-widget-icon" />
@@ -93,8 +93,7 @@ const SearchOption = () => {
                                 href="/"
                                 className="btn btn-soft-secondary btn-sm btn-rounded"
                             >
-                                how to setup{' '}
-                                <i className="mdi mdi-magnify ms-1" />
+                                how to setup <i className="mdi mdi-magnify ms-1" />
                             </Link>
                             <Link
                                 href="/"
@@ -203,7 +202,7 @@ const SearchOption = () => {
                 </div>
             </form>
         </React.Fragment>
-    );
-};
+    )
+}
 
-export default SearchOption;
+export default SearchOption

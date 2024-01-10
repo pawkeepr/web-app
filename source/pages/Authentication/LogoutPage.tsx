@@ -1,22 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-'use client';
+'use client'
 
-import { useAppDispatch } from '~/store/hooks';
+import { useAppDispatch } from '~/store/hooks'
 
-import { useEffect } from 'react';
-import { BtnLink } from '~/Components/atoms/btn';
-import { resetLoading, signOutUser } from '~/store/slices/auth/login/actions';
-import AuthLayout from '../_layouts/auth/auth_layout';
+import { useEffect } from 'react'
+import { BtnLink } from '~/Components/atoms/btn'
+import { resetLoading, signOutUser } from '~/store/slices/auth/login/actions'
+import AuthLayout from '../_layouts/auth/auth_layout'
 
 const LogoutPage = () => {
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(resetLoading());
+        dispatch(resetLoading())
         setTimeout(() => {
-            dispatch(signOutUser());
-        }, 1000);
-    }, []);
+            dispatch(signOutUser())
+        }, 1000)
+    }, [])
 
     return (
         <AuthLayout title="Sair">
@@ -39,7 +39,7 @@ const LogoutPage = () => {
                 </div>
             </div>
         </AuthLayout>
-    );
-};
+    )
+}
 
-export default LogoutPage;
+export default LogoutPage

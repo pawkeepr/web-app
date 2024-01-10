@@ -69,4 +69,4 @@ export {
     leftSidebarViewTypes,
     preloaderTypes,
     topBarThemeTypes,
-};
+}

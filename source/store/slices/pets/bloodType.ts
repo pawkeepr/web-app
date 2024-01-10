@@ -10,49 +10,49 @@ export const DogBloodType = {
     DEA_5: 'DEA_5',
     DEA_7: 'DEA_7',
     UNKNOWN: 'unknown',
-} as const;
+} as const
 
 export const CatBloodType = {
     A: 'A',
     B: 'B',
     AB: 'AB',
-} as const;
+} as const
 
 export const HorseBloodType = {
     A: 'A',
     C: 'C',
     D: 'D',
     Q: 'Q',
-} as const;
+} as const
 
 export const RabbitBloodType = {
     A: 'A',
     B: 'B',
     C: 'C',
     D: 'D',
-} as const;
+} as const
 
 export const BirdBloodType = {
     A: 'A',
     B: 'B',
     SEM_TIPO_DEFINIDO: 'SEM_TIPO_DEFINIDO',
-} as const;
+} as const
 
 export const FishBloodType = {
     SEM_TIPO_DEFINIDO: 'SEM_TIPO_DEFINIDO',
-} as const;
+} as const
 
 export const ReptileBloodType = {
     SEM_TIPO_DEFINIDO: 'SEM_TIPO_DEFINIDO',
-} as const;
+} as const
 
-type DogBloodType = keyof typeof DogBloodType;
-type CatBloodType = keyof typeof CatBloodType;
-type HorseBloodType = keyof typeof HorseBloodType;
-type RabbitBloodType = keyof typeof RabbitBloodType;
-type BirdBloodType = keyof typeof BirdBloodType;
-type FishBloodType = keyof typeof FishBloodType;
-type ReptileBloodType = keyof typeof ReptileBloodType;
+type DogBloodType = keyof typeof DogBloodType
+type CatBloodType = keyof typeof CatBloodType
+type HorseBloodType = keyof typeof HorseBloodType
+type RabbitBloodType = keyof typeof RabbitBloodType
+type BirdBloodType = keyof typeof BirdBloodType
+type FishBloodType = keyof typeof FishBloodType
+type ReptileBloodType = keyof typeof ReptileBloodType
 
 export type BloodType =
     | DogBloodType
@@ -62,4 +62,4 @@ export type BloodType =
     | BirdBloodType
     | FishBloodType
     | ReptileBloodType
-    | 'unknown';
+    | 'unknown'

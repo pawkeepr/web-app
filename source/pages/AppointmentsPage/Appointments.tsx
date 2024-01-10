@@ -1,38 +1,31 @@
-import DashboardLayouts from '../_layouts/dashboard';
+import DashboardLayouts from '../_layouts/dashboard'
 
-import VerticalTabs from './components/templates/vertical-tabs';
-
-import { Formik } from 'formik';
-import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useMemo } from 'react';
-import { BtnCancel } from '~/Components/atoms/btn';
-import ModalConfirm from '~/Components/modals/confirm-modal';
-import useProfileVeterinary from '~/hooks/use-veterinary';
-import useAppointment from '~/store/hooks/appointment/use-appointment';
-import usePetById from '~/store/hooks/pet/use-pets';
-import { VeterinaryConsultation } from '~/types/appointment';
-import { IPetV2 } from '~/types/pet-v2';
-import { DTOProfile } from '~/types/profile';
-import { geolocation } from '~/utils/geolocation';
+import { Formik } from 'formik'
+import { useRouter } from 'next/navigation'
+import { useCallback, useEffect, useMemo } from 'react'
+import { BtnCancel } from '~/Components/atoms/btn'
+import ModalConfirm from '~/Components/modals/confirm-modal'
+import useProfileVeterinary from '~/hooks/use-veterinary'
+import useAppointment from '~/store/hooks/appointment/use-appointment'
+import usePetById from '~/store/hooks/pet/use-pets'
+import { VeterinaryConsultation } from '~/types/appointment'
+import { IPetV2 } from '~/types/pet-v2'
+import { DTOProfile } from '~/types/profile'
+import { geolocation } from '~/utils/geolocation'
+import VerticalTabs from './components/templates/vertical-tabs'
 import {
     SchemaYupAppointment,
     schemaStepAppointment,
-} from './components/validations.yup';
+} from './components/validations.yup'
 
 type AppointmentsPageProps = {
-    document: string;
-    pet: string;
-    appointment_id: string;
-};
+    document: string
+    pet: string
+    appointment_id: string
+}
 
 const initialValues = (
-    {
-        id: id_pet,
-        pet_information,
-        main_responsible_guardian,
-        cpf_tutor,
-        health_insurance,
-    }: IPetV2,
+    { id: id_pet, pet_information, main_responsible_guardian, cpf_tutor }: IPetV2,
     profile: DTOProfile,
     appointment_id: string | null = null,
 ): VeterinaryConsultation => ({
@@ -97,39 +90,35 @@ const initialValues = (
         tutor: main_responsible_guardian,
         veterinary: profile,
     },
-});
+})
 
 const AppointmentsPage = ({
     document,
     pet,
     appointment_id,
 }: AppointmentsPageProps) => {
-    const router = useRouter();
+    const router = useRouter()
 
-    const {
-        data,
-        isLoading: isLoadingPet,
-        isError,
-    } = usePetById(document, pet);
-    const profile = useProfileVeterinary();
+    const { data, isLoading: isLoadingPet, isError } = usePetById(document, pet)
+    const profile = useProfileVeterinary()
 
-    const { handleSubmit } = useAppointment();
+    const { handleSubmit } = useAppointment()
 
     const values = useMemo(
         () => initialValues(data as IPetV2, profile, appointment_id),
         [data, profile, appointment_id],
-    );
+    )
 
     useEffect(() => {
-        geolocation();
-    }, []);
+        geolocation()
+    }, [])
 
-    const veterinary = useProfileVeterinary();
+    const veterinary = useProfileVeterinary()
 
     const onSubmit = useCallback(
         async (values: SchemaYupAppointment) => {
             const [appointment_geolocation, appointment_signature] =
-                await geolocation();
+                await geolocation()
 
             try {
                 await handleSubmit({
@@ -143,17 +132,17 @@ const AppointmentsPage = ({
                         appointment_geolocation,
                         appointment_signature,
                     },
-                } as VeterinaryConsultation);
+                } as VeterinaryConsultation)
             } catch {
-                router.push('/dashboard');
+                router.push('/dashboard')
             }
         },
         [handleSubmit, veterinary],
-    );
+    )
 
     if (isError) {
-        router.back();
-        return null;
+        router.back()
+        return null
     }
 
     return (
@@ -178,7 +167,7 @@ const AppointmentsPage = ({
                                     label="Cancelar Consulta"
                                     onClick={() => onChangeOpen(true)}
                                 />
-                            );
+                            )
                         }}
                     </ModalConfirm>
 
@@ -186,7 +175,7 @@ const AppointmentsPage = ({
                 </div>
             </DashboardLayouts>
         </Formik>
-    );
-};
+    )
+}
 
-export default AppointmentsPage;
+export default AppointmentsPage

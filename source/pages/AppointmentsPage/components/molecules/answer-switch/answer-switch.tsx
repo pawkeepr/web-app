@@ -1,20 +1,20 @@
-import { Switch } from '@headlessui/react';
-import { useField } from 'formik';
-import { useState } from 'react';
-import ControlSwitch from '~/Components/molecules/control-switch-div/switch';
+import { Switch } from '@headlessui/react'
+import { useField } from 'formik'
+import { useState } from 'react'
+import ControlSwitch from '~/Components/molecules/control-switch-div/switch'
 
 type AnswerProps = {
-    question: string;
-    name: string;
-};
+    question: string
+    name: string
+}
 
 type AnswerSwitchProps = {
-    answers: AnswerProps[];
-    name: string;
-    title: string;
-    onClick?: () => void;
-    color?: 'primary' | 'secondary';
-};
+    answers: AnswerProps[]
+    name: string
+    title: string
+    onClick?: () => void
+    color?: 'primary' | 'secondary'
+}
 
 const AnswerSwitch = ({
     answers,
@@ -23,26 +23,26 @@ const AnswerSwitch = ({
     onClick,
     color = 'primary',
 }: AnswerSwitchProps) => {
-    const [enabled, setEnabled] = useState<string[]>([]);
+    const [enabled, setEnabled] = useState<string[]>([])
 
-    const [field, meta, helpers] = useField(`anamnese.${name}`);
+    const [field, meta, helpers] = useField(`anamnese.${name}`)
 
-    const { setValue } = helpers;
+    const { setValue } = helpers
 
     function onChange(e: any, name: string) {
         if (e) {
             return setEnabled((state) => {
-                const result = [...state, name];
-                setValue(result);
-                return result;
-            });
+                const result = [...state, name]
+                setValue(result)
+                return result
+            })
         }
 
         setEnabled((state) => {
-            const result = state.filter((value) => value !== name);
-            setValue(result);
-            return result;
-        });
+            const result = state.filter((value) => value !== name)
+            setValue(result)
+            return result
+        })
     }
 
     return (
@@ -95,7 +95,7 @@ const AnswerSwitch = ({
                 ))}
             </div>
         </ControlSwitch>
-    );
-};
+    )
+}
 
-export default AnswerSwitch;
+export default AnswerSwitch

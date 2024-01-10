@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
 import {
     useAsyncDebounce,
     useExpanded,
@@ -9,8 +9,8 @@ import {
     useRowSelect,
     useSortBy,
     useTable,
-} from 'react-table';
-import { Button, CardBody, Col, Input, Row, Table } from 'reactstrap';
+} from 'react-table'
+import { Button, CardBody, Col, Input, Row, Table } from 'reactstrap'
 import {
     CompaniesGlobalFilter,
     ContactsGlobalFilter,
@@ -23,8 +23,8 @@ import {
     ProductsGlobalFilter,
     TaskListGlobalFilter,
     TicketsListGlobalFilter,
-} from '../../Components/Common/GlobalSearchFilter';
-import { DefaultColumnFilter } from './filters';
+} from '../../Components/Common/GlobalSearchFilter'
+import { DefaultColumnFilter } from './filters'
 
 // Define a default UI for filtering
 function GlobalFilter({
@@ -43,11 +43,11 @@ function GlobalFilter({
     isProductsFilter,
     isLeadsFilter,
 }) {
-    const count = preGlobalFilteredRows.length;
-    const [value, setValue] = React.useState(globalFilter);
+    const count = preGlobalFilteredRows.length
+    const [value, setValue] = React.useState(globalFilter)
     const onChange = useAsyncDebounce((value) => {
-        setGlobalFilter(value || undefined);
-    }, 200);
+        setGlobalFilter(value || undefined)
+    }, 200)
 
     return (
         <React.Fragment>
@@ -67,8 +67,8 @@ function GlobalFilter({
                             >
                                 <input
                                     onChange={(e) => {
-                                        setValue(e.target.value);
-                                        onChange(e.target.value);
+                                        setValue(e.target.value)
+                                        onChange(e.target.value)
                                     }}
                                     id="search-bar-0"
                                     type="text"
@@ -94,7 +94,7 @@ function GlobalFilter({
                 </form>
             </CardBody>
         </React.Fragment>
-    );
+    )
 }
 
 const TableContainer = ({
@@ -165,19 +165,19 @@ const TableContainer = ({
         useExpanded,
         usePagination,
         useRowSelect,
-    );
+    )
 
     const generateSortingIndicator = (column) => {
-        return column.isSorted ? (column.isSortedDesc ? ' ' : '') : '';
-    };
+        return column.isSorted ? (column.isSortedDesc ? ' ' : '') : ''
+    }
 
     const onChangeInSelect = (event) => {
-        setPageSize(Number(event.target.value));
-    };
+        setPageSize(Number(event.target.value))
+    }
     const onChangeInInput = (event) => {
-        const page = event.target.value ? Number(event.target.value) - 1 : 0;
-        gotoPage(page);
-    };
+        const page = event.target.value ? Number(event.target.value) - 1 : 0
+        gotoPage(page)
+    }
 
     return (
         <Fragment>
@@ -289,7 +289,7 @@ const TableContainer = ({
 
                     <tbody {...getTableBodyProps()}>
                         {page.map((row) => {
-                            prepareRow(row);
+                            prepareRow(row)
                             return (
                                 <Fragment key={row.getRowProps().key}>
                                     <tr>
@@ -301,11 +301,11 @@ const TableContainer = ({
                                                 >
                                                     {cell.render('Cell')}
                                                 </td>
-                                            );
+                                            )
                                         })}
                                     </tr>
                                 </Fragment>
-                            );
+                            )
                         })}
                     </tbody>
                 </Table>
@@ -353,11 +353,11 @@ const TableContainer = ({
                 </Col>
             </Row>
         </Fragment>
-    );
-};
+    )
+}
 
 TableContainer.propTypes = {
     preGlobalFilteredRows: PropTypes.any,
-};
+}
 
-export default TableContainer;
+export default TableContainer

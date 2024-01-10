@@ -1,23 +1,23 @@
-import { Combobox, Transition } from '@headlessui/react';
-import { Fragment, useEffect, useState } from 'react';
-import { FaArrowAltCircleDown, FaCheck } from 'react-icons/fa';
-import FieldControl from '../field-control/field-control';
+import { Combobox, Transition } from '@headlessui/react'
+import { Fragment, useEffect, useState } from 'react'
+import { FaArrowAltCircleDown, FaCheck } from 'react-icons/fa'
+import FieldControl from '../field-control/field-control'
 
-import { useFormikContext } from 'formik';
-import { InputControlProps } from '../field-control/types';
+import { useFormikContext } from 'formik'
+import { InputControlProps } from '../field-control/types'
 
-import cn from 'classnames';
+import cn from 'classnames'
 
 type Item = {
-    item: string[];
-};
+    item: string[]
+}
 
 type ComboBoxAutocompleteProps<T> = {
-    items?: string[];
-    option?: Item & T;
-    onChangeOption?: (item: Item & T) => void;
-    onChange?: (item: string) => void;
-} & InputControlProps;
+    items?: string[]
+    option?: Item & T
+    onChangeOption?: (item: Item & T) => void
+    onChange?: (item: string) => void
+} & InputControlProps
 
 const ComboBoxAutocomplete = <T,>({
     name,
@@ -27,24 +27,21 @@ const ComboBoxAutocomplete = <T,>({
     onChangeOption,
     ...rest
 }: ComboBoxAutocompleteProps<T>) => {
-    const [selected, setSelected] = useState<Item & T>(
-        option || ({} as Item & T),
-    );
-    const [query, setQuery] = useState('');
+    const [selected, setSelected] = useState<Item & T>(option || ({} as Item & T))
+    const [query, setQuery] = useState('')
 
-    const { setFieldValue, values } =
-        useFormikContext<{ [key in string]: any }>();
-    const queryValue = values[name];
+    const { setFieldValue, values } = useFormikContext<{ [key in string]: any }>()
+    const queryValue = values[name]
 
     useEffect(() => {
-        setQuery(queryValue);
-    }, [queryValue]);
+        setQuery(queryValue)
+    }, [queryValue])
 
     const onChangeValue = (item: Item & T) => {
-        onChangeOption?.(item);
-        setSelected(item);
-        setFieldValue(name, item);
-    };
+        onChangeOption?.(item)
+        setSelected(item)
+        setFieldValue(name, item)
+    }
 
     const filteredItems =
         query === '' || query === undefined || query === null
@@ -54,7 +51,7 @@ const ComboBoxAutocomplete = <T,>({
                       .toLowerCase()
                       .replace(/\s+/g, '')
                       .includes(query?.toLowerCase().replace(/\s+/g, '')),
-              );
+              )
 
     return (
         <Combobox value={selected} onChange={onChangeValue}>
@@ -109,8 +106,7 @@ const ComboBoxAutocomplete = <T,>({
                                         cn(
                                             'relative cursor-default select-none py-2 pl-10 pr-4 font-normal',
                                             {
-                                                'bg-primary-600 text-white':
-                                                    active,
+                                                'bg-primary-600 text-white': active,
                                                 'text-gray-900': !active,
                                             },
                                             'dark:text-gray-200 ',
@@ -119,7 +115,7 @@ const ComboBoxAutocomplete = <T,>({
                                     value={item}
                                     onClick={() => {
                                         if (typeof onChange === 'function') {
-                                            onChange(item);
+                                            onChange(item)
                                         }
                                     }}
                                 >
@@ -154,7 +150,7 @@ const ComboBoxAutocomplete = <T,>({
                 </Transition>
             </div>
         </Combobox>
-    );
-};
+    )
+}
 
-export default ComboBoxAutocomplete;
+export default ComboBoxAutocomplete

@@ -29,7 +29,7 @@ const LoaderError = () => {
                 </h4>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default LoaderError;
+export default LoaderError

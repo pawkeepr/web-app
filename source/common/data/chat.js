@@ -1,14 +1,14 @@
 // import images
-import avatar1 from '~/assets/images/users/avatar-1.jpg';
-import avatar2 from '~/assets/images/users/avatar-2.jpg';
-import avatar3 from '~/assets/images/users/avatar-3.jpg';
-import avatar4 from '~/assets/images/users/avatar-4.jpg';
-import avatar5 from '~/assets/images/users/avatar-5.jpg';
-import avatar6 from '~/assets/images/users/avatar-6.jpg';
-import avatar7 from '~/assets/images/users/avatar-7.jpg';
-import avatar10 from '~/assets/images/users/avatar-10.jpg';
+import avatar1 from '~/assets/images/users/avatar-1.jpg'
+import avatar2 from '~/assets/images/users/avatar-2.jpg'
+import avatar3 from '~/assets/images/users/avatar-3.jpg'
+import avatar4 from '~/assets/images/users/avatar-4.jpg'
+import avatar5 from '~/assets/images/users/avatar-5.jpg'
+import avatar6 from '~/assets/images/users/avatar-6.jpg'
+import avatar7 from '~/assets/images/users/avatar-7.jpg'
+import avatar10 from '~/assets/images/users/avatar-10.jpg'
 
-import userImage from '~/assets/images/users/multi-user.jpg';
+import userImage from '~/assets/images/users/multi-user.jpg'
 
 const direactContact = [
     {
@@ -104,7 +104,7 @@ const direactContact = [
         email: 'lisaparker@gmail.com',
         location: 'California, USA',
     },
-];
+]
 
 const channelsList = [
     {
@@ -134,7 +134,7 @@ const channelsList = [
         name: 'Reporting',
         image: userImage,
     },
-];
+]
 
 const messages = [
     {
@@ -155,8 +155,7 @@ const messages = [
         id: 3,
         roomId: 1,
         sender: 'Lisa Parker',
-        message:
-            'Yeah everything is fine. Our next meeting tomorrow at 10.00 AM',
+        message: 'Yeah everything is fine. Our next meeting tomorrow at 10.00 AM',
         createdAt: '09:10 am',
     },
     {
@@ -230,7 +229,7 @@ const messages = [
         message: 'Good morning 😊',
         createdAt: '09:07 am',
     },
-];
+]
 
 const attachements = [
     {
@@ -257,7 +256,7 @@ const attachements = [
         foldername: 'bg-pattern.png',
         foldersize: '1.1MB',
     },
-];
+]
 
 const chatContactData = [
     {
@@ -454,12 +453,6 @@ const chatContactData = [
             },
         ],
     },
-];
+]
 
-export {
-    direactContact,
-    channelsList,
-    messages,
-    attachements,
-    chatContactData,
-};
+export { direactContact, channelsList, messages, attachements, chatContactData }

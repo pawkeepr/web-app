@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import Slide from 'react-reveal/Slide';
-import Zoom from 'react-reveal/Zoom';
+import Slide from 'react-reveal/Slide'
+import Zoom from 'react-reveal/Zoom'
 
 // Import Images
 
-import HeaderTitle from '~/Components/atoms/header-title';
+import HeaderTitle from '~/Components/atoms/header-title'
 
 const Home = () => {
     return (
@@ -67,10 +67,7 @@ const Home = () => {
                     </Slide>
                 </div>
             </section>
-            <section
-                className="section pb-0 hero-section bg-primary"
-                id="hero3"
-            >
+            <section className="section pb-0 hero-section bg-primary" id="hero3">
                 <div className="bg-overlay bg-overlay-pattern" />
                 <div className="grid grid-cols-1 mt-5 md:mt-0 md:grid-cols-2 p-4">
                     <Slide left>
@@ -102,7 +99,7 @@ const Home = () => {
                 </div>
             </section>
         </>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home

@@ -8,9 +8,9 @@
  */
 export async function promiseErrorHandler(promise: any) {
     try {
-        const data = await promise;
-        return [null, data];
+        const data = await promise
+        return [null, data]
     } catch (error) {
-        return [error, null];
+        return [error, null]
     }
 }

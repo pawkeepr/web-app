@@ -1,14 +1,14 @@
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
-import { FieldArray, useFormikContext } from 'formik';
-import { useMemo } from 'react';
-import { OptionSelect } from '~/Components/molecules/field-control';
-import CardInputTreatment from '~/Components/organism/card-input-treatment';
-import { StepProps, Tabs } from '~/types/helpers';
+import { FieldArray, useFormikContext } from 'formik'
+import { useMemo } from 'react'
+import { OptionSelect } from '~/Components/molecules/field-control'
+import CardInputTreatment from '~/Components/organism/card-input-treatment'
+import { StepProps, Tabs } from '~/types/helpers'
 import {
     CtxStepTreatment,
     schemaStepTreatmentValidation,
-} from '../../../validations.yup';
+} from '../../../validations.yup'
 
 const items: OptionSelect[] = [
     {
@@ -35,7 +35,7 @@ const items: OptionSelect[] = [
         value: 'nutrition',
         label: 'Nutrição Alimentar',
     },
-];
+]
 
 const KeyTreatment = {
     activities_carry: 'Recomendações de atividades físicas',
@@ -44,14 +44,14 @@ const KeyTreatment = {
     vaccine: 'Vacina',
     exam: 'Exame',
     nutrition: 'Nutrição Alimentar',
-} as const;
+} as const
 
 const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
-    const { values } = useFormikContext<CtxStepTreatment>();
+    const { values } = useFormikContext<CtxStepTreatment>()
 
     const isValid = useMemo(() => {
-        return schemaStepTreatmentValidation.isValidSync(values.treatments);
-    }, [values]);
+        return schemaStepTreatmentValidation.isValidSync(values.treatments)
+    }, [values])
 
     return (
         <section className="card card-body shadow-lg">
@@ -104,12 +104,12 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                             items={items}
                             handleSubmit={async (data, formikHelpers) => {
                                 const { label, value } =
-                                    data.type_treatment as OptionSelect;
+                                    data.type_treatment as OptionSelect
                                 push({
                                     ...data,
                                     type_treatment: value,
-                                });
-                                formikHelpers.resetForm();
+                                })
+                                formikHelpers.resetForm()
                             }}
                         />
                     </>
@@ -121,7 +121,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     type="button"
                     label="Voltar"
                     onClick={() => {
-                        toggleTab((activeTab - 1) as Tabs);
+                        toggleTab((activeTab - 1) as Tabs)
                     }}
                 />
                 <BtnPrimary
@@ -129,12 +129,12 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     type="button"
                     label="Próximo"
                     onClick={() => {
-                        toggleTab((activeTab + 1) as Tabs);
+                        toggleTab((activeTab + 1) as Tabs)
                     }}
                 />
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default StepTreatment;
+export default StepTreatment

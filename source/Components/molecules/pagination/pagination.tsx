@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 const Pagination = () => {
     return (
@@ -55,7 +55,7 @@ const Pagination = () => {
                 </ul>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Pagination;
+export default Pagination

@@ -1,23 +1,23 @@
-import ImgGif1 from '~/assets/images/nft/gif/img-1.gif';
-import ImgGif3 from '~/assets/images/nft/gif/img-3.gif';
-import ImgGif4 from '~/assets/images/nft/gif/img-4.gif';
-import ImgGif5 from '~/assets/images/nft/gif/img-5.gif';
+import ImgGif1 from '~/assets/images/nft/gif/img-1.gif'
+import ImgGif3 from '~/assets/images/nft/gif/img-3.gif'
+import ImgGif4 from '~/assets/images/nft/gif/img-4.gif'
+import ImgGif5 from '~/assets/images/nft/gif/img-5.gif'
 // Import Images
-import Img1 from '~/assets/images/nft/img-01.jpg';
-import Img2 from '~/assets/images/nft/img-02.jpg';
-import Img3 from '~/assets/images/nft/img-03.jpg';
-import Img4 from '~/assets/images/nft/img-04.jpg';
-import Img5 from '~/assets/images/nft/img-05.jpg';
-import Img6 from '~/assets/images/nft/img-06.jpg';
-import bnbCoin from '~/assets/images/svg/crypto-icons/bnb.svg';
-import btcCoin from '~/assets/images/svg/crypto-icons/btc.svg';
-import dashCoin from '~/assets/images/svg/crypto-icons/dash.svg';
-import etcCoin from '~/assets/images/svg/crypto-icons/etc.svg';
-import ltcCoin from '~/assets/images/svg/crypto-icons/ltc.svg';
-import usdtCoin from '~/assets/images/svg/crypto-icons/usdt.svg';
-import avatar1 from '~/assets/images/users/avatar-1.jpg';
-import avatar8 from '~/assets/images/users/avatar-8.jpg';
-import avatar10 from '~/assets/images/users/avatar-10.jpg';
+import Img1 from '~/assets/images/nft/img-01.jpg'
+import Img2 from '~/assets/images/nft/img-02.jpg'
+import Img3 from '~/assets/images/nft/img-03.jpg'
+import Img4 from '~/assets/images/nft/img-04.jpg'
+import Img5 from '~/assets/images/nft/img-05.jpg'
+import Img6 from '~/assets/images/nft/img-06.jpg'
+import bnbCoin from '~/assets/images/svg/crypto-icons/bnb.svg'
+import btcCoin from '~/assets/images/svg/crypto-icons/btc.svg'
+import dashCoin from '~/assets/images/svg/crypto-icons/dash.svg'
+import etcCoin from '~/assets/images/svg/crypto-icons/etc.svg'
+import ltcCoin from '~/assets/images/svg/crypto-icons/ltc.svg'
+import usdtCoin from '~/assets/images/svg/crypto-icons/usdt.svg'
+import avatar1 from '~/assets/images/users/avatar-1.jpg'
+import avatar8 from '~/assets/images/users/avatar-8.jpg'
+import avatar10 from '~/assets/images/users/avatar-10.jpg'
 const topartWork = [
     {
         id: 1,
@@ -91,7 +91,7 @@ const topartWork = [
         chartsColor: '#f06548',
         series: [{ data: [45, 53, 24, 89, 63, 60, 36, 50] }],
     },
-];
+]
 const featuredNFTData = [
     {
         id: 1,
@@ -129,7 +129,7 @@ const featuredNFTData = [
         highest: '2.75ETH',
         price: '3.167 ETH',
     },
-];
+]
 const popularityData = [
     {
         id: 1,
@@ -180,7 +180,7 @@ const popularityData = [
         username: '@timothy',
         price: '349.08 ETH',
     },
-];
+]
 const recentNFTsData = [
     {
         id: 1,
@@ -250,7 +250,7 @@ const recentNFTsData = [
         creators: '7.2K',
         items: '25.0K',
     },
-];
+]
 const topCollectionData = [
     {
         id: 1,
@@ -276,7 +276,7 @@ const topCollectionData = [
         category: 'Collectibles',
         items: '3468+',
     },
-];
+]
 const popularCreatorsData = [
     {
         id: 1,
@@ -302,7 +302,7 @@ const popularCreatorsData = [
         author: 'Glen Matney',
         price: '49,031 ETH',
     },
-];
+]
 
 const allMarketplaceData = [
     {
@@ -317,7 +317,7 @@ const allMarketplaceData = [
         name: 'Creators',
         data: [95, 35, 20, 130, 64, 22, 43, 45, 31],
     },
-];
+]
 
 const monthMarketplaceData = [
     {
@@ -332,7 +332,7 @@ const monthMarketplaceData = [
         name: 'Creators',
         data: [55, 55, 30, 150, 84, 52, 53, 65, 51],
     },
-];
+]
 
 const halfyearMarketplaceData = [
     {
@@ -347,7 +347,7 @@ const halfyearMarketplaceData = [
         name: 'Creators',
         data: [125, 95, 60, 150, 74, 32, 63, 65, 71],
     },
-];
+]
 
 const yearMarketplaceData = [
     {
@@ -362,7 +362,7 @@ const yearMarketplaceData = [
         name: 'Creators',
         data: [145, 75, 60, 150, 74, 52, 63, 65, 61],
     },
-];
+]
 
 export {
     topartWork,
@@ -375,4 +375,4 @@ export {
     monthMarketplaceData,
     halfyearMarketplaceData,
     yearMarketplaceData,
-};
+}

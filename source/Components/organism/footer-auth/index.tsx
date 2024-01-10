@@ -1,3 +1,3 @@
-import FooterAuth from './footer-auth';
+import FooterAuth from './footer-auth'
 
-export default FooterAuth;
+export default FooterAuth

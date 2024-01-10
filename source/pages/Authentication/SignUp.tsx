@@ -1,30 +1,30 @@
-'use client';
+'use client'
 
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 
 //formik
-import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
+import { Form, Formik } from 'formik'
+import * as Yup from 'yup'
 
-import validateEmail from '~/validations/email';
-import validatePassword from '~/validations/password';
+import validateEmail from '~/validations/email'
+import validatePassword from '~/validations/password'
 
-import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { BtnLink, BtnPrimary } from '~/Components/atoms/btn';
-import FieldCheckbox from '~/Components/molecules/field-checkbox';
-import FieldControl from '~/Components/molecules/field-control';
-import FieldPassword from '~/Components/molecules/field-password';
-import PasswordRules from '~/Components/molecules/password-rules';
-import LOADING from '~/constants/loading';
-import { useAppDispatch, useAppSelector } from '~/store/hooks';
+import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'
+import FieldCheckbox from '~/Components/molecules/field-checkbox'
+import FieldControl from '~/Components/molecules/field-control'
+import FieldPassword from '~/Components/molecules/field-password'
+import PasswordRules from '~/Components/molecules/password-rules'
+import LOADING from '~/constants/loading'
+import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import {
     registerUser,
     resetRegisterFlag,
-} from '~/store/slices/auth/register/actions';
-import { AccountSignUp } from '~/store/slices/auth/register/types';
-import AuthLayout from '../_layouts/auth/auth_layout';
+} from '~/store/slices/auth/register/actions'
+import { AccountSignUp } from '~/store/slices/auth/register/types'
+import AuthLayout from '../_layouts/auth/auth_layout'
 
 const validationSchema = Yup.object({
     email: validateEmail,
@@ -39,7 +39,7 @@ const validationSchema = Yup.object({
                     'passwords-match',
                     'As senhas não conferem',
                     (value) => password === value,
-                );
+                )
         }),
     termsOfUse: Yup.boolean()
         .oneOf([true], 'Você deve aceitar os termos de uso')
@@ -49,7 +49,7 @@ const validationSchema = Yup.object({
         .required(),
     //person: validatePerson,
     //address: validateAddress,
-});
+})
 
 const initialValues: AccountSignUp = {
     email: '',
@@ -57,23 +57,23 @@ const initialValues: AccountSignUp = {
     passwordConfirm: '',
     termsOfUse: false,
     policyPrivacy: false,
-};
+}
 
 const CoverSignUp = () => {
-    const dispatch = useAppDispatch();
-    const router = useRouter();
-    const isLoading = useAppSelector((state) => state.Login.isLoading);
+    const dispatch = useAppDispatch()
+    const router = useRouter()
+    const isLoading = useAppSelector((state) => state.Login.isLoading)
     const onSubmit = async (values: AccountSignUp) => {
-        dispatch(registerUser(values));
-        router.push('/confirm-account');
-    };
+        dispatch(registerUser(values))
+        router.push('/confirm-account')
+    }
 
     useEffect(() => {
         return () => {
-            dispatch(resetRegisterFlag());
-        };
+            dispatch(resetRegisterFlag())
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [])
 
     return (
         <AuthLayout
@@ -181,11 +181,7 @@ const CoverSignUp = () => {
             </Formik>
             <div className="mobile:hidden w-full flex flex-col justify-center items-center !h-fit">
                 <p className="text-xs">Você já tem uma conta ?</p>
-                <BtnLink
-                    className="p-0 h-fit"
-                    href="/sign-in"
-                    message="Entrar"
-                />
+                <BtnLink className="p-0 h-fit" href="/sign-in" message="Entrar" />
             </div>
             <BtnLink
                 message="Voltar"
@@ -195,7 +191,7 @@ const CoverSignUp = () => {
                 <ArrowLeftCircleIcon />
             </BtnLink>
         </AuthLayout>
-    );
-};
+    )
+}
 
-export default CoverSignUp;
+export default CoverSignUp

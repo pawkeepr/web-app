@@ -1,116 +1,116 @@
-import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 
 const NavData = () => {
-    const history = useRouter();
+    const history = useRouter()
     //state data
-    const [isDashboard, setIsDashboard] = useState(false);
-    const [isApps, setIsApps] = useState(false);
-    const [isAuth, setIsAuth] = useState(false);
-    const [isPages, setIsPages] = useState(false);
-    const [isBaseUi, setIsBaseUi] = useState(false);
-    const [isAdvanceUi, setIsAdvanceUi] = useState(false);
-    const [isForms, setIsForms] = useState(false);
-    const [isTables, setIsTables] = useState(false);
-    const [isCharts, setIsCharts] = useState(false);
-    const [isIcons, setIsIcons] = useState(false);
-    const [isMaps, setIsMaps] = useState(false);
-    const [isMultiLevel, setIsMultiLevel] = useState(false);
+    const [isDashboard, setIsDashboard] = useState(false)
+    const [isApps, setIsApps] = useState(false)
+    const [isAuth, setIsAuth] = useState(false)
+    const [isPages, setIsPages] = useState(false)
+    const [isBaseUi, setIsBaseUi] = useState(false)
+    const [isAdvanceUi, setIsAdvanceUi] = useState(false)
+    const [isForms, setIsForms] = useState(false)
+    const [isTables, setIsTables] = useState(false)
+    const [isCharts, setIsCharts] = useState(false)
+    const [isIcons, setIsIcons] = useState(false)
+    const [isMaps, setIsMaps] = useState(false)
+    const [isMultiLevel, setIsMultiLevel] = useState(false)
 
     // Apps
-    const [isEmail, setEmail] = useState(false);
-    const [isSubEmail, setSubEmail] = useState(false);
-    const [isEcommerce, setIsEcommerce] = useState(false);
-    const [isProjects, setIsProjects] = useState(false);
-    const [isTasks, setIsTasks] = useState(false);
-    const [isCRM, setIsCRM] = useState(false);
-    const [isCrypto, setIsCrypto] = useState(false);
-    const [isInvoices, setIsInvoices] = useState(false);
-    const [isSupportTickets, setIsSupportTickets] = useState(false);
-    const [isNFTMarketplace, setIsNFTMarketplace] = useState(false);
-    const [isLanding, setIsLanding] = useState(false);
+    const [isEmail, setEmail] = useState(false)
+    const [isSubEmail, setSubEmail] = useState(false)
+    const [isEcommerce, setIsEcommerce] = useState(false)
+    const [isProjects, setIsProjects] = useState(false)
+    const [isTasks, setIsTasks] = useState(false)
+    const [isCRM, setIsCRM] = useState(false)
+    const [isCrypto, setIsCrypto] = useState(false)
+    const [isInvoices, setIsInvoices] = useState(false)
+    const [isSupportTickets, setIsSupportTickets] = useState(false)
+    const [isNFTMarketplace, setIsNFTMarketplace] = useState(false)
+    const [isLanding, setIsLanding] = useState(false)
 
     // Authentication
-    const [isSignIn, setIsSignIn] = useState(false);
-    const [isSignUp, setIsSignUp] = useState(false);
-    const [isPasswordReset, setIsPasswordReset] = useState(false);
-    const [isPasswordCreate, setIsPasswordCreate] = useState(false);
-    const [isLockScreen, setIsLockScreen] = useState(false);
-    const [isLogout, setIsLogout] = useState(false);
-    const [isSuccessMessage, setIsSuccessMessage] = useState(false);
-    const [isVerification, setIsVerification] = useState(false);
-    const [isError, setIsError] = useState(false);
+    const [isSignIn, setIsSignIn] = useState(false)
+    const [isSignUp, setIsSignUp] = useState(false)
+    const [isPasswordReset, setIsPasswordReset] = useState(false)
+    const [isPasswordCreate, setIsPasswordCreate] = useState(false)
+    const [isLockScreen, setIsLockScreen] = useState(false)
+    const [isLogout, setIsLogout] = useState(false)
+    const [isSuccessMessage, setIsSuccessMessage] = useState(false)
+    const [isVerification, setIsVerification] = useState(false)
+    const [isError, setIsError] = useState(false)
 
     // Pages
-    const [isProfile, setIsProfile] = useState(false);
+    const [isProfile, setIsProfile] = useState(false)
 
     // Charts
-    const [isApex, setIsApex] = useState(false);
+    const [isApex, setIsApex] = useState(false)
 
     // Multi Level
-    const [isLevel1, setIsLevel1] = useState(false);
-    const [isLevel2, setIsLevel2] = useState(false);
+    const [isLevel1, setIsLevel1] = useState(false)
+    const [isLevel2, setIsLevel2] = useState(false)
 
-    const [iscurrentState, setIscurrentState] = useState('Dashboard');
+    const [iscurrentState, setIscurrentState] = useState('Dashboard')
 
     function updateIconSidebar(e) {
         if (e && e.target && e.target.getAttribute('subitems')) {
-            const ul = document.getElementById('two-column-menu');
-            const iconItems = ul.querySelectorAll('.nav-icon.active');
-            const activeIconItems = [...iconItems];
+            const ul = document.getElementById('two-column-menu')
+            const iconItems = ul.querySelectorAll('.nav-icon.active')
+            const activeIconItems = [...iconItems]
             activeIconItems.forEach((item) => {
-                item.classList.remove('active');
-                var id = item.getAttribute('subitems');
+                item.classList.remove('active')
+                var id = item.getAttribute('subitems')
                 if (document.getElementById(id))
-                    document.getElementById(id).classList.remove('show');
-            });
+                    document.getElementById(id).classList.remove('show')
+            })
         }
     }
 
     useEffect(() => {
-        document.body.classList.remove('twocolumn-panel');
+        document.body.classList.remove('twocolumn-panel')
         if (iscurrentState !== 'Dashboard') {
-            setIsDashboard(false);
+            setIsDashboard(false)
         }
         if (iscurrentState !== 'Apps') {
-            setIsApps(false);
+            setIsApps(false)
         }
         if (iscurrentState !== 'Auth') {
-            setIsAuth(false);
+            setIsAuth(false)
         }
         if (iscurrentState !== 'Pages') {
-            setIsPages(false);
+            setIsPages(false)
         }
         if (iscurrentState !== 'BaseUi') {
-            setIsBaseUi(false);
+            setIsBaseUi(false)
         }
         if (iscurrentState !== 'AdvanceUi') {
-            setIsAdvanceUi(false);
+            setIsAdvanceUi(false)
         }
         if (iscurrentState !== 'Forms') {
-            setIsForms(false);
+            setIsForms(false)
         }
         if (iscurrentState !== 'Tables') {
-            setIsTables(false);
+            setIsTables(false)
         }
         if (iscurrentState !== 'Charts') {
-            setIsCharts(false);
+            setIsCharts(false)
         }
         if (iscurrentState !== 'Icons') {
-            setIsIcons(false);
+            setIsIcons(false)
         }
         if (iscurrentState !== 'Maps') {
-            setIsMaps(false);
+            setIsMaps(false)
         }
         if (iscurrentState !== 'MuliLevel') {
-            setIsMultiLevel(false);
+            setIsMultiLevel(false)
         }
         if (iscurrentState === 'Widgets') {
-            history.push('/widgets');
-            document.body.classList.add('twocolumn-panel');
+            history.push('/widgets')
+            document.body.classList.add('twocolumn-panel')
         }
         if (iscurrentState !== 'Landing') {
-            setIsLanding(false);
+            setIsLanding(false)
         }
     }, [
         history,
@@ -127,7 +127,7 @@ const NavData = () => {
         isIcons,
         isMaps,
         isMultiLevel,
-    ]);
+    ])
 
     const menuItems = [
         {
@@ -141,10 +141,10 @@ const NavData = () => {
             link: '/#',
             stateVariables: isDashboard,
             click: (e) => {
-                e.preventDefault();
-                setIsDashboard(!isDashboard);
-                setIscurrentState('Dashboard');
-                updateIconSidebar(e);
+                e.preventDefault()
+                setIsDashboard(!isDashboard)
+                setIscurrentState('Dashboard')
+                updateIconSidebar(e)
             },
             subItems: [
                 {
@@ -191,10 +191,10 @@ const NavData = () => {
             icon: 'ri-apps-2-line',
             link: '/#',
             click: (e) => {
-                e.preventDefault();
-                setIsApps(!isApps);
-                setIscurrentState('Apps');
-                updateIconSidebar(e);
+                e.preventDefault()
+                setIsApps(!isApps)
+                setIscurrentState('Apps')
+                updateIconSidebar(e)
             },
             stateVariables: isApps,
             subItems: [
@@ -217,8 +217,8 @@ const NavData = () => {
                     parentId: 'apps',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setEmail(!isEmail);
+                        e.preventDefault()
+                        setEmail(!isEmail)
                     },
                     stateVariables: isEmail,
                     childItems: [
@@ -236,8 +236,8 @@ const NavData = () => {
                             isChildItem: true,
                             stateVariables: isSubEmail,
                             click: (e) => {
-                                e.preventDefault();
-                                setSubEmail(!isSubEmail);
+                                e.preventDefault()
+                                setSubEmail(!isSubEmail)
                             },
                             childItems: [
                                 {
@@ -262,8 +262,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsEcommerce(!isEcommerce);
+                        e.preventDefault()
+                        setIsEcommerce(!isEcommerce)
                     },
                     parentId: 'apps',
                     stateVariables: isEcommerce,
@@ -336,8 +336,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsProjects(!isProjects);
+                        e.preventDefault()
+                        setIsProjects(!isProjects)
                     },
                     parentId: 'apps',
                     stateVariables: isProjects,
@@ -368,8 +368,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsTasks(!isTasks);
+                        e.preventDefault()
+                        setIsTasks(!isTasks)
                     },
                     parentId: 'apps',
                     stateVariables: isTasks,
@@ -394,8 +394,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsCRM(!isCRM);
+                        e.preventDefault()
+                        setIsCRM(!isCRM)
                     },
                     parentId: 'apps',
                     stateVariables: isCRM,
@@ -420,8 +420,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsCrypto(!isCrypto);
+                        e.preventDefault()
+                        setIsCrypto(!isCrypto)
                     },
                     parentId: 'apps',
                     stateVariables: isCrypto,
@@ -456,8 +456,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsInvoices(!isInvoices);
+                        e.preventDefault()
+                        setIsInvoices(!isInvoices)
                     },
                     parentId: 'apps',
                     stateVariables: isInvoices,
@@ -485,8 +485,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsSupportTickets(!isSupportTickets);
+                        e.preventDefault()
+                        setIsSupportTickets(!isSupportTickets)
                     },
                     parentId: 'apps',
                     stateVariables: isSupportTickets,
@@ -509,8 +509,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsNFTMarketplace(!isNFTMarketplace);
+                        e.preventDefault()
+                        setIsNFTMarketplace(!isNFTMarketplace)
                     },
                     parentId: 'apps',
                     stateVariables: isNFTMarketplace,
@@ -586,10 +586,10 @@ const NavData = () => {
             icon: 'ri-account-circle-line',
             link: '/#',
             click: (e) => {
-                e.preventDefault();
-                setIsAuth(!isAuth);
-                setIscurrentState('Auth');
-                updateIconSidebar(e);
+                e.preventDefault()
+                setIsAuth(!isAuth)
+                setIscurrentState('Auth')
+                updateIconSidebar(e)
             },
             stateVariables: isAuth,
             subItems: [
@@ -599,8 +599,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsSignIn(!isSignIn);
+                        e.preventDefault()
+                        setIsSignIn(!isSignIn)
                     },
                     parentId: 'authentication',
                     stateVariables: isSignIn,
@@ -615,8 +615,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsSignUp(!isSignUp);
+                        e.preventDefault()
+                        setIsSignUp(!isSignUp)
                     },
                     parentId: 'authentication',
                     stateVariables: isSignUp,
@@ -631,8 +631,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsPasswordReset(!isPasswordReset);
+                        e.preventDefault()
+                        setIsPasswordReset(!isPasswordReset)
                     },
                     parentId: 'authentication',
                     stateVariables: isPasswordReset,
@@ -655,8 +655,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsPasswordCreate(!isPasswordCreate);
+                        e.preventDefault()
+                        setIsPasswordCreate(!isPasswordCreate)
                     },
                     parentId: 'authentication',
                     stateVariables: isPasswordCreate,
@@ -679,8 +679,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsLockScreen(!isLockScreen);
+                        e.preventDefault()
+                        setIsLockScreen(!isLockScreen)
                     },
                     parentId: 'authentication',
                     stateVariables: isLockScreen,
@@ -703,8 +703,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsLogout(!isLogout);
+                        e.preventDefault()
+                        setIsLogout(!isLogout)
                     },
                     parentId: 'authentication',
                     stateVariables: isLogout,
@@ -719,8 +719,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsSuccessMessage(!isSuccessMessage);
+                        e.preventDefault()
+                        setIsSuccessMessage(!isSuccessMessage)
                     },
                     parentId: 'authentication',
                     stateVariables: isSuccessMessage,
@@ -743,8 +743,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsVerification(!isVerification);
+                        e.preventDefault()
+                        setIsVerification(!isVerification)
                     },
                     parentId: 'authentication',
                     stateVariables: isVerification,
@@ -759,8 +759,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsError(!isError);
+                        e.preventDefault()
+                        setIsError(!isError)
                     },
                     parentId: 'authentication',
                     stateVariables: isError,
@@ -780,10 +780,10 @@ const NavData = () => {
             icon: 'ri-pages-line',
             link: '/#',
             click: (e) => {
-                e.preventDefault();
-                setIsPages(!isPages);
-                setIscurrentState('Pages');
-                updateIconSidebar(e);
+                e.preventDefault()
+                setIsPages(!isPages)
+                setIscurrentState('Pages')
+                updateIconSidebar(e)
             },
             stateVariables: isPages,
             subItems: [
@@ -799,8 +799,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsProfile(!isProfile);
+                        e.preventDefault()
+                        setIsProfile(!isProfile)
                     },
                     parentId: 'pages',
                     stateVariables: isProfile,
@@ -882,10 +882,10 @@ const NavData = () => {
             link: '/#',
             stateVariables: isLanding,
             click: (e) => {
-                e.preventDefault();
-                setIsLanding(!isLanding);
-                setIscurrentState('Landing');
-                updateIconSidebar(e);
+                e.preventDefault()
+                setIsLanding(!isLanding)
+                setIscurrentState('Landing')
+                updateIconSidebar(e)
             },
             subItems: [
                 {
@@ -912,10 +912,10 @@ const NavData = () => {
             icon: 'ri-pencil-ruler-2-line',
             link: '/#',
             click: (e) => {
-                e.preventDefault();
-                setIsBaseUi(!isBaseUi);
-                setIscurrentState('BaseUi');
-                updateIconSidebar(e);
+                e.preventDefault()
+                setIsBaseUi(!isBaseUi)
+                setIscurrentState('BaseUi')
+                updateIconSidebar(e)
             },
             stateVariables: isBaseUi,
             subItems: [
@@ -1065,10 +1065,10 @@ const NavData = () => {
             icon: 'ri-stack-line',
             link: '/#',
             click: (e) => {
-                e.preventDefault();
-                setIsAdvanceUi(!isAdvanceUi);
-                setIscurrentState('AdvanceUi');
-                updateIconSidebar(e);
+                e.preventDefault()
+                setIsAdvanceUi(!isAdvanceUi)
+                setIscurrentState('AdvanceUi')
+                updateIconSidebar(e)
             },
             stateVariables: isAdvanceUi,
             subItems: [
@@ -1122,8 +1122,8 @@ const NavData = () => {
             icon: 'ri-honour-line',
             link: '/widgets',
             click: (e) => {
-                e.preventDefault();
-                setIscurrentState('Widgets');
+                e.preventDefault()
+                setIscurrentState('Widgets')
             },
         },
         {
@@ -1132,10 +1132,10 @@ const NavData = () => {
             icon: 'ri-file-list-3-line',
             link: '/#',
             click: (e) => {
-                e.preventDefault();
-                setIsForms(!isForms);
-                setIscurrentState('Forms');
-                updateIconSidebar(e);
+                e.preventDefault()
+                setIsForms(!isForms)
+                setIscurrentState('Forms')
+                updateIconSidebar(e)
             },
             stateVariables: isForms,
             subItems: [
@@ -1225,10 +1225,10 @@ const NavData = () => {
             icon: 'ri-layout-grid-line',
             link: '/#',
             click: (e) => {
-                e.preventDefault();
-                setIsTables(!isTables);
-                setIscurrentState('Tables');
-                updateIconSidebar(e);
+                e.preventDefault()
+                setIsTables(!isTables)
+                setIscurrentState('Tables')
+                updateIconSidebar(e)
             },
             stateVariables: isTables,
             subItems: [
@@ -1264,10 +1264,10 @@ const NavData = () => {
             icon: 'ri-pie-chart-line',
             link: '/#',
             click: (e) => {
-                e.preventDefault();
-                setIsCharts(!isCharts);
-                setIscurrentState('Charts');
-                updateIconSidebar(e);
+                e.preventDefault()
+                setIsCharts(!isCharts)
+                setIscurrentState('Charts')
+                updateIconSidebar(e)
             },
             stateVariables: isCharts,
             subItems: [
@@ -1277,8 +1277,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsApex(!isApex);
+                        e.preventDefault()
+                        setIsApex(!isApex)
                     },
                     stateVariables: isApex,
                     childItems: [
@@ -1352,10 +1352,10 @@ const NavData = () => {
             icon: 'ri-compasses-2-line',
             link: '/#',
             click: (e) => {
-                e.preventDefault();
-                setIsIcons(!isIcons);
-                setIscurrentState('Icons');
-                updateIconSidebar(e);
+                e.preventDefault()
+                setIsIcons(!isIcons)
+                setIscurrentState('Icons')
+                updateIconSidebar(e)
             },
             stateVariables: isIcons,
             subItems: [
@@ -1405,10 +1405,10 @@ const NavData = () => {
             icon: 'ri-map-pin-line',
             link: '/#',
             click: (e) => {
-                e.preventDefault();
-                setIsMaps(!isMaps);
-                setIscurrentState('Maps');
-                updateIconSidebar(e);
+                e.preventDefault()
+                setIsMaps(!isMaps)
+                setIscurrentState('Maps')
+                updateIconSidebar(e)
             },
             stateVariables: isMaps,
             subItems: [
@@ -1438,10 +1438,10 @@ const NavData = () => {
             icon: 'ri-share-line',
             link: '/#',
             click: (e) => {
-                e.preventDefault();
-                setIsMultiLevel(!isMultiLevel);
-                setIscurrentState('MuliLevel');
-                updateIconSidebar(e);
+                e.preventDefault()
+                setIsMultiLevel(!isMultiLevel)
+                setIscurrentState('MuliLevel')
+                updateIconSidebar(e)
             },
             stateVariables: isMultiLevel,
             subItems: [
@@ -1457,8 +1457,8 @@ const NavData = () => {
                     link: '/#',
                     isChildItem: true,
                     click: (e) => {
-                        e.preventDefault();
-                        setIsLevel1(!isLevel1);
+                        e.preventDefault()
+                        setIsLevel1(!isLevel1)
                     },
                     stateVariables: isLevel1,
                     childItems: [
@@ -1469,8 +1469,8 @@ const NavData = () => {
                             link: '/#',
                             isChildItem: true,
                             click: (e) => {
-                                e.preventDefault();
-                                setIsLevel2(!isLevel2);
+                                e.preventDefault()
+                                setIsLevel2(!isLevel2)
                             },
                             stateVariables: isLevel2,
                             childItems: [
@@ -1482,7 +1482,7 @@ const NavData = () => {
                 },
             ],
         },
-    ];
-    return <React.Fragment>{menuItems}</React.Fragment>;
-};
-export default NavData;
+    ]
+    return <React.Fragment>{menuItems}</React.Fragment>
+}
+export default NavData

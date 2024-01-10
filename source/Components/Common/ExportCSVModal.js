@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { CSVLink } from 'react-csv';
-import { Modal, ModalBody, ModalHeader } from 'reactstrap';
+import PropTypes from 'prop-types'
+import React from 'react'
+import { CSVLink } from 'react-csv'
+import { Modal, ModalBody, ModalHeader } from 'reactstrap'
 
 const ExportCSVModal = ({ show, onCloseClick, data }) => {
     return (
@@ -43,13 +43,13 @@ const ExportCSVModal = ({ show, onCloseClick, data }) => {
                 </div>
             </ModalBody>
         </Modal>
-    );
-};
+    )
+}
 
 ExportCSVModal.propTypes = {
     onCloseClick: PropTypes.func,
     data: PropTypes.any,
     show: PropTypes.any,
-};
+}
 
-export default ExportCSVModal;
+export default ExportCSVModal

@@ -1,33 +1,33 @@
-import { Form, Formik } from 'formik';
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
-import Modal from '~/Components/organism/modal';
+import { Form, Formik } from 'formik'
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import Modal from '~/Components/organism/modal'
 
-import * as Yup from 'yup';
-import CardTutor from '~/Components/molecules/card-tutor';
-import FieldControl from '~/Components/molecules/field-control';
-import { usePlusModal } from '~/hooks/use-plus-modal';
-import useAppointmentRescheduled from '~/store/hooks/appointments/rescheduled';
-import { IAppointmentVet } from '~/store/slices/appointment-vet/types';
+import * as Yup from 'yup'
+import CardTutor from '~/Components/molecules/card-tutor'
+import FieldControl from '~/Components/molecules/field-control'
+import { usePlusModal } from '~/hooks/use-plus-modal'
+import useAppointmentRescheduled from '~/store/hooks/appointments/rescheduled'
+import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
 
 const validationSchema = Yup.object().shape({
     id: Yup.string().required('Campo obrigatório'),
     appointment_status: Yup.object().shape({
         reason_canceled: Yup.string().required('Campo obrigatório'),
     }),
-});
+})
 
-type onChangeOpen = (arg: boolean) => void;
+type onChangeOpen = (arg: boolean) => void
 
 type ChildrenProps = {
-    showModal: onChangeOpen;
-};
+    showModal: onChangeOpen
+}
 
 type ReScheduledModalProps = {
-    children?: (params: ChildrenProps) => React.ReactNode;
-    closeModal: () => void;
-    showModal: () => void;
-    isOpen?: boolean;
-};
+    children?: (params: ChildrenProps) => React.ReactNode
+    closeModal: () => void
+    showModal: () => void
+    isOpen?: boolean
+}
 
 const ReScheduledModal = ({
     children,
@@ -35,11 +35,11 @@ const ReScheduledModal = ({
     showModal,
     isOpen,
 }: ReScheduledModalProps) => {
-    const { item, close, keys } = usePlusModal();
+    const { item, close, keys } = usePlusModal()
 
     const { handleSubmit, isLoading } = useAppointmentRescheduled({
         handleClose: () => close(keys.Rescheduled),
-    });
+    })
 
     return (
         <>
@@ -83,10 +83,7 @@ const ReScheduledModal = ({
                                             <strong className="mr-2">
                                                 Tipo da Consulta:
                                             </strong>
-                                            {
-                                                item.dates_consults
-                                                    .type_consultation
-                                            }
+                                            {item.dates_consults.type_consultation}
                                         </p>
                                         <p className="text-gray-500 flex justify-between">
                                             <strong className="mr-2">
@@ -143,7 +140,7 @@ const ReScheduledModal = ({
                 </Formik>
             </Modal>
         </>
-    );
-};
+    )
+}
 
-export default ReScheduledModal;
+export default ReScheduledModal

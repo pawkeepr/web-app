@@ -1,12 +1,12 @@
-import { useField } from 'formik';
+import { useField } from 'formik'
 
-import type { InputControlProps } from './types';
+import type { InputControlProps } from './types'
 
-import cn from 'classnames';
-import { ChangeEvent } from 'react';
-import { twMerge } from 'tailwind-merge';
-import Input from '~/Components/atoms/input/input';
-import Label from '~/Components/atoms/label';
+import cn from 'classnames'
+import { ChangeEvent } from 'react'
+import { twMerge } from 'tailwind-merge'
+import Input from '~/Components/atoms/input/input'
+import Label from '~/Components/atoms/label'
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const FieldControl = <T, Ctx = any>({
@@ -25,15 +25,15 @@ const FieldControl = <T, Ctx = any>({
     onChange: onChangeDefault,
     ...props
 }: InputControlProps<T, Ctx>) => {
-    const [inputProps, meta] = useField(props.name as string);
-    const id = props.name || props.id;
+    const [inputProps, meta] = useField(props.name as string)
+    const id = props.name || props.id
 
-    const InputComponent = component as JSX.ElementType;
+    const InputComponent = component as JSX.ElementType
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        onChangeDefault?.(e);
-        inputProps.onChange(e);
-    };
+        onChangeDefault?.(e)
+        inputProps.onChange(e)
+    }
 
     return (
         <div className={twMerge('w-full', divClassName)}>
@@ -80,7 +80,7 @@ const FieldControl = <T, Ctx = any>({
                 </div>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default FieldControl;
+export default FieldControl

@@ -5,4 +5,4 @@ enum LOADING {
     FAILED = 4,
 }
 
-export default LOADING;
+export default LOADING

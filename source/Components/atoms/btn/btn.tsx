@@ -1,10 +1,10 @@
-import Link, { LinkProps } from 'next/link';
-import React, { ComponentProps } from 'react';
-import { VariantProps, tv } from 'tailwind-variants';
-import BtnAvatar from './btn-avatar';
+import Link, { LinkProps } from 'next/link'
+import React, { ComponentProps } from 'react'
+import { VariantProps, tv } from 'tailwind-variants'
+import BtnAvatar from './btn-avatar'
 
-import withControl from '~/Components/helpers/with-control';
-import withLoading from '~/Components/helpers/with-loading';
+import withControl from '~/Components/helpers/with-control'
+import withLoading from '~/Components/helpers/with-loading'
 
 export const button = tv({
     base: `
@@ -42,25 +42,25 @@ export const button = tv({
             true: 'text-secondary-500 dark:text-primary-600 hover:no-underline capitalize w-fit',
         },
     },
-});
+})
 
 const styledIcon = tv({
     base: `
         flex justify-center items-center
         w-5 h-5
     `,
-});
+})
 
 export type BtnProps = {
-    icon?: React.ReactNode | string;
-    label?: string;
-    iconStyle?: string;
-    children?: React.ReactNode;
-    isLoading?: boolean;
-    condition?: boolean;
+    icon?: React.ReactNode | string
+    label?: string
+    iconStyle?: string
+    children?: React.ReactNode
+    isLoading?: boolean
+    condition?: boolean
 } & ComponentProps<'button'> &
     VariantProps<typeof button> &
-    VariantProps<typeof styledIcon>;
+    VariantProps<typeof styledIcon>
 
 const Btn = ({
     label,
@@ -72,52 +72,48 @@ const Btn = ({
     ...props
 }: BtnProps) => {
     return (
-        <button
-            type={type}
-            className={button({ ...props, className })}
-            {...props}
-        >
+        <button type={type} className={button({ ...props, className })} {...props}>
             {icon && <span className={styledIcon({ ...props })}>{icon}</span>}
             {children && (
                 <span className={styledIcon({ ...props })}>{children}</span>
             )}
             <span>{label}</span>
         </button>
-    );
-};
+    )
+}
 
-const BtnCompose = withLoading(withControl(Btn));
+const BtnCompose = withLoading(withControl(Btn))
 
 const BtnPrimary = ({ label = 'Primário', ...props }: BtnProps) => {
-    return <BtnCompose primary label={label} {...props} />;
-};
+    return <BtnCompose primary label={label} {...props} />
+}
 
 const BtnSecondary = ({ label = 'Secundário', ...props }: BtnProps) => {
-    return <BtnCompose secondary label={label} {...props} />;
-};
+    return <BtnCompose secondary label={label} {...props} />
+}
 
 const BtnSuccess = ({ label = 'Sucesso', ...props }: BtnProps) => {
-    return <BtnCompose success label={label} {...props} />;
-};
+    return <BtnCompose success label={label} {...props} />
+}
 
 const BtnConfirm = ({ label = 'Confirmar', ...props }: BtnProps) => {
-    return <BtnCompose confirm label={label} {...props} />;
-};
+    return <BtnCompose confirm label={label} {...props} />
+}
 
 const BtnCancel = ({ label = 'Cancelar', ...props }: BtnProps) => {
-    return <BtnCompose cancel label={label} {...props} />;
-};
+    return <BtnCompose cancel label={label} {...props} />
+}
 
 const BtnLabel = ({ label = 'Texto', ...props }: BtnProps) => {
-    return <BtnCompose text label={label} {...props} />;
-};
+    return <BtnCompose text label={label} {...props} />
+}
 
 type BtnLinkProps = {
-    message?: string;
-    children?: React.ReactNode;
-    className?: string;
+    message?: string
+    children?: React.ReactNode
+    className?: string
 } & VariantProps<typeof button> &
-    LinkProps;
+    LinkProps
 
 const BtnLink = ({
     href,
@@ -138,8 +134,8 @@ const BtnLink = ({
             )}
             {message}
         </Link>
-    );
-};
+    )
+}
 
 export {
     Btn,
@@ -151,4 +147,4 @@ export {
     BtnPrimary,
     BtnSecondary,
     BtnSuccess,
-};
+}

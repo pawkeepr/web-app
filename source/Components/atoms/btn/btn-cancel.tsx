@@ -1,4 +1,4 @@
-import { BtnProps } from './types';
+import { BtnProps } from './types'
 
 const BtnCancel = ({
     onClick,
@@ -24,7 +24,7 @@ const BtnCancel = ({
         >
             {label}
         </button>
-    );
-};
+    )
+}
 
-export default BtnCancel;
+export default BtnCancel
