@@ -9,7 +9,20 @@
 		"rules": {
 			"recommended": true,
 			"correctness": {
-				"useExhaustiveDependencies": "off"
+				"recommended": true,
+				"useExhaustiveDependencies": "off",
+				"noUnusedVariables": "error"
+			},
+			"complexity": {
+				"recommended": true
+			},
+			"style": {
+				"recommended": true,
+				"noUselessElse": "warn",
+				"noVar": "error"
+			},
+			"nursery": {
+				"noUnusedImports": "error"
 			}
 		},
 
@@ -20,9 +33,9 @@
 			"enabled": true,
 			"indentStyle": "space",
 			"indentWidth": 4,
-			"lineWidth": 80,
+			"lineWidth": 100,
 			"lineEnding": "lf",
-			"semicolons": "always",
+			"semicolons": "asNeeded",
 			"quoteStyle": "single"
 		}
 	},
