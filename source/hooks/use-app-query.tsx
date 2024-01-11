@@ -1,5 +1,9 @@
-import { QueryKey, UseQueryOptions, useQuery } from '@tanstack/react-query'
-import { AxiosResponse } from 'axios'
+import {
+    useQuery,
+    type QueryKey,
+    type UseQueryOptions,
+} from '@tanstack/react-query'
+import type { AxiosResponse } from 'axios'
 
 export type Fn<T> = () => Promise<AxiosResponse<T>>
 
@@ -8,7 +12,7 @@ const useAppQuery = <T,>(
     fn: Fn<T>,
     options?: UseQueryOptions<T>,
 ) => {
-    const Fn = () => fn?.() as any
+    const Fn = () => fn?.()
 
     return useQuery<T>(
         key,
@@ -18,7 +22,6 @@ const useAppQuery = <T,>(
         },
         {
             ...options,
-            cacheTime: 60 * 1000 * 60 * 24,
         },
     )
 }

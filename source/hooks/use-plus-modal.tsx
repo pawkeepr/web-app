@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import CanceledScheduledModal from '~/Components/modals/canceled-scheduled-modal'
 import ConfirmedScheduledModal from '~/Components/modals/confirmed-scheduled-modal'
 import ReScheduledModal from '~/Components/modals/re-scheduled-modal'
-import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
+import type { VeterinaryConsultation } from '~/types/appointment'
 
 export enum ModalPlus {
     CanceledScheduled = 'CanceledScheduled',
@@ -16,8 +16,8 @@ interface PlusModalState {
     }
     open: (key: ModalPlus) => void
     close: (key: ModalPlus) => void
-    item: IAppointmentVet
-    setItem: (item: IAppointmentVet) => void
+    item: VeterinaryConsultation
+    setItem: (item: VeterinaryConsultation) => void
     keys: typeof ModalPlus
 }
 
@@ -25,8 +25,8 @@ export const usePlusModal = create<PlusModalState>((set) => ({
     isOpen: {},
     open: (key: ModalPlus) => set({ isOpen: { [key]: true } }),
     close: (key: ModalPlus) => set({ isOpen: { [key]: false } }),
-    item: {} as IAppointmentVet,
-    setItem: (item: IAppointmentVet) => set({ item }),
+    item: {} as VeterinaryConsultation,
+    setItem: (item: VeterinaryConsultation) => set({ item }),
     keys: ModalPlus,
 }))
 

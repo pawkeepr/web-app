@@ -4,7 +4,7 @@ import type { Breed } from '~/store/slices/pets/breedType'
 import { Gender, Species } from '~/store/slices/pets/speciesType'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import { calcAge } from '~/utils/calc-age'
-import { getNameTutor } from '../../../../../utils/get-name-tutors'
+import { getNameTutor } from '~/utils/get-name-tutors'
 
 type CtxCard = Pick<VeterinaryConsultation, 'tutor_pet_vet'>
 
@@ -22,6 +22,11 @@ const CardPet = () => {
     const gender = useMemo(
         () => Gender[values.tutor_pet_vet?.pet?.sex as Gender],
         [values.tutor_pet_vet?.pet?.sex],
+    )
+
+    const name_tutor = useMemo(
+        () => getNameTutor(values.tutor_pet_vet?.tutor),
+        [values.tutor_pet_vet?.tutor],
     )
 
     return (
@@ -43,7 +48,7 @@ const CardPet = () => {
             <div className="gap-2 flex-wrap flex mt-2">
                 <p className="text-gray-500">
                     <strong className="mr-2">Tutor:</strong>
-                    {getNameTutor(values.tutor_pet_vet?.tutor)}
+                    {name_tutor}
                 </p>
             </div>
         </section>

@@ -1,4 +1,5 @@
-import LOADING from '~/constants/loading'
+import type LOADING from '~/constants/loading'
+import type { DTOProfile } from '~/types/profile'
 
 export const name = 'Auth/Login'
 
@@ -32,7 +33,7 @@ interface UserAuthenticationData {
 }
 
 export type LoginState = {
-    user: IUser
+    user: DTOProfile | null
     isAuthenticated: boolean
     rememberMe: boolean
     token: string

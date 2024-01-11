@@ -51,25 +51,24 @@ const useAppStore = <T, G = unknown>({
         get?.bind(null) as Fn<T[]>,
         {
             ...options,
-            initialData: [],
             keepPreviousData: true,
             staleTime: TIME, // 1 min
             enabled: !!get && enabled,
-            // staleTime: TIME // 1 min
         },
     )
 
     const queryClient = useQueryClient()
 
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    const onError = (_err: unknown, _newData: unknown, context: any) => {
+    const onError = async (_err: unknown, _newData: unknown, context: any) => {
+        await errorToast('Houve um erro ', 'Tente novamente')
         queryClient.setQueryData(superKeys, context?.oldData)
     }
 
     const onSettled = async () => {
-        await queryClient.invalidateQueries({
+        await queryClient?.invalidateQueries({
             predicate: (query) => {
-                return query.queryKey.includes(name)
+                return query?.queryKey?.includes(name)
             },
         })
     }
