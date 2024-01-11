@@ -72,7 +72,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "^1.5.1",
 		"@faker-js/faker": "^8.3.1",
-		"@tanstack/react-query-devtools": "^5.17.9",
+		"@tanstack/react-query-devtools": "^4.36.1",
 		"@testing-library/jest-dom": "^6.2.0",
 		"@testing-library/react": "^14.1.2",
 		"@testing-library/react-hooks": "^8.0.1",
