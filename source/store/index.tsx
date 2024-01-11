@@ -44,7 +44,7 @@ const ProviderClient = ({ children }: ProviderClientProps) => {
                 <QueryClientProvider client={queryClient}>
                     {children}
                     {process.env.NODE_ENV !== 'production' && (
-                        <ReactQueryDevtools initialIsOpen={true} />
+                        <ReactQueryDevtools initialIsOpen />
                     )}
                 </QueryClientProvider>
             </PersistGate>
