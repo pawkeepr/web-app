@@ -9,8 +9,8 @@ import { useCallback, useMemo } from 'react'
 import * as Yup from 'yup'
 import type { StepProps } from '~/Components/modals/list-pets-modal/types'
 import BoxButtons from '~/Components/molecules/box-buttons'
+import FieldTextArea from '~/Components/molecules/field-text-area'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
-import type { IDateConsult } from '~/services/helpers'
 import useListAppointments from '~/store/hooks/list-appointments'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import type { IPetV2 } from '~/types/pet-v2'
@@ -36,6 +36,7 @@ const StepScheduledAppointment = ({
     const veterinary = useProfileVeterinary()
     const initialValues: VeterinaryConsultation = useMemo(
         () => ({
+            id: '',
             anamnesis: {
                 note: '',
                 questions_anamnesis: [],
@@ -54,10 +55,26 @@ const StepScheduledAppointment = ({
                 note: '',
                 questions_treatment: [],
             },
-            cpf_tutor: pet.cpf_tutor,
             appointment_details: {
-                appointment_geolocation: {},
-                appointment_signature: {},
+                appointment_geolocation: {
+                    latitude: '',
+                    longitude: '',
+                    timestamp: '',
+                    speed: '',
+                    altitude: '',
+                    date_geolocation: '',
+                    heading: '',
+                    precision: '',
+                },
+                appointment_signature: {
+                    browser_device: '',
+                    date_signature: '',
+                    ip_address: '',
+                    operational_system: '',
+                    signature_data: '',
+                    status_signature: '',
+                    type_signature: '',
+                },
                 payment: {
                     coin: '',
                     date_payment: '',
@@ -115,59 +132,46 @@ const StepScheduledAppointment = ({
                         <CardPet pet={values.tutor_pet_vet?.pet} />
                         <CardTutor
                             tutor={values.tutor_pet_vet?.tutor}
-                            document={values.cpf_tutor}
+                            document={values.tutor_pet_vet?.tutor?.cpf_tutor}
                         />
                     </div>
                     <section className="my-2">
                         <div className="flex justify-around gap-3">
                             <FieldControl
-                                ctx={{} as IDateConsult}
+                                ctx={values}
                                 label="Data da consulta"
                                 name="dates_consults.date_consultation"
                                 required
-                                className=" "
                                 placeholder="exemplo='05/12/2023'"
                                 type="date"
                             />
 
                             <FieldControl
-                                ctx={{} as IDateConsult}
+                                ctx={values}
                                 label="Hora da consulta"
                                 required
                                 name="dates_consults.time_consultation"
-                                className=" "
                                 placeholder="exemplo='14:00'"
                                 type="time"
                             />
                         </div>
-                        <div className="flex justify-around gap-3">
-                            <FieldControl
-                                ctx={{} as IDateConsult}
-                                label="Tipo da consulta"
-                                name="dates_consults.type_consultation"
-                                required
-                                className=" "
-                                placeholder="exemplo='exame'"
-                                type="text"
-                            />
-                            <FieldControl
-                                ctx={{} as IDateConsult}
-                                label="Razão da consulta"
-                                name="dates_consults.reason_consultation"
-                                required
-                                className=" "
-                                placeholder="exemplo='consulta de rotina'"
-                                type="text"
-                            />
-                        </div>
-                        {/* <FieldTextArea
-                            ctx={{} as IDateConsult}
-                            label="Orientações e Anotações"
+                        <FieldControl
+                            ctx={values}
+                            label="Tipo da consulta"
+                            name="dates_consults.type_consultation"
+                            required
+                            className="w-100"
+                            placeholder="exemplo='exame'"
+                            type="text"
+                        />
+                        <FieldTextArea
+                            ctx={values}
+                            label="Razão da consulta"
                             className="form-control"
                             component="textarea"
-                            name="dates_consults"
+                            name="dates_consults.reason_consultation"
                             type="text"
-                        /> */}
+                        />
                     </section>
 
                     <BoxButtons
