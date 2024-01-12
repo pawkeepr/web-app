@@ -1,21 +1,21 @@
-import '~/globals.scss';
-import '~/tailwind.css';
+import '~/globals.scss'
+import '~/tailwind.css'
 
-import Provider from '~/store';
+import Provider from '~/store'
 
-import type { AppProps } from 'next/app';
+import type { AppProps } from 'next/app'
 
-import { AuthProvider } from '~/contexts/auth-context';
-import LayoutProvider from '~/contexts/layout-context';
+import { AuthProvider } from '~/contexts/auth-context'
+import LayoutProvider from '~/contexts/layout-context'
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import '~/aws';
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import '~/aws'
 
-import { appWithTranslation } from 'next-i18next';
-import ErrorBoundary from '~/contexts/error-boundary';
+import { appWithTranslation } from 'next-i18next'
+import ErrorBoundary from '~/contexts/error-boundary'
 
-import VLibras from '@djpfs/react-vlibras';
+import VLibras from '@djpfs/react-vlibras'
 
 function App({ Component, pageProps }: AppProps) {
     return (
@@ -33,7 +33,7 @@ function App({ Component, pageProps }: AppProps) {
                 </AuthProvider>
             </Provider>
         </ErrorBoundary>
-    );
+    )
 }
 
-export default appWithTranslation(App);
+export default appWithTranslation(App)
