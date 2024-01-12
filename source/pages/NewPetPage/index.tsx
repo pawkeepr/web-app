@@ -7,10 +7,10 @@ import Tabs from './components/templates/vertical-tabs'
 
 import { BtnCancel } from '~/Components/atoms/btn'
 import ModalConfirm from '~/Components/modals/confirm-modal'
-import { Veterinary } from '~/entities/Veterinary'
+import type { Veterinary } from '~/entities/Veterinary'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
-import { IPet } from '~/types/pet'
-import { Address } from '~/validations/address'
+import type { IPet } from '~/types/pet'
+import type { Address } from '~/validations/address'
 
 export type InitialValues = Nullable<IPet>
 
@@ -106,8 +106,8 @@ const NewPetPage = ({ document }: PetPageProps) => {
             try {
                 const data = await handleSubmit(values)
                 if (data) router.push('/dashboard')
-            } catch (error) {
-                console.log(error)
+            } catch (_) {
+                // console.log(error)
             }
         },
         [handleSubmit],
