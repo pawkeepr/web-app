@@ -22,7 +22,8 @@ import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 import { BtnLink } from '~/Components/atoms/btn'
 
 import { layoutModeTypes } from '~/Components/constants/layout'
-import type { IProfile, Location } from '~/types/profile'
+import type { ActivateAccountVeterinary } from '~/types/activate-account-veterinary'
+import type { Location } from '~/types/profile'
 import StepActivationAddress from './components/organism/steps-activation/step-address'
 import StepActivationFinally from './components/organism/steps-activation/step-finally'
 import StepActivationPerson from './components/organism/steps-activation/step-person'
@@ -87,15 +88,16 @@ const ActivationAccount = () => {
     const onSubmit = async (values: ActivateAccount) => {
         const { list_specialty } = values
 
-        const profile: IProfile = {
+        const profile: ActivateAccountVeterinary = {
             user_information: {
+                cpf_cnpj: values?.cpf_cnpj,
                 address: { ...(values?.location as Location) },
                 first_name: values?.firstName,
                 last_name: values?.lastName,
                 contact: {
-                    email: values?.contact.email,
-                    phone: values?.contact.phone,
-                    whatsapp: values?.contact.whatsapp,
+                    email: values?.contact.email as string,
+                    phone: values?.contact.phone as string,
+                    whatsapp: values?.contact.whatsapp as string,
                     facebook: '',
                     instagram: '',
                     linkedIn: '',
