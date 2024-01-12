@@ -1,6 +1,9 @@
 import * as yup from 'yup'
-import { AppointmentDetails, VeterinaryConsultation } from '~/types/appointment'
-import { RecordsShapeYup } from '~/types/helpers'
+import type {
+    AppointmentDetails,
+    VeterinaryConsultation,
+} from '~/types/appointment'
+import type { RecordsShapeYup } from '~/types/helpers'
 
 export type CtxStepAnamnese = Pick<
     VeterinaryConsultation,
@@ -85,10 +88,6 @@ export const schemaStepAppointment = yup
     .object()
     .shape<RecordsShapeYup<VeterinaryConsultation>>({
         id: yup.string().optional(),
-        id_pet: yup.string().optional(),
-        cpf_tutor: yup.string().required(),
-        crmv_vet: yup.string().required(),
-        cpf_cnpj_vet: yup.string().required(),
         dates_consults: yup.object().optional(),
         tutor_pet_vet: schemaTutorPetVetValidation,
         details_pet_consultation: schemaValidationDetailsPetConsultation,
