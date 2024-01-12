@@ -34,9 +34,6 @@ const initialValues = (
         note: '',
         questions_anamnesis: [],
     },
-    cpf_cnpj_vet: profile.cpf_cnpj,
-    crmv_vet: profile.crmv,
-    cpf_tutor,
     dates_consults: {
         additional_remarks: '',
         date_consultation: '',
@@ -44,7 +41,6 @@ const initialValues = (
         time_consultation: '',
         type_consultation: '',
     },
-    id_pet: id_pet as string,
     treatments: {
         note: '',
         questions_treatment: [],
@@ -86,9 +82,19 @@ const initialValues = (
         },
     },
     tutor_pet_vet: {
-        pet: pet_information,
-        tutor: main_responsible_guardian,
-        veterinary: profile,
+        pet: {
+            ...pet_information,
+            id_pet: id_pet as string,
+        },
+        tutor: {
+            ...main_responsible_guardian,
+            cpf_tutor,
+        },
+        veterinary: {
+            ...profile,
+            cpf_cnpj: profile.cpf_cnpj,
+            crmv: profile.crmv,
+        },
     },
 })
 

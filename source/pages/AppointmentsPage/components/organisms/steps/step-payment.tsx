@@ -4,11 +4,11 @@ import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import CardTutor from '~/Components/molecules/card-tutor'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import FieldNumber from '~/Components/molecules/field-number/field-number'
-import { StepProps, Tabs } from '~/types/helpers'
+import type { StepProps, Tabs } from '~/types/helpers'
 
 import RadioGroup from '~/Components/molecules/radio-group'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { VeterinaryConsultation } from '~/types/appointment'
+import type { VeterinaryConsultation } from '~/types/appointment'
 
 type CtxStepPayment = Pick<VeterinaryConsultation, 'appointment_details'>
 
@@ -21,7 +21,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
         [values],
     )
 
-    const options = new Array(12).fill(0).map((item, index) => ({
+    const options = new Array(12).fill(0).map((_item, index) => ({
         value: index + 1,
         label: `${index + 1} Parcela${index + 1 > 1 ? 's' : ''}`,
         color: 'rgb(255 200 107);',
