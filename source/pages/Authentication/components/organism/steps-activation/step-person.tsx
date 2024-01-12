@@ -12,10 +12,10 @@ import FieldCrmv from '~/Components/molecules/field-crmv'
 import FieldDocument from '~/Components/molecules/field-document'
 import FieldPhone from '~/Components/molecules/field-phone'
 import useNextStep from '~/hooks/use-next-step'
-import { ActivateAccount } from '~/validations/activate'
-import { StepProps } from './types'
+import type { ActivateAccount } from '~/validations/activate'
+import type { StepProps } from './types'
 
-const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
+const StepSignUpPerson = ({ nextStep }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<ActivateAccount>()
 
     const requiredValid = useMemo((): boolean => {
@@ -39,6 +39,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
         <div className="container grid grid-cols-2 gap-1 mobile:grid-cols-1">
             <div className="col-span-2 mobile:col-span-2 grid grid-cols-2 gap-1">
                 <FieldControl
+                    ctx={values}
                     initialFocus
                     label="Nome"
                     name="firstName"
@@ -49,6 +50,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 />
 
                 <FieldControl
+                    ctx={values}
                     label="Sobrenome"
                     required
                     separator={''}
@@ -60,6 +62,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
             </div>
             <div className="col-span-1 mobile:col-span-2">
                 <FieldDocument
+                    ctx={values}
                     divClassName="col-span-2 mobile:col-span-2"
                     label="CPF/CNPJ"
                     name="cpf_cnpj"
@@ -70,6 +73,7 @@ const StepSignUpPerson = ({ nextStep, prevStep, ...rest }: StepProps) => {
             </div>
             <div className="col-span-1 mobile:col-span-2">
                 <FieldCrmv
+                    ctx={values}
                     label="CRMV"
                     name="crmv"
                     placeholder="Digite o seu CRMV"

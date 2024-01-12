@@ -1,20 +1,19 @@
-import { useFormikContext } from 'formik'
-
 import { useCallback, useMemo, useState } from 'react'
 
 import validateLocation from '~/validations/address'
 
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control/field-control'
-import { IAddress } from '~/helpers/fetch-address-by-cep'
+import type { IAddress } from '~/helpers/fetch-address-by-cep'
 import useFetchAddress from '~/hooks/use-fetch-address'
 
 import FieldMasked from '~/Components/molecules/field-masked'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import useNextStep from '~/hooks/use-next-step'
-import { ActivateAccount } from '~/validations/activate'
-import { StepProps } from './types'
+import type { ActivateAccount } from '~/validations/activate'
+import type { StepProps } from './types'
 
-const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
+const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
     const [disabledInputs, setDisabledInputs] = useState({
         state: false,
         city: false,
@@ -23,7 +22,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
         complement: false,
     })
 
-    const { values, setFieldValue } = useFormikContext<ActivateAccount>()
+    const { values, setFieldValue } = useFormikContextSafe<ActivateAccount>()
     const { zipCode } = values.location
 
     const updateAddressFields = useCallback(
@@ -57,11 +56,6 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
         zipCode,
     })
 
-    const onChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target
-        setFieldValue('location.number', value)
-    }
-
     const requiredValid = useMemo((): boolean => {
         const isValid =
             validateLocation.isValidSync(values?.location) && !cepInvalid
@@ -74,6 +68,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
     return (
         <div className="container grid grid-cols-2 mobile:grid-cols-1 gap-1">
             <FieldMasked
+                ctx={values}
                 label="CEP"
                 name="location.zipCode"
                 placeholder="Digite o CEP"
@@ -82,6 +77,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
             />
 
             <FieldControl
+                ctx={values}
                 className=" "
                 type="text"
                 label="Estado"
@@ -91,6 +87,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 required
             />
             <FieldControl
+                ctx={values}
                 type="text"
                 label="Cidade"
                 name="location.city"
@@ -99,6 +96,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 required
             />
             <FieldControl
+                ctx={values}
                 type="text"
                 label="Bairro"
                 name="location.neighborhood"
@@ -109,6 +107,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
             <div className="grid grid-cols-4 mobile:grid-cols-1 col-span-full w-full gap-1">
                 <FieldControl
+                    ctx={values}
                     divClassName="col-span-3"
                     label="Rua"
                     name="location.street"
@@ -120,6 +119,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
                 />
 
                 <FieldControl
+                    ctx={values}
                     divClassName="col-span-1"
                     label="N°"
                     name="location.number"
@@ -131,6 +131,7 @@ const StepSignUpAddress = ({ nextStep, prevStep, ...rest }: StepProps) => {
 
             <div className="col-span-full">
                 <FieldControl
+                    ctx={values}
                     type="text"
                     label="Complemento"
                     name="location.complement"

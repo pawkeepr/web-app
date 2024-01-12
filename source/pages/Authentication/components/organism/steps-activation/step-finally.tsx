@@ -3,9 +3,8 @@ import { twMerge } from 'tailwind-merge'
 import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn'
 import LOADING from '~/constants/loading'
 import { useAppSelector } from '~/store/hooks'
-import { Specialty } from '~/types/profile'
-import { ActivateAccount } from '~/validations/activate'
-import { StepProps } from './types'
+import type { ActivateAccount } from '~/validations/activate'
+import type { StepProps } from './types'
 
 const listItem = 'flex gap-1 font-semibold text-gray-500 p-1 text-center w-full'
 const strongText = 'text-gray-700 mr-2'
@@ -19,9 +18,8 @@ const Specialty = {
 
 type KeysSpecialty = keyof typeof Specialty
 
-const StepFinally = ({ prevStep, nextStep }: StepProps) => {
-    const { values, isValid, errors, handleSubmit } =
-        useFormikContext<ActivateAccount>()
+const StepFinally = ({ prevStep }: StepProps) => {
+    const { values, isValid, handleSubmit } = useFormikContext<ActivateAccount>()
 
     const isLoading = useAppSelector(
         (state) =>
