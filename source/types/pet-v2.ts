@@ -10,6 +10,7 @@ type GenericSelect = {
 export type On_Off = 'yes' | 'no'
 
 export interface PetData {
+    id_pet: string | null
     name_pet: string
     microchip: string | null
     identification_number: string | null
@@ -36,6 +37,7 @@ export type IHealthInsurance = {
 }
 
 export type ITutor = {
+    cpf_tutor: string | null
     first_name: string | null
     last_name: string | null
     name: string | null
