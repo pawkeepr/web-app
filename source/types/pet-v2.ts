@@ -2,7 +2,7 @@ import type { Breed } from '~/store/slices/pets/breedType'
 import type { Gender, Species } from '~/store/slices/pets/speciesType'
 import type { Contact, DTOProfile, Location } from './profile'
 
-type GenericSelect = {
+export type GenericSelect = {
     label: string
     value: string
 }
@@ -37,7 +37,7 @@ export type IHealthInsurance = {
 }
 
 export type ITutor = {
-    cpf_tutor: string | null
+    cpf_tutor: string
     first_name: string | null
     last_name: string | null
     name: string | null
@@ -58,7 +58,6 @@ export type IMainResponsibleGuardian = {
 
 export interface IPetV2 {
     id?: string | null
-    cpf_tutor: string
     pet_information: PetData
     main_responsible_guardian: IMainResponsibleGuardian
     secondary_responsible_tutor: ISecondaryTutor
