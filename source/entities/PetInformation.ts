@@ -1,8 +1,9 @@
-import { Breed } from '~/store/slices/pets/breedType'
-import { Gender, Species } from '~/store/slices/pets/speciesType'
-import { GenericSelect, On_Off, PetData } from '~/types/pet-v2'
+import type { Breed } from '~/store/slices/pets/breedType'
+import type { Gender, Species } from '~/store/slices/pets/speciesType'
+import type { GenericSelect, On_Off, PetData } from '~/types/pet-v2'
 
 export class PetInformation implements PetData {
+    id_pet: string
     name_pet: string
     microchip: string | null
     identification_number: string | null
@@ -21,6 +22,7 @@ export class PetInformation implements PetData {
     pedigree_registry: string | null
 
     constructor() {
+        this.id_pet = ''
         this.name_pet = ''
         this.microchip = ''
         this.identification_number = ''
@@ -121,8 +123,14 @@ export class PetInformation implements PetData {
         return this
     }
 
+    defineIdPet(idPet: string): PetInformation {
+        this.id_pet = idPet
+        return this
+    }
+
     static build(params: PetData): PetInformation {
         return new PetInformation()
+            .defineIdPet(params.id_pet || '')
             .defineBloodDonator(params.blood_donator || 'no')
             .defineBloodType(params.blood_type || 'unknown')
             .defineCastrated(params.castrated || 'no')
