@@ -1,13 +1,11 @@
 import type {
-    IGeolocationAppointment,
-    ISignatureAppointment,
-} from '~/store/slices/appointment-vet/types'
-import type {
     Anamnesis,
     AppointmentDetails,
     DateConsults,
     DetailsPetConsultation,
+    IGeolocationAppointment,
     IPayment,
+    ISignatureAppointment,
     Treatments,
     TutorPetVet,
     VeterinaryConsultation,
