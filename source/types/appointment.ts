@@ -16,6 +16,26 @@ export interface VeterinaryConsultation {
     appointment_details: AppointmentDetails
 }
 
+export interface ISignatureAppointment {
+    signature_data: string
+    date_signature: string
+    type_signature: string
+    status_signature: string
+    ip_address: string
+    browser_device: string
+    operational_system: string
+}
+
+export interface IGeolocationAppointment {
+    latitude: string
+    longitude: string
+    precision: string
+    altitude: string
+    speed: string
+    heading: string
+    date_geolocation: string
+}
+
 export interface DateConsults {
     date_consultation: string
     time_consultation: string
