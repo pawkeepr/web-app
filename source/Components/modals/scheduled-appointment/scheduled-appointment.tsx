@@ -78,7 +78,6 @@ const ModalListPets = ({ children, selectedTabInitial = 1 }: ModalConfirmProps) 
         () => ({
             id: '',
             name: '',
-            cpf_tutor: document,
             species: '',
             breed: '',
             ownerEmergencyContact: {
@@ -103,9 +102,9 @@ const ModalListPets = ({ children, selectedTabInitial = 1 }: ModalConfirmProps) 
                         : '',
             },
             castrated: 'no',
-            specie: 'cat',
-            race: 'Angora',
-            sex: 'female',
+            specie: 'unknown',
+            race: 'unknown',
+            sex: 'unknown',
             veterinary,
             date_birth: '',
             microchip: '',
