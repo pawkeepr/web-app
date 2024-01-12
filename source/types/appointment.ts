@@ -4,10 +4,10 @@ import type { DTOProfile } from './profile'
 
 export interface VeterinaryConsultation {
     id?: string | null
-    id_pet: string
-    cpf_tutor: string
-    crmv_vet: string
-    cpf_cnpj_vet: string
+    // id_pet: string
+    // cpf_tutor: string
+    // crmv_vet: string
+    // cpf_cnpj_vet: string
     dates_consults: DateConsults
     tutor_pet_vet: TutorPetVet
     details_pet_consultation: DetailsPetConsultation
