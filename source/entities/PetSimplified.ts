@@ -1,11 +1,11 @@
-import { IPet } from '~/types/pet'
-import {
+import type { IPet } from '~/types/pet'
+import type {
     IMainResponsibleGuardianSimplified,
     IPetV2Simplified,
     PetData,
     PetDataSimplified,
 } from '~/types/pet-v2'
-import { DTOProfile } from '~/types/profile'
+import type { DTOProfile } from '~/types/profile'
 import { Veterinary } from './Veterinary'
 
 export class PetSimplified implements IPetV2Simplified {
@@ -33,6 +33,7 @@ export class PetSimplified implements IPetV2Simplified {
             country: '',
             email: '',
             first_name: '',
+            cpf_cnpj: '',
             last_name: '',
             neighborhood: '',
             phone: '',
@@ -44,17 +45,32 @@ export class PetSimplified implements IPetV2Simplified {
         this.veterinary = {
             cpf_cnpj: '',
             crmv: '',
-            name_veterinary: '',
             specialty: '',
-            email: '',
-            phone: '',
-            whatsapp: '',
-            country: '',
-            state: '',
-            city: '',
-            neighborhood: '',
-            street: '',
+            name: '',
+            first_name: '',
+            last_name: '',
+            url_img: '',
             id: '',
+            contact: {
+                email: '',
+                facebook: '',
+                instagram: '',
+                linkedIn: '',
+                phone: '',
+                twitter: '',
+                whatsapp: '',
+                youtube: '',
+            },
+            address: {
+                city: '',
+                complement: '',
+                country: '',
+                neighborhood: '',
+                number: '',
+                state: '',
+                street: '',
+                zipCode: '',
+            },
         }
     }
 
@@ -90,8 +106,8 @@ export class PetSimplified implements IPetV2Simplified {
     static build(params: IPet): PetSimplified {
         return new PetSimplified()
             .defineID(params.id as string)
-            .defineCpfTutor(params.cpf_tutor)
             .definePetInformation({
+                id_pet: params.id as string,
                 blood_donator: params.blood_donator || 'no',
                 blood_type: params.bloodType || '',
                 color: params.color || '',
@@ -110,6 +126,7 @@ export class PetSimplified implements IPetV2Simplified {
                 identification_number: '',
             })
             .defineTutorInformation({
+                cpf_cnpj: params.ownerEmergencyContact?.cpf_cnpj,
                 city: params.ownerEmergencyContact?.address?.city || '',
                 country: params.ownerEmergencyContact?.address?.country || '',
                 neighborhood:
