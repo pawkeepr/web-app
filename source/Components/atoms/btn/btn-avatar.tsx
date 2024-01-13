@@ -1,6 +1,6 @@
 import { useField } from 'formik'
 import type { ImageProps, StaticImageData } from 'next/image'
-import { ChangeEvent, useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState, type ChangeEvent } from 'react'
 
 import dummyImg from '~/assets/images/users/user-dummy-img.jpg'
 import MyImage from '../my-image/my-image'
@@ -74,6 +74,7 @@ const BtnAvatar = ({
                     className={cn(`w-${size} h-${size}`, 'avatar-sm p-1 z-0', {
                         'cursor-pointer': !disabled,
                     })}
+                    onKeyUp={() => {}}
                     onClick={openImageInput}
                 >
                     <div className="avatar-title bg-light rounded-circle">
