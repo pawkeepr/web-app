@@ -29,6 +29,7 @@ type Stores<T, G> = {
     handleCloseModal?: () => void
     entity?: BuilderEntity
     options?: UseQueryOptions<T[]>
+    initialData?: T[]
 }
 
 const TIME = 1000 * 60 * 5 // 5 min
@@ -43,6 +44,7 @@ const useAppStore = <T, G = unknown>({
     handleCloseModal,
     enabled = true,
     name,
+    initialData,
 }: Stores<T, G>) => {
     const superKeys = ['active', ...keys]
 
@@ -141,7 +143,7 @@ const useAppStore = <T, G = unknown>({
 
     return {
         isLoading,
-        activeData: data,
+        activeData: data ?? initialData,
         error,
         addData,
         isError,

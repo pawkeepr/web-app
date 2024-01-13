@@ -7,9 +7,7 @@ import { useEffect, useState } from 'react'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import StepScheduledAll from '../steps/step-scheduled-all'
 import StepScheduledCanceled from '../steps/step-scheduled-canceled'
-import StepScheduledConfirmed from '../steps/step-scheduled-confirmed'
 import StepScheduledDone from '../steps/step-scheduled-done'
-import StepScheduledRescheduled from '../steps/step-scheduled-rescheduled'
 
 const Tabs = () => [
     {
@@ -19,21 +17,10 @@ const Tabs = () => [
         tab: <StepScheduledAll />,
     },
     {
-        title: 'Consultas Reagendadas',
-        href: '#rescheduled',
-        tab: <StepScheduledRescheduled />,
-    },
-    {
         id: 3,
         title: 'Consultas Canceladas',
         href: '#canceled',
         tab: <StepScheduledCanceled />,
-    },
-    {
-        id: 4,
-        title: 'Consultas Confirmadas',
-        href: '#confirmed',
-        tab: <StepScheduledConfirmed />,
     },
     {
         id: 5,
@@ -78,9 +65,9 @@ const HorizontalTabs = () => {
                     ))}
                 </Tab.List>
                 <Tab.Panels className="mt-2">
-                    {categories.map((item, idx) => (
+                    {categories.map((item) => (
                         <Tab.Panel
-                            key={idx}
+                            key={item.id}
                             className={cn(
                                 'rounded-xl bg-white p-3',
                                 'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
