@@ -1,4 +1,5 @@
 import ArrowLeftCircleIcon from '@heroicons/react/20/solid/ArrowLeftCircleIcon'
+import HistoricIcon from '@heroicons/react/24/solid/ArchiveBoxXMarkIcon'
 import Cog8ToothIcon from '@heroicons/react/24/solid/Cog8ToothIcon'
 import DashboardIcon from '@heroicons/react/24/solid/HomeIcon'
 import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
@@ -38,6 +39,11 @@ const items = [
             </div>
         ),
         href: '/dashboard/pets-and-tutors',
+    },
+    {
+        name: 'Histórico',
+        icon: <HistoricIcon className="w-5 h-5" />,
+        href: '/dashboard/historic',
     },
     {
         name: 'Configurações',
