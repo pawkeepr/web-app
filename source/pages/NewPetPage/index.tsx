@@ -10,7 +10,7 @@ import ModalConfirm from '~/Components/modals/confirm-modal'
 import type { Veterinary } from '~/entities/Veterinary'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import type { IPet } from '~/types/pet'
-import type { Address } from '~/validations/address'
+import type { Location } from '~/types/profile'
 
 export type InitialValues = Nullable<IPet>
 
@@ -21,7 +21,7 @@ type MakeInitialValuesProps = {
     email?: string
     whatsapp?: string
     veterinary?: Veterinary
-    address?: Address
+    address?: Location
 }
 type MakeInitialValues = (props: MakeInitialValuesProps) => InitialValues
 
@@ -49,7 +49,7 @@ export const makeInitialValues: MakeInitialValues = ({
     date_birth: null,
     phone_tutor: phone,
     ownerEmergencyContact: {
-        cpf_cnpj: '',
+        cpf_cnpj: cpf_tutor,
         email: email || '',
         phone: phone || '',
         whatsapp: whatsapp || phone || '',
@@ -97,7 +97,7 @@ const NewPetPage = ({ document }: PetPageProps) => {
             whatsapp: pets[0]?.main_responsible_guardian.contact
                 ?.whatsapp as string,
             veterinary,
-            address: pets[0]?.main_responsible_guardian.address as Address,
+            address: pets[0]?.main_responsible_guardian.address as Location,
         })
     }, [pets, document, veterinary]) as IPet
 
