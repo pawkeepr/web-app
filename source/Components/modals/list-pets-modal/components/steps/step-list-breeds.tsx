@@ -1,9 +1,9 @@
 import { startTransition, useEffect, useState } from 'react'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import type { Breed } from '~/store/slices/pets/breedType'
 import { species } from '~/store/slices/pets/speciesType'
-import { Breed } from '~/store/slices/pets/types'
-import { CtxSimplifiedPedFields, StepProps } from '../../types'
+import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
 import { option } from '../helpers'
 
 type Item = {
@@ -13,7 +13,7 @@ type Item = {
 
 const StepListBreeds = ({ nextStep, previousStep }: StepProps) => {
     const [breeds, setBreeds] = useState<Item[]>([])
-    const { values, setFieldValue } = useFormikContextSafe<CtxSimplifiedPedFields>()
+    const { values, setFieldValue } = useFormikContextSafe<CtxSimplifiedPeTFields>()
 
     const handleSelectBreed = (breed: Breed) => {
         setFieldValue('race', breed)
@@ -21,14 +21,13 @@ const StepListBreeds = ({ nextStep, previousStep }: StepProps) => {
     }
 
     useEffect(() => {
-        const specie = species.find(
-            (specie) => (specie.value as any) === values.specie,
-        )
+        const specie = species.find((specie) => specie.value === values.specie)
 
         if (!specie) return
 
         startTransition(() => {
-            setBreeds(specie.breedType)
+            const casted_breed = specie.breedType as unknown as Item[]
+            setBreeds(casted_breed)
         })
     }, [values.specie])
 
