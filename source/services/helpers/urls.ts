@@ -65,5 +65,5 @@ export const APPOINTMENT_CREATE_SCHEDULED_VET = () =>
 
 // Pets in Clinic
 
-export const PET_FETCH_ALL_CLINIC = () => '/api-appointment/fetch-all-pets-vet'
-export const TUTORS_FETCH_ALL_CLINIC = () => '/api-appointment/fetch-all-tutors-vet'
+export const PET_FETCH_ALL_CLINIC = () => '/api-user/fetch-all-pets-vet'
+export const TUTORS_FETCH_ALL_CLINIC = () => '/api-user/fetch-all-tutors-vet'
