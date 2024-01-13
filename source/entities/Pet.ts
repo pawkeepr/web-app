@@ -48,7 +48,7 @@ export class Pet implements IPetV2 {
             validity: null,
         }
         this.main_responsible_guardian = {
-            cpf_tutor: '',
+            cpf_cnpj: '',
             address: {
                 city: '',
                 complement: '',
@@ -132,6 +132,13 @@ export class Pet implements IPetV2 {
             main_responsible_guardian?.last_name
         this.main_responsible_guardian.url_img = main_responsible_guardian?.url_img
 
+        if (!main_responsible_guardian?.cpf_cnpj?.trim()) {
+            throw new Error('CPF/CNPJ is required')
+        }
+
+        this.main_responsible_guardian.cpf_cnpj =
+            main_responsible_guardian?.cpf_cnpj
+
         return this
     }
 
@@ -214,7 +221,7 @@ export class Pet implements IPetV2 {
                 zipCode: params?.ownerEmergencyContact?.address?.zipCode || '',
             })
             .defineTutorInformation({
-                cpf_tutor: params?.ownerEmergencyContact?.cpf_cnpj,
+                cpf_cnpj: params?.ownerEmergencyContact?.cpf_cnpj,
                 name: params?.ownerEmergencyContact?.name,
                 first_name: params?.ownerEmergencyContact?.name,
                 last_name: params?.ownerEmergencyContact?.name,
