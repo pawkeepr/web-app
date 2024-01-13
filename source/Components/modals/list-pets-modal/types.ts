@@ -1,5 +1,5 @@
-import { IPet } from '~/types/pet'
-import { IPetV2 } from '~/types/pet-v2'
+import type { IPet } from '~/types/pet'
+import type { IPetV2 } from '~/types/pet-v2'
 
 export type onChangeOpen = (arg: boolean) => void
 
@@ -15,15 +15,9 @@ export type ModalConfirmProps = {
 }
 
 export type InitialValues = IPet
-export type CtxSimplifiedPedFields = Pick<
+export type CtxSimplifiedPeTFields = Pick<
     IPet,
-    | 'race'
-    | 'specie'
-    | 'sex'
-    | 'bloodType'
-    | 'cpf_tutor'
-    | 'name'
-    | 'ownerEmergencyContact'
+    'race' | 'specie' | 'sex' | 'bloodType' | 'name' | 'ownerEmergencyContact'
 >
 
 export type StepProps = {
