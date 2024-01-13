@@ -1,7 +1,7 @@
-import { GenericObject } from '~/store/helpers/types'
-import { IPaymentsAppointment } from '~/store/slices/appointment-vet/types'
+import type { GenericObject } from '~/store/helpers/types'
+import type { IPayment } from '~/types/appointment'
 
-type PaymentAppointmentProps = IPaymentsAppointment
+type PaymentAppointmentProps = IPayment
 
 class PaymentAppointment implements PaymentAppointmentProps {
     form_payment: string
