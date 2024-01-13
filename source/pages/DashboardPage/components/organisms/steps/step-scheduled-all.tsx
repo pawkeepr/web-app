@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
+import CardScheduled from '~/Components/organism/card-scheduled/card-scheduled'
 import useListAppointments from '~/store/hooks/list-appointments'
 import type { VeterinaryConsultation } from '~/types/appointment'
-import CardScheduled from '../organisms/card-scheduled'
 
 const StepAll = () => {
     const { activeData: scheduledData, isLoading: isLoadingScheduled } =
@@ -25,13 +25,30 @@ const StepAll = () => {
     if (isLoading) return <div>Loading...</div>
 
     return (
-        <div className="space-y-10 w-full">
-            {confirmedData?.map((appointment) => (
-                <CardScheduled key={appointment.id} appointment={appointment} />
-            ))}
-            {data?.map((appointment) => (
-                <CardScheduled key={appointment.id} appointment={appointment} />
-            ))}
+        <div className="w-full">
+            <section className="w-full space-y-10 mt-2">
+                <h1 className="text-2xl font-bold">Confirmadas</h1>
+                {confirmedData?.map((appointment) => (
+                    <CardScheduled key={appointment.id} appointment={appointment} />
+                ))}
+                {confirmedData?.length === 0 && (
+                    <div className="text-center">
+                        <span>Não há agendamentos confirmados</span>
+                    </div>
+                )}
+            </section>
+
+            <section className="w-full space-y-10 mt-4">
+                <h1 className="text-2xl font-bold">Agendadas</h1>
+                {data?.map((appointment) => (
+                    <CardScheduled key={appointment.id} appointment={appointment} />
+                ))}
+                {data?.length === 0 && (
+                    <div className="text-center">
+                        <span>Não há consultas agendadas</span>
+                    </div>
+                )}
+            </section>
         </div>
     )
 }
