@@ -12,7 +12,7 @@ export type CtxStepAnamnese = Pick<
 
 export type CtxStepTreatment = Pick<VeterinaryConsultation, 'treatments'>
 
-const schemaValidationDetailsPetConsultation = yup
+export const schemaValidationDetailsPetConsultation = yup
     .object()
     .shape<RecordsShapeYup<VeterinaryConsultation['details_pet_consultation']>>({
         age: yup.string().optional().nullable(),
@@ -49,7 +49,12 @@ export const schemaTutorPetVetValidation = yup
     .object()
     .shape<RecordsShapeYup<VeterinaryConsultation['tutor_pet_vet']>>({
         tutor: yup.object().required(),
-        pet: yup.object().required(),
+        pet: yup
+            .object()
+            .shape({
+                id_pet: yup.string().required(),
+            })
+            .required(),
         veterinary: yup.object().required(),
     })
 
