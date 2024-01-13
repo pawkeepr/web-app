@@ -69,10 +69,12 @@ export type PetDataSimplified = Pick<
     PetData,
     'name_pet' | 'specie' | 'race' | 'sex' | 'date_birth' | 'castrated'
 >
+
 export type IMainResponsibleGuardianSimplified = {
     first_name: string
     last_name: string
     email: string
+    cpf_cnpj: string
     phone: string
     whatsapp: string
     country: string
