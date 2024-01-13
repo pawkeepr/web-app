@@ -6,7 +6,6 @@ import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import { Appointments } from '~/entities/Appointments'
 
 import { useCallback, useMemo } from 'react'
-import * as Yup from 'yup'
 import type { StepProps } from '~/Components/modals/list-pets-modal/types'
 import BoxButtons from '~/Components/molecules/box-buttons'
 import FieldTextArea from '~/Components/molecules/field-text-area'
@@ -18,15 +17,7 @@ import { calcAge } from '~/utils/calc-age'
 import { geolocation } from '~/utils/geolocation'
 import CardPet from '../card-pet'
 import CardTutor from '../card-tutor'
-
-const validationSchema = Yup.object().shape({
-    dates_consults: Yup.object().shape({
-        date_consultation: Yup.string().required('Campo obrigatório'),
-        time_consultation: Yup.string().required('Campo obrigatório'),
-        type_consultation: Yup.string().required('Campo obrigatório'),
-        reason_consultation: Yup.string().required('Campo obrigatório'),
-    }),
-})
+import { schemaStepAppointmentSchedule } from './validation.yup'
 
 const StepScheduledAppointment = ({
     onChangeStep,
@@ -34,6 +25,7 @@ const StepScheduledAppointment = ({
     closeModal,
 }: StepProps & { pet: IPetV2 }) => {
     const veterinary = useProfileVeterinary()
+
     const initialValues: VeterinaryConsultation = useMemo(
         () => ({
             id: '',
@@ -41,8 +33,6 @@ const StepScheduledAppointment = ({
                 note: '',
                 questions_anamnesis: [],
             },
-            cpf_cnpj_vet: veterinary?.cpf_cnpj,
-            crmv_vet: veterinary?.crmv,
             dates_consults: {
                 date_consultation: '',
                 time_consultation: '',
@@ -50,7 +40,6 @@ const StepScheduledAppointment = ({
                 reason_consultation: '',
                 additional_remarks: '',
             },
-            id_pet: pet.id as string,
             treatments: {
                 note: '',
                 questions_treatment: [],
@@ -93,7 +82,10 @@ const StepScheduledAppointment = ({
                 type_weight: '',
             },
             tutor_pet_vet: {
-                pet: pet.pet_information,
+                pet: {
+                    ...pet?.pet_information,
+                    id_pet: pet.id as string,
+                },
                 tutor: pet.main_responsible_guardian,
                 veterinary,
             },
@@ -122,7 +114,7 @@ const StepScheduledAppointment = ({
     return (
         <Formik
             initialValues={initialValues}
-            validationSchema={validationSchema}
+            validationSchema={schemaStepAppointmentSchedule}
             onSubmit={onSubmit}
             enableReinitialize
         >
@@ -132,7 +124,7 @@ const StepScheduledAppointment = ({
                         <CardPet pet={values.tutor_pet_vet?.pet} />
                         <CardTutor
                             tutor={values.tutor_pet_vet?.tutor}
-                            document={values.tutor_pet_vet?.tutor?.cpf_tutor}
+                            document={values.tutor_pet_vet?.tutor?.cpf_cnpj}
                         />
                     </div>
                     <section className="my-2">
