@@ -5,7 +5,7 @@ import BoxButtons from '~/Components/molecules/box-buttons'
 import FieldControl from '~/Components/molecules/field-control'
 import FieldPhone from '~/Components/molecules/field-phone'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { CtxSimplifiedPedFields, StepProps } from '../../types'
+import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
 
 export const validationSchema = Yup.object().shape({
     ownerEmergencyContact: Yup.object().shape({
@@ -16,14 +16,14 @@ export const validationSchema = Yup.object().shape({
 })
 
 const StepTutor = ({ previousStep, isLoading }: StepProps) => {
-    const { isValid, handleSubmit, isSubmitting, values } =
-        useFormikContextSafe<CtxSimplifiedPedFields>()
+    const { isValid, handleSubmit, isSubmitting } =
+        useFormikContextSafe<CtxSimplifiedPeTFields>()
 
     return (
         <Form onSubmit={handleSubmit}>
             <div className="overflow-auto h-[calc(100vh-24rem)] flex flex-col w-full justify-center gap-2 px-2">
                 <FieldControl
-                    ctx={{} as CtxSimplifiedPedFields}
+                    ctx={{} as CtxSimplifiedPeTFields}
                     required
                     label="Nome do tutor"
                     name="ownerEmergencyContact.name"
@@ -31,7 +31,7 @@ const StepTutor = ({ previousStep, isLoading }: StepProps) => {
                 />
 
                 <FieldPhone
-                    ctx={{} as CtxSimplifiedPedFields}
+                    ctx={{} as CtxSimplifiedPeTFields}
                     required
                     label="Telefone do tutor"
                     name="ownerEmergencyContact.phone"
@@ -39,7 +39,7 @@ const StepTutor = ({ previousStep, isLoading }: StepProps) => {
                 />
 
                 <FieldControl
-                    ctx={{} as CtxSimplifiedPedFields}
+                    ctx={{} as CtxSimplifiedPeTFields}
                     required
                     label="Email do tutor"
                     name="ownerEmergencyContact.email"
