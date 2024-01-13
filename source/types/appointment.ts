@@ -1,5 +1,5 @@
 import type { OptionSelect } from '~/Components/molecules/field-control'
-import type { IMainResponsibleGuardian, PetData } from './pet-v2'
+import type { IMainResponsibleGuardian, On_Off, PetData } from './pet-v2'
 import type { DTOProfile } from './profile'
 
 export interface VeterinaryConsultation {
@@ -14,6 +14,16 @@ export interface VeterinaryConsultation {
     anamnesis: Anamnesis
     treatments: Treatments
     appointment_details: AppointmentDetails
+    appointment_status?: AppointmentStatus
+}
+
+export type AppointmentStatus = {
+    canceled: On_Off
+    confirmed: On_Off
+    done: On_Off
+    reason_canceled: string
+    rescheduled: On_Off
+    scheduled: On_Off
 }
 
 export interface ISignatureAppointment {
