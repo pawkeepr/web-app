@@ -27,8 +27,8 @@ export const updateProfileTutor = async (data: IProfile, user_id: string) =>
     api.post(urls.TUTOR_UPDATE_PROFILE(), data, { params: { user_id } })
 export const getTutorProfile = async () => api.get(urls.TUTOR_GET_PROFILE())
 
-export const getAllPets = async (cpf_tutor: string) =>
-    api.get(urls.PET_FETCH_ALL(), { params: { cpf_tutor } })
+export const getAllPets = async (cpf_cnpj: string) =>
+    api.get(urls.PET_FETCH_ALL(), { params: { cpf_cnpj } })
 export const getPet = async (cpf_tutor: string, id_pet: string) =>
     api.get(urls.PET_GET_PROFILE(), { params: { id_pet, cpf_tutor } })
 export const createPet = async (data: any) =>
