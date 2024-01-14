@@ -1,6 +1,8 @@
+import { useRef, type ForwardRefExoticComponent, type RefAttributes } from 'react'
 import { tv } from 'tailwind-variants'
 import MyImage from '~/Components/atoms/my-image'
 import ravena from '~/assets/images/ravena.jpeg'
+import type { IHookModal } from '~/hooks/use-modal'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import { getNameTutor } from '~/utils/get-name-tutors'
@@ -19,7 +21,7 @@ type CardScheduledProps = {
 
 const card = tv({
     base: `
-        bg-white relative flex flex-col cursor-pointer rounded-lg px-2 py-2 shadow-md focus:outline-none
+        bg-white relative flex flex-col rounded-lg px-2 py-2 shadow-md focus:outline-none
     `,
     variants: {
         checked: {
@@ -42,7 +44,7 @@ const card = tv({
             no: '',
         },
         isMobile: {
-            true: 'mobile:grid mobile:grid-cols-full',
+            true: 'hover:bg-gray-100 hover:bg-opacity-50 cursor-pointer',
             false: 'mobile:grid mobile:grid-cols-2',
         },
     },
@@ -53,6 +55,8 @@ const CardScheduled = ({
     appointment,
     boxButtons = (props) => <BoxButtons {...props} />,
 }: CardScheduledProps) => {
+    const ref = useRef<ForwardRefExoticComponent<RefAttributes<IHookModal>>>(null)
+
     const BoxButtons = boxButtons
     const name = getNameTutor(appointment?.tutor_pet_vet.tutor)
     const { isMobile } = useResizeMobile()
@@ -60,6 +64,13 @@ const CardScheduled = ({
     return (
         <div
             key={appointment?.id}
+            onClick={() => {
+                if (!isMobile) return
+                if (!ref?.current) return
+                const castRef = ref.current as unknown as IHookModal
+                castRef?.showModal?.()
+            }}
+            onKeyUp={() => {}}
             className={card({
                 checked,
                 isMobile,
@@ -162,7 +173,7 @@ const CardScheduled = ({
             </div>
 
             {BoxButtons && !isMobile && <BoxButtons item={appointment} />}
-            {isMobile && <ModalBoxButtons item={appointment} />}
+            {isMobile && <ModalBoxButtons item={appointment} ref={ref} />}
         </div>
     )
 }
