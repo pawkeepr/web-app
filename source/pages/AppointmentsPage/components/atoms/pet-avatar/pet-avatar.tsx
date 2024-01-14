@@ -1,14 +1,38 @@
 import { BtnAvatar } from '~/Components/atoms/btn'
+import type { AvatarImageProps } from '~/Components/atoms/btn/btn-avatar'
 
-type AvatarPetProps = {
+type TitleAvatarProps = {
     name: string
 }
 
-const AvatarPet = ({ name }: AvatarPetProps) => {
+type AvatarPetProps = Omit<AvatarImageProps, 'title'> & {
+    name: string
+    key?: string
+    alt?: string
+    title?: (props: TitleAvatarProps) => React.ReactNode
+}
+
+const AvatarPet = ({
+    name,
+    key = 'pet.avatar',
+    size = 40,
+    disabled = true,
+    alt = 'Avatar do Pet',
+    title = (props) => <h5 className="text-center text-muted">{props.name}</h5>,
+    ...rest
+}: AvatarPetProps) => {
+    const Title = title
+
     return (
         <div>
-            <BtnAvatar alt="Avatar do Pet" name="pet.avatar" disabled size={40} />
-            <h5 className="text-center text-muted">{name}</h5>
+            <BtnAvatar
+                alt={alt}
+                name={key}
+                disabled={disabled}
+                size={size}
+                {...rest}
+            />
+            <Title name={name} />
         </div>
     )
 }
