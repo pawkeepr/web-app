@@ -1,4 +1,3 @@
-import { useField } from 'formik'
 import type { ImageProps, StaticImageData } from 'next/image'
 import { useMemo, useRef, useState, type ChangeEvent } from 'react'
 
@@ -6,8 +5,9 @@ import dummyImg from '~/assets/images/users/user-dummy-img.jpg'
 import MyImage from '../my-image/my-image'
 
 import cn from 'classnames'
+import useFieldSafe from '~/hooks/use-field-safe'
 
-type AvatarImageProps = {
+export type AvatarImageProps = {
     src?: string | StaticImageData
     alt?: string
     name?: string
@@ -25,8 +25,7 @@ const BtnAvatar = ({
     const [image, setImage] = useState<File | null>(null)
 
     const sourceImage = src || dummyImg
-
-    const [field, meta, helpers] = useField(name)
+    const [field, _meta, helpers] = useFieldSafe<File>(name)
     const { onBlur, value } = field
     const { setValue } = helpers
 
@@ -79,7 +78,7 @@ const BtnAvatar = ({
                 >
                     <div className="avatar-title bg-light rounded-circle">
                         <MyImage
-                            src={img}
+                            src={img as string | StaticImageData}
                             alt={alt || 'dummyImg'}
                             id="customer-img"
                             fill
