@@ -4,12 +4,12 @@ import Cog8ToothIcon from '@heroicons/react/24/solid/Cog8ToothIcon'
 import DashboardIcon from '@heroicons/react/24/solid/HomeIcon'
 import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
 import Image from 'next/image'
-import { MdPerson, MdPets } from 'react-icons/md'
+import { MdPets } from 'react-icons/md'
 import { layoutModeTypes } from '~/Components/constants/layout'
 import useChangeLayoutMode from '~/hooks/use-change-layout-mode'
 
-import darkLogo from '../../../../public/logo-dark.png'
-import lightLogo from '../../../../public/logo-light.png'
+import darkLogo from '~/public/logo-dark.png'
+import lightLogo from '~/public/logo-light.png'
 
 import { button } from '~/Components/atoms/btn'
 
@@ -35,7 +35,6 @@ const items = [
         icon: (
             <div className="flex justify-start">
                 <MdPets className="w-5 h-5" />
-                <MdPerson className="w-5 h-5" />
             </div>
         ),
         href: '/dashboard/pets-and-tutors',
