@@ -8,8 +8,8 @@ import { MdPets } from 'react-icons/md'
 import { layoutModeTypes } from '~/Components/constants/layout'
 import useChangeLayoutMode from '~/hooks/use-change-layout-mode'
 
-import darkLogo from '~/public/logo-dark.png'
-import lightLogo from '~/public/logo-light.png'
+import darkLogo from '../../../../public/logo-dark.png'
+import lightLogo from '../../../../public/logo-light.png'
 
 import { button } from '~/Components/atoms/btn'
 
@@ -32,11 +32,7 @@ const items = [
     },
     {
         name: 'Pets / Tutores',
-        icon: (
-            <div className="flex justify-start">
-                <MdPets className="w-5 h-5" />
-            </div>
-        ),
+        icon: <MdPets className="w-5 h-5" />,
         href: '/dashboard/pets-and-tutors',
     },
     {
