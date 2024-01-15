@@ -62,7 +62,7 @@ const CardScheduled = ({
     const { isMobile } = useResizeMobile()
 
     return (
-        <div
+        <article
             key={appointment?.id}
             onClick={() => {
                 if (!isMobile) return
@@ -174,7 +174,7 @@ const CardScheduled = ({
 
             {BoxButtons && !isMobile && <BoxButtons item={appointment} />}
             {isMobile && <ModalBoxButtons item={appointment} ref={ref} />}
-        </div>
+        </article>
     )
 }
 
