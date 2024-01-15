@@ -155,7 +155,7 @@ const AppointmentsPage = ({
             initialValues={values}
             validationSchema={schemaStepAppointment}
         >
-            <DashboardLayouts title="Nova Consulta">
+            <DashboardLayouts title="Nova Consulta" searchBlock={false}>
                 <div className="gap-2 mt-2 mobile:py-6">
                     <ModalConfirm
                         title="Cancelar Consulta!"

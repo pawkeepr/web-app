@@ -1,11 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 import { Tab } from '@headlessui/react'
 import cn from 'classnames'
 import { useEffect, useState } from 'react'
-import FieldDocumentAppointment from '~/Components/molecules/field-document-appointment'
-import SearchInput from '~/Components/molecules/search-input'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import StepScheduledAll from '../steps/step-scheduled-all'
 
@@ -51,12 +48,6 @@ const HorizontalTabs = () => {
                     </Tab>
                 ))}
             </Tab.List>
-            <div className="mb-2 w-full mobile:my-2 flex h-fit justify-end items-center">
-                <div className="h-fit w-full">
-                    <SearchInput placeholder="Digite sua busca" />
-                </div>
-                <FieldDocumentAppointment />
-            </div>
             <Tab.Panels>
                 {categories.map((item) => (
                     <Tab.Panel
