@@ -1,11 +1,13 @@
-
 import DashboardPage from '~/pages/DashboardPage'
 
+import LayoutMain from '~/Layouts'
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
 
 const DashboardPageNext = () => {
     return (
-        <DashboardPage />
+        <LayoutMain>
+            <DashboardPage />
+        </LayoutMain>
     )
 }
 

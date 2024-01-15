@@ -1,8 +1,12 @@
-import { useRouter, useSearchParams } from 'next/navigation';
-import Page from '~/pages/PetsAndTutors';
+import LayoutMain from '~/Layouts'
+import Page from '~/pages/PetsAndTutors'
 
 const PetAndTutors = () => {
-    return <Page />;
-};
+    return (
+        <LayoutMain>
+            <Page />
+        </LayoutMain>
+    )
+}
 
-export default PetAndTutors;
+export default PetAndTutors

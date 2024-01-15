@@ -1,4 +1,5 @@
 import { useRouter, useSearchParams } from 'next/navigation'
+import LayoutMain from '~/Layouts'
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
 import Page from '~/pages/NewPetPage'
 
@@ -10,7 +11,9 @@ const PetsPage = () => {
     if (!document) return push('/dashboard')
 
     return (
-        <Page document={document} />
+        <LayoutMain>
+            <Page document={document} />
+        </LayoutMain>
     )
 }
 
