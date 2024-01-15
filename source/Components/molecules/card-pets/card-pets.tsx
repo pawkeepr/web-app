@@ -1,27 +1,30 @@
-import MyImage from '~/Components/atoms/my-image/my-image'
-import ravena from '~/assets/images/ravena.jpeg'
+import MyImage from "~/Components/atoms/my-image/my-image";
+import ravena from "~/assets/images/ravena.jpeg";
 
-import { RadioGroup } from '@headlessui/react'
-import ViewAppointment from '~/Components/modals/view-appointment/modal-view-appointment'
-import { IPetV2 } from '~/types/pet-v2'
+import { RadioGroup } from "@headlessui/react";
+import { useRouter } from "next/router";
+import { BtnPrimary } from "~/Components/atoms/btn";
+import ViewAppointment from "~/Components/modals/view-appointment/modal-view-appointment";
+import type { IPetV2 } from "~/types/pet-v2";
 
 type CardPetsProps = {
-    pet: IPetV2
-    checked: boolean
-}
+    pet: IPetV2;
+    checked: boolean;
+};
 
 const CardPets = ({ pet, checked }: CardPetsProps) => {
+    const { push } = useRouter();
     return (
         <div className="space-y-10 w-full">
             <RadioGroup.Option
                 key={pet?.name_pet || pet?.pet_data?.name_pet}
                 value={pet}
                 className={({ active }) =>
-                    `${active ? 'ring-2 ring-white/20 ring-offset-2' : ''}
+                    `${active ? "ring-2 ring-white/20 ring-offset-2" : ""}
                     ${
                         checked
-                            ? 'bg-primary-500 bg-opacity-60 text-white'
-                            : 'bg-white'
+                            ? "bg-primary-500 bg-opacity-60 text-white"
+                            : "bg-white"
                     }
                       relative flex cursor-pointer rounded-lg px-2 py-2 shadow-md focus:outline-none`
                 }
@@ -41,7 +44,7 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                 <RadioGroup.Label
                                     as="p"
                                     className={`font-medium  ${
-                                        checked ? 'text-white' : 'text-gray-900'
+                                        checked ? "text-white" : "text-gray-900"
                                     }`}
                                 >
                                     <h3 className="font-semibold mobile:hidden">
@@ -51,21 +54,24 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                 <RadioGroup.Description
                                     as="span"
                                     className={`inline ${
-                                        checked ? 'text-sky-100' : 'text-gray-500'
+                                        checked
+                                            ? "text-sky-100"
+                                            : "text-gray-500"
                                     }`}
                                 >
-                                    <div className="p-2 ">
+                                    <div className="p-2 max-w-40 ">
                                         <p className="text-gray-700">
-                                            <strong>Nome do pet:</strong>{' '}
+                                            <strong>Nome do pet:</strong>{" "}
                                             {pet?.pet_data?.name_pet ||
                                                 pet?.name_pet}
                                         </p>
                                         <p className="text-gray-700">
-                                            <strong>Especie:</strong>{' '}
-                                            {pet?.pet_data?.specie || pet?.specie}
+                                            <strong>Especie:</strong>{" "}
+                                            {pet?.pet_data?.specie ||
+                                                pet?.specie}
                                         </p>
                                         <p className="text-gray-700">
-                                            <strong>Sexo:</strong>{' '}
+                                            <strong>Sexo:</strong>{" "}
                                             {pet?.pet_data?.sex || pet?.sex}
                                         </p>
                                         <p className="text-gray-700 md:hidden">
@@ -78,7 +84,7 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                 <RadioGroup.Label
                                     as="p"
                                     className={`font-medium  ${
-                                        checked ? 'text-white' : 'text-gray-900'
+                                        checked ? "text-white" : "text-gray-900"
                                     }`}
                                 >
                                     <h3 className="font-semibold mobile:hidden">
@@ -88,7 +94,9 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                 <RadioGroup.Description
                                     as="span"
                                     className={`inline ${
-                                        checked ? 'text-sky-100' : 'text-gray-500'
+                                        checked
+                                            ? "text-sky-100"
+                                            : "text-gray-500"
                                     }`}
                                 >
                                     <div className="p-2">
@@ -113,10 +121,25 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                             </div>
                         )}
                     </div>
+                    <div className="m-2">
+                        <BtnPrimary
+                            label="Editar"
+                            className="w-32"
+                            type="submit"
+                            onClick={() => {
+                                push("/dashboard/update-pet");
+                            }}
+                        />
+                        <BtnPrimary
+                            label="Excluir"
+                            className="w-32"
+                            type="submit"
+                        />
+                    </div>
                 </>
             </RadioGroup.Option>
         </div>
-    )
-}
+    );
+};
 
-export default CardPets
+export default CardPets;

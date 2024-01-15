@@ -1,16 +1,16 @@
-import { Formik } from 'formik';
-import { useRouter } from 'next/navigation';
-import { useCallback, useMemo } from 'react';
-import usePetsByDocument from '~/store/hooks/list-pets-of-tutor';
-import DashboardLayouts from '../_layouts/dashboard';
-import Tabs from './components/templates/vertical-tabs';
+import { Formik } from "formik";
+import { useRouter } from "next/navigation";
+import { useCallback, useMemo } from "react";
+import usePetsByDocument from "~/store/hooks/list-pets-of-tutor";
+import DashboardLayouts from "../_layouts/dashboard";
+import Tabs from "./components/templates/vertical-tabs";
 
-import { BtnCancel } from '~/Components/atoms/btn';
-import ModalConfirm from '~/Components/modals/confirm-modal';
-import { Veterinary } from '~/entities/Veterinary';
-import useProfileVeterinary from '~/hooks/use-profile-veterinary';
-import { IPet } from '~/types/pet';
-import { Address } from '~/validations/address';
+import { BtnCancel } from "~/Components/atoms/btn";
+import ModalConfirm from "~/Components/modals/confirm-modal";
+import type { Veterinary } from "~/entities/Veterinary";
+import useProfileVeterinary from "~/hooks/use-profile-veterinary";
+import type { IPet } from "~/types/pet";
+import type { Address } from "~/validations/address";
 
 export type InitialValues = Nullable<IPet>;
 
@@ -49,36 +49,36 @@ export const makeInitialValues: MakeInitialValues = ({
     cpf_tutor,
     blood_donator: null,
     blood_type: null,
-    castrated: 'no',
+    castrated: "no",
     identification_number: null,
     microchip: null,
-    name_pet: '',
-    organ_donor: '',
-    race: 'unknown',
-    sex: 'unknown',
+    name_pet: "",
+    organ_donor: "",
+    race: "unknown",
+    sex: "unknown",
     specie: null,
     date_birth: null,
     ownerEmergencyContact: {
-        cpf_cnpj: '',
-        email: email || '',
-        phone: phone || '',
-        whatsapp: whatsapp || phone || '',
-        lastName: '',
+        cpf_cnpj: "",
+        email: email || "",
+        phone: phone || "",
+        whatsapp: whatsapp || phone || "",
+        lastName: "",
         address: {
-            city: address?.city || '',
-            complement: address?.complement || '',
-            country: address?.country || '',
-            neighborhood: address?.neighborhood || '',
-            number: address?.number || '',
-            state: address?.state || '',
-            street: address?.street || '',
-            zipCode: address?.zipCode || '',
+            city: address?.city || "",
+            complement: address?.complement || "",
+            country: address?.country || "",
+            neighborhood: address?.neighborhood || "",
+            number: address?.number || "",
+            state: address?.state || "",
+            street: address?.street || "",
+            zipCode: address?.zipCode || "",
         },
-        avatar: '',
-        id: '',
-        name: name_tutor || '',
+        avatar: "",
+        id: "",
+        name: name_tutor || "",
     },
-    name: '',
+    name: "",
     veterinary,
 });
 
@@ -86,10 +86,10 @@ type PetPageProps = {
     document: string;
 };
 
-const NewPetPage = ({ document }: PetPageProps) => {
+const UpdatePet = ({ document }: PetPageProps) => {
     const { activeData, handleSubmit, isLoading } = usePetsByDocument(
         document,
-        'full'
+        "full"
     );
     const pets = useMemo(() => activeData || [], [activeData]);
     const veterinary = useProfileVeterinary();
@@ -127,7 +127,7 @@ const NewPetPage = ({ document }: PetPageProps) => {
         async (values: IPet) => {
             try {
                 const data = await handleSubmit(values);
-                if (data) router.push('/dashboard');
+                if (data) router.push("/dashboard");
             } catch (error) {
                 console.log(error);
             }
@@ -138,7 +138,7 @@ const NewPetPage = ({ document }: PetPageProps) => {
     const tutorExist = useMemo(() => pets.length > 0, [pets]);
 
     return (
-        <DashboardLayouts title="Novo Pet">
+        <DashboardLayouts title="Editar Pet">
             <Formik
                 onSubmit={onSubmit}
                 enableReinitialize
@@ -146,8 +146,8 @@ const NewPetPage = ({ document }: PetPageProps) => {
             >
                 <div className="gap-2 mt-2 mobile:py-6">
                     <ModalConfirm
-                        title="Cancelar Novo Pet!"
-                        onConfirm={() => router.push('/dashboard')}
+                        title="Cancelar Edição!"
+                        onConfirm={() => router.push("/dashboard")}
                         description="Importante!"
                         message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
                     >
@@ -168,4 +168,4 @@ const NewPetPage = ({ document }: PetPageProps) => {
     );
 };
 
-export default NewPetPage;
+export default UpdatePet;

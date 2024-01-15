@@ -1,72 +1,57 @@
 /* eslint-disable react/jsx-no-undef */
 
-import { BtnPrimary } from '~/Components/atoms/btn';
+import { BtnPrimary } from "~/Components/atoms/btn";
 
-import { useMemo } from 'react';
-import * as yup from 'yup';
-import ComboBoxFields from '~/Components/molecules/combo-box-fields';
-import FieldControl from '~/Components/molecules/field-control';
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select';
-import FieldMasked from '~/Components/molecules/field-masked';
-import useFormikContextSafe from '~/hooks/use-formik-context-safe';
-import { genderValues } from '~/store/slices/pets/sexType';
-import type { StepProps } from '~/types/helpers';
-import type { InitialValues } from '../../index';
+import { useMemo } from "react";
+import * as yup from "yup";
+import ComboBoxFields from "~/Components/molecules/combo-box-fields";
+import FieldControl from "~/Components/molecules/field-control";
+import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
+import FieldMasked from "~/Components/molecules/field-masked";
+import useFormikContextSafe from "~/hooks/use-formik-context-safe";
+import { genderValues } from "~/store/slices/pets/sexType";
+import type { StepProps } from "~/types/helpers";
+import type { InitialValues } from "../../index";
 
 type KeysInitial =
-    | 'name'
-    | 'date_birth'
-    | 'sex'
-    | 'microchip'
-    | 'identification_number'
-    | 'id'
-    | 'race'
-    | 'specie';
+    | "name"
+    | "date_birth"
+    | "sex"
+    | "microchip"
+    | "identification_number"
+    | "id"
+    | "race"
+    | "specie";
 type StepPetKeys = Pick<InitialValues, KeysInitial>;
 
 const schema = yup.object().shape({
-    name: yup.string().required('Campo obrigatório'),
+    name: yup.string().required("Campo obrigatório"),
     sex: yup
         .object()
         .shape({
-            label: yup.string().required('Campo obrigatório'),
-            value: yup.string().required('Campo obrigatório'),
+            label: yup.string().required("Campo obrigatório"),
+            value: yup.string().required("Campo obrigatório"),
         })
-        .required('Campo obrigatório'),
+        .required("Campo obrigatório"),
     race: yup
         .object()
         .shape({
-            label: yup.string().required('Campo obrigatório'),
-            value: yup.string().required('Campo obrigatório'),
+            label: yup.string().required("Campo obrigatório"),
+            value: yup.string().required("Campo obrigatório"),
         })
-        .required('Campo obrigatório'),
+        .required("Campo obrigatório"),
     specie: yup
         .object()
         .shape({
-            label: yup.string().required('Campo obrigatório'),
-            value: yup.string().required('Campo obrigatório'),
+            label: yup.string().required("Campo obrigatório"),
+            value: yup.string().required("Campo obrigatório"),
         })
-        .required('Campo obrigatório'),
-    date_birth: yup.string().nullable().required('Campo obrigatório'),
+        .required("Campo obrigatório"),
+    date_birth: yup.string().nullable().required("Campo obrigatório"),
 });
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setValues } = useFormikContextSafe<StepPetKeys>();
-
-    // useEffect(() => {
-    //     const fetchPetInformation = async () => {
-    //         if (values.id) {
-    //             try {
-    //                 const petData = await fetchPetData(values.id); // Substitua por sua função de GET
-    //                 setValues({ ...values, ...petData });
-    //             } catch (error) {
-    //                 console.error('Erro ao buscar informações do pet:', error);
-    //             }
-    //         }
-    //     };
-
-    //     fetchPetInformation();
-    // }, [values.id, setValues]);
 
     const isValid = useMemo(() => {
         return schema.isValidSync(values);
@@ -124,7 +109,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
 
                 <FieldMasked
                     ctx={{} as StepPetKeys}
-                    label={'Número de registro cartório'}
+                    label={"Número de registro cartório"}
                     name="identification_number"
                     mask="_____"
                     placeholder="Digite o número do registro (opcional)"
