@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { StaticImageData } from 'next/image'
-import React from 'react'
+import type { StaticImageData } from 'next/image'
+import type React from 'react'
 import HeaderTitle from '~/Components/atoms/header-title'
 import Footer from '~/Layouts/Footer'
 

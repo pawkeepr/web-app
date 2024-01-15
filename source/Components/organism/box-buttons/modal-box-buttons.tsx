@@ -1,4 +1,5 @@
 import { forwardRef, useImperativeHandle, useMemo } from 'react'
+import { FaWhatsapp } from 'react-icons/fa'
 import { BtnConfirm } from '~/Components/atoms/btn'
 import useModal from '~/hooks/use-modal'
 import AvatarPet from '~/pages/AppointmentsPage/components/atoms/pet-avatar/pet-avatar'
@@ -118,7 +119,8 @@ const ModalBoxButtons = forwardRef(
 
                                 <div className="text-gray-500 mb-2">
                                     <h3 className="font-bold">Whatsapp:</h3>
-                                    <p>
+                                    <p className="flex gap-1">
+                                        <FaWhatsapp className="text-green-600 text-xl" />
                                         {pet?.contact?.whatsapp || 'Não informado'}
                                     </p>
                                 </div>

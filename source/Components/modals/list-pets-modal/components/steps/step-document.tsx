@@ -1,17 +1,23 @@
 import { cnpj, cpf } from 'cpf-cnpj-validator'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldDocument from '~/Components/molecules/field-document'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
 
-const StepDocument = ({ nextStep, onChangeDocument }: StepProps) => {
+const StepDocument = ({ nextStep, onChangeDocument, onChangeStep }: StepProps) => {
     const { values } = useFormikContextSafe<CtxSimplifiedPeTFields>()
 
     const validateDocument = useMemo(() => {
         const document = values.ownerEmergencyContact?.cpf_cnpj
         return cpf.isValid(document) || cnpj.isValid(document)
     }, [values.ownerEmergencyContact])
+
+    useEffect(() => {
+        if (validateDocument) {
+            onChangeStep(1)
+        }
+    }, [validateDocument])
 
     return (
         <div className="mt-3 p-1 gap-2 ">

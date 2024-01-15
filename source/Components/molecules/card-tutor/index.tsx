@@ -12,8 +12,8 @@ type CardPetProps = {
 const CardTutor = ({ pet = null }: CardPetProps) => {
     const { values } = useFormikContextSafe<VeterinaryConsultation>()
 
-    const name_tutor = getNameTutor(values.tutor_pet_vet.tutor)
-    const cpf_tutor = values.tutor_pet_vet.tutor.cpf_cnpj
+    const name_tutor = getNameTutor(values.tutor_pet_vet?.tutor)
+    const cpf_tutor = values.tutor_pet_vet?.tutor?.cpf_cnpj
     const email_tutor = values.tutor_pet_vet?.tutor?.contact?.email
     const phone_tutor = values.tutor_pet_vet?.tutor?.contact?.phone
     const whatsapp_tutor = values.tutor_pet_vet?.tutor?.contact?.whatsapp
