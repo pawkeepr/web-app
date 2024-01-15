@@ -1,21 +1,22 @@
-import { useFormikContext } from 'formik'
 import { FaWhatsapp } from 'react-icons/fa'
-import { InitialValues } from '~/pages/AppointmentsPage/Appointments'
-import { PetData } from '~/store/slices/appointment-vet/types'
-import { KeyOfSpecies, Species } from '~/store/slices/pets/speciesType'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { Species } from '~/store/slices/pets/speciesType'
+import type { VeterinaryConsultation } from '~/types/appointment'
+import type { PetData } from '~/types/pet-v2'
+import { getNameTutor } from '~/utils/get-name-tutors'
 
 type CardPetProps = {
     pet?: PetData | null
 }
 
 const CardTutor = ({ pet = null }: CardPetProps) => {
-    const { values } = useFormikContext<InitialValues>()
+    const { values } = useFormikContextSafe<VeterinaryConsultation>()
 
-    const name_tutor = values.name_tutor || values.tutor_data?.name
-    const cpf_tutor = values.cpf_tutor
-    const email_tutor = values.contact_tutor?.email || values.tutor_data?.email
-    const phone_tutor = values.contact_tutor?.phone || values.tutor_data?.phone
-    const whatsapp_tutor = values.contact_tutor?.whatsapp
+    const name_tutor = getNameTutor(values.tutor_pet_vet.tutor)
+    const cpf_tutor = values.tutor_pet_vet.tutor.cpf_cnpj
+    const email_tutor = values.tutor_pet_vet?.tutor?.contact?.email
+    const phone_tutor = values.tutor_pet_vet?.tutor?.contact?.phone
+    const whatsapp_tutor = values.tutor_pet_vet?.tutor?.contact?.whatsapp
 
     return (
         <section className="flex flex-col justify-start p-4 w-full">
@@ -24,11 +25,9 @@ const CardTutor = ({ pet = null }: CardPetProps) => {
                     <p className="text-gray-500 flex justify-between">
                         <strong className="mr-2">Pet:</strong>
                         <span>
-                            {`${pet.name_pet}, ${
-                                Species[
-                                    pet.specie as Species as unknown as KeyOfSpecies
-                                ]
-                            }, ${pet.race as string}`}
+                            {`${pet.name_pet}, ${Species[pet.specie as Species]}, ${
+                                pet.race as string
+                            }`}
                         </span>
                     </p>
                 )}
