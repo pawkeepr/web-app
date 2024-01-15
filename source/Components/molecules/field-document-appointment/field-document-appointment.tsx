@@ -73,13 +73,17 @@ const FieldDocumentAppointment = ({
                                     onChangeOpen,
                                     onChangeDocument,
                                 }) || (
-                                    <div className="w-full mb-3 ml-3 hidden lg:block xl:block">
+                                    <div className="w-96 ml-3 mobile:hidden block relative pt-3">
+                                        <span className="text-xs text-gray-500 font-semibold font-sans w-full absolute top-0 right-0 text-center">
+                                            {
+                                                'Insira o CPF do tutor para agendar ou iniciar uma consulta'
+                                            }
+                                        </span>
                                         <FieldDocument
                                             ctx={values}
                                             name="cpf_tutor"
                                             placeholder="Nova Consulta"
-                                            label="CPF"
-                                            className="rounded-md"
+                                            className="rounded-md mt-1 border border-secondary"
                                             onlyCPF
                                             endIcon={
                                                 <button
@@ -91,11 +95,6 @@ const FieldDocumentAppointment = ({
                                                 </button>
                                             }
                                         />
-                                        <span className="text-xs text-gray-500 font-semibold font-sans">
-                                            {
-                                                'Insira o CPF do tutor para agendar ou iniciar uma consulta'
-                                            }
-                                        </span>
                                     </div>
                                 )}
                             </Form>
