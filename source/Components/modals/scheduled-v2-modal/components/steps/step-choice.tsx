@@ -7,7 +7,7 @@ import type { InitialValues, StepProps } from '../../types'
 import CardPet from '../card-pet'
 import CardTutor from '../card-tutor'
 
-const StepChoice = ({ nextStep, pet }: StepProps) => {
+const StepChoice = ({ nextStep, pet, closeModal }: StepProps) => {
     const router = useRouter()
     const { values } = useFormikContextSafe<InitialValues>()
 
@@ -17,6 +17,8 @@ const StepChoice = ({ nextStep, pet }: StepProps) => {
                 `${routes.dashboard.new.appointments}?document=${values.ownerEmergencyContact?.cpf_cnpj}&pet=${pet.id}`,
             )
         }, 100)
+
+        closeModal?.()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [values])
 
