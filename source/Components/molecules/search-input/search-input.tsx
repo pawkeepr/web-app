@@ -9,7 +9,7 @@ type SearchInputProps = {
 const SearchInput = ({ ...rest }: SearchInputProps) => {
     return (
         <div className="flex w-full">
-            <div className="search-box w-full">
+            <div className="search-box w-full border border-secondary rounded-sm">
                 <FaSearch className="search-icon" />
                 <Input type="text" className="px-8" {...rest} />
             </div>
