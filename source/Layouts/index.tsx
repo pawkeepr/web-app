@@ -2,7 +2,8 @@
 
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon'
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import type React from 'react'
+import { useEffect, useState } from 'react'
 import image from '../../styles/assets/images/landing/bg-pattern.png'
 
 import cookies from '~/constants/cookies'
@@ -126,20 +127,22 @@ const Layout = ({ children }: LayoutProps) => {
                 {children}
                 <FieldDocumentAppointment selectedTabInitial={0}>
                     {({ onChangeOpen }) => (
-                        <button
-                            type="button"
-                            onClick={() => onChangeOpen(true)}
-                            className="
+                        <div className="fixed mobile:flex mobile:flex-col items-center justify-center mobile:opacity-100 bottom-4 z-50 mobile:bottom-4 right-4  mobile:right-4 hidden ">
+                            <button
+                                type="button"
+                                onClick={() => onChangeOpen(true)}
+                                className="
                                 bg-primary-600 p-3 rounded-full 
-                                shadow-2xl z-50 fixed bottom-4 right-4
+                                shadow-2xl 
                                 transition duration-500 ease-in-out
                                 opacity-40 hover:opacity-100 
-                                mobile:opacity-100 mobile:bottom-4 mobile:right-4
-                                md:block  xl:hidden lg:hidden
+
                             "
-                        >
-                            <PlusIcon className="w-8 h-8 text-gray-50" />
-                        </button>
+                            >
+                                <PlusIcon className="w-8 h-8 text-gray-50" />
+                            </button>
+                            <h6>Nova Consulta</h6>
+                        </div>
                     )}
                 </FieldDocumentAppointment>
 
