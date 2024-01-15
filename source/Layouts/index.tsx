@@ -35,7 +35,7 @@ type LayoutProps = {
     children: React.ReactNode
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const LayoutMain = ({ children }: LayoutProps) => {
     const dispatch = useAppDispatch()
     const {
         layoutType,
@@ -152,8 +152,8 @@ const Layout = ({ children }: LayoutProps) => {
     )
 }
 
-Layout.propTypes = {
+LayoutMain.propTypes = {
     children: PropTypes.object,
 }
 
-export default Layout
+export default LayoutMain
