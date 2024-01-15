@@ -56,7 +56,8 @@ const ReScheduledModal = ({
                     h-fit
                     min-w-fit
                     flex
-                    flex-col     
+                    flex-col
+                    !w-fit
                 "
             >
                 <Formik
