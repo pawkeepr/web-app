@@ -1,28 +1,28 @@
-import ArrowLeftCircleIcon from '@heroicons/react/20/solid/ArrowLeftCircleIcon'
-import HistoricIcon from '@heroicons/react/24/solid/ArchiveBoxXMarkIcon'
-import Cog8ToothIcon from '@heroicons/react/24/solid/Cog8ToothIcon'
-import DashboardIcon from '@heroicons/react/24/solid/HomeIcon'
-import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
-import Image from 'next/image'
-import { MdPerson, MdPets } from 'react-icons/md'
-import { layoutModeTypes } from '~/Components/constants/layout'
-import useChangeLayoutMode from '~/hooks/use-change-layout-mode'
+import ArrowLeftCircleIcon from '@heroicons/react/20/solid/ArrowLeftCircleIcon';
+import HistoricIcon from '@heroicons/react/24/solid/ArchiveBoxXMarkIcon';
+import Cog8ToothIcon from '@heroicons/react/24/solid/Cog8ToothIcon';
+import DashboardIcon from '@heroicons/react/24/solid/HomeIcon';
+import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon';
+import Image from 'next/image';
+import { MdPets } from 'react-icons/md';
+import { layoutModeTypes } from '~/Components/constants/layout';
+import useChangeLayoutMode from '~/hooks/use-change-layout-mode';
 
-import darkLogo from '../../../../public/logo-dark.png'
-import lightLogo from '../../../../public/logo-light.png'
+import darkLogo from '../../../../public/logo-dark.png';
+import lightLogo from '../../../../public/logo-light.png';
 
-import { button } from '~/Components/atoms/btn'
+import { button } from '~/Components/atoms/btn';
 
-import cn from 'classnames'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { twMerge } from 'tailwind-merge'
+import cn from 'classnames';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { twMerge } from 'tailwind-merge';
 
 type DrawerProps = {
-    closeDrawer: () => void
-    visibleDrawer: boolean
-    drawerWidth?: number
-}
+    closeDrawer: () => void;
+    visibleDrawer: boolean;
+    drawerWidth?: number;
+};
 
 const items = [
     {
@@ -35,7 +35,6 @@ const items = [
         icon: (
             <div className="flex justify-start">
                 <MdPets className="w-5 h-5" />
-                <MdPerson className="w-5 h-5" />
             </div>
         ),
         href: '/dashboard/pets-and-tutors',
@@ -50,20 +49,20 @@ const items = [
         icon: <Cog8ToothIcon className="w-5 h-5" />,
         href: '#',
     },
-]
+];
 
 const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
-    const pathname = usePathname()
-    const { mode } = useChangeLayoutMode()
-    const isLightMode = mode === layoutModeTypes.LIGHT_MODE
+    const pathname = usePathname();
+    const { mode } = useChangeLayoutMode();
+    const isLightMode = mode === layoutModeTypes.LIGHT_MODE;
 
     const buttonStyled = twMerge(
         button({ link: true }),
         'flex justify-start items-center',
         'px-4 py-2 w-full mt-4',
         'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-600',
-        'hover:bg-gray-200 dark:hover:bg-dark-600 rounded-none',
-    )
+        'hover:bg-gray-200 dark:hover:bg-dark-600 rounded-none'
+    );
 
     return (
         <div
@@ -82,7 +81,7 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                 {
                     '-translate-x-full': !visibleDrawer,
                     'translate-x-0': visibleDrawer,
-                },
+                }
             )}
         >
             <div className="flex justify-between px-4">
@@ -118,7 +117,9 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                         >
                             {item.icon}
 
-                            <span className="mx-4 font-medium">{item.name}</span>
+                            <span className="mx-4 font-medium">
+                                {item.name}
+                            </span>
                         </Link>
                     ))}
                     <div className="absolute w-full bottom-0">
@@ -133,7 +134,7 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                 </nav>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Drawer
+export default Drawer;

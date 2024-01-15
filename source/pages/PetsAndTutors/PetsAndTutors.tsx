@@ -1,15 +1,10 @@
-import React, {
-    useCallback,
-    useDeferredValue,
-    useEffect,
-    useState,
-} from 'react';
+import type React from 'react';
+import { useCallback, useDeferredValue, useEffect, useState } from 'react';
 import ScheduledNewAppointment from '~/Components/modals/scheduled-appointment';
 import FieldDocumentAppointment from '~/Components/molecules/field-document-appointment';
 import SearchInput from '~/Components/molecules/search-input';
-import DefaultLayout from '../_layouts/dashboard/dashboard';
-
 import ContextModalPlus from '~/hooks/use-plus-modal';
+import DefaultLayout from '../_layouts/dashboard/dashboard';
 import HorizontalTabs from './components/organisms/templates/Horizontal-List';
 
 const PetAndTutors = <T,>() => {
@@ -26,7 +21,7 @@ const PetAndTutors = <T,>() => {
             const search = e.target.value.toLowerCase();
             setSearch(search);
         },
-        [],
+        []
     );
 
     return (
