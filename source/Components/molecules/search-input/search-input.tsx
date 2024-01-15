@@ -8,11 +8,11 @@ type SearchInputProps = {
 
 const SearchInput = ({ ...rest }: SearchInputProps) => {
     return (
-        <div className="flex w-full">
-            <div className="search-box w-full border border-secondary rounded-sm">
-                <FaSearch className="search-icon" />
-                <Input type="text" className="px-8" {...rest} />
+        <div className="w-full border border-secondary rounded-lg relative">
+            <div className="absolute h-10 left-0 flex items-center justify-center w-10">
+                <FaSearch className="text-gray-400" />
             </div>
+            <Input type="text" className="px-8 rounded-lg" {...rest} />
         </div>
     )
 }
