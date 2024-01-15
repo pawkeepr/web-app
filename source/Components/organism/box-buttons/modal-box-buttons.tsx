@@ -44,6 +44,18 @@ const ModalBoxButtons = forwardRef(
             [item.tutor_pet_vet],
         )
 
+        const dateFormatted = useMemo(() => {
+            try {
+                return `${
+                    Intl.DateTimeFormat('pt-BR', {}).format(
+                        new Date(item.dates_consults.date_consultation),
+                    ) || 'Não informado'
+                } às ${item.dates_consults.time_consultation}`
+            } catch (_) {
+                return 'Não informado'
+            }
+        }, [item.dates_consults])
+
         return (
             <>
                 {children?.({ showModal })}
@@ -93,16 +105,7 @@ const ModalBoxButtons = forwardRef(
                                 {item.appointment_status?.canceled === 'no' && (
                                     <div className="text-gray-500 mb-2">
                                         <h3 className="font-bold">Data Marcada:</h3>
-                                        <p>{`${
-                                            Intl.DateTimeFormat('pt-BR', {}).format(
-                                                new Date(
-                                                    item.dates_consults
-                                                        .date_consultation,
-                                                ),
-                                            ) || 'Não informado'
-                                        } às ${
-                                            item.dates_consults.time_consultation
-                                        }`}</p>
+                                        <p>{dateFormatted}</p>
                                     </div>
                                 )}
                             </div>
