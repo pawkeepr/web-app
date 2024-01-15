@@ -2,7 +2,7 @@
 
 import { BtnPrimary } from '~/Components/atoms/btn';
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import * as yup from 'yup';
 import ComboBoxFields from '~/Components/molecules/combo-box-fields';
 import FieldControl from '~/Components/molecules/field-control';
@@ -10,8 +10,8 @@ import FieldControlSelect from '~/Components/molecules/field-control/field-contr
 import FieldMasked from '~/Components/molecules/field-masked';
 import useFormikContextSafe from '~/hooks/use-formik-context-safe';
 import { genderValues } from '~/store/slices/pets/sexType';
-import { StepProps } from '~/types/helpers';
-import { InitialValues } from '../../index';
+import type { StepProps } from '~/types/helpers';
+import type { InitialValues } from '../../index';
 
 type KeysInitial =
     | 'name'
@@ -53,20 +53,20 @@ const schema = yup.object().shape({
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const { values, setValues } = useFormikContextSafe<StepPetKeys>();
 
-    useEffect(() => {
-        const fetchPetInformation = async () => {
-            if (values.id) {
-                try {
-                    const petData = await fetchPetData(values.id); // Substitua por sua função de GET
-                    setValues({ ...values, ...petData });
-                } catch (error) {
-                    console.error('Erro ao buscar informações do pet:', error);
-                }
-            }
-        };
+    // useEffect(() => {
+    //     const fetchPetInformation = async () => {
+    //         if (values.id) {
+    //             try {
+    //                 const petData = await fetchPetData(values.id); // Substitua por sua função de GET
+    //                 setValues({ ...values, ...petData });
+    //             } catch (error) {
+    //                 console.error('Erro ao buscar informações do pet:', error);
+    //             }
+    //         }
+    //     };
 
-        fetchPetInformation();
-    }, [values.id, setValues]);
+    //     fetchPetInformation();
+    // }, [values.id, setValues]);
 
     const isValid = useMemo(() => {
         return schema.isValidSync(values);
