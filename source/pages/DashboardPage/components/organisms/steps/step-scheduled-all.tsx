@@ -26,32 +26,40 @@ const StepAll = () => {
     if (isLoading) return <div>Loading...</div>
 
     return (
-        <div className="w-full">
+        <>
             <SearchInput placeholder="Digite sua busca" />
-            <section className="w-full space-y-10 mt-2">
-                <h1 className="text-2xl font-bold">Confirmadas</h1>
-                {confirmedData?.map((appointment) => (
-                    <CardScheduled key={appointment.id} appointment={appointment} />
-                ))}
-                {confirmedData?.length === 0 && (
-                    <div className="text-center">
-                        <span>Não há agendamentos confirmados</span>
-                    </div>
-                )}
-            </section>
+            <div className="w-full">
+                <section className="w-full space-y-10 mt-2">
+                    <h1 className="text-2xl font-bold">Confirmadas</h1>
+                    {confirmedData?.map((appointment) => (
+                        <CardScheduled
+                            key={appointment.id}
+                            appointment={appointment}
+                        />
+                    ))}
+                    {confirmedData?.length === 0 && (
+                        <div className="text-center">
+                            <span>Não há agendamentos confirmados</span>
+                        </div>
+                    )}
+                </section>
 
-            <section className="w-full space-y-10 mt-4">
-                <h1 className="text-2xl font-bold">Agendadas</h1>
-                {data?.map((appointment) => (
-                    <CardScheduled key={appointment.id} appointment={appointment} />
-                ))}
-                {data?.length === 0 && (
-                    <div className="text-center">
-                        <span>Não há consultas agendadas</span>
-                    </div>
-                )}
-            </section>
-        </div>
+                <section className="w-full space-y-10 mt-4">
+                    <h1 className="text-2xl font-bold">Agendadas</h1>
+                    {data?.map((appointment) => (
+                        <CardScheduled
+                            key={appointment.id}
+                            appointment={appointment}
+                        />
+                    ))}
+                    {data?.length === 0 && (
+                        <div className="text-center">
+                            <span>Não há consultas agendadas</span>
+                        </div>
+                    )}
+                </section>
+            </div>
+        </>
     )
 }
 
