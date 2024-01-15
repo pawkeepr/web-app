@@ -91,6 +91,11 @@ const FieldDocumentAppointment = ({
                                                 </button>
                                             }
                                         />
+                                        <span className="text-xs text-gray-500 font-semibold font-sans">
+                                            {
+                                                'Insira o CPF do tutor para agendar ou iniciar uma consulta'
+                                            }
+                                        </span>
                                     </div>
                                 )}
                             </Form>
