@@ -1,7 +1,7 @@
 import { PlusCircleIcon } from '@heroicons/react/24/solid'
 import { Form, Formik } from 'formik'
 import { startTransition, useState } from 'react'
-import ModalListPets from '~/Components/modals/list-pets-modal/modal-list-pets'
+import ModalListPets from '~/Components/modals/scheduled-v2-modal'
 import ModalWarning from '~/Components/modals/warning-modal/modal-warning'
 import FieldDocument from '~/Components/molecules/field-document/field-document'
 import isValidCPF from '~/validations/cpf'
@@ -64,7 +64,7 @@ const FieldDocumentAppointment = ({
                         })}
                         enableReinitialize
                     >
-                        {({ handleSubmit }) => (
+                        {({ handleSubmit, values }) => (
                             <Form
                                 className=" flex flex-row items-center justify-end"
                                 onSubmit={handleSubmit}
@@ -75,6 +75,7 @@ const FieldDocumentAppointment = ({
                                 }) || (
                                     <div className="w-full mb-3 ml-3 hidden lg:block xl:block">
                                         <FieldDocument
+                                            ctx={values}
                                             name="cpf_tutor"
                                             placeholder="Nova Consulta"
                                             label="CPF"
