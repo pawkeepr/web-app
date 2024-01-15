@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import SearchInput from '~/Components/molecules/search-input'
 import CardScheduled from '~/Components/organism/card-scheduled/card-scheduled'
 import useListAppointments from '~/store/hooks/list-appointments'
 import type { VeterinaryConsultation } from '~/types/appointment'
@@ -26,6 +27,7 @@ const StepAll = () => {
 
     return (
         <div className="w-full">
+            <SearchInput placeholder="Digite sua busca" />
             <section className="w-full space-y-10 mt-2">
                 <h1 className="text-2xl font-bold">Confirmadas</h1>
                 {confirmedData?.map((appointment) => (
