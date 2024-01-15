@@ -1,7 +1,7 @@
 import { Tab } from '@headlessui/react'
 import cn from 'classnames'
 import { Formik } from 'formik'
-import { startTransition, useCallback, useState } from 'react'
+import { startTransition, useCallback, useEffect, useState } from 'react'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
@@ -70,6 +70,14 @@ const ModalListPets = ({
         STEPS,
         selectedTabInitial,
     )
+
+    useEffect(() => {
+        return () => {
+            onChangeSelectedTab(selectedTabInitial)
+            onChangePet({} as IPetV2)
+            onChangeDocument('')
+        }
+    }, [])
 
     const onChangePet = (pet: IPetV2) => {
         setPet(pet)
@@ -162,6 +170,8 @@ const ModalListPets = ({
                 onOpen={() => showModal()}
                 onClose={() => {
                     onChangeSelectedTab(selectedTabInitial)
+                    onChangePet({} as IPetV2)
+                    onChangeDocument('')
                     closeModal()
                 }}
                 modal
