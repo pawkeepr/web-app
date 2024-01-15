@@ -5,7 +5,7 @@ import FieldDocument from '~/Components/molecules/field-document'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
 
-const StepDocument = ({ nextStep, onChangeDocument }: StepProps) => {
+const StepDocument = ({ nextStep, onChangeDocument, onChangeStep }: StepProps) => {
     const { values } = useFormikContextSafe<CtxSimplifiedPeTFields>()
 
     const validateDocument = useMemo(() => {
@@ -15,7 +15,7 @@ const StepDocument = ({ nextStep, onChangeDocument }: StepProps) => {
 
     useEffect(() => {
         if (validateDocument) {
-            nextStep()
+            onChangeStep(1)
         }
     }, [validateDocument])
 
