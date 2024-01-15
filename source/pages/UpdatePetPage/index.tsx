@@ -15,6 +15,17 @@ import { Address } from '~/validations/address';
 export type InitialValues = Nullable<IPet>;
 
 type MakeInitialValuesProps = {
+    blood_donator: string;
+    blood_type: string;
+    castrated: string;
+    identification_number: string;
+    microchip: string;
+    name_pet: string;
+    organ_donor: string;
+    race: string;
+    sex: string;
+    specie: string;
+    date_birth: string;
     cpf_tutor: string;
     name_tutor?: string;
     phone?: string;
@@ -42,12 +53,11 @@ export const makeInitialValues: MakeInitialValues = ({
     identification_number: null,
     microchip: null,
     name_pet: '',
-    organ_donor: 'no',
+    organ_donor: '',
     race: 'unknown',
     sex: 'unknown',
     specie: null,
     date_birth: null,
-    phone_tutor: phone,
     ownerEmergencyContact: {
         cpf_cnpj: '',
         email: email || '',
@@ -90,6 +100,18 @@ const NewPetPage = ({ document }: PetPageProps) => {
         const trimmedName = fullName.trim();
 
         return makeInitialValues({
+            blood_donator: pets[0]?.pet_information.blood_donator as string,
+            blood_type: pets[0]?.pet_information.blood_type as string,
+            castrated: pets[0]?.pet_information.castrated as string,
+            identification_number: pets[0]?.pet_information
+                .identification_number as string,
+            microchip: pets[0]?.pet_information.microchip as string,
+            name_pet: pets[0]?.pet_information.name_pet as string,
+            organ_donor: pets[0]?.pet_information.organ_donor as string,
+            race: pets[0]?.pet_information.race as string,
+            sex: pets[0]?.pet_information.sex as string,
+            specie: pets[0]?.pet_information.specie as string,
+            date_birth: pets[0]?.pet_information.date_birth as string,
             cpf_tutor: document,
             email: pets[0]?.main_responsible_guardian.contact?.email as string,
             name_tutor: trimmedName,
