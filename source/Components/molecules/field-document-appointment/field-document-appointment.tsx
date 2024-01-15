@@ -1,7 +1,7 @@
 import { PlusCircleIcon } from '@heroicons/react/24/solid'
 import { Form, Formik } from 'formik'
 import { startTransition, useState } from 'react'
-import ModalListPets from '~/Components/modals/scheduled-v2-modal'
+import ModalScheduledV2 from '~/Components/modals/scheduled-v2-modal'
 import ModalWarning from '~/Components/modals/warning-modal/modal-warning'
 import FieldDocument from '~/Components/molecules/field-document/field-document'
 import isValidCPF from '~/validations/cpf'
@@ -54,7 +54,7 @@ const FieldDocumentAppointment = ({
                     setIsOpen(false)
                 }}
             />
-            <ModalListPets selectedTabInitial={selectedTabInitial}>
+            <ModalScheduledV2 selectedTabInitial={selectedTabInitial}>
                 {({ onChangeOpen, onChangeDocument }) => (
                     <Formik
                         initialValues={initialValues}
@@ -102,7 +102,7 @@ const FieldDocumentAppointment = ({
                         )}
                     </Formik>
                 )}
-            </ModalListPets>
+            </ModalScheduledV2>
         </>
     )
 }
