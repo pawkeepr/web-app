@@ -1,7 +1,7 @@
 import { cpf } from 'cpf-cnpj-validator'
 import { useFormikContext } from 'formik'
 import { useMemo, useState } from 'react'
-import { InputControlProps } from '~/Components/molecules/field-control'
+import type { InputControlProps } from '~/Components/molecules/field-control'
 
 import FieldMasked from '../field-masked'
 
@@ -33,7 +33,7 @@ const FieldDocument = <T, Ctx>({
     }, [document, typeDocument])
 
     return (
-        <div className="">
+        <div className="relative pb-[12px]">
             <FieldMasked
                 {...props}
                 name={props.name}
@@ -41,7 +41,7 @@ const FieldDocument = <T, Ctx>({
                 replacement={{ _: /\d/ }}
             />
             {!isValid && document.length > 0 && (
-                <p className="flex justify-center font-semibold text-secondary-500 items-center text-xs">
+                <p className="absolute bottom-0 flex w-full justify-center font-semibold text-secondary-500 items-center text-xs">
                     CPF/CNPJ inválido!
                 </p>
             )}
