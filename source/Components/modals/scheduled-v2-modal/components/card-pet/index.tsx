@@ -12,9 +12,9 @@ const CardPet = ({ pet }: CardPetProps) => {
                 <p className="text-gray-500 flex justify-between">
                     <strong className="mr-2">Pet:</strong>
                     <span>
-                        {`${pet.name_pet}, ${
-                            Species[pet.specie as keyof typeof Species]
-                        }, ${pet.race as string}`}
+                        {`${pet?.name_pet}, ${
+                            Species[pet?.specie as keyof typeof Species]
+                        }, ${pet?.race as string}`}
                     </span>
                 </p>
             </div>
