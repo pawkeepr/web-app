@@ -1,11 +1,11 @@
-require('dotenv').config();
+require('dotenv').config()
 
 /**@type {import('next').NextConfig} */
 const nextConfig = ((phase) => {
-    const isProduction = phase === 'production';
+    const isProduction = phase === 'production'
 
     const _currentURL =
-        'https://z4etzps20a.execute-api.us-east-1.amazonaws.com/development';
+        'https://z4etzps20a.execute-api.us-east-1.amazonaws.com/development'
 
     return {
         publicRuntimeConfig: {
@@ -15,6 +15,7 @@ const nextConfig = ((phase) => {
                 '/forget-password',
                 '/reset-password',
                 '/',
+                '/client/confirmation/[id]',
             ],
         },
         images: {
@@ -45,7 +46,7 @@ const nextConfig = ((phase) => {
             locales: ['pt-BR', 'en'],
             defaultLocale: 'pt-BR',
         },
-    };
-})(process.env.NODE_ENV);
+    }
+})(process.env.NODE_ENV)
 
-module.exports = nextConfig;
+module.exports = nextConfig
