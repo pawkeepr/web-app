@@ -10,6 +10,7 @@ import useSteps from '~/hooks/use-steps'
 import useListPetsOfTutor from '~/store/hooks/list-pets-of-tutor'
 import type { IPet } from '~/types/pet'
 import type { IPetV2 } from '~/types/pet-v2'
+import { getNameTutor } from '~/utils/get-name-tutors'
 import StepDocument from '../list-pets-modal/components/steps/step-document'
 import StepListBreeds from '../list-pets-modal/components/steps/step-list-breeds'
 import StepListGender from '../list-pets-modal/components/steps/step-list-gender'
@@ -92,9 +93,13 @@ const ModalListPets = ({ children, selectedTabInitial = 1 }: ModalConfirmProps) 
                         ? (pets[0].main_responsible_guardian.contact
                               .email as string)
                         : '',
+                first_name:
+                    pets && pets.length > 0
+                        ? (pets[0].main_responsible_guardian.first_name as string)
+                        : '',
                 name:
                     pets && pets.length > 0
-                        ? (pets[0].main_responsible_guardian.name as string)
+                        ? getNameTutor(pets[0].main_responsible_guardian)
                         : '',
                 lastName:
                     pets && pets.length > 0
@@ -140,7 +145,7 @@ const ModalListPets = ({ children, selectedTabInitial = 1 }: ModalConfirmProps) 
 
             if (!pet) return
 
-            setPet(pet)
+            handleNavigate(pet)
         },
         [handleSubmit],
     )
