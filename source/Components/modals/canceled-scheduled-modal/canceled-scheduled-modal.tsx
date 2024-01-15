@@ -77,11 +77,12 @@ const CanceledScheduledModal = ({
                     h-fit
                     min-w-fit
                     flex
-                    flex-col     
+                    flex-col
+                    w-fit     
                 "
             >
                 <Formik
-                    initialValues={item as any}
+                    initialValues={item}
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
                 >
@@ -99,23 +100,22 @@ const CanceledScheduledModal = ({
                                     {'Esta ação não poderá ser desfeita.'}
                                 </p>
 
-                                <CardTutor
-                                    pet={(values as IAppointmentVet).pet_data}
-                                />
+                                <CardTutor pet={values.tutor_pet_vet?.pet} />
 
                                 <FieldTextArea
+                                    ctx={values}
                                     required
                                     label="Motivo do cancelamento"
                                     name="appointment_status.reason_canceled"
                                 />
 
-                                <div className="mt-4 flex justify-center items-center w-3/6">
+                                <div className="mt-4 flex justify-center items-center">
                                     <BtnCancel
                                         type="button"
                                         onClick={closeModal}
                                         label="Desistir"
                                         condition={!isSubmitting && !isLoading}
-                                        className="text-gray-600"
+                                        className="text-gray-600 "
                                     />
 
                                     <BtnPrimary
@@ -123,6 +123,7 @@ const CanceledScheduledModal = ({
                                         label="Cancelar Agendamento"
                                         isLoading={isSubmitting || isLoading}
                                         disabled={!isValid}
+                                        className="bg-red-400"
                                     />
                                 </div>
                             </div>

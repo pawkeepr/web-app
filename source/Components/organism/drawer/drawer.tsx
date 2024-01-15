@@ -1,22 +1,22 @@
-import ArrowLeftCircleIcon from '@heroicons/react/20/solid/ArrowLeftCircleIcon';
-import HistoricIcon from '@heroicons/react/24/solid/ArchiveBoxXMarkIcon';
-import Cog8ToothIcon from '@heroicons/react/24/solid/Cog8ToothIcon';
-import DashboardIcon from '@heroicons/react/24/solid/HomeIcon';
-import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon';
-import Image from 'next/image';
-import { MdPets } from 'react-icons/md';
-import { layoutModeTypes } from '~/Components/constants/layout';
-import useChangeLayoutMode from '~/hooks/use-change-layout-mode';
+import ArrowLeftCircleIcon from "@heroicons/react/20/solid/ArrowLeftCircleIcon";
+import HistoricIcon from "@heroicons/react/24/solid/ArchiveBoxXMarkIcon";
+import Cog8ToothIcon from "@heroicons/react/24/solid/Cog8ToothIcon";
+import DashboardIcon from "@heroicons/react/24/solid/HomeIcon";
+import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
+import Image from "next/image";
+import { MdPets } from "react-icons/md";
+import { layoutModeTypes } from "~/Components/constants/layout";
+import useChangeLayoutMode from "~/hooks/use-change-layout-mode";
 
-import darkLogo from '../../../../public/logo-dark.png';
-import lightLogo from '../../../../public/logo-light.png';
+import darkLogo from "../../../../public/logo-dark.png";
+import lightLogo from "../../../../public/logo-light.png";
 
-import { button } from '~/Components/atoms/btn';
+import { button } from "~/Components/atoms/btn";
 
-import cn from 'classnames';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { twMerge } from 'tailwind-merge';
+import cn from "classnames";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { twMerge } from "tailwind-merge";
 
 type DrawerProps = {
     closeDrawer: () => void;
@@ -26,28 +26,29 @@ type DrawerProps = {
 
 const items = [
     {
-        name: 'Consultas',
+        name: "Consultas",
         icon: <DashboardIcon className="w-5 h-5" />,
-        href: '/dashboard',
+        href: "/dashboard",
     },
     {
-        name: 'Pets / Tutores',
+        name: "Pets / Tutores",
         icon: (
             <div className="flex justify-start">
                 <MdPets className="w-5 h-5" />
             </div>
         ),
-        href: '/dashboard/pets-and-tutors',
+
+        href: "/dashboard/pets-and-tutors",
     },
     {
-        name: 'Histórico',
+        name: "Histórico",
         icon: <HistoricIcon className="w-5 h-5" />,
-        href: '/dashboard/historic',
+        href: "/dashboard/historic",
     },
     {
-        name: 'Configurações',
+        name: "Configurações",
         icon: <Cog8ToothIcon className="w-5 h-5" />,
-        href: '#',
+        href: "#",
     },
 ];
 
@@ -58,10 +59,10 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
 
     const buttonStyled = twMerge(
         button({ link: true }),
-        'flex justify-start items-center',
-        'px-4 py-2 w-full mt-4',
-        'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-600',
-        'hover:bg-gray-200 dark:hover:bg-dark-600 rounded-none'
+        "flex justify-start items-center",
+        "px-4 py-2 w-full mt-4",
+        "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-600",
+        "hover:bg-gray-200 dark:hover:bg-dark-600 rounded-none"
     );
 
     return (
@@ -79,8 +80,8 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                 overflow-x-hidden
             `,
                 {
-                    '-translate-x-full': !visibleDrawer,
-                    'translate-x-0': visibleDrawer,
+                    "-translate-x-full": !visibleDrawer,
+                    "translate-x-0": visibleDrawer,
                 }
             )}
         >
@@ -110,7 +111,7 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                         <Link
                             key={index.toString()}
                             className={cn(buttonStyled, {
-                                'bg-gray-200 dark:bg-dark-600':
+                                "bg-gray-200 dark:bg-dark-600":
                                     pathname === item.href,
                             })}
                             href={item.href}
