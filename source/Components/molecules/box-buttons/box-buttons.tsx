@@ -1,4 +1,4 @@
-import { BtnCancel, BtnPrimary, BtnProps } from '~/Components/atoms/btn'
+import { BtnCancel, BtnPrimary, type BtnProps } from '~/Components/atoms/btn'
 import withLoading from '~/Components/helpers/with-loading'
 
 type Fn = () => void
