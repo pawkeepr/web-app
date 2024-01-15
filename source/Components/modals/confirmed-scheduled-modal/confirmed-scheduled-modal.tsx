@@ -76,11 +76,12 @@ const ConfirmedScheduledModal = ({
                     h-fit
                     min-w-fit
                     flex
-                    flex-col     
+                    flex-col
+                    w-fit
                 "
             >
                 <Formik
-                    initialValues={item as any}
+                    initialValues={item}
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
                 >
@@ -98,11 +99,9 @@ const ConfirmedScheduledModal = ({
                                     {'Esta ação não poderá ser desfeita.'}
                                 </p>
 
-                                <CardTutor
-                                    pet={(values as IAppointmentVet).pet_data}
-                                />
+                                <CardTutor pet={values.tutor_pet_vet?.pet} />
 
-                                <div className="mt-4 flex justify-center items-center w-3/6">
+                                <div className="mt-4 flex justify-center items-center">
                                     <BtnCancel
                                         type="button"
                                         onClick={closeModal}
