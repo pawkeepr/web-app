@@ -16,27 +16,42 @@ const routesAuth = [
     '/confirm-account',
 ]
 
+const routesPublics = ['/client/confirmation']
+
 const routesPrivates = ['/activation']
 
 const LayoutAuth = ({ children }: LayoutProps) => {
     return <ParticlesAuth>{children}</ParticlesAuth>
 }
 
+const isPublicRoute = (pathname: string) => {
+    const isPublic = [...routesAuth, ...routesPublics, ...routesPrivates].find(
+        (route) => {
+            if (route === '/') {
+                return route === pathname
+            }
+
+            if (typeof pathname !== 'string') return true
+
+            return pathname?.startsWith(route)
+        },
+    )
+
+    return !!isPublic
+}
+
 const LayoutDefault = ({ children }: LayoutProps) => {
     const pathname = usePathname()
+
     if (pathname === '/' || !pathname) {
         return <>{children}</>
     }
 
-    if (routesAuth.includes(pathname as string)) {
+    if (isPublicRoute(pathname as string)) {
         return <LayoutAuth>{children}</LayoutAuth>
     }
 
-    if (routesPrivates.includes(pathname as string)) {
-        return <LayoutAuth>{children}</LayoutAuth>
-    }
-
-    return <VerticalLayouts>{children as any}</VerticalLayouts>
+    return <VerticalLayouts>{children}</VerticalLayouts>
 }
 
 export default LayoutDefault
