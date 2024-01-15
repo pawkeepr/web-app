@@ -1,8 +1,8 @@
+import CardScheduled from '~/Components/organism/card-scheduled/card-scheduled'
 import useListAppointments from '~/store/hooks/list-appointments'
-import CardScheduled from '../organisms/card-scheduled'
 
-const StepConfirmed = () => {
-    const { activeData, isLoading } = useListAppointments({ mode: 'confirmed' })
+const StepDone = () => {
+    const { activeData, isLoading } = useListAppointments({ mode: 'done' })
 
     if (isLoading) return <div>Loading...</div>
 
@@ -15,4 +15,4 @@ const StepConfirmed = () => {
     )
 }
 
-export default StepConfirmed
+export default StepDone

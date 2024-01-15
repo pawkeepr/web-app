@@ -1,15 +1,15 @@
 import { useEffect, useMemo } from 'react'
 import { BtnPrimary } from '~/Components/atoms/btn'
 import FieldArraySafe from '~/Components/molecules/field-array-safe'
-import { OptionSelect } from '~/Components/molecules/field-control'
+import type { OptionSelect } from '~/Components/molecules/field-control'
 import FieldNumber from '~/Components/molecules/field-number'
 import CardInputAnamnese from '~/Components/organism/card-input-anamnese'
 import { questions } from '~/constants/anamnese-questions'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { StepProps, Tabs } from '~/types/helpers'
+import type { StepProps, Tabs } from '~/types/helpers'
 import {
-    CtxStepAnamnese,
     schemaStepAnamneseValidation,
+    type CtxStepAnamnese,
 } from '../../../validations.yup'
 
 const TranslationOptions = {
@@ -33,8 +33,7 @@ function calcularIMC(height: number, weight: number): number {
 }
 
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
-    const { values, setFieldValue, errors } =
-        useFormikContextSafe<CtxStepAnamnese>()
+    const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>()
 
     const height = useMemo(() => values.details_pet_consultation?.height, [values])
     const weight = useMemo(() => values.details_pet_consultation?.weight, [values])
@@ -140,17 +139,19 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                         )}
                         <CardInputAnamnese
                             items={questions}
-                            handleSubmit={async (data, formikHelpers) => {
-                                const { label, type } =
-                                    data.type_anamnesis as OptionSelect
+                            handleSubmit={(data, formikHelpers) => {
+                                return new Promise(() => {
+                                    const { label, type } =
+                                        data.type_anamnesis as OptionSelect
 
-                                push({
-                                    ...data,
-                                    name_anamnesis: label,
-                                    type_anamnesis: type,
+                                    push({
+                                        ...data,
+                                        name_anamnesis: label,
+                                        type_anamnesis: type,
+                                    })
+
+                                    formikHelpers.resetForm()
                                 })
-
-                                formikHelpers.resetForm()
                             }}
                         />
                     </>

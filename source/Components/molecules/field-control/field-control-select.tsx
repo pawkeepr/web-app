@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
-import { Props } from 'react-select'
+import type { Props } from 'react-select'
 import Label from '~/Components/atoms/label'
 import Select from '~/Components/atoms/select'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { ObjPaths } from '~/types/helpers'
+import type { ObjPaths } from '~/types/helpers'
 import type { InputControlProps, OptionSelect } from './types'
 
 type FieldSelectControl<Ctx> = Omit<InputControlProps<Props, Ctx>, 'value'> & {
@@ -20,7 +20,6 @@ type FieldSelectControl<Ctx> = Omit<InputControlProps<Props, Ctx>, 'value'> & {
 const FieldControlSelect = <Ctx,>({
     label,
     required = false,
-    className,
     name,
     divClassName,
     options = [],

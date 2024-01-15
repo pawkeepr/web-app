@@ -41,7 +41,7 @@ export const CatBreed = {
     Ocicat: 'Ocicat',
     // ...
 } as const
-export type CatBreedKeys = keyof typeof CatBreed
+export type CatBreedKeys = (typeof CatBreed)[keyof typeof CatBreed]
 
 export const HorseBreed = {
     MangalargaMarchador: 'Mangalarga Marchador',
@@ -52,7 +52,7 @@ export const HorseBreed = {
     Outros: 'Outros',
     // ...
 } as const
-export type HorseBreedKeys = keyof typeof HorseBreed
+export type HorseBreedKeys = (typeof HorseBreed)[keyof typeof HorseBreed]
 
 export const FishBreed = {
     Betta: 'Betta',
@@ -63,7 +63,7 @@ export const FishBreed = {
     Outros: 'Outros',
     // ...
 } as const
-export type FishBreedKeys = keyof typeof FishBreed
+export type FishBreedKeys = (typeof FishBreed)[keyof typeof FishBreed]
 
 export const ReptileBreed = {
     Iguana: 'Iguana',
@@ -74,7 +74,7 @@ export const ReptileBreed = {
     Outros: 'Outros',
     // ...
 } as const
-export type ReptileBreedKeys = keyof typeof ReptileBreed
+export type ReptileBreedKeys = (typeof ReptileBreed)[keyof typeof ReptileBreed]
 
 export const BirdBreed = {
     CanarioBelga: 'Canário Belga',
@@ -86,7 +86,7 @@ export const BirdBreed = {
     Outros: 'Outros',
     // ...
 } as const
-export type BirdBreedKeys = keyof typeof BirdBreed
+export type BirdBreedKeys = (typeof BirdBreed)[keyof typeof BirdBreed]
 
 export const RabbitBreed = {
     AngoraIngles: 'Angorá Inglês',
@@ -115,7 +115,7 @@ export const RabbitBreed = {
     SilverFox: 'Silver Fox',
     Outros: 'Não Informado',
 } as const
-export type RabbitBreedKeys = keyof typeof RabbitBreed
+export type RabbitBreedKeys = (typeof RabbitBreed)[keyof typeof RabbitBreed]
 
 export type Breed =
     | DogBreedKeys

@@ -6,40 +6,13 @@ import cn from 'classnames'
 import { useEffect, useState } from 'react'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import StepScheduledAll from '../steps/step-scheduled-all'
-import StepScheduledCanceled from '../steps/step-scheduled-canceled'
-import StepScheduledConfirmed from '../steps/step-scheduled-confirmed'
-import StepScheduledDone from '../steps/step-scheduled-done'
-import StepScheduledRescheduled from '../steps/step-scheduled-rescheduled'
 
 const Tabs = () => [
     {
         id: 1,
-        title: 'Consultas Agendadas',
+        title: 'Todos os agendamentos',
         href: '#scheduled',
         tab: <StepScheduledAll />,
-    },
-    {
-        title: 'Consultas Reagendadas',
-        href: '#rescheduled',
-        tab: <StepScheduledRescheduled />,
-    },
-    {
-        id: 3,
-        title: 'Consultas Canceladas',
-        href: '#canceled',
-        tab: <StepScheduledCanceled />,
-    },
-    {
-        id: 4,
-        title: 'Consultas Confirmadas',
-        href: '#confirmed',
-        tab: <StepScheduledConfirmed />,
-    },
-    {
-        id: 5,
-        title: 'Consultas Finalizadas',
-        href: '#done',
-        tab: <StepScheduledDone />,
     },
 ]
 
@@ -57,15 +30,15 @@ const HorizontalTabs = () => {
     }, [isMobile])
 
     return (
-        <div className="w-full mt-2 rounded-md">
+        <div className="w-full mt-2">
             <Tab.Group>
-                <Tab.List className="flex  rounded-xl bg-primary-500 p-1">
+                <Tab.List className="flex  rounded-sm bg-primary-500 p-1">
                     {categories.map((category) => (
                         <Tab
                             key={category.id}
                             className={({ selected }) =>
                                 cn(
-                                    'w-full rounded-lg py-2.5 text-sm leading-5 font-bold text-white',
+                                    'w-full rounded-sm py-2.5 text-sm leading-5 font-bold text-white uppercase',
                                     'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
                                     selected
                                         ? 'bg-white !text-secondary-500 shadow'
@@ -78,9 +51,9 @@ const HorizontalTabs = () => {
                     ))}
                 </Tab.List>
                 <Tab.Panels className="mt-2">
-                    {categories.map((item, idx) => (
+                    {categories.map((item) => (
                         <Tab.Panel
-                            key={idx}
+                            key={item.id}
                             className={cn(
                                 'rounded-xl bg-white p-3',
                                 'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',

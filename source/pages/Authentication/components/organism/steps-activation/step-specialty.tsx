@@ -7,8 +7,8 @@ import FieldControlSelect from '~/Components/molecules/field-control/field-contr
 import { sub_specialty } from '~/common/data/sub-specialtys'
 
 import CheckboxGroup from '~/Components/molecules/checkbox-group'
-import { ActivateAccount } from '~/validations/activate'
-import { StepProps } from './types'
+import type { ActivateAccount } from '~/validations/activate'
+import type { StepProps } from './types'
 
 import * as Yup from 'yup'
 
@@ -36,7 +36,7 @@ const validate = Yup.object().shape({
         ),
 })
 
-const StepActivationSpecialty = ({ nextStep, prevStep, ...rest }: StepProps) => {
+const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
     const { values } = useFormikContext<ActivateAccount>()
 
     const requiredValid = useMemo((): boolean => {
@@ -70,6 +70,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep, ...rest }: StepProps) => 
                 required
             />
             <FieldControlSelect
+                ctx={values}
                 type="text"
                 label="Especialidade"
                 required
@@ -77,6 +78,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep, ...rest }: StepProps) => 
                 options={options}
             />
             <FieldControlSelect
+                ctx={values}
                 isMulti
                 type="text"
                 required

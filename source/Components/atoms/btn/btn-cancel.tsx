@@ -1,4 +1,4 @@
-import { BtnProps } from './types'
+import type { BtnProps } from './btn'
 
 const BtnCancel = ({
     onClick,

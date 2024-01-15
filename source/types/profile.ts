@@ -40,11 +40,14 @@ export type ProfileUserInformation = {
     address: Location
 }
 
+export type IVeterinaryInformation = {
+    crmv: string
+    cpf_cnpj: string
+} & SpecialtyInformation
+
 export type IProfile = {
     id?: string
-    cpf_cnpj: string
-    crmv: string
-    specialty_information: SpecialtyInformation
+    veterinary_information: IVeterinaryInformation
     user_information: ProfileUserInformation
 }
 

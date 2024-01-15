@@ -1,26 +1,25 @@
 import {
-    FieldHelperProps,
-    FieldInputProps,
-    FieldMetaProps,
     useField as useOriginalField,
+    type FieldHelperProps,
+    type FieldInputProps,
+    type FieldMetaProps,
 } from 'formik'
 
-function useFieldSafe(
+function useFieldSafe<T = string>(
     fieldName: string,
-): [FieldInputProps<any>, FieldMetaProps<any>, FieldHelperProps<any>] {
+): [FieldInputProps<T>, FieldMetaProps<T>, FieldHelperProps<T>] {
     try {
         // Tenta usar o hook useField do Formik
         const field = useOriginalField(fieldName)
         return field
-    } catch (error) {
-        console.info('Context not found, using default field')
+    } catch (_) {
         const defaultField: [
-            FieldInputProps<any>,
-            FieldMetaProps<any>,
-            FieldHelperProps<any>,
+            FieldInputProps<T>,
+            FieldMetaProps<T>,
+            FieldHelperProps<T>,
         ] = [
             {
-                value: '',
+                value: '' as T,
                 onChange: () => {},
                 onBlur: () => {},
                 name: fieldName,
@@ -31,14 +30,15 @@ function useFieldSafe(
                 touched: false,
                 error: undefined,
                 initialTouched: false,
-                value: '',
+                value: '' as T,
             },
             {
-                setValue: () => {},
-                setTouched: () => {},
+                setValue: () => Promise.resolve(),
+                setTouched: () => Promise.resolve(),
                 setError: () => {},
             },
-        ]
+        ] as const
+
         return defaultField
     }
 }

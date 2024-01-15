@@ -2,12 +2,12 @@ import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
 import { FieldArray, useFormikContext } from 'formik'
 import { useMemo } from 'react'
-import { OptionSelect } from '~/Components/molecules/field-control'
+import type { OptionSelect } from '~/Components/molecules/field-control'
 import CardInputTreatment from '~/Components/organism/card-input-treatment'
-import { StepProps, Tabs } from '~/types/helpers'
+import type { StepProps, Tabs } from '~/types/helpers'
 import {
-    CtxStepTreatment,
     schemaStepTreatmentValidation,
+    type CtxStepTreatment,
 } from '../../../validations.yup'
 
 const items: OptionSelect[] = [
@@ -102,14 +102,16 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                         )}
                         <CardInputTreatment
                             items={items}
-                            handleSubmit={async (data, formikHelpers) => {
-                                const { label, value } =
-                                    data.type_treatment as OptionSelect
-                                push({
-                                    ...data,
-                                    type_treatment: value,
+                            handleSubmit={(data, formikHelpers) => {
+                                return new Promise(() => {
+                                    const { value } =
+                                        data.type_treatment as OptionSelect
+                                    push({
+                                        ...data,
+                                        type_treatment: value,
+                                    })
+                                    formikHelpers.resetForm()
                                 })
-                                formikHelpers.resetForm()
                             }}
                         />
                     </>

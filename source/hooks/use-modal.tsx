@@ -1,6 +1,12 @@
 import { useCallback, useState } from 'react'
 
-const useModal = () => {
+export type IHookModal = {
+    open: boolean
+    closeModal: () => void
+    showModal: () => void
+}
+
+const useModal = (): IHookModal => {
     const [open, setOpen] = useState(false)
 
     const closeModal = useCallback(() => {

@@ -25,7 +25,7 @@ type AppointmentsPageProps = {
 }
 
 const initialValues = (
-    { id: id_pet, pet_information, main_responsible_guardian, cpf_tutor }: IPetV2,
+    { id: id_pet, pet_information, main_responsible_guardian }: IPetV2,
     profile: DTOProfile,
     appointment_id: string | null = null,
 ): VeterinaryConsultation => ({
@@ -34,9 +34,6 @@ const initialValues = (
         note: '',
         questions_anamnesis: [],
     },
-    cpf_cnpj_vet: profile.cpf_cnpj,
-    crmv_vet: profile.crmv,
-    cpf_tutor,
     dates_consults: {
         additional_remarks: '',
         date_consultation: '',
@@ -44,7 +41,6 @@ const initialValues = (
         time_consultation: '',
         type_consultation: '',
     },
-    id_pet: id_pet as string,
     treatments: {
         note: '',
         questions_treatment: [],
@@ -86,9 +82,16 @@ const initialValues = (
         },
     },
     tutor_pet_vet: {
-        pet: pet_information,
+        pet: {
+            ...pet_information,
+            id_pet: id_pet as string,
+        },
         tutor: main_responsible_guardian,
-        veterinary: profile,
+        veterinary: {
+            ...profile,
+            cpf_cnpj: profile?.cpf_cnpj,
+            crmv: profile?.crmv,
+        },
     },
 })
 

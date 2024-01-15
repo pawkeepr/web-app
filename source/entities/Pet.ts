@@ -1,5 +1,5 @@
-import { IPet } from '~/types/pet'
-import {
+import type { IPet } from '~/types/pet'
+import type {
     IHealthInsurance,
     IMainResponsibleGuardian,
     IPetV2,
@@ -7,14 +7,12 @@ import {
     ITutor,
     PetData,
 } from '~/types/pet-v2'
-import { DTOProfile } from '~/types/profile'
-import { Contact, Location } from '~/validations/activate'
+import type { Contact, DTOProfile, Location } from '~/types/profile'
 import { PetInformation } from './PetInformation'
 import { Veterinary } from './Veterinary'
 
 export class Pet implements IPetV2 {
     id: string | null
-    cpf_tutor: string
     pet_information: PetData
     main_responsible_guardian: IMainResponsibleGuardian
     secondary_responsible_tutor: ISecondaryTutor
@@ -23,9 +21,9 @@ export class Pet implements IPetV2 {
 
     constructor() {
         this.id = ''
-        this.cpf_tutor = ''
 
         this.pet_information = {
+            id_pet: null,
             name_pet: '',
             microchip: null,
             identification_number: null,
@@ -50,6 +48,7 @@ export class Pet implements IPetV2 {
             validity: null,
         }
         this.main_responsible_guardian = {
+            cpf_cnpj: '',
             address: {
                 city: '',
                 complement: '',
@@ -77,18 +76,34 @@ export class Pet implements IPetV2 {
         }
 
         this.veterinary = {
+            address: {
+                city: '',
+                complement: '',
+                country: 'BR',
+                neighborhood: '',
+                number: '',
+                state: '',
+                street: '',
+                zipCode: '',
+            },
+            contact: {
+                email: '',
+                phone: '',
+                whatsapp: '',
+                facebook: null,
+                instagram: null,
+                linkedIn: null,
+                twitter: null,
+                youtube: null,
+            },
+            name: '',
             cpf_cnpj: '',
             crmv: '',
-            name_veterinary: '',
+            first_name: '',
+            last_name: '',
+            id: '',
+            url_img: '',
             specialty: '',
-            email: '',
-            phone: '',
-            whatsapp: '',
-            country: '',
-            state: '',
-            city: '',
-            neighborhood: '',
-            street: '',
         }
 
         this.secondary_responsible_tutor = {
@@ -104,11 +119,6 @@ export class Pet implements IPetV2 {
         return this
     }
 
-    defineCpfTutor(cpf_tutor: string): this {
-        this.cpf_tutor = cpf_tutor
-        return this
-    }
-
     definePetInformation(pet_information: PetData): this {
         this.pet_information = PetInformation.build(pet_information)
         return this
@@ -121,6 +131,13 @@ export class Pet implements IPetV2 {
         this.main_responsible_guardian.last_name =
             main_responsible_guardian?.last_name
         this.main_responsible_guardian.url_img = main_responsible_guardian?.url_img
+
+        if (!main_responsible_guardian?.cpf_cnpj?.trim()) {
+            throw new Error('CPF/CNPJ is required')
+        }
+
+        this.main_responsible_guardian.cpf_cnpj =
+            main_responsible_guardian?.cpf_cnpj
 
         return this
     }
@@ -156,8 +173,8 @@ export class Pet implements IPetV2 {
     static build(params: IPet): Pet {
         return new Pet()
             .defineID(params?.id as string)
-            .defineCpfTutor(params?.cpf_tutor)
             .definePetInformation({
+                id_pet: params?.id as string,
                 blood_donator: params?.blood_donator || 'no',
                 blood_type: params?.bloodType || 'unknown',
                 color: params?.color || '',
@@ -204,6 +221,7 @@ export class Pet implements IPetV2 {
                 zipCode: params?.ownerEmergencyContact?.address?.zipCode || '',
             })
             .defineTutorInformation({
+                cpf_cnpj: params?.ownerEmergencyContact?.cpf_cnpj,
                 name: params?.ownerEmergencyContact?.name,
                 first_name: params?.ownerEmergencyContact?.name,
                 last_name: params?.ownerEmergencyContact?.name,

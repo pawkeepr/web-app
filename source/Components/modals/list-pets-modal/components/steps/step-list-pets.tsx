@@ -3,10 +3,10 @@ import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldControl from '~/Components/molecules/field-control/field-control'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import {
-    KeyOfMapOptionSpecies,
     MapOptionSpecies,
+    type KeyOfMapOptionSpecies,
 } from '~/store/slices/pets/speciesType'
-import { CtxSimplifiedPedFields, StepProps } from '../../types'
+import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
 import { option } from '../helpers'
 
 enum EmojiPet {
@@ -22,7 +22,7 @@ enum EmojiPet {
 type Key = keyof typeof EmojiPet
 
 const StepListPets = ({ nextStep, pets, handleNavigate, isLoading }: StepProps) => {
-    const { values } = useFormikContextSafe<CtxSimplifiedPedFields>()
+    const { values } = useFormikContextSafe<CtxSimplifiedPeTFields>()
 
     return (
         <div className="mt-3 gap-2">
@@ -61,7 +61,7 @@ const StepListPets = ({ nextStep, pets, handleNavigate, isLoading }: StepProps) 
             </div>
 
             <FieldControl
-                ctx={{} as CtxSimplifiedPedFields}
+                ctx={values}
                 name="name"
                 label="Caso o pet não esteja na lista, digite o nome dele para prosseguir:"
                 className=" w-full mb-4"
@@ -69,7 +69,7 @@ const StepListPets = ({ nextStep, pets, handleNavigate, isLoading }: StepProps) 
             />
 
             <BoxButtons
-                isValid={values.name.length > 0}
+                isValid={values.name?.length > 0}
                 link={false}
                 cancel={(props) => (
                     <BtnLink

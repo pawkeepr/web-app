@@ -8,7 +8,6 @@ import type { ITutor } from './tutor'
 export type IPet = {
     id?: string
     name: string
-    cpf_tutor: string
     specie: Species
     race: Breed
     microchip?: string

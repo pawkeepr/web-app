@@ -1,19 +1,49 @@
 import type { OptionSelect } from '~/Components/molecules/field-control'
-import type { IMainResponsibleGuardian, PetData } from './pet-v2'
+import type { IMainResponsibleGuardian, On_Off, PetData } from './pet-v2'
 import type { DTOProfile } from './profile'
 
 export interface VeterinaryConsultation {
     id?: string | null
-    id_pet: string
-    cpf_tutor: string
-    crmv_vet: string
-    cpf_cnpj_vet: string
+    // id_pet: string
+    // cpf_tutor: string
+    // crmv_vet: string
+    // cpf_cnpj_vet: string
     dates_consults: DateConsults
     tutor_pet_vet: TutorPetVet
     details_pet_consultation: DetailsPetConsultation
     anamnesis: Anamnesis
     treatments: Treatments
     appointment_details: AppointmentDetails
+    appointment_status?: AppointmentStatus
+}
+
+export type AppointmentStatus = {
+    canceled: On_Off
+    confirmed: On_Off
+    done: On_Off
+    reason_canceled: string
+    rescheduled: On_Off
+    scheduled: On_Off
+}
+
+export interface ISignatureAppointment {
+    signature_data: string
+    date_signature: string
+    type_signature: string
+    status_signature: string
+    ip_address: string
+    browser_device: string
+    operational_system: string
+}
+
+export interface IGeolocationAppointment {
+    latitude: string
+    longitude: string
+    precision: string
+    altitude: string
+    speed: string
+    heading: string
+    date_geolocation: string
 }
 
 export interface DateConsults {

@@ -1,6 +1,6 @@
-import { FieldHookConfig } from 'formik'
-import { DetailedHTMLProps, HTMLAttributes } from 'react'
-import { ObjPaths } from '~/types/helpers'
+import type { FieldHookConfig } from 'formik'
+import type { DetailedHTMLProps, HTMLAttributes } from 'react'
+import type { ObjPaths } from '~/types/helpers'
 
 export type InputControlProps<T, Ctx = undefined> = FieldHookConfig<string> &
     T & {

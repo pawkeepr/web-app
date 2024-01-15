@@ -1,6 +1,6 @@
-import { RefAttributes } from 'react'
+import type { RefAttributes } from 'react'
 import Popup from 'reactjs-popup'
-import { PopupActions, PopupProps } from 'reactjs-popup/dist/types'
+import type { PopupActions, PopupProps } from 'reactjs-popup/dist/types'
 
 import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
 

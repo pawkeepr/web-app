@@ -1,12 +1,8 @@
 import * as Yup from 'yup'
 
-import { Contact } from '~/types/profile'
+import type { Contact } from '~/types/profile'
 import Address from './address'
-
-const transformTrim = (value: any, originalValue: string) => {
-    // Remover espaços em branco extras da string
-    return typeof originalValue === 'string' ? originalValue.trim() : originalValue
-}
+import contactValidationSchema from './contact'
 
 export type IMainTutor = {
     first_name: string
@@ -24,12 +20,12 @@ const validate = Yup.object().shape({
         .email('O email deve ser válido')
         .required('O campo de email é obrigatório'),
     firstName: Yup.string()
-        .transform(transformTrim)
+        .trim()
         .min(2, 'O nome deve ter pelo menos 2 caracteres')
         .max(50, 'O nome deve ter no máximo 50 caracteres')
         .required('O campo de nome é obrigatório'),
     lastName: Yup.string()
-        .transform(transformTrim)
+        .trim()
         .min(2, 'O sobrenome deve ter pelo menos 2 caracteres')
         .max(155, 'O sobrenome deve ter no máximo 50 caracteres')
         .required('O campo de sobrenome é obrigatório'),
@@ -54,31 +50,7 @@ const validate = Yup.object().shape({
             }),
         )
         .required(),
-    contact: Yup.object().shape({
-        email: Yup.string()
-            .email('O email deve ser válido')
-            .required('O campo de email é obrigatório'),
-        phone: Yup.string()
-            .matches(
-                /^\+55 \(\d{2}\) \d \d{4}-\d{4}$/,
-                'Número de telefone inválido',
-            )
-            .test('phone-validator', 'Número de telefone inválido', (value) => {
-                if (!value) return false
-                return value.length >= 10
-            })
-            .required('O campo de telefone é obrigatório'),
-        whatsapp: Yup.string()
-            .matches(
-                /^\+55 \(\d{2}\) \d \d{4}-\d{4}$/,
-                'Número de telefone inválido',
-            )
-            .test('phone-validator', 'Número de telefone inválido', (value) => {
-                if (!value) return false
-                return value.length >= 10
-            })
-            .required('O campo de whatsapp é obrigatório'),
-    }),
+    contact: contactValidationSchema,
     cpf_cnpj: Yup.string()
         .required('Este campo é obrigatório')
         .transform((value) => value.replace(/[^\d]/g, '')),

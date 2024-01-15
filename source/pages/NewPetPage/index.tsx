@@ -1,29 +1,29 @@
-import { Formik } from 'formik';
-import { useRouter } from 'next/navigation';
-import { useCallback, useMemo } from 'react';
-import usePetsByDocument from '~/store/hooks/list-pets-of-tutor';
-import DashboardLayouts from '../_layouts/dashboard';
-import Tabs from './components/templates/vertical-tabs';
+import { Formik } from 'formik'
+import { useRouter } from 'next/navigation'
+import { useCallback, useMemo } from 'react'
+import usePetsByDocument from '~/store/hooks/list-pets-of-tutor'
+import DashboardLayouts from '../_layouts/dashboard'
+import Tabs from './components/templates/vertical-tabs'
 
-import { BtnCancel } from '~/Components/atoms/btn';
-import ModalConfirm from '~/Components/modals/confirm-modal';
-import { Veterinary } from '~/entities/Veterinary';
-import useProfileVeterinary from '~/hooks/use-profile-veterinary';
-import { IPet } from '~/types/pet';
-import { Address } from '~/validations/address';
+import { BtnCancel } from '~/Components/atoms/btn'
+import ModalConfirm from '~/Components/modals/confirm-modal'
+import type { Veterinary } from '~/entities/Veterinary'
+import useProfileVeterinary from '~/hooks/use-profile-veterinary'
+import type { IPet } from '~/types/pet'
+import type { Location } from '~/types/profile'
 
-export type InitialValues = Nullable<IPet>;
+export type InitialValues = Nullable<IPet>
 
 type MakeInitialValuesProps = {
-    cpf_tutor: string;
-    name_tutor?: string;
-    phone?: string;
-    email?: string;
-    whatsapp?: string;
-    veterinary?: Veterinary;
-    address?: Address;
-};
-type MakeInitialValues = (props: MakeInitialValuesProps) => InitialValues;
+    cpf_tutor: string
+    name_tutor?: string
+    phone?: string
+    email?: string
+    whatsapp?: string
+    veterinary?: Veterinary
+    address?: Location
+}
+type MakeInitialValues = (props: MakeInitialValuesProps) => InitialValues
 
 export const makeInitialValues: MakeInitialValues = ({
     cpf_tutor,
@@ -49,7 +49,7 @@ export const makeInitialValues: MakeInitialValues = ({
     date_birth: null,
     phone_tutor: phone,
     ownerEmergencyContact: {
-        cpf_cnpj: '',
+        cpf_cnpj: cpf_tutor,
         email: email || '',
         phone: phone || '',
         whatsapp: whatsapp || phone || '',
@@ -70,24 +70,24 @@ export const makeInitialValues: MakeInitialValues = ({
     },
     name: '',
     veterinary,
-});
+})
 
 type PetPageProps = {
-    document: string;
-};
+    document: string
+}
 
 const NewPetPage = ({ document }: PetPageProps) => {
     const { activeData, handleSubmit, isLoading } = usePetsByDocument(
         document,
-        'full'
-    );
-    const pets = useMemo(() => activeData || [], [activeData]);
-    const veterinary = useProfileVeterinary();
-    const router = useRouter();
+        'full',
+    )
+    const pets = useMemo(() => activeData || [], [activeData])
+    const veterinary = useProfileVeterinary()
+    const router = useRouter()
 
     const initialValues = useMemo(() => {
-        const fullName = `${pets[0]?.main_responsible_guardian.first_name} ${pets[0]?.main_responsible_guardian.last_name}`;
-        const trimmedName = fullName.trim();
+        const fullName = `${pets[0]?.main_responsible_guardian.first_name} ${pets[0]?.main_responsible_guardian.last_name}`
+        const trimmedName = fullName.trim()
 
         return makeInitialValues({
             cpf_tutor: document,
@@ -97,23 +97,23 @@ const NewPetPage = ({ document }: PetPageProps) => {
             whatsapp: pets[0]?.main_responsible_guardian.contact
                 ?.whatsapp as string,
             veterinary,
-            address: pets[0]?.main_responsible_guardian.address as Address,
-        });
-    }, [pets, document, veterinary]) as IPet;
+            address: pets[0]?.main_responsible_guardian.address as Location,
+        })
+    }, [pets, document, veterinary]) as IPet
 
     const onSubmit = useCallback(
         async (values: IPet) => {
             try {
-                const data = await handleSubmit(values);
-                if (data) router.push('/dashboard');
-            } catch (error) {
-                console.log(error);
+                const data = await handleSubmit(values)
+                if (data) router.push('/dashboard')
+            } catch (_) {
+                // console.log(error)
             }
         },
-        [handleSubmit]
-    );
+        [handleSubmit],
+    )
 
-    const tutorExist = useMemo(() => pets.length > 0, [pets]);
+    const tutorExist = useMemo(() => pets.length > 0, [pets])
 
     return (
         <DashboardLayouts title="Novo Pet">
@@ -136,14 +136,14 @@ const NewPetPage = ({ document }: PetPageProps) => {
                                     label="Cancelar"
                                     onClick={() => onChangeOpen(true)}
                                 />
-                            );
+                            )
                         }}
                     </ModalConfirm>
                     <Tabs isPending={isLoading} tutorExist={tutorExist} />
                 </div>
             </Formik>
         </DashboardLayouts>
-    );
-};
+    )
+}
 
-export default NewPetPage;
+export default NewPetPage

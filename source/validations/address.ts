@@ -1,24 +1,13 @@
 import * as Yup from 'yup'
+import type { RecordsShapeYup } from '~/types/helpers'
+import type { Location } from '~/types/profile'
 
-const transformTrim = (value: any, originalValue: string) => {
-    // Remover espaços em branco extras da string
-    return typeof originalValue === 'string' ? originalValue.trim() : originalValue
-}
-
-const schema = Yup.object().shape({
-    street: Yup.string()
-        .transform(transformTrim)
-        .required('O campo Rua é obrigatório'),
-    number: Yup.string()
-        .transform(transformTrim)
-        .required('O campo Número é obrigatório'),
-    complement: Yup.string().transform(transformTrim),
-    neighborhood: Yup.string()
-        .transform(transformTrim)
-        .required('O campo Bairro é obrigatório'),
-    city: Yup.string()
-        .transform(transformTrim)
-        .required('O campo Cidade é obrigatório'),
+const locationValidationSchema = Yup.object().shape<RecordsShapeYup<Location>>({
+    street: Yup.string().trim().required('O campo Rua é obrigatório'),
+    number: Yup.string().trim().required('O campo Número é obrigatório'),
+    complement: Yup.string().trim(),
+    neighborhood: Yup.string().trim().required('O campo Bairro é obrigatório'),
+    city: Yup.string().trim().required('O campo Cidade é obrigatório'),
     state: Yup.string()
         .max(3, 'O campo Estado deve ter no max 3 caracteres')
         .min(2, 'O campo Estado deve ter no min 2 caracteres')
@@ -29,6 +18,6 @@ const schema = Yup.object().shape({
     country: Yup.string(),
 })
 
-export type Address = Yup.InferType<typeof schema>
+export type YupAddress = Yup.InferType<typeof locationValidationSchema>
 
-export default schema
+export default locationValidationSchema

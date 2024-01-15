@@ -1,6 +1,9 @@
 import * as yup from 'yup'
-import { AppointmentDetails, VeterinaryConsultation } from '~/types/appointment'
-import { RecordsShapeYup } from '~/types/helpers'
+import type {
+    AppointmentDetails,
+    VeterinaryConsultation,
+} from '~/types/appointment'
+import type { RecordsShapeYup } from '~/types/helpers'
 
 export type CtxStepAnamnese = Pick<
     VeterinaryConsultation,
@@ -9,7 +12,7 @@ export type CtxStepAnamnese = Pick<
 
 export type CtxStepTreatment = Pick<VeterinaryConsultation, 'treatments'>
 
-const schemaValidationDetailsPetConsultation = yup
+export const schemaValidationDetailsPetConsultation = yup
     .object()
     .shape<RecordsShapeYup<VeterinaryConsultation['details_pet_consultation']>>({
         age: yup.string().optional().nullable(),
@@ -46,7 +49,12 @@ export const schemaTutorPetVetValidation = yup
     .object()
     .shape<RecordsShapeYup<VeterinaryConsultation['tutor_pet_vet']>>({
         tutor: yup.object().required(),
-        pet: yup.object().required(),
+        pet: yup
+            .object()
+            .shape({
+                id_pet: yup.string().required(),
+            })
+            .required(),
         veterinary: yup.object().required(),
     })
 
@@ -85,10 +93,6 @@ export const schemaStepAppointment = yup
     .object()
     .shape<RecordsShapeYup<VeterinaryConsultation>>({
         id: yup.string().optional(),
-        id_pet: yup.string().optional(),
-        cpf_tutor: yup.string().required(),
-        crmv_vet: yup.string().required(),
-        cpf_cnpj_vet: yup.string().required(),
         dates_consults: yup.object().optional(),
         tutor_pet_vet: schemaTutorPetVetValidation,
         details_pet_consultation: schemaValidationDetailsPetConsultation,

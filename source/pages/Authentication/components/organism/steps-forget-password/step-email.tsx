@@ -3,7 +3,7 @@ import FieldControl from '~/Components/molecules/field-control/field-control'
 import LOADING from '~/constants/loading'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
 
-import { FormEventHandler, useEffect } from 'react'
+import { useEffect, type FormEventHandler } from 'react'
 import { forgetPwd, resetLoading } from '~/store/slices/auth/forget-pwd/actions'
 
 import Alert from '~/Components/atoms/alert'

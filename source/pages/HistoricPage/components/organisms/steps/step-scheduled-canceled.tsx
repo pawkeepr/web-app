@@ -1,8 +1,8 @@
+import CardScheduled from '~/Components/organism/card-scheduled/card-scheduled'
 import useListAppointments from '~/store/hooks/list-appointments'
-import CardScheduled from '../organisms/card-scheduled'
 
-const StepAll = () => {
-    const { activeData, isLoading } = useListAppointments({ mode: 'rescheduled' })
+const StepCanceled = () => {
+    const { activeData, isLoading } = useListAppointments({ mode: 'canceled' })
 
     if (isLoading) return <div>Loading...</div>
 
@@ -15,4 +15,4 @@ const StepAll = () => {
     )
 }
 
-export default StepAll
+export default StepCanceled

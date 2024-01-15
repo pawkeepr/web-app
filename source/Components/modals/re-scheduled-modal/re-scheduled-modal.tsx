@@ -56,11 +56,12 @@ const ReScheduledModal = ({
                     h-fit
                     min-w-fit
                     flex
-                    flex-col     
+                    flex-col
+                    !w-fit
                 "
             >
                 <Formik
-                    initialValues={item as any}
+                    initialValues={item}
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
                 >
@@ -74,9 +75,7 @@ const ReScheduledModal = ({
                                     {'Reagendar Consulta'}
                                 </h2>
 
-                                <CardTutor
-                                    pet={(values as IAppointmentVet).pet_data}
-                                />
+                                <CardTutor pet={values.tutor_pet_vet?.pet} />
                                 {item && (
                                     <div className="flex justify-around gap-3">
                                         <p className="text-gray-500 flex justify-between">
@@ -99,6 +98,7 @@ const ReScheduledModal = ({
                                 <section className="my-2">
                                     <div className="flex justify-around gap-3">
                                         <FieldControl
+                                            ctx={values}
                                             label="Data da consulta"
                                             name="dates_consults.date_consultation"
                                             required
@@ -108,6 +108,7 @@ const ReScheduledModal = ({
                                         />
 
                                         <FieldControl
+                                            ctx={values}
                                             label="Hora da consulta"
                                             required
                                             name="dates_consults.time_consultation"
@@ -118,7 +119,7 @@ const ReScheduledModal = ({
                                     </div>
                                 </section>
 
-                                <div className="mt-4 flex justify-center items-center w-3/6">
+                                <div className="mt-4 flex justify-center items-center">
                                     <BtnCancel
                                         type="button"
                                         onClick={closeModal}

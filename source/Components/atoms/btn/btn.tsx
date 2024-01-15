@@ -1,6 +1,7 @@
-import Link, { LinkProps } from 'next/link'
-import React, { ComponentProps } from 'react'
-import { VariantProps, tv } from 'tailwind-variants'
+import Link, { type LinkProps } from 'next/link'
+import type React from 'react'
+import type { ComponentProps } from 'react'
+import { tv, type VariantProps } from 'tailwind-variants'
 import BtnAvatar from './btn-avatar'
 
 import withControl from '~/Components/helpers/with-control'

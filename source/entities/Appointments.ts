@@ -1,25 +1,19 @@
 import type {
-    IGeolocationAppointment,
-    ISignatureAppointment,
-} from '~/store/slices/appointment-vet/types'
-import type {
     Anamnesis,
     AppointmentDetails,
     DateConsults,
     DetailsPetConsultation,
+    IGeolocationAppointment,
     IPayment,
+    ISignatureAppointment,
     Treatments,
     TutorPetVet,
     VeterinaryConsultation,
 } from '~/types/appointment'
-import type { DTOProfile } from '~/types/profile'
+import type { Contact, Location } from '~/types/profile'
 
 export class Appointments implements VeterinaryConsultation {
     id?: string | null
-    id_pet: string
-    cpf_tutor: string
-    crmv_vet: string
-    cpf_cnpj_vet: string
     appointment_details: AppointmentDetails
     dates_consults: DateConsults
     tutor_pet_vet: TutorPetVet
@@ -29,10 +23,6 @@ export class Appointments implements VeterinaryConsultation {
 
     constructor() {
         this.id = ''
-        this.id_pet = ''
-        this.cpf_tutor = ''
-        this.crmv_vet = ''
-        this.cpf_cnpj_vet = ''
         this.dates_consults = {
             date_consultation: '',
             time_consultation: '',
@@ -42,6 +32,7 @@ export class Appointments implements VeterinaryConsultation {
         }
         this.tutor_pet_vet = {
             pet: {
+                id_pet: '',
                 blood_donator: 'no',
                 blood_type: '',
                 castrated: 'no',
@@ -60,6 +51,7 @@ export class Appointments implements VeterinaryConsultation {
                 weight: '',
             },
             tutor: {
+                cpf_tutor: '',
                 address: {
                     city: '',
                     complement: '',
@@ -85,7 +77,18 @@ export class Appointments implements VeterinaryConsultation {
                 name: '',
                 url_img: '',
             },
-            veterinary: {} as DTOProfile,
+            veterinary: {
+                crmv: '',
+                cpf_cnpj: '',
+                specialty: '',
+                address: {} as Location,
+                contact: {} as Contact,
+                first_name: '',
+                id: '',
+                last_name: '',
+                name: '',
+                url_img: '',
+            },
         }
         this.details_pet_consultation = {
             age: '',
@@ -112,26 +115,6 @@ export class Appointments implements VeterinaryConsultation {
 
     defineId(id: string | null = null): this {
         this.id = id
-        return this
-    }
-
-    defineIdPet(id_pet: string): this {
-        this.id_pet = id_pet
-        return this
-    }
-
-    defineCpfTutor(cpf_tutor: string): this {
-        this.cpf_tutor = cpf_tutor
-        return this
-    }
-
-    defineCrmvVet(crmv_vet: string): this {
-        this.crmv_vet = crmv_vet
-        return this
-    }
-
-    defineCpfCnpjVet(cpf_cnpj_vet: string): this {
-        this.cpf_cnpj_vet = cpf_cnpj_vet
         return this
     }
 
@@ -192,10 +175,6 @@ export class Appointments implements VeterinaryConsultation {
     static build(params: VeterinaryConsultation): Appointments {
         return new Appointments()
             .defineId(params?.id ?? null)
-            .defineIdPet(params?.id_pet)
-            .defineCpfTutor(params?.cpf_tutor)
-            .defineCrmvVet(params?.crmv_vet)
-            .defineCpfCnpjVet(params?.cpf_cnpj_vet)
             .defineAppointmentSignature(
                 params?.appointment_details?.appointment_signature,
             )

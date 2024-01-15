@@ -1,35 +1,86 @@
-import cn from 'classnames'
+import { useRef, type ForwardRefExoticComponent, type RefAttributes } from 'react'
+import { tv } from 'tailwind-variants'
 import MyImage from '~/Components/atoms/my-image'
 import ravena from '~/assets/images/ravena.jpeg'
-import { IAppointmentVet } from '~/store/slices/appointment-vet/types'
-import BoxButtons from './box-buttons'
+import type { IHookModal } from '~/hooks/use-modal'
+import useResizeMobile from '~/hooks/use-resize-mobile'
+import type { VeterinaryConsultation } from '~/types/appointment'
+import { getNameTutor } from '~/utils/get-name-tutors'
+import BoxButtons from '../box-buttons'
+import ModalBoxButtons from '../box-buttons/modal-box-buttons'
 
 type BoxButtonsProps = {
-    item: IAppointmentVet
+    item: VeterinaryConsultation
 }
 
 type CardScheduledProps = {
     checked?: boolean
-    appointment: IAppointmentVet
+    appointment: VeterinaryConsultation
     boxButtons?: null | ((props: BoxButtonsProps) => JSX.Element)
 }
+
+const card = tv({
+    base: `
+        bg-white relative flex flex-col rounded-lg px-2 py-2 shadow-md focus:outline-none
+    `,
+    variants: {
+        checked: {
+            true: '!bg-primary-500 bg-opacity-60 text-white',
+        },
+        confirmed: {
+            yes: 'border-l-4 !border-[#0971B3]',
+            no: '',
+        },
+        scheduled: {
+            yes: 'border-l-4 border-primary-500',
+            no: '',
+        },
+        rescheduled: {
+            yes: 'border-l-4 border-secondary-500',
+            no: '',
+        },
+        canceled: {
+            yes: 'border-l-4 border-red-500',
+            no: '',
+        },
+        isMobile: {
+            true: 'hover:bg-gray-100 hover:bg-opacity-50 cursor-pointer',
+            false: 'mobile:grid mobile:grid-cols-2',
+        },
+    },
+})
 
 const CardScheduled = ({
     checked,
     appointment,
     boxButtons = (props) => <BoxButtons {...props} />,
 }: CardScheduledProps) => {
+    const ref = useRef<ForwardRefExoticComponent<RefAttributes<IHookModal>>>(null)
+
     const BoxButtons = boxButtons
+    const name = getNameTutor(appointment?.tutor_pet_vet.tutor)
+    const { isMobile } = useResizeMobile()
 
     return (
         <div
             key={appointment?.id}
-            className={cn(
-                'bg-white relative flex flex-col cursor-pointer rounded-lg px-2 py-2 shadow-md focus:outline-none`',
-                {
-                    '!bg-primary-500 bg-opacity-60 text-white': checked,
-                },
-            )}
+            onClick={() => {
+                if (!isMobile) return
+                if (!ref?.current) return
+                const castRef = ref.current as unknown as IHookModal
+                castRef?.showModal?.()
+            }}
+            onKeyUp={() => {}}
+            className={card({
+                checked,
+                isMobile,
+                // a ordem é importante para o tailwind definir a prioridade e sobrescrever o estilo corretamente:
+                // Agenda, Reagendada, Confirmada, Cancelada
+                scheduled: appointment.appointment_status?.scheduled,
+                rescheduled: appointment.appointment_status?.rescheduled,
+                confirmed: appointment.appointment_status?.confirmed,
+                canceled: appointment.appointment_status?.canceled,
+            })}
         >
             <div className="mb-2">
                 <div className="flex flex-col w-full">
@@ -100,11 +151,9 @@ const CardScheduled = ({
                             {'Informações Do Tutor:'}
 
                             <div className="p-2">
+                                <p className="text-gray-700">Nome: {name}</p>
                                 <p className="text-gray-700">
-                                    Nome: {appointment?.tutor_pet_vet.tutor?.name}
-                                </p>
-                                <p className="text-gray-700">
-                                    Nome:{' '}
+                                    Email:{' '}
                                     {
                                         appointment?.tutor_pet_vet.tutor?.contact
                                             ?.email
@@ -123,7 +172,8 @@ const CardScheduled = ({
                 </div>
             </div>
 
-            {BoxButtons && <BoxButtons item={appointment} />}
+            {BoxButtons && !isMobile && <BoxButtons item={appointment} />}
+            {isMobile && <ModalBoxButtons item={appointment} ref={ref} />}
         </div>
     )
 }

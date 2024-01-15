@@ -3,7 +3,7 @@ import { useField } from 'formik'
 import type { InputControlProps } from './types'
 
 import cn from 'classnames'
-import { ChangeEvent } from 'react'
+import type { ChangeEvent } from 'react'
 import { twMerge } from 'tailwind-merge'
 import Input from '~/Components/atoms/input/input'
 import Label from '~/Components/atoms/label'
@@ -11,16 +11,12 @@ import Label from '~/Components/atoms/label'
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const FieldControl = <T, Ctx = any>({
     label,
-    children,
     required = false,
     component = Input,
     startIcon,
-    startChildren,
     endIcon,
     separator = ':',
-    disabledError = false,
     className,
-    initialFocus = false,
     divClassName,
     onChange: onChangeDefault,
     ...props

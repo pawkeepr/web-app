@@ -1,7 +1,7 @@
-import {
+import type {
     IGeolocationAppointment,
     ISignatureAppointment,
-} from '~/store/slices/appointment-vet/types'
+} from '~/types/appointment'
 import { browser } from './navigator.utils'
 
 type Geolocation = [IGeolocationAppointment, ISignatureAppointment]

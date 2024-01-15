@@ -93,7 +93,6 @@ const ModalListPets = ({
 
     const initialValues: IPet = {
         name: '',
-        cpf_tutor: document,
         specie: 'unknown',
         race: 'unknown',
         ownerEmergencyContact: {

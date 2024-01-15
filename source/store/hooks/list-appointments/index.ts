@@ -106,6 +106,7 @@ export const useListAppointments = ({
         entity,
         keys,
         name,
+        initialData: [],
     })
 }
 

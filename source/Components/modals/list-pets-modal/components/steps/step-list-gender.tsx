@@ -1,13 +1,13 @@
 import BoxButtons from '~/Components/molecules/box-buttons'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import { Gender, GenderBR } from '~/store/slices/pets/speciesType'
-import { CtxSimplifiedPedFields, StepProps } from '../../types'
+import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
 import { option } from '../helpers'
 
 type Key = keyof typeof Gender
 
 const StepListGender = ({ previousStep, nextStep }: StepProps) => {
-    const { values, setFieldValue } = useFormikContextSafe<CtxSimplifiedPedFields>()
+    const { values, setFieldValue } = useFormikContextSafe<CtxSimplifiedPeTFields>()
 
     const handleSelected = (gender: string) => {
         setFieldValue('sex', gender)

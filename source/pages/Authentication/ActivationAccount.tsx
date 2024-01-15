@@ -10,7 +10,7 @@ import TabContainer from 'react-bootstrap/TabContainer'
 import TabContent from 'react-bootstrap/TabContent'
 import TabPane from 'react-bootstrap/TabPane'
 
-import validate, { ActivateAccount, Location } from '~/validations/activate'
+import validate, { type ActivateAccount } from '~/validations/activate'
 
 import { signOutUser } from '~/store/slices/auth/login/actions'
 import { addNew } from '~/store/slices/auth/profile/actions'
@@ -22,11 +22,13 @@ import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 import { BtnLink } from '~/Components/atoms/btn'
 
 import { layoutModeTypes } from '~/Components/constants/layout'
-import { IProfile } from '~/types/profile'
+import type { ActivateAccountVeterinary } from '~/types/activate-account-veterinary'
+import type { Location } from '~/types/profile'
 import StepActivationAddress from './components/organism/steps-activation/step-address'
 import StepActivationFinally from './components/organism/steps-activation/step-finally'
 import StepActivationPerson from './components/organism/steps-activation/step-person'
 import StepActivationSpecialty from './components/organism/steps-activation/step-specialty'
+import type { StepProps } from './components/organism/steps-activation/types'
 
 const initialValues = (email: string): ActivateAccount => ({
     email,
@@ -60,19 +62,19 @@ const initialValues = (email: string): ActivateAccount => ({
 const Tabs = [
     {
         id: '1',
-        component: (props: any) => <StepActivationPerson {...props} />,
+        component: (props: StepProps) => <StepActivationPerson {...props} />,
     },
     {
         id: '2',
-        component: (props: any) => <StepActivationSpecialty {...props} />,
+        component: (props: StepProps) => <StepActivationSpecialty {...props} />,
     },
     {
         id: '3',
-        component: (props: any) => <StepActivationAddress {...props} />,
+        component: (props: StepProps) => <StepActivationAddress {...props} />,
     },
     {
         id: '4',
-        component: (props: any) => <StepActivationFinally {...props} />,
+        component: (props: StepProps) => <StepActivationFinally {...props} />,
     },
 ]
 
@@ -84,30 +86,32 @@ const ActivationAccount = () => {
     const dispatch = useAppDispatch()
 
     const onSubmit = async (values: ActivateAccount) => {
-        const { list_specialty, specialty, list_service_type, ...rest } = values
+        const { list_specialty } = values
 
-        const profile: IProfile = {
-            ...rest,
+        const profile: ActivateAccountVeterinary = {
             user_information: {
-                address: { ...(values.location as Location) },
-                first_name: values.firstName,
-                last_name: values.lastName,
+                cpf_cnpj: values?.cpf_cnpj,
+                address: { ...(values?.location as Location) },
+                first_name: values?.firstName,
+                last_name: values?.lastName,
                 contact: {
-                    email: values.contact.email,
-                    phone: values.contact.phone,
-                    whatsapp: values.contact.whatsapp,
+                    email: values?.contact.email as string,
+                    phone: values?.contact.phone as string,
+                    whatsapp: values?.contact.whatsapp as string,
                     facebook: '',
                     instagram: '',
                     linkedIn: '',
                     twitter: '',
                     youtube: '',
                 },
-                name: `${values.firstName} ${values.lastName}`,
+                name: `${values?.firstName} ${values?.lastName}`,
                 url_img: '',
             },
-            specialty_information: {
-                list_service_type,
-                specialty: specialty.value,
+            veterinary_information: {
+                cpf_cnpj: values?.cpf_cnpj,
+                crmv: values?.crmv,
+                list_service_type: values?.list_service_type,
+                specialty: values?.specialty.value,
                 list_specialty: list_specialty.map((item) => ({
                     name_specialty: item.label,
                     type: item.value,
@@ -177,13 +181,13 @@ const ActivationAccount = () => {
             <Formik
                 enableReinitialize
                 validationSchema={validate}
-                initialValues={initialValues(email) as any}
+                initialValues={initialValues(email)}
                 onSubmit={onSubmit}
                 initialErrors={{}}
             >
                 <TabContainer activeKey={tab}>
-                    {Tabs.map((tab, index) => (
-                        <TabContent key={index}>
+                    {Tabs.map((tab) => (
+                        <TabContent key={tab.id}>
                             <TabPane
                                 eventKey={tab.id}
                                 data-testid={`step-${tab.id.padStart(2, '0')}`}

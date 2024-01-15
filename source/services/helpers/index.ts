@@ -27,23 +27,23 @@ export const updateProfileTutor = async (data: IProfile, user_id: string) =>
     api.post(urls.TUTOR_UPDATE_PROFILE(), data, { params: { user_id } })
 export const getTutorProfile = async () => api.get(urls.TUTOR_GET_PROFILE())
 
-export const getAllPets = async (cpf_tutor: string) =>
-    api.get(urls.PET_FETCH_ALL(), { params: { cpf_tutor } })
-export const getPet = async (cpf_tutor: string, id_pet: string) =>
-    api.get(urls.PET_GET_PROFILE(), { params: { id_pet, cpf_tutor } })
+export const getAllPets = async (cpf_cnpj: string) =>
+    api.get(urls.PET_FETCH_ALL(), { params: { cpf_cnpj } })
+export const getPet = async (cpf_cnpj: string, id_pet: string) =>
+    api.get(urls.PET_GET_PROFILE(), { params: { id_pet, cpf_cnpj } })
 export const createPet = async (data: any) =>
     api.post(urls.PET_CREATE_PROFILE(), data)
 export const createPetSimplified = async (data: any) =>
     api.post(urls.PET_CREATE_SIMPLIFIED_PROFILE(), data)
-export const updatePet = async (data: any, cpf_tutor: string, id_pet: string) =>
+export const updatePet = async (data: any, cpf_cnpj: string, id_pet: string) =>
     api.post(urls.PET_UPDATE_PROFILE(), data, {
-        params: { id_pet, cpf_tutor },
+        params: { id_pet, cpf_cnpj },
     })
 export const updateHealthPet = async (
     data: any,
-    cpf_tutor: string,
+    cpf_cnpj: string,
     id_pet: string,
-) => api.post(urls.PET_UPDATE_HEALTH(), data, { params: { id_pet, cpf_tutor } })
+) => api.post(urls.PET_UPDATE_HEALTH(), data, { params: { id_pet, cpf_cnpj } })
 
 export const sendMessageWhatsapp = async (data: any) =>
     api.post(urls.WHATSAPP_SEND_MESSAGE(), data)

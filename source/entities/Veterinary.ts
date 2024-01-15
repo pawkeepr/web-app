@@ -1,4 +1,4 @@
-import { Contact, DTOProfile, IProfile, Location } from '~/types/profile'
+import type { Contact, DTOProfile, IProfile, Location } from '~/types/profile'
 
 export class Veterinary implements DTOProfile {
     id: string
@@ -97,14 +97,14 @@ export class Veterinary implements DTOProfile {
         const veterinary = new Veterinary()
 
         if ((profile as IProfile).user_information) {
-            const user_information = (profile as IProfile).user_information
-            const specialty_information = (profile as IProfile)
-                .specialty_information
+            const casted_profile = profile as IProfile
+            const user_information = casted_profile.user_information
+            const veterinary_information = casted_profile.veterinary_information
+
             return veterinary.update({
                 ...user_information,
-                ...profile,
+                ...veterinary_information,
                 id: profile.id as string,
-                specialty: specialty_information.specialty,
             })
         }
 

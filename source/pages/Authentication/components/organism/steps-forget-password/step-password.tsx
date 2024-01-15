@@ -2,7 +2,7 @@ import Alert from '~/Components/atoms/alert'
 import { BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control/field-control'
 
-import { FormEventHandler } from 'react'
+import type { FormEventHandler } from 'react'
 
 import { Form } from 'formik'
 

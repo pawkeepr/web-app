@@ -2,7 +2,7 @@ import type { Breed } from '~/store/slices/pets/breedType'
 import type { Gender, Species } from '~/store/slices/pets/speciesType'
 import type { Contact, DTOProfile, Location } from './profile'
 
-type GenericSelect = {
+export type GenericSelect = {
     label: string
     value: string
 }
@@ -10,6 +10,7 @@ type GenericSelect = {
 export type On_Off = 'yes' | 'no'
 
 export interface PetData {
+    id_pet: string | null
     name_pet: string
     microchip: string | null
     identification_number: string | null
@@ -36,6 +37,7 @@ export type IHealthInsurance = {
 }
 
 export type ITutor = {
+    cpf_cnpj: string
     first_name: string | null
     last_name: string | null
     name: string | null
@@ -56,7 +58,6 @@ export type IMainResponsibleGuardian = {
 
 export interface IPetV2 {
     id?: string | null
-    cpf_tutor: string
     pet_information: PetData
     main_responsible_guardian: IMainResponsibleGuardian
     secondary_responsible_tutor: ISecondaryTutor
@@ -68,10 +69,12 @@ export type PetDataSimplified = Pick<
     PetData,
     'name_pet' | 'specie' | 'race' | 'sex' | 'date_birth' | 'castrated'
 >
+
 export type IMainResponsibleGuardianSimplified = {
     first_name: string
     last_name: string
     email: string
+    cpf_cnpj: string
     phone: string
     whatsapp: string
     country: string
