@@ -1,16 +1,18 @@
-import { Form, Formik, FormikHelpers } from 'formik'
+import { Form, Formik, type FormikHelpers } from 'formik'
 import { useMemo } from 'react'
 import * as Yup from 'yup'
 import { BtnConfirm } from '~/Components/atoms/btn'
-import FieldControl, { OptionSelect } from '~/Components/molecules/field-control'
+import FieldControl, {
+    type OptionSelect,
+} from '~/Components/molecules/field-control'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import FieldTextArea from '~/Components/molecules/field-text-area'
-import { QuestionTreatment } from '~/types/appointment'
-import { RecordsShapeYup } from '~/types/helpers'
+import type { QuestionTreatment } from '~/types/appointment'
+import type { RecordsShapeYup } from '~/types/helpers'
 
 type CardInputProps = {
     items?: OptionSelect[]
-    handleSubmit?: (
+    handleSubmit: (
         data: QuestionTreatment,
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         formikHelpers: FormikHelpers<any>,
@@ -39,12 +41,7 @@ const makeOptions = (items: OptionSelect[]) => {
     }))
 }
 
-const CardInputTreatment = ({
-    items = [],
-    handleSubmit = async (data: QuestionTreatment) => {
-        console.log('handleSubmit')
-    },
-}: CardInputProps) => {
+const CardInputTreatment = ({ items = [], handleSubmit }: CardInputProps) => {
     const options = useMemo(() => makeOptions(items), [items])
 
     return (
@@ -83,7 +80,7 @@ const CardInputTreatment = ({
                     <FieldTextArea
                         ctx={values}
                         name={'notes_treatment' as ''}
-                        label="Observações"
+                        label="Observações e Resultados"
                     />
 
                     <BtnConfirm
