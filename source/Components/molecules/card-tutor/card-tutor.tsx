@@ -1,6 +1,6 @@
 import { FaWhatsapp } from 'react-icons/fa'
-import { Species } from '~/store/slices/pets/speciesType'
 import type { IMainResponsibleGuardian, PetData } from '~/types/pet-v2'
+import { Species } from '~/types/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
 
 type CardPetProps = {

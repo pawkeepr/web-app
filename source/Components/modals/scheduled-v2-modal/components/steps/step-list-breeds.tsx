@@ -1,8 +1,8 @@
 import { startTransition, useEffect, useState } from 'react'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import type { Breed } from '~/store/slices/pets/breedType'
-import { species } from '~/store/slices/pets/speciesType'
+import type { Breed } from '~/types/breedType'
+import { species } from '~/types/speciesType'
 import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
 import { option } from '../helpers'
 

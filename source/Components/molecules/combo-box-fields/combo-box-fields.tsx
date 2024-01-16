@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState, useTransition } from 'react'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { InitialValues } from '~/pages/NewPetPage'
-import { SpeciesType, species } from '~/store/slices/pets/speciesType'
+import type { InitialValues } from '~/pages/NewPetPage'
+import { species, type SpeciesType } from '~/types/speciesType'
 
 type AuxSpeciesFormikProps = Pick<
     InitialValues,

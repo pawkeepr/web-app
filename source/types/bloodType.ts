@@ -9,13 +9,14 @@ export const DogBloodType = {
     DEA_4: 'DEA_4',
     DEA_5: 'DEA_5',
     DEA_7: 'DEA_7',
-    UNKNOWN: 'unknown',
+    UNKNOWN: 'Desconhecido',
 } as const
 
 export const CatBloodType = {
     A: 'A',
     B: 'B',
     AB: 'AB',
+    UNKNOWN: 'Desconhecido',
 } as const
 
 export const HorseBloodType = {
@@ -23,6 +24,7 @@ export const HorseBloodType = {
     C: 'C',
     D: 'D',
     Q: 'Q',
+    UNKNOWN: 'Desconhecido',
 } as const
 
 export const RabbitBloodType = {
@@ -30,6 +32,7 @@ export const RabbitBloodType = {
     B: 'B',
     C: 'C',
     D: 'D',
+    UNKNOWN: 'Desconhecido',
 } as const
 
 export const BirdBloodType = {

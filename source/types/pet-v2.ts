@@ -1,5 +1,5 @@
-import type { Breed } from '~/store/slices/pets/breedType'
-import type { Gender, Species } from '~/store/slices/pets/speciesType'
+import type { Breed } from '~/types/breedType'
+import type { Gender, Species } from '~/types/speciesType'
 import type { Contact, DTOProfile, Location } from './profile'
 
 export type GenericSelect = {

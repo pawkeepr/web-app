@@ -9,9 +9,9 @@ import FieldControl from '~/Components/molecules/field-control'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import FieldMasked from '~/Components/molecules/field-masked'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { genderValues } from '~/store/slices/pets/sexType'
-import { StepProps } from '~/types/helpers'
-import { InitialValues } from '../../index'
+import type { StepProps } from '~/types/helpers'
+import { genderValues } from '~/types/sexType'
+import type { InitialValues } from '../../index'
 
 type KeysInitial =
     | 'name'
@@ -63,7 +63,6 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 <h4 className="text-center font-sans font-semibold text-base capitalize">
                     Informações do PET
                     <br />
-
                     <span className="text-sm font-bold text-secondary-500">
                         Obrigatório (*)
                     </span>

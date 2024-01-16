@@ -1,6 +1,6 @@
 import BoxButtons from '~/Components/molecules/box-buttons'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { Gender, GenderBR } from '~/store/slices/pets/speciesType'
+import { Gender, GenderBR } from '~/types/speciesType'
 import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
 import { option } from '../helpers'
 

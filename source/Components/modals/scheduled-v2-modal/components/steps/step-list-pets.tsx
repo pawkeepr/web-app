@@ -2,10 +2,7 @@ import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldControl from '~/Components/molecules/field-control/field-control'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import {
-    MapOptionSpecies,
-    type KeyOfMapOptionSpecies,
-} from '~/store/slices/pets/speciesType'
+import { MapOptionSpecies, type KeyOfMapOptionSpecies } from '~/types/speciesType'
 import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
 import { option } from '../helpers'
 

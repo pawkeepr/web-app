@@ -1,6 +1,6 @@
 import { useFormikContext } from 'formik'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
-import { species, type Species } from '~/store/slices/pets/speciesType'
+import { species, type Species } from '~/types/speciesType'
 import type { InitialValues, StepProps } from '../../types'
 import { option } from '../helpers'
 

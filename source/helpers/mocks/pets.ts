@@ -1,11 +1,11 @@
-import MockAdapter from 'axios-mock-adapter/types'
+import type MockAdapter from 'axios-mock-adapter/types'
 import { getCookie, setCookie } from '~/utils/cookies-utils'
 
 import { faker } from '@faker-js/faker'
-import { CatBloodType } from '~/store/slices/pets/bloodType'
-import { CatBreed } from '~/store/slices/pets/breedType'
-import { Species } from '~/store/slices/pets/speciesType'
-import { Pet } from '~/store/slices/pets/types'
+import type { Pet } from '~/store/slices/pets/types'
+import { CatBloodType } from '~/types/bloodType'
+import { CatBreed } from '~/types/breedType'
+import { Species } from '~/types/speciesType'
 import * as url from '../url_helper'
 
 import _ from 'lodash'

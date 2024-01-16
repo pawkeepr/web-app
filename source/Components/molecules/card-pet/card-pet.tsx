@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import type { Breed } from '~/store/slices/pets/breedType'
-import { Gender, Species } from '~/store/slices/pets/speciesType'
 import type { VeterinaryConsultation } from '~/types/appointment'
+import type { Breed } from '~/types/breedType'
+import { Gender, Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import { getNameTutor } from '~/utils/get-name-tutors'
 

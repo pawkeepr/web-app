@@ -8,7 +8,7 @@ import CanceledExternalModal from '~/Components/modals/client-external-confirmat
 import ConfirmedExternalModal from '~/Components/modals/client-external-confirmation/confirmed-modal/confirmed-external-modal'
 import Loader from '~/Components/organism/loader'
 import useAppointment from '~/store/hooks/appointment/use-appointment'
-import { Species } from '~/store/slices/pets/speciesType'
+import { Species } from '~/types/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import AuthLayout from '../_layouts/auth/auth_layout'
 
