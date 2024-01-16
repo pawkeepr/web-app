@@ -133,7 +133,7 @@ const ModalListPets = ({
 
             if (!pet) return
             startTransition(() => {
-                onChangePet(pet)
+                onChangePet(pet as IPetV2)
                 onChangeSelectedTab(STEPS.length - 1)
             })
         },
@@ -229,6 +229,7 @@ const ModalListPets = ({
                                         nextStep={nextStep}
                                         isLoading={isLoading}
                                         previousStep={previousStep}
+                                        closeModal={closeModal}
                                     />
                                 </Tab.Panel>
                             ))}
