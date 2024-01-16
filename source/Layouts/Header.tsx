@@ -14,11 +14,7 @@ import Bars3CenterLeftIcon from '@heroicons/react/24/solid/Bars3CenterLeftIcon'
 
 import Drawer from '~/Components/organism/drawer'
 
-type HeaderProps = {
-    headerClass: string
-}
-
-const Header = ({ headerClass }: HeaderProps) => {
+const Header = () => {
     const [show, setShow] = useState<boolean>(false)
 
     const divRef = useRef<HTMLDivElement>(null)
@@ -121,7 +117,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                     <FullScreenDropdown />
 
                     {/* Dark/Light Mode set */}
-                    <LightDark />
+                    <LightDark condition={false} />
 
                     {/* NotificationDropdown */}
                     {/* <NotificationDropdown /> */}
