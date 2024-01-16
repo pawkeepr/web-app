@@ -100,7 +100,10 @@ const CanceledScheduledModal = ({
                                     {'Esta ação não poderá ser desfeita.'}
                                 </p>
 
-                                <CardTutor pet={values.tutor_pet_vet?.pet} />
+                                <CardTutor
+                                    pet={values.tutor_pet_vet?.pet}
+                                    tutor={values.tutor_pet_vet?.tutor}
+                                />
 
                                 <FieldTextArea
                                     ctx={values}

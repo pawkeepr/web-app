@@ -75,7 +75,10 @@ const ReScheduledModal = ({
                                     {'Reagendar Consulta'}
                                 </h2>
 
-                                <CardTutor pet={values.tutor_pet_vet?.pet} />
+                                <CardTutor
+                                    pet={values.tutor_pet_vet?.pet}
+                                    tutor={values.tutor_pet_vet?.tutor}
+                                />
                                 {item && (
                                     <div className="flex justify-around gap-3">
                                         <p className="text-gray-500 flex justify-between">

@@ -10,7 +10,10 @@ import RadioGroup from '~/Components/molecules/radio-group'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { VeterinaryConsultation } from '~/types/appointment'
 
-type CtxStepPayment = Pick<VeterinaryConsultation, 'appointment_details'>
+type CtxStepPayment = Pick<
+    VeterinaryConsultation,
+    'appointment_details' | 'tutor_pet_vet'
+>
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     const { handleSubmit, isSubmitting, values, isValid } =
@@ -33,7 +36,10 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                 Informações de Pagamento
                 <br />
             </h4>
-            <CardTutor />
+            <CardTutor
+                tutor={values.tutor_pet_vet?.tutor}
+                pet={values.tutor_pet_vet?.pet}
+            />
             <div className="grid grid-cols-2 gap-2">
                 <RadioGroup
                     name="appointment_details.payment.form_payment"
