@@ -4,6 +4,7 @@ import useChangeLayoutMode from '~/hooks/use-change-layout-mode'
 
 import MoonIcon from '@heroicons/react/24/solid/MoonIcon'
 import SunIcon from '@heroicons/react/24/solid/SunIcon'
+import withControl from '~/Components/helpers/with-control'
 
 const LightDark = () => {
     const { mode, onHandleChangeLayout } = useChangeLayoutMode()
@@ -24,4 +25,4 @@ const LightDark = () => {
     )
 }
 
-export default LightDark
+export default withControl(LightDark)
