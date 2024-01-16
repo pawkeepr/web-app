@@ -81,9 +81,18 @@ export const getAllPetsOfClinic = async () => api.get(urls.PET_FETCH_ALL_CLINIC(
 export const getAllTutorsOfClinic = async () =>
     api.get(urls.TUTORS_FETCH_ALL_CLINIC())
 
-export const getAppointmentExternalByID = async (id_appointment: string) =>
-    api.get(urls.APPOINTMENT_GET_BY_ID_EXTERNAL(), { params: { id_appointment } })
-export const confirmedAppointmentExternal = async (id_appointment: string) =>
-    api.post(urls.APPOINTMENT_CONFIRMED_EXTERNAL(), { params: { id_appointment } })
-export const canceledAppointmentExternal = async (id_appointment: string) =>
-    api.post(urls.APPOINTMENT_CANCELED_EXTERNAL(), { params: { id_appointment } })
+export type FnAxiosAppointmentByIdExternal = (
+    id_appointment: string,
+) => Promise<unknown>
+
+export const getAppointmentExternalByID: FnAxiosAppointmentByIdExternal = async (
+    id_appointment: string,
+) => api.get(urls.APPOINTMENT_GET_BY_ID_EXTERNAL(), { params: { id_appointment } })
+
+export const confirmedAppointmentExternal: FnAxiosAppointmentByIdExternal = async (
+    id_appointment: string,
+) => api.post(urls.APPOINTMENT_CONFIRMED_EXTERNAL(), { params: { id_appointment } })
+
+export const canceledAppointmentExternal: FnAxiosAppointmentByIdExternal = async (
+    id_appointment: string,
+) => api.post(urls.APPOINTMENT_CANCELED_EXTERNAL(), { params: { id_appointment } })
