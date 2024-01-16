@@ -46,7 +46,7 @@ const useGetAllAppointments = () => {
     const { activeData: rescheduledData, isLoading: isLoadingRescheduled } =
         useListAppointments({ mode: 'rescheduled' })
 
-    const { search } = useSearch()
+    const { search } = useSearch('appointments')
 
     const [data, confirmedData] = useMemo(() => {
         const allData = [

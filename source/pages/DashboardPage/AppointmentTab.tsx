@@ -4,7 +4,7 @@ import HorizontalTabs from './components/organisms/templates/Horizontal-List'
 
 const AppointmentsTabs = <T,>() => {
     return (
-        <DefaultLayout title="Dashboard">
+        <DefaultLayout title="Dashboard" name="appointments" searchBlock>
             <HorizontalTabs />
         </DefaultLayout>
     )
