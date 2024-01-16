@@ -63,30 +63,33 @@ export type ShapeAppointmentDetailsPayment = RecordsShapeYup<
     AppointmentDetails['payment']
 >
 
+export const schemaPayment = yup
+    .object()
+    .shape<ShapeAppointmentDetailsPayment>({
+        coin: yup.string().optional(),
+        date_payment: yup.string().optional(),
+        form_payment: yup
+            .string()
+            .oneOf(['cash', 'credit', 'debit', 'pix'])
+            .required(),
+        number_installments: yup
+            .number()
+            .transform((value) => (Number.isNaN(value) ? undefined : Number(value)))
+            .optional(),
+        status_payment: yup.string().optional(),
+        value_payment: yup
+            .number()
+            .transform((value) => (Number.isNaN(value) ? undefined : Number(value)))
+            .required(),
+    })
+    .required()
+
 export const schemaStepAppointmentDetails = yup
     .object()
     .shape<ShapeAppointmentDetails>({
         appointment_geolocation: yup.object().optional(),
         appointment_signature: yup.object().optional(),
-        payment: yup
-            .object()
-            .shape<ShapeAppointmentDetailsPayment>({
-                coin: yup.string().optional(),
-                date_payment: yup.string().optional(),
-                form_payment: yup
-                    .string()
-                    .oneOf(['cash', 'credit', 'debit', 'pix'])
-                    .required(),
-                number_installments: yup.number().optional(),
-                status_payment: yup.string().optional(),
-                value_payment: yup
-                    .number()
-                    .transform((value) =>
-                        Number.isNaN(value) ? undefined : Number(value),
-                    )
-                    .required(),
-            })
-            .required(),
+        payment: schemaPayment,
     })
 
 export const schemaStepAppointment = yup
