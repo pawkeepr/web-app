@@ -24,6 +24,7 @@ export type AppointmentStatus = {
     reason_canceled: string
     rescheduled: On_Off
     scheduled: On_Off
+    is_possible_action: On_Off
 }
 
 export interface ISignatureAppointment {
