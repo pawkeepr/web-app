@@ -1,12 +1,12 @@
 import cn from 'classnames'
-import { Formik, FormikHelpers } from 'formik'
+import { Formik, type FormikHelpers } from 'formik'
 import { useMemo, useState } from 'react'
 import * as Yup from 'yup'
-import { KeyOfQuestionTypes, Question } from '~/constants/anamnese-questions'
+import type { KeyOfQuestionTypes, Question } from '~/constants/anamnese-questions'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { CtxStepAnamnese } from '~/pages/AppointmentsPage/components/organisms/steps/step-anamnese/step-anamnese'
-import { QuestionAnamnesis } from '~/types/appointment'
-import { RecordsShapeYup } from '~/types/helpers'
+import type { CtxStepAnamnese } from '~/pages/AppointmentsPage/components/validations.yup'
+import type { QuestionAnamnesis } from '~/types/appointment'
+import type { RecordsShapeYup } from '~/types/helpers'
 import QuestionsAnamnese from './questions-anamnese'
 
 const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionAnamnesis>>({
