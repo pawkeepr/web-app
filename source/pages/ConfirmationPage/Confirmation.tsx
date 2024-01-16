@@ -6,6 +6,7 @@ import { FaWhatsapp } from 'react-icons/fa'
 import { BtnCancel, BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import CanceledExternalModal from '~/Components/modals/client-external-confirmation/canceled-modal/canceled-external-modal'
 import ConfirmedExternalModal from '~/Components/modals/client-external-confirmation/confirmed-modal/confirmed-external-modal'
+import Loader from '~/Components/organism/loader'
 import useAppointment from '~/store/hooks/appointment/use-appointment'
 import { Species } from '~/store/slices/pets/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
@@ -35,13 +36,9 @@ const ConfirmationPage = () => {
         return activeData?.appointment_status?.is_possible_action === 'yes'
     }, [activeData])
 
-    if (isLoading) {
-        return <h1>Carregando...</h1>
-    }
-
     return (
         <AuthLayout title="Confirmação de Agendamento">
-            {!isPossibleAction && (
+            {!isPossibleAction && !isLoading && (
                 <div className="w-full flex flex-col justify-center items-center my-4 ">
                     <p className="text-gray-600 font-normal text-xl ">
                         Este agendamento não está mais disponível para confirmação
@@ -49,6 +46,8 @@ const ConfirmationPage = () => {
                     </p>
                 </div>
             )}
+
+            <Loader condition={isLoading} type="ThreeDots" />
 
             {activeData && isPossibleAction && (
                 <>
