@@ -117,7 +117,8 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                                 'bg-gray-200 dark:bg-dark-600':
                                     pathname === item.href,
                                 '!text-gray-400 hover:text-gray-400': item.disabled,
-                                'hover:bg-transparent': item.disabled,
+                                'hover:bg-transparent hover:cursor-default':
+                                    item.disabled,
                             })}
                             href={item.disabled ? '#' : item.href}
                         >
