@@ -67,3 +67,12 @@ export const APPOINTMENT_CREATE_SCHEDULED_VET = () =>
 
 export const PET_FETCH_ALL_CLINIC = () => '/api-user/fetch-all-pets-vet'
 export const TUTORS_FETCH_ALL_CLINIC = () => '/api-user/fetch-all-tutors-vet'
+
+// External Appointment
+
+export const APPOINTMENT_GET_BY_ID_EXTERNAL = () =>
+    '/api-appointment/search-appointment-external'
+export const APPOINTMENT_CONFIRMED_EXTERNAL = () =>
+    '/api-appointment/confirmed-appointment-tutor-external'
+export const APPOINTMENT_CANCELED_EXTERNAL = () =>
+    '/api-appointment/canceled-appointment-tutor-external'
