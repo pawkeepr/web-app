@@ -8,7 +8,6 @@ const usePetById = (document: string, pet_id: string) => {
     const superKeys = [NAME, document, pet_id]
 
     return useAppQuery<IPetV2>(superKeys, getPet.bind(null, document, pet_id), {
-        initialData: {} as IPetV2,
         keepPreviousData: true,
         cacheTime: TIME, // 1 min
         enabled: !!document && !!pet_id,
