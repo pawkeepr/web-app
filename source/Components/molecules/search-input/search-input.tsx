@@ -6,20 +6,39 @@ import Input from '~/Components/atoms/input'
 type SearchInputProps = {
     value?: string
     placeholder?: string
+    name: string
 } & React.HTMLAttributes<HTMLInputElement>
 
 type IHookUseSearch = {
-    search: string
-    onChangeSearch: (search: string) => void
+    search: {
+        [key: string]: string
+    }
+    onChangeSearch: (search: string, key: string) => void
 }
 
-export const useSearch = create<IHookUseSearch>((set) => ({
-    search: '',
-    onChangeSearch: (search: string) => set({ search }),
+export const useZustandSearch = create<IHookUseSearch>((set) => ({
+    search: {},
+    onChangeSearch: (search: string, name: string) =>
+        set({
+            search: {
+                [name]: search,
+            },
+        }),
 }))
 
-const SearchInput = ({ ...rest }: SearchInputProps) => {
-    const { onChangeSearch, search } = useSearch()
+type KeySearch = 'appointments' | 'veterinary' | 'tutor' | 'pet' | 'historic'
+
+export const useSearch = (name: KeySearch) => {
+    const { search, onChangeSearch } = useZustandSearch()
+
+    return {
+        search: search[name] || '',
+        onChangeSearch: (search: string) => onChangeSearch(search, name),
+    }
+}
+
+const SearchInput = ({ name, ...rest }: SearchInputProps) => {
+    const { onChangeSearch, search } = useSearch(name)
 
     const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChangeSearch(e.target.value)
