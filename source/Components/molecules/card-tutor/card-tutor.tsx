@@ -1,22 +1,19 @@
 import { FaWhatsapp } from 'react-icons/fa'
-import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import { Species } from '~/store/slices/pets/speciesType'
-import type { VeterinaryConsultation } from '~/types/appointment'
-import type { PetData } from '~/types/pet-v2'
+import type { IMainResponsibleGuardian, PetData } from '~/types/pet-v2'
 import { getNameTutor } from '~/utils/get-name-tutors'
 
 type CardPetProps = {
-    pet?: PetData | null
+    pet: PetData
+    tutor: IMainResponsibleGuardian
 }
 
-const CardTutor = ({ pet = null }: CardPetProps) => {
-    const { values } = useFormikContextSafe<VeterinaryConsultation>()
-
-    const name_tutor = getNameTutor(values.tutor_pet_vet?.tutor)
-    const cpf_tutor = values.tutor_pet_vet?.tutor?.cpf_cnpj
-    const email_tutor = values.tutor_pet_vet?.tutor?.contact?.email
-    const phone_tutor = values.tutor_pet_vet?.tutor?.contact?.phone
-    const whatsapp_tutor = values.tutor_pet_vet?.tutor?.contact?.whatsapp
+const CardTutor = ({ pet, tutor }: CardPetProps) => {
+    const name_tutor = getNameTutor(tutor)
+    const cpf_tutor = tutor?.cpf_cnpj
+    const email_tutor = tutor?.contact?.email
+    const phone_tutor = tutor?.contact?.phone
+    const whatsapp_tutor = tutor?.contact?.whatsapp
 
     return (
         <section className="flex flex-col justify-start p-4 w-full">
