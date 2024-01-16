@@ -7,7 +7,7 @@ import { BtnCancel, BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import CanceledExternalModal from '~/Components/modals/client-external-confirmation/canceled-modal/canceled-external-modal'
 import ConfirmedExternalModal from '~/Components/modals/client-external-confirmation/confirmed-modal/confirmed-external-modal'
 import Loader from '~/Components/organism/loader'
-import useAppointment from '~/store/hooks/appointment/use-appointment'
+import useAppointmentExternal from '~/store/hooks/appointment-external/use-appointment-external'
 import { Species } from '~/types/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import AuthLayout from '../_layouts/auth/auth_layout'
@@ -15,7 +15,10 @@ import AuthLayout from '../_layouts/auth/auth_layout'
 const ConfirmationPage = () => {
     const { query } = useRouter()
 
-    const { activeData, isLoading } = useAppointment({ id: query.id as string })
+    const { activeData, isLoading } = useAppointmentExternal({
+        id: query.id as string,
+        mode: 'confirmed',
+    })
 
     const pet = activeData?.tutor_pet_vet?.pet
     const name_tutor = getNameTutor(activeData?.tutor_pet_vet?.tutor)

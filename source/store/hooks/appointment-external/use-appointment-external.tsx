@@ -1,4 +1,5 @@
 import { Appointments } from '~/entities/Appointments'
+import type { Fn } from '~/hooks/use-app-query'
 import {
     canceledAppointmentExternal,
     confirmedAppointmentExternal,
@@ -20,6 +21,7 @@ type ModeExternal = (typeof ModeExternal)[keyof typeof ModeExternal]
 type IHookUseAppointmentExternal = {
     id?: string
     mode: ModeExternal
+    handleCloseModal?: () => void
 }
 
 const strategyModeExternal = new Map<ModeExternal, FnAxiosAppointmentByIdExternal>([
@@ -27,7 +29,11 @@ const strategyModeExternal = new Map<ModeExternal, FnAxiosAppointmentByIdExterna
     [ModeExternal.CANCELED, canceledAppointmentExternal],
 ])
 
-const useAppointmentExternal = ({ id, mode }: IHookUseAppointmentExternal) => {
+const useAppointmentExternal = ({
+    id,
+    mode,
+    handleCloseModal,
+}: IHookUseAppointmentExternal) => {
     const superKeys = [NAME]
 
     if (!mode) {
@@ -39,9 +45,13 @@ const useAppointmentExternal = ({ id, mode }: IHookUseAppointmentExternal) => {
     return useAppStore<VeterinaryConsultation, VeterinaryConsultation>({
         keys: superKeys,
         name: NAME,
-        get: getAppointmentExternalByID.bind(null, id as string),
+        get: getAppointmentExternalByID.bind(
+            null,
+            id as string,
+        ) as Fn<VeterinaryConsultation>,
         entity: Appointments,
-        update,
+        update: update as Fn<VeterinaryConsultation>,
+        handleCloseModal,
     })
 }
 

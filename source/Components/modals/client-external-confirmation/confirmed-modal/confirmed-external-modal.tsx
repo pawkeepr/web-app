@@ -4,7 +4,7 @@ import { Fragment, useMemo } from 'react'
 import * as Yup from 'yup'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import useModal from '~/hooks/use-modal'
-import useListAppointments from '~/store/hooks/list-appointments'
+import useAppointmentExternal from '~/store/hooks/appointment-external/use-appointment-external'
 import type { VeterinaryConsultation } from '~/types/appointment'
 
 type ChildrenProps = {
@@ -32,11 +32,9 @@ const ConfirmedExternalModal = ({
 }: ConfirmedExternalModalProps) => {
     const { closeModal, open, showModal } = useModal()
 
-    const { handleSubmit, isLoading } = useListAppointments({
+    const { handleSubmit, isLoading } = useAppointmentExternal({
         mode: 'confirmed',
-        handleClose: () => {
-            closeModal()
-        },
+        handleCloseModal: closeModal,
     })
 
     const formattedDateAndHours = useMemo(() => {
