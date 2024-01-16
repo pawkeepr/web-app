@@ -1,6 +1,5 @@
 import {
     useQuery,
-    type QueryFunction,
     type QueryKey,
     type UseQueryOptions,
 } from '@tanstack/react-query'
@@ -13,10 +12,14 @@ const useAppQuery = <T,>(
     fn: Fn<T>,
     options?: Omit<UseQueryOptions<T>, 'queryKey'>,
 ) => {
+    const Fn = () => fn?.()
 
     return useQuery<T>({
         queryKey: key,
-        queryFn: fn as unknown as QueryFunction<T>,
+        queryFn: async () => {
+            const res = await Fn()
+            return res.data
+        },
         ...options,
     })
 }
