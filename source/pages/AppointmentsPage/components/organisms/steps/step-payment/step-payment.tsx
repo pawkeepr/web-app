@@ -1,5 +1,5 @@
 import { Form } from 'formik'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import CardTutor from '~/Components/molecules/card-tutor'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
@@ -16,7 +16,7 @@ type CtxStepPayment = Pick<
 >
 
 const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
-    const { handleSubmit, isSubmitting, values, isValid } =
+    const { handleSubmit, isSubmitting, values, isValid, setFieldValue } =
         useFormikContextSafe<CtxStepPayment>()
 
     const form_payment = useMemo(
@@ -29,6 +29,15 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
         label: `${index + 1} Parcela${index + 1 > 1 ? 's' : ''}`,
         color: 'rgb(255 200 107);',
     }))
+
+    useEffect(() => {
+        if (form_payment !== 'credit') {
+            setFieldValue(
+                'appointment_details.payment.number_installments',
+                options,
+            )
+        }
+    }, [form_payment])
 
     return (
         <Form className="card card-body shadow-lg" onSubmit={handleSubmit}>
