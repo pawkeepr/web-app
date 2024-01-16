@@ -1,4 +1,5 @@
 import {
+    keepPreviousData,
     useMutation,
     useQueryClient,
     type UseQueryOptions,
@@ -51,9 +52,9 @@ const useAppStore = <T, G = unknown>({
         get?.bind(null) as Fn<T>,
         {
             ...options,
-            keepPreviousData: true,
             staleTime: TIME, // 1 min
             enabled: !!get && enabled,
+            placeholderData: keepPreviousData,
         },
     )
 
@@ -135,8 +136,8 @@ const useAppStore = <T, G = unknown>({
     )
 
     const submitLoading = useMemo(
-        () => addData?.isLoading || updateData?.isLoading,
-        [addData?.isLoading, updateData?.isLoading],
+        () => addData?.isPending || updateData?.isPending,
+        [addData?.isPending, updateData?.isPending],
     )
 
     return {
