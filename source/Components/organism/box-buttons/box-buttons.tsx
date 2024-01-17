@@ -3,7 +3,10 @@ import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
 import { BtnCancel, BtnConfirm, BtnLabel, BtnPrimary } from '~/Components/atoms/btn'
 import withLoading from '~/Components/helpers/with-loading'
-import { ModalPlus, usePlusModal } from '~/hooks/use-plus-modal'
+import {
+    ModalPlus,
+    usePlusModal,
+} from '~/contexts/setters-status-appointments-modals-context'
 import type { VeterinaryConsultation } from '~/types/appointment'
 
 type BoxButtonsProps = {

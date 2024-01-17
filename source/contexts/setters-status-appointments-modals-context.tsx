@@ -30,7 +30,7 @@ export const usePlusModal = create<PlusModalState>((set) => ({
     keys: ModalPlus,
 }))
 
-const ContextModalPlus = () => {
+const ContextSettersStatusAppointmentsModals = () => {
     const { isOpen, close, open } = usePlusModal()
 
     return (
@@ -62,4 +62,4 @@ const ContextModalPlus = () => {
     )
 }
 
-export default ContextModalPlus
+export default ContextSettersStatusAppointmentsModals

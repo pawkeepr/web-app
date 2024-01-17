@@ -4,7 +4,7 @@ import type React from 'react'
 
 import HeaderTitle from '~/Components/atoms/header-title'
 import BlockSearchAndInputDocument from '~/Components/molecules/block-search-and-input-document'
-import ContextModalPlus from '~/hooks/use-plus-modal'
+import ContextSettersStatusAppointmentsModals from '~/contexts/setters-status-appointments-modals-context'
 
 type DashboardLayoutsSearch =
     | {
@@ -32,7 +32,7 @@ const DashboardLayouts = ({
             <HeaderTitle title={title} />
             {searchBlock && <BlockSearchAndInputDocument name={name as string} />}
             {children}
-            <ContextModalPlus />
+            <ContextSettersStatusAppointmentsModals />
         </main>
     )
 }

@@ -5,7 +5,7 @@ import Modal from '~/Components/organism/modal'
 
 import * as Yup from 'yup'
 import CardTutor from '~/Components/molecules/card-tutor'
-import { usePlusModal } from '~/hooks/use-plus-modal'
+import { usePlusModal } from '~/contexts/setters-status-appointments-modals-context'
 import useListAppointments from '~/store/hooks/list-appointments'
 
 const validationSchema = Yup.object().shape({
