@@ -29,7 +29,7 @@ module.exports = {
                     800: '#66502b',
                     900: '#332815',
                 },
-                blue: {
+                confirm: {
                     50: '#f3f8fb',
                     100: '#cee3f0',
                     200: '#9dc6e1',
@@ -58,18 +58,24 @@ module.exports = {
     plugins: [require('daisyui'), require('./deps/@tailwindcss/forms')],
     daisyui: {
         themes: [
-            // {
-            //     light: {
-            //         ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
-            //         "primary": "#09b285",
-            //         "secondary": "#FFC86B",
-            //     },
-            //     dark: {
-            //         ...require("daisyui/src/theming/themes")["[data-theme=light]"],
-            //         "primary": "#FFC86B",
-            //         "secondary": "#09b285",
-            //     }
-            // }
+            {
+                light: {
+                    primary: '#09b285',
+                    secondary: '#FFC86B',
+                    confirm: '#0971B3',
+                    accent: '#37cdbe',
+                    neutral: '#3d4451',
+                    'base-100': '#ffffff',
+                },
+                dark: {
+                    secondary: '#056b50',
+                    primary: '#FFC86B',
+                    confirm: '#0971B3',
+                    accent: '#37cdbe',
+                    neutral: '#ffffff',
+                    'base-100': '#3d4451',
+                },
+            },
         ],
     },
 }
