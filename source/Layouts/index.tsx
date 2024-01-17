@@ -109,7 +109,7 @@ const LayoutMain = ({ children }: LayoutProps) => {
 
     return (
         <div id="relative">
-            <Header headerClass={headerClass} />
+            <Header />
             {/* <Sidebar layoutType={layoutType} /> */}
 
             <div
