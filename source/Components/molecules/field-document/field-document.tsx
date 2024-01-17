@@ -36,6 +36,7 @@ const FieldDocument = <T, Ctx>({
         <div className="relative pb-[12px]">
             <FieldMasked
                 {...props}
+                className="rounded-md mt-1 border border-secondary focus:border-none focus:ring-0"
                 name={props.name}
                 mask={mask}
                 replacement={{ _: /\d/ }}

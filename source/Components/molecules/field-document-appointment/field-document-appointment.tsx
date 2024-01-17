@@ -83,7 +83,6 @@ const FieldDocumentAppointment = ({
                                             ctx={values}
                                             name="cpf_tutor"
                                             placeholder="Nova Consulta"
-                                            className="rounded-md mt-1 border border-secondary"
                                             onlyCPF
                                             endIcon={
                                                 <button
