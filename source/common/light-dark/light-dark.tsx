@@ -1,4 +1,4 @@
-import { layoutModeTypes } from '~/Components/constants/layout'
+import { layoutModeTypes } from '~/constants/layout'
 
 import useChangeLayoutMode from '~/hooks/use-change-layout-mode'
 

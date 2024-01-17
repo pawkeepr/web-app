@@ -2,32 +2,32 @@
 import { all, call, fork, takeEvery } from 'redux-saga/effects'
 
 import {
-    changeHeaderSize,
-    changeLayout,
     changeLayoutMode as actionChangeLayoutMode,
     changeLayoutPosition as actionChangeLayoutPosition,
     changeLayoutWidth as actionChangeLayoutWidth,
     changePreloader as actionChangePreloader,
     changeSidebarImageType as actionChangeSidebarImageType,
+    changeTopBarTheme as actionChangeTopBarTheme,
+    changeHeaderSize,
+    changeLayout,
     changeSidebarSizeType,
     changeSidebarTheme,
     changeSidebarView,
-    changeTopBarTheme as actionChangeTopBarTheme,
 } from './actions'
 
 import {
     layoutModeTypes,
-    layoutPositionTypes,
-    layoutTypes,
-    layoutWidthTypes,
-    leftSideBarSizeTypes,
-    leftSidebarImageTypes,
-    leftSidebarTypes,
-    leftSidebarViewTypes,
-    preloaderTypes,
-    topBarThemeTypes,
-} from '~/Components/constants/layout'
-import { DivSize } from './types'
+    type layoutPositionTypes,
+    type layoutTypes,
+    type layoutWidthTypes,
+    type leftSideBarSizeTypes,
+    type leftSidebarImageTypes,
+    type leftSidebarTypes,
+    type leftSidebarViewTypes,
+    type preloaderTypes,
+    type topBarThemeTypes,
+} from '~/constants/layout'
+import type { DivSize } from './types'
 
 /**
  * Changes the body attribute

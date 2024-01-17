@@ -10,9 +10,9 @@ import {
     leftSidebarViewTypes,
     preloaderTypes,
     topBarThemeTypes,
-} from '~/Components/constants/layout'
+} from '~/constants/layout'
 
-import { LayoutState, name } from './types'
+import { name, type LayoutState } from './types'
 
 const initialState: LayoutState = {
     layoutType: layoutTypes.HORIZONTAL,

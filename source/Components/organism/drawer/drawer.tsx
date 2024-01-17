@@ -5,7 +5,7 @@ import UserCircleIcon from '@heroicons/react/24/solid/UserCircleIcon'
 import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
 import Image from 'next/image'
 import { MdPets } from 'react-icons/md'
-import { layoutModeTypes } from '~/Components/constants/layout'
+import { layoutModeTypes } from '~/constants/layout'
 import useChangeLayoutMode from '~/hooks/use-change-layout-mode'
 
 import darkLogo from '../../../../public/logo-dark.png'

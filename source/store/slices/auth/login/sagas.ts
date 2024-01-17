@@ -1,5 +1,5 @@
-import { PayloadAction } from '@reduxjs/toolkit'
-import { CognitoUserSession } from 'amazon-cognito-identity-js'
+import type { PayloadAction } from '@reduxjs/toolkit'
+import type { CognitoUserSession } from 'amazon-cognito-identity-js'
 import { call, delay, put, takeLatest } from 'redux-saga/effects'
 import cookies from '~/constants/cookies'
 
@@ -18,19 +18,19 @@ import { name } from './types'
 
 import Router from 'next/router'
 import {
-    SignInCredentials,
-    UserData,
     getUser,
     signInAws,
     signOut,
+    type SignInCredentials,
+    type UserData,
 } from '~/services/helpers/auth'
 
-import { layoutModeTypes } from '~/Components/constants/layout'
+import { layoutModeTypes } from '~/constants/layout'
 import { errorToast } from '~/store/helpers/toast'
 import { getCookie, removeCookie, setCookie } from '~/utils/cookies-utils'
 import { getProfileSession, resetProfileFlag, setProfile } from '../profile/actions'
 
-import { IProfile } from '~/types/profile'
+import type { IProfile } from '~/types/profile'
 import { setEmailAccount, setPasswordAccount } from '../activate-account/actions'
 
 export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {

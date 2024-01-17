@@ -1,8 +1,8 @@
 import { createAction } from '@reduxjs/toolkit'
 
-import { DivSize, name } from './types'
+import { name, type DivSize } from './types'
 
-import {
+import type {
     layoutModeTypes,
     layoutPositionTypes,
     layoutTypes,
@@ -13,7 +13,7 @@ import {
     leftSidebarViewTypes,
     preloaderTypes,
     topBarThemeTypes,
-} from '../../../Components/constants/layout'
+} from '../../../constants/layout'
 
 export const changeLayout = createAction<layoutTypes>(`${name}/changeLayout`)
 export const changeLayoutMode = createAction<layoutModeTypes>(

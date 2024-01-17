@@ -21,7 +21,7 @@ import { useAppDispatch } from '~/store/hooks'
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 import { BtnLink } from '~/Components/atoms/btn'
 
-import { layoutModeTypes } from '~/Components/constants/layout'
+import { layoutModeTypes } from '~/constants/layout'
 import type { ActivateAccountVeterinary } from '~/types/activate-account-veterinary'
 import type { Location } from '~/types/profile'
 import StepActivationAddress from './components/organism/steps-activation/step-address'
