@@ -1,8 +1,7 @@
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { BtnPrimary } from '~/Components/atoms/btn'
 import FieldArraySafe from '~/Components/molecules/field-array-safe'
 import type { OptionSelect } from '~/Components/molecules/field-control'
-import FieldNumber from '~/Components/molecules/field-number'
 import CardInputAnamnese from '~/Components/organism/card-input-anamnese'
 import { questions } from '~/constants/anamnese-questions'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
@@ -18,32 +17,8 @@ const TranslationOptions = {
     other: 'Outro',
 } as const
 
-// Função para calcular o IMC de um animal
-// height: altura em centímetros
-// weight: peso em quilos
-function calcularIMC(height: number, weight: number): number {
-    if (height === 0 || weight === 0) {
-        return 0 // Evita divisão por zero
-    }
-
-    const heightInMeters = height / 100 // Converter altura para metros
-
-    const imc = weight / (heightInMeters * heightInMeters) // Converter altura para metros
-    return imc
-}
-
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
-    const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>()
-
-    const height = useMemo(() => values.details_pet_consultation?.height, [values])
-    const weight = useMemo(() => values.details_pet_consultation?.weight, [values])
-
-    useEffect(() => {
-        if (height && weight) {
-            const imc = calcularIMC(Number(height), Number(weight))
-            setFieldValue('details_pet_consultation.imc', imc)
-        }
-    }, [height, weight])
+    const { values } = useFormikContextSafe<CtxStepAnamnese>()
 
     const isValid = useMemo(() => {
         return schemaStepAnamneseValidation.isValidSync(values)
@@ -58,40 +33,6 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                     Obrigatório (*)
                 </span>
             </h4>
-
-            <div className="grid grid-cols-3 gap-3">
-                <FieldNumber
-                    ctx={values}
-                    label="Peso"
-                    placeholder="Peso do pet em quilos, exemplo = 0.5 (500 gramas)"
-                    required
-                    name="details_pet_consultation.weight"
-                />
-
-                <FieldNumber
-                    ctx={values}
-                    label="Altura"
-                    placeholder="Altura do pet em centímetros, exemplo = 32"
-                    name="details_pet_consultation.height"
-                />
-
-                <FieldNumber
-                    ctx={values}
-                    label="Comprimento"
-                    placeholder="Comprimento do pet em centímetros "
-                    className="border-gray-300"
-                    name="details_pet_consultation.length"
-                />
-
-                <div>
-                    {values.details_pet_consultation?.imc > 0 && (
-                        <h2 className="m-4 font-bold">
-                            O IMC do animal é:{' '}
-                            {values.details_pet_consultation?.imc?.toFixed(2)}
-                        </h2>
-                    )}
-                </div>
-            </div>
 
             <FieldArraySafe ctx={values} name="anamnesis.questions_anamnesis">
                 {({ push, remove }) => (

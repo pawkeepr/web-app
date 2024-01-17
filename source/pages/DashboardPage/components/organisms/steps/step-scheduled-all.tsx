@@ -1,32 +1,13 @@
-import { useMemo } from 'react'
 import CardScheduled from '~/Components/organism/card-scheduled/card-scheduled'
-import useListAppointments from '~/store/hooks/list-appointments'
-import type { VeterinaryConsultation } from '~/types/appointment'
+import useGetAllAppointments from './hook'
 
 const StepAll = () => {
-    const { activeData: scheduledData, isLoading: isLoadingScheduled } =
-        useListAppointments({ mode: 'scheduled' })
-    const { activeData: confirmedData, isLoading: isLoadingConfirmed } =
-        useListAppointments({ mode: 'confirmed' })
-    const { activeData: rescheduledData, isLoading: isLoadingRescheduled } =
-        useListAppointments({ mode: 'rescheduled' })
-
-    const data = useMemo(() => {
-        return [
-            ...(scheduledData as VeterinaryConsultation[]),
-            ...(rescheduledData as VeterinaryConsultation[]),
-        ]
-    }, [scheduledData, rescheduledData])
-
-    const isLoading = useMemo(() => {
-        return isLoadingScheduled || isLoadingConfirmed || isLoadingRescheduled
-    }, [isLoadingScheduled, isLoadingConfirmed, isLoadingRescheduled])
-
+    const { confirmedData, data, isLoading } = useGetAllAppointments()
     if (isLoading) return <div>Loading...</div>
 
     return (
         <div className="w-full">
-            <section className="w-full space-y-10 mt-2">
+            <section className="w-full space-y-10">
                 <h1 className="text-2xl font-bold">Confirmadas</h1>
                 {confirmedData?.map((appointment) => (
                     <CardScheduled key={appointment.id} appointment={appointment} />

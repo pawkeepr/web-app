@@ -5,6 +5,7 @@ const QuestionTypes = {
     nervous_system: 'nervous_system',
     locomotive_system: 'locomotive_system',
     physical_activity: 'physical_activity',
+    general_information: 'general_information',
 } as const
 
 export type KeyOfQuestionTypes = keyof typeof QuestionTypes

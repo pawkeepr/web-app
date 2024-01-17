@@ -1,10 +1,12 @@
-
+import LayoutAuth from '~/Layouts/LayoutAuth'
 import getServerSidePropsPagesPublics from '~/helpers/get-server-side-props-pages-publics'
 import SignUpPage from '~/pages/Authentication/SignUp'
 
 const SignUpPageNext = () => {
     return (
-        <SignUpPage />
+        <LayoutAuth>
+            <SignUpPage />
+        </LayoutAuth>
     )
 }
 

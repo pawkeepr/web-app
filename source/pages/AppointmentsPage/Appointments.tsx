@@ -25,7 +25,7 @@ type AppointmentsPageProps = {
 }
 
 const initialValues = (
-    { id: id_pet, pet_information, main_responsible_guardian }: IPetV2,
+    data: IPetV2,
     profile: DTOProfile,
     appointment_id: string | null = null,
 ): VeterinaryConsultation => ({
@@ -83,10 +83,10 @@ const initialValues = (
     },
     tutor_pet_vet: {
         pet: {
-            ...pet_information,
-            id_pet: id_pet as string,
+            ...data?.pet_information,
+            id_pet: data?.id as string,
         },
-        tutor: main_responsible_guardian,
+        tutor: data?.main_responsible_guardian,
         veterinary: {
             ...profile,
             cpf_cnpj: profile?.cpf_cnpj,
@@ -105,7 +105,7 @@ const AppointmentsPage = ({
     const { data, isLoading: isLoadingPet, isError } = usePetById(document, pet)
     const profile = useProfileVeterinary()
 
-    const { handleSubmit } = useAppointment()
+    const { handleSubmit } = useAppointment({})
 
     const values = useMemo(
         () => initialValues(data as IPetV2, profile, appointment_id),
@@ -155,7 +155,7 @@ const AppointmentsPage = ({
             initialValues={values}
             validationSchema={schemaStepAppointment}
         >
-            <DashboardLayouts title="Nova Consulta">
+            <DashboardLayouts title="Nova Consulta" searchBlock={false}>
                 <div className="gap-2 mt-2 mobile:py-6">
                     <ModalConfirm
                         title="Cancelar Consulta!"

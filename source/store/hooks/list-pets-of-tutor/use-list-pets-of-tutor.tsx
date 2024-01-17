@@ -28,7 +28,7 @@ const usePetsByTutor = (
     const create = createStrategy.get(strategy) || createPet
     const entity = entityStrategy.get(strategy) || Pet
 
-    return useAppStore<IPetV2, IPet>({
+    return useAppStore<IPetV2[], IPet | IPetV2>({
         get: getAllPets.bind(null, document),
         add: create,
         entity: entity,

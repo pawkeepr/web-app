@@ -1,4 +1,4 @@
-import {
+import type {
     layoutModeTypes,
     layoutPositionTypes,
     layoutTypes,
@@ -9,7 +9,7 @@ import {
     leftSidebarViewTypes,
     preloaderTypes,
     topBarThemeTypes,
-} from '../../../Components/constants/layout'
+} from '~/constants/layout'
 
 export type DivSize = {
     height: number

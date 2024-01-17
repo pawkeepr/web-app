@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
-import { sub_specialty } from '~/common/data/sub-specialtys'
+import { sub_specialty } from '~/constants/sub-specialtys'
 
 import CheckboxGroup from '~/Components/molecules/checkbox-group'
 import type { ActivateAccount } from '~/validations/activate'

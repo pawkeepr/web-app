@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
-import { ComponentType } from 'react'
-import Loading, { KeysLoading } from '~/Components/organism/loader'
+import type { ComponentType } from 'react'
+import Loading, { type KeysLoading } from '~/Components/organism/loader'
 
 // Estas são as props que o HOC irá adicionar
 export type ControlProps = {

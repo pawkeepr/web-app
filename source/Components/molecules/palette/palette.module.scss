@@ -1,0 +1,281 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+
+$green: #09b285 !default;
+// fusv-disable
+$green-50: tint-color($green, 95%) !default;
+$green-100: tint-color($green, 80%) !default;
+$green-200: tint-color($green, 60%) !default;
+$green-300: tint-color($green, 40%) !default;
+$green-400: tint-color($green, 20%) !default;
+$green-500: $green !default;
+$green-600: shade-color($green, 20%) !default;
+$green-700: shade-color($green, 40%) !default;
+$green-800: shade-color($green, 60%) !default;
+$green-900: shade-color($green, 80%) !default;
+
+$orange: #FFC86B !default;
+// fusv-disable
+$orange-50: tint-color($orange, 95%) !default;
+$orange-100: tint-color($orange, 80%) !default;
+$orange-200: tint-color($orange, 60%) !default;
+$orange-300: tint-color($orange, 40%) !default;
+$orange-400: tint-color($orange, 20%) !default;
+$orange-500: $orange !default;
+$orange-600: shade-color($orange, 20%) !default;
+$orange-700: shade-color($orange, 40%) !default;
+$orange-800: shade-color($orange, 60%) !default;
+$orange-900: shade-color($orange, 80%) !default;
+
+$blue: #0971B3 !default;
+// fusv-disable
+$blue-50: tint-color($blue, 95%) !default;
+$blue-100: tint-color($blue, 80%) !default;
+$blue-200: tint-color($blue, 60%) !default;
+$blue-300: tint-color($blue, 40%) !default;
+$blue-400: tint-color($blue, 20%) !default;
+$blue-500: $blue !default;
+$blue-600: shade-color($blue, 20%) !default;
+$blue-700: shade-color($blue, 40%) !default;
+$blue-800: shade-color($blue, 60%) !default;
+$blue-900: shade-color($blue, 80%) !default;
+
+.green-500 {
+    background-color: $green-500 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.green-100 {
+    background-color: $green-100 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.green-200 {
+    background-color: $green-200 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.green-300 {
+    background-color: $green-300 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.green-400 {
+    background-color: $green-400 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.green-600 {
+    background-color: $green-600 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.green-700 {
+    background-color: $green-700 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.green-800 {
+    background-color: $green-800 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.green-900 {
+    background-color: $green-900 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.green-50 {
+    background-color: $green-50 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: black;
+    padding: 12px;
+}
+
+.orange-500 {
+    background-color: $orange-500 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.orange-100 {
+    background-color: $orange-100 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.orange-200 {
+    background-color: $orange-200 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.orange-300 {
+    background-color: $orange-300 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.orange-400 {
+    background-color: $orange-400 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.orange-600 {
+    background-color: $orange-600 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.orange-700 {
+    background-color: $orange-700 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.orange-800 {
+    background-color: $orange-800 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.orange-900 {
+    background-color: $orange-900 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.orange-50 {
+    background-color: $orange-50 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: black;
+    padding: 12px;
+}
+
+
+.blue-500 {
+    background-color: $blue !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.blue-100 {
+    background-color: $blue-100 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.blue-200 {
+    background-color: $blue-200 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.blue-300 {
+    background-color: $blue-300 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.blue-400 {
+    background-color: $blue-400 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.blue-600 {
+    background-color: $blue-600 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.blue-700 {
+    background-color: $blue-700 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.blue-800 {
+    background-color: $blue-800 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.blue-900 {
+    background-color: $blue-900 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: white;
+    padding: 12px;
+}
+
+.blue-50 {
+    background-color: $blue-50 !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    color: black;
+    padding: 12px;
+}

@@ -5,7 +5,7 @@ import Modal from '~/Components/organism/modal'
 import * as Yup from 'yup'
 import CardTutor from '~/Components/molecules/card-tutor'
 import FieldControl from '~/Components/molecules/field-control'
-import { usePlusModal } from '~/hooks/use-plus-modal'
+import { usePlusModal } from '~/contexts/setters-status-appointments-modals-context'
 import useListAppointments from '~/store/hooks/list-appointments'
 
 const validationSchema = Yup.object().shape({
@@ -75,7 +75,10 @@ const ReScheduledModal = ({
                                     {'Reagendar Consulta'}
                                 </h2>
 
-                                <CardTutor pet={values.tutor_pet_vet?.pet} />
+                                <CardTutor
+                                    pet={values.tutor_pet_vet?.pet}
+                                    tutor={values.tutor_pet_vet?.tutor}
+                                />
                                 {item && (
                                     <div className="flex justify-around gap-3">
                                         <p className="text-gray-500 flex justify-between">

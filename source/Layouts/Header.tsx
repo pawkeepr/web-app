@@ -7,18 +7,14 @@ import { useEffect, useRef, useState } from 'react'
 import { changeHeaderSize } from '~/store/actions'
 import { useAppDispatch } from '~/store/hooks'
 import lightLogo from '../../public/logo-light.png'
-import FullScreenDropdown from '../Components/Common/full-screen-dropdown'
-import LightDark from '../Components/Common/light-dark'
+import FullScreenDropdown from '../common/full-screen-dropdown'
+import LightDark from '../common/light-dark'
 
 import Bars3CenterLeftIcon from '@heroicons/react/24/solid/Bars3CenterLeftIcon'
 
 import Drawer from '~/Components/organism/drawer'
 
-type HeaderProps = {
-    headerClass: string
-}
-
-const Header = ({ headerClass }: HeaderProps) => {
+const Header = () => {
     const [show, setShow] = useState<boolean>(false)
 
     const divRef = useRef<HTMLDivElement>(null)
@@ -121,7 +117,7 @@ const Header = ({ headerClass }: HeaderProps) => {
                     <FullScreenDropdown />
 
                     {/* Dark/Light Mode set */}
-                    <LightDark />
+                    <LightDark condition={false} />
 
                     {/* NotificationDropdown */}
                     {/* <NotificationDropdown /> */}

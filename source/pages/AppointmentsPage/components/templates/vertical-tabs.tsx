@@ -1,10 +1,11 @@
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
 
 import cn from 'classnames'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import withLoading from '~/Components/helpers/with-loading'
 import CardPet from '~/Components/molecules/card-pet'
+import useResizeMobile from '~/hooks/use-resize-mobile'
 import { useAppSelector } from '~/store/hooks'
 import type { StepProps, Tabs } from '~/types/helpers'
 import StepAnamneses from '../organisms/steps/step-anamnese'
@@ -40,11 +41,12 @@ const items: TabItem[] = [
 ]
 
 const VerticalTabs = () => {
-    const [isFixed, setIsFixed] = useState(false)
     const [activeVerticalTab, setActiveVerticalTab] = useState(1)
     const [passedVerticalSteps, setPassedVerticalSteps] = useState([1])
 
     const { height } = useAppSelector((state) => state.Layout.headerSize)
+
+    const { isMobile } = useResizeMobile()
 
     function toggleVerticalTab(tab: Tabs) {
         if (activeVerticalTab !== tab) {
@@ -57,16 +59,6 @@ const VerticalTabs = () => {
         }
     }
 
-    useEffect(() => {
-        if (window.innerWidth < 768) {
-            setIsFixed(window.innerWidth < 768)
-        }
-
-        return () => {
-            setIsFixed(false)
-        }
-    }, [])
-
     return (
         <section className="card card-body shadow-lg gap-2 mt-2">
             <h4 className="card-title mb-0">Nova Consulta</h4>
@@ -74,12 +66,12 @@ const VerticalTabs = () => {
             <section className="form-steps">
                 <div className="flex flex-col relative">
                     <div
-                        style={{ marginTop: isFixed ? `${height}px` : 0 }}
+                        style={{ marginTop: isMobile ? `${height}px` : 0 }}
                         className={cn(
                             'mb-4 step-arrow-nav',
                             {
                                 'fixed top-0 left-0 right-0 z-[100] bg-white':
-                                    isFixed,
+                                    isMobile,
                             },
                             'md:static',
                         )}
@@ -93,6 +85,7 @@ const VerticalTabs = () => {
                                     <NavItem key={item.id}>
                                         <NavLink
                                             href={item.href}
+                                            disabled
                                             id="steparrow-gen-info-tab"
                                             className={cn({
                                                 active:

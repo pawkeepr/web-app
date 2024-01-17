@@ -10,20 +10,18 @@ export type Fn<T> = () => Promise<AxiosResponse<T>>
 const useAppQuery = <T,>(
     key: QueryKey,
     fn: Fn<T>,
-    options?: UseQueryOptions<T>,
+    options?: Omit<UseQueryOptions<T>, 'queryKey'>,
 ) => {
     const Fn = () => fn?.()
 
-    return useQuery<T>(
-        key,
-        async () => {
+    return useQuery<T>({
+        queryKey: key,
+        queryFn: async () => {
             const res = await Fn()
             return res.data
         },
-        {
-            ...options,
-        },
-    )
+        ...options,
+    })
 }
 
 export default useAppQuery

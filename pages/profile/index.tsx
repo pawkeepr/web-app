@@ -1,8 +1,11 @@
-import ProfilePage from '~/pages/ProfilePage';
+import LayoutMain from '~/Layouts'
+import ProfilePage from '~/pages/ProfilePage'
 
 const Profile = () => {
     return (
-        <ProfilePage />
+        <LayoutMain>
+            <ProfilePage />
+        </LayoutMain>
     )
 }
 

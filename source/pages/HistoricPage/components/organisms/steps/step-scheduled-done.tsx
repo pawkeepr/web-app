@@ -1,14 +1,13 @@
 import CardScheduled from '~/Components/organism/card-scheduled/card-scheduled'
-import useListAppointments from '~/store/hooks/list-appointments'
+import useGetAllAppointments from './hook'
 
 const StepDone = () => {
-    const { activeData, isLoading } = useListAppointments({ mode: 'done' })
-
+    const { isLoading, filteredDoneData } = useGetAllAppointments()
     if (isLoading) return <div>Loading...</div>
 
     return (
         <div className="space-y-10 w-full">
-            {activeData?.map((appointment) => (
+            {filteredDoneData?.map((appointment) => (
                 <CardScheduled key={appointment.id} appointment={appointment} />
             ))}
         </div>

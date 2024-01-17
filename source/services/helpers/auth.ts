@@ -1,8 +1,8 @@
-import { CognitoUserSession } from 'amazon-cognito-identity-js'
+import type { CognitoUserSession } from 'amazon-cognito-identity-js'
 import { Auth } from 'aws-amplify'
 
-import { AccountSignUp } from '~/store/slices/auth/register/types'
-import { UserData } from './types'
+import type { AccountSignUp } from '~/store/slices/auth/register/types'
+import type { UserData } from './types'
 
 export type SignInCredentials = {
     username: string
@@ -10,7 +10,7 @@ export type SignInCredentials = {
 }
 
 export async function resendConfirmationCode(username: string) {
-    return Auth.resendSignUp(username)
+    return await Auth.resendSignUp(username)
 }
 
 export const singUpAws = async (data: AccountSignUp) => {
@@ -26,23 +26,23 @@ export const singUpAws = async (data: AccountSignUp) => {
 
 // Login Method
 export const signInAws = async (data: SignInCredentials): Promise<UserData> => {
-    return Auth.signIn(data.username, data.password)
+    return await Auth.signIn(data.username, data.password)
 }
 
 export const confirmSignUp = async (username: string, code: string) => {
-    return Auth.confirmSignUp(username, code)
+    return await Auth.confirmSignUp(username, code)
 }
 
 export const signOut = async () => {
-    return Auth.signOut()
+    return await Auth.signOut()
 }
 
 export async function getUser(): Promise<CognitoUserSession> {
-    return Auth.currentSession()
+    return await Auth.currentSession()
 }
 
 export async function forgetPwd(email: string) {
-    return Auth.forgotPassword(email)
+    return await Auth.forgotPassword(email)
 }
 
 export async function forgotPasswordSubmit(
@@ -50,7 +50,7 @@ export async function forgotPasswordSubmit(
     code: string,
     newPassword: string,
 ) {
-    return Auth.forgotPasswordSubmit(email, code, newPassword)
+    return await Auth.forgotPasswordSubmit(email, code, newPassword)
 }
 
 export type { UserData }

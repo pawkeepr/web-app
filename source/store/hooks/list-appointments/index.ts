@@ -88,17 +88,14 @@ export const useListAppointments = ({
 
     const keys = [name, nameStrategy.get(mode) as string]
     const get = getStrategy.get(mode) as FGetAxios<VeterinaryConsultation[]>
-    const update = updateStrategy.get(mode) as FAxiosUpdate<
-        VeterinaryConsultation,
-        IDateConsult
-    >
-    const add = createStrategy.get(mode) as unknown as FAxiosPost<
-        VeterinaryConsultation,
-        IDateConsult
-    >
+    const update = updateStrategy.get(mode) as FAxiosUpdate<IDateConsult>
+    const add = createStrategy.get(mode) as unknown as FAxiosPost<IDateConsult>
     const entity = entityStrategy.get(mode)
 
-    return useAppStore<VeterinaryConsultation, IDateConsult>({
+    return useAppStore<
+        VeterinaryConsultation[],
+        IDateConsult | VeterinaryConsultation
+    >({
         add,
         get,
         update,

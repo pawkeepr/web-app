@@ -10,8 +10,8 @@ import MyImage from '~/Components/atoms/my-image'
 import ravena from '~/assets/images/ravena.jpeg'
 import type { IHookModal } from '~/hooks/use-modal'
 import useResizeMobile from '~/hooks/use-resize-mobile'
-import { Gender, Species } from '~/store/slices/pets/speciesType'
 import type { VeterinaryConsultation } from '~/types/appointment'
+import { Gender, Species } from '~/types/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import BoxButtons from '../box-buttons'
 import ModalBoxButtons from '../box-buttons/modal-box-buttons'
@@ -78,10 +78,10 @@ const CardScheduled = ({
         [appointment],
     )
 
-    const formatedDateAndHours = useMemo(() => {
+    const formattedDateAndHours = useMemo(() => {
         const date = appointment?.dates_consults?.date_consultation
         const hour = appointment?.dates_consults?.time_consultation
-        const dateAndHour = `${date} - ${hour}`
+        const dateAndHour = `${date} às ${hour}`
         return dateAndHour
     }, [appointment])
 
@@ -136,7 +136,7 @@ const CardScheduled = ({
                         </div>
                         <div className="text-gray-500 mb-2">
                             <h3 className="font-bold mb-1">Data da Consulta:</h3>
-                            <p>{formatedDateAndHours}</p>
+                            <p>{formattedDateAndHours}</p>
                         </div>
                     </section>
                     <section>

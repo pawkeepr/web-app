@@ -1,4 +1,5 @@
 import {
+    keepPreviousData,
     useMutation,
     useQueryClient,
     type UseQueryOptions,
@@ -9,27 +10,25 @@ import type { BuilderEntity } from '~/entities/BuilderEntity'
 import useAppQuery, { type Fn } from '~/hooks/use-app-query'
 import { errorToast, successToast } from '../helpers/toast'
 
-export type FAxiosPost<T = unknown, G = undefined> = (
-    data: G extends undefined ? T : T | G,
-) => Promise<AxiosResponse<T>>
-export type FAxiosUpdate<T = unknown, G = unknown> = (
+export type FAxiosPost<G = undefined> = (data: G) => Promise<AxiosResponse<G>>
+export type FAxiosUpdate<G = unknown> = (
     id: string,
-    data: Partial<T | G>,
-) => Promise<AxiosResponse<T>>
+    data: Partial<G>,
+) => Promise<AxiosResponse<G>>
 export type FAxiosDelete<T = unknown> = (id: string) => Promise<AxiosResponse<T>>
 
 type Stores<T, G> = {
     keys: (string | number)[]
     name: string
     enabled?: boolean
-    update?: FAxiosUpdate<T, G>
+    update?: FAxiosUpdate<G>
     del?: FAxiosDelete<T>
-    add?: FAxiosPost<T, G>
-    get?: Fn<T[]>
+    add?: FAxiosPost<G>
+    get?: Fn<T>
     handleCloseModal?: () => void
     entity?: BuilderEntity
-    options?: UseQueryOptions<T[]>
-    initialData?: T[]
+    options?: UseQueryOptions<T>
+    initialData?: T
 }
 
 const TIME = 1000 * 60 * 5 // 5 min
@@ -48,14 +47,14 @@ const useAppStore = <T, G = unknown>({
 }: Stores<T, G>) => {
     const superKeys = ['active', ...keys]
 
-    const { isLoading, data, error, isError } = useAppQuery<T[]>(
+    const { isLoading, data, error, isError } = useAppQuery<T>(
         superKeys,
-        get?.bind(null) as Fn<T[]>,
+        get?.bind(null) as Fn<T>,
         {
             ...options,
-            keepPreviousData: true,
             staleTime: TIME, // 1 min
             enabled: !!get && enabled,
+            placeholderData: keepPreviousData,
         },
     )
 
@@ -81,7 +80,7 @@ const useAppStore = <T, G = unknown>({
     }, [handleCloseModal])
 
     const addData = useMutation({
-        mutationFn: async (data: G extends undefined ? T : T | G) => {
+        mutationFn: async (data: G) => {
             const res = await add?.(data)
 
             return res?.data as T
@@ -92,8 +91,8 @@ const useAppStore = <T, G = unknown>({
     })
 
     const updateData = useMutation({
-        mutationFn: async (data: T | G) => {
-            const newData = data as { id?: string } & (T | G)
+        mutationFn: async (data: G) => {
+            const newData = data as { id?: string } & G
             if (!newData.id) {
                 throw new Error('Id não encontrado')
             }
@@ -106,7 +105,7 @@ const useAppStore = <T, G = unknown>({
     })
 
     const handleSubmit = useCallback(
-        async (data: T | G) => {
+        async (data: G) => {
             try {
                 const newData = entity ? entity.build(data) : data
 
@@ -137,8 +136,8 @@ const useAppStore = <T, G = unknown>({
     )
 
     const submitLoading = useMemo(
-        () => addData?.isLoading || updateData?.isLoading,
-        [addData?.isLoading, updateData?.isLoading],
+        () => addData?.isPending || updateData?.isPending,
+        [addData?.isPending, updateData?.isPending],
     )
 
     return {

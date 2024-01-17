@@ -3,8 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation'
 import { createContext, useEffect } from 'react'
 import cookies from '~/constants/cookies'
-import LOADING from '~/constants/loading'
-import { decrypt, encrypt } from '~/helpers/encrypt-and-decrypt'
+import type LOADING from '~/constants/loading'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import {
     recoverUserByToken,
@@ -12,13 +11,10 @@ import {
     signOutUser,
 } from '~/store/slices/auth/login/actions'
 import {
-    LoginState,
-    onChangePassword,
     onChangeRememberMe,
-    onChangeUsername,
-    onSetRememberMe,
+    type LoginState,
 } from '~/store/slices/auth/login/slice'
-import { getCookie, setCookie } from '~/utils/cookies-utils'
+import { getCookie } from '~/utils/cookies-utils'
 
 interface SignInData {
     username: string
@@ -50,6 +46,7 @@ const PUBLIC_ROUTES = [
     '/activation',
     '/logout',
     '/confirm-account',
+    '/client/confirmation',
 ]
 
 export function AuthProvider({ children }: AuthProviderProps) {
@@ -61,7 +58,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     useEffect(() => {
         const token = getCookie(cookies.token.name)
-        const isPublicRoute = PUBLIC_ROUTES.includes(pathname)
+        const isPublicRoute = !!PUBLIC_ROUTES.find((route) => {
+            if (route === '/') {
+                return route === pathname
+            }
+
+            if (typeof pathname !== 'string') return true
+
+            return pathname?.startsWith(route)
+        })
 
         if (!token && isPublicRoute) return
 
@@ -76,43 +81,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname])
 
-    useEffect(() => {
-        getRememberInfo()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
     async function signIn({ username, password }: SignInData) {
-        await setRememberInfo()
-        dispatch(signInUser({ username, password }))
-    }
-
-    async function setRememberInfo() {
-        const JSON_REMEMBER = JSON.stringify({
-            username,
-            password: encrypt(password),
-        })
-
-        if (rememberMe) {
-            setCookie(
-                cookies.remember.name,
-                JSON_REMEMBER,
-                cookies.remember.expires,
-            )
-        }
-    }
-
-    async function getRememberInfo() {
-        const rememberInfo = getCookie(cookies.remember.name)
-
-        if (!rememberInfo) {
-            return
-        }
-
-        const { username, password } = rememberInfo
-
-        dispatch(onSetRememberMe(true))
-        dispatch(onChangeUsername(username))
-        dispatch(onChangePassword(decrypt(password)))
+        await dispatch(signInUser({ username, password }))
     }
 
     const onToggleRememberMe = () => {

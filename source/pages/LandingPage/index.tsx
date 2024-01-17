@@ -46,6 +46,7 @@ const LandingPage = () => {
                 <Footer />
             </div>
             <button
+                type="button"
                 onClick={() => toTop()}
                 className="bg-secondary-500 p-3 rounded-full absolute bottom-0 right-0 mb-[5rem] shadow-md"
                 id="back-to-top"

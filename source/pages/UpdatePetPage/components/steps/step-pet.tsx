@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
 
+<<<<<<< HEAD
 import { BtnPrimary } from "~/Components/atoms/btn";
 
 import { useMemo } from "react";
@@ -23,6 +24,31 @@ type KeysInitial =
     | "race"
     | "specie";
 type StepPetKeys = Pick<InitialValues, KeysInitial>;
+=======
+import { BtnPrimary } from '~/Components/atoms/btn'
+
+import { useMemo } from 'react'
+import * as yup from 'yup'
+import ComboBoxFields from '~/Components/molecules/combo-box-fields'
+import FieldControl from '~/Components/molecules/field-control'
+import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
+import FieldMasked from '~/Components/molecules/field-masked'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import type { StepProps } from '~/types/helpers'
+import { genderValues } from '~/types/sexType'
+import type { InitialValues } from '../../index'
+
+type KeysInitial =
+    | 'name'
+    | 'date_birth'
+    | 'sex'
+    | 'microchip'
+    | 'identification_number'
+    | 'id'
+    | 'race'
+    | 'specie'
+type StepPetKeys = Pick<InitialValues, KeysInitial>
+>>>>>>> main
 
 const schema = yup.object().shape({
     name: yup.string().required("Campo obrigatório"),
@@ -46,16 +72,22 @@ const schema = yup.object().shape({
             label: yup.string().required("Campo obrigatório"),
             value: yup.string().required("Campo obrigatório"),
         })
+<<<<<<< HEAD
         .required("Campo obrigatório"),
     date_birth: yup.string().nullable().required("Campo obrigatório"),
 });
+=======
+        .required('Campo obrigatório'),
+    date_birth: yup.string().nullable().required('Campo obrigatório'),
+})
+>>>>>>> main
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
-    const { values, setValues } = useFormikContextSafe<StepPetKeys>();
+    const { values, setValues } = useFormikContextSafe<StepPetKeys>()
 
     const isValid = useMemo(() => {
-        return schema.isValidSync(values);
-    }, [values]);
+        return schema.isValidSync(values)
+    }, [values])
 
     return (
         <div className="card card-body shadow-lg">
@@ -120,12 +152,12 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     label="Próximo"
                     disabled={!isValid}
                     onClick={() => {
-                        toggleTab(activeTab + 1);
+                        toggleTab(activeTab + 1)
                     }}
                 />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default StepPet;
+export default StepPet

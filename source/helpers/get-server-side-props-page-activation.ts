@@ -2,7 +2,7 @@ import optionsCookies from '~/constants/cookies'
 
 import type { GetServerSideProps } from 'next'
 import { getCookie } from '~/utils/cookies-utils'
-import { Context, fetchProfile } from './get-server-side-props-pages-privates'
+import { fetchProfile, type Context } from './get-server-side-props-pages-privates'
 
 const getServerSidePropsPageActivation =
     (callback?: GetServerSideProps) => async (ctx: Context) => {

@@ -22,13 +22,7 @@ type AuthLayoutProps = {
       }
 )
 
-const AuthLayout = ({
-    children,
-    title,
-    image,
-    alt,
-    hasImage = false,
-}: AuthLayoutProps) => {
+const AuthLayout = ({ children, title, image, alt }: AuthLayoutProps) => {
     return (
         <div className="min-h-screen auth-bg-cover flex flex-col ">
             <HeaderTitle title={title} />

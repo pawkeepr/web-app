@@ -1,6 +1,6 @@
-import type { Breed } from '~/store/slices/pets/breedType'
-import type { Gender, Species } from '~/store/slices/pets/speciesType'
+import type { Breed } from '~/types/breedType'
 import type { GenericSelect, On_Off, PetData } from '~/types/pet-v2'
+import type { Gender, Species } from '~/types/speciesType'
 
 export class PetInformation implements PetData {
     id_pet: string

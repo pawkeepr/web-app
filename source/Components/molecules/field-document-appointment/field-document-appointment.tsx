@@ -1,7 +1,7 @@
 import { PlusCircleIcon } from '@heroicons/react/24/solid'
 import { Form, Formik } from 'formik'
 import { startTransition, useState } from 'react'
-import ModalListPets from '~/Components/modals/list-pets-modal/modal-list-pets'
+import ModalScheduledV2 from '~/Components/modals/scheduled-v2-modal'
 import ModalWarning from '~/Components/modals/warning-modal/modal-warning'
 import FieldDocument from '~/Components/molecules/field-document/field-document'
 import isValidCPF from '~/validations/cpf'
@@ -54,7 +54,7 @@ const FieldDocumentAppointment = ({
                     setIsOpen(false)
                 }}
             />
-            <ModalListPets selectedTabInitial={selectedTabInitial}>
+            <ModalScheduledV2 selectedTabInitial={selectedTabInitial}>
                 {({ onChangeOpen, onChangeDocument }) => (
                     <Formik
                         initialValues={initialValues}
@@ -64,7 +64,7 @@ const FieldDocumentAppointment = ({
                         })}
                         enableReinitialize
                     >
-                        {({ handleSubmit }) => (
+                        {({ handleSubmit, values }) => (
                             <Form
                                 className=" flex flex-row items-center justify-end"
                                 onSubmit={handleSubmit}
@@ -73,12 +73,17 @@ const FieldDocumentAppointment = ({
                                     onChangeOpen,
                                     onChangeDocument,
                                 }) || (
-                                    <div className="w-full mb-3 ml-3 hidden lg:block xl:block">
+                                    <div className="w-96 ml-3 mobile:hidden block relative pt-3">
+                                        <span className="text-xs text-gray-500 font-semibold font-sans w-full absolute top-0 right-0 text-center">
+                                            {
+                                                'Insira o CPF do tutor para agendar ou iniciar uma consulta'
+                                            }
+                                        </span>
                                         <FieldDocument
+                                            ctx={values}
                                             name="cpf_tutor"
                                             placeholder="Nova Consulta"
-                                            label="CPF"
-                                            className="rounded-md"
+                                            className="rounded-md mt-1 border border-secondary"
                                             onlyCPF
                                             endIcon={
                                                 <button
@@ -96,7 +101,7 @@ const FieldDocumentAppointment = ({
                         )}
                     </Formik>
                 )}
-            </ModalListPets>
+            </ModalScheduledV2>
         </>
     )
 }

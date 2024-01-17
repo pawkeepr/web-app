@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 
-import { VariantProps, tv } from 'tailwind-variants'
+import { tv, type VariantProps } from 'tailwind-variants'
 
 export const input = tv({
     base: `

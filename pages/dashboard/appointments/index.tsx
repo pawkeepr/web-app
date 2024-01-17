@@ -1,5 +1,6 @@
-import { useRouter, useSearchParams } from "next/navigation"
-import AppointmentsPage from "~/pages/AppointmentsPage/Appointments"
+import { useRouter, useSearchParams } from 'next/navigation'
+import LayoutMain from '~/Layouts'
+import AppointmentsPage from '~/pages/AppointmentsPage/Appointments'
 
 const AppointmentsNext = () => {
     const search = useSearchParams()
@@ -12,7 +13,13 @@ const AppointmentsNext = () => {
     if (!document || !pet) return push('/dashboard')
 
     return (
-        <AppointmentsPage document={document} pet={pet} appointment_id={appointment_id} />
+        <LayoutMain>
+            <AppointmentsPage
+                document={document}
+                pet={pet}
+                appointment_id={appointment_id}
+            />
+        </LayoutMain>
     )
 }
 
