@@ -28,10 +28,10 @@ export const button = tv({
             true: 'bg-secondary-500 text-gray-500 dark:bg-primary-500',
         },
         success: {
-            true: 'bg-green-500',
+            true: 'bg-primary-500',
         },
         confirm: {
-            true: 'bg-[#0971B3]',
+            true: 'bg-confirm-500',
         },
         cancel: {
             true: 'bg-secondary-500 text-gray-500',
