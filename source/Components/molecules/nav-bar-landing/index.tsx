@@ -3,9 +3,9 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { FaRegEdit } from 'react-icons/fa' // Ícone de Cadastro
+import { FiLogIn } from 'react-icons/fi' // Ícone de Login
 import { BtnLink } from '~/Components/atoms/btn'
-
-import ArrowRightOnRectangleIcon from '@heroicons/react/24/solid/ArrowRightOnRectangleIcon'
 
 const NavbarLanding = () => {
     // const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -108,17 +108,18 @@ const NavbarLanding = () => {
                     <div className="z-50 flex gap-2">
                         <BtnLink
                             message="Entrar"
-                            className="text-gray-500 hover:!bg-secondary-500 !border-secondary-500 border"
+                            className="text-gray-500 hover:!bg-secondary-500 !border-secondary-500 border w-40"
                             href="/sign-in"
                         >
-                            <ArrowRightOnRectangleIcon />
+                            <FiLogIn className="w-8 h-8" />
                         </BtnLink>
                         <BtnLink
                             message="Criar Conta"
-                            className="border-2 border-solid border-primary-600 hover:!bg-secondary-500"
+                            className="border-2 border-solid border-primary-600 hover:!bg-secondary-500 w-40"
                             href="/sign-up"
                         >
                             {/* icon de cadastro */}
+                            <FaRegEdit />
                         </BtnLink>
                     </div>
                     {/* </Collapse> */}
