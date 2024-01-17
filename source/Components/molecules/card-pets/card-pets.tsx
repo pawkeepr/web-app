@@ -3,7 +3,6 @@ import ravena from "~/assets/images/ravena.jpeg";
 
 import { RadioGroup } from "@headlessui/react";
 import { useRouter } from "next/router";
-import { BtnPrimary } from "~/Components/atoms/btn";
 import ViewAppointment from "~/Components/modals/view-appointment/modal-view-appointment";
 import type { IPetV2 } from "~/types/pet-v2";
 
@@ -17,7 +16,7 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
     return (
         <div className="space-y-10 w-full">
             <RadioGroup.Option
-                key={pet?.name_pet || pet?.pet_data?.name_pet}
+                key={pet?.pet_information?.name_pet || pet?.pet_data?.name_pet}
                 value={pet}
                 className={({ active }) =>
                     `${active ? "ring-2 ring-white/20 ring-offset-2" : ""}
@@ -62,20 +61,18 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                     <div className="p-2 max-w-40 ">
                                         <p className="text-gray-700">
                                             <strong>Nome do pet:</strong>{" "}
-                                            {pet?.pet_data?.name_pet ||
+                                            {pet?.pet_information?.name_pet ||
                                                 pet?.name_pet}
                                         </p>
                                         <p className="text-gray-700">
                                             <strong>Especie:</strong>{" "}
-                                            {pet?.pet_data?.specie ||
+                                            {pet?.pet_information?.specie ||
                                                 pet?.specie}
                                         </p>
                                         <p className="text-gray-700">
                                             <strong>Sexo:</strong>{" "}
-                                            {pet?.pet_data?.sex || pet?.sex}
-                                        </p>
-                                        <p className="text-gray-700 md:hidden">
-                                            <strong>Raça: </strong> {pet?.race}
+                                            {pet?.pet_information?.sex ||
+                                                pet?.sex}
                                         </p>
                                     </div>
                                 </RadioGroup.Description>
@@ -102,14 +99,15 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                     <div className="p-2">
                                         <p className="text-gray-700">
                                             <strong>Ano de Nascimento: </strong>
-                                            {pet?.date_birth}
+                                            {pet?.pet_information?.date_birth}
                                         </p>
                                         <p className="text-gray-700">
-                                            <strong>Raça: </strong> {pet?.race}
+                                            <strong>Raça: </strong>{" "}
+                                            {pet?.pet_information?.race}
                                         </p>
                                         <p className="text-gray-700">
                                             <strong>Tipo sanguíneo: </strong>
-                                            {pet?.blood_type}
+                                            {pet?.pet_information?.blood_type}
                                         </p>
                                     </div>
                                 </RadioGroup.Description>
@@ -120,21 +118,6 @@ const CardPets = ({ pet, checked }: CardPetsProps) => {
                                 <ViewAppointment props={pet} />
                             </div>
                         )}
-                    </div>
-                    <div className="m-2">
-                        <BtnPrimary
-                            label="Editar"
-                            className="w-32"
-                            type="submit"
-                            onClick={() => {
-                                push("/dashboard/update-pet");
-                            }}
-                        />
-                        <BtnPrimary
-                            label="Excluir"
-                            className="w-32"
-                            type="submit"
-                        />
                     </div>
                 </>
             </RadioGroup.Option>
