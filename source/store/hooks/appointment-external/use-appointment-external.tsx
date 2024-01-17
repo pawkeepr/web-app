@@ -52,6 +52,7 @@ const useAppointmentExternal = ({
         entity: Appointments,
         update: update as Fn<VeterinaryConsultation>,
         handleCloseModal,
+        enabled: !!id,
     })
 }
 
