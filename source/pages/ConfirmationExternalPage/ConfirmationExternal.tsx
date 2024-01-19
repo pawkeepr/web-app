@@ -70,9 +70,12 @@ const ConfirmationPage = () => {
                     </div>
                     <section className="flex flex-col justify-start p-4 w-full">
                         <div className="gap-2 flex-wrap flex flex-col mt-2 w-full justify-between ">
-                            <h1 className="font-sans font-bold text-base text-gray-600 dark:!text-gray-200">
-                                Tutor
-                            </h1>
+                            {name_tutor && (
+                                <p className="text-gray-500 flex justify-between">
+                                    <strong className="mr-2">Tutor:</strong>
+                                    {name_tutor}
+                                </p>
+                            )}
                             {pet && (
                                 <p className="text-gray-500 flex justify-between">
                                     <strong className="mr-2">Pet:</strong>
@@ -83,12 +86,7 @@ const ConfirmationPage = () => {
                                     </span>
                                 </p>
                             )}
-                            {name_tutor && (
-                                <p className="text-gray-500 flex justify-between">
-                                    <strong className="mr-2">Tutor:</strong>
-                                    {name_tutor}
-                                </p>
-                            )}
+
                             {cpf_tutor && (
                                 <p className="text-gray-500 flex justify-between">
                                     <strong className="mr-2">CPF:</strong>
@@ -106,13 +104,12 @@ const ConfirmationPage = () => {
                             )}
 
                             <hr className="w-full border-gray-600 dark:border-gray-700" />
-                            <h1 className="font-sans font-bold text-base text-gray-600 dark:!text-gray-200">
-                                Veterinário
-                            </h1>
 
                             {name_veterinary && (
                                 <p className="text-gray-500 flex justify-between">
-                                    <strong className="mr-2">Nome:</strong>
+                                    <strong className="mr-2">
+                                        Veterinário(a):
+                                    </strong>
                                     {name_veterinary}
                                 </p>
                             )}

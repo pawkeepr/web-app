@@ -1,10 +1,10 @@
 import LayoutAuth from '~/Layouts/LayoutAuth'
-import ConfirmationPage from '~/pages/ConfirmationPage'
+import ConfirmationExternalPage from '~/pages/ConfirmationExternalPage'
 
 const Confirmation = () => {
     return (
         <LayoutAuth>
-            <ConfirmationPage />
+            <ConfirmationExternalPage />
         </LayoutAuth>
     )
 }
