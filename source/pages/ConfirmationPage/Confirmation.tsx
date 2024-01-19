@@ -15,7 +15,7 @@ import AuthLayout from '../_layouts/auth/auth_layout'
 const ConfirmationPage = () => {
     const { query } = useRouter()
 
-    const { activeData, isLoading } = useAppointmentExternal({
+    const { activeData, isLoading, error } = useAppointmentExternal({
         id: query.id as string,
         mode: 'confirmed',
     })
@@ -27,6 +27,7 @@ const ConfirmationPage = () => {
         activeData?.tutor_pet_vet?.veterinary?.contact?.whatsapp
     const cpf_tutor = activeData?.tutor_pet_vet?.tutor?.cpf_cnpj
     const whatsapp_tutor = activeData?.tutor_pet_vet?.tutor?.contact?.whatsapp
+    const crmv = activeData?.tutor_pet_vet?.veterinary?.crmv
 
     const formattedDateAndHours = useMemo(() => {
         const date = activeData?.dates_consults?.date_consultation
@@ -36,7 +37,8 @@ const ConfirmationPage = () => {
     }, [activeData])
 
     const isPossibleAction = useMemo(() => {
-        return activeData?.appointment_status?.is_possible_action === 'yes'
+        console.log(error)
+        return error?.cause !== 'already_confirmed'
     }, [activeData])
 
     return (
@@ -112,6 +114,13 @@ const ConfirmationPage = () => {
                                 <p className="text-gray-500 flex justify-between">
                                     <strong className="mr-2">Nome:</strong>
                                     {name_veterinary}
+                                </p>
+                            )}
+
+                            {crmv && (
+                                <p className="text-gray-500 flex justify-between">
+                                    <strong className="mr-2">CRMV:</strong>
+                                    {crmv}
                                 </p>
                             )}
 
