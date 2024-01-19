@@ -61,8 +61,7 @@ const useAppStore = <T, G = unknown>({
     const queryClient = useQueryClient()
 
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    const onError = async (_err: unknown, _newData: unknown, context: any) => {
-        await errorToast('Houve um erro ', 'Tente novamente')
+    const onError = (_err: unknown, _newData: unknown, context: any) => {
         queryClient.setQueryData(superKeys, context?.oldData)
     }
 
