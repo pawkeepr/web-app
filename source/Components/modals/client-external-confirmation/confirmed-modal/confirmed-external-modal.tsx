@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import { Fragment, useMemo } from 'react'
 import * as Yup from 'yup'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
@@ -35,6 +35,7 @@ const ConfirmedExternalModal = ({
     const { handleSubmit, isLoading } = useAppointmentExternal({
         mode: 'confirmed',
         handleCloseModal: closeModal,
+        id: item.id as string,
     })
 
     const formattedDateAndHours = useMemo(() => {
@@ -89,8 +90,11 @@ const ConfirmedExternalModal = ({
                         validationSchema={validationSchema}
                         onSubmit={handleSubmit}
                     >
-                        {({ isValid }) => (
-                            <div className="fixed inset-0 overflow-y-auto">
+                        {({ isValid, handleSubmit }) => (
+                            <Form
+                                className="fixed inset-0 overflow-y-auto"
+                                onSubmit={handleSubmit}
+                            >
                                 <div className="flex min-h-full items-center justify-center p-4 text-center">
                                     <Transition.Child
                                         as={Fragment}
@@ -158,7 +162,7 @@ const ConfirmedExternalModal = ({
                                         </Dialog.Panel>
                                     </Transition.Child>
                                 </div>
-                            </div>
+                            </Form>
                         )}
                     </Formik>
                 </Dialog>

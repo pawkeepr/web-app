@@ -91,8 +91,14 @@ export const getAppointmentExternalByID: FnAxiosAppointmentByIdExternal = async 
 
 export const confirmedAppointmentExternal: FnAxiosAppointmentByIdExternal = async (
     id_appointment: string,
-) => api.post(urls.APPOINTMENT_CONFIRMED_EXTERNAL(), { params: { id_appointment } })
+) =>
+    api.put(urls.APPOINTMENT_CONFIRMED_EXTERNAL(), undefined, {
+        params: { id_appointment },
+    })
 
 export const canceledAppointmentExternal: FnAxiosAppointmentByIdExternal = async (
     id_appointment: string,
-) => api.post(urls.APPOINTMENT_CANCELED_EXTERNAL(), { params: { id_appointment } })
+) =>
+    api.put(urls.APPOINTMENT_CANCELED_EXTERNAL(), undefined, {
+        params: { id_appointment },
+    })
