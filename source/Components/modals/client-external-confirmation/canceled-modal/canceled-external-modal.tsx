@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Form, Formik } from 'formik'
+import { useRouter } from 'next/navigation'
 import { Fragment } from 'react'
 import * as Yup from 'yup'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
@@ -35,12 +36,20 @@ const CanceledExternalModal = ({
     children,
 }: CanceledExternalModalProps) => {
     const { closeModal, open, showModal } = useModal()
+    const router = useRouter()
 
     const { handleSubmit, isLoading } = useAppointmentExternal({
         mode: 'canceled',
         handleCloseModal: closeModal,
         id: item.id as string,
     })
+
+    const onSubmit = async (values: VeterinaryConsultation) => {
+        try {
+            await handleSubmit(values)
+            router.push('/sign-in')
+        } catch (_) {}
+    }
 
     return (
         <>
@@ -85,7 +94,7 @@ const CanceledExternalModal = ({
                     <Formik
                         initialValues={item}
                         validationSchema={validationSchema}
-                        onSubmit={handleSubmit}
+                        onSubmit={onSubmit}
                     >
                         {({ values, isValid, handleSubmit }) => (
                             <Form
