@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-import type { Breed } from "~/store/slices/pets/breedType";
-import type { Gender, Species } from "~/store/slices/pets/speciesType";
+import type { Breed } from "~/types/breedType";
+import type { Gender, Species } from "~/types/speciesType";
 import type { Contact, DTOProfile, Location } from "./profile";
-=======
-import type { Breed } from '~/types/breedType'
-import type { Gender, Species } from '~/types/speciesType'
-import type { Contact, DTOProfile, Location } from './profile'
->>>>>>> main
 
 export type GenericSelect = {
     label: string;
@@ -99,7 +93,7 @@ export interface IPetV2Simplified {
 }
 
 export type IPetV2Data = {
-    id: string;
+    id_pet: string;
     name_pet: string;
     microchip: string;
     identification_number: string;
@@ -111,4 +105,6 @@ export type IPetV2Data = {
     sex: string;
     castrated: boolean;
     date_birth: string;
+    cpf_cnpj: string;
+    color: string;
 };

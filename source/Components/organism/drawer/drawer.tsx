@@ -1,30 +1,18 @@
-<<<<<<< HEAD
 import ArrowLeftCircleIcon from "@heroicons/react/20/solid/ArrowLeftCircleIcon";
 import HistoricIcon from "@heroicons/react/24/solid/ArchiveBoxXMarkIcon";
-import Cog8ToothIcon from "@heroicons/react/24/solid/Cog8ToothIcon";
 import DashboardIcon from "@heroicons/react/24/solid/HomeIcon";
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
 import Image from "next/image";
 import { MdPets } from "react-icons/md";
-import { layoutModeTypes } from "~/Components/constants/layout";
+import { layoutModeTypes } from "~/constants/layout";
 import useChangeLayoutMode from "~/hooks/use-change-layout-mode";
-=======
-import ArrowLeftCircleIcon from '@heroicons/react/20/solid/ArrowLeftCircleIcon'
-import HistoricIcon from '@heroicons/react/24/solid/ArchiveBoxXMarkIcon'
-import DashboardIcon from '@heroicons/react/24/solid/HomeIcon'
-import UserCircleIcon from '@heroicons/react/24/solid/UserCircleIcon'
-import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
-import Image from 'next/image'
-import { MdPets } from 'react-icons/md'
-import { layoutModeTypes } from '~/constants/layout'
-import useChangeLayoutMode from '~/hooks/use-change-layout-mode'
->>>>>>> main
 
 import darkLogo from "../../../../public/logo-dark.png";
 import lightLogo from "../../../../public/logo-light.png";
 
 import { button } from "~/Components/atoms/btn";
 
+import { UserCircleIcon } from "@heroicons/react/24/solid";
 import cn from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -37,11 +25,11 @@ type DrawerProps = {
 };
 
 type Item = {
-    name: string
-    icon: React.ReactNode
-    href: string
-    disabled?: boolean
-}
+    name: string;
+    icon: React.ReactNode;
+    href: string;
+    disabled?: boolean;
+};
 
 const items: Item[] = [
     {
@@ -65,16 +53,10 @@ const items: Item[] = [
         href: "/dashboard/historic",
     },
     {
-<<<<<<< HEAD
-        name: "Configurações",
-        icon: <Cog8ToothIcon className="w-5 h-5" />,
-        href: "#",
-=======
-        name: 'Perfil',
+        name: "Perfil",
         disabled: true,
         icon: <UserCircleIcon className="w-5 h-5" />,
-        href: '/profile',
->>>>>>> main
+        href: "/profile",
     },
 ];
 
@@ -139,11 +121,12 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                             className={cn(buttonStyled, {
                                 "bg-gray-200 dark:bg-dark-600":
                                     pathname === item.href,
-                                '!text-gray-400 hover:text-gray-400': item.disabled,
-                                'hover:bg-transparent hover:cursor-default':
+                                "!text-gray-400 hover:text-gray-400":
+                                    item.disabled,
+                                "hover:bg-transparent hover:cursor-default":
                                     item.disabled,
                             })}
-                            href={item.disabled ? '#' : item.href}
+                            href={item.disabled ? "#" : item.href}
                         >
                             {item.icon}
 
