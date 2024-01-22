@@ -1,4 +1,4 @@
-@import './assets/scss/themes.scss';
+@import "./assets/scss/themes.scss";
 
 html {
     overflow: -moz-scrollbars-vertical;
@@ -90,7 +90,6 @@ input:invalid {
     animation: animate-ellipsis 3s steps(4) infinite;
 }
 
-
 /* Adiciona animação de X */
 @keyframes cancel-x {
     0% {
@@ -156,4 +155,10 @@ input:invalid {
     .show-light:not(.dark\\:hidden) {
         display: none !important;
     }
+}
+
+input,
+select,
+textarea {
+    font-size: 10px;
 }
