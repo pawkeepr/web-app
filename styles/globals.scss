@@ -162,3 +162,12 @@ select,
 textarea {
     font-size: 10px;
 }
+
+
+.outline-primary:focus {
+    outline: 3px solid #09b285 !important;
+}
+
+.outline-secondary:focus {
+    outline: 3px solid #FFC86B !important;
+}

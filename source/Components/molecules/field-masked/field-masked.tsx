@@ -1,6 +1,6 @@
-import { InputMask, InputMaskProps } from '@react-input/mask'
+import { InputMask, type InputMaskProps } from '@react-input/mask'
 import FieldControl, {
-    InputControlProps,
+    type InputControlProps,
 } from '~/Components/molecules/field-control'
 
 import { input } from '~/Components/atoms/input'
