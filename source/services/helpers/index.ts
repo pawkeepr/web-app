@@ -35,7 +35,7 @@ export const createPet = async (data: any) =>
     api.post(urls.PET_CREATE_PROFILE(), data)
 export const createPetSimplified = async (data: any) =>
     api.post(urls.PET_CREATE_SIMPLIFIED_PROFILE(), data)
-export const updatePet = async (data: any, cpf_cnpj: string, id_pet: string) =>
+export const updatePet = async (cpf_cnpj: string, id_pet: string, data: any) =>
     api.post(urls.PET_UPDATE_PROFILE(), data, {
         params: { id_pet, cpf_cnpj },
     })
@@ -87,7 +87,10 @@ export type FnAxiosAppointmentByIdExternal = (
 
 export const getAppointmentExternalByID: FnAxiosAppointmentByIdExternal = async (
     id_appointment: string,
-) => api.get(urls.APPOINTMENT_GET_BY_ID_EXTERNAL(), { params: { id_appointment } })
+) =>
+    api.get(urls.APPOINTMENT_GET_BY_ID_EXTERNAL(), {
+        params: { id_appointment },
+    })
 
 export const confirmedAppointmentExternal: FnAxiosAppointmentByIdExternal = async (
     id_appointment: string,

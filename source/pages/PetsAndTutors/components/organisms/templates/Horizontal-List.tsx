@@ -1,23 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-'use client';
+"use client";
 
-import { Tab } from '@headlessui/react';
-import cn from 'classnames';
-import { useEffect, useState } from 'react';
-import useResizeMobile from '~/hooks/use-resize-mobile';
-import PetsTab from '~/pages/PetsPage/PetsTab';
-import TutorsTab from '~/pages/TutorsPage/TutorsTab';
+import { Tab } from "@headlessui/react";
+import cn from "classnames";
+import { useEffect, useState } from "react";
+import useResizeMobile from "~/hooks/use-resize-mobile";
+import PetsTab from "~/pages/PetsPage/PetsTab";
+import TutorsTab from "~/pages/TutorsPage/TutorsTab";
 
 const Tabs = () => [
     {
         id: 1,
-        title: 'Pets',
-        href: '#pets',
+        title: "Pets",
+        href: "#pets",
         tab: <PetsTab />,
     },
     {
-        title: 'Tutores',
-        href: '#tutors',
+        title: "Tutores",
+        href: "#tutors",
         tab: <TutorsTab />,
     },
 ];
@@ -44,11 +44,11 @@ const HorizontalTabs = () => {
                             key={category.id}
                             className={({ selected }) =>
                                 cn(
-                                    'w-full rounded-lg py-2.5 text-sm leading-5 font-bold text-white',
-                                    'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
+                                    "w-full rounded-lg py-2.5 text-sm leading-5 font-bold text-white",
+                                    "ring-white/60 ring-offset-2 focus:outline-none focus:ring-2",
                                     selected
-                                        ? 'bg-white !text-secondary-500 shadow'
-                                        : 'text-blue-100 hover:bg-white/[0.12]  hover:text-white',
+                                        ? "bg-white !text-secondary-500 shadow"
+                                        : "text-blue-100 hover:bg-white/[0.12]  hover:text-white"
                                 )
                             }
                         >
@@ -61,8 +61,8 @@ const HorizontalTabs = () => {
                         <Tab.Panel
                             key={idx.toString()}
                             className={cn(
-                                'rounded-xl bg-white p-3',
-                                'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
+                                "rounded-xl bg-white p-3",
+                                "ring-white/60 ring-offset-2 focus:outline-none focus:ring-2"
                             )}
                         >
                             {item.tab}
