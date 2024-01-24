@@ -6,12 +6,11 @@ import {
 } from 'react'
 import { FaWhatsapp } from 'react-icons/fa'
 import { tv } from 'tailwind-variants'
-import MyImage from '~/Components/atoms/my-image'
-import ravena from '~/assets/images/ravena.jpeg'
+import AvatarPet from '~/Components/molecules/avatar-pet'
 import type { IHookModal } from '~/hooks/use-modal'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { VeterinaryConsultation } from '~/types/appointment'
-import { Gender, Species } from '~/types/speciesType'
+import { Gender, MapOptionSpecies, Species } from '~/types/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import BoxButtons from '../box-buttons'
 import ModalBoxButtons from '../box-buttons/modal-box-buttons'
@@ -106,15 +105,14 @@ const CardScheduled = ({
                 canceled: appointment.appointment_status?.canceled,
             })}
         >
-            <picture className="mobile:w-full flex flex-1 justify-center items-center">
-                <MyImage
-                    src={ravena}
-                    alt="Picture of the author"
-                    width={150}
-                    height={150}
-                    className="h-32 mt-3 w-32 rounded-full"
-                />
-            </picture>
+            <AvatarPet
+                name_pet={pet?.name_pet}
+                specie={
+                    MapOptionSpecies[
+                        pet.specie as keyof typeof MapOptionSpecies
+                    ] as Species
+                }
+            />
             <div className="flex flex-col flex-[4] mobile:flex-1 w-full">
                 <div className="flex mobile:gap-3 justify-around items-center">
                     <section>
