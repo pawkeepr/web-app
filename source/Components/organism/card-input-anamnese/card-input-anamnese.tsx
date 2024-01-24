@@ -6,6 +6,7 @@ import { BtnConfirm } from '~/Components/atoms/btn'
 import FieldNumber from '~/Components/molecules/field-number'
 import type { KeyOfQuestionTypes, Question } from '~/constants/anamnese-questions'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { CtxStepAnamnese } from '~/pages/AppointmentsPage/components/validations.yup'
 import type { QuestionAnamnesis } from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
@@ -43,7 +44,7 @@ const STEPS: {
         value: 'general_information',
     },
     {
-        title: 'Sistema Digestório',
+        title: 'Sistema Digestivo',
         value: 'digestive_system',
     },
     {
@@ -82,10 +83,22 @@ function calcularIMC(height: number, weight: number): number {
     return imc
 }
 
+const makeTitle = (title: string, isMobile: boolean) => {
+    if (isMobile) {
+        return title
+            .split(' ')
+            .map((item) => item[0])
+            .join('')
+    }
+
+    return title
+}
+
 const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
     const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>()
 
     const [category, setCategory] = useState<KeyOfQuestionTypes>('digestive_system')
+    const { isMobile } = useResizeMobile()
 
     const filtered = useMemo(() => {
         if (!values?.anamnesis?.questions_anamnesis) return items
@@ -102,8 +115,21 @@ const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
         })
     }, [items, values?.anamnesis?.questions_anamnesis])
 
-    const height = useMemo(() => values.details_pet_consultation?.height, [values])
-    const weight = useMemo(() => values.details_pet_consultation?.weight, [values])
+    const height = useMemo(
+        () => values.details_pet_consultation?.height,
+        [values.details_pet_consultation?.height],
+    )
+    const weight = useMemo(
+        () => values.details_pet_consultation?.weight,
+        [values.details_pet_consultation?.weight],
+    )
+
+    const isValidNumber = useMemo(() => {
+        const castedWeight = Number(weight)
+        const isNumber = !Number.isNaN(weight)
+        const isPositive = castedWeight > 0
+        return isNumber && isPositive
+    }, [weight])
 
     useEffect(() => {
         if (height && weight) {
@@ -113,13 +139,21 @@ const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
     }, [height, weight])
 
     return (
-        <div className="gap-2 flex flex-col card shadow-2xl p-8 border-primary-500 border-2 relative">
+        <div
+            className="
+        gap-2 flex flex-col card shadow-2xl p-8 
+        border-primary-500 border-2 relative
+        mobile:p-0 mobile:border-none mobile:!shadow-none mobile:!rounded-none
+        
+        "
+        >
             <div className="flex flex-row w-full justify-between flex-wrap">
                 {STEPS.map((item) => (
                     <button
                         type="button"
                         onClick={() => setCategory(item.value)}
                         key={item.value}
+                        disabled={!isValidNumber}
                         className={cn(
                             'p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full',
                             {
@@ -128,7 +162,7 @@ const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
                             },
                         )}
                     >
-                        {item.title}
+                        {makeTitle(item.title, isMobile)}
                     </button>
                 ))}
             </div>
@@ -197,7 +231,7 @@ const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
                     )}
                 </Formik>
             )}
-            {/* Botões de Próximo e Anterior */}
+            {/* Botões de Próximo e Anterior 
             <button type="button" className="absolute bottom-4 left-4">
                 Anterior
             </button>
@@ -205,6 +239,7 @@ const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
             <button type="button" className="absolute bottom-4 right-4">
                 Próximo
             </button>
+            */}
         </div>
     )
 }

@@ -9,7 +9,7 @@ const BlockSearchAndInputDocument = ({
     name,
 }: BlockSearchAndInputDocumentProps) => {
     return (
-        <div className="my-2 w-full flex h-fit justify-end items-center">
+        <div className="my-2 mobile:px-2 w-full flex h-fit justify-end items-center">
             <SearchInput placeholder="Digite sua busca" name={name} />
 
             <FieldDocumentAppointment />

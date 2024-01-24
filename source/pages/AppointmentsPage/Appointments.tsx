@@ -165,11 +165,14 @@ const AppointmentsPage = ({
                     >
                         {({ onChangeOpen }) => {
                             return (
-                                <BtnCancel
-                                    type="button"
-                                    label="Cancelar Consulta"
-                                    onClick={() => onChangeOpen(true)}
-                                />
+                                <div className="w-full flex mobile:justify-center mobile:items-center">
+                                    <BtnCancel
+                                        type="button"
+                                        className="mobile:w-96"
+                                        label="Cancelar Consulta"
+                                        onClick={() => onChangeOpen(true)}
+                                    />
+                                </div>
                             )
                         }}
                     </ModalConfirm>

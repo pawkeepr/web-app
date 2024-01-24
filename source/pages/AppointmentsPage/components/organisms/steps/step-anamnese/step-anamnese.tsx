@@ -25,7 +25,7 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
     }, [values])
 
     return (
-        <section className="card card-body shadow-lg">
+        <section className="card card-body shadow-lg mobile:!shadow-none mobile:!rounded-none mobile:m-0 mobile:p-0">
             <h4 className="text-center font-sans font-semibold text-base capitalize">
                 Anamnese
                 <br />
