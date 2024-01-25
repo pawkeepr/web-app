@@ -5,6 +5,7 @@ import ModalScheduledV2 from '~/Components/modals/scheduled-v2-modal'
 import ModalWarning from '~/Components/modals/warning-modal/modal-warning'
 import FieldDocument from '~/Components/molecules/field-document/field-document'
 import isValidCPF from '~/validations/cpf'
+import styles from './field-document.module.scss'
 
 type InitialValues = {
     cpf_tutor: string
@@ -73,12 +74,12 @@ const FieldDocumentAppointment = ({
                                     onChangeOpen,
                                     onChangeDocument,
                                 }) || (
-                                    <div className="w-96 ml-3 mobile:hidden block relative pt-3">
-                                        <span className="text-xs text-gray-500 font-semibold font-sans w-full absolute top-0 right-0 text-center">
-                                            {
-                                                'Insira o CPF do tutor para agendar ou iniciar uma consulta'
-                                            }
-                                        </span>
+                                    <div
+                                        className={`
+                                    w-96 ml-3 mobile:hidden block relative pt-3
+                                    ${styles['field-document']}
+                                    `}
+                                    >
                                         <FieldDocument
                                             ctx={values}
                                             name="cpf_tutor"
@@ -86,14 +87,19 @@ const FieldDocumentAppointment = ({
                                             onlyCPF
                                             endIcon={
                                                 <button
-                                                    className="focus:outline-none flex h-full items-center justify-center"
+                                                    className="focus:outline-none flex h-full items-center justify-center "
                                                     data-bs-target="#addVeterinaryAppointmentModal"
                                                     type="submit"
                                                 >
-                                                    <PlusCircleIcon className="h-6 w-6 self-center m-2 text-secondary-500" />
+                                                    <PlusCircleIcon className="h-6 w-6 m-2 text-secondary-500" />
                                                 </button>
                                             }
                                         />
+                                        <span className="text-xs text-gray-500 font-semibold font-sans w-full absolute top-0 right-0 text-center">
+                                            {
+                                                'Insira o CPF do tutor para agendar ou iniciar uma consulta'
+                                            }
+                                        </span>
                                     </div>
                                 )}
                             </Form>
