@@ -3,42 +3,21 @@
 
 import { Tab } from '@headlessui/react'
 import cn from 'classnames'
-import { useEffect, useState } from 'react'
-import useResizeMobile from '~/hooks/use-resize-mobile'
-import PetsTab from '../organisms/PetsTab'
-import TutorsTab from '../organisms/TutorsTab'
 
-const Tabs = () => [
-    {
-        id: 1,
-        title: 'Pets',
-        href: '#pets',
-        tab: <PetsTab />,
-    },
-    {
-        title: 'Tutores',
-        href: '#tutors',
-        tab: <TutorsTab />,
-    },
-]
+type HorizontalTabsProps = {
+    categories: {
+        id: number
+        title: string
+        href: string
+        tab: React.ReactNode
+    }[]
+}
 
-const HorizontalTabs = () => {
-    const [categories, setCategories] = useState(() => Tabs())
-
-    const { isMobile } = useResizeMobile()
-
-    useEffect(() => {
-        if (isMobile) {
-            setCategories(Tabs().slice(0, 3))
-        } else {
-            setCategories(Tabs())
-        }
-    }, [isMobile])
-
+const HorizontalTabs = ({ categories }: HorizontalTabsProps) => {
     return (
-        <div className="mt-2 rounded-md">
+        <div className="w-full mt-2">
             <Tab.Group>
-                <Tab.List className="flex rounded-sm bg-primary-500 p-1">
+                <Tab.List className="flex  rounded-sm bg-primary-500 p-1 mobile:w-88 mobile:mx-4">
                     {categories.map((category) => (
                         <Tab
                             key={category.id}
@@ -56,10 +35,10 @@ const HorizontalTabs = () => {
                         </Tab>
                     ))}
                 </Tab.List>
-                <Tab.Panels className="mt-2 w-full">
-                    {categories.map((item, idx) => (
+                <Tab.Panels className="mt-2">
+                    {categories.map((item) => (
                         <Tab.Panel
-                            key={idx.toString()}
+                            key={item.id}
                             className={cn(
                                 'rounded-xl bg-white p-3',
                                 'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
