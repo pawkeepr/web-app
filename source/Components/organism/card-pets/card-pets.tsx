@@ -5,6 +5,8 @@ import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { IPetV2Data } from '~/types/pet-v2'
 import { GenderBR, MapOptionSpecies, type Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
+import BoxButtonsPets from '../box-buttons-pets'
+import ModalBoxButtonsPet from '../box-buttons-pets/modal-box-buttons-pets'
 import { card } from '../card-scheduled'
 
 type CardPetProps = {
@@ -39,32 +41,36 @@ const CardPet = ({ pet }: CardPetProps) => {
                 }
             />
             {isMobile && (
-                <div className="text-gray-500 mb-2 text-center w-full mt-1">
-                    <p>
-                        {`${pet?.name_pet}, ${pet?.specie}, ${pet?.race}, ${
-                            GenderBR[pet?.sex as keyof typeof GenderBR]
-                        }`}
-                        {', '}
-                        {calcAge(pet?.date_birth)} ano(s)
-                    </p>
+                <div className="text-gray-700 mb-2 text-center w-full mt-1 capitalize">
+                    <strong>
+                        <p>
+                            {`${pet?.name_pet}, ${pet?.specie}, ${pet?.race}, ${
+                                GenderBR[pet?.sex as keyof typeof GenderBR]
+                            }`}
+                            {', '}
+                            {calcAge(pet?.date_birth)} ano(s)
+                        </p>
+                    </strong>
                 </div>
             )}
-            <div className="flex flex-col flex-[4] mobile:flex-1 w-full ">
+            <div className="flex flex-col flex-[2] mobile:flex-1 w-full ">
                 <div className="flex mobile:gap-3 justify-around items-center mt-4 px-2">
                     {!isMobile && (
                         <section className="justify-center flex items-start flex-col flex-1">
+                            <div className="text-gray-700 mb-2 mobile:text-center w-full mt-1 capitalize">
+                                <strong>
+                                    <p>
+                                        {`${pet?.name_pet}, ${pet?.specie}, ${pet?.race}`}
+                                    </p>
+                                </strong>
+                            </div>
                             <div className="text-gray-500 mb-2 mobile:text-center w-full mt-1">
-                                <h3 className="font-bold mb-1">Pet:</h3>
-
-                                <p>
-                                    {`${pet?.name_pet}, ${pet?.specie}, ${
-                                        pet?.race
-                                    }, ${
-                                        GenderBR[pet?.sex as keyof typeof GenderBR]
-                                    }`}
-                                    {', '}
-                                    {calcAge(pet?.date_birth)} ano(s)
-                                </p>
+                                <h3 className="font-bold mb-1">Sexo:</h3>
+                                <p>{GenderBR[pet?.sex as keyof typeof GenderBR]}</p>
+                            </div>
+                            <div className="text-gray-500 mb-2 mobile:text-center w-full mt-1">
+                                <h3 className="font-bold mb-1">Idade:</h3>
+                                <p>{calcAge(pet?.date_birth)} ano(s)</p>
                             </div>
                         </section>
                     )}
@@ -94,6 +100,8 @@ const CardPet = ({ pet }: CardPetProps) => {
                         )}
                     </section>
                 </div>
+                {!isMobile && <BoxButtonsPets item={pet} />}
+                {isMobile && <ModalBoxButtonsPet item={pet} ref={ref} />}
             </div>
         </article>
     )
