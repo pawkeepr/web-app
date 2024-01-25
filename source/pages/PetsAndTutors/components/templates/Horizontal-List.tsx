@@ -38,13 +38,13 @@ const HorizontalTabs = () => {
     return (
         <div className="mt-2 rounded-md">
             <Tab.Group>
-                <Tab.List className="flex rounded-xl bg-primary-500 p-1">
+                <Tab.List className="flex rounded-sm bg-primary-500 p-1">
                     {categories.map((category) => (
                         <Tab
                             key={category.id}
                             className={({ selected }) =>
                                 cn(
-                                    'w-full rounded-lg py-2.5 text-sm leading-5 font-bold text-white',
+                                    'w-full rounded-sm py-2.5 text-sm leading-5 font-bold text-white',
                                     'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
                                     selected
                                         ? 'bg-white !text-secondary-500 shadow'
