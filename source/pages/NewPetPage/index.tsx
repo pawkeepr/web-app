@@ -135,7 +135,7 @@ const NewPetPage = ({ document, id_pet }: PetPageProps) => {
                 <div className="gap-2 mt-2 mobile:py-6">
                     <ModalConfirm
                         title="Cancelar Novo Pet!"
-                        onConfirm={() => router.push('/dashboard')}
+                        onConfirm={() => router.back()}
                         description="Importante!"
                         message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
                     >

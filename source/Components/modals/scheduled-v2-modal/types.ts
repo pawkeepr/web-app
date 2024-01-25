@@ -1,10 +1,10 @@
 import type { IPet } from '~/types/pet'
 import type { IPetV2 } from '~/types/pet-v2'
 
-export type onChangeOpen = (arg: boolean) => void
+export type OnChangeOpen = (arg: boolean) => void
 
 export type ChildrenProps = {
-    onChangeOpen: onChangeOpen
+    onChangeOpen: OnChangeOpen
     onChangeDocument: (doc: string) => void
 }
 

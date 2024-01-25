@@ -18,7 +18,7 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
 
     const onClickEdit = useCallback(() => {
         router.push(
-            `/dashboard/update-pet?document=${item.cpf_cnpj}&id_pet=${item.id_pet}`,
+            `/dashboard/historic/pet?document=${item.cpf_cnpj}&id_pet=${item.id_pet}`,
         )
     }, [item])
 

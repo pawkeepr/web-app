@@ -5,7 +5,6 @@ import cn from 'classnames'
 import { useState } from 'react'
 
 import useResizeMobile from '~/hooks/use-resize-mobile'
-import { useAppSelector } from '~/store/hooks'
 import type { StepProps } from '~/types/helpers'
 import { StepHealthInsurance, StepPet, StepTutor } from '../steps'
 
@@ -45,8 +44,6 @@ const VerticalTabs = ({ isPending, tutorExist }: VerticalTabsProps) => {
     const { isMobile } = useResizeMobile()
     const [activeVerticalTab, setActiveVerticalTab] = useState(1)
     const [passedVerticalSteps, setPassedVerticalSteps] = useState([1])
-
-    const { height } = useAppSelector((state) => state.Layout.headerSize)
 
     function toggleVerticalTab(tab: Tabs) {
         if (activeVerticalTab !== tab) {
@@ -104,9 +101,9 @@ const VerticalTabs = ({ isPending, tutorExist }: VerticalTabsProps) => {
 
             <div className="px-lg-4">
                 <TabContent activeTab={activeVerticalTab}>
-                    {items.map(({ id, Component }, index) => {
+                    {items.map(({ id, Component }) => {
                         return (
-                            <TabPane tabId={id} key={index}>
+                            <TabPane tabId={id} key={id}>
                                 <Component
                                     activeTab={activeVerticalTab}
                                     toggleTab={toggleVerticalTab}
