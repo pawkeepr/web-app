@@ -9,10 +9,15 @@ const Footer = () => {
     return (
         <footer className="bg-transparent w-full my-2 mobile:hidden">
             <div className="flex items-center justify-between px-6 flex-row mobile:flex-col">
-                <p className="text-sm text-gray-600 font-semibold">
-                    {new Date().getFullYear()} © PawKeepr SmartCare - Todos os
-                    direitos reservados.
-                </p>
+                <div>
+                    <p className="text-sm text-gray-600 font-semibold">
+                        {new Date().getFullYear()} © PawKeepr Sistema Inteligente
+                        para Pets Inova Simples LTDA. 49.173.821/0001-19
+                    </p>
+                    <p className="text-sm mt-2 text-gray-600 font-semibold">
+                        Rua Riachuelo, 1200, São José, 49015-160 Aracaju.
+                    </p>
+                </div>
 
                 <div className="flex items-center">
                     <Link
