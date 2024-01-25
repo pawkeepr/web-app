@@ -1,15 +1,20 @@
-import { useSearchParams } from "next/navigation";
-import getServerSidePropsPagesPrivates from "~/helpers/get-server-side-props-pages-privates";
-import Page from "~/pages/NewPetPage";
+import { useSearchParams } from 'next/navigation'
+import LayoutMain from '~/Layouts'
+import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
+import Page from '~/pages/NewPetPage'
 
 const PetsPage = () => {
-    const search = useSearchParams();
-    const document = search.get("document") || "";
-    const id_pet = search.get("id_pet") || undefined;
+    const search = useSearchParams()
+    const document = search.get('document') || ''
+    const id_pet = search.get('id_pet') || undefined
 
-    return <Page document={document} id_pet={id_pet} />;
-};
+    return (
+        <LayoutMain>
+            <Page document={document} id_pet={id_pet} />
+        </LayoutMain>
+    )
+}
 
-export default PetsPage;
+export default PetsPage
 
-export const getServerSideProps = getServerSidePropsPagesPrivates();
+export const getServerSideProps = getServerSidePropsPagesPrivates()
