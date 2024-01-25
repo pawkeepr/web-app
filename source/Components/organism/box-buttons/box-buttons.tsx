@@ -1,12 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/navigation'
-import { useCallback } from 'react'
-import { BtnCancel, BtnConfirm, BtnLabel, BtnPrimary } from '~/Components/atoms/btn'
+import { useCallback, useMemo } from 'react'
+import { FaCheckCircle, FaEdit, FaPlayCircle } from 'react-icons/fa'
+import { MdClose } from 'react-icons/md'
+import {
+    BtnLabel as BtnCancel,
+    BtnConfirm,
+    BtnPrimary,
+    BtnCancel as BtnRescheduled,
+} from '~/Components/atoms/btn'
 import withLoading from '~/Components/helpers/with-loading'
 import {
     ModalPlus,
     usePlusModal,
 } from '~/contexts/setters-status-appointments-modals-context'
+import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { VeterinaryConsultation } from '~/types/appointment'
 
 type BoxButtonsProps = {
@@ -16,7 +24,7 @@ type BoxButtonsProps = {
 
 const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
     const router = useRouter()
-
+    const { isMobile } = useResizeMobile()
     const { setItem, open, close } = usePlusModal()
 
     const onClickCancel = useCallback(() => {
@@ -43,25 +51,37 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
         )
     }, [item])
 
+    const labelCancel = useMemo(() => {
+        return isMobile ? 'Cancelar' : ''
+    }, [isMobile])
+
     return (
-        <div className="gap-1 justify-end flex w-full mobile:grid mobile:grid-cols-1 flex-wrap">
-            <BtnLabel
+        <div className="gap-1 justify-end items-end h-full flex w-full mobile:grid mobile:grid-cols-1 flex-wrap">
+            <BtnCancel
                 condition={
                     !isLoading &&
                     item.appointment_status?.canceled === 'no' &&
                     item.appointment_status?.done === 'no'
                 }
-                label="Cancelar Consulta"
+                label={labelCancel}
                 onClick={onClickCancel}
-                className="text-red-500 border-none mobile:col-span-1"
-            />
+                className="text-red-500 border-none mobile:col-span-1 web:absolute web:top-0 web:right-0 web:w-fit web:hover:!bg-transparent"
+            >
+                <MdClose className="h-6 w-6" />
+            </BtnCancel>
 
-            <BtnCancel
-                condition={!isLoading && item.appointment_status?.done === 'no'}
-                label="Reagendar Consulta"
+            <BtnRescheduled
+                condition={
+                    !isLoading &&
+                    item.appointment_status?.done === 'no' &&
+                    item.appointment_status?.canceled === 'no'
+                }
+                label="Reagendar"
                 onClick={onClickReScheduled}
                 className="border-none mobile:!w-full mobile:col-span-1 text-gray-500"
-            />
+            >
+                <FaEdit />
+            </BtnRescheduled>
 
             <BtnConfirm
                 condition={
@@ -70,10 +90,12 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.canceled === 'no' &&
                     item.appointment_status?.done === 'no'
                 }
-                label="Confirmar Consulta"
+                label="Confirmar"
                 className="border-none mobile:!w-full mobile:col-span-1 text-gray-200"
                 onClick={onClickConfirmed}
-            />
+            >
+                <FaCheckCircle />
+            </BtnConfirm>
 
             <BtnPrimary
                 condition={
@@ -81,10 +103,12 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.canceled === 'no' &&
                     item.appointment_status?.done === 'no'
                 }
-                label="Iniciar Consulta"
+                label="Iniciar"
                 className="border-none mobile:!w-full mobile:col-span-1"
                 onClick={startAppointment}
-            />
+            >
+                <FaPlayCircle />
+            </BtnPrimary>
         </div>
     )
 }
