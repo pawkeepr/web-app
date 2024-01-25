@@ -1,8 +1,8 @@
 import { forwardRef, useImperativeHandle, useMemo } from 'react'
 import { FaWhatsapp } from 'react-icons/fa'
 import { BtnConfirm } from '~/Components/atoms/btn'
+import AvatarPet from '~/Components/molecules/avatar-pet'
 import useModal from '~/hooks/use-modal'
-import AvatarPet from '~/pages/AppointmentsPage/components/atoms/pet-avatar/pet-avatar'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import { Gender, Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
@@ -76,17 +76,15 @@ const ModalBoxButtons = forwardRef(
                     lockScroll
                     className="pb-0 w-[750px]"
                 >
-                    <div className="flex flex-col justify-between items-center w-full h-[90%] p-4">
+                    <div className="flex flex-col justify-between items-center w-full h-[90%] p-2">
                         <AvatarPet
-                            name={pet?.name_pet}
-                            alt={`Avatar do Pet ${pet?.name_pet}`}
-                            title={(props) => (
-                                <h1 className="text-center text-muted text-xl font-sans">
-                                    {props.name}
-                                </h1>
-                            )}
+                            name_pet={pet?.name_pet}
+                            specie={pet?.specie as Species}
                         />
-                        <section className="w-full grid grid-cols-2 mt-4">
+                        <h1 className="text-center text-muted text-xl font-sans">
+                            {pet?.name_pet}
+                        </h1>
+                        <section className="w-full grid grid-cols-1 mt-4">
                             <div className="col-span-1">
                                 <div className="text-gray-500 mb-2">
                                     <h3 className="font-bold">Pet:</h3>
@@ -102,12 +100,6 @@ const ModalBoxButtons = forwardRef(
                                     <h3 className="font-bold">Sexo do Pet:</h3>
                                     <p>{pet?.gender}</p>
                                 </div>
-                                {item.appointment_status?.canceled === 'no' && (
-                                    <div className="text-gray-500 mb-2">
-                                        <h3 className="font-bold">Data Marcada:</h3>
-                                        <p>{dateFormatted}</p>
-                                    </div>
-                                )}
                             </div>
                             <div className="col-span-1">
                                 <div className="text-gray-500 mb-2">
@@ -133,6 +125,12 @@ const ModalBoxButtons = forwardRef(
                                     <p>{pet?.contact?.email}</p>
                                 </div>
                             </div>
+                            {item.appointment_status?.canceled === 'no' && (
+                                <div className="text-gray-500 mb-2 w-full text-center mt-2">
+                                    <h3 className="font-bold">Data Marcada:</h3>
+                                    <p>{dateFormatted}</p>
+                                </div>
+                            )}
                         </section>
 
                         <div className="w-full mt-4 self-end">
