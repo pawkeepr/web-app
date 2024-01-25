@@ -67,7 +67,7 @@ const VerticalTabs = ({ isPending, tutorExist }: VerticalTabsProps) => {
                 </h4>
             </div>
             <div
-                style={{ marginTop: isMobile ? `${height}px` : 0 }}
+                style={{ marginTop: isMobile ? '70px' : 0 }}
                 className={cn(
                     'mb-4 step-arrow-nav',
                     {
