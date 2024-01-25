@@ -78,7 +78,7 @@ const ComboBoxFields = () => {
     return (
         <>
             <FieldControlSelect
-                ctx={{} as AuxSpeciesFormikProps}
+                ctx={pet}
                 options={memoSpecies}
                 required
                 disabled={isPending || !!pet.id}
@@ -89,7 +89,7 @@ const ComboBoxFields = () => {
             />
 
             <FieldControlSelect
-                ctx={{} as AuxSpeciesFormikProps}
+                ctx={pet}
                 options={memoBreed}
                 disabled={!specie.breedType || isPending || !!pet.id}
                 onChangeValue={(e) => setBreedValue(e)}
@@ -101,7 +101,7 @@ const ComboBoxFields = () => {
             />
 
             <FieldControlSelect
-                ctx={{} as AuxSpeciesFormikProps}
+                ctx={pet}
                 options={memoBloodType}
                 onChangeValue={(e) => setBloodTypeValue(e)}
                 value={bloodTypeValue}

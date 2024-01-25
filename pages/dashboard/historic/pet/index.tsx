@@ -1,7 +1,7 @@
 import { useSearchParams } from 'next/navigation'
 import LayoutMain from '~/Layouts'
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
-import Page from '~/pages/NewPetPage'
+import Page from '~/pages/HistoricPetPage'
 
 const PetsPage = () => {
     const search = useSearchParams()

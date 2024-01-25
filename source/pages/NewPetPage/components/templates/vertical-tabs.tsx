@@ -38,9 +38,13 @@ const items: TabItem[] = [
     },
 ]
 
-type VerticalTabsProps = Pick<StepProps, 'isPending' | 'tutorExist'>
+type VerticalTabsProps = {
+    isPending: boolean
+    hasTutor: boolean
+    hasPet: boolean
+}
 
-const VerticalTabs = ({ isPending, tutorExist }: VerticalTabsProps) => {
+const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
     const { isMobile } = useResizeMobile()
     const [activeVerticalTab, setActiveVerticalTab] = useState(1)
     const [passedVerticalSteps, setPassedVerticalSteps] = useState([1])
@@ -60,7 +64,7 @@ const VerticalTabs = ({ isPending, tutorExist }: VerticalTabsProps) => {
         <div className="px-2 py-4 card  h-fit overflow-auto">
             <div className="w-full flex justify-center items-center">
                 <h4 className="card-title mb-2 !text-center font-semibold font-sans">
-                    Novo Pet
+                    {hasPet ? 'Atualizar Pet' : 'Novo Pet'}
                 </h4>
             </div>
             <div
@@ -79,7 +83,7 @@ const VerticalTabs = ({ isPending, tutorExist }: VerticalTabsProps) => {
                             <NavItem key={item.id}>
                                 <NavLink
                                     href={item.href}
-                                    disabled
+                                    disabled={!hasPet}
                                     id="steparrow-gen-info-tab"
                                     className={cn({
                                         active: activeVerticalTab === item.id,
@@ -108,7 +112,7 @@ const VerticalTabs = ({ isPending, tutorExist }: VerticalTabsProps) => {
                                     activeTab={activeVerticalTab}
                                     toggleTab={toggleVerticalTab}
                                     isPending={isPending}
-                                    tutorExist={tutorExist}
+                                    tutorExist={hasTutor}
                                 />
                             </TabPane>
                         )

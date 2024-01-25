@@ -50,7 +50,11 @@ const schema = yup.object().shape({
     date_birth: yup.string().nullable().required('Campo obrigatório'),
 })
 
-const StepPet = ({ toggleTab, activeTab }: StepProps) => {
+const StepPet = ({
+    toggleTab,
+    activeTab,
+    hasPet,
+}: StepProps & { hasPet: boolean }) => {
     const { values } = useFormikContextSafe<StepPetKeys>()
 
     const isValid = useMemo(() => {
@@ -71,8 +75,9 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
             <h1 className="font-semibold">Preencha as Informações do PET</h1>
             <div className="grid grid-cols-3 gap-4 mt-4 mobile:grid-cols-1 mobile:gap-2">
                 <FieldControl
-                    ctx={{} as StepPetKeys}
+                    ctx={values}
                     label="Nome do PET"
+                    disabled={hasPet}
                     required
                     name="name"
                     placeholder="Digite o nome do PET"
@@ -82,9 +87,9 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 <ComboBoxFields />
 
                 <FieldControlSelect
-                    ctx={{} as StepPetKeys}
+                    ctx={values}
                     options={genderValues}
-                    disabled={!!values.id}
+                    disabled={!!values.id || hasPet}
                     name="sex"
                     required
                     label="Sexo do Pet"
@@ -92,7 +97,8 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 />
 
                 <FieldControl
-                    ctx={{} as StepPetKeys}
+                    ctx={values}
+                    disabled={!!values.id || hasPet}
                     label="Data de nascimento"
                     required
                     name="date_birth"
@@ -100,7 +106,8 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 />
 
                 <FieldMasked
-                    ctx={{} as StepPetKeys}
+                    ctx={values}
+                    disabled={!!values.id || hasPet}
                     label="Número do microchip"
                     name="microchip"
                     mask="_____"
@@ -108,7 +115,8 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 />
 
                 <FieldMasked
-                    ctx={{} as StepPetKeys}
+                    ctx={values}
+                    disabled={!!values.id || hasPet}
                     label={'Número de registro cartório'}
                     name="identification_number"
                     mask="_____"

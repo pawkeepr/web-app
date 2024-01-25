@@ -99,16 +99,16 @@ export interface IPetV2Simplified {
 export type IPetV2Data = {
     id_pet: string
     name_pet: string
-    microchip: string
-    identification_number: string
+    microchip?: string | null
+    identification_number?: string | null
     specie: string
     race: string
-    blood_type: string
-    blood_donator: string
-    organ_donor: string
+    blood_type?: string | null
+    blood_donator?: string | null
+    organ_donor?: string | null
     sex: string
-    castrated: boolean
-    date_birth: string
+    castrated?: boolean | null
+    date_birth?: string | null
     cpf_cnpj: string
-    color: string
+    color?: string | null
 }
