@@ -1,22 +1,19 @@
 import cn from 'classnames'
 import { FaWhatsapp } from 'react-icons/fa'
 import MyImage from '~/Components/atoms/my-image'
-import { Tutor } from '~/store/slices/tutors/types'
+import type { IMainResponsibleGuardian } from '~/types/pet-v2'
+import { getNameTutor } from '~/utils/get-name-tutors'
 
 type CardTutorsProps = {
-    tutor: Tutor
-    checked?: boolean
+    tutor: IMainResponsibleGuardian
 }
 
-const CardTutor = ({ tutor, checked }: CardTutorsProps) => {
+const CardTutor = ({ tutor }: CardTutorsProps) => {
     return (
         <div
             key={tutor?.name}
             className={cn(
                 'bg-white relative flex flex-col cursor-pointer rounded-lg px-2 py-2 shadow-md focus:outline-none`',
-                {
-                    '!bg-primary-500 bg-opacity-60 text-white': checked,
-                },
             )}
         >
             <div className="mb-2">
@@ -24,27 +21,23 @@ const CardTutor = ({ tutor, checked }: CardTutorsProps) => {
                     <div className="flex mobile:gap-3 justify-around items-center">
                         <MyImage
                             src={tutor?.avatar}
-                            alt={`Foto de Perfil de ${tutor?.name}`}
+                            alt={`Foto de Perfil de ${getNameTutor(tutor)}`}
                             width={150}
                             height={150}
                             className="h-32 mt-3 w-32 rounded-full"
                         />
                         <div className="flex flex-col">
-                            <h3 className="font-semibold mobile:hidden">
-                                Informações Do Tutor:
-                            </h3>
-
                             <div className="p-2">
                                 <p className="text-gray-700">
                                     <strong>Nome: </strong>
-                                    {tutor?.name}
+                                    {getNameTutor(tutor)}
                                 </p>
                                 <p className="text-gray-700">
-                                    <strong>Email: </strong> {tutor?.email}
+                                    <strong>Email: </strong> {tutor?.contact?.email}
                                 </p>
                                 <p className="text-gray-700">
                                     <strong>Contato: </strong>
-                                    {tutor?.phone}
+                                    {tutor?.contact?.whatsapp}
                                     <span className="d-inline-block align-middle ml-2 mb-1">
                                         <FaWhatsapp className="text-green-600 text-lg align-middle" />
                                     </span>
@@ -52,21 +45,18 @@ const CardTutor = ({ tutor, checked }: CardTutorsProps) => {
                             </div>
                         </div>
                         <div className="flex flex-col mobile:hidden">
-                            <h3 className="font-semibold mobile:hidden">
-                                Logradouro:
-                            </h3>
                             <div className="p-2 ">
                                 <p className="text-gray-700">
                                     <strong>País: </strong>
-                                    {tutor?.country}
+                                    {tutor?.address?.country}
                                 </p>
                                 <p className="text-gray-700">
                                     <strong>Cidade: </strong>
-                                    {tutor?.city}-{tutor?.state}
+                                    {tutor?.address?.city}-{tutor?.address?.state}
                                 </p>
                                 <p className="text-gray-700">
                                     <strong>Cep: </strong>
-                                    {tutor?.zipCode}
+                                    {tutor?.address?.zipCode}
                                 </p>
                             </div>
                         </div>
