@@ -27,7 +27,7 @@ type CardScheduledProps = {
 
 export const card = tv({
     base: `
-        bg-white relative flex flex-row rounded-lg px-2 py-2 shadow-md focus:outline-none
+        bg-white relative flex flex-row rounded-sm px-2 py-2 shadow-md focus:outline-none h-64 mobile:h-[540px] mobile:!p-12
     `,
     variants: {
         checked: {
@@ -113,7 +113,7 @@ const CardScheduled = ({
                     ] as Species
                 }
             />
-            <div className="flex flex-col flex-[4] mobile:flex-1 w-full">
+            <div className="flex flex-col flex-[2] mobile:flex-1 w-full">
                 <div className="flex mobile:gap-3 justify-around items-center">
                     <section>
                         <div className="text-gray-500 mb-2">
