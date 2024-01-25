@@ -64,11 +64,11 @@ const CardPet = ({ pet }: CardPetProps) => {
                                     </p>
                                 </strong>
                             </div>
-                            <div className="text-gray-500 mb-2 mobile:text-center w-full mt-1">
+                            <div className="text-gray-500  mobile:text-center w-full mt-1">
                                 <h3 className="font-bold mb-1">Sexo:</h3>
                                 <p>{GenderBR[pet?.sex as keyof typeof GenderBR]}</p>
                             </div>
-                            <div className="text-gray-500 mb-2 mobile:text-center w-full mt-1">
+                            <div className="text-gray-500  mobile:text-center w-full mt-1">
                                 <h3 className="font-bold mb-1">Idade:</h3>
                                 <p>{calcAge(pet?.date_birth)} ano(s)</p>
                             </div>
@@ -78,22 +78,22 @@ const CardPet = ({ pet }: CardPetProps) => {
                     <section className="justify-center flex flex-1 items-start flex-col gap-2 ">
                         {!isMobile && (
                             <>
-                                <div className="text-gray-500 mb-2">
+                                <div className="text-gray-500 ">
                                     <h3 className="font-bold mb-1">Castrado?</h3>
                                     <p>{pet?.castrated || 'Não Informado'} </p>
                                 </div>
                             </>
                         )}
-                        <div className="text-gray-500 mb-2">
+                        <div className="text-gray-500 ">
                             <h3 className="font-bold mb-1">Tipo Sanguíneo:</h3>
                             <p>{pet?.blood_type || 'Desconhecido'}</p>
                         </div>
-                        <div className="text-gray-500 mb-2">
+                        <div className="text-gray-500 ">
                             <h3 className="font-bold mb-1">Doador de Órgãos:</h3>
                             <p>{pet?.blood_donator || 'Não'}</p>
                         </div>
                         {isMobile && (
-                            <div className="text-gray-500 mb-2">
+                            <div className="text-gray-500 ">
                                 <h3 className="font-bold mb-1">Castrado?</h3>
                                 <p>{pet?.castrated || 'Não Informado'} </p>
                             </div>
