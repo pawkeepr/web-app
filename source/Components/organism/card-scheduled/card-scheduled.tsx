@@ -10,7 +10,7 @@ import AvatarPet from '~/Components/molecules/avatar-pet'
 import type { IHookModal } from '~/hooks/use-modal'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { VeterinaryConsultation } from '~/types/appointment'
-import { Gender, MapOptionSpecies, Species } from '~/types/speciesType'
+import { Gender, GenderBR, MapOptionSpecies, Species } from '~/types/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import BoxButtons from '../box-buttons'
 import ModalBoxButtons from '../box-buttons/modal-box-buttons'
@@ -25,7 +25,7 @@ type CardScheduledProps = {
     boxButtons?: null | ((props: BoxButtonsProps) => JSX.Element)
 }
 
-const card = tv({
+export const card = tv({
     base: `
         bg-white relative flex flex-row rounded-lg px-2 py-2 shadow-md focus:outline-none
     `,
@@ -118,7 +118,9 @@ const CardScheduled = ({
                     <section>
                         <div className="text-gray-500 mb-2">
                             <h3 className="font-bold mb-1">Pet:</h3>
-                            <p>{`${pet?.name_pet}, ${pet?.specie}, ${pet?.race}, ${pet?.sex}`}</p>
+                            <p>{`${pet?.name_pet}, ${pet?.specie}, ${pet?.race}, ${
+                                GenderBR[pet?.sex as keyof typeof GenderBR]
+                            }`}</p>
                         </div>
                         {pet?.microchip && (
                             <div className="text-gray-500 mb-2 mobile:hidden">

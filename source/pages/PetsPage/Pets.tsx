@@ -1,7 +1,7 @@
 'use client'
 
+import PetsTab from '~/pages/PetsAndTutors/components/organisms/PetsTab'
 import DefaultLayout from '../_layouts/dashboard/dashboard'
-import PetsTab from './PetsTab'
 
 const PetsPage = () => {
     return (
