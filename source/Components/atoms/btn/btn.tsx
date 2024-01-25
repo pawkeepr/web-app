@@ -67,7 +67,6 @@ const Btn = ({
     label,
     icon,
     className,
-    iconStyle,
     children,
     type = 'button',
     ...props
@@ -78,7 +77,7 @@ const Btn = ({
             {children && (
                 <span className={styledIcon({ ...props })}>{children}</span>
             )}
-            <span>{label}</span>
+            <p>{label}</p>
         </button>
     )
 }
