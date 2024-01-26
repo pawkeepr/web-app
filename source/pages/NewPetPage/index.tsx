@@ -11,8 +11,9 @@ type PetPageProps = {
 }
 
 const NewPetPage = (props: PetPageProps) => {
+    const title = props.id_pet ? 'Editar Pet' : 'Novo Pet'
     return (
-        <DashboardLayouts title="Novo Pet" searchBlock={false}>
+        <DashboardLayouts title={title} searchBlock={false}>
             <CreateOrUpdatePetPage {...props} />
         </DashboardLayouts>
     )
