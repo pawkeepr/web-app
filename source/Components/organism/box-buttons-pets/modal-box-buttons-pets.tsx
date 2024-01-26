@@ -1,5 +1,6 @@
 import { forwardRef, useImperativeHandle } from 'react'
 import { BtnConfirm } from '~/Components/atoms/btn'
+import withCompose, { type ControlProps } from '~/Components/helpers/with-compose'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import useModal from '~/hooks/use-modal'
 import type { IPetV2Data } from '~/types/pet-v2'
@@ -11,7 +12,7 @@ import BoxButtonsPets from './box-buttons-pets'
 type ModalBoxButtonsPetProps = {
     item: IPetV2Data
     children?: null | ((props: { showModal: () => void }) => JSX.ElementType)
-}
+} & ControlProps
 
 const ModalBoxButtonsPet = forwardRef(
     ({ item: pet, children }: ModalBoxButtonsPetProps, ref) => {
@@ -87,4 +88,4 @@ const ModalBoxButtonsPet = forwardRef(
     },
 )
 
-export default ModalBoxButtonsPet
+export default withCompose(ModalBoxButtonsPet) as typeof ModalBoxButtonsPet
