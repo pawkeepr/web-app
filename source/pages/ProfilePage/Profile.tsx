@@ -1,61 +1,61 @@
 // path/filename: src/pages/Profile.tsx
 
-import { useState } from 'react'
-import {
-    Card,
-    CardBody,
-    CardHeader,
-    Col,
-    Row,
-    TabContent,
-    TabPane,
-} from 'reactstrap'
+import type React from 'react'
+import HorizontalTabs from '~/Components/organism/horizontal-list/horizontal-list'
 import DashboardLayouts from '../_layouts/dashboard/dashboard'
 import FormChangePass from './components/Forms/ChangePass'
 import FormPersonalData from './components/Forms/PersonalData'
 import FormProfissionalExperiencie from './components/Forms/ProfessionalExperience'
-import ProfileTabs from './components/ProfileTabs'
 import SocialLinks from './components/SocialLinks'
 import UserProfileCard from './components/UserProfileCard'
 
+type OptionTab = {
+    id: number
+    title: string
+    href: string
+    tab: JSX.Element
+}
+
+const makeTabs = (): OptionTab[] => {
+    return [
+        {
+            id: 1,
+            title: 'Dados Pessoais',
+            href: '#personal-data',
+            tab: <FormPersonalData />,
+        },
+        {
+            id: 2,
+            title: 'Alterar Senha',
+            href: '#change-pass',
+            tab: <FormChangePass />,
+        },
+        {
+            id: 3,
+            title: 'Experiência Profissional',
+            href: '#professional-experience',
+            tab: <FormProfissionalExperiencie />,
+        },
+    ]
+}
+
 const Profile: React.FC = () => {
-    const [activeTab, setActiveTab] = useState<string>('1')
-
-    const tabChange = (tab: string) => {
-        if (activeTab !== tab) setActiveTab(tab)
-    }
-
+    const tabs = makeTabs()
     return (
         <DashboardLayouts title="Perfil" searchBlock={false}>
-            <Row className="mt-14">
-                <Col xxl={3}>
-                    <UserProfileCard />
-                    <SocialLinks />
-                </Col>
-                <Col xxl={9}>
-                    <Card className="mt-xxl-n5">
-                        <CardHeader>
-                            <ProfileTabs
-                                activeTab={activeTab}
-                                onTabChange={tabChange}
-                            />
-                        </CardHeader>
-                        <CardBody className="p-4">
-                            <TabContent activeTab={activeTab}>
-                                <TabPane tabId="1">
-                                    <FormPersonalData />
-                                </TabPane>
-                                <TabPane tabId="2">
-                                    <FormChangePass />
-                                </TabPane>
-                                <TabPane tabId="3">
-                                    <FormProfissionalExperiencie />
-                                </TabPane>
-                            </TabContent>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
+            <div className="container mx-auto mt-14">
+                <div className="flex flex-wrap -mx-4">
+                    <div className="w-full web:w-1/4 px-4">
+                        <UserProfileCard />
+                        <SocialLinks />
+                    </div>
+                    <div className="w-full web:w-3/4 px-4 mt-10 web:mt-0">
+                        <div className="bg-white shadow rounded-lg overflow-hidden">
+                            <HorizontalTabs categories={tabs} />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </DashboardLayouts>
     )
 }
