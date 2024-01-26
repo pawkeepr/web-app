@@ -1,10 +1,12 @@
 import LadingPage from '~/pages/LandingPage'
+import LandingLayout from '~/pages/_layouts/landing/landing'
 
-const LadingPagePage = () => {
+const LadingPageNext = () => {
     return (
-        <LadingPage />
+        <LandingLayout>
+            <LadingPage />
+        </LandingLayout>
     )
 }
 
-export default LadingPagePage
-
+export default LadingPageNext
