@@ -4,7 +4,7 @@ import LandingLayout from '~/pages/_layouts/landing/landing'
 
 const ServiceTerms = () => {
     return (
-        <LandingLayout navBar={NavbarServiceTerms}>
+        <LandingLayout navBar={NavbarServiceTerms} title="Política de Privacidade">
             <PrivacyPolicy />
         </LandingLayout>
     )

@@ -3,7 +3,7 @@ import LandingLayout from '~/pages/_layouts/landing/landing'
 
 const LadingPageNext = () => {
     return (
-        <LandingLayout>
+        <LandingLayout title="Bem Vindo">
             <LadingPage />
         </LandingLayout>
     )
