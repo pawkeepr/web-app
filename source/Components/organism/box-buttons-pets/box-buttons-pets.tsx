@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
 import { FaEdit, FaPlayCircle } from 'react-icons/fa'
 import { BtnConfirm, BtnPrimary } from '~/Components/atoms/btn'
-import withLoading from '~/Components/helpers/with-loading'
+import withCompose from '~/Components/helpers/with-compose'
 import type { IPetV2Data } from '~/types/pet-v2'
 
 type BoxButtonsPetsProps = {
@@ -57,4 +57,6 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
     )
 }
 
-export default withLoading(BoxButtonsPets)
+const BoxButtonsPetsCompose = withCompose(BoxButtonsPets)
+
+export default BoxButtonsPetsCompose as typeof BoxButtonsPets
