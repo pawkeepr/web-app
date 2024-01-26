@@ -1,8 +1,8 @@
 /* eslint-disable react/display-name */
-import { ComponentType } from 'react'
+import type { ComponentType } from 'react'
 
 // Estas são as props que o HOC irá adicionar
-export type ControlProps = {
+type ControlProps = {
     condition?: boolean | string | number | null | undefined
 }
 

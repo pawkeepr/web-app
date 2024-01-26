@@ -3,7 +3,7 @@ import type { ComponentType } from 'react'
 import Loading, { type KeysLoading } from '~/Components/organism/loader'
 
 // Estas são as props que o HOC irá adicionar
-export type ControlProps = {
+type ControlProps = {
     isLoading?: boolean
     typeLoading?: KeysLoading
 }
