@@ -2,51 +2,19 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import { FaRegEdit } from 'react-icons/fa' // Ícone de Cadastro
 import { FiLogIn } from 'react-icons/fi' // Ícone de Login
 import { BtnLink } from '~/Components/atoms/btn'
 
-const NavbarLanding = () => {
-    // const [isOpenMenu, setIsOpenMenu] = useState(false);
-    const [actionScroll, setActionScroll] = useState(false)
-
-    // const toggle = () => setIsOpenMenu(!isOpenMenu);
-
-    useEffect(() => {
-        window.addEventListener('scroll', scrollNavigation, true)
-    }, [])
-
-    const scrollNavigation = () => {
-        const scrollUp = document.documentElement.scrollTop
-
-        if (scrollUp > 100) {
-            setActionScroll(true)
-        } else {
-            setActionScroll(false)
-        }
-    }
-
+const NavbarServiceTerms = () => {
     return (
         <header>
-            <nav
-                className="fixed z-50 left-0 right-0 mobile:p-2 px-4 py-2 transition-colors data-[scroll-action=true]:bg-white shadow-md"
-                data-scroll-action={actionScroll}
-            >
+            <nav className="fixed z-50 left-0 right-0 mobile:p-2 px-4 py-2 transition-colors shadow-md">
                 <div className="container flex flex-wrap justify-center gap-2 md:gap-0 md:justify-between">
                     <Link href="/">
                         <img
-                            src="/logo-rgb-04.png"
-                            className="hidden h-12 w-40  data-[logo-light=false]:flex"
-                            data-logo-light={actionScroll}
-                            alt="logo light"
-                            height="40"
-                            width={120}
-                        />
-                        <img
                             src="/logo-rgb-21.png"
-                            className="hidden h-12 w-40 data-[logo-light=true]:flex"
-                            data-logo-light={actionScroll}
+                            className=" h-12 w-40"
                             alt="logo dark"
                         />
                     </Link>
@@ -75,4 +43,4 @@ const NavbarLanding = () => {
     )
 }
 
-export default NavbarLanding
+export default NavbarServiceTerms
