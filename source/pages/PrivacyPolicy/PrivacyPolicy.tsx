@@ -1,7 +1,7 @@
 const PrivacyPolicy = () => {
     return (
         <div className="bg-gray-100 min-h-screen p-8">
-            <article className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6">
+            <article className="max-w-2xl mt-10 mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6">
                 <header className="text-center mb-6">
                     <h1 className="text-3xl font-bold text-gray-800">
                         Política de Privacidade - App Pawkeeper

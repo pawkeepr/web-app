@@ -9,13 +9,13 @@ import { BtnLink } from '~/Components/atoms/btn'
 const NavbarServiceTerms = () => {
     return (
         <header>
-            <nav className="fixed z-50 left-0 right-0 mobile:p-2 px-4 py-2 transition-colors shadow-md">
-                <div className="container flex flex-wrap justify-center gap-2 md:gap-0 md:justify-between">
+            <nav className="fixed z-50 left-0 right-0 mobile:p-2 px-4 py-2 transition-colors bg-primary shadow-md">
+                <div className="container flex flex-wrap justify-center gap-2 web:gap-0 web:justify-between">
                     <Link href="/">
                         <img
-                            src="/logo-rgb-21.png"
+                            src="/logo-rgb-04.png"
                             className=" h-12 w-40"
-                            alt="logo dark"
+                            alt="logo light"
                         />
                     </Link>
 
