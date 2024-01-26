@@ -26,7 +26,7 @@ type HistoricPetPageProps = {
 const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
     const tabs = Tabs(document, id_pet)
     return (
-        <DefaultLayout title="Dashboard" searchBlock={false}>
+        <DefaultLayout title="Histórico do Pet" searchBlock={false}>
             <HorizontalTabs categories={tabs} />
         </DefaultLayout>
     )
