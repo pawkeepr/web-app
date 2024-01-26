@@ -29,7 +29,7 @@ const HistoricPet = ({ document, id_pet }: HistoricPetProps) => {
 
     return (
         <section>
-            <CardPet pet={cardData} />
+            <CardPet pet={cardData} hasButtons={false} />
         </section>
     )
 }

@@ -1,13 +1,13 @@
 import { Formik } from 'formik'
 import { useRouter } from 'next/navigation'
 import { useCallback, useMemo } from 'react'
-import usePetsByDocument from '~/store/hooks/list-pets-by-document'
 import Tabs from './components/templates/vertical-tabs'
 
 import { BtnCancel } from '~/Components/atoms/btn'
 import ModalConfirm from '~/Components/modals/confirm-modal'
 import type { Veterinary } from '~/entities/Veterinary'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
+import usePetById from '~/store/hooks/pet/use-pets'
 import type { Breed } from '~/types/breedType'
 import type { IPet } from '~/types/pet'
 import type { IPetV2, On_Off } from '~/types/pet-v2'
@@ -17,6 +17,7 @@ import type { Gender, Species } from '~/types/speciesType'
 export type InitialValues = Nullable<IPet>
 
 type MakeInitialValuesProps = {
+    id_pet?: string
     pet_information?: IPetV2['pet_information']
     cpf_tutor: string
     name_tutor?: string
@@ -29,6 +30,7 @@ type MakeInitialValuesProps = {
 type MakeInitialValues = (props: MakeInitialValuesProps) => InitialValues
 
 export const makeInitialValues: MakeInitialValues = ({
+    id_pet = null,
     cpf_tutor,
     name_tutor = null,
     phone = null,
@@ -38,7 +40,7 @@ export const makeInitialValues: MakeInitialValues = ({
     address = null,
     pet_information = null,
 }) => ({
-    id: pet_information?.id_pet || null,
+    id: id_pet || pet_information?.id_pet || null,
     cpf_tutor,
     blood_donator: pet_information?.blood_donator || 'no',
     blood_type: pet_information?.blood_type || 'unknown',
@@ -85,33 +87,31 @@ const CreateOrUpdatePetPage = ({
     document,
     id_pet,
 }: CreateOrUpdatePetPageProps) => {
-    const { activeData, handleSubmit, isLoading } = usePetsByDocument({
-        document: document as string,
-        strategy: id_pet ? 'update' : 'full',
-        id_pet,
-    })
+    const {
+        activeData: pet,
+        isLoading,
+        handleSubmit,
+    } = usePetById(document as string, id_pet as string)
 
-    const petsData = useMemo(() => activeData || [], [activeData])
     const veterinary = useProfileVeterinary()
     const router = useRouter()
 
     const initialValues = useMemo(() => {
-        const pets = (id_pet ? [petsData as IPetV2] : petsData) as IPetV2[]
-        const fullName = `${pets[0]?.main_responsible_guardian?.first_name} ${pets[0]?.main_responsible_guardian?.last_name}`
+        const fullName = `${pet?.main_responsible_guardian?.first_name} ${pet?.main_responsible_guardian?.last_name}`
         const trimmedName = fullName.trim()
 
         return makeInitialValues({
-            pet_information: pets[0]?.pet_information,
+            id_pet,
+            pet_information: pet?.pet_information,
             cpf_tutor: document as string,
-            email: pets[0]?.main_responsible_guardian?.contact?.email as string,
+            email: pet?.main_responsible_guardian?.contact?.email as string,
             name_tutor: trimmedName,
-            phone: pets[0]?.main_responsible_guardian?.contact?.phone as string,
-            whatsapp: pets[0]?.main_responsible_guardian?.contact
-                ?.whatsapp as string,
+            phone: pet?.main_responsible_guardian?.contact?.phone as string,
+            whatsapp: pet?.main_responsible_guardian?.contact?.whatsapp as string,
             veterinary,
-            address: pets[0]?.main_responsible_guardian?.address as Location,
+            address: pet?.main_responsible_guardian?.address as Location,
         })
-    }, [petsData, document, veterinary, id_pet]) as IPet
+    }, [pet, document, veterinary, id_pet]) as IPet
 
     const onSubmit = useCallback(
         async (values: IPet) => {
@@ -125,13 +125,9 @@ const CreateOrUpdatePetPage = ({
         [handleSubmit],
     )
 
-    const tutorExist = useMemo(() => {
-        return typeof activeData !== 'undefined' && typeof activeData === 'object'
-    }, [activeData])
-
     const hasPet = useMemo(() => {
-        return typeof activeData === 'object' && !!(activeData as IPetV2).id
-    }, [activeData])
+        return !!pet?.id
+    }, [pet])
 
     return (
         <Formik
@@ -159,7 +155,7 @@ const CreateOrUpdatePetPage = ({
                         )
                     }}
                 </ModalConfirm>
-                <Tabs isPending={isLoading} hasTutor={tutorExist} hasPet={hasPet} />
+                <Tabs isPending={isLoading} hasTutor={hasPet} hasPet={hasPet} />
             </div>
         </Formik>
     )

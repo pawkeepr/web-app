@@ -11,9 +11,10 @@ import { card } from '../card-scheduled'
 
 type CardPetProps = {
     pet: IPetV2Data
+    hasButtons?: boolean
 }
 
-const CardPet = ({ pet }: CardPetProps) => {
+const CardPet = ({ pet, hasButtons = true }: CardPetProps) => {
     const ref = useRef<ForwardRefExoticComponent<RefAttributes<IHookModal>>>(null)
 
     const { isMobile } = useResizeMobile()
@@ -100,8 +101,12 @@ const CardPet = ({ pet }: CardPetProps) => {
                         )}
                     </section>
                 </div>
-                {!isMobile && <BoxButtonsPets item={pet} />}
-                {isMobile && <ModalBoxButtonsPet item={pet} ref={ref} />}
+                <BoxButtonsPets item={pet} condition={!isMobile && hasButtons} />
+                <ModalBoxButtonsPet
+                    item={pet}
+                    ref={ref}
+                    condition={isMobile && hasButtons}
+                />
             </div>
         </article>
     )

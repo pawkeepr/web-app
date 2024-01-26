@@ -81,7 +81,7 @@ const ComboBoxFields = () => {
                 ctx={pet}
                 options={memoSpecies}
                 required
-                disabled={isPending || !!pet.id}
+                isDisabled={isPending || !!pet.id}
                 onChangeValue={onChangeSpecie}
                 name="specie"
                 placeholder="Ex: Cachorro, Gato, etc..."
@@ -91,7 +91,7 @@ const ComboBoxFields = () => {
             <FieldControlSelect
                 ctx={pet}
                 options={memoBreed}
-                disabled={!specie.breedType || isPending || !!pet.id}
+                isDisabled={!specie.breedType || isPending || !!pet.id}
                 onChangeValue={(e) => setBreedValue(e)}
                 value={breedValue}
                 required
@@ -105,7 +105,7 @@ const ComboBoxFields = () => {
                 options={memoBloodType}
                 onChangeValue={(e) => setBloodTypeValue(e)}
                 value={bloodTypeValue}
-                disabled={!specie.bloodType || isPending || !!pet.id}
+                isDisabled={!specie.bloodType || isPending || !!pet.id}
                 required
                 name="bloodType"
                 label="Tipo Sanguíneo"

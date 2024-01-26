@@ -9,7 +9,7 @@ import FieldControl from '~/Components/molecules/field-control'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import FieldMasked from '~/Components/molecules/field-masked'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import type { StepProps } from '~/types/helpers'
+import type { StepProps, Tabs } from '~/types/helpers'
 import { genderValues } from '~/types/sexType'
 import type { InitialValues } from '../../index'
 
@@ -50,11 +50,7 @@ const schema = yup.object().shape({
     date_birth: yup.string().nullable().required('Campo obrigatório'),
 })
 
-const StepPet = ({
-    toggleTab,
-    activeTab,
-    hasPet,
-}: StepProps & { hasPet: boolean }) => {
+const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     const { values } = useFormikContextSafe<StepPetKeys>()
 
     const isValid = useMemo(() => {
@@ -77,7 +73,7 @@ const StepPet = ({
                 <FieldControl
                     ctx={values}
                     label="Nome do PET"
-                    disabled={hasPet}
+                    disabled={!!values.id && !!values.name}
                     required
                     name="name"
                     placeholder="Digite o nome do PET"
@@ -89,7 +85,7 @@ const StepPet = ({
                 <FieldControlSelect
                     ctx={values}
                     options={genderValues}
-                    disabled={!!values.id || hasPet}
+                    isDisabled={!!values.id && !!values.sex}
                     name="sex"
                     required
                     label="Sexo do Pet"
@@ -98,7 +94,7 @@ const StepPet = ({
 
                 <FieldControl
                     ctx={values}
-                    disabled={!!values.id || hasPet}
+                    disabled={!!values.id && !!values.date_birth}
                     label="Data de nascimento"
                     required
                     name="date_birth"
@@ -107,7 +103,7 @@ const StepPet = ({
 
                 <FieldMasked
                     ctx={values}
-                    disabled={!!values.id || hasPet}
+                    disabled={!!values.id && !!values.microchip}
                     label="Número do microchip"
                     name="microchip"
                     mask="_____"
@@ -116,7 +112,7 @@ const StepPet = ({
 
                 <FieldMasked
                     ctx={values}
-                    disabled={!!values.id || hasPet}
+                    disabled={!!values.id && !!values.identification_number}
                     label={'Número de registro cartório'}
                     name="identification_number"
                     mask="_____"
@@ -128,7 +124,7 @@ const StepPet = ({
                     label="Próximo"
                     disabled={!isValid}
                     onClick={() => {
-                        toggleTab(activeTab + 1)
+                        toggleTab((activeTab + 1) as Tabs)
                     }}
                 />
             </div>
