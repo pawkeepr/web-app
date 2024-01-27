@@ -5,13 +5,13 @@ import type { InitialValues, StepProps } from '../../types'
 import { option } from '../helpers'
 
 enum EmojiPet {
-    Gato = '🐱',
-    Cachorro = '🐶',
-    Coelho = '🐰',
-    Peixe = '🐠',
-    Pássaro = '🐦',
-    Réptil = '🦎',
-    Cavalo = '🐴',
+    cat = '🐱',
+    dog = '🐶',
+    rabbit = '🐰',
+    fish = '🐠',
+    bird = '🐦',
+    reptile = '🦎',
+    horse = '🐴',
 }
 
 type Key = keyof typeof EmojiPet
@@ -40,10 +40,10 @@ const StepListSpecies = ({ nextStep, previousStep }: StepProps) => {
                     >
                         <div className="flex justify-around gap-2 items-center w-40 ">
                             <span className="align-middle col-span-1">
-                                {EmojiPet[specie.name as Key]}
+                                {EmojiPet[specie.value as Key]}
                             </span>
                             <span className="align-middle col-span-2">
-                                {specie.name}
+                                {specie.label}
                             </span>
                         </div>
                     </button>
