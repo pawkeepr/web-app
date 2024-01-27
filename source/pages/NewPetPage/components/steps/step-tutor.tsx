@@ -21,7 +21,8 @@ const schema = yup.object().shape({
     ownerEmergencyContact: yup
         .object()
         .shape({
-            name: yup.string().min(2).max(255).required('Campo obrigatório'),
+            first_name: yup.string().min(2).max(255).required('Campo obrigatório'),
+            last_name: yup.string().min(2).max(255).required('Campo obrigatório'),
             phone: yup.string().length(20).required('Campo obrigatório'),
             email: yup.string().email().required('Campo obrigatório'),
             address: yup.object().shape({
@@ -54,6 +55,30 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
             </div>
             <div className="flex flex-col flex-1 gap-2">
                 <div className="mb-2">Preencha as Informações do Tutor</div>
+                <div className="grid grid-cols-2 gap-2 mobile:grid-cols-1">
+                    <FieldControl
+                        mode={mode}
+                        ctx={values}
+                        required
+                        disabled={isPending || tutorExist}
+                        aria-label="first_name"
+                        label="Nome do tutor"
+                        name="ownerEmergencyContact.first_name"
+                        placeholder="Nome"
+                        disabledError
+                    />
+                    <FieldControl
+                        mode={mode}
+                        ctx={values}
+                        required
+                        disabled={isPending || tutorExist}
+                        aria-label="last_name"
+                        label="Sobrenome do tutor"
+                        name="ownerEmergencyContact.last_name"
+                        placeholder="Nome"
+                        disabledError
+                    />
+                </div>
                 <div className="grid grid-cols-3 mobile:grid-cols-1 gap-2">
                     <FieldDocument
                         mode={mode}
@@ -66,30 +91,6 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                         placeholder="CPF"
                         required
                     />
-                    <div className="grid grid-cols-2 gap-2 mobile:grid-cols-1">
-                        <FieldControl
-                            mode={mode}
-                            ctx={values}
-                            required
-                            disabled={isPending || tutorExist}
-                            aria-label="first_name"
-                            label="Nome do tutor"
-                            name="ownerEmergencyContact.first_name"
-                            placeholder="Nome"
-                            disabledError
-                        />
-                        <FieldControl
-                            mode={mode}
-                            ctx={values}
-                            required
-                            disabled={isPending || tutorExist}
-                            aria-label="last_name"
-                            label="Sobrenome do tutor"
-                            name="ownerEmergencyContact.last_name"
-                            placeholder="Nome"
-                            disabledError
-                        />
-                    </div>
 
                     <FieldPhone
                         mode={mode}
