@@ -1,3 +1,4 @@
+import { BreedNames } from '~/types/breedType'
 import type { IPet } from '~/types/pet'
 import { Species } from '~/types/speciesType'
 
@@ -14,7 +15,7 @@ const CardPet = ({ pet }: CardPetProps) => {
                     <span>
                         {`${pet?.name}, ${
                             Species[pet?.specie as keyof typeof Species]
-                        }, ${pet?.race as string}`}
+                        }, ${BreedNames[pet?.race as keyof typeof BreedNames]}`}
                     </span>
                 </p>
             </div>
