@@ -1,12 +1,50 @@
-import { useField } from 'formik'
-
 import type { InputControlProps } from './types'
 
-import cn from 'classnames'
 import type { ChangeEvent } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { tv, type VariantProps } from 'tailwind-variants'
 import Input from '~/Components/atoms/input/input'
 import Label from '~/Components/atoms/label'
+import useFieldSafe from '~/hooks/use-field-safe'
+
+const fieldControlDiv = tv({
+    base: 'w-full',
+})
+
+export const ModeInput = {
+    editable: 'editable',
+    readonly: 'readonly',
+} as const
+export type ModeInput = (typeof ModeInput)[keyof typeof ModeInput]
+
+const fieldControlInput = tv({
+    base: '',
+    variants: {
+        required: {
+            true: 'border-secondary-500',
+        },
+        disabled: {
+            true: 'bg-slate-100',
+        },
+        startIcon: {
+            true: '!pl-8',
+        },
+        endIcon: {
+            true: '!pr-8',
+        },
+        mode: {
+            editable: '',
+            readonly:
+                'bg-transparent !border-none !pointer-events-none !focus:outline-none text-right',
+        },
+    },
+})
+
+// criar a tipagem para tv
+
+type FieldControlInput = Omit<
+    VariantProps<typeof fieldControlInput>,
+    'startIcon' | 'endIcon'
+>
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const FieldControl = <T, Ctx = any>({
@@ -18,10 +56,11 @@ const FieldControl = <T, Ctx = any>({
     separator = ':',
     className,
     divClassName,
+    mode = 'editable',
     onChange: onChangeDefault,
     ...props
-}: InputControlProps<T, Ctx>) => {
-    const [inputProps, meta] = useField(props.name as string)
+}: InputControlProps<T, Ctx> & FieldControlInput) => {
+    const [inputProps, meta] = useFieldSafe(props.name as string)
     const id = props.name || props.id
 
     const InputComponent = component as JSX.ElementType
@@ -32,7 +71,7 @@ const FieldControl = <T, Ctx = any>({
     }
 
     return (
-        <div className={twMerge('w-full', divClassName)}>
+        <div className={fieldControlDiv({ className: divClassName })}>
             <Label
                 label={label}
                 required={required}
@@ -49,15 +88,14 @@ const FieldControl = <T, Ctx = any>({
                     id={id}
                     required={required}
                     data-testid={`input-${id}`}
-                    className={twMerge(
-                        cn({
-                            'border-secondary-500': required,
-                            'bg-slate-100': props.disabled,
-                            '!pl-8': startIcon,
-                            '!pr-8': endIcon,
-                        }),
+                    className={fieldControlInput({
                         className,
-                    )}
+                        required,
+                        startIcon: !!startIcon,
+                        endIcon: !!endIcon,
+                        disabled: props.disabled === true,
+                        mode,
+                    })}
                     {...inputProps}
                     {...props}
                     onChange={onChange}
