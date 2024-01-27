@@ -44,15 +44,13 @@ const Profile: React.FC = () => {
     return (
         <DashboardLayouts title="Perfil" searchBlock={false}>
             <div className="container mx-auto mt-14">
-                <div className="flex flex-wrap -mx-4">
-                    <div className="w-full web:w-1/4 px-4">
+                <div className="flex flex-wrap flex-1 mobile:flex-col">
+                    <div className="w-full flex flex-1 flex-col px-4">
                         <UserProfileCard />
                         <SocialLinks />
                     </div>
-                    <div className="w-full web:w-3/4 px-4 mt-10 web:mt-0">
-                        <div className="bg-white shadow rounded-lg overflow-hidden">
-                            <HorizontalTabs categories={tabs} />
-                        </div>
+                    <div className="w-full flex flex-[3] px-4 mt-10 web:mt-0 mobile:!flex-1 overflow-hidden">
+                        <HorizontalTabs categories={tabs} />
                     </div>
                 </div>
             </div>
