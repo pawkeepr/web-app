@@ -18,7 +18,6 @@ const SelectsSpecies = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) =
     const { values } = useFormikContextSafe<AuxSpeciesFormikProps>()
 
     useEffect(() => {
-        if (firstLoad) return setFirstLoad(false)
         const specie = optionsSpecies.find(
             (specie) => specie.value === values.specie,
         )
@@ -40,8 +39,8 @@ const SelectsSpecies = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) =
                     setFirstLoad(false)
                 }}
             />
-            {specie?.bloodType?.length > 0 && <SelectsBlood mode={props.mode} />}
             {specie?.breedType?.length > 0 && <SelectsRace mode={props.mode} />}
+            {specie?.bloodType?.length > 0 && <SelectsBlood mode={props.mode} />}
         </>
     )
 }
