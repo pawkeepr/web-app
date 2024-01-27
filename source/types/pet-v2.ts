@@ -16,21 +16,21 @@ export type On_Off = (typeof On_Off)[keyof typeof On_Off]
 export interface PetData {
     id_pet: string | null
     name_pet: string
-    microchip: string | null
-    identification_number: string | null
+    microchip?: string | null
+    identification_number?: string | null
     specie: Species | null | GenericSelect
     race: Breed | null | GenericSelect
-    castrated: On_Off | null
-    blood_type: string | null | GenericSelect
-    blood_donator: On_Off | null
-    sex: Gender | null | GenericSelect
-    organ_donor: string | null
+    castrated?: On_Off | null
+    blood_type?: string | null | GenericSelect
+    blood_donator?: On_Off | null
+    sex?: Gender | null | GenericSelect
+    organ_donor?: string | null
     date_birth: string | null
-    color: string | null
-    size: string | null
-    weight: string | null
-    pedigree: On_Off | null
-    pedigree_registry: string | null
+    color?: string | null
+    size?: string | null
+    weight?: string | null
+    pedigree?: On_Off | null
+    pedigree_registry?: string | null
 }
 
 export type IHealthInsurance = {

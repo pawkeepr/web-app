@@ -2,8 +2,8 @@ import type { Location } from './profile'
 
 export type ITutor = {
     id?: string
-    name: string
-    lastName: string
+    first_name?: string
+    last_name: string
     email: string
     cpf_cnpj: string
     created_at?: string

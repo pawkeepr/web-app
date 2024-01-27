@@ -10,6 +10,7 @@ export type IPet = {
     name: string
     specie: Species
     race: Breed
+    cpf_cnpj: string
     microchip?: string
     identification_number?: string
     health_insurance?: IHealthInsurance
