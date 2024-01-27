@@ -136,3 +136,13 @@ export type Breed =
     | BirdBreedKeys
     | RabbitBreedKeys
     | 'unknown'
+
+export const BreedNames = {
+    ...DogBreed,
+    ...CatBreed,
+    ...HorseBreed,
+    ...FishBreed,
+    ...ReptileBreed,
+    ...BirdBreed,
+    ...RabbitBreed,
+} as const
