@@ -3,11 +3,13 @@ import { useCallback } from 'react'
 import { BtnPrimary, BtnSecondary } from '~/Components/atoms/btn'
 import routes from '~/constants/routes'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import type { Breed } from '~/types/breedType'
+import type { Species } from '~/types/speciesType'
 import type { InitialValues, StepProps } from '../../types'
 import CardPet from '../card-pet'
 import CardTutor from '../card-tutor'
 
-const StepChoice = ({ nextStep, closeModal }: StepProps) => {
+const StepChoice = ({ nextStep, closeModal, pet }: StepProps) => {
     const router = useRouter()
     const { values } = useFormikContextSafe<InitialValues>()
 
@@ -25,7 +27,13 @@ const StepChoice = ({ nextStep, closeModal }: StepProps) => {
     return (
         <div className="overflow-auto h-[calc(100vh-24rem)] flex flex-1 w-full flex-col gap-2 justify-center items-center">
             <div className="w-1/2 flex-[2] mobile:w-full mt-10 ">
-                <CardPet pet={values} />
+                <CardPet
+                    pet={{
+                        name: pet.pet_information?.name_pet,
+                        race: pet.pet_information?.race as Breed,
+                        specie: pet.pet_information?.specie as Species,
+                    }}
+                />
                 <CardTutor
                     tutor={values.ownerEmergencyContact}
                     document={values.ownerEmergencyContact?.cpf_cnpj}

@@ -3,6 +3,7 @@ import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldControl from '~/Components/molecules/field-control/field-control'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import { MapOptionSpecies, type KeyOfMapOptionSpecies } from '~/types/speciesType'
+import { NUMBER_STEPS } from '../../modal-list-pets'
 import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
 import { option } from '../helpers'
 
@@ -43,7 +44,7 @@ const StepListPets = ({
                         type="button"
                         onClick={() => {
                             onChangePet(pet)
-                            onChangeStep(6)
+                            onChangeStep(NUMBER_STEPS.CHOICE)
                         }}
                         className={option()}
                     >

@@ -3,6 +3,7 @@ import { useEffect, useMemo } from 'react'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldDocument from '~/Components/molecules/field-document'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { NUMBER_STEPS } from '../../modal-list-pets'
 import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
 
 const StepDocument = ({ nextStep, onChangeDocument, onChangeStep }: StepProps) => {
@@ -15,7 +16,7 @@ const StepDocument = ({ nextStep, onChangeDocument, onChangeStep }: StepProps) =
 
     useEffect(() => {
         if (validateDocument) {
-            onChangeStep(1)
+            onChangeStep(NUMBER_STEPS.PETS)
         }
     }, [validateDocument])
 
