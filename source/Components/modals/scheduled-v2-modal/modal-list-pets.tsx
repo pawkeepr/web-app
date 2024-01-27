@@ -19,44 +19,62 @@ import StepScheduledAppointment from './components/steps/step-scheduled-appointm
 import StepTutor from './components/steps/step-tutor'
 import type { ModalConfirmProps, StepProps } from './types'
 
-const STEPS = [
+export const NUMBER_STEPS = {
+    DOCUMENTS: 0,
+    PETS: 1,
+    SPECIES: 2,
+    RACE: 3,
+    SEX: 4,
+    TUTOR: 5,
+    CHOICE: 6,
+    SCHEDULED: 7,
+} as const
+export type NumberSteps = (typeof NUMBER_STEPS)[keyof typeof NUMBER_STEPS]
+
+type Steps = {
+    id: NumberSteps
+    title: string
+    component: (props: StepProps) => JSX.Element
+}
+
+const STEPS: Steps[] = [
     {
-        id: 0,
+        id: NUMBER_STEPS.DOCUMENTS,
         title: 'Documento',
         component: (props: StepProps) => <StepDocument {...props} />,
     },
     {
-        id: 1,
+        id: NUMBER_STEPS.PETS,
         title: 'Pets',
         component: (props: StepProps) => <StepListPets {...props} />,
     },
     {
-        id: 2,
+        id: NUMBER_STEPS.SPECIES,
         title: 'Espécie',
         component: (props: StepProps) => <StepListSpecies {...props} />,
     },
     {
-        id: 3,
+        id: NUMBER_STEPS.RACE,
         title: 'Raça',
         component: (props: StepProps) => <StepListBreeds {...props} />,
     },
     {
-        id: 4,
+        id: NUMBER_STEPS.SEX,
         title: 'Gênero',
         component: (props: StepProps) => <StepListGender {...props} />,
     },
     {
-        id: 5,
+        id: NUMBER_STEPS.TUTOR,
         title: 'Tutor',
         component: (props: StepProps) => <StepTutor {...props} />,
     },
     {
-        id: 6,
+        id: NUMBER_STEPS.CHOICE,
         title: 'Consulta',
         component: (props: StepProps) => <StepChoice {...props} />,
     },
     {
-        id: 7,
+        id: NUMBER_STEPS.SCHEDULED,
         title: 'Agendamento',
         component: (props: StepProps) => <StepScheduledAppointment {...props} />,
     },
@@ -95,8 +113,8 @@ const ModalListPets = ({
     } = useListPetsOfTutor({
         document,
         strategy: 'simple',
-        handleCloseModal: closeModal,
     })
+
     const veterinary = useProfileVeterinary()
 
     const initialValues = useMemo(() => {
@@ -144,7 +162,7 @@ const ModalListPets = ({
             if (!pet) return
             startTransition(() => {
                 onChangePet(pet as IPetV2)
-                onChangeSelectedTab(STEPS.length - 1)
+                onChangeSelectedTab(NUMBER_STEPS.CHOICE)
             })
         },
         [handleSubmit, closeModal],
