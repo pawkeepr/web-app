@@ -11,6 +11,8 @@ import FieldTextArea from '~/Components/molecules/field-text-area'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import useListAppointments from '~/store/hooks/list-appointments'
 import type { VeterinaryConsultation } from '~/types/appointment'
+import type { Breed } from '~/types/breedType'
+import type { Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import { geolocation } from '~/utils/geolocation'
 import type { StepProps } from '../../types'
@@ -116,9 +118,29 @@ const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) 
             {({ isValid, handleSubmit, values, isSubmitting }) => (
                 <div className="p-4">
                     <div className="gap-1">
-                        <CardPet pet={values.tutor_pet_vet?.pet} />
+                        <CardPet
+                            pet={{
+                                name: values.tutor_pet_vet?.pet?.name_pet as string,
+                                race: values.tutor_pet_vet?.pet?.race as Breed,
+                                specie: values.tutor_pet_vet?.pet
+                                    ?.specie as Species,
+                            }}
+                        />
                         <CardTutor
-                            tutor={values.tutor_pet_vet?.tutor}
+                            tutor={{
+                                last_name: values.tutor_pet_vet?.tutor
+                                    ?.last_name as string,
+                                first_name: values.tutor_pet_vet?.tutor
+                                    ?.first_name as string,
+                                cpf_cnpj: values.tutor_pet_vet?.tutor
+                                    ?.cpf_cnpj as string,
+                                email: values.tutor_pet_vet?.tutor?.contact
+                                    ?.email as string,
+                                phone: values.tutor_pet_vet?.tutor?.contact
+                                    ?.phone as string,
+                                whatsapp: values.tutor_pet_vet?.tutor?.contact
+                                    ?.whatsapp as string,
+                            }}
                             document={values.tutor_pet_vet?.tutor?.cpf_cnpj}
                         />
                     </div>
