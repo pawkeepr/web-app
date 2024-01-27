@@ -7,7 +7,7 @@ import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
 import { option } from '../helpers'
 
 type Item = {
-    name: Breed
+    label: Breed
     value: Breed
 }
 
@@ -45,7 +45,7 @@ const StepListBreeds = ({ nextStep, previousStep }: StepProps) => {
                     >
                         <div className="grid grid-cols-4 justify-center items-center">
                             <span className="align-middle col-span-full">
-                                {breed.name}
+                                {breed.label}
                             </span>
                         </div>
                     </button>

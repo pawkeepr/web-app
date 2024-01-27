@@ -43,7 +43,7 @@ const StepListPets = ({
                         type="button"
                         onClick={() => {
                             onChangePet(pet)
-                            onChangeStep(5)
+                            onChangeStep(6)
                         }}
                         className={option()}
                     >
@@ -75,13 +75,13 @@ const StepListPets = ({
             />
 
             <BoxButtons
-                isValid={values.name?.length > 0}
+                isValid={values?.name?.length > 0}
                 link={false}
                 cancel={(props) => (
                     <BtnLink
                         {...(props as any)}
                         message="Cadastro Completo"
-                        href={`/dashboard/pet?document=${values.ownerEmergencyContact.cpf_cnpj}`}
+                        href={`/dashboard/pet?document=${values?.ownerEmergencyContact?.cpf_cnpj}`}
                     />
                 )}
                 success={(props) => (

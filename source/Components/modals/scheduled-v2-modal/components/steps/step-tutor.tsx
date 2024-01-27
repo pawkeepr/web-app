@@ -16,22 +16,31 @@ export const validationSchema = Yup.object().shape({
 })
 
 const StepTutor = ({ previousStep, isLoading }: StepProps) => {
-    const { isValid, handleSubmit, isSubmitting } =
+    const { isValid, handleSubmit, isSubmitting, values } =
         useFormikContextSafe<CtxSimplifiedPeTFields>()
 
     return (
         <Form onSubmit={handleSubmit}>
             <div className="overflow-auto h-[calc(100vh-24rem)] flex flex-col w-full justify-center gap-2 px-2">
-                <FieldControl
-                    ctx={{} as CtxSimplifiedPeTFields}
-                    required
-                    label="Nome do tutor"
-                    name="ownerEmergencyContact.name"
-                    placeholder="Nome"
-                />
+                <div className="grid grid-cols-2 gap-2 mobile:grid-cols-1">
+                    <FieldControl
+                        ctx={values}
+                        required
+                        label="Nome do tutor"
+                        name="ownerEmergencyContact.first_name"
+                        placeholder="Nome"
+                    />
+                    <FieldControl
+                        ctx={values}
+                        required
+                        label="Sobrenome do tutor"
+                        name="ownerEmergencyContact.last_name"
+                        placeholder="Nome"
+                    />
+                </div>
 
                 <FieldPhone
-                    ctx={{} as CtxSimplifiedPeTFields}
+                    ctx={values}
                     required
                     label="Telefone do tutor"
                     name="ownerEmergencyContact.phone"
@@ -39,7 +48,7 @@ const StepTutor = ({ previousStep, isLoading }: StepProps) => {
                 />
 
                 <FieldControl
-                    ctx={{} as CtxSimplifiedPeTFields}
+                    ctx={values}
                     required
                     label="Email do tutor"
                     name="ownerEmergencyContact.email"
