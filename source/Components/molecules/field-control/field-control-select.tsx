@@ -6,11 +6,12 @@ import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { ObjPaths } from '~/types/helpers'
 import type { InputControlProps, OptionSelect } from './types'
 
-type FieldSelectControl<Ctx> = Omit<
+export type FieldSelectControl<Ctx> = Omit<
     InputControlProps<Props, Ctx>,
     'value' | 'disabled'
 > & {
-    name: string
+    ctx?: Ctx extends undefined ? never : Ctx
+    name: Ctx extends undefined ? string : ObjPaths<Ctx>
     deps?: unknown[]
     onChangeValue?: (item: unknown) => void
     options?: OptionSelect[]
