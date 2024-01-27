@@ -20,25 +20,27 @@ type MakeInitialValuesProps = {
     id_pet?: string
     pet_information?: IPetV2['pet_information']
     cpf_tutor: string
-    name_tutor?: string
     phone?: string
     email?: string
     whatsapp?: string
     veterinary?: Veterinary
     address?: Location
+    first_name?: string
+    last_name?: string
 }
 type MakeInitialValues = (props: MakeInitialValuesProps) => InitialValues
 
 export const makeInitialValues: MakeInitialValues = ({
     id_pet = null,
     cpf_tutor,
-    name_tutor = null,
     phone = null,
     email = null,
     whatsapp = null,
     veterinary = null,
     address = null,
     pet_information = null,
+    first_name = null,
+    last_name = null,
 }) => ({
     id: id_pet || pet_information?.id_pet || null,
     cpf_tutor,
@@ -53,13 +55,14 @@ export const makeInitialValues: MakeInitialValues = ({
     sex: (pet_information?.sex as Gender) || 'unknown',
     specie: (pet_information?.specie as Species) || 'unknown',
     date_birth: pet_information?.date_birth || null,
+    cpf_cnpj: cpf_tutor,
     phone_tutor: phone,
     ownerEmergencyContact: {
         cpf_cnpj: cpf_tutor,
         email: email || '',
         phone: phone || '',
         whatsapp: whatsapp || phone || '',
-        lastName: '',
+        last_name: last_name || '',
         address: {
             city: address?.city || '',
             complement: address?.complement || '',
@@ -72,7 +75,7 @@ export const makeInitialValues: MakeInitialValues = ({
         },
         avatar: '',
         id: '',
-        name: name_tutor || '',
+        first_name: first_name || '',
     },
     name: pet_information?.name_pet || '',
     veterinary,
@@ -97,19 +100,17 @@ const CreateOrUpdatePetPage = ({
     const router = useRouter()
 
     const initialValues = useMemo(() => {
-        const fullName = `${pet?.main_responsible_guardian?.first_name} ${pet?.main_responsible_guardian?.last_name}`
-        const trimmedName = fullName.trim()
-
         return makeInitialValues({
             id_pet,
             pet_information: pet?.pet_information,
             cpf_tutor: document as string,
             email: pet?.main_responsible_guardian?.contact?.email as string,
-            name_tutor: trimmedName,
             phone: pet?.main_responsible_guardian?.contact?.phone as string,
             whatsapp: pet?.main_responsible_guardian?.contact?.whatsapp as string,
             veterinary,
             address: pet?.main_responsible_guardian?.address as Location,
+            first_name: pet?.main_responsible_guardian?.first_name as string,
+            last_name: pet?.main_responsible_guardian?.last_name as string,
         })
     }, [pet, document, veterinary, id_pet]) as IPet
 
@@ -137,6 +138,7 @@ const CreateOrUpdatePetPage = ({
         >
             <div className="gap-2 mt-2 mobile:py-6">
                 <ModalConfirm
+                    condition={!hasPet}
                     title="Cancelar Novo Pet!"
                     onConfirm={() => router.back()}
                     description="Importante!"
