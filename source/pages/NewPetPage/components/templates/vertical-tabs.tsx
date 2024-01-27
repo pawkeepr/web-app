@@ -61,7 +61,7 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
     }
 
     return (
-        <div className="px-2 py-4 card  h-fit overflow-auto">
+        <div className="flex flex-col relative bg-transparent h-fit overflow-auto">
             <div className="w-full flex justify-center items-center">
                 <h4 className="card-title mb-2 !text-center font-semibold font-sans">
                     {hasPet ? 'Atualizar Pet' : 'Novo Pet'}
@@ -103,22 +103,20 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
                 </Nav>
             </div>
 
-            <div className="px-lg-4">
-                <TabContent activeTab={activeVerticalTab}>
-                    {items.map(({ id, Component }) => {
-                        return (
-                            <TabPane tabId={id} key={id}>
-                                <Component
-                                    activeTab={activeVerticalTab}
-                                    toggleTab={toggleVerticalTab}
-                                    isPending={isPending}
-                                    tutorExist={hasTutor}
-                                />
-                            </TabPane>
-                        )
-                    })}
-                </TabContent>
-            </div>
+            <TabContent activeTab={activeVerticalTab}>
+                {items.map(({ id, Component }) => {
+                    return (
+                        <TabPane tabId={id} key={id}>
+                            <Component
+                                activeTab={activeVerticalTab}
+                                toggleTab={toggleVerticalTab}
+                                isPending={isPending}
+                                tutorExist={hasTutor}
+                            />
+                        </TabPane>
+                    )
+                })}
+            </TabContent>
         </div>
     )
 }

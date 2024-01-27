@@ -36,7 +36,7 @@ export const createPet = async (data: any) =>
 export const createPetSimplified = async (data: any) =>
     api.post(urls.PET_CREATE_SIMPLIFIED_PROFILE(), data)
 export const updatePet = async (cpf_cnpj: string, id_pet: string, data: any) =>
-    api.post(urls.PET_UPDATE_PROFILE(), data, {
+    api.put(urls.PET_UPDATE_PROFILE(), data, {
         params: { id_pet, cpf_cnpj },
     })
 export const updateHealthPet = async (

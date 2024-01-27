@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import withCompose from '~/Components/helpers/with-compose'
 
 type onChangeOpen = (arg: boolean) => void
 
@@ -162,4 +163,4 @@ const ModalConfirm = ({
     )
 }
 
-export default ModalConfirm
+export default withCompose(ModalConfirm)
