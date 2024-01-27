@@ -118,6 +118,15 @@ export const RabbitBreed = {
 } as const
 export type RabbitBreedKeys = (typeof RabbitBreed)[keyof typeof RabbitBreed]
 
+export type ObjectBreed =
+    | typeof DogBreed
+    | typeof CatBreed
+    | typeof HorseBreed
+    | typeof FishBreed
+    | typeof ReptileBreed
+    | typeof BirdBreed
+    | typeof RabbitBreed
+
 export type Breed =
     | DogBreedKeys
     | CatBreedKeys
