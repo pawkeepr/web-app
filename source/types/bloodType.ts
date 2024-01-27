@@ -57,6 +57,15 @@ type BirdBloodType = keyof typeof BirdBloodType
 type FishBloodType = keyof typeof FishBloodType
 type ReptileBloodType = keyof typeof ReptileBloodType
 
+export type ObjectBloodType =
+    | typeof DogBloodType
+    | typeof CatBloodType
+    | typeof HorseBloodType
+    | typeof RabbitBloodType
+    | typeof BirdBloodType
+    | typeof FishBloodType
+    | typeof ReptileBloodType
+
 export type BloodType =
     | DogBloodType
     | CatBloodType
