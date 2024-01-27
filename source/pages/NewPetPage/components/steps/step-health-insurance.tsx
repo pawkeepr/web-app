@@ -2,13 +2,15 @@ import { Form } from 'formik'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { InitialValues } from '~/pages/NewPetPage'
-import { StepProps } from '~/types/helpers'
+import type { InitialValues } from '~/pages/NewPetPage'
+import type { StepProps, Tabs } from '~/types/helpers'
+import { useModeEditablePet } from '../../use-zustand-hook'
 
 type StepHealthInsuranceKeys = Pick<InitialValues, 'health_insurance'>
 
 export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps) {
-    const { handleSubmit, isSubmitting } =
+    const { mode } = useModeEditablePet()
+    const { handleSubmit, isSubmitting, values } =
         useFormikContextSafe<StepHealthInsuranceKeys>()
 
     return (
@@ -18,25 +20,29 @@ export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps)
             </div>
             <div className="grid grid-cols-2 mobile:grid-cols-1 gap-3 m-2 p-2">
                 <FieldControl
-                    ctx={{} as StepHealthInsuranceKeys}
+                    mode={mode}
+                    ctx={values}
                     label="Nome do plano"
                     name="health_insurance.name"
                     placeholder="Digite o nome do plano"
                 />
                 <FieldControl
-                    ctx={{} as StepHealthInsuranceKeys}
+                    mode={mode}
+                    ctx={values}
                     label="Tipo do plano"
                     name="health_insurance.type_health"
                     placeholder="Digite o tipo do plano"
                 />
                 <FieldControl
-                    ctx={{} as StepHealthInsuranceKeys}
+                    mode={mode}
+                    ctx={values}
                     label="Número da carteirinha"
                     name="health_insurance.number_health"
                     placeholder="Digite o número da carteirinha"
                 />
                 <FieldControl
-                    ctx={{} as StepHealthInsuranceKeys}
+                    mode={mode}
+                    ctx={values}
                     label="Validade da carteirinha"
                     name="health_insurance.validity"
                     placeholder="Digite a data de validade da carteirinha"
@@ -48,7 +54,7 @@ export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps)
                     condition={!isSubmitting}
                     label="Voltar"
                     onClick={() => {
-                        toggleTab(activeTab - 1)
+                        toggleTab((activeTab - 1) as Tabs)
                     }}
                 />
                 <BtnPrimary

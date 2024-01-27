@@ -1,8 +1,8 @@
-import type { PetData } from '~/types/pet-v2'
+import type { IPet } from '~/types/pet'
 import { Species } from '~/types/speciesType'
 
 type CardPetProps = {
-    pet: PetData
+    pet: Pick<IPet, 'name' | 'race' | 'specie'>
 }
 
 const CardPet = ({ pet }: CardPetProps) => {
@@ -12,7 +12,7 @@ const CardPet = ({ pet }: CardPetProps) => {
                 <p className="text-gray-500 flex justify-between">
                     <strong className="mr-2">Pet:</strong>
                     <span>
-                        {`${pet?.name_pet}, ${
+                        {`${pet?.name}, ${
                             Species[pet?.specie as keyof typeof Species]
                         }, ${pet?.race as string}`}
                     </span>

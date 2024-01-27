@@ -1,21 +1,24 @@
 //Import images
 
 import FieldCep from '~/Components/molecules/field-cep/field-cep'
-import FieldControl from '~/Components/molecules/field-control/field-control'
+import FieldControl, {
+    ModeInput,
+} from '~/Components/molecules/field-control/field-control'
 
 import { useCallback, useMemo, useTransition } from 'react'
-import { IAddress } from '~/helpers/fetch-address-by-cep'
+import type { IAddress } from '~/helpers/fetch-address-by-cep'
 import useFetchAddress from '~/hooks/use-fetch-address'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { InitialValues } from '~/pages/NewPetPage'
+import type { InitialValues } from '~/pages/NewPetPage'
 
 type CtxAddress = Pick<InitialValues, 'ownerEmergencyContact'>
 
 type StepTutorProps = {
     disabled?: boolean
+    mode?: ModeInput
 }
 
-const AddressTutor = ({ disabled }: StepTutorProps) => {
+const AddressTutor = ({ mode = ModeInput.editable }: StepTutorProps) => {
     const { values, setFieldValue } = useFormikContextSafe<CtxAddress>()
 
     const [isPending, startTransition] = useTransition()
@@ -63,7 +66,8 @@ const AddressTutor = ({ disabled }: StepTutorProps) => {
     return (
         <>
             <FieldCep
-                className=" "
+                mode={mode}
+                ctx={values}
                 label="CEP"
                 name="ownerEmergencyContact.address.zipCode"
                 disabled={isLoading}
@@ -72,7 +76,8 @@ const AddressTutor = ({ disabled }: StepTutorProps) => {
             />
 
             <FieldControl
-                ctx={{} as CtxAddress}
+                mode={mode}
+                ctx={values}
                 type="text"
                 label="Estado"
                 name="ownerEmergencyContact.address.state"
@@ -84,7 +89,8 @@ const AddressTutor = ({ disabled }: StepTutorProps) => {
             />
 
             <FieldControl
-                ctx={{} as CtxAddress}
+                mode={mode}
+                ctx={values}
                 type="text"
                 label="Cidade"
                 name="ownerEmergencyContact.address.city"
@@ -95,7 +101,8 @@ const AddressTutor = ({ disabled }: StepTutorProps) => {
                 required
             />
             <FieldControl
-                ctx={{} as CtxAddress}
+                mode={mode}
+                ctx={values}
                 type="text"
                 label="Rua"
                 name="ownerEmergencyContact.address.street"

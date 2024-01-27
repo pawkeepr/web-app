@@ -1,22 +1,20 @@
-import FieldDocument from '~/Components/molecules/field-document/field-document';
-import FieldPhone from '~/Components/molecules/field-phone/field-phone';
+import FieldDocument from '~/Components/molecules/field-document/field-document'
+import FieldPhone from '~/Components/molecules/field-phone/field-phone'
 
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn';
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
-import FieldControl from '~/Components/molecules/field-control/field-control';
+import FieldControl from '~/Components/molecules/field-control/field-control'
 
-import { StepProps } from '~/types/helpers';
-import { InitialValues } from '../../index';
-import AddressTutor from '../molecules/address-tutor.tsx';
+import type { StepProps, Tabs } from '~/types/helpers'
+import type { InitialValues } from '../../index'
+import AddressTutor from '../molecules/address-tutor.tsx'
 
-import { useMemo } from 'react';
-import * as yup from 'yup';
-import useFormikContextSafe from '~/hooks/use-formik-context-safe';
+import { useMemo } from 'react'
+import * as yup from 'yup'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { useModeEditablePet } from '../../use-zustand-hook'
 
-type StepTutorsKeys = Pick<
-    InitialValues,
-    'ownerEmergencyContact' | 'cpf_tutor'
->;
+type StepTutorsKeys = Pick<InitialValues, 'ownerEmergencyContact' | 'cpf_cnpj'>
 
 const schema = yup.object().shape({
     cpf_tutor: yup.string().required('Campo obrigatório'),
@@ -34,19 +32,14 @@ const schema = yup.object().shape({
             }),
         })
         .required('Campo obrigatório'),
-});
+})
 
-const StepTutor = ({
-    toggleTab,
-    activeTab,
-    isPending,
-    tutorExist,
-}: StepProps) => {
-    const { values } = useFormikContextSafe<StepTutorsKeys>();
-
+const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) => {
+    const { values } = useFormikContextSafe<StepTutorsKeys>()
+    const { mode } = useModeEditablePet()
     const isValid = useMemo(() => {
-        return schema.isValidSync(values);
-    }, [values]);
+        return schema.isValidSync(values)
+    }, [values])
 
     return (
         <div className="card card-body shadow-lg">
@@ -63,9 +56,10 @@ const StepTutor = ({
                 <div className="mb-2">Preencha as Informações do Tutor</div>
                 <div className="grid grid-cols-3 mobile:grid-cols-1 gap-2">
                     <FieldDocument
-                        ctx={{} as StepTutorsKeys}
+                        mode={mode}
+                        ctx={values}
                         label="CPF"
-                        name="cpf_tutor"
+                        name="cpf_cnpj"
                         disabled={isPending || tutorExist}
                         aria-label="document"
                         typeDocument="cpf"
@@ -73,10 +67,11 @@ const StepTutor = ({
                         required
                     />
                     <FieldControl
+                        mode={mode}
                         initialFocus
-                        ctx={{} as StepTutorsKeys}
-                        label="Nome Completo"
-                        name="ownerEmergencyContact.name"
+                        ctx={values}
+                        label="Nome"
+                        name="ownerEmergencyContact.first_name"
                         disabled={isPending || tutorExist}
                         aria-label="name"
                         placeholder="Digite o nome do Tutor"
@@ -84,6 +79,7 @@ const StepTutor = ({
                         disabledError
                     />
                     <FieldPhone
+                        mode={mode}
                         label="Telefone/Celular"
                         name="ownerEmergencyContact.phone"
                         disabled={isPending || tutorExist}
@@ -95,6 +91,8 @@ const StepTutor = ({
                         required
                     />
                     <FieldControl
+                        mode={mode}
+                        ctx={values}
                         initialFocus
                         label="Email"
                         name="ownerEmergencyContact.email"
@@ -105,52 +103,26 @@ const StepTutor = ({
                         required
                         disabledError
                     />
-                    <AddressTutor disabled={tutorExist} />
+                    <AddressTutor disabled={tutorExist} mode={mode} />
                 </div>
-                {/* <ControlSwitchDiv
-                    name="has_second_tutor"
-                    label="O pet possui um segundo Tutor?"
-                    onClick={() => setSecondTutorActive(!secondTutorActive)}
-                >
-                    <div className="left mb-2">Preencha as Informações do segundo Tutor</div>
-                    <FieldDocument
-                        label="CPF"
-                        name="responsible_tutors.cpf_tutor"
-                        aria-label="document"
-                        disabled={isPending}
-                        typeDocument="cpf"
-                        placeholder="CPF"
-                        required
-                    />
-                    <FieldControl
-                        label="Nome Completo"
-                        name="responsible_tutors.name_tutor"
-                        disabled={isPending}
-                        aria-label="name"
-                        placeholder="Digite o nome do Tutor"
-                        required
-                        disabledError
-                    />
-
-                </ControlSwitchDiv> */}
             </div>
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnCancel
                     label="Voltar"
                     onClick={() => {
-                        toggleTab(activeTab - 1);
+                        toggleTab((activeTab - 1) as Tabs)
                     }}
                 />
                 <BtnPrimary
                     disabled={!isValid}
                     label="Próximo"
                     onClick={() => {
-                        toggleTab(activeTab + 1);
+                        toggleTab((activeTab + 1) as Tabs)
                     }}
                 />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default StepTutor;
+export default StepTutor
