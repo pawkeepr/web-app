@@ -6,6 +6,7 @@ import {
     HorseBloodType,
     RabbitBloodType,
     ReptileBloodType,
+    type ObjectBloodType,
 } from './bloodType'
 import {
     BirdBreed,
@@ -15,6 +16,7 @@ import {
     HorseBreed,
     RabbitBreed,
     ReptileBreed,
+    type ObjectBreed,
 } from './breedType'
 
 export const Species = {
@@ -65,96 +67,36 @@ export const MapOptionSpecies = {
 
 export type KeyOfMapOptionSpecies = keyof typeof MapOptionSpecies
 
-export const dog = {
-    name: 'Cachorro',
-    value: 'dog',
-    bloodType: Object.values(DogBloodType).map((bloodType) => ({
-        name: bloodType,
-        value: bloodType,
+const makeSpecie = (
+    specie: Species,
+    bloodType: ObjectBloodType,
+    breedType: ObjectBreed,
+) => ({
+    label: Species[specie],
+    value: specie,
+    bloodType: Object.entries(bloodType).map(([key, name]) => ({
+        label: name,
+        value: key,
     })),
-    breedType: Object.values(DogBreed).map((breedType) => ({
-        name: breedType,
-        value: breedType,
+    breedType: Object.entries(breedType).map(([key, name]) => ({
+        label: name,
+        value: key,
     })),
-}
+})
 
-export const cat = {
-    name: 'Gato',
-    value: 'cat',
-    bloodType: Object.values(CatBloodType).map((bloodType) => ({
-        name: bloodType,
-        value: bloodType,
-    })),
-    breedType: Object.values(CatBreed).map((breedType) => ({
-        name: breedType,
-        value: breedType,
-    })),
-}
+export const dog = makeSpecie('dog', DogBloodType, DogBreed)
 
-export const horse = {
-    name: 'Cavalo',
-    value: 'horse',
-    bloodType: Object.values(HorseBloodType).map((bloodType) => ({
-        name: bloodType,
-        value: bloodType,
-    })),
-    breedType: Object.values(HorseBreed).map((breedType) => ({
-        name: breedType,
-        value: breedType,
-    })),
-}
+export const cat = makeSpecie('cat', CatBloodType, CatBreed)
 
-export const rabbit = {
-    name: 'Coelho',
-    value: 'rabbit',
-    bloodType: Object.values(RabbitBloodType).map((bloodType) => ({
-        name: bloodType,
-        value: bloodType,
-    })),
-    breedType: Object.values(RabbitBreed).map((breedType) => ({
-        name: breedType,
-        value: breedType,
-    })),
-}
+export const horse = makeSpecie('horse', HorseBloodType, HorseBreed)
 
-export const bird = {
-    name: 'Pássaro',
-    value: 'bird',
-    bloodType: Object.values(BirdBloodType).map((bloodType) => ({
-        name: bloodType,
-        value: bloodType,
-    })),
-    breedType: Object.values(BirdBreed).map((breedType) => ({
-        name: breedType,
-        value: breedType,
-    })),
-}
+export const rabbit = makeSpecie('rabbit', RabbitBloodType, RabbitBreed)
 
-export const fish = {
-    name: 'Peixe',
-    value: 'fish',
-    bloodType: Object.values(FishBloodType).map((bloodType) => ({
-        name: bloodType,
-        value: bloodType,
-    })),
-    breedType: Object.values(FishBreed).map((breedType) => ({
-        name: breedType,
-        value: breedType,
-    })),
-}
+export const bird = makeSpecie('bird', BirdBloodType, BirdBreed)
 
-export const reptile = {
-    name: 'Réptil',
-    value: 'reptile',
-    bloodType: Object.values(ReptileBloodType).map((bloodType) => ({
-        name: bloodType,
-        value: bloodType,
-    })),
-    breedType: Object.values(ReptileBreed).map((breedType) => ({
-        name: breedType,
-        value: breedType,
-    })),
-}
+export const fish = makeSpecie('fish', FishBloodType, FishBreed)
+
+export const reptile = makeSpecie('reptile', ReptileBloodType, ReptileBreed)
 
 export type SpeciesType =
     | typeof dog
