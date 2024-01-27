@@ -108,6 +108,8 @@ export class Veterinary implements DTOProfile {
             })
         }
 
-        return veterinary.update(profile as DTOProfile)
+        return veterinary
+            .defineId(profile.id as string)
+            .update(profile as DTOProfile)
     }
 }
