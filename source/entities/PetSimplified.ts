@@ -136,8 +136,8 @@ export class PetSimplified implements IPetV2Simplified {
                 email: params.ownerEmergencyContact?.email,
                 phone: params.ownerEmergencyContact?.phone,
                 whatsapp: params.ownerEmergencyContact?.whatsapp || '',
-                first_name: params.ownerEmergencyContact?.name,
-                last_name: params.ownerEmergencyContact?.lastName,
+                first_name: params.ownerEmergencyContact?.first_name as string,
+                last_name: params.ownerEmergencyContact?.last_name as string,
             })
             .defineVeterinary(params.veterinary)
     }
