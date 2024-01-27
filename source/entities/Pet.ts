@@ -222,10 +222,10 @@ export class Pet implements IPetV2 {
             })
             .defineTutorInformation({
                 cpf_cnpj: params?.ownerEmergencyContact?.cpf_cnpj,
-                name: params?.ownerEmergencyContact?.name,
-                first_name: params?.ownerEmergencyContact?.name,
-                last_name: params?.ownerEmergencyContact?.name,
+                first_name: params?.ownerEmergencyContact?.first_name as string,
+                last_name: params?.ownerEmergencyContact?.last_name as string,
                 url_img: '',
+                name: '',
             })
             .defineVeterinary(params.veterinary)
     }
