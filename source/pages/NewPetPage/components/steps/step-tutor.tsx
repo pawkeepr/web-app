@@ -66,18 +66,31 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                         placeholder="CPF"
                         required
                     />
-                    <FieldControl
-                        mode={mode}
-                        initialFocus
-                        ctx={values}
-                        label="Nome"
-                        name="ownerEmergencyContact.first_name"
-                        disabled={isPending || tutorExist}
-                        aria-label="name"
-                        placeholder="Digite o nome do Tutor"
-                        required
-                        disabledError
-                    />
+                    <div className="grid grid-cols-2 gap-2 mobile:grid-cols-1">
+                        <FieldControl
+                            mode={mode}
+                            ctx={values}
+                            required
+                            disabled={isPending || tutorExist}
+                            aria-label="first_name"
+                            label="Nome do tutor"
+                            name="ownerEmergencyContact.first_name"
+                            placeholder="Nome"
+                            disabledError
+                        />
+                        <FieldControl
+                            mode={mode}
+                            ctx={values}
+                            required
+                            disabled={isPending || tutorExist}
+                            aria-label="last_name"
+                            label="Sobrenome do tutor"
+                            name="ownerEmergencyContact.last_name"
+                            placeholder="Nome"
+                            disabledError
+                        />
+                    </div>
+
                     <FieldPhone
                         mode={mode}
                         label="Telefone/Celular"
