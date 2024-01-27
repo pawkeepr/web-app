@@ -1,39 +1,62 @@
-// path/filename: src/components/UserProfileCard.js
-
-import Image from 'next/image'
+import { CameraIcon } from '@heroicons/react/24/solid'
 import { Input, Label } from 'reactstrap'
-import avatar1 from '~/assets/images/users/avatar-1.jpg'
+import AvatarPet from '~/Components/molecules/avatar-pet'
+import { MapOptionSpecies, type Species } from '~/types/speciesType'
 import CardContainer from './CardContainer'
 
-const UserProfileCard = () => {
+type UserProfileCardProps = {
+    title?: string
+    subtitle?: string
+    avatar?: string
+    name?: string
+    specie?: string
+}
+
+const UserProfileCard = ({
+    avatar,
+    name,
+    specie,
+    subtitle,
+    title,
+}: UserProfileCardProps) => {
     return (
-        <CardContainer className="mt-n5">
-            <div className="p-4">
+        <CardContainer>
+            <div className="p-1">
                 <div className="text-center">
                     <div className="profile-user position-relative d-inline-block mx-auto  mb-4">
-                        <Image
-                            src={avatar1}
-                            className="rounded-circle avatar-xl img-thumbnail user-profile-image"
-                            alt="user-profile"
+                        <AvatarPet
+                            src={avatar}
+                            name_pet={name as string}
+                            specie={
+                                MapOptionSpecies[
+                                    specie as keyof typeof MapOptionSpecies
+                                ] as Species
+                            }
                         />
                         <div className="avatar-xs p-0 rounded-circle profile-photo-edit">
                             <Input
+                                disabled
                                 id="profile-img-file-input"
                                 type="file"
-                                className="profile-img-file-input"
+                                className="profile-img-file-input hover:!cursor-default"
                             />
                             <Label
                                 htmlFor="profile-img-file-input"
-                                className="profile-photo-edit avatar-xs"
+                                className="profile-photo-edit avatar-xs "
                             >
-                                <span className="avatar-title rounded-circle bg-light text-body">
-                                    <i className="ri-camera-fill" />
+                                <span
+                                    data-tip="hello"
+                                    className="avatar-title rounded-circle bg-light text-body hover:!cursor-default"
+                                >
+                                    <CameraIcon className="text-gray-300" />
                                 </span>
                             </Label>
                         </div>
                     </div>
-                    <h5 className="mb-1">Anna Adame</h5>
-                    <p className="text-muted mb-0">Lead Designer / Developer</p>
+                    <h5 className="text-gray-700 mb-2 text-center w-full mt-1 capitalize">
+                        <strong>{title}</strong>
+                    </h5>
+                    <p className="text-muted mb-0">{subtitle}</p>
                 </div>
             </div>
         </CardContainer>
