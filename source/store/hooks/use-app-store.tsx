@@ -109,12 +109,13 @@ const useAppStore = <T, G = unknown>({
                 const newData = entity ? entity.build(data) : data
 
                 if (newData.id) {
-                    return await updateData.mutateAsync(data)
+                    return await updateData.mutateAsync(newData)
                 }
 
                 const { id: _id, ...aux } = newData
                 return await addData.mutateAsync(aux)
             } catch (err) {
+                console.error('🚀 ~ err:', err)
                 const error = err as AxiosError
                 const statusCode = error?.response?.status
 
