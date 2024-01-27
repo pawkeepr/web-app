@@ -7,14 +7,14 @@ import type { InitialValues, StepProps } from '../../types'
 import CardPet from '../card-pet'
 import CardTutor from '../card-tutor'
 
-const StepChoice = ({ nextStep, pet, closeModal }: StepProps) => {
+const StepChoice = ({ nextStep, closeModal }: StepProps) => {
     const router = useRouter()
     const { values } = useFormikContextSafe<InitialValues>()
 
     const handleNavigate = useCallback(() => {
         setTimeout(() => {
             router.push(
-                `${routes.dashboard.new.appointments}?document=${values.ownerEmergencyContact?.cpf_cnpj}&pet=${pet.id}`,
+                `${routes.dashboard.new.appointments}?document=${values.ownerEmergencyContact?.cpf_cnpj}&pet=${values.id}`,
             )
         }, 100)
 
@@ -25,9 +25,9 @@ const StepChoice = ({ nextStep, pet, closeModal }: StepProps) => {
     return (
         <div className="overflow-auto h-[calc(100vh-24rem)] flex flex-1 w-full flex-col gap-2 justify-center items-center">
             <div className="w-1/2 flex-[2] mobile:w-full mt-10 ">
-                <CardPet pet={pet.pet_information} />
+                <CardPet pet={values} />
                 <CardTutor
-                    tutor={pet.main_responsible_guardian}
+                    tutor={values.ownerEmergencyContact}
                     document={values.ownerEmergencyContact?.cpf_cnpj}
                 />
             </div>
