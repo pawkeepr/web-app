@@ -40,8 +40,6 @@ const NavbarLanding = () => {
                             className="hidden h-12 w-40  data-[logo-light=false]:flex"
                             data-logo-light={actionScroll}
                             alt="logo light"
-                            height="40"
-                            width={120}
                         />
                         <img
                             src="/logo-rgb-21.png"
