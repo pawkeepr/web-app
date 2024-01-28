@@ -10,7 +10,7 @@ type StepHealthInsuranceKeys = Pick<InitialValues, 'health_insurance' | 'id'>
 
 export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps) {
     const { mode } = useModeEditablePet()
-    const { handleSubmit, isSubmitting, values } =
+    const { handleSubmit, values, isSubmitting } =
         useFormikContextSafe<StepHealthInsuranceKeys>()
 
     return (
@@ -51,7 +51,7 @@ export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps)
             </div>
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnCancel
-                    condition={mode === 'editable' || isSubmitting}
+                    condition={isSubmitting || mode === 'editable'}
                     label="Voltar"
                     onClick={() => {
                         toggleTab((activeTab - 1) as Tabs)
@@ -59,7 +59,7 @@ export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps)
                 />
                 <BtnPrimary
                     condition={mode === 'editable'}
-                    disabled={isSubmitting || mode === 'editable'}
+                    disabled={isSubmitting || mode !== 'editable'}
                     isLoading={isSubmitting}
                     label={values.id ? 'Atualizar' : 'Cadastrar'}
                     type="submit"

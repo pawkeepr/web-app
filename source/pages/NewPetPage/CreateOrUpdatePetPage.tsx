@@ -10,7 +10,7 @@ import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import usePetById from '~/store/hooks/pet/use-pets'
 import type { Breed } from '~/types/breedType'
 import type { IPet } from '~/types/pet'
-import type { IPetV2, On_Off } from '~/types/pet-v2'
+import type { IPetV2 } from '~/types/pet-v2'
 import type { Location } from '~/types/profile'
 import type { Gender, Species } from '~/types/speciesType'
 import { useModeEditablePet } from './use-zustand-hook'
@@ -45,13 +45,13 @@ export const makeInitialValues: MakeInitialValues = ({
 }) => ({
     id: id_pet || pet_information?.id_pet || null,
     cpf_tutor,
-    blood_donator: pet_information?.blood_donator || 'no',
+    blood_donator: pet_information?.blood_donator === 'yes',
     blood_type: pet_information?.blood_type || 'unknown',
-    castrated: pet_information?.castrated || 'no',
+    castrated: pet_information?.castrated === 'yes',
     identification_number: pet_information?.identification_number || '',
     microchip: pet_information?.microchip || '',
     name_pet: pet_information?.name_pet || '',
-    organ_donor: (pet_information?.organ_donor as On_Off) || 'no',
+    organ_donor: pet_information?.organ_donor === 'yes',
     race: (pet_information?.race as Breed) || 'unknown',
     sex: (pet_information?.sex as Gender) || 'unknown',
     specie: (pet_information?.specie as Species) || 'unknown',

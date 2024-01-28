@@ -104,11 +104,44 @@ const AddressTutor = ({ mode = ModeInput.editable }: StepTutorProps) => {
                 mode={mode}
                 ctx={values}
                 type="text"
+                label="Bairro"
+                name="ownerEmergencyContact.address.neighborhood"
+                disabled={isLoading}
+                placeholder={
+                    isLoading ? 'Carregando...' : 'Digite o nome do bairro'
+                }
+                required
+            />
+            <FieldControl
+                mode={mode}
+                ctx={values}
+                type="text"
                 label="Rua"
                 name="ownerEmergencyContact.address.street"
                 disabled={isLoading}
                 placeholder={isLoading ? 'Carregando...' : 'Digite o nome da rua'}
                 required
+            />
+            <FieldControl
+                mode={mode}
+                ctx={values}
+                type="text"
+                label="Número"
+                name="ownerEmergencyContact.address.number"
+                disabled={isLoading}
+                placeholder={
+                    isLoading ? 'Carregando...' : 'Digite o numero da casa'
+                }
+            />
+            <FieldControl
+                mode={mode}
+                ctx={values}
+                type="text"
+                label="Complemento"
+                divClassName="col-span-full w-full"
+                name="ownerEmergencyContact.address.complement"
+                disabled={isLoading}
+                placeholder={isLoading ? 'Carregando...' : 'Complemento'}
             />
         </>
     )

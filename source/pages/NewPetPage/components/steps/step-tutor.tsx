@@ -5,7 +5,7 @@ import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
 import FieldControl from '~/Components/molecules/field-control/field-control'
 
-import type { StepProps, Tabs } from '~/types/helpers'
+import type { RecordsShapeYup, StepProps, Tabs } from '~/types/helpers'
 import type { InitialValues } from '../../index'
 import AddressTutor from '../molecules/address-tutor.tsx'
 
@@ -16,8 +16,10 @@ import { useModeEditablePet } from '../../use-zustand-hook'
 
 type StepTutorsKeys = Pick<InitialValues, 'ownerEmergencyContact' | 'cpf_cnpj'>
 
-const schema = yup.object().shape({
-    cpf_tutor: yup.string().required('Campo obrigatório'),
+type StepTutorSchema = RecordsShapeYup<StepTutorsKeys>
+
+const schema = yup.object().shape<StepTutorSchema>({
+    cpf_cnpj: yup.string().required('Campo obrigatório'),
     ownerEmergencyContact: yup
         .object()
         .shape({
@@ -30,6 +32,9 @@ const schema = yup.object().shape({
                 state: yup.string().required('Campo obrigatório'),
                 city: yup.string().required('Campo obrigatório'),
                 street: yup.string().required('Campo obrigatório'),
+                neighborhood: yup.string().required('Campo obrigatório'),
+                number: yup.string().optional(),
+                complement: yup.string().optional(),
             }),
         })
         .required('Campo obrigatório'),
