@@ -1,7 +1,9 @@
 import { Switch } from '@headlessui/react'
+import cn from 'classnames'
 import { useField } from 'formik'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { ObjPaths } from '~/types/helpers'
+import { ModeInput } from '../field-control/field-control'
 
 type SwitchProps<Ctx = undefined> = {
     className?: string
@@ -11,6 +13,8 @@ type SwitchProps<Ctx = undefined> = {
     label: string
     onClick?: () => void
     divClassName?: string
+    legend?: boolean
+    mode?: ModeInput
 }
 
 const controlSwitch = tv({
@@ -33,6 +37,10 @@ const controlSwitch = tv({
             true: 'bg-secondary-500',
             false: 'bg-primary-400',
         },
+        mode: {
+            [ModeInput.readonly]: 'hidden',
+            [ModeInput.editable]: '',
+        },
     },
     defaultVariants: {
         checked: false,
@@ -54,6 +62,8 @@ const ControlSwitch = <Ctx,>({
     name,
     divClassName,
     onClick,
+    legend = true,
+    mode = ModeInput.editable,
 }: SwitchProps<Ctx> & ControlSwitchTailwind) => {
     const [field, meta, helpers] = useField(name)
 
@@ -61,27 +71,39 @@ const ControlSwitch = <Ctx,>({
         <div className={divSwitch({ className: divClassName })}>
             <div className="flex justify-between items-center gap-2 mb-2">
                 <span className="font-semibold text-gray-600">{label}</span>
-                <div className="w-16 max-h-max">
-                    <Switch
-                        onClick={onClick}
-                        checked={field.value}
-                        onChange={(e) => {
-                            helpers.setValue(e)
-                        }}
-                        className={controlSwitch({
-                            checked: field.value as boolean,
-                            className,
-                        })}
-                    >
-                        <span className="sr-only">Use setting</span>
-                        <span
-                            aria-hidden="true"
-                            className={`${
-                                field.value ? 'translate-x-9' : 'translate-x-0'
-                            }
-              pointer-events-none inline-block lg:h-[24px] lg:w-[24px] h-[20px] w-[20px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
-                        />
-                    </Switch>
+                <div className="flex items-center gap-2">
+                    <div className="w-16 max-h-max relative">
+                        <Switch
+                            disabled={mode === ModeInput.readonly}
+                            onClick={onClick}
+                            checked={field.value}
+                            onChange={(e) => {
+                                helpers.setValue(e)
+                            }}
+                            className={controlSwitch({
+                                mode,
+                                checked: field.value as boolean,
+                                primary: field.value as boolean,
+                                secondary: !field.value as boolean,
+                                className,
+                            })}
+                        >
+                            <span className="sr-only">Use setting</span>
+                            {/* Adjusted the translate class to center the circle */}
+                            <span
+                                aria-hidden="true"
+                                className={`${
+                                    field.value ? 'translate-x-9' : 'translate-x-0'
+                                } pointer-events-none inline-block lg:h-[24px] lg:w-[24px] h-[20px] w-[20px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+                            />
+                            {/* Text inside the switch */}
+                        </Switch>
+                    </div>
+                    {legend && (
+                        <span className={cn('text-gray-400')}>
+                            {field.value ? 'Sim' : 'Não'}
+                        </span>
+                    )}
                 </div>
             </div>
             {field.value && children}

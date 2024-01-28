@@ -135,18 +135,21 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 />
                 <div className="col-span-full">
                     <ControlSwitch
+                        mode={mode}
                         ctx={values}
                         name="castrated"
                         label="Castrado"
                         divClassName="w-1/2 mobile:w-full"
                     />
                     <ControlSwitch
+                        mode={mode}
                         ctx={values}
                         name="organ_donor"
                         label="Doador de órgãos?"
                         divClassName="w-1/2 mobile:w-full"
                     />
                     <ControlSwitch
+                        mode={mode}
                         ctx={values}
                         name="blood_donator"
                         label="Doador de sangue?"
