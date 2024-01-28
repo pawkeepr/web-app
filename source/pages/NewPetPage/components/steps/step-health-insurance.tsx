@@ -6,7 +6,7 @@ import type { InitialValues } from '~/pages/NewPetPage'
 import type { StepProps, Tabs } from '~/types/helpers'
 import { useModeEditablePet } from '../../use-zustand-hook'
 
-type StepHealthInsuranceKeys = Pick<InitialValues, 'health_insurance'>
+type StepHealthInsuranceKeys = Pick<InitialValues, 'health_insurance' | 'id'>
 
 export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps) {
     const { mode } = useModeEditablePet()
@@ -51,15 +51,17 @@ export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps)
             </div>
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnCancel
-                    condition={!isSubmitting}
+                    condition={mode === 'editable' || isSubmitting}
                     label="Voltar"
                     onClick={() => {
                         toggleTab((activeTab - 1) as Tabs)
                     }}
                 />
                 <BtnPrimary
+                    condition={mode === 'editable'}
+                    disabled={isSubmitting || mode === 'editable'}
                     isLoading={isSubmitting}
-                    label="Cadastrar"
+                    label={values.id ? 'Atualizar' : 'Cadastrar'}
                     type="submit"
                 />
             </div>

@@ -122,12 +122,14 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
             </div>
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnCancel
+                    condition={mode === 'editable'}
                     label="Voltar"
                     onClick={() => {
                         toggleTab((activeTab - 1) as Tabs)
                     }}
                 />
                 <BtnPrimary
+                    condition={mode === 'editable'}
                     disabled={!isValid}
                     label="Próximo"
                     onClick={() => {

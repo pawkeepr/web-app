@@ -127,6 +127,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
             </div>
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnPrimary
+                    condition={mode === 'editable'}
                     label="Próximo"
                     disabled={!isValid}
                     onClick={() => {

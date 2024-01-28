@@ -13,6 +13,7 @@ import type { IPet } from '~/types/pet'
 import type { IPetV2, On_Off } from '~/types/pet-v2'
 import type { Location } from '~/types/profile'
 import type { Gender, Species } from '~/types/speciesType'
+import { useModeEditablePet } from './use-zustand-hook'
 
 export type InitialValues = Nullable<IPet>
 
@@ -98,7 +99,7 @@ const CreateOrUpdatePetPage = ({
 
     const veterinary = useProfileVeterinary()
     const router = useRouter()
-
+    const { mode } = useModeEditablePet()
     const initialValues = useMemo(() => {
         return makeInitialValues({
             id_pet,
@@ -138,7 +139,6 @@ const CreateOrUpdatePetPage = ({
         >
             <div className="gap-2 mt-2 mobile:py-6">
                 <ModalConfirm
-                    condition={!hasPet}
                     title="Cancelar Novo Pet!"
                     onConfirm={() => router.back()}
                     description="Importante!"
@@ -148,6 +148,7 @@ const CreateOrUpdatePetPage = ({
                         return (
                             <div className="w-full flex mobile:justify-center mobile:items-center">
                                 <BtnCancel
+                                    disabled={mode !== 'editable'}
                                     type="button"
                                     className="mobile:w-96"
                                     label="Cancelar"

@@ -39,6 +39,7 @@ const SocialLinks = ({ whatsapp }: SocialLinksProps) => {
             </div> */}
             <div className="flex items-center mb-3">
                 <FieldControl
+                    text_align="right"
                     startIcon={<FaWhatsapp className="text-green-500 w-5 h-5" />}
                     ctx={{ whatsapp: '' }}
                     name="whatsapp"
