@@ -61,7 +61,7 @@ const schema = yup.object().shape<StepPetSchema>({
 })
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
-    const { values } = useFormikContextSafe<StepPetKeys>()
+    const { values, initialValues } = useFormikContextSafe<StepPetKeys>()
     const { mode } = useModeEditablePet()
 
     const isValid = useMemo(() => {
@@ -85,7 +85,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     mode={mode}
                     ctx={values}
                     label="Nome do PET"
-                    disabled={!!values.id && !!values.name}
+                    disabled={!!values.id && !!initialValues.name}
                     required
                     name="name"
                     placeholder="Digite o nome do PET"
@@ -95,9 +95,10 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 <SelectsSpecies mode={mode} />
 
                 <FieldControlSelect
+                    mode={mode}
                     ctx={values}
                     options={genderValues}
-                    isDisabled={!!values.id && !!values.sex}
+                    isDisabled={!!values.id && !!initialValues.sex}
                     name="sex"
                     required
                     label="Sexo do Pet"
@@ -107,7 +108,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 <FieldControl
                     mode={mode}
                     ctx={values}
-                    disabled={!!values.id && !!values.date_birth}
+                    disabled={!!values.id && !!initialValues.date_birth}
                     label="Data de nascimento"
                     required
                     name="date_birth"
@@ -117,7 +118,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 <FieldMasked
                     mode={mode}
                     ctx={values}
-                    disabled={!!values.id && !!values.microchip}
+                    disabled={!!values.id && !!initialValues.microchip}
                     label="Número do microchip"
                     name="microchip"
                     mask="_____"
@@ -127,33 +128,34 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                 <FieldMasked
                     mode={mode}
                     ctx={values}
-                    disabled={!!values.id && !!values.identification_number}
+                    disabled={!!values.id && !!initialValues.identification_number}
                     label={'Número de registro cartório'}
                     name="identification_number"
                     mask="_____"
                     placeholder="Digite o número do registro (opcional)"
                 />
-                <div className="col-span-full">
+                <div className="col-span-full grid grid-cols-2 gap-3">
                     <ControlSwitch
                         mode={mode}
                         ctx={values}
                         name="castrated"
                         label="Castrado"
-                        divClassName="w-1/2 mobile:w-full"
+                        divClassName="col-span-1 mobile:col-span-full"
                     />
+
                     <ControlSwitch
                         mode={mode}
                         ctx={values}
                         name="organ_donor"
                         label="Doador de órgãos?"
-                        divClassName="w-1/2 mobile:w-full"
+                        divClassName="col-span-1 mobile:col-span-full"
                     />
                     <ControlSwitch
                         mode={mode}
                         ctx={values}
                         name="blood_donator"
                         label="Doador de sangue?"
-                        divClassName="w-1/2 mobile:w-full"
+                        divClassName="col-span-1 mobile:col-span-full"
                     />
                 </div>
             </div>

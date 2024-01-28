@@ -15,7 +15,7 @@ type AuxSpeciesFormikProps = Pick<
 const SelectsSpecies = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => {
     const [firstLoad, setFirstLoad] = useState(true)
     const { specie, optionsSpecies, onChangeSpecie } = useSpecies()
-    const { values } = useFormikContextSafe<AuxSpeciesFormikProps>()
+    const { values, initialValues } = useFormikContextSafe<AuxSpeciesFormikProps>()
 
     useEffect(() => {
         const specie = optionsSpecies.find(
@@ -33,6 +33,7 @@ const SelectsSpecies = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) =
                 ctx={values}
                 name="specie"
                 required
+                isDisabled={!!values.id && !!initialValues.specie}
                 options={optionsSpecies}
                 error={props.error && !firstLoad}
                 onChangeValue={(value) => {

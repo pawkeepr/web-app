@@ -13,7 +13,8 @@ type AuxSpeciesFormikProps = Pick<
 const SelectsBlood = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => {
     const [firstLoad, setFirstLoad] = useState(true)
     const { specie } = useSpecies()
-    const { values, setFieldValue } = useFormikContextSafe<AuxSpeciesFormikProps>()
+    const { values, setFieldValue, initialValues } =
+        useFormikContextSafe<AuxSpeciesFormikProps>()
 
     useEffect(() => {
         if (firstLoad) return setFirstLoad(false)
@@ -25,6 +26,7 @@ const SelectsBlood = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => 
             {...props}
             label="Tipo de sanguíneo"
             ctx={values}
+            isDisabled={!!values.id && !!initialValues.bloodType}
             name="bloodType"
             options={specie.bloodType}
             error={props.error && !firstLoad}

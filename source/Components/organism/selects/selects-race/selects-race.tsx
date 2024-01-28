@@ -13,7 +13,8 @@ type AuxSpeciesFormikProps = Pick<
 const SelectsRace = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => {
     const [firstLoad, setFirstLoad] = useState(true)
     const { specie } = useSpecies()
-    const { values, setFieldValue } = useFormikContextSafe<AuxSpeciesFormikProps>()
+    const { values, setFieldValue, initialValues } =
+        useFormikContextSafe<AuxSpeciesFormikProps>()
 
     useEffect(() => {
         if (firstLoad) return setFirstLoad(false)
@@ -24,6 +25,7 @@ const SelectsRace = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => {
         <FieldControlSelect
             {...props}
             label="Raça"
+            isDisabled={!!values.id && !!initialValues.race}
             ctx={values}
             name="race"
             options={specie.breedType}
