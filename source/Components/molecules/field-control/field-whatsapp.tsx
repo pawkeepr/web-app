@@ -10,7 +10,6 @@ type NumberWhatsAppProps = {
 
 const NumberWhatsapp = ({ name }: NumberWhatsAppProps) => {
     const [phoneValue, setPhoneValue] = useState<string | any>(undefined)
-    const [showWhatsAppInput, setShowWhatsAppInput] = useState(false)
     const [clickAppInput, setClickAppInput] = useState(false)
 
     // guarda o valor do input de telefone
@@ -43,10 +42,7 @@ const NumberWhatsapp = ({ name }: NumberWhatsAppProps) => {
                         required
                         onChange={handlePhoneInputChange}
                     />
-                    <div
-                        onClick={copyPhoneToWhatsapp}
-                        className="flex justify-center items-center"
-                    >
+                    <div className="flex justify-center items-center">
                         <p className="text-xs mr-2 mb-2 md:m-2">
                             Clique no ícone do whatsapp para duplicar o telefone no
                             campo abaixo:
@@ -63,8 +59,6 @@ const NumberWhatsapp = ({ name }: NumberWhatsAppProps) => {
                     // input de whatsapp com o mesmo numero do telefone caso o usuário clique no ícone do whatsapp
                     clickAppInput ? (
                         <FieldControl
-                            className=" "
-                            // divClassName="my-1"
                             type="text"
                             label="WhatsApp"
                             name="whatsapp"
@@ -77,8 +71,6 @@ const NumberWhatsapp = ({ name }: NumberWhatsAppProps) => {
                         />
                     ) : (
                         <FieldControl
-                            className=" "
-                            // divClassName="my-1"
                             type="text"
                             label="WhatsApp"
                             name="whatsapp"

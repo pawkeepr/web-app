@@ -1,18 +1,16 @@
 import { useField } from 'formik'
 import Checkbox from '~/Components/atoms/checkbox'
 import { labelStyled } from '~/Components/atoms/label/label'
-import { InputControlProps } from '../field-control/types'
+import type { InputControlProps } from '../field-control/types'
 
-type FieldCheckboxProps<T> = {
-    name: string
-} & InputControlProps<T>
+type FieldCheckboxProps<T, Ctx> = InputControlProps<T, Ctx>
 
-const FieldCheckbox = <T,>({
+const FieldCheckbox = <T, Ctx>({
     name,
     className,
     children,
     ...rest
-}: FieldCheckboxProps<T>) => {
+}: FieldCheckboxProps<T, Ctx>) => {
     const [field, meta] = useField(name)
 
     return (

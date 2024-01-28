@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit'
 
-import { IProfile } from '~/types/profile'
+import type { IProfile } from '~/types/profile'
 import {
     ACTION_ADD_FAIL,
     ACTION_ADD_NEW,

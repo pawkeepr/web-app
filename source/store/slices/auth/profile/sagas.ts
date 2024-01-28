@@ -1,7 +1,7 @@
 import { all, call, delay, fork, put, takeEvery } from 'redux-saga/effects'
 
 //Include Both Helper File with needed methods
-import { PayloadAction } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 import Router from 'next/router'
 // Login Redux States
 import {
@@ -23,7 +23,7 @@ import {
     updateProfileVet,
 } from '~/services/helpers'
 import { errorToast, successToast } from '~/store/helpers/toast'
-import { IProfile } from '~/types/profile'
+import type { IProfile } from '~/types/profile'
 import { setCookie } from '~/utils/cookies-utils'
 
 function* onGetProfile() {
