@@ -12,6 +12,7 @@ import LightDark from '../common/light-dark'
 
 import Bars3CenterLeftIcon from '@heroicons/react/24/solid/Bars3CenterLeftIcon'
 
+import ProfileDropdownTailwind from '~/Components/molecules/profile-dropdown/profile-dropdown'
 import Drawer from '~/Components/organism/drawer'
 
 const Header = () => {
@@ -69,7 +70,7 @@ const Header = () => {
     return (
         <header
             className={
-                'dark:!bg-primary-700 mb-2 !bg-primary-500 mobile:fixed mobile:z-50 w-full '
+                'dark:!bg-primary-700 mb-2 !bg-primary-500 mobile:fixed mobile:z-50 w-full z-10 '
             }
             ref={divRef}
         >
@@ -113,7 +114,6 @@ const Header = () => {
                     {/* MyCartDropdwon */}
                     {/* <MyCartDropdown /> */}
 
-                    {/* FullScreenDropdown */}
                     <FullScreenDropdown />
 
                     {/* Dark/Light Mode set */}
@@ -121,7 +121,7 @@ const Header = () => {
 
                     {/* NotificationDropdown */}
                     {/* <NotificationDropdown /> */}
-                    {/* <ProfileDropdownTailwind /> */}
+                    <ProfileDropdownTailwind />
                 </div>
 
                 {/* <SearchOption /> */}
