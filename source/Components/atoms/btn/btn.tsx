@@ -42,6 +42,9 @@ export const button = tv({
         link: {
             true: 'text-secondary-500 dark:text-primary-600 hover:no-underline capitalize w-fit',
         },
+        icon: {
+            true: 'w-fit p-1 m-0 h-fit text-gray-400 border-none hover:!bg-transparent',
+        },
     },
 })
 
@@ -53,7 +56,7 @@ const styledIcon = tv({
 })
 
 export type BtnProps = {
-    icon?: React.ReactNode | string
+    icon?: React.ReactNode | string | JSX.Element | JSX.ElementType | null
     label?: string
     iconStyle?: string
     children?: React.ReactNode
@@ -108,6 +111,16 @@ const BtnLabel = ({ label = 'Texto', ...props }: BtnProps) => {
     return <BtnCompose text label={label} {...props} />
 }
 
+const BtnIcon = ({
+    icon,
+    ...props
+}: Omit<BtnProps, 'icon'> & {
+    icon?: React.ReactNode
+}) => {
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    return <BtnCompose icon={icon as any} {...props} />
+}
+
 type BtnLinkProps = {
     message?: string
     children?: React.ReactNode
@@ -142,6 +155,7 @@ export {
     BtnAvatar,
     BtnCancel,
     BtnConfirm,
+    BtnIcon,
     BtnLabel,
     BtnLink,
     BtnPrimary,
