@@ -18,6 +18,7 @@ export type FieldSelectControl<Ctx> = Omit<
     value?: OptionSelect | null
     required?: boolean
     label: string
+    isDisabled?: boolean
     divClassName?: string
 }
 
