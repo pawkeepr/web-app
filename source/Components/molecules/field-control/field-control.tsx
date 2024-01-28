@@ -34,7 +34,12 @@ const fieldControlInput = tv({
         mode: {
             editable: '',
             readonly:
-                'bg-transparent !border-none !pointer-events-none !focus:outline-none text-right',
+                'bg-transparent !border-none !pointer-events-none !focus:outline-none text-gray-900 font-sans',
+        },
+        text_align: {
+            center: 'text-center',
+            left: 'text-left',
+            right: 'text-right',
         },
     },
 })
@@ -93,8 +98,8 @@ const FieldControl = <T, Ctx = any>({
                         required,
                         startIcon: !!startIcon,
                         endIcon: !!endIcon,
-                        disabled: props.disabled === true,
                         mode,
+                        ...props,
                     })}
                     {...inputProps}
                     {...props}
