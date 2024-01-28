@@ -2,10 +2,11 @@ import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
 //Import images
 
 import cn from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { StepProps } from '~/types/helpers'
+import { useModeEditablePet } from '../../use-zustand-hook'
 import { StepHealthInsurance, StepPet, StepTutor } from '../steps'
 
 type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
@@ -48,6 +49,8 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
     const { isMobile } = useResizeMobile()
     const [activeVerticalTab, setActiveVerticalTab] = useState(1)
     const [passedVerticalSteps, setPassedVerticalSteps] = useState([1])
+    const { mode } = useModeEditablePet()
+
     function toggleVerticalTab(tab: Tabs) {
         if (activeVerticalTab !== tab) {
             const modifiedSteps = [...passedVerticalSteps, tab]
@@ -58,6 +61,15 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
             }
         }
     }
+
+    useEffect(() => {
+        if (mode === 'readonly') {
+            return
+        }
+
+        setActiveVerticalTab(1)
+        setPassedVerticalSteps([1])
+    }, [mode])
 
     return (
         <div
@@ -87,7 +99,7 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
                             <NavItem key={item.id}>
                                 <NavLink
                                     href={item.href}
-                                    disabled={!hasPet}
+                                    disabled={!hasPet || mode !== 'readonly'}
                                     id="steparrow-gen-info-tab"
                                     className={cn({
                                         active: activeVerticalTab === item.id,
