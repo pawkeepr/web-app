@@ -32,6 +32,7 @@ const SelectsSpecies = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) =
                 label="Espécie"
                 ctx={values}
                 name="specie"
+                required
                 options={optionsSpecies}
                 error={props.error && !firstLoad}
                 onChangeValue={(value) => {
@@ -39,7 +40,9 @@ const SelectsSpecies = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) =
                     setFirstLoad(false)
                 }}
             />
-            {specie?.breedType?.length > 0 && <SelectsRace mode={props.mode} />}
+            {specie?.breedType?.length > 0 && (
+                <SelectsRace mode={props.mode} required />
+            )}
             {specie?.bloodType?.length > 0 && <SelectsBlood mode={props.mode} />}
         </>
     )
