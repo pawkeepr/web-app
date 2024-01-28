@@ -7,7 +7,12 @@ import type {
     ITutor,
     PetData,
 } from '~/types/pet-v2'
-import type { Contact, DTOProfile, Location } from '~/types/profile'
+import {
+    TypeProfile,
+    type Contact,
+    type DTOProfile,
+    type Location,
+} from '~/types/profile'
 import { PetInformation } from './PetInformation'
 import { Veterinary } from './Veterinary'
 
@@ -76,6 +81,7 @@ export class Pet implements IPetV2 {
         }
 
         this.veterinary = {
+            type_profile: TypeProfile.VETERINARY,
             address: {
                 city: '',
                 complement: '',

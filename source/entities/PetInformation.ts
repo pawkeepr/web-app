@@ -13,7 +13,7 @@ export class PetInformation implements PetData {
     blood_type: string | null
     blood_donator: On_Off | null
     sex: Gender | null
-    organ_donor: string | null
+    organ_donor: On_Off | null
     date_birth: string | null
     color: string | null
     size: string | null
@@ -27,13 +27,13 @@ export class PetInformation implements PetData {
         this.microchip = ''
         this.identification_number = ''
         this.specie = null
-        this.blood_donator = null
+        this.blood_donator = 'no'
         this.blood_type = ''
-        this.castrated = null
+        this.castrated = 'no'
         this.color = ''
         this.date_birth = ''
-        this.organ_donor = ''
-        this.pedigree = null
+        this.organ_donor = 'no'
+        this.pedigree = 'no'
         this.pedigree_registry = ''
         this.size = ''
         this.race = null
@@ -62,7 +62,11 @@ export class PetInformation implements PetData {
         return this
     }
 
-    defineBloodDonator(bloodDonator: On_Off): PetInformation {
+    defineBloodDonator(bloodDonator: On_Off | boolean): PetInformation {
+        if (typeof bloodDonator === 'boolean') {
+            this.blood_donator = bloodDonator ? 'yes' : 'no'
+            return this
+        }
         this.blood_donator = bloodDonator
         return this
     }
@@ -73,7 +77,11 @@ export class PetInformation implements PetData {
         return this
     }
 
-    defineCastrated(castrated: On_Off): PetInformation {
+    defineCastrated(castrated: On_Off | boolean): PetInformation {
+        if (typeof castrated === 'boolean') {
+            this.castrated = castrated ? 'yes' : 'no'
+            return this
+        }
         this.castrated = castrated
         return this
     }
@@ -88,7 +96,11 @@ export class PetInformation implements PetData {
         return this
     }
 
-    defineOrganDonor(organDonor: string): PetInformation {
+    defineOrganDonor(organDonor: On_Off | boolean): PetInformation {
+        if (typeof organDonor === 'boolean') {
+            this.organ_donor = organDonor ? 'yes' : 'no'
+            return this
+        }
         this.organ_donor = organDonor
         return this
     }
