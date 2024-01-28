@@ -1,10 +1,17 @@
-import type { Contact, DTOProfile, IProfile, Location } from '~/types/profile'
+import {
+    TypeProfile,
+    type Contact,
+    type DTOProfile,
+    type IProfile,
+    type Location,
+} from '~/types/profile'
 
 export class Veterinary implements DTOProfile {
     id: string
     cpf_cnpj: string
     crmv: string
     name: string
+    type_profile: TypeProfile
     specialty: string
     url_img: string
     contact: Contact
@@ -12,9 +19,10 @@ export class Veterinary implements DTOProfile {
     first_name: string
     last_name: string
 
-    private constructor() {
-        this.id = ''
+    private constructor(id: string) {
+        this.id = id
         this.cpf_cnpj = ''
+        this.type_profile = TypeProfile.VETERINARY
         this.crmv = ''
         this.name = ''
         this.specialty = ''
@@ -84,7 +92,8 @@ export class Veterinary implements DTOProfile {
     }
 
     private update(params: DTOProfile) {
-        return this.defineAddress(params.address)
+        return this.defineId(params.id)
+            .defineAddress(params.address)
             .defineContact(params.contact)
             .defineCpfCnpj(params.cpf_cnpj as string)
             .defineCrmv(params.crmv as string)
@@ -94,7 +103,7 @@ export class Veterinary implements DTOProfile {
     }
 
     static build(profile: IProfile | DTOProfile): Veterinary {
-        const veterinary = new Veterinary()
+        const veterinary = new Veterinary(profile.id as string)
 
         if ((profile as IProfile).user_information) {
             const casted_profile = profile as IProfile

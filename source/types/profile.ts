@@ -31,10 +31,17 @@ export type SpecialtyInformation = {
     list_service_type: string[]
 }
 
+export const TypeProfile = {
+    VETERINARY: 1,
+    TUTOR: 2,
+} as const
+export type TypeProfile = (typeof TypeProfile)[keyof typeof TypeProfile]
+
 export type ProfileUserInformation = {
     first_name: string
     last_name: string
     name: string
+    type_profile: TypeProfile
     url_img: string
     contact: Contact
     address: Location
