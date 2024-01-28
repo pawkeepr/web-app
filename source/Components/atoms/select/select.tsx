@@ -27,7 +27,7 @@ const control = tv({
         mode: {
             editable: '',
             readonly:
-                'bg-transparent !border-none !pointer-events-none !focus:outline-none',
+                'bg-transparent !border-none !pointer-events-none !focus:outline-none !text-gray-900',
         },
     },
 })
@@ -38,7 +38,6 @@ const dropdownIndicator = tv({
         mode: {
             editable: '',
             readonly: '!hidden',
-            view: '!hidden',
         },
     },
 })
