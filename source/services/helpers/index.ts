@@ -1,6 +1,7 @@
 import { api } from '../api'
 
 import type { VeterinaryConsultation } from '~/types/appointment'
+import type { IPetV2 } from '~/types/pet-v2'
 import type { IProfile } from '~/types/profile'
 import * as urls from './urls'
 
@@ -35,8 +36,13 @@ export const createPet = async (data: any) =>
     api.post(urls.PET_CREATE_PROFILE(), data)
 export const createPetSimplified = async (data: any) =>
     api.post(urls.PET_CREATE_SIMPLIFIED_PROFILE(), data)
-export const updatePet = async (cpf_cnpj: string, id_pet: string, data: any) =>
-    api.put(urls.PET_UPDATE_PROFILE(), data, {
+export const updatePet = async (
+    cpf_cnpj: string,
+    id_pet: string,
+    // biome-ignore lint/correctness/noUnusedVariables: <explanation>
+    { veterinary, id, ...pet }: IPetV2,
+) =>
+    api.put(urls.PET_UPDATE_PROFILE(), pet, {
         params: { id_pet, cpf_cnpj },
     })
 export const updateHealthPet = async (
