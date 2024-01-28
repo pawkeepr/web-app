@@ -1,6 +1,6 @@
 import type { ImageProps, StaticImageData } from 'next/image'
 import Image from 'next/image'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 
 import user from '~/assets/images/users/user-dummy-img.jpg'
 
@@ -12,6 +12,7 @@ type MyImageProps = {
 } & ImageProps
 
 const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
     return (
@@ -19,24 +20,29 @@ const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
             <Image
                 {...rest}
                 src={src}
+                onLoad={() => setLoading(true)}
                 onError={() => setError(true)}
+                onLoadingComplete={() => setLoading(false)}
                 alt={alt}
                 className={className}
                 style={{
-                    display: error ? 'none' : 'block',
+                    display: error || loading ? 'none' : 'block',
                     ...style,
                 }}
             />
-            {error && (
+            {(error || loading) && (
                 <Image
                     {...rest}
                     src={user}
-                    alt="Default Image"
+                    alt="Default Profile Image"
                     className={className}
+                    style={{
+                        display: error || loading ? 'block' : 'none',
+                    }}
                 />
             )}
         </>
     )
 }
 
-export default MyImage
+export default memo(MyImage)
