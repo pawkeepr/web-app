@@ -17,13 +17,13 @@ export type IPet = {
     chip_number?: string
     date_birth: string | Date
     bloodType?: BloodType
-    blood_donator?: On_Off | null
+    blood_donator?: On_Off | null | boolean
     color?: string
     allergies?: string[]
     medicationsInUse?: string[]
-    castrated: On_Off
+    castrated?: On_Off | null | boolean
     dateOfCastration?: string
-    organ_donor?: On_Off
+    organ_donor?: On_Off | null | boolean
     size?: string
     weight?: string
     pedigree?: On_Off
