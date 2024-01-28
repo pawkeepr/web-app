@@ -2,77 +2,60 @@ import { Menu, Transition } from '@headlessui/react'
 import Link from 'next/link'
 import { Fragment } from 'react'
 import MyImage from '~/Components/atoms/my-image/my-image'
-import { useAppSelector } from '~/store/hooks'
 
+import { ArrowLeftCircleIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import cn from 'classnames'
-import { StaticImageData } from 'next/image'
+import type { StaticImageData } from 'next/image'
 import useChangeLayoutMode from '~/hooks/use-change-layout-mode'
+import useProfile from '~/store/hooks/profile/use-profile'
 
 type CustomToggleProps = {
     onClick: () => void
-    name: string
     avatar: string | StaticImageData
     color?: string
 }
 
-const CustomToggle = ({ onClick, name, avatar }: CustomToggleProps) => (
-    <div className="btn d-flex items-center" onClick={onClick}>
+const CustomToggle = ({ onClick, avatar }: CustomToggleProps) => (
+    <button
+        type="button"
+        className="flex items-center bg-transparent border-none"
+        onClick={onClick}
+    >
         <MyImage
-            className="rounded-circle header-profile-user"
+            className="rounded-full w-10 h-10"
             src={avatar}
             alt="Header Avatar"
-            height={48}
-            width={48}
         />
-
-        <span className="text-start ms-xl-2">
-            <span
-                className={
-                    'd-none d-xl-inline-block ms-1 fw-medium text-white dark:!text-gray-200'
-                }
-            >
-                {name}
-            </span>
-        </span>
-    </div>
+    </button>
 )
 
 const options = [
     {
         label: 'Perfil',
         href: '/profile',
-        icon: (active: boolean) => (
-            <i
-                className={cn(
-                    'mdi mdi-account-circle text-muted fs-16 align-middle mx-2',
-                    {
-                        '!text-white': active,
-                    },
-                )}
-            />
-        ),
+        icon: (active: boolean) => <UserCircleIcon className="w-5 h-5" />,
         dataKey: 'profile',
     },
     {
         href: '/logout',
         icon: (active: boolean) => (
-            <i
-                className={cn('mdi mdi-logout text-muted fs-16 align-middle mx-2', {
-                    '!text-white': active,
-                })}
-            />
+            <ArrowLeftCircleIcon className="w-5 h-5 mt-1" viewBox="0 0 24 24" />
         ),
-        label: 'Logout',
+        label: 'Sair',
         dataKey: 'logout',
     },
 ]
 
 const ProfileDropdownTailwind = () => {
-    const profile = useAppSelector((state) => state.Profile.user)
+    const { data: profile } = useProfile()
+
     const { onHandleChangeLayout } = useChangeLayoutMode()
 
     return (
-        <Menu as="div" className="relative inline-block text-left mobile:hidden">
+        <Menu
+            as="div"
+            className="relative inline-block text-left mobile:hidden z-[99]"
+        >
             <div>
                 <Menu.Button
                     className="
@@ -93,8 +76,7 @@ const ProfileDropdownTailwind = () => {
                 >
                     <CustomToggle
                         onClick={() => {}}
-                        name={profile?.firstName as any}
-                        avatar={profile?.avatar as any}
+                        avatar={profile?.user_information?.url_img || ''}
                     />
                 </Menu.Button>
             </div>
@@ -109,35 +91,38 @@ const ProfileDropdownTailwind = () => {
             >
                 <Menu.Items
                     className="
-                    border-[1px] 
+                    border
                     border-gray-300
                     dark:!border-gray-700
                     absolute 
                     right-0 
+                    text-gray-500
                     m-2
                     py-2 
                     w-44
                     origin-top-right 
                     rounded-md 
-                    bg-gray-200
+                    bg-gray-100
                     dark:!bg-dark-500
                     shadow-lg 
                     ring-1 
                     ring-black 
                     ring-opacity-5 
+                    flex flex-col
                     focus:outline-none"
                 >
-                    <div className="flex items-center justify-center">
+                    <div className="flex flex-1 self-center items-center justify-center">
                         <MyImage
-                            className="rounded-circle"
-                            src={profile?.avatar as any}
+                            className="rounded-full self-center"
+                            src={profile?.user_information?.url_img || ''}
                             alt="Header Avatar"
-                            height={62}
-                            width={62}
+                            height={60}
+                            width={60}
                         />
                     </div>
+
                     <h6 className="text-xs text-center p-1 m-1">
-                        Bem Vindo, {profile?.firstName} aaaa!
+                        Bem Vindo, {profile?.user_information?.first_name}!
                     </h6>
 
                     <Menu.Item as={Fragment}>
@@ -162,7 +147,7 @@ const ProfileDropdownTailwind = () => {
                     </Menu.Item>
 
                     <div className="px-1 py-1 ">
-                        {options.map((item, index) => (
+                        {options.map((item) => (
                             <Menu.Item key={item.href} as={Fragment}>
                                 {({ active }) => (
                                     <Link
@@ -191,27 +176,3 @@ const ProfileDropdownTailwind = () => {
 }
 
 export default ProfileDropdownTailwind
-
-// Outros Items
-{
-    /* 
-<DropdownItem href="/apps-chat"><i
-                        className="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span
-                            className="align-middle">Messages</span></DropdownItem>
-                    <DropdownItem href="#"><i
-                        className="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span
-                            className="align-middle">Taskboard</span></DropdownItem>
-                    <DropdownItem href="/pages-faqs"><i
-                        className="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
-                            className="align-middle">Help</span></DropdownItem>
-                    <div className="dropdown-divider"></div>
-                    <DropdownItem href="/pages-profile"><i
-                        className="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
-                            className="align-middle">Balance : <b>$5971.67</b></span></DropdownItem>
-                    <DropdownItem href="/pages-profile-settings"><span
-                        className="badge bg-soft-success text-success mt-1 float-end">New</span><i
-                            className="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
-                                className="align-middle">Settings</span></DropdownItem>
-                    <DropdownItem href="/auth-lockscreen-basic"><i
-                        className="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Lock screen</span></DropdownItem> */
-}
