@@ -14,7 +14,10 @@ export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps)
         useFormikContextSafe<StepHealthInsuranceKeys>()
 
     return (
-        <Form className="mb-4 card card-body" onSubmit={handleSubmit}>
+        <Form
+            className="flex relative flex-col card-body shadow-lg mobile:p-0"
+            onSubmit={handleSubmit}
+        >
             <div className="flex justify-center mb-2">
                 Preencha as Informações do plano de saúde do Pet
             </div>

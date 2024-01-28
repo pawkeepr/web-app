@@ -1,10 +1,13 @@
 import { Formik } from 'formik'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useCallback, useMemo } from 'react'
 import Tabs from './components/templates/vertical-tabs'
 
-import { BtnCancel } from '~/Components/atoms/btn'
+import cn from 'classnames'
+import { FaEdit, FaEye } from 'react-icons/fa'
+import { BtnCancel, BtnIcon } from '~/Components/atoms/btn'
 import ModalConfirm from '~/Components/modals/confirm-modal'
+import { ModeInput } from '~/Components/molecules/field-control/field-control'
 import type { Veterinary } from '~/entities/Veterinary'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import usePetById from '~/store/hooks/pet/use-pets'
@@ -14,7 +17,6 @@ import type { IPetV2 } from '~/types/pet-v2'
 import type { Location } from '~/types/profile'
 import type { Gender, Species } from '~/types/speciesType'
 import { useModeEditablePet } from './use-zustand-hook'
-
 export type InitialValues = Nullable<IPet>
 
 type MakeInitialValuesProps = {
@@ -96,10 +98,9 @@ const CreateOrUpdatePetPage = ({
         isLoading,
         handleSubmit,
     } = usePetById(document as string, id_pet as string)
-
+    const pathname = usePathname()
     const veterinary = useProfileVeterinary()
     const router = useRouter()
-    const { mode } = useModeEditablePet()
     const initialValues = useMemo(() => {
         return makeInitialValues({
             id_pet,
@@ -114,7 +115,7 @@ const CreateOrUpdatePetPage = ({
             last_name: pet?.main_responsible_guardian?.last_name as string,
         })
     }, [pet, document, veterinary, id_pet]) as IPet
-
+    const { mode, onChangeMode } = useModeEditablePet()
     const onSubmit = useCallback(
         async (values: IPet) => {
             try {
@@ -131,13 +132,24 @@ const CreateOrUpdatePetPage = ({
         return !!pet?.id
     }, [pet])
 
+    const changeMode = () => {
+        if (mode === ModeInput.readonly) return onChangeMode('editable')
+
+        onChangeMode(ModeInput.readonly)
+    }
+
+    const isRouteCreate = useMemo(
+        () => pathname === '/dashboard/pets/new',
+        [pathname],
+    )
+
     return (
         <Formik
             onSubmit={onSubmit}
             enableReinitialize
             initialValues={initialValues}
         >
-            <div className="gap-2 mt-2 mobile:py-6">
+            <div className="gap-2 mt-2 mobile:py-6 relative">
                 <ModalConfirm
                     title="Cancelar Novo Pet!"
                     onConfirm={() => router.back()}
@@ -158,6 +170,35 @@ const CreateOrUpdatePetPage = ({
                         )
                     }}
                 </ModalConfirm>
+                <BtnIcon
+                    icon={
+                        mode === 'editable' ? (
+                            <span>
+                                <FaEye className="w-5 h-5" />
+                            </span>
+                        ) : (
+                            <span>
+                                <FaEdit className="w-5 h-5" />
+                            </span>
+                        )
+                    }
+                    condition={!isRouteCreate}
+                    type="button"
+                    className={cn(
+                        `
+                        web:absolute web:right-0 web:top-0 web:w-32 web:p-1 web:m-0 web:h-fit 
+                        web:text-gray-400 web:border-none
+                    `,
+                        {
+                            'bg-confirm-500 hover:bg-confirm-600 text-white':
+                                mode === 'editable',
+                            'bg-primary-500 hover:bg-primary-600 text-white':
+                                mode !== 'editable',
+                        },
+                    )}
+                    label={mode === 'editable' ? 'Visualizar' : 'Editar'}
+                    onClick={changeMode}
+                />
                 <Tabs isPending={isLoading} hasTutor={hasPet} hasPet={hasPet} />
             </div>
         </Formik>

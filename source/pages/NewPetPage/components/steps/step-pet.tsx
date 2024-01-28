@@ -69,7 +69,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     }, [values])
 
     return (
-        <div className="card card-body shadow-lg">
+        <div className="flex relative flex-col card-body shadow-lg mobile:p-0">
             <div className="p-1 m-2 mb-4">
                 <h4 className="text-center font-sans font-semibold text-base capitalize">
                     Informações do PET
