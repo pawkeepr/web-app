@@ -8,7 +8,11 @@ import { useModeEditablePet } from '../../use-zustand-hook'
 
 type StepHealthInsuranceKeys = Pick<InitialValues, 'health_insurance' | 'id'>
 
-export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps) {
+export default function StepHealthInsurance({
+    toggleTab,
+    activeTab,
+    isPending,
+}: StepProps) {
     const { mode } = useModeEditablePet()
     const { handleSubmit, values, isSubmitting } =
         useFormikContextSafe<StepHealthInsuranceKeys>()
@@ -54,7 +58,7 @@ export default function StepHealthInsurance({ toggleTab, activeTab }: StepProps)
             </div>
             <div className="flex align-items-center justify-center gap-3 mt-4">
                 <BtnCancel
-                    condition={isSubmitting || mode === 'editable'}
+                    condition={!isPending && !isSubmitting && mode === 'editable'}
                     label="Voltar"
                     onClick={() => {
                         toggleTab((activeTab - 1) as Tabs)
