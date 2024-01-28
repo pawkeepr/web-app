@@ -1,6 +1,6 @@
 import type { ImageProps, StaticImageData } from 'next/image'
 import Image from 'next/image'
-import { memo, useState } from 'react'
+import { useState } from 'react'
 
 import user from '~/assets/images/users/user-dummy-img.jpg'
 
@@ -45,4 +45,4 @@ const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
     )
 }
 
-export default memo(MyImage)
+export default MyImage
