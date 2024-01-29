@@ -158,7 +158,13 @@ const CreateOrUpdatePetPage = ({
             enableReinitialize
             initialValues={initialValues}
         >
-            <div className="gap-2 mt-2 mobile:py-6 relative">
+            <div
+                className="
+                gap-2 mt-2 mobile:py-6 relative 
+                mobile:items-center mobile:flex 
+                mobile:!h-fit mobile:flex-col
+            "
+            >
                 <ModalConfirm
                     title="Cancelar Novo Pet!"
                     onConfirm={() => router.back()}
@@ -196,7 +202,7 @@ const CreateOrUpdatePetPage = ({
                     className={cn(
                         `
                         web:absolute web:right-0 web:top-0 web:w-32 web:p-1 web:m-0 web:h-fit 
-                        web:text-gray-400 web:border-none
+                        web:text-gray-400 web:border-none mobile:w-40
                     `,
                         {
                             'bg-confirm-500 hover:bg-confirm-600 text-white':
