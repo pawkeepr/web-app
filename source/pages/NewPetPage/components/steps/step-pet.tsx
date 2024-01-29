@@ -27,6 +27,8 @@ type KeysInitial =
     | 'castrated'
     | 'organ_donor'
     | 'blood_donator'
+    | 'blood_type'
+    | 'pedigree'
 type StepPetKeys = Pick<InitialValues, KeysInitial>
 type StepPetSchema = RecordsShapeYup<StepPetKeys>
 
@@ -58,6 +60,14 @@ const schema = yup.object().shape<StepPetSchema>({
     identification_number: yup.string().nullable(),
     microchip: yup.string().nullable(),
     organ_donor: yup.boolean(),
+    blood_donator: yup.boolean(),
+    blood_type: yup
+        .object()
+        .shape({
+            label: yup.string().required('Campo obrigatório'),
+            value: yup.string().required('Campo obrigatório'),
+        })
+        .nullable(),
 })
 
 const StepPet = ({ toggleTab, activeTab }: StepProps) => {
@@ -155,6 +165,13 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         ctx={values}
                         name="blood_donator"
                         label="Doador de sangue?"
+                        divClassName="col-span-1 mobile:col-span-full"
+                    />
+                    <ControlSwitch
+                        mode={mode}
+                        ctx={values}
+                        name="pedigree"
+                        label="Pedigree?"
                         divClassName="col-span-1 mobile:col-span-full"
                     />
                 </div>
