@@ -1,11 +1,48 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
+import cn from 'classnames'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { FaRegEdit } from 'react-icons/fa' // Ícone de Cadastro
 import { FiLogIn } from 'react-icons/fi' // Ícone de Login
 import { BtnLink } from '~/Components/atoms/btn'
+import useResizeMobile from '~/hooks/use-resize-mobile'
+
+export const ButtonsNavBar = () => {
+    const { isMobile } = useResizeMobile()
+    return (
+        <div className="z-50 flex gap-2">
+            <BtnLink
+                message="Entrar"
+                className={cn(
+                    'text-gray-500 hover:!bg-secondary-500 !border-secondary-500 border-0 ',
+                    {
+                        // 'border-2 border-solid w-40': !isMobile,
+                        'border-0': isMobile,
+                    },
+                )}
+                href="/sign-in"
+            >
+                <FiLogIn className="w-6 h-6" />
+            </BtnLink>
+            <BtnLink
+                message="Criar Conta"
+                className={cn(
+                    'border-primary-600 hover:!bg-secondary-500 border-0',
+                    {
+                        // 'border-2 border-solid w-40': !isMobile,
+                        'border-0 ': isMobile,
+                    },
+                )}
+                href="/sign-up"
+            >
+                {/* icon de cadastro */}
+                <FaRegEdit className="w-6 h-6" />
+            </BtnLink>
+        </div>
+    )
+}
 
 const NavbarLanding = () => {
     // const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -48,24 +85,8 @@ const NavbarLanding = () => {
                             alt="logo dark"
                         />
                     </Link>
+                    <ButtonsNavBar />
 
-                    <div className="z-50 flex gap-2">
-                        <BtnLink
-                            message="Entrar"
-                            className="text-gray-500 hover:!bg-secondary-500 !border-secondary-500 border w-40"
-                            href="/sign-in"
-                        >
-                            <FiLogIn className="w-8 h-8" />
-                        </BtnLink>
-                        <BtnLink
-                            message="Criar Conta"
-                            className="border-2 border-solid border-primary-600 hover:!bg-secondary-500 w-40"
-                            href="/sign-up"
-                        >
-                            {/* icon de cadastro */}
-                            <FaRegEdit />
-                        </BtnLink>
-                    </div>
                     {/* </Collapse> */}
                 </div>
             </nav>
