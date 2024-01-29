@@ -1,4 +1,4 @@
-import CardScheduled from '~/Components/organism/card-scheduled/card-scheduled'
+import CardMedicalRecord from '~/Components/organism/card-medical-record'
 import useListAppointmentsByPet from '~/store/hooks/list-appointments-by-pet'
 
 type HistoricPetProps = {
@@ -17,7 +17,7 @@ const HistoricPet = ({ id_pet }: HistoricPetProps) => {
     return (
         <section>
             {appointments?.map((appointment) => (
-                <CardScheduled key={appointment.id} appointment={appointment} />
+                <CardMedicalRecord key={appointment.id} appointment={appointment} />
             ))}
         </section>
     )

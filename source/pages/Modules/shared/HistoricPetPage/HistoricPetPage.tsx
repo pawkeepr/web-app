@@ -7,6 +7,7 @@ import CreateOrUpdatePetPage from '../NewPetPage/CreateOrUpdatePetPage'
 import SocialLinks from '../ProfilePage/components/SocialLinks'
 import UserProfileCard from '../ProfilePage/components/UserProfileCard'
 import HistoricPet from './components/template/HistoricPet'
+import MedicalRecords from './components/template/MedicalRecords'
 
 const Tabs = (document?: string, id_pet?: string) => [
     {
@@ -24,16 +25,8 @@ const Tabs = (document?: string, id_pet?: string) => [
     {
         id: 1,
         title: 'Prontuário',
-        disabled: true,
         href: '#chart',
-        tab: <HistoricPet document={document} id_pet={id_pet} />,
-    },
-    {
-        id: 1,
-        title: 'Arquivos',
-        disabled: true,
-        href: '#files',
-        tab: <HistoricPet document={document} id_pet={id_pet} />,
+        tab: <MedicalRecords document={document} id_pet={id_pet} />,
     },
 ]
 
