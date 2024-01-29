@@ -1,5 +1,6 @@
 // Import Images
 import Link from 'next/link'
+import { memo } from 'react'
 
 import { FaInstagram } from 'react-icons/fa'
 import { GrFacebookOption } from 'react-icons/gr'
@@ -63,4 +64,4 @@ const Footer = () => {
     )
 }
 
-export default Footer
+export default memo(Footer)
