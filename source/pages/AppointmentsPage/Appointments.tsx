@@ -102,14 +102,18 @@ const AppointmentsPage = ({
 }: AppointmentsPageProps) => {
     const router = useRouter()
 
-    const { data, isLoading: isLoadingPet, isError } = usePetById(document, pet)
+    const {
+        activeData,
+        isLoading: isLoadingPet,
+        isError,
+    } = usePetById(document, pet)
     const profile = useProfileVeterinary()
 
     const { handleSubmit } = useAppointment({})
 
     const values = useMemo(
-        () => initialValues(data as IPetV2, profile, appointment_id),
-        [data, profile, appointment_id],
+        () => initialValues(activeData as IPetV2, profile, appointment_id),
+        [activeData, profile, appointment_id],
     )
 
     useEffect(() => {
