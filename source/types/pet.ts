@@ -26,7 +26,7 @@ export type IPet = {
     organ_donor?: On_Off | null | boolean
     size?: string
     weight?: string
-    pedigree?: On_Off
+    pedigree?: On_Off | null | boolean
     pedigree_registry?: string
     ownerEmergencyContact: ITutor
     avatar?: string

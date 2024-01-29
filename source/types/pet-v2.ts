@@ -29,7 +29,7 @@ export interface PetData {
     color?: string | null
     size?: string | null
     weight?: string | null
-    pedigree?: On_Off | null
+    pedigree?: On_Off | null | boolean
     pedigree_registry?: string | null
 }
 

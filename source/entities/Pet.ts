@@ -182,7 +182,7 @@ export class Pet implements IPetV2 {
             .definePetInformation({
                 id_pet: params?.id as string,
                 blood_donator: params?.blood_donator || 'no',
-                blood_type: params?.bloodType || 'unknown',
+                blood_type: params?.blood_type || 'unknown',
                 color: params?.color || '',
                 date_birth: (params?.date_birth as string) || '',
                 microchip: params?.chip_number || '',

@@ -105,7 +105,11 @@ export class PetInformation implements PetData {
         return this
     }
 
-    definePedigree(pedigree: On_Off): PetInformation {
+    definePedigree(pedigree: On_Off | boolean): PetInformation {
+        if (typeof pedigree === 'boolean') {
+            this.pedigree = pedigree ? 'yes' : 'no'
+            return this
+        }
         this.pedigree = pedigree
         return this
     }

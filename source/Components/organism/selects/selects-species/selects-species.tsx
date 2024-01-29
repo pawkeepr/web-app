@@ -9,7 +9,7 @@ import { useSpecies } from '../use-species'
 
 type AuxSpeciesFormikProps = Pick<
     IPet,
-    'id' | 'sex' | 'race' | 'specie' | 'bloodType'
+    'id' | 'sex' | 'race' | 'specie' | 'blood_type'
 >
 
 const SelectsSpecies = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => {
