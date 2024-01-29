@@ -1,16 +1,16 @@
 import LayoutAuth from '~/Layouts/LayoutAuth'
 import getServerSidePropsPagesPublics from '~/helpers/get-server-side-props-pages-publics'
 
-import ForgetPasswordPage from '~/pages/Authentication/ForgotPassword'
+import ForgotPasswordPage from '~/pages/Modules/shared/Authentication/ForgotPassword'
 
-const ForgetPasswordPageNext = () => {
+const ForgotPasswordPageNext = () => {
     return (
         <LayoutAuth>
-            <ForgetPasswordPage />
+            <ForgotPasswordPage />
         </LayoutAuth>
     )
 }
 
-export default ForgetPasswordPageNext
+export default ForgotPasswordPageNext
 
 export const getServerSideProps = getServerSidePropsPagesPublics()

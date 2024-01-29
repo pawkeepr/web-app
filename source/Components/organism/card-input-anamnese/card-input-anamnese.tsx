@@ -7,10 +7,14 @@ import FieldNumber from '~/Components/molecules/field-number'
 import type { KeyOfQuestionTypes, Question } from '~/constants/anamnese-questions'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import useResizeMobile from '~/hooks/use-resize-mobile'
-import type { CtxStepAnamnese } from '~/pages/AppointmentsPage/components/validations.yup'
-import type { QuestionAnamnesis } from '~/types/appointment'
+import type { QuestionAnamnesis, VeterinaryConsultation } from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
 import QuestionsAnamnese from './questions-anamnese'
+
+export type CtxStepAnamnese = Pick<
+    VeterinaryConsultation,
+    'anamnesis' | 'details_pet_consultation'
+>
 
 const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionAnamnesis>>({
     name_anamnesis: Yup.string().optional(),

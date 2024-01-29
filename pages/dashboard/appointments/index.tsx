@@ -1,6 +1,6 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import LayoutMain from '~/Layouts'
-import AppointmentsPage from '~/pages/AppointmentsPage/Appointments'
+import AppointmentsPage from '~/pages/Modules/veterinary/AppointmentsPage/Appointments'
 
 const AppointmentsNext = () => {
     const search = useSearchParams()

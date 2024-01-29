@@ -1,5 +1,5 @@
 import LayoutAuth from '~/Layouts/LayoutAuth'
-import ConfirmationExternalPage from '~/pages/ConfirmationExternalPage'
+import ConfirmationExternalPage from '~/pages/Modules/shared/ConfirmationExternalPage'
 
 const Confirmation = () => {
     return (

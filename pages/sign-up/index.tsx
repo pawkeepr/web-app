@@ -1,6 +1,6 @@
 import LayoutAuth from '~/Layouts/LayoutAuth'
 import getServerSidePropsPagesPublics from '~/helpers/get-server-side-props-pages-publics'
-import SignUpPage from '~/pages/Authentication/SignUp'
+import SignUpPage from '~/pages/Modules/shared/Authentication/SignUp'
 
 const SignUpPageNext = () => {
     return (

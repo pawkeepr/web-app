@@ -1,5 +1,5 @@
 import LayoutMain from '~/Layouts'
-import ProfilePage from '~/pages/ProfilePage'
+import ProfilePage from '~/pages/Modules/shared/ProfilePage'
 
 const Profile = () => {
     return (

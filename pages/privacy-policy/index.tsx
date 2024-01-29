@@ -1,6 +1,6 @@
 import NavbarServiceTerms from '~/Components/molecules/nav-bar-service-terms'
-import PrivacyPolicy from '~/pages/PrivacyPolicy'
-import LandingLayout from '~/pages/_layouts/landing/landing'
+import LandingLayout from '~/pages/Modules/_layouts/landing/landing'
+import PrivacyPolicy from '~/pages/Modules/veterinary/PrivacyPolicy'
 
 const ServiceTerms = () => {
     return (

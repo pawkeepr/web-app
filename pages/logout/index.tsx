@@ -1,7 +1,7 @@
 import type { GetServerSidePropsContext } from 'next'
 import LayoutAuth from '~/Layouts/LayoutAuth'
 import optionsCookies from '~/constants/cookies'
-import LogoutPage from '~/pages/Authentication/LogoutPage'
+import LogoutPage from '~/pages/Modules/shared/Authentication/LogoutPage'
 import { removeCookie } from '~/utils/cookies-utils'
 
 const LogoutNextPage = () => {

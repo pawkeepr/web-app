@@ -1,5 +1,5 @@
-import LadingPage from '~/pages/LandingPage'
-import LandingLayout from '~/pages/_layouts/landing/landing'
+import LandingLayout from '~/pages/Modules/_layouts/landing/landing'
+import LadingPage from '~/pages/Modules/veterinary/LandingPage'
 
 const LadingPageNext = () => {
     return (
