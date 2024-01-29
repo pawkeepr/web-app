@@ -9,7 +9,7 @@ import { useCallback, useMemo, useTransition } from 'react'
 import type { IAddress } from '~/helpers/fetch-address-by-cep'
 import useFetchAddress from '~/hooks/use-fetch-address'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import type { InitialValues } from '~/pages/NewPetPage'
+import type { InitialValues } from '~/pages/Modules/shared/NewPetPage'
 
 type CtxAddress = Pick<InitialValues, 'ownerEmergencyContact'>
 
@@ -19,7 +19,8 @@ type StepTutorProps = {
 }
 
 const AddressTutor = ({ mode = ModeInput.editable }: StepTutorProps) => {
-    const { values, setFieldValue } = useFormikContextSafe<CtxAddress>()
+    const { values, setFieldValue, initialValues } =
+        useFormikContextSafe<CtxAddress>()
 
     const [isPending, startTransition] = useTransition()
 
@@ -59,6 +60,7 @@ const AddressTutor = ({ mode = ModeInput.editable }: StepTutorProps) => {
     const { loading } = useFetchAddress({
         onChangeAddress: updateAddressFields,
         zipCode: values.ownerEmergencyContact?.address?.zipCode || '',
+        initialValue: initialValues.ownerEmergencyContact?.address?.zipCode || '',
     })
 
     const isLoading = useMemo(() => isPending || loading, [isPending, loading])

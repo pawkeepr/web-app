@@ -1,17 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
-import { IAddress, fetchAddressByCep } from '~/helpers/fetch-address-by-cep'
+import { fetchAddressByCep, type IAddress } from '~/helpers/fetch-address-by-cep'
 
 type TUseFetchCep = {
     zipCode: string
     onChangeAddress: (address: IAddress) => void
+    initialValue?: string
 }
 
-const useFetchAddress = ({ zipCode, onChangeAddress }: TUseFetchCep) => {
-    const [cepInvalid, setCepInvalid] = useState(false)
+const useFetchAddress = ({
+    zipCode,
+    onChangeAddress,
+    initialValue,
+}: TUseFetchCep) => {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        if (initialValue === zipCode) return
+
         if (zipCode.replace(/\D/g, '').length === 8) {
             setLoading(true)
             fetchAddressByCep(zipCode)
@@ -31,7 +37,7 @@ const useFetchAddress = ({ zipCode, onChangeAddress }: TUseFetchCep) => {
         }
     }, [zipCode])
 
-    return { cepInvalid, loading }
+    return { loading }
 }
 
 export default useFetchAddress
