@@ -1,57 +1,57 @@
-import ArrowLeftCircleIcon from '@heroicons/react/20/solid/ArrowLeftCircleIcon'
-import HistoricIcon from '@heroicons/react/24/solid/ArchiveBoxXMarkIcon'
-import DashboardIcon from '@heroicons/react/24/solid/HomeIcon'
-import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
-import Image from 'next/image'
-import { MdPets } from 'react-icons/md'
-import { layoutModeTypes } from '~/constants/layout'
-import useChangeLayoutMode from '~/hooks/use-change-layout-mode'
+import ArrowLeftCircleIcon from "@heroicons/react/20/solid/ArrowLeftCircleIcon";
+import HistoricIcon from "@heroicons/react/24/solid/ArchiveBoxXMarkIcon";
+import DashboardIcon from "@heroicons/react/24/solid/HomeIcon";
+import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
+import Image from "next/image";
+import { MdPets } from "react-icons/md";
+import { layoutModeTypes } from "~/constants/layout";
+import useChangeLayoutMode from "~/hooks/use-change-layout-mode";
 
-import darkLogo from '../../../../public/logo-dark.png'
-import lightLogo from '../../../../public/logo-light.png'
+import darkLogo from "../../../../public/logo-dark.png";
+import lightLogo from "../../../../public/logo-light.png";
 
-import { button } from '~/Components/atoms/btn'
+import { button } from "~/Components/atoms/btn";
 
-import { UserCircleIcon } from '@heroicons/react/24/solid'
-import cn from 'classnames'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { memo, useMemo } from 'react'
-import { twMerge } from 'tailwind-merge'
-import MyImage from '~/Components/atoms/my-image'
-import useResizeMobile from '~/hooks/use-resize-mobile'
-import useProfile from '~/store/hooks/profile/use-profile'
+import { UserCircleIcon } from "@heroicons/react/24/solid";
+import cn from "classnames";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { memo, useMemo } from "react";
+import { twMerge } from "tailwind-merge";
+import MyImage from "~/Components/atoms/my-image";
+import useResizeMobile from "~/hooks/use-resize-mobile";
+import useProfile from "~/store/hooks/profile/use-profile";
 
 type DrawerProps = {
-    closeDrawer: () => void
-    visibleDrawer: boolean
-    drawerWidth?: number
-}
+    closeDrawer: () => void;
+    visibleDrawer: boolean;
+    drawerWidth?: number;
+};
 
 type Item = {
-    name: string
-    visible: boolean
-    icon: React.ReactNode
-    href: string
-    disabled?: boolean
-}
+    name: string;
+    visible: boolean;
+    icon: React.ReactNode;
+    href: string;
+    disabled?: boolean;
+};
 
 const items: Item[] = [
     {
-        name: 'Perfil',
+        name: "Perfil",
         visible: false,
         disabled: true,
         icon: <UserCircleIcon className="w-5 h-5" />,
-        href: '/profile',
+        href: "/profile",
     },
     {
-        name: 'Consultas',
+        name: "Consultas",
         visible: true,
         icon: <DashboardIcon className="w-5 h-5" />,
-        href: '/dashboard',
+        href: "/dashboard",
     },
     {
-        name: 'Pets / Tutores',
+        name: "Pets / Tutores",
         visible: true,
         icon: (
             <div className="flex justify-start">
@@ -59,37 +59,37 @@ const items: Item[] = [
             </div>
         ),
 
-        href: '/dashboard/pets-and-tutors',
+        href: "/dashboard/pets-and-tutors",
     },
     {
-        name: 'Histórico',
+        name: "Histórico",
         visible: true,
         icon: <HistoricIcon className="w-5 h-5" />,
-        href: '/dashboard/historic',
+        href: "/dashboard/historic",
     },
-]
+];
 
 const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
-    const pathname = usePathname()
-    const { mode } = useChangeLayoutMode()
-    const isLightMode = mode === layoutModeTypes.LIGHT_MODE
-    const { isMobile } = useResizeMobile()
-    const { data: profile } = useProfile()
+    const pathname = usePathname();
+    const { mode } = useChangeLayoutMode();
+    const isLightMode = mode === layoutModeTypes.LIGHT_MODE;
+    const { isMobile } = useResizeMobile();
+    const { data: profile } = useProfile();
     const buttonStyled = twMerge(
         button({ link: true }),
-        'flex justify-start items-center',
-        'px-4 py-2 w-full mt-4',
-        'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-600',
-        'hover:bg-gray-200 dark:hover:bg-dark-600 rounded-none',
-    )
+        "flex justify-start items-center",
+        "px-4 py-2 w-full mt-4",
+        "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-600",
+        "hover:bg-gray-200 dark:hover:bg-dark-600 rounded-none"
+    );
 
     const options = useMemo(
         () =>
             items.filter((item) => {
-                return isMobile || item.visible
+                return isMobile || item.visible;
             }),
-        [isMobile],
-    )
+        [isMobile]
+    );
 
     return (
         <div
@@ -106,9 +106,9 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                 overflow-x-hidden
             `,
                 {
-                    '-translate-x-full': !visibleDrawer,
-                    'translate-x-0': visibleDrawer,
-                },
+                    "-translate-x-full": !visibleDrawer,
+                    "translate-x-0": visibleDrawer,
+                }
             )}
         >
             <div className="flex justify-between px-4">
@@ -132,7 +132,7 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                     <div className="flex flex-1 self-center items-center justify-center">
                         <MyImage
                             className="rounded-full self-center"
-                            src={profile?.user_information?.url_img || ''}
+                            src={profile?.user_information?.url_img || ""}
                             alt="Header Avatar"
                             height={120}
                             width={120}
@@ -150,17 +150,20 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                         <Link
                             key={index.toString()}
                             className={cn(buttonStyled, {
-                                'bg-gray-200 dark:bg-dark-600':
+                                "bg-gray-200 dark:bg-dark-600":
                                     pathname === item.href,
-                                '!text-gray-400 hover:text-gray-400': item.disabled,
-                                'hover:bg-transparent hover:cursor-default':
+                                "!text-gray-400 hover:text-gray-400":
+                                    item.disabled,
+                                "hover:bg-transparent hover:cursor-default":
                                     item.disabled,
                             })}
-                            href={item.disabled ? '#' : item.href}
+                            href={item.disabled ? "#" : item.href}
                         >
                             {item.icon}
 
-                            <span className="mx-4 font-medium">{item.name}</span>
+                            <span className="mx-4 font-medium">
+                                {item.name}
+                            </span>
                         </Link>
                     ))}
                     {isMobile && (
@@ -177,7 +180,7 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
                 </nav>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default memo(Drawer)
+export default memo(Drawer);
