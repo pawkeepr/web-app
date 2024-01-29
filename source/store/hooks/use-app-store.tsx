@@ -66,9 +66,12 @@ const useAppStore = <T, G = unknown>({
     }
 
     const onSettled = async () => {
-        await queryClient?.invalidateQueries({
+        await queryClient.invalidateQueries({
             predicate: (query) => {
-                return query?.queryKey?.includes(name)
+                return keys.reduce(
+                    (acc, key) => acc || query.queryKey.includes(key),
+                    false,
+                )
             },
         })
     }
