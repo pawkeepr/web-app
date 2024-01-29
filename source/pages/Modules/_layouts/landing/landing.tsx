@@ -63,7 +63,7 @@ const LandingLayout = ({
                 <Teams />
                 <FAQ />
                 <Contact /> */}
-                <Footer />
+                <Footer bg="primary" />
             </div>
             <button
                 type="button"
