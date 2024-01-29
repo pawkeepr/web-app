@@ -16,6 +16,7 @@ import {
     type IDateConsult,
 } from '~/services/helpers'
 import type { VeterinaryConsultation } from '~/types/appointment'
+import { NAME } from '../appointment'
 import useAppStore, { type FAxiosPost, type FAxiosUpdate } from '../use-app-store'
 
 type AppointmentStrategy =
@@ -78,15 +79,13 @@ type UseAppointmentProps = {
     handleClose?: () => void
 }
 
-const name = 'appointment'
-
 export const useListAppointmentsByPet = ({
     mode,
     handleClose: handleCloseModal,
 }: UseAppointmentProps) => {
     if (!mode) throw new Error('Mode is required')
 
-    const keys = [name, nameStrategy.get(mode) as string]
+    const keys = [NAME, nameStrategy.get(mode) as string]
     const get = getStrategy.get(mode) as FGetAxios<VeterinaryConsultation[]>
     const update = updateStrategy.get(mode) as FAxiosUpdate<IDateConsult>
     const add = createStrategy.get(mode) as unknown as FAxiosPost<IDateConsult>
@@ -102,7 +101,7 @@ export const useListAppointmentsByPet = ({
         handleCloseModal,
         entity,
         keys,
-        name,
+        name: NAME,
         initialData: [],
     })
 }

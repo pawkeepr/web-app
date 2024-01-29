@@ -7,7 +7,7 @@ import {
 import type { VeterinaryConsultation } from '~/types/appointment'
 import useAppStore from '../use-app-store'
 
-export const NAME = 'appointments-vet'
+export const NAME = 'appointment'
 
 type IHookUseAppointment = {
     id?: string
