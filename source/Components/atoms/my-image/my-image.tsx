@@ -15,22 +15,26 @@ const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
+    const isPublicImage = typeof src === 'string' && src.startsWith('/')
+
     return (
         <>
             <Image
                 {...rest}
                 src={src}
-                onLoad={() => setLoading(true)}
                 onError={() => setError(true)}
+                onLoadedData={() => setLoading(false)}
                 onLoadingComplete={() => setLoading(false)}
+                onLoadStart={() => setLoading(true)}
                 alt={alt}
                 className={className}
                 style={{
-                    display: error || loading ? 'none' : 'block',
+                    display:
+                        !isPublicImage && (error || loading) ? 'none' : 'block',
                     ...style,
                 }}
             />
-            {(error || loading) && (
+            {!isPublicImage && (error || loading) && (
                 <Image
                     {...rest}
                     src={user}
