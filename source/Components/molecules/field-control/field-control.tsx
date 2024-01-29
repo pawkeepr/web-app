@@ -34,7 +34,7 @@ const fieldControlInput = tv({
         mode: {
             editable: '',
             readonly:
-                'bg-transparent !border-none !pointer-events-none !focus:outline-none text-gray-900 font-sans',
+                'bg-transparent !border-none !pointer-events-none !focus:outline-none !text-gray-900 font-sans',
         },
         text_align: {
             center: 'text-center',

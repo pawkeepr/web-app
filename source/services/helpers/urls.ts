@@ -25,6 +25,8 @@ export const TUTOR_UPDATE_PROFILE = () => '/api-user-tutor/update-user-tutor'
 // Pet
 
 export const PET_FETCH_ALL = () => '/api-pet/fetch-all-pets-tutor'
+export const PET_FETCH_ALL_APPOINTMENTS_DONE = () =>
+    '/api-pet/fetch-all-appointment-done-pet'
 export const PET_CREATE_PROFILE = () => '/api-pet/create-pet'
 export const PET_CREATE_SIMPLIFIED_PROFILE = () => '/api-pet/create-pet-simplified'
 export const PET_GET_PROFILE = () => '/api-pet/search-pet'

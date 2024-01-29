@@ -1,7 +1,7 @@
 import { RadioGroup } from '@headlessui/react'
 import CardPets from '~/Components/organism/card-pets'
 import ListTab from '~/Components/templates/ListTab'
-import useListPets from '~/store/hooks/pets/use-list-pets'
+import useListPets from '~/store/hooks/list-pets-by-clinic/use-list-pets'
 import type { IPetV2Data } from '~/types/pet-v2'
 
 const PetsTab = () => {

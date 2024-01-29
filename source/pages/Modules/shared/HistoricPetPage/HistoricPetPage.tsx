@@ -1,5 +1,5 @@
 import HorizontalTabs from '~/Components/organism/horizontal-list'
-import usePetById from '~/store/hooks/pet/use-pets'
+import usePetById from '~/store/hooks/pet-by-id/use-pets'
 import { GenderBR } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import DefaultLayout from '../../_layouts/dashboard/dashboard'

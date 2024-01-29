@@ -27,7 +27,7 @@ const control = tv({
         mode: {
             editable: '',
             readonly:
-                'bg-transparent !border-none !pointer-events-none !focus:outline-none !text-gray-900',
+                'bg-transparent !border-none !pointer-events-none !focus:outline-none !text-dark-900',
         },
     },
 })
