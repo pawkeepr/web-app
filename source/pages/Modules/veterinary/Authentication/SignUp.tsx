@@ -56,7 +56,7 @@ const initialValues: AccountSignUp = {
     password: '',
     passwordConfirm: '',
     termsOfUse: false,
-    policyPrivacy: false,
+    privacyPolicy: false,
 }
 
 const CoverSignUp = () => {
@@ -100,6 +100,7 @@ const CoverSignUp = () => {
                             </p>
                         </div>
                         <FieldControl
+                            ctx={values}
                             label="Email"
                             initialFocus
                             name="email"
@@ -112,6 +113,7 @@ const CoverSignUp = () => {
                         />
                         <div className="grid grid-cols-2 mobile:grid-cols-1 gap-2">
                             <FieldPassword
+                                ctx={values}
                                 required
                                 label="Senha"
                                 name="password"
@@ -121,6 +123,7 @@ const CoverSignUp = () => {
                             />
 
                             <FieldPassword
+                                ctx={values}
                                 required
                                 label="Repita a senha"
                                 name="passwordConfirm"
@@ -132,7 +135,7 @@ const CoverSignUp = () => {
 
                         <PasswordRules value={values.password} />
                         <div className="flex flex-col justify-start items-start">
-                            <FieldCheckbox name="termsOfUse">
+                            <FieldCheckbox ctx={values} name="termsOfUse">
                                 <p className="italic text-xs text-justify">
                                     {
                                         'Você se registrando aceita os termos de uso da plataforma: '
@@ -145,7 +148,7 @@ const CoverSignUp = () => {
                                     </Link>
                                 </p>
                             </FieldCheckbox>
-                            <FieldCheckbox name="privacyPolicy">
+                            <FieldCheckbox ctx={values} name="privacyPolicy">
                                 <p className="italic text-xs text-justify">
                                     {
                                         'Você se registrando aceita a política de privacidade da plataforma: '

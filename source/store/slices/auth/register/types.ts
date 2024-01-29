@@ -1,4 +1,4 @@
-import LOADING from '~/constants/loading'
+import type LOADING from '~/constants/loading'
 
 export const name = 'account'
 
@@ -14,5 +14,5 @@ export type AccountSignUp = {
     password: string
     passwordConfirm: string
     termsOfUse: boolean
-    policyPrivacy: boolean
+    privacyPolicy: boolean
 }

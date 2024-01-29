@@ -7,11 +7,11 @@ import FieldControl, {
     type InputControlProps,
 } from '~/Components/molecules/field-control'
 
-const InputPassword = <T,>({
+const InputPassword = <T, Ctx = undefined>({
     name = 'password',
     label = 'Senha',
     ...rest
-}: InputControlProps<T>) => {
+}: InputControlProps<T, Ctx>) => {
     const [visiblePassword, setVisiblePassword] = useState(false)
 
     return (
