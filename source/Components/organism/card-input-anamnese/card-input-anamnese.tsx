@@ -97,7 +97,8 @@ const makeTitle = (title: string, isMobile: boolean) => {
 const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
     const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>()
 
-    const [category, setCategory] = useState<KeyOfQuestionTypes>('digestive_system')
+    const [category, setCategory] =
+        useState<KeyOfQuestionTypes>('general_information')
     const { isMobile } = useResizeMobile()
 
     const filtered = useMemo(() => {
