@@ -41,7 +41,7 @@ export class Appointments implements VeterinaryConsultation {
                 identification_number: '',
                 microchip: '',
                 name_pet: '',
-                organ_donor: '',
+                organ_donor: null,
                 pedigree: 'no',
                 pedigree_registry: '',
                 race: 'unknown',
@@ -51,7 +51,7 @@ export class Appointments implements VeterinaryConsultation {
                 weight: '',
             },
             tutor: {
-                cpf_tutor: '',
+                cpf_cnpj: '',
                 address: {
                     city: '',
                     complement: '',
@@ -78,6 +78,7 @@ export class Appointments implements VeterinaryConsultation {
                 url_img: '',
             },
             veterinary: {
+                type_profile: 1,
                 crmv: '',
                 cpf_cnpj: '',
                 specialty: '',
@@ -109,7 +110,9 @@ export class Appointments implements VeterinaryConsultation {
         this.appointment_details = {
             appointment_geolocation: {} as IGeolocationAppointment,
             appointment_signature: {} as ISignatureAppointment,
-            payment: {} as IPayment,
+            payment: {
+                number_installments: '0',
+            } as IPayment,
         }
     }
 
@@ -131,7 +134,11 @@ export class Appointments implements VeterinaryConsultation {
     }
 
     definePayment(payment: IPayment): this {
+        const formPayment = payment?.form_payment
         this.appointment_details.payment = payment
+        if (formPayment !== 'credit_card') {
+            this.appointment_details.payment.number_installments = '1'
+        }
         return this
     }
 

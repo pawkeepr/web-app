@@ -31,7 +31,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
     }))
 
     useEffect(() => {
-        if (form_payment !== 'credit') {
+        if (form_payment !== 'credit_card') {
             setFieldValue(
                 'appointment_details.payment.number_installments',
                 options,
@@ -56,14 +56,14 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     checked={form_payment}
                     items={[
                         {
-                            id: 'credit',
+                            id: 'credit_card',
                             name: 'Cartão de Crédito',
-                            value: 'credit',
+                            value: 'credit_card',
                         },
                         {
-                            id: 'debit',
+                            id: 'debit_card',
                             name: 'Cartão de Débito',
-                            value: 'debit',
+                            value: 'debit_card',
                         },
                         {
                             id: 'pix',
@@ -75,6 +75,11 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                             name: 'Dinheiro',
                             value: 'cash',
                         },
+                        {
+                            id: 'transfer',
+                            name: 'Transferência',
+                            value: 'transfer',
+                        },
                     ]}
                 />
                 <FieldControlSelect
@@ -83,7 +88,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     placeholder="Selecione a quantidade de parcelas"
                     name="appointment_details.payment.number_installments"
                     options={options}
-                    isDisabled={form_payment !== 'credit'}
+                    isDisabled={form_payment !== 'credit_card'}
                 />
                 <FieldNumber
                     ctx={values}

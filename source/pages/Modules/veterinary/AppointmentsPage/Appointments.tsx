@@ -76,7 +76,7 @@ const initialValues = (
             coin: '',
             date_payment: '',
             form_payment: 'unknown',
-            number_installments: '',
+            number_installments: '1',
             status_payment: '',
             value_payment: '0',
         },
@@ -140,8 +140,9 @@ const AppointmentsPage = ({
                         appointment_signature,
                     },
                 } as VeterinaryConsultation)
-            } catch {
                 router.push('/dashboard')
+            } catch (err) {
+                console.log('🚀 ~ err:', err)
             }
         },
         [handleSubmit, veterinary],

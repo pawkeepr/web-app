@@ -109,8 +109,17 @@ export interface AppointmentDetails {
     appointment_geolocation: IGeolocationAppointment
 }
 
+export const PaymentForm = {
+    credit_card: 'credit_card',
+    debit_card: 'debit_card',
+    cash: 'cash',
+    pix: 'pix',
+    transfer: 'transfer',
+} as const
+export type PaymentForm = (typeof PaymentForm)[keyof typeof PaymentForm]
+
 export interface IPayment {
-    form_payment: string
+    form_payment: PaymentForm
     value_payment: string
     coin: string
     number_installments: string
