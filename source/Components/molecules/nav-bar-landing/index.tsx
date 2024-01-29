@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
+import { UserPlusIcon } from '@heroicons/react/24/solid'
 import cn from 'classnames'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { FaRegEdit } from 'react-icons/fa' // Ícone de Cadastro
 import { FiLogIn } from 'react-icons/fi' // Ícone de Login
 import { BtnLink } from '~/Components/atoms/btn'
 import useResizeMobile from '~/hooks/use-resize-mobile'
@@ -38,7 +38,7 @@ export const ButtonsNavBar = () => {
                 href="/sign-up"
             >
                 {/* icon de cadastro */}
-                <FaRegEdit className="w-6 h-6" />
+                <UserPlusIcon className="w-6 h-6" />
             </BtnLink>
         </div>
     )
