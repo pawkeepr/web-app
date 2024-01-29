@@ -54,7 +54,7 @@ const option = tv({
 
 const Select = ({
     isSearchable = true,
-    mode = 'readonly',
+    mode = 'editable',
     ...props
 }: SelectProps) => {
     return (
