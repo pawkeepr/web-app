@@ -7,7 +7,7 @@ import { useSpecies } from '../use-species'
 
 type AuxSpeciesFormikProps = Pick<
     IPet,
-    'id' | 'sex' | 'race' | 'specie' | 'bloodType'
+    'id' | 'sex' | 'race' | 'specie' | 'blood_type'
 >
 
 const SelectsBlood = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => {
@@ -18,7 +18,7 @@ const SelectsBlood = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => 
 
     useEffect(() => {
         if (firstLoad) return setFirstLoad(false)
-        setFieldValue('bloodType', null, true)
+        setFieldValue('blood_type', null, true)
     }, [specie])
 
     return (
@@ -26,8 +26,8 @@ const SelectsBlood = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => 
             {...props}
             label="Tipo de sanguíneo"
             ctx={values}
-            isDisabled={!!values.id && !!initialValues.bloodType}
-            name="bloodType"
+            isDisabled={!!values.id && !!initialValues.blood_type}
+            name="blood_type"
             options={specie.bloodType}
             error={props.error && !firstLoad}
         />
