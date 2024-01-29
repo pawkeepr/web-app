@@ -4,7 +4,7 @@ import FieldControl from '~/Components/molecules/field-control'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { InitialValues } from '~/pages/NewPetPage'
 import type { StepProps, Tabs } from '~/types/helpers'
-import { useModeEditablePet } from '../../use-zustand-hook'
+import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
 
 type StepHealthInsuranceKeys = Pick<InitialValues, 'health_insurance' | 'id'>
 

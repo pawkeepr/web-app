@@ -17,7 +17,8 @@ import type { IPet } from '~/types/pet'
 import type { IPetV2 } from '~/types/pet-v2'
 import type { Location } from '~/types/profile'
 import type { Gender, Species } from '~/types/speciesType'
-import { useModeEditablePet } from './use-zustand-hook'
+import { useModeEditablePet } from './components/hooks/use-mode-editable-pet'
+
 export type InitialValues = Nullable<IPet>
 
 type MakeInitialValuesProps = {
@@ -53,6 +54,8 @@ export const makeInitialValues: MakeInitialValues = ({
         blood_type: (pet_information?.blood_type as BloodType) || 'unknown',
         castrated: pet_information?.castrated === 'yes',
         identification_number: pet_information?.identification_number || '',
+        pedigree: pet_information?.pedigree === 'yes',
+        pedigree_registry: pet_information?.pedigree_registry || '',
         microchip: pet_information?.microchip || '',
         name_pet: pet_information?.name_pet || '',
         organ_donor: pet_information?.organ_donor === 'yes',

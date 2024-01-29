@@ -13,7 +13,7 @@ import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { RecordsShapeYup, StepProps, Tabs } from '~/types/helpers'
 import { genderValues } from '~/types/sexType'
 import type { InitialValues } from '../../index'
-import { useModeEditablePet } from '../../use-zustand-hook'
+import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
 
 type KeysInitial =
     | 'name'

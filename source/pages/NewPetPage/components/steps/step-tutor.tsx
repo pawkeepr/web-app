@@ -12,7 +12,7 @@ import AddressTutor from '../molecules/address-tutor.tsx'
 import { useMemo } from 'react'
 import * as yup from 'yup'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { useModeEditablePet } from '../../use-zustand-hook'
+import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
 
 type StepTutorsKeys = Pick<InitialValues, 'ownerEmergencyContact' | 'cpf_cnpj'>
 

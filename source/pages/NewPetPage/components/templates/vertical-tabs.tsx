@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { StepProps } from '~/types/helpers'
-import { useModeEditablePet } from '../../use-zustand-hook'
+import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
 import { StepHealthInsurance, StepPet, StepTutor } from '../steps'
 
 type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
