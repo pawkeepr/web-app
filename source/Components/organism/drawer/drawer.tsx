@@ -16,7 +16,7 @@ import { UserCircleIcon } from '@heroicons/react/24/solid'
 import cn from 'classnames'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import MyImage from '~/Components/atoms/my-image'
 import useResizeMobile from '~/hooks/use-resize-mobile'
@@ -180,4 +180,4 @@ const Drawer = ({ closeDrawer, visibleDrawer }: DrawerProps) => {
     )
 }
 
-export default Drawer
+export default memo(Drawer)
