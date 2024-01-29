@@ -11,6 +11,7 @@ import { ModeInput } from '~/Components/molecules/field-control/field-control'
 import type { Veterinary } from '~/entities/Veterinary'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import usePetById from '~/store/hooks/pet/use-pets'
+import type { BloodType } from '~/types/bloodType'
 import type { Breed } from '~/types/breedType'
 import type { IPet } from '~/types/pet'
 import type { IPetV2 } from '~/types/pet-v2'
@@ -44,45 +45,47 @@ export const makeInitialValues: MakeInitialValues = ({
     pet_information = null,
     first_name = null,
     last_name = null,
-}) => ({
-    id: id_pet || pet_information?.id_pet || null,
-    cpf_tutor,
-    blood_donator: pet_information?.blood_donator === 'yes',
-    blood_type: pet_information?.blood_type || 'unknown',
-    castrated: pet_information?.castrated === 'yes',
-    identification_number: pet_information?.identification_number || '',
-    microchip: pet_information?.microchip || '',
-    name_pet: pet_information?.name_pet || '',
-    organ_donor: pet_information?.organ_donor === 'yes',
-    race: (pet_information?.race as Breed) || 'unknown',
-    sex: (pet_information?.sex as Gender) || 'unknown',
-    specie: (pet_information?.specie as Species) || 'unknown',
-    date_birth: pet_information?.date_birth || null,
-    cpf_cnpj: cpf_tutor,
-    phone_tutor: phone,
-    ownerEmergencyContact: {
+}) => {
+    return {
+        id: id_pet || pet_information?.id_pet || null,
+        cpf_tutor,
+        blood_donator: pet_information?.blood_donator === 'yes',
+        blood_type: (pet_information?.blood_type as BloodType) || 'unknown',
+        castrated: pet_information?.castrated === 'yes',
+        identification_number: pet_information?.identification_number || '',
+        microchip: pet_information?.microchip || '',
+        name_pet: pet_information?.name_pet || '',
+        organ_donor: pet_information?.organ_donor === 'yes',
+        race: (pet_information?.race as Breed) || 'unknown',
+        sex: (pet_information?.sex as Gender) || 'unknown',
+        specie: (pet_information?.specie as Species) || 'unknown',
+        date_birth: pet_information?.date_birth || null,
         cpf_cnpj: cpf_tutor,
-        email: email || '',
-        phone: phone || '',
-        whatsapp: whatsapp || phone || '',
-        last_name: last_name || '',
-        address: {
-            city: address?.city || '',
-            complement: address?.complement || '',
-            country: address?.country || '',
-            neighborhood: address?.neighborhood || '',
-            number: address?.number || '',
-            state: address?.state || '',
-            street: address?.street || '',
-            zipCode: address?.zipCode || '',
+        phone_tutor: phone,
+        ownerEmergencyContact: {
+            cpf_cnpj: cpf_tutor,
+            email: email || '',
+            phone: phone || '',
+            whatsapp: whatsapp || phone || '',
+            last_name: last_name || '',
+            address: {
+                city: address?.city || '',
+                complement: address?.complement || '',
+                country: address?.country || '',
+                neighborhood: address?.neighborhood || '',
+                number: address?.number || '',
+                state: address?.state || '',
+                street: address?.street || '',
+                zipCode: address?.zipCode || '',
+            },
+            avatar: '',
+            id: '',
+            first_name: first_name || '',
         },
-        avatar: '',
-        id: '',
-        first_name: first_name || '',
-    },
-    name: pet_information?.name_pet || '',
-    veterinary,
-})
+        name: pet_information?.name_pet || '',
+        veterinary,
+    }
+}
 
 type CreateOrUpdatePetPageProps = {
     document?: string
@@ -98,9 +101,11 @@ const CreateOrUpdatePetPage = ({
         isLoading,
         handleSubmit,
     } = usePetById(document as string, id_pet as string)
+
     const pathname = usePathname()
     const veterinary = useProfileVeterinary()
     const router = useRouter()
+
     const initialValues = useMemo(() => {
         return makeInitialValues({
             id_pet,
@@ -115,6 +120,7 @@ const CreateOrUpdatePetPage = ({
             last_name: pet?.main_responsible_guardian?.last_name as string,
         })
     }, [pet, document, veterinary, id_pet]) as IPet
+
     const { mode, onChangeMode } = useModeEditablePet()
     const onSubmit = useCallback(
         async (values: IPet) => {
