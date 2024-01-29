@@ -53,7 +53,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
 
     const { cepInvalid, loading } = useFetchAddress({
         onChangeAddress: updateAddressFields,
-        zipCode,
+        zipCode: zipCode as string,
     })
 
     const requiredValid = useMemo((): boolean => {

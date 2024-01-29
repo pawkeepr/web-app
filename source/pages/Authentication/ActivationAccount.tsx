@@ -23,7 +23,7 @@ import { BtnLink } from '~/Components/atoms/btn'
 
 import { layoutModeTypes } from '~/constants/layout'
 import type { ActivateAccountVeterinary } from '~/types/activate-account-veterinary'
-import type { Location } from '~/types/profile'
+import { TypeProfile, type Location } from '~/types/profile'
 import StepActivationAddress from './components/organism/steps-activation/step-address'
 import StepActivationFinally from './components/organism/steps-activation/step-finally'
 import StepActivationPerson from './components/organism/steps-activation/step-person'
@@ -90,6 +90,7 @@ const ActivationAccount = () => {
 
         const profile: ActivateAccountVeterinary = {
             user_information: {
+                type_profile: TypeProfile.VETERINARY,
                 cpf_cnpj: values?.cpf_cnpj,
                 address: { ...(values?.location as Location) },
                 first_name: values?.firstName,
