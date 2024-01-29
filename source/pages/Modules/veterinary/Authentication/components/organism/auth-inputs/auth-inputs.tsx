@@ -2,11 +2,11 @@ import useAuth from '~/hooks/use-auth'
 import { useAppDispatch } from '~/store/hooks'
 import { onChangePassword, onChangeUsername } from '~/store/slices/auth/login/slice'
 
-import { ChangeEvent, useMemo } from 'react'
+import { useMemo, type ChangeEvent } from 'react'
 import FieldControl from '~/Components/molecules/field-control'
 
 import { Form, Formik } from 'formik'
-import { SignInCredentials } from '~/services/helpers/auth'
+import type { SignInCredentials } from '~/services/helpers/auth'
 
 import * as Yup from 'yup'
 import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'

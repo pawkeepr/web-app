@@ -2,7 +2,7 @@
 
 import LayoutAuth from '~/Layouts/LayoutAuth'
 import getServerSidePropsPagesPublics from '~/helpers/get-server-side-props-pages-publics'
-import SignInPage from '~/pages/Modules/shared/Authentication/SignIn'
+import SignInPage from '~/pages/Modules/veterinary/Authentication/SignIn'
 
 const SignInPageNext = () => {
     return (

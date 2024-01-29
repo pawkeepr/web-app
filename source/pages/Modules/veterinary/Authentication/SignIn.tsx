@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 
 import LOADING from '~/constants/loading'
-import AuthInputs from './components/organism/auth-inputs'
 
 import { useRouter } from 'next/navigation'
 import { BtnLink } from '~/Components/atoms/btn'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import { resetLoading } from '~/store/slices/auth/login/actions'
 import AuthLayout from '../../_layouts/auth/auth_layout'
+import AuthInputs from './components/organism/auth-inputs'
 
 const CoverSignIn = () => {
     const router = useRouter()

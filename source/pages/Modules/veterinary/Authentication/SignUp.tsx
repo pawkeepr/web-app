@@ -63,7 +63,7 @@ const CoverSignUp = () => {
     const dispatch = useAppDispatch()
     const router = useRouter()
     const isLoading = useAppSelector((state) => state.Login.isLoading)
-    const onSubmit = async (values: AccountSignUp) => {
+    const onSubmit = (values: AccountSignUp) => {
         dispatch(registerUser(values))
         router.push('/confirm-account')
     }
