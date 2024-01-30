@@ -1,20 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-'use client'
+"use client";
 
-import { Tab } from '@headlessui/react'
-import cn from 'classnames'
-import { tv } from 'tailwind-variants'
-import useResizeMobile from '~/hooks/use-resize-mobile'
+import { Tab } from "@headlessui/react";
+import cn from "classnames";
+import { tv } from "tailwind-variants";
+import useResizeMobile from "~/hooks/use-resize-mobile";
 
 type HorizontalTabsProps = {
     categories: {
-        id: number
-        title: string
-        href: string
-        disabled?: boolean
-        tab: React.ReactNode
-    }[]
-}
+        id: number;
+        title: string;
+        icon?: React.ReactNode;
+        href: string;
+        disabled?: boolean;
+        tab: React.ReactNode;
+    }[];
+};
 
 const tab = tv({
     base: `
@@ -23,22 +24,22 @@ const tab = tv({
     `,
     variants: {
         selected: {
-            true: 'bg-white !text-secondary-500 shadow',
-            false: 'text-blue-100 hover:bg-white/[0.12]  hover:text-white',
+            true: "bg-white !text-secondary-500 shadow",
+            false: "text-blue-100 hover:bg-white/[0.12]  hover:text-white",
         },
         disabled: {
-            true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
-            false: 'text-blue-100 hover:bg-white/[0.12]  hover:text-white',
+            true: "!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600",
+            false: "text-blue-100 hover:bg-white/[0.12]  hover:text-white",
         },
         mobile: {
-            true: 'text-xs leading-1 font-bold text-white',
-            false: 'text-sm leading-1 font-bold text-white',
+            true: "text-xs leading-1 font-bold text-white",
+            false: "text-sm leading-1 font-bold text-white",
         },
     },
-})
+});
 
 const HorizontalTabs = ({ categories }: HorizontalTabsProps) => {
-    const { isMobile } = useResizeMobile()
+    const { isMobile } = useResizeMobile();
 
     return (
         <div className="w-full mt-2">
@@ -56,7 +57,12 @@ const HorizontalTabs = ({ categories }: HorizontalTabsProps) => {
                                 })
                             }
                         >
-                            {category.title}
+                            <div className="flex justify-center">
+                                <span className="mr-3">{category.icon}</span>
+                                <span className="mobile:hidden">
+                                    {category.title}
+                                </span>
+                            </div>
                         </Tab>
                     ))}
                 </Tab.List>
@@ -65,8 +71,8 @@ const HorizontalTabs = ({ categories }: HorizontalTabsProps) => {
                         <Tab.Panel
                             key={item.id}
                             className={cn(
-                                'rounded-xl bg-white p-3',
-                                'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
+                                "rounded-xl bg-white p-3",
+                                "ring-white/60 ring-offset-2 focus:outline-none focus:ring-2"
                             )}
                         >
                             {item.tab}
@@ -75,7 +81,7 @@ const HorizontalTabs = ({ categories }: HorizontalTabsProps) => {
                 </Tab.Panels>
             </Tab.Group>
         </div>
-    )
-}
+    );
+};
 
-export default HorizontalTabs
+export default HorizontalTabs;
