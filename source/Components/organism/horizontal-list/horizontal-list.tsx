@@ -21,7 +21,8 @@ const tab = tv({
         ring-white/60 ring-offset-2 focus:outline-none focus:ring-2
         leading-1 font-bold text-white
         mobile:text-xs
-        text-sm
+        text-sm flex web:flex-row items-center justify-center
+        mobile:flex-col
     `,
     // Ajustes adicionais para os estilos mobile
     variants: {
@@ -84,9 +85,7 @@ const HorizontalTabs = ({
                             })
                         }
                     >
-                        {category.icon && (
-                            <span className="mr-2">{category.icon}</span>
-                        )}
+                        {category.icon && <span>{category.icon}</span>}
                         {category.title}
                     </Tab>
                 ))}
