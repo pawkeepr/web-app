@@ -1,11 +1,11 @@
-import LayoutMain from '~/Layouts'
-import Page from '~/pages/Modules/veterinary/PetsAndTutors'
+import { LayoutTutor } from '~/Layouts'
+import Page from '~/pages/Modules/tutor/DashboardPage'
 
 const PetAndTutors = () => {
     return (
-        <LayoutMain>
+        <LayoutTutor>
             <Page />
-        </LayoutMain>
+        </LayoutTutor>
     )
 }
 

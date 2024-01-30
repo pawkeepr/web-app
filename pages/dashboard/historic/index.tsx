@@ -1,13 +1,13 @@
 import HistoricPage from '~/pages/Modules/veterinary/HistoricPage'
 
-import LayoutMain from '~/Layouts'
+import { LayoutVeterinary } from '~/Layouts'
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
 
 const HistoricPageNext = () => {
     return (
-        <LayoutMain>
+        <LayoutVeterinary>
             <HistoricPage />
-        </LayoutMain>
+        </LayoutVeterinary>
     )
 }
 
