@@ -22,7 +22,7 @@ const tab = tv({
         leading-1 font-bold text-white
         mobile:text-xs
         text-sm flex web:flex-row items-center justify-center
-        mobile:flex-col
+        mobile:flex-col gap-2
     `,
     // Ajustes adicionais para os estilos mobile
     variants: {

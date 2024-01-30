@@ -1,26 +1,26 @@
-import Image from 'next/image'
+import Image from "next/image";
 /* eslint-disable @next/next/no-img-element */
-import Link from 'next/link'
+import Link from "next/link";
 
 //import Components
-import { useEffect, useRef, useState } from 'react'
-import { changeHeaderSize } from '~/store/actions'
-import { useAppDispatch } from '~/store/hooks'
-import lightLogo from '../../public/logo-light.png'
-import FullScreenDropdown from '../common/full-screen-dropdown'
-import LightDark from '../common/light-dark'
+import { useEffect, useRef, useState } from "react";
+import { changeHeaderSize } from "~/store/actions";
+import { useAppDispatch } from "~/store/hooks";
+import lightLogo from "../../public/logo-light.png";
+import FullScreenDropdown from "../common/full-screen-dropdown";
+import LightDark from "../common/light-dark";
 
-import Bars3CenterLeftIcon from '@heroicons/react/24/solid/Bars3CenterLeftIcon'
+import Bars3CenterLeftIcon from "@heroicons/react/24/solid/Bars3CenterLeftIcon";
 
-import ProfileDropdownTailwind from '~/Components/molecules/profile-dropdown/profile-dropdown'
-import Drawer from '~/Components/organism/drawer'
+import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
+import DrawerVet from "~/Components/organism/drawer-vet";
 
-const Header = () => {
-    const [show, setShow] = useState<boolean>(false)
+const Header = ({ drawer: Drawer = DrawerVet }) => {
+    const [show, setShow] = useState<boolean>(false);
 
-    const divRef = useRef<HTMLDivElement>(null)
+    const divRef = useRef<HTMLDivElement>(null);
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (divRef?.current) {
@@ -28,10 +28,10 @@ const Header = () => {
                 changeHeaderSize({
                     width: divRef.current.offsetWidth,
                     height: divRef.current.offsetHeight,
-                }),
-            )
+                })
+            );
         }
-    }, [dispatch])
+    }, [dispatch]);
 
     // const toggleMenuBtn = () => {
     //     var windowSize = document.documentElement.clientWidth;
@@ -64,13 +64,13 @@ const Header = () => {
     //     }
     // };
 
-    const handleShow = () => setShow(!show)
-    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(!show);
+    const handleClose = () => setShow(false);
 
     return (
         <header
             className={
-                'dark:!bg-primary-700 mb-2 !bg-primary-500 mobile:fixed mobile:z-50 w-full z-10 '
+                "dark:!bg-primary-700 mb-2 !bg-primary-500 mobile:fixed mobile:z-50 w-full z-10 "
             }
             ref={divRef}
         >
@@ -121,13 +121,18 @@ const Header = () => {
 
                     {/* NotificationDropdown */}
                     {/* <NotificationDropdown /> */}
-                    <ProfileDropdownTailwind />
+                    <Link href={"/logout"}>
+                        <ArrowRightCircleIcon
+                            className="w-8 text-cyan-50 h-6 m-2"
+                            viewBox="0 0 24 24"
+                        />
+                    </Link>
                 </div>
 
                 {/* <SearchOption /> */}
             </div>
         </header>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;
