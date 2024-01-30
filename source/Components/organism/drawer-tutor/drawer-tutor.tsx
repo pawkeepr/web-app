@@ -3,7 +3,6 @@ import HistoricIcon from "@heroicons/react/24/solid/ArchiveBoxXMarkIcon";
 import DashboardIcon from "@heroicons/react/24/solid/HomeIcon";
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
 import Image from "next/image";
-import { MdPets } from "react-icons/md";
 import { layoutModeTypes } from "~/constants/layout";
 import useChangeLayoutMode from "~/hooks/use-change-layout-mode";
 
@@ -42,30 +41,19 @@ const items: Item[] = [
         visible: false,
         disabled: true,
         icon: <UserCircleIcon className="w-5 h-5" />,
-        href: "/profile",
+        href: "/tutor/profile",
     },
     {
-        name: "Consultas",
+        name: "Início",
         visible: true,
         icon: <DashboardIcon className="w-5 h-5" />,
-        href: "/dashboard",
-    },
-    {
-        name: "Pets / Veterinários",
-        visible: true,
-        icon: (
-            <div className="flex justify-start">
-                <MdPets className="w-5 h-5" />
-            </div>
-        ),
-
-        href: "/dashboard/pets-and-tutors",
+        href: "/tutor/dashboard",
     },
     {
         name: "Histórico",
         visible: true,
         icon: <HistoricIcon className="w-5 h-5" />,
-        href: "/dashboard/historic",
+        href: "/tutor/dashboard/historic",
     },
     {
         href: "/logout",
