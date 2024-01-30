@@ -1,3 +1,4 @@
+import type { TabItem } from '~/Components/organism/horizontal-list'
 import HorizontalTabs from '~/Components/organism/horizontal-list'
 import usePetById from '~/store/hooks/pet-by-id/use-pets'
 import { GenderBR } from '~/types/speciesType'
@@ -9,7 +10,7 @@ import UserProfileCard from '../ProfilePage/components/UserProfileCard'
 import HistoricPet from './components/template/HistoricPet'
 import MedicalRecords from './components/template/MedicalRecords'
 
-const Tabs = (document?: string, id_pet?: string) => [
+const Tabs = (document?: string, id_pet?: string): TabItem[] => [
     {
         id: 2,
         title: 'Dados do Pet',
@@ -70,7 +71,10 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
                         />
                     </div>
                     <div className="w-full flex flex-[3] px-4 mt-10 web:mt-0 mobile:!flex-1 overflow-hidden">
-                        <HorizontalTabs categories={tabs} />
+                        <HorizontalTabs
+                            categories={tabs}
+                            bottomNavigation={false}
+                        />
                     </div>
                 </div>
             </div>

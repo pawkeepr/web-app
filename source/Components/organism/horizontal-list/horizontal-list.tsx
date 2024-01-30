@@ -3,17 +3,15 @@
 
 import { Tab } from '@headlessui/react'
 import cn from 'classnames'
-import { tv } from 'tailwind-variants'
+import { tv, type VariantProps } from 'tailwind-variants'
 
-type HorizontalTabsProps = {
-    categories: {
-        id: number
-        title: string
-        icon?: React.ReactNode
-        href: string
-        disabled?: boolean
-        tab: React.ReactNode
-    }[]
+export type TabItem = {
+    id: number | string
+    title: string
+    icon?: React.ReactNode
+    href: string
+    disabled?: boolean
+    tab: React.ReactNode
 }
 
 const tab = tv({
@@ -41,23 +39,38 @@ const tab = tv({
 const tabList = tv({
     base: `
         gap-2 p-1
-        web:rounded-sm web:bg-primary-500 web:mt-2
-        mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:bg-primary-500 mobile:z-10
+        web:rounded-sm web:bg-primary-500 web:mt-2 
     `,
     variants: {
         hidden: {
             true: 'hidden',
             false: 'flex flex-row',
         },
+        bottomNavigation: {
+            true: 'mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:bg-primary-500 mobile:z-10',
+            false: '',
+        },
     },
 })
 
-const HorizontalTabs = ({ categories }: HorizontalTabsProps) => {
+type TabListProps = VariantProps<typeof tabList>
+type TabProps = VariantProps<typeof tab>
+
+type HorizontalTabsProps = {
+    categories: TabItem[]
+} & TabListProps &
+    TabProps
+
+const HorizontalTabs = ({
+    categories,
+    bottomNavigation = true,
+}: HorizontalTabsProps) => {
     return (
-        <Tab.Group>
+        <Tab.Group as="section" className="flex flex-col w-full">
             <Tab.List
                 className={tabList({
                     hidden: categories.length === 1,
+                    bottomNavigation,
                 })}
             >
                 {categories.map((category) => (
@@ -71,6 +84,9 @@ const HorizontalTabs = ({ categories }: HorizontalTabsProps) => {
                             })
                         }
                     >
+                        {category.icon && (
+                            <span className="mr-2">{category.icon}</span>
+                        )}
                         {category.title}
                     </Tab>
                 ))}
