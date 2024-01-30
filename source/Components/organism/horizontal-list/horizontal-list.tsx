@@ -4,12 +4,12 @@
 import { Tab } from '@headlessui/react'
 import cn from 'classnames'
 import { tv } from 'tailwind-variants'
-import useResizeMobile from '~/hooks/use-resize-mobile'
 
 type HorizontalTabsProps = {
     categories: {
         id: number
         title: string
+        icon?: React.ReactNode
         href: string
         disabled?: boolean
         tab: React.ReactNode
@@ -21,6 +21,9 @@ const tab = tv({
     base: `
         w-full rounded-sm py-2.5 
         ring-white/60 ring-offset-2 focus:outline-none focus:ring-2
+        leading-1 font-bold text-white
+        mobile:text-xs
+        text-sm
     `,
     // Ajustes adicionais para os estilos mobile
     variants: {
@@ -32,25 +35,30 @@ const tab = tv({
             true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
             false: 'text-blue-100 hover:bg-white/[0.12]  hover:text-white',
         },
-        mobile: {
-            true: 'text-xs leading-1 font-bold text-white',
-            false: 'text-sm leading-1 font-bold text-white',
+    },
+})
+
+const tabList = tv({
+    base: `
+        gap-2 p-1
+        web:rounded-sm web:bg-primary-500 web:mt-2
+        mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:bg-primary-500 mobile:z-10
+    `,
+    variants: {
+        hidden: {
+            true: 'hidden',
+            false: 'flex flex-row',
         },
     },
 })
 
 const HorizontalTabs = ({ categories }: HorizontalTabsProps) => {
-    const { isMobile } = useResizeMobile()
-
     return (
         <Tab.Group>
             <Tab.List
-                className={cn(
-                    'flex gap-2 p-1',
-                    isMobile
-                        ? 'fixed bottom-0 left-0 right-0 bg-primary-500 z-10'
-                        : 'rounded-sm bg-primary-500 mt-2',
-                )}
+                className={tabList({
+                    hidden: categories.length === 1,
+                })}
             >
                 {categories.map((category) => (
                     <Tab
@@ -60,7 +68,6 @@ const HorizontalTabs = ({ categories }: HorizontalTabsProps) => {
                             tab({
                                 selected,
                                 disabled: category.disabled,
-                                mobile: isMobile,
                             })
                         }
                     >
