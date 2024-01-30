@@ -1,16 +1,16 @@
-import HistoricPage from '~/pages/Modules/veterinary/HistoricPage'
+import HistoricPage from "~/pages/Modules/veterinary/HistoricPage";
 
-import LayoutMain from '~/Layouts'
-import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
+import LayoutTutor from "~/Layouts/LayoutTutor";
+import getServerSidePropsPagesPrivates from "~/helpers/get-server-side-props-pages-privates";
 
 const HistoricPageNext = () => {
     return (
-        <LayoutMain>
+        <LayoutTutor>
             <HistoricPage />
-        </LayoutMain>
-    )
-}
+        </LayoutTutor>
+    );
+};
 
-export default HistoricPageNext
+export default HistoricPageNext;
 
-export const getServerSideProps = getServerSidePropsPagesPrivates()
+export const getServerSideProps = getServerSidePropsPagesPrivates();
