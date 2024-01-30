@@ -39,8 +39,8 @@ const tab = tv({
 
 const tabList = tv({
     base: `
-        gap-2 p-1
-        web:rounded-sm web:bg-primary-500 web:mt-2 
+        gap-2 p-1 bg-primary-500
+        web:rounded-sm web:mt-2 
     `,
     variants: {
         hidden: {
@@ -48,7 +48,7 @@ const tabList = tv({
             false: 'flex flex-row',
         },
         bottomNavigation: {
-            true: 'mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:bg-primary-500 mobile:z-10',
+            true: 'mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:z-10',
             false: '',
         },
     },
