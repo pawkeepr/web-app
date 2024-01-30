@@ -4,6 +4,7 @@ import Link from "next/link";
 
 //import Components
 import { useEffect, useRef, useState } from "react";
+import { TbLogout } from "react-icons/tb";
 import { changeHeaderSize } from "~/store/actions";
 import { useAppDispatch } from "~/store/hooks";
 import lightLogo from "../../public/logo-light.png";
@@ -12,7 +13,6 @@ import LightDark from "../common/light-dark";
 
 import Bars3CenterLeftIcon from "@heroicons/react/24/solid/Bars3CenterLeftIcon";
 
-import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
 import DrawerVet from "~/Components/organism/drawer-vet";
 
 const Header = ({ drawer: Drawer = DrawerVet }) => {
@@ -121,11 +121,14 @@ const Header = ({ drawer: Drawer = DrawerVet }) => {
 
                     {/* NotificationDropdown */}
                     {/* <NotificationDropdown /> */}
-                    <Link href={"/logout"}>
-                        <ArrowRightCircleIcon
-                            className="w-8 text-cyan-50 h-6 m-2"
+                    <Link className="flex flex-col w-8 ml-7" href={"/logout"}>
+                        <TbLogout
+                            className="w-6 text-cyan-50 h-6"
                             viewBox="0 0 24 24"
                         />
+                        <span className="text-white text-xs font-medium">
+                            Sair
+                        </span>
                     </Link>
                 </div>
 
