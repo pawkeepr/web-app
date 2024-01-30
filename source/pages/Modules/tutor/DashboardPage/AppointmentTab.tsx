@@ -2,8 +2,8 @@ import { FaCalendarCheck, FaStethoscope } from 'react-icons/fa'
 import { MdPets } from 'react-icons/md'
 import HorizontalTabs from '~/Components/organism/horizontal-list/horizontal-list'
 import DefaultLayout from '../../_layouts/dashboard/dashboard'
-import PetsTab from '../../veterinary/PetsAndTutors/components/organisms/PetsTab'
-import TutorsTab from '../../veterinary/PetsAndTutors/components/organisms/TutorsTab'
+import PetsTab from '../../veterinary/DashboardPage/components/organisms/steps/step-pets'
+import TutorsTab from '../../veterinary/DashboardPage/components/organisms/steps/step-tutors'
 import StepScheduledAll from './components/organisms/steps/step-scheduled-all'
 
 const Tabs = () => [
