@@ -23,6 +23,8 @@ const validationSchema = Yup.object({
     password: Yup.string().required('Este campo é obrigatório'),
 })
 
+type CtxSchema = Yup.InferType<typeof validationSchema>
+
 const Auth = () => {
     const dispatch = useAppDispatch()
 
@@ -57,6 +59,7 @@ const Auth = () => {
             {({ handleSubmit }) => (
                 <Form onSubmit={handleSubmit} className="w-full">
                     <FieldControl
+                        ctx={{} as CtxSchema}
                         label="Email"
                         type="text"
                         pattern="[^\s]+" // no spaces
