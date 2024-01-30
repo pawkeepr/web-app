@@ -1,3 +1,4 @@
+import { FaCalendarCheck } from 'react-icons/fa'
 import { HiUserGroup } from 'react-icons/hi2'
 import { MdOutlinePets } from 'react-icons/md'
 import HorizontalTabs from '~/Components/organism/horizontal-list/horizontal-list'
@@ -9,8 +10,9 @@ import TutorsTab from './components/organisms/steps/step-tutors'
 const Tabs = () => [
     {
         id: 1,
-        title: 'Todos os agendamentos',
+        title: 'Agendamentos',
         href: '#scheduled',
+        icon: <FaCalendarCheck className="w-6 h-4" />,
         tab: <StepScheduledAll />,
     },
     {
