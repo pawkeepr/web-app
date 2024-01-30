@@ -3,7 +3,7 @@
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon'
 import PropTypes from 'prop-types'
 import type React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import image from '../../styles/assets/images/landing/bg-pattern.png'
 
 import cookies from '~/constants/cookies'
@@ -92,21 +92,6 @@ const LayoutMain = ({ children }: LayoutProps) => {
         dispatch,
     ])
 
-    const [headerClass, setHeaderClass] = useState('')
-    // class add remove in header
-    useEffect(() => {
-        window.addEventListener('scroll', scrollNavigation, true)
-    })
-
-    function scrollNavigation() {
-        const scrollUp = document.documentElement.scrollTop
-        if (scrollUp > 50) {
-            setHeaderClass('topBar-shadow')
-        } else {
-            setHeaderClass('')
-        }
-    }
-
     return (
         <div id="relative">
             <Header />
@@ -127,7 +112,7 @@ const LayoutMain = ({ children }: LayoutProps) => {
                 {children}
                 <FieldDocumentAppointment selectedTabInitial={0}>
                     {({ onChangeOpen }) => (
-                        <div className="fixed mobile:flex mobile:flex-col items-center justify-center mobile:opacity-100 bottom-4 z-50 mobile:bottom-4 right-4  mobile:right-4 hidden ">
+                        <div className="fixed mobile:flex mobile:flex-col items-center justify-center mobile:opacity-100 z-50 mobile:bottom-20 mobile:right-4 hidden ">
                             <button
                                 type="button"
                                 onClick={() => onChangeOpen(true)}

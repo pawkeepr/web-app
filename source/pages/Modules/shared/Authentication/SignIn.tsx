@@ -1,28 +1,43 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-import LOADING from '~/constants/loading'
+import { LOADING } from '~/constants/loading'
 
 import { useRouter } from 'next/navigation'
 import { BtnLink } from '~/Components/atoms/btn'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import { resetLoading } from '~/store/slices/auth/login/actions'
 import AuthLayout from '../../_layouts/auth/auth_layout'
+import LoadingPage from '../LoadingPage'
 import AuthInputs from './components/organism/auth-inputs'
 
 const CoverSignIn = () => {
+    const [pageLoading, setPageLoading] = useState(false)
     const router = useRouter()
-    const { isAuthenticated, isLoading } = useAppSelector((state) => state.Login)
+    const { isLoading, isAuthenticated } = useAppSelector((state) => state.Login)
     const dispatch = useAppDispatch()
 
     const loading = isLoading === LOADING.PENDING
 
     useEffect(() => {
         if (isAuthenticated) {
-            dispatch(resetLoading())
-            router.push('/dashboard')
+            setPageLoading(true)
+            router.prefetch('/dashboard')
+            setTimeout(() => {
+                dispatch(resetLoading())
+                router.push('/dashboard')
+            }, 1000)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated])
+
+    if (pageLoading) {
+        return (
+            <div className="min-h-screen auth-bg-cover flex flex-col ">
+                <div className="bg-overlay" />
+                <LoadingPage />
+            </div>
+        )
+    }
 
     return (
         <AuthLayout title="Entrar" image="/bg-sign-in.webp" alt="Imagem" hasImage>
@@ -31,11 +46,11 @@ const CoverSignIn = () => {
                     Seja Bem-vindo(a)!
                 </p>
             </div>
-            <div className="mobile:!mt-0 mobile:p-0">
+            <div className="mobile:!mt-0 mobile:p-0 p-4">
                 {loading && (
-                    <div className="flex justify-center item-center">
+                    <div className="flex justify-center item-center web:min-h-[236px]">
                         <div
-                            className="spinner-border text-primary-500 w-40 h-40 my-4"
+                            className="spinner-border text-primary-500 w-44 h-44 my-4"
                             role="status"
                         >
                             <span className="visually-hidden">Loading...</span>
@@ -43,7 +58,11 @@ const CoverSignIn = () => {
                     </div>
                 )}
 
-                {!loading && <AuthInputs />}
+                {!loading && (
+                    <div className="web:max-h-[236px]">
+                        <AuthInputs />
+                    </div>
+                )}
             </div>
 
             <div className="w-full flex flex-col justify-center items-center ">

@@ -5,10 +5,28 @@ import { memo } from 'react'
 import { FaInstagram } from 'react-icons/fa'
 import { GrFacebookOption } from 'react-icons/gr'
 import { RiLinkedinFill } from 'react-icons/ri'
+import type { VariantProps } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-const Footer = () => {
+const footer = tv({
+    base: 'w-full py-2 mobile:hidden',
+    variants: {
+        bg: {
+            transparent: 'bg-transparent',
+            primary: 'bg-primary-500',
+            secondary: 'bg-secondary-500',
+        },
+    },
+    defaultVariants: {
+        bg: 'transparent',
+    },
+})
+
+type FooterProps = VariantProps<typeof footer>
+
+const Footer = ({ bg = 'transparent' }: FooterProps) => {
     return (
-        <footer className="bg-transparent w-full my-2 mobile:hidden">
+        <footer className={footer({ bg })}>
             <div className="flex items-center justify-between px-6 flex-row mobile:flex-col">
                 <div>
                     <p className="text-xs text-gray-600 font-semibold">
@@ -22,14 +40,14 @@ const Footer = () => {
                 <div className="gap-2 p-2 h-full">
                     <Link
                         href="/privacy-policy"
-                        className="text-xs text-gray-600 font-semibold mx-1"
+                        className="text-xs text-gray-600 font-semibold mx-1 hover:text-secondary-500"
                     >
                         Política de Privacidade
                     </Link>
                     {' - '}
                     <Link
                         href="/service-terms"
-                        className="text-xs text-gray-600 font-semibold mx-1"
+                        className="text-xs text-gray-600 font-semibold mx-1 hover:text-secondary-500"
                     >
                         Termos de Uso
                     </Link>

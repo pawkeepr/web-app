@@ -67,9 +67,12 @@ const Home = () => {
                     </Slide>
                 </div>
             </section>
-            <section className="section pb-0 hero-section bg-primary" id="hero3">
+            <section
+                className="section pb-0 hero-section bg-primary-500"
+                id="hero3"
+            >
                 <div className="bg-overlay bg-overlay-pattern" />
-                <div className="grid grid-cols-1 mt-5 md:mt-0 md:grid-cols-2 p-4">
+                <div className="grid grid-cols-1 mt-5 web:mt-0 md:grid-cols-2 p-4">
                     <Slide left>
                         <div className="col-span-1">
                             <img
@@ -80,7 +83,7 @@ const Home = () => {
                         </div>
                     </Slide>
                     <Zoom>
-                        <div className="text-center mt-lg-5 pt-5 col-span-1">
+                        <div className="text-center pt-5 col-span-1">
                             <p className="text-lg lg:text-2xl font-semibold font-sans p-4 text-white">
                                 {`Isso significa que você terá mais tempo para se concentrar no que realmente importa: 
                             oferecer um cuidado excepcional aos animais.`}
