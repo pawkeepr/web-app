@@ -17,10 +17,12 @@ type HorizontalTabsProps = {
 }
 
 const tab = tv({
+    // Ajuste os estilos base e variantes conforme necessário
     base: `
         w-full rounded-sm py-2.5 
         ring-white/60 ring-offset-2 focus:outline-none focus:ring-2
     `,
+    // Ajustes adicionais para os estilos mobile
     variants: {
         selected: {
             true: 'bg-white !text-secondary-500 shadow',
@@ -41,40 +43,45 @@ const HorizontalTabs = ({ categories }: HorizontalTabsProps) => {
     const { isMobile } = useResizeMobile()
 
     return (
-        <div className="w-full mt-2">
-            <Tab.Group>
-                <Tab.List className="flex rounded-sm bg-primary-500 p-1 mobile:w-88 mobile:mx-4 gap-2">
-                    {categories.map((category) => (
-                        <Tab
-                            key={category.id}
-                            disabled={category.disabled}
-                            className={({ selected }) =>
-                                tab({
-                                    selected,
-                                    disabled: category.disabled,
-                                    mobile: isMobile,
-                                })
-                            }
-                        >
-                            {category.title}
-                        </Tab>
-                    ))}
-                </Tab.List>
-                <Tab.Panels className="mt-2">
-                    {categories.map((item) => (
-                        <Tab.Panel
-                            key={item.id}
-                            className={cn(
-                                'rounded-xl bg-white p-3',
-                                'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
-                            )}
-                        >
-                            {item.tab}
-                        </Tab.Panel>
-                    ))}
-                </Tab.Panels>
-            </Tab.Group>
-        </div>
+        <Tab.Group>
+            <Tab.List
+                className={cn(
+                    'flex gap-2 p-1',
+                    isMobile
+                        ? 'fixed bottom-0 left-0 right-0 bg-primary-500 z-10'
+                        : 'rounded-sm bg-primary-500 mt-2',
+                )}
+            >
+                {categories.map((category) => (
+                    <Tab
+                        key={category.id}
+                        disabled={category.disabled}
+                        className={({ selected }) =>
+                            tab({
+                                selected,
+                                disabled: category.disabled,
+                                mobile: isMobile,
+                            })
+                        }
+                    >
+                        {category.title}
+                    </Tab>
+                ))}
+            </Tab.List>
+            <Tab.Panels className="mt-2">
+                {categories.map((item) => (
+                    <Tab.Panel
+                        key={item.id}
+                        className={cn(
+                            'rounded-xl bg-white p-3',
+                            'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
+                        )}
+                    >
+                        {item.tab}
+                    </Tab.Panel>
+                ))}
+            </Tab.Panels>
+        </Tab.Group>
     )
 }
 

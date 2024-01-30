@@ -19,7 +19,7 @@ const Tabs = () => [
     },
 ]
 
-const AppointmentsTabs = <T,>() => {
+const HistoricPage = <T,>() => {
     const categories = Tabs()
 
     return (
@@ -29,4 +29,4 @@ const AppointmentsTabs = <T,>() => {
     )
 }
 
-export default AppointmentsTabs
+export default HistoricPage
