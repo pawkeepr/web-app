@@ -12,4 +12,6 @@ export const PUBLIC_ROUTES = [
     '/activation',
     '/logout',
     '/confirm-account',
+    '/privacy-policy',
+    '/service-terms',
 ]
