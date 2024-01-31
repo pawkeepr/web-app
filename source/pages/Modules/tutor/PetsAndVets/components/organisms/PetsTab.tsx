@@ -5,7 +5,11 @@ import useListPets from "~/store/hooks/list-appointments-by-pet/use-list-appoint
 import type { IPetV2Data } from "~/types/pet-v2";
 
 const PetsTab = () => {
-    const { data: pets, isLoading, isError } = useListPets();
+    const {
+        data: pets,
+        isLoading,
+        isError,
+    } = useListPets({ mode: "scheduled" });
 
     const cards = (pets: IPetV2Data[]) =>
         pets?.map((pet) => <CardPets key={pet?.id_pet} pet={pet} />);

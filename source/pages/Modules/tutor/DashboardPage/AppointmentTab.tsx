@@ -2,8 +2,8 @@ import { FaCalendarCheck, FaStethoscope } from "react-icons/fa";
 import { MdPets } from "react-icons/md";
 import HorizontalTabs from "~/Components/organism/horizontal-list/horizontal-list";
 import DefaultLayout from "../../_layouts/dashboard/dashboard";
-import PetsTab from "../../veterinary/PetsAndTutors/components/organisms/PetsTab";
-import VetsTab from "../../veterinary/PetsAndTutors/components/organisms/TutorsTab";
+import PetsTab from "../../tutor/PetsAndVets/components/organisms/PetsTab";
+import VetsTab from "../../tutor/PetsAndVets/components/organisms/VetsTab";
 import StepScheduledAll from "./components/organisms/steps/step-scheduled-all";
 
 const Tabs = () => [
@@ -33,7 +33,7 @@ const Tabs = () => [
 const AppointmentsTabs = <T,>() => {
     const tabs = Tabs();
     return (
-        <DefaultLayout title="Dashboard" name="appointments" searchBlock>
+        <DefaultLayout title="Tutor-Dashboard" name="appointments" searchBlock>
             <HorizontalTabs categories={tabs} />
         </DefaultLayout>
     );

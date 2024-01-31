@@ -28,7 +28,7 @@ import {
 
 //redux
 import cn from "classnames";
-import FieldDocumentAppointment from "~/Components/molecules/field-document-appointment";
+import FieldDocumentAppointment from "~/Components/molecules/field-appointment-vet";
 import { useAppDispatch, useAppSelector } from "~/store/hooks";
 import { getCookie } from "~/utils/cookies-utils";
 

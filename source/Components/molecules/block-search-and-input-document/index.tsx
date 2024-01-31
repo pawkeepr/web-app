@@ -1,20 +1,27 @@
-import FieldDocumentAppointment from '~/Components/molecules/field-document-appointment'
-import SearchInput from '~/Components/molecules/search-input'
+import FieldDocumentAppointment from "~/Components/molecules/field-appointment-vet";
+import SearchInput from "~/Components/molecules/search-input";
+import FieldAppointmentTutor from "../field-appointment-tutor";
 
 type BlockSearchAndInputDocumentProps = {
-    name: string
-}
+    name: string;
+    title: string;
+};
 
 const BlockSearchAndInputDocument = ({
     name,
+    title,
 }: BlockSearchAndInputDocumentProps) => {
     return (
         <div className="my-2 mobile:px-2 w-full flex h-fit justify-end items-center">
             <SearchInput placeholder="Digite sua busca" name={name} />
 
-            <FieldDocumentAppointment />
+            {title === "Dashboard" ? (
+                <FieldDocumentAppointment />
+            ) : (
+                <FieldAppointmentTutor />
+            )}
         </div>
-    )
-}
+    );
+};
 
-export default BlockSearchAndInputDocument
+export default BlockSearchAndInputDocument;
