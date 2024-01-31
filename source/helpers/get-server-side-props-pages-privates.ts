@@ -1,11 +1,12 @@
 import optionsCookies from '~/constants/cookies'
 
-import type { ParsedUrlQuery } from 'querystring'
 import type {
     GetServerSideProps,
     GetServerSidePropsContext,
     PreviewData,
 } from 'next'
+import type { ParsedUrlQuery } from 'querystring'
+import { PUBLIC_ROUTES } from '~/common/public-routes'
 import { getAPIClient } from '~/services/axios'
 import { getVetProfile } from '~/services/helpers'
 import { getCookie, removeCookie, setCookie } from '~/utils/cookies-utils'
@@ -45,15 +46,6 @@ export const fetchProfile = async (token: string, ctx: Context) => {
         }
     }
 }
-
-export const PUBLIC_ROUTES = [
-    '/sign-in',
-    '/sign-up',
-    '/forgot-password',
-    '/activation',
-    '/logout',
-    '/confirm-account',
-]
 
 const getServerSidePropsPagesPrivates =
     (callback?: GetServerSideProps) => async (ctx: Context) => {

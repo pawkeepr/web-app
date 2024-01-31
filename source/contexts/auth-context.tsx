@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import { createContext, useEffect } from 'react'
+import { PUBLIC_ROUTES } from '~/common/public-routes'
 import cookies from '~/constants/cookies'
 import type LOADING from '~/constants/loading'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
@@ -37,17 +38,6 @@ export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 interface AuthProviderProps {
     children: React.ReactNode
 }
-
-const PUBLIC_ROUTES = [
-    '/',
-    '/sign-in',
-    '/sign-up',
-    '/forgot-password',
-    '/activation',
-    '/logout',
-    '/confirm-account',
-    '/client/confirmation',
-]
 
 export function AuthProvider({ children }: AuthProviderProps) {
     const dispatch = useAppDispatch()

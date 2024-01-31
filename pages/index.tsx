@@ -1,12 +1,13 @@
+import NavbarHome from '~/Components/molecules/nav-bar-home'
+import HomePage from '~/pages/Home'
 import LandingLayout from '~/pages/Modules/_layouts/landing/landing'
-import LadingPage from '~/pages/Modules/veterinary/LandingPage'
 
-const LadingPageNext = () => {
+const HomePageNext = () => {
     return (
-        <LandingLayout title="Bem Vindo">
-            <LadingPage />
+        <LandingLayout title="Bem Vindo" navBar={NavbarHome}>
+            <HomePage />
         </LandingLayout>
     )
 }
 
-export default LadingPageNext
+export default HomePageNext
