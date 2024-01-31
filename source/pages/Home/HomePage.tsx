@@ -10,6 +10,8 @@ import { MdPerson } from 'react-icons/md'
 import Slide from 'react-reveal/Slide'
 import Zoom from 'react-reveal/Zoom'
 import HeaderTitle from '~/Components/atoms/header-title'
+import NavbarHome from '~/Components/molecules/nav-bar-home'
+import Footer from '~/Layouts/Footer'
 
 export const ButtonsNavBar = () => {
     const { isMobile } = useResizeMobile()
@@ -49,9 +51,9 @@ export const ButtonsNavBar = () => {
 const HomePage = () => {
     return (
         <>
-            <HeaderTitle title="Bem Vindo" />
-
-            <section className="section" id="hero">
+            <NavbarHome />
+            <section className="section bg-primary-500 min-h-screen" id="hero">
+                <HeaderTitle title="Bem Vindo" />
                 <div className="bg-overlay bg-overlay-pattern" />
 
                 <div className="grid grid-cols-1  mt-5 web:grid-cols-2 p-4">
@@ -77,6 +79,9 @@ const HomePage = () => {
                             <ButtonsNavBar />
                         </div>
                     </Zoom>
+                </div>
+                <div className="fixed inset-x-0 bottom-0">
+                    <Footer />
                 </div>
             </section>
         </>

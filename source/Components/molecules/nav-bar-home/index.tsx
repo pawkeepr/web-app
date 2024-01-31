@@ -67,7 +67,7 @@ const NavbarHome = () => {
     return (
         <header>
             <nav
-                className="fixed z-50 left-0 right-0 mobile:p-2 px-4 py-2 transition-colors data-[scroll-action=true]:bg-white shadow-md"
+                className="fixed z-50 left-0 right-0 mobile:p-2 px-4 py-2 transition-colors data-[scroll-action=true]:bg-white"
                 data-scroll-action={actionScroll}
             >
                 <div className="container flex flex-wrap justify-center gap-2 md:gap-0 md:justify-between">
