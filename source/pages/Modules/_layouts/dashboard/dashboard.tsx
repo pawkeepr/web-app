@@ -23,7 +23,7 @@ type DashboardLayoutsProps = {
 
 const DashboardLayouts = ({
     children,
-    title = "Dashboard",
+    title = "",
     searchBlock = true,
     name,
 }: DashboardLayoutsProps) => {

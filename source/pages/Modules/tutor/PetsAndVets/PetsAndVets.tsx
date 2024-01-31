@@ -27,7 +27,7 @@ const Tabs = (): TabItem[] => [
 const PetAndTutors = <T,>() => {
     const tabs = Tabs();
     return (
-        <DefaultLayout title="Dashboard" searchBlock={false}>
+        <DefaultLayout title="Tutor-Dashboard" searchBlock={false}>
             <HorizontalTabs categories={tabs} />
         </DefaultLayout>
     );
