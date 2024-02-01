@@ -1,6 +1,6 @@
 // Appointment Vet
 export const APPOINTMENT_GET_ALL = () =>
-    '/api-appointment/fetch-all-appointment-vet'
+    '/api-appointment-vet/fetch-all-appointment-vet'
 export const APPOINTMENT_FINISHED = () =>
     '/api-appointment/update-start-appointment'
 export const APPOINTMENT_UPDATE = () => '/api-appointment/update-appointment'
@@ -26,7 +26,7 @@ export const TUTOR_UPDATE_PROFILE = () => '/api-user-tutor/update-user-tutor'
 
 export const PET_FETCH_ALL = () => '/api-pet/fetch-all-pets-tutor'
 export const PET_FETCH_ALL_APPOINTMENTS_DONE = () =>
-    '/api-pet/fetch-all-appointment-done-pet'
+    '/api-appointment-pet/fetch-all-appointment-done-pet'
 export const PET_CREATE_PROFILE = () => '/api-pet/create-pet'
 export const PET_CREATE_SIMPLIFIED_PROFILE = () => '/api-pet/create-pet-simplified'
 export const PET_GET_PROFILE = () => '/api-pet/search-pet'
@@ -41,15 +41,15 @@ export const WHATSAPP_SEND_MESSAGE = () =>
 // Appointment Vet
 
 export const APPOINTMENT_GET_ALL_DONE = () =>
-    '/api-appointment/fetch-all-appointment-done-vet'
+    '/api-appointment-vet/fetch-all-appointment-done-vet'
 export const APPOINTMENT_GET_ALL_CANCELED = () =>
-    '/api-appointment/fetch-all-appointment-canceled-vet'
+    '/api-appointment-vet/fetch-all-appointment-canceled-vet'
 export const APPOINTMENT_GET_ALL_SCHEDULED = () =>
-    '/api-appointment/fetch-all-appointment-scheduled-vet'
+    '/api-appointment-vet/fetch-all-appointment-scheduled-vet'
 export const APPOINTMENT_GET_ALL_CONFIRMED = () =>
-    '/api-appointment/fetch-all-appointment-confirmed-vet'
+    '/api-appointment-vet/fetch-all-appointment-confirmed-vet'
 export const APPOINTMENT_GET_ALL_RESCHEDULED = () =>
-    '/api-appointment/fetch-all-appointment-rescheduled-vet'
+    '/api-appointment-vet/fetch-all-appointment-rescheduled-vet'
 
 // Appointment Update
 
@@ -73,8 +73,8 @@ export const TUTORS_FETCH_ALL_CLINIC = () => '/api-user/fetch-all-tutors-vet'
 // External Appointment
 
 export const APPOINTMENT_GET_BY_ID_EXTERNAL = () =>
-    '/api-appointment/search-appointment-external'
+    '/api-appointment-external/search-appointment-external'
 export const APPOINTMENT_CONFIRMED_EXTERNAL = () =>
-    '/api-appointment/confirmed-appointment-tutor-external'
+    '/api-appointment-external/confirmed-appointment-tutor-external'
 export const APPOINTMENT_CANCELED_EXTERNAL = () =>
-    '/api-appointment/canceled-appointment-tutor-external'
+    '/api-appointment-external/canceled-appointment-tutor-external'
