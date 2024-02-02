@@ -9,12 +9,6 @@ import {
     type CtxStepAnamnese,
 } from '../../../validations.yup'
 
-const TranslationOptions = {
-    yes: 'Sim',
-    no: 'Não',
-    other: 'Outro',
-} as const
-
 const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
     const { values } = useFormikContextSafe<CtxStepAnamnese>()
 

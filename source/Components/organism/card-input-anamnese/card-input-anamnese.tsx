@@ -1,13 +1,15 @@
 import cn from 'classnames'
-import { Formik, type FormikHelpers } from 'formik'
-import { useEffect, useMemo, useState } from 'react'
+import { Formik } from 'formik'
+import { useMemo, useState } from 'react'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import * as Yup from 'yup'
+import ControlSwitchDiv from '~/Components/molecules/control-switch-div'
+import type { OptionSelect } from '~/Components/molecules/field-control'
 import type { KeyOfQuestionTypes, Question } from '~/constants/anamnese-questions'
-import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { QuestionAnamnesis, VeterinaryConsultation } from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
-import QuestionsAnamnese from './questions-anamnese'
 
 export type CtxStepAnamnese = Pick<
     VeterinaryConsultation,
@@ -30,11 +32,6 @@ const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionAnamnesis>>(
 
 type CardInputProps = {
     items: Question[]
-    handleSubmit: (
-        data: Yup.InferType<typeof validationSchema>,
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-        formikHelpers: FormikHelpers<any>,
-    ) => Promise<unknown>
 }
 
 const STEPS: {
@@ -67,20 +64,6 @@ const STEPS: {
     },
 ]
 
-// Função para calcular o IMC de um animal
-// height: altura em centímetros
-// weight: peso em quilos
-function calcularIMC(height: number, weight: number): number {
-    if (height === 0 || weight === 0) {
-        return 0 // Evita divisão por zero
-    }
-
-    const heightInMeters = height / 100 // Converter altura para metros
-
-    const imc = weight / (heightInMeters * heightInMeters) // Converter altura para metros
-    return imc
-}
-
 const makeTitle = (title: string, isMobile: boolean) => {
     if (isMobile) {
         return title
@@ -92,51 +75,84 @@ const makeTitle = (title: string, isMobile: boolean) => {
     return title
 }
 
-const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
-    const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>()
+const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => {
+    const filtered = items.reduce((acc, item) => {
+        if (item.type === category) {
+            acc.push({
+                type: item.type,
+                value: `${item.id}`,
+                label: item.question,
+                color: 'rgb(255 200 107);',
+            })
+        }
+        return acc
+    }, [] as OptionSelect[])
 
+    return filtered
+}
+
+const CardInputAnamnese = ({ items }: CardInputProps) => {
     const [category, setCategory] = useState<KeyOfQuestionTypes>('digestive_system')
     const { isMobile } = useResizeMobile()
 
-    const height = useMemo(
-        () => values.details_pet_consultation?.height,
-        [values.details_pet_consultation?.height],
-    )
-    const weight = useMemo(
-        () => values.details_pet_consultation?.weight,
-        [values.details_pet_consultation?.weight],
-    )
+    const options = useMemo(() => makeOptions(items, category), [category, items])
 
-    const isValidNumber = useMemo(() => {
-        const castedWeight = Number(weight)
-        const isNumber = !Number.isNaN(weight)
-        const isPositive = castedWeight > 0
-        return isNumber && isPositive
-    }, [weight])
+    const initialValues = useMemo(() => {
+        return options.reduce(
+            (acc, item) => {
+                return {
+                    // biome-ignore lint/performance/noAccumulatingSpread: <explanation>
+                    ...acc,
+                    [item.value]: false,
+                }
+            },
+            {} as Record<string, boolean>,
+        )
+    }, [options])
 
-    useEffect(() => {
-        if (height && weight) {
-            const imc = calcularIMC(Number(height), Number(weight))
-            setFieldValue('details_pet_consultation.imc', imc)
-        }
-    }, [height, weight])
+    const keyPressLeft = () => {
+        setCategory((prev) => {
+            const index = STEPS.findIndex((item) => item.value === prev)
+            const next = STEPS[index - 1]
+            if (next) {
+                return next.value
+            }
+            return prev
+        })
+    }
+
+    const keyPressRight = () => {
+        setCategory((prev) => {
+            const index = STEPS.findIndex((item) => item.value === prev)
+            const next = STEPS[index + 1]
+            if (next) {
+                return next.value
+            }
+            return prev
+        })
+    }
+
+    useKeyboardNavigation({
+        ArrowLeft: keyPressLeft,
+        ArrowRight: keyPressRight,
+    })
 
     return (
         <div
             className="
-        gap-2 flex flex-col card shadow-2xl p-8 
-        border-primary-500 border-2 relative
-        mobile:p-0 mobile:border-none mobile:!shadow-none mobile:!rounded-none
+            gap-2 flex flex-col card shadow-2xl p-8 
+            border-primary-500 border-2 relative
+            mobile:p-0 mobile:border-none mobile:!shadow-none mobile:!rounded-none
+            min-h-[420px]
         
         "
         >
-            <div className="flex flex-row w-full justify-between flex-wrap">
+            <div className="flex flex-row w-full justify-between flex-wrap mb-4">
                 {STEPS.map((item) => (
                     <button
                         type="button"
                         onClick={() => setCategory(item.value)}
                         key={item.value}
-                        disabled={!isValidNumber}
                         className={cn(
                             'p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full',
                             {
@@ -151,29 +167,38 @@ const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
             </div>
 
             <Formik
-                initialValues={{
-                    list_notes_anamnesis: [] as string[],
-                    logical_list_default_anamnesis: 'logical',
-                    name_anamnesis: '',
-                    type_anamnesis: '',
-                    notes_anamnesis: '',
-                    options_anamnesis: 'no',
-                }}
+                initialValues={initialValues}
                 validationSchema={validationSchema}
-                onSubmit={handleSubmit}
+                onSubmit={() => {}}
             >
-                {() => <QuestionsAnamnese category={category} questions={items} />}
+                {({ values }) => (
+                    <>
+                        {options.map((item) => (
+                            <ControlSwitchDiv
+                                ctx={values}
+                                name={item.value as string}
+                                label={item.label}
+                                divClassName="col-span-1 mobile:col-span-full"
+                            />
+                        ))}
+                    </>
+                )}
             </Formik>
-
-            {/* Botões de Próximo e Anterior 
-            <button type="button" className="absolute bottom-4 left-4">
-                Anterior
+            <button
+                onClick={keyPressRight}
+                type="button"
+                className="btn btn-primary absolute bottom-4 right-4"
+            >
+                <FaArrowRight />
             </button>
 
-            <button type="button" className="absolute bottom-4 right-4">
-                Próximo
+            <button
+                onClick={keyPressLeft}
+                type="button"
+                className="btn btn-primary absolute bottom-4 left-4"
+            >
+                <FaArrowLeft />
             </button>
-            */}
         </div>
     )
 }
