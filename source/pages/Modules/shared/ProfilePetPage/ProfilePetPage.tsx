@@ -160,10 +160,10 @@ const CreateOrUpdatePetPage = ({
         >
             <div
                 className="
-                gap-2 mt-2 mobile:py-6 relative 
-                mobile:items-center mobile:flex 
-                mobile:!h-fit mobile:flex-col
-            "
+                gap-2 mt-2 relative 
+                mobile:py-6 mobile:items-center mobile:flex mobile:!h-fit mobile:flex-col
+                tablet:py-0 tablet:items-center tablet:flex tablet:!h-fit tablet:flex-col
+              "
             >
                 <ModalConfirm
                     title="Cancelar Novo Pet!"

@@ -7,12 +7,12 @@ import FieldControl from '~/Components/molecules/field-control/field-control'
 
 import type { RecordsShapeYup, StepProps, Tabs } from '~/types/helpers'
 import type { InitialValues } from '../../index'
-import AddressTutor from '../molecules/address-tutor.tsx/index.ts'
+import AddressTutor from '../molecules/address-tutor.tsx'
 
 import { useMemo } from 'react'
 import * as yup from 'yup'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { useModeEditablePet } from '../hooks/use-mode-editable-pet.tsx'
+import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
 
 type StepTutorsKeys = Pick<InitialValues, 'ownerEmergencyContact' | 'cpf_cnpj'>
 

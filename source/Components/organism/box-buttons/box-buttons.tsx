@@ -86,7 +86,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                 }
                 label="Reagendar"
                 onClick={onClickReScheduled}
-                className="border-none mobile:!w-full mobile:col-span-1 text-gray-500 tablet:w-28"
+                className="border-none mobile:!w-full mobile:col-span-1 text-gray-500 tablet:w-full"
             >
                 <FaEdit />
             </BtnRescheduled>
@@ -99,7 +99,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.done === 'no'
                 }
                 label="Confirmar"
-                className="border-none mobile:!w-full mobile:col-span-1 text-gray-200  tablet:w-28"
+                className="border-none mobile:!w-full mobile:col-span-1 text-gray-200 tablet:w-full "
                 onClick={onClickConfirmed}
             >
                 <FaCheckCircle />
@@ -112,7 +112,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.done === 'no'
                 }
                 label="Iniciar"
-                className="border-none mobile:!w-full mobile:col-span-1  tablet:w-28"
+                className="border-none mobile:!w-full mobile:col-span-1  tablet:w-full"
                 onClick={startAppointment}
             >
                 <FaPlayCircle />

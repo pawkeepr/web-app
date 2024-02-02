@@ -54,10 +54,10 @@ module.exports = {
                 },
                 tablet: {
                     min: '768px',
-                    max: '991px',
+                    max: '1024px',
                 },
                 web: {
-                    min: '992px',
+                    min: '1025px',
                 },
             },
         },

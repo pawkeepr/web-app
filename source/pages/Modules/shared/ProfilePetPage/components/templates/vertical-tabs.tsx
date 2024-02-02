@@ -74,7 +74,9 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
     return (
         <div
             className="
-                flex flex-col relative bg-transparent h-fit overflow-auto mobile:!w-full  mobile:!m-0 mobile:!p-0
+                flex flex-col relative bg-transparent h-fit overflow-auto 
+                mobile:!w-full mobile:!m-0 mobile:!p-0
+                tablet:!w-full tablet:!m-0 tablet:!p-0 tablet:!flex-col
                 "
         >
             <div className="w-full flex justify-center items-center">

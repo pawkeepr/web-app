@@ -1,7 +1,7 @@
 import DashboardLayouts from '../../_layouts/dashboard'
 
 import type { IPet } from '~/types/pet'
-import CreateOrUpdatePetPage from './CreateOrUpdatePetPage'
+import ProfilePetPage from './ProfilePetPage'
 
 export type InitialValues = Nullable<IPet>
 
@@ -14,7 +14,7 @@ const NewPetPage = (props: PetPageProps) => {
     const title = props.id_pet ? 'Editar Pet' : 'Novo Pet'
     return (
         <DashboardLayouts title={title} searchBlock={false}>
-            <CreateOrUpdatePetPage {...props} />
+            <ProfilePetPage {...props} />
         </DashboardLayouts>
     )
 }
