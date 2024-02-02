@@ -54,7 +54,7 @@ const StepGeral = ({ toggleTab }: StepProps) => {
                     ctx={values}
                     label="Motivação da Consulta"
                     required
-                    name="details_pet_consultation.motivation"
+                    name="dates_consults.reason_consultation"
                     divClassName="col-span-full"
                 />
             </div>

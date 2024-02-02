@@ -11,7 +11,7 @@ import QuestionsAnamnese from './questions-anamnese'
 
 export type CtxStepAnamnese = Pick<
     VeterinaryConsultation,
-    'anamnesis' | 'details_pet_consultation'
+    'anamnesis' | 'details_pet_consultation' | 'dates_consults'
 >
 
 const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionAnamnesis>>({
