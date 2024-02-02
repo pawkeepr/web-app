@@ -1,6 +1,7 @@
 import Image from 'next/image'
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
+import { TbLogout } from 'react-icons/tb'
 
 //import Components
 import { useEffect, useRef, useState } from 'react'
@@ -12,7 +13,6 @@ import LightDark from '../common/light-dark'
 
 import Bars3CenterLeftIcon from '@heroicons/react/24/solid/Bars3CenterLeftIcon'
 
-import { ArrowRightCircleIcon } from '@heroicons/react/24/solid'
 import DrawerVet from '~/Components/organism/drawer'
 import type { ModeDrawerItems } from '~/Components/organism/drawer/drawer'
 
@@ -43,37 +43,6 @@ const Header = ({
             )
         }
     }, [dispatch])
-
-    // const toggleMenuBtn = () => {
-    //     var windowSize = document.documentElement.clientWidth;
-
-    //     if (windowSize > 767)
-    //         document.querySelector(".hamburger-icon").classList.toggle('open');
-
-    //     //For collapse horizontal menu
-    //     if (document.documentElement.getAttribute('data-layout') === "horizontal") {
-    //         document.body.classList.contains("menu") ? document.body.classList.remove("menu") : document.body.classList.add("menu");
-    //     }
-
-    //     //For collapse vertical menu
-    //     if (document.documentElement.getAttribute('data-layout') === "vertical") {
-    //         if (windowSize < 1025 && windowSize > 767) {
-    //             document.body.classList.remove('vertical-sidebar-enable');
-    //             (document.documentElement.getAttribute('data-sidebar-size') === 'sm') ? document.documentElement.setAttribute('data-sidebar-size', '') : document.documentElement.setAttribute('data-sidebar-size', 'sm');
-    //         } else if (windowSize > 1025) {
-    //             document.body.classList.remove('vertical-sidebar-enable');
-    //             (document.documentElement.getAttribute('data-sidebar-size') === 'lg') ? document.documentElement.setAttribute('data-sidebar-size', 'sm') : document.documentElement.setAttribute('data-sidebar-size', 'lg');
-    //         } else if (windowSize <= 767) {
-    //             document.body.classList.add('vertical-sidebar-enable');
-    //             document.documentElement.setAttribute('data-sidebar-size', 'lg');
-    //         }
-    //     }
-
-    //     //Two column menu
-    //     if (document.documentElement.getAttribute('data-layout') === "twocolumn") {
-    //         document.body.classList.contains('twocolumn-panel') ? document.body.classList.remove('twocolumn-panel') : document.body.classList.add('twocolumn-panel');
-    //     }
-    // };
 
     const handleShow = () => setShow(!show)
     const handleClose = () => setShow(false)
@@ -136,11 +105,12 @@ const Header = ({
 
                     {/* NotificationDropdown */}
                     {/* <NotificationDropdown /> */}
-                    <Link href={'/logout'}>
-                        <ArrowRightCircleIcon
-                            className="w-8 text-cyan-50 h-6 m-2"
+                    <Link className="flex flex-col w-8 ml-7" href={'/logout'}>
+                        <TbLogout
+                            className="w-6 text-cyan-50 h-6"
                             viewBox="0 0 24 24"
                         />
+                        <span className="text-white text-xs font-medium">Sair</span>
                     </Link>
                 </div>
 

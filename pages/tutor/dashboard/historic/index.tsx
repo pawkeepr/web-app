@@ -1,4 +1,4 @@
-import HistoricPage from '~/pages/Modules/veterinary/HistoricPage'
+import HistoricPage from '~/pages/Modules/tutor/HistoricPage/HistoricPage'
 
 import { LayoutTutor } from '~/Layouts'
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'

@@ -1,0 +1,13 @@
+.field-document {
+    input {
+        ~div {
+            margin-top: 2px;
+        }
+    }
+
+    input:focus~div {
+        svg {
+            fill: #09b285;
+        }
+    }
+}

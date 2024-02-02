@@ -65,7 +65,7 @@ export const APPOINTMENT_UPDATE_RESCHEDULED = (id_appointment: string) =>
 export const APPOINTMENT_CREATE_SCHEDULED_VET = () =>
     '/api-appointment/create-scheduled-vet'
 
-// Pets in Clinic
+// Pets and tutors in Clinic
 
 export const PET_FETCH_ALL_CLINIC = () => '/api-user/fetch-all-pets-vet'
 export const TUTORS_FETCH_ALL_CLINIC = () => '/api-user/fetch-all-tutors-vet'

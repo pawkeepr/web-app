@@ -41,7 +41,7 @@ const HistoricPage = <T,>() => {
     const categories = Tabs();
 
     return (
-        <DefaultLayout title="Dashboard" searchBlock name="historic">
+        <DefaultLayout title="Tutor-Historic" name="historic" searchBlock>
             <HorizontalTabs categories={categories} />
         </DefaultLayout>
     );

@@ -13,7 +13,7 @@ import Header from './Header'
 
 //redux
 import cn from 'classnames'
-import FieldDocumentAppointment from '~/Components/molecules/field-document-appointment'
+import FieldDocumentAppointment from '~/Components/molecules/field-appointment-vet'
 import Drawer from '~/Components/organism/drawer'
 import useHookLayout from './use-hook'
 
