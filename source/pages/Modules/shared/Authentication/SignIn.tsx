@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { LOADING } from '~/constants/loading'
 
@@ -11,26 +11,28 @@ import LoadingPage from '../LoadingPage'
 import AuthInputs from './components/organism/auth-inputs'
 
 const CoverSignIn = () => {
-    const [pageLoading, setPageLoading] = useState(false)
     const router = useRouter()
-    const { isLoading, isAuthenticated } = useAppSelector((state) => state.Login)
+    const { isLoading } = useAppSelector((state) => state.Login)
     const dispatch = useAppDispatch()
 
-    const loading = isLoading === LOADING.PENDING
+    const loading = isLoading === LOADING.PENDING || isLoading === LOADING.SUCCESS
 
     useEffect(() => {
-        if (isAuthenticated) {
-            setPageLoading(true)
+        if (isLoading === LOADING.SUCCESS) {
             router.prefetch('/dashboard')
             setTimeout(() => {
-                dispatch(resetLoading())
                 router.push('/dashboard')
             }, 1000)
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isAuthenticated])
+    }, [isLoading])
 
-    if (pageLoading) {
+    useEffect(() => {
+        return () => {
+            dispatch(resetLoading())
+        }
+    }, [])
+
+    if (isLoading === LOADING.SUCCESS) {
         return (
             <div className="min-h-screen auth-bg-cover flex flex-col ">
                 <div className="bg-overlay" />
