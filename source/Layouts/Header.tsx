@@ -1,26 +1,37 @@
-import Image from "next/image";
+import Image from 'next/image'
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
+import Link from 'next/link'
+import { TbLogout } from 'react-icons/tb'
 
 //import Components
-import { useEffect, useRef, useState } from "react";
-import { TbLogout } from "react-icons/tb";
-import { changeHeaderSize } from "~/store/actions";
-import { useAppDispatch } from "~/store/hooks";
-import lightLogo from "../../public/logo-light.png";
-import FullScreenDropdown from "../common/full-screen-dropdown";
-import LightDark from "../common/light-dark";
+import { useEffect, useRef, useState } from 'react'
+import { changeHeaderSize } from '~/store/actions'
+import { useAppDispatch } from '~/store/hooks'
+import lightLogo from '../../public/logo-light.png'
+import FullScreenDropdown from '../common/full-screen-dropdown'
+import LightDark from '../common/light-dark'
 
-import Bars3CenterLeftIcon from "@heroicons/react/24/solid/Bars3CenterLeftIcon";
+import Bars3CenterLeftIcon from '@heroicons/react/24/solid/Bars3CenterLeftIcon'
 
-import DrawerVet from "~/Components/organism/drawer-vet";
+import DrawerVet from '~/Components/organism/drawer'
+import type { ModeDrawerItems } from '~/Components/organism/drawer/drawer'
 
-const Header = ({ drawer: Drawer = DrawerVet }) => {
-    const [show, setShow] = useState<boolean>(false);
+type HeaderProps = {
+    drawer?: (props: {
+        closeDrawer: () => void
+        visibleDrawer: boolean
+        mode: ModeDrawerItems
+    }) => JSX.Element
+}
 
-    const divRef = useRef<HTMLDivElement>(null);
+const Header = ({
+    drawer: Drawer = (props) => <DrawerVet {...props} mode="VETERINARY" />,
+}: HeaderProps) => {
+    const [show, setShow] = useState<boolean>(false)
 
-    const dispatch = useAppDispatch();
+    const divRef = useRef<HTMLDivElement>(null)
+
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         if (divRef?.current) {
@@ -28,49 +39,18 @@ const Header = ({ drawer: Drawer = DrawerVet }) => {
                 changeHeaderSize({
                     width: divRef.current.offsetWidth,
                     height: divRef.current.offsetHeight,
-                })
-            );
+                }),
+            )
         }
-    }, [dispatch]);
+    }, [dispatch])
 
-    // const toggleMenuBtn = () => {
-    //     var windowSize = document.documentElement.clientWidth;
-
-    //     if (windowSize > 767)
-    //         document.querySelector(".hamburger-icon").classList.toggle('open');
-
-    //     //For collapse horizontal menu
-    //     if (document.documentElement.getAttribute('data-layout') === "horizontal") {
-    //         document.body.classList.contains("menu") ? document.body.classList.remove("menu") : document.body.classList.add("menu");
-    //     }
-
-    //     //For collapse vertical menu
-    //     if (document.documentElement.getAttribute('data-layout') === "vertical") {
-    //         if (windowSize < 1025 && windowSize > 767) {
-    //             document.body.classList.remove('vertical-sidebar-enable');
-    //             (document.documentElement.getAttribute('data-sidebar-size') === 'sm') ? document.documentElement.setAttribute('data-sidebar-size', '') : document.documentElement.setAttribute('data-sidebar-size', 'sm');
-    //         } else if (windowSize > 1025) {
-    //             document.body.classList.remove('vertical-sidebar-enable');
-    //             (document.documentElement.getAttribute('data-sidebar-size') === 'lg') ? document.documentElement.setAttribute('data-sidebar-size', 'sm') : document.documentElement.setAttribute('data-sidebar-size', 'lg');
-    //         } else if (windowSize <= 767) {
-    //             document.body.classList.add('vertical-sidebar-enable');
-    //             document.documentElement.setAttribute('data-sidebar-size', 'lg');
-    //         }
-    //     }
-
-    //     //Two column menu
-    //     if (document.documentElement.getAttribute('data-layout') === "twocolumn") {
-    //         document.body.classList.contains('twocolumn-panel') ? document.body.classList.remove('twocolumn-panel') : document.body.classList.add('twocolumn-panel');
-    //     }
-    // };
-
-    const handleShow = () => setShow(!show);
-    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(!show)
+    const handleClose = () => setShow(false)
 
     return (
         <header
             className={
-                "dark:!bg-primary-700 mb-2 !bg-primary-500 mobile:fixed mobile:z-50 w-full z-10 "
+                'dark:!bg-primary-700 mb-2 !bg-primary-500 mobile:fixed mobile:z-50 w-full z-10 '
             }
             ref={divRef}
         >
@@ -84,7 +64,11 @@ const Header = ({ drawer: Drawer = DrawerVet }) => {
                     <Bars3CenterLeftIcon className="h-6 w-6 text-white " />
                 </button>
 
-                <Drawer closeDrawer={handleClose} visibleDrawer={show} />
+                <Drawer
+                    closeDrawer={handleClose}
+                    visibleDrawer={show}
+                    mode="VETERINARY"
+                />
                 <div className="flex items-center justify-center">
                     <Link href="/" className="logo-light justify-center block">
                         <Image
@@ -121,21 +105,19 @@ const Header = ({ drawer: Drawer = DrawerVet }) => {
 
                     {/* NotificationDropdown */}
                     {/* <NotificationDropdown /> */}
-                    <Link className="flex flex-col w-8 ml-7" href={"/logout"}>
+                    <Link className="flex flex-col w-8 ml-7" href={'/logout'}>
                         <TbLogout
                             className="w-6 text-cyan-50 h-6"
                             viewBox="0 0 24 24"
                         />
-                        <span className="text-white text-xs font-medium">
-                            Sair
-                        </span>
+                        <span className="text-white text-xs font-medium">Sair</span>
                     </Link>
                 </div>
 
                 {/* <SearchOption /> */}
             </div>
         </header>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

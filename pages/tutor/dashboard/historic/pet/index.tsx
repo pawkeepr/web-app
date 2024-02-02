@@ -1,6 +1,6 @@
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
-import LayoutMain from '~/Layouts'
+import { LayoutTutor } from '~/Layouts'
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
 import HistoricPetPage from '~/pages/Modules/shared/HistoricPetPage'
 import { useModeEditablePet } from '~/pages/Modules/shared/NewPetPage/components/hooks/use-mode-editable-pet'
@@ -16,9 +16,9 @@ const PetsPage = () => {
     }, [])
 
     return (
-        <LayoutMain>
+        <LayoutTutor>
             <HistoricPetPage document={document} id_pet={id_pet} />
-        </LayoutMain>
+        </LayoutTutor>
     )
 }
 

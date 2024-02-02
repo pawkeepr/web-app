@@ -1,5 +1,5 @@
 import { useRouter, useSearchParams } from 'next/navigation'
-import LayoutMain from '~/Layouts'
+import { LayoutVeterinary } from '~/Layouts'
 import AppointmentsPage from '~/pages/Modules/veterinary/AppointmentsPage/Appointments'
 
 const AppointmentsNext = () => {
@@ -13,13 +13,13 @@ const AppointmentsNext = () => {
     if (!document || !pet) return push('/dashboard')
 
     return (
-        <LayoutMain>
+        <LayoutVeterinary>
             <AppointmentsPage
                 document={document}
                 pet={pet}
                 appointment_id={appointment_id}
             />
-        </LayoutMain>
+        </LayoutVeterinary>
     )
 }
 

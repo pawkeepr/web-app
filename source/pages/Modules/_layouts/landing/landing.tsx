@@ -54,7 +54,7 @@ const LandingLayout = ({
     return (
         <React.Fragment>
             <HeaderTitle title={title || ''} />
-            <div className="layout-wrapper landing">
+            <div className="layout-wrapper landing !bg-primary-500 min-h-screen">
                 <NabBar />
                 {children}
                 {/* <WorkProcess /> */}

@@ -1,6 +1,6 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
-import LayoutMain from '~/Layouts'
+import { LayoutVeterinary } from '~/Layouts'
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
 import Page from '~/pages/Modules/shared/NewPetPage'
 import { useModeEditablePet } from '~/pages/Modules/shared/NewPetPage/components/hooks/use-mode-editable-pet'
@@ -18,9 +18,9 @@ const PetsPage = () => {
     if (!document) return push('/dashboard')
 
     return (
-        <LayoutMain>
+        <LayoutVeterinary>
             <Page document={document} />
-        </LayoutMain>
+        </LayoutVeterinary>
     )
 }
 

@@ -13,20 +13,18 @@ import Header from './Header'
 
 //redux
 import cn from 'classnames'
-import FieldDocumentAppointment from '~/Components/molecules/field-appointment-vet'
-import Drawer from '~/Components/organism/drawer'
+import FieldDocumentAppointment from '~/Components/molecules/field-document-appointment'
 import useHookLayout from './use-hook'
 
 type LayoutProps = {
     children: React.ReactNode
 }
 
-const LayoutTutor = ({ children }: LayoutProps) => {
+const LayoutMain = ({ children }: LayoutProps) => {
     useHookLayout()
-
     return (
         <div id="relative">
-            <Header drawer={(props) => <Drawer {...props} mode="TUTOR" />} />
+            <Header />
             {/* <Sidebar layoutType={layoutType} /> */}
 
             <div
@@ -44,7 +42,7 @@ const LayoutTutor = ({ children }: LayoutProps) => {
                 {children}
                 <FieldDocumentAppointment selectedTabInitial={0}>
                     {({ onChangeOpen }) => (
-                        <div className="fixed mobile:flex mobile:flex-col items-center justify-center mobile:opacity-100 bottom-4 z-50 mobile:bottom-4 right-4  mobile:right-4 hidden ">
+                        <div className="fixed flex flex-col items-center justify-center opacity-100 z-50 mobile:bottom-20 web:bottom-10 right-4">
                             <button
                                 type="button"
                                 onClick={() => onChangeOpen(true)}
@@ -69,8 +67,8 @@ const LayoutTutor = ({ children }: LayoutProps) => {
     )
 }
 
-LayoutTutor.propTypes = {
+LayoutMain.propTypes = {
     children: PropTypes.object,
 }
 
-export default LayoutTutor
+export default LayoutMain
