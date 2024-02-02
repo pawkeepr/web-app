@@ -99,7 +99,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                 <FieldPhone
                     divClassName="col-span-1 mobile:col-span-full"
                     t
-                    label="WhatsApp"
+                    label="WhatsApp Comercial"
                     name="contact.whatsapp"
                     placeholder="Digite o seu Número do WhatsApp"
                     required
