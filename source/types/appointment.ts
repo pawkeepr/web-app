@@ -66,6 +66,7 @@ export interface DetailsPetConsultation {
     height: string
     length: string
     weight: string
+    motivation: string
     type_weight: string
     imc: number
 }

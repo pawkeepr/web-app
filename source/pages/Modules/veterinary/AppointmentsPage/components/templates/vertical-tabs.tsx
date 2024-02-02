@@ -9,6 +9,7 @@ import useResizeMobile from '~/hooks/use-resize-mobile'
 import { useAppSelector } from '~/store/hooks'
 import type { StepProps, Tabs } from '~/types/helpers'
 import StepAnamneses from '../organisms/steps/step-anamnese'
+import StepGeral from '../organisms/steps/step-geral'
 import StepPayment from '../organisms/steps/step-payment'
 import StepTreatment from '../organisms/steps/step-treatment'
 
@@ -22,18 +23,24 @@ type TabItem = {
 const items: TabItem[] = [
     {
         id: 1,
+        title: 'Prontuário',
+        href: '#Prontuário',
+        Component: StepGeral,
+    },
+    {
+        id: 2,
         title: 'Anamnese',
         href: '#Anamnese',
         Component: StepAnamneses,
     },
     {
-        id: 2,
+        id: 3,
         title: 'Tratamento',
         href: '#Treatment',
         Component: StepTreatment,
     },
     {
-        id: 3,
+        id: 4,
         title: 'Finalizar',
         href: '#Finalizar',
         Component: StepPayment,
@@ -83,7 +90,6 @@ const VerticalTabs = () => {
                                 <NavItem key={item.id}>
                                     <NavLink
                                         href={item.href}
-                                        disabled
                                         id="steparrow-gen-info-tab"
                                         className={cn({
                                             active: activeVerticalTab === item.id,

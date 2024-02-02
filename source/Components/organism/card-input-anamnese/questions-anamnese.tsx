@@ -1,10 +1,8 @@
 import { Form } from 'formik'
 import { startTransition, useEffect, useMemo } from 'react'
-import { BtnConfirm } from '~/Components/atoms/btn'
+import ControlSwitchDiv from '~/Components/molecules/control-switch-div'
 import type { OptionSelect } from '~/Components/molecules/field-control'
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import FieldTextArea from '~/Components/molecules/field-text-area'
-import RadioGroup from '~/Components/molecules/radio-group'
 import type { KeyOfQuestionTypes, Question } from '~/constants/anamnese-questions'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { QuestionAnamnesis } from '~/types/appointment'
@@ -31,7 +29,7 @@ const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => {
 }
 
 const QuestionsAnamnese = ({ category, questions }: QuestionAnamneseProps) => {
-    const { values, handleSubmit, isValid, setFieldValue } =
+    const { values, handleSubmit, setFieldValue } =
         useFormikContextSafe<QuestionAnamnesis>()
 
     const options = useMemo(
@@ -49,48 +47,15 @@ const QuestionsAnamnese = ({ category, questions }: QuestionAnamneseProps) => {
     }, [category])
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <FieldControlSelect
-                ctx={values}
-                name="type_anamnesis"
-                required
-                label="Questão"
-                options={options}
-                isDisabled={options?.length === 0}
-            />
-            <RadioGroup
-                ctx={values}
-                title="Resposta"
-                checked={values.options_anamnesis}
-                name="options_anamnesis"
-                items={[
-                    {
-                        id: 'yes',
-                        name: 'Sim',
-                        value: 'yes',
-                    },
-                    {
-                        id: 'no',
-                        name: 'Não',
-                        value: 'no',
-                    },
-                    {
-                        id: 'other',
-                        name: 'Outro',
-                        value: 'other',
-                    },
-                ]}
-            />
-            <FieldTextArea ctx={values} name="notes_anamnesis" label="Anotações" />
-            <div className="flex align-items-center justify-center gap-3 mt-4">
-                {/* <BtnSecondary label="Pular (Espaço)" type="submit" /> */}
-                <BtnConfirm
-                    disabled={!isValid}
-                    className="text-white"
-                    label="Responder"
-                    type="submit"
+        <Form onSubmit={handleSubmit} className="grid grid-cols-1">
+            {options.map((item) => (
+                <ControlSwitchDiv
+                    ctx={values}
+                    label={item.label}
+                    divClassName="col-span-1 mobile:col-span-full"
                 />
-            </div>
+            ))}
+            <FieldTextArea ctx={values} name="notes_anamnesis" label="Anotações" />
         </Form>
     )
 }

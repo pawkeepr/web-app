@@ -8,7 +8,7 @@ import type {
 import type { RecordsShapeYup } from '~/types/helpers'
 
 export type CtxStepTreatment = Pick<VeterinaryConsultation, 'treatments'>
-
+export type { CtxStepAnamnese }
 export const schemaValidationDetailsPetConsultation = yup
     .object()
     .shape<RecordsShapeYup<VeterinaryConsultation['details_pet_consultation']>>({
@@ -17,6 +17,7 @@ export const schemaValidationDetailsPetConsultation = yup
         imc: yup.string().optional().nullable(),
         length: yup.string().optional().nullable(),
         type_weight: yup.string().optional().nullable(),
+        motivation: yup.string().required(),
         weight: yup
             .number() // Define o campo como numérico
             .transform((value) => (Number.isNaN(value) ? undefined : Number(value))) // Converte de string para número
