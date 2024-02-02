@@ -4,11 +4,11 @@ import cn from 'classnames'
 
 import Input from '../../atoms/text-area'
 
-import { ChangeEvent } from 'react'
+import type { ChangeEvent } from 'react'
 import { twMerge } from 'tailwind-merge'
 import Label from '~/Components/atoms/label'
 import withControl from '~/Components/helpers/with-control'
-import { InputControlProps } from '../field-control'
+import type { InputControlProps } from '../field-control'
 
 const FieldTextArea = <T, Ctx>({
     endIcon,
@@ -19,15 +19,14 @@ const FieldTextArea = <T, Ctx>({
     separator = ':',
     onChange,
     className,
+    divClassName,
     div,
     label,
-    ctx,
     ...rest
 }: InputControlProps<T, Ctx>) => {
     const [field, meta] = useField(rest.name as string)
     const id = rest.id || rest.name
     const ComponentInput = input as JSX.ElementType
-    const error = meta.touched && meta.error
 
     const handleChange = (
         e: ChangeEvent<HTMLInputElement> &
@@ -39,7 +38,7 @@ const FieldTextArea = <T, Ctx>({
     }
 
     return (
-        <div {...div} className={twMerge('w-full', div?.className)}>
+        <div {...div} className={twMerge('w-full', div?.className, divClassName)}>
             <Label
                 label={label}
                 required={required}
@@ -86,4 +85,4 @@ const FieldTextArea = <T, Ctx>({
     )
 }
 
-export default (withControl(FieldTextArea) as typeof FieldTextArea)
+export default withControl(FieldTextArea) as typeof FieldTextArea

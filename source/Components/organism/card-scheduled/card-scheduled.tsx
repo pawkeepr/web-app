@@ -28,6 +28,7 @@ type CardScheduledProps = {
 export const card = tv({
     base: `
         bg-white relative flex flex-row rounded-sm px-2 py-2 shadow-md focus:outline-none h-64 mobile:h-[540px] mobile:!p-12
+        tablet:h-fit
     `,
     variants: {
         checked: {

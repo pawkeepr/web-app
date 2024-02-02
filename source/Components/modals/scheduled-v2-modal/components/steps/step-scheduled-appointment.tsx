@@ -64,7 +64,7 @@ const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) 
                 payment: {
                     coin: '',
                     date_payment: '',
-                    form_payment: '',
+                    form_payment: 'cash',
                     number_installments: '',
                     status_payment: '',
                     value_payment: '',
@@ -175,6 +175,7 @@ const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) 
                         />
                         <FieldTextArea
                             ctx={values}
+                            required
                             label="Razão da consulta"
                             className="form-control"
                             component="textarea"

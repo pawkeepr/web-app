@@ -56,7 +56,15 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
     }, [isMobile])
 
     return (
-        <div className="gap-1 justify-end items-end h-full flex w-full mobile:grid mobile:grid-cols-1 flex-wrap">
+        <div
+            className="
+                gap-1 justify-end items-end 
+                h-full flex w-full 
+                mobile:grid mobile:grid-cols-1
+                tablet:grid tablet:grid-cols-3
+                flex-wrap
+            "
+        >
             <BtnCancel
                 condition={
                     !isLoading &&
@@ -65,7 +73,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                 }
                 label={labelCancel}
                 onClick={onClickCancel}
-                className="text-red-500 border-none mobile:col-span-1 web:absolute web:top-0 web:right-0 web:w-fit web:hover:!bg-transparent"
+                className="text-red-500 border-none mobile:relative mobile:col-span-1 absolute top-0 right-0 w-fit hover:!bg-transparent"
             >
                 <MdClose className="h-6 w-6" />
             </BtnCancel>
@@ -78,7 +86,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                 }
                 label="Reagendar"
                 onClick={onClickReScheduled}
-                className="border-none mobile:!w-full mobile:col-span-1 text-gray-500"
+                className="border-none mobile:!w-full mobile:col-span-1 text-gray-500 tablet:w-28"
             >
                 <FaEdit />
             </BtnRescheduled>
@@ -91,7 +99,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.done === 'no'
                 }
                 label="Confirmar"
-                className="border-none mobile:!w-full mobile:col-span-1 text-gray-200"
+                className="border-none mobile:!w-full mobile:col-span-1 text-gray-200  tablet:w-28"
                 onClick={onClickConfirmed}
             >
                 <FaCheckCircle />
@@ -104,7 +112,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.done === 'no'
                 }
                 label="Iniciar"
-                className="border-none mobile:!w-full mobile:col-span-1"
+                className="border-none mobile:!w-full mobile:col-span-1  tablet:w-28"
                 onClick={startAppointment}
             >
                 <FaPlayCircle />

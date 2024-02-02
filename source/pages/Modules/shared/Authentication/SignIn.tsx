@@ -46,7 +46,7 @@ const CoverSignIn = () => {
                     Seja Bem-vindo(a)!
                 </p>
             </div>
-            <div className="mobile:!mt-0 mobile:p-0 p-4">
+            <div className="mobile:!mt-0 mobile:p-0 web:p-4">
                 {loading && (
                     <div className="flex justify-center item-center web:min-h-[236px]">
                         <div

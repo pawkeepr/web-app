@@ -2,8 +2,6 @@ import cn from 'classnames'
 import { Formik, type FormikHelpers } from 'formik'
 import { useEffect, useMemo, useState } from 'react'
 import * as Yup from 'yup'
-import { BtnConfirm } from '~/Components/atoms/btn'
-import FieldNumber from '~/Components/molecules/field-number'
 import type { KeyOfQuestionTypes, Question } from '~/constants/anamnese-questions'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import useResizeMobile from '~/hooks/use-resize-mobile'
@@ -43,10 +41,6 @@ const STEPS: {
     title: string
     value: KeyOfQuestionTypes
 }[] = [
-    {
-        title: 'Informações Gerais',
-        value: 'general_information',
-    },
     {
         title: 'Sistema Digestivo',
         value: 'digestive_system',
@@ -101,24 +95,8 @@ const makeTitle = (title: string, isMobile: boolean) => {
 const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
     const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>()
 
-    const [category, setCategory] =
-        useState<KeyOfQuestionTypes>('general_information')
+    const [category, setCategory] = useState<KeyOfQuestionTypes>('digestive_system')
     const { isMobile } = useResizeMobile()
-
-    const filtered = useMemo(() => {
-        if (!values?.anamnesis?.questions_anamnesis) return items
-
-        // filtra items eliminando os que já estão no array de anamnese
-        return items.filter((item) => {
-            const exists = values?.anamnesis?.questions_anamnesis?.find(
-                (question) => {
-                    return question.name_anamnesis === item.question
-                },
-            )
-
-            return !exists
-        })
-    }, [items, values?.anamnesis?.questions_anamnesis])
 
     const height = useMemo(
         () => values.details_pet_consultation?.height,
@@ -171,71 +149,22 @@ const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
                     </button>
                 ))}
             </div>
-            {category === 'general_information' && (
-                <div className="grid grid-cols-1 gap-3">
-                    <FieldNumber
-                        ctx={values}
-                        label="Peso"
-                        placeholder="Peso do pet em quilos, exemplo = 0.5 (500 gramas)"
-                        required
-                        name="details_pet_consultation.weight"
-                    />
 
-                    <FieldNumber
-                        ctx={values}
-                        label="Altura"
-                        placeholder="Altura do pet em centímetros, exemplo = 32"
-                        name="details_pet_consultation.height"
-                    />
+            <Formik
+                initialValues={{
+                    list_notes_anamnesis: [] as string[],
+                    logical_list_default_anamnesis: 'logical',
+                    name_anamnesis: '',
+                    type_anamnesis: '',
+                    notes_anamnesis: '',
+                    options_anamnesis: 'no',
+                }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+            >
+                {() => <QuestionsAnamnese category={category} questions={items} />}
+            </Formik>
 
-                    <FieldNumber
-                        ctx={values}
-                        label="Comprimento"
-                        placeholder="Comprimento do pet em centímetros "
-                        className="border-gray-300"
-                        name="details_pet_consultation.length"
-                    />
-
-                    <div>
-                        {values.details_pet_consultation?.imc > 0 && (
-                            <h2 className="m-4 font-bold">
-                                O IMC do animal é:{' '}
-                                {values.details_pet_consultation?.imc?.toFixed(2)}
-                            </h2>
-                        )}
-                    </div>
-
-                    <div className="flex align-items-center justify-center gap-3 mt-4">
-                        <BtnConfirm
-                            className="text-white"
-                            label="Responder"
-                            onClick={() => setCategory('digestive_system')}
-                            type="button"
-                        />
-                    </div>
-                </div>
-            )}
-            {category !== 'general_information' && (
-                <Formik
-                    initialValues={{
-                        list_notes_anamnesis: [] as string[],
-                        logical_list_default_anamnesis: 'logical',
-                        name_anamnesis: '',
-                        type_anamnesis: '',
-                        notes_anamnesis: '',
-                        options_anamnesis: 'no',
-                    }}
-                    validationSchema={validationSchema}
-                    onSubmit={handleSubmit}
-                >
-                    {() => (
-                        <QuestionsAnamnese
-                            category={category}
-                            questions={filtered}
-                        />
-                    )}
-                </Formik>
-            )}
             {/* Botões de Próximo e Anterior 
             <button type="button" className="absolute bottom-4 left-4">
                 Anterior
