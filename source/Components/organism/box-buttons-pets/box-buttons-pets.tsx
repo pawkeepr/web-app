@@ -17,9 +17,7 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
     // const { setItem, open, close } = usePlusModal()
 
     const onClickEdit = useCallback(() => {
-        router.push(
-            `/dashboard/historic/pet?document=${item.cpf_cnpj}&id_pet=${item.id_pet}`,
-        )
+        router.push(`/profile/pet?document=${item.cpf_cnpj}&id_pet=${item.id_pet}`)
     }, [item])
 
     const startAppointment = useCallback(() => {
