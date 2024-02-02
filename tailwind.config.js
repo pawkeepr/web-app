@@ -52,8 +52,12 @@ module.exports = {
                 mobile: {
                     max: '767px',
                 },
-                web: {
+                tablet: {
                     min: '768px',
+                    max: '991px',
+                },
+                web: {
+                    min: '992px',
                 },
             },
         },
