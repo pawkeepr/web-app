@@ -25,6 +25,7 @@ import {
 } from '~/store/slices/auth/register/actions'
 import type { AccountSignUp } from '~/store/slices/auth/register/types'
 import AuthLayout from '../../_layouts/auth/auth_layout'
+import type { CoverSignInProps } from './SignIn'
 
 const validationSchema = Yup.object({
     email: validateEmail,
@@ -59,7 +60,7 @@ const initialValues: AccountSignUp = {
     privacyPolicy: false,
 }
 
-const CoverSignUp = () => {
+const CoverSignUp = ({ mode, bgImage }: CoverSignInProps) => {
     const dispatch = useAppDispatch()
     const router = useRouter()
     const isLoading = useAppSelector((state) => state.Login.isLoading)
@@ -75,10 +76,12 @@ const CoverSignUp = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    const link = mode === 'veterinary' ? '/veterinary/sign-in' : '/tutor/sign-in'
+
     return (
         <AuthLayout
             title="Criar conta"
-            image="/bg-sign-up.webp"
+            image={bgImage}
             alt="Imagem cartunizada de pessoas e um globo terrestre se comunicando"
         >
             <Formik
@@ -141,7 +144,7 @@ const CoverSignUp = () => {
                                         'Você se registrando aceita os termos de uso da plataforma: '
                                     }
                                     <Link
-                                        href="#"
+                                        href="/service-terms"
                                         className="text-primary no-underline fst-normal fw-medium"
                                     >
                                         Termos de Uso.{' '}
@@ -154,7 +157,7 @@ const CoverSignUp = () => {
                                         'Você se registrando aceita a política de privacidade da plataforma: '
                                     }
                                     <Link
-                                        href="#"
+                                        href="/privacy-policy"
                                         className="text-primary no-underline fst-normal fw-medium"
                                     >
                                         Política de Privacidade
@@ -184,12 +187,12 @@ const CoverSignUp = () => {
             </Formik>
             <div className="mobile:hidden w-full flex flex-col justify-center items-center !h-fit">
                 <p className="text-xs">Você já tem uma conta ?</p>
-                <BtnLink className="p-0 h-fit" href="/sign-in" message="Entrar" />
+                <BtnLink className="p-0 h-fit" href={link} message="Entrar" />
             </div>
             <BtnLink
                 message="Voltar"
                 className="hidden mobile:flex max-w-fit absolute top-2 left-2  items-center justify-start"
-                href="/sign-in"
+                href={link}
             >
                 <ArrowLeftCircleIcon />
             </BtnLink>

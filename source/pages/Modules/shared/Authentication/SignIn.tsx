@@ -10,7 +10,12 @@ import AuthLayout from '../../_layouts/auth/auth_layout'
 import LoadingPage from '../LoadingPage'
 import AuthInputs from './components/organism/auth-inputs'
 
-const CoverSignIn = () => {
+export type CoverSignInProps = {
+    mode: 'veterinary' | 'tutor'
+    bgImage: '/bg-sign-in.webp' | '/bg-three.jpg' | '/bg-sign-up.webp'
+}
+
+const CoverSignIn = ({ mode, bgImage }: CoverSignInProps) => {
     const router = useRouter()
     const { isLoading } = useAppSelector((state) => state.Login)
     const dispatch = useAppDispatch()
@@ -32,6 +37,8 @@ const CoverSignIn = () => {
         }
     }, [])
 
+    const link = mode === 'veterinary' ? '/veterinary/sign-up' : '/tutor/sign-up'
+
     if (isLoading === LOADING.SUCCESS) {
         return (
             <div className="min-h-screen auth-bg-cover flex flex-col ">
@@ -42,7 +49,7 @@ const CoverSignIn = () => {
     }
 
     return (
-        <AuthLayout title="Entrar" image="/bg-sign-in.webp" alt="Imagem" hasImage>
+        <AuthLayout title="Entrar" image={bgImage} alt="Imagem" hasImage>
             <div className="flex flex-col justify-center items-center gap-3 lg:mt-5">
                 <p className="text-sm font-bold text-secondary-500">
                     Seja Bem-vindo(a)!
@@ -71,7 +78,7 @@ const CoverSignIn = () => {
                 <p className="-mb-2 text-gray-400 font-normal">
                     Você não tem uma conta ?
                 </p>
-                <BtnLink message="Criar Conta" href="/sign-up" />
+                <BtnLink message="Criar Conta" href={link} />
             </div>
         </AuthLayout>
     )

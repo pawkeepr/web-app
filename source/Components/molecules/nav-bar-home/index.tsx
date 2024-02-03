@@ -35,7 +35,7 @@ export const ButtonsNavBar = () => {
                         'border-0 ': isMobile,
                     },
                 )}
-                href="/sign-in"
+                href="/veterinary/sign-in"
             >
                 {/* icon de cadastro */}
                 <FaStethoscope className="w-6 h-4" />

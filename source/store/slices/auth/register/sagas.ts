@@ -1,4 +1,4 @@
-import { PayloadAction } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 import { all, call, delay, fork, put, takeEvery } from 'redux-saga/effects'
 
 //Account Redux states
@@ -7,7 +7,7 @@ import { registerUser, registerUserFailed, registerUserSuccessful } from './acti
 //Include Both Helper File with needed methods
 import { singUpAws } from '~/services/helpers/auth'
 
-import { AccountSignUp } from './types'
+import type { AccountSignUp } from './types'
 
 import { errorToast, infoToast, successToast } from '~/store/helpers/toast'
 
