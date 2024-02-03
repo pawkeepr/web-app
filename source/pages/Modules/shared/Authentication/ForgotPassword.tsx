@@ -22,6 +22,7 @@ import LOADING from '~/constants/loading'
 import { useAppSelector } from '~/store/hooks'
 import validatePassword from '~/validations/password'
 import AuthLayout from '../../_layouts/auth/auth_layout'
+import type { CoverSignInProps } from './SignIn'
 import StepEmail from './components/organism/steps-forget-password/step-email'
 import StepPassword from './components/organism/steps-forget-password/step-password'
 const validationSchema = Yup.object({
@@ -40,7 +41,7 @@ const initialValues: InitialValues = {
     code: '',
 }
 
-const ForgetPasswordPage = () => {
+const ForgetPasswordPage = ({ mode }: Partial<CoverSignInProps>) => {
     const [selectedTab, setSelectedTab] = useState(0)
     const router = useRouter()
     const dispatch = useDispatch()
@@ -51,7 +52,7 @@ const ForgetPasswordPage = () => {
     useEffect(() => {
         if (isLoading === LOADING.SUCCESS) {
             setTimeout(() => {
-                router.push('/sign-in')
+                router.push(`${mode}/sign-in`)
             })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
