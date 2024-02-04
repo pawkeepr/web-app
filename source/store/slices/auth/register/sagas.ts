@@ -10,11 +10,19 @@ import { singUpAws } from '~/services/helpers/auth'
 import type { AccountSignUp } from './types'
 
 import { errorToast, infoToast, successToast } from '~/store/helpers/toast'
+import { TypeProfile } from '~/types/profile'
 
 // Is user register successful then direct plot user in redux.
 function* registerUserSaga({ payload: user }: PayloadAction<AccountSignUp>) {
+    // pegar o path da url
+    const path = window.location.pathname
+    const isVeterinary = /veterinary/.test(path)
+
     try {
-        yield call(singUpAws, user)
+        yield call(singUpAws, {
+            ...user,
+            type_profile: isVeterinary ? TypeProfile.VETERINARY : TypeProfile.TUTOR,
+        })
         successToast(
             'Um e-mail de confirmação foi enviado para o seu e-mail.',
             'Registro realizado com sucesso!',

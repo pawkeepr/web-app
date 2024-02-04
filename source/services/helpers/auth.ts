@@ -14,12 +14,13 @@ export async function resendConfirmationCode(username: string) {
 }
 
 export const singUpAws = async (data: AccountSignUp) => {
-    const { email, password, ...rest } = data
+    const { email, password, type_profile, ..._ } = data
     return await Auth.signUp({
         username: email,
         password,
         attributes: {
             email,
+            type_profile,
         },
     })
 }

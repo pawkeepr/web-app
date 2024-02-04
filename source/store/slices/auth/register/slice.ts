@@ -7,7 +7,6 @@ import { registerUser, resetRegisterFlag } from './actions'
 
 const initialState: AccountState = {
     message: null,
-    typeProfile: null,
     loading: LOADING.IDLE,
     success: false,
     error: false,
@@ -33,9 +32,6 @@ const accountSlice = createSlice({
             state.loading = LOADING.IDLE
             state.success = false
             state.error = false
-        },
-        onChangeTypeProfile: (state, action) => {
-            state.typeProfile = action.payload
         },
     },
 })
