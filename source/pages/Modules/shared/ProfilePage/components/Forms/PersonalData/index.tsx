@@ -1,125 +1,109 @@
-import Button from 'react-bootstrap/Button'
-import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import FieldControl from "~/Components/molecules/field-control";
 
 const PersonalData = () => {
     return (
         <Form>
-            <Row>
-                <Col lg={6}>
+            <div>
+                <div>
                     <div className="mb-3">
-                        <Form.Label htmlFor="firstnameInput" className="form-label">
-                            First Name
-                        </Form.Label>
-                        <Form.Control
+                        <FieldControl
+                            label="Nome"
                             type="text"
+                            name={"firstname"}
                             className="form-control"
                             id="firstnameInput"
-                            placeholder="Enter your firstname"
+                            placeholder="Digite seu nome"
                         />
                     </div>
-                </Col>
-                <Col lg={6}>
+                </div>
+                <div>
                     <div className="mb-3">
-                        <Form.Label htmlFor="lastnameInput" className="form-label">
-                            Last Name
-                        </Form.Label>
-                        <Form.Control
+                        <FieldControl
+                            label="Sobrenome"
                             type="text"
+                            name={"lastname"}
                             className="form-control"
                             id="lastnameInput"
-                            placeholder="Enter your lastname"
+                            placeholder="Digite seu sobrenome"
                         />
                     </div>
-                </Col>
-                <Col lg={6}>
+                </div>
+                <div>
                     <div className="mb-3">
-                        <Form.Label
-                            htmlFor="phonenumberInput"
-                            className="form-label"
-                        >
-                            Phone Number
-                        </Form.Label>
-                        <Form.Control
+                        <FieldControl
+                            label="Telefone"
                             type="text"
+                            name={"phonenumber"}
                             className="form-control"
                             id="phonenumberInput"
-                            placeholder="Enter your phone number"
+                            placeholder="Digite seu telefone"
                         />
                     </div>
-                </Col>
-                <Col lg={6}>
+                </div>
+                <div>
                     <div className="mb-3">
-                        <Form.Label htmlFor="emailInput" className="form-label">
-                            Email Address
-                        </Form.Label>
-                        <Form.Control
+                        <FieldControl
+                            label="Email"
+                            name={"email"}
                             type="email"
                             className="form-control"
                             id="emailInput"
-                            placeholder="Enter your email"
+                            placeholder="Digite seu email"
                         />
                     </div>
-                </Col>
-                <Col lg={4}>
+                </div>
+                <div>
                     <div className="mb-3">
-                        <Form.Label htmlFor="cityInput" className="form-label">
-                            City
-                        </Form.Label>
-                        <Form.Control
+                        <FieldControl
+                            label="Cidade"
                             type="text"
+                            name={"city"}
                             className="form-control"
                             id="cityInput"
-                            placeholder="City"
+                            placeholder="Digite sua Cidade"
                         />
                     </div>
-                </Col>
-                <Col lg={4}>
+                </div>
+                <div>
                     <div className="mb-3">
-                        <Form.Label htmlFor="countryInput" className="form-label">
-                            Country
-                        </Form.Label>
-                        <Form.Control
+                        <FieldControl
+                            label="País"
                             type="text"
+                            name={"country"}
                             className="form-control"
                             id="countryInput"
-                            placeholder="Country"
+                            placeholder="Digite seu País"
                         />
                     </div>
-                </Col>
-                <Col lg={4}>
+                </div>
+                <div>
                     <div className="mb-3">
-                        <Form.Label htmlFor="zipcodeInput" className="form-label">
-                            Zip Code
-                        </Form.Label>
-                        <Form.Control
+                        <FieldControl
+                            label="CEP"
                             type="text"
+                            name={"zipcode"}
                             className="form-control"
                             minLength={5}
                             maxLength={6}
                             id="zipcodeInput"
-                            placeholder="Enter zipcode"
+                            placeholder="Digite seu CEP"
                         />
                     </div>
-                </Col>
-                <Col lg={12}>
+                </div>
+                <div>
                     <div className="mb-3 pb-2">
-                        <Form.Label
-                            htmlFor="exampleFormControlTextarea"
-                            className="form-label"
-                        >
-                            Description
-                        </Form.Label>
-                        <Form.Control
+                        <FieldControl
+                            label="Endereço"
+                            name={"address"}
                             as="textarea"
                             className="form-control"
-                            id="exampleFormControlTextarea"
-                            rows={3}
+                            id="exampleFormControlText\area"
                         />
                     </div>
-                </Col>
-                <Col lg={12}>
+                </div>
+                <div>
                     <div className="hstack gap-2 justify-content-end">
                         <Button type="button" className="btn-primary">
                             Atualizar
@@ -128,10 +112,10 @@ const PersonalData = () => {
                             Cancelar
                         </Button>
                     </div>
-                </Col>
-            </Row>
+                </div>
+            </div>
         </Form>
-    )
-}
+    );
+};
 
-export default PersonalData
+export default PersonalData;
