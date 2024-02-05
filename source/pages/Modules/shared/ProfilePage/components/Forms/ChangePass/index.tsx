@@ -1,82 +1,61 @@
 import Link from "next/link";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
+import { BtnPrimary } from "~/Components/atoms/btn";
+import FieldControl from "~/Components/molecules/field-control";
 
 const ChangePass = () => {
     return (
         <Form>
-            <Row className="g-2">
-                <Col lg={4}>
-                    <div>
-                        <Form.Label
-                            htmlFor="oldpasswordInput"
-                            className="form-label"
-                        >
-                            Old Password*
-                        </Form.Label>
-                        <Form.Control
-                            type="password"
-                            className="form-control"
-                            id="oldpasswordInput"
-                            placeholder="Enter current password"
-                        />
-                    </div>
-                </Col>
+            <div className="flex justify-around w-full mobile:flex-col">
+                <div>
+                    <FieldControl
+                        name={"oldpassword"}
+                        label="Senha Atual"
+                        type="password"
+                        className="form-control"
+                        id="oldpasswordInput"
+                        placeholder="Digite sua senha atual"
+                    />
+                </div>
 
-                <Col lg={4}>
+                <div>
                     <div>
-                        <Form.Label
-                            htmlFor="newpasswordInput"
-                            className="form-label"
-                        >
-                            New Password*
-                        </Form.Label>
-                        <Form.Control
+                        <FieldControl
+                            name={"newpassword"}
+                            label="Nova Senha"
                             type="password"
                             className="form-control"
                             id="newpasswordInput"
-                            placeholder="Enter new password"
+                            placeholder="Digite sua nova senha"
                         />
                     </div>
-                </Col>
+                </div>
 
-                <Col lg={4}>
+                <div>
                     <div>
-                        <Form.Label
-                            htmlFor="confirmpasswordInput"
-                            className="form-label"
-                        >
-                            Confirm Password*
-                        </Form.Label>
-                        <Form.Control
+                        <FieldControl
+                            name={"confirmpassword"}
+                            label="Confirmar Senha"
                             type="password"
                             className="form-control"
                             id="confirmpasswordInput"
-                            placeholder="Confirm password"
+                            placeholder="Confirme sua nova senha"
                         />
                     </div>
-                </Col>
+                </div>
+            </div>
+            <div className="mb-4">
+                <Link
+                    href="#"
+                    className="link-primary text-decoration-underline"
+                >
+                    Esqueceu a senha?
+                </Link>
+            </div>
 
-                <Col lg={12}>
-                    <div className="mb-3">
-                        <Link
-                            href="#"
-                            className="link-primary text-decoration-underline"
-                        >
-                            Forgot Password ?
-                        </Link>
-                    </div>
-                </Col>
-
-                <Col lg={12}>
-                    <div className="text-end">
-                        <button type="button" className="btn btn-success">
-                            Change Password
-                        </button>
-                    </div>
-                </Col>
-            </Row>
+            <div className="flex flex-col items-end">
+                <BtnPrimary className="" label="Salvar Senha" />
+            </div>
         </Form>
     );
 };
