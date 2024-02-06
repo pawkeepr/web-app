@@ -1,5 +1,5 @@
 import LayoutAuth from '~/Layouts/LayoutAuth'
-import getServerSidePropsVeterinaryActivation from '~/helpers/get-server-side-props-page-veterinary-activation'
+import getServerSidePropsTutorActivation from '~/helpers/get-server-side-props-page-tutor-activation'
 import ActivationAccount from '~/pages/Modules/veterinary/Authentication/ActivationAccount'
 
 const Activation = () => {
@@ -12,4 +12,4 @@ const Activation = () => {
 
 export default Activation
 
-export const getServerSideProps = getServerSidePropsVeterinaryActivation()
+export const getServerSideProps = getServerSidePropsTutorActivation()

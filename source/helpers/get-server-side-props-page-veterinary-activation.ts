@@ -8,7 +8,7 @@ import {
 } from './get-server-side-props-pages-veterinary-privates'
 
 const getServerSidePropsPageActivation =
-    (callback?: GetServerSideProps) => async (ctx: Context) => {
+    (callback?: GetServerSideProps) => (ctx: Context) => {
         if (!ctx) {
             return {
                 redirect: {
@@ -30,7 +30,18 @@ const getServerSidePropsPageActivation =
             }
         }
 
-        const hasProfile = await fetchProfile(token, ctx)
+        const attr = fetchProfile(ctx)
+        const hasProfile = attr?.['custom:has_profile'] === 'yes'
+        const typeProfile = attr?.['custom:type_profile']
+
+        if (typeProfile && typeProfile !== '1') {
+            return {
+                redirect: {
+                    destination: '/tutor/dashboard',
+                    permanent: false,
+                },
+            }
+        }
 
         if (hasProfile) {
             return {
