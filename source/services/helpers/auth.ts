@@ -20,7 +20,7 @@ export const singUpAws = async (data: AccountSignUp) => {
         password,
         attributes: {
             email,
-            type_profile,
+            'custom:type_profile': `${type_profile}`,
         },
     })
 }

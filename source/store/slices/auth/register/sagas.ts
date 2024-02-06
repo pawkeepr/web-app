@@ -1,11 +1,10 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { all, call, delay, fork, put, takeEvery } from 'redux-saga/effects'
 
-//Account Redux states
-import { registerUser, registerUserFailed, registerUserSuccessful } from './actions'
-
 //Include Both Helper File with needed methods
 import { singUpAws } from '~/services/helpers/auth'
+//Account Redux states
+import { registerUser, registerUserFailed, registerUserSuccessful } from './actions'
 
 import type { AccountSignUp } from './types'
 
@@ -17,11 +16,12 @@ function* registerUserSaga({ payload: user }: PayloadAction<AccountSignUp>) {
     // pegar o path da url
     const path = window.location.pathname
     const isVeterinary = /veterinary/.test(path)
+    const type_profile = isVeterinary ? TypeProfile.VETERINARY : TypeProfile.TUTOR
 
     try {
         yield call(singUpAws, {
             ...user,
-            type_profile: isVeterinary ? TypeProfile.VETERINARY : TypeProfile.TUTOR,
+            type_profile,
         })
         successToast(
             'Um e-mail de confirmação foi enviado para o seu e-mail.',
@@ -32,6 +32,7 @@ function* registerUserSaga({ payload: user }: PayloadAction<AccountSignUp>) {
         )
         yield delay(4000)
         yield put(registerUserSuccessful())
+
         infoToast(
             'Tente acessar sua conta com o email cadastrado, você será redirecionado para a página de ativação. Onde deverá digitar o número enviado para o seu email!".',
             'Ative sua Conta',
