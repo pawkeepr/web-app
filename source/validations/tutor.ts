@@ -11,20 +11,8 @@ const validate = Yup.object().shape({
         .min(2, 'O sobrenome deve ter pelo menos 2 caracteres')
         .max(155, 'O sobrenome deve ter no máximo 50 caracteres')
         .required('O campo de sobrenome é obrigatório'),
-    crmv: Yup.string()
-        .matches(/^[A-Za-z]{2}\d{4,6}$/, 'CRMV inválido. Exemplo: SP12345')
-        .min(6, 'O CRMV deve ter pelo menos 6 caracteres')
-        .transform((value) => value.toUpperCase())
-        .required('O Campo CRMV é obrigatório'),
     contact: Yup.object()
         .shape({
-            phone: Yup.string()
-                .matches(/^\+55 \(\d{2}\) \d \d{4}-\d{4}$/)
-                .test('phone-validator', 'Número de telefone inválido', (value) => {
-                    if (!value) return false
-                    return value.length >= 10
-                })
-                .required(),
             email: Yup.string()
                 .email('E-mail inválido')
                 .required('O campo de e-mail é obrigatório'),
@@ -44,12 +32,8 @@ const validate = Yup.object().shape({
     cpf_cnpj: Yup.string()
         .required('Este campo é obrigatório')
         .transform((value) => value.replace(/[^\d]/g, '')),
-    // .test('cpf-cnpj-validator', 'CPF/CNPJ inválido', value => {
-    //     if (!value) return false;
-    //     return cpf.isValid(value) || cnpj.isValid(value);
-    // })
 })
 
-export type Person = Yup.InferType<typeof validate>
+export type Tutor = Yup.InferType<typeof validate>
 
 export default validate
