@@ -85,7 +85,7 @@ const getServerSidePropsPagesPrivates =
         if (!hasProfile) {
             return {
                 redirect: {
-                    destination: '/activation',
+                    destination: '/veterinary/activation',
                     permanent: false,
                 },
             }

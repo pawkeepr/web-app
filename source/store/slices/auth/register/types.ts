@@ -17,4 +17,5 @@ export type AccountSignUp = {
     termsOfUse: boolean
     privacyPolicy: boolean
     type_profile: TypeProfile
+    has_profile: 'yes' | 'no'
 }

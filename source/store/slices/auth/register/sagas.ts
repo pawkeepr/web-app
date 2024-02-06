@@ -22,6 +22,7 @@ function* registerUserSaga({ payload: user }: PayloadAction<AccountSignUp>) {
         yield call(singUpAws, {
             ...user,
             type_profile,
+            has_profile: 'no',
         })
         successToast(
             'Um e-mail de confirmação foi enviado para o seu e-mail.',

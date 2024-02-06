@@ -33,7 +33,7 @@ function* onGetProfile() {
         yield put(editProfileSuccess(data))
     } catch (error) {
         console.log(error)
-        yield call([Router, Router.push], '/activation')
+        yield call([Router, Router.push], '/veterinary/activation')
     }
 }
 

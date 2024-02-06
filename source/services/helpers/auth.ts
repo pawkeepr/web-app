@@ -14,13 +14,14 @@ export async function resendConfirmationCode(username: string) {
 }
 
 export const singUpAws = async (data: AccountSignUp) => {
-    const { email, password, type_profile, ..._ } = data
+    const { email, password, type_profile, has_profile, ..._ } = data
     return await Auth.signUp({
         username: email,
         password,
         attributes: {
             email,
             'custom:type_profile': `${type_profile}`,
+            'custom:has_profile': has_profile,
         },
     })
 }
@@ -52,6 +53,20 @@ export async function forgotPasswordSubmit(
     newPassword: string,
 ) {
     return await Auth.forgotPasswordSubmit(email, code, newPassword)
+}
+
+export async function updatePassword(oldPassword: string, newPassword: string) {
+    return getUser().then((user) => {
+        return Auth.changePassword(user, oldPassword, newPassword)
+    })
+}
+
+export async function updateHasProfile(has_profile: 'yes' | 'no') {
+    return getUser().then((user) => {
+        return Auth.updateUserAttributes(user, {
+            'custom:has_profile': has_profile,
+        })
+    })
 }
 
 export type { UserData }
