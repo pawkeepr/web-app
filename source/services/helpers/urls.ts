@@ -18,9 +18,9 @@ export const VET_UPDATE_PROFILE = () => '/api-user/update-user-vet'
 
 // Profile Tutor
 
-export const TUTOR_CREATE_PROFILE = () => '/api-user-tutor/create-user-tutor'
-export const TUTOR_GET_PROFILE = () => '/api-user-tutor/search-user-tutor'
-export const TUTOR_UPDATE_PROFILE = () => '/api-user-tutor/update-user-tutor'
+export const TUTOR_CREATE_PROFILE = () => '/api-user/create-user-tutor'
+export const TUTOR_GET_PROFILE = () => '/api-user/search-user-tutor'
+export const TUTOR_UPDATE_PROFILE = () => '/api-user/update-user-tutor'
 
 // Pet
 

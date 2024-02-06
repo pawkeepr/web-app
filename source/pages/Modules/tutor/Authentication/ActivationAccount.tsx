@@ -82,7 +82,7 @@ const ActivationAccount = () => {
                 last_name: values?.lastName,
                 contact: {
                     email: values?.contact.email as string,
-                    phone: values?.contact.phone as string,
+                    phone: values?.contact.whatsapp as string,
                     whatsapp: values?.contact.whatsapp as string,
                     facebook: '',
                     instagram: '',
