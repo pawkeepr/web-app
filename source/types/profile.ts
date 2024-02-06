@@ -55,7 +55,7 @@ export type IVeterinaryInformation = {
 
 export type IProfile = {
     id?: string
-    veterinary_information: IVeterinaryInformation
+    veterinary_information?: IVeterinaryInformation
     user_information: ProfileUserInformation
 }
 

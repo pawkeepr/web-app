@@ -18,8 +18,11 @@ import {
 
 import cookies from '~/constants/cookies'
 import {
+    createProfileTutor,
     createProfileVet,
+    getTutorProfile,
     getVetProfile,
+    updateProfileTutor,
     updateProfileVet,
 } from '~/services/helpers'
 import { updateHasProfile } from '~/services/helpers/auth'
@@ -38,7 +41,8 @@ function* onGetProfile({
         if (has_profile === 'no') {
             yield call([Router, Router.push], link)
         } else {
-            const { data } = yield call(getVetProfile)
+            const getVet = type_profile === '1' ? getVetProfile : getTutorProfile
+            const { data } = yield call(getVet)
             yield setCookie(cookies.profile.name, data)
             yield put(editProfileSuccess(data))
         }
@@ -56,7 +60,10 @@ function* onGetProfile({
 function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
     try {
         yield call(updateHasProfile, 'yes')
-        const { data } = yield call(createProfileVet, profile)
+        const path = window.location.pathname
+        const isVeterinary = /veterinary/.test(path)
+        const createProfile = isVeterinary ? createProfileVet : createProfileTutor
+        const { data } = yield call(createProfile, profile)
         yield delay(1000)
         yield put(addSuccess(data))
         successToast('Perfil ativado com sucesso!')
@@ -92,7 +99,11 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
 
 function* onUpdateProfile({ payload: user }: PayloadAction<IProfile>) {
     try {
-        const { data } = yield call(updateProfileVet, user, user.id as string)
+        const path = window.location.pathname
+        const isVeterinary = /veterinary/.test(path)
+        const updateProfile = isVeterinary ? updateProfileVet : updateProfileTutor
+        const { data } = yield call(updateProfile, user, user.id as string)
+
         yield call(updateHasProfile, 'yes')
         yield put(editProfileSuccess(data))
         successToast('Perfil atualizado com sucesso!')
