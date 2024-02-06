@@ -7,6 +7,10 @@ const cookies = {
         name: 'pawkeepr.profile',
         expires: 60 * 60 * 24 * 7, // 1 week
     },
+    cognito_profile: {
+        name: 'pawkeepr.cognito-profile',
+        expires: 60 * 60 * 24 * 7, // 1 week
+    },
     remember: {
         name: 'pawkeepr.remember',
         expires: 60 * 60 * 24 * 30 * 12 * 10, // 10 years

@@ -33,31 +33,60 @@ function* onGetProfile({
 }: PayloadAction<AttributesProfile>) {
     const link =
         type_profile === '1' ? '/veterinary/activation' : '/tutor/activation'
-    if (has_profile === 'no') {
-        yield call([Router, Router.push], link)
-        return
-    }
+
     try {
-        const { data } = yield call(getVetProfile)
-        yield setCookie(cookies.profile.name, data)
-        yield put(editProfileSuccess(data))
+        if (has_profile === 'no') {
+            yield call([Router, Router.push], link)
+        } else {
+            const { data } = yield call(getVetProfile)
+            yield setCookie(cookies.profile.name, data)
+            yield put(editProfileSuccess(data))
+        }
     } catch (error) {
-        console.log(error)
-        yield call([Router, Router.push], link)
+        if (!(typeof error === 'object') || !error) return
+        if (!('response' in error)) return
+        if (!(typeof error.response === 'object') || !error.response) return
+        if (!('status' in error.response) || !error.response.status) return
+
+        switch (error.response.status) {
+        }
     }
 }
 
 function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
     try {
+        yield call(updateHasProfile, 'yes')
         const { data } = yield call(createProfileVet, profile)
         yield delay(1000)
         yield put(addSuccess(data))
-        yield call(updateHasProfile, 'yes')
         successToast('Perfil ativado com sucesso!')
         yield call([Router, Router.push], '/dashboard')
     } catch (error) {
-        errorToast('Erro ao ativar perfil!')
-        yield put(addFail((error as any).message))
+        if (!(typeof error === 'object') || !error) return
+        if (!('response' in error)) return
+        if (!(typeof error.response === 'object') || !error.response) return
+        if (!('status' in error.response) || !error.response.status) return
+
+        switch (error.response.status) {
+            case 409:
+                errorToast(
+                    'Já existe um usuário com este cpf/cnpj para este tipo de perfil',
+                )
+                yield call(updateHasProfile, 'yes')
+                yield call([Router, Router.push], '/logout')
+                break
+            default:
+                yield call(updateHasProfile, 'no')
+                if (!('message' in error) || !error.message) {
+                    errorToast('Erro ao ativar perfil!')
+                    return
+                }
+                if (!(typeof error.message === 'string') || !error.message) return
+
+                errorToast(error.message)
+
+                yield put(addFail())
+        }
     }
 }
 

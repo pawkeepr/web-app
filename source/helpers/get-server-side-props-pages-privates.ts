@@ -7,47 +7,26 @@ import type {
 } from 'next'
 import type { ParsedUrlQuery } from 'querystring'
 import { PUBLIC_ROUTES } from '~/common/public-routes'
-import { getAPIClient } from '~/services/axios'
-import { getVetProfile } from '~/services/helpers'
-import { getCookie, removeCookie, setCookie } from '~/utils/cookies-utils'
+import cookies from '~/constants/cookies'
+import { getCookie } from '~/utils/cookies-utils'
 export type Context =
     | GetServerSidePropsContext<ParsedUrlQuery, PreviewData>
     | undefined
 
-export const fetchProfile = async (token: string, ctx: Context) => {
-    const profileKey = `${optionsCookies.profile.name}-${token}`
+type AttributesCognito = {
+    email: string
+    email_verified: boolean
+    'custom:type_profile': '1' | '2'
+    'custom:has_profile': 'yes' | 'no'
+}
+export const fetchProfile = (ctx: Context) => {
+    const attr: AttributesCognito = getCookie(cookies.cognito_profile.name, ctx)
 
-    const profile = getCookie(profileKey, ctx)
-
-    if (profile) return profile
-
-    const api = getAPIClient(ctx)
-
-    try {
-        const { data: profile } = await getVetProfile(api)
-        setCookie(
-            profileKey,
-            JSON.stringify(profile),
-            optionsCookies.profile.expires,
-        )
-        return profile
-    } catch (error: unknown) {
-        const { response } = error as { response: { status: number } }
-
-        switch (response?.status) {
-            case 401:
-                removeCookie(optionsCookies.token.name, ctx)
-                return 'Erro interno ao buscar perfil'
-            case 404:
-                return null
-            default:
-                return 'Erro interno ao buscar perfil'
-        }
-    }
+    return attr?.['custom:has_profile'] === 'yes'
 }
 
 const getServerSidePropsPagesPrivates =
-    (callback?: GetServerSideProps) => async (ctx: Context) => {
+    (callback?: GetServerSideProps) => (ctx: Context) => {
         if (!ctx) {
             return {
                 redirect: {
@@ -70,7 +49,7 @@ const getServerSidePropsPagesPrivates =
         }
 
         const route = ctx.resolvedUrl
-        const hasProfile = await fetchProfile(token, ctx)
+        const hasProfile = fetchProfile(ctx)
 
         if (PUBLIC_ROUTES.includes(route)) {
             return {

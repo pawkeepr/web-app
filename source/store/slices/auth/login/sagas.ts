@@ -47,6 +47,12 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
             idToken.payload.exp / 1000,
         )
 
+        yield setCookie(
+            cookies.cognito_profile.name,
+            JSON.stringify(attributes),
+            idToken.payload.exp / 1000,
+        )
+
         const mode =
             getCookie(cookies.layoutMode.name) || layoutModeTypes.LIGHT_MODE
         const token = idToken.jwtToken
