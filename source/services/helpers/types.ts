@@ -28,12 +28,17 @@ interface SignInUserSession {
 export interface UserData {
     username: string
     Session: any
-    atributes: {
+    attributes: {
         email: string
         email_verified: boolean
         'custom:type_profile': '1' | '2'
+        'custom:has_profile': 'yes' | 'no'
     }
     signInUserSession: SignInUserSession
 }
 
+export interface AttributesProfile {
+    type_profile: '1' | '2'
+    has_profile: 'yes' | 'no'
+}
 // Example usage:

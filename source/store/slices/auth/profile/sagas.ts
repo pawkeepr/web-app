@@ -22,18 +22,27 @@ import {
     getVetProfile,
     updateProfileVet,
 } from '~/services/helpers'
+import type { AttributesProfile } from '~/services/helpers/types'
 import { errorToast, successToast } from '~/store/helpers/toast'
 import type { IProfile } from '~/types/profile'
 import { setCookie } from '~/utils/cookies-utils'
 
-function* onGetProfile() {
+function* onGetProfile({
+    payload: { has_profile, type_profile },
+}: PayloadAction<AttributesProfile>) {
+    const link =
+        type_profile === '1' ? '/veterinary/activation' : '/tutor/activation'
+    if (has_profile === 'no') {
+        yield call([Router, Router.push], link)
+        return
+    }
     try {
         const { data } = yield call(getVetProfile)
         yield setCookie(cookies.profile.name, data)
         yield put(editProfileSuccess(data))
     } catch (error) {
         console.log(error)
-        yield call([Router, Router.push], '/veterinary/activation')
+        yield call([Router, Router.push], link)
     }
 }
 

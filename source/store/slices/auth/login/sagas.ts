@@ -38,6 +38,7 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
         const response: UserData = yield call(signInAws, action.payload)
         const {
             signInUserSession: { idToken },
+            attributes,
         } = response
 
         yield setCookie(
@@ -53,7 +54,12 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
         yield put(changeLayoutMode(mode))
         yield put(setAuthorization({ token }))
         yield put(signInSuccess({ token }))
-        yield put(getProfileSession())
+        yield put(
+            getProfileSession({
+                has_profile: attributes['custom:has_profile'],
+                type_profile: attributes['custom:type_profile'],
+            }),
+        )
     } catch (error) {
         switch ((error as any)?.code) {
             case 'UserNotConfirmedException':
