@@ -1,22 +1,13 @@
 import { useFormikContext } from 'formik'
-import { twMerge } from 'tailwind-merge'
 import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn'
 import LOADING from '~/constants/loading'
 import { useAppSelector } from '~/store/hooks'
-import type { ActivateAccount } from '~/validations/activate'
+import type { ActivateAccount } from '../../activate'
 import type { StepProps } from './types'
 
 const listItem = 'flex gap-1 font-semibold text-gray-500 p-1 text-center w-full'
 const strongText = 'text-gray-700 mr-2'
 const pStyle = 'text-center w-full text-sm flex flex-row'
-
-const Specialty = {
-    domestics: 'Animais Domésticos',
-    large: 'Animais de Grande Porte',
-    midsize: 'Animais de Médio Porte',
-} as const
-
-type KeysSpecialty = keyof typeof Specialty
 
 const StepFinally = ({ prevStep }: StepProps) => {
     const { values, isValid, handleSubmit } = useFormikContext<ActivateAccount>()
@@ -47,12 +38,7 @@ const StepFinally = ({ prevStep }: StepProps) => {
                         </span>
                     </p>
                 </li>
-                <li className={listItem}>
-                    <p className={pStyle}>
-                        <strong className={strongText}>CRMV:</strong>
-                        <span className="">{values.crmv}</span>
-                    </p>
-                </li>
+
                 <li className={listItem}>
                     <p className={pStyle}>
                         <strong className={strongText}>Documento:</strong>
@@ -62,46 +48,8 @@ const StepFinally = ({ prevStep }: StepProps) => {
 
                 <li className={listItem}>
                     <p className={pStyle}>
-                        <strong className={strongText}>Telefone:</strong>
-                        <span className="">{values?.contact?.phone}</span>
-                    </p>
-                </li>
-
-                <li className={listItem}>
-                    <p className={pStyle}>
                         <strong className={strongText}>WhatsApp:</strong>
-                        <span className="">{values?.contact?.phone}</span>
-                    </p>
-                </li>
-            </ul>
-
-            <ul className="grid grid-cols-1">
-                <li className={twMerge(listItem, 'w-full col-span-full')}>
-                    <p className={pStyle}>
-                        <strong className={strongText}>Especialidade:</strong>
-                        <span className="">{values?.specialty?.label}</span>
-                    </p>
-                </li>
-
-                <li className={twMerge(listItem, 'w-full col-span-full')}>
-                    <p className={pStyle}>
-                        <strong className={strongText}>Serviços:</strong>
-                        <span className="">
-                            {values?.list_service_type
-                                ?.map((item: KeysSpecialty) => Specialty[item])
-                                .join(', ')}
-                        </span>
-                    </p>
-                </li>
-
-                <li className={twMerge(listItem, 'w-full col-span-full')}>
-                    <p className={pStyle}>
-                        <strong className={strongText}>Sub-Especialidade:</strong>
-                        <span className="">
-                            {values?.list_specialty
-                                ?.map((item) => item.label)
-                                .join(', ')}
-                        </span>
+                        <span className="">{values?.contact?.whatsapp}</span>
                     </p>
                 </li>
             </ul>
