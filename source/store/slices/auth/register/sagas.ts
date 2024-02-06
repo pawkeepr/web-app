@@ -6,6 +6,7 @@ import { singUpAws } from '~/services/helpers/auth'
 //Account Redux states
 import { registerUser, registerUserFailed, registerUserSuccessful } from './actions'
 
+import Router from 'next/router'
 import type { AccountSignUp } from './types'
 
 import { errorToast, infoToast, successToast } from '~/store/helpers/toast'
@@ -42,6 +43,8 @@ function* registerUserSaga({ payload: user }: PayloadAction<AccountSignUp>) {
                 position: 'bottom-center',
             },
         )
+        yield delay(2000)
+        yield call([Router, Router.push], '/sign-in')
     } catch (error) {
         console.log(error)
         errorToast(
