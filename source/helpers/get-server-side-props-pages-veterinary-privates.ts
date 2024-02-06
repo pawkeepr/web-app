@@ -22,10 +22,10 @@ type AttributesCognito = {
 export const fetchProfile = (ctx: Context) => {
     const attr: AttributesCognito = getCookie(cookies.cognito_profile.name, ctx)
 
-    return attr?.['custom:has_profile'] === 'yes'
+    return attr
 }
 
-const getServerSidePropsPagesPrivates =
+const getServerSidePropsPagesVeterinaryPrivates =
     (callback?: GetServerSideProps) => (ctx: Context) => {
         if (!ctx) {
             return {
@@ -49,12 +49,24 @@ const getServerSidePropsPagesPrivates =
         }
 
         const route = ctx.resolvedUrl
-        const hasProfile = fetchProfile(ctx)
+        const attr = fetchProfile(ctx)
 
         if (PUBLIC_ROUTES.includes(route)) {
             return {
                 redirect: {
                     destination: '/dashboard',
+                    permanent: false,
+                },
+            }
+        }
+
+        const hasProfile = attr?.['custom:has_profile'] === 'yes'
+        const typeProfile = attr?.['custom:type_profile']
+
+        if (typeProfile && typeProfile !== '1') {
+            return {
+                redirect: {
+                    destination: '/tutor/dashboard',
                     permanent: false,
                 },
             }
@@ -76,4 +88,4 @@ const getServerSidePropsPagesPrivates =
         }
     }
 
-export default getServerSidePropsPagesPrivates
+export default getServerSidePropsPagesVeterinaryPrivates
