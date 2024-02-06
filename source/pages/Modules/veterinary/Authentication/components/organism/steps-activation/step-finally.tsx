@@ -69,8 +69,8 @@ const StepFinally = ({ prevStep }: StepProps) => {
 
                 <li className={listItem}>
                     <p className={pStyle}>
-                        <strong className={strongText}>WhatsApp:</strong>
-                        <span className="">{values?.contact?.phone}</span>
+                        <strong className={strongText}>WhatsApp Comercial:</strong>
+                        <span className="">{values?.contact?.whatsapp}</span>
                     </p>
                 </li>
             </ul>
