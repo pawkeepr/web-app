@@ -17,6 +17,7 @@ import {
 } from './types'
 
 import cookies from '~/constants/cookies'
+import type { AttributesCognito } from '~/helpers/get-server-side-props-pages-veterinary-privates'
 import {
     createProfileTutor,
     createProfileVet,
@@ -29,7 +30,7 @@ import { updateHasProfile } from '~/services/helpers/auth'
 import type { AttributesProfile } from '~/services/helpers/types'
 import { errorToast, successToast } from '~/store/helpers/toast'
 import type { IProfile } from '~/types/profile'
-import { setCookie } from '~/utils/cookies-utils'
+import { getCookie, setCookie } from '~/utils/cookies-utils'
 
 function* onGetProfile({
     payload: { has_profile, type_profile },
@@ -64,6 +65,14 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
         const isVeterinary = /veterinary/.test(path)
         const createProfile = isVeterinary ? createProfileVet : createProfileTutor
         const { data } = yield call(createProfile, profile)
+        const attr = getCookie(cookies.cognito_profile.name) as AttributesCognito
+        setCookie(
+            cookies.cognito_profile.name,
+            JSON.stringify({
+                ...attr,
+                'custom:has_profile': 'yes',
+            }),
+        )
         yield delay(1000)
         yield put(addSuccess(data))
         successToast('Perfil ativado com sucesso!')

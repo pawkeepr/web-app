@@ -13,7 +13,7 @@ export type Context =
     | GetServerSidePropsContext<ParsedUrlQuery, PreviewData>
     | undefined
 
-type AttributesCognito = {
+export type AttributesCognito = {
     email: string
     email_verified: boolean
     'custom:type_profile': '1' | '2'
