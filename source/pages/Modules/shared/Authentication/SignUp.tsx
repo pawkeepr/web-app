@@ -11,7 +11,6 @@ import validatePassword from '~/validations/password'
 
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import FieldCheckbox from '~/Components/molecules/field-checkbox'
 import FieldControl from '~/Components/molecules/field-control'
@@ -62,11 +61,10 @@ const initialValues: AccountSignUp = {
 
 const CoverSignUp = ({ mode, bgImage }: CoverSignInProps) => {
     const dispatch = useAppDispatch()
-    const router = useRouter()
     const isLoading = useAppSelector((state) => state.Login.isLoading)
+
     const onSubmit = (values: AccountSignUp) => {
         dispatch(registerUser(values))
-        router.push('/confirm-account')
     }
 
     useEffect(() => {
