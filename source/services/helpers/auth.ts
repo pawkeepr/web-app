@@ -43,6 +43,10 @@ export async function getUser(): Promise<CognitoUserSession> {
     return await Auth.currentSession()
 }
 
+export async function getCurrentUser() {
+    return await Auth.currentAuthenticatedUser()
+}
+
 export async function forgetPwd(email: string) {
     return await Auth.forgotPassword(email)
 }
@@ -56,13 +60,13 @@ export async function forgotPasswordSubmit(
 }
 
 export async function updatePassword(oldPassword: string, newPassword: string) {
-    return getUser().then((user) => {
+    return getCurrentUser().then((user) => {
         return Auth.changePassword(user, oldPassword, newPassword)
     })
 }
 
 export async function updateHasProfile(has_profile: 'yes' | 'no') {
-    return getUser().then((user) => {
+    return getCurrentUser().then((user) => {
         return Auth.updateUserAttributes(user, {
             'custom:has_profile': has_profile,
         })
