@@ -78,3 +78,6 @@ export const APPOINTMENT_CONFIRMED_EXTERNAL = () =>
     '/api-appointment-external/confirmed-appointment-tutor-external'
 export const APPOINTMENT_CANCELED_EXTERNAL = () =>
     '/api-appointment-external/canceled-appointment-tutor-external'
+
+// Tutors
+export const VET_FETCH_ALL_TUTORS = () => '/api-user-vet/fetch-all-tutors-vet'
