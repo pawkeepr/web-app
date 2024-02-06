@@ -1,7 +1,7 @@
 import HistoricPage from '~/pages/Modules/tutor/HistoricPage/HistoricPage'
 
 import { LayoutTutor } from '~/Layouts'
-import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
+import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-tutor-privates'
 
 const HistoricPageNext = () => {
     return (

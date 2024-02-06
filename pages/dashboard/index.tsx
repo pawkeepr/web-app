@@ -2,7 +2,7 @@ import DashboardPage from '~/pages/Modules/veterinary/DashboardPage'
 
 import { Suspense } from 'react'
 import { LayoutVeterinary } from '~/Layouts'
-import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
+import getServerSidePropsPagesVeterinaryPrivates from '~/helpers/get-server-side-props-pages-veterinary-privates'
 import LoadingPage from '~/pages/Modules/shared/LoadingPage/LoadingPage'
 
 const DashboardPageNext = () => {
@@ -17,4 +17,4 @@ const DashboardPageNext = () => {
 
 export default DashboardPageNext
 
-export const getServerSideProps = getServerSidePropsPagesPrivates()
+export const getServerSideProps = getServerSidePropsPagesVeterinaryPrivates()

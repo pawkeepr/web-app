@@ -1,7 +1,7 @@
 import DashboardPage from '~/pages/Modules/tutor/DashboardPage'
 
 import { LayoutTutor } from '~/Layouts'
-import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
+import getServerSidePropsPagesTutorPrivates from '~/helpers/get-server-side-props-pages-tutor-privates'
 
 const DashboardPageNext = () => {
     return (
@@ -13,4 +13,4 @@ const DashboardPageNext = () => {
 
 export default DashboardPageNext
 
-export const getServerSideProps = getServerSidePropsPagesPrivates()
+export const getServerSideProps = getServerSidePropsPagesTutorPrivates()

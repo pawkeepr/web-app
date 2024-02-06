@@ -1,7 +1,7 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { LayoutTutor } from '~/Layouts'
-import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-privates'
+import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-tutor-privates'
 import Page from '~/pages/Modules/shared/ProfilePetPage'
 import { useModeEditablePet } from '~/pages/Modules/shared/ProfilePetPage/components/hooks/use-mode-editable-pet'
 
