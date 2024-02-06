@@ -24,11 +24,11 @@ import { BtnLink } from '~/Components/atoms/btn'
 import { layoutModeTypes } from '~/constants/layout'
 import type { ActivateAccountVeterinary } from '~/types/activate-account-veterinary'
 import { TypeProfile, type Location } from '~/types/profile'
-import StepActivationAddress from './components/organism/steps-activation/step-address'
-import StepActivationFinally from './components/organism/steps-activation/step-finally'
-import StepActivationPerson from './components/organism/steps-activation/step-person'
-import StepActivationSpecialty from './components/organism/steps-activation/step-specialty'
-import type { StepProps } from './components/organism/steps-activation/types'
+import StepActivationAddress from './components/steps-activation/step-address'
+import StepActivationFinally from './components/steps-activation/step-finally'
+import StepActivationPerson from './components/steps-activation/step-person'
+import StepActivationSpecialty from './components/steps-activation/step-specialty'
+import type { StepProps } from './components/steps-activation/types'
 
 const initialValues = (email: string): ActivateAccount => ({
     email,
