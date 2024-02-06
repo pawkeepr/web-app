@@ -10,7 +10,6 @@ import { PUBLIC_ROUTES } from '~/common/public-routes'
 import { getAPIClient } from '~/services/axios'
 import { getVetProfile } from '~/services/helpers'
 import { getCookie, removeCookie, setCookie } from '~/utils/cookies-utils'
-
 export type Context =
     | GetServerSidePropsContext<ParsedUrlQuery, PreviewData>
     | undefined

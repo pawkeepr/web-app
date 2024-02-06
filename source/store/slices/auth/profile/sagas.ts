@@ -22,6 +22,7 @@ import {
     getVetProfile,
     updateProfileVet,
 } from '~/services/helpers'
+import { updateHasProfile } from '~/services/helpers/auth'
 import type { AttributesProfile } from '~/services/helpers/types'
 import { errorToast, successToast } from '~/store/helpers/toast'
 import type { IProfile } from '~/types/profile'
@@ -51,6 +52,7 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
         const { data } = yield call(createProfileVet, profile)
         yield delay(1000)
         yield put(addSuccess(data))
+        yield call(updateHasProfile, 'yes')
         successToast('Perfil ativado com sucesso!')
         yield call([Router, Router.push], '/dashboard')
     } catch (error) {
@@ -62,7 +64,7 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
 function* onUpdateProfile({ payload: user }: PayloadAction<IProfile>) {
     try {
         const { data } = yield call(updateProfileVet, user, user.id as string)
-        // yield call(createProfile, user)
+        yield call(updateHasProfile, 'yes')
         yield put(editProfileSuccess(data))
         successToast('Perfil atualizado com sucesso!')
     } catch (error) {
