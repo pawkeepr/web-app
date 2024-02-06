@@ -1,242 +1,223 @@
-import Link from 'next/link'
+import { Form, Formik } from "formik";
 
-import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
+import { useCallback } from "react";
+import { BtnPrimary, BtnSecondary } from "~/Components/atoms/btn";
+import FieldControl from "~/Components/molecules/field-control";
+import FieldControlSelect from "~/Components/molecules/field-control/field-control-select";
+import FieldTextArea from "~/Components/molecules/field-text-area/field-text-area";
+
+type InitialValuesProps = {
+    cargo?: string;
+    empresa?: string;
+    mesInicio?: string;
+    anoInicio?: string;
+    mesFim?: string;
+    anoFim?: string;
+    descricao?: string;
+};
+
+export const InitialValues = (props: InitialValuesProps) => {
+    return {
+        cargo: props.cargo || "",
+        empresa: props.empresa || "",
+        mesInicio: props.mesInicio || "",
+        anoInicio: props.anoInicio || "",
+        mesFim: props.mesFim || "",
+        anoFim: props.anoFim || "",
+        descricao: props.descricao || "",
+    };
+};
 
 const ProfessionalExperience = () => {
-    const currentYear = new Date().getFullYear()
+    const currentYear = new Date().getFullYear();
     const listOfYears = Array.from(
         { length: 100 },
-        (_, index) => currentYear - index,
-    )
+        (_, index) => currentYear - index
+    );
+
+    const handleSubmit = useCallback(() => {}, []);
+
     return (
-        <Form>
-            <div id="newlink">
+        <Formik initialValues={InitialValues} onSubmit={handleSubmit}>
+            <Form>
                 <div id="1">
-                    <Row>
-                        <Col lg={6}>
-                            <div className="mb-3">
-                                <Form.Label
-                                    htmlFor="jobTitle"
-                                    className="form-label"
-                                >
-                                    Título
-                                </Form.Label>
-                                <Form.Control
+                    <div>
+                        <div className="mb-3">
+                            <div className="flex gap-3">
+                                <FieldControl
                                     type="text"
+                                    name={"jobTitle"}
+                                    label="Cargo"
                                     className="form-control"
                                     id="jobTitle"
                                     placeholder=""
                                     defaultValue=""
                                 />
-                            </div>
-                        </Col>
 
-                        <Col lg={6}>
-                            <div className="mb-3">
-                                <Form.Label
-                                    htmlFor="companyName"
-                                    className="form-label"
-                                >
-                                    Nome da empresa
-                                </Form.Label>
-                                <Form.Control
+                                <FieldControl
+                                    label="Nome da Empresa"
+                                    name={"companyName"}
                                     type="text"
                                     className="form-control"
                                     id="companyName"
                                     placeholder=""
                                 />
                             </div>
-                        </Col>
-
-                        <Col>
-                            <Row>
-                                <Col lg={6}>
-                                    <div className="mb-3">
-                                        <Form.Label
-                                            htmlFor="experienceYear"
-                                            className="form-label"
-                                        >
-                                            Início
-                                        </Form.Label>
-                                        <Row>
-                                            <Col lg={5} widths={['xs']}>
-                                                <Form.Select
-                                                    className="form-control"
-                                                    data-choices
-                                                    data-choices-search-false
-                                                    name="experienceYear"
-                                                    id="experienceYear"
-                                                    defaultValue=""
-                                                >
-                                                    <option value="">Mês</option>
-                                                    <option value="1">
-                                                        Janeiro
-                                                    </option>
-                                                    <option value="2">
-                                                        Fevereiro
-                                                    </option>
-                                                    <option value="3">Março</option>
-                                                    <option value="4">Abril</option>
-                                                    <option value="5">Maio</option>
-                                                    <option value="6">Junho</option>
-                                                    <option value="7">Julho</option>
-                                                    <option value="8">
-                                                        Agosto
-                                                    </option>
-                                                    <option value="9">
-                                                        Setembro
-                                                    </option>
-                                                    <option value="10">
-                                                        Outubro
-                                                    </option>
-                                                    <option value="11">
-                                                        Novembro
-                                                    </option>
-                                                    <option value="12">
-                                                        Dezembro
-                                                    </option>
-                                                </Form.Select>
-                                            </Col>
+                            <div className="flex justify-between mobile:flex-col flex-row">
+                                <div className="flex flex-col  mb-3">
+                                    <h3 className="mt-4">Início</h3>
+                                    <div className="flex gap-3 mobile:flex-col">
+                                        <FieldControlSelect
+                                            label="Mês"
+                                            name="experienceYear"
+                                            options={[
+                                                { label: "Janeiro", value: 1 },
+                                                {
+                                                    label: "Fevereiro",
+                                                    value: 2,
+                                                },
+                                                { label: "Março", value: 3 },
+                                                { label: "Abril", value: 4 },
+                                                { label: "Maio", value: 5 },
+                                                { label: "Junho", value: 6 },
+                                                { label: "Julho", value: 7 },
+                                                { label: "Agosto", value: 8 },
+                                                { label: "Setembro", value: 9 },
+                                                { label: "Outubro", value: 10 },
+                                                {
+                                                    label: "Novembro",
+                                                    value: 11,
+                                                },
+                                                {
+                                                    label: "Dezembro",
+                                                    value: 12,
+                                                },
+                                            ]}
+                                        />
+                                        <div className="col-auto align-self-center">
+                                            de
+                                        </div>
+                                        <FieldControlSelect
+                                            label="Ano"
+                                            name="experienceYear"
+                                            options={[
+                                                { label: "Janeiro", value: 1 },
+                                                {
+                                                    label: "Fevereiro",
+                                                    value: 2,
+                                                },
+                                                { label: "Março", value: 3 },
+                                                { label: "Abril", value: 4 },
+                                                { label: "Maio", value: 5 },
+                                                { label: "Junho", value: 6 },
+                                                { label: "Julho", value: 7 },
+                                                { label: "Agosto", value: 8 },
+                                                { label: "Setembro", value: 9 },
+                                                { label: "Outubro", value: 10 },
+                                                {
+                                                    label: "Novembro",
+                                                    value: 11,
+                                                },
+                                                {
+                                                    label: "Dezembro",
+                                                    value: 12,
+                                                },
+                                            ]}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex mobile:flex-col">
+                                    <div className="flex flex-col mb-3">
+                                        <h3 className="mt-4">Fim</h3>
+                                        <div className="flex gap-3 mobile:flex-col">
+                                            <FieldControlSelect
+                                                label="Mês"
+                                                name="experienceYear"
+                                                options={[
+                                                    {
+                                                        label: "Janeiro",
+                                                        value: 1,
+                                                    },
+                                                    {
+                                                        label: "Fevereiro",
+                                                        value: 2,
+                                                    },
+                                                    {
+                                                        label: "Março",
+                                                        value: 3,
+                                                    },
+                                                    {
+                                                        label: "Abril",
+                                                        value: 4,
+                                                    },
+                                                    { label: "Maio", value: 5 },
+                                                    {
+                                                        label: "Junho",
+                                                        value: 6,
+                                                    },
+                                                    {
+                                                        label: "Julho",
+                                                        value: 7,
+                                                    },
+                                                    {
+                                                        label: "Agosto",
+                                                        value: 8,
+                                                    },
+                                                    {
+                                                        label: "Setembro",
+                                                        value: 9,
+                                                    },
+                                                    {
+                                                        label: "Outubro",
+                                                        value: 10,
+                                                    },
+                                                    {
+                                                        label: "Novembro",
+                                                        value: 11,
+                                                    },
+                                                    {
+                                                        label: "Dezembro",
+                                                        value: 12,
+                                                    },
+                                                ]}
+                                            />
 
                                             <div className="col-auto align-self-center">
                                                 de
                                             </div>
-
-                                            <Col lg={5} widths={['xs']}>
-                                                <Form.Select
-                                                    className="form-control"
-                                                    data-choices
-                                                    data-choices-search-false
-                                                    name="choices-single-default2"
-                                                    defaultValue=""
-                                                >
-                                                    <option value="">Ano</option>
-                                                    {listOfYears?.map((year) => (
-                                                        <option
-                                                            key={year}
-                                                            value={year}
-                                                        >
-                                                            {year}
-                                                        </option>
-                                                    ))}
-                                                </Form.Select>
-                                            </Col>
-                                        </Row>
+                                            <FieldControlSelect
+                                                label="Ano"
+                                                name="experienceYear"
+                                                options={listOfYears.map(
+                                                    (year) => ({
+                                                        label: year.toString(),
+                                                        value: year,
+                                                    })
+                                                )}
+                                            />
+                                        </div>
                                     </div>
-                                </Col>
+                                </div>
+                            </div>
 
-                                <Col lg={6}>
-                                    <div className="mb-3">
-                                        <Form.Label
-                                            htmlFor="experienceYear"
-                                            className="form-label"
-                                        >
-                                            Término
-                                        </Form.Label>
-                                        <Row>
-                                            <Col lg={5} widths={['xs']}>
-                                                <Form.Select
-                                                    className="form-control"
-                                                    data-choices
-                                                    data-choices-search-false
-                                                    name="experienceYear"
-                                                    id="experienceYear"
-                                                    defaultValue=""
-                                                >
-                                                    <option value="">Mês</option>
-                                                    <option value="1">
-                                                        Janeiro
-                                                    </option>
-                                                    <option value="2">
-                                                        Fevereiro
-                                                    </option>
-                                                    <option value="3">Março</option>
-                                                    <option value="4">Abril</option>
-                                                    <option value="5">Maio</option>
-                                                    <option value="6">Junho</option>
-                                                    <option value="7">Julho</option>
-                                                    <option value="8">
-                                                        Agosto
-                                                    </option>
-                                                    <option value="9">
-                                                        Setembro
-                                                    </option>
-                                                    <option value="10">
-                                                        Outubro
-                                                    </option>
-                                                    <option value="11">
-                                                        Novembro
-                                                    </option>
-                                                    <option value="12">
-                                                        Dezembro
-                                                    </option>
-                                                </Form.Select>
-                                            </Col>
-
-                                            <div className="col-auto align-self-center">
-                                                de
-                                            </div>
-
-                                            <Col lg={5} widths={['xs']}>
-                                                <Form.Select
-                                                    className="form-control"
-                                                    data-choices
-                                                    data-choices-search-false
-                                                    name="choices-single-default2"
-                                                >
-                                                    <option value="">Ano</option>
-                                                    {listOfYears?.map((year) => (
-                                                        <option
-                                                            key={year}
-                                                            value={year}
-                                                        >
-                                                            {year}
-                                                        </option>
-                                                    ))}
-                                                </Form.Select>
-                                            </Col>
-                                        </Row>
-                                    </div>
-                                </Col>
-                            </Row>
-                        </Col>
-
-                        <Col lg={12}>
                             <div className="mb-3">
-                                <Form.Label
-                                    htmlFor="jobDescription"
-                                    className="form-label"
-                                >
-                                    Descrição
-                                </Form.Label>
-                                <Form.Control
-                                    as="textarea"
-                                    className="form-control"
-                                    id="jobDescription"
-                                    rows={3}
-                                    placeholder="crie uma breve descrição sobre o cargo"
+                                <FieldTextArea
+                                    name="description "
+                                    label="Descrição"
+                                    placeholder="Crie uma breve descrição sobre o cargo"
                                 />
                             </div>
-                        </Col>
-                    </Row>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div id="newForm" style={{ display: 'none' }} />
-
-            <Col lg={12}>
-                <div className="hstack gap-2">
-                    <button type="submit" className="btn btn-success">
-                        Atualizar
-                    </button>
-                    <Link href="#" className="btn btn-primary">
-                        Adicionar
-                    </Link>
+                <div id="newForm" style={{ display: "none" }} />
+                <div className="flex justify-end items-end">
+                    <BtnSecondary className="mr-2" label="Cancelar" />
+                    <BtnPrimary className="" label="Salvar" />
                 </div>
-            </Col>
-        </Form>
-    )
-}
+            </Form>
+        </Formik>
+    );
+};
 
-export default ProfessionalExperience
+export default ProfessionalExperience;
