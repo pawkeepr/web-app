@@ -43,7 +43,7 @@ const ProfessionalExperience = () => {
                 <div id="1">
                     <div>
                         <div className="mb-3">
-                            <div className="flex gap-3">
+                            <div className="flex mobile:flex-col gap-3">
                                 <FieldControl
                                     type="text"
                                     name={"jobTitle"}

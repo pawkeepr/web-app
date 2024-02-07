@@ -5,8 +5,8 @@ import FieldControl from "~/Components/molecules/field-control";
 const PersonalData = () => {
     return (
         <Form>
-            <div>
-                <div className="flex gap-3 mb-3">
+            <div className="flex mobile:flex-col">
+                <div className="flex mobile:flex-col gap-3 mb-3">
                     <FieldControl
                         label="Nome"
                         type="text"
@@ -24,7 +24,7 @@ const PersonalData = () => {
                         placeholder="Digite seu sobrenome"
                     />
                 </div>
-                <div className="flex gap-3 mb-3">
+                <div className="flex mobile:flex-col gap-3 mb-3">
                     <FieldControl
                         label="Telefone"
                         type="text"
@@ -42,7 +42,7 @@ const PersonalData = () => {
                         placeholder="Digite seu email"
                     />
                 </div>
-                <div className="flex gap-3 mb-3">
+                <div className="flex mobile:flex-col gap-3 mb-3">
                     <FieldControl
                         label="Cidade"
                         type="text"
@@ -60,7 +60,7 @@ const PersonalData = () => {
                         placeholder="Digite seu País"
                     />
                 </div>
-                <div className="flex gap-3 mb-3">
+                <div className="flex mobile:flex-col gap-3 mb-3">
                     <FieldControl
                         label="CEP"
                         type="text"
