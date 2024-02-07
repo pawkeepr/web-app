@@ -4,9 +4,9 @@ import usePetById from '~/store/hooks/pet-by-id/use-pets'
 import { GenderBR } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import DefaultLayout from '../../_layouts/dashboard/dashboard'
-import CreateOrUpdatePetPage from '../NewPetPage/CreateOrUpdatePetPage'
 import SocialLinks from '../ProfilePage/components/SocialLinks'
 import UserProfileCard from '../ProfilePage/components/UserProfileCard'
+import CreateOrUpdatePetPage from '../ProfilePetPage/ProfilePetPage'
 import HistoricPet from './components/template/HistoricPet'
 import MedicalRecords from './components/template/MedicalRecords'
 
@@ -48,7 +48,7 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
     return (
         <DefaultLayout title="Histórico do Pet" searchBlock={false}>
             <div className="container mx-auto">
-                <div className="flex flex-wrap flex-1 mobile:flex-col">
+                <div className="flex flex-wrap flex-1 mobile:flex-col tablet:flex-col">
                     <div className="w-full flex flex-1 flex-col px-4">
                         <UserProfileCard
                             name={pet?.pet_information?.name_pet}

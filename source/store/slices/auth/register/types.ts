@@ -1,4 +1,5 @@
 import type LOADING from '~/constants/loading'
+import type { TypeProfile } from '~/types/profile'
 
 export const name = 'account'
 
@@ -15,4 +16,6 @@ export type AccountSignUp = {
     passwordConfirm: string
     termsOfUse: boolean
     privacyPolicy: boolean
+    type_profile: TypeProfile
+    has_profile: 'yes' | 'no'
 }

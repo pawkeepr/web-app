@@ -5,10 +5,10 @@ import {
     EDIT_PROFILE,
     EDIT_PROFILE_ERROR,
     EDIT_PROFILE_SUCCESS,
-    InitialStateProfile,
     RESET_PROFILE_FLAG,
     SET_PROFILE,
     name,
+    type InitialStateProfile,
 } from './types'
 
 import { ADD_FAIL, ADD_NEW, ADD_SUCCESS } from '~/store/helpers/constants'

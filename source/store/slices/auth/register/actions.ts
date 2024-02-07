@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
-import { AccountSignUp, name } from './types'
+import { name, type AccountSignUp } from './types'
 
 export const registerUser = createAction<AccountSignUp>(`${name}/registerUser`)
 export const registerUserSuccessful = createAction(`${name}/registerUserSuccessful`)

@@ -1,19 +1,13 @@
-import { cnpj, cpf } from 'cpf-cnpj-validator'
 import * as Yup from 'yup'
-
-const transformTrim = (value: any, originalValue: string) => {
-    // Remover espaços em branco extras da string
-    return typeof originalValue === 'string' ? originalValue.trim() : originalValue
-}
 
 const validate = Yup.object().shape({
     firstName: Yup.string()
-        .transform(transformTrim)
+        .trim()
         .min(2, 'O nome deve ter pelo menos 2 caracteres')
         .max(50, 'O nome deve ter no máximo 50 caracteres')
         .required('O campo de nome é obrigatório'),
     lastName: Yup.string()
-        .transform(transformTrim)
+        .trim()
         .min(2, 'O sobrenome deve ter pelo menos 2 caracteres')
         .max(155, 'O sobrenome deve ter no máximo 50 caracteres')
         .required('O campo de sobrenome é obrigatório'),

@@ -34,6 +34,7 @@ export type SpecialtyInformation = {
 export const TypeProfile = {
     VETERINARY: 1,
     TUTOR: 2,
+    NONE: null,
 } as const
 export type TypeProfile = (typeof TypeProfile)[keyof typeof TypeProfile]
 
@@ -54,7 +55,7 @@ export type IVeterinaryInformation = {
 
 export type IProfile = {
     id?: string
-    veterinary_information: IVeterinaryInformation
+    veterinary_information?: IVeterinaryInformation
     user_information: ProfileUserInformation
 }
 

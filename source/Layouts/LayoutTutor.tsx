@@ -31,7 +31,7 @@ const LayoutTutor = ({ children }: LayoutProps) => {
 
             <div
                 className={cn(
-                    'px-24 mobile:px-0 relative',
+                    'px-24 mobile:px-0 relative tablet:px-0',
                     'mobile:pt-20 z-[0]',
                     // 'bg-cover bg-no-repeat bg-fixed',
                 )}

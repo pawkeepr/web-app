@@ -1,6 +1,6 @@
-import LOADING from '~/constants/loading'
+import type LOADING from '~/constants/loading'
 import { ADD_FAIL, ADD_NEW, ADD_SUCCESS } from '~/store/helpers/constants'
-import { IProfile } from '~/types/profile'
+import type { IProfile } from '~/types/profile'
 
 export const name = 'profile'
 

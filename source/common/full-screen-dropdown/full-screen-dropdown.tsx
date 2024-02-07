@@ -1,7 +1,7 @@
 import ArrowsPointingInIcon from '@heroicons/react/24/solid/ArrowsPointingInIcon'
 import ArrowsPointingOutIcon from '@heroicons/react/24/solid/ArrowsPointingOutIcon'
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const FullScreenDropdown = () => {
     /*
@@ -55,22 +55,12 @@ const FullScreenDropdown = () => {
         document.addEventListener('mozfullscreenchange', exitHandler)
     }
     return (
-        <React.Fragment>
-            <div className="flex mobile:hidden">
-                <button
-                    onClick={toggleFullscreen}
-                    type="button"
-                    className="text-white"
-                >
-                    {isFullScreenMode && (
-                        <ArrowsPointingOutIcon className="w-5 h-5" />
-                    )}
-                    {!isFullScreenMode && (
-                        <ArrowsPointingInIcon className="w-5 h-5" />
-                    )}
-                </button>
-            </div>
-        </React.Fragment>
+        <div className="flex mobile:hidden hover:text-secondary-500 hover:scale-110">
+            <button onClick={toggleFullscreen} type="button" className="text-white">
+                {isFullScreenMode && <ArrowsPointingOutIcon className="w-5 h-5" />}
+                {!isFullScreenMode && <ArrowsPointingInIcon className="w-5 h-5" />}
+            </button>
+        </div>
     )
 }
 

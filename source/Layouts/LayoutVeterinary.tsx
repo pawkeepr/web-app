@@ -11,10 +11,9 @@ import Header from "./Header";
 
 //import actions
 
-//redux
-import cn from "classnames";
-import FieldDocumentAppointment from "~/Components/molecules/field-appointment-tutor";
-import useHookLayout from "./use-hook";
+import cn from 'classnames'
+import FieldDocumentAppointment from '~/Components/molecules/field-appointment-vet'
+import useHookLayout from './use-hook'
 
 type LayoutProps = {
     children: React.ReactNode;
@@ -29,8 +28,8 @@ const LayoutMain = ({ children }: LayoutProps) => {
 
             <div
                 className={cn(
-                    "px-24 mobile:px-0 relative",
-                    "mobile:pt-20 z-[0]"
+                    'px-24 mobile:px-0 relative tablet:px-0',
+                    'mobile:pt-20 z-[0]',
                     // 'bg-cover bg-no-repeat bg-fixed',
                 )}
                 style={{

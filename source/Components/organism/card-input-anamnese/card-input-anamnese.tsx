@@ -1,19 +1,19 @@
 import cn from 'classnames'
-import { Formik, type FormikHelpers } from 'formik'
-import { useEffect, useMemo, useState } from 'react'
+import { Formik } from 'formik'
+import { useMemo, useState } from 'react'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import * as Yup from 'yup'
-import { BtnConfirm } from '~/Components/atoms/btn'
-import FieldNumber from '~/Components/molecules/field-number'
+import ControlSwitchDiv from '~/Components/molecules/control-switch-div'
+import type { OptionSelect } from '~/Components/molecules/field-control'
 import type { KeyOfQuestionTypes, Question } from '~/constants/anamnese-questions'
-import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { QuestionAnamnesis, VeterinaryConsultation } from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
-import QuestionsAnamnese from './questions-anamnese'
 
 export type CtxStepAnamnese = Pick<
     VeterinaryConsultation,
-    'anamnesis' | 'details_pet_consultation'
+    'anamnesis' | 'details_pet_consultation' | 'dates_consults'
 >
 
 const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionAnamnesis>>({
@@ -32,21 +32,12 @@ const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionAnamnesis>>(
 
 type CardInputProps = {
     items: Question[]
-    handleSubmit: (
-        data: Yup.InferType<typeof validationSchema>,
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-        formikHelpers: FormikHelpers<any>,
-    ) => Promise<unknown>
 }
 
 const STEPS: {
     title: string
     value: KeyOfQuestionTypes
 }[] = [
-    {
-        title: 'Informações Gerais',
-        value: 'general_information',
-    },
     {
         title: 'Sistema Digestivo',
         value: 'digestive_system',
@@ -73,20 +64,6 @@ const STEPS: {
     },
 ]
 
-// Função para calcular o IMC de um animal
-// height: altura em centímetros
-// weight: peso em quilos
-function calcularIMC(height: number, weight: number): number {
-    if (height === 0 || weight === 0) {
-        return 0 // Evita divisão por zero
-    }
-
-    const heightInMeters = height / 100 // Converter altura para metros
-
-    const imc = weight / (heightInMeters * heightInMeters) // Converter altura para metros
-    return imc
-}
-
 const makeTitle = (title: string, isMobile: boolean) => {
     if (isMobile) {
         return title
@@ -98,67 +75,84 @@ const makeTitle = (title: string, isMobile: boolean) => {
     return title
 }
 
-const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
-    const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>()
+const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => {
+    const filtered = items.reduce((acc, item) => {
+        if (item.type === category) {
+            acc.push({
+                type: item.type,
+                value: `${item.id}`,
+                label: item.question,
+                color: 'rgb(255 200 107);',
+            })
+        }
+        return acc
+    }, [] as OptionSelect[])
 
-    const [category, setCategory] =
-        useState<KeyOfQuestionTypes>('general_information')
+    return filtered
+}
+
+const CardInputAnamnese = ({ items }: CardInputProps) => {
+    const [category, setCategory] = useState<KeyOfQuestionTypes>('digestive_system')
     const { isMobile } = useResizeMobile()
 
-    const filtered = useMemo(() => {
-        if (!values?.anamnesis?.questions_anamnesis) return items
+    const options = useMemo(() => makeOptions(items, category), [category, items])
 
-        // filtra items eliminando os que já estão no array de anamnese
-        return items.filter((item) => {
-            const exists = values?.anamnesis?.questions_anamnesis?.find(
-                (question) => {
-                    return question.name_anamnesis === item.question
-                },
-            )
+    const initialValues = useMemo(() => {
+        return options.reduce(
+            (acc, item) => {
+                return {
+                    // biome-ignore lint/performance/noAccumulatingSpread: <explanation>
+                    ...acc,
+                    [item.value]: false,
+                }
+            },
+            {} as Record<string, boolean>,
+        )
+    }, [options])
 
-            return !exists
+    const keyPressLeft = () => {
+        setCategory((prev) => {
+            const index = STEPS.findIndex((item) => item.value === prev)
+            const next = STEPS[index - 1]
+            if (next) {
+                return next.value
+            }
+            return prev
         })
-    }, [items, values?.anamnesis?.questions_anamnesis])
+    }
 
-    const height = useMemo(
-        () => values.details_pet_consultation?.height,
-        [values.details_pet_consultation?.height],
-    )
-    const weight = useMemo(
-        () => values.details_pet_consultation?.weight,
-        [values.details_pet_consultation?.weight],
-    )
+    const keyPressRight = () => {
+        setCategory((prev) => {
+            const index = STEPS.findIndex((item) => item.value === prev)
+            const next = STEPS[index + 1]
+            if (next) {
+                return next.value
+            }
+            return prev
+        })
+    }
 
-    const isValidNumber = useMemo(() => {
-        const castedWeight = Number(weight)
-        const isNumber = !Number.isNaN(weight)
-        const isPositive = castedWeight > 0
-        return isNumber && isPositive
-    }, [weight])
-
-    useEffect(() => {
-        if (height && weight) {
-            const imc = calcularIMC(Number(height), Number(weight))
-            setFieldValue('details_pet_consultation.imc', imc)
-        }
-    }, [height, weight])
+    useKeyboardNavigation({
+        ArrowLeft: keyPressLeft,
+        ArrowRight: keyPressRight,
+    })
 
     return (
         <div
             className="
-        gap-2 flex flex-col card shadow-2xl p-8 
-        border-primary-500 border-2 relative
-        mobile:p-0 mobile:border-none mobile:!shadow-none mobile:!rounded-none
+            gap-2 flex flex-col card shadow-2xl p-8 
+            border-primary-500 border-2 relative
+            mobile:p-0 mobile:border-none mobile:!shadow-none mobile:!rounded-none
+            min-h-[420px]
         
         "
         >
-            <div className="flex flex-row w-full justify-between flex-wrap">
+            <div className="flex flex-row w-full justify-between flex-wrap mb-4">
                 {STEPS.map((item) => (
                     <button
                         type="button"
                         onClick={() => setCategory(item.value)}
                         key={item.value}
-                        disabled={!isValidNumber}
                         className={cn(
                             'p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full',
                             {
@@ -171,80 +165,40 @@ const CardInputAnamnese = ({ items, handleSubmit }: CardInputProps) => {
                     </button>
                 ))}
             </div>
-            {category === 'general_information' && (
-                <div className="grid grid-cols-1 gap-3">
-                    <FieldNumber
-                        ctx={values}
-                        label="Peso"
-                        placeholder="Peso do pet em quilos, exemplo = 0.5 (500 gramas)"
-                        required
-                        name="details_pet_consultation.weight"
-                    />
 
-                    <FieldNumber
-                        ctx={values}
-                        label="Altura"
-                        placeholder="Altura do pet em centímetros, exemplo = 32"
-                        name="details_pet_consultation.height"
-                    />
-
-                    <FieldNumber
-                        ctx={values}
-                        label="Comprimento"
-                        placeholder="Comprimento do pet em centímetros "
-                        className="border-gray-300"
-                        name="details_pet_consultation.length"
-                    />
-
-                    <div>
-                        {values.details_pet_consultation?.imc > 0 && (
-                            <h2 className="m-4 font-bold">
-                                O IMC do animal é:{' '}
-                                {values.details_pet_consultation?.imc?.toFixed(2)}
-                            </h2>
-                        )}
-                    </div>
-
-                    <div className="flex align-items-center justify-center gap-3 mt-4">
-                        <BtnConfirm
-                            className="text-white"
-                            label="Responder"
-                            onClick={() => setCategory('digestive_system')}
-                            type="button"
-                        />
-                    </div>
-                </div>
-            )}
-            {category !== 'general_information' && (
-                <Formik
-                    initialValues={{
-                        list_notes_anamnesis: [] as string[],
-                        logical_list_default_anamnesis: 'logical',
-                        name_anamnesis: '',
-                        type_anamnesis: '',
-                        notes_anamnesis: '',
-                        options_anamnesis: 'no',
-                    }}
-                    validationSchema={validationSchema}
-                    onSubmit={handleSubmit}
-                >
-                    {() => (
-                        <QuestionsAnamnese
-                            category={category}
-                            questions={filtered}
-                        />
-                    )}
-                </Formik>
-            )}
-            {/* Botões de Próximo e Anterior 
-            <button type="button" className="absolute bottom-4 left-4">
-                Anterior
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={() => {}}
+            >
+                {({ values }) => (
+                    <>
+                        {options.map((item) => (
+                            <ControlSwitchDiv
+                                ctx={values}
+                                name={item.value as string}
+                                label={item.label}
+                                divClassName="col-span-1 mobile:col-span-full"
+                            />
+                        ))}
+                    </>
+                )}
+            </Formik>
+            <button
+                onClick={keyPressRight}
+                type="button"
+                className="btn btn-primary absolute bottom-4 right-4"
+            >
+                <FaArrowRight />
             </button>
 
-            <button type="button" className="absolute bottom-4 right-4">
-                Próximo
+            <button
+                onClick={keyPressLeft}
+                type="button"
+                className="btn btn-primary absolute bottom-4 left-4"
+            >
+                <FaArrowLeft />
             </button>
-            */}
         </div>
     )
 }

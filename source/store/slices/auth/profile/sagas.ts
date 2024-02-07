@@ -17,43 +17,103 @@ import {
 } from './types'
 
 import cookies from '~/constants/cookies'
+import type { AttributesCognito } from '~/helpers/get-server-side-props-pages-veterinary-privates'
 import {
+    createProfileTutor,
     createProfileVet,
+    getTutorProfile,
     getVetProfile,
+    updateProfileTutor,
     updateProfileVet,
 } from '~/services/helpers'
+import { updateHasProfile } from '~/services/helpers/auth'
+import type { AttributesProfile } from '~/services/helpers/types'
 import { errorToast, successToast } from '~/store/helpers/toast'
 import type { IProfile } from '~/types/profile'
-import { setCookie } from '~/utils/cookies-utils'
+import { getCookie, setCookie } from '~/utils/cookies-utils'
 
-function* onGetProfile() {
+function* onGetProfile({
+    payload: { has_profile, type_profile },
+}: PayloadAction<AttributesProfile>) {
+    const link =
+        type_profile === '1' ? '/veterinary/activation' : '/tutor/activation'
+
     try {
-        const { data } = yield call(getVetProfile)
-        yield setCookie(cookies.profile.name, data)
-        yield put(editProfileSuccess(data))
+        if (has_profile === 'no') {
+            yield call([Router, Router.push], link)
+        } else {
+            const getVet = type_profile === '1' ? getVetProfile : getTutorProfile
+            const { data } = yield call(getVet)
+            yield setCookie(cookies.profile.name, data)
+            yield put(editProfileSuccess(data))
+        }
     } catch (error) {
-        console.log(error)
-        yield call([Router, Router.push], '/activation')
+        if (!(typeof error === 'object') || !error) return
+        if (!('response' in error)) return
+        if (!(typeof error.response === 'object') || !error.response) return
+        if (!('status' in error.response) || !error.response.status) return
+
+        switch (error.response.status) {
+        }
     }
 }
 
 function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
     try {
-        const { data } = yield call(createProfileVet, profile)
+        yield call(updateHasProfile, 'yes')
+        const path = window.location.pathname
+        const isVeterinary = /veterinary/.test(path)
+        const createProfile = isVeterinary ? createProfileVet : createProfileTutor
+        const { data } = yield call(createProfile, profile)
+        const attr = getCookie(cookies.cognito_profile.name) as AttributesCognito
+        setCookie(
+            cookies.cognito_profile.name,
+            JSON.stringify({
+                ...attr,
+                'custom:has_profile': 'yes',
+            }),
+        )
         yield delay(1000)
         yield put(addSuccess(data))
         successToast('Perfil ativado com sucesso!')
         yield call([Router, Router.push], '/dashboard')
     } catch (error) {
-        errorToast('Erro ao ativar perfil!')
-        yield put(addFail((error as any).message))
+        if (!(typeof error === 'object') || !error) return
+        if (!('response' in error)) return
+        if (!(typeof error.response === 'object') || !error.response) return
+        if (!('status' in error.response) || !error.response.status) return
+
+        switch (error.response.status) {
+            case 409:
+                errorToast(
+                    'Já existe um usuário com este cpf/cnpj para este tipo de perfil',
+                )
+                yield call(updateHasProfile, 'yes')
+                yield call([Router, Router.push], '/logout')
+                break
+            default:
+                yield call(updateHasProfile, 'no')
+                if (!('message' in error) || !error.message) {
+                    errorToast('Erro ao ativar perfil!')
+                    return
+                }
+                if (!(typeof error.message === 'string') || !error.message) return
+
+                errorToast(error.message)
+
+                yield put(addFail())
+        }
     }
 }
 
 function* onUpdateProfile({ payload: user }: PayloadAction<IProfile>) {
     try {
-        const { data } = yield call(updateProfileVet, user, user.id as string)
-        // yield call(createProfile, user)
+        const path = window.location.pathname
+        const isVeterinary = /veterinary/.test(path)
+        const updateProfile = isVeterinary ? updateProfileVet : updateProfileTutor
+        const { data } = yield call(updateProfile, user, user.id as string)
+
+        yield call(updateHasProfile, 'yes')
         yield put(editProfileSuccess(data))
         successToast('Perfil atualizado com sucesso!')
     } catch (error) {

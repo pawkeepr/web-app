@@ -10,7 +10,7 @@ import TabContainer from 'react-bootstrap/TabContainer'
 import TabContent from 'react-bootstrap/TabContent'
 import TabPane from 'react-bootstrap/TabPane'
 
-import validate, { type ActivateAccount } from '~/validations/activate'
+import validate, { type ActivateAccount } from './activate'
 
 import { signOutUser } from '~/store/slices/auth/login/actions'
 import { addNew } from '~/store/slices/auth/profile/actions'
@@ -22,31 +22,22 @@ import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 import { BtnLink } from '~/Components/atoms/btn'
 
 import { layoutModeTypes } from '~/constants/layout'
-import type { ActivateAccountVeterinary } from '~/types/activate-account-veterinary'
+import type { ActivateAccountTutor } from '~/types/activate-account-tutor'
 import { TypeProfile, type Location } from '~/types/profile'
-import StepActivationAddress from './components/organism/steps-activation/step-address'
-import StepActivationFinally from './components/organism/steps-activation/step-finally'
-import StepActivationPerson from './components/organism/steps-activation/step-person'
-import StepActivationSpecialty from './components/organism/steps-activation/step-specialty'
-import type { StepProps } from './components/organism/steps-activation/types'
+import StepActivationAddress from './components/steps-activation/step-address'
+import StepActivationFinally from './components/steps-activation/step-finally'
+import StepActivationPerson from './components/steps-activation/step-person'
+import type { StepProps } from './components/steps-activation/types'
 
 const initialValues = (email: string): ActivateAccount => ({
     email,
     contact: {
         email,
-        phone: '',
         whatsapp: '',
     },
     cpf_cnpj: '',
-    crmv: '',
     firstName: '',
     lastName: '',
-    list_service_type: [],
-    list_specialty: [],
-    specialty: {
-        value: '',
-        label: '',
-    },
     location: {
         country: 'BR',
         street: '',
@@ -66,14 +57,10 @@ const Tabs = [
     },
     {
         id: '2',
-        component: (props: StepProps) => <StepActivationSpecialty {...props} />,
-    },
-    {
-        id: '3',
         component: (props: StepProps) => <StepActivationAddress {...props} />,
     },
     {
-        id: '4',
+        id: '3',
         component: (props: StepProps) => <StepActivationFinally {...props} />,
     },
 ]
@@ -85,10 +72,8 @@ const ActivationAccount = () => {
 
     const dispatch = useAppDispatch()
 
-    const onSubmit = async (values: ActivateAccount) => {
-        const { list_specialty } = values
-
-        const profile: ActivateAccountVeterinary = {
+    const onSubmit = (values: ActivateAccount) => {
+        const profile: ActivateAccountTutor = {
             user_information: {
                 type_profile: TypeProfile.VETERINARY,
                 cpf_cnpj: values?.cpf_cnpj,
@@ -97,7 +82,7 @@ const ActivationAccount = () => {
                 last_name: values?.lastName,
                 contact: {
                     email: values?.contact.email as string,
-                    phone: values?.contact.phone as string,
+                    phone: values?.contact.whatsapp as string,
                     whatsapp: values?.contact.whatsapp as string,
                     facebook: '',
                     instagram: '',
@@ -107,16 +92,6 @@ const ActivationAccount = () => {
                 },
                 name: `${values?.firstName} ${values?.lastName}`,
                 url_img: '',
-            },
-            veterinary_information: {
-                cpf_cnpj: values?.cpf_cnpj,
-                crmv: values?.crmv,
-                list_service_type: values?.list_service_type,
-                specialty: values?.specialty.value,
-                list_specialty: list_specialty.map((item) => ({
-                    name_specialty: item.label,
-                    type: item.value,
-                })),
             },
         }
 

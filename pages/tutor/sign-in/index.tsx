@@ -7,7 +7,7 @@ import SignInPage from '~/pages/Modules/shared/Authentication/SignIn'
 const SignInPageNext = () => {
     return (
         <LayoutAuth>
-            <SignInPage />
+            <SignInPage mode="tutor" bgImage="/bg-three.jpg" />
         </LayoutAuth>
     )
 }

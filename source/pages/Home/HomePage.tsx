@@ -70,11 +70,11 @@ const HomePage = () => {
                         <div className="text-center mt-lg-5 pt-5 col-span-1">
                             <p className="text-lg lg:text-2xl font-semibold font-sans p-4 text-white">
                                 {`
-                            Imagine realizar uma consulta completa em no máximo 5 minutos, 
-                            sem sacrificar a qualidade do atendimento. 
-                            Com nosso aplicativo inovador, você terá acesso a recursos poderosos 
-                            na palma da sua mão.
-                           `}
+                                    Imagine realizar uma consulta completa em no máximo 5 minutos, 
+                                    sem sacrificar a qualidade do atendimento. 
+                                    Com nosso aplicativo inovador, você terá acesso a recursos poderosos 
+                                    na palma da sua mão.
+                                `}
                             </p>
                             <ButtonsNavBar />
                         </div>

@@ -1,11 +1,11 @@
-import { LabelHTMLAttributes } from 'react'
+import type { LabelHTMLAttributes } from 'react'
 import withControl from '~/Components/helpers/with-control'
 
 import { tv } from 'tailwind-variants'
 
 export const labelStyled = tv({
     base: `
-        text-xs font-semibold text-gray-500 gap-1 text-start items-center label justify-start pb-1 mb-0
+        text-xs font-semibold text-gray-500 gap-1 text-start items-center label justify-start pb-1 mb-0 h-fit
     `,
 })
 

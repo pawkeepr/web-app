@@ -22,7 +22,7 @@ export const ButtonsNavBar = () => {
                         'border-0': isMobile,
                     },
                 )}
-                href="/sign-in"
+                href="/veterinary/sign-in"
             >
                 <FiLogIn className="w-6 h-6" />
             </BtnLink>
@@ -35,7 +35,7 @@ export const ButtonsNavBar = () => {
                         'border-0 ': isMobile,
                     },
                 )}
-                href="/sign-up"
+                href="/veterinary/sign-up"
             >
                 {/* icon de cadastro */}
                 <UserPlusIcon className="w-6 h-6" />

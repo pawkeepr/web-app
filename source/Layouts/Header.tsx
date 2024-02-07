@@ -13,6 +13,7 @@ import LightDark from '../common/light-dark'
 
 import Bars3CenterLeftIcon from '@heroicons/react/24/solid/Bars3CenterLeftIcon'
 
+import { BtnLink } from '~/Components/atoms/btn'
 import DrawerVet from '~/Components/organism/drawer'
 import type { ModeDrawerItems } from '~/Components/organism/drawer/drawer'
 
@@ -70,7 +71,10 @@ const Header = ({
                     mode="VETERINARY"
                 />
                 <div className="flex items-center justify-center">
-                    <Link href="/" className="logo-light justify-center block">
+                    <Link
+                        href="/dashboard"
+                        className="logo-light justify-center block"
+                    >
                         <Image
                             src={lightLogo}
                             alt="Logo Pawkeepr Mode Light"
@@ -105,13 +109,17 @@ const Header = ({
 
                     {/* NotificationDropdown */}
                     {/* <NotificationDropdown /> */}
-                    <Link className="flex flex-col w-8 ml-7" href={'/logout'}>
-                        <TbLogout
-                            className="w-6 text-cyan-50 h-6"
-                            viewBox="0 0 24 24"
-                        />
-                        <span className="text-white text-xs font-medium">Sair</span>
-                    </Link>
+                    <BtnLink href="/logout" className="hover:!text-secondary-500">
+                        <div>
+                            <TbLogout
+                                className="w-6 text-cyan-50 h-6"
+                                viewBox="0 0 24 24"
+                            />
+                            <span className="text-white text-xs font-medium">
+                                Sair
+                            </span>
+                        </div>
+                    </BtnLink>
                 </div>
 
                 {/* <SearchOption /> */}
