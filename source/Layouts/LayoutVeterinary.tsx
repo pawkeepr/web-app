@@ -1,27 +1,26 @@
-'use client'
+"use client";
 
-import PlusIcon from '@heroicons/react/24/solid/PlusIcon'
-import PropTypes from 'prop-types'
-import type React from 'react'
-import image from '../../styles/assets/images/landing/bg-pattern.png'
+import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
+import PropTypes from "prop-types";
+import type React from "react";
+import image from "../../styles/assets/images/landing/bg-pattern.png";
 
 //import Components
-import Footer from './Footer'
-import Header from './Header'
+import Footer from "./Footer";
+import Header from "./Header";
 
 //import actions
 
-//redux
 import cn from 'classnames'
 import FieldDocumentAppointment from '~/Components/molecules/field-appointment-vet'
 import useHookLayout from './use-hook'
 
 type LayoutProps = {
-    children: React.ReactNode
-}
+    children: React.ReactNode;
+};
 
 const LayoutMain = ({ children }: LayoutProps) => {
-    useHookLayout()
+    useHookLayout();
     return (
         <div id="relative">
             <Header />
@@ -35,8 +34,8 @@ const LayoutMain = ({ children }: LayoutProps) => {
                 )}
                 style={{
                     backgroundImage: `url(${image})`,
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
                 }}
             >
                 {children}
@@ -64,11 +63,11 @@ const LayoutMain = ({ children }: LayoutProps) => {
                 <Footer />
             </div>
         </div>
-    )
-}
+    );
+};
 
 LayoutMain.propTypes = {
     children: PropTypes.object,
-}
+};
 
-export default LayoutMain
+export default LayoutMain;
