@@ -1,9 +1,11 @@
-import { Formik } from "formik";
+import { Formik, type FormikHelpers } from "formik";
 import { useCallback } from "react";
 import Form from "react-bootstrap/Form";
+import { useDispatch } from "react-redux";
 import { BtnPrimary, BtnSecondary } from "~/Components/atoms/btn";
 import FieldControl from "~/Components/molecules/field-control";
 import useProfile from "~/store/hooks/profile/use-profile";
+import { editProfile } from "~/store/slices/auth/profile/actions";
 
 const PersonalData = () => {
     type initialValuesProps = {
@@ -18,8 +20,7 @@ const PersonalData = () => {
     };
 
     const { data } = useProfile();
-
-    console.log(data);
+    const dispatch = useDispatch();
 
     const InitialValues: initialValuesProps = {
         firstname: data?.user_information?.first_name || undefined,
@@ -32,7 +33,49 @@ const PersonalData = () => {
         address: data?.user_information?.address?.complement || undefined,
     };
 
-    const handleSubmit = useCallback(() => {}, []);
+    const handleSubmit = useCallback(
+        (
+            values: initialValuesProps,
+            { setSubmitting }: FormikHelpers<initialValuesProps>
+        ) => {
+            dispatch(
+                editProfile({
+                    user_information: {
+                        first_name: values.firstname || "",
+                        last_name: values.lastname || "",
+                        name: `${values.firstname} ${values.lastname}`,
+                        type_profile: 1,
+                        url_img: "",
+                        contact: {
+                            email: values.email || "",
+                            phone: values.phonenumber || "",
+                            whatsapp: "",
+                            facebook: "",
+                            instagram: "",
+                            twitter: "",
+                            linkedIn: "",
+                            youtube: "",
+                        },
+                        address: {
+                            country: values.country || "",
+                            zipCode: values.zipcode || "",
+                            state: "",
+                            city: values.city || "",
+                            neighborhood: "",
+                            street: "",
+                            number: "",
+                            complement: values.address || "",
+                        },
+                    },
+                })
+            );
+            setSubmitting(false);
+        },
+        [dispatch]
+    );
+
+    console.log("data", data);
+    console.log("InitialValues", InitialValues);
 
     return (
         <Formik initialValues={InitialValues} onSubmit={handleSubmit}>
@@ -114,7 +157,11 @@ const PersonalData = () => {
                     <div className="hstack gap-2 justify-content-end">
                         <div className="flex justify-end items-end">
                             <BtnSecondary className="mr-2" label="Cancelar" />
-                            <BtnPrimary className="" label="Salvar" />
+                            <BtnPrimary
+                                className=""
+                                label="Salvar"
+                                type="submit"
+                            />
                         </div>
                     </div>
                 </div>

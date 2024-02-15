@@ -44,7 +44,7 @@ const ChangePass = () => {
                     <div>
                         <FieldControl
                             name={"oldpassword"}
-                            onChange={() => setErrorMessage("")}
+                            onChange={() => {}}
                             label="Senha Atual"
                             type="password"
                             className="form-control"
@@ -89,7 +89,11 @@ const ChangePass = () => {
                 </div>
 
                 <div className="flex flex-col items-end">
-                    <BtnPrimary className="" label="Salvar Senha" />
+                    <BtnPrimary
+                        className=""
+                        label="Salvar Senha"
+                        type="submit"
+                    />
                 </div>
             </Form>
         </Formik>
