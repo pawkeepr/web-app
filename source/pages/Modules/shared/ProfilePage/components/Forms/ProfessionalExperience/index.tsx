@@ -63,7 +63,7 @@ const ProfessionalExperience = () => {
                                     placeholder=""
                                 />
                             </div>
-                            <div className="flex justify-between mobile:flex-col flex-row">
+                            <div className="flex justify-between gap-3 mobile:flex-col">
                                 <div className="flex flex-col  mb-3">
                                     <h3 className="mt-4">Início</h3>
                                     <div className="flex gap-3 mobile:flex-col">
@@ -94,9 +94,9 @@ const ProfessionalExperience = () => {
                                                 },
                                             ]}
                                         />
-                                        <div className="col-auto align-self-center">
+                                        {/* <div className="col-auto align-self-center mobile:hidden">
                                             de
-                                        </div>
+                                        </div> */}
                                         <FieldControlSelect
                                             label="Ano"
                                             name="experienceYear"
@@ -182,9 +182,9 @@ const ProfessionalExperience = () => {
                                                 ]}
                                             />
 
-                                            <div className="col-auto align-self-center">
+                                            {/* <div className="col-auto align-self-center mobile:hidden">
                                                 de
-                                            </div>
+                                            </div> */}
                                             <FieldControlSelect
                                                 label="Ano"
                                                 name="experienceYear"
