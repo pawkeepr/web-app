@@ -51,7 +51,7 @@ const SearchInput = ({ name, ...rest }: SearchInputProps) => {
             </div>
             <Input
                 type="text"
-                className="px-8 rounded-lg"
+                className="px-8 rounded-md"
                 value={search}
                 onChange={handleChangeSearch}
                 {...rest}

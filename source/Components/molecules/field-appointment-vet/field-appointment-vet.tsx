@@ -87,7 +87,7 @@ const FieldDocumentAppointment = ({
                                             onlyCPF
                                             endIcon={
                                                 <button
-                                                    className="focus:outline-none flex h-full items-center justify-center "
+                                                    className="focus:outline-none flex h-full items-center justify-center"
                                                     data-bs-target="#addVeterinaryAppointmentModal"
                                                     type="submit"
                                                 >
