@@ -7,10 +7,7 @@ export const NAME = 'profile'
 const useProfile = () => {
     const superKeys = [NAME, document]
 
-    return useAppQuery<IProfile>(superKeys, getVetProfile.bind(null), {
-        initialData: {} as IProfile,
-        // staleTime: TIME // 1 min
-    })
+    return useAppQuery<IProfile>(superKeys, getVetProfile.bind(null))
 }
 
 export default useProfile

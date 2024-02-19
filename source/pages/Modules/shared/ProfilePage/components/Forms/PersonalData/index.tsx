@@ -1,173 +1,71 @@
-import { Formik, type FormikHelpers } from "formik";
-import { useCallback } from "react";
-import Form from "react-bootstrap/Form";
-import { useDispatch } from "react-redux";
-import { BtnPrimary, BtnSecondary } from "~/Components/atoms/btn";
-import FieldControl from "~/Components/molecules/field-control";
-import useProfile from "~/store/hooks/profile/use-profile";
-import { editProfile } from "~/store/slices/auth/profile/actions";
+import { Formik } from 'formik'
+import { useCallback } from 'react'
+import Form from 'react-bootstrap/Form'
+import { BtnPrimary, BtnSecondary } from '~/Components/atoms/btn'
+import FieldControl from '~/Components/molecules/field-control'
+import { useModeEditablePet } from '~/pages/Modules/shared/ProfilePetPage/components/hooks/use-mode-editable-pet'
+import type { IProfile } from '~/types/profile'
+import AddressTutor from '../../address-tutor'
 
-const PersonalData = () => {
-    type initialValuesProps = {
-        firstname?: string;
-        lastname?: string;
-        phonenumber?: string;
-        email?: string;
-        city?: string;
-        country?: string;
-        zipcode?: string;
-        address?: string;
-    };
+type PersonalDataProps = {
+    data: IProfile
+}
 
-    const { data } = useProfile();
-    const dispatch = useDispatch();
+const PersonalData = ({ data }: PersonalDataProps) => {
+    const { mode } = useModeEditablePet()
 
-    const InitialValues: initialValuesProps = {
-        firstname: data?.user_information?.first_name || undefined,
-        lastname: data?.user_information?.last_name || undefined,
-        phonenumber: data?.user_information?.contact?.phone || undefined,
-        email: data?.user_information?.contact?.email || undefined,
-        city: data?.user_information?.address?.city || undefined,
-        country: data?.user_information?.address?.country || undefined,
-        zipcode: data?.user_information?.address?.zipCode || undefined,
-        address: data?.user_information?.address?.complement || undefined,
-    };
-
-    const handleSubmit = useCallback(
-        (
-            values: initialValuesProps,
-            { setSubmitting }: FormikHelpers<initialValuesProps>
-        ) => {
-            dispatch(
-                editProfile({
-                    user_information: {
-                        first_name: values.firstname || "",
-                        last_name: values.lastname || "",
-                        name: `${values.firstname} ${values.lastname}`,
-                        type_profile: 1,
-                        url_img: "",
-                        contact: {
-                            email: values.email || "",
-                            phone: values.phonenumber || "",
-                            whatsapp: "",
-                            facebook: "",
-                            instagram: "",
-                            twitter: "",
-                            linkedIn: "",
-                            youtube: "",
-                        },
-                        address: {
-                            country: values.country || "",
-                            zipCode: values.zipcode || "",
-                            state: "",
-                            city: values.city || "",
-                            neighborhood: "",
-                            street: "",
-                            number: "",
-                            complement: values.address || "",
-                        },
-                    },
-                })
-            );
-            setSubmitting(false);
-        },
-        [dispatch]
-    );
-
-    console.log("data", data);
-    console.log("InitialValues", InitialValues);
+    const values = {} as IProfile
+    const handleSubmit = useCallback((values: IProfile) => {}, [])
 
     return (
-        <Formik initialValues={InitialValues} onSubmit={handleSubmit}>
+        <Formik initialValues={data} onSubmit={handleSubmit}>
             <Form>
                 <div className="flex flex-col">
-                    <div className="flex mobile:flex-col gap-3 mb-3">
+                    <div className="grid grid-cols-2 mobile:grid-cols-1 gap-2">
                         <FieldControl
+                            mode={mode}
                             label="Nome"
                             type="text"
-                            name={"firstname"}
-                            className="form-control"
-                            id="firstnameInput"
+                            ctx={values}
+                            name="user_information.first_name"
                             placeholder="Digite seu nome"
                         />
                         <FieldControl
+                            mode={mode}
                             label="Sobrenome"
                             type="text"
-                            name={"lastname"}
-                            className="form-control"
-                            id="lastnameInput"
+                            ctx={values}
+                            name="user_information.last_name"
                             placeholder="Digite seu sobrenome"
                         />
-                    </div>
-                    <div className="flex mobile:flex-col gap-3 mb-3">
                         <FieldControl
+                            mode={mode}
                             label="Telefone"
                             type="text"
-                            name={"phonenumber"}
-                            className="form-control"
-                            id="phonenumberInput"
+                            ctx={values}
+                            name="user_information.contact.phone"
                             placeholder="Digite seu telefone"
                         />
                         <FieldControl
+                            mode={mode}
+                            ctx={values}
                             label="Email"
-                            name={"email"}
+                            name="user_information.contact.email"
                             type="email"
-                            className="form-control"
-                            id="emailInput"
                             placeholder="Digite seu email"
                         />
-                    </div>
-                    <div className="flex mobile:flex-col gap-3 mb-3">
-                        <FieldControl
-                            label="Cidade"
-                            type="text"
-                            name={"city"}
-                            className="form-control"
-                            id="cityInput"
-                            placeholder="Digite sua Cidade"
-                        />
-                        <FieldControl
-                            label="País"
-                            type="text"
-                            name={"country"}
-                            className="form-control"
-                            id="countryInput"
-                            placeholder="Digite seu País"
-                        />
-                    </div>
-                    <div className="flex mobile:flex-col gap-3 mb-3">
-                        <FieldControl
-                            label="CEP"
-                            type="text"
-                            name={"zipcode"}
-                            className="form-control"
-                            minLength={5}
-                            maxLength={6}
-                            id="zipcodeInput"
-                            placeholder="Digite seu CEP"
-                        />
-                        <FieldControl
-                            label="Endereço"
-                            name={"address"}
-                            as="textarea"
-                            className="form-control"
-                            id="exampleFormControlText\area"
-                        />
+                        <AddressTutor mode={mode} />
                     </div>
                     <div className="hstack gap-2 justify-content-end">
                         <div className="flex justify-end items-end">
                             <BtnSecondary className="mr-2" label="Cancelar" />
-                            <BtnPrimary
-                                className=""
-                                label="Salvar"
-                                type="submit"
-                            />
+                            <BtnPrimary className="" label="Salvar" type="submit" />
                         </div>
                     </div>
                 </div>
             </Form>
         </Formik>
-    );
-};
+    )
+}
 
-export default PersonalData;
+export default PersonalData

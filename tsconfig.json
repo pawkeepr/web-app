@@ -45,6 +45,7 @@
         "**/*.js",
         "**/*.jsx",
         ".next/types/**/*.ts",
+        "source/pages/Modules/shared/ProfilePetPage/components/molecules/address-tutor",
     ],
     "exclude": [
         "node_modules"

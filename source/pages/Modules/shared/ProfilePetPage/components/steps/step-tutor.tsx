@@ -7,7 +7,7 @@ import FieldControl from '~/Components/molecules/field-control/field-control'
 
 import type { RecordsShapeYup, StepProps, Tabs } from '~/types/helpers'
 import type { InitialValues } from '../../index'
-import AddressTutor from '../molecules/address-tutor.tsx'
+import AddressTutor from '../molecules/address-tutor'
 
 import { useMemo } from 'react'
 import * as yup from 'yup'

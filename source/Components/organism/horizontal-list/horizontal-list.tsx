@@ -3,7 +3,10 @@
 
 import { Tab } from '@headlessui/react'
 import cn from 'classnames'
+import { FaEdit, FaEye } from 'react-icons/fa'
 import { tv, type VariantProps } from 'tailwind-variants'
+import { BtnIcon } from '~/Components/atoms/btn'
+import { useModeEditablePet } from '~/pages/Modules/shared/ProfilePetPage/components/hooks/use-mode-editable-pet'
 
 export type TabItem = {
     id: number | string
@@ -66,6 +69,7 @@ const HorizontalTabs = ({
     categories,
     bottomNavigation = true,
 }: HorizontalTabsProps) => {
+    const { mode, toggleMode } = useModeEditablePet()
     return (
         <Tab.Group as="section" className="flex flex-col w-full">
             <Tab.List
@@ -90,7 +94,41 @@ const HorizontalTabs = ({
                     </Tab>
                 ))}
             </Tab.List>
-            <Tab.Panels className="mt-2">
+            <Tab.Panels
+                className=" 
+                gap-2 mt-2 relative bg-white w-full
+                py-6 px-2 mobile:items-center mobile:flex mobile:!h-fit mobile:flex-col
+                tablet:py-0 tablet:items-center tablet:flex tablet:!h-fit tablet:flex-col
+                "
+            >
+                <BtnIcon
+                    icon={
+                        mode === 'editable' ? (
+                            <span>
+                                <FaEye className="w-5 h-5" />
+                            </span>
+                        ) : (
+                            <span>
+                                <FaEdit className="w-5 h-5" />
+                            </span>
+                        )
+                    }
+                    type="button"
+                    className={cn(
+                        `mt-2
+                        web:absolute web:right-0 web:top-0 web:w-32 web:p-1 web:m-0 web:h-fit 
+                        web:text-gray-400 web:border-none mobile:w-40
+                    `,
+                        {
+                            'bg-confirm-500 hover:bg-confirm-600 text-white':
+                                mode === 'editable',
+                            'bg-primary-500 hover:bg-primary-600 text-white':
+                                mode !== 'editable',
+                        },
+                    )}
+                    label={mode === 'editable' ? 'Visualizar' : 'Editar'}
+                    onClick={toggleMode}
+                />
                 {categories.map((item) => (
                     <Tab.Panel
                         key={item.id}

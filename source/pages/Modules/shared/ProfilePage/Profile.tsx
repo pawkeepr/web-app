@@ -1,46 +1,58 @@
 // path/filename: src/pages/Profile.tsx
 
-import type React from "react";
-import HorizontalTabs from "~/Components/organism/horizontal-list/horizontal-list";
-import DashboardLayouts from "../../_layouts/dashboard/dashboard";
-import FormChangePass from "./components/Forms/ChangePass";
-import FormPersonalData from "./components/Forms/PersonalData";
-import FormProfissionalExperiencie from "./components/Forms/ProfessionalExperience";
-import SocialLinks from "./components/SocialLinks";
-import UserProfileCard from "./components/UserProfileCard";
+import type React from 'react'
+import { useMemo } from 'react'
+import HorizontalTabs from '~/Components/organism/horizontal-list/horizontal-list'
+import useProfile from '~/store/hooks/profile/use-profile'
+import type { IProfile } from '~/types/profile'
+import DashboardLayouts from '../../_layouts/dashboard/dashboard'
+import FormChangePass from './components/Forms/ChangePass'
+import FormPersonalData from './components/Forms/PersonalData'
+import SocialLinks from './components/SocialLinks'
+import UserProfileCard from './components/UserProfileCard'
 
 type OptionTab = {
-    id: number;
-    title: string;
-    href: string;
-    tab: JSX.Element;
-};
+    id: number
+    title: string
+    href: string
+    tab: JSX.Element
+}
 
-const makeTabs = (): OptionTab[] => {
+const makeTabs = (profile: IProfile): OptionTab[] => {
     return [
         {
             id: 1,
-            title: "Dados Pessoais",
-            href: "#personal-data",
-            tab: <FormPersonalData />,
+            title: 'Dados Pessoais',
+            href: '#personal-data',
+            tab: <FormPersonalData data={profile} />,
         },
         {
             id: 2,
-            title: "Alterar Senha",
-            href: "#change-pass",
+            title: 'Alterar Senha',
+            href: '#change-pass',
             tab: <FormChangePass />,
         },
-        {
-            id: 3,
-            title: "Experiência Profissional",
-            href: "#professional-experience",
-            tab: <FormProfissionalExperiencie />,
-        },
-    ];
-};
+        // {
+        //     id: 3,
+        //     title: 'Experiência Profissional',
+        //     href: '#professional-experience',
+        //     tab: <FormProfissionalExperiencie />,
+        // },
+    ]
+}
 
 const Profile: React.FC = () => {
-    const tabs = makeTabs();
+    const { data: profile, isLoading } = useProfile()
+
+    if (isLoading) {
+        return <div>Carregando...</div>
+    }
+
+    const tabs = useMemo(() => {
+        if (!profile) return []
+        return makeTabs(profile)
+    }, [profile])
+
     return (
         <DashboardLayouts title="Perfil" searchBlock={false}>
             <div className="container mx-auto mt-14">
@@ -55,7 +67,7 @@ const Profile: React.FC = () => {
                 </div>
             </div>
         </DashboardLayouts>
-    );
-};
+    )
+}
 
-export default Profile;
+export default Profile
