@@ -50,8 +50,8 @@ const veterinaryItems: Item[] = [
     },
     {
         name: 'Perfil',
-        visible: false,
-        disabled: true,
+        visible: true,
+        disabled: false,
         icon: <UserCircleIcon className="w-5 h-5" />,
         href: '/profile',
     },
