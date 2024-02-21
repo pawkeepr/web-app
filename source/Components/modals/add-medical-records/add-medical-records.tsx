@@ -26,8 +26,8 @@ const AddMedicalRecordsModal = ({ children, item }: AddModalProps) => {
                     onClick={showModal}
                     className={cn(
                         `
-                        web:absolute web:right-0 web:top-0 web:w-fit web:p-1 web:m-0 web:h-fit 
-                        web:text-gray-400 web:border-none mobile:w-40 bg-primary-500 hover:bg-primary-600 text-white
+                        web:absolute web:right-0 web:top-0 web:w-fit web:p-1 web:m-0 web:h-fit  mobile:w-full
+                        web:text-gray-400 web:border-none bg-confirm-500 hover:bg-confirm-600 text-white
                     `,
                     )}
                     label="Adicionar Registro Médico"
