@@ -1,4 +1,9 @@
-import { Theme, ToastOptions, ToastPosition, toast } from 'react-toastify'
+import {
+    toast,
+    type Theme,
+    type ToastOptions,
+    type ToastPosition,
+} from 'react-toastify'
 
 export const OptionsDefault = {
     position: 'bottom-center' as ToastPosition,
@@ -16,7 +21,7 @@ export const OptionsDefault = {
         padding: '2rem',
         minWidth: '450px',
     }, // Estilo para ocupar a tela toda e centralizar
-} as ToastOptions
+} as unknown as ToastOptions
 
 type Options = Partial<typeof OptionsDefault>
 
@@ -26,7 +31,7 @@ type ToastMessage = {
     description?: string
 }
 
-export const buildToast = async (
+export const buildToast = (
     { type, description = '' }: ToastMessage,
     options?: Options,
 ) => {
@@ -56,7 +61,7 @@ export const buildToast = async (
     })
 }
 
-export const successToast = async (
+export const successToast = (
     description: string,
     title = 'Operação Concluida!',
     options?: Options,
@@ -64,7 +69,7 @@ export const successToast = async (
     return buildToast({ description, type: 'success' }, options)
 }
 
-export const errorToast = async (
+export const errorToast = (
     description: string,
     title = 'Erro na Operação!',
     options?: Options,
@@ -72,10 +77,34 @@ export const errorToast = async (
     return buildToast({ description, type: 'error' }, options)
 }
 
-export const infoToast = async (
+export const infoToast = (
     description: string,
     title = 'Aviso!',
     options?: Options,
 ) => {
     return buildToast({ description, type: 'info' }, options)
+}
+
+export const updateSuccessToast = () => {
+    return successToast('Atualizado com sucesso')
+}
+
+export const createSuccessToast = () => {
+    return successToast('Criado com sucesso')
+}
+
+export const deleteSuccessToast = () => {
+    return successToast('Excluído com sucesso')
+}
+
+export const updateErrorToast = () => {
+    return errorToast('Erro ao atualizar')
+}
+
+export const createErrorToast = () => {
+    return errorToast('Erro ao criar')
+}
+
+export const deleteErrorToast = () => {
+    return errorToast('Erro ao excluir')
 }
