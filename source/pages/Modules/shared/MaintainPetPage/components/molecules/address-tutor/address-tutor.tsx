@@ -9,7 +9,7 @@ import { useCallback, useMemo, useTransition } from 'react'
 import type { IAddress } from '~/helpers/fetch-address-by-cep'
 import useFetchAddress from '~/hooks/use-fetch-address'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import type { InitialValues } from '~/pages/Modules/shared/ProfilePetPage'
+import type { InitialValues } from '~/pages/Modules/shared/MaintainPetPage'
 
 type CtxAddress = Pick<InitialValues, 'ownerEmergencyContact'>
 

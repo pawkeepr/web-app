@@ -4,9 +4,9 @@ import usePetById from '~/store/hooks/pet-by-id/use-pets'
 import { GenderBR } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import DefaultLayout from '../../_layouts/dashboard/dashboard'
+import MaintainPetPage from '../MaintainPetPage/MaintainPetPage'
 import SocialLinks from '../ProfilePage/components/SocialLinks'
 import UserProfileCard from '../ProfilePage/components/UserProfileCard'
-import CreateOrUpdatePetPage from '../ProfilePetPage/ProfilePetPage'
 import HistoricPet from './components/template/HistoricPet'
 import MedicalRecords from './components/template/MedicalRecords'
 
@@ -15,7 +15,7 @@ const Tabs = (document?: string, id_pet?: string): TabItem[] => [
         id: 2,
         title: 'Dados do Pet',
         href: '#tutors',
-        tab: <CreateOrUpdatePetPage document={document} id_pet={id_pet} />,
+        tab: <MaintainPetPage document={document} id_pet={id_pet} />,
     },
     {
         id: 1,

@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import Form from 'react-bootstrap/Form'
 import { BtnPrimary, BtnSecondary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control'
-import { useModeEditablePet } from '~/pages/Modules/shared/ProfilePetPage/components/hooks/use-mode-editable-pet'
+import { useModeEditablePet } from '~/pages/Modules/shared/MaintainPetPage/components/hooks/use-mode-editable-pet'
 import type { IProfile } from '~/types/profile'
 import AddressTutor from '../../address-tutor'
 

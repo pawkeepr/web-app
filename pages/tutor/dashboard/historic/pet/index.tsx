@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { LayoutTutor } from '~/Layouts'
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-tutor-privates'
 import HistoricPetPage from '~/pages/Modules/shared/HistoricPetPage'
-import { useModeEditablePet } from '~/pages/Modules/shared/ProfilePetPage/components/hooks/use-mode-editable-pet'
+import { useModeEditablePet } from '~/pages/Modules/shared/MaintainPetPage/components/hooks/use-mode-editable-pet'
 
 const PetsPage = () => {
     const search = useSearchParams()

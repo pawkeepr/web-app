@@ -2,8 +2,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { LayoutVeterinary } from '~/Layouts'
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-veterinary-privates'
-import Page from '~/pages/Modules/shared/ProfilePetPage'
-import { useModeEditablePet } from '~/pages/Modules/shared/ProfilePetPage/components/hooks/use-mode-editable-pet'
+import Page from '~/pages/Modules/shared/MaintainPetPage'
+import { useModeEditablePet } from '~/pages/Modules/shared/MaintainPetPage/components/hooks/use-mode-editable-pet'
 
 const PetsPage = () => {
     const search = useSearchParams()

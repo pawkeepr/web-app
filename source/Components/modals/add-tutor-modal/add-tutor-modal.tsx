@@ -69,22 +69,23 @@ const AddTutorModal = ({ children, item }: AddModalProps) => {
                     onSubmit={onSubmit}
                     enableReinitialize
                 >
-                    {({ handleSubmit, isValid }) => (
+                    {({ handleSubmit, isValid, values }) => (
                         <Form onSubmit={handleSubmit}>
                             <BtnAvatar src="" alt="Avatar do Tutor" />
 
                             <div className="grid grid-cols-2">
                                 <FieldControl
+                                    ctx={values}
                                     label="Nome"
                                     divClassName="col-span-full"
                                     name="name"
-                                    className=" "
                                     placeholder="Nome do tutor"
                                     type="text"
                                     required
                                 />
 
                                 <FieldControl
+                                    ctx={values}
                                     label="Email"
                                     name="email"
                                     className=" "
