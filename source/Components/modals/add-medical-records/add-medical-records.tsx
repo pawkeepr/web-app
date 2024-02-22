@@ -1,20 +1,33 @@
-import { Formik } from 'formik'
-
 import cn from 'classnames'
+import { useState } from 'react'
 import { FaPlus } from 'react-icons/fa'
 import { BtnIcon } from '~/Components/atoms/btn'
+import MedicalRecordsForm from '~/Components/forms/medical-records-form'
+import FieldSelect from '~/Components/molecules/field-select'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
+import {
+    MedicalRecordOptions,
+    type MEDICAL_RECORDS,
+    type MedicalRecordEntry,
+} from '~/types/medical-records'
 
 type AddModalProps = {
     children?: (showModal: () => void) => JSX.Element
-    item?: any
+    cpf_cnpj: string
+    id_pet: string
+    item?: MedicalRecordEntry | null
 }
 
-const AddMedicalRecordsModal = ({ children, item }: AddModalProps) => {
+const AddMedicalRecordsModal = ({
+    children,
+    item = null,
+    cpf_cnpj,
+    id_pet,
+}: AddModalProps) => {
+    const [type, setType] = useState<MEDICAL_RECORDS>('body-evolution')
     const { closeModal, open, showModal } = useModal()
 
-    const onSubmit = (values: any) => {}
     const title = item ? 'Editar Registro Médico' : 'Adicionar Registro Médico'
 
     return (
@@ -48,9 +61,19 @@ const AddMedicalRecordsModal = ({ children, item }: AddModalProps) => {
                     </h6>
                 </div>
 
-                <Formik initialValues={{}} onSubmit={onSubmit} enableReinitialize>
-                    {() => <div />}
-                </Formik>
+                <FieldSelect
+                    options={MedicalRecordOptions}
+                    label="Condição"
+                    name="type"
+                    onChangeValue={(value) => setType(value as MEDICAL_RECORDS)}
+                />
+
+                <MedicalRecordsForm
+                    type={type}
+                    item={item}
+                    cpf_cnpj={cpf_cnpj}
+                    id_pet={id_pet}
+                />
             </Modal>
         </>
     )
