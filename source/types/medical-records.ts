@@ -17,6 +17,29 @@ export const MEDICAL_RECORDS = {
 } as const
 export type MEDICAL_RECORDS = (typeof MEDICAL_RECORDS)[keyof typeof MEDICAL_RECORDS]
 
+type MedicalRecordOption = {
+    value: (typeof MEDICAL_RECORDS)[keyof typeof MEDICAL_RECORDS]
+    label: string
+}
+
+export const MedicalRecordOptions: MedicalRecordOption[] = [
+    { value: MEDICAL_RECORDS.BODY_EVOLUTION, label: 'Evolução Corporal' },
+    { value: MEDICAL_RECORDS.VACCINES, label: 'Vacinas' },
+    { value: MEDICAL_RECORDS.DISEASES, label: 'Doenças' },
+    { value: MEDICAL_RECORDS.ALLERGIES, label: 'Alergias' },
+    { value: MEDICAL_RECORDS.MEDICATIONS, label: 'Medicamentos' },
+    { value: MEDICAL_RECORDS.HOSPITALIZATIONS, label: 'Hospitalizações' },
+    { value: MEDICAL_RECORDS.INTERNMENTS, label: 'Internações' },
+    { value: MEDICAL_RECORDS.INJURIES, label: 'Lesões' },
+    { value: MEDICAL_RECORDS.SURGERIES, label: 'Cirurgias' },
+    { value: MEDICAL_RECORDS.TREATMENTS, label: 'Tratamentos' },
+    { value: MEDICAL_RECORDS.DENTAL_PROCEDURES, label: 'Procedimentos Dentários' },
+    { value: MEDICAL_RECORDS.NUTRITIONS, label: 'Alimentação' },
+    { value: MEDICAL_RECORDS.PHYSICAL_ACTIVITIES, label: 'Atividades Físicas' },
+    { value: MEDICAL_RECORDS.MEDICINES, label: 'Medicamentos' },
+    { value: MEDICAL_RECORDS.EXAMS, label: 'Exames' },
+]
+
 // Interface base com elementos comuns a todas as entradas do prontuário médico
 export interface MedicalRecordEntry {
     type: MEDICAL_RECORDS
