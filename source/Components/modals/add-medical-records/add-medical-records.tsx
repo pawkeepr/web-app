@@ -25,7 +25,10 @@ const AddMedicalRecordsModal = ({
     cpf_cnpj,
     id_pet,
 }: AddModalProps) => {
-    const [type, setType] = useState<MEDICAL_RECORDS>('body-evolution')
+    const [type, setType] = useState<{
+        value: MEDICAL_RECORDS
+        label: string
+    } | null>(null)
     const { closeModal, open, showModal } = useModal()
 
     const title = item ? 'Editar Registro Médico' : 'Adicionar Registro Médico'
@@ -60,20 +63,21 @@ const AddMedicalRecordsModal = ({
                         {title}
                     </h6>
                 </div>
-
                 <FieldSelect
                     options={MedicalRecordOptions}
                     label="Condição"
                     name="type"
-                    onChangeValue={(value) => setType(value as MEDICAL_RECORDS)}
+                    onChangeValue={(value) => setType(value as any)}
                 />
 
-                <MedicalRecordsForm
-                    type={type}
-                    item={item}
-                    cpf_cnpj={cpf_cnpj}
-                    id_pet={id_pet}
-                />
+                {type && (
+                    <MedicalRecordsForm
+                        type={type.value}
+                        item={item}
+                        cpf_cnpj={cpf_cnpj}
+                        id_pet={id_pet}
+                    />
+                )}
             </Modal>
         </>
     )

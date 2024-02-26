@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { Props } from 'react-select'
+import { twMerge } from 'tailwind-merge'
 import Label from '~/Components/atoms/label'
 import Select from '~/Components/atoms/select'
 import type { InputControlProps, OptionSelect } from '../field-control'
@@ -35,10 +36,11 @@ const FieldSelect = ({
     }
 
     return (
-        <div className={divClassName}>
+        <div className={twMerge('w-full relative')}>
             <Label label={label} required={required} id={name} separator={':'} />
             <Select
                 {...props}
+                menuPosition="absolute"
                 id={name}
                 required={required}
                 className={required ? 'border-secondary-500' : ''}
