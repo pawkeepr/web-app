@@ -1,4 +1,4 @@
-import { Form, Formik } from 'formik'
+import withControl from '~/Components/helpers/with-control'
 import { useUpdateMedicalRecordsMutation } from '~/store/hooks/medical-records'
 import { MEDICAL_RECORDS, type MedicalRecordEntry } from '~/types/medical-records'
 import BodyEvolutionForm from './forms/body-evolution-form'
@@ -11,7 +11,16 @@ import NutritionForm from './forms/nutrition-form'
 import PhysicalActivityForm from './forms/physical-activity-form'
 import VaccinesForm from './forms/vaccines-form'
 
-export const OptionsForms = new Map<MEDICAL_RECORDS, () => JSX.Element>([
+export type OptionFormsProps<T> = {
+    item: T | null
+    handleSubmit: (data: MedicalRecordEntry) => void
+}
+
+export const OptionsForms = new Map<
+    MEDICAL_RECORDS,
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    (props: OptionFormsProps<any>) => JSX.Element
+>([
     [MEDICAL_RECORDS.BODY_EVOLUTION, BodyEvolutionForm],
     [MEDICAL_RECORDS.HOSPITALIZATIONS, HospitalizationForm],
     [MEDICAL_RECORDS.INTERNMENTS, HospitalizationForm],
@@ -53,15 +62,7 @@ const MedicalRecordsForm = ({
         updateMutation.mutateAsync({ data })
     }
 
-    return (
-        <Formik initialValues={item as MedicalRecordEntry} onSubmit={handleSubmit}>
-            {({ handleSubmit }) => (
-                <Form onSubmit={handleSubmit} className="h-screen">
-                    <FormComponent />
-                </Form>
-            )}
-        </Formik>
-    )
+    return <FormComponent item={item} handleSubmit={handleSubmit} />
 }
 
-export default MedicalRecordsForm
+export default withControl(MedicalRecordsForm)
