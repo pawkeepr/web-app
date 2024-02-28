@@ -56,28 +56,29 @@ const AddMedicalRecordsModal = ({
                 nested
                 open={open}
                 lockScroll
-                className="pb-0 w-[750px]"
+                className="pb-0 w-[750px] h-fit py-4 min-h-96"
             >
                 <div className="w-full">
                     <h6 className="mb-4 font-semibold text-center uppercase">
                         {title}
                     </h6>
                 </div>
-                <FieldSelect
-                    options={MedicalRecordOptions}
-                    label="Condição"
-                    name="type"
-                    onChangeValue={(value) => setType(value as any)}
-                />
+                <section className="flex flex-1 relative flex-col">
+                    <FieldSelect
+                        options={MedicalRecordOptions}
+                        label="Condição"
+                        name="type"
+                        onChangeValue={(value) => setType(value as any)}
+                    />
 
-                {type && (
                     <MedicalRecordsForm
-                        type={type.value}
+                        condition={!!type}
+                        type={type?.value as MEDICAL_RECORDS}
                         item={item}
                         cpf_cnpj={cpf_cnpj}
                         id_pet={id_pet}
                     />
-                )}
+                </section>
             </Modal>
         </>
     )
