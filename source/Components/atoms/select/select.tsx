@@ -82,6 +82,8 @@ const Select = ({
                 indicatorSeparator: () => '!hidden',
                 option: (state) => option({ selected: state.isSelected }),
                 dropdownIndicator: () => dropdownIndicator({ mode }),
+                menuList: () =>
+                    'h-40 overflow-y-auto bg-white dark:bg-[#292e33] dark:text-gray-200',
             }}
             {...props}
         />
