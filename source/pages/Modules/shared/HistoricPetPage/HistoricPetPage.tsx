@@ -1,5 +1,8 @@
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import type { TabItem } from '~/Components/organism/horizontal-list'
 import HorizontalTabs from '~/Components/organism/horizontal-list'
+import { infoToast } from '~/store/helpers/toast'
 import usePetById from '~/store/hooks/pet-by-id/use-pets'
 import { GenderBR } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
@@ -38,10 +41,35 @@ type HistoricPetPageProps = {
 
 const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
     const tabs = Tabs(document, id_pet)
-    const { activeData: pet, isLoading } = usePetById(
-        document as string,
-        id_pet as string,
-    )
+    const router = useRouter()
+    const {
+        activeData: pet,
+        isLoading,
+        error,
+    } = usePetById(document as string, id_pet as string)
+
+    useEffect(() => {
+        if (!error) return
+        if (!('response' in error)) return
+        if (!error.response) return
+
+        const response = error.response
+        if (!(typeof response === 'object')) return
+        if (!('status' in response)) return
+        if (typeof response.status !== 'number') return
+
+        switch (response.status) {
+            case 404:
+                infoToast('Pet não encontrado')
+
+                setTimeout(() => {
+                    router.push('/dashboard')
+                }, 300)
+                break
+            default:
+                break
+        }
+    }, [error])
 
     if (isLoading) return <div>Carregando...</div>
 
