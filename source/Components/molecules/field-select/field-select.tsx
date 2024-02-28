@@ -36,7 +36,7 @@ const FieldSelect = ({
     }
 
     return (
-        <div className={twMerge('w-full relative')}>
+        <div className={twMerge('w-full relative', divClassName)}>
             <Label label={label} required={required} id={name} separator={':'} />
             <Select
                 {...props}

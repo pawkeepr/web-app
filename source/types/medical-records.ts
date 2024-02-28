@@ -86,7 +86,7 @@ export interface Disease extends MedicalRecordEntry {
 export interface DentalProcedure extends MedicalRecordEntry {
     type: 'dental-procedures'
     status_dental: string
-    need_dental_cleaning: string
+    need_dental_cleaning: 'yes' | 'no'
     recommended_treatment: string
     anesthesia_required: boolean
     follow_up_required: boolean
