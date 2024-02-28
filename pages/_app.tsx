@@ -29,6 +29,7 @@ function App({ Component, pageProps }: AppProps) {
             <Provider>
                 <AuthProvider>
                     <ToastContainer
+                        limit={1}
                         theme="colored"
                         className="!w-full p-4 bg-dark bg-opacity-50 !h-screen  flex flex-1 items-center justify-center absolute top-0"
                     />
