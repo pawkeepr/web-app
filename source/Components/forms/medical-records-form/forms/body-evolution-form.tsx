@@ -1,4 +1,5 @@
 import { Form, Formik } from 'formik'
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldNumber from '~/Components/molecules/field-number'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import type { BodyEvolution } from '~/types/medical-records'
@@ -7,6 +8,7 @@ import type { OptionFormsProps } from '../medical-records-form'
 const BodyEvolutionForm = ({
     item = {} as BodyEvolution,
     handleSubmit,
+    handleClose,
 }: OptionFormsProps<BodyEvolution>) => {
     return (
         <Formik
@@ -33,7 +35,7 @@ const BodyEvolutionForm = ({
             }
             onSubmit={handleSubmit}
         >
-            {({ values, handleSubmit }) => (
+            {({ values, handleSubmit, isValid }) => (
                 <Form
                     className="grid grid-cols-3 gap-1 mobile:grid-cols-1"
                     onSubmit={handleSubmit}
@@ -64,10 +66,23 @@ const BodyEvolutionForm = ({
                     <FieldTextArea
                         ctx={values}
                         label="Anotações Gerais"
-                        required
                         name="notes"
                         divClassName="col-span-full"
                     />
+                    <div className="flex flex-1 justify-end col-span-full">
+                        <BtnCancel
+                            className="flex-1"
+                            label="Cancelar"
+                            onClick={handleClose}
+                        />
+
+                        <BtnPrimary
+                            className="flex-1 text-white"
+                            label="Adicionar"
+                            type="submit"
+                            disabled={!isValid}
+                        />
+                    </div>
                 </Form>
             )}
         </Formik>
