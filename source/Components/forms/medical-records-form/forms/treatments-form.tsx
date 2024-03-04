@@ -1,5 +1,6 @@
 import { Form, Formik } from 'formik'
 import FieldControl from '~/Components/molecules/field-control'
+import FieldTextArea from '~/Components/molecules/field-text-area'
 import type { Medicine } from '~/types/medical-records'
 import type { OptionFormsProps } from '../medical-records-form'
 
@@ -39,7 +40,20 @@ const TreatmentsForm = ({
                     className="grid grid-cols-2 gap-1 mobile:grid-cols-1"
                     onSubmit={handleSubmit}
                 >
-                    <FieldControl ctx={values} label="Nome" required name="name" />
+                    <FieldControl
+                        ctx={values}
+                        label="Nome"
+                        required
+                        name="name"
+                        divClassName="col-span-full"
+                    />
+
+                    <FieldTextArea
+                        ctx={values}
+                        label="Observações"
+                        name="notes"
+                        divClassName="col-span-full"
+                    />
                 </Form>
             )}
         </Formik>

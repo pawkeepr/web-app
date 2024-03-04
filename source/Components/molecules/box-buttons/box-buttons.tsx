@@ -1,6 +1,6 @@
+import { twMerge } from 'tailwind-merge'
 import { BtnCancel, BtnPrimary, type BtnProps } from '~/Components/atoms/btn'
 import withLoading from '~/Components/helpers/with-loading'
-
 type Fn = () => void
 
 type hasBtnCancel =
@@ -27,6 +27,7 @@ type BoxButtonsProps = {
     type?: 'button' | 'submit'
     isValid?: boolean
     link?: boolean
+    className: string
     isLoading?: boolean
 } & hasBtnCancel &
     hasBtnSuccess
@@ -54,9 +55,10 @@ const BoxButtons = ({
         />
     ),
     isValid = false,
+    className,
 }: BoxButtonsProps) => {
     return (
-        <div className="gap-2 justify-center flex w-full">
+        <div className={twMerge('gap-2 justify-center flex w-full', className)}>
             {cancel?.({ onClick: onClickCancel as Fn, isLoading })}
 
             {success?.({
