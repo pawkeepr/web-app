@@ -1,3 +1,4 @@
+import type { MEDICAL_RECORDS } from '~/types/medical-records'
 import { api } from '../api'
 
 const urls = {
@@ -5,24 +6,8 @@ const urls = {
         '/api-medical/search-medical-record-pet',
     MEDICAL_RECORDS_GET_BY_TUTOR: () =>
         '/api-medical/fetch-all-medical-records-tutor',
-    MEDICAL_RECORDS_UPDATE_BODY_EVOLUTION: () =>
-        '/api-medical/update-list-body-evolution',
-    MEDICAL_RECORDS_UPDATE_HOSPITALIZATIONS: () =>
-        '/api-medical/update-list-hospitalizations',
-    MEDICAL_RECORDS_UPDATE_VACCINES: () => '/api-medical/update-list-vaccines',
-    MEDICAL_RECORDS_UPDATE_MEDICINES: () => '/api-medical/update-list-medicines',
-    MEDICAL_RECORDS_UPDATE_SURGERIES: () => '/api-medical/update-list-surgeries',
-    MEDICAL_RECORDS_UPDATE_EXAMS: () => '/api-medical/update-list-exams-tests',
-    MEDICAL_RECORDS_UPDATE_INTERNMENTS: () =>
-        '/api-medical/update-list-internments',
-    MEDICAL_RECORDS_UPDATE_INJURIES: () => '/api-medical/update-list-injuries',
-    MEDICAL_RECORDS_UPDATE_ALLERGIES: () => '/api-medical/update-list-allergies',
-    MEDICAL_RECORDS_UPDATE_DISEASES: () => '/api-medical/update-list-diseases',
-    MEDICAL_RECORDS_UPDATE_DENTAL_PROCEDURES: () =>
-        '/api-medical/update-list-dental-procedures',
-    MEDICAL_RECORDS_UPDATE_NUTRITIONS: () => '/api-medical/update-list-nutritions',
-    MEDICAL_RECORDS_PHYSICAL_ACTIVITIES: () =>
-        '/api-medical/update-list-physical-activities',
+    MEDICAL_RECORDS_UPDATE: (type: MEDICAL_RECORDS) =>
+        `/api-medical/update-medical/${type}`,
 }
 
 export const getAllMedicalRecordsByPet = async (cpf_cnpj: string, id_pet: string) =>
@@ -31,12 +16,13 @@ export const getAllMedicalRecordsByPet = async (cpf_cnpj: string, id_pet: string
     })
 export const getMedicalRecordsByTutor = async (cpf_cnpj: string) =>
     api.get(urls.MEDICAL_RECORDS_GET_BY_TUTOR(), { params: { cpf_cnpj } })
+
 export const updateBodyEvolution = async (
     data: unknown,
     cpf_cnpj: string,
     id_pet: string,
 ) =>
-    api.put(urls.MEDICAL_RECORDS_UPDATE_BODY_EVOLUTION(), data, {
+    api.put(urls.MEDICAL_RECORDS_UPDATE('body-evolution'), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateHospitalizations = async (
@@ -44,7 +30,7 @@ export const updateHospitalizations = async (
     cpf_cnpj: string,
     id_pet: string,
 ) =>
-    api.put(urls.MEDICAL_RECORDS_UPDATE_HOSPITALIZATIONS(), data, {
+    api.put(urls.MEDICAL_RECORDS_UPDATE('hospitalizations'), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateVaccines = async (
@@ -52,7 +38,7 @@ export const updateVaccines = async (
     cpf_cnpj: string,
     id_pet: string,
 ) =>
-    api.put(urls.MEDICAL_RECORDS_UPDATE_VACCINES(), data, {
+    api.put(urls.MEDICAL_RECORDS_UPDATE('vaccines'), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateMedicines = async (
@@ -60,7 +46,7 @@ export const updateMedicines = async (
     cpf_cnpj: string,
     id_pet: string,
 ) =>
-    api.put(urls.MEDICAL_RECORDS_UPDATE_MEDICINES(), data, {
+    api.put(urls.MEDICAL_RECORDS_UPDATE('medicines'), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateSurgeries = async (
@@ -68,7 +54,7 @@ export const updateSurgeries = async (
     cpf_cnpj: string,
     id_pet: string,
 ) =>
-    api.put(urls.MEDICAL_RECORDS_UPDATE_SURGERIES(), data, {
+    api.put(urls.MEDICAL_RECORDS_UPDATE('surgeries'), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateExams = async (
@@ -76,7 +62,7 @@ export const updateExams = async (
     cpf_cnpj: string,
     id_pet: string,
 ) =>
-    api.put(urls.MEDICAL_RECORDS_UPDATE_EXAMS(), data, {
+    api.put(urls.MEDICAL_RECORDS_UPDATE('exams'), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateInternments = async (
@@ -84,7 +70,7 @@ export const updateInternments = async (
     cpf_cnpj: string,
     id_pet: string,
 ) =>
-    api.put(urls.MEDICAL_RECORDS_UPDATE_INTERNMENTS(), data, {
+    api.put(urls.MEDICAL_RECORDS_UPDATE('internments'), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateInjuries = async (
@@ -92,7 +78,7 @@ export const updateInjuries = async (
     cpf_cnpj: string,
     id_pet: string,
 ) =>
-    api.put(urls.MEDICAL_RECORDS_UPDATE_INJURIES(), data, {
+    api.put(urls.MEDICAL_RECORDS_UPDATE('injuries'), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateAllergies = async (
@@ -100,7 +86,7 @@ export const updateAllergies = async (
     cpf_cnpj: string,
     id_pet: string,
 ) =>
-    api.put(urls.MEDICAL_RECORDS_UPDATE_ALLERGIES(), data, {
+    api.put(urls.MEDICAL_RECORDS_UPDATE('allergies'), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateDiseases = async (
@@ -108,7 +94,7 @@ export const updateDiseases = async (
     cpf_cnpj: string,
     id_pet: string,
 ) =>
-    api.put(urls.MEDICAL_RECORDS_UPDATE_DISEASES(), data, {
+    api.put(urls.MEDICAL_RECORDS_UPDATE('diseases'), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateDentalProcedures = async (
@@ -116,7 +102,7 @@ export const updateDentalProcedures = async (
     cpf_cnpj: string,
     id_pet: string,
 ) =>
-    api.put(urls.MEDICAL_RECORDS_UPDATE_DENTAL_PROCEDURES(), data, {
+    api.put(urls.MEDICAL_RECORDS_UPDATE('dental-procedures'), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateNutritions = async (
@@ -124,7 +110,7 @@ export const updateNutritions = async (
     cpf_cnpj: string,
     id_pet: string,
 ) =>
-    api.put(urls.MEDICAL_RECORDS_UPDATE_NUTRITIONS(), data, {
+    api.put(urls.MEDICAL_RECORDS_UPDATE('nutritions'), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updatePhysicalActivities = async (
@@ -132,6 +118,6 @@ export const updatePhysicalActivities = async (
     cpf_cnpj: string,
     id_pet: string,
 ) =>
-    api.put(urls.MEDICAL_RECORDS_PHYSICAL_ACTIVITIES(), data, {
+    api.put(urls.MEDICAL_RECORDS_UPDATE('physical-activities'), data, {
         params: { cpf_cnpj, id_pet },
     })
