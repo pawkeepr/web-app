@@ -18,7 +18,6 @@ const DiseaseForm = ({
                     type_profile: 1,
                     who_applied: '',
                     type: 'diseases',
-                    recommended_treatment: '',
                     url_document: '',
                     appointment_date: new Date().toISOString(),
                     name: '',
@@ -33,7 +32,7 @@ const DiseaseForm = ({
         >
             {({ values, handleSubmit }) => (
                 <Form
-                    className="grid grid-cols-1 gap-3 mobile:grid-cols-1"
+                    className="grid grid-cols-1 gap-1 mobile:grid-cols-1"
                     onSubmit={handleSubmit}
                 >
                     <FieldControl

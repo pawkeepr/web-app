@@ -1,11 +1,9 @@
 import { Form, Formik } from 'formik'
-import ControlSwitchDiv from '~/Components/molecules/control-switch-div'
 import FieldControl from '~/Components/molecules/field-control'
-import FieldTextArea from '~/Components/molecules/field-text-area'
 import type { Medicine } from '~/types/medical-records'
 import type { OptionFormsProps } from '../medical-records-form'
 
-const HospitalizationForm = ({
+const TreatmentsForm = ({
     item = {} as Medicine,
     handleSubmit,
 }: OptionFormsProps<Medicine>) => {
@@ -42,39 +40,10 @@ const HospitalizationForm = ({
                     onSubmit={handleSubmit}
                 >
                     <FieldControl ctx={values} label="Nome" required name="name" />
-
-                    <FieldControl ctx={values} label="Marca" name="brand" />
-
-                    <FieldControl
-                        ctx={values}
-                        label="Data de Inicio"
-                        type="date"
-                        name="date_application"
-                    />
-
-                    <FieldControl
-                        ctx={values}
-                        label="Data de Fim"
-                        type="date"
-                        name="date_application"
-                    />
-                    <ControlSwitchDiv
-                        ctx={values}
-                        name="continuous_use"
-                        label="Uso Contínuo"
-                        divClassName="col-span-full"
-                    />
-
-                    <FieldTextArea
-                        ctx={values}
-                        label="Descreva o Uso"
-                        name="notes"
-                        divClassName="col-span-full"
-                    />
                 </Form>
             )}
         </Formik>
     )
 }
 
-export default HospitalizationForm
+export default TreatmentsForm
