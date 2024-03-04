@@ -13,6 +13,7 @@ import {
     updatePhysicalActivities,
     updateSurgeries,
     updateVaccines,
+    type TYPE_USER,
 } from '~/services/helpers/medical-records'
 import { MEDICAL_RECORDS } from '~/types/medical-records'
 
@@ -20,6 +21,7 @@ export type FAxiosUpdate<G = unknown> = (
     data: unknown,
     cpf_cnpj: string,
     id_pet: string,
+    user: TYPE_USER,
 ) => Promise<AxiosResponse<G>>
 
 export const StrategiesMedicalRecords = new Map<MEDICAL_RECORDS, FAxiosUpdate>([

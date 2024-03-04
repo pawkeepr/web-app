@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
 import useAppQuery from '~/hooks/use-app-query'
+import { getCurrentUser, type CurrentUserCognito } from '~/services/helpers/auth'
 import { getAllMedicalRecordsByPet } from '~/services/helpers/medical-records'
 import { updateErrorToast, updateSuccessToast } from '~/store/helpers/toast'
 import type { MEDICAL_RECORDS } from '~/types/medical-records'
@@ -14,11 +16,28 @@ type UseHookMedicalRecords = {
 
 const NAME = 'medical-records'
 
+const TYPE_USER = {
+    '1': 'vet',
+    '2': 'tutor',
+} as const
+
 export const useUpdateMedicalRecordsMutation = ({
     name,
     cpf_cnpj,
     id_pet,
 }: Required<UseHookMedicalRecords>) => {
+    if (!cpf_cnpj || !id_pet) {
+        throw new Error('cpf_cnpj and id_pet are required')
+    }
+
+    const [user, setUser] = useState<CurrentUserCognito | null>(null)
+
+    useEffect(() => {
+        getCurrentUser().then((res) => {
+            setUser(res)
+        })
+    }, [])
+
     const queryClient = useQueryClient()
 
     const update = StrategiesMedicalRecords.get(name)
@@ -29,7 +48,11 @@ export const useUpdateMedicalRecordsMutation = ({
         }: {
             data: Partial<unknown>
         }) => {
-            const res = await update?.(data, cpf_cnpj, id_pet)
+            const type =
+                (user?.attributes[
+                    'custom:type_profile'
+                ] as keyof typeof TYPE_USER) || '1'
+            const res = await update?.(data, cpf_cnpj, id_pet, TYPE_USER[type])
             return res?.data
         },
         onSuccess: updateSuccessToast,
