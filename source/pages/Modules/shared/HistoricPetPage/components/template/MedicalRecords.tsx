@@ -5,10 +5,14 @@ type HistoricPetProps = {
     id_pet?: string
 }
 
-const MedicalRecords = (props: HistoricPetProps) => {
+const MedicalRecords = ({ id_pet, document }: HistoricPetProps) => {
     return (
         <div className="relative">
-            <AddMedicalRecordsModal item={null} />
+            <AddMedicalRecordsModal
+                item={null}
+                cpf_cnpj={document as string}
+                id_pet={id_pet as string}
+            />
         </div>
     )
 }

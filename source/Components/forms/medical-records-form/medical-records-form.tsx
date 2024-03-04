@@ -15,6 +15,7 @@ import VaccinesForm from './forms/vaccines-form'
 export type OptionFormsProps<T> = {
     item: T | null
     handleSubmit: (data: MedicalRecordEntry) => void
+    handleClose?: () => void
 }
 
 type ComponentForm = <T>(props: OptionFormsProps<T>) => JSX.Element
@@ -45,6 +46,7 @@ type MedicalRecordForm = {
     item: MedicalRecordEntry | null
     cpf_cnpj: string
     id_pet: string
+    handleClose?: () => void
 }
 
 const MedicalRecordsForm = ({
@@ -52,6 +54,7 @@ const MedicalRecordsForm = ({
     id_pet,
     item,
     type,
+    handleClose,
 }: MedicalRecordForm) => {
     const updateMutation = useUpdateMedicalRecordsMutation({
         cpf_cnpj,
@@ -59,13 +62,19 @@ const MedicalRecordsForm = ({
         name: type,
     })
 
-    const FormComponent = OptionsForms.get(type) as ComponentForm
+    const FormComponent = OptionsForms.get(type) || (() => <></>)
 
-    const handleSubmit = (data: MedicalRecordEntry) => {
-        updateMutation.mutateAsync({ data })
+    const handleSubmit = async (data: MedicalRecordEntry) => {
+        await updateMutation.mutateAsync({ data })
     }
 
-    return <FormComponent item={item} handleSubmit={handleSubmit} />
+    return (
+        <FormComponent
+            item={item}
+            handleSubmit={handleSubmit}
+            handleClose={handleClose}
+        />
+    )
 }
 
 export default withControl(MedicalRecordsForm)

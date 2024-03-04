@@ -77,6 +77,7 @@ const AddMedicalRecordsModal = ({
                         item={item}
                         cpf_cnpj={cpf_cnpj}
                         id_pet={id_pet}
+                        handleClose={closeModal}
                     />
                 </section>
             </Modal>
