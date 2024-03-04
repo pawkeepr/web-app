@@ -43,7 +43,18 @@ export async function getUser(): Promise<CognitoUserSession> {
     return await Auth.currentSession()
 }
 
-export async function getCurrentUser() {
+export type CurrentUserCognito = {
+    [key: string]: unknown
+    attributes: {
+        email: string
+        'custom:type_profile': '1' | '2'
+        'custom:has_profile': string
+        email_verified: boolean
+        sub: string
+    }
+}
+
+export async function getCurrentUser(): Promise<CurrentUserCognito> {
     return await Auth.currentAuthenticatedUser()
 }
 
