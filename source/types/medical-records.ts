@@ -67,9 +67,11 @@ export interface BodyEvolution extends MedicalRecordEntry {
 export interface Hospitalization extends MedicalRecordEntry {
     type: 'hospitalizations' | 'internments' | 'surgeries'
     local: string
-    date: string
     appointment_date: string
-    time_date: string
+    date_start: string
+    time_start: string
+    date_end: string
+    time_end: string
     health_insurance: string
     type_object: string
 }
@@ -117,7 +119,7 @@ export interface PhysicalActivity extends MedicalRecordEntry {
 export interface Medicine extends MedicalRecordEntry {
     type: 'medicines'
     brand: string
-    continuous_use: string
+    continuous_use: 'yes' | 'no'
     amount: string
     type_object: string
     interval: string
