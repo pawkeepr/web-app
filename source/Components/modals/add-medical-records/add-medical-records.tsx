@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaPlus } from 'react-icons/fa'
 import { BtnIcon } from '~/Components/atoms/btn'
 import MedicalRecordsForm from '~/Components/forms/medical-records-form'
@@ -29,7 +29,14 @@ const AddMedicalRecordsModal = ({
         value: MEDICAL_RECORDS
         label: string
     } | null>(null)
+
     const { closeModal, open, showModal } = useModal()
+
+    useEffect(() => {
+        return () => {
+            setType(null)
+        }
+    }, [])
 
     const title = item ? 'Editar Registro Médico' : 'Adicionar Registro Médico'
 

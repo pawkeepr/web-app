@@ -1,4 +1,5 @@
 import { Form, Formik } from 'formik'
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import Label from '~/Components/atoms/label'
 import FieldControl from '~/Components/molecules/field-control'
 import FieldTextArea from '~/Components/molecules/field-text-area'
@@ -8,6 +9,7 @@ import type { OptionFormsProps } from '../medical-records-form'
 const HospitalizationForm = ({
     item = {} as Hospitalization,
     handleSubmit,
+    handleClose,
 }: OptionFormsProps<Hospitalization>) => {
     return (
         <Formik
@@ -34,7 +36,7 @@ const HospitalizationForm = ({
             }
             onSubmit={handleSubmit}
         >
-            {({ values, handleSubmit }) => (
+            {({ values, handleSubmit, isValid }) => (
                 <Form
                     className="grid grid-cols-2 gap-1 mobile:grid-cols-1"
                     onSubmit={handleSubmit}
@@ -48,11 +50,15 @@ const HospitalizationForm = ({
                     <div>
                         <Label label="Inicio" />
                         <div className="flex gap-2 items-center text-xs ">
-                            <FieldControl ctx={values} name="date" type="date" />
+                            <FieldControl
+                                ctx={values}
+                                name="date_start"
+                                type="date"
+                            />
                             às
                             <FieldControl
                                 ctx={values}
-                                name="time_date"
+                                name="time_start"
                                 type="time"
                             />
                         </div>
@@ -65,12 +71,12 @@ const HospitalizationForm = ({
                                 ctx={values}
                                 name="date_end"
                                 type="date"
-                                minDate={values?.date}
+                                minDate={values?.date_start}
                             />
                             às
                             <FieldControl
                                 ctx={values}
-                                name="time_date_end"
+                                name="time_end"
                                 type="time"
                             />
                         </div>
@@ -81,6 +87,21 @@ const HospitalizationForm = ({
                         name="notes"
                         divClassName="col-span-full"
                     />
+
+                    <div className="flex flex-1 justify-end col-span-full">
+                        <BtnCancel
+                            className="flex-1"
+                            label="Cancelar"
+                            onClick={handleClose}
+                        />
+
+                        <BtnPrimary
+                            className="flex-1 text-white"
+                            label="Adicionar"
+                            type="submit"
+                            disabled={!isValid}
+                        />
+                    </div>
                 </Form>
             )}
         </Formik>

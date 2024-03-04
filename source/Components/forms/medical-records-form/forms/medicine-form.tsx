@@ -1,4 +1,5 @@
 import { Form, Formik } from 'formik'
+import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import ControlSwitchDiv from '~/Components/molecules/control-switch-div'
 import FieldControl from '~/Components/molecules/field-control'
 import FieldTextArea from '~/Components/molecules/field-text-area'
@@ -8,6 +9,7 @@ import type { OptionFormsProps } from '../medical-records-form'
 const HospitalizationForm = ({
     item = {} as Medicine,
     handleSubmit,
+    handleClose,
 }: OptionFormsProps<Medicine>) => {
     return (
         <Formik
@@ -36,7 +38,7 @@ const HospitalizationForm = ({
             }
             onSubmit={handleSubmit}
         >
-            {({ values, handleSubmit }) => (
+            {({ values, handleSubmit, isValid }) => (
                 <Form
                     className="grid grid-cols-2 gap-1 mobile:grid-cols-1"
                     onSubmit={handleSubmit}
@@ -71,6 +73,21 @@ const HospitalizationForm = ({
                         name="notes"
                         divClassName="col-span-full"
                     />
+
+                    <div className="flex flex-1 justify-end col-span-full">
+                        <BtnCancel
+                            className="flex-1"
+                            label="Cancelar"
+                            onClick={handleClose}
+                        />
+
+                        <BtnPrimary
+                            className="flex-1 text-white"
+                            label="Adicionar"
+                            type="submit"
+                            disabled={!isValid}
+                        />
+                    </div>
                 </Form>
             )}
         </Formik>
