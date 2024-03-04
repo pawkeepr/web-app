@@ -9,12 +9,15 @@ import HospitalizationForm from './forms/hospitalization-form'
 import MedicineForm from './forms/medicine-form'
 import NutritionForm from './forms/nutrition-form'
 import PhysicalActivityForm from './forms/physical-activity-form'
+import TreatmentsForm from './forms/treatments-form'
 import VaccinesForm from './forms/vaccines-form'
 
 export type OptionFormsProps<T> = {
     item: T | null
     handleSubmit: (data: MedicalRecordEntry) => void
 }
+
+type ComponentForm = <T>(props: OptionFormsProps<T>) => JSX.Element
 
 export const OptionsForms = new Map<
     MEDICAL_RECORDS,
@@ -34,7 +37,7 @@ export const OptionsForms = new Map<
     [MEDICAL_RECORDS.MEDICINES, MedicineForm],
     [MEDICAL_RECORDS.EXAMS, ExamAndTestForm],
     [MEDICAL_RECORDS.VACCINES, VaccinesForm],
-    [MEDICAL_RECORDS.TREATMENTS, HospitalizationForm],
+    [MEDICAL_RECORDS.TREATMENTS, TreatmentsForm],
 ])
 
 type MedicalRecordForm = {
@@ -56,7 +59,7 @@ const MedicalRecordsForm = ({
         name: type,
     })
 
-    const FormComponent = OptionsForms.get(type) || MedicineForm
+    const FormComponent = OptionsForms.get(type) as ComponentForm
 
     const handleSubmit = (data: MedicalRecordEntry) => {
         updateMutation.mutateAsync({ data })
