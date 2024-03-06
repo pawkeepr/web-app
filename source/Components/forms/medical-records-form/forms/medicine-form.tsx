@@ -2,6 +2,7 @@ import { Form, Formik } from 'formik'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import ControlSwitchDiv from '~/Components/molecules/control-switch-div'
 import FieldControl from '~/Components/molecules/field-control'
+import FieldNumber from '~/Components/molecules/field-number'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import type { Medicine } from '~/types/medical-records'
 import type { OptionFormsProps } from '../medical-records-form'
@@ -46,6 +47,17 @@ const HospitalizationForm = ({
                     <FieldControl ctx={values} label="Nome" required name="name" />
 
                     <FieldControl ctx={values} label="Marca" name="brand" />
+
+                    <FieldNumber
+                        ctx={values}
+                        label="Período (em Dias)"
+                        name="period"
+                    />
+                    <FieldNumber
+                        ctx={values}
+                        label="Intervalo (em Horas)"
+                        name="interval"
+                    />
 
                     <FieldControl
                         ctx={values}

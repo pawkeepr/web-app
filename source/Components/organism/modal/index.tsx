@@ -5,6 +5,7 @@ import type { PopupActions, PopupProps } from 'reactjs-popup/dist/types'
 import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
 
 import { twMerge } from 'tailwind-merge'
+import { BtnIcon } from '~/Components/atoms/btn'
 
 const Modal = ({
     className,
@@ -15,7 +16,7 @@ const Modal = ({
     <Popup
         position="bottom center"
         className="mt-2"
-        overlayStyle={{ background: 'rgba(0,0,0,0.4)' }}
+        overlayStyle={{ background: 'rgba(0,0,0,0.6)' }}
         closeOnEscape={false}
         {...props}
     >
@@ -28,21 +29,27 @@ const Modal = ({
                 w-[80vw] flex flex-col 
                 h-fit
                 mobile:!w-screen mobile:!h-screen mobile:rounded-none 
-	            overflow-auto px-4 py-10 bg-gray-100 dark:bg-dark-500
+	            overflow-hidden px-4 py-10 bg-gray-100 dark:bg-dark-500
 	            shadow-2xl rounded-md
                 `,
                 className,
             )}
         >
-            <button
+            <div className="h-4 p-3 bg-primary absolute top-0 w-full right-0" />
+
+            <BtnIcon
                 type="button"
-                className="absolute top-4 right-4"
+                icon={
+                    <XMarkIcon className="w-8 h-8 text-gray-500 hover:!text-red-600 font-extrabold" />
+                }
+                className="absolute top-1 right-0 w-fit p-0 ! py-0 h-fit "
                 onClick={() => props.onClose?.()}
                 aria-label="Close modal"
-            >
-                <XMarkIcon className="w-8 h-8 text-gray-800 font-extrabold" />
-            </button>
-            {props.children}
+            />
+
+            <section className="overflow-auto mt-3 relative">
+                {props.children}
+            </section>
         </div>
     </Popup>
 )
