@@ -29,7 +29,7 @@ const Modal = ({
                 w-[80vw] flex flex-col 
                 h-fit
                 mobile:!w-screen mobile:!h-screen mobile:rounded-none 
-	            overflow-hidden px-4 py-10 bg-gray-100 dark:bg-dark-500
+	            overflow-visible  py-10 bg-gray-100 dark:bg-dark-500
 	            shadow-2xl rounded-md
                 `,
                 className,
@@ -47,7 +47,7 @@ const Modal = ({
                 aria-label="Close modal"
             />
 
-            <section className="overflow-auto mt-3 relative">
+            <section className="mt-3 relative overflow-auto px-4 ">
                 {props.children}
             </section>
         </div>

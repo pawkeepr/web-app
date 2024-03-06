@@ -15,27 +15,99 @@ export const MEDICAL_RECORDS = {
     EXAMS: 'exams',
 } as const
 export type MEDICAL_RECORDS = (typeof MEDICAL_RECORDS)[keyof typeof MEDICAL_RECORDS]
+import {
+    FaAllergies,
+    FaBandAid,
+    FaBed,
+    FaBriefcaseMedical,
+    FaCapsules,
+    FaFileMedical,
+    FaHeart,
+    FaHospital,
+    FaRunning,
+    FaSyringe,
+    FaTooth,
+    FaUserMd,
+    FaUtensils,
+} from 'react-icons/fa'
 
 type MedicalRecordOption = {
     value: (typeof MEDICAL_RECORDS)[keyof typeof MEDICAL_RECORDS]
     label: string
+    icon: React.FC
 }
 
 export const MedicalRecordOptions: MedicalRecordOption[] = [
-    { value: MEDICAL_RECORDS.BODY_EVOLUTION, label: 'Evolução Corporal' },
-    { value: MEDICAL_RECORDS.VACCINES, label: 'Vacinas' },
-    { value: MEDICAL_RECORDS.DISEASES, label: 'Doenças' },
-    { value: MEDICAL_RECORDS.ALLERGIES, label: 'Alergias' },
-    { value: MEDICAL_RECORDS.HOSPITALIZATIONS, label: 'Hospitalizações' },
-    { value: MEDICAL_RECORDS.INTERNMENTS, label: 'Internações' },
-    { value: MEDICAL_RECORDS.INJURIES, label: 'Lesões' },
-    { value: MEDICAL_RECORDS.SURGERIES, label: 'Cirurgias' },
-    { value: MEDICAL_RECORDS.TREATMENTS, label: 'Tratamentos' },
-    { value: MEDICAL_RECORDS.DENTAL_PROCEDURES, label: 'Procedimentos Dentários' },
-    { value: MEDICAL_RECORDS.NUTRITIONS, label: 'Alimentação' },
-    { value: MEDICAL_RECORDS.PHYSICAL_ACTIVITIES, label: 'Atividades Físicas' },
-    { value: MEDICAL_RECORDS.MEDICINES, label: 'Medicamentos' },
-    { value: MEDICAL_RECORDS.EXAMS, label: 'Exames' },
+    {
+        value: MEDICAL_RECORDS.BODY_EVOLUTION,
+        label: 'Evolução Corporal',
+        icon: FaHeart,
+    },
+    {
+        value: MEDICAL_RECORDS.VACCINES,
+        label: 'Vacinas',
+        icon: FaSyringe,
+    },
+    {
+        value: MEDICAL_RECORDS.DISEASES,
+        label: 'Doenças',
+        icon: FaBriefcaseMedical,
+    },
+    {
+        value: MEDICAL_RECORDS.ALLERGIES,
+        label: 'Alergias',
+        icon: FaAllergies,
+    },
+    {
+        value: MEDICAL_RECORDS.HOSPITALIZATIONS,
+        label: 'Hospitalizações',
+        icon: FaHospital,
+    },
+    {
+        value: MEDICAL_RECORDS.INTERNMENTS,
+        label: 'Internações',
+        icon: FaBed,
+    },
+    {
+        value: MEDICAL_RECORDS.INJURIES,
+        label: 'Lesões',
+        icon: FaBandAid,
+    },
+    {
+        value: MEDICAL_RECORDS.SURGERIES,
+        label: 'Cirurgias',
+        icon: FaUserMd,
+    },
+    {
+        value: MEDICAL_RECORDS.TREATMENTS,
+        label: 'Tratamentos',
+        icon: FaBriefcaseMedical,
+    },
+    {
+        value: MEDICAL_RECORDS.DENTAL_PROCEDURES,
+        label: 'Procedimentos Dentários',
+        icon: FaTooth,
+    },
+    {
+        value: MEDICAL_RECORDS.NUTRITIONS,
+        label: 'Alimentação',
+        icon: FaUtensils,
+    },
+    {
+        value: MEDICAL_RECORDS.PHYSICAL_ACTIVITIES,
+        label: 'Atividades Físicas',
+        icon: FaRunning,
+    },
+    {
+        value: MEDICAL_RECORDS.MEDICINES,
+        label: 'Medicamentos',
+        icon: FaCapsules,
+    },
+    {
+        value: MEDICAL_RECORDS.EXAMS,
+        label: 'Exames',
+        icon: FaFileMedical,
+    },
 ]
 
 // Interface base com elementos comuns a todas as entradas do prontuário médico

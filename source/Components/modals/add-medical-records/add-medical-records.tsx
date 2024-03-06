@@ -55,11 +55,15 @@ const OptionsComponent = ({ onChange }: MedicalRecordFormProps) => {
                     }}
                     className={option()}
                 >
-                    <div className="grid grid-cols-4 justify-center items-center">
-                        <span className="align-middle col-span-1" />
-                        <span className="align-middle col-span-2">
-                            {item.label}
-                        </span>
+                    <div className="flex flex-1 justify-center gap-2">
+                        <div className="w-60 flex flex-row gap-2 justify-center items-center">
+                            <span className="flex-1  items-center justify-center">
+                                <item.icon />
+                            </span>
+                            <span className=" flex-[2] items-center justify-center">
+                                {item.label}
+                            </span>
+                        </div>
                     </div>
                 </button>
             ))}
@@ -182,7 +186,7 @@ const AddMedicalRecordsModal = ({
                             ))}
                         </div>
 
-                        <Tab.Panels className="w-full h-full relative">
+                        <Tab.Panels className="w-full h-full relative ">
                             {STEPS.map((Step) => (
                                 <Tab.Panel key={Step.id}>
                                     <Step.component
