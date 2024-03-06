@@ -41,9 +41,16 @@ const VaccinesForm = ({
                     className="grid grid-cols-2 gap-1 mobile:grid-cols-1"
                     onSubmit={handleSubmit}
                 >
-                    <FieldControl ctx={values} label="Nome" required name="name" />
+                    <FieldControl
+                        ctx={values}
+                        label="Nome"
+                        required
+                        name="name"
+                        divClassName="col-span-full"
+                    />
 
                     <FieldControl ctx={values} label="Marca" name="brand" />
+                    <FieldControl ctx={values} label="Lote" name="batch" />
 
                     <FieldControl
                         ctx={values}

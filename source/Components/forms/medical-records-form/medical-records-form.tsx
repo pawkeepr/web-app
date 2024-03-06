@@ -11,14 +11,11 @@ import NutritionForm from './forms/nutrition-form'
 import PhysicalActivityForm from './forms/physical-activity-form'
 import TreatmentsForm from './forms/treatments-form'
 import VaccinesForm from './forms/vaccines-form'
-
 export type OptionFormsProps<T> = {
     item: T | null
     handleSubmit: (data: MedicalRecordEntry) => void
     handleClose?: () => void
 }
-
-type ComponentForm = <T>(props: OptionFormsProps<T>) => JSX.Element
 
 export const OptionsForms = new Map<
     MEDICAL_RECORDS,
@@ -47,6 +44,7 @@ type MedicalRecordForm = {
     cpf_cnpj: string
     id_pet: string
     handleClose?: () => void
+    onChangeIndex?: (index: number) => void
 }
 
 const MedicalRecordsForm = ({

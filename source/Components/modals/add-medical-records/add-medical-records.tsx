@@ -1,16 +1,18 @@
+import { Tab } from '@headlessui/react'
 import cn from 'classnames'
-import { useEffect, useState } from 'react'
-import { FaPlus } from 'react-icons/fa'
+import { useState } from 'react'
+import { FaArrowLeft, FaPlus } from 'react-icons/fa'
 import { BtnIcon } from '~/Components/atoms/btn'
 import MedicalRecordsForm from '~/Components/forms/medical-records-form'
-import FieldSelect from '~/Components/molecules/field-select'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
+
 import {
     MedicalRecordOptions,
     type MEDICAL_RECORDS,
     type MedicalRecordEntry,
 } from '~/types/medical-records'
+import { option } from '../scheduled-v2-modal/components/helpers'
 
 type AddModalProps = {
     children?: (showModal: () => void) => JSX.Element
@@ -19,26 +21,91 @@ type AddModalProps = {
     item?: MedicalRecordEntry | null
 }
 
+type Option = {
+    value: MEDICAL_RECORDS
+    label: string
+}
+
+export const NUMBER_STEPS = {
+    OPTIONS: 0,
+    MEDICAL_RECORDS: 1,
+} as const
+export type NumberSteps = (typeof NUMBER_STEPS)[keyof typeof NUMBER_STEPS]
+
+type MedicalRecordFormProps = {
+    type: MEDICAL_RECORDS
+    item: MedicalRecordEntry | null
+    cpf_cnpj: string
+    id_pet: string
+    condition?: boolean
+    handleClose?: () => void
+    onChange: (type: Option) => void
+    onChangeIndex?: (index: number) => void
+}
+
+const OptionsComponent = ({ onChange }: MedicalRecordFormProps) => {
+    return (
+        <div className="h-96">
+            {MedicalRecordOptions?.map((item, index) => (
+                <button
+                    key={`${item.value}-${index}`}
+                    type="button"
+                    onClick={() => {
+                        onChange(item)
+                    }}
+                    className={option()}
+                >
+                    <div className="grid grid-cols-4 justify-center items-center">
+                        <span className="align-middle col-span-1" />
+                        <span className="align-middle col-span-2">
+                            {item.label}
+                        </span>
+                    </div>
+                </button>
+            ))}
+        </div>
+    )
+}
+
+const STEPS = [
+    {
+        id: NUMBER_STEPS.OPTIONS,
+        title: 'Opções',
+        component: (props: MedicalRecordFormProps) => (
+            <OptionsComponent {...props} />
+        ),
+    },
+    {
+        id: NUMBER_STEPS.MEDICAL_RECORDS,
+        title: 'Prontuário',
+        component: (props: MedicalRecordFormProps) => (
+            <MedicalRecordsForm {...props} />
+        ),
+    },
+]
+
 const AddMedicalRecordsModal = ({
     children,
     item = null,
     cpf_cnpj,
     id_pet,
 }: AddModalProps) => {
-    const [type, setType] = useState<{
-        value: MEDICAL_RECORDS
-        label: string
-    } | null>(null)
+    const [selectedTab, setSelectedTab] = useState(0)
+
+    const [type, setType] = useState<Option | null>(null)
 
     const { closeModal, open, showModal } = useModal()
 
-    useEffect(() => {
-        return () => {
-            setType(null)
-        }
-    }, [])
+    const onChangeSelectedTab = (index: number) => {
+        setSelectedTab(index)
+    }
 
     const title = item ? 'Editar Registro Médico' : 'Adicionar Registro Médico'
+
+    const onChangeType = (type: Option) => {
+        setType(type)
+        setSelectedTab(NUMBER_STEPS.MEDICAL_RECORDS)
+    }
 
     return (
         <>
@@ -57,7 +124,11 @@ const AddMedicalRecordsModal = ({
                 />
             )}
             <Modal
-                onOpen={() => showModal}
+                onOpen={() => {
+                    setType(null)
+                    setSelectedTab(0)
+                    showModal()
+                }}
                 onClose={() => closeModal()}
                 modal
                 nested
@@ -70,22 +141,64 @@ const AddMedicalRecordsModal = ({
                         {title}
                     </h6>
                 </div>
-                <section className="flex flex-1 relative flex-col">
-                    <FieldSelect
-                        options={MedicalRecordOptions}
-                        label="Condição"
-                        name="type"
-                        onChangeValue={(value) => setType(value as any)}
-                    />
 
-                    <MedicalRecordsForm
-                        condition={!!type}
-                        type={type?.value as MEDICAL_RECORDS}
-                        item={item}
-                        cpf_cnpj={cpf_cnpj}
-                        id_pet={id_pet}
-                        handleClose={closeModal}
-                    />
+                {selectedTab > 0 && (
+                    <div className="absolute top-0 left-0 right-0 h-1">
+                        <BtnIcon
+                            icon={<FaArrowLeft />}
+                            type="button"
+                            label="Voltar"
+                            onClick={onChangeSelectedTab?.bind(null, 0)}
+                            className="w-fit text-gray-400 hover:text-gray-600"
+                        />
+                    </div>
+                )}
+                <section className="flex flex-1 relative flex-col">
+                    <Tab.Group
+                        selectedIndex={selectedTab}
+                        onChange={onChangeSelectedTab}
+                    >
+                        <Tab.List className="flex flex-row w-full justify-between">
+                            {STEPS.map((item) => (
+                                <Tab key={item.id} className="hidden" />
+                            ))}
+                        </Tab.List>
+                        <div className="flex flex-row w-full justify-between">
+                            {STEPS.slice(1, STEPS.length - 2).map((item) => (
+                                <div
+                                    key={item.id}
+                                    className={cn(
+                                        'p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full',
+                                        {
+                                            'text-primary-500':
+                                                selectedTab === item.id,
+                                            'text-gray-400':
+                                                selectedTab !== item.id,
+                                        },
+                                    )}
+                                >
+                                    {item.title}
+                                </div>
+                            ))}
+                        </div>
+
+                        <Tab.Panels className="w-full h-full relative">
+                            {STEPS.map((Step) => (
+                                <Tab.Panel key={Step.id}>
+                                    <Step.component
+                                        condition={!!type}
+                                        type={type?.value as MEDICAL_RECORDS}
+                                        onChange={onChangeType}
+                                        item={item}
+                                        cpf_cnpj={cpf_cnpj}
+                                        id_pet={id_pet}
+                                        handleClose={closeModal}
+                                        onChangeIndex={onChangeSelectedTab}
+                                    />
+                                </Tab.Panel>
+                            ))}
+                        </Tab.Panels>
+                    </Tab.Group>
                 </section>
             </Modal>
         </>

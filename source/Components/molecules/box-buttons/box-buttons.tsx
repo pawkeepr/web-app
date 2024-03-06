@@ -27,7 +27,7 @@ type BoxButtonsProps = {
     type?: 'button' | 'submit'
     isValid?: boolean
     link?: boolean
-    className: string
+    className?: string
     isLoading?: boolean
 } & hasBtnCancel &
     hasBtnSuccess
