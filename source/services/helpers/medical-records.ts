@@ -25,7 +25,7 @@ const urls = {
     MEDICAL_RECORDS_UPDATE_NUTRITIONS: (user: TYPE_USER) =>
         `/api-medical/update-list-nutritions/${user}`,
     MEDICAL_RECORDS_UPDATE_VACCINES: (user: TYPE_USER) =>
-        `/api-medical/update-list-vaccine/${user}`,
+        `/api-medical/update-list-vacine/${user}`,
     MEDICAL_RECORDS_UPDATE_PHYSICAL_ACTIVITIES: (user: TYPE_USER) =>
         `/api-medical/update-list-physical-activities/${user}`,
     MEDICAL_RECORDS_UPDATE_DENTAL_PROCEDURES: (user: TYPE_USER) =>

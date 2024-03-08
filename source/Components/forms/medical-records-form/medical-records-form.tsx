@@ -1,6 +1,9 @@
+import { format } from 'date-fns'
 import withControl from '~/Components/helpers/with-control'
 import { useUpdateMedicalRecordsMutation } from '~/store/hooks/medical-records'
+import useProfile from '~/store/hooks/profile/use-profile'
 import { MEDICAL_RECORDS, type MedicalRecordEntry } from '~/types/medical-records'
+import { NameProfile } from '~/types/profile'
 import BodyEvolutionForm from './forms/body-evolution-form'
 import DentalProcedureForm from './forms/dental-procedure-form'
 import DiseaseForm from './forms/disease-form'
@@ -9,7 +12,6 @@ import HospitalizationForm from './forms/hospitalization-form'
 import MedicineForm from './forms/medicine-form'
 import NutritionForm from './forms/nutrition-form'
 import PhysicalActivityForm from './forms/physical-activity-form'
-import TreatmentsForm from './forms/treatments-form'
 import VaccinesForm from './forms/vaccines-form'
 export type OptionFormsProps<T> = {
     item: T | null
@@ -35,7 +37,6 @@ export const OptionsForms = new Map<
     [MEDICAL_RECORDS.MEDICINES, MedicineForm],
     [MEDICAL_RECORDS.EXAMS, ExamAndTestForm],
     [MEDICAL_RECORDS.VACCINES, VaccinesForm],
-    [MEDICAL_RECORDS.TREATMENTS, TreatmentsForm],
 ])
 
 type MedicalRecordForm = {
@@ -53,6 +54,7 @@ const MedicalRecordsForm = ({
     item,
     type,
     handleClose,
+    onChangeIndex,
 }: MedicalRecordForm) => {
     const updateMutation = useUpdateMedicalRecordsMutation({
         cpf_cnpj,
@@ -61,14 +63,27 @@ const MedicalRecordsForm = ({
     })
 
     const FormComponent = OptionsForms.get(type) || (() => <></>)
+    const { data } = useProfile()
 
     const handleSubmit = async (data: MedicalRecordEntry) => {
         await updateMutation.mutateAsync({ data })
+        onChangeIndex?.(0)
     }
 
     return (
         <FormComponent
-            item={item}
+            item={
+                {
+                    coin: 'BRL',
+                    date_application: format(new Date(), 'dd-MM-yyyy'),
+                    type_profile:
+                        data?.user_information?.type_profile &&
+                        NameProfile[data?.user_information?.type_profile],
+                    cpf_cnpj_who_applied: data?.user_information?.cpf_cnpj,
+                    who_applied: data?.user_information?.name,
+                    ...item,
+                } as MedicalRecordEntry
+            }
             handleSubmit={handleSubmit}
             handleClose={handleClose}
         />

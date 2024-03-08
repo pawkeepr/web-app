@@ -48,7 +48,6 @@ const DiseaseForm = ({
                     <FieldTextArea
                         ctx={values}
                         label="Recomendações de Tratamento"
-                        required
                         name="notes"
                         divClassName="col-span-full"
                     />

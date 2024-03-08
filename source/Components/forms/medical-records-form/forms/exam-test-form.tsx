@@ -51,7 +51,6 @@ const ExamTestForm = ({
                     <FieldControl
                         ctx={values}
                         label="Plano de Saúde"
-                        required
                         name="health_insurance"
                     />
                     <FieldControl
@@ -59,12 +58,6 @@ const ExamTestForm = ({
                         label="Data de Exame"
                         type="date"
                         name="date_exam"
-                    />
-                    <FieldControl
-                        ctx={values}
-                        label="Data de Aplicação"
-                        type="date"
-                        name="date_application"
                     />
                     <FieldControl ctx={values} label="Local" name="local" />
                     <RadioGroup
@@ -98,7 +91,6 @@ const ExamTestForm = ({
                     <FieldTextArea
                         ctx={values}
                         label="Notas"
-                        required
                         name="notes"
                         divClassName="col-span-full"
                     />

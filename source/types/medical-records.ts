@@ -79,11 +79,6 @@ export const MedicalRecordOptions: MedicalRecordOption[] = [
         icon: FaUserMd,
     },
     {
-        value: MEDICAL_RECORDS.TREATMENTS,
-        label: 'Tratamentos',
-        icon: FaBriefcaseMedical,
-    },
-    {
         value: MEDICAL_RECORDS.DENTAL_PROCEDURES,
         label: 'Procedimentos Dentários',
         icon: FaTooth,
@@ -108,7 +103,42 @@ export const MedicalRecordOptions: MedicalRecordOption[] = [
         label: 'Exames',
         icon: FaFileMedical,
     },
-]
+].sort((a, b) => a.label.localeCompare(b.label))
+
+export interface PetMedicalRecords {
+    id: string
+    date_pet: {
+        id_pet: string
+        cpf_cnpj: string
+    }
+    list_well_being: {
+        body_evolution: BodyEvolution[]
+        physical_activities: unknown[] // Pode ser especificado se houver um formato padrão para atividades físicas
+    }
+    list_nutritions: unknown[] // Pode ser especificado se houver um formato padrão para informações de nutrição
+    list_vaccines: unknown[] // Pode ser especificado se houver um formato padrão para informações de vacinas
+    list_exams_tests: unknown[] // Pode ser especificado se houver um formato padrão para exames/testes
+    list_medicines: unknown[] // Pode ser especificado se houver um formato padrão para informações de medicamentos
+    list_dental_procedures: unknown[] // Pode ser especificado se houver um formato padrão para procedimentos dentários
+    list_hospital_information: {
+        list_surgeries: unknown[] // Pode ser especificado se houver um formato padrão para informações de cirurgias
+        list_allergies: unknown[] // Pode ser especificado se houver um formato padrão para informações de alergias
+        list_diseases: unknown[] // Pode ser especificado se houver um formato padrão para informações de doenças
+        list_injuries: unknown[] // Pode ser especificado se houver um formato padrão para informações de lesões
+        list_internment: unknown[] // Pode ser especificado se houver um formato padrão para informações de internação
+        list_hospitalizations: unknown[] // Pode ser especificado se houver um formato padrão para informações de hospitalização
+    }
+    list_anamnesis: {
+        list_digestive_sys: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema digestivo
+        list_respiratory_sys: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema respiratório
+        list_locomotor_sys: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema locomotor
+        list_urinary_system: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema urinário
+        list_nervous_sys: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema nervoso
+    }
+    list_others: unknown[] // Pode ser especificado se houver um formato padrão para outras informações
+    date_register: string
+    owner: string
+}
 
 // Interface base com elementos comuns a todas as entradas do prontuário médico
 export interface MedicalRecordEntry {
@@ -125,6 +155,7 @@ export interface MedicalRecordEntry {
 
 // Evolução Corporal
 export interface BodyEvolution extends MedicalRecordEntry {
+    id?: string
     type: 'body-evolution'
     age: string
     height: string

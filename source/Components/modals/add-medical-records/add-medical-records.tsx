@@ -45,14 +45,12 @@ type MedicalRecordFormProps = {
 
 const OptionsComponent = ({ onChange }: MedicalRecordFormProps) => {
     return (
-        <div className="h-96">
+        <div className="grid grid-cols-2 mobile:grid-cols-1">
             {MedicalRecordOptions?.map((item, index) => (
                 <button
                     key={`${item.value}-${index}`}
                     type="button"
-                    onClick={() => {
-                        onChange(item)
-                    }}
+                    onClick={onChange.bind(null, item)}
                     className={option()}
                 >
                     <div className="flex flex-1 justify-center gap-2">
@@ -120,7 +118,7 @@ const AddMedicalRecordsModal = ({
                     onClick={showModal}
                     className={cn(
                         `
-                        web:absolute web:right-0 web:top-0 web:w-fit web:p-1 web:m-0 web:h-fit  mobile:w-full
+                        web:w-fit web:p-1 web:m-0 web:h-fit  mobile:w-full
                         web:text-gray-400 web:border-none bg-confirm-500 hover:bg-confirm-600 text-white
                     `,
                     )}

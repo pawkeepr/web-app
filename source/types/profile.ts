@@ -38,6 +38,13 @@ export const TypeProfile = {
 } as const
 export type TypeProfile = (typeof TypeProfile)[keyof typeof TypeProfile]
 
+export const NameProfile = {
+    '1': 'vet',
+    '2': 'tutor',
+    NONE: null,
+} as const
+export type NameProfile = (typeof NameProfile)[keyof typeof NameProfile]
+
 export type ProfileUserInformation = {
     first_name: string
     last_name: string
@@ -45,6 +52,7 @@ export type ProfileUserInformation = {
     type_profile: TypeProfile
     url_img: string
     contact: Contact
+    cpf_cnpj?: string
     address: Location
 }
 

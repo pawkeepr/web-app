@@ -63,14 +63,15 @@ const HospitalizationForm = ({
                         ctx={values}
                         label="Data de Inicio"
                         type="date"
-                        name="date_application"
+                        name="date_init"
                     />
 
                     <FieldControl
                         ctx={values}
                         label="Data de Fim"
                         type="date"
-                        name="date_application"
+                        minDate={values?.date_init}
+                        name="date_end"
                     />
                     <ControlSwitchDiv
                         ctx={values}

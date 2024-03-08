@@ -4,7 +4,7 @@ import useAppQuery from '~/hooks/use-app-query'
 import { getCurrentUser, type CurrentUserCognito } from '~/services/helpers/auth'
 import { getAllMedicalRecordsByPet } from '~/services/helpers/medical-records'
 import { updateErrorToast, updateSuccessToast } from '~/store/helpers/toast'
-import type { MEDICAL_RECORDS } from '~/types/medical-records'
+import type { MEDICAL_RECORDS, PetMedicalRecords } from '~/types/medical-records'
 import useProfile from '../profile/use-profile'
 import { StrategiesMedicalRecords } from './strategies-medical-records'
 
@@ -72,8 +72,8 @@ export const useGetMedicalRecordsByPet = ({
     cpf_cnpj,
 }: UseHookMedicalRecords) => {
     const { data } = useProfile()
-    return useAppQuery<unknown[]>([NAME, data?.id, id_pet], async () => {
-        const res = await getAllMedicalRecordsByPet(cpf_cnpj, id_pet)
-        return res?.data
-    })
+    return useAppQuery<PetMedicalRecords>(
+        [NAME, data?.id, id_pet, cpf_cnpj],
+        getAllMedicalRecordsByPet.bind(null, cpf_cnpj, id_pet),
+    )
 }
