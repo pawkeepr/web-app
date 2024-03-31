@@ -112,21 +112,21 @@ export interface PetMedicalRecords {
         cpf_cnpj: string
     }
     list_well_being: {
-        body_evolution: BodyEvolution[]
-        physical_activities: unknown[] // Pode ser especificado se houver um formato padrão para atividades físicas
+        body_evolution: BodyEvolution[] // ✅
+        physical_activities: PhysicalActivity[] // ✅
     }
-    list_nutritions: unknown[] // Pode ser especificado se houver um formato padrão para informações de nutrição
-    list_vaccines: unknown[] // Pode ser especificado se houver um formato padrão para informações de vacinas
-    list_exams_tests: unknown[] // Pode ser especificado se houver um formato padrão para exames/testes
-    list_medicines: unknown[] // Pode ser especificado se houver um formato padrão para informações de medicamentos
-    list_dental_procedures: unknown[] // Pode ser especificado se houver um formato padrão para procedimentos dentários
+    list_dental_procedures: DentalProcedure[] // ✅
+    list_exams_tests: ExamTest[] // ✅
+    list_nutritions: Nutrition[]
+    list_vaccines: Vaccine[]
+    list_medicines: Medicine[]
     list_hospital_information: {
-        list_surgeries: unknown[] // Pode ser especificado se houver um formato padrão para informações de cirurgias
-        list_allergies: unknown[] // Pode ser especificado se houver um formato padrão para informações de alergias
-        list_diseases: unknown[] // Pode ser especificado se houver um formato padrão para informações de doenças
-        list_injuries: unknown[] // Pode ser especificado se houver um formato padrão para informações de lesões
-        list_internment: unknown[] // Pode ser especificado se houver um formato padrão para informações de internação
-        list_hospitalizations: unknown[] // Pode ser especificado se houver um formato padrão para informações de hospitalização
+        list_surgeries: Hospitalization[]
+        list_allergies: Disease[]
+        list_diseases: Disease[]
+        list_injuries: Disease[]
+        list_internment: Hospitalization[]
+        list_hospitalizations: Hospitalization[]
     }
     list_anamnesis: {
         list_digestive_sys: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema digestivo
@@ -142,6 +142,7 @@ export interface PetMedicalRecords {
 
 // Interface base com elementos comuns a todas as entradas do prontuário médico
 export interface MedicalRecordEntry {
+    id?: string
     type: MEDICAL_RECORDS
     name: string
     cpf_cnpj_who_applied: string
@@ -212,6 +213,7 @@ export interface Nutrition extends MedicalRecordEntry {
 
 // Atividades Físicas
 export interface PhysicalActivity extends MedicalRecordEntry {
+    id?: string
     type: 'physical-activities'
     continuously: boolean
     date_init: string
