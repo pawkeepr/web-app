@@ -49,14 +49,14 @@ const Profile: React.FC = () => {
     const { data: profile, isLoading } = useProfile()
     const { mode, toggleMode } = useModeEditablePet()
 
-    if (isLoading) {
-        return <div>Carregando...</div>
-    }
-
     const tabs = useMemo(() => {
         if (!profile) return []
         return makeTabs(profile)
     }, [profile])
+
+    if (isLoading) {
+        return <div>Carregando...</div>
+    }
 
     return (
         <DashboardLayouts title="Perfil" searchBlock={false}>
