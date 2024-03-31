@@ -1,6 +1,8 @@
 import AddMedicalRecordsModal from '~/Components/modals/add-medical-records/add-medical-records'
+import VisualizationMode from '~/Components/organism/visualization-mode'
 import { useGetMedicalRecordsByPet } from '~/store/hooks/medical-records'
 import ListsMedicalRecords from './lists-medical-records'
+
 type HistoricPetProps = {
     document?: string
     id_pet?: string
@@ -23,6 +25,8 @@ const MedicalRecords = ({ id_pet, document }: HistoricPetProps) => {
                     id_pet={id_pet as string}
                 />
             </div>
+
+            <VisualizationMode />
             <ListsMedicalRecords condition={!isLoading} data={data} />
         </section>
     )

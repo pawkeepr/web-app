@@ -2,12 +2,12 @@ import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
 import { FieldArray, useFormikContext } from 'formik'
 import { useMemo } from 'react'
+import ItemMedicalRecordsForm from '~/Components/forms/item-medical-records-form/item-medical-records-form'
 import type { OptionSelect } from '~/Components/molecules/field-control'
-import CardInputTreatment from '~/Components/organism/card-input-treatment'
 import type { StepProps, Tabs } from '~/types/helpers'
 import {
-    schemaStepTreatmentValidation,
     type CtxStepTreatment,
+    schemaStepTreatmentValidation,
 } from '../../../validations.yup'
 
 const items: OptionSelect[] = [
@@ -100,20 +100,7 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                 </div>
                             ),
                         )}
-                        <CardInputTreatment
-                            items={items}
-                            handleSubmit={(data, formikHelpers) => {
-                                return new Promise(() => {
-                                    const { value } =
-                                        data.type_treatment as OptionSelect
-                                    push({
-                                        ...data,
-                                        type_treatment: value,
-                                    })
-                                    formikHelpers.resetForm()
-                                })
-                            }}
-                        />
+                        <ItemMedicalRecordsForm cpf_cnpj="" id_pet="" item={{}} />
                     </>
                 )}
             </FieldArray>
