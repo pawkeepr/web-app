@@ -49,29 +49,6 @@ const StepAnamnese = ({ toggleTab, activeTab }: StepProps) => {
                 handleChange={handlePushAnamnese}
             />
 
-            {values.anamnesis?.questions_anamnesis?.map((anamnese, index) => (
-                <div
-                    key={`anamnese-${index}`}
-                    className="w-full bg-secondary rounded-md text-xs py-1 px-2"
-                >
-                    <div className="w-full flex flex-row bg-secondary px-2 rounded-sm border-dashed border border-primary">
-                        <div className="grid grid-cols-6 w-full">
-                            <h6 className="col-span-2 font-mono font-semibold  capitalize">
-                                {anamnese.name_anamnesis}
-                            </h6>
-
-                            <p className="col-span-2 font-mono  capitalize">
-                                {anamnese.notes_anamnesis}
-                            </p>
-
-                            <p className="col-span-2 font-mono  capitalize">
-                                {anamnese.options_anamnesis}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            ))}
-
             <div className="flex items-center justify-center gap-3 mt-4">
                 <BtnCancel
                     label="Voltar"

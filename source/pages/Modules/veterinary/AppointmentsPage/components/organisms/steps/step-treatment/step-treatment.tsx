@@ -38,6 +38,18 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
             <FieldArray name="treatments.questions_treatment">
                 {({ push, remove }) => (
                     <>
+                        <ItemMedicalRecordsForm
+                            handleCancel={() => {}}
+                            cpf_cnpj=""
+                            id_pet=""
+                            form={(props) => (
+                                <TreatmentItemForm
+                                    {...props}
+                                    handleSubmit={push}
+                                    item={null}
+                                />
+                            )}
+                        />
                         {values.treatments?.questions_treatment?.map(
                             (treatment, index) => (
                                 <div
@@ -73,18 +85,6 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                 </div>
                             ),
                         )}
-                        <ItemMedicalRecordsForm
-                            handleCancel={() => {}}
-                            cpf_cnpj=""
-                            id_pet=""
-                            form={(props) => (
-                                <TreatmentItemForm
-                                    {...props}
-                                    handleSubmit={push}
-                                    item={null}
-                                />
-                            )}
-                        />
                     </>
                 )}
             </FieldArray>
