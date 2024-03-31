@@ -76,16 +76,23 @@ export interface Anamnesis {
     note: string
 }
 
-export type OptionAnamnesis = 'yes' | 'no' | 'other'
+export const OPTION_BOOLEAN = {
+    yes: 'yes',
+    true: 'yes',
+    no: 'no',
+    other: 'other',
+    false: 'no',
+} as const
+export type OPTION_BOOLEAN = (typeof OPTION_BOOLEAN)[keyof typeof OPTION_BOOLEAN]
+
 export type LogicalListDefaultAnamnesis = 'logical'
 
 export interface QuestionAnamnesis {
+    id?: string | number
     type_anamnesis: string | OptionSelect
     name_anamnesis: string // Pergunta "Ele nadou?"
     notes_anamnesis: string // Observação
-    options_anamnesis: OptionAnamnesis
-    logical_list_default_anamnesis: LogicalListDefaultAnamnesis
-    list_notes_anamnesis: string[]
+    options_anamnesis: OPTION_BOOLEAN
 }
 
 export interface Treatments {

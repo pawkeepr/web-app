@@ -1,7 +1,7 @@
 import { Switch } from '@headlessui/react'
 import cn from 'classnames'
 import { useField } from 'formik'
-import { tv, type VariantProps } from 'tailwind-variants'
+import { type VariantProps, tv } from 'tailwind-variants'
 import type { ObjPaths } from '~/types/helpers'
 import { ModeInput } from '../field-control/field-control'
 
@@ -12,6 +12,7 @@ type SwitchProps<Ctx = undefined> = {
     children?: React.ReactNode
     label: string
     onClick?: () => void
+    onChange?: (e: boolean) => void
     divClassName?: string
     legend?: boolean
     mode?: ModeInput
@@ -64,8 +65,14 @@ const ControlSwitch = <Ctx,>({
     onClick,
     legend = true,
     mode = ModeInput.editable,
+    onChange = () => {},
 }: SwitchProps<Ctx> & ControlSwitchTailwind) => {
     const [field, meta, helpers] = useField(name)
+
+    const handleChange = (e: boolean) => {
+        helpers.setValue(e)
+        onChange?.(e)
+    }
 
     return (
         <div className={divSwitch({ className: divClassName })}>
@@ -77,9 +84,7 @@ const ControlSwitch = <Ctx,>({
                             disabled={mode === ModeInput.readonly}
                             onClick={onClick}
                             checked={field.value}
-                            onChange={(e) => {
-                                helpers.setValue(e)
-                            }}
+                            onChange={handleChange}
                             className={controlSwitch({
                                 mode,
                                 checked: field.value as boolean,

@@ -17,7 +17,6 @@ export const schemaValidationDetailsPetConsultation = yup
         imc: yup.string().optional().nullable(),
         length: yup.string().optional().nullable(),
         type_weight: yup.string().optional().nullable(),
-        motivation: yup.string().required(),
         weight: yup
             .number() // Define o campo como numérico
             .transform((value) => (Number.isNaN(value) ? undefined : Number(value))) // Converte de string para número
@@ -34,6 +33,7 @@ export const schemaStepAnamneseValidation = yup
     .shape<RecordsShapeYup<CtxStepAnamnese>>({
         details_pet_consultation: schemaValidationDetailsPetConsultation,
         anamnesis: yup.object().optional(),
+        dates_consults: yup.object().optional(),
     })
 
 export type ShapeTreatments = RecordsShapeYup<CtxStepTreatment['treatments']>

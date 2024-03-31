@@ -8,7 +8,11 @@ import type { OptionSelect } from '~/Components/molecules/field-control'
 import type { KeyOfQuestionTypes, Question } from '~/constants/anamnese-questions'
 import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
 import useResizeMobile from '~/hooks/use-resize-mobile'
-import type { QuestionAnamnesis, VeterinaryConsultation } from '~/types/appointment'
+import {
+    OPTION_BOOLEAN,
+    type QuestionAnamnesis,
+    type VeterinaryConsultation,
+} from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
 
 export type CtxStepAnamnese = Pick<
@@ -23,15 +27,14 @@ const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionAnamnesis>>(
         label: Yup.string().required('Campo obrigatório'),
     }),
     notes_anamnesis: Yup.string().optional(),
-    list_notes_anamnesis: Yup.array().optional(),
     options_anamnesis: Yup.string()
         .oneOf(['no', 'yes', 'other'])
         .required('Campo obrigatório'),
-    logical_list_default_anamnesis: Yup.string().oneOf(['logical']).optional(),
 })
 
 type CardInputProps = {
     items: Question[]
+    handleChange?: (value: QuestionAnamnesis) => void
 }
 
 const STEPS: {
@@ -40,22 +43,22 @@ const STEPS: {
 }[] = [
     {
         title: 'Sistema Digestivo',
-        value: 'digestive_system',
+        value: 'digestive_sys',
     },
     {
         title: 'Sistema Respiratório',
-        value: 'respiratory_system',
+        value: 'respiratory_sys',
     },
     {
         title: 'Sistema Urinário',
-        value: 'urinary_system',
+        value: 'urinary_sys',
     },
     {
         title: 'Sistema Nervoso',
-        value: 'nervous_system',
+        value: 'nervous_sys',
     },
     {
-        value: 'locomotive_system',
+        value: 'locomotive_sys',
         title: 'Sistema Locomotor',
     },
     {
@@ -76,23 +79,26 @@ const makeTitle = (title: string, isMobile: boolean) => {
 }
 
 const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => {
-    const filtered = items.reduce((acc, item) => {
-        if (item.type === category) {
-            acc.push({
-                type: item.type,
-                value: `${item.id}`,
-                label: item.question,
-                color: 'rgb(255 200 107);',
-            })
-        }
-        return acc
-    }, [] as OptionSelect[])
+    const filtered = items.reduce(
+        (acc, item) => {
+            if (item.type === category) {
+                acc.push({
+                    type: item.type,
+                    value: `${item.id}`,
+                    label: item.question,
+                    color: 'rgb(255 200 107);',
+                })
+            }
+            return acc
+        },
+        [] as (OptionSelect & { type: string })[],
+    )
 
     return filtered
 }
 
-const CardInputAnamnese = ({ items }: CardInputProps) => {
-    const [category, setCategory] = useState<KeyOfQuestionTypes>('digestive_system')
+const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
+    const [category, setCategory] = useState<KeyOfQuestionTypes>('digestive_sys')
     const { isMobile } = useResizeMobile()
 
     const options = useMemo(() => makeOptions(items, category), [category, items])
@@ -176,6 +182,18 @@ const CardInputAnamnese = ({ items }: CardInputProps) => {
                         {options.map((item) => (
                             <ControlSwitchDiv
                                 ctx={values}
+                                onChange={(e) =>
+                                    handleChange?.({
+                                        id: item.value,
+                                        name_anamnesis: item.label,
+                                        notes_anamnesis: '',
+                                        type_anamnesis: item.type,
+                                        options_anamnesis:
+                                            OPTION_BOOLEAN[
+                                                String(e) as OPTION_BOOLEAN
+                                            ],
+                                    })
+                                }
                                 name={item.value as string}
                                 label={item.label}
                                 divClassName="col-span-1 mobile:col-span-full"
