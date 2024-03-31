@@ -1,4 +1,5 @@
 import type { OptionSelect } from '~/Components/molecules/field-control'
+import type { MEDICAL_RECORDS } from './medical-records'
 import type { IMainResponsibleGuardian, On_Off, PetData } from './pet-v2'
 import type { DTOProfile } from './profile'
 
@@ -93,12 +94,9 @@ export interface Treatments {
 }
 
 export interface QuestionTreatment {
-    type_treatment: string | OptionSelect
+    type_treatment: MEDICAL_RECORDS
     name_treatment: string
     notes_treatment: string
-    list_notes_treatment: string[]
-    options_anamnesis: string
-    logical_list_default_anamnesis: string
     value_coin_treatment: string
     coin_treatment: string
 }

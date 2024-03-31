@@ -1,17 +1,15 @@
 import { Form, Formik, type FormikHelpers } from 'formik'
-import { useMemo } from 'react'
 import * as Yup from 'yup'
 import { BtnConfirm } from '~/Components/atoms/btn'
-import FieldControl, {
-    type OptionSelect,
-} from '~/Components/molecules/field-control'
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
+import FieldControl from '~/Components/molecules/field-control'
+import FieldNumber from '~/Components/molecules/field-number'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import type { QuestionTreatment } from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
+import type { MEDICAL_RECORDS } from '~/types/medical-records'
 
 type CardInputProps = {
-    items?: OptionSelect[]
+    type: MEDICAL_RECORDS
     handleSubmit: (
         data: QuestionTreatment,
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -19,64 +17,54 @@ type CardInputProps = {
     ) => Promise<unknown>
 }
 
-const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionTreatment>>({
-    type_treatment: Yup.object().shape({
-        value: Yup.string().required('Campo obrigatório'),
-        label: Yup.string().required('Campo obrigatório'),
-    }),
+type ShapeTreatment = Omit<RecordsShapeYup<QuestionTreatment>, 'type_treatment'>
+
+const validationSchema = Yup.object().shape<ShapeTreatment>({
     name_treatment: Yup.string().required('Campo obrigatório'),
     coin_treatment: Yup.string().optional(),
     notes_treatment: Yup.string().optional(),
-    list_notes_treatment: Yup.array().optional(),
-    logical_list_default_anamnesis: Yup.array().optional(),
-    options_anamnesis: Yup.array().optional(),
-    value_coin_treatment: Yup.number().optional(),
+    value_coin_treatment: Yup.string().transform((value) => {
+        return value.replace('R$', '').replace(',', '.')
+    }),
 })
 
-const makeOptions = (items: OptionSelect[]) => {
-    return items.map((item) => ({
-        value: item.value,
-        label: item.label,
-        color: 'rgb(255 200 107);',
-    }))
-}
-
-const CardInputTreatment = ({ items = [], handleSubmit }: CardInputProps) => {
-    const options = useMemo(() => makeOptions(items), [items])
-
+const CardInputTreatment = ({ handleSubmit, type }: CardInputProps) => {
     return (
         <Formik
             initialValues={{
-                coin_treatment: '',
+                coin_treatment: 'BRL',
                 name_treatment: '',
                 notes_treatment: '',
-                type_treatment: '',
-                list_notes_treatment: [] as string[],
                 value_coin_treatment: '',
-                logical_list_default_anamnesis: '',
-                options_anamnesis: '',
             }}
             validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+            onSubmit={(values, formikHelpers) =>
+                handleSubmit(
+                    {
+                        ...values,
+                        type_treatment: type,
+                    },
+                    formikHelpers,
+                )
+            }
         >
             {({ isValid, handleSubmit, values }) => (
-                <Form
-                    onSubmit={handleSubmit}
-                    className="gap-2 flex flex-col card shadow-2xl p-8 border-primary-500 border-2"
-                >
-                    <FieldControlSelect
-                        ctx={values}
-                        name="type_treatment"
-                        required
-                        label="Tipo"
-                        options={options}
-                    />
+                <Form onSubmit={handleSubmit} className="gap-2 flex flex-col card">
                     <FieldControl
                         ctx={values}
                         name="name_treatment"
                         label="Nome"
                         required
                     />
+
+                    <FieldNumber
+                        ctx={values}
+                        locales="pt-BR"
+                        currency="BRL"
+                        label="Valor do Pagamento? (R$)"
+                        name="value_coin_treatment"
+                    />
+
                     <FieldTextArea
                         ctx={values}
                         name={'notes_treatment' as ''}

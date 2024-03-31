@@ -3,39 +3,12 @@ import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import { FieldArray, useFormikContext } from 'formik'
 import { useMemo } from 'react'
 import ItemMedicalRecordsForm from '~/Components/forms/item-medical-records-form/item-medical-records-form'
-import type { OptionSelect } from '~/Components/molecules/field-control'
+import TreatmentItemForm from '~/Components/forms/treatment-item-form'
 import type { StepProps, Tabs } from '~/types/helpers'
 import {
     type CtxStepTreatment,
     schemaStepTreatmentValidation,
 } from '../../../validations.yup'
-
-const items: OptionSelect[] = [
-    {
-        value: 'activities_carry',
-        label: 'Recomendações de atividades físicas',
-    },
-    {
-        value: 'fast_test',
-        label: 'Testes rápidos',
-    },
-    {
-        value: 'medicine',
-        label: 'Medicação',
-    },
-    {
-        value: 'vaccine',
-        label: 'Vacina',
-    },
-    {
-        value: 'exam',
-        label: 'Exame',
-    },
-    {
-        value: 'nutrition',
-        label: 'Nutrição Alimentar',
-    },
-]
 
 const KeyTreatment = {
     activities_carry: 'Recomendações de atividades físicas',
@@ -100,7 +73,18 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                                 </div>
                             ),
                         )}
-                        <ItemMedicalRecordsForm cpf_cnpj="" id_pet="" item={{}} />
+                        <ItemMedicalRecordsForm
+                            handleCancel={() => {}}
+                            cpf_cnpj=""
+                            id_pet=""
+                            form={(props) => (
+                                <TreatmentItemForm
+                                    {...props}
+                                    handleSubmit={push}
+                                    item={null}
+                                />
+                            )}
+                        />
                     </>
                 )}
             </FieldArray>

@@ -1,4 +1,5 @@
 import { format } from 'date-fns'
+import type { FormikHelpers } from 'formik'
 import withControl from '~/Components/helpers/with-control'
 import { useUpdateMedicalRecordsMutation } from '~/store/hooks/medical-records'
 import useProfile from '~/store/hooks/profile/use-profile'
@@ -13,9 +14,13 @@ import MedicineForm from './forms/medicine-form'
 import NutritionForm from './forms/nutrition-form'
 import PhysicalActivityForm from './forms/physical-activity-form'
 import VaccinesForm from './forms/vaccines-form'
+
 export type OptionFormsProps<T> = {
     item: T | null
-    handleSubmit: (data: MedicalRecordEntry) => void
+    handleSubmit: (
+        data: MedicalRecordEntry,
+        formikHelpers: FormikHelpers<T>,
+    ) => void
     handleClose?: () => void
 }
 

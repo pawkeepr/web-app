@@ -5,6 +5,7 @@ import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
 
 import ItemMedicalRecordsForm from '~/Components/forms/item-medical-records-form'
+import MedicalRecordsForm from '~/Components/forms/medical-records-form'
 import type { MedicalRecordEntry } from '~/types/medical-records'
 
 type AddModalProps = {
@@ -58,6 +59,7 @@ const AddMedicalRecordsModal = ({
                 </div>
 
                 <ItemMedicalRecordsForm
+                    form={(props) => <MedicalRecordsForm {...props} />}
                     id_pet={id_pet}
                     handleCancel={closeModal}
                     cpf_cnpj={cpf_cnpj}

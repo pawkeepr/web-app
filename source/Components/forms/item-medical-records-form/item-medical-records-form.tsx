@@ -1,6 +1,6 @@
 import { Tab } from '@headlessui/react'
 import cn from 'classnames'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { FaArrowLeft } from 'react-icons/fa'
 import { BtnIcon } from '~/Components/atoms/btn'
 
@@ -9,13 +9,13 @@ import OptionsComponent, {
     type MedicalRecordFormProps,
     type Option,
 } from '../../forms/item-medical-records-form/options-component'
-import MedicalRecordsForm from '../medical-records-form'
 
 type ItemMedicalRecordsFormProps = {
     cpf_cnpj: string
     id_pet: string
     item?: MedicalRecordEntry | null
     handleCancel: () => void
+    form: (props: MedicalRecordFormProps) => JSX.Element
 }
 
 export const NUMBER_STEPS = {
@@ -24,7 +24,9 @@ export const NUMBER_STEPS = {
 } as const
 export type NumberSteps = (typeof NUMBER_STEPS)[keyof typeof NUMBER_STEPS]
 
-const STEPS = [
+const makeSteps = (
+    FormComponent: (props: MedicalRecordFormProps) => JSX.Element,
+) => [
     {
         id: NUMBER_STEPS.OPTIONS,
         title: 'Opções',
@@ -35,9 +37,7 @@ const STEPS = [
     {
         id: NUMBER_STEPS.MEDICAL_RECORDS,
         title: 'Prontuário',
-        component: (props: MedicalRecordFormProps) => (
-            <MedicalRecordsForm {...props} />
-        ),
+        component: FormComponent,
     },
 ]
 
@@ -46,6 +46,7 @@ const ItemMedicalRecordsForm = ({
     cpf_cnpj,
     id_pet,
     handleCancel,
+    form: FormComponent,
 }: ItemMedicalRecordsFormProps) => {
     const [selectedTab, setSelectedTab] = useState(0)
 
@@ -64,6 +65,8 @@ const ItemMedicalRecordsForm = ({
         setType(type)
         setSelectedTab(NUMBER_STEPS.MEDICAL_RECORDS)
     }
+
+    const STEPS = useMemo(() => makeSteps(FormComponent), [FormComponent])
 
     return (
         <>
