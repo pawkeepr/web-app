@@ -171,10 +171,10 @@ const AppointmentsPage = ({
                 >
                     {({ onChangeOpen }) => {
                         return (
-                            <div className="w-full flex mobile:justify-center mobile:items-center">
+                            <div className="w-full flex mobile:justify-center mobile:items-center mb-1">
                                 <BtnCancel
                                     type="button"
-                                    className="mobile:w-96"
+                                    className="mobile:w-96 h-fit"
                                     label="Cancelar Consulta"
                                     onClick={() => onChangeOpen(true)}
                                 />
