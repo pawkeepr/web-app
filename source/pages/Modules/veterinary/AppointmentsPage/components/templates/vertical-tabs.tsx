@@ -54,13 +54,13 @@ const items: TabItem[] = [
 const tab = tv({
     // Ajuste os estilos base e variantes conforme necessário
     base: `
-        w-full rounded-sm py-3
-        ring-white/60 ring-offset-2 focus:outline-none focus:ring-2
+        w-full rounded-sm mobile:py-4
+        ring-white/60 ring-offset-2
         leading-1 font-bold text-white
         mobile:text-xs
         text-sm flex web:flex-row items-center justify-center
         mobile:flex-col gap-2 step-arrow-nav
-        border border-primary-500 bg-red-400
+        mobile:border border-primary-500
         `,
     // Ajustes adicionais para os estilos mobile
     variants: {
@@ -110,7 +110,7 @@ const VerticalTabs = () => {
             <div
                 style={{ marginTop: isMobile ? `${height}px` : 0 }}
                 className={cn(
-                    'fixed bottom-0 left-0 right-0 h-fit z-[100] bg-white border-t-2 border-primary-500',
+                    'mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 h-fit z-[100] bg-white mobile:border-t-2 border-primary-500',
                 )}
             >
                 <Nav className="nav-pills custom-nav nav-justified" role="tablist">
@@ -140,7 +140,7 @@ const VerticalTabs = () => {
 
             <TabContent
                 activeTab={activeVerticalTab}
-                className="card card-body shadow-lg mobile:!shadow-none mobile:!rounded-none mobile:m-0 mobile:p-4"
+                className="card card-body shadow-lg mobile:!shadow-none mobile:!rounded-none mobile:m-0 mobile:p-4 rounded-t-none"
             >
                 <p className="text-gray-500 flex flex-1 justify-start">
                     <strong className="mr-2">Pet:</strong>
