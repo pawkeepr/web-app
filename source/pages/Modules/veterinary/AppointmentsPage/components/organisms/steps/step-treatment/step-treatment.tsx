@@ -1,14 +1,7 @@
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
-
 import { FieldArray, useFormikContext } from 'formik'
-import { useMemo } from 'react'
 import type { OptionSelect } from '~/Components/molecules/field-control'
 import CardInputTreatment from '~/Components/organism/card-input-treatment'
-import type { StepProps, Tabs } from '~/types/helpers'
-import {
-    type CtxStepTreatment,
-    schemaStepTreatmentValidation,
-} from '../../../validations.yup'
+import type { CtxStepTreatment } from '../../../validations.yup'
 
 const items: OptionSelect[] = [
     {
@@ -46,15 +39,11 @@ const KeyTreatment = {
     nutrition: 'Nutrição Alimentar',
 } as const
 
-const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
+const StepTreatment = () => {
     const { values } = useFormikContext<CtxStepTreatment>()
 
-    const isValid = useMemo(() => {
-        return schemaStepTreatmentValidation.isValidSync(values.treatments)
-    }, [values])
-
     return (
-        <section className="card card-body shadow-lg">
+        <section>
             <h4 className="text-center font-sans font-semibold text-base capitalize">
                 Informações de Tratamento
                 <br />
@@ -112,24 +101,6 @@ const StepTreatment = ({ toggleTab, activeTab }: StepProps) => {
                     </>
                 )}
             </FieldArray>
-
-            <div className="flex items-center justify-center">
-                <BtnCancel
-                    type="button"
-                    label="Voltar"
-                    onClick={() => {
-                        toggleTab((activeTab - 1) as Tabs)
-                    }}
-                />
-                <BtnPrimary
-                    disabled={!isValid}
-                    type="button"
-                    label="Próximo"
-                    onClick={() => {
-                        toggleTab((activeTab + 1) as Tabs)
-                    }}
-                />
-            </div>
         </section>
     )
 }

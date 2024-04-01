@@ -1,9 +1,9 @@
 import {
     InputNumberFormat,
-    InputNumberFormatProps,
+    type InputNumberFormatProps,
 } from '@react-input/number-format'
 import FieldControl, {
-    InputControlProps,
+    type InputControlProps,
 } from '~/Components/molecules/field-control'
 
 import { input } from '~/Components/atoms/input'

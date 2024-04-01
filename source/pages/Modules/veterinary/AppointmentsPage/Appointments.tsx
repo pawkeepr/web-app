@@ -163,29 +163,26 @@ const AppointmentsPage = ({
             validationSchema={schemaStepAppointment}
         >
             <DashboardLayouts title="Nova Consulta" searchBlock={false}>
-                <div className="gap-2 mt-2 mobile:py-6">
-                    <ModalConfirm
-                        title="Cancelar Consulta!"
-                        onConfirm={() => router.push('/dashboard')}
-                        description="Importante!"
-                        message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
-                    >
-                        {({ onChangeOpen }) => {
-                            return (
-                                <div className="w-full flex mobile:justify-center mobile:items-center">
-                                    <BtnCancel
-                                        type="button"
-                                        className="mobile:w-96"
-                                        label="Cancelar Consulta"
-                                        onClick={() => onChangeOpen(true)}
-                                    />
-                                </div>
-                            )
-                        }}
-                    </ModalConfirm>
-
-                    <VerticalTabs isLoading={isLoadingPet} />
-                </div>
+                <ModalConfirm
+                    title="Cancelar Consulta!"
+                    onConfirm={() => router.push('/dashboard')}
+                    description="Importante!"
+                    message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
+                >
+                    {({ onChangeOpen }) => {
+                        return (
+                            <div className="w-full flex mobile:justify-center mobile:items-center">
+                                <BtnCancel
+                                    type="button"
+                                    className="mobile:w-96"
+                                    label="Cancelar Consulta"
+                                    onClick={() => onChangeOpen(true)}
+                                />
+                            </div>
+                        )
+                    }}
+                </ModalConfirm>
+                <VerticalTabs isLoading={isLoadingPet} />
             </DashboardLayouts>
         </Formik>
     )

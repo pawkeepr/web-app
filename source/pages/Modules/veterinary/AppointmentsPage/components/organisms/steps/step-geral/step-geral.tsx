@@ -1,15 +1,13 @@
-import { BtnPrimary } from '~/Components/atoms/btn'
 import FieldNumber from '~/Components/molecules/field-number'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import type { StepProps } from '~/types/helpers'
 import type { CtxStepAnamnese } from '../../../validations.yup'
 
-const StepGeral = ({ toggleTab }: StepProps) => {
+const StepGeral = () => {
     const { values } = useFormikContextSafe<CtxStepAnamnese>()
 
     return (
-        <section className="card card-body shadow-lg mobile:!shadow-none mobile:!rounded-none mobile:m-0 mobile:p-0">
+        <>
             <h4 className="text-center font-sans font-semibold text-base capitalize">
                 Prontuário
                 <br />
@@ -58,15 +56,7 @@ const StepGeral = ({ toggleTab }: StepProps) => {
                     divClassName="col-span-full"
                 />
             </div>
-            <div className="flex align-items-center justify-center gap-3 mt-4">
-                <BtnPrimary
-                    className="text-white"
-                    label="Próximo"
-                    type="button"
-                    onClick={() => toggleTab(2)}
-                />
-            </div>
-        </section>
+        </>
     )
 }
 

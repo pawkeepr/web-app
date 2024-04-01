@@ -1,7 +1,7 @@
 import { Field } from 'formik'
 import { checkbox } from '~/Components/atoms/checkbox'
 import Label from '~/Components/atoms/label'
-import { ObjPaths } from '~/types/helpers'
+import type { ObjPaths } from '~/types/helpers'
 
 interface RadioGroupProps<T, Ctx = undefined>
     extends React.HTMLAttributes<HTMLDivElement> {

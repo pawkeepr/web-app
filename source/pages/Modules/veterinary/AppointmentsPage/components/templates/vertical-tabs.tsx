@@ -1,13 +1,17 @@
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
 
 import cn from 'classnames'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
+import { tv } from 'tailwind-variants'
 import withLoading from '~/Components/helpers/with-loading'
-import CardPet from '~/Components/molecules/card-pet'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import { useAppSelector } from '~/store/hooks'
+import type { VeterinaryConsultation } from '~/types/appointment'
+import type { Breed } from '~/types/breedType'
 import type { StepProps, Tabs } from '~/types/helpers'
+import { Species } from '~/types/speciesType'
 import StepAnamneses from '../organisms/steps/step-anamnese'
 import StepGeral from '../organisms/steps/step-geral'
 import StepPayment from '../organisms/steps/step-payment'
@@ -47,10 +51,36 @@ const items: TabItem[] = [
     },
 ]
 
+const tab = tv({
+    // Ajuste os estilos base e variantes conforme necessário
+    base: `
+        w-full rounded-sm py-3
+        ring-white/60 ring-offset-2 focus:outline-none focus:ring-2
+        leading-1 font-bold text-white
+        mobile:text-xs
+        text-sm flex web:flex-row items-center justify-center
+        mobile:flex-col gap-2 step-arrow-nav
+        border border-primary-500 bg-red-400
+        `,
+    // Ajustes adicionais para os estilos mobile
+    variants: {
+        selected: {
+            true: 'bg-white !text-primary-500 shadow',
+            false: 'text-blue-100 ',
+        },
+        disabled: {
+            true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
+            false: 'text-blue-100 ',
+        },
+    },
+})
+
+type CtxCard = Pick<VeterinaryConsultation, 'tutor_pet_vet'>
+
 const VerticalTabs = () => {
     const [activeVerticalTab, setActiveVerticalTab] = useState(1)
     const [passedVerticalSteps, setPassedVerticalSteps] = useState([1])
-
+    const { values } = useFormikContextSafe<CtxCard>()
     const { height } = useAppSelector((state) => state.Layout.headerSize)
 
     const { isMobile } = useResizeMobile()
@@ -66,65 +96,67 @@ const VerticalTabs = () => {
         }
     }
 
+    const specie = useMemo(
+        () => Species[values.tutor_pet_vet?.pet?.specie as keyof typeof Species],
+        [values.tutor_pet_vet?.pet?.specie],
+    )
+    const race = useMemo(
+        () => values.tutor_pet_vet?.pet?.race as Breed,
+        [values.tutor_pet_vet?.pet?.race],
+    )
+
     return (
-        <section className="card card-body shadow-lg gap-2 mt-2 mobile:p-1 mobile:!shadow-none mobile:rounded-none">
-            <h4 className="card-title mb-0">Nova Consulta</h4>
-            <CardPet />
-            <div className="flex flex-col relative">
-                <div
-                    style={{ marginTop: isMobile ? `${height}px` : 0 }}
-                    className={cn(
-                        'mb-4 step-arrow-nav',
-                        {
-                            'fixed top-0 left-0 right-0 z-[100] bg-white': isMobile,
-                        },
-                        'md:static',
-                    )}
-                >
-                    <Nav
-                        className="nav-pills custom-nav nav-justified"
-                        role="tablist"
-                    >
-                        {items.map((item) => {
-                            return (
-                                <NavItem key={item.id}>
-                                    <NavLink
-                                        href={item.href}
-                                        id="steparrow-gen-info-tab"
-                                        className={cn({
-                                            active: activeVerticalTab === item.id,
-                                            done:
-                                                activeVerticalTab <= items.length &&
-                                                activeVerticalTab === item.id,
-                                        })}
-                                        onClick={() => {
-                                            toggleVerticalTab(item.id)
-                                        }}
-                                    >
-                                        {/* <span className="step-title me-2">
+        <section>
+            <div
+                style={{ marginTop: isMobile ? `${height}px` : 0 }}
+                className={cn(
+                    'fixed bottom-0 left-0 right-0 h-fit z-[100] bg-white border-t-2 border-primary-500',
+                )}
+            >
+                <Nav className="nav-pills custom-nav nav-justified" role="tablist">
+                    {items.map((item) => {
+                        return (
+                            <NavItem key={item.id}>
+                                <NavLink
+                                    href={item.href}
+                                    id="steparrow-gen-info-tab"
+                                    className={tab({
+                                        selected: activeVerticalTab === item.id,
+                                    })}
+                                    onClick={() => {
+                                        toggleVerticalTab(item.id)
+                                    }}
+                                >
+                                    {/* <span className="step-title me-2">
                                                                 <i className="ri-close-circle-fill step-icon me-2"/>
                                                             </span> */}
-                                        {item.title}
-                                    </NavLink>
-                                </NavItem>
-                            )
-                        })}
-                    </Nav>
-                </div>
-
-                <TabContent activeTab={activeVerticalTab}>
-                    {items.map(({ id, Component }, index) => {
-                        return (
-                            <TabPane tabId={id} key={`${id}-${index}`}>
-                                <Component
-                                    activeTab={activeVerticalTab}
-                                    toggleTab={toggleVerticalTab}
-                                />
-                            </TabPane>
+                                    {item.title}
+                                </NavLink>
+                            </NavItem>
                         )
                     })}
-                </TabContent>
+                </Nav>
             </div>
+
+            <TabContent
+                activeTab={activeVerticalTab}
+                className="card card-body shadow-lg mobile:!shadow-none mobile:!rounded-none mobile:m-0 mobile:p-4"
+            >
+                <p className="text-gray-500 flex flex-1 justify-start">
+                    <strong className="mr-2">Pet:</strong>
+                    <span>{`${values.tutor_pet_vet?.pet?.name_pet}, ${specie}, ${race}`}</span>
+                </p>
+                {items.map(({ id, Component }, index) => {
+                    return (
+                        <TabPane tabId={id} key={`${id}-${index}`}>
+                            <Component
+                                activeTab={activeVerticalTab}
+                                toggleTab={toggleVerticalTab}
+                            />
+                        </TabPane>
+                    )
+                })}
+            </TabContent>
         </section>
     )
 }

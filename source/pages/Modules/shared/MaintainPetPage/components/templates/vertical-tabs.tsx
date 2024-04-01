@@ -28,13 +28,13 @@ const items: TabItem[] = [
     {
         id: 2,
         title: 'Tutor',
-        href: '#NewPet',
+        href: '#NewTutor',
         Component: StepTutor,
     },
     {
         id: 3,
         title: 'Planos de Saúde',
-        href: '#NewPet',
+        href: '#NewHealthInsurance',
         Component: StepHealthInsurance,
     },
 ]

@@ -1,10 +1,8 @@
 import { Form } from 'formik'
 import { useEffect, useMemo } from 'react'
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import { BtnPrimary } from '~/Components/atoms/btn'
 import CardTutor from '~/Components/molecules/card-tutor'
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import FieldNumber from '~/Components/molecules/field-number/field-number'
-import type { StepProps, Tabs } from '~/types/helpers'
 
 import RadioGroup from '~/Components/molecules/radio-group'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
@@ -15,8 +13,8 @@ type CtxStepPayment = Pick<
     'appointment_details' | 'tutor_pet_vet'
 >
 
-const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
-    const { handleSubmit, isSubmitting, values, isValid, setFieldValue } =
+const StepPayment = () => {
+    const { handleSubmit, isSubmitting, isValid, values, setFieldValue } =
         useFormikContextSafe<CtxStepPayment>()
 
     const form_payment = useMemo(
@@ -24,23 +22,14 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
         [values],
     )
 
-    const options = new Array(12).fill(0).map((_item, index) => ({
-        value: index + 1,
-        label: `${index + 1} Parcela${index + 1 > 1 ? 's' : ''}`,
-        color: 'rgb(255 200 107);',
-    }))
-
     useEffect(() => {
         if (form_payment !== 'credit_card') {
-            setFieldValue(
-                'appointment_details.payment.number_installments',
-                options,
-            )
+            setFieldValue('appointment_details.payment.number_installments', 1)
         }
     }, [form_payment])
 
     return (
-        <Form className="card card-body shadow-lg" onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
             <h4 className="text-center font-sans font-semibold text-base capitalize">
                 Informações de Pagamento
                 <br />
@@ -53,6 +42,7 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                 <RadioGroup
                     name="appointment_details.payment.form_payment"
                     title="Forma de Pagamento"
+                    className="col-span-1"
                     checked={form_payment}
                     items={[
                         {
@@ -82,13 +72,14 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                         },
                     ]}
                 />
-                <FieldControlSelect
+                <FieldNumber
                     ctx={values}
                     label="Quantidade de Parcelas"
-                    placeholder="Selecione a quantidade de parcelas"
+                    placeholder="Parcelas"
+                    maximumFractionDigits={0}
+                    maximumIntegerDigits={2}
                     name="appointment_details.payment.number_installments"
-                    options={options}
-                    isDisabled={form_payment !== 'credit_card'}
+                    disabled={form_payment !== 'credit_card'}
                 />
                 <FieldNumber
                     ctx={values}
@@ -98,27 +89,13 @@ const StepPayment = ({ activeTab, toggleTab }: StepProps) => {
                     name="appointment_details.payment.value_payment"
                 />
             </div>
-
-            <div className="flex items-center justify-center gap-3 mt-4">
-                <BtnCancel
-                    label="Voltar"
-                    condition={!isSubmitting}
-                    onClick={() => {
-                        toggleTab((activeTab - 1) as Tabs)
-                    }}
-                />
-                <BtnPrimary
-                    disabled={!isValid}
-                    isLoading={isSubmitting}
-                    type="submit"
-                    label="Concluir Consulta"
-                />
-            </div>
-            {/* <div>
-                <PDFViewer>
-                    <MyDocument />
-                </PDFViewer>
-            </div> */}
+            <BtnPrimary
+                disabled={!isValid}
+                isLoading={isSubmitting}
+                className="w-full mt-4"
+                type="submit"
+                label="Concluir Consulta"
+            />
         </Form>
     )
 }

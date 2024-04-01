@@ -178,7 +178,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                 onSubmit={() => {}}
             >
                 {({ values }) => (
-                    <>
+                    <section className="px-4">
                         {options.map((item) => (
                             <ControlSwitchDiv
                                 ctx={values}
@@ -199,7 +199,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                                 divClassName="col-span-1 mobile:col-span-full"
                             />
                         ))}
-                    </>
+                    </section>
                 )}
             </Formik>
             <button

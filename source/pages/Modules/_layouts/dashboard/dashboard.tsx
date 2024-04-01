@@ -1,29 +1,29 @@
-"use client";
+'use client'
 
-import type React from "react";
-import { memo } from "react";
-import HeaderTitle from "~/Components/atoms/header-title";
-import BlockSearchAndInputDocument from "~/Components/molecules/block-search-and-input-document";
-import ContextSettersStatusAppointmentsModals from "~/contexts/setters-status-appointments-modals-context";
+import type React from 'react'
+import { memo } from 'react'
+import HeaderTitle from '~/Components/atoms/header-title'
+import BlockSearchAndInputDocument from '~/Components/molecules/block-search-and-input-document'
+import ContextSettersStatusAppointmentsModals from '~/contexts/setters-status-appointments-modals-context'
 
 type DashboardLayoutsSearch =
     | {
-          searchBlock: true;
-          name: "appointments" | "veterinary" | "tutor" | "pet" | "historic";
+          searchBlock: true
+          name: 'appointments' | 'veterinary' | 'tutor' | 'pet' | 'historic'
       }
     | {
-          searchBlock?: false;
-          name?: never;
-      };
+          searchBlock?: false
+          name?: never
+      }
 
 type DashboardLayoutsProps = {
-    children: React.ReactNode;
-    title?: string;
-} & DashboardLayoutsSearch;
+    children: React.ReactNode
+    title?: string
+} & DashboardLayoutsSearch
 
 const DashboardLayouts = ({
     children,
-    title = "",
+    title = '',
     searchBlock = true,
     name,
 }: DashboardLayoutsProps) => {
@@ -31,15 +31,12 @@ const DashboardLayouts = ({
         <main className="min-h-screen">
             <HeaderTitle title={title} />
             {searchBlock && (
-                <BlockSearchAndInputDocument
-                    name={name as string}
-                    title={title}
-                />
+                <BlockSearchAndInputDocument name={name as string} title={title} />
             )}
             {children}
             <ContextSettersStatusAppointmentsModals />
         </main>
-    );
-};
+    )
+}
 
-export default memo(DashboardLayouts);
+export default memo(DashboardLayouts)
