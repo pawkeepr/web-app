@@ -8,7 +8,7 @@ type State = {
 }
 
 export const useModeEditablePet = create<State>((set) => ({
-    mode: 'editable',
+    mode: 'readonly',
     onChangeMode: (mode) => set({ mode }),
     toggleMode: () =>
         set((state) => ({

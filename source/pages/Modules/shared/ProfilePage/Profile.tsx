@@ -36,12 +36,6 @@ const makeTabs = (profile: IProfile): OptionTab[] => {
             href: '#change-pass',
             tab: <FormChangePass />,
         },
-        // {
-        //     id: 3,
-        //     title: 'Experiência Profissional',
-        //     href: '#professional-experience',
-        //     tab: <FormProfissionalExperiencie />,
-        // },
     ]
 }
 
