@@ -2,6 +2,7 @@ import CardInputAnamnese from '~/Components/organism/card-input-anamnese'
 import { questions } from '~/constants/anamnese-questions'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { QuestionAnamnesis } from '~/types/appointment'
+import CardSimplePet from '../../../molecules/card-simple-pet'
 import type { CtxStepAnamnese } from '../../../validations.yup'
 
 const StepAnamnese = () => {
@@ -26,6 +27,7 @@ const StepAnamnese = () => {
 
     return (
         <>
+            <CardSimplePet />
             <h4 className="text-center font-sans font-semibold text-base capitalize">
                 Anamnese
                 <br />

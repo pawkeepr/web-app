@@ -146,3 +146,4 @@ export const BreedNames = {
     ...BirdBreed,
     ...RabbitBreed,
 } as const
+export type BreedNames = (typeof BreedNames)[keyof typeof BreedNames]

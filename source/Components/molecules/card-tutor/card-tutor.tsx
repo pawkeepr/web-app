@@ -1,4 +1,6 @@
+import { useMemo } from 'react'
 import { FaWhatsapp } from 'react-icons/fa'
+import { BreedNames } from '~/types/breedType'
 import type { IMainResponsibleGuardian, PetData } from '~/types/pet-v2'
 import { Species } from '~/types/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
@@ -15,17 +17,20 @@ const CardTutor = ({ pet, tutor }: CardPetProps) => {
     const phone_tutor = tutor?.contact?.phone
     const whatsapp_tutor = tutor?.contact?.whatsapp
 
+    const race = useMemo(
+        () => BreedNames[pet?.race as keyof typeof BreedNames],
+        [pet?.race],
+    )
+
+    const specie = Species[pet?.specie as Species]
+
     return (
         <section className="flex flex-col justify-start p-4 w-full">
             <div className="gap-2 flex-wrap flex flex-col mt-2 w-full justify-between ">
                 {pet && (
                     <p className="text-gray-500 flex justify-between">
                         <strong className="mr-2">Pet:</strong>
-                        <span>
-                            {`${pet.name_pet}, ${Species[pet.specie as Species]}, ${
-                                pet.race as string
-                            }`}
-                        </span>
+                        <span>{`${pet.name_pet}, ${specie}, ${race}`}</span>
                     </p>
                 )}
                 {name_tutor && (

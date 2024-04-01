@@ -1,6 +1,7 @@
 import { FieldArray, useFormikContext } from 'formik'
 import type { OptionSelect } from '~/Components/molecules/field-control'
 import CardInputTreatment from '~/Components/organism/card-input-treatment'
+import CardSimplePet from '../../../molecules/card-simple-pet'
 import type { CtxStepTreatment } from '../../../validations.yup'
 
 const items: OptionSelect[] = [
@@ -44,6 +45,7 @@ const StepTreatment = () => {
 
     return (
         <section>
+            <CardSimplePet />
             <h4 className="text-center font-sans font-semibold text-base capitalize">
                 Informações de Tratamento
                 <br />

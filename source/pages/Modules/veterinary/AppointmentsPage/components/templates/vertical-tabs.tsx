@@ -1,17 +1,13 @@
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
 
 import cn from 'classnames'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 
 import { tv } from 'tailwind-variants'
 import withLoading from '~/Components/helpers/with-loading'
-import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import { useAppSelector } from '~/store/hooks'
-import type { VeterinaryConsultation } from '~/types/appointment'
-import type { Breed } from '~/types/breedType'
 import type { StepProps, Tabs } from '~/types/helpers'
-import { Species } from '~/types/speciesType'
 import StepAnamneses from '../organisms/steps/step-anamnese'
 import StepGeral from '../organisms/steps/step-geral'
 import StepPayment from '../organisms/steps/step-payment'
@@ -75,12 +71,9 @@ const tab = tv({
     },
 })
 
-type CtxCard = Pick<VeterinaryConsultation, 'tutor_pet_vet'>
-
 const VerticalTabs = () => {
     const [activeVerticalTab, setActiveVerticalTab] = useState(1)
     const [passedVerticalSteps, setPassedVerticalSteps] = useState([1])
-    const { values } = useFormikContextSafe<CtxCard>()
     const { height } = useAppSelector((state) => state.Layout.headerSize)
 
     const { isMobile } = useResizeMobile()
@@ -95,15 +88,6 @@ const VerticalTabs = () => {
             }
         }
     }
-
-    const specie = useMemo(
-        () => Species[values.tutor_pet_vet?.pet?.specie as keyof typeof Species],
-        [values.tutor_pet_vet?.pet?.specie],
-    )
-    const race = useMemo(
-        () => values.tutor_pet_vet?.pet?.race as Breed,
-        [values.tutor_pet_vet?.pet?.race],
-    )
 
     return (
         <section>
@@ -127,9 +111,6 @@ const VerticalTabs = () => {
                                         toggleVerticalTab(item.id)
                                     }}
                                 >
-                                    {/* <span className="step-title me-2">
-                                                                <i className="ri-close-circle-fill step-icon me-2"/>
-                                                            </span> */}
                                     {item.title}
                                 </NavLink>
                             </NavItem>
@@ -142,10 +123,6 @@ const VerticalTabs = () => {
                 activeTab={activeVerticalTab}
                 className="card card-body shadow-lg mobile:!shadow-none mobile:!rounded-none mobile:m-0 mobile:p-4 rounded-t-none"
             >
-                <p className="text-gray-500 flex flex-1 justify-start">
-                    <strong className="mr-2">Pet:</strong>
-                    <span>{`${values.tutor_pet_vet?.pet?.name_pet}, ${specie}, ${race}`}</span>
-                </p>
                 {items.map(({ id, Component }, index) => {
                     return (
                         <TabPane tabId={id} key={`${id}-${index}`}>

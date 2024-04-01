@@ -1,6 +1,7 @@
 import FieldNumber from '~/Components/molecules/field-number'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import CardSimplePet from '../../../molecules/card-simple-pet'
 import type { CtxStepAnamnese } from '../../../validations.yup'
 
 const StepGeral = () => {
@@ -8,6 +9,7 @@ const StepGeral = () => {
 
     return (
         <>
+            <CardSimplePet />
             <h4 className="text-center font-sans font-semibold text-base capitalize">
                 Prontuário
                 <br />
