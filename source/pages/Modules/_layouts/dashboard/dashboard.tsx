@@ -28,7 +28,7 @@ const DashboardLayouts = ({
     name,
 }: DashboardLayoutsProps) => {
     return (
-        <main className="min-h-screen">
+        <main>
             <HeaderTitle title={title} />
             {searchBlock && (
                 <BlockSearchAndInputDocument name={name as string} title={title} />

@@ -71,7 +71,7 @@ module.exports = {
                     secondary: '#FFC86B',
                     confirm: '#0971B3',
                     accent: '#37cdbe',
-                    neutral: '#3d4451',
+                    neutral: '#f3f3f9',
                     'base-100': '#ffffff',
                 },
                 dark: {
@@ -80,7 +80,7 @@ module.exports = {
                     confirm: '#0971B3',
                     accent: '#37cdbe',
                     neutral: '#ffffff',
-                    'base-100': '#3d4451',
+                    'base-100': '#f3f3f9',
                 },
             },
         ],
