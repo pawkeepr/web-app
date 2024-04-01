@@ -15,8 +15,8 @@ import type { DTOProfile } from '~/types/profile'
 import { geolocation } from '~/utils/geolocation'
 import VerticalTabs from './components/templates/vertical-tabs'
 import {
-    schemaStepAppointment,
     type SchemaYupAppointment,
+    schemaStepAppointment,
 } from './components/validations.yup'
 
 type AppointmentsPageProps = {

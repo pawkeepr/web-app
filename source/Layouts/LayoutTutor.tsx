@@ -15,6 +15,7 @@ import Header from './Header'
 import cn from 'classnames'
 import FieldDocumentAppointment from '~/Components/molecules/field-appointment-vet'
 import Drawer from '~/Components/organism/drawer'
+import { useBtnFloating } from '~/contexts/button-floating'
 import useHookLayout from './use-hook'
 
 type LayoutProps = {
@@ -23,6 +24,7 @@ type LayoutProps = {
 
 const LayoutTutor = ({ children }: LayoutProps) => {
     useHookLayout()
+    const { hasButtonFloating } = useBtnFloating()
 
     return (
         <div id="relative">
@@ -42,19 +44,21 @@ const LayoutTutor = ({ children }: LayoutProps) => {
                 }}
             >
                 {children}
-                <FieldDocumentAppointment selectedTabInitial={0}>
+                <FieldDocumentAppointment
+                    condition={hasButtonFloating}
+                    selectedTabInitial={0}
+                >
                     {({ onChangeOpen }) => (
                         <div className="fixed mobile:flex mobile:flex-col items-center justify-center mobile:opacity-100 bottom-4 z-50 mobile:bottom-4 right-4  mobile:right-4 hidden ">
                             <button
                                 type="button"
                                 onClick={() => onChangeOpen(true)}
                                 className="
-                                bg-primary-600 p-3 rounded-full 
-                                shadow-2xl 
-                                transition duration-500 ease-in-out
-                                opacity-40 hover:opacity-100 
-
-                            "
+                                    bg-primary-600 p-3 rounded-full 
+                                    shadow-2xl 
+                                    transition duration-500 ease-in-out
+                                    opacity-40 hover:opacity-100 
+                                "
                             >
                                 <PlusIcon className="w-8 h-8 text-gray-50" />
                             </button>

@@ -1,6 +1,7 @@
 import { PlusCircleIcon } from '@heroicons/react/24/solid'
 import { Form, Formik } from 'formik'
 import { startTransition, useState } from 'react'
+import withControl from '~/Components/helpers/with-control'
 import ModalScheduledV2 from '~/Components/modals/scheduled-v2-modal'
 import ModalWarning from '~/Components/modals/warning-modal/modal-warning'
 import FieldDocument from '~/Components/molecules/field-document/field-document'
@@ -111,4 +112,4 @@ const FieldDocumentAppointment = ({
     )
 }
 
-export default FieldDocumentAppointment
+export default withControl(FieldDocumentAppointment)
