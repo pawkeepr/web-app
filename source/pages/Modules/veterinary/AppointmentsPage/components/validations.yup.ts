@@ -87,6 +87,7 @@ export const schemaStepAppointment = yup
         anamnesis: yup.object().optional(),
         treatments: schemaStepTreatmentValidation,
         appointment_details: schemaStepAppointmentDetails,
+        appointment_status: yup.string().optional(),
     })
 
 export type SchemaYupAppointment = yup.InferType<typeof schemaStepAppointment>

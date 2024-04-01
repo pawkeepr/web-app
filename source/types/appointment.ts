@@ -4,7 +4,6 @@ import type { IMainResponsibleGuardian, On_Off, PetData } from './pet-v2'
 import type { DTOProfile } from './profile'
 
 export interface VeterinaryConsultation {
-    values: any
     id?: string | null
     // id_pet: string
     // cpf_tutor: string
