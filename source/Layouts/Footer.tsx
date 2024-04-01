@@ -1,12 +1,12 @@
 // Import Images
 import Link from 'next/link'
-import { memo } from 'react'
 
 import { FaInstagram } from 'react-icons/fa'
 import { GrFacebookOption } from 'react-icons/gr'
 import { RiLinkedinFill } from 'react-icons/ri'
 import type { VariantProps } from 'tailwind-variants'
 import { tv } from 'tailwind-variants'
+import withControl from '~/Components/helpers/with-control'
 
 const footer = tv({
     base: 'w-full py-2 mobile:hidden',
@@ -82,4 +82,4 @@ const Footer = ({ bg = 'transparent' }: FooterProps) => {
     )
 }
 
-export default memo(Footer)
+export default withControl(Footer)
