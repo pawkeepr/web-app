@@ -67,7 +67,7 @@ const VerticalTabs = () => {
     }
 
     return (
-        <section className="card card-body shadow-lg gap-2 mt-2 mobile:!shadow-none mobile:rounded-none">
+        <section className="card card-body shadow-lg gap-2 mt-2 mobile:p-1 mobile:!shadow-none mobile:rounded-none">
             <h4 className="card-title mb-0">Nova Consulta</h4>
             <CardPet />
             <div className="flex flex-col relative">
