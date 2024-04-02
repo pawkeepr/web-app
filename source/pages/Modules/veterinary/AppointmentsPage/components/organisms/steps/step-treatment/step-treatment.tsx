@@ -47,7 +47,7 @@ const StepTreatment = () => {
         <section>
             <CardSimplePet />
             <h4 className="text-center font-sans font-semibold text-base capitalize">
-                Informações de Tratamento
+                Tratamento
                 <br />
                 <span className="text-xs font-bold text-secondary-500">
                     Obrigatório (*)
