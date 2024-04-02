@@ -7,7 +7,6 @@ import type { OptionSelect } from '~/Components/molecules/field-control'
 import OptionsMenu from '~/Components/molecules/options-menu'
 import { makeTitle } from '~/Components/molecules/options-menu/options-menu'
 import type { KeyOfQuestionTypes, Question } from '~/constants/anamnese-questions'
-import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
 import {
     OPTION_BOOLEAN,
     type QuestionAnamnesis,
@@ -132,11 +131,6 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
         })
     }
 
-    useKeyboardNavigation({
-        ArrowLeft: keyPressLeft,
-        ArrowRight: keyPressRight,
-    })
-
     return (
         <div
             className="
@@ -174,6 +168,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                     <section className="px-4">
                         {options.map((item) => (
                             <ControlSwitchDiv
+                                initialValue={null}
                                 ctx={values}
                                 onChange={(e) =>
                                     handleChange?.({

@@ -10,7 +10,6 @@ import FieldCurrency from '~/Components/molecules/field-currency'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import OptionsMenu from '~/Components/molecules/options-menu'
 import { makeTitle } from '~/Components/molecules/options-menu/options-menu'
-import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
 import type { QuestionTreatment } from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
 import type { MEDICAL_RECORDS } from '~/types/medical-records'
@@ -79,10 +78,10 @@ const CardInputTreatment = ({ items = [], handleSubmit }: CardInputProps) => {
         })
     }
 
-    useKeyboardNavigation({
-        ArrowLeft: keyPressLeft,
-        ArrowRight: keyPressRight,
-    })
+    // useKeyboardNavigation({
+    //     ArrowLeft: keyPressLeft,
+    //     ArrowRight: keyPressRight,
+    // })
 
     return (
         <div
