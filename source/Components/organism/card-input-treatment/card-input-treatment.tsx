@@ -1,4 +1,3 @@
-import cn from 'classnames'
 import { Form, Formik, type FormikHelpers } from 'formik'
 import { useMemo, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
@@ -8,12 +7,12 @@ import FieldControl, {
     type OptionSelect,
 } from '~/Components/molecules/field-control'
 import FieldTextArea from '~/Components/molecules/field-text-area'
+import OptionsMenu from '~/Components/molecules/options-menu'
+import { makeTitle } from '~/Components/molecules/options-menu/options-menu'
 import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
-import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { QuestionTreatment } from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
 import type { MEDICAL_RECORDS } from '~/types/medical-records'
-import { makeTitle } from '../card-input-anamnese/card-input-anamnese'
 
 type CardInputProps = {
     items?: OptionSelect[]
@@ -56,7 +55,6 @@ const makeOptions = (items: OptionSelect[]) => {
 const CardInputTreatment = ({ items = [], handleSubmit }: CardInputProps) => {
     const [category, setCategory] = useState<OptionSelect>(items[0])
     const options = useMemo(() => makeOptions(items), [items])
-    const { isMobile } = useResizeMobile()
 
     const keyPressLeft = () => {
         setCategory((prev) => {
@@ -99,20 +97,17 @@ const CardInputTreatment = ({ items = [], handleSubmit }: CardInputProps) => {
             </h4>
             <div className="flex flex-row w-full justify-between flex-wrap mb-4">
                 {options.map((item) => (
-                    <button
-                        type="button"
-                        onClick={() => setCategory(item)}
-                        key={item.value}
-                        className={cn(
-                            'p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full',
-                            {
-                                'text-primary-500': category.value === item.value,
-                                'text-gray-400': category.value !== item.value,
-                            },
-                        )}
-                    >
-                        {makeTitle(item.label, isMobile)}
-                    </button>
+                    <OptionsMenu
+                        item={item}
+                        option={category}
+                        onChangeOption={(item) =>
+                            setCategory({
+                                ...item,
+                                label: item.label,
+                                value: item.value,
+                            })
+                        }
+                    />
                 ))}
             </div>
 

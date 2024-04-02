@@ -1,13 +1,13 @@
-import cn from 'classnames'
 import { Formik } from 'formik'
 import { useMemo, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import * as Yup from 'yup'
 import ControlSwitchDiv from '~/Components/molecules/control-switch-div'
 import type { OptionSelect } from '~/Components/molecules/field-control'
+import OptionsMenu from '~/Components/molecules/options-menu'
+import { makeTitle } from '~/Components/molecules/options-menu/options-menu'
 import type { KeyOfQuestionTypes, Question } from '~/constants/anamnese-questions'
 import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
-import useResizeMobile from '~/hooks/use-resize-mobile'
 import {
     OPTION_BOOLEAN,
     type QuestionAnamnesis,
@@ -38,45 +38,34 @@ type CardInputProps = {
 }
 
 const STEPS: {
-    title: string
+    label: string
     value: KeyOfQuestionTypes
 }[] = [
     {
-        title: 'Sistema Digestivo',
+        label: 'Sistema Digestivo',
         value: 'digestive_sys',
     },
     {
-        title: 'Sistema Respiratório',
+        label: 'Sistema Respiratório',
         value: 'respiratory_sys',
     },
     {
-        title: 'Sistema Urinário',
+        label: 'Sistema Urinário',
         value: 'urinary_sys',
     },
     {
-        title: 'Sistema Nervoso',
+        label: 'Sistema Nervoso',
         value: 'nervous_sys',
     },
     {
         value: 'locomotive_sys',
-        title: 'Sistema Locomotor',
+        label: 'Sistema Locomotor',
     },
     {
         value: 'physical_activity',
-        title: 'Atividade Física',
+        label: 'Atividade Física',
     },
 ]
-
-export const makeTitle = (title: string, isMobile: boolean) => {
-    if (isMobile) {
-        return title
-            .split(' ')
-            .map((item) => item[0])
-            .join('')
-    }
-
-    return title
-}
 
 export const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => {
     const filtered = items.reduce(
@@ -99,10 +88,9 @@ export const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => 
 
 const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
     const [category, setCategory] = useState<{
-        title: string
+        label: string
         value: KeyOfQuestionTypes
     }>(STEPS[0])
-    const { isMobile } = useResizeMobile()
 
     const options = useMemo(
         () => makeOptions(items, category.value),
@@ -159,24 +147,21 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
             "
         >
             <h4 className="font-sans text-center font-semibold uppercase">
-                {makeTitle(category.title, false)}
+                {makeTitle(category.label, false)}
             </h4>
             <div className="flex flex-row w-full justify-between flex-wrap mb-4">
                 {STEPS.map((item) => (
-                    <button
-                        type="button"
-                        onClick={() => setCategory(item)}
-                        key={item.value}
-                        className={cn(
-                            'p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full',
-                            {
-                                'text-primary-500': category.value === item.value,
-                                'text-gray-400': category.value !== item.value,
-                            },
-                        )}
-                    >
-                        {makeTitle(item.title, isMobile)}
-                    </button>
+                    <OptionsMenu
+                        item={item}
+                        option={category}
+                        onChangeOption={(item) =>
+                            setCategory({
+                                ...item,
+                                label: item.label,
+                                value: item.value as KeyOfQuestionTypes,
+                            })
+                        }
+                    />
                 ))}
             </div>
 

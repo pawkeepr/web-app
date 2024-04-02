@@ -142,6 +142,7 @@ const AppointmentsPage = ({
                 } as VeterinaryConsultation)
                 router.push('/dashboard')
             } catch (err) {
+                // biome-ignore lint/suspicious/noConsoleLog: <explanation>
                 console.log('🚀 ~ err:', err)
             }
         },
