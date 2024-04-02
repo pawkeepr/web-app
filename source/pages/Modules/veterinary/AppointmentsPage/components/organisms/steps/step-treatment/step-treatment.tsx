@@ -7,7 +7,7 @@ import type { CtxStepTreatment } from '../../../validations.yup'
 const items: OptionSelect[] = [
     {
         value: 'activities_carry',
-        label: 'Recomendações de atividades físicas',
+        label: 'Atividades físicas',
     },
     {
         value: 'fast_test',
@@ -32,7 +32,7 @@ const items: OptionSelect[] = [
 ]
 
 const KeyTreatment = {
-    activities_carry: 'Recomendações de atividades físicas',
+    activities_carry: 'Atividades físicas',
     fast_test: 'Testes rápidos',
     medicine: 'Medicação',
     vaccine: 'Vacina',

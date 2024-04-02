@@ -94,7 +94,10 @@ const VerticalTabs = () => {
             <div
                 style={{ marginTop: isMobile ? `${height}px` : 0 }}
                 className={cn(
-                    'mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 h-fit z-[100] bg-white mobile:border-t-2 border-primary-500',
+                    `
+                        mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 
+                        h-fit z-[100] bg-white mobile:border-t-2 border-primary-500
+                    `,
                 )}
             >
                 <Nav className="nav-pills custom-nav nav-justified" role="tablist">
