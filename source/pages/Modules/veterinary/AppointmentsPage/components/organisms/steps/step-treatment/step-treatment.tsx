@@ -6,14 +6,6 @@ import type { CtxStepTreatment } from '../../../validations.yup'
 
 const items: OptionSelect[] = [
     {
-        value: 'activities_carry',
-        label: 'Atividades físicas',
-    },
-    {
-        value: 'fast_test',
-        label: 'Testes rápidos',
-    },
-    {
         value: 'medicine',
         label: 'Medicação',
     },
@@ -22,12 +14,20 @@ const items: OptionSelect[] = [
         label: 'Vacina',
     },
     {
+        value: 'nutrition',
+        label: 'Nutrição Alimentar',
+    },
+    {
+        value: 'fast_test',
+        label: 'Testes rápidos',
+    },
+    {
         value: 'exam',
         label: 'Exame',
     },
     {
-        value: 'nutrition',
-        label: 'Nutrição Alimentar',
+        value: 'activities_carry',
+        label: 'Atividades físicas',
     },
 ]
 

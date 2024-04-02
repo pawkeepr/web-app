@@ -6,6 +6,7 @@ import { BtnSuccess } from '~/Components/atoms/btn'
 import FieldControl, {
     type OptionSelect,
 } from '~/Components/molecules/field-control'
+import FieldCurrency from '~/Components/molecules/field-currency'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import OptionsMenu from '~/Components/molecules/options-menu'
 import { makeTitle } from '~/Components/molecules/options-menu/options-menu'
@@ -142,38 +143,40 @@ const CardInputTreatment = ({ items = [], handleSubmit }: CardInputProps) => {
                             required
                         />
 
+                        <FieldCurrency label="Valor:" name="value_coin_treatment" />
+
                         <FieldTextArea
                             className="mb-1"
                             ctx={values}
                             name={'notes_treatment' as ''}
                             label="Informações Complementares"
                         />
+                        <div className="flex flex-row">
+                            <button
+                                onClick={keyPressLeft}
+                                type="button"
+                                className="btn btn-primary "
+                            >
+                                <FaArrowLeft />
+                            </button>
+                            <BtnSuccess
+                                disabled={!isValid}
+                                className="flex-1 text-white"
+                                label="Adicionar"
+                                type="submit"
+                            />
 
-                        <BtnSuccess
-                            disabled={!isValid}
-                            className="w-full text-white"
-                            label="Adicionar"
-                            type="submit"
-                        />
+                            <button
+                                onClick={keyPressRight}
+                                type="button"
+                                className="btn btn-primary"
+                            >
+                                <FaArrowRight />
+                            </button>
+                        </div>
                     </Form>
                 )}
             </Formik>
-
-            <button
-                onClick={keyPressRight}
-                type="button"
-                className="btn btn-primary absolute bottom-4 right-4"
-            >
-                <FaArrowRight />
-            </button>
-
-            <button
-                onClick={keyPressLeft}
-                type="button"
-                className="btn btn-primary absolute bottom-4 left-4"
-            >
-                <FaArrowLeft />
-            </button>
         </div>
     )
 }
