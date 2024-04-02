@@ -9,17 +9,13 @@ const StepAnamnese = () => {
     const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>()
 
     const handlePushAnamnese = (value: QuestionAnamnesis) => {
-        let items = values.anamnesis?.questions_anamnesis || []
+        const items = values.anamnesis?.questions_anamnesis || []
         const index = items.findIndex((item) => item.id === value.id)
 
-        if (value.options_anamnesis === 'no') {
-            items = items.filter((item) => item.id !== value.id)
-        } else if (value.options_anamnesis === 'yes') {
-            if (index >= 0) {
-                items[index] = value
-            } else {
-                items.push(value)
-            }
+        if (index >= 0) {
+            items[index] = value
+        } else {
+            items.push(value)
         }
 
         setFieldValue('anamnesis.questions_anamnesis', items)

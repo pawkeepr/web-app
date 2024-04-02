@@ -10,6 +10,8 @@ import FieldCurrency from '~/Components/molecules/field-currency'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import OptionsMenu from '~/Components/molecules/options-menu'
 import { makeTitle } from '~/Components/molecules/options-menu/options-menu'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import type { CtxStepTreatment } from '~/pages/Modules/veterinary/AppointmentsPage/components/validations.yup'
 import type { QuestionTreatment } from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
 import type { MEDICAL_RECORDS } from '~/types/medical-records'
@@ -21,24 +23,16 @@ type CardInputProps = {
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         formikHelpers: FormikHelpers<any>,
     ) => Promise<unknown>
+    handleRemove?: (index: number) => void
 }
 
-type OmitTreatment = Omit<QuestionTreatment, 'type_treatment'> & {
-    type_treatment: {
-        value: MEDICAL_RECORDS
-        label: string
-    } | null
-}
+type OmitTreatment = Omit<QuestionTreatment, 'type_treatment'>
 type ShapeTreatment = RecordsShapeYup<OmitTreatment>
 
 const validationSchema = Yup.object().shape<ShapeTreatment>({
     name_treatment: Yup.string().required('Campo obrigatório'),
     coin_treatment: Yup.string().optional(),
     notes_treatment: Yup.string().optional(),
-    type_treatment: Yup.object().shape({
-        value: Yup.string().required('Campo obrigatório'),
-        label: Yup.string().required('Campo obrigatório'),
-    }),
     value_coin_treatment: Yup.string().transform((value) => {
         return value.replace('R$', '').replace(',', '.')
     }),
@@ -52,9 +46,32 @@ const makeOptions = (items: OptionSelect[]) => {
     }))
 }
 
-const CardInputTreatment = ({ items = [], handleSubmit }: CardInputProps) => {
+const KeyTreatment = {
+    activities_carry: 'Atividades físicas',
+    fast_test: 'Testes rápidos',
+    medicine: 'Medicação',
+    vaccine: 'Vacina',
+    exam: 'Exame',
+    nutrition: 'Nutrição Alimentar',
+} as const
+
+const CardInputTreatment = ({
+    items = [],
+    handleSubmit,
+    handleRemove,
+}: CardInputProps) => {
     const [category, setCategory] = useState<OptionSelect>(items[0])
     const options = useMemo(() => makeOptions(items), [items])
+
+    const { values } = useFormikContextSafe<CtxStepTreatment>()
+
+    const filteredItemsSelects = useMemo(() => {
+        return (
+            values.treatments?.questions_treatment?.filter(
+                (item) => item.type_treatment === category.value,
+            ) || []
+        )
+    }, [values.treatments.questions_treatment, category.value])
 
     const keyPressLeft = () => {
         setCategory((prev) => {
@@ -126,8 +143,7 @@ const CardInputTreatment = ({ items = [], handleSubmit }: CardInputProps) => {
                     handleSubmit(
                         {
                             ...data,
-                            type_treatment: data.type_treatment
-                                ?.value as MEDICAL_RECORDS,
+                            type_treatment: category.value as MEDICAL_RECORDS,
                         },
                         formikHelpers,
                     )
@@ -176,6 +192,51 @@ const CardInputTreatment = ({ items = [], handleSubmit }: CardInputProps) => {
                     </Form>
                 )}
             </Formik>
+
+            {filteredItemsSelects?.map((treatment, index) => (
+                <div
+                    key={`treatment-${index}`}
+                    className="w-full bg-secondary rounded-md text-xs py-1 px-2"
+                >
+                    <div className="w-full flex flex-row bg-secondary px-2 rounded-sm border-dashed border border-primary">
+                        <div className="grid grid-cols-12 w-full">
+                            <h6 className="col-span-3 font-mono font-semibold  capitalize">
+                                {treatment.name_treatment}
+                            </h6>
+
+                            <h6 className="col-span-3 font-mono font-semibold  capitalize">
+                                {
+                                    KeyTreatment[
+                                        treatment.type_treatment as keyof typeof KeyTreatment
+                                    ]
+                                }
+                            </h6>
+
+                            <p className="col-span-3 font-mono  capitalize">
+                                {treatment.notes_treatment}
+                            </p>
+
+                            <p className="col-span-3 font-mono  capitalize">
+                                {Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL',
+                                }).format(
+                                    Number.parseFloat(
+                                        treatment.value_coin_treatment,
+                                    ),
+                                )}
+                            </p>
+                        </div>
+                        <button
+                            type="button"
+                            className="text-red-500"
+                            onClick={() => handleRemove?.(index)}
+                        >
+                            X
+                        </button>
+                    </div>
+                </div>
+            ))}
         </div>
     )
 }
