@@ -4,8 +4,6 @@ import { format } from 'date-fns'
 import { Formik } from 'formik'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useMemo } from 'react'
-import { BtnCancel } from '~/Components/atoms/btn'
-import ModalConfirm from '~/Components/modals/confirm-modal'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import useAppointment from '~/store/hooks/appointment-id/use-appointment'
 import usePetById from '~/store/hooks/pet-by-id/use-pets'
@@ -163,25 +161,6 @@ const AppointmentsPage = ({
             validationSchema={schemaStepAppointment}
         >
             <DashboardLayouts title="Nova Consulta" searchBlock={false}>
-                <ModalConfirm
-                    title="Cancelar Consulta!"
-                    onConfirm={() => router.push('/dashboard')}
-                    description="Importante!"
-                    message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
-                >
-                    {({ onChangeOpen }) => {
-                        return (
-                            <div className="w-full flex mobile:justify-center mobile:items-center mb-1">
-                                <BtnCancel
-                                    type="button"
-                                    className="mobile:w-96 h-fit"
-                                    label="Cancelar Consulta"
-                                    onClick={() => onChangeOpen(true)}
-                                />
-                            </div>
-                        )
-                    }}
-                </ModalConfirm>
                 <VerticalTabs isLoading={isLoadingPet} />
             </DashboardLayouts>
         </Formik>

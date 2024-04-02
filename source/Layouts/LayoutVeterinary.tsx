@@ -31,7 +31,7 @@ const LayoutMain = ({ children }: LayoutProps) => {
             <div
                 className={cn(
                     'px-24 mobile:px-0 relative tablet:px-0 min-h-full',
-                    'mobile:pt-20 z-[1]',
+                    `mobile:pt-[40px] z-[1]`,
                     // 'bg-cover bg-no-repeat bg-fixed',
                 )}
                 style={{

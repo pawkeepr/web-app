@@ -3,12 +3,13 @@ import { Form, Formik, type FormikHelpers } from 'formik'
 import { useMemo, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import * as Yup from 'yup'
-import { BtnConfirm } from '~/Components/atoms/btn'
+import { BtnSuccess } from '~/Components/atoms/btn'
 import FieldControl, {
     type OptionSelect,
 } from '~/Components/molecules/field-control'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
+import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { QuestionTreatment } from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
 import type { MEDICAL_RECORDS } from '~/types/medical-records'
@@ -55,6 +56,7 @@ const makeOptions = (items: OptionSelect[]) => {
 const CardInputTreatment = ({ items = [], handleSubmit }: CardInputProps) => {
     const [category, setCategory] = useState<OptionSelect>(items[0])
     const options = useMemo(() => makeOptions(items), [items])
+    const { isMobile } = useResizeMobile()
 
     const keyPressLeft = () => {
         setCategory((prev) => {
@@ -87,9 +89,9 @@ const CardInputTreatment = ({ items = [], handleSubmit }: CardInputProps) => {
         <div
             className="
                 gap-2 flex flex-col card shadow-2xl p-8 
-                border-secondary-500 border-2 relative
+                border-secondary-500 border relative
                 mobile:p-2 mobile:border  mobile:!shadow-none
-                min-h-[420px]  rounded-sm
+                min-h-[480px] mobile:min-h-[440px]  rounded-sm
             "
         >
             <h4 className="font-sans text-center font-semibold uppercase">
@@ -109,7 +111,7 @@ const CardInputTreatment = ({ items = [], handleSubmit }: CardInputProps) => {
                             },
                         )}
                     >
-                        {makeTitle(item.label, false)}
+                        {makeTitle(item.label, isMobile)}
                     </button>
                 ))}
             </div>
@@ -144,13 +146,15 @@ const CardInputTreatment = ({ items = [], handleSubmit }: CardInputProps) => {
                             label="Nome"
                             required
                         />
+
                         <FieldTextArea
+                            className="mb-1"
                             ctx={values}
                             name={'notes_treatment' as ''}
-                            label="Observações e Resultados"
+                            label="Informações Complementares"
                         />
 
-                        <BtnConfirm
+                        <BtnSuccess
                             disabled={!isValid}
                             className="w-full text-white"
                             label="Adicionar"

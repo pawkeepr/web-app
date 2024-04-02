@@ -34,65 +34,77 @@ const StepPayment = () => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <h4 className="text-center font-sans font-semibold text-base capitalize">
+            <h4 className="text-center font-sans font-semibold text-base capitalize mt-4">
                 Informações de Pagamento
                 <br />
+                <span className="text-xs font-bold text-secondary-500">
+                    Obrigatório (*)
+                </span>
             </h4>
-            <CardTutor
-                tutor={values.tutor_pet_vet?.tutor}
-                pet={values.tutor_pet_vet?.pet}
-            />
-            <div className="grid grid-cols-3 gap-2 mobile:grid-cols-1">
-                <FieldControlSelect
-                    ctx={values}
-                    name="appointment_details.payment.form_payment"
-                    label="Forma de Pagamento"
-                    className="col-span-1"
-                    checked={form_payment}
-                    options={[
-                        {
-                            label: 'Cartão de Crédito',
-                            value: 'credit_card',
-                        },
-                        {
-                            label: 'Cartão de Débito',
-                            value: 'debit_card',
-                        },
-                        {
-                            label: 'Pix',
-                            value: 'pix',
-                        },
-                        {
-                            label: 'Dinheiro',
-                            value: 'cash',
-                        },
-                        {
-                            label: 'Transferência',
-                            value: 'transfer',
-                        },
-                    ]}
+            <div
+                className="
+                gap-2 flex flex-col card shadow-2xl p-8 
+                border-secondary-500 border relative
+                mobile:p-2 mobile:border  mobile:!shadow-none
+                min-h-[420px]  rounded-sm
+            "
+            >
+                <CardTutor
+                    tutor={values.tutor_pet_vet?.tutor}
+                    pet={values.tutor_pet_vet?.pet}
                 />
-                <FieldMasked
-                    ctx={values}
-                    label="Quantidade de Parcelas"
-                    placeholder="Parcelas"
-                    maximumFractionDigits={0}
-                    maximumIntegerDigits={2}
-                    name="appointment_details.payment.number_installments"
-                    disabled={form_payment.value !== 'credit_card'}
-                />
-                <FieldCurrency
-                    label="R$"
-                    name="appointment_details.payment.value_payment"
+                <div className="grid grid-cols-3 gap-2 mobile:grid-cols-1">
+                    <FieldControlSelect
+                        ctx={values}
+                        name="appointment_details.payment.form_payment"
+                        label="Forma de Pagamento"
+                        className="col-span-1"
+                        checked={form_payment}
+                        options={[
+                            {
+                                label: 'Cartão de Crédito',
+                                value: 'credit_card',
+                            },
+                            {
+                                label: 'Cartão de Débito',
+                                value: 'debit_card',
+                            },
+                            {
+                                label: 'Pix',
+                                value: 'pix',
+                            },
+                            {
+                                label: 'Dinheiro',
+                                value: 'cash',
+                            },
+                            {
+                                label: 'Transferência',
+                                value: 'transfer',
+                            },
+                        ]}
+                    />
+                    <FieldMasked
+                        ctx={values}
+                        label="Quantidade de Parcelas"
+                        placeholder="Parcelas"
+                        maximumFractionDigits={0}
+                        maximumIntegerDigits={2}
+                        name="appointment_details.payment.number_installments"
+                        disabled={form_payment.value !== 'credit_card'}
+                    />
+                    <FieldCurrency
+                        label="R$"
+                        name="appointment_details.payment.value_payment"
+                    />
+                </div>
+                <BtnPrimary
+                    disabled={!isValid}
+                    isLoading={isSubmitting}
+                    className="w-full mt-4"
+                    type="submit"
+                    label="Concluir Consulta"
                 />
             </div>
-            <BtnPrimary
-                disabled={!isValid}
-                isLoading={isSubmitting}
-                className="w-full mt-4"
-                type="submit"
-                label="Concluir Consulta"
-            />
         </Form>
     )
 }

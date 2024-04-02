@@ -153,7 +153,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
         <div
             className="
                 gap-2 flex flex-col card shadow-2xl p-8 
-                border-secondary-500 border-2 relative
+                border-secondary-500 border relative
                 mobile:p-2 mobile:border  mobile:!shadow-none
                 min-h-[420px]  rounded-sm
             "

@@ -11,13 +11,28 @@ const StepGeral = () => {
         <>
             <CardSimplePet />
             <h4 className="text-center font-sans font-semibold text-base capitalize">
-                Prontuário
+                Pré-Anamnese
                 <br />
                 <span className="text-xs font-bold text-secondary-500">
                     Obrigatório (*)
                 </span>
             </h4>
-            <div className="grid grid-cols-3 gap-3 mobile:grid-cols-1">
+            <div
+                className="
+                gap-2 flex flex-col card shadow-2xl p-8 
+                border-secondary-500 border relative
+                mobile:p-2 mobile:border  mobile:!shadow-none
+                min-h-[420px]  rounded-sm
+                grid-cols-3 mobile:grid-cols-1
+            "
+            >
+                <FieldTextArea
+                    ctx={values}
+                    label="Motivação da Consulta"
+                    required
+                    name="dates_consults.reason_consultation"
+                    divClassName="col-span-full"
+                />
                 <FieldNumber
                     ctx={values}
                     label="Peso"
@@ -49,14 +64,6 @@ const StepGeral = () => {
                         </h2>
                     )}
                 </div>
-
-                <FieldTextArea
-                    ctx={values}
-                    label="Motivação da Consulta"
-                    required
-                    name="dates_consults.reason_consultation"
-                    divClassName="col-span-full"
-                />
             </div>
         </>
     )

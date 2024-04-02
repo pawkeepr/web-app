@@ -3,10 +3,12 @@ import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
 import cn from 'classnames'
 import { useState } from 'react'
 
+import { XMarkIcon } from '@heroicons/react/24/solid'
+import { useRouter } from 'next/navigation'
 import { tv } from 'tailwind-variants'
+import { BtnIcon } from '~/Components/atoms/btn'
 import withLoading from '~/Components/helpers/with-loading'
-import useResizeMobile from '~/hooks/use-resize-mobile'
-import { useAppSelector } from '~/store/hooks'
+import ModalConfirm from '~/Components/modals/confirm-modal'
 import type { StepProps, Tabs } from '~/types/helpers'
 import StepAnamneses from '../organisms/steps/step-anamnese'
 import StepGeral from '../organisms/steps/step-geral'
@@ -23,8 +25,8 @@ type TabItem = {
 const items: TabItem[] = [
     {
         id: 1,
-        title: 'Prontuário',
-        href: '#Prontuário',
+        title: 'Inicio',
+        href: '#Inicio',
         Component: StepGeral,
     },
     {
@@ -61,7 +63,7 @@ const tab = tv({
     // Ajustes adicionais para os estilos mobile
     variants: {
         selected: {
-            true: 'bg-white !text-primary-500 shadow',
+            true: '!bg-secondary-500 !text-gray-600 shadow',
             false: 'text-blue-100 ',
         },
         disabled: {
@@ -74,9 +76,7 @@ const tab = tv({
 const VerticalTabs = () => {
     const [activeVerticalTab, setActiveVerticalTab] = useState(1)
     const [passedVerticalSteps, setPassedVerticalSteps] = useState([1])
-    const { height } = useAppSelector((state) => state.Layout.headerSize)
-
-    const { isMobile } = useResizeMobile()
+    const router = useRouter()
 
     function toggleVerticalTab(tab: Tabs) {
         if (activeVerticalTab !== tab) {
@@ -90,9 +90,8 @@ const VerticalTabs = () => {
     }
 
     return (
-        <section>
+        <section className="web:mt-2">
             <div
-                style={{ marginTop: isMobile ? `${height}px` : 0 }}
                 className={cn(
                     `
                         mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 
@@ -100,7 +99,7 @@ const VerticalTabs = () => {
                     `,
                 )}
             >
-                <Nav className="nav-pills custom-nav nav-justified" role="tablist">
+                <Nav className="nav-pills nav-justified" role="tablist">
                     {items.map((item) => {
                         return (
                             <NavItem key={item.id}>
@@ -124,8 +123,28 @@ const VerticalTabs = () => {
 
             <TabContent
                 activeTab={activeVerticalTab}
-                className="card card-body shadow-lg mobile:!shadow-none mobile:!rounded-none mobile:m-0 mobile:p-4 rounded-t-none"
+                className="relative border border-secondary-500 shadow-lg px-4 py-2 bg-white mobile:!shadow-none mobile:!rounded-none mobile:m-0 mobile:px-4 rounded-t-none"
             >
+                <ModalConfirm
+                    title="Cancelar Consulta!"
+                    onConfirm={() => router.push('/dashboard')}
+                    description="Importante!"
+                    message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
+                >
+                    {({ onChangeOpen }) => {
+                        return (
+                            <BtnIcon
+                                type="button"
+                                icon={
+                                    <XMarkIcon className="w-8 h-8 text-gray-500 hover:!text-secondary-600 font-extrabold" />
+                                }
+                                className="absolute top-1 right-0 w-fit p-0 ! py-0 h-fit "
+                                onClick={() => onChangeOpen(true)}
+                                aria-label="Close modal"
+                            />
+                        )
+                    }}
+                </ModalConfirm>
                 {items.map(({ id, Component }, index) => {
                     return (
                         <TabPane tabId={id} key={`${id}-${index}`}>
