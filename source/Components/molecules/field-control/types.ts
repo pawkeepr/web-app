@@ -14,6 +14,7 @@ export type InputControlProps<T, Ctx = undefined> = FieldHookConfig<string> &
         required?: boolean
         condition?: boolean
         isLoading?: boolean
+        visibleError?: boolean
         pattern?: string
         mask?: string | Array<string | RegExp>
         onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void

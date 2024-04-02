@@ -1,7 +1,7 @@
 import Link, { type LinkProps } from 'next/link'
 import type React from 'react'
 import type { ComponentProps } from 'react'
-import { tv, type VariantProps } from 'tailwind-variants'
+import { type VariantProps, tv } from 'tailwind-variants'
 import BtnAvatar from './btn-avatar'
 
 import withControl from '~/Components/helpers/with-control'
@@ -51,7 +51,7 @@ export const button = tv({
 const styledIcon = tv({
     base: `
         flex justify-center items-center
-        w-5 h-5
+        w-6 h-6
     `,
 })
 

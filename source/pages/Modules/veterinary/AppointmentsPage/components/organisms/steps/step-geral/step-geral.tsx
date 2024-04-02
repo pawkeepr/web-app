@@ -19,11 +19,11 @@ const StepGeral = () => {
             </h4>
             <div
                 className="
-                gap-2 flex flex-col card shadow-2xl p-8 
+                flex-col card shadow-2xl p-8 
                 border-secondary-500 border relative
                 mobile:p-2 mobile:border  mobile:!shadow-none
                 min-h-[420px]  rounded-sm
-                grid-cols-3 mobile:grid-cols-1
+                grid grid-cols-12 mobile:grid-cols-1
             "
             >
                 <FieldTextArea
@@ -33,28 +33,42 @@ const StepGeral = () => {
                     name="dates_consults.reason_consultation"
                     divClassName="col-span-full"
                 />
+
                 <FieldNumber
                     ctx={values}
                     label="Peso"
-                    placeholder="Peso do pet em quilos, exemplo = 0.5 (500 gramas)"
                     required
+                    visibleError={false}
+                    divClassName="col-span-full"
+                    className="!border-secondary-500 "
                     name="details_pet_consultation.weight"
                 />
+                <legend className="col-span-full text-xs text-gray-400 text-center">
+                    Peso do pet em quilos, exemplo = 0.5 (500 gramas)
+                </legend>
 
-                <FieldNumber
-                    ctx={values}
-                    label="Altura"
-                    placeholder="Altura do pet em centímetros, exemplo = 32"
-                    name="details_pet_consultation.height"
-                />
+                <div className="col-span-6 mr-2">
+                    <FieldNumber
+                        ctx={values}
+                        label="Altura"
+                        name="details_pet_consultation.height"
+                    />
+                    <legend className="col-span-3 text-xs text-gray-400 text-center">
+                        Altura do pet em centímetros, exemplo = 32
+                    </legend>
+                </div>
 
-                <FieldNumber
-                    ctx={values}
-                    label="Comprimento"
-                    placeholder="Comprimento do pet em centímetros "
-                    className="border-gray-300"
-                    name="details_pet_consultation.length"
-                />
+                <div className="col-span-6">
+                    <FieldNumber
+                        ctx={values}
+                        label="Comprimento"
+                        name="details_pet_consultation.length"
+                    />
+
+                    <legend className="col-span-3 text-xs text-gray-400 text-center">
+                        Comprimento do pet em centímetros
+                    </legend>
+                </div>
 
                 <div>
                     {values.details_pet_consultation?.imc > 0 && (

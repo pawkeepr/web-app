@@ -4,7 +4,7 @@ import { BtnPrimary } from '~/Components/atoms/btn'
 import CardTutor from '~/Components/molecules/card-tutor'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import FieldCurrency from '~/Components/molecules/field-currency'
-import FieldMasked from '~/Components/molecules/field-masked'
+import FieldNumber from '~/Components/molecules/field-number'
 
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { VeterinaryConsultation } from '~/types/appointment'
@@ -83,9 +83,9 @@ const StepPayment = () => {
                             },
                         ]}
                     />
-                    <FieldMasked
+                    <FieldNumber
                         ctx={values}
-                        label="Quantidade de Parcelas"
+                        label="Parcelas (Somente Crédito)"
                         placeholder="Parcelas"
                         maximumFractionDigits={0}
                         maximumIntegerDigits={2}
@@ -96,6 +96,10 @@ const StepPayment = () => {
                         label="R$"
                         name="appointment_details.payment.value_payment"
                     />
+
+                    <legend className="col-span-3 text-xs text-gray-400 text-center">
+                        Informações de pagamento apenas para efeito de relatório
+                    </legend>
                 </div>
                 <BtnPrimary
                     disabled={!isValid}

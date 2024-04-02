@@ -136,9 +136,9 @@ const VerticalTabs = () => {
                             <BtnIcon
                                 type="button"
                                 icon={
-                                    <XMarkIcon className="w-8 h-8 text-gray-500 hover:!text-secondary-600 font-extrabold" />
+                                    <XMarkIcon className="text-secondary-500 hover:!text-secondary-600 font-extrabold" />
                                 }
-                                className="absolute top-1 right-0 w-fit p-0 ! py-0 h-fit "
+                                className="absolute top-1 right-0 w-fit p-0  py-0 h-fit"
                                 onClick={() => onChangeOpen(true)}
                                 aria-label="Close modal"
                             />

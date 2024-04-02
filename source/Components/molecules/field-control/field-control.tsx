@@ -1,7 +1,7 @@
 import type { InputControlProps } from './types'
 
 import type { ChangeEvent } from 'react'
-import { tv, type VariantProps } from 'tailwind-variants'
+import { type VariantProps, tv } from 'tailwind-variants'
 import Input from '~/Components/atoms/input/input'
 import Label from '~/Components/atoms/label'
 import useFieldSafe from '~/hooks/use-field-safe'
@@ -62,6 +62,7 @@ const FieldControl = <T, Ctx = any>({
     className,
     divClassName,
     mode = 'editable',
+    visibleError = true,
     onChange: onChangeDefault,
     ...props
 }: InputControlProps<T, Ctx> & FieldControlInput) => {
@@ -113,7 +114,7 @@ const FieldControl = <T, Ctx = any>({
             </div>
             {!meta.error && <div className="pb-2" />}
 
-            {meta.error && (
+            {meta.error && visibleError && (
                 <div className="w-full text-xs text-center text-secondary-500 font-semibold">
                     {meta.error}
                 </div>
