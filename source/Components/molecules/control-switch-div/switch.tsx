@@ -101,6 +101,12 @@ const ControlSwitch = <Ctx,>({
     const handleClick = (
         event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
     ) => {
+        if (mode === ModeInput.readonly) return
+        if (field.value !== null) {
+            handleChange(!field.value)
+            return
+        }
+
         const switchRect = event.currentTarget.getBoundingClientRect()
         const clickPosition = event.clientX - switchRect.left
         const newValue = clickPosition > switchRect.width / 2
