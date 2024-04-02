@@ -3,7 +3,8 @@ import { useEffect, useMemo } from 'react'
 import { BtnPrimary } from '~/Components/atoms/btn'
 import CardTutor from '~/Components/molecules/card-tutor'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
-import FieldNumber from '~/Components/molecules/field-number/field-number'
+import FieldCurrency from '~/Components/molecules/field-currency'
+import FieldMasked from '~/Components/molecules/field-masked'
 
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { VeterinaryConsultation } from '~/types/appointment'
@@ -71,7 +72,7 @@ const StepPayment = () => {
                         },
                     ]}
                 />
-                <FieldNumber
+                <FieldMasked
                     ctx={values}
                     label="Quantidade de Parcelas"
                     placeholder="Parcelas"
@@ -80,10 +81,7 @@ const StepPayment = () => {
                     name="appointment_details.payment.number_installments"
                     disabled={form_payment.value !== 'credit_card'}
                 />
-                <FieldNumber
-                    ctx={values}
-                    locales="pt-BR"
-                    currency="BRL"
+                <FieldCurrency
                     label="R$"
                     name="appointment_details.payment.value_payment"
                 />
