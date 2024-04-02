@@ -1,4 +1,4 @@
-import CurrencyInput, { CurrencyInputProps } from 'react-currency-input-field'
+import CurrencyInput, { type CurrencyInputProps } from 'react-currency-input-field'
 import Label from '../../atoms/label'
 
 import { input } from '../../atoms/input'
