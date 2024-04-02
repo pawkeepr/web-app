@@ -67,7 +67,7 @@ const STEPS: {
     },
 ]
 
-const makeTitle = (title: string, isMobile: boolean) => {
+export const makeTitle = (title: string, isMobile: boolean) => {
     if (isMobile) {
         return title
             .split(' ')
@@ -78,7 +78,7 @@ const makeTitle = (title: string, isMobile: boolean) => {
     return title
 }
 
-const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => {
+export const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => {
     const filtered = items.reduce(
         (acc, item) => {
             if (item.type === category) {
@@ -98,10 +98,16 @@ const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => {
 }
 
 const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
-    const [category, setCategory] = useState<KeyOfQuestionTypes>('digestive_sys')
+    const [category, setCategory] = useState<{
+        title: string
+        value: KeyOfQuestionTypes
+    }>(STEPS[0])
     const { isMobile } = useResizeMobile()
 
-    const options = useMemo(() => makeOptions(items, category), [category, items])
+    const options = useMemo(
+        () => makeOptions(items, category.value),
+        [category, items],
+    )
 
     const initialValues = useMemo(() => {
         return options.reduce(
@@ -118,10 +124,10 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
 
     const keyPressLeft = () => {
         setCategory((prev) => {
-            const index = STEPS.findIndex((item) => item.value === prev)
+            const index = STEPS.findIndex((item) => item.value === prev.value)
             const next = STEPS[index - 1]
             if (next) {
-                return next.value
+                return next
             }
             return prev
         })
@@ -129,10 +135,10 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
 
     const keyPressRight = () => {
         setCategory((prev) => {
-            const index = STEPS.findIndex((item) => item.value === prev)
+            const index = STEPS.findIndex((item) => item.value === prev.value)
             const next = STEPS[index + 1]
             if (next) {
-                return next.value
+                return next
             }
             return prev
         })
@@ -146,24 +152,26 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
     return (
         <div
             className="
-            gap-2 flex flex-col card shadow-2xl p-8 
-            border-secondary-500 border-2 relative
-            mobile:p-2 mobile:border  mobile:!shadow-none
-            min-h-[420px]  rounded-sm
-        
-        "
+                gap-2 flex flex-col card shadow-2xl p-8 
+                border-secondary-500 border-2 relative
+                mobile:p-2 mobile:border  mobile:!shadow-none
+                min-h-[420px]  rounded-sm
+            "
         >
+            <h4 className="font-sans text-center font-semibold uppercase">
+                {makeTitle(category.title, false)}
+            </h4>
             <div className="flex flex-row w-full justify-between flex-wrap mb-4">
                 {STEPS.map((item) => (
                     <button
                         type="button"
-                        onClick={() => setCategory(item.value)}
+                        onClick={() => setCategory(item)}
                         key={item.value}
                         className={cn(
                             'p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full',
                             {
-                                'text-primary-500': category === item.value,
-                                'text-gray-400': category !== item.value,
+                                'text-primary-500': category.value === item.value,
+                                'text-gray-400': category.value !== item.value,
                             },
                         )}
                     >
