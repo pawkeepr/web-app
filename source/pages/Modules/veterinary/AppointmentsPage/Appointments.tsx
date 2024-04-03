@@ -2,10 +2,10 @@ import DashboardLayouts from '../../_layouts/dashboard'
 
 import { format } from 'date-fns'
 import { Formik } from 'formik'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 import { useCallback, useEffect, useMemo } from 'react'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
-import useAppointment from '~/store/hooks/appointment-id/use-appointment'
+import { handleSubmitAppointments } from '~/store/hooks/appointment-id/use-appointment'
 import usePetById from '~/store/hooks/pet-by-id/use-pets'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import type { IPetV2 } from '~/types/pet-v2'
@@ -109,7 +109,9 @@ const AppointmentsPage = ({
     } = usePetById(document, pet)
     const profile = useProfileVeterinary()
 
-    const { handleSubmit } = useAppointment({})
+    const handleSubmit = handleSubmitAppointments(() => {
+        router.push('/dashboard')
+    })
 
     const values = useMemo(
         () => initialValues(activeData as IPetV2, profile, appointment_id),
@@ -127,24 +129,18 @@ const AppointmentsPage = ({
             const [appointment_geolocation, appointment_signature] =
                 await geolocation()
 
-            try {
-                await handleSubmit({
-                    ...values,
-                    tutor_pet_vet: {
-                        ...(values.tutor_pet_vet as VeterinaryConsultation['tutor_pet_vet']),
-                        veterinary,
-                    },
-                    appointment_details: {
-                        ...(values.appointment_details as VeterinaryConsultation['appointment_details']),
-                        appointment_geolocation,
-                        appointment_signature,
-                    },
-                } as VeterinaryConsultation)
-                router.push('/dashboard')
-            } catch (err) {
-                // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-                console.log('🚀 ~ err:', err)
-            }
+            await handleSubmit({
+                ...values,
+                tutor_pet_vet: {
+                    ...(values.tutor_pet_vet as VeterinaryConsultation['tutor_pet_vet']),
+                    veterinary,
+                },
+                appointment_details: {
+                    ...(values.appointment_details as VeterinaryConsultation['appointment_details']),
+                    appointment_geolocation,
+                    appointment_signature,
+                },
+            } as VeterinaryConsultation)
         },
         [handleSubmit, veterinary],
     )
