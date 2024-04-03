@@ -53,19 +53,19 @@ export const schemaPayment = yup
     .shape<ShapeAppointmentDetailsPayment>({
         coin: yup.string().optional(),
         date_payment: yup.string().optional(),
-        form_payment: yup
-            .string()
-            .oneOf(['cash', 'credit', 'debit', 'pix'])
-            .required(),
+        form_payment: yup.object().required(),
         number_installments: yup
             .number()
             .transform((value) => (Number.isNaN(value) ? undefined : Number(value)))
             .optional(),
         status_payment: yup.string().optional(),
         value_payment: yup
-            .number()
-            .transform((value) => (Number.isNaN(value) ? undefined : Number(value)))
-            .required(),
+            .string()
+            .transform((value: string) => {
+                const valueFormatted = value.replace('R$ ', '').replace(',', '.')
+                return Number.isNaN(valueFormatted) ? undefined : valueFormatted
+            })
+            .required('O valor do pagamento é obrigatório'),
     })
     .required()
 

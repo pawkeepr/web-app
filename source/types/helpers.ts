@@ -28,3 +28,9 @@ type NullableSchema<T> = T extends null | undefined
 export type RecordsShapeYup<Ctx> = {
     [K in keyof Ctx]: NullableSchema<Required<Ctx[K]>>
 }
+
+export type GenericObject = {
+    [key: string]: unknown
+    value: unknown
+    label: string
+}

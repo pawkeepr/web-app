@@ -6,10 +6,12 @@ import type {
     IGeolocationAppointment,
     IPayment,
     ISignatureAppointment,
+    PaymentForm,
     Treatments,
     TutorPetVet,
     VeterinaryConsultation,
 } from '~/types/appointment'
+import type { GenericObject } from '~/types/helpers'
 import type { Contact, Location } from '~/types/profile'
 
 export class Appointments implements VeterinaryConsultation {
@@ -133,10 +135,22 @@ export class Appointments implements VeterinaryConsultation {
         return this
     }
 
+    definePaymentForm(form_payment: GenericObject | string): this {
+        if (typeof form_payment === 'object') {
+            this.appointment_details.payment.form_payment =
+                form_payment.value as PaymentForm
+        } else {
+            this.appointment_details.payment.form_payment =
+                form_payment as PaymentForm
+        }
+
+        return this
+    }
+
     definePayment(payment: IPayment): this {
-        const formPayment = payment?.form_payment
         this.appointment_details.payment = payment
-        if (formPayment !== 'credit_card') {
+        this.definePaymentForm(payment.form_payment)
+        if (this.appointment_details.payment.form_payment !== 'credit_card') {
             this.appointment_details.payment.number_installments = '1'
         }
         return this

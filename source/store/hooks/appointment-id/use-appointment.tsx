@@ -23,6 +23,7 @@ const useAppointment = ({ id }: IHookUseAppointment) => {
         entity: Appointments,
         add: createAppointmentVet,
         update: finishedAppointmentVet,
+        enabled: !!id,
     })
 }
 

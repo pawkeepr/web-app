@@ -52,12 +52,11 @@ const items: TabItem[] = [
 const tab = tv({
     // Ajuste os estilos base e variantes conforme necessário
     base: `
-        w-full rounded-sm mobile:py-4
-        ring-white/60 ring-offset-2
-        leading-1 font-bold text-white
+        w-full mobile:py-4
+        font-bold text-white
         mobile:text-xs
         text-sm flex web:flex-row items-center justify-center
-        mobile:flex-col gap-2 step-arrow-nav
+        mobile:flex-col gap-2  !rounded-none
         mobile:border border-primary-500
         `,
     // Ajustes adicionais para os estilos mobile
@@ -90,7 +89,29 @@ const VerticalTabs = () => {
     }
 
     return (
-        <section className="web:mt-2">
+        <section>
+            <ModalConfirm
+                title="Cancelar Consulta!"
+                onConfirm={() => router.push('/dashboard')}
+                description="Importante!"
+                message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
+            >
+                {({ onChangeOpen }) => {
+                    return (
+                        <div className="w-full bg-primary-500 rounded-t-sm justify-end flex p-0 py-1">
+                            <BtnIcon
+                                type="button"
+                                icon={
+                                    <XMarkIcon className="font-extrabold text-secondary-400 hover:bg-red-500 rounded-sm" />
+                                }
+                                className="w-fit !p-0 !m-0 h-fit"
+                                onClick={() => onChangeOpen(true)}
+                                aria-label="Close modal"
+                            />
+                        </div>
+                    )
+                }}
+            </ModalConfirm>
             <div
                 className={cn(
                     `
@@ -125,26 +146,6 @@ const VerticalTabs = () => {
                 activeTab={activeVerticalTab}
                 className="relative border border-secondary-500 shadow-lg px-4 py-2 bg-white mobile:!shadow-none mobile:!rounded-none mobile:m-0 mobile:px-4 rounded-t-none"
             >
-                <ModalConfirm
-                    title="Cancelar Consulta!"
-                    onConfirm={() => router.push('/dashboard')}
-                    description="Importante!"
-                    message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
-                >
-                    {({ onChangeOpen }) => {
-                        return (
-                            <BtnIcon
-                                type="button"
-                                icon={
-                                    <XMarkIcon className="text-secondary-500 hover:!text-secondary-600 font-extrabold" />
-                                }
-                                className="absolute top-1 right-0 w-fit p-0  py-0 h-fit"
-                                onClick={() => onChangeOpen(true)}
-                                aria-label="Close modal"
-                            />
-                        )
-                    }}
-                </ModalConfirm>
                 {items.map(({ id, Component }, index) => {
                     return (
                         <TabPane tabId={id} key={`${id}-${index}`}>

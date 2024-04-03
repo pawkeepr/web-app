@@ -4,10 +4,16 @@ import Label from '../../atoms/label'
 import useFieldSafe from '~/hooks/use-field-safe'
 import { input } from '../../atoms/input'
 
+type FieldCurrencyProps = {
+    label?: string
+    divClassName?: string
+}
+
 const FieldCurrency = ({
     label,
+    divClassName,
     ...props
-}: CurrencyInputProps & { label?: string }) => {
+}: CurrencyInputProps & FieldCurrencyProps) => {
     const [inputProps, _meta, field] = useFieldSafe(props.name as string)
 
     const onChange = (value: string) => {
@@ -15,7 +21,7 @@ const FieldCurrency = ({
     }
 
     return (
-        <div>
+        <div className={divClassName}>
             <Label label={label} id={props.name} required={props.required} />
 
             <CurrencyInput

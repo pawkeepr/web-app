@@ -139,15 +139,16 @@ const CardInputTreatment = ({
                     } as OmitTreatment
                 }
                 validationSchema={validationSchema}
-                onSubmit={(data, formikHelpers) =>
-                    handleSubmit(
+                onSubmit={async (data, formikHelpers) => {
+                    await handleSubmit(
                         {
                             ...data,
                             type_treatment: category.value as MEDICAL_RECORDS,
                         },
                         formikHelpers,
                     )
-                }
+                    formikHelpers.resetForm()
+                }}
             >
                 {({ isValid, handleSubmit, values }) => (
                     <Form onSubmit={handleSubmit}>
@@ -166,7 +167,16 @@ const CardInputTreatment = ({
                             name={'notes_treatment' as ''}
                             label="Informações Complementares"
                         />
-                        <div className="flex flex-row">
+
+                        <div className="flex justify-center">
+                            <BtnSuccess
+                                disabled={!isValid}
+                                className=" text-white w-full"
+                                label="Adicionar"
+                                type="submit"
+                            />
+                        </div>
+                        <div className="flex flex-row w-full justify-between web:hidden">
                             <button
                                 onClick={keyPressLeft}
                                 type="button"
@@ -174,13 +184,6 @@ const CardInputTreatment = ({
                             >
                                 <FaArrowLeft />
                             </button>
-                            <BtnSuccess
-                                disabled={!isValid}
-                                className="flex-1 text-white"
-                                label="Adicionar"
-                                type="submit"
-                            />
-
                             <button
                                 onClick={keyPressRight}
                                 type="button"
