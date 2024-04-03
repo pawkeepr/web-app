@@ -1,9 +1,12 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Appointments } from '~/entities/Appointments'
 import {
     createAppointmentVet,
     finishedAppointmentVet,
     getAppointmentVet,
 } from '~/services/helpers'
+import { handleSubmitHelper } from '~/store/helpers/handle-submit-helper'
+import { createErrorToast, createSuccessToast } from '~/store/helpers/toast'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import useAppStore from '../use-app-store'
 
@@ -25,6 +28,43 @@ const useAppointment = ({ id }: IHookUseAppointment) => {
         update: finishedAppointmentVet,
         enabled: !!id,
     })
+}
+
+export const useCreateAppointmentMutation = () => {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: async (data: VeterinaryConsultation) =>
+            createAppointmentVet(data),
+        onSuccess: createSuccessToast,
+        onError: createErrorToast,
+        onSettled: () => queryClient.invalidateQueries([NAME]),
+    })
+}
+
+export const useUpdateAppointmentMutation = () => {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: async (data: VeterinaryConsultation) =>
+            finishedAppointmentVet(data?.id as string, data),
+        onSuccess: createSuccessToast,
+        onError: createErrorToast,
+        onSettled: () => queryClient.invalidateQueries([NAME]),
+    })
+}
+
+export const handleSubmitAppointments = (finallySubmit?: () => unknown) => {
+    const createdMutation = useCreateAppointmentMutation()
+    const updatedMutation = useUpdateAppointmentMutation()
+
+    return (data: VeterinaryConsultation) => {
+        return handleSubmitHelper({
+            createMutation: createdMutation,
+            updateMutation: updatedMutation,
+            data,
+            entity: Appointments,
+            onSubmit: finallySubmit,
+        })
+    }
 }
 
 export default useAppointment
