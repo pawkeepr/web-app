@@ -13,7 +13,7 @@ import type { GenericSelect } from '~/types/pet-v2'
 
 type CtxStepPayment = Pick<
     VeterinaryConsultation,
-    'appointment_details' | 'tutor_pet_vet'
+    'appointment_details' | 'tutor_pet_vet' | 'treatments'
 > & {}
 
 const StepPayment = () => {
@@ -26,6 +26,15 @@ const StepPayment = () => {
                 ?.form_payment as unknown as GenericSelect,
         [values],
     )
+
+    useEffect(() => {
+        const sum = values.treatments?.questions_treatment?.reduce(
+            (acc, item) =>
+                acc + Number(item.value_coin_treatment.replace(',', '.')),
+            0,
+        )
+        setFieldValue('appointment_details.payment.value_payment', sum.toFixed(2))
+    }, [values.treatments?.questions_treatment])
 
     useEffect(() => {
         if (form_payment.value !== 'credit_card') {
