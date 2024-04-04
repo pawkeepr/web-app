@@ -1,7 +1,5 @@
 import { useField } from 'formik'
 
-import cn from 'classnames'
-
 import Input from '../../atoms/text-area'
 
 import type { ChangeEvent } from 'react'
@@ -9,6 +7,7 @@ import { twMerge } from 'tailwind-merge'
 import Label from '~/Components/atoms/label'
 import withControl from '~/Components/helpers/with-control'
 import type { InputControlProps } from '../field-control'
+import { fieldControlInput } from '../field-control/field-control'
 
 const FieldTextArea = <T, Ctx>({
     endIcon,
@@ -17,15 +16,17 @@ const FieldTextArea = <T, Ctx>({
     startIcon = false,
     disabled = false,
     separator = ':',
+    isValid = false,
     onChange,
     className,
+    mode = 'editable',
     divClassName,
     div,
     label,
-    ...rest
+    ...props
 }: InputControlProps<T, Ctx>) => {
-    const [field, meta] = useField(rest.name as string)
-    const id = rest.id || rest.name
+    const [field, meta] = useField(props.name as string)
+    const id = props.id || props.name
     const ComponentInput = input as JSX.ElementType
 
     const handleChange = (
@@ -53,17 +54,17 @@ const FieldTextArea = <T, Ctx>({
                 )}
                 <ComponentInput
                     id={id}
-                    className={twMerge(
-                        cn({
-                            '!border-secondary-500': required,
-                            'bg-slate-100': disabled,
-                            '!pl-8': startIcon,
-                            '!pr-8': endIcon,
-                        }),
+                    className={fieldControlInput({
                         className,
-                    )}
+                        startIcon: !!startIcon,
+                        endIcon: !!endIcon,
+                        mode,
+                        required: required && !isValid,
+                        isValid: required && isValid,
+                        ...props,
+                    })}
                     {...field}
-                    {...rest}
+                    {...props}
                     disabled={disabled}
                     onChange={handleChange}
                     required={required}

@@ -16,11 +16,14 @@ export const ModeInput = {
 } as const
 export type ModeInput = (typeof ModeInput)[keyof typeof ModeInput]
 
-const fieldControlInput = tv({
+export const fieldControlInput = tv({
     base: '',
     variants: {
+        isValid: {
+            true: '!border-primary-500',
+        },
         required: {
-            true: 'border-secondary-500',
+            true: '!border-secondary-500',
         },
         disabled: {
             true: 'bg-slate-100',
@@ -46,7 +49,7 @@ const fieldControlInput = tv({
 
 // criar a tipagem para tv
 
-type FieldControlInput = Omit<
+export type FieldControlInput = Omit<
     VariantProps<typeof fieldControlInput>,
     'startIcon' | 'endIcon'
 >
@@ -62,6 +65,7 @@ const FieldControl = <T, Ctx = any>({
     className,
     divClassName,
     mode = 'editable',
+    isValid = false,
     visibleError = true,
     onChange: onChangeDefault,
     ...props
@@ -96,10 +100,11 @@ const FieldControl = <T, Ctx = any>({
                     data-testid={`input-${id}`}
                     className={fieldControlInput({
                         className,
-                        required,
                         startIcon: !!startIcon,
                         endIcon: !!endIcon,
                         mode,
+                        required: required && !isValid,
+                        isValid: required && isValid,
                         ...props,
                     })}
                     {...inputProps}

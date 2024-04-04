@@ -16,7 +16,7 @@ type CtxStepPayment = Pick<
 > & {}
 
 const StepPayment = () => {
-    const { handleSubmit, isSubmitting, isValid, values, setFieldValue, errors } =
+    const { handleSubmit, isSubmitting, isValid, values, setFieldValue } =
         useFormikContextSafe<CtxStepPayment>()
 
     const form_payment = useMemo(
@@ -53,7 +53,7 @@ const StepPayment = () => {
                     tutor={values.tutor_pet_vet?.tutor}
                     pet={values.tutor_pet_vet?.pet}
                 />
-                <div className="grid grid-cols-3 mobile:grid-cols-2 gap-2">
+                <div className="grid grid-cols-3 mobile:grid-cols-2 gap-2 z-50">
                     <FieldControlSelect
                         ctx={values}
                         required
@@ -95,6 +95,14 @@ const StepPayment = () => {
                         disabled={form_payment.value !== 'credit_card'}
                     />
                     <FieldCurrency
+                        isValid={
+                            Number(
+                                values.appointment_details.payment.value_payment?.replace(
+                                    ',',
+                                    '.',
+                                ),
+                            ) > 0
+                        }
                         required
                         divClassName="col-span-1 mobile:col-span-full"
                         label="R$"

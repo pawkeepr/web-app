@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 
-import { tv, type VariantProps } from 'tailwind-variants'
+import { type VariantProps, tv } from 'tailwind-variants'
 
 export const input = tv({
     base: `
@@ -18,6 +18,9 @@ export const input = tv({
         required: {
             true: '!border-secondary-500',
         },
+        isValid: {
+            true: '!border-primary-500',
+        },
         center: {
             true: 'text-center',
         },
@@ -26,11 +29,20 @@ export const input = tv({
 
 export type InputProps = ComponentProps<'input'> & VariantProps<typeof input>
 
-const Input = ({ className, required = false, ...props }: InputProps) => {
+const Input = ({
+    className,
+    isValid = false,
+    required = false,
+    ...props
+}: InputProps) => {
     return (
         <input
             placeholder={props.placeholder || 'Digite aqui ...'}
-            className={input({ className, required })}
+            className={input({
+                className,
+                required: required && !isValid,
+                isValid: required && isValid,
+            })}
             {...props}
         />
     )

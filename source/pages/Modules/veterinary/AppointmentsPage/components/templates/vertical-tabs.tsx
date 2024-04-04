@@ -83,7 +83,7 @@ const VerticalTabs = () => {
     const router = useRouter()
 
     return (
-        <section>
+        <section className="bg-white">
             <ModalConfirm
                 title="Cancelar Consulta!"
                 onConfirm={() => router.push('/dashboard')}

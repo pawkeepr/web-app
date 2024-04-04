@@ -206,6 +206,7 @@ const CardInputTreatment = ({
                             ctx={values}
                             name="name_treatment"
                             label="Nome"
+                            isValid={values.name_treatment.length > 0}
                             required
                         />
 

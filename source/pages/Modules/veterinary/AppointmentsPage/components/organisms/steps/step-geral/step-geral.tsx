@@ -27,6 +27,7 @@ const StepGeral = () => {
             "
             >
                 <FieldTextArea
+                    isValid={values.dates_consults.reason_consultation.length > 0}
                     ctx={values}
                     label="Motivação da Consulta"
                     required
@@ -38,9 +39,9 @@ const StepGeral = () => {
                     ctx={values}
                     label="Peso"
                     required
+                    isValid={values.details_pet_consultation?.weight.length > 0}
                     visibleError={false}
                     divClassName="col-span-full"
-                    className="!border-secondary-500 "
                     name="details_pet_consultation.weight"
                 />
                 <legend className="col-span-full text-xs text-gray-400 text-center">

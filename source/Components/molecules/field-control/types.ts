@@ -10,8 +10,10 @@ export type InputControlProps<T, Ctx = undefined> = FieldHookConfig<string> &
         ctx?: Ctx extends undefined ? never : Ctx
         name: Ctx extends undefined ? string : ObjPaths<Ctx>
         input?: Omit<React.ElementType, 'name'> | 'input'
+        mode?: 'editable' | 'readonly'
         startIcon?: React.ReactNode
         required?: boolean
+        isValid?: boolean
         condition?: boolean
         isLoading?: boolean
         visibleError?: boolean
