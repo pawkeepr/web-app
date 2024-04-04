@@ -9,6 +9,7 @@ import type { IPetV2Data } from '~/types/pet-v2'
 type BoxButtonsPetsProps = {
     isLoading?: boolean
     item: IPetV2Data
+    condition?: boolean
 }
 
 const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {

@@ -56,7 +56,7 @@ const tab = tv({
         font-bold text-white
         mobile:text-xs
         text-sm flex web:flex-row items-center justify-center
-        mobile:flex-col gap-2  !rounded-none
+        mobile:flex-col gap-2 !rounded-none
         mobile:border border-primary-500
         `,
     // Ajustes adicionais para os estilos mobile
@@ -115,7 +115,8 @@ const VerticalTabs = () => {
             <div
                 className={cn(
                     `
-                        mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 
+                        mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0
+                        mobile:p-0
                         h-fit z-[100] bg-white mobile:border-t-2 border-primary-500
                     `,
                 )}
