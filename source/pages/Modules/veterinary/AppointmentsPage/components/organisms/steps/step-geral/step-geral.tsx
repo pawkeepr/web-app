@@ -29,7 +29,7 @@ const StepGeral = () => {
                 <FieldTextArea
                     isValid={values.dates_consults.reason_consultation.length > 0}
                     ctx={values}
-                    label="Motivação da Consulta"
+                    label="Motivo da Consulta"
                     required
                     name="dates_consults.reason_consultation"
                     divClassName="col-span-full"

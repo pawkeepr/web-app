@@ -6,7 +6,7 @@ import {
     getAppointmentVet,
 } from '~/services/helpers'
 import { handleSubmitHelper } from '~/store/helpers/handle-submit-helper'
-import { createErrorToast, createSuccessToast } from '~/store/helpers/toast'
+import { createErrorToast, successToast } from '~/store/helpers/toast'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import useAppStore from '../use-app-store'
 
@@ -35,7 +35,7 @@ export const useCreateAppointmentMutation = () => {
     return useMutation({
         mutationFn: async (data: VeterinaryConsultation) =>
             createAppointmentVet(data),
-        onSuccess: createSuccessToast,
+        onSuccess: () => successToast('Consulta realizada com sucesso!'),
         onError: createErrorToast,
         onSettled: () => queryClient.invalidateQueries([NAME]),
     })
@@ -46,7 +46,7 @@ export const useUpdateAppointmentMutation = () => {
     return useMutation({
         mutationFn: async (data: VeterinaryConsultation) =>
             finishedAppointmentVet(data?.id as string, data),
-        onSuccess: createSuccessToast,
+        onSuccess: () => successToast('Consulta realizada com sucesso!'),
         onError: createErrorToast,
         onSettled: () => queryClient.invalidateQueries([NAME]),
     })

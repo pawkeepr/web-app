@@ -16,9 +16,11 @@ import withLoading from '~/Components/helpers/with-loading'
 import ModalConfirm from '~/Components/modals/confirm-modal'
 import type { StepProps, Tabs } from '~/types/helpers'
 import StepAnamneses from '../organisms/steps/step-anamnese'
+import StepDiagnosis from '../organisms/steps/step-diagnosis'
 import StepGeral from '../organisms/steps/step-geral'
 import StepPayment from '../organisms/steps/step-payment'
 import StepTreatment from '../organisms/steps/step-treatment'
+
 type TabItem = {
     id: Tabs
     title: string
@@ -41,12 +43,18 @@ const items: TabItem[] = [
     },
     {
         id: 2,
+        title: 'Diagnóstico',
+        href: '#Diagnostic',
+        Component: StepDiagnosis,
+    },
+    {
+        id: 3,
         title: 'Tratamento',
         href: '#Treatment',
         Component: StepTreatment,
     },
     {
-        id: 3,
+        id: 4,
         title: 'Finalizar',
         href: '#Finalizar',
         Component: StepPayment,
