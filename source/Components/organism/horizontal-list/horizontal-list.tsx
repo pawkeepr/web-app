@@ -3,7 +3,7 @@
 
 import { Tab } from '@headlessui/react'
 import cn from 'classnames'
-import { tv, type VariantProps } from 'tailwind-variants'
+import { type VariantProps, tv } from 'tailwind-variants'
 
 export type TabItem = {
     id: number | string
@@ -17,7 +17,7 @@ export type TabItem = {
 const tab = tv({
     // Ajuste os estilos base e variantes conforme necessário
     base: `
-        w-full rounded-sm py-2.5 
+        w-full rounded-sm py-2.5
         ring-white/60 ring-offset-2 focus:outline-none focus:ring-2
         leading-1 font-bold text-white
         mobile:text-xs
@@ -39,8 +39,9 @@ const tab = tv({
 
 const tabList = tv({
     base: `
-        gap-2 p-1 bg-primary-500
+        gap-2 bg-primary-500 p-0
         web:rounded-sm web:mt-2 
+        mobile:border border-primary-500
     `,
     variants: {
         hidden: {
