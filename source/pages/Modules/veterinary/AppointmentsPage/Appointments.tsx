@@ -78,7 +78,7 @@ const initialValues = (
             form_payment: 'cash',
             number_installments: '1',
             status_payment: '',
-            value_payment: '0',
+            value_payment: '',
         },
     },
     tutor_pet_vet: {

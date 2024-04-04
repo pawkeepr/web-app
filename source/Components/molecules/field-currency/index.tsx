@@ -31,6 +31,7 @@ const FieldCurrency = ({
                 value={inputProps.value}
                 onValueChange={(value, _name, _values) => onChange(value as string)}
                 className={input({
+                    required: props.required,
                     className: `${props.className} resize-none h-[38px]`,
                 })}
                 {...props}

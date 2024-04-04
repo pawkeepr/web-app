@@ -85,7 +85,7 @@ export const schemaStepAppointment = yup
         tutor_pet_vet: schemaTutorPetVetValidation,
         details_pet_consultation: schemaValidationDetailsPetConsultation,
         anamnesis: yup.object().optional(),
-        treatments: schemaStepTreatmentValidation,
+        treatments: schemaStepTreatmentValidation.optional().nullable(),
         appointment_details: schemaStepAppointmentDetails,
         appointment_status: yup.string().optional(),
     })

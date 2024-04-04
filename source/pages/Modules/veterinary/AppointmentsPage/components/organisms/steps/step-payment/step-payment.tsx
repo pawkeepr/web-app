@@ -56,6 +56,7 @@ const StepPayment = () => {
                 <div className="grid grid-cols-3 mobile:grid-cols-2 gap-2">
                     <FieldControlSelect
                         ctx={values}
+                        required
                         divClassName="col-span-1"
                         name="appointment_details.payment.form_payment"
                         label="Forma de Pagamento"
@@ -94,6 +95,7 @@ const StepPayment = () => {
                         disabled={form_payment.value !== 'credit_card'}
                     />
                     <FieldCurrency
+                        required
                         divClassName="col-span-1 mobile:col-span-full"
                         label="R$"
                         name="appointment_details.payment.value_payment"
