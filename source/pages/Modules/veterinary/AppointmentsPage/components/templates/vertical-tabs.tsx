@@ -1,10 +1,15 @@
-import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
-
 import cn from 'classnames'
 import { useState } from 'react'
 
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { useRouter } from 'next/navigation'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
+import { A11y, Controller, Navigation, Pagination, Scrollbar } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import { tv } from 'tailwind-variants'
 import { BtnIcon } from '~/Components/atoms/btn'
 import withLoading from '~/Components/helpers/with-loading'
@@ -14,7 +19,6 @@ import StepAnamneses from '../organisms/steps/step-anamnese'
 import StepGeral from '../organisms/steps/step-geral'
 import StepPayment from '../organisms/steps/step-payment'
 import StepTreatment from '../organisms/steps/step-treatment'
-
 type TabItem = {
     id: Tabs
     title: string
@@ -24,25 +28,25 @@ type TabItem = {
 
 const items: TabItem[] = [
     {
-        id: 1,
+        id: 0,
         title: 'Inicio',
         href: '#Inicio',
         Component: StepGeral,
     },
     {
-        id: 2,
+        id: 1,
         title: 'Anamnese',
         href: '#Anamnese',
         Component: StepAnamneses,
     },
     {
-        id: 3,
+        id: 2,
         title: 'Tratamento',
         href: '#Treatment',
         Component: StepTreatment,
     },
     {
-        id: 4,
+        id: 3,
         title: 'Finalizar',
         href: '#Finalizar',
         Component: StepPayment,
@@ -52,18 +56,18 @@ const items: TabItem[] = [
 const tab = tv({
     // Ajuste os estilos base e variantes conforme necessário
     base: `
-        w-full mobile:py-4
+        w-full flex-1 mobile:!py-4 py-2
         font-bold text-white
         mobile:text-xs
         text-sm flex web:flex-row items-center justify-center
         mobile:flex-col gap-2 !rounded-none
-        mobile:border border-primary-500
+        mobile:border
         `,
     // Ajustes adicionais para os estilos mobile
     variants: {
         selected: {
             true: '!bg-secondary-500 !text-gray-600 shadow',
-            false: 'text-blue-100 ',
+            false: 'text-gray-400 ',
         },
         disabled: {
             true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
@@ -73,20 +77,10 @@ const tab = tv({
 })
 
 const VerticalTabs = () => {
-    const [activeVerticalTab, setActiveVerticalTab] = useState(1)
-    const [passedVerticalSteps, setPassedVerticalSteps] = useState([1])
+    const [activeIndex, setActiveIndex] = useState(0)
+    const [swipperController, setSwipperController] = useState<any>()
+
     const router = useRouter()
-
-    function toggleVerticalTab(tab: Tabs) {
-        if (activeVerticalTab !== tab) {
-            const modifiedSteps = [...passedVerticalSteps, tab]
-
-            if (tab >= 1 && tab <= items.length) {
-                setActiveVerticalTab(tab)
-                setPassedVerticalSteps(modifiedSteps)
-            }
-        }
-    }
 
     return (
         <section>
@@ -114,50 +108,59 @@ const VerticalTabs = () => {
             </ModalConfirm>
             <div
                 className={cn(
-                    `
+                    `   
+                        flex flex-row justify-center
                         mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0
-                        mobile:p-0
+                        mobile:p-0 
                         h-fit z-[100] bg-white mobile:border-t-2 border-primary-500
+                        nav-pills nav-justified
                     `,
                 )}
             >
-                <Nav className="nav-pills nav-justified" role="tablist">
-                    {items.map((item) => {
-                        return (
-                            <NavItem key={item.id}>
-                                <NavLink
-                                    href={item.href}
-                                    id="steparrow-gen-info-tab"
-                                    className={tab({
-                                        selected: activeVerticalTab === item.id,
-                                    })}
-                                    onClick={() => {
-                                        toggleVerticalTab(item.id)
-                                    }}
-                                >
-                                    {item.title}
-                                </NavLink>
-                            </NavItem>
-                        )
-                    })}
-                </Nav>
+                {items.map((item) => {
+                    return (
+                        <button
+                            type="button"
+                            // href={item.href}
+                            id="steparrow-gen-info-tab"
+                            className={tab({
+                                selected: activeIndex === item.id,
+                            })}
+                            onClick={() => {
+                                swipperController?.slideTo(item.id)
+                                setActiveIndex(item.id)
+                            }}
+                        >
+                            {item.title}
+                        </button>
+                    )
+                })}
             </div>
-
-            <TabContent
-                activeTab={activeVerticalTab}
-                className="relative border border-secondary-500 shadow-lg px-4 py-2 bg-white mobile:!shadow-none mobile:!rounded-none mobile:m-0 mobile:px-4 rounded-t-none"
+            <Swiper
+                // install Swiper modules
+                modules={[Navigation, Pagination, Scrollbar, A11y, Controller]}
+                spaceBetween={50}
+                slidesPerView={1}
+                onSwiper={(swiper) => {
+                    setSwipperController(swiper)
+                }}
+                pagination={{ clickable: true }}
+                onSlideChange={(swiper) => {
+                    setActiveIndex(swiper.activeIndex)
+                }}
+                scrollbar={{ draggable: true }}
             >
                 {items.map(({ id, Component }, index) => {
                     return (
-                        <TabPane tabId={id} key={`${id}-${index}`}>
+                        <SwiperSlide key={`${id}-${index}`}>
                             <Component
-                                activeTab={activeVerticalTab}
-                                toggleTab={toggleVerticalTab}
+                                activeTab={activeIndex}
+                                toggleTab={setActiveIndex}
                             />
-                        </TabPane>
+                        </SwiperSlide>
                     )
                 })}
-            </TabContent>
+            </Swiper>
         </section>
     )
 }
