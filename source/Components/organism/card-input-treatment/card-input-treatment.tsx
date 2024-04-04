@@ -100,6 +100,55 @@ const CardInputTreatment = ({
     //     ArrowRight: keyPressRight,
     // })
 
+    const Items = useMemo(
+        () =>
+            filteredItemsSelects?.map((treatment, index) => (
+                <div
+                    key={`treatment-${index}`}
+                    className="w-full bg-secondary rounded-md text-xs py-1 px-2"
+                >
+                    <div className="w-full flex flex-row bg-secondary px-2 rounded-sm border-dashed border border-primary">
+                        <div className="grid grid-cols-12 w-full">
+                            <h6 className="col-span-3 font-mono font-semibold  capitalize">
+                                {treatment.name_treatment}
+                            </h6>
+
+                            <h6 className="col-span-3 font-mono font-semibold  capitalize">
+                                {
+                                    KeyTreatment[
+                                        treatment.type_treatment as keyof typeof KeyTreatment
+                                    ]
+                                }
+                            </h6>
+
+                            <p className="col-span-3 font-mono  capitalize">
+                                {treatment.notes_treatment}
+                            </p>
+
+                            <p className="col-span-3 font-mono  capitalize">
+                                {Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL',
+                                }).format(
+                                    Number.parseFloat(
+                                        treatment.value_coin_treatment,
+                                    ),
+                                )}
+                            </p>
+                        </div>
+                        <button
+                            type="button"
+                            className="text-red-500"
+                            onClick={() => handleRemove?.(index)}
+                        >
+                            X
+                        </button>
+                    </div>
+                </div>
+            )),
+        [filteredItemsSelects, handleRemove],
+    )
+
     return (
         <div
             className="
@@ -128,6 +177,7 @@ const CardInputTreatment = ({
                 ))}
             </div>
 
+            {Items}
             <Formik
                 initialValues={
                     {
@@ -196,50 +246,7 @@ const CardInputTreatment = ({
                 )}
             </Formik>
 
-            {filteredItemsSelects?.map((treatment, index) => (
-                <div
-                    key={`treatment-${index}`}
-                    className="w-full bg-secondary rounded-md text-xs py-1 px-2"
-                >
-                    <div className="w-full flex flex-row bg-secondary px-2 rounded-sm border-dashed border border-primary">
-                        <div className="grid grid-cols-12 w-full">
-                            <h6 className="col-span-3 font-mono font-semibold  capitalize">
-                                {treatment.name_treatment}
-                            </h6>
-
-                            <h6 className="col-span-3 font-mono font-semibold  capitalize">
-                                {
-                                    KeyTreatment[
-                                        treatment.type_treatment as keyof typeof KeyTreatment
-                                    ]
-                                }
-                            </h6>
-
-                            <p className="col-span-3 font-mono  capitalize">
-                                {treatment.notes_treatment}
-                            </p>
-
-                            <p className="col-span-3 font-mono  capitalize">
-                                {Intl.NumberFormat('pt-BR', {
-                                    style: 'currency',
-                                    currency: 'BRL',
-                                }).format(
-                                    Number.parseFloat(
-                                        treatment.value_coin_treatment,
-                                    ),
-                                )}
-                            </p>
-                        </div>
-                        <button
-                            type="button"
-                            className="text-red-500"
-                            onClick={() => handleRemove?.(index)}
-                        >
-                            X
-                        </button>
-                    </div>
-                </div>
-            ))}
+            {}
         </div>
     )
 }
