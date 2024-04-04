@@ -17,6 +17,7 @@ type SelectModalProps = {
     onChange: (item: GenericObject) => void
     id?: string
     isValid?: boolean
+    disabled?: boolean
     placeholder?: string
 }
 
@@ -27,6 +28,7 @@ const SelectModal = ({
     value,
     onChange,
     label,
+    disabled = false,
     placeholder = 'Clique para selecionar',
     ...props
 }: SelectModalProps) => {
@@ -43,6 +45,7 @@ const SelectModal = ({
                         id={id as string}
                     />
                     <Input
+                        disabled={disabled}
                         type="button"
                         value={value.label || placeholder}
                         onClick={showModal}

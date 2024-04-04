@@ -147,11 +147,24 @@ export class Appointments implements VeterinaryConsultation {
         return this
     }
 
+    defineNumberInstallments(number_installments: string | GenericObject): this {
+        if (typeof number_installments === 'object') {
+            this.appointment_details.payment.number_installments =
+                number_installments.value as string
+        } else {
+            this.appointment_details.payment.number_installments =
+                number_installments
+        }
+        return this
+    }
+
     definePayment(payment: IPayment): this {
         this.appointment_details.payment = payment
         this.definePaymentForm(payment.form_payment)
         if (this.appointment_details.payment.form_payment !== 'credit_card') {
             this.appointment_details.payment.number_installments = '1'
+        } else {
+            this.defineNumberInstallments(payment.number_installments)
         }
         return this
     }

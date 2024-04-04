@@ -84,7 +84,7 @@ const FieldDocumentAppointment = ({
                                         <FieldDocument
                                             ctx={values}
                                             name="cpf_tutor"
-                                            placeholder="Nova Consulta"
+                                            placeholder="Agendar/Nova Consulta"
                                             onlyCPF
                                             endIcon={
                                                 <button

@@ -16,7 +16,7 @@ export const validationSchema = Yup.object().shape({
 })
 
 const StepTutor = ({ previousStep, isLoading }: StepProps) => {
-    const { isValid, handleSubmit, isSubmitting, values } =
+    const { isValid, handleSubmit, isSubmitting, values, initialValues } =
         useFormikContextSafe<CtxSimplifiedPeTFields>()
 
     return (
@@ -26,12 +26,14 @@ const StepTutor = ({ previousStep, isLoading }: StepProps) => {
                     <FieldControl
                         ctx={values}
                         required
+                        disabled={!!initialValues.ownerEmergencyContact?.first_name}
                         label="Nome do tutor"
                         name="ownerEmergencyContact.first_name"
                         placeholder="Nome"
                     />
                     <FieldControl
                         ctx={values}
+                        disabled={!!initialValues.ownerEmergencyContact?.last_name}
                         required
                         label="Sobrenome do tutor"
                         name="ownerEmergencyContact.last_name"
@@ -49,6 +51,7 @@ const StepTutor = ({ previousStep, isLoading }: StepProps) => {
 
                 <FieldControl
                     ctx={values}
+                    disabled={!!initialValues.ownerEmergencyContact?.email}
                     required
                     label="Email do tutor"
                     name="ownerEmergencyContact.email"

@@ -1,29 +1,23 @@
-import { Tab } from "@headlessui/react";
-import cn from "classnames";
-import { Formik } from "formik";
-import {
-    startTransition,
-    useCallback,
-    useEffect,
-    useMemo,
-    useState,
-} from "react";
-import Modal from "~/Components/organism/modal";
-import useModal from "~/hooks/use-modal";
-import useProfileVeterinary from "~/hooks/use-profile-veterinary";
-import useSteps from "~/hooks/use-steps";
-import useListPetsOfTutor from "~/store/hooks/list-pets-by-tutor";
-import type { IPet } from "~/types/pet";
-import type { IPetV2 } from "~/types/pet-v2";
-import StepChoice from "./components/steps/step-choice";
-import StepDocument from "./components/steps/step-document";
-import StepListBreeds from "./components/steps/step-list-breeds";
-import StepListGender from "./components/steps/step-list-gender";
-import StepListPets from "./components/steps/step-list-pets";
-import StepListSpecies from "./components/steps/step-list-species";
-import StepScheduledAppointment from "./components/steps/step-scheduled-appointment";
-import StepTutor from "./components/steps/step-tutor";
-import type { ModalConfirmProps, StepProps } from "./types";
+import { Tab } from '@headlessui/react'
+import cn from 'classnames'
+import { Formik } from 'formik'
+import { startTransition, useCallback, useEffect, useMemo, useState } from 'react'
+import Modal from '~/Components/organism/modal'
+import useModal from '~/hooks/use-modal'
+import useProfileVeterinary from '~/hooks/use-profile-veterinary'
+import useSteps from '~/hooks/use-steps'
+import useListPetsOfTutor from '~/store/hooks/list-pets-by-tutor'
+import type { IPet } from '~/types/pet'
+import type { IPetV2 } from '~/types/pet-v2'
+import StepChoice from './components/steps/step-choice'
+import StepDocument from './components/steps/step-document'
+import StepListBreeds from './components/steps/step-list-breeds'
+import StepListGender from './components/steps/step-list-gender'
+import StepListPets from './components/steps/step-list-pets'
+import StepListSpecies from './components/steps/step-list-species'
+import StepScheduledAppointment from './components/steps/step-scheduled-appointment'
+import StepTutor from './components/steps/step-tutor'
+import type { ModalConfirmProps, StepProps } from './types'
 
 export const NUMBER_STEPS = {
     DOCUMENTS: 0,
@@ -34,83 +28,83 @@ export const NUMBER_STEPS = {
     TUTOR: 5,
     CHOICE: 6,
     SCHEDULED: 7,
-} as const;
-export type NumberSteps = (typeof NUMBER_STEPS)[keyof typeof NUMBER_STEPS];
+} as const
+export type NumberSteps = (typeof NUMBER_STEPS)[keyof typeof NUMBER_STEPS]
 
 type Steps = {
-    id: NumberSteps;
-    title: string;
-    component: (props: StepProps) => JSX.Element;
-};
+    id: NumberSteps
+    title: string
+    component: (props: StepProps) => JSX.Element
+}
 
 const STEPS: Steps[] = [
     {
         id: NUMBER_STEPS.DOCUMENTS,
-        title: "Documento",
+        title: 'Documento',
         component: (props: StepProps) => <StepDocument {...props} />,
     },
     {
         id: NUMBER_STEPS.PETS,
-        title: "Pets",
+        title: 'Pets',
         component: (props: StepProps) => <StepListPets {...props} />,
     },
     {
         id: NUMBER_STEPS.SPECIES,
-        title: "Espécie",
+        title: 'Espécie',
         component: (props: StepProps) => <StepListSpecies {...props} />,
     },
     {
         id: NUMBER_STEPS.RACE,
-        title: "Raça",
+        title: 'Raça',
         component: (props: StepProps) => <StepListBreeds {...props} />,
     },
     {
         id: NUMBER_STEPS.SEX,
-        title: "Gênero",
+        title: 'Gênero',
         component: (props: StepProps) => <StepListGender {...props} />,
     },
     {
         id: NUMBER_STEPS.TUTOR,
-        title: "Tutor",
+        title: 'Tutor',
         component: (props: StepProps) => <StepTutor {...props} />,
     },
     {
         id: NUMBER_STEPS.CHOICE,
-        title: "Consulta",
+        title: 'Consulta',
         component: (props: StepProps) => <StepChoice {...props} />,
     },
     {
         id: NUMBER_STEPS.SCHEDULED,
-        title: "Agendamento",
-        component: (props: StepProps) => (
-            <StepScheduledAppointment {...props} />
-        ),
+        title: 'Agendamento',
+        component: (props: StepProps) => <StepScheduledAppointment {...props} />,
     },
-];
+]
 
 const ModalListPets = ({
     children,
     label,
     selectedTabInitial = 1,
 }: ModalConfirmProps) => {
-    const [document, setDocument] = useState("");
-    const [pet, setPet] = useState<IPetV2>({} as IPetV2);
-    const { closeModal, open, showModal } = useModal();
+    const [document, setDocument] = useState('')
+    const [pet, setPet] = useState<IPetV2>({} as IPetV2)
+    const { closeModal, open, showModal } = useModal()
 
-    const { nextStep, onChangeSelectedTab, previousStep, selectedTab } =
-        useSteps(STEPS, selectedTabInitial);
+    const { nextStep, onChangeSelectedTab, previousStep, selectedTab } = useSteps(
+        STEPS,
+        selectedTabInitial,
+    )
 
     useEffect(() => {
         return () => {
-            onChangeSelectedTab(selectedTabInitial);
-            onChangePet({} as IPetV2);
-            onChangeDocument("");
-        };
-    }, []);
+            onChangeSelectedTab(selectedTabInitial)
+            onChangePet({} as IPetV2)
+            onChangeDocument('')
+        }
+    }, [])
 
     const onChangePet = (pet: IPetV2) => {
-        setPet(pet);
-    };
+        setPet(pet)
+    }
 
     const {
         activeData: pets,
@@ -118,62 +112,67 @@ const ModalListPets = ({
         isLoading,
     } = useListPetsOfTutor({
         document,
-        strategy: "simple",
-    });
+        strategy: 'simple',
+    })
 
-    const veterinary = useProfileVeterinary();
+    const veterinary = useProfileVeterinary()
 
     const initialValues = useMemo(() => {
-        const isArray = Array.isArray(pets);
+        const isArray = Array.isArray(pets)
         if (isArray && pets?.length === 0)
             return {
                 cpf_cnpj: document,
                 ownerEmergencyContact: {
                     cpf_cnpj: document,
                 },
-                date_birth: "2021-01-01", // dado falso para não dar erro no backend
+                date_birth: '2021-01-01', // dado falso para não dar erro no backend
                 veterinary,
-            };
-        const pet = (isArray ? pets[0] : pets) as IPetV2;
+            }
+        const pet = (isArray ? pets[0] : pets) as IPetV2
         return {
             id: pet?.id,
-            name: "",
-            specie: "unknown",
-            race: "unknown",
-            castrated: "no",
+            name: '',
+            specie: 'unknown',
+            race: 'unknown',
+            castrated: 'no',
             cpf_cnpj: document,
             ownerEmergencyContact: {
                 last_name: pet?.main_responsible_guardian?.last_name as string,
-                first_name: pet?.main_responsible_guardian
-                    ?.first_name as string,
+                first_name: pet?.main_responsible_guardian?.first_name as string,
                 cpf_cnpj: document,
                 phone: pet?.main_responsible_guardian?.contact?.phone as string,
                 email: pet?.main_responsible_guardian?.contact?.email as string,
                 whatsapp: pet?.main_responsible_guardian?.contact
                     ?.whatsapp as string,
             },
-            date_birth: "2021-01-01", // dado falso para não dar erro no backend
-            sex: "unknown",
+            date_birth: '2021-01-01', // dado falso para não dar erro no backend
+            sex: 'unknown',
             veterinary,
-        } as IPet;
-    }, [pets, veterinary, document]);
+        } as IPet
+    }, [pets, veterinary, document])
 
     const onChangeDocument = (doc: string) => {
-        setDocument(doc);
-    };
+        setDocument(doc)
+    }
 
     const onSubmit = useCallback(
         async (values: IPet) => {
-            const pet = await handleSubmit(values);
+            const pet = await handleSubmit(values)
 
-            if (!pet) return;
+            if (!pet) return
             startTransition(() => {
-                onChangePet(pet as IPetV2);
-                onChangeSelectedTab(NUMBER_STEPS.CHOICE);
-            });
+                onChangePet(pet as IPetV2)
+                onChangeSelectedTab(NUMBER_STEPS.CHOICE)
+            })
         },
-        [handleSubmit, closeModal]
-    );
+        [handleSubmit, closeModal],
+    )
+
+    const hasVisibleStep = useMemo(() => {
+        return (
+            selectedTab >= NUMBER_STEPS.SPECIES && selectedTab < NUMBER_STEPS.CHOICE
+        )
+    }, [selectedTab])
 
     return (
         <>
@@ -204,10 +203,10 @@ const ModalListPets = ({
             <Modal
                 onOpen={() => showModal()}
                 onClose={() => {
-                    onChangeSelectedTab(selectedTabInitial);
-                    onChangePet({} as IPetV2);
-                    onChangeDocument("");
-                    closeModal();
+                    onChangeSelectedTab(selectedTabInitial)
+                    onChangePet({} as IPetV2)
+                    onChangeDocument('')
+                    closeModal()
                 }}
                 modal
                 nested
@@ -220,65 +219,61 @@ const ModalListPets = ({
                     onChange={onChangeSelectedTab}
                     defaultIndex={selectedTabInitial}
                 >
-                    <h1 className="text-center font-bold text-2xl">
-                        Adicionar Pet
-                    </h1>
-                    <h5 className="text-center text-gray-500 mb-2">
-                        Selecione ou Adicione um Pet para prosseguir na
-                        consulta.
+                    <h5 className="text-center font-semibold text-gray-500 mb-2">
+                        Selecione ou Adicione um Pet para prosseguir na consulta.
                     </h5>
                     <Tab.List className="flex flex-row w-full justify-between">
                         {STEPS.map((item) => (
                             <Tab key={item.id} className="hidden" />
                         ))}
                     </Tab.List>
-                    <div className="flex flex-row w-full justify-between">
-                        {STEPS.slice(1, STEPS.length - 2).map((item) => (
-                            <div
-                                key={item.id}
-                                className={cn(
-                                    "p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full",
-                                    {
-                                        "text-primary-500":
-                                            selectedTab === item.id,
-                                        "text-gray-400":
-                                            selectedTab !== item.id,
-                                    }
-                                )}
-                            >
-                                {item.title}
-                            </div>
-                        ))}
-                    </div>
+                    {hasVisibleStep && (
+                        <div className="flex flex-row w-full justify-between">
+                            {STEPS.slice(2, STEPS.length - 2).map((item) => (
+                                <div
+                                    key={item.id}
+                                    className={cn(
+                                        'p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full',
+                                        {
+                                            'text-primary-500':
+                                                selectedTab === item.id,
+                                            'text-gray-400':
+                                                selectedTab !== item.id,
+                                        },
+                                    )}
+                                >
+                                    {item.title}
+                                </div>
+                            ))}
+                        </div>
+                    )}
                     <Formik
                         initialValues={initialValues as IPet}
                         enableReinitialize
                         onSubmit={onSubmit}
                     >
                         <Tab.Panels className="w-full h-full relative">
-                            {STEPS.map(
-                                ({ component: Component, id }, index) => (
-                                    <Tab.Panel key={id} tabIndex={index}>
-                                        <Component
-                                            onChangePet={onChangePet}
-                                            pet={pet}
-                                            onChangeStep={onChangeSelectedTab}
-                                            pets={(pets || []) as IPetV2[]}
-                                            onChangeDocument={onChangeDocument}
-                                            nextStep={nextStep}
-                                            isLoading={isLoading}
-                                            previousStep={previousStep}
-                                            closeModal={closeModal}
-                                        />
-                                    </Tab.Panel>
-                                )
-                            )}
+                            {STEPS.map(({ component: Component, id }, index) => (
+                                <Tab.Panel key={id} tabIndex={index}>
+                                    <Component
+                                        onChangePet={onChangePet}
+                                        pet={pet}
+                                        onChangeStep={onChangeSelectedTab}
+                                        pets={(pets || []) as IPetV2[]}
+                                        onChangeDocument={onChangeDocument}
+                                        nextStep={nextStep}
+                                        isLoading={isLoading}
+                                        previousStep={previousStep}
+                                        closeModal={closeModal}
+                                    />
+                                </Tab.Panel>
+                            ))}
                         </Tab.Panels>
                     </Formik>
                 </Tab.Group>
             </Modal>
         </>
-    );
-};
+    )
+}
 
-export default ModalListPets;
+export default ModalListPets
