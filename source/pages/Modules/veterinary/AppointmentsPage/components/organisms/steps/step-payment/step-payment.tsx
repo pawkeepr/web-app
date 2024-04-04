@@ -1,13 +1,14 @@
 import { Form } from 'formik'
 import { useEffect, useMemo } from 'react'
 import { BtnPrimary } from '~/Components/atoms/btn'
+import SelectModal from '~/Components/modals/select-modal'
 import CardTutor from '~/Components/molecules/card-tutor'
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import FieldCurrency from '~/Components/molecules/field-currency'
 import FieldNumber from '~/Components/molecules/field-number'
 
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { VeterinaryConsultation } from '~/types/appointment'
+import type { GenericObject } from '~/types/helpers'
 import type { GenericSelect } from '~/types/pet-v2'
 
 type CtxStepPayment = Pick<
@@ -53,15 +54,26 @@ const StepPayment = () => {
                     tutor={values.tutor_pet_vet?.tutor}
                     pet={values.tutor_pet_vet?.pet}
                 />
+
                 <div className="grid grid-cols-3 mobile:grid-cols-2 gap-2 z-50">
-                    <FieldControlSelect
-                        ctx={values}
+                    <SelectModal
+                        value={
+                            values.appointment_details.payment
+                                .form_payment as unknown as GenericObject
+                        }
+                        onChange={(item) => {
+                            setFieldValue(
+                                'appointment_details.payment.form_payment',
+                                item,
+                            )
+                        }}
+                        isValid={!!form_payment.value}
+                        title="Selecione a Forma de Pagamento"
                         required
                         divClassName="col-span-1"
                         name="appointment_details.payment.form_payment"
                         label="Forma de Pagamento"
-                        checked={form_payment}
-                        options={[
+                        items={[
                             {
                                 label: 'Cartão de Crédito',
                                 value: 'credit_card',
