@@ -154,7 +154,7 @@ const CardInputTreatment = ({
                 min-h-[480px] mobile:min-h-[440px]  rounded-sm
             "
         >
-            <h4 className="font-sans text-center font-semibold uppercase mobile:underline mobile:text-primary-500">
+            <h4 className="font-sans text-center font-semibold uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
                 {makeTitle(category.label as string, false)}
             </h4>
             <div className="flex flex-row w-full justify-between flex-wrap mb-4">

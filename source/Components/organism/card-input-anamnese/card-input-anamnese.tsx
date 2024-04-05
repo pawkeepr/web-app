@@ -140,7 +140,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                 min-h-[420px]  rounded-sm
             "
         >
-            <h4 className="font-sans text-center font-semibold uppercase mobile:underline mobile:text-primary-500">
+            <h4 className="font-sans text-center font-semibold uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
                 {makeTitle(category.label, false)}
             </h4>
             <div className="flex flex-row w-full justify-between flex-wrap mb-4">
