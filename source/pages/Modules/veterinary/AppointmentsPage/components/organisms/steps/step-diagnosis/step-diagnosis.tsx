@@ -4,6 +4,7 @@ import FieldTextArea from '~/Components/molecules/field-text-area'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import CardSimplePet from '../../../molecules/card-simple-pet'
 import type { CtxStepAnamnese } from '../../../validations.yup'
+import { screen } from '../styles'
 
 const TRADUCTION = {
     yes: 'Sim',
@@ -16,21 +17,13 @@ const StepDiagnosis = () => {
     return (
         <>
             <h4 className="text-center font-sans font-semibold text-base capitalize">
-                Pré-Anamnese
+                Diagnostico
                 <br />
                 <span className="text-xs font-bold text-secondary-500">
                     Obrigatório (*)
                 </span>
             </h4>
-            <div
-                className="
-                flex-col card shadow-2xl p-8 
-                border-secondary-500 border relative
-                mobile:p-2 mobile:border  mobile:!shadow-none
-                min-h-[420px]  rounded-sm
-                grid grid-cols-12 mobile:grid-cols-1
-            "
-            >
+            <div className={screen()}>
                 <div className="w-full col-span-full">
                     <CardSimplePet />
                 </div>

@@ -10,6 +10,7 @@ import type { OptionSelect } from '~/Components/molecules/field-control'
 import CardInputTreatment from '~/Components/organism/card-input-treatment'
 import { MEDICAL_RECORDS } from '~/types/medical-records'
 import CardSimplePet from '../../../molecules/card-simple-pet'
+import { screen } from '../styles'
 
 const items: OptionSelect[] = [
     {
@@ -29,7 +30,7 @@ const items: OptionSelect[] = [
     },
     {
         value: MEDICAL_RECORDS.EXAMS,
-        label: 'Exames',
+        label: 'Exames/Testes',
         icon: FaFileMedical,
     },
     {
@@ -41,7 +42,7 @@ const items: OptionSelect[] = [
 
 const StepTreatment = () => {
     return (
-        <section>
+        <>
             <CardSimplePet />
             <h4 className="text-center font-sans font-semibold text-base capitalize">
                 Tratamento
@@ -50,21 +51,23 @@ const StepTreatment = () => {
                     Obrigatório (*)
                 </span>
             </h4>
-            <FieldArray name="treatments.questions_treatment">
-                {({ push, remove }) => (
-                    <CardInputTreatment
-                        items={items}
-                        handleRemove={(index) => remove(index)}
-                        handleSubmit={(data, formikHelpers) => {
-                            return new Promise(() => {
-                                push(data)
-                                formikHelpers.resetForm()
-                            })
-                        }}
-                    />
-                )}
-            </FieldArray>
-        </section>
+            <div className={screen()}>
+                <FieldArray name="treatments.questions_treatment">
+                    {({ push, remove }) => (
+                        <CardInputTreatment
+                            items={items}
+                            handleRemove={(index) => remove(index)}
+                            handleSubmit={(data, formikHelpers) => {
+                                return new Promise(() => {
+                                    push(data)
+                                    formikHelpers.resetForm()
+                                })
+                            }}
+                        />
+                    )}
+                </FieldArray>
+            </div>
+        </>
     )
 }
 

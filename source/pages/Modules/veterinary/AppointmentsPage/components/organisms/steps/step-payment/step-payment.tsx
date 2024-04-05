@@ -13,6 +13,7 @@ import {
     PAYMENTS_OPTIONS_INSTALLMENTS,
 } from '~/types/helpers'
 import type { GenericSelect } from '~/types/pet-v2'
+import { screen } from '../styles'
 
 type CtxStepPayment = Pick<
     VeterinaryConsultation,
@@ -57,14 +58,7 @@ const StepPayment = () => {
                     Obrigatório (*)
                 </span>
             </h4>
-            <div
-                className="
-                gap-2 flex flex-col card shadow-2xl p-8 
-                border-secondary-500 border relative
-                mobile:p-2 mobile:border  mobile:!shadow-none
-                min-h-[420px]  rounded-sm
-            "
-            >
+            <div className={screen()}>
                 <CardTutor
                     tutor={values.tutor_pet_vet?.tutor}
                     pet={values.tutor_pet_vet?.pet}

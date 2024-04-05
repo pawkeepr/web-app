@@ -14,6 +14,7 @@ import { tv } from 'tailwind-variants'
 import { BtnIcon } from '~/Components/atoms/btn'
 import withLoading from '~/Components/helpers/with-loading'
 import ModalConfirm from '~/Components/modals/confirm-modal'
+import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { StepProps, Tabs } from '~/types/helpers'
 import StepAnamneses from '../organisms/steps/step-anamnese'
 import StepDiagnosis from '../organisms/steps/step-diagnosis'
@@ -87,7 +88,7 @@ const tab = tv({
 const VerticalTabs = () => {
     const [activeIndex, setActiveIndex] = useState(0)
     const [swipperController, setSwipperController] = useState<any>()
-
+    const { isMobile } = useResizeMobile()
     const router = useRouter()
 
     return (
@@ -152,11 +153,11 @@ const VerticalTabs = () => {
                 onSwiper={(swiper) => {
                     setSwipperController(swiper)
                 }}
-                pagination={{ clickable: true }}
+                // pagination={{ clickable: true, }}
                 onSlideChange={(swiper) => {
                     setActiveIndex(swiper.activeIndex)
                 }}
-                scrollbar={{ draggable: true }}
+                scrollbar={isMobile ? false : { draggable: false }}
             >
                 {items.map(({ id, Component }, index) => {
                     return (

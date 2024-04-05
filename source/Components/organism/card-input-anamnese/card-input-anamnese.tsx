@@ -2,7 +2,7 @@ import { Formik } from 'formik'
 import { useMemo, useState } from 'react'
 import type { IconType } from 'react-icons'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { FaArrowLeft, FaArrowRight, FaRunning } from 'react-icons/fa'
+import { FaRunning } from 'react-icons/fa'
 import { GiBrain, GiKidneys, GiLungs, GiStomach } from 'react-icons/gi'
 import * as Yup from 'yup'
 import ControlSwitchDiv from '~/Components/molecules/control-switch-div'
@@ -119,38 +119,31 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
         )
     }, [options])
 
-    const keyPressLeft = () => {
-        setCategory((prev) => {
-            const index = STEPS.findIndex((item) => item.value === prev.value)
-            const next = STEPS[index - 1]
-            if (next) {
-                return next
-            }
-            return prev
-        })
-    }
+    // const keyPressLeft = () => {
+    //     setCategory((prev) => {
+    //         const index = STEPS.findIndex((item) => item.value === prev.value)
+    //         const next = STEPS[index - 1]
+    //         if (next) {
+    //             return next
+    //         }
+    //         return prev
+    //     })
+    // }
 
-    const keyPressRight = () => {
-        setCategory((prev) => {
-            const index = STEPS.findIndex((item) => item.value === prev.value)
-            const next = STEPS[index + 1]
-            if (next) {
-                return next
-            }
-            return prev
-        })
-    }
+    // const keyPressRight = () => {
+    //     setCategory((prev) => {
+    //         const index = STEPS.findIndex((item) => item.value === prev.value)
+    //         const next = STEPS[index + 1]
+    //         if (next) {
+    //             return next
+    //         }
+    //         return prev
+    //     })
+    // }
 
     return (
-        <div
-            className="
-                gap-2 flex flex-col card shadow-2xl p-8 
-                border-secondary-500 border relative
-                mobile:p-2 mobile:border  mobile:!shadow-none
-                min-h-[420px]  rounded-sm
-            "
-        >
-            <h4 className="font-sans text-center font-semibold uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
+        <>
+            <h4 className="font-sans mb-2 text-center font-semibold uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
                 {makeTitle(category.label, false)}
             </h4>
             <div className="flex flex-row w-full justify-between flex-wrap mb-4">
@@ -178,7 +171,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                 onSubmit={() => {}}
             >
                 {({ values }) => (
-                    <section className="px-4">
+                    <section>
                         {options.map((item) => (
                             <ControlSwitchDiv
                                 initialValue={null}
@@ -203,7 +196,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                     </section>
                 )}
             </Formik>
-            <button
+            {/* <button
                 onClick={keyPressRight}
                 type="button"
                 className="btn btn-primary absolute bottom-4 right-4"
@@ -217,8 +210,8 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                 className="btn btn-primary absolute bottom-4 left-4"
             >
                 <FaArrowLeft />
-            </button>
-        </div>
+            </button> */}
+        </>
     )
 }
 

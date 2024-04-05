@@ -4,6 +4,7 @@ import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { QuestionAnamnesis } from '~/types/appointment'
 import CardSimplePet from '../../../molecules/card-simple-pet'
 import type { CtxStepAnamnese } from '../../../validations.yup'
+import { screen } from '../styles'
 
 const StepAnamnese = () => {
     const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>()
@@ -31,11 +32,12 @@ const StepAnamnese = () => {
                     Obrigatório (*)
                 </span>
             </h4>
-
-            <CardInputAnamnese
-                items={questions}
-                handleChange={handlePushAnamnese}
-            />
+            <div className={screen()}>
+                <CardInputAnamnese
+                    items={questions}
+                    handleChange={handlePushAnamnese}
+                />
+            </div>
         </>
     )
 }

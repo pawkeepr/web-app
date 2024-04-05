@@ -3,6 +3,7 @@ import FieldTextArea from '~/Components/molecules/field-text-area'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import CardSimplePet from '../../../molecules/card-simple-pet'
 import type { CtxStepAnamnese } from '../../../validations.yup'
+import { screen } from '../styles'
 
 const StepGeral = () => {
     const { values } = useFormikContextSafe<CtxStepAnamnese>()
@@ -17,15 +18,7 @@ const StepGeral = () => {
                     Obrigatório (*)
                 </span>
             </h4>
-            <div
-                className="
-                flex-col card shadow-2xl p-8 
-                border-secondary-500 border relative
-                mobile:p-2 mobile:border  mobile:!shadow-none
-                min-h-[420px]  rounded-sm
-                grid grid-cols-12 mobile:grid-cols-1
-            "
-            >
+            <div className={screen()}>
                 <FieldTextArea
                     isValid={values.dates_consults.reason_consultation.length > 0}
                     ctx={values}
@@ -48,27 +41,29 @@ const StepGeral = () => {
                     Peso do pet em quilos, exemplo = 0.5 (500 gramas)
                 </legend>
 
-                <div className="col-span-6 mr-2">
-                    <FieldNumber
-                        ctx={values}
-                        label="Altura"
-                        name="details_pet_consultation.height"
-                    />
-                    <legend className="col-span-3 text-xs text-gray-400 text-center">
-                        Altura do pet em centímetros, exemplo = 32
-                    </legend>
-                </div>
+                <div className="flex flex-1 flex-row gap-2 mobile:!flex-col mobile:gap-0">
+                    <div className="mobile:w-full web:w-[50%]">
+                        <FieldNumber
+                            ctx={values}
+                            label="Altura"
+                            name="details_pet_consultation.height"
+                        />
+                        <legend className="col-span-3 text-xs text-gray-400 text-center">
+                            Altura do pet em centímetros, exemplo = 32
+                        </legend>
+                    </div>
 
-                <div className="col-span-6">
-                    <FieldNumber
-                        ctx={values}
-                        label="Comprimento"
-                        name="details_pet_consultation.length"
-                    />
+                    <div className="mobile:w-full web:w-[50%]">
+                        <FieldNumber
+                            ctx={values}
+                            label="Comprimento"
+                            name="details_pet_consultation.length"
+                        />
 
-                    <legend className="col-span-3 text-xs text-gray-400 text-center">
-                        Comprimento do pet em centímetros
-                    </legend>
+                        <legend className="col-span-3 text-xs text-gray-400 text-center">
+                            Comprimento do pet em centímetros
+                        </legend>
+                    </div>
                 </div>
 
                 <div>
