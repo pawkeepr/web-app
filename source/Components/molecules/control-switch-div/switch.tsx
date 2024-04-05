@@ -102,7 +102,7 @@ const ControlSwitch = <Ctx,>({
         event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
     ) => {
         if (mode === ModeInput.readonly) return
-        if (field.value !== null) {
+        if (field.value !== null && field.value !== undefined) {
             handleChange(!field.value)
             return
         }
