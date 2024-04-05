@@ -110,7 +110,7 @@ const ControlSwitch = <Ctx,>({
         const switchRect = event.currentTarget.getBoundingClientRect()
         const clickPosition = event.clientX - switchRect.left
         const newValue = clickPosition > switchRect.width / 2
-        handleChange(newValue)
+        handleChange(!!newValue)
         onClick?.()
     }
 
