@@ -1,8 +1,8 @@
 import {
-    useMemo,
-    useRef,
     type ForwardRefExoticComponent,
     type RefAttributes,
+    useMemo,
+    useRef,
 } from 'react'
 import { FaWhatsapp } from 'react-icons/fa'
 import { tv } from 'tailwind-variants'
@@ -10,6 +10,7 @@ import AvatarPet from '~/Components/molecules/avatar-pet'
 import type { IHookModal } from '~/hooks/use-modal'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { VeterinaryConsultation } from '~/types/appointment'
+import { BreedNames } from '~/types/breedType'
 import { Gender, GenderBR, MapOptionSpecies, Species } from '~/types/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import BoxButtons from '../box-buttons'
@@ -72,6 +73,9 @@ const CardScheduled = ({
             ...appointment.tutor_pet_vet.pet,
             specie: Species[
                 appointment.tutor_pet_vet?.pet?.specie as keyof typeof Species
+            ],
+            race: BreedNames[
+                appointment.tutor_pet_vet?.pet?.race as keyof typeof BreedNames
             ],
             gender: Gender[appointment.tutor_pet_vet?.pet?.sex as Gender],
         }),

@@ -4,6 +4,7 @@ import { BtnConfirm } from '~/Components/atoms/btn'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import useModal from '~/hooks/use-modal'
 import type { VeterinaryConsultation } from '~/types/appointment'
+import { BreedNames } from '~/types/breedType'
 import { Gender, Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import { getNameTutor } from '~/utils/get-name-tutors'
@@ -38,6 +39,9 @@ const ModalBoxButtons = forwardRef(
                     item.tutor_pet_vet?.pet?.specie as keyof typeof Species
                 ],
                 gender: Gender[item.tutor_pet_vet?.pet?.sex as Gender],
+                race: BreedNames[
+                    item.tutor_pet_vet?.pet?.race as keyof typeof BreedNames
+                ],
                 name_tutor: getNameTutor(item.tutor_pet_vet?.tutor),
                 contact: item.tutor_pet_vet?.tutor?.contact,
             }),
@@ -79,7 +83,7 @@ const ModalBoxButtons = forwardRef(
                     <div className="flex flex-col justify-between items-center w-full h-[90%] p-2">
                         <AvatarPet
                             name_pet={pet?.name_pet}
-                            specie={pet?.specie as Species}
+                            specie={item?.tutor_pet_vet?.pet?.specie as Species}
                         />
                         <h1 className="text-center text-muted text-xl font-sans">
                             {pet?.name_pet}

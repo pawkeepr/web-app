@@ -26,8 +26,8 @@ const StepListBreeds = ({ nextStep, previousStep }: StepProps) => {
         if (!specie) return
 
         startTransition(() => {
-            const casted_breed = specie.breedType as unknown as Item[]
-            setBreeds(casted_breed)
+            const listBreed = specie.breedType as unknown as Item[]
+            setBreeds(listBreed)
         })
     }, [values.specie])
 
@@ -43,7 +43,7 @@ const StepListBreeds = ({ nextStep, previousStep }: StepProps) => {
                             selected: values.race === breed.value,
                         })}
                     >
-                        <div className="grid grid-cols-4 justify-center items-center">
+                        <div className="flex flex-1 justify-center items-center">
                             <span className="align-middle col-span-full">
                                 {breed.label}
                             </span>

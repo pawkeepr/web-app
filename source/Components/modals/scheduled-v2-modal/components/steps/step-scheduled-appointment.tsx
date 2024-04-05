@@ -9,7 +9,7 @@ import { useCallback, useMemo } from 'react'
 import BoxButtons from '~/Components/molecules/box-buttons'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
-import useListAppointments from '~/store/hooks/list-appointments'
+import { handleSubmitTypeAppointments } from '~/store/hooks/list-appointments/use-list-appointments'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import type { Breed } from '~/types/breedType'
 import type { Species } from '~/types/speciesType'
@@ -89,7 +89,7 @@ const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) 
         }),
         [pet, veterinary],
     )
-    const { handleSubmit, isLoading } = useListAppointments({
+    const handleSubmit = handleSubmitTypeAppointments({
         mode: 'scheduled',
         handleClose: closeModal,
     })
@@ -176,7 +176,7 @@ const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) 
                         <FieldTextArea
                             ctx={values}
                             required
-                            label="Razão da consulta"
+                            label="Motivo da Consulta"
                             className="form-control"
                             component="textarea"
                             name="dates_consults.reason_consultation"
@@ -187,7 +187,7 @@ const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) 
                     <BoxButtons
                         link={false}
                         isValid={isValid}
-                        isLoading={isSubmitting || isLoading}
+                        isLoading={isSubmitting}
                         onClickSuccess={() => handleSubmit()}
                         onClickCancel={previousStep}
                         success={(props) => (
