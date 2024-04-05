@@ -43,7 +43,7 @@ const Modal = ({
             {...props}
         >
             <div className={modal({ className, mobilePage })}>
-                <div className="h-8 bg-primary w-full relative flex justify-end">
+                <div className="h-8 bg-primary w-full relative flex justify-end mobile:justify-center">
                     <button
                         type="button"
                         className="!w-fit !p-0 !m-0  !h-fit "

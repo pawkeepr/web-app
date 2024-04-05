@@ -1,3 +1,4 @@
+import ModalConfirm from '~/Components/modals/confirm-modal/modal-confirm'
 import FieldArraySafe from '~/Components/molecules/field-array-safe'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
@@ -42,37 +43,63 @@ const StepDiagnosis = () => {
                             <div className="h-44 overflow-auto scroll-smooth scroll-width-thin mine-scroll-bar flex flex-1 w-full flex-col gap-1">
                                 {values.anamnesis?.questions_anamnesis?.map(
                                     (anamnesis, index) => (
-                                        <div
+                                        <ModalConfirm
+                                            onConfirm={() => remove(index)}
                                             key={`anamnesis-${index}`}
-                                            className="w-full rounded-md text-xs py-1 px-2"
+                                            title="Deseja remover a seguinte questão?"
+                                            description={`
+                                                    As questões de anamnese caso
+                                                    sejam removidas, não serão
+                                                    enviadas ao relatório final.
+                                                    Caso tenha as removido por
+                                                    engano, basta respondê-la
+                                                    novamente na seção de anamnese.
+                                            `}
+                                            message={`${
+                                                anamnesis.name_anamnesis
+                                            } - ${
+                                                TRADUCTION[
+                                                    anamnesis.options_anamnesis as
+                                                        | 'yes'
+                                                        | 'no'
+                                                ]
+                                            }`}
                                         >
-                                            <div className="w-full flex flex-row bg-white px-2 rounded-sm border-dashed border border-primary">
-                                                <div className="flex flex-wrap w-full">
-                                                    <h6 className="flex-[2] font-mono font-semibold  capitalize">
-                                                        {anamnesis.name_anamnesis}
-                                                    </h6>
+                                            {(showModal) => (
+                                                <button
+                                                    onClick={showModal}
+                                                    type="button"
+                                                    key={`anamnesis-${index}`}
+                                                    className="w-full rounded-md text-xs py-1 px-2"
+                                                >
+                                                    <div className="w-full flex flex-row bg-white px-2 rounded-sm border-dashed border border-primary">
+                                                        <div className="flex flex-wrap w-full">
+                                                            <h6 className="flex-[2] font-mono font-semibold text-left capitalize">
+                                                                {
+                                                                    anamnesis.name_anamnesis
+                                                                }
+                                                            </h6>
 
-                                                    <p className="flex-1 font-mono capitalize">
-                                                        {
-                                                            TRADUCTION[
-                                                                anamnesis.options_anamnesis as
-                                                                    | 'yes'
-                                                                    | 'no'
-                                                            ]
-                                                        }
-                                                    </p>
-                                                    <button
-                                                        type="button"
-                                                        className="text-red-500"
-                                                        onClick={() =>
-                                                            remove(index)
-                                                        }
-                                                    >
-                                                        X
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                            <p className="flex-1 font-mono capitalize">
+                                                                {
+                                                                    TRADUCTION[
+                                                                        anamnesis.options_anamnesis as
+                                                                            | 'yes'
+                                                                            | 'no'
+                                                                    ]
+                                                                }
+                                                            </p>
+                                                            <button
+                                                                type="button"
+                                                                className="text-red-500"
+                                                            >
+                                                                X
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                            )}
+                                        </ModalConfirm>
                                     ),
                                 )}
                             </div>

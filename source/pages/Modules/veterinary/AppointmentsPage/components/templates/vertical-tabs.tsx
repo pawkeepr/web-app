@@ -98,7 +98,7 @@ const VerticalTabs = () => {
                 description="Importante!"
                 message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
             >
-                {({ onChangeOpen }) => {
+                {(showModal) => {
                     return (
                         <div className="w-full bg-primary-500 rounded-t-sm justify-end flex p-0 py-1">
                             <BtnIcon
@@ -107,7 +107,7 @@ const VerticalTabs = () => {
                                     <XMarkIcon className="font-extrabold text-secondary-400 hover:bg-red-500 rounded-sm" />
                                 }
                                 className="w-fit !p-0 !m-0 h-fit"
-                                onClick={() => onChangeOpen(true)}
+                                onClick={showModal}
                                 aria-label="Close modal"
                             />
                         </div>

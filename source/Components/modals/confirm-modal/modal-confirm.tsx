@@ -1,13 +1,7 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import withCompose from '~/Components/helpers/with-compose'
-
-type onChangeOpen = (arg: boolean) => void
-
-type ChildrenProps = {
-    onChangeOpen: onChangeOpen
-}
+import Modal from '~/Components/organism/modal'
+import useModal from '~/hooks/use-modal'
 
 type ModalConfirmProps = {
     title: string
@@ -16,7 +10,7 @@ type ModalConfirmProps = {
     label?: string
     onConfirm?: () => void
     onCancel?: () => void
-    children?: (params: ChildrenProps) => React.ReactNode
+    children?: (showModal: () => void) => JSX.Element
 }
 
 const ModalConfirm = ({
@@ -28,38 +22,26 @@ const ModalConfirm = ({
     description,
     children,
 }: ModalConfirmProps) => {
-    const [isOpen, setIsOpen] = useState(false)
+    const { closeModal, open, showModal } = useModal()
 
     const handleConfirm = () => {
         onConfirm?.()
-        setIsOpen(false)
+        closeModal()
     }
 
     const handleCancel = () => {
         onCancel?.()
-        setIsOpen(false)
-    }
-
-    const onChangeOpen = (arg: boolean) => {
-        setIsOpen(arg)
-    }
-
-    const closeModal = () => {
-        onChangeOpen(false)
-    }
-
-    const openModal = () => {
-        onChangeOpen(true)
+        closeModal()
     }
 
     return (
         <>
-            {children?.({ onChangeOpen })}
+            {children?.(showModal)}
             {!children && (
                 <div className="flex items-center justify-center">
                     <button
                         type="button"
-                        onClick={openModal}
+                        onClick={() => showModal()}
                         className="
                                 rounded-md 
                                 bg-secondary-500 bg-opacity-20 
@@ -78,87 +60,40 @@ const ModalConfirm = ({
                 </div>
             )}
 
-            <Transition appear show={isOpen} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={closeModal}>
-                    <Transition.Child
-                        as={Fragment}
-                        enter="ease-out duration-300"
-                        enterFrom="opacity-0"
-                        enterTo="opacity-100"
-                        leave="ease-in duration-200"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                    >
-                        <div className="fixed inset-0 bg-black bg-opacity-25" />
-                    </Transition.Child>
+            <Modal
+                onOpen={() => showModal}
+                onClose={() => closeModal()}
+                modal
+                nested
+                open={open}
+                lockScroll
+                mobilePage={false}
+                className="w-fit h-fit m-2"
+            >
+                <div className="flex justify-center items-center flex-col max-w-[480px] ">
+                    <h2 className="text-xl mb-1 font-semibold leading-6 text-gray-900 dark:!text-gray-200 text-center">
+                        {title}
+                    </h2>
 
-                    <div className="fixed inset-0 overflow-y-auto">
-                        <div className="flex min-h-full items-center justify-center p-4 text-center">
-                            <Transition.Child
-                                as={Fragment}
-                                enter="ease-out duration-300"
-                                enterFrom="opacity-0 scale-95"
-                                enterTo="opacity-100 scale-100"
-                                leave="ease-in duration-200"
-                                leaveFrom="opacity-100 scale-100"
-                                leaveTo="opacity-0 scale-95"
-                            >
-                                <Dialog.Panel
-                                    className="
-                                    w-full 
-                                    max-w-md 
-                                    transform 
-                                    overflow-hidden 
-                                    rounded-2xl 
-                                    bg-white 
-                                    p-6 
-                                    text-left 
-                                    align-middle 
-                                    shadow-xl 
-                                    transition-all
-                                    dark:!bg-dark-500
-                                    dark:!text-gray-200
-                                    !font-sans
-                                "
-                                >
-                                    <Dialog.Title
-                                        as="h2"
-                                        className="text-xl font-semibold leading-6 text-gray-900 dark:!text-gray-200 text-center"
-                                    >
-                                        {title}
-                                    </Dialog.Title>
+                    <legend className="col-span-full text-sm text-gray-500 text-center">
+                        {description}
+                    </legend>
 
-                                    <Dialog.Description
-                                        as="p"
-                                        className="text-sm font-bold text-secondary-500 dark:!text-secondary-500 text-center"
-                                    >
-                                        {description}
-                                    </Dialog.Description>
+                    <p className="text-sm text-center text-gray-700 dark:!text-gray-300 leading-6">
+                        {message}
+                    </p>
 
-                                    <div className="mt-3 p-1">
-                                        <p className="text-sm text-gray-500 dark:!text-gray-300 leading-6">
-                                            {message}
-                                        </p>
-                                    </div>
+                    <div className="mt-4 flex justify-center items-center">
+                        <BtnCancel type="button" onClick={handleCancel} />
 
-                                    <div className="mt-4 flex justify-center items-center">
-                                        <BtnCancel
-                                            type="button"
-                                            onClick={handleCancel}
-                                        />
-
-                                        <BtnPrimary
-                                            type="button"
-                                            label="Continuar"
-                                            onClick={handleConfirm}
-                                        />
-                                    </div>
-                                </Dialog.Panel>
-                            </Transition.Child>
-                        </div>
+                        <BtnPrimary
+                            type="button"
+                            label="Continuar"
+                            onClick={handleConfirm}
+                        />
                     </div>
-                </Dialog>
-            </Transition>
+                </div>
+            </Modal>
         </>
     )
 }
