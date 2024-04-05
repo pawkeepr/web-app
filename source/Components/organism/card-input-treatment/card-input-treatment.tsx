@@ -101,9 +101,9 @@ const CardInputTreatment = ({
             filteredItemsSelects?.map((treatment, index) => (
                 <div
                     key={`treatment-${index}`}
-                    className="w-full bg-secondary rounded-md text-xs py-1 px-2"
+                    className="w-full  rounded-md text-xs py-1 px-2"
                 >
-                    <div className="w-full flex flex-row bg-secondary px-2 rounded-sm border-dashed border border-primary">
+                    <div className="w-full flex flex-row px-2 rounded-sm border-dashed border border-primary">
                         <div className="grid grid-cols-12 w-full">
                             <h6 className="col-span-3 font-mono font-semibold  capitalize ">
                                 {treatment.name_treatment}
@@ -245,8 +245,6 @@ const CardInputTreatment = ({
                     </Form>
                 )}
             </Formik>
-
-            {}
         </div>
     )
 }

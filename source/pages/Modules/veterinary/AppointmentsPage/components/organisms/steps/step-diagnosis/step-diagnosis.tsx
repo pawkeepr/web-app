@@ -33,46 +33,50 @@ const StepDiagnosis = () => {
                 <div className="w-full col-span-full">
                     <CardSimplePet />
                 </div>
-                <section className="col-span-full flex flex-1 w-full flex-col gap-1">
+                <section className="col-span-full ">
                     <FieldArraySafe
                         ctx={values}
                         name="anamnesis.questions_anamnesis"
                     >
-                        {({ remove }) =>
-                            values.anamnesis?.questions_anamnesis?.map(
-                                (anamnesis, index) => (
-                                    <div
-                                        key={`anamnesis-${index}`}
-                                        className="w-full bg-secondary rounded-md text-xs py-1 px-2"
-                                    >
-                                        <div className="w-full flex flex-row bg-secondary px-2 rounded-sm border-dashed border border-primary">
-                                            <div className="flex flex-wrap w-full">
-                                                <h6 className="flex-[2] font-mono font-semibold  capitalize">
-                                                    {anamnesis.name_anamnesis}
-                                                </h6>
+                        {({ remove }) => (
+                            <div className="h-56 overflow-auto flex flex-1 w-full flex-col gap-1">
+                                {values.anamnesis?.questions_anamnesis?.map(
+                                    (anamnesis, index) => (
+                                        <div
+                                            key={`anamnesis-${index}`}
+                                            className="w-full rounded-md text-xs py-1 px-2"
+                                        >
+                                            <div className="w-full flex flex-row bg-white px-2 rounded-sm border-dashed border border-primary">
+                                                <div className="flex flex-wrap w-full">
+                                                    <h6 className="flex-[2] font-mono font-semibold  capitalize">
+                                                        {anamnesis.name_anamnesis}
+                                                    </h6>
 
-                                                <p className="flex-1 font-mono capitalize">
-                                                    {
-                                                        TRADUCTION[
-                                                            anamnesis.options_anamnesis as
-                                                                | 'yes'
-                                                                | 'no'
-                                                        ]
-                                                    }
-                                                </p>
-                                                <button
-                                                    type="button"
-                                                    className="text-red-500"
-                                                    onClick={() => remove(index)}
-                                                >
-                                                    X
-                                                </button>
+                                                    <p className="flex-1 font-mono capitalize">
+                                                        {
+                                                            TRADUCTION[
+                                                                anamnesis.options_anamnesis as
+                                                                    | 'yes'
+                                                                    | 'no'
+                                                            ]
+                                                        }
+                                                    </p>
+                                                    <button
+                                                        type="button"
+                                                        className="text-red-500"
+                                                        onClick={() =>
+                                                            remove(index)
+                                                        }
+                                                    >
+                                                        X
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ),
-                            )
-                        }
+                                    ),
+                                )}
+                            </div>
+                        )}
                     </FieldArraySafe>
                     <legend className="col-span-full text-xs text-gray-400 text-center">
                         As questões de anamnese caso sejam removidas, não serão
