@@ -172,3 +172,24 @@ textarea {
 .outline-secondary:focus {
     outline: 3px solid #FFC86B !important;
 }
+
+.mine-scroll-bar::-webkit-scrollbar,
+.mine-scroll-bar::-webkit-scrollbar-thumb {
+    width: 26px;
+    border-radius: 13px;
+    background-clip: padding-box;
+    border: 10px solid transparent;
+}
+
+.mine-scroll-bar::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 0 10px;
+}
+
+.scroll-width-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #FFC86B #f1f1f1;
+}
+
+.scroll-width-none {
+    scrollbar-width: none;
+}

@@ -39,7 +39,7 @@ const StepDiagnosis = () => {
                         name="anamnesis.questions_anamnesis"
                     >
                         {({ remove }) => (
-                            <div className="h-56 overflow-auto flex flex-1 w-full flex-col gap-1">
+                            <div className="h-44 overflow-auto scroll-smooth scroll-width-thin mine-scroll-bar flex flex-1 w-full flex-col gap-1">
                                 {values.anamnesis?.questions_anamnesis?.map(
                                     (anamnesis, index) => (
                                         <div

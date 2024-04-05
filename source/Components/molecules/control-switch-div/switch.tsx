@@ -56,15 +56,15 @@ const controlSwitch = tv({
 
 const pointerSwitch = tv({
     base: `
-        pointer-events-none inline-block lg:h-[24px] 
-        lg:w-[24px] h-[20px] w-[20px] transform rounded-full 
+        pointer-events-none inline-block h-[2rem] w-[2rem]
+        transform rounded-full 
         bg-white shadow-lg ring-0 transition duration-200 ease-in-out
     `,
     variants: {
         translateClass: {
             true: 'translate-x-9',
             false: 'translate-x-0',
-            null: 'translate-x-[1.2rem]',
+            null: 'translate-x-[50%]',
         },
     },
 })
@@ -129,7 +129,7 @@ const ControlSwitch = <Ctx,>({
                     >
                         Não
                     </span>
-                    <div className="w-16 max-h-max relative">
+                    <div className="w-[72px] max-h-max relative">
                         <Switch
                             disabled={mode === ModeInput.readonly}
                             onClick={(e) => handleClick(e)}
