@@ -16,6 +16,7 @@ const StepDiagnosis = () => {
 
     return (
         <>
+            <div className="h-10" />
             <h4 className="text-center font-sans font-semibold text-base capitalize">
                 Diagnostico
                 <br />

@@ -56,7 +56,8 @@ const StepPayment = () => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <h4 className="text-center font-sans font-semibold text-base capitalize mt-4">
+            <div className="h-10" />
+            <h4 className="text-center font-sans font-semibold text-base capitalize">
                 Pagamento
                 <br />
                 <span className="text-xs font-bold text-secondary-500">
