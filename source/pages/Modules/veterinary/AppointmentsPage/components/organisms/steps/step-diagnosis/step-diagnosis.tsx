@@ -74,6 +74,11 @@ const StepDiagnosis = () => {
                             )
                         }
                     </FieldArraySafe>
+                    <legend className="col-span-full text-xs text-gray-400 text-center">
+                        As questões de anamnese caso sejam removidas, não serão
+                        enviadas ao relatório final. Caso tenha as removido por
+                        engano, basta respondê-la novamente na seção de anamnese.
+                    </legend>
                 </section>
                 <FieldTextArea
                     isValid={values.anamnesis.note.length > 0}

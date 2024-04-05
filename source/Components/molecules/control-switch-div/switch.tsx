@@ -115,6 +115,7 @@ const ControlSwitch = <Ctx,>({
     }
 
     const title = field.value === null ? 'Ind.' : field.value ? 'Sim' : 'Não'
+    const hasInd = field.value === null || field.value === undefined
 
     return (
         <div className={divSwitch({ className: divClassName })}>
@@ -128,11 +129,9 @@ const ControlSwitch = <Ctx,>({
                             checked={field.value === true}
                             className={controlSwitch({
                                 mode,
-                                checked: field.value as boolean,
-                                primary:
-                                    field.value === null ? 'null' : field.value,
-                                secondary:
-                                    field.value === null ? 'null' : !field.value,
+                                checked: hasInd ? false : field.value,
+                                primary: hasInd ? 'null' : field.value,
+                                secondary: hasInd ? 'null' : !field.value,
                                 className,
                             })}
                         >
@@ -141,8 +140,7 @@ const ControlSwitch = <Ctx,>({
                             <span
                                 aria-hidden="true"
                                 className={pointerSwitch({
-                                    translateClass:
-                                        field.value === null ? 'null' : field.value,
+                                    translateClass: hasInd ? 'null' : field.value,
                                 })}
                             />
                             {/* Text inside the switch */}

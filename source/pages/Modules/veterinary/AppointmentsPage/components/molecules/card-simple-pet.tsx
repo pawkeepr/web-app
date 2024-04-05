@@ -18,7 +18,7 @@ const CardSimplePet = () => {
     )
 
     return (
-        <p className="text-gray-500 flex flex-1 justify-start">
+        <p className="text-gray-500 p-2 flex flex-1 justify-start">
             <strong className="mr-2">Pet:</strong>
             <span>{`${values.tutor_pet_vet?.pet?.name_pet}, ${specie}, ${race}`}</span>
         </p>

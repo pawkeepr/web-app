@@ -95,11 +95,6 @@ const CardInputTreatment = ({
         })
     }
 
-    // useKeyboardNavigation({
-    //     ArrowLeft: keyPressLeft,
-    //     ArrowRight: keyPressRight,
-    // })
-
     const Items = useMemo(
         () =>
             filteredItemsSelects?.map((treatment, index) => (
@@ -109,7 +104,7 @@ const CardInputTreatment = ({
                 >
                     <div className="w-full flex flex-row bg-secondary px-2 rounded-sm border-dashed border border-primary">
                         <div className="grid grid-cols-12 w-full">
-                            <h6 className="col-span-3 font-mono font-semibold  capitalize">
+                            <h6 className="col-span-3 font-mono font-semibold  capitalize ">
                                 {treatment.name_treatment}
                             </h6>
 
@@ -158,7 +153,7 @@ const CardInputTreatment = ({
                 min-h-[480px] mobile:min-h-[440px]  rounded-sm
             "
         >
-            <h4 className="font-sans text-center font-semibold uppercase">
+            <h4 className="font-sans text-center font-semibold uppercase mobile:underline">
                 {makeTitle(category.label as string, false)}
             </h4>
             <div className="flex flex-row w-full justify-between flex-wrap mb-4">

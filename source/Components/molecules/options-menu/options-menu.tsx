@@ -17,7 +17,7 @@ const optionMenu = tv({
     base: 'p-2 text-center uppercase bg-opacity-20 bg-secondary-500 flex-1 w-full text-gray-400',
     variants: {
         active: {
-            true: 'text-white !bg-primary-500 rounded-sm bg-opacity-100',
+            true: 'text-white !bg-primary-500 rounded-sm bg-opacity-100 mobile:underline',
         },
     },
 })
