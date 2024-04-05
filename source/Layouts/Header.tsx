@@ -14,6 +14,7 @@ import LightDark from '../common/light-dark'
 import Bars3CenterLeftIcon from '@heroicons/react/24/solid/Bars3CenterLeftIcon'
 
 import { BtnLink } from '~/Components/atoms/btn'
+import { ProfileButton } from '~/Components/molecules/profile-dropdown/profile-dropdown'
 import DrawerVet from '~/Components/organism/drawer'
 import type { ModeDrawerItems } from '~/Components/organism/drawer/drawer'
 
@@ -103,13 +104,16 @@ const Header = ({
                     {/* <MyCartDropdown /> */}
 
                     <FullScreenDropdown />
-
+                    <ProfileButton />
                     {/* Dark/Light Mode set */}
                     <LightDark condition={false} />
 
                     {/* NotificationDropdown */}
                     {/* <NotificationDropdown /> */}
-                    <BtnLink href="/logout" className="hover:!text-secondary-500">
+                    <BtnLink
+                        href="/logout"
+                        className="hover:!text-secondary-500 mobile:hidden"
+                    >
                         <div>
                             <TbLogout
                                 className="w-6 text-cyan-50 h-6"
