@@ -160,6 +160,9 @@ const CardInputTreatment = ({
             <div className="flex flex-row w-full justify-between flex-wrap mb-4">
                 {options.map((item) => (
                     <OptionsMenu
+                        classNames={{
+                            label: 'mobile:hidden',
+                        }}
                         item={item}
                         option={category}
                         onChangeOption={(item) =>

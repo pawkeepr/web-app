@@ -26,9 +26,18 @@ type OptionsMenuProps = {
     item: OptionSelect & { icon: React.ElementType }
     option: OptionSelect
     onChangeOption: (item: OptionSelect) => void
+    classNames?: {
+        icon?: string
+        label?: string
+    }
 }
 
-const OptionsMenu = ({ item, onChangeOption, option }: OptionsMenuProps) => {
+const OptionsMenu = ({
+    item,
+    onChangeOption,
+    option,
+    classNames,
+}: OptionsMenuProps) => {
     const { isMobile } = useResizeMobile()
 
     const Icon = item.icon
@@ -42,11 +51,11 @@ const OptionsMenu = ({ item, onChangeOption, option }: OptionsMenuProps) => {
         >
             <div className="flex w-full items-center justify-center gap-2">
                 {Icon && (
-                    <span className="mobile:underline">
+                    <span className={classNames?.icon}>
                         <Icon className="w-4 h-4 mobile:underline" />
                     </span>
                 )}
-                <span className="mobile:hidden">
+                <span className={classNames?.label}>
                     {makeTitle(item.label, isMobile)}
                 </span>
             </div>

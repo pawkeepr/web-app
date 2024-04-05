@@ -62,7 +62,7 @@ const STEPS: {
     },
     {
         value: 'physical_activity',
-        label: 'Atividade Física',
+        label: 'Outros',
     },
 ]
 
@@ -146,7 +146,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
             <div className="flex flex-row w-full justify-between flex-wrap mb-4">
                 {STEPS.map((item) => (
                     <OptionsMenu
-                        item={item}
+                        item={item as any}
                         option={category}
                         onChangeOption={(item) =>
                             setCategory({
