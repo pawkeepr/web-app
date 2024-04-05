@@ -1,6 +1,9 @@
 import { Formik } from 'formik'
 import { useMemo, useState } from 'react'
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import type { IconType } from 'react-icons'
+import { BsThreeDotsVertical } from 'react-icons/bs'
+import { FaArrowLeft, FaArrowRight, FaRunning } from 'react-icons/fa'
+import { GiBrain, GiKidneys, GiLungs, GiStomach } from 'react-icons/gi'
 import * as Yup from 'yup'
 import ControlSwitchDiv from '~/Components/molecules/control-switch-div'
 import type { OptionSelect } from '~/Components/molecules/field-control'
@@ -39,30 +42,37 @@ type CardInputProps = {
 const STEPS: {
     label: string
     value: KeyOfQuestionTypes
+    icon?: IconType
 }[] = [
     {
         label: 'Sistema Digestivo',
         value: 'digestive_sys',
+        icon: GiStomach,
     },
     {
         label: 'Sistema Respiratório',
         value: 'respiratory_sys',
+        icon: GiLungs,
     },
     {
         label: 'Sistema Urinário',
         value: 'urinary_sys',
+        icon: GiKidneys,
     },
     {
         label: 'Sistema Nervoso',
         value: 'nervous_sys',
+        icon: GiBrain,
     },
     {
         value: 'locomotive_sys',
         label: 'Sistema Locomotor',
+        icon: FaRunning,
     },
     {
         value: 'physical_activity',
         label: 'Outros',
+        icon: BsThreeDotsVertical,
     },
 ]
 
@@ -148,6 +158,9 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                     <OptionsMenu
                         item={item as any}
                         option={category}
+                        classNames={{
+                            label: 'mobile:hidden',
+                        }}
                         onChangeOption={(item) =>
                             setCategory({
                                 ...item,
