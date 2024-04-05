@@ -70,7 +70,7 @@ const pointerSwitch = tv({
 })
 
 const divSwitch = tv({
-    base: 'mb-2',
+    base: 'mb-2 mobile:my-6',
 })
 
 type ControlSwitchTailwind = VariantProps<typeof controlSwitch>

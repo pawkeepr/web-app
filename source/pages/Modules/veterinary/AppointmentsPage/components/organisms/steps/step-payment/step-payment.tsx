@@ -37,7 +37,12 @@ const StepPayment = () => {
                 acc + Number(item.value_coin_treatment.replace(',', '.')),
             0,
         )
-        setFieldValue('appointment_details.payment.value_payment', sum.toFixed(2))
+        if (sum > 0) {
+            setFieldValue(
+                'appointment_details.payment.value_payment',
+                sum.toFixed(2),
+            )
+        }
     }, [values.treatments?.questions_treatment])
 
     useEffect(() => {

@@ -171,7 +171,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                 onSubmit={() => {}}
             >
                 {({ values }) => (
-                    <section>
+                    <section className="mobile:gap-4 ">
                         {options.map((item) => (
                             <ControlSwitchDiv
                                 initialValue={null}
@@ -190,7 +190,6 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                                 }
                                 name={item.value as string}
                                 label={item.label}
-                                divClassName="col-span-1 mobile:col-span-full"
                             />
                         ))}
                     </section>
