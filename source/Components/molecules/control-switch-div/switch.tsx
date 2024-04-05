@@ -114,14 +114,21 @@ const ControlSwitch = <Ctx,>({
         onClick?.()
     }
 
-    const title = field.value === null ? 'Ind.' : field.value ? 'Sim' : 'Não'
     const hasInd = field.value === null || field.value === undefined
-
+    const title = hasInd ? 'Ind.' : field.value ? 'Sim' : 'Não'
+    const hasTitle = mode === ModeInput.readonly
     return (
         <div className={divSwitch({ className: divClassName })}>
             <div className="flex justify-between items-center gap-2 mb-2">
                 <span className="font-semibold text-gray-600">{label}</span>
                 <div className="flex items-center gap-2">
+                    <span
+                        className={cn('text-gray-400', {
+                            hidden: !legend,
+                        })}
+                    >
+                        Não
+                    </span>
                     <div className="w-16 max-h-max relative">
                         <Switch
                             disabled={mode === ModeInput.readonly}
@@ -146,8 +153,15 @@ const ControlSwitch = <Ctx,>({
                             {/* Text inside the switch */}
                         </Switch>
                     </div>
-                    {legend && <span className={cn('text-gray-400')}>{title}</span>}
+                    <span
+                        className={cn('text-gray-400', {
+                            hidden: !legend,
+                        })}
+                    >
+                        Sim
+                    </span>
                 </div>
+                {hasTitle && <span className={cn('text-gray-400')}>{title}</span>}
             </div>
             {field.value && children}
         </div>
