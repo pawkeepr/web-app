@@ -40,15 +40,16 @@ const validationSchema = Yup.object().shape<ShapeTreatment>({
 
 const makeOptions = (items: OptionSelect[]) => {
     return items.map((item) => ({
+        ...item,
+        icon: item.icon,
         value: item.value,
         label: item.label,
         color: 'rgb(255 200 107);',
-    }))
+    })) as (OptionSelect & { icon: React.ElementType })[]
 }
 
 const KeyTreatment = {
     activities_carry: 'Atividades físicas',
-    fast_test: 'Testes rápidos',
     medicine: 'Medicação',
     vaccine: 'Vacina',
     exam: 'Exame',

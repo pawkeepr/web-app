@@ -23,13 +23,15 @@ const optionMenu = tv({
 })
 
 type OptionsMenuProps = {
-    item: OptionSelect
+    item: OptionSelect & { icon: React.ElementType }
     option: OptionSelect
     onChangeOption: (item: OptionSelect) => void
 }
 
 const OptionsMenu = ({ item, onChangeOption, option }: OptionsMenuProps) => {
     const { isMobile } = useResizeMobile()
+
+    const Icon = item.icon
 
     return (
         <button
@@ -38,7 +40,16 @@ const OptionsMenu = ({ item, onChangeOption, option }: OptionsMenuProps) => {
             key={item.value}
             className={optionMenu({ active: item.value === option.value })}
         >
-            {makeTitle(item.label, isMobile)}
+            <div className="flex w-full items-center justify-center gap-2">
+                {Icon && (
+                    <span className="mobile:underline">
+                        <Icon className="w-4 h-4 mobile:underline" />
+                    </span>
+                )}
+                <span className="mobile:hidden">
+                    {makeTitle(item.label, isMobile)}
+                </span>
+            </div>
         </button>
     )
 }

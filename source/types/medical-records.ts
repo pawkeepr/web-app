@@ -1,3 +1,19 @@
+import {
+    FaAllergies,
+    FaBandAid,
+    FaBed,
+    FaBriefcaseMedical,
+    FaCapsules,
+    FaFileMedical,
+    FaHeart,
+    FaHospital,
+    FaRunning,
+    FaSyringe,
+    FaTooth,
+    FaUserMd,
+    FaUtensils,
+} from 'react-icons/fa'
+
 export const MEDICAL_RECORDS = {
     BODY_EVOLUTION: 'body-evolution',
     VACCINES: 'vaccines',
@@ -15,21 +31,6 @@ export const MEDICAL_RECORDS = {
     EXAMS: 'exams',
 } as const
 export type MEDICAL_RECORDS = (typeof MEDICAL_RECORDS)[keyof typeof MEDICAL_RECORDS]
-import {
-    FaAllergies,
-    FaBandAid,
-    FaBed,
-    FaBriefcaseMedical,
-    FaCapsules,
-    FaFileMedical,
-    FaHeart,
-    FaHospital,
-    FaRunning,
-    FaSyringe,
-    FaTooth,
-    FaUserMd,
-    FaUtensils,
-} from 'react-icons/fa'
 
 type MedicalRecordOption = {
     value: (typeof MEDICAL_RECORDS)[keyof typeof MEDICAL_RECORDS]

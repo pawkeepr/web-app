@@ -1,32 +1,41 @@
 import { FieldArray } from 'formik'
+import {
+    FaCapsules,
+    FaFileMedical,
+    FaRunning,
+    FaSyringe,
+    FaUtensils,
+} from 'react-icons/fa'
 import type { OptionSelect } from '~/Components/molecules/field-control'
 import CardInputTreatment from '~/Components/organism/card-input-treatment'
+import { MEDICAL_RECORDS } from '~/types/medical-records'
 import CardSimplePet from '../../../molecules/card-simple-pet'
 
 const items: OptionSelect[] = [
     {
-        value: 'medicine',
-        label: 'Medicação',
+        value: MEDICAL_RECORDS.MEDICINES,
+        label: 'Medicamentos',
+        icon: FaCapsules,
     },
     {
-        value: 'vaccine',
-        label: 'Vacina',
+        value: MEDICAL_RECORDS.VACCINES,
+        label: 'Vacinas',
+        icon: FaSyringe,
     },
     {
-        value: 'nutrition',
-        label: 'Nutrição Alimentar',
+        value: MEDICAL_RECORDS.NUTRITIONS,
+        label: 'Alimentação',
+        icon: FaUtensils,
     },
     {
-        value: 'fast_test',
-        label: 'Testes rápidos',
+        value: MEDICAL_RECORDS.EXAMS,
+        label: 'Exames',
+        icon: FaFileMedical,
     },
     {
-        value: 'exam',
-        label: 'Exame',
-    },
-    {
-        value: 'activities_carry',
-        label: 'Atividades físicas',
+        value: MEDICAL_RECORDS.PHYSICAL_ACTIVITIES,
+        label: 'Atividades Físicas',
+        icon: FaRunning,
     },
 ]
 
