@@ -152,11 +152,6 @@ input:invalid {
     display: block !important;
 }
 
-@media (prefers-color-scheme: dark) {
-    .show-light:not(.dark\\:hidden) {
-        display: none !important;
-    }
-}
 
 input,
 select,

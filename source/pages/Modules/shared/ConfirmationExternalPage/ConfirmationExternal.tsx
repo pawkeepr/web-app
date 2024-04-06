@@ -59,11 +59,11 @@ const ConfirmationPage = () => {
                         <p className="text-sm font-bold text-secondary-500">
                             Seja Bem-vindo(a)!
                         </p>
-                        <h2 className="text-xl font-semibold leading-6 text-gray-600 dark:!text-gray-200 text-center">
+                        <h2 className="text-xl font-semibold leading-6 text-gray-600  text-center">
                             {'Confirmar Agendamento'}
                         </h2>
 
-                        <p className="text-xs font-bold text-primary-500 dark:!text-secondary-500 text-center mb-2">
+                        <p className="text-xs font-bold text-primary-500 text-center mb-2">
                             {'Esta ação não poderá ser desfeita.'}
                         </p>
                     </div>
