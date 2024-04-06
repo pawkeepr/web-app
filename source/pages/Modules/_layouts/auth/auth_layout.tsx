@@ -6,23 +6,42 @@ import Footer from '~/Layouts/Footer'
 
 import cn from 'classnames'
 import Img from '~/Components/atoms/img'
+import LoadingPage from '../../shared/LoadingPage'
 
 type AuthLayoutProps = {
     children: React.ReactNode
     title: string
     hasImage?: boolean
+    loading?: boolean
 } & (
-    | {
-          image: StaticImageData | string
-          alt: string
-      }
-    | {
-          image?: never
-          alt?: never
-      }
-)
+        | {
+            image: StaticImageData | string
+            alt: string
+        }
+        | {
+            image?: never
+            alt?: never
+        }
+    )
 
-const AuthLayout = ({ children, title, image, alt }: AuthLayoutProps) => {
+const AuthLayout = ({
+    children,
+    title,
+    image,
+    alt,
+    loading = false
+}: AuthLayoutProps) => {
+
+    if (loading) {
+        return (
+            <main className={cn(
+                'flex flex-1 content-center mobile:content-start items-center justify-center mobile:items-start mobile:justify-start mobile:overflow-hidden',
+            )}>
+                <LoadingPage />
+            </main>
+        )
+    }
+
     return (
         <div className="min-h-screen auth-bg-cover flex flex-col ">
             <HeaderTitle title={title} />
@@ -42,7 +61,7 @@ const AuthLayout = ({ children, title, image, alt }: AuthLayoutProps) => {
                     )}
                 >
                     {image && (
-                        <picture className="flex flex-1 overflow-hidden !w-full !h-full relative rounded-l-xl mobile:rounded-l-none">
+                        <picture className=" mobile:hidden flex flex-1 overflow-hidden !w-full !h-full relative rounded-l-xl mobile:rounded-l-none">
                             <Img
                                 alt={alt}
                                 src={image as string}
@@ -54,42 +73,27 @@ const AuthLayout = ({ children, title, image, alt }: AuthLayoutProps) => {
                                 className="hidden mobile:block absolute inset-0 w-full h-full object-fill "
                             />
                         </picture>
-                        // {/* <picture className={cn("col-span-1 ", {
-                        //     "block mobile:hidden": !hasImage,
-                        //     "block": hasImage,
-                        // })}>
-                        //     <Image
-                        //         className="object-cover rounded-l-xl mobile:rounded-l-none"
-                        //         src={image}
-                        //         alt={alt}
-                        //         fill
-                        //     />
-                        // </picture> */}
                     )}
                     <div
                         className={cn(
-                            '!overflow-hidden relative mobile:rounded-r-none mobile:rounded-none grid grid-cols-1 mobile:!w-full mobile:!min-h-full py-4 px-12 mobile:py-2 mobile:px-4 bg-white',
+                            `
+                                !overflow-hidden relative mobile:rounded-r-none 
+                                mobile:rounded-none grid grid-cols-1 mobile:!w-full 
+                                mobile:!min-h-full py-4 px-12 
+                                mobile:py-2 mobile:px-4 bg-white
+                            `,
                             {
                                 'rounded-r-xl': image,
                                 'rounded-xl': !image,
                             },
                         )}
                     >
-                        <div className="flex flex-col justify-center items-center mt-2 mobile:mt-0 mb-2">
-                            <div
-                                className="hidden mobile:flex h-20 w-16 !bg-no-repeat !bg-cover !bg-center"
-                                style={{
-                                    background: 'url(/logo-mobile.png)',
-                                }}
-                            />
-
-                            <div
-                                className="mobile:hidden flex h-32 w-full !bg-contain !bg-no-repeat !bg-center"
-                                style={{
-                                    background: 'url(/logo-default.webp)',
-                                }}
-                            />
-                        </div>
+                        <div
+                            className="flex h-52 w-full !bg-contain !bg-no-repeat !bg-center"
+                            style={{
+                                background: 'url(/logo-default.webp)',
+                            }}
+                        />
                         {children}
                     </div>
                 </section>

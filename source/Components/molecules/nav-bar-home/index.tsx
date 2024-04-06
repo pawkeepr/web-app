@@ -14,9 +14,9 @@ export const ButtonsNavBar = () => {
     return (
         <div className="z-50 flex gap-2">
             <BtnLink
-                message="Entrar como Tutor"
+                message="Entre Tutor"
                 className={cn(
-                    'text-gray-500 hover:!bg-secondary-500 !border-secondary-500 border-0  w-40 ',
+                    'text-gray-500 hover:!bg-secondary-500 !border-secondary-500 border-0  w-fit ',
                     {
                         // 'border-2 border-solid w-40': !isMobile,
                         'border-0': isMobile,
@@ -27,7 +27,7 @@ export const ButtonsNavBar = () => {
                 <MdPerson className="w-6 h-6" />
             </BtnLink>
             <BtnLink
-                message="Entrar como Vet"
+                message="Entre Vet"
                 className={cn(
                     'border-primary-600 hover:!bg-secondary-500 border-0 w-40',
                     {

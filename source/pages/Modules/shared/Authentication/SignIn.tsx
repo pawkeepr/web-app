@@ -7,7 +7,6 @@ import { BtnLink } from '~/Components/atoms/btn'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import { resetLoading } from '~/store/slices/auth/login/actions'
 import AuthLayout from '../../_layouts/auth/auth_layout'
-import LoadingPage from '../LoadingPage'
 import AuthInputs from './components/organism/auth-inputs'
 
 export type CoverSignInProps = {
@@ -23,11 +22,19 @@ const CoverSignIn = ({ mode, bgImage }: CoverSignInProps) => {
     const loading = isLoading === LOADING.PENDING || isLoading === LOADING.SUCCESS
 
     useEffect(() => {
-        if (isLoading === LOADING.SUCCESS) {
+        if (loading) {
             router.prefetch('/dashboard')
-            setTimeout(() => {
+        }
+
+        let timeout: string | number | NodeJS.Timeout | undefined
+        if (isLoading === LOADING.SUCCESS) {
+            timeout = setTimeout(() => {
                 router.push('/dashboard')
-            }, 1000)
+            }, 3000)
+        }
+
+        return () => {
+            clearTimeout(timeout)
         }
     }, [isLoading])
 
@@ -39,18 +46,15 @@ const CoverSignIn = ({ mode, bgImage }: CoverSignInProps) => {
 
     const link = mode === 'veterinary' ? '/veterinary/sign-up' : '/tutor/sign-up'
 
-    if (isLoading === LOADING.SUCCESS) {
-        return (
-            <div className="min-h-screen auth-bg-cover flex flex-col ">
-                <div className="bg-overlay" />
-                <LoadingPage />
-            </div>
-        )
-    }
-
     return (
-        <AuthLayout title="Entrar" image={bgImage} alt="Imagem" hasImage>
-            <div className="flex flex-col justify-center items-center gap-3 lg:mt-5">
+        <AuthLayout
+            title="Entrar"
+            image={bgImage}
+            alt="Imagem"
+            hasImage
+            loading={LOADING.SUCCESS === isLoading}
+        >
+            <div className="flex flex-col justify-center items-center">
                 <p className="text-sm font-bold text-secondary-500">
                     Seja Bem-vindo(a)!
                 </p>

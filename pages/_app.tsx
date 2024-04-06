@@ -14,15 +14,8 @@ import '~/aws'
 import { appWithTranslation } from 'next-i18next'
 import ErrorBoundary from '~/contexts/error-boundary'
 
-// import VLibras from '@djpfs/react-vlibras'
-import { useEffect } from 'react'
-import { geolocation } from '~/utils/geolocation'
 
 function App({ Component, pageProps }: AppProps) {
-    useEffect(() => {
-        geolocation()
-    }, [])
-
     return (
         <ErrorBoundary>
             <Provider>
