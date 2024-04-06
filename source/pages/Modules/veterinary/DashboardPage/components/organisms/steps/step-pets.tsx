@@ -9,7 +9,7 @@ const PetsTab = () => {
     if (isError) return <div>Error</div>
 
     return (
-        <section className=" !w-full">
+        <section className="w-full px-4 mobile:!px-2 web:mt-2">
             {pets?.map((pet) => (
                 <CardPets key={pet?.id_pet} pet={pet} />
             ))}

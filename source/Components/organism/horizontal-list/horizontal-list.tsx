@@ -41,7 +41,7 @@ const tabList = tv({
     base: `
         gap-2 bg-primary-500 p-0
         web:rounded-sm web:mt-2 
-        mobile:border border-primary-500
+        
     `,
     variants: {
         hidden: {

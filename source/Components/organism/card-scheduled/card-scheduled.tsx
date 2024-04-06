@@ -16,6 +16,7 @@ import {
     MapOptionSpecies,
     Species,
 } from '~/types/speciesType'
+import { calcAge } from '~/utils/calc-age'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import BoxButtons from '../box-buttons'
 import ModalBoxButtons from '../box-buttons/modal-box-buttons'
@@ -39,19 +40,19 @@ export const card = tv({
             true: '!bg-primary-500 bg-opacity-60 text-white',
         },
         confirmed: {
-            yes: 'border-l-4 !border-[#0971B3]',
+            yes: '!border-l-4 !border-[#0971B3]',
             no: '',
         },
         scheduled: {
-            yes: 'border-l-4 border-primary-500',
+            yes: '!border-l-4 !border-primary-500',
             no: '',
         },
         rescheduled: {
-            yes: 'border-l-4 border-secondary-500',
+            yes: '!border-l-4 !border-secondary-500',
             no: '',
         },
         canceled: {
-            yes: 'border-l-4 border-red-500',
+            yes: '!border-l-4 !border-red-500',
             no: '',
         },
         isMobile: {
@@ -130,6 +131,7 @@ const CardScheduled = ({
                     className="text-center font-bold text-lg mobile:text-sm text-gray-400"
 
                 >{`${pet?.name_pet}`}</h1>
+                <h2 className="text-center text-xs">{calcAge(pet?.date_birth)} ano(s)</h2>
             </div>
 
             <div className="card-body mobile:text-xs text-sm gap-1 mobile:py-4 px-0 m-0 flex-[3] font-sans">

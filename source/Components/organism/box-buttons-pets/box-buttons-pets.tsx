@@ -28,13 +28,7 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
     }, [item])
 
     return (
-        <div className="gap-1 justify-end flex items-end h-full w-full mobile:grid mobile:grid-cols-1 flex-wrap">
-            {/* <BtnCancel
-                condition={!isLoading}
-                label="Agendar Consulta"
-                onClick={() => {}}
-                className="border-none mobile:!w-full mobile:col-span-1 text-gray-500"
-            /> */}
+        <div className="gap-1 justify-center flex items-end h-full w-full mobile:grid mobile:grid-cols-1 flex-wrap">
 
             <BtnConfirm
                 condition={!isLoading}

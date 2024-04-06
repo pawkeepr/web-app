@@ -31,7 +31,7 @@ const Tabs = () => [
     },
 ]
 
-const AppointmentsTabs = <T,>() => {
+const AppointmentsTabs = () => {
     const tabs = Tabs()
     return (
         <DefaultLayout title="Dashboard" name="appointments" searchBlock>

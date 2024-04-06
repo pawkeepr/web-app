@@ -19,7 +19,7 @@ const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
 
     return (
         <>
-            <img
+            {src && <img
                 {...rest}
                 src={src as string}
                 onError={() => setError(true)}
@@ -32,7 +32,7 @@ const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
                         !isPublicImage && (error || loading) ? 'none' : 'block',
                     ...style,
                 }}
-            />
+            />}
             {!isPublicImage && (error || loading) && (
                 <IoPersonCircle className={
                     twMerge('text-white', className)

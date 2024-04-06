@@ -6,8 +6,8 @@ const StepAll = () => {
     if (isLoading) return <div>Loading...</div>
 
     return (
-        <div className="w-full h-screen bg-base-100 gap-10">
-            <section className="w-full  px-4 mobile:!px-2  ">
+        <>
+            <section className="w-full px-4 mobile:!px-2  ">
                 <h1 className="text-lg font-bold">Confirmadas</h1>
                 {confirmedData?.map((appointment) => (
                     <CardScheduled key={appointment.id} appointment={appointment} />
@@ -30,7 +30,7 @@ const StepAll = () => {
                     </div>
                 )}
             </section>
-        </div>
+        </>
     )
 }
 
