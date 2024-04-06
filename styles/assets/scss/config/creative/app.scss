@@ -5,11 +5,10 @@
 @import "./node_modules/bootstrap/scss/mixins";
 
 @import "theme-light";
-
 // Components
-@import "../../components/waves";
 @import "../../components/helper";
 @import "../../components/preloader";
+@import "../../components/waves";
 @import "../../components/widgets";
 
 // Pages
