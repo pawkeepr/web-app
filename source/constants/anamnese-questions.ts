@@ -4,7 +4,7 @@ const QuestionTypes = {
     urinary_sys: 'urinary_sys',
     nervous_sys: 'nervous_sys',
     locomotive_sys: 'locomotive_sys',
-    physical_activity: 'physical_activity',
+    others: 'others',
     general_information: 'general_information',
 } as const
 
@@ -103,11 +103,6 @@ export const questions: Question[] = [
         type: 'locomotive_sys',
     },
     {
-        id: 18,
-        question: 'Apresenta alguma deformidade na região da coluna?',
-        type: 'locomotive_sys',
-    },
-    {
         id: 19,
         question: 'Ocorreu algum tipo de trauma?',
         type: 'locomotive_sys',
@@ -115,6 +110,6 @@ export const questions: Question[] = [
     {
         id: 20,
         question: 'O Animal pratica alguma atividade física?',
-        type: 'physical_activity',
+        type: 'locomotive_sys',
     },
 ]

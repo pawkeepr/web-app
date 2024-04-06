@@ -51,7 +51,9 @@ const Header = ({
 
     return (
         <header
-            className={'mb-2 !bg-primary-500 mobile:fixed mobile:z-50 w-full z-10 '}
+            className={
+                'mb-2 !bg-primary-500 mobile:fixed mobile:z-50 w-full z-10 mobile:py-4'
+            }
             ref={divRef}
         >
             <div className="flex w-full justify-between items-center px-4 mobile:px-2">

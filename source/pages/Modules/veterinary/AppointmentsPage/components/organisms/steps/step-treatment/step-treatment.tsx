@@ -1,11 +1,6 @@
 import { FieldArray } from 'formik'
-import {
-    FaCapsules,
-    FaFileMedical,
-    FaRunning,
-    FaSyringe,
-    FaUtensils,
-} from 'react-icons/fa'
+import { BsThreeDotsVertical } from 'react-icons/bs'
+import { FaCapsules, FaFileMedical, FaSyringe, FaUtensils } from 'react-icons/fa'
 import type { OptionSelect } from '~/Components/molecules/field-control'
 import CardInputTreatment from '~/Components/organism/card-input-treatment'
 import { MEDICAL_RECORDS } from '~/types/medical-records'
@@ -34,9 +29,9 @@ const items: OptionSelect[] = [
         icon: FaFileMedical,
     },
     {
-        value: MEDICAL_RECORDS.PHYSICAL_ACTIVITIES,
-        label: 'Atividades Físicas',
-        icon: FaRunning,
+        value: MEDICAL_RECORDS.OTHERS,
+        label: 'Outros',
+        icon: BsThreeDotsVertical,
     },
 ]
 
@@ -46,10 +41,6 @@ const StepTreatment = () => {
             <CardSimplePet />
             <h4 className="text-center font-sans font-semibold text-base capitalize">
                 Tratamento
-                <br />
-                <span className="text-xs font-bold text-secondary-500">
-                    Obrigatório (*)
-                </span>
             </h4>
             <div className={screen()}>
                 <FieldArray name="treatments.questions_treatment">

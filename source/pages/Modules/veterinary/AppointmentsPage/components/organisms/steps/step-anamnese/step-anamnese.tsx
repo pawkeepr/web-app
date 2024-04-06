@@ -27,10 +27,6 @@ const StepAnamnese = () => {
             <CardSimplePet />
             <h4 className="text-center font-sans font-semibold text-base capitalize">
                 Anamnese
-                <br />
-                <span className="text-xs font-bold text-secondary-500">
-                    Obrigatório (*)
-                </span>
             </h4>
             <div className={screen()}>
                 <CardInputAnamnese

@@ -1,3 +1,4 @@
+import { BsThreeDotsVertical } from 'react-icons/bs'
 import {
     FaAllergies,
     FaBandAid,
@@ -29,6 +30,7 @@ export const MEDICAL_RECORDS = {
     PHYSICAL_ACTIVITIES: 'physical-activities',
     MEDICINES: 'medicines',
     EXAMS: 'exams',
+    OTHERS: 'others',
 } as const
 export type MEDICAL_RECORDS = (typeof MEDICAL_RECORDS)[keyof typeof MEDICAL_RECORDS]
 
@@ -103,6 +105,11 @@ export const MedicalRecordOptions: MedicalRecordOption[] = [
         value: MEDICAL_RECORDS.EXAMS,
         label: 'Exames',
         icon: FaFileMedical,
+    },
+    {
+        value: MEDICAL_RECORDS.OTHERS,
+        label: 'Outros',
+        icon: BsThreeDotsVertical,
     },
 ].sort((a, b) => a.label.localeCompare(b.label))
 

@@ -1,7 +1,6 @@
 import { Formik } from 'formik'
 import { useMemo, useState } from 'react'
 import type { IconType } from 'react-icons'
-import { BsThreeDotsVertical } from 'react-icons/bs'
 import { FaArrowLeft, FaArrowRight, FaRunning } from 'react-icons/fa'
 import { GiBrain, GiKidneys, GiLungs, GiStomach } from 'react-icons/gi'
 import * as Yup from 'yup'
@@ -68,11 +67,6 @@ const STEPS: {
         value: 'locomotive_sys',
         label: 'Sistema Locomotor',
         icon: FaRunning,
-    },
-    {
-        value: 'physical_activity',
-        label: 'Outros',
-        icon: BsThreeDotsVertical,
     },
 ]
 
