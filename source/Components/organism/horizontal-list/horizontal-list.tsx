@@ -95,8 +95,8 @@ const HorizontalTabs = ({
             </Tab.List>
             <Tab.Panels
                 className=" 
-                    gap-2 mt-2 relative w-full mobile:w-full 
-                    py-6 px-2 mobile:items-center mobile:flex mobile:!h-fit mobile:flex-col
+                    gap-2 relative w-full mobile:w-full 
+                    px-2 mobile:items-center mobile:flex mobile:!h-fit mobile:flex-col
                     tablet:py-0 tablet:items-center tablet:flex tablet:!h-fit tablet:flex-col
                 "
             >
@@ -105,8 +105,7 @@ const HorizontalTabs = ({
                     <Tab.Panel
                         key={item.id}
                         className={cn(
-                            'rounded-xl bg-white w-full p-0',
-                            'ring-white/60 ring-offset-2 focus:outline-none focus:ring-2',
+                            'w-full p-0',
                         )}
                     >
                         {item.tab}

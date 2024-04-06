@@ -29,6 +29,7 @@ const LayoutTutor = ({ children }: LayoutProps) => {
     return (
         <div id="relative">
             <Header drawer={(props) => <Drawer {...props} mode="TUTOR" />} />
+            <div className='h-4 block web:hidden' />
             {/* <Sidebar layoutType={layoutType} /> */}
 
             <div

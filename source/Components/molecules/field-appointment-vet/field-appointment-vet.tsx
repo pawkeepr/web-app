@@ -75,34 +75,37 @@ const FieldDocumentAppointment = ({
                                     onChangeOpen,
                                     onChangeDocument,
                                 }) || (
-                                    <div
-                                        className={`
-                                    w-96 ml-3 block relative pt-3
-                                    ${styles['field-document']}
-                                    `}
-                                    >
-                                        <FieldDocument
-                                            ctx={values}
-                                            name="cpf_tutor"
-                                            placeholder="Agendar/Nova Consulta"
-                                            onlyCPF
-                                            endIcon={
-                                                <button
-                                                    className="focus:outline-none flex h-full items-center justify-center"
-                                                    data-bs-target="#addVeterinaryAppointmentModal"
-                                                    type="submit"
-                                                >
-                                                    <PlusCircleIcon className="h-6 w-6 m-2 text-secondary-500" />
-                                                </button>
-                                            }
-                                        />
-                                        <span className="text-xs text-gray-500 font-semibold font-sans w-full absolute top-0 right-0 text-center">
-                                            {
-                                                'Insira o CPF do tutor para agendar ou iniciar uma consulta'
-                                            }
-                                        </span>
-                                    </div>
-                                )}
+                                        <div
+                                            className={`
+                                                fixed flex flex-col items-center 
+                                                justify-center opacity-100 z-50 
+                                                mobile:bottom-20 web:bottom-10 right-2
+                                                w-[95vw] pt-4
+                                                ${styles['field-document']}
+                                    `   }
+                                        >
+                                            <span className="text-xs text-gray-500 font-semibold font-sans w-full absolute top-0 right-0 mobile:text-center">
+                                                {
+                                                    'Insira o CPF do tutor para agendar ou iniciar uma consulta'
+                                                }
+                                            </span>
+                                            <FieldDocument
+                                                ctx={values}
+                                                name="cpf_tutor"
+                                                placeholder="Agendar/Nova Consulta"
+                                                onlyCPF
+                                                endIcon={
+                                                    <button
+                                                        className="focus:outline-none flex h-full items-center justify-center"
+                                                        data-bs-target="#addVeterinaryAppointmentModal"
+                                                        type="submit"
+                                                    >
+                                                        <PlusCircleIcon className="h-6 w-6 m-2 text-secondary-500" />
+                                                    </button>
+                                                }
+                                            />
+                                        </div>
+                                    )}
                             </Form>
                         )}
                     </Formik>

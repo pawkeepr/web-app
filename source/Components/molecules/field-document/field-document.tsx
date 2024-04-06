@@ -33,7 +33,7 @@ const FieldDocument = <T, Ctx>({
     }, [document, typeDocument])
 
     return (
-        <div className="relative pb-[12px]">
+        <div className="relative w-full">
             <FieldMasked
                 {...props}
                 className="border border-secondary focus:border-none focus:ring-0"
