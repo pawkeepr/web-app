@@ -2,7 +2,7 @@ import { Formik } from 'formik'
 import { useMemo, useState } from 'react'
 import type { IconType } from 'react-icons'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { FaRunning } from 'react-icons/fa'
+import { FaArrowLeft, FaArrowRight, FaRunning } from 'react-icons/fa'
 import { GiBrain, GiKidneys, GiLungs, GiStomach } from 'react-icons/gi'
 import * as Yup from 'yup'
 import ControlSwitchDiv from '~/Components/molecules/control-switch-div'
@@ -119,27 +119,27 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
         )
     }, [options])
 
-    // const keyPressLeft = () => {
-    //     setCategory((prev) => {
-    //         const index = STEPS.findIndex((item) => item.value === prev.value)
-    //         const next = STEPS[index - 1]
-    //         if (next) {
-    //             return next
-    //         }
-    //         return prev
-    //     })
-    // }
+    const keyPressLeft = () => {
+        setCategory((prev) => {
+            const index = STEPS.findIndex((item) => item.value === prev.value)
+            const next = STEPS[index - 1]
+            if (next) {
+                return next
+            }
+            return prev
+        })
+    }
 
-    // const keyPressRight = () => {
-    //     setCategory((prev) => {
-    //         const index = STEPS.findIndex((item) => item.value === prev.value)
-    //         const next = STEPS[index + 1]
-    //         if (next) {
-    //             return next
-    //         }
-    //         return prev
-    //     })
-    // }
+    const keyPressRight = () => {
+        setCategory((prev) => {
+            const index = STEPS.findIndex((item) => item.value === prev.value)
+            const next = STEPS[index + 1]
+            if (next) {
+                return next
+            }
+            return prev
+        })
+    }
 
     return (
         <>
@@ -192,24 +192,26 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                                 label={item.label}
                             />
                         ))}
+                        <div className="flex w-full justify-between mt-4">
+                            <button
+                                onClick={keyPressLeft}
+                                type="button"
+                                className="btn bg-secondary-500 text-gray-500"
+                            >
+                                <FaArrowLeft />
+                            </button>
+
+                            <button
+                                onClick={keyPressRight}
+                                type="button"
+                                className="btn bg-secondary-500 text-gray-500"
+                            >
+                                <FaArrowRight />
+                            </button>
+                        </div>
                     </section>
                 )}
             </Formik>
-            {/* <button
-                onClick={keyPressRight}
-                type="button"
-                className="btn btn-primary absolute bottom-4 right-4"
-            >
-                <FaArrowRight />
-            </button>
-
-            <button
-                onClick={keyPressLeft}
-                type="button"
-                className="btn btn-primary absolute bottom-4 left-4"
-            >
-                <FaArrowLeft />
-            </button> */}
         </>
     )
 }

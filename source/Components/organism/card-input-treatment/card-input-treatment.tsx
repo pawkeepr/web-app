@@ -1,5 +1,6 @@
 import { Form, Formik, type FormikHelpers } from 'formik'
 import { useMemo, useState } from 'react'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import * as Yup from 'yup'
 import { BtnSuccess } from '~/Components/atoms/btn'
 import FieldControl, {
@@ -218,22 +219,23 @@ const CardInputTreatment = ({
                                 type="submit"
                             />
                         </div>
-                        {/* <div className="flex flex-row w-full justify-between web:hidden">
+                        <div className="flex w-full justify-between mt-4">
                             <button
                                 onClick={keyPressLeft}
                                 type="button"
-                                className="btn btn-primary "
+                                className="btn bg-secondary-500 text-gray-500"
                             >
                                 <FaArrowLeft />
                             </button>
+
                             <button
                                 onClick={keyPressRight}
                                 type="button"
-                                className="btn btn-primary"
+                                className="btn bg-secondary-500 text-gray-500"
                             >
                                 <FaArrowRight />
                             </button>
-                        </div> */}
+                        </div>
                     </Form>
                 )}
             </Formik>
