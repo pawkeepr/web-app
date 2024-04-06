@@ -58,7 +58,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
     return (
         <div
             className="
-                gap-1 justify-end items-end 
+                gap-1 items-end 
                 h-full flex w-full 
                 mobile:grid mobile:grid-cols-1
                 tablet:grid tablet:grid-cols-3

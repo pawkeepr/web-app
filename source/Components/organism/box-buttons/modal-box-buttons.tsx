@@ -50,11 +50,10 @@ const ModalBoxButtons = forwardRef(
 
         const dateFormatted = useMemo(() => {
             try {
-                return `${
-                    Intl.DateTimeFormat('pt-BR', {}).format(
-                        new Date(item.dates_consults.date_consultation),
-                    ) || 'Não informado'
-                } às ${item.dates_consults.time_consultation}`
+                return `${Intl.DateTimeFormat('pt-BR', {}).format(
+                    new Date(item.dates_consults.date_consultation),
+                ) || 'Não informado'
+                    } às ${item.dates_consults.time_consultation}`
             } catch (_) {
                 return 'Não informado'
             }
@@ -66,7 +65,7 @@ const ModalBoxButtons = forwardRef(
                 {!children && (
                     <BtnConfirm
                         label="Ver Mais"
-                        className="border-none mobile:!w-full mobile:col-span-full text-gray-500 bg-transparent"
+                        className="border-none !p-0 mobile:!w-full mobile:col-span-full text-gray-500 bg-transparent"
                         onClick={showModal}
                     />
                 )}

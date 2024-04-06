@@ -1,11 +1,12 @@
 import { useMemo } from 'react'
+import { twMerge } from 'tailwind-merge'
 import MyImage from '~/Components/atoms/my-image'
 import type { Species } from '~/types/speciesType'
-
 type AvatarPetProps = {
     src?: string
     specie?: Species
     name_pet: string
+    className?: string
 }
 
 const strategiesAvatar = new Map<Species, string>([
@@ -18,7 +19,7 @@ const strategiesAvatar = new Map<Species, string>([
     ['reptile', '/icon-pet/reptile_primary.png'],
 ])
 
-const AvatarPet = ({ specie, src, name_pet }: AvatarPetProps) => {
+const AvatarPet = ({ specie, src, name_pet, className }: AvatarPetProps) => {
     const link = useMemo(() => {
         if (src) return src
         if (!specie) return '/icon-pet/other_primary.png'
@@ -26,15 +27,13 @@ const AvatarPet = ({ specie, src, name_pet }: AvatarPetProps) => {
     }, [src, specie])
 
     return (
-        <picture className="mobile:w-full flex flex-1 justify-center items-center">
+        <figure className={twMerge("", className)}>
             <MyImage
                 src={link}
                 alt={`Avatar do pet ${name_pet}`}
-                width={160}
-                height={160}
-                className="rounded-full"
+                className="rounded-full w-40 h-40 mobile:w-20 mobile:h-20 object-cover"
             />
-        </picture>
+        </figure>
     )
 }
 

@@ -4,14 +4,18 @@ import {
     useMemo,
     useRef,
 } from 'react'
-import { FaWhatsapp } from 'react-icons/fa'
 import { tv } from 'tailwind-variants'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import type { IHookModal } from '~/hooks/use-modal'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import { BreedNames } from '~/types/breedType'
-import { Gender, GenderBR, MapOptionSpecies, Species } from '~/types/speciesType'
+import {
+    type Gender,
+    GenderBR,
+    MapOptionSpecies,
+    Species,
+} from '~/types/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import BoxButtons from '../box-buttons'
 import ModalBoxButtons from '../box-buttons/modal-box-buttons'
@@ -28,8 +32,7 @@ type CardScheduledProps = {
 
 export const card = tv({
     base: `
-        bg-white relative flex flex-row rounded-sm px-2 py-2 shadow-md focus:outline-none h-64 mobile:h-[540px] mobile:!p-12
-        tablet:h-fit
+        card card-side !flex rounded-md shadow-xl border border-gray-200
     `,
     variants: {
         checked: {
@@ -52,7 +55,7 @@ export const card = tv({
             no: '',
         },
         isMobile: {
-            true: 'hover:bg-gray-100 hover:bg-opacity-50 cursor-pointer flex-col',
+            true: 'hover:bg-gray-100 hover:bg-opacity-50 cursor-pointer',
         },
     },
 })
@@ -77,7 +80,7 @@ const CardScheduled = ({
             race: BreedNames[
                 appointment.tutor_pet_vet?.pet?.race as keyof typeof BreedNames
             ],
-            gender: Gender[appointment.tutor_pet_vet?.pet?.sex as Gender],
+            sex: GenderBR[appointment.tutor_pet_vet?.pet?.sex as Gender],
         }),
         [appointment],
     )
@@ -98,7 +101,11 @@ const CardScheduled = ({
                 const castRef = ref.current as unknown as IHookModal
                 castRef?.showModal?.()
             }}
-            onKeyUp={() => {}}
+            onKeyUp={() => { }}
+            style={{
+                cursor: isMobile ? 'pointer' : 'default',
+                outline: 'none',
+            }}
             className={card({
                 checked,
                 isMobile,
@@ -110,74 +117,39 @@ const CardScheduled = ({
                 canceled: appointment.appointment_status?.canceled,
             })}
         >
-            <AvatarPet
-                name_pet={pet?.name_pet}
-                specie={
-                    MapOptionSpecies[
+            <div className="flex-[2] flex-col items-center justify-center flex">
+                <AvatarPet
+                    name_pet={pet?.name_pet}
+                    specie={
+                        MapOptionSpecies[
                         pet.specie as keyof typeof MapOptionSpecies
-                    ] as Species
-                }
-            />
-            <div className="flex flex-col flex-[2] mobile:flex-1 w-full">
-                <div className="flex mobile:gap-3 justify-around items-center">
-                    <section>
-                        <div className="text-gray-500 mb-2">
-                            <h3 className="font-bold mb-1">Pet:</h3>
-                            <p>{`${pet?.name_pet}, ${pet?.specie}, ${pet?.race}, ${
-                                GenderBR[pet?.sex as keyof typeof GenderBR]
-                            }`}</p>
-                        </div>
-                        {pet?.microchip && (
-                            <div className="text-gray-500 mb-2 mobile:hidden">
-                                <h3 className="font-bold mb-1">
-                                    Microchip do Pet:
-                                </h3>
-                                <p>{pet?.microchip}</p>
-                            </div>
-                        )}
-                        <div className="text-gray-500 mb-2">
-                            <h3 className="font-bold mb-1">Nome do Tutor:</h3>
-                            <p>{name}</p>
-                        </div>
-                        <div className="text-gray-500 mb-2">
-                            <h3 className="font-bold mb-1">Data da Consulta:</h3>
-                            <p>{formattedDateAndHours}</p>
-                        </div>
-                    </section>
-                    <section>
-                        <div className="text-gray-500 mb-2 mobile:hidden">
-                            <h3 className="font-bold mb-1">Email do Tutor:</h3>
-                            <p>
-                                {appointment?.tutor_pet_vet.tutor?.contact?.email}
-                            </p>
-                        </div>
+                        ] as Species
+                    }
+                />
+                <h1
+                    className="text-center font-bold text-lg mobile:text-sm text-gray-400"
 
-                        <div className="text-gray-500 mb-2 mobile:hidden">
-                            <h3 className="font-bold mb-1">Telefone do Tutor:</h3>
-                            <p>
-                                {appointment?.tutor_pet_vet.tutor?.contact?.phone}
-                            </p>
-                        </div>
-                        {appointment?.tutor_pet_vet.tutor?.contact?.whatsapp && (
-                            <div className="text-gray-500 mb-2 gap-2 mobile:hidden">
-                                <h3 className="font-bold mb-1">
-                                    WhatsApp do Tutor:{' '}
-                                </h3>
-                                <p className="flex gap-2">
-                                    <FaWhatsapp className="text-green-600 text-xl" />
+                >{`${pet?.name_pet}`}</h1>
+            </div>
 
-                                    {
-                                        appointment?.tutor_pet_vet.tutor?.contact
-                                            ?.whatsapp
-                                    }
-                                </p>
-                            </div>
-                        )}
-                    </section>
+            <div className="card-body mobile:text-xs text-sm gap-1 mobile:py-4 px-0 m-0 flex-[3] font-sans">
+                <div className="text-gray-500  ">
+                    <h3 className="font-bold ">Pet:</h3>
+                    <p>{`${pet?.specie}, ${pet?.race}`}</p>
+
+                    <div className="text-gray-500 ">
+                        <h3 className="font-bold ">Nome do Tutor:</h3>
+                        <p>{name}</p>
+                    </div>
+                    <div className="text-gray-500 ">
+                        <h3 className="font-bold ">Data da Consulta:</h3>
+                        <p>{formattedDateAndHours}</p>
+                    </div>
                 </div>
-
-                {BoxButtons && !isMobile && <BoxButtons item={appointment} />}
-                {isMobile && <ModalBoxButtons item={appointment} ref={ref} />}
+                <div className="card-actions mobile:hidden  ">
+                    {BoxButtons && !isMobile && <BoxButtons item={appointment} />}
+                    {isMobile && <ModalBoxButtons item={appointment} ref={ref} />}
+                </div>
             </div>
         </article>
     )

@@ -160,5 +160,6 @@ export {
     BtnLink,
     BtnPrimary,
     BtnSecondary,
-    BtnSuccess,
+    BtnSuccess
 }
+
