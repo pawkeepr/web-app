@@ -61,7 +61,7 @@ const AuthLayout = ({
                     )}
                 >
                     {image && (
-                        <picture className=" mobile:hidden flex flex-1 overflow-hidden !w-full !h-full relative rounded-l-xl mobile:rounded-l-none">
+                        <picture className="flex mobile:h-52  overflow-hidden !w-full h-full relative rounded-l-xl mobile:rounded-l-none">
                             <Img
                                 alt={alt}
                                 src={image as string}
@@ -77,6 +77,7 @@ const AuthLayout = ({
                     <div
                         className={cn(
                             `
+                                
                                 !overflow-hidden relative mobile:rounded-r-none 
                                 mobile:rounded-none grid grid-cols-1 mobile:!w-full 
                                 mobile:!min-h-full py-4 px-12 
@@ -89,7 +90,7 @@ const AuthLayout = ({
                         )}
                     >
                         <div
-                            className="flex h-52 w-full !bg-contain !bg-no-repeat !bg-center"
+                            className="flex h-52 mobile:h-36 w-full !bg-contain !bg-no-repeat !bg-center"
                             style={{
                                 background: 'url(/logo-default.webp)',
                             }}
