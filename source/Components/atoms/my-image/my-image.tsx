@@ -1,7 +1,8 @@
 import type { ImageProps, StaticImageData } from 'next/image'
 import { useState } from 'react'
 
-import user from '~/assets/images/users/user-dummy-img.jpg'
+import { IoPersonCircle } from 'react-icons/io5'
+import { twMerge } from 'tailwind-merge'
 
 type MyImageProps = {
     width?: number
@@ -33,15 +34,9 @@ const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
                 }}
             />
             {!isPublicImage && (error || loading) && (
-                <img
-                    {...rest}
-                    src={user as unknown as string}
-                    alt="Default Profile"
-                    className={className}
-                    style={{
-                        display: error || loading ? 'block' : 'none',
-                    }}
-                />
+                <IoPersonCircle className={
+                    twMerge('text-white', className)
+                } />
             )}
         </>
     )

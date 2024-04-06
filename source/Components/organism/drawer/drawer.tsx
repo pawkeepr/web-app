@@ -156,11 +156,9 @@ const Drawer = ({
             <div className="flex flex-col items-center mt-6 -mx-2">
                 <div className="flex flex-1 self-center items-center justify-center">
                     <MyImage
-                        className="rounded-full self-center"
+                        className="rounded-full self-center text-gray-400 w-40 h-40"
                         src={profile?.user_information?.url_img || ''}
                         alt="Header Avatar"
-                        height={120}
-                        width={120}
                     />
                 </div>
                 <h6 className="text-md text-center p-1 m-1 font-semibold font-sans">
