@@ -24,13 +24,13 @@ const LayoutMain = ({ children }: LayoutProps) => {
     return (
         <div className="relative">
             <Header />
-            <div className="h-4 block w-full web:hidden" />
+            <div className="h-[48px] block w-full web:hidden" />
             {/* <Sidebar layoutType={layoutType} /> */}
 
             <div
                 className={cn(
                     'px-24 mobile:px-0 relative tablet:px-0 min-h-full',
-                    'mobile:pt-[40px] z-[1]',
+                    'z-[1]',
                     // 'bg-cover bg-no-repeat bg-fixed',
                 )}
                 style={{
@@ -45,7 +45,7 @@ const LayoutMain = ({ children }: LayoutProps) => {
                     selectedTabInitial={0}
                 />
             </div>
-            <div className="h-40 block w-full " />
+            <div className="h-40 web:hidden w-full " />
         </div>
     )
 }

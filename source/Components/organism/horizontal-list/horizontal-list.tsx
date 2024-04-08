@@ -17,12 +17,11 @@ export type TabItem = {
 const tab = tv({
     // Ajuste os estilos base e variantes conforme necessário
     base: `
-        w-full rounded-sm py-2.5
+        w-full rounded-md h-14 web:h-10 mobile:rounded-none
         ring-white/60 ring-offset-2 focus:outline-none focus:ring-2
-        leading-1 font-bold text-white
-        mobile:text-xs
+        leading-1 font-bold text-white 
         text-sm flex web:flex-row items-center justify-center
-        mobile:flex-col gap-2
+        mobile:flex-col mobile:text-xs gap-2
     `,
     // Ajustes adicionais para os estilos mobile
     variants: {
@@ -39,9 +38,8 @@ const tab = tv({
 
 const tabList = tv({
     base: `
-        gap-2 bg-primary-500 p-0
-        web:rounded-sm web:mt-2 
-        
+        bg-primary-500 p-0
+        web:rounded-md
     `,
     variants: {
         hidden: {
@@ -103,8 +101,8 @@ const HorizontalTabs = ({
             </Tab.List>
             <Tab.Panels
                 className=" 
-                    gap-2 relative w-full mobile:w-full 
-                    px-2 mobile:items-center mobile:flex mobile:!h-fit mobile:flex-col
+                    relative w-full px-2
+                    mobile:items-center mobile:flex mobile:!h-fit mobile:flex-col mobile:w-full
                     tablet:py-0 tablet:items-center tablet:flex tablet:!h-fit tablet:flex-col
                 "
             >

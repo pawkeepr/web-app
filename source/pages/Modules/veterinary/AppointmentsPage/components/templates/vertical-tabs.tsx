@@ -161,11 +161,16 @@ const VerticalTabs = () => {
             >
                 {items.map(({ id, Component }, index) => {
                     return (
-                        <SwiperSlide key={`${id}-${index}`} className='mobile:min-h-screen bg-red-500'>
-                            <Component
-                                activeTab={activeIndex}
-                                toggleTab={setActiveIndex}
-                            />
+                        <SwiperSlide key={`${id}-${index}`}>
+                            <div className='flex flex-1 flex-col ' style={{
+                                height: 'calc(100vh - 120px)',
+                            }} id='Inicio'
+                            >
+                                <Component
+                                    activeTab={activeIndex}
+                                    toggleTab={setActiveIndex}
+                                />
+                            </div>
                         </SwiperSlide>
                     )
                 })}

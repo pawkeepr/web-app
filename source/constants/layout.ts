@@ -58,6 +58,9 @@ enum preloaderTypes {
     DISABLE = 'disable',
 }
 
+export const SIZE_HEADER = '60px'
+export const SIZE_BAR_MOBILE = '60px'
+
 export {
     layoutModeTypes,
     layoutPositionTypes,

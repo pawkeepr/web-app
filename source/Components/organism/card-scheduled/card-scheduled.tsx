@@ -35,7 +35,7 @@ type CardScheduledProps = {
 
 export const card = tv({
     base: `
-        card card-side !flex rounded-md shadow-xl border border-gray-200 m-2
+        card card-side !flex shadow-xl border border-gray-200 m-2
     `,
     variants: {
         checked: {

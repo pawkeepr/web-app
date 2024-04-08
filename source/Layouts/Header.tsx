@@ -52,11 +52,11 @@ const Header = ({
     return (
         <header
             className={
-                'mb-2 !bg-primary-500 mobile:fixed mobile:z-50 w-full z-10 mobile:py-4'
+                ' !bg-primary-500 mobile:fixed mobile:z-50 w-full z-10 h-12 flex items-center'
             }
             ref={divRef}
         >
-            <div className="flex w-full justify-between items-center px-4 mobile:px-2">
+            <div className="flex w-full justify-between items-center px-4">
                 <button
                     onClick={handleShow}
                     type="button"
