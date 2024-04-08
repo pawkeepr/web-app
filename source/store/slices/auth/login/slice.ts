@@ -1,8 +1,8 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 import LOADING from '~/constants/loading'
 
 import { api } from '~/services/api'
-import { name, type IUser, type LoginState } from './types'
+import { type IUser, type LoginState, name } from './types'
 
 const initialState: LoginState = {
     user: null,
@@ -40,11 +40,11 @@ const loginSlice = createSlice({
             state.error = null
             state.username = ''
             state.password = ''
-            state.isLoading = LOADING.SUCCESS
+            state.isLoading = LOADING.IDLE
         },
         signOutUserFailed: (state, action: PayloadAction<string>) => {
             state.error = action.payload
-            state.isLoading = LOADING.SUCCESS
+            state.isLoading = LOADING.IDLE
         },
 
         signInUser: (state) => {

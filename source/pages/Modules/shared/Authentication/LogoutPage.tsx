@@ -4,7 +4,7 @@ import { useAppDispatch } from '~/store/hooks'
 
 import { useEffect } from 'react'
 import { BtnLink } from '~/Components/atoms/btn'
-import { resetLoading, signOutUser } from '~/store/slices/auth/login/actions'
+import { resetLoading, signOutUser, } from '~/store/slices/auth/login/actions'
 import AuthLayout from '../../_layouts/auth/auth_layout'
 
 const LogoutPage = () => {
