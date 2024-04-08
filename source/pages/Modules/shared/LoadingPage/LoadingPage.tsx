@@ -1,10 +1,14 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Loader from '~/Components/organism/loader'
+import { useAppDispatch } from '~/store/hooks'
+import { resetLoading } from '~/store/slices/auth/login/actions'
 
 const LoadingPage = () => {
     const [expiredTime, setExpiredTime] = useState(false)
     const router = useRouter()
+
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -15,6 +19,12 @@ const LoadingPage = () => {
             setExpiredTime(false)
         }
     }, [])
+
+    const handleFailed = () => {
+        dispatch(resetLoading())
+        router.push('/sign-in')
+        setExpiredTime(false)
+    }
 
 
     return (
@@ -50,7 +60,7 @@ const LoadingPage = () => {
                             <button
                                 type='button'
                                 className="text-gray-600 bg-secondary-500 px-4 py-2 mt-4 rounded-md"
-                                onClick={() => router.back()}
+                                onClick={handleFailed}
                             >
                                 Voltar
                             </button>
