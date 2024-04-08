@@ -1,7 +1,8 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
+import { Formik } from 'formik'
 import { FaSearch } from 'react-icons/fa'
 import { create } from 'zustand'
-import Input from '~/Components/atoms/input'
+import FieldControl from '../field-control'
 
 type SearchInputProps = {
     value?: string
@@ -26,7 +27,13 @@ export const useZustandSearch = create<IHookUseSearch>((set) => ({
         }),
 }))
 
-type KeySearch = 'appointments' | 'veterinary' | 'tutor' | 'pet' | 'historic'
+const KeySearch = {
+    veterinary: 'veterinary',
+    tutor: 'tutor',
+    pet: 'pet',
+    appointment: 'appointment',
+}
+type KeySearch = typeof KeySearch[keyof typeof KeySearch]
 
 export const useSearch = (name: KeySearch) => {
     const { search, onChangeSearch } = useZustandSearch()
@@ -37,33 +44,36 @@ export const useSearch = (name: KeySearch) => {
     }
 }
 
-const SearchInput = ({ name, ...rest }: SearchInputProps) => {
-    const { onChangeSearch, search } = useSearch(name)
+const SearchInput = ({ name }: SearchInputProps) => {
+    const { onChangeSearch } = useSearch(name)
 
-    const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        onChangeSearch(e.target.value)
+    const handleSubmit = (values: { search: string }) => {
+        onChangeSearch(values.search)
     }
 
     return (
-        <div className="w-full border border-secondary rounded-lg relative">
-            <div className="absolute h-10 left-0 flex items-center justify-center w-10">
-                <FaSearch className="text-gray-400" />
-            </div>
-            <Input
-                type="text"
-                className="px-8 rounded-md"
-                value={search}
-                onChange={handleChangeSearch}
-                {...rest}
-            />
-            <button
-                type="button"
-                onClick={() => onChangeSearch('')}
-                className="absolute h-10 right-0 items-center justify-center w-10 "
-            >
-                <XMarkIcon className="text-red-300 w-6 h-6" />
-            </button>
-        </div>
+        <Formik initialValues={{ search: '' }} onSubmit={handleSubmit}>
+            {({ values }) => {
+                return (
+                    <FieldControl
+                        ctx={values}
+                        name="search"
+                        required
+                        label="Pesquisar"
+                        className="h-10 w-full"
+                        startIcon={<FaSearch className="text-gray-400" />}
+                        endIcon={
+                            <button
+                                type="button"
+                                onClick={() => onChangeSearch('')}
+                            >
+                                <XMarkIcon className="text-red-300 w-6 h-6" />
+                            </button>
+                        }
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

@@ -80,7 +80,7 @@ const FieldAppointmentTutor = ({
                                 }) || (
                                         <div
                                             className={`
-                                    w-96 ml-3 mobile:hidden block relative pt-3
+                                            w-96 ml-3 mobile:hidden block relative pt-3
                                     ${styles["field-document"]}
                                     `}
                                         >

@@ -1,15 +1,18 @@
 import SearchInput from '~/Components/molecules/search-input'
+import useProfile from '~/store/hooks/profile/use-profile'
+import { TypeProfile } from '~/types/profile'
 import FieldAppointmentTutor from '../field-appointment-tutor'
+import FieldAppointmentVet from '../field-appointment-vet'
 
 type BlockSearchAndInputDocumentProps = {
     name: string
-    title: string
 }
 
 const BlockSearchAndInputDocument = ({
     name,
-    title,
 }: BlockSearchAndInputDocumentProps) => {
+    const { data: profile } = useProfile()
+
     return (
         <div
             className={`
@@ -18,9 +21,11 @@ const BlockSearchAndInputDocument = ({
                 justify-end items-center r
             `}
         >
-            <FieldAppointmentTutor condition={title !== 'Dashboard'} />
+
 
             <SearchInput placeholder="Digite sua busca" name={name} />
+            <FieldAppointmentVet condition={profile?.type_profile === TypeProfile.VETERINARY} />
+            <FieldAppointmentTutor condition={profile?.type_profile === TypeProfile.TUTOR} />
         </div>
     )
 }

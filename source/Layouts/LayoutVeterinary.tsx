@@ -10,7 +10,7 @@ import Header from './Header'
 //import actions
 
 import cn from 'classnames'
-import FieldDocumentAppointment from '~/Components/molecules/field-appointment-vet'
+import FieldDocumentAppointment from '~/Components/molecules/field-appointment-vet/field-appointment-vet.mobile'
 import { useBtnFloating } from '~/contexts/button-floating'
 import useHookLayout from './use-hook'
 
@@ -45,7 +45,7 @@ const LayoutMain = ({ children }: LayoutProps) => {
                     selectedTabInitial={0}
                 />
             </div>
-            <div className="h-40 web:hidden w-full " />
+            {hasButtonFloating && <div className="h-40 web:hidden w-full " />}
         </div>
     )
 }

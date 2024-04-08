@@ -65,6 +65,7 @@ export type IProfile = {
     id?: string
     veterinary_information?: IVeterinaryInformation
     user_information: ProfileUserInformation
+    type_profile?: TypeProfile
 }
 
 export type DTOProfile = ProfileUserInformation & {
