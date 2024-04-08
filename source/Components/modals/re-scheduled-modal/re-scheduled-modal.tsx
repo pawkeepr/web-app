@@ -67,7 +67,7 @@ const ReScheduledModal = ({
                 >
                     {({ isValid, isSubmitting, handleSubmit, values }) => (
                         <Form
-                            className="w-full h-full flex flex-col "
+                            className="w-full h-full flex flex-col min-w-[500px]"
                             onSubmit={handleSubmit}
                         >
                             <div className="flex flex-col min-h-full items-center justify-center p-4 text-center">
@@ -79,47 +79,46 @@ const ReScheduledModal = ({
                                     pet={values.tutor_pet_vet?.pet}
                                     tutor={values.tutor_pet_vet?.tutor}
                                 />
-                                {item && (
-                                    <div className="flex justify-around gap-3">
+                                <section className="flex flex-col  mt-2 justify-start px-4 w-full">
+                                    <div className="gap-2 flex-wrap flex flex-col w-full justify-between ">
                                         <p className="text-gray-500 flex justify-between">
                                             <strong className="mr-2">
                                                 Tipo da Consulta:
                                             </strong>
-                                            {item.dates_consults.type_consultation}
+                                            {item?.dates_consults?.type_consultation}
                                         </p>
                                         <p className="text-gray-500 flex justify-between">
                                             <strong className="mr-2">
                                                 Razão da Consulta:
                                             </strong>
+
+                                        </p>
+                                        <p className="text-gray-500 text-center flex justify-between">
                                             {
-                                                item.dates_consults
-                                                    .reason_consultation
+                                                item?.dates_consults?.reason_consultation
                                             }
                                         </p>
                                     </div>
-                                )}
-                                <section className="my-2">
-                                    <div className="flex justify-around gap-3">
-                                        <FieldControl
-                                            ctx={values}
-                                            label="Data da consulta"
-                                            name="dates_consults.date_consultation"
-                                            required
-                                            className=" "
-                                            placeholder="exemplo='05/12/2023'"
-                                            type="date"
-                                        />
+                                </section>
 
-                                        <FieldControl
-                                            ctx={values}
-                                            label="Hora da consulta"
-                                            required
-                                            name="dates_consults.time_consultation"
-                                            className=" "
-                                            placeholder="exemplo='14:00'"
-                                            type="time"
-                                        />
-                                    </div>
+                                <section className="my-2 flex gap-3 w-full">
+                                    <FieldControl
+                                        ctx={values}
+                                        label="Data da consulta"
+                                        name="dates_consults.date_consultation"
+                                        required
+                                        placeholder="exemplo='05/12/2023'"
+                                        type="date"
+                                    />
+
+                                    <FieldControl
+                                        ctx={values}
+                                        label="Hora da consulta"
+                                        required
+                                        name="dates_consults.time_consultation"
+                                        placeholder="exemplo='14:00'"
+                                        type="time"
+                                    />
                                 </section>
 
                                 <div className="mt-4 flex justify-center items-center">

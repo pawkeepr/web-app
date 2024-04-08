@@ -112,7 +112,7 @@ const CardInputTreatment = ({
                             <h6 className="col-span-3 font-mono font-semibold  capitalize">
                                 {
                                     KeyTreatment[
-                                        treatment.type_treatment as keyof typeof KeyTreatment
+                                    treatment.type_treatment as keyof typeof KeyTreatment
                                     ]
                                 }
                             </h6>
@@ -198,8 +198,6 @@ const CardInputTreatment = ({
                             ctx={values}
                             name="name_treatment"
                             label="Nome"
-                            isValid={values.name_treatment.length > 0}
-                            required
                         />
 
                         <FieldCurrency label="Valor:" name="value_coin_treatment" />

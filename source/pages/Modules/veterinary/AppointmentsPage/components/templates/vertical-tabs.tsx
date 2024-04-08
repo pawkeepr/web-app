@@ -161,7 +161,7 @@ const VerticalTabs = () => {
             >
                 {items.map(({ id, Component }, index) => {
                     return (
-                        <SwiperSlide key={`${id}-${index}`}>
+                        <SwiperSlide key={`${id}-${index}`} className='mobile:min-h-screen bg-red-500'>
                             <Component
                                 activeTab={activeIndex}
                                 toggleTab={setActiveIndex}

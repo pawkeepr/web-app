@@ -25,7 +25,7 @@ const CardTutor = ({ pet, tutor }: CardPetProps) => {
     const specie = Species[pet?.specie as Species]
 
     return (
-        <section className="flex flex-col justify-start p-4 w-full">
+        <section className="flex flex-col justify-start px-4 w-full">
             <div className="gap-2 flex-wrap flex flex-col mt-2 w-full justify-between ">
                 {pet && (
                     <p className="text-gray-500 flex justify-between">

@@ -17,10 +17,10 @@ export const useBtnFloating = () => {
     const { hasButtonFloating, setHasButtonFloating } = useZustandBtnFloating()
 
     useEffect(() => {
-        if (pathname.startsWith('/dashboard/appointments')) {
-            setHasButtonFloating(false)
-        } else {
+        if (pathname === '/dashboard') {
             setHasButtonFloating(true)
+        } else {
+            setHasButtonFloating(false)
         }
     }, [pathname])
 

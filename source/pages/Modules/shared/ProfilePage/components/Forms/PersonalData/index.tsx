@@ -1,7 +1,9 @@
+import cn from 'classnames'
 import { Formik } from 'formik'
 import { useCallback } from 'react'
 import Form from 'react-bootstrap/Form'
-import { BtnPrimary, BtnSecondary } from '~/Components/atoms/btn'
+import { FaEdit, FaEye } from 'react-icons/fa'
+import { BtnIcon, BtnPrimary, BtnSecondary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control'
 import { useModeEditablePet } from '~/pages/Modules/shared/MaintainPetPage/components/hooks/use-mode-editable-pet'
 import type { IProfile } from '~/types/profile'
@@ -12,14 +14,47 @@ type PersonalDataProps = {
 }
 
 const PersonalData = ({ data }: PersonalDataProps) => {
-    const { mode } = useModeEditablePet()
+    const { mode, toggleMode } = useModeEditablePet()
 
     const values = {} as IProfile
-    const handleSubmit = useCallback((values: IProfile) => {}, [])
+    const handleSubmit = useCallback((values: IProfile) => { }, [])
 
     return (
         <Formik initialValues={data} onSubmit={handleSubmit}>
-            <Form>
+
+            <Form className="pb-4">
+                <div className='flex w-full justify-end'>
+                    <BtnIcon
+                        icon={
+                            mode === 'editable' ? (
+                                <span>
+                                    <FaEye className="w-5 h-5" />
+                                </span>
+                            ) : (
+                                <span>
+                                    <FaEdit className="w-5 h-5" />
+                                </span>
+                            )
+                        }
+                        type="button"
+                        className={cn(
+                            `
+                                flex justify-center items-center w-32 h-10 rounded-md
+                            `
+                            ,
+                            {
+                                'bg-confirm-500 hover:bg-confirm-600 text-white':
+                                    mode === 'editable',
+                                'bg-primary-500 hover:bg-primary-600 text-white':
+                                    mode !== 'editable',
+                            },
+                        )}
+                        label={
+                            mode === 'editable' ? 'Visualizar' : 'Editar'
+                        }
+                        onClick={toggleMode}
+                    />
+                </div>
                 <div className="flex flex-col">
                     <div className="grid grid-cols-2 mobile:grid-cols-1 gap-2">
                         <FieldControl
@@ -56,11 +91,9 @@ const PersonalData = ({ data }: PersonalDataProps) => {
                         />
                         <AddressTutor mode={mode} />
                     </div>
-                    <div className="hstack gap-2 justify-content-end">
-                        <div className="flex justify-end items-end">
-                            <BtnSecondary className="mr-2" label="Cancelar" />
-                            <BtnPrimary className="" label="Salvar" type="submit" />
-                        </div>
+                    <div className="flex justify-end mobile:justify-center items-end">
+                        <BtnSecondary label="Cancelar" />
+                        <BtnPrimary label="Salvar" type="submit" />
                     </div>
                 </div>
             </Form>

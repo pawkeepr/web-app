@@ -18,7 +18,7 @@ import {
 import { calcAge } from '~/utils/calc-age'
 import BoxButtonsPets from '../box-buttons-pets'
 import ModalBoxButtonsPet from '../box-buttons-pets/modal-box-buttons-pets'
-import { card } from '../card-scheduled'
+import { IconGender, card } from '../card-scheduled'
 
 type CardPetProps = {
     pet: IPetV2Data
@@ -39,6 +39,9 @@ const CardPet = ({ pet, hasButtons = true }: CardPetProps) => {
         }),
         [pet],
     )
+
+    const Gender = IconGender[pet?.sex as keyof typeof IconGender]
+
     return (
         <article
             key={pet?.id}
@@ -68,9 +71,15 @@ const CardPet = ({ pet, hasButtons = true }: CardPetProps) => {
                         ] as Species
                     }
                 />
-                <h1
-                    className="text-center font-bold text-lg mobile:text-sm text-gray-400"
-                >{`${pet?.name_pet}`} </h1>
+                <div className="flex flex-row gap-1">
+                    <h1
+                        className="text-center font-bold text-lg mobile:text-sm text-gray-400"
+
+                    >{`${pet?.name_pet}`}
+
+                    </h1>
+                    <Gender />
+                </div>
                 <h2 className="text-center text-xs">{calcAge(pet?.date_birth)} ano(s)</h2>
             </div>
             <div className="card-body mobile:text-xs text-sm mobile:py-4 px-0 m-0 flex-[3] font-sans">

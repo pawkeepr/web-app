@@ -5,7 +5,6 @@ import type React from 'react'
 import image from '../../styles/assets/images/landing/bg-pattern.png'
 
 //import Components
-import Footer from './Footer'
 import Header from './Header'
 
 //import actions
@@ -25,7 +24,7 @@ const LayoutMain = ({ children }: LayoutProps) => {
     return (
         <div className="relative">
             <Header />
-            <div className="h-4 block web:hidden" />
+            <div className="h-4 block w-full web:hidden" />
             {/* <Sidebar layoutType={layoutType} /> */}
 
             <div
@@ -46,7 +45,7 @@ const LayoutMain = ({ children }: LayoutProps) => {
                     selectedTabInitial={0}
                 />
             </div>
-            <Footer condition={hasButtonFloating} />
+            <div className="h-40 block w-full " />
         </div>
     )
 }

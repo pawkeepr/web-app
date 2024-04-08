@@ -3,23 +3,25 @@ import {
     type RefAttributes,
     useMemo,
     useRef,
-} from 'react'
-import { tv } from 'tailwind-variants'
-import AvatarPet from '~/Components/molecules/avatar-pet'
-import type { IHookModal } from '~/hooks/use-modal'
-import useResizeMobile from '~/hooks/use-resize-mobile'
-import type { VeterinaryConsultation } from '~/types/appointment'
-import { BreedNames } from '~/types/breedType'
+} from 'react';
+import { FaTransgenderAlt } from "react-icons/fa";
+import { IoMdFemale, IoMdMale } from "react-icons/io";
+import { tv } from 'tailwind-variants';
+import AvatarPet from '~/Components/molecules/avatar-pet';
+import type { IHookModal } from '~/hooks/use-modal';
+import useResizeMobile from '~/hooks/use-resize-mobile';
+import type { VeterinaryConsultation } from '~/types/appointment';
+import { BreedNames } from '~/types/breedType';
 import {
     type Gender,
     GenderBR,
     MapOptionSpecies,
     Species,
-} from '~/types/speciesType'
-import { calcAge } from '~/utils/calc-age'
-import { getNameTutor } from '~/utils/get-name-tutors'
-import BoxButtons from '../box-buttons'
-import ModalBoxButtons from '../box-buttons/modal-box-buttons'
+} from '~/types/speciesType';
+import { calcAge } from '~/utils/calc-age';
+import { getNameTutor } from '~/utils/get-name-tutors';
+import BoxButtons from '../box-buttons';
+import ModalBoxButtons from '../box-buttons/modal-box-buttons';
 
 type BoxButtonsProps = {
     item: VeterinaryConsultation
@@ -33,7 +35,7 @@ type CardScheduledProps = {
 
 export const card = tv({
     base: `
-        card card-side !flex rounded-md shadow-xl border border-gray-200
+        card card-side !flex rounded-md shadow-xl border border-gray-200 m-2
     `,
     variants: {
         checked: {
@@ -60,6 +62,12 @@ export const card = tv({
         },
     },
 })
+
+export const IconGender = {
+    male: IoMdMale.bind(null, { className: 'text-blue-800 w-5 h-5 mobile:absolute bottom-1 right-2' }),
+    female: IoMdFemale.bind(null, { className: 'text-pink-800 w-5 h-5 mobile:absolute bottom-1 right-2' }),
+    unknown: FaTransgenderAlt.bind(null, { className: 'text-purple-800 w-5 h-5 mobile:absolute bottom-1 right-2' }),
+}
 
 const CardScheduled = ({
     checked,
@@ -92,6 +100,8 @@ const CardScheduled = ({
         const dateAndHour = `${date} às ${hour}`
         return dateAndHour
     }, [appointment])
+
+    const Gender = IconGender[appointment.tutor_pet_vet?.pet?.sex as keyof typeof IconGender]
 
     return (
         <article
@@ -127,10 +137,15 @@ const CardScheduled = ({
                         ] as Species
                     }
                 />
-                <h1
-                    className="text-center font-bold text-lg mobile:text-sm text-gray-400"
+                <div className="flex flex-row gap-1">
+                    <h1
+                        className="text-center font-bold text-lg mobile:text-sm text-gray-400"
 
-                >{`${pet?.name_pet}`}</h1>
+                    >{`${pet?.name_pet}`}
+
+                    </h1>
+                    <Gender />
+                </div>
                 <h2 className="text-center text-xs">{calcAge(pet?.date_birth)} ano(s)</h2>
             </div>
 

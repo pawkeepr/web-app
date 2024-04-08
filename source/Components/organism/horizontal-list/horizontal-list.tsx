@@ -2,7 +2,7 @@
 'use client'
 
 import { Tab } from '@headlessui/react'
-import cn from 'classnames'
+import { twMerge } from 'tailwind-merge'
 import { type VariantProps, tv } from 'tailwind-variants'
 
 export type TabItem = {
@@ -61,6 +61,11 @@ type TabProps = VariantProps<typeof tab>
 type HorizontalTabsProps = {
     categories: TabItem[]
     children?: React.ReactNode
+    classNames?: {
+        tabList?: string
+        tab?: string
+        panel?: string
+    }
 } & TabListProps &
     TabProps
 
@@ -68,6 +73,7 @@ const HorizontalTabs = ({
     categories,
     bottomNavigation = true,
     children = null,
+    classNames = {},
 }: HorizontalTabsProps) => {
     return (
         <Tab.Group as="section" className="flex flex-col w-full">
@@ -75,6 +81,7 @@ const HorizontalTabs = ({
                 className={tabList({
                     hidden: categories.length === 1,
                     bottomNavigation,
+                    className: classNames.tabList,
                 })}
             >
                 {categories.map((category) => (
@@ -85,6 +92,7 @@ const HorizontalTabs = ({
                             tab({
                                 selected,
                                 disabled: category.disabled,
+                                className: classNames.tab,
                             })
                         }
                     >
@@ -104,9 +112,7 @@ const HorizontalTabs = ({
                 {categories.map((item) => (
                     <Tab.Panel
                         key={item.id}
-                        className={cn(
-                            'w-full p-0',
-                        )}
+                        className={twMerge('w-full p-0', classNames.panel)}
                     >
                         {item.tab}
                     </Tab.Panel>

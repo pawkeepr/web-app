@@ -6,7 +6,6 @@ import type React from 'react'
 import image from '../../styles/assets/images/landing/bg-pattern.png'
 
 //import Components
-import Footer from './Footer'
 import Header from './Header'
 
 //import actions
@@ -29,7 +28,7 @@ const LayoutTutor = ({ children }: LayoutProps) => {
     return (
         <div id="relative">
             <Header drawer={(props) => <Drawer {...props} mode="TUTOR" />} />
-            <div className='h-4 block web:hidden' />
+            <div className="h-4 block web:hidden" />
             {/* <Sidebar layoutType={layoutType} /> */}
 
             <div
@@ -68,7 +67,6 @@ const LayoutTutor = ({ children }: LayoutProps) => {
                     )}
                 </FieldDocumentAppointment>
             </div>
-            <Footer condition={!hasButtonFloating} />
         </div>
     )
 }

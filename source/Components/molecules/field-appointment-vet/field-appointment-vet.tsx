@@ -79,8 +79,9 @@ const FieldDocumentAppointment = ({
                                             className={`
                                                 fixed flex flex-col items-center 
                                                 justify-center opacity-100 z-50 
-                                                mobile:bottom-20 web:bottom-10 right-2
-                                                w-[95vw] pt-4
+                                                mobile:bottom-20 web:bottom-14 right-2
+                                                w-[95vw] pt-4 
+                                                transition-all duration-300
                                                 ${styles['field-document']}
                                     `   }
                                         >
