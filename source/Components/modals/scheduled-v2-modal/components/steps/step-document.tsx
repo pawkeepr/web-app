@@ -21,7 +21,10 @@ const StepDocument = ({ nextStep, onChangeDocument, onChangeStep }: StepProps) =
     }, [validateDocument])
 
     return (
-        <div className="mt-3 p-1 gap-2 ">
+        <div className="gap-2">
+            <h5 className="text-center font-semibold text-gray-500 mb-2">
+                Insira o CPF do tutor para agendar ou iniciar uma consulta
+            </h5>
             <FieldDocument
                 ctx={values}
                 required

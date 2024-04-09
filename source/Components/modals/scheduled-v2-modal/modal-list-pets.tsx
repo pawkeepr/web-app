@@ -214,9 +214,6 @@ const ModalListPets = ({
                     onChange={onChangeSelectedTab}
                     defaultIndex={selectedTabInitial}
                 >
-                    <h5 className="text-center font-semibold text-gray-500 mb-2">
-                        Selecione ou Adicione um Pet para prosseguir na consulta.
-                    </h5>
                     <Tab.List className="flex flex-row w-full justify-between">
                         {STEPS.map((item) => (
                             <Tab key={item.id} className="hidden" />

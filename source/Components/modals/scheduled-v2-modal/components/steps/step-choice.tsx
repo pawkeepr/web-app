@@ -25,8 +25,8 @@ const StepChoice = ({ nextStep, closeModal, pet }: StepProps) => {
     }, [values])
 
     return (
-        <div className="overflow-auto h-[calc(100vh-24rem)] flex flex-1 w-full flex-col gap-2 justify-center items-center">
-            <div className="w-1/2 flex-[2] mobile:w-full mt-10 ">
+        <div className="flex flex-1 flex-col">
+            <div className="flex-[2] mobile:w-full mt-10 ">
                 <CardPet
                     pet={{
                         name: pet.pet_information?.name_pet,
@@ -43,7 +43,7 @@ const StepChoice = ({ nextStep, closeModal, pet }: StepProps) => {
                 className="
                 flex flex-[1] 
                 mobile:flex-col mt-4 
-                justify-center w-1/2 
+                justify-center
                 mobile:w-full items-end mobile:h-full 
                 overflow-hidden
             "

@@ -29,7 +29,10 @@ const StepListPets = ({
     const { values } = useFormikContextSafe<CtxSimplifiedPeTFields>()
 
     return (
-        <div className="mt-3 gap-2">
+        <div>
+            <h5 className="text-center font-semibold text-gray-500 mb-2">
+                Selecione ou Adicione um Pet para prosseguir na consulta.
+            </h5>
             <div className="overflow-auto h-[calc(100vh-24rem)] flex justify-center items-center flex-col">
                 {pets?.length === 0 && (
                     <div className="flex justify-center items-center  ">
@@ -52,10 +55,10 @@ const StepListPets = ({
                             <span className="align-middle col-span-1">
                                 {
                                     EmojiPet[
-                                        MapOptionSpecies[
-                                            pet.pet_information
-                                                ?.specie as KeyOfMapOptionSpecies
-                                        ] as Key
+                                    MapOptionSpecies[
+                                    pet.pet_information
+                                        ?.specie as KeyOfMapOptionSpecies
+                                    ] as Key
                                     ]
                                 }
                             </span>

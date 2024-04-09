@@ -116,7 +116,7 @@ const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) 
             enableReinitialize
         >
             {({ isValid, handleSubmit, values, isSubmitting }) => (
-                <div className="p-4">
+                <div >
                     <div className="gap-1">
                         <CardPet
                             pet={{
@@ -144,7 +144,7 @@ const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) 
                             document={values.tutor_pet_vet?.tutor?.cpf_cnpj}
                         />
                     </div>
-                    <section className="my-2">
+                    <section>
                         <div className="flex justify-around gap-3">
                             <FieldControl
                                 ctx={values}
