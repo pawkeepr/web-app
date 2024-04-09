@@ -46,19 +46,8 @@ const ReScheduledModal = ({
             {children?.({ showModal })}
 
             <Modal
-                onOpen={() => showModal}
+                open={isOpen as boolean}
                 onClose={() => closeModal()}
-                modal
-                nested
-                open={isOpen}
-                lockScroll
-                className=" 
-                    h-fit
-                    min-w-fit
-                    flex
-                    flex-col
-                    !w-fit
-                "
             >
                 <Formik
                     initialValues={item}

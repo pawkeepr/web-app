@@ -201,18 +201,13 @@ const ModalListPets = ({
             )}
 
             <Modal
-                onOpen={() => showModal()}
                 onClose={() => {
                     onChangeSelectedTab(selectedTabInitial)
                     onChangePet({} as IPetV2)
                     onChangeDocument('')
                     closeModal()
                 }}
-                modal
-                nested
                 open={open}
-                lockScroll
-                className="py-4 min-h-[calc(100vh-4rem)] !overflow-x-hidden"
             >
                 <Tab.Group
                     selectedIndex={selectedTab}
