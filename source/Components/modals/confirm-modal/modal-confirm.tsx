@@ -22,7 +22,7 @@ const ModalConfirm = ({
     description,
     children,
 }: ModalConfirmProps) => {
-    const { closeModal, open, showModal } = useModal()
+    const { closeModal, open, showModal } = useModal({ name: 'warning' })
 
     const handleConfirm = () => {
         onConfirm?.()

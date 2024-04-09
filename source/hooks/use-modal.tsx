@@ -1,26 +1,53 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useId } from 'react'
+import { create } from 'zustand'
 
-export type IHookModal = {
-    open: boolean
-    closeModal: () => void
-    showModal: () => void
+type ModalState = {
+    open: {
+        [key: string]: boolean | undefined
+    }
+    closeModal: (key: string) => void
+    showModal: (key: string) => void
 }
 
-const useModal = (): IHookModal => {
-    const [open, setOpen] = useState(false)
+const useZustandModal = create<ModalState>((set) => ({
+    open: {},
+    closeModal: (key) =>
+        set((state) => ({ open: { ...state.open, [key]: false } })),
+    showModal: (key) => set((state) => ({ open: { ...state.open, [key]: true } })),
+}))
 
-    const closeModal = useCallback(() => {
-        setOpen(false)
-    }, [])
+const NameKeys = {
+    confirm: 'confirm',
+    delete: 'delete',
+    edit: 'edit',
+    add: 'add',
+    info: 'info',
+    success: 'success',
+    error: 'error',
+    warning: 'warning',
+    alert: 'alert',
+    custom: 'custom',
+} as const
+type NameKeys = (typeof NameKeys)[keyof typeof NameKeys]
+
+type UseModalProps = {
+    name?: NameKeys
+    forceCloseDrawer?: boolean
+}
+
+const useModal = (props?: UseModalProps) => {
+    const { name } = props || {}
+    const id = name || useId()
+    const { open, closeModal, showModal: showModalZustand } = useZustandModal()
 
     const showModal = useCallback(() => {
-        setOpen(true)
-    }, [])
+        showModalZustand(id)
+    }, [id])
 
     return {
-        open,
-        closeModal,
-        showModal,
+        open: open[id] || false,
+        closeModal: () => closeModal(id),
+        showModal: () => showModal(),
     }
 }
 

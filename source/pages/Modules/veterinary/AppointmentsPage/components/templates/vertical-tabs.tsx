@@ -1,8 +1,8 @@
 import cn from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { XMarkIcon } from '@heroicons/react/24/solid'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -14,6 +14,7 @@ import { tv } from 'tailwind-variants'
 import { BtnIcon } from '~/Components/atoms/btn'
 import withLoading from '~/Components/helpers/with-loading'
 import ModalConfirm from '~/Components/modals/confirm-modal'
+import useModal from '~/hooks/use-modal'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { StepProps, Tabs } from '~/types/helpers'
 import StepAnamneses from '../organisms/steps/step-anamnese'
@@ -89,10 +90,38 @@ const VerticalTabs = () => {
     const [activeIndex, setActiveIndex] = useState(0)
     const [swipperController, setSwipperController] = useState<any>()
     const { isMobile } = useResizeMobile()
+    const { showModal, closeModal } = useModal({ name: 'warning' })
+
     const router = useRouter()
 
+    useEffect(() => {
+        const handleBeforeUnload = (event) => {
+            event.preventDefault()
+            event.returnValue = '' // Necessário para alguns navegadores
+        }
+
+        window.addEventListener('beforeunload', handleBeforeUnload)
+
+        return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+    }, [])
+
+    useEffect(() => {
+        const handleRouteChange = (url) => {
+            router.events.emit('routeChangeError')
+            showModal()
+            throw `Route change to ${url} was aborted.`
+        }
+
+        router.events.on('routeChangeStart', handleRouteChange)
+
+        return () => {
+            router.events.off('routeChangeStart', handleRouteChange)
+            closeModal()
+        }
+    }, [router])
+
     return (
-        <section className="bg-white">
+        <section className="bg-white mt-1">
             <ModalConfirm
                 title="Cancelar Consulta!"
                 onConfirm={() => router.push('/dashboard')}
@@ -162,9 +191,12 @@ const VerticalTabs = () => {
                 {items.map(({ id, Component }, index) => {
                     return (
                         <SwiperSlide key={`${id}-${index}`}>
-                            <div className='flex flex-1 flex-col ' style={{
-                                height: 'calc(100vh - 120px)',
-                            }} id='Inicio'
+                            <div
+                                className="flex flex-1 flex-col "
+                                style={{
+                                    height: 'calc(100vh - 120px)',
+                                }}
+                                id="Inicio"
                             >
                                 <Component
                                     activeTab={activeIndex}
