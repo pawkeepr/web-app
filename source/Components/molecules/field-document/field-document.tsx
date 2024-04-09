@@ -37,7 +37,7 @@ const FieldDocument = <T, Ctx>({
         <div className={twMerge("relative w-full", className)}>
             <FieldMasked
                 {...props}
-                className="border border-secondary focus:border-none focus:ring-0"
+                className="border border-secondary focus:border-none focus:ring-0 "
                 name={props.name}
                 mask={mask}
                 replacement={{ _: /\d/ }}

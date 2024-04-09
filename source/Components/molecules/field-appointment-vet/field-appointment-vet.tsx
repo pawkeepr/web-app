@@ -1,4 +1,4 @@
-import { PlusCircleIcon } from '@heroicons/react/24/solid'
+import { PlusIcon } from '@heroicons/react/24/solid'
 import { Form, Formik } from 'formik'
 import { startTransition, useState } from 'react'
 import withControl from '~/Components/helpers/with-control'
@@ -75,26 +75,30 @@ const FieldDocumentAppointment = ({
                                     onChangeOpen,
                                     onChangeDocument,
                                 }) || (
-
-                                        <FieldDocument
-                                            ctx={values}
-                                            name="cpf_tutor"
-                                            placeholder="Nova Consulta"
-                                            divClassName='!w-96 mobile:hidden'
-                                            className={` ${styles['field-document']} `}
-                                            onlyCPF
-                                            label='Insira o CPF do tutor para agendar ou iniciar uma consulta'
-                                            endIcon={
-                                                <button
-                                                    className="focus:outline-none flex h-full items-center justify-center"
-                                                    data-bs-target="#addVeterinaryAppointmentModal"
-                                                    type="submit"
-                                                >
-                                                    <PlusCircleIcon className="h-6 w-6 m-2 text-secondary-500" />
-                                                </button>
-                                            }
-                                        />
-
+                                        <div className="flex items-center">
+                                            <FieldDocument
+                                                ctx={values}
+                                                name="cpf_tutor"
+                                                placeholder="Nova Consulta"
+                                                divClassName="!w-96 mobile:hidden"
+                                                className={` ${styles['field-document']} `}
+                                                onlyCPF
+                                                label="Insira o CPF do tutor para agendar ou iniciar uma consulta"
+                                            />
+                                            <button
+                                                type="submit"
+                                                className="
+                                                        web:block hidden
+                                                        bg-secondary-500 p-1 m-1 rounded-full 
+                                                        shadow-2xl
+                                                        transition duration-500 ease-in-out
+                                                        opacity-70 hover:opacity-100 items-center justify-center
+                                                        mt-4
+                                                    "
+                                            >
+                                                <PlusIcon className="w-4 h-4 text-white" />
+                                            </button>
+                                        </div>
                                     )}
                             </Form>
                         )}

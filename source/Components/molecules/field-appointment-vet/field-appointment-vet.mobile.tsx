@@ -100,14 +100,14 @@ const FieldDocumentAppointmentMobile = ({
                                             <button
                                                 type="submit"
                                                 className="
-                                                        bg-primary-600 p-3 m-1 rounded-full 
-                                                        shadow-2xl 
+                                                        bg-secondary-500 p-3 m-1 rounded-full 
+                                                        shadow-2xl
                                                         transition duration-500 ease-in-out
-                                                        opacity-40 hover:opacity-100  flex items-center justify-center
+                                                        opacity-70 hover:opacity-100  flex items-center justify-center
                                                         mb-2
                                                     "
                                             >
-                                                <PlusIcon className="w-6 h-6 text-gray-50" />
+                                                <PlusIcon className="w-6 h-6 text-gray-500" />
                                             </button>
                                         </div>
                                     )}

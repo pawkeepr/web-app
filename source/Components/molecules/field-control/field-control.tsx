@@ -1,13 +1,13 @@
 import type { InputControlProps } from './types'
 
 import type { ChangeEvent } from 'react'
-import { type VariantProps, tv } from 'tailwind-variants'
+import { tv, type VariantProps } from 'tailwind-variants'
 import Input from '~/Components/atoms/input/input'
 import Label from '~/Components/atoms/label'
 import useFieldSafe from '~/hooks/use-field-safe'
 
 const fieldControlDiv = tv({
-    base: 'w-full',
+    base: 'w-full bg-white p-1',
 })
 
 export const ModeInput = {
@@ -17,7 +17,7 @@ export const ModeInput = {
 export type ModeInput = (typeof ModeInput)[keyof typeof ModeInput]
 
 export const fieldControlInput = tv({
-    base: '',
+    base: 'bg-white',
     variants: {
         isValid: {
             true: '!border-primary-500',
@@ -88,7 +88,7 @@ const FieldControl = <T, Ctx = any>({
                 id={id as string}
                 separator={separator as string}
             />
-            <div className="relative">
+            <div className="relative ">
                 {startIcon && (
                     <div className="absolute inset-y-0 flex items-center pl-1 text-sm text-gray-400 pointer-events-none left-1">
                         {startIcon}
@@ -117,7 +117,7 @@ const FieldControl = <T, Ctx = any>({
                     </div>
                 )}
             </div>
-            {!meta.error && <div className="pb-2" />}
+
 
             {meta.error && visibleError && (
                 <div className="w-full text-xs text-center text-secondary-500 font-semibold">
