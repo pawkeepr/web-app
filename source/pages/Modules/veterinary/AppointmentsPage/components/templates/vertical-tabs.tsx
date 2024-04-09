@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { useRouter } from 'next/router'
@@ -13,8 +13,6 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { tv } from 'tailwind-variants'
 import { BtnIcon } from '~/Components/atoms/btn'
 import withLoading from '~/Components/helpers/with-loading'
-import ModalConfirm from '~/Components/modals/confirm-modal'
-import useModal from '~/hooks/use-modal'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { StepProps, Tabs } from '~/types/helpers'
 import StepAnamneses from '../organisms/steps/step-anamnese'
@@ -86,64 +84,40 @@ const tab = tv({
     },
 })
 
+const handleBeforeUnload = (event) => {
+    event.preventDefault()
+    event.returnValue = '' // Necessário para alguns navegadores
+}
+
 const VerticalTabs = () => {
     const [activeIndex, setActiveIndex] = useState(0)
     const [swipperController, setSwipperController] = useState<any>()
     const { isMobile } = useResizeMobile()
-    const { showModal, closeModal } = useModal({ name: 'warning' })
-
     const router = useRouter()
 
     useEffect(() => {
-        const handleBeforeUnload = (event) => {
-            event.preventDefault()
-            event.returnValue = '' // Necessário para alguns navegadores
-        }
-
         window.addEventListener('beforeunload', handleBeforeUnload)
-
         return () => window.removeEventListener('beforeunload', handleBeforeUnload)
     }, [])
 
-    useEffect(() => {
-        const handleRouteChange = (url) => {
-            router.events.emit('routeChangeError')
-            showModal()
-            throw `Route change to ${url} was aborted.`
-        }
-
-        router.events.on('routeChangeStart', handleRouteChange)
-
-        return () => {
-            router.events.off('routeChangeStart', handleRouteChange)
-            closeModal()
-        }
-    }, [router])
+    const handleConfirm = useCallback(() => {
+        router.push('/dashboard')
+    }, [])
 
     return (
         <section className="bg-white mt-1">
-            <ModalConfirm
-                title="Cancelar Consulta!"
-                onConfirm={() => router.push('/dashboard')}
-                description="Importante!"
-                message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
-            >
-                {(showModal) => {
-                    return (
-                        <div className="w-full bg-primary-500 rounded-t-sm justify-end flex p-0 py-1">
-                            <BtnIcon
-                                type="button"
-                                icon={
-                                    <XMarkIcon className="font-extrabold text-secondary-400 hover:bg-red-500 rounded-sm" />
-                                }
-                                className="w-fit !p-0 !m-0 h-fit"
-                                onClick={showModal}
-                                aria-label="Close modal"
-                            />
-                        </div>
-                    )
-                }}
-            </ModalConfirm>
+            <div className="w-full bg-primary-500 rounded-t-sm justify-end flex p-0 py-1">
+                <BtnIcon
+                    type="button"
+                    icon={
+                        <XMarkIcon className="font-extrabold text-secondary-400 hover:bg-red-500 rounded-sm" />
+                    }
+                    className="w-fit !p-0 !m-0 h-fit"
+                    onClick={handleConfirm}
+                    aria-label="Close modal"
+                />
+            </div>
+
             <div
                 className={cn(
                     `   

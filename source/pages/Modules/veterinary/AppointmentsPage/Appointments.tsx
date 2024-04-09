@@ -4,6 +4,7 @@ import { format } from 'date-fns'
 import { Formik } from 'formik'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useMemo } from 'react'
+import RouteConfirmationModal from '~/Components/modals/route-confirmation-modal'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import { handleSubmitAppointments } from '~/store/hooks/appointment-id/use-appointment'
 import usePetById from '~/store/hooks/pet-by-id/use-pets'
@@ -159,6 +160,7 @@ const AppointmentsPage = ({
         >
             <DashboardLayouts title="Nova Consulta" searchBlock={false}>
                 <VerticalTabs isLoading={isLoadingPet} />
+                <RouteConfirmationModal />
             </DashboardLayouts>
         </Formik>
     )
