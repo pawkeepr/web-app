@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { useRouter } from 'next/router'
@@ -84,21 +84,11 @@ const tab = tv({
     },
 })
 
-const handleBeforeUnload = (event) => {
-    event.preventDefault()
-    event.returnValue = '' // Necessário para alguns navegadores
-}
-
 const VerticalTabs = () => {
     const [activeIndex, setActiveIndex] = useState(0)
     const [swipperController, setSwipperController] = useState<any>()
     const { isMobile } = useResizeMobile()
     const router = useRouter()
-
-    useEffect(() => {
-        window.addEventListener('beforeunload', handleBeforeUnload)
-        return () => window.removeEventListener('beforeunload', handleBeforeUnload)
-    }, [])
 
     const handleConfirm = useCallback(() => {
         router.push('/dashboard')

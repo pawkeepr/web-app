@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import Modal from '~/Components/organism/modal'; // Adapte este importe ao seu caminho real do componente Modal
-import { BtnCancel, BtnPrimary } from '../atoms/btn';
+import { BtnCancel, BtnPrimary } from '../../atoms/btn';
 
 type RouteConfirmationModalProps = {
     title?: string
@@ -20,8 +20,19 @@ const RouteConfirmationModal = ({
     const [confirmNavigation, setConfirmNavigation] = useState(false)
     const router = useRouter()
 
+
     useEffect(() => {
-        const handleRouteChangeStart = (url) => {
+        const handleBeforeUnload = (event) => {
+            event.preventDefault()
+            event.returnValue = '' // Necessário para alguns navegadores
+        }
+
+        window.addEventListener('beforeunload', handleBeforeUnload)
+        return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+    }, [])
+
+    useEffect(() => {
+        const handleRouteChangeStart = (url: string) => {
             if (confirmNavigation) {
                 return
             }
