@@ -160,7 +160,11 @@ const AppointmentsPage = ({
         >
             <DashboardLayouts title="Nova Consulta" searchBlock={false}>
                 <VerticalTabs isLoading={isLoadingPet} />
-                <RouteConfirmationModal />
+                <RouteConfirmationModal
+                    title="Cancelar Consulta!"
+                    description="Importante!"
+                    message="Esta ação irá cancelará todas as operações realizadas até o momento, deseja continuar?"
+                />
             </DashboardLayouts>
         </Formik>
     )
