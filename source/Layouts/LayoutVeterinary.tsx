@@ -25,7 +25,6 @@ const LayoutMain = ({ children }: LayoutProps) => {
         <div className="relative">
             <Header />
             <div className="h-[48px] block w-full web:hidden" />
-            {/* <Sidebar layoutType={layoutType} /> */}
 
             <div
                 className={cn(

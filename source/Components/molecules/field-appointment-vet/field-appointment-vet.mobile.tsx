@@ -1,4 +1,4 @@
-import { PlusCircleIcon } from '@heroicons/react/24/solid'
+import { PlusIcon } from '@heroicons/react/24/solid'
 import { Form, Formik } from 'formik'
 import { startTransition, useState } from 'react'
 import withControl from '~/Components/helpers/with-control'
@@ -19,17 +19,17 @@ type HandleProps = {
     onChangeDocument: (doc: string) => void
 }
 
-type FieldDocumentAppointmentProps = {
+type FieldDocumentAppointmentMobileProps = {
     selectedTabInitial?: number
     children?: (props: HandleProps) => JSX.Element
 }
 
 const initialValues: InitialValues = { cpf_tutor: '' }
 
-const FieldDocumentAppointment = ({
+const FieldDocumentAppointmentMobile = ({
     selectedTabInitial = 1,
     children,
-}: FieldDocumentAppointmentProps) => {
+}: FieldDocumentAppointmentMobileProps) => {
     const [isOpen, setIsOpen] = useState(false)
 
     const onHandleSubmit = ({ onChangeDocument, onChangeOpen }: HandleProps) => {
@@ -68,7 +68,7 @@ const FieldDocumentAppointment = ({
                     >
                         {({ handleSubmit, values }) => (
                             <Form
-                                className=" flex flex-row items-center justify-end"
+                                className="flex flex-row items-center justify-end"
                                 onSubmit={handleSubmit}
                             >
                                 {children?.({
@@ -77,15 +77,15 @@ const FieldDocumentAppointment = ({
                                 }) || (
                                         <div
                                             className={`
-                                                fixed flex flex-col items-center 
-                                                justify-center opacity-100 z-50 
-                                                mobile:bottom-20 web:bottom-14 right-2
-                                                w-[95vw] pt-4 web:hidden
+                                                fixed flex flex-row items-center 
+                                                justify-end opacity-100 z-50 
+                                                bottom-14 right-2 web:bottom-0
+                                                w-[95vw] pt-3
                                                 transition-all duration-300
                                                 ${styles['field-document']}
-                                    `   }
+                                    `}
                                         >
-                                            <span className="text-xs text-gray-500 font-semibold font-sans w-full absolute top-0 right-0 mobile:text-center">
+                                            <span className="text-xs web:hidden text-gray-500 font-semibold font-sans w-full absolute top-0 right-0 mobile:text-center">
                                                 {
                                                     'Insira o CPF do tutor para agendar ou iniciar uma consulta'
                                                 }
@@ -94,17 +94,21 @@ const FieldDocumentAppointment = ({
                                                 ctx={values}
                                                 name="cpf_tutor"
                                                 placeholder="Agendar/Nova Consulta"
+                                                className='!w-[70vw] mr-2 web:hidden '
                                                 onlyCPF
-                                                endIcon={
-                                                    <button
-                                                        className="focus:outline-none flex h-full items-center justify-center"
-                                                        data-bs-target="#addVeterinaryAppointmentModal"
-                                                        type="submit"
-                                                    >
-                                                        <PlusCircleIcon className="h-6 w-6 m-2 text-secondary-500" />
-                                                    </button>
-                                                }
                                             />
+                                            <button
+                                                type="submit"
+                                                className="
+                                                        bg-primary-600 p-3 m-1 rounded-full 
+                                                        shadow-2xl 
+                                                        transition duration-500 ease-in-out
+                                                        opacity-40 hover:opacity-100  flex items-center justify-center
+                                                        mb-2
+                                                    "
+                                            >
+                                                <PlusIcon className="w-6 h-6 text-gray-50" />
+                                            </button>
                                         </div>
                                     )}
                             </Form>
@@ -116,4 +120,4 @@ const FieldDocumentAppointment = ({
     )
 }
 
-export default withControl(FieldDocumentAppointment)
+export default withControl(FieldDocumentAppointmentMobile)

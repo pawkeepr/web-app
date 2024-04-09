@@ -1,8 +1,8 @@
 import { cpf } from 'cpf-cnpj-validator'
 import { useFormikContext } from 'formik'
 import { useMemo, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 import type { InputControlProps } from '~/Components/molecules/field-control'
-
 import FieldMasked from '../field-masked'
 
 type FieldDocumentProps<T, Ctx = any> = InputControlProps<T, Ctx> & {
@@ -11,6 +11,7 @@ type FieldDocumentProps<T, Ctx = any> = InputControlProps<T, Ctx> & {
 
 const FieldDocument = <T, Ctx>({
     typeDocument = 'all',
+    className,
     ...props
 }: FieldDocumentProps<T, Ctx>) => {
     const { values } = useFormikContext()
@@ -33,7 +34,7 @@ const FieldDocument = <T, Ctx>({
     }, [document, typeDocument])
 
     return (
-        <div className="relative w-full">
+        <div className={twMerge("relative w-full", className)}>
             <FieldMasked
                 {...props}
                 className="border border-secondary focus:border-none focus:ring-0"
