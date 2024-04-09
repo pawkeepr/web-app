@@ -1,64 +1,48 @@
-import type { RefAttributes } from 'react'
-import Popup from 'reactjs-popup'
-import type { PopupActions, PopupProps } from 'reactjs-popup/dist/types'
-
-import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
-
+import {
+    Modal as ModalResponsive,
+    type ModalProps as ModalResponsiveProps,
+} from 'react-responsive-modal'
+import 'react-responsive-modal/styles.css'
 import { tv } from 'tailwind-variants'
 import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
 
 const modal = tv({
     base: `  
         relative
-        z-50
-        w-[80vw] flex flex-col 
-        h-fit
-        overflow-visible bg-gray-100 dark:bg-dark-500
-        shadow-2xl rounded-md !py-0
+        rounded-md 
     `,
     variants: {
         mobilePage: {
-            true: 'mobile:!w-screen mobile:!h-screen mobile:rounded-none',
+            true: 'mobile:!w-screen mobile:!h-screen mobile:!rounded-none mobile:!p-0 mobile:!m-0',
         },
     },
 })
 
-const Modal = ({
-    className,
-    mobilePage = true,
-    ...props
-}: JSX.IntrinsicAttributes &
-    PopupProps &
-    RefAttributes<PopupActions> & { mobilePage?: boolean }) => {
+type ModalProps = {
+    open?: boolean
+    onClose?: () => void
+    className?: string
+    children?: React.ReactNode
+    mobilePage?: boolean
+} & ModalResponsiveProps
+
+const Modal = ({ className, mobilePage = true, ...props }: ModalProps) => {
     useKeyboardNavigation({
         Escape: () => props.onClose?.(),
     })
 
     return (
-        <Popup
-            position="bottom center"
-            className="mt-2"
-            overlayStyle={{ background: 'rgba(0,0,0,0.6)' }}
-            closeOnEscape={false}
+        <ModalResponsive
             {...props}
+            center
+            classNames={{
+                modal: modal({ className, mobilePage }),
+            }}
         >
-            <div className={modal({ className, mobilePage })}>
-                <div className="h-8 bg-primary w-full relative flex justify-end mobile:justify-center">
-                    <button
-                        type="button"
-                        className="!w-fit !p-0 !m-0  !h-fit "
-                        onClick={() => props.onClose?.()}
-                        aria-label="Close modal"
-                    >
-                        <XMarkIcon className="w-8 h-8 text-red-400 hover:!text-red-600 font-extrabold" />
-                    </button>
-                </div>
-
-                <section className="mt-3 relative overflow-auto px-4 ">
-                    {props.children}
-                </section>
-            </div>
-        </Popup>
+            <section className="relative overflow-auto py-4">
+                {props.children}
+            </section>
+        </ModalResponsive>
     )
 }
 
