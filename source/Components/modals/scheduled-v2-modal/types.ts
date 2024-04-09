@@ -10,6 +10,7 @@ export type ChildrenProps = {
 
 export type ModalConfirmProps = {
     label?: string
+    value?: string
     children?: (params: ChildrenProps) => React.ReactNode
     selectedTabInitial?: number
 }
@@ -17,7 +18,7 @@ export type ModalConfirmProps = {
 export type InitialValues = IPet
 export type CtxSimplifiedPeTFields = Pick<
     IPet,
-    'race' | 'specie' | 'sex' | 'bloodType' | 'name' | 'ownerEmergencyContact'
+    'race' | 'specie' | 'sex' | 'blood_type' | 'name' | 'ownerEmergencyContact'
 >
 
 export type StepProps = {

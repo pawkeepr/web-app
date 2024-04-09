@@ -1,8 +1,6 @@
 import cn from 'classnames'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 
-import { XMarkIcon } from '@heroicons/react/24/solid'
-import { useRouter } from 'next/router'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -11,7 +9,6 @@ import 'swiper/css/scrollbar'
 import { A11y, Controller, Navigation, Pagination, Scrollbar } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { tv } from 'tailwind-variants'
-import { BtnIcon } from '~/Components/atoms/btn'
 import withLoading from '~/Components/helpers/with-loading'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { StepProps, Tabs } from '~/types/helpers'
@@ -65,21 +62,20 @@ const tab = tv({
     // Ajuste os estilos base e variantes conforme necessário
     base: `
         w-full flex-1 mobile:!py-4 py-2
-        font-bold text-white
+        font-bold text-gray-600
         mobile:text-xs
+        border border-secondary-500
         text-sm flex web:flex-row items-center justify-center
         mobile:flex-col gap-2 !rounded-none
-        mobile:border
+        mobile:border  hover:bg-gray-100 
         `,
     // Ajustes adicionais para os estilos mobile
     variants: {
         selected: {
             true: '!bg-secondary-500 !text-gray-600 shadow',
-            false: 'text-gray-400 ',
         },
         disabled: {
             true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
-            false: 'text-blue-100 ',
         },
     },
 })
@@ -88,26 +84,9 @@ const VerticalTabs = () => {
     const [activeIndex, setActiveIndex] = useState(0)
     const [swipperController, setSwipperController] = useState<any>()
     const { isMobile } = useResizeMobile()
-    const router = useRouter()
-
-    const handleConfirm = useCallback(() => {
-        router.push('/dashboard')
-    }, [])
 
     return (
         <section className="bg-white mt-1">
-            <div className="w-full bg-primary-500 rounded-t-sm justify-end flex p-0 py-1">
-                <BtnIcon
-                    type="button"
-                    icon={
-                        <XMarkIcon className="font-extrabold text-secondary-400 hover:bg-red-500 rounded-sm" />
-                    }
-                    className="w-fit !p-0 !m-0 h-fit"
-                    onClick={handleConfirm}
-                    aria-label="Close modal"
-                />
-            </div>
-
             <div
                 className={cn(
                     `   

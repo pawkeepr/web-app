@@ -13,7 +13,7 @@ const modal = tv({
     `,
     variants: {
         mobilePage: {
-            true: 'mobile:!w-screen mobile:!h-screen mobile:!rounded-none mobile:!p-0 mobile:!m-0',
+            true: 'mobile:!w-screen mobile:!h-screen mobile:!rounded-none mobile:!p-4 mobile:!m-0',
         },
     },
 })
@@ -34,6 +34,8 @@ const Modal = ({ className, mobilePage = true, ...props }: ModalProps) => {
     return (
         <ModalResponsive
             {...props}
+            onEscKeyDown={props.onClose}
+            closeOnOverlayClick
             center
             classNames={{
                 modal: modal({ className, mobilePage }),

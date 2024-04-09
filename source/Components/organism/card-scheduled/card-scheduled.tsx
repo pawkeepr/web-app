@@ -1,11 +1,11 @@
 import {
-    type ForwardRefExoticComponent,
-    type RefAttributes,
     useMemo,
     useRef,
+    type ForwardRefExoticComponent,
+    type RefAttributes,
 } from 'react';
 import { FaTransgenderAlt } from "react-icons/fa";
-import { IoMdFemale, IoMdMale } from "react-icons/io";
+import { IoMdCalendar, IoMdCheckmarkCircle, IoMdCloseCircle, IoMdFemale, IoMdMale } from "react-icons/io";
 import { tv } from 'tailwind-variants';
 import AvatarPet from '~/Components/molecules/avatar-pet';
 import type { IHookModal } from '~/hooks/use-modal';
@@ -13,10 +13,10 @@ import useResizeMobile from '~/hooks/use-resize-mobile';
 import type { VeterinaryConsultation } from '~/types/appointment';
 import { BreedNames } from '~/types/breedType';
 import {
-    type Gender,
     GenderBR,
     MapOptionSpecies,
     Species,
+    type Gender,
 } from '~/types/speciesType';
 import { calcAge } from '~/utils/calc-age';
 import { getNameTutor } from '~/utils/get-name-tutors';
@@ -28,7 +28,6 @@ type BoxButtonsProps = {
 }
 
 type CardScheduledProps = {
-    checked?: boolean
     appointment: VeterinaryConsultation
     boxButtons?: null | ((props: BoxButtonsProps) => JSX.Element)
 }
@@ -36,41 +35,63 @@ type CardScheduledProps = {
 export const card = tv({
     base: `
         card card-side !flex shadow-xl border border-gray-200 m-2
+        
     `,
     variants: {
-        checked: {
-            true: '!bg-primary-500 bg-opacity-60 text-white',
-        },
-        confirmed: {
-            yes: '!border-l-4 !border-[#0971B3]',
-            no: '',
-        },
-        scheduled: {
-            yes: '!border-l-4 !border-primary-500',
-            no: '',
-        },
-        rescheduled: {
-            yes: '!border-l-4 !border-secondary-500',
-            no: '',
-        },
-        canceled: {
-            yes: '!border-l-4 !border-red-500',
-            no: '',
-        },
         isMobile: {
             true: 'hover:bg-gray-100 hover:bg-opacity-50 cursor-pointer',
         },
     },
 })
 
+// a ordem é importante para o tailwind definir a prioridade e sobrescrever o estilo corretamente:
+// Agenda, Reagendada, Confirmada, Cancelada
+
+// scheduled: appointment.appointment_status?.scheduled,
+// rescheduled: appointment.appointment_status?.rescheduled,
+// confirmed: appointment.appointment_status?.confirmed,
+// canceled: appointment.appointment_status?.canceled,
+
+// objeto com os status e seus respectivos ícones para serem exibidos no card, biblioteca utilizada react icons
+export const IconStatus = {
+    scheduled: {
+        icon: IoMdCalendar,
+        className: 'text-secondary-500 w-5 h-5',
+        title: 'Agendado',
+    },
+    rescheduled: {
+        icon: IoMdCalendar,
+        className: 'text-secondary-500 w-5 h-5',
+        title: 'Reagendado',
+    },
+    confirmed: {
+        icon: IoMdCheckmarkCircle,
+        className: 'text-primary-500 w-5 h-5',
+        title: 'Confirmado',
+    },
+    canceled: {
+        icon: IoMdCloseCircle,
+        className: 'text-red-500 w-5 h-5',
+        title: 'Cancelado',
+    },
+}
+
+const getIconStatus = (status: VeterinaryConsultation['appointment_status']) => {
+    if (status?.canceled === 'yes') return IconStatus.canceled
+    if (status?.confirmed === 'yes') return IconStatus.confirmed
+    if (status?.rescheduled === 'yes') return IconStatus.rescheduled
+
+    return IconStatus.scheduled
+}
+
+
 export const IconGender = {
-    male: IoMdMale.bind(null, { className: 'text-blue-800 w-5 h-5 mobile:absolute bottom-1 right-2' }),
-    female: IoMdFemale.bind(null, { className: 'text-pink-800 w-5 h-5 mobile:absolute bottom-1 right-2' }),
-    unknown: FaTransgenderAlt.bind(null, { className: 'text-purple-800 w-5 h-5 mobile:absolute bottom-1 right-2' }),
+    male: IoMdMale.bind(null, { className: 'text-blue-500 w-5 h-5 mobile:absolute bottom-1 right-2' }),
+    female: IoMdFemale.bind(null, { className: 'text-pink-500 w-5 h-5 mobile:absolute bottom-1 right-2' }),
+    unknown: FaTransgenderAlt.bind(null, { className: 'text-purple-500 w-5 h-5 mobile:absolute bottom-1 right-2' }),
 }
 
 const CardScheduled = ({
-    checked,
     appointment,
     boxButtons = (props) => <BoxButtons {...props} />,
 }: CardScheduledProps) => {
@@ -102,6 +123,7 @@ const CardScheduled = ({
     }, [appointment])
 
     const Gender = IconGender[appointment.tutor_pet_vet?.pet?.sex as keyof typeof IconGender]
+    const Icon = getIconStatus(appointment.appointment_status)
 
     return (
         <article
@@ -118,14 +140,7 @@ const CardScheduled = ({
                 outline: 'none',
             }}
             className={card({
-                checked,
                 isMobile,
-                // a ordem é importante para o tailwind definir a prioridade e sobrescrever o estilo corretamente:
-                // Agenda, Reagendada, Confirmada, Cancelada
-                scheduled: appointment.appointment_status?.scheduled,
-                rescheduled: appointment.appointment_status?.rescheduled,
-                confirmed: appointment.appointment_status?.confirmed,
-                canceled: appointment.appointment_status?.canceled,
             })}
         >
             <div className="flex-[2] flex-col items-center justify-center flex">
@@ -163,11 +178,16 @@ const CardScheduled = ({
                         <p>{formattedDateAndHours}</p>
                     </div>
                 </div>
-                <div className="card-actions mobile:hidden  ">
+                <div className="card-actions mobile:hidden">
                     {BoxButtons && !isMobile && <BoxButtons item={appointment} />}
                     {isMobile && <ModalBoxButtons item={appointment} ref={ref} />}
                 </div>
+                <span className='flex flex-row w-40 items-center justify-center gap-2 p-2 absolute top-0 mobile:right-0 mobile:text-xs text-sm text-gray-600 web:left-0'>
+                    <Icon.icon className={Icon.className} title={Icon.title} />
+                    {Icon.title}
+                </span>
             </div>
+
         </article>
     )
 }
