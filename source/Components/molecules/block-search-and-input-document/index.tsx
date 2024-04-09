@@ -16,13 +16,11 @@ const BlockSearchAndInputDocument = ({
     return (
         <div
             className={`
-                my-2 mobile:px-2 w-full
-                web:gap-2 flex mobile:flex-col h-fit 
-                justify-end items-center r
+                mobile:px-2 w-full 
+                web:gap-2 flex mobile:flex-col
+                justify-end items-center 
             `}
         >
-
-
             <SearchInput placeholder="Digite sua busca" name={name} />
             <FieldAppointmentVet condition={profile?.type_profile === TypeProfile.VETERINARY} />
             <FieldAppointmentTutor condition={profile?.type_profile === TypeProfile.TUTOR} />

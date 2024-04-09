@@ -1,7 +1,7 @@
 import { useCallback, useId } from 'react'
 import { create } from 'zustand'
 
-type ModalState = {
+export type ModalState = {
     open: {
         [key: string]: boolean | undefined
     }
@@ -50,5 +50,7 @@ const useModal = (props?: UseModalProps) => {
         showModal: () => showModal(),
     }
 }
+
+export type IHookModal = ReturnType<typeof useModal>
 
 export default useModal

@@ -1,8 +1,8 @@
 import {
-    type ForwardRefExoticComponent,
-    type RefAttributes,
     useMemo,
     useRef,
+    type ForwardRefExoticComponent,
+    type RefAttributes,
 } from 'react'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import type { IHookModal } from '~/hooks/use-modal'
@@ -10,10 +10,10 @@ import useResizeMobile from '~/hooks/use-resize-mobile'
 import { BreedNames } from '~/types/breedType'
 import type { IPetV2Data } from '~/types/pet-v2'
 import {
-    type Gender,
     GenderBR,
     MapOptionSpecies,
     Species,
+    type Gender,
 } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import BoxButtonsPets from '../box-buttons-pets'
@@ -44,7 +44,7 @@ const CardPet = ({ pet, hasButtons = true }: CardPetProps) => {
 
     return (
         <article
-            key={pet?.id}
+            key={pet?.id || pet?.id_pet}
             onClick={() => {
                 if (!isMobile) return
                 if (!ref?.current) return

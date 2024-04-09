@@ -97,6 +97,7 @@ export interface IPetV2Simplified {
 }
 
 export type IPetV2Data = {
+    id?: string
     id_pet: string
     name_pet: string
     microchip?: string | null
