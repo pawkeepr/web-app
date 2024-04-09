@@ -7,7 +7,7 @@ import Label from '~/Components/atoms/label'
 import useFieldSafe from '~/hooks/use-field-safe'
 
 const fieldControlDiv = tv({
-    base: 'w-full bg-white p-1',
+    base: 'w-full  p-1',
 })
 
 export const ModeInput = {
@@ -17,7 +17,7 @@ export const ModeInput = {
 export type ModeInput = (typeof ModeInput)[keyof typeof ModeInput]
 
 export const fieldControlInput = tv({
-    base: 'bg-white',
+    base: 'bg-white focus:!border-none focus:!ring-2 focus:!ring-primary-500 outline-none ',
     variants: {
         isValid: {
             true: '!border-primary-500',
@@ -117,7 +117,7 @@ const FieldControl = <T, Ctx = any>({
                     </div>
                 )}
             </div>
-
+            {!meta.error && <div className="pb-3" />}
 
             {meta.error && visibleError && (
                 <div className="w-full text-xs text-center text-secondary-500 font-semibold">

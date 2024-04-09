@@ -93,7 +93,7 @@ const FieldDocumentAppointment = ({
                                                         shadow-2xl
                                                         transition duration-500 ease-in-out
                                                         opacity-70 hover:opacity-100 items-center justify-center
-                                                        mt-4
+                                                        mt-2
                                                     "
                                             >
                                                 <PlusIcon className="w-4 h-4 text-white" />

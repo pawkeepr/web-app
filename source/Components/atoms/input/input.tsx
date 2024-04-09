@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 
-import { type VariantProps, tv } from 'tailwind-variants'
+import { tv, type VariantProps } from 'tailwind-variants'
 
 export const input = tv({
     base: `
@@ -11,8 +11,8 @@ export const input = tv({
         text-sm h-10 invalid:!shadow-outline-secondary-500 invalid:!text-secondary-500
         font-sans dark:bg-[#292e33] dark:text-gray-200 
         invalid:border-secondary-500 border invalid:focus:border-gray-300
-        focus:!border-none focus:ring-0
-        outline-primary
+        focus:!border-none focus:ring-2 focus:ring-primary-500 
+        outline-none 
     `,
     variants: {
         required: {
