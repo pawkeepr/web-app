@@ -66,6 +66,7 @@ const SearchInput = ({ name }: SearchInputProps) => {
                             <button
                                 type="button"
                                 onClick={() => onChangeSearch('')}
+                                className="flex items-center justify-center"
                             >
                                 <XMarkIcon className="text-red-300 w-6 h-6" />
                             </button>

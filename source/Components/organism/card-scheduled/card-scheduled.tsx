@@ -86,9 +86,9 @@ const getIconStatus = (status: VeterinaryConsultation['appointment_status']) => 
 
 
 export const IconGender = {
-    male: IoMdMale.bind(null, { className: 'text-blue-500 w-5 h-5 mobile:absolute bottom-1 right-2' }),
-    female: IoMdFemale.bind(null, { className: 'text-pink-500 w-5 h-5 mobile:absolute bottom-1 right-2' }),
-    unknown: FaTransgenderAlt.bind(null, { className: 'text-purple-500 w-5 h-5 mobile:absolute bottom-1 right-2' }),
+    male: IoMdMale.bind(null, { className: 'text-blue-400 w-4 h-4 mobile:absolute bottom-1 right-2' }),
+    female: IoMdFemale.bind(null, { className: 'text-pink-400 w-4 h-4 mobile:absolute bottom-1 right-2' }),
+    unknown: FaTransgenderAlt.bind(null, { className: 'text-purple-400 w-4 h-4 mobile:absolute bottom-1 right-2' }),
 }
 
 const CardScheduled = ({
@@ -161,20 +161,20 @@ const CardScheduled = ({
                     </h1>
                     <Gender />
                 </div>
-                <h2 className="text-center text-xs">{calcAge(pet?.date_birth)} ano(s)</h2>
+                <h2 className="text-center text-gray-400 text-xs">{calcAge(pet?.date_birth)} ano(s)</h2>
             </div>
 
-            <div className="card-body mobile:text-xs text-sm gap-1 mobile:py-4 px-0 m-0 flex-[3] font-sans">
-                <div className="text-gray-500  ">
+            <div className="card-body mobile:text-xs text-sm gap-1 mobile:py-4 px-0 m-0 flex-[4] font-sans">
+                <div className="text-gray-400  ">
                     <h3 className="font-bold ">Pet:</h3>
                     <p>{`${pet?.specie}, ${pet?.race}`}</p>
 
-                    <div className="text-gray-500 ">
-                        <h3 className="font-bold ">Nome do Tutor:</h3>
+                    <div className="text-gray-400 ">
+                        <h3 className="font-bold ">Tutor:</h3>
                         <p>{name}</p>
                     </div>
-                    <div className="text-gray-500 ">
-                        <h3 className="font-bold ">Data da Consulta:</h3>
+                    <div className="text-gray-400 ">
+                        <h3 className="font-bold ">Data:</h3>
                         <p>{formattedDateAndHours}</p>
                     </div>
                 </div>
@@ -182,7 +182,7 @@ const CardScheduled = ({
                     {BoxButtons && !isMobile && <BoxButtons item={appointment} />}
                     {isMobile && <ModalBoxButtons item={appointment} ref={ref} />}
                 </div>
-                <span className='flex flex-row w-40 items-center justify-center gap-2 p-2 absolute top-0 mobile:right-0 mobile:text-xs text-sm text-gray-600 web:left-0'>
+                <span className='flex flex-row w-40 items-center justify-center gap-2 p-2 absolute top-0 mobile:right-0 mobile:text-xs text-sm text-gray-400 web:left-0'>
                     <Icon.icon className={Icon.className} title={Icon.title} />
                     {Icon.title}
                 </span>

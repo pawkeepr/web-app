@@ -31,7 +31,7 @@ const AvatarPet = ({ specie, src, name_pet, className }: AvatarPetProps) => {
             <MyImage
                 src={link}
                 alt={`Avatar do pet ${name_pet}`}
-                className="rounded-full w-40 h-40 mobile:w-20 mobile:h-20 object-cover"
+                className="rounded-full w-40 h-40 mobile:w-16 mobile:h-16 object-cover"
             />
         </figure>
     )
