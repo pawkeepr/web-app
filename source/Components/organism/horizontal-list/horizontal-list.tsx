@@ -101,7 +101,7 @@ const HorizontalTabs = ({
             </Tab.List>
             <Tab.Panels
                 className=" 
-                    relative w-full px-2
+                    relative w-full web:px-2 mobile:px-0
                     mobile:items-center mobile:flex mobile:!h-fit mobile:flex-col mobile:w-full
                     tablet:py-0 tablet:items-center tablet:flex tablet:!h-fit tablet:flex-col
                 "

@@ -43,32 +43,32 @@ const STEPS: {
     value: KeyOfQuestionTypes
     icon?: IconType
 }[] = [
-    {
-        label: 'Sistema Digestivo',
-        value: 'digestive_sys',
-        icon: GiStomach,
-    },
-    {
-        label: 'Sistema Respiratório',
-        value: 'respiratory_sys',
-        icon: GiLungs,
-    },
-    {
-        label: 'Sistema Urinário',
-        value: 'urinary_sys',
-        icon: GiKidneys,
-    },
-    {
-        label: 'Sistema Nervoso',
-        value: 'nervous_sys',
-        icon: GiBrain,
-    },
-    {
-        value: 'locomotive_sys',
-        label: 'Sistema Locomotor',
-        icon: FaRunning,
-    },
-]
+        {
+            label: 'Sistema Digestivo',
+            value: 'digestive_sys',
+            icon: GiStomach,
+        },
+        {
+            label: 'Sistema Respiratório',
+            value: 'respiratory_sys',
+            icon: GiLungs,
+        },
+        {
+            label: 'Sistema Urinário',
+            value: 'urinary_sys',
+            icon: GiKidneys,
+        },
+        {
+            label: 'Sistema Nervoso',
+            value: 'nervous_sys',
+            icon: GiBrain,
+        },
+        {
+            value: 'locomotive_sys',
+            label: 'Sistema Locomotor',
+            icon: FaRunning,
+        },
+    ]
 
 export const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => {
     const filtered = items.reduce(
@@ -140,7 +140,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
             <h4 className="font-sans mb-2 text-center font-semibold uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
                 {makeTitle(category.label, false)}
             </h4>
-            <div className="flex flex-row w-full justify-between flex-wrap mb-4">
+            <div className="flex  flex-row w-full justify-between flex-wrap mb-4">
                 {STEPS.map((item) => (
                     <OptionsMenu
                         item={item as any}
@@ -162,31 +162,33 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
-                onSubmit={() => {}}
+                onSubmit={() => { }}
             >
                 {({ values }) => (
-                    <section className="mobile:gap-4 ">
-                        {options.map((item) => (
-                            <ControlSwitchDiv
-                                initialValue={null}
-                                ctx={values}
-                                onChange={(e) =>
-                                    handleChange?.({
-                                        id: item.value,
-                                        name_anamnesis: item.label,
-                                        notes_anamnesis: '',
-                                        type_anamnesis: item.type,
-                                        options_anamnesis:
-                                            OPTION_BOOLEAN[
+                    <section className="flex-col flex flex-1 !min-h-[460px] ">
+                        <div className='flex-[3]'>
+                            {options.map((item) => (
+                                <ControlSwitchDiv
+                                    initialValue={null}
+                                    ctx={values}
+                                    onChange={(e) =>
+                                        handleChange?.({
+                                            id: item.value,
+                                            name_anamnesis: item.label,
+                                            notes_anamnesis: '',
+                                            type_anamnesis: item.type,
+                                            options_anamnesis:
+                                                OPTION_BOOLEAN[
                                                 String(e) as OPTION_BOOLEAN
-                                            ],
-                                    })
-                                }
-                                name={item.value as string}
-                                label={item.label}
-                            />
-                        ))}
-                        <div className="flex w-full justify-between mt-4">
+                                                ],
+                                        })
+                                    }
+                                    name={item.value as string}
+                                    label={item.label}
+                                />
+                            ))}
+                        </div>
+                        <div className="flex w-full h-12 justify-between  ">
                             <button
                                 onClick={keyPressLeft}
                                 type="button"
