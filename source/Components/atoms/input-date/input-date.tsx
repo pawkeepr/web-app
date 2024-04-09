@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 import { tv } from 'tailwind-variants';
 
-type InputDateProps = {
+export type InputDateProps = {
     isValid?: boolean
     onChange?: (date: Date) => void
     selected?: Date | null
@@ -36,17 +36,22 @@ export const input = tv({
 
 // props de button
 
-const InputDate = ({ selected = null, onChange, ...props }: InputDateProps) => {
+export const InputLabelDate = forwardRef(
+    ({ value, onClick, ...props }: ComponentProps<'button'>, ref) => {
+        const placeholder = props['aria-placeholder'] || 'Selecione uma data'
+        return (
+            <button {...props} type="button" className={input()} onClick={onClick} ref={ref} >
+                <FaRegCalendarAlt className="text-gray-600" />
+                {value || placeholder}
+            </button>
+        )
+    },
+)
+
+const InputDate = ({ selected = null, onChange, placeholderText, ...props }: InputDateProps) => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(selected)
 
-    const ExampleCustomInput = forwardRef(
-        <T,>({ value, onClick }: ComponentProps<'button'>, ref) => (
-            <button className={input()} onClick={onClick} ref={ref}>
-                <FaRegCalendarAlt className="text-gray-600" />
-                {value}
-            </button>
-        ),
-    )
+
 
     const onChangeSelectedDate = (date: Date) => {
         onChange?.(date)
@@ -58,11 +63,9 @@ const InputDate = ({ selected = null, onChange, ...props }: InputDateProps) => {
             {...props}
             withPortal
             locale={ptBR}
-            showTimeSelect
-            dateFormat="Pp"
             onChange={onChangeSelectedDate}
             selected={selectedDate}
-            customInput={<ExampleCustomInput />}
+            customInput={<InputLabelDate aria-placeholder={placeholderText} />}
         />
     )
 }
