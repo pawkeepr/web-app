@@ -50,11 +50,14 @@ module.exports = {
             },
             screens: {
                 mobile: {
-                    max: '767px',
+                    max: '1024px',
                 },
                 tablet: {
                     min: '768px',
                     max: '1024px',
+                },
+                phone: {
+                    max: '767px',
                 },
                 web: {
                     min: '1025px',

@@ -59,7 +59,7 @@ const SearchInput = ({ name }: SearchInputProps) => {
                         ctx={values}
                         name="search"
                         label="Pesquisar"
-                        className="h-10 w-full"
+                        className="w-full mobile:rounded-full mobile:shadow-md mobile:overflow-visible"
                         startIcon={<FaSearch className="text-gray-400" />}
                         endIcon={
                             <button

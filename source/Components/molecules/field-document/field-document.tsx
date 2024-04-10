@@ -7,11 +7,15 @@ import FieldMasked from '../field-masked'
 
 type FieldDocumentProps<T, Ctx = any> = InputControlProps<T, Ctx> & {
     typeDocument?: 'all' | 'cpf' | 'cnpj'
+    classNames?: {
+        input?: string
+    }
 }
 
 const FieldDocument = <T, Ctx>({
     typeDocument = 'all',
     className,
+    classNames,
     ...props
 }: FieldDocumentProps<T, Ctx>) => {
     const { values } = useFormikContext()
@@ -38,6 +42,7 @@ const FieldDocument = <T, Ctx>({
             <FieldMasked
                 {...props}
                 name={props.name}
+                className={classNames?.input}
                 mask={mask}
                 replacement={{ _: /\d/ }}
             />

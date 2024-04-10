@@ -10,23 +10,23 @@ import TutorsTab from './components/organisms/steps/step-tutors'
 const Tabs = () => [
     {
         id: 1,
-        title: 'Agendamentos',
+        title: 'Agenda',
         href: '#scheduled',
-        icon: <FaCalendarCheck className="w-6 h-4" />,
+        icon: <FaCalendarCheck className="w-5 h-5" />,
         tab: <StepScheduledAll />,
     },
     {
         id: 2,
         title: 'Pets',
         href: '#pets',
-        icon: <MdOutlinePets className="w-6 h-6" />,
+        icon: <MdOutlinePets className="w-5 h-5" />,
         tab: <PetsTab />,
     },
     {
         id: 3,
         title: 'Tutores',
         href: '#tutors',
-        icon: <HiUserGroup className="w-6 h-6" />,
+        icon: <HiUserGroup className="w-5 h-5" />,
         tab: <TutorsTab />,
     },
 ]
@@ -35,7 +35,7 @@ const AppointmentsTabs = () => {
     const tabs = Tabs()
     return (
         <DefaultLayout title="Dashboard" name="appointments" searchBlock>
-            <HorizontalTabs categories={tabs} />
+            <HorizontalTabs categories={tabs} menu />
         </DefaultLayout>
     )
 }

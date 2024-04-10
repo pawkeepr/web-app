@@ -5,13 +5,19 @@ import useResizeMobile from '~/hooks/use-resize-mobile'
 export const card = tv({
     base: `
         card card-side shadow-xl border border-gray-200 my-2 w-full justify-start items-center text-left
-        bg-white rounded-2xl !h-fit max-h-[232px] overflow-hidden
+        bg-white rounded-3xl !h-fit max-h-[232px] overflow-hidden
     `,
     variants: {
+        mobile: {
+            true: 'mobile:rounded-3xl',
+        },
         isMobile: {
             true: 'hover:bg-gray-100 hover:bg-opacity-50 cursor-pointer',
         },
     },
+    defaultVariants: {
+        mobile: true,
+    }
 })
 
 export type ModalBoxButtonsProps<T> = {

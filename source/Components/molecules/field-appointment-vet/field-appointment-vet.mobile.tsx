@@ -79,35 +79,33 @@ const FieldDocumentAppointmentMobile = ({
                                             className={`
                                                 fixed flex flex-row items-center 
                                                 justify-end opacity-100 z-50 
-                                                bottom-14 right-2 web:bottom-0
+                                                bottom-[68px] right-2 web:bottom-0
                                                 w-[95vw] pt-3
                                                 transition-all duration-300
                                                 ${styles['field-document']}
                                     `}
                                         >
-                                            <span className="text-xs web:hidden text-gray-500 font-semibold font-sans w-full absolute top-0 right-0 mobile:text-center">
-                                                {
-                                                    'Insira o CPF do tutor para agendar ou iniciar uma consulta'
-                                                }
-                                            </span>
                                             <FieldDocument
                                                 ctx={values}
                                                 name="cpf_tutor"
                                                 placeholder="Agendar/Nova Consulta"
-                                                className='!w-[70vw] mr-2 web:hidden '
+                                                className='!w-[70vw] mr-2 web:hidden'
+                                                classNames={{
+                                                    input: 'rounded-full shadow-md overflow-visible border border-secondary-500'
+                                                }}
                                                 onlyCPF
                                             />
                                             <button
                                                 type="submit"
                                                 className="
-                                                        bg-secondary-500 p-3 m-1 rounded-full 
-                                                        shadow-2xl
+                                                        bg-primary-500 p-3 rounded-full 
+                                                        shadow-2xl 
                                                         transition duration-500 ease-in-out
                                                         opacity-70 hover:opacity-100  flex items-center justify-center
-                                                        mb-2
+                                                        mb-3
                                                     "
                                             >
-                                                <PlusIcon className="w-6 h-6 text-gray-500" />
+                                                <PlusIcon className="w-5 h-5 text-white" />
                                             </button>
                                         </div>
                                     )}

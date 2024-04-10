@@ -4,7 +4,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 export const input = tv({
     base: `
-        w-full px-4 py-2 rounded-sm
+        w-full px-4 py-2 rounded-md
         transition-all duration-100 ease-in-out
         transition-shadow 
         disabled:opacity-70 text-gray-600 disabled:bg-gray-200

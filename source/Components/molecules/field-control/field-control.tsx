@@ -17,7 +17,7 @@ export const ModeInput = {
 export type ModeInput = (typeof ModeInput)[keyof typeof ModeInput]
 
 export const fieldControlInput = tv({
-    base: 'bg-white focus:!border-none focus:!ring-2 focus:!ring-primary-500 outline-none ',
+    base: 'bg-white focus:!border-none focus:!ring-2 focus:!ring-primary-500 outline-none rounded-md',
     variants: {
         isValid: {
             true: '!border-primary-500',

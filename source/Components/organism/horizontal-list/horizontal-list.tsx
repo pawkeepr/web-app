@@ -17,26 +17,48 @@ export type TabItem = {
 const tab = tv({
     // Ajuste os estilos base e variantes conforme necessário
     base: `
-        w-full h-14 web:h-10 rounded-none
+        rounded-none 
         ring-white/60 ring-offset-2 focus:outline-none focus:ring-2
-        leading-1 font-bold text-gray-500 bg-gray-50
+        leading-1 font-bold text-gray-500 bg-transparent
         text-sm flex web:flex-row items-center justify-center
-        mobile:flex-col mobile:text-xs gap-2
+        gap-1 flex-grow 
     `,
     // Ajustes adicionais para os estilos mobile
     variants: {
+        mobile: {
+            true: 'mobile:flex-col mobile:text-xs mobile:h-20 mobile:!max-w-[80px]'
+        },
+        web: {
+            true: 'web:py-2 web:!w-full'
+        },
         selected: {
-            true: 'bg-primary-500 !text-white shadow',
+            true: '!text-white shadow',
         },
         disabled: {
             true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
         },
+        menu: {
+            true: 'mobile:mb-5',
+        }
     },
+    defaultVariants: {
+        mobile: true,
+        web: true,
+    },
+    compoundVariants: [
+        {
+            selected: true,
+            menu: true,
+            className: 'mobile:!rounded-full bg-primary-500',
+        }
+    ]
 })
 
 const tabList = tv({
     base: `
-        bg-primary-500 p-0
+        p-0 
+        mobile:bg-[#f6dda3] mobile:rounded-t-full mobile:shadow-md mobile:h-16 mobile:overflow-visible 
+        web:bg-white
         web:rounded-md
     `,
     variants: {
@@ -70,6 +92,7 @@ const HorizontalTabs = ({
     bottomNavigation = true,
     children = null,
     classNames = {},
+    menu = false,
 }: HorizontalTabsProps) => {
     return (
         <Tab.Group as="section" className="flex flex-col w-full">
@@ -81,20 +104,23 @@ const HorizontalTabs = ({
                 })}
             >
                 {categories.map((category) => (
-                    <Tab
-                        key={category.id}
-                        disabled={category.disabled}
-                        className={({ selected }) =>
-                            tab({
-                                selected,
-                                disabled: category.disabled,
-                                className: classNames.tab,
-                            })
-                        }
-                    >
-                        {category.icon && <span>{category.icon}</span>}
-                        {category.title}
-                    </Tab>
+                    <div className='flex-grow w-1/3 flex items-center justify-center'>
+                        <Tab
+                            key={category.id}
+                            disabled={category.disabled}
+                            className={({ selected }) =>
+                                tab({
+                                    selected,
+                                    menu,
+                                    disabled: category.disabled,
+                                    className: classNames.tab,
+                                })
+                            }
+                        >
+                            {category.icon && <span>{category.icon}</span>}
+                            {category.title}
+                        </Tab>
+                    </div>
                 ))}
             </Tab.List>
             <Tab.Panels
