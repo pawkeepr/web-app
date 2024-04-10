@@ -44,7 +44,7 @@ const LayoutMain = ({ children }: LayoutProps) => {
                     selectedTabInitial={0}
                 />
             </div>
-            {hasButtonFloating && <div className="h-40 web:hidden w-full " />}
+            {hasButtonFloating && <div className="h-36 web:hidden w-full " />}
         </div>
     )
 }
