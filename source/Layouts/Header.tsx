@@ -51,9 +51,7 @@ const Header = ({
 
     return (
         <header
-            className={
-                ' !bg-primary-500 mobile:fixed mobile:z-50 w-full z-10 h-12 flex items-center'
-            }
+            className='!bg-primary-500 mobile:fixed mobile:z-50 w-full z-10 h-12 flex items-center'
             ref={divRef}
         >
             <div className="flex w-full justify-between items-center px-4">
@@ -74,7 +72,7 @@ const Header = ({
                 <div className="flex items-center justify-center">
                     <Link
                         href="/dashboard"
-                        className="logo-light justify-center block"
+                        className="logo-light justify-center block absolute left-1/2 transform -translate-x-1/2"
                     >
                         <Image
                             src={lightLogo}
