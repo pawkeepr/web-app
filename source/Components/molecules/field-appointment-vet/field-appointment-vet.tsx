@@ -83,6 +83,7 @@ const FieldDocumentAppointment = ({
                                                 divClassName="!w-96 mobile:hidden"
                                                 className={` ${styles['field-document']} `}
                                                 onlyCPF
+                                                required={false}
                                                 label="Insira o CPF do tutor para agendar ou iniciar uma consulta"
                                             />
                                             <button

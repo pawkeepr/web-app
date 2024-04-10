@@ -11,13 +11,13 @@ import { getNameTutor } from '~/utils/get-name-tutors'
 import Modal from '../modal'
 import BoxButtons from './box-buttons'
 
-type ModalBoxButtonsProps = {
-    item: VeterinaryConsultation
-    children?: (props: { showModal: () => void }) => JSX.Element
+export type ModalBoxButtonsProps<T> = {
+    item: T
+    children: (props: { showModal: () => void }) => JSX.Element
 }
 
 const ModalBoxButtons = forwardRef(
-    ({ item, children }: ModalBoxButtonsProps, ref) => {
+    ({ item, children }: ModalBoxButtonsProps<VeterinaryConsultation>, ref) => {
         const { closeModal, open, showModal } = useModal()
 
         useImperativeHandle(

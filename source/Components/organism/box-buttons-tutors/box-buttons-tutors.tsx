@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback } from 'react'
 import { FaEdit } from 'react-icons/fa'
-import { BtnConfirm } from '~/Components/atoms/btn'
+import { BtnSecondary } from '~/Components/atoms/btn'
 import withLoading from '~/Components/helpers/with-loading'
 import ModalListPets from '~/Components/modals/scheduled-v2-modal/modal-list-pets'
 import type { OnChangeOpen } from '~/Components/modals/scheduled-v2-modal/types'
@@ -25,14 +25,20 @@ const BoxButtonsTutors = ({ isLoading = false, item }: BoxButtonsTutorsProps) =>
     )
 
     return (
-        <div className="gap-1 justify-center flex items-end h-full w-full mobile:grid mobile:grid-cols-1 flex-wrap">
-
+        <div
+            className="
+                items-center justify-center
+                w-full gap-1 flex 
+                overflow-hidden 
+                flex-wrap
+                px-2
+            "
+        >
             <ModalListPets>
                 {({ onChangeDocument, onChangeOpen }) => (
-                    <BtnConfirm
+                    <BtnSecondary
                         condition={!isLoading}
                         label="Agendar Consulta"
-                        className="border-none mobile:!w-full mobile:col-span-1 text-white"
                         onClick={onClickScheduled.bind(
                             null,
                             onChangeDocument,
@@ -40,7 +46,7 @@ const BoxButtonsTutors = ({ isLoading = false, item }: BoxButtonsTutorsProps) =>
                         )}
                     >
                         <FaEdit />
-                    </BtnConfirm>
+                    </BtnSecondary>
                 )}
             </ModalListPets>
         </div>

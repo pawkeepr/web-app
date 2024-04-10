@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
 import { FaEdit, FaPlayCircle } from 'react-icons/fa'
-import { BtnConfirm, BtnPrimary } from '~/Components/atoms/btn'
+import { BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
 import withCompose from '~/Components/helpers/with-compose'
 import type { IPetV2Data } from '~/types/pet-v2'
 
@@ -28,20 +28,28 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
     }, [item])
 
     return (
-        <div className="gap-1 justify-center flex items-end h-full w-full mobile:grid mobile:grid-cols-1 flex-wrap">
-
-            <BtnConfirm
+        <div
+            className="
+                items-center justify-center
+                w-full gap-1 flex 
+                overflow-hidden 
+                flex-wrap
+                px-2
+            "
+        >
+            <BtnNeutral
                 condition={!isLoading}
                 label="Visualizar Histórico"
-                className="border-none mobile:!w-full mobile:col-span-1 text-white"
+                outline
+                className=" !w-1/4  max-w-[33%] "
                 onClick={onClickEdit}
             >
                 <FaEdit />
-            </BtnConfirm>
+            </BtnNeutral>
             <BtnPrimary
                 condition={!isLoading}
                 label="Iniciar Consulta"
-                className="border-none mobile:!w-full mobile:col-span-1"
+                className="mobile:!w-full w-1/4 max-w-[33%] "
                 onClick={startAppointment}
             >
                 <FaPlayCircle />

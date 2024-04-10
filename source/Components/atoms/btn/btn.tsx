@@ -9,35 +9,26 @@ import withLoading from '~/Components/helpers/with-loading'
 
 export const button = tv({
     base: `
-        mobile:p-4 mobile:w-full w-40
-        px-2 h-12 py-2
+        mobile:p-4 mobile:w-full w-40 flex-grow
+        px-2 h-10 py-1
         text-sm font-semibold rounded-md text-center
         leading-1 font-semibold
         transition duration-100 ease-in-out
         disabled:opacity-50 disabled:cursor-not-allowed
         bg-opacity-80 hover:bg-opacity-100 active:opacity-100
         hover:transform hover:scale-[101%] disabled:hover:scale-100
-        text-opacity-100
+        text-opacity-100 text-gray-50
         flex justify-center items-center
     `,
     variants: {
-        primary: {
-            true: 'bg-primary-500 dark:bg-secondary-500 text-gray-50 dark:text-gray-600 border border-secondary-600',
-        },
-        secondary: {
-            true: 'bg-secondary-500 text-gray-500 dark:bg-primary-500',
-        },
-        success: {
-            true: 'bg-primary-500',
-        },
-        confirm: {
-            true: 'bg-confirm-500',
-        },
-        cancel: {
-            true: 'bg-secondary-500 text-gray-500',
+        color: {
+            primary: 'bg-primary-500',
+            secondary: 'bg-secondary-500 text-gray-500 ',
+            confirm: 'bg-confirm-500',
+            neutral: 'bg-gray-500 text-gray-500',
         },
         text: {
-            true: 'bg-transparent border-2 border-secondary-500 text-secondary-500 hover:!bg-gray-100',
+            true: 'bg-transparent border-2 border-secondary-500 text-secondary-500 hover:!bg-gray-100'
         },
         link: {
             true: 'text-secondary-500 dark:text-primary-600 hover:no-underline capitalize w-fit',
@@ -45,7 +36,33 @@ export const button = tv({
         icon: {
             true: 'w-fit p-1 m-0 h-fit text-gray-400 border-none hover:!bg-transparent',
         },
+        outline: {
+            true: 'bg-transparent !border',
+        },
     },
+
+    compoundVariants: [
+        {
+            outline: true,
+            color: 'primary',
+            className: 'border-primary-500 text-primary-500 hover:text-primary-600',
+        },
+        {
+            outline: true,
+            color: 'secondary',
+            className: 'border-secondary-600 text-secondary-600 hover:text-secondary-600',
+        },
+        {
+            outline: true,
+            color: 'confirm',
+            className: 'border-confirm-500 text-confirm-500 hover:text-confirm-600',
+        },
+        {
+            outline: true,
+            color: 'neutral',
+            className: 'border-gray-500 text-gray-500 hover:text-gray-600',
+        },
+    ]
 })
 
 const styledIcon = tv({
@@ -89,23 +106,27 @@ const Btn = ({
 const BtnCompose = withLoading(withControl(Btn))
 
 const BtnPrimary = ({ label = 'Primário', ...props }: BtnProps) => {
-    return <BtnCompose primary label={label} {...props} />
+    return <BtnCompose color="primary" label={label} {...props} />
+}
+
+const BtnNeutral = ({ label = 'Neutro', ...props }: BtnProps) => {
+    return <BtnCompose color="neutral" label={label} {...props} />
 }
 
 const BtnSecondary = ({ label = 'Secundário', ...props }: BtnProps) => {
-    return <BtnCompose secondary label={label} {...props} />
+    return <BtnCompose color="secondary" label={label} {...props} />
 }
 
 const BtnSuccess = ({ label = 'Sucesso', ...props }: BtnProps) => {
-    return <BtnCompose success label={label} {...props} />
+    return <BtnCompose color="primary" label={label} {...props} />
 }
 
 const BtnConfirm = ({ label = 'Confirmar', ...props }: BtnProps) => {
-    return <BtnCompose confirm label={label} {...props} />
+    return <BtnCompose color="confirm" label={label} {...props} />
 }
 
 const BtnCancel = ({ label = 'Cancelar', ...props }: BtnProps) => {
-    return <BtnCompose cancel label={label} {...props} />
+    return <BtnCompose color="secondary" label={label} {...props} />
 }
 
 const BtnLabel = ({ label = 'Texto', ...props }: BtnProps) => {
@@ -158,8 +179,7 @@ export {
     BtnConfirm,
     BtnIcon,
     BtnLabel,
-    BtnLink,
-    BtnPrimary,
+    BtnLink, BtnNeutral, BtnPrimary,
     BtnSecondary,
     BtnSuccess
 }

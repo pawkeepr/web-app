@@ -1,12 +1,5 @@
-import {
-    useMemo,
-    useRef,
-    type ForwardRefExoticComponent,
-    type RefAttributes,
-} from 'react'
+import { useMemo } from 'react'
 import AvatarPet from '~/Components/molecules/avatar-pet'
-import type { IHookModal } from '~/hooks/use-modal'
-import useResizeMobile from '~/hooks/use-resize-mobile'
 import { BreedNames } from '~/types/breedType'
 import type { IPetV2Data } from '~/types/pet-v2'
 import {
@@ -18,18 +11,15 @@ import {
 import { calcAge } from '~/utils/calc-age'
 import BoxButtonsPets from '../box-buttons-pets'
 import ModalBoxButtonsPet from '../box-buttons-pets/modal-box-buttons-pets'
-import { IconGender, card } from '../card-scheduled'
+import Card from '../card'
+import { IconGender } from '../card-scheduled'
 
 type CardPetProps = {
     pet: IPetV2Data
     hasButtons?: boolean
 }
 
-const CardPet = ({ pet, hasButtons = true }: CardPetProps) => {
-    const ref = useRef<ForwardRefExoticComponent<RefAttributes<IHookModal>>>(null)
-
-    const { isMobile } = useResizeMobile()
-
+const CardPet = ({ pet }: CardPetProps) => {
     const item = useMemo(
         () => ({
             ...pet,
@@ -43,46 +33,33 @@ const CardPet = ({ pet, hasButtons = true }: CardPetProps) => {
     const Gender = IconGender[pet?.sex as keyof typeof IconGender]
 
     return (
-        <article
-            key={pet?.id || pet?.id_pet}
-            onClick={() => {
-                if (!isMobile) return
-                if (!ref?.current) return
-                const castRef = ref.current as unknown as IHookModal
-                castRef?.showModal?.()
-            }}
-            onKeyUp={() => { }}
-            style={{
-                cursor: isMobile ? 'pointer' : 'default',
-                outline: 'none',
-            }}
-            className={card({
-                isMobile,
-                confirmed: 'yes',
-                className: 'py-2'
-            })}
+        <Card
+            boxButtons={() => <BoxButtonsPets item={pet} />}
+            item={pet}
+            modal={ModalBoxButtonsPet}
+            sectionAvatar={() => (
+                <>
+                    <AvatarPet
+                        name_pet={pet?.name_pet}
+                        specie={
+                            MapOptionSpecies[
+                            pet.specie as keyof typeof MapOptionSpecies
+                            ] as Species
+                        }
+                    />
+                    <div className="flex flex-row gap-1">
+                        <h1 className="text-center font-bold text-lg mobile:text-sm text-gray-400">
+                            {`${pet?.name_pet}`}
+                        </h1>
+                        <Gender />
+                    </div>
+                    <h2 className="text-center text-xs">
+                        {calcAge(pet?.date_birth)} ano(s)
+                    </h2>
+                </>
+            )}
         >
-            <div className="flex-[2] flex-col items-center justify-center flex">
-                <AvatarPet
-                    name_pet={pet?.name_pet}
-                    specie={
-                        MapOptionSpecies[
-                        pet.specie as keyof typeof MapOptionSpecies
-                        ] as Species
-                    }
-                />
-                <div className="flex flex-row gap-1">
-                    <h1
-                        className="text-center font-bold text-lg mobile:text-sm text-gray-400"
-
-                    >{`${pet?.name_pet}`}
-
-                    </h1>
-                    <Gender />
-                </div>
-                <h2 className="text-center text-xs">{calcAge(pet?.date_birth)} ano(s)</h2>
-            </div>
-            <div className="card-body mobile:text-xs text-sm mobile:py-4 px-0 m-0 flex-[3] font-sans">
+            <>
                 <div className="text-gray-500 space-y-1">
                     <div className="text-gray-500 ">
                         <h3 className="font-bold">Pet:</h3>
@@ -92,19 +69,9 @@ const CardPet = ({ pet, hasButtons = true }: CardPetProps) => {
                         <h3 className="font-bold ">Sexo:</h3>
                         <p>{item.sex}</p>
                     </div>
-
                 </div>
-
-                <div className="card-actions mobile:hidden">
-                    <BoxButtonsPets item={pet} condition={!isMobile && hasButtons} />
-                    <ModalBoxButtonsPet
-                        item={pet}
-                        ref={ref}
-                        condition={isMobile && hasButtons}
-                    />
-                </div>
-            </div>
-        </article>
+            </>
+        </Card>
     )
 }
 

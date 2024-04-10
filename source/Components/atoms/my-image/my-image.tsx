@@ -33,7 +33,7 @@ const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
                     ...style,
                 }}
             />}
-            {!isPublicImage && (error || loading) && (
+            {!src && (error || loading) && (
                 <IoPersonCircle className={
                     twMerge('text-white', className)
                 } />

@@ -4,10 +4,10 @@ import { useCallback } from 'react'
 import { FaCheckCircle, FaEdit, FaPlayCircle } from 'react-icons/fa'
 import { MdClose } from 'react-icons/md'
 import {
-    BtnLabel as BtnCancel,
     BtnConfirm,
+    BtnNeutral,
     BtnPrimary,
-    BtnCancel as BtnRescheduled,
+    BtnSecondary,
 } from '~/Components/atoms/btn'
 import withLoading from '~/Components/helpers/with-loading'
 import {
@@ -59,21 +59,37 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                 px-2
             "
         >
-            <BtnCancel
+            <BtnPrimary
                 condition={
                     !isLoading &&
                     item.appointment_status?.canceled === 'no' &&
                     item.appointment_status?.done === 'no'
                 }
-                label='Cancelar'
-                aria-label='Cancelar consulta'
+                label="Iniciar Consulta"
+                aria-label="Iniciar consulta"
+                className="border-none mobile:!w-full w-full "
+                onClick={startAppointment}
+            >
+                <FaPlayCircle />
+            </BtnPrimary>
+            <BtnNeutral
+                condition={
+                    !isLoading &&
+                    item.appointment_status?.canceled === 'no' &&
+                    item.appointment_status?.done === 'no'
+                }
+                label="Cancelar"
+                aria-label="Cancelar consulta"
                 onClick={onClickCancel}
-                className="!text-red-500 !w-1/4 flex-grow web:text-none border web:!border-none web:absolute web:top-0 web:right-0 web:!w-fit hover:!bg-transparent"
+                outline
+                className="!w-1/5"
+
+
             >
                 <MdClose className="h-6 w-6" />
-            </BtnCancel>
+            </BtnNeutral>
 
-            <BtnRescheduled
+            <BtnSecondary
                 condition={
                     !isLoading &&
                     item.appointment_status?.done === 'no' &&
@@ -81,11 +97,12 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                 }
                 label="Reagendar"
                 aria-label="Reagendar consulta"
+                outline
                 onClick={onClickReScheduled}
-                className="border-none !w-1/4 flex-grow  text-gray-500"
+                className="!w-1/5"
             >
                 <FaEdit />
-            </BtnRescheduled>
+            </BtnSecondary>
 
             <BtnConfirm
                 condition={
@@ -96,25 +113,14 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                 }
                 label="Confirmar"
                 aria-label="Confirmar consulta"
-                className="border-none !w-1/4 flex-grow  text-white"
+                outline
+                className="!w-1/5"
                 onClick={onClickConfirmed}
             >
                 <FaCheckCircle />
             </BtnConfirm>
 
-            <BtnPrimary
-                condition={
-                    !isLoading &&
-                    item.appointment_status?.canceled === 'no' &&
-                    item.appointment_status?.done === 'no'
-                }
-                label="Iniciar"
-                aria-label="Iniciar consulta"
-                className="border-none mobile:!w-full w-1/4 flex-grow "
-                onClick={startAppointment}
-            >
-                <FaPlayCircle />
-            </BtnPrimary>
+
         </div>
     )
 }

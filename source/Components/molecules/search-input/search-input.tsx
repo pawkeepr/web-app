@@ -58,7 +58,6 @@ const SearchInput = ({ name }: SearchInputProps) => {
                     <FieldControl
                         ctx={values}
                         name="search"
-                        required
                         label="Pesquisar"
                         className="h-10 w-full"
                         startIcon={<FaSearch className="text-gray-400" />}
