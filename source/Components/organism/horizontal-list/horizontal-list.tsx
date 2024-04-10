@@ -3,7 +3,7 @@
 
 import { Tab } from '@headlessui/react'
 import { twMerge } from 'tailwind-merge'
-import { type VariantProps, tv } from 'tailwind-variants'
+import { tv, type VariantProps } from 'tailwind-variants'
 
 export type TabItem = {
     id: number | string
@@ -17,21 +17,19 @@ export type TabItem = {
 const tab = tv({
     // Ajuste os estilos base e variantes conforme necessário
     base: `
-        w-full rounded-md h-14 web:h-10 mobile:rounded-none
+        w-full h-14 web:h-10 rounded-none
         ring-white/60 ring-offset-2 focus:outline-none focus:ring-2
-        leading-1 font-bold text-white 
+        leading-1 font-bold text-gray-500 bg-gray-50
         text-sm flex web:flex-row items-center justify-center
         mobile:flex-col mobile:text-xs gap-2
     `,
     // Ajustes adicionais para os estilos mobile
     variants: {
         selected: {
-            true: 'bg-white !text-secondary-500 shadow',
-            false: 'text-blue-100 hover:bg-white/[0.12]  hover:text-white',
+            true: 'bg-primary-500 !text-white shadow',
         },
         disabled: {
             true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
-            false: 'text-blue-100 hover:bg-white/[0.12]  hover:text-white',
         },
     },
 })
