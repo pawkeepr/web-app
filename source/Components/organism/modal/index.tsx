@@ -13,7 +13,7 @@ const modal = tv({
     `,
     variants: {
         mobilePage: {
-            true: 'mobile:!w-screen mobile:!h-screen mobile:!rounded-none mobile:!p-4 mobile:!m-0',
+            true: 'mobile:!w-screen mobile:!h-screen mobile:!rounded-none mobile:!p-2 mobile:!m-0',
         },
     },
 })

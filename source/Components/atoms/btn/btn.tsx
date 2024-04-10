@@ -1,7 +1,7 @@
 import Link, { type LinkProps } from 'next/link'
 import type React from 'react'
-import type { ComponentProps } from 'react'
-import { type VariantProps, tv } from 'tailwind-variants'
+import { useId, type ComponentProps } from 'react'
+import { tv, type VariantProps } from 'tailwind-variants'
 import BtnAvatar from './btn-avatar'
 
 import withControl from '~/Components/helpers/with-control'
@@ -9,14 +9,14 @@ import withLoading from '~/Components/helpers/with-loading'
 
 export const button = tv({
     base: `
-        mobile:p-4 mobile:w-full w-52
-        px-4 m-1 h-12 py-2
+        mobile:p-4 mobile:w-full w-40
+        px-2 h-12 py-2
         text-sm font-semibold rounded-md text-center
-        gap-1 leading-1 font-semibold
+        leading-1 font-semibold
         transition duration-100 ease-in-out
         disabled:opacity-50 disabled:cursor-not-allowed
         bg-opacity-80 hover:bg-opacity-100 active:opacity-100
-        hover:transform hover:scale-105 disabled:hover:scale-100
+        hover:transform hover:scale-[101%] disabled:hover:scale-100
         text-opacity-100
         flex justify-center items-center
     `,
@@ -74,13 +74,14 @@ const Btn = ({
     type = 'button',
     ...props
 }: BtnProps) => {
+    const id = props.id || useId()
     return (
-        <button type={type} className={button({ ...props, className })} {...props}>
+        <button type={type} id={id} className={button({ ...props, className })} {...props}>
             {icon && <span className={styledIcon({ ...props })}>{icon}</span>}
             {children && (
                 <span className={styledIcon({ ...props })}>{children}</span>
             )}
-            <p>{label}</p>
+            {label}
         </button>
     )
 }

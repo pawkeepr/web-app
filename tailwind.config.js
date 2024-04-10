@@ -60,6 +60,9 @@ module.exports = {
                     min: '1025px',
                 },
             },
+            fontSize: {
+                none: 0, // Adiciona um utilitário `text-none` para definir o tamanho da fonte como 0
+            },
         },
     },
     plugins: [require('daisyui'), require('./deps/@tailwindcss/forms')],

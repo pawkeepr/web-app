@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/navigation'
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 import { FaCheckCircle, FaEdit, FaPlayCircle } from 'react-icons/fa'
 import { MdClose } from 'react-icons/md'
 import {
@@ -14,7 +14,6 @@ import {
     ModalPlus,
     usePlusModal,
 } from '~/contexts/setters-status-appointments-modals-context'
-import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { VeterinaryConsultation } from '~/types/appointment'
 
 type BoxButtonsProps = {
@@ -24,7 +23,6 @@ type BoxButtonsProps = {
 
 const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
     const router = useRouter()
-    const { isMobile } = useResizeMobile()
     const { setItem, open, close } = usePlusModal()
 
     const onClickCancel = useCallback(() => {
@@ -51,18 +49,14 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
         )
     }, [item])
 
-    const labelCancel = useMemo(() => {
-        return isMobile ? 'Cancelar' : ''
-    }, [isMobile])
-
     return (
         <div
             className="
-                gap-1 items-end 
-                h-full flex w-full 
-                mobile:grid mobile:grid-cols-1
-                tablet:grid tablet:grid-cols-3
+                items-center justify-center
+                w-full gap-1 flex 
+                overflow-hidden 
                 flex-wrap
+                px-2
             "
         >
             <BtnCancel
@@ -71,9 +65,10 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.canceled === 'no' &&
                     item.appointment_status?.done === 'no'
                 }
-                label={labelCancel}
+                label='Cancelar'
+                aria-label='Cancelar consulta'
                 onClick={onClickCancel}
-                className="text-red-500 border-none mobile:relative mobile:col-span-1 absolute top-0 right-0 w-fit hover:!bg-transparent"
+                className="!text-red-500 !w-1/4 flex-grow web:text-none border web:!border-none web:absolute web:top-0 web:right-0 web:!w-fit hover:!bg-transparent"
             >
                 <MdClose className="h-6 w-6" />
             </BtnCancel>
@@ -85,8 +80,9 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.canceled === 'no'
                 }
                 label="Reagendar"
+                aria-label="Reagendar consulta"
                 onClick={onClickReScheduled}
-                className="border-none mobile:!w-full mobile:col-span-1 text-gray-500 tablet:w-full"
+                className="border-none !w-1/4 flex-grow  text-gray-500"
             >
                 <FaEdit />
             </BtnRescheduled>
@@ -99,7 +95,8 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.done === 'no'
                 }
                 label="Confirmar"
-                className="border-none mobile:!w-full mobile:col-span-1 text-gray-200 tablet:w-full "
+                aria-label="Confirmar consulta"
+                className="border-none !w-1/4 flex-grow  text-white"
                 onClick={onClickConfirmed}
             >
                 <FaCheckCircle />
@@ -112,7 +109,8 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.done === 'no'
                 }
                 label="Iniciar"
-                className="border-none mobile:!w-full mobile:col-span-1  tablet:w-full"
+                aria-label="Iniciar consulta"
+                className="border-none mobile:!w-full w-1/4 flex-grow "
                 onClick={startAppointment}
             >
                 <FaPlayCircle />

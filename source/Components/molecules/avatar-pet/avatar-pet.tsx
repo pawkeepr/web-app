@@ -7,6 +7,10 @@ type AvatarPetProps = {
     specie?: Species
     name_pet: string
     className?: string
+    classNames?: {
+        figure?: string
+        img?: string
+    }
 }
 
 const strategiesAvatar = new Map<Species, string>([
@@ -19,7 +23,13 @@ const strategiesAvatar = new Map<Species, string>([
     ['reptile', '/icon-pet/reptile_primary.png'],
 ])
 
-const AvatarPet = ({ specie, src, name_pet, className }: AvatarPetProps) => {
+const AvatarPet = ({
+    specie,
+    src,
+    name_pet,
+    className,
+    classNames,
+}: AvatarPetProps) => {
     const link = useMemo(() => {
         if (src) return src
         if (!specie) return '/icon-pet/other_primary.png'
@@ -27,11 +37,16 @@ const AvatarPet = ({ specie, src, name_pet, className }: AvatarPetProps) => {
     }, [src, specie])
 
     return (
-        <figure className={twMerge("", className)}>
+        <figure className={twMerge("", className, classNames?.figure)}>
             <MyImage
                 src={link}
                 alt={`Avatar do pet ${name_pet}`}
-                className="rounded-full w-40 h-40 mobile:w-16 mobile:h-16 object-cover"
+                className={
+                    twMerge(
+                        "rounded-full w-40 h-40 mobile:w-16 mobile:h-16 object-cover",
+                        classNames?.img
+                    )
+                }
             />
         </figure>
     )

@@ -201,6 +201,7 @@ const ModalListPets = ({
                         onChangeSelectedTab(0)
                     }, 300)
                 }}
+                mobilePage={false}
                 open={open}
             >
                 <Tab.Group
