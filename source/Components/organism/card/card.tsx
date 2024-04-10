@@ -4,8 +4,8 @@ import useResizeMobile from '~/hooks/use-resize-mobile'
 
 export const card = tv({
     base: `
-        card card-side !flex shadow-xl border border-gray-200 my-2 w-full justify-start items-center text-left
-        bg-white rounded-lg
+        card card-side shadow-xl border border-gray-200 my-2 w-full justify-start items-center text-left
+        bg-white rounded-2xl !h-fit max-h-[232px] overflow-hidden
     `,
     variants: {
         isMobile: {
@@ -25,6 +25,7 @@ type CardProps<T> = {
     children: JSX.Element
     boxButtons: (props: { item: T }) => JSX.Element
     modal: (props: ModalBoxButtonsProps<T>) => JSX.Element
+    className?: string
 }
 
 const Card = <T,>({
@@ -33,6 +34,7 @@ const Card = <T,>({
     modal: ModalBoxButtons,
     sectionAvatar: Avatar,
     children,
+    className,
 }: CardProps<T>) => {
     const id = useId()
     const { isMobile } = useResizeMobile()
@@ -50,6 +52,7 @@ const Card = <T,>({
                     }}
                     className={card({
                         isMobile,
+                        className,
                     })}
                 >
                     <div className="flex-[2] flex-col items-center justify-center flex">

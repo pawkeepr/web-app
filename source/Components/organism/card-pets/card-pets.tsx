@@ -37,6 +37,7 @@ const CardPet = ({ pet }: CardPetProps) => {
             boxButtons={() => <BoxButtonsPets item={pet} />}
             item={pet}
             modal={ModalBoxButtonsPet}
+            className='mobile:!px-2 mobile:!py-2 px-4 py-4 '
             sectionAvatar={() => (
                 <>
                     <AvatarPet

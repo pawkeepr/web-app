@@ -43,7 +43,7 @@ const AvatarPet = ({
                 alt={`Avatar do pet ${name_pet}`}
                 className={
                     twMerge(
-                        "rounded-full w-40 h-40 mobile:w-16 mobile:h-16 object-cover",
+                        "rounded-full w-32 h-32 mobile:w-16 mobile:h-16 object-cover",
                         classNames?.img
                     )
                 }
