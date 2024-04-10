@@ -34,7 +34,7 @@ type CardScheduledProps = {
 
 export const card = tv({
     base: `
-        card card-side !flex shadow-xl border border-gray-200 m-2 w-full justify-start items-center text-left
+        card card-side !flex shadow-xl border border-gray-200 my-2 w-full justify-start items-center text-left
         bg-white rounded-lg
     `,
     variants: {
@@ -156,12 +156,12 @@ const CardScheduled = ({
                             }
                         />
                         <div className="flex flex-row gap-1">
-                            <h1 className="text-center font-bold text-lg mobile:text-sm text-gray-400">
+                            <h1 className="text-center font-bold text-lg mobile:text-sm text-gray-500">
                                 {`${pet?.name_pet}`}
                             </h1>
                             <Gender />
                         </div>
-                        <h2 className="text-center text-gray-400 text-xs">
+                        <h2 className="text-center text-gray-500 text-xs">
                             {calcAge(pet?.date_birth)} ano(s)
                         </h2>
                     </div>
@@ -183,7 +183,7 @@ const CardScheduled = ({
                         <div className="card-actions mobile:hidden">
                             {BoxButtons && <BoxButtons item={appointment} />}
                         </div>
-                        <span className="flex flex-row w-40 items-center justify-center gap-2 p-2 absolute top-0 mobile:right-0 mobile:text-xs text-sm text-gray-400 web:left-0">
+                        <span className="flex flex-row w-fit items-center justify-center gap-2  pt-2 absolute top-0 right-0 web:mr-32  mr-4 mobile:text-xs text-sm text-gray-400">
                             <Icon.icon
                                 className={Icon.className}
                                 title={Icon.title}
