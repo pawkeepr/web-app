@@ -90,6 +90,7 @@ const FieldDocumentAppointmentMobile = ({
                                                 name="cpf_tutor"
                                                 placeholder="Agendar/Nova Consulta"
                                                 className='!w-[70vw] mr-2 web:hidden'
+                                                label='CPF do Tutor para'
                                                 classNames={{
                                                     input: 'rounded-full shadow-md overflow-visible border border-secondary-500'
                                                 }}
@@ -102,7 +103,7 @@ const FieldDocumentAppointmentMobile = ({
                                                         shadow-2xl 
                                                         transition duration-500 ease-in-out
                                                         opacity-70 hover:opacity-100  flex items-center justify-center
-                                                        mb-3
+                                                        
                                                     "
                                             >
                                                 <PlusIcon className="w-5 h-5 text-white" />
