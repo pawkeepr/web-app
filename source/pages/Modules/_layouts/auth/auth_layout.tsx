@@ -61,7 +61,7 @@ const AuthLayout = ({
                     )}
                 >
                     {image && (
-                        <picture className="flex mobile:h-52  overflow-hidden !w-full h-full relative rounded-l-xl mobile:rounded-l-none">
+                        <picture className="flex mobile:h-64  overflow-hidden !w-full h-full relative rounded-l-xl mobile:rounded-l-none">
                             <Img
                                 alt={alt}
                                 src={image as string}
@@ -70,7 +70,7 @@ const AuthLayout = ({
                             <Img
                                 src={image as string}
                                 alt={alt}
-                                className="hidden mobile:block absolute inset-0 w-full h-full object-fill "
+                                className="hidden mobile:block absolute inset-0 w-full h-full object-fill"
                             />
                         </picture>
                     )}

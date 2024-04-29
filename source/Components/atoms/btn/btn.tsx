@@ -12,12 +12,12 @@ export const button = tv({
         mobile:p-4 mobile:w-full w-40 flex-grow
         px-2 h-10 py-1
         text-sm font-semibold rounded-md text-center
-        leading-1 font-semibold
+        leading-1 hover:brightness-90
         transition duration-100 ease-in-out
         disabled:opacity-50 disabled:cursor-not-allowed
         bg-opacity-80 hover:bg-opacity-100 active:opacity-100
         hover:transform hover:scale-[101%] disabled:hover:scale-100
-        text-opacity-100 text-gray-50
+        text-opacity-100 text-gray-50 
         flex justify-center items-center
     `,
     variants: {
@@ -40,7 +40,6 @@ export const button = tv({
             true: 'bg-transparent !border',
         },
     },
-
     compoundVariants: [
         {
             outline: true,

@@ -117,7 +117,7 @@ const FieldControl = <T, Ctx = any>({
                     </div>
                 )}
             </div>
-            {!meta.error && <div className="pb-3" />}
+            
 
             {meta.error && visibleError && (
                 <div className="w-full text-xs text-center text-secondary-500 font-semibold">

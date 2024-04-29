@@ -53,7 +53,7 @@ const BtnAvatar = ({
     }, [image, sourceImage, value])
 
     return (
-        <div className="text-center">
+        <div className="text-center ">
             <div className="relative inline-block">
                 <div className="absolute bottom-0 end-0">
                     <input
@@ -66,14 +66,14 @@ const BtnAvatar = ({
                         onChange={handleImageChange}
                         onBlur={onBlur}
                         disabled={disabled}
-                        //onBlur={onBlur}
+                    //onBlur={onBlur}
                     />
                 </div>
                 <div
                     className={cn(`w-${size} h-${size}`, 'avatar-sm p-1 z-0', {
                         'cursor-pointer': !disabled,
                     })}
-                    onKeyUp={() => {}}
+                    onKeyUp={() => { }}
                     onClick={openImageInput}
                 >
                     <div className="avatar-title bg-light rounded-circle">
