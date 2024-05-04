@@ -112,7 +112,7 @@ const CanceledScheduledModal = ({
                                     name="appointment_status.reason_canceled"
                                 />
 
-                                <div className="mt-4 flex justify-center items-center">
+                                <div className="mt-2 gap-2 w-full flex justify-center items-center">
                                     <BtnCancel
                                         type="button"
                                         onClick={closeModal}

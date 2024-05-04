@@ -1,5 +1,5 @@
 import { Form, Formik } from 'formik'
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import { BtnConfirm, BtnNeutral } from '~/Components/atoms/btn'
 import Modal from '~/Components/organism/modal'
 
 import * as Yup from 'yup'
@@ -104,18 +104,18 @@ const ConfirmedScheduledModal = ({
                                     tutor={values?.tutor_pet_vet?.tutor}
                                 />
 
-                                <div className="mt-4 flex justify-center items-center">
-                                    <BtnCancel
+                                <div className="mt-1 gap-2 flex justify-center items-center">
+                                    <BtnNeutral
+                                        outline
                                         type="button"
                                         onClick={closeModal}
                                         label="Cancelar"
                                         condition={!isSubmitting && !isLoading}
-                                        className="text-gray-600"
                                     />
 
-                                    <BtnPrimary
+                                    <BtnConfirm
                                         type="submit"
-                                        label="Confirmar Agendamento"
+                                        label="Confirmar"
                                         isLoading={isSubmitting || isLoading}
                                         disabled={!isValid}
                                     />

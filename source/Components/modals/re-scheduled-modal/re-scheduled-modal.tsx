@@ -45,10 +45,7 @@ const ReScheduledModal = ({
         <>
             {children?.({ showModal })}
 
-            <Modal
-                open={isOpen as boolean}
-                onClose={() => closeModal()}
-            >
+            <Modal open={isOpen as boolean} onClose={() => closeModal()}>
                 <Formik
                     initialValues={item}
                     validationSchema={validationSchema}
@@ -74,17 +71,20 @@ const ReScheduledModal = ({
                                             <strong className="mr-2">
                                                 Tipo da Consulta:
                                             </strong>
-                                            {item?.dates_consults?.type_consultation}
+                                            {
+                                                item?.dates_consults
+                                                    ?.type_consultation
+                                            }
                                         </p>
                                         <p className="text-gray-500 flex justify-between">
                                             <strong className="mr-2">
                                                 Razão da Consulta:
                                             </strong>
-
                                         </p>
                                         <p className="text-gray-500 text-center flex justify-between">
                                             {
-                                                item?.dates_consults?.reason_consultation
+                                                item?.dates_consults
+                                                    ?.reason_consultation
                                             }
                                         </p>
                                     </div>
@@ -110,7 +110,7 @@ const ReScheduledModal = ({
                                     />
                                 </section>
 
-                                <div className="mt-4 flex justify-center items-center">
+                                <div className="mt-1 flex gap-2 w-full justify-center items-center">
                                     <BtnCancel
                                         type="button"
                                         onClick={closeModal}

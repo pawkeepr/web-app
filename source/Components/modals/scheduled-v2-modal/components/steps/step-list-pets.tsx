@@ -33,7 +33,7 @@ const StepListPets = ({
             <h5 className="text-center font-semibold text-gray-500 mb-2">
                 Selecione ou Adicione um Pet para prosseguir na consulta.
             </h5>
-            <div className="overflow-auto flex flex-1 gap-2 justify-start items-center flex-col w-full py-1">
+            <div className="overflow-auto flex flex-1 gap-2 justify-center items-center flex-col w-full py-1">
                 {pets?.length === 0 && (
                     <div className="flex justify-center items-center  ">
                         <span className="text-gray-500 text-center font-semibold text-base">
