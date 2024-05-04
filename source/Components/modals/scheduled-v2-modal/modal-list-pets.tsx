@@ -7,6 +7,7 @@ import useModal from '~/hooks/use-modal'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import useSteps from '~/hooks/use-steps'
 import useListPetsOfTutor from '~/store/hooks/list-pets-by-tutor'
+import useListPetsByTutor from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
 import type { IPet } from '~/types/pet'
 import type { IPetV2 } from '~/types/pet-v2'
 import StepChoice from './components/steps/step-choice'
@@ -98,14 +99,12 @@ const ModalListPets = ({
         setPet(pet)
     }
 
-    const {
-        activeData: pets,
-        handleSubmit,
-        isLoading,
-    } = useListPetsOfTutor({
+    const { handleSubmit } = useListPetsOfTutor({
         document,
         strategy: 'simple',
     })
+
+    const { data: pets, isPending } = useListPetsByTutor({ document })
 
     const veterinary = useProfileVeterinary()
 
@@ -258,7 +257,7 @@ const ModalListPets = ({
                                                 pets={(pets || []) as IPetV2[]}
                                                 onChangeDocument={onChangeDocument}
                                                 nextStep={nextStep}
-                                                isLoading={isLoading}
+                                                isLoading={isPending}
                                                 previousStep={previousStep}
                                                 closeModal={closeModal}
                                             />
