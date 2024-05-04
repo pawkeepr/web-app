@@ -80,7 +80,7 @@ const FieldDocumentAppointmentMobile = ({
                                                 fixed flex flex-row items-center 
                                                 justify-end opacity-100 z-50 
                                                 bottom-[68px] right-2 web:bottom-0
-                                                w-[95vw] pt-3
+                                                w-[95vw] mb-2
                                                 transition-all duration-300
                                                 ${styles['field-document']}
                                     `}
@@ -100,10 +100,10 @@ const FieldDocumentAppointmentMobile = ({
                                                 type="submit"
                                                 className="
                                                         bg-primary-500 p-3 rounded-full 
-                                                        shadow-2xl 
+                                                        shadow-2xl mt-3
                                                         transition duration-500 ease-in-out
-                                                        opacity-70 hover:opacity-100  flex items-center justify-center
-                                                        
+                                                        opacity-70 hover:opacity-100  
+                                                        flex items-center justify-center
                                                     "
                                             >
                                                 <PlusIcon className="w-5 h-5 text-white" />

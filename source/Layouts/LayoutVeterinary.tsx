@@ -43,8 +43,10 @@ const LayoutMain = ({ children }: LayoutProps) => {
                     condition={hasButtonFloating}
                     selectedTabInitial={0}
                 />
+                
             </div>
             {hasButtonFloating && <div className="h-36 web:hidden w-full " />}
+            
         </div>
     )
 }

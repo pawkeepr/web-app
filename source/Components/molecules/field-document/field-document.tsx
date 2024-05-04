@@ -51,6 +51,7 @@ const FieldDocument = <T, Ctx>({
                     CPF/CNPJ inválido!
                 </p>
             )}
+            <div className="pb-2" />
         </div>
     )
 }
