@@ -20,9 +20,12 @@ const StepTutor = ({ previousStep, isLoading }: StepProps) => {
         useFormikContextSafe<CtxSimplifiedPeTFields>()
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <div className="overflow-auto h-[calc(100vh-24rem)] flex flex-col w-full justify-center gap-2 px-2">
-                <div className="grid grid-cols-2 gap-2 mobile:grid-cols-1">
+        <Form
+            className="flex-1 flex h-[85vh]  w-full justify-between items-center flex-col"
+            onSubmit={handleSubmit}
+        >
+            <div className="overflow-auto flex flex-1 gap-2 justify-start items-center flex-col w-full pt-2">
+                <div className="grid grid-cols-3 gap-2 mobile:gap-0 mobile:grid-cols-1 w-full">
                     <FieldControl
                         ctx={values}
                         required
@@ -30,6 +33,7 @@ const StepTutor = ({ previousStep, isLoading }: StepProps) => {
                         label="Nome do tutor"
                         name="ownerEmergencyContact.first_name"
                         placeholder="Nome"
+                        divClassName="col-span-1 mobile:col-span-full"
                     />
                     <FieldControl
                         ctx={values}
@@ -37,7 +41,8 @@ const StepTutor = ({ previousStep, isLoading }: StepProps) => {
                         required
                         label="Sobrenome do tutor"
                         name="ownerEmergencyContact.last_name"
-                        placeholder="Nome"
+                        placeholder="Sobrenome"
+                        divClassName="col-span-2 mobile:col-span-full"
                     />
                 </div>
 

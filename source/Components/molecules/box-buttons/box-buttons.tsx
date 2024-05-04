@@ -40,7 +40,9 @@ const BoxButtons = ({
     type = 'submit',
     cancel = ({ label = 'Voltar', onClick, isLoading, ...props }) => (
         <BtnCancel
+            outline
             condition={!isLoading}
+            className="border-none"
             label={label}
             onClick={onClick}
             {...props}

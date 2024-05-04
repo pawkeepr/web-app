@@ -28,7 +28,7 @@ export const button = tv({
             neutral: 'bg-gray-500 text-gray-500',
         },
         text: {
-            true: 'bg-transparent border-2 border-secondary-500 text-secondary-500 hover:!bg-gray-100'
+            true: 'bg-transparent border-2 border-secondary-500 text-secondary-500 hover:!bg-gray-100',
         },
         link: {
             true: 'text-secondary-500 dark:text-primary-600 hover:no-underline capitalize w-fit',
@@ -49,7 +49,8 @@ export const button = tv({
         {
             outline: true,
             color: 'secondary',
-            className: 'border-secondary-600 text-secondary-600 hover:text-secondary-600',
+            className:
+                'border-secondary-500 text-secondary-500 hover:text-secondary-500',
         },
         {
             outline: true,
@@ -61,7 +62,7 @@ export const button = tv({
             color: 'neutral',
             className: 'border-gray-500 text-gray-500 hover:text-gray-600',
         },
-    ]
+    ],
 })
 
 const styledIcon = tv({
@@ -92,7 +93,12 @@ const Btn = ({
 }: BtnProps) => {
     const id = props.id || useId()
     return (
-        <button type={type} id={id} className={button({ ...props, className })} {...props}>
+        <button
+            type={type}
+            id={id}
+            className={button({ ...props, className })}
+            {...props}
+        >
             {icon && <span className={styledIcon({ ...props })}>{icon}</span>}
             {children && (
                 <span className={styledIcon({ ...props })}>{children}</span>
@@ -178,8 +184,9 @@ export {
     BtnConfirm,
     BtnIcon,
     BtnLabel,
-    BtnLink, BtnNeutral, BtnPrimary,
+    BtnLink,
+    BtnNeutral,
+    BtnPrimary,
     BtnSecondary,
-    BtnSuccess
+    BtnSuccess,
 }
-

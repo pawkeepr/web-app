@@ -239,7 +239,7 @@ const ModalListPets = ({
                         enableReinitialize
                         onSubmit={onSubmit}
                     >
-                        <Tab.Panels className="w-full h-[90vh] relative">
+                        <Tab.Panels className="w-full mt-3 relative">
                             {STEPS.map(({ component: Component, id }, index) => (
                                 <Tab.Panel key={id} tabIndex={index}>
                                     <Component

@@ -29,7 +29,7 @@ const StepListPets = ({
     const { values } = useFormikContextSafe<CtxSimplifiedPeTFields>()
 
     return (
-        <div className="flex-1 flex h-[95vh] w-full  justify-between items-center flex-col">
+        <div className="flex-1 flex h-[90vh] w-full  justify-between items-center flex-col">
             <h5 className="text-center mt-6 font-semibold text-gray-500 mb-2">
                 Selecione ou Adicione um Pet para prosseguir na consulta.
             </h5>

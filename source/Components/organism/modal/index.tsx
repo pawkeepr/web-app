@@ -10,7 +10,6 @@ const modal = tv({
     base: `  
         relative
         rounded-md
-        bg-green-500
     `,
     variants: {
         mobilePage: {
@@ -42,7 +41,7 @@ const Modal = ({ className, mobilePage = true, ...props }: ModalProps) => {
                 modal: modal({ className, mobilePage }),
             }}
         >
-                {props.children}
+            {props.children}
         </ModalResponsive>
     )
 }
