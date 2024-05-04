@@ -25,7 +25,7 @@ const StepListSpecies = ({ nextStep, previousStep }: StepProps) => {
     }
 
     return (
-        <div className="flex-1 flex mobile:h-[90vh] h-[80vh] w-full  justify-between items-center flex-col">
+        <div className="flex-1 flex mobile:h-[90vh] h-[75vh] w-full  justify-between items-center flex-col">
             <div className="overflow-auto flex flex-1 gap-2 justify-start items-center flex-col w-full py-1">
                 {species.map((specie) => (
                     <button
