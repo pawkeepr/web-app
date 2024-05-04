@@ -1,16 +1,11 @@
 export const sub_specialty = [
-    'Acupuntura',
     'Anestesiologia e controle da dor',
     'Cardiologia',
-    'Células-tronco',
     'Cirurgias',
-    'Cuidados paliativos',
     'Dermatologia',
     'Endocrinologia',
     'Felinos',
-    'Fisioterapia e reabilitação',
     'Gastroenterologia e Endoscopia',
-    'Internamentos',
     'Medicina Comportamental',
     'Nefrologia e Urologia',
     'Neurologia',
@@ -21,4 +16,5 @@ export const sub_specialty = [
     'Ortopedia',
     'Pneumologia',
     'Reprodução e Neonatologia',
+    'Clinica Geral',
 ]
