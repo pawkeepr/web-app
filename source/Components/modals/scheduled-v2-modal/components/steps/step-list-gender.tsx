@@ -29,8 +29,8 @@ const StepListGender = ({ previousStep, nextStep }: StepProps) => {
     }
 
     return (
-        <div className="flex-1 flex h-[85vh]  w-full justify-between items-center flex-col">
-            <div className="overflow-auto flex flex-1 gap-2 justify-center items-center flex-col w-full pt-2">
+        <div className="flex-1 flex mobile:h-[90vh] h-full w-full justify-between items-center flex-col">
+            <div className="overflow-auto flex flex-1 gap-2 justify-center items-center flex-col w-full py-1">
                 {Object.keys(Gender).map((gender) => {
                     const Icon = IconGender[gender as keyof typeof IconGender]
 

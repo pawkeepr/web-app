@@ -29,11 +29,11 @@ const StepListPets = ({
     const { values } = useFormikContextSafe<CtxSimplifiedPeTFields>()
 
     return (
-        <div className="flex-1 flex h-[90vh] w-full  justify-between items-center flex-col">
-            <h5 className="text-center mt-6 font-semibold text-gray-500 mb-2">
+        <div className="flex-1 flex mobile:h-[95vh] h-[80vh]  w-full  justify-between items-center flex-col">
+            <h5 className="text-center font-semibold text-gray-500 mb-2">
                 Selecione ou Adicione um Pet para prosseguir na consulta.
             </h5>
-            <div className="flex flex-1 justify-center items-center flex-col overflow-y-scroll">
+            <div className="overflow-auto flex flex-1 gap-2 justify-start items-center flex-col w-full py-1">
                 {pets?.length === 0 && (
                     <div className="flex justify-center items-center  ">
                         <span className="text-gray-500 text-center font-semibold text-base">
@@ -70,7 +70,7 @@ const StepListPets = ({
                 ))}
             </div>
 
-            <div>
+            <div className="w-full mb-2">
                 <FieldControl
                     ctx={values}
                     name="name"

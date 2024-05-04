@@ -21,10 +21,10 @@ const StepTutor = ({ previousStep, isLoading }: StepProps) => {
 
     return (
         <Form
-            className="flex-1 flex h-[85vh]  w-full justify-between items-center flex-col"
+            className="flex-1 flex mobile:h-[90vh] web:h-full  w-full  justify-between items-center flex-col"
             onSubmit={handleSubmit}
         >
-            <div className="overflow-auto flex flex-1 gap-2 justify-start items-center flex-col w-full pt-2">
+            <div className="overflow-auto flex flex-1 gap-2 justify-center items-center flex-col w-full py-1">
                 <div className="grid grid-cols-3 gap-2 mobile:gap-0 mobile:grid-cols-1 w-full">
                     <FieldControl
                         ctx={values}

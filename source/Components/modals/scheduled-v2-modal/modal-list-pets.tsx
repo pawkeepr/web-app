@@ -202,62 +202,73 @@ const ModalListPets = ({
                     }, 300)
                 }}
                 mobilePage={selectedTab !== NUMBER_STEPS.DOCUMENTS}
+                classNames={{
+                    modal: '!min-w-[600px]',
+                }}
                 open={open}
             >
-                <Tab.Group
-                    selectedIndex={selectedTab}
-                    onChange={onChangeSelectedTab}
-                    defaultIndex={selectedTabInitial}
-                >
-                    <Tab.List className="flex flex-row w-full justify-between">
-                        {STEPS.map((item) => (
-                            <Tab key={item.id} className="hidden" />
-                        ))}
-                    </Tab.List>
-                    {hasVisibleStep && (
-                        <div className="flex flex-row  justify-between w-[85vw]">
-                            {STEPS.slice(2, STEPS.length - 2).map((item) => (
-                                <div
-                                    key={item.id}
-                                    className={cn(
-                                        'p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full',
-                                        {
-                                            'text-primary-500':
-                                                selectedTab === item.id,
-                                            'text-gray-400':
-                                                selectedTab !== item.id,
-                                        },
-                                    )}
-                                >
-                                    {item.title}
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                    <Formik
-                        initialValues={initialValues as IPet}
-                        enableReinitialize
-                        onSubmit={onSubmit}
+                <section className="web:min-w-[640px]">
+                    <Tab.Group
+                        selectedIndex={selectedTab}
+                        onChange={onChangeSelectedTab}
+                        defaultIndex={selectedTabInitial}
                     >
-                        <Tab.Panels className="w-full mt-3 relative">
-                            {STEPS.map(({ component: Component, id }, index) => (
-                                <Tab.Panel key={id} tabIndex={index}>
-                                    <Component
-                                        onChangePet={onChangePet}
-                                        pet={pet}
-                                        onChangeStep={onChangeSelectedTab}
-                                        pets={(pets || []) as IPetV2[]}
-                                        onChangeDocument={onChangeDocument}
-                                        nextStep={nextStep}
-                                        isLoading={isLoading}
-                                        previousStep={previousStep}
-                                        closeModal={closeModal}
-                                    />
-                                </Tab.Panel>
+                        <Tab.List className="flex flex-row w-full justify-between">
+                            {STEPS.map((item) => (
+                                <Tab key={item.id} className="hidden" />
                             ))}
-                        </Tab.Panels>
-                    </Formik>
-                </Tab.Group>
+                        </Tab.List>
+                        {hasVisibleStep && (
+                            <div className="flex flex-row  justify-between mobile:w-[85vw]">
+                                {STEPS.slice(2, STEPS.length - 2).map((item) => (
+                                    <div
+                                        key={item.id}
+                                        className={cn(
+                                            'p-2 text-center uppercase bg-opacity-10 bg-primary-500 flex-1 w-full',
+                                            {
+                                                'text-primary-500':
+                                                    selectedTab === item.id,
+                                                'text-gray-400':
+                                                    selectedTab !== item.id,
+                                            },
+                                        )}
+                                    >
+                                        {item.title}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                        <Formik
+                            initialValues={initialValues as IPet}
+                            enableReinitialize
+                            onSubmit={onSubmit}
+                        >
+                            <Tab.Panels>
+                                {STEPS.map(
+                                    ({ component: Component, id }, index) => (
+                                        <Tab.Panel
+                                            key={id}
+                                            tabIndex={index}
+                                            className="w-full mt-4 "
+                                        >
+                                            <Component
+                                                onChangePet={onChangePet}
+                                                pet={pet}
+                                                onChangeStep={onChangeSelectedTab}
+                                                pets={(pets || []) as IPetV2[]}
+                                                onChangeDocument={onChangeDocument}
+                                                nextStep={nextStep}
+                                                isLoading={isLoading}
+                                                previousStep={previousStep}
+                                                closeModal={closeModal}
+                                            />
+                                        </Tab.Panel>
+                                    ),
+                                )}
+                            </Tab.Panels>
+                        </Formik>
+                    </Tab.Group>
+                </section>
             </Modal>
         </>
     )
