@@ -14,7 +14,7 @@ const useFetchAddress = ({
     initialValue,
 }: TUseFetchCep) => {
     const [loading, setLoading] = useState(false)
-
+    const [cpfNotFound, setCpfNotFound] = useState(false)
     useEffect(() => {
         if (initialValue === zipCode) return
 
@@ -23,10 +23,11 @@ const useFetchAddress = ({
             fetchAddressByCep(zipCode)
                 .then((data) => {
                     // existem CEP's válidos que a API não devolve resultado
-                    // setCepInvalid(Boolean(!data || data?.erro))
+                    setCpfNotFound(Boolean(!data || data?.erro))
                     onChangeAddress(data as IAddress)
                 })
                 .catch((err) => {
+                    setCpfNotFound(true)
                     throw err
                 })
                 .finally(() => {
@@ -37,7 +38,7 @@ const useFetchAddress = ({
         }
     }, [zipCode])
 
-    return { loading }
+    return { loading, cpfNotFound }
 }
 
 export default useFetchAddress
