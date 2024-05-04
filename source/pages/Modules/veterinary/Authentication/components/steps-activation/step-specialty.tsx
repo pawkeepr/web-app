@@ -7,10 +7,11 @@ import FieldControlSelect from '~/Components/molecules/field-control/field-contr
 import { sub_specialty } from '~/constants/sub-specialtys'
 
 import CheckboxGroup from '~/Components/molecules/checkbox-group'
-import type { ActivateAccount } from '~/validations/activate'
+import { specialty_validation, type ActivateAccount } from '~/validations/activate'
 import type { StepProps } from './types'
 
 import * as Yup from 'yup'
+import { pets } from '~/constants/pets'
 
 const options = sub_specialty.map((item) => ({
     value: item,
@@ -18,23 +19,7 @@ const options = sub_specialty.map((item) => ({
     color: 'rgb(255 200 107);',
 }))
 
-const validate = Yup.object().shape({
-    specialty: Yup.object({
-        value: Yup.string().required('O campo especialidade é obrigatório'),
-        label: Yup.string().required('O campo especialidade é obrigatório'),
-    }).required('O campo especialidade é obrigatório'),
-    list_service_type: Yup.array()
-        .min(1, 'Selecione pelo menos um tipo de atendimento')
-        .required(),
-    list_specialty: Yup.array()
-        .min(1, 'Selecione pelo menos uma sub especialidade')
-        .of(
-            Yup.object().shape({
-                value: Yup.string().required('O campo especialidade é obrigatório'),
-                label: Yup.string().required('O campo especialidade é obrigatório'),
-            }),
-        ),
-})
+const validate = Yup.object().shape(specialty_validation)
 
 const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
     const { values } = useFormikContext<ActivateAccount>()
@@ -50,24 +35,62 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
     return (
         <div className="flex flex-1 flex-col gap-2">
             <CheckboxGroup
-                label="Tipo de atendimento"
+                ctx={values}
+                label="Tipo de Atendimento"
+                name="types_service"
+                items={[
+                    {
+                        label: 'Online',
+                        value: 'online',
+                    },
+                    {
+                        label: 'Clínica',
+                        value: 'clinic',
+                    },
+                    {
+                        label: 'Domiciliar',
+                        value: 'domiciliary',
+                    },
+                    {
+                        label: 'Emergencial',
+                        value: 'emergency',
+                    },
+                    {
+                        label: 'Hospitalar',
+                        value: 'hospital',
+                    },
+                    {
+                        label: 'Intensivo',
+                        value: 'intensive',
+                    },
+                    {
+                        label: 'Ambulatorial',
+                        value: 'ambulatory',
+                    },
+                ]}
+                divClassName="mobile:col-span-full col-span-full "
+                required
+            />
+            <CheckboxGroup
+                ctx={values}
+                label="Tipo de Animais Atendidos"
                 name="list_service_type"
                 items={[
                     {
                         label: 'Domésticos',
-                        value: 'domestics',
+                        value: 'domestic',
                     },
                     {
-                        label: 'Médio Porte',
-                        value: 'midsize',
+                        label: 'Equinos',
+                        value: 'horses',
                     },
                     {
-                        label: 'Grande Porte',
-                        value: 'large',
-                    },
-                    {
-                        label: 'Silvestres',
+                        label: 'Silvestres e Conservação',
                         value: 'wild',
+                    },
+                    {
+                        label: 'Rurais',
+                        value: 'rural',
                     },
                     {
                         label: 'Exóticos',
@@ -77,14 +100,25 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                         label: 'Não Convencionais',
                         value: 'unconventional',
                     },
+                    {
+                        label: 'Aquáticos',
+                        value: 'aquatic',
+                    },
                 ]}
                 divClassName="mobile:col-span-full col-span-full "
                 required
             />
             <FieldControlSelect
                 ctx={values}
-                type="text"
-                label="Especialidade"
+                label="Animais que Atende a domicílio"
+                required
+                isMulti
+                name="types_animals"
+                options={pets}
+            />
+            <FieldControlSelect
+                ctx={values}
+                label="Especialidade Principal"
                 required
                 name="specialty"
                 options={options}
@@ -92,9 +126,8 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
             <FieldControlSelect
                 ctx={values}
                 isMulti
-                type="text"
                 required
-                label="Sub Especialidades"
+                label="Outras Especialidades"
                 name="list_specialty"
                 options={options}
             />
