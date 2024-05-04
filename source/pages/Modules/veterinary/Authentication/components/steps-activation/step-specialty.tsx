@@ -2,7 +2,7 @@ import { useFormikContext } from 'formik'
 
 import { useMemo } from 'react'
 
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import { sub_specialty } from '~/constants/sub-specialtys'
 
@@ -58,12 +58,24 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                         value: 'domestics',
                     },
                     {
-                        label: 'Médio porte',
+                        label: 'Médio Porte',
                         value: 'midsize',
                     },
                     {
-                        label: 'Grande porte',
+                        label: 'Grande Porte',
                         value: 'large',
+                    },
+                    {
+                        label: 'Silvestres',
+                        value: 'wild',
+                    },
+                    {
+                        label: 'Exóticos',
+                        value: 'exotic',
+                    },
+                    {
+                        label: 'Não Convencionais',
+                        value: 'unconventional',
                     },
                 ]}
                 divClassName="mobile:col-span-full col-span-full "
@@ -86,8 +98,12 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                 name="list_specialty"
                 options={options}
             />
-            <div className="mt-1 flex justify-center items-center col-span-full">
-                <BtnCancel onClick={prevStep} label="Voltar" />
+            <div className="mt-1 gap-2 flex justify-center items-center col-span-full">
+                <BtnLabel
+                    onClick={prevStep}
+                    label="Voltar"
+                    className="border-none"
+                />
                 <BtnPrimary
                     onClick={nextStep}
                     disabled={!requiredValid}

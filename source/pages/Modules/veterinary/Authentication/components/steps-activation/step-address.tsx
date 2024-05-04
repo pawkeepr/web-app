@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 
 import validateLocation from '~/validations/address'
 
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control/field-control'
 import type { IAddress } from '~/helpers/fetch-address-by-cep'
 import useFetchAddress from '~/hooks/use-fetch-address'
@@ -51,31 +51,36 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
         [setFieldValue],
     )
 
-    const { cepInvalid, loading } = useFetchAddress({
+    const { cpfNotFound, loading } = useFetchAddress({
         onChangeAddress: updateAddressFields,
         zipCode: zipCode as string,
     })
 
     const requiredValid = useMemo((): boolean => {
-        const isValid =
-            validateLocation.isValidSync(values?.location) && !cepInvalid
+        const isValid = validateLocation.isValidSync(values?.location)
 
         return isValid
-    }, [cepInvalid, values?.location])
+    }, [values?.location])
 
-    useNextStep(nextStep, requiredValid, 1000)
+    useNextStep(nextStep, requiredValid, 5000)
 
     return (
         <div className="container grid grid-cols-2 mobile:grid-cols-1 gap-1">
-            <FieldMasked
-                ctx={values}
-                label="CEP"
-                name="location.zipCode"
-                placeholder="Digite o CEP"
-                mask={'_____-___'}
-                required
-            />
-
+            <div className="w-full justify-center flex flex-col items-center">
+                <FieldMasked
+                    ctx={values}
+                    label="CEP"
+                    name="location.zipCode"
+                    placeholder="Digite o CEP"
+                    mask={'_____-___'}
+                    required
+                />
+                {cpfNotFound && (
+                    <legend className="w-full text-xs text-gray-400 text-center">
+                        CEP não encontrado, preencha manualmente os campos.
+                    </legend>
+                )}
+            </div>
             <FieldControl
                 ctx={values}
                 className=" "
@@ -144,8 +149,12 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
                 />
             </div>
 
-            <div className="mt-1 flex justify-center items-center col-span-full">
-                <BtnCancel onClick={prevStep} label="Voltar" />
+            <div className="mt-1 gap-2 flex justify-center items-center col-span-full">
+                <BtnLabel
+                    className="border-none"
+                    onClick={prevStep}
+                    label="Voltar"
+                />
                 <BtnPrimary
                     onClick={nextStep}
                     disabled={!requiredValid || loading}

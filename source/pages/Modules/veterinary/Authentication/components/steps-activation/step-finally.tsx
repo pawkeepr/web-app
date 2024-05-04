@@ -14,6 +14,9 @@ const Specialty = {
     domestics: 'Animais Domésticos',
     large: 'Animais de Grande Porte',
     midsize: 'Animais de Médio Porte',
+    wild: 'Animais Selvagens',
+    exotic: 'Animais Exóticos',
+    unconventional: 'Animais Não Convencionais',
 } as const
 
 type KeysSpecialty = keyof typeof Specialty
@@ -166,24 +169,21 @@ const StepFinally = ({ prevStep }: StepProps) => {
                 </li>
             </ul>
 
-            <div className="flex gap-2 justify-center items-center mt-2">
-                <div>
-                    <BtnLabel
-                        condition={!isLoading}
-                        disabled={isLoading}
-                        onClick={prevStep}
-                        label="Anterior"
-                    />
-                </div>
-                <div>
-                    <BtnPrimary
-                        isLoading={isLoading}
-                        label="Cadastrar"
-                        type="submit"
-                        onClick={handleClick}
-                        disabled={!isValid}
-                    />
-                </div>
+            <div className="flex gap-2 justify-center items-center mt-2 w-full">
+                <BtnLabel
+                    condition={!isLoading}
+                    disabled={isLoading}
+                    onClick={prevStep}
+                    className="border-none"
+                    label="Voltar"
+                />
+                <BtnPrimary
+                    isLoading={isLoading}
+                    label="Cadastrar"
+                    type="submit"
+                    onClick={handleClick}
+                    disabled={!isValid}
+                />
             </div>
         </div>
     )
