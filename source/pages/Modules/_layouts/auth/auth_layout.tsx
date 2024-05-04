@@ -14,29 +14,30 @@ type AuthLayoutProps = {
     hasImage?: boolean
     loading?: boolean
 } & (
-        | {
-            image: StaticImageData | string
-            alt: string
-        }
-        | {
-            image?: never
-            alt?: never
-        }
-    )
+    | {
+          image: StaticImageData | string
+          alt: string
+      }
+    | {
+          image?: never
+          alt?: never
+      }
+)
 
 const AuthLayout = ({
     children,
     title,
     image,
     alt,
-    loading = false
+    loading = false,
 }: AuthLayoutProps) => {
-
     if (loading) {
         return (
-            <main className={cn(
-                'flex flex-1 content-center mobile:content-start items-center justify-center mobile:items-start mobile:justify-start mobile:overflow-hidden',
-            )}>
+            <main
+                className={cn(
+                    'flex flex-1 content-center mobile:content-start items-center justify-center mobile:items-start mobile:justify-start mobile:overflow-hidden',
+                )}
+            >
                 <LoadingPage />
             </main>
         )
@@ -90,7 +91,7 @@ const AuthLayout = ({
                         )}
                     >
                         <div
-                            className="flex h-52 mobile:h-36 w-full !bg-contain !bg-no-repeat !bg-center"
+                            className="flex h-40 mobile:h-36 w-full !bg-contain !bg-no-repeat !bg-center"
                             style={{
                                 background: 'url(/logo-default.webp)',
                             }}
