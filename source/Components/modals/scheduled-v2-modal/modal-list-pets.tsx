@@ -201,7 +201,7 @@ const ModalListPets = ({
                         onChangeSelectedTab(0)
                     }, 300)
                 }}
-                mobilePage={false}
+                mobilePage={selectedTab !== NUMBER_STEPS.DOCUMENTS}
                 open={open}
             >
                 <Tab.Group
@@ -215,7 +215,7 @@ const ModalListPets = ({
                         ))}
                     </Tab.List>
                     {hasVisibleStep && (
-                        <div className="flex flex-row w-full justify-between">
+                        <div className="flex flex-row  justify-between w-[85vw]">
                             {STEPS.slice(2, STEPS.length - 2).map((item) => (
                                 <div
                                     key={item.id}
@@ -239,7 +239,7 @@ const ModalListPets = ({
                         enableReinitialize
                         onSubmit={onSubmit}
                     >
-                        <Tab.Panels className="w-full h-full relative">
+                        <Tab.Panels className="w-full h-[90vh] relative">
                             {STEPS.map(({ component: Component, id }, index) => (
                                 <Tab.Panel key={id} tabIndex={index}>
                                     <Component

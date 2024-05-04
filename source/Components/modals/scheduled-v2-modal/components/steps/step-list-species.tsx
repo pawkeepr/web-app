@@ -25,8 +25,8 @@ const StepListSpecies = ({ nextStep, previousStep }: StepProps) => {
     }
 
     return (
-        <div className="mt-3 p-1 gap-2">
-            <div className="pb-1 h-[calc(100vh-20rem)] overflow-auto">
+        <div className="flex-1 flex h-[90vh] w-full justify-between items-center flex-col">
+            <div className="overflow-auto flex flex-1 gap-2 justify-start items-center flex-col w-full pt-2">
                 {species.map((specie) => (
                     <button
                         key={specie.value}
@@ -38,7 +38,7 @@ const StepListSpecies = ({ nextStep, previousStep }: StepProps) => {
                             selected: values.specie === specie.value,
                         })}
                     >
-                        <div className="flex justify-around gap-2 items-center w-40 ">
+                        <div className="flex justify-center gap-2 items-center w-full">
                             <span className="align-middle col-span-1">
                                 {EmojiPet[specie.value as Key]}
                             </span>

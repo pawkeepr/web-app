@@ -29,11 +29,11 @@ const StepListPets = ({
     const { values } = useFormikContextSafe<CtxSimplifiedPeTFields>()
 
     return (
-        <div>
-            <h5 className="text-center font-semibold text-gray-500 mb-2">
+        <div className="flex-1 flex h-[95vh] w-full  justify-between items-center flex-col">
+            <h5 className="text-center mt-6 font-semibold text-gray-500 mb-2">
                 Selecione ou Adicione um Pet para prosseguir na consulta.
             </h5>
-            <div className="overflow-auto h-[calc(100vh-24rem)] flex justify-center items-center flex-col">
+            <div className="flex flex-1 justify-center items-center flex-col overflow-y-scroll">
                 {pets?.length === 0 && (
                     <div className="flex justify-center items-center  ">
                         <span className="text-gray-500 text-center font-semibold text-base">
@@ -55,10 +55,10 @@ const StepListPets = ({
                             <span className="align-middle col-span-1">
                                 {
                                     EmojiPet[
-                                    MapOptionSpecies[
-                                    pet.pet_information
-                                        ?.specie as KeyOfMapOptionSpecies
-                                    ] as Key
+                                        MapOptionSpecies[
+                                            pet.pet_information
+                                                ?.specie as KeyOfMapOptionSpecies
+                                        ] as Key
                                     ]
                                 }
                             </span>
@@ -70,29 +70,31 @@ const StepListPets = ({
                 ))}
             </div>
 
-            <FieldControl
-                ctx={values}
-                name="name"
-                label="Caso o pet não esteja na lista, digite o nome dele para prosseguir:"
-                className=" w-full mb-4"
-                placeholder="Nome do Pet"
-            />
+            <div>
+                <FieldControl
+                    ctx={values}
+                    name="name"
+                    label="Caso o pet não esteja na lista, digite o nome dele para prosseguir:"
+                    className=" w-full mb-1"
+                    placeholder="Nome do Pet"
+                />
 
-            <BoxButtons
-                isValid={values?.name?.length > 0}
-                link={false}
-                cancel={(props) => (
-                    <BtnLink
-                        {...(props as any)}
-                        message="Cadastro Completo"
-                        href={`/dashboard/pet?document=${values?.ownerEmergencyContact?.cpf_cnpj}`}
-                    />
-                )}
-                success={(props) => (
-                    <BtnPrimary {...props} label="Cadastro Simplificado" />
-                )}
-                onClickSuccess={nextStep}
-            />
+                <BoxButtons
+                    isValid={values?.name?.length > 0}
+                    link={false}
+                    cancel={(props) => (
+                        <BtnLink
+                            {...(props as any)}
+                            message="Cadastro Completo"
+                            href={`/dashboard/pet?document=${values?.ownerEmergencyContact?.cpf_cnpj}`}
+                        />
+                    )}
+                    success={(props) => (
+                        <BtnPrimary {...props} label="Cadastro Simplificado" />
+                    )}
+                    onClickSuccess={nextStep}
+                />
+            </div>
         </div>
     )
 }

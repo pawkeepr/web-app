@@ -32,8 +32,8 @@ const StepListBreeds = ({ nextStep, previousStep }: StepProps) => {
     }, [values.specie])
 
     return (
-        <div className="mt-3 p-1 gap-2">
-            <div className="pb-1 h-[calc(100vh-20rem)] overflow-auto">
+        <div className="flex-1 flex h-[90vh]  w-full justify-between items-center flex-col">
+            <div className="overflow-auto flex flex-1 gap-2 justify-start items-center flex-col w-full pt-2">
                 {breeds.map((breed) => (
                     <button
                         key={breed.value}

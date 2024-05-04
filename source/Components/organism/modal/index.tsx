@@ -9,7 +9,8 @@ import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
 const modal = tv({
     base: `  
         relative
-        rounded-md 
+        rounded-md
+        bg-green-500
     `,
     variants: {
         mobilePage: {
@@ -41,9 +42,7 @@ const Modal = ({ className, mobilePage = true, ...props }: ModalProps) => {
                 modal: modal({ className, mobilePage }),
             }}
         >
-            <section className="relative overflow-auto py-4">
                 {props.children}
-            </section>
         </ModalResponsive>
     )
 }

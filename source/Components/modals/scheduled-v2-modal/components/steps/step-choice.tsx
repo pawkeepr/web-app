@@ -59,7 +59,7 @@ const StepChoice = ({ nextStep, closeModal, pet }: StepProps) => {
             </div>
             <div
                 className="
-                flex flex-[1] 
+                flex
                 flex-row gap-1 mt-4 
                 justify-center
                 items-end 
