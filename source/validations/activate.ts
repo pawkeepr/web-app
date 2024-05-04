@@ -15,6 +15,29 @@ export type UserInformation = {
     contact: Contact
 }
 
+export const specialty_validation = {
+    types_animals: Yup.array(),
+    specialty: Yup.object({
+        value: Yup.string().required('O campo especialidade é obrigatório'),
+        label: Yup.string().required('O campo especialidade é obrigatório'),
+    }).required('O campo especialidade é obrigatório'),
+    list_service_type: Yup.array()
+        .min(1, 'Selecione pelo menos um tipo de atendimento')
+        .required(),
+    types_service: Yup.array()
+        .min(1, 'Selecione pelo menos um tipo de serviço de atendimento')
+        .required(),
+    list_specialty: Yup.array()
+        .min(1, 'Selecione pelo menos uma especialidade')
+        .of(
+            Yup.object().shape({
+                value: Yup.string().required('O campo especialidade é obrigatório'),
+                label: Yup.string().required('O campo especialidade é obrigatório'),
+            }),
+        )
+        .required(),
+}
+
 const validate = Yup.object().shape({
     email: Yup.string()
         .email('O email deve ser válido')
@@ -34,22 +57,6 @@ const validate = Yup.object().shape({
         .min(6, 'O CRMV deve ter pelo menos 6 caracteres')
         .transform((value) => value.toUpperCase())
         .required('O Campo CRMV é obrigatório'),
-    specialty: Yup.object({
-        value: Yup.string().required('O campo especialidade é obrigatório'),
-        label: Yup.string().required('O campo especialidade é obrigatório'),
-    }).required('O campo especialidade é obrigatório'),
-    list_service_type: Yup.array()
-        .min(1, 'Selecione pelo menos um tipo de atendimento')
-        .required(),
-    list_specialty: Yup.array()
-        .min(1, 'Selecione pelo menos uma especialidade')
-        .of(
-            Yup.object().shape({
-                value: Yup.string().required('O campo especialidade é obrigatório'),
-                label: Yup.string().required('O campo especialidade é obrigatório'),
-            }),
-        )
-        .required(),
     contact: contactValidationSchema,
     cpf_cnpj: Yup.string()
         .required('Este campo é obrigatório')
@@ -59,6 +66,7 @@ const validate = Yup.object().shape({
     //     return cpf.isValid(value) || cnpj.isValid(value);
     // }),
     location: Address,
+    ...specialty_validation,
 })
 
 export type ActivateAccount = Yup.InferType<typeof validate>
