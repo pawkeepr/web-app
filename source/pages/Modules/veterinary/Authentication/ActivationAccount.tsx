@@ -43,6 +43,8 @@ const initialValues = (email: string): ActivateAccount => ({
     lastName: '',
     list_service_type: [],
     list_specialty: [],
+    types_service: [],
+    types_animals: [],
     specialty: {
         value: '',
         label: '',
@@ -161,7 +163,14 @@ const ActivationAccount = () => {
 
     return (
         <AuthLayout title="Activation Profile">
-            <div className="flex flex-col items-center justify-center ">
+            <BtnLink
+                message="Sair"
+                className="absolute top-0 right-0 !w-fit"
+                href="/logout"
+            >
+                <ArrowLeftCircleIcon />
+            </BtnLink>
+            <div className="flex flex-col items-center justify-center relative ">
                 <div className="text-center font-sans text-gray-600 gap-1">
                     <h5 className="text-secondary-500 uppercase font-bold font-sans p-2">
                         Olá, Seja Bem-Vindo(a)!
@@ -202,14 +211,6 @@ const ActivationAccount = () => {
                     ))}
                 </TabContainer>
             </Formik>
-
-            <BtnLink
-                message="Sair"
-                className="absolute top-2 right-2"
-                href="/logout"
-            >
-                <ArrowLeftCircleIcon />
-            </BtnLink>
         </AuthLayout>
     )
 }
