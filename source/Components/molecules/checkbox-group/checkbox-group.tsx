@@ -56,7 +56,7 @@ export default function CheckboxGroup<Ctx>({
             <div className="flex items-center justify-around gap-1 flex-wrap ">
                 {items.map((item, index) => (
                     <div
-                        className="flex !w-fit flex-row items-center justify-center"
+                        className="flex w-fit flex-row items-center mobile:flex-grow justify-center"
                         key={`${item.value}-${index}`}
                     >
                         <div className="w-fit ">
