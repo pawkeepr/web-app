@@ -53,24 +53,28 @@ export default function CheckboxGroup<Ctx>({
     return (
         <div className={divClassName}>
             <Label label={label} required={required} id={id} separator=":" />
-            <div className="flex items-center justify-center gap-1 flex-wrap">
+            <div className="flex items-center justify-around gap-1 flex-wrap ">
                 {items.map((item, index) => (
                     <div
-                        className="flex flex-row flex-grow  items-center justify-center"
+                        className="flex !w-fit flex-row items-center justify-center"
                         key={`${item.value}-${index}`}
                     >
                         <div className="w-fit ">
                             <Checkbox
-                                id={item.value}
+                                id={item.value as string}
                                 type="checkbox"
-                                checked={checkedValues.includes(item.value)}
+                                checked={checkedValues.includes(
+                                    item.value as string,
+                                )}
                                 {...field}
-                                onChange={() => setCheckboxValue(item.value)}
+                                onChange={() =>
+                                    setCheckboxValue(item.value as string)
+                                }
                             />
                         </div>
                         <Label
                             className="flex-[3]"
-                            htmlFor={item.value}
+                            htmlFor={item.value as string}
                             label={item.label}
                         />
                     </div>
