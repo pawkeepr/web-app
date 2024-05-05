@@ -48,10 +48,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     useEffect(() => {
         const token = getCookie(cookies.token.name)
+
         const isPublicRoute = !!PUBLIC_ROUTES.find((route) => {
-            if (route === '/') {
-                return route === pathname
-            }
+            if (route === '/') return route === pathname
 
             if (typeof pathname !== 'string') return true
 
@@ -59,6 +58,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
 
         if (!token && isPublicRoute) return
+        if (pathname === '/logout') return
 
         if (!token) {
             dispatch(signOutUser())
