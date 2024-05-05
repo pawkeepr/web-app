@@ -1,6 +1,6 @@
 import { useFormikContext } from 'formik'
 import { twMerge } from 'tailwind-merge'
-import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn'
+import { BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
 import LOADING from '~/constants/loading'
 import { useAppSelector } from '~/store/hooks'
 import type { ActivateAccount } from '~/validations/activate'
@@ -170,7 +170,7 @@ const StepFinally = ({ prevStep }: StepProps) => {
             </ul>
 
             <div className="flex gap-2 justify-center items-center mt-2 w-full">
-                <BtnLabel
+                <BtnNeutral
                     condition={!isLoading}
                     disabled={isLoading}
                     onClick={prevStep}

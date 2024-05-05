@@ -2,7 +2,7 @@ import { useFormikContext } from 'formik'
 
 import { useMemo } from 'react'
 
-import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn'
+import { BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import { sub_specialty } from '~/constants/sub-specialtys'
 
@@ -33,7 +33,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
     // useNextStep(nextStep, requiredValid);
 
     return (
-        <div className="flex flex-1 flex-col gap-2">
+        <div className="flex flex-1 flex-col gap-1">
             <CheckboxGroup
                 ctx={values}
                 label="Tipo de Atendimento"
@@ -132,7 +132,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                 options={options}
             />
             <div className="mt-1 gap-2 flex justify-center items-center col-span-full">
-                <BtnLabel
+                <BtnNeutral
                     onClick={prevStep}
                     label="Voltar"
                     className="border-none"

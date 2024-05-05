@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 
 import validateLocation from '~/validations/address'
 
-import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn'
+import { BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control/field-control'
 import type { IAddress } from '~/helpers/fetch-address-by-cep'
 import useFetchAddress from '~/hooks/use-fetch-address'
@@ -65,8 +65,8 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
     useNextStep(nextStep, requiredValid, 5000)
 
     return (
-        <div className="container grid grid-cols-2 mobile:grid-cols-1 gap-1">
-            <div className="w-full justify-center flex flex-col items-center">
+        <div className="flex flex-row flex-wrap w-full">
+            <div className="flex-grow w-1/3 justify-center flex flex-col items-center">
                 <FieldMasked
                     ctx={values}
                     label="CEP"
@@ -83,7 +83,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
             </div>
             <FieldControl
                 ctx={values}
-                className=" "
+                divClassName="flex-grow w-1/3 "
                 type="text"
                 label="Estado"
                 name="location.state"
@@ -99,6 +99,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
                 disabled={disabledInputs.city || loading}
                 placeholder={loading ? 'Carregando...' : 'Digite o nome da cidade'}
                 required
+                divClassName="flex-grow w-1/3 "
             />
             <FieldControl
                 ctx={values}
@@ -108,49 +109,45 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
                 disabled={loading}
                 placeholder={loading ? 'Carregando...' : 'Digite o nome do bairro'}
                 required
+                divClassName="flex-grow w-1/3 "
             />
 
-            <div className="grid grid-cols-4 mobile:grid-cols-1 col-span-full w-full gap-1">
-                <FieldControl
-                    ctx={values}
-                    divClassName="col-span-3"
-                    label="Rua"
-                    name="location.street"
-                    aria-label="street"
-                    disabled={loading}
-                    placeholder={loading ? 'Carregando...' : 'Digite o nome da rua'}
-                    required
-                    disabledError
-                />
+            <FieldControl
+                ctx={values}
+                divClassName="flex-grow w-1/3 "
+                label="Rua"
+                name="location.street"
+                aria-label="street"
+                disabled={loading}
+                placeholder={loading ? 'Carregando...' : 'Digite o nome da rua'}
+                required
+                disabledError
+            />
 
-                <FieldControl
-                    ctx={values}
-                    divClassName="col-span-1"
-                    label="N°"
-                    name="location.number"
-                    aria-label="number"
-                    disabled={loading}
-                    placeholder="N°"
-                />
-            </div>
+            <FieldControl
+                ctx={values}
+                divClassName="flex-grow w-1/4 "
+                label="N°"
+                name="location.number"
+                aria-label="number"
+                disabled={loading}
+                placeholder="N°"
+            />
 
-            <div className="col-span-full">
-                <FieldControl
-                    ctx={values}
-                    type="text"
-                    label="Complemento"
-                    name="location.complement"
-                    disabled={loading}
-                    placeholder={
-                        loading
-                            ? 'Carregando...'
-                            : 'Digite o complemento (opcional)'
-                    }
-                />
-            </div>
+            <FieldControl
+                ctx={values}
+                divClassName="flex-grow w-full"
+                type="text"
+                label="Complemento"
+                name="location.complement"
+                disabled={loading}
+                placeholder={
+                    loading ? 'Carregando...' : 'Digite o complemento (opcional)'
+                }
+            />
 
-            <div className="mt-1 gap-2 flex justify-center items-center col-span-full">
-                <BtnLabel
+            <div className="mt-1 gap-2 flex justify-center items-center w-full">
+                <BtnNeutral
                     className="border-none"
                     onClick={prevStep}
                     label="Voltar"
