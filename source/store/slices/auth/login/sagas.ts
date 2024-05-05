@@ -41,13 +41,14 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
             attributes,
         } = response
 
-        yield setCookie(
+        yield call(setCookie,
             cookies.token.name,
             idToken.jwtToken,
             idToken.payload.exp / 1000,
+            { sameSite: 'strict' }
         )
 
-        yield setCookie(
+        yield call(setCookie, 
             cookies.cognito_profile.name,
             JSON.stringify(attributes),
             idToken.payload.exp / 1000,
@@ -100,7 +101,7 @@ export function* recoverUserByTokenSaga() {
 
         yield put(setAuthorization({ token: access_token }))
         yield put(setProfile(userData as IProfile))
-    } catch (error) {
+    } catch (_error) {
         yield put(signOutUser())
     }
 }
@@ -108,10 +109,10 @@ export function* recoverUserByTokenSaga() {
 export function* signOutUserSaga() {
     try {
         yield put(changeLayoutMode(layoutModeTypes.LIGHT_MODE))
-        yield removeCookie(cookies.token.name)
+        yield call(removeCookie, cookies.token.name)
+        yield call(signOut)
         yield put(resetProfileFlag())
         yield put(signOutUserSuccess())
-        yield call(signOut)
     } catch (error) {
         if ((error as string) === 'No current user') {
             yield put(signOutUserSuccess())

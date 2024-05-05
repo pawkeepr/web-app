@@ -2,7 +2,7 @@ import type { GetServerSidePropsContext } from 'next'
 import LayoutAuth from '~/Layouts/LayoutAuth'
 import optionsCookies from '~/constants/cookies'
 import LogoutPage from '~/pages/Modules/shared/Authentication/LogoutPage'
-import { removeCookie } from '~/utils/cookies-utils'
+import { removeCookie, setCookie } from '~/utils/cookies-utils'
 
 const LogoutNextPage = () => {
     return (
@@ -14,8 +14,8 @@ const LogoutNextPage = () => {
 
 export default LogoutNextPage
 
-// biome-ignore lint/nursery/useAwait: <explanation>
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+export const getServerSideProps = (ctx: GetServerSidePropsContext) => {
+    setCookie(optionsCookies.token.name, null, 0)
     removeCookie(optionsCookies.token.name, ctx)
 
     return {

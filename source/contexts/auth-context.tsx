@@ -24,13 +24,13 @@ interface SignInData {
 
 interface AuthContextType {
     isAuthenticated: boolean
-    user: any
+    user: unknown
     password: string
     username: string
     isLoading: LOADING
     rememberMe: boolean
     onToggleRememberMe: () => void
-    signIn: (data: SignInData) => Promise<void>
+    signIn: (data: SignInData) => void
 }
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
@@ -71,8 +71,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname])
 
-    async function signIn({ username, password }: SignInData) {
-        await dispatch(signInUser({ username, password }))
+    function signIn({ username, password }: SignInData) {
+        return dispatch(signInUser({ username, password }))
     }
 
     const onToggleRememberMe = () => {

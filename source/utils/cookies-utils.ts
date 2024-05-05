@@ -1,7 +1,13 @@
+import type { CookieSerializeOptions } from 'cookie'
 import { destroyCookie, parseCookies, setCookie as setCookieWrapper } from 'nookies'
 
-export function setCookie(name: string, value: string, maxAge?: number) {
-    setCookieWrapper(null, name, value, { maxAge })
+export function setCookie(
+    name: string,
+    value: string | null,
+    maxAge?: number,
+    options?: CookieSerializeOptions,
+) {
+    return setCookieWrapper(null, name, value, { ...options, maxAge })
 }
 
 export function getCookie(name: string, ctx: any = null) {
@@ -19,5 +25,5 @@ export function getCookie(name: string, ctx: any = null) {
 }
 
 export function removeCookie(name: string, ctx: any = null) {
-    destroyCookie(ctx, name)
+    return destroyCookie(ctx, name)
 }
