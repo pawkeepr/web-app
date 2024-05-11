@@ -1,0 +1,9 @@
+.li-option-checkbox {
+    &:hover {
+        button {
+            svg {
+                color: #fff !important;
+            }
+        }
+    }
+}
