@@ -1,9 +1,6 @@
-import { useFormikContext } from 'formik'
-
 import { useMemo } from 'react'
 
 import { BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
-import { sub_specialty } from '~/constants/sub-specialtys'
 
 import { specialty_validation, type ActivateAccount } from '~/validations/activate'
 import type { StepProps } from './types'
@@ -12,26 +9,22 @@ import * as Yup from 'yup'
 import CheckboxIsMultiModalGroup from '~/Components/organism/checkbox-is-multi-modal-group'
 import CheckboxModalGroup from '~/Components/organism/checkbox-modal-group'
 
-import { pets } from '~/constants/pets'
+import { list_service_type, pets, sub_specialty, types_service } from '~/constants'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 
 const options = sub_specialty.map((item) => ({
     value: item,
     label: item,
-    color: 'rgb(255 200 107);',
 }))
 
 const validate = Yup.object().shape(specialty_validation)
 
 const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
-    const { values } = useFormikContext<ActivateAccount>()
+    const { values } = useFormikContextSafe<ActivateAccount>()
 
     const requiredValid = useMemo((): boolean => {
-        const isValid = validate.isValidSync(values)
-
-        return isValid
+        return validate.isValidSync(values)
     }, [values])
-
-    // useNextStep(nextStep, requiredValid);
 
     return (
         <div className="flex flex-col flex-1 gap-1">
@@ -48,72 +41,14 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                 ctx={values}
                 label="Tipo de Atendimento"
                 name="types_service"
-                items={[
-                    {
-                        label: 'Online',
-                        value: 'online',
-                    },
-                    {
-                        label: 'Clínica',
-                        value: 'clinic',
-                    },
-                    {
-                        label: 'Domiciliar',
-                        value: 'domiciliary',
-                    },
-                    {
-                        label: 'Emergencial',
-                        value: 'emergency',
-                    },
-                    {
-                        label: 'Hospitalar',
-                        value: 'hospital',
-                    },
-                    {
-                        label: 'Intensivo',
-                        value: 'intensive',
-                    },
-                    {
-                        label: 'Ambulatorial',
-                        value: 'ambulatory',
-                    },
-                ]}
+                items={types_service}
                 required
             />
             <CheckboxIsMultiModalGroup
                 ctx={values}
                 label="Tipo de Animais Atendidos"
                 name="list_service_type"
-                items={[
-                    {
-                        label: 'Domésticos',
-                        value: 'domestic',
-                    },
-                    {
-                        label: 'Equinos',
-                        value: 'horses',
-                    },
-                    {
-                        label: 'Silvestres e Conservação',
-                        value: 'wild',
-                    },
-                    {
-                        label: 'Rurais',
-                        value: 'rural',
-                    },
-                    {
-                        label: 'Exóticos',
-                        value: 'exotic',
-                    },
-                    {
-                        label: 'Não Convencionais',
-                        value: 'unconventional',
-                    },
-                    {
-                        label: 'Aquáticos',
-                        value: 'aquatic',
-                    },
-                ]}
+                items={list_service_type}
                 required
             />
             <CheckboxIsMultiModalGroup
