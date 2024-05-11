@@ -100,9 +100,7 @@ const Btn = ({
             {...props}
         >
             {icon && <span className={styledIcon({ ...props })}>{icon}</span>}
-            {children && (
-                <span className={styledIcon({ ...props })}>{children}</span>
-            )}
+            {children}
             {label}
         </button>
     )
@@ -110,31 +108,31 @@ const Btn = ({
 
 const BtnCompose = withLoading(withControl(Btn))
 
-const BtnPrimary = ({ label = 'Primário', ...props }: BtnProps) => {
+const BtnPrimary = ({ label = '', ...props }: BtnProps) => {
     return <BtnCompose color="primary" label={label} {...props} />
 }
 
-const BtnNeutral = ({ label = 'Neutro', ...props }: BtnProps) => {
+const BtnNeutral = ({ label = '', ...props }: BtnProps) => {
     return <BtnCompose color="neutral" label={label} {...props} />
 }
 
-const BtnSecondary = ({ label = 'Secundário', ...props }: BtnProps) => {
+const BtnSecondary = ({ label = '', ...props }: BtnProps) => {
     return <BtnCompose color="secondary" label={label} {...props} />
 }
 
-const BtnSuccess = ({ label = 'Sucesso', ...props }: BtnProps) => {
+const BtnSuccess = ({ label = '', ...props }: BtnProps) => {
     return <BtnCompose color="primary" label={label} {...props} />
 }
 
-const BtnConfirm = ({ label = 'Confirmar', ...props }: BtnProps) => {
+const BtnConfirm = ({ label = '', ...props }: BtnProps) => {
     return <BtnCompose color="confirm" label={label} {...props} />
 }
 
-const BtnCancel = ({ label = 'Cancelar', ...props }: BtnProps) => {
+const BtnCancel = ({ label = '', ...props }: BtnProps) => {
     return <BtnCompose color="secondary" label={label} {...props} />
 }
 
-const BtnLabel = ({ label = 'Texto', ...props }: BtnProps) => {
+const BtnLabel = ({ label = '', ...props }: BtnProps) => {
     return <BtnCompose text label={label} {...props} />
 }
 
