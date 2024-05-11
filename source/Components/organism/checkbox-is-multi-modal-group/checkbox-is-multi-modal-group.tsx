@@ -8,12 +8,12 @@ import CheckboxIcon from '~/Components/atoms/checkbox-icon'
 import Label from '~/Components/atoms/label'
 import useModal from '~/hooks/use-modal'
 import type { ObjPaths } from '~/types/helpers'
-import styles from './checkbox-modal-group.module.scss'
+import styles from './checkbox-is-multi-modal-group.module.scss'
 import ItemCheckbox from './item-checkbox'
 
-export type Item = {
+export type Item<T = unknown> = {
     label: string
-    value: unknown
+    value: T
 }
 
 export const option = tv({
@@ -32,7 +32,7 @@ export const option = tv({
     },
 })
 
-interface CheckboxModalProps<Ctx> {
+export interface CheckboxIsMultiModalProps<Ctx> {
     items: Item[]
     ctx?: Ctx extends undefined ? never : Ctx
     name: Ctx extends undefined ? string : ObjPaths<Ctx>
@@ -44,7 +44,7 @@ interface CheckboxModalProps<Ctx> {
     children?: (props: { showModal: () => void }) => JSX.Element
 }
 
-export default function CheckboxModal<Ctx>({
+export default function CheckboxIsMultiModal<Ctx>({
     items = [],
     name,
     label,
@@ -52,7 +52,7 @@ export default function CheckboxModal<Ctx>({
     id,
     divClassName,
     children,
-}: CheckboxModalProps<Ctx>) {
+}: CheckboxIsMultiModalProps<Ctx>) {
     const [field, _meta, helpers] = useField(name)
     const { closeModal, open, showModal } = useModal()
     const { setValue } = helpers
