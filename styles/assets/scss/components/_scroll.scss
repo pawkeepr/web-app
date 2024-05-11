@@ -1,0 +1,95 @@
+@mixin scroll-style($size: 4px,
+    $thumb: none,
+    $thumb-color: grey,
+    $thumb-radius: 24px,
+    $track-color: transparent,
+    $track-radius: 8px) {
+
+    // Respaldo para Firefox
+    @supports not (selector(::-webkit-scrollbar-thumb)) {
+        scrollbar-color: $thumb-color $track-color;
+        scrollbar-width: thin;
+    }
+
+    // Navegadores basados en webkit
+    &::-webkit-scrollbar {
+        width: $size;
+        height: $size;
+
+        &-track {
+            background-color: $track-color;
+            border-radius: $track-radius;
+        }
+
+        &-thumb {
+            background-color: $thumb-color;
+            background-image: $thumb;
+            border-radius: $thumb-radius;
+        }
+    }
+}
+
+.scroll {
+    @include scroll-style($size: var(--scroll-size, 10px),
+
+        $thumb: var(--scroll-thumb, none),
+        $thumb-color: var(--scroll-thumb-color, grey),
+        $thumb-radius: var(--scroll-thumb-radius, var(--scroll-radius)),
+
+        $track-color: var(--scroll-track, transparent),
+        $track-radius: var(--scroll-track-radius, var(--scroll-radius)),
+    );
+
+    &.scroll-primary {
+        $bg-mask: rgb(255 255 255 / 30%);
+        --scroll-size: 4px;
+        --scroll-radius: 48px;
+        --scroll-track: rgb(0 0 0 / 40%);
+        --scroll-thumb-color: #ffc86b;
+    }
+}
+
+.scrollable-x {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    /* Para Firefox */
+    -ms-overflow-style: none;
+    /* Para Internet Explorer e Edge */
+
+    &::-webkit-scrollbar {
+        display: none;
+        /* Para WebKit (Safari, Chrome) */
+    }
+
+    /* Estilos para telas maiores */
+    @media (min-width: 1024px) {
+        .scrollable-x {
+            scrollbar-width: thin;
+            /* Para Firefox */
+            -ms-overflow-style: auto;
+            /* Para IE e Edge */
+        }
+
+        .scrollable-x::-webkit-scrollbar {
+            display: block;
+            width: 6px;
+            /* Largura da barra de rolagem */
+            height: 6px;
+            /* Altura necessária para rolagem horizontal */
+        }
+
+        .scrollable-x::-webkit-scrollbar-thumb {
+            background-color: darkgrey;
+            /* Cor da barra de rolagem */
+            border-radius: 10px;
+            /* Cantos arredondados */
+        }
+
+        .scrollable-x::-webkit-scrollbar-track {
+            background: transparent;
+            /* Cor do fundo da barra de rolagem */
+        }
+    }
+}
