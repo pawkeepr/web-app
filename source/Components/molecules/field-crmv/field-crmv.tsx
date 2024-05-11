@@ -4,14 +4,13 @@ import FieldMasked from '../field-masked'
 
 type FieldDocumentProps<T, Ctx> = Omit<InputControlProps<T, Ctx>, 'ref'>
 
-const FieldCRMV = <T, Ctx = undefined>({
-    ...props
-}: FieldDocumentProps<T, Ctx>) => {
+const FieldCRMV = <T, Ctx = unknown>({ ...props }: FieldDocumentProps<T, Ctx>) => {
     return (
         <FieldMasked
             {...props}
-            name={props.name}
-            showMask={true}
+            // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+            name={props.name as any}
+            showMask={false}
             mask={'--______'}
             replacement={{
                 _: /\d/,
