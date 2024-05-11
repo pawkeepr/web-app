@@ -12,11 +12,6 @@ import CheckboxModalGroup from '~/Components/organism/checkbox-modal-group'
 import { list_service_type, pets, sub_specialty, types_service } from '~/constants'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 
-const options = sub_specialty.map((item) => ({
-    value: item,
-    label: item,
-}))
-
 const validate = Yup.object().shape(specialty_validation)
 
 const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
@@ -34,7 +29,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                 required
                 className="my-4"
                 name="specialty"
-                items={options}
+                items={sub_specialty}
             />
 
             <CheckboxIsMultiModalGroup
@@ -54,17 +49,15 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
             <CheckboxIsMultiModalGroup
                 ctx={values}
                 label="Animais que Atende a domicílio"
-                required
                 items={pets}
                 name="types_animals"
             />
 
             <CheckboxIsMultiModalGroup
                 ctx={values}
-                required
                 label="Outras Especialidades"
                 name="list_specialty"
-                items={options}
+                items={sub_specialty}
             />
 
             <div className="flex items-center justify-center gap-2 mt-1 col-span-full">
