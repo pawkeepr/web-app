@@ -7,3 +7,48 @@
         }
     }
 }
+
+.scrollable-x {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    /* Para Firefox */
+    -ms-overflow-style: none;
+    /* Para Internet Explorer e Edge */
+
+    &::-webkit-scrollbar {
+        display: none;
+        /* Para WebKit (Safari, Chrome) */
+    }
+
+    /* Estilos para telas maiores */
+    @media (min-width: 1024px) {
+        .scrollable-x {
+            scrollbar-width: thin;
+            /* Para Firefox */
+            -ms-overflow-style: auto;
+            /* Para IE e Edge */
+        }
+
+        .scrollable-x::-webkit-scrollbar {
+            display: block;
+            width: 6px;
+            /* Largura da barra de rolagem */
+            height: 6px;
+            /* Altura necessária para rolagem horizontal */
+        }
+
+        .scrollable-x::-webkit-scrollbar-thumb {
+            background-color: darkgrey;
+            /* Cor da barra de rolagem */
+            border-radius: 10px;
+            /* Cantos arredondados */
+        }
+
+        .scrollable-x::-webkit-scrollbar-track {
+            background: transparent;
+            /* Cor do fundo da barra de rolagem */
+        }
+    }
+}
