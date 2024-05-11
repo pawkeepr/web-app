@@ -36,34 +36,34 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
     }
 
     return (
-        <div className="container grid grid-cols-2 gap-1 mobile:grid-cols-1">
-            <div className="col-span-2 mobile:col-span-2 grid grid-cols-2 gap-1">
-                <FieldControl
-                    ctx={values}
-                    initialFocus
-                    label="Nome"
-                    name="firstName"
-                    aria-label="firstName"
-                    placeholder="Nome"
-                    required
-                    disabledError
-                />
+        <div className="flex flex-row flex-wrap w-full">
+            <FieldControl
+                ctx={values}
+                initialFocus
+                label="Nome"
+                name="firstName"
+                divClassName="flex-grow w-1/5 "
+                aria-label="firstName"
+                placeholder="Nome"
+                required
+                disabledError
+            />
 
-                <FieldControl
-                    ctx={values}
-                    label="Sobrenome"
-                    required
-                    separator={''}
-                    name="lastName"
-                    aria-label="lastName"
-                    placeholder="Sobrenome"
-                    disabledError
-                />
-            </div>
-            <div className="col-span-1 mobile:col-span-2">
+            <FieldControl
+                ctx={values}
+                label="Sobrenome"
+                divClassName="flex-grow w-1/2 "
+                required
+                separator={''}
+                name="lastName"
+                aria-label="lastName"
+                placeholder="Sobrenome"
+                disabledError
+            />
+            <div className="w-1/2">
                 <FieldDocument
                     ctx={values}
-                    divClassName="col-span-2 mobile:col-span-2"
+                    divClassName="flex-grow"
                     label="CPF/CNPJ"
                     name="cpf_cnpj"
                     aria-label="cpf_cnpj"
@@ -71,7 +71,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                     required
                 />
             </div>
-            <div className="col-span-1 mobile:col-span-2">
+            <div className="w-1/2">
                 <FieldCrmv
                     ctx={values}
                     label="CRMV"
@@ -80,41 +80,35 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                     required
                 />
             </div>
-            <div className="grid grid-cols-2 col-span-full gap-1">
-                <FieldPhone
-                    divClassName="col-span-1 mobile:col-span-full"
-                    label="Telefone/Celular"
-                    name="contact.phone"
-                    placeholder="Digite o seu Número de Telefone"
-                    required
-                />
-                <div className="w-full hidden mobile:flex col-span-full justify-center items-center">
-                    <ControlSwitch onChange={copyPhoneToWhatsApp}>
-                        <p className="text-xs font-semibold flex flex-row justify-center items-center gap-1">
-                            Clique aqui para duplicar o telefone no campo ao lado:
-                            <FaWhatsapp className="text-green-600 text-xl cursor-pointer" />
-                        </p>
-                    </ControlSwitch>
+            <div className="flex flex-row flex-grow w-full">
+                <div className="w-1/2">
+                    <FieldPhone
+                        label="Telefone/Celular"
+                        name="contact.phone"
+                        placeholder="Digite o seu Número de Telefone"
+                        required
+                    />
                 </div>
-                <FieldPhone
-                    divClassName="col-span-1 mobile:col-span-full"
-                    t
-                    label="WhatsApp Comercial"
-                    name="contact.whatsapp"
-                    placeholder="Digite o seu Número do WhatsApp"
-                    required
-                />
-                <div className="w-full flex mobile:hidden col-span-full justify-center items-center">
-                    <ControlSwitch onChange={copyPhoneToWhatsApp}>
-                        <p className="text-xs font-semibold flex flex-row justify-center items-center gap-1">
-                            Clique aqui para duplicar o telefone no campo ao lado:
-                            <FaWhatsapp className="text-green-600 text-xl" />
-                        </p>
-                    </ControlSwitch>
+
+                <div className="w-1/2">
+                    <FieldPhone
+                        label="WhatsApp Comercial"
+                        name="contact.whatsapp"
+                        placeholder="Digite o seu Número do WhatsApp"
+                        required
+                    />
                 </div>
             </div>
+            <div className="flex flex-grow w-full justify-center items-center">
+                <ControlSwitch onChange={copyPhoneToWhatsApp}>
+                    <p className="text-xs font-semibold flex flex-row justify-center items-center gap-1">
+                        Clique aqui para duplicar o telefone no campo ao lado:
+                        <FaWhatsapp className="text-green-600 text-xl" />
+                    </p>
+                </ControlSwitch>
+            </div>
 
-            <div className="flex items-center justify-end mt-1 col-span-full">
+            <div className="flex items-center justify-end mt-1 w-full">
                 <div className="flex-1" />
                 <BtnPrimary
                     className="flex-1"

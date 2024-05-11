@@ -133,6 +133,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
             />
             <div className="mt-1 gap-2 flex justify-center items-center col-span-full">
                 <BtnNeutral
+                    outline
                     onClick={prevStep}
                     label="Voltar"
                     className="border-none"

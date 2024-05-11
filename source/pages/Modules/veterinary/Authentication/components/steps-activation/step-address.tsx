@@ -148,6 +148,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
 
             <div className="mt-1 gap-2 flex justify-center items-center w-full">
                 <BtnNeutral
+                    outline
                     className="border-none"
                     onClick={prevStep}
                     label="Voltar"

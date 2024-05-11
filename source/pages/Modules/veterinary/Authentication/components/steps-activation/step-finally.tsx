@@ -176,6 +176,7 @@ const StepFinally = ({ prevStep }: StepProps) => {
                     onClick={prevStep}
                     className="border-none"
                     label="Voltar"
+                    outline
                 />
                 <BtnPrimary
                     isLoading={isLoading}
