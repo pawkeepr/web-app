@@ -10,7 +10,7 @@ export const checkbox = tv({
     variants: {
         checked: {
             true: 'text-primary-500 ',
-            false: 'text-gray-300',
+            false: 'text-gray-400',
         },
     },
 })
