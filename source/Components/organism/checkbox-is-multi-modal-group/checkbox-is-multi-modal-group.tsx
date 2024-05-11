@@ -113,9 +113,7 @@ export default function CheckboxIsMultiModal<Ctx>({
                         }
                         {/* Badge dos items dos checkboxes selecionados */}
                     </div>
-                    <div
-                        className={`h-6 overflow-x-auto ${styles['scrollable-x']} `}
-                    >
+                    <div className="h-6 overflow-x-auto scrollable-x">
                         {
                             <ul className="flex gap-1 ">
                                 <ItemCheckbox
@@ -137,11 +135,11 @@ export default function CheckboxIsMultiModal<Ctx>({
                         id={id}
                         separator=":"
                     />
-                    <div className="overflow-x-hidden overflow-y-auto web:h-60">
+                    <div className="overflow-x-hidden overflow-y-auto scroll scroll-primary web:h-60">
                         <ul className="flex flex-col flex-wrap items-center justify-around gap-1 w-80 ">
                             {items.map((item, index) => (
                                 <li
-                                    className={`flex ${styles['li-option-checkbox']} w-full flex-row items-center mobile:flex-grow justify-center`}
+                                    className={`flex ${styles['li-option-checkbox']} w-full pr-4 flex-row items-center mobile:flex-grow justify-center`}
                                     key={`${item.value}-${index}`}
                                 >
                                     <button
