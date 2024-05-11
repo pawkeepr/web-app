@@ -60,7 +60,7 @@ export default function CheckboxModal<Ctx>({
                             htmlFor={idLabel}
                             separator=":"
                         >
-                            <span className="ml-1">
+                            <span className="ml-1 font-bold text-primary">
                                 {items.find((item) => item.value === checkedValue)
                                     ?.label || 'Nenhum item selecionado'}
                             </span>
