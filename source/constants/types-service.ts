@@ -59,3 +59,25 @@ export const list_service_type = [
         value: 'aquatic',
     },
 ]
+
+export const SpecialtyAnimals = {
+    domestic: 'Animais Domésticos',
+    horses: 'Animais Equinos',
+    wild: 'Animais Selvagens',
+    rural: 'Animais Rurais',
+    exotic: 'Animais Exóticos',
+    unconventional: 'Animais Não Convencionais',
+    aquatic: 'Animais Aquáticos',
+} as const
+export type KeysSpecialtyAnimals = keyof typeof SpecialtyAnimals
+
+export const Services = {
+    online: 'Consulta Online',
+    clinic: 'Consulta Clínica',
+    domiciliary: 'Consulta Domiciliar',
+    emergency: 'Consulta Emergencial',
+    hospital: 'Consulta Hospitalar',
+    intensive: 'Consulta Intensiva',
+    ambulatory: 'Consulta Ambulatorial',
+} as const
+export type KeysServices = keyof typeof Services
