@@ -2,7 +2,6 @@ import { useField } from 'formik'
 import { useState } from 'react'
 import Modal from '~/Components/organism/modal'
 
-import { IoCloseOutline } from 'react-icons/io5'
 import { tv } from 'tailwind-variants'
 import { BtnNeutral } from '~/Components/atoms/btn'
 import CheckboxIcon from '~/Components/atoms/checkbox-icon'
@@ -10,8 +9,9 @@ import Label from '~/Components/atoms/label'
 import useModal from '~/hooks/use-modal'
 import type { ObjPaths } from '~/types/helpers'
 import styles from './checkbox-modal-group.module.scss'
+import ItemCheckbox from './item-checkbox'
 
-type Item = {
+export type Item = {
     label: string
     value: unknown
 }
@@ -102,26 +102,12 @@ export default function CheckboxModal<Ctx>({
                     <div className="h-10 mt-1">
                         {
                             <ul className="flex gap-1">
-                                {checkedValues.map((value) => (
-                                    <li
-                                        key={value}
-                                        className="flex items-center justify-center h-8 px-2 py-1 text-xs text-gray-500 rounded-full bg-secondary-300 "
-                                    >
-                                        {
-                                            items.find(
-                                                (item) => item.value === value,
-                                            )?.label
-                                        }
-                                        <button
-                                            type="button"
-                                            className="w-5 h-5"
-                                            onClick={() => removeItem(value)}
-                                        >
-                                            <span className="sr-only">Remover</span>
-                                            <IoCloseOutline className="w-full h-full" />
-                                        </button>
-                                    </li>
-                                ))}
+                                <ItemCheckbox
+                                    repeat={checkedValues}
+                                    name="value"
+                                    options={items}
+                                    removeItem={removeItem}
+                                />
                             </ul>
                         }
                     </div>
