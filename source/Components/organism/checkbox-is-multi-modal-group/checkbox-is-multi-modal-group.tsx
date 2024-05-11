@@ -2,6 +2,7 @@ import { useField } from 'formik'
 import { useId, useState } from 'react'
 import Modal from '~/Components/organism/modal'
 
+import cn from 'classnames'
 import { tv } from 'tailwind-variants'
 import { BtnNeutral } from '~/Components/atoms/btn'
 import CheckboxIcon from '~/Components/atoms/checkbox-icon'
@@ -39,7 +40,7 @@ export interface CheckboxIsMultiModalProps<Ctx> {
     label: string
     required?: boolean
     disabledError?: boolean
-    divClassName?: string
+    className?: string
     id?: string
     children?: (props: { showModal: () => void }) => JSX.Element
 }
@@ -50,7 +51,7 @@ export default function CheckboxIsMultiModal<Ctx>({
     label,
     required,
     id,
-    divClassName,
+    className,
     children,
 }: CheckboxIsMultiModalProps<Ctx>) {
     const [field, _meta, helpers] = useField(name)
@@ -84,7 +85,12 @@ export default function CheckboxIsMultiModal<Ctx>({
         <>
             {children?.({ showModal }) || (
                 <>
-                    <div className="flex items-center justify-center overflow-visible ">
+                    <div
+                        className={cn(
+                            'flex items-center justify-center overflow-visible ',
+                            className,
+                        )}
+                    >
                         <BtnNeutral
                             outline
                             type="button"
@@ -107,9 +113,11 @@ export default function CheckboxIsMultiModal<Ctx>({
                         }
                         {/* Badge dos items dos checkboxes selecionados */}
                     </div>
-                    <div className="h-6">
+                    <div
+                        className={`h-6 overflow-x-auto ${styles['scrollable-x']} `}
+                    >
                         {
-                            <ul className="flex gap-1">
+                            <ul className="flex gap-1 ">
                                 <ItemCheckbox
                                     repeat={checkedValues}
                                     name="value"
@@ -122,7 +130,7 @@ export default function CheckboxIsMultiModal<Ctx>({
                 </>
             )}
             <Modal onClose={() => closeModal()} open={open}>
-                <div className={divClassName}>
+                <div>
                     <Label
                         label={label}
                         required={required}
