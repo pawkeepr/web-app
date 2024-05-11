@@ -12,9 +12,9 @@ type FormikContextTypeSafe<T = unknown> = Omit<
 > & {
     setFieldValue: (
         field: ObjPaths<T>, // use ObjPaths to get the string paths of the object T
-        value: any,
+        value: unknown,
         shouldValidate?: boolean | undefined,
-    ) => Promise<void | FormikErrors<T>>
+    ) => Promise<unknown | FormikErrors<T>>
 }
 
 const useFormikContextSafe = <T,>(): FormikContextTypeSafe<T> => {
