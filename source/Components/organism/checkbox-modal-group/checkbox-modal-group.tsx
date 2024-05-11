@@ -76,7 +76,7 @@ export default function CheckboxModal<Ctx>({
                         id={id}
                         separator=":"
                     />
-                    <div className="overflow-x-hidden overflow-y-auto scroll scroll-primary web:h-60">
+                    <div className="overflow-x-hidden overflow-y-auto scroll scroll-primary h-60">
                         <ul className="flex flex-col flex-wrap items-center justify-around gap-1 w-80 ">
                             {items.map((item, index) => (
                                 <li
