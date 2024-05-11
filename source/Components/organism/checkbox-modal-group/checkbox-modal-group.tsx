@@ -2,6 +2,7 @@ import { useField } from 'formik'
 import { useId, useState } from 'react'
 import Modal from '~/Components/organism/modal'
 
+import cn from 'classnames'
 import { BtnNeutral } from '~/Components/atoms/btn'
 import CheckboxIcon from '~/Components/atoms/checkbox-icon'
 import Label from '~/Components/atoms/label'
@@ -10,7 +11,7 @@ import {
     option,
     type CheckboxIsMultiModalProps,
 } from '../checkbox-is-multi-modal-group'
-import styles from './checkbox-is-multi-modal-group.module.scss'
+import styles from '../checkbox-is-multi-modal-group/checkbox-is-multi-modal-group.module.scss'
 
 export default function CheckboxModal<Ctx>({
     items = [],
@@ -18,7 +19,7 @@ export default function CheckboxModal<Ctx>({
     label,
     required,
     id,
-    divClassName,
+    className,
     children,
 }: CheckboxIsMultiModalProps<Ctx>) {
     const [field, _meta, helpers] = useField(name)
@@ -37,31 +38,37 @@ export default function CheckboxModal<Ctx>({
     return (
         <>
             {children?.({ showModal }) || (
-                <>
-                    <div className="flex items-center justify-center overflow-visible ">
-                        <BtnNeutral
-                            outline
-                            type="button"
-                            onClick={showModal}
-                            className="h-8"
-                            id={idLabel}
+                <div
+                    className={cn(
+                        'flex items-center justify-center overflow-visible ',
+                        className,
+                    )}
+                >
+                    <BtnNeutral
+                        outline
+                        type="button"
+                        onClick={showModal}
+                        className="h-8"
+                        id={idLabel}
+                    >
+                        <Label
+                            endChildren
+                            className="hover:cursor-pointer"
+                            label={label}
+                            required={required}
+                            htmlFor={idLabel}
+                            separator=":"
                         >
-                            <Label
-                                endChildren
-                                className="hover:cursor-pointer"
-                                label={label}
-                                required={required}
-                                htmlFor={idLabel}
-                            >
+                            <span className="ml-1">
                                 {items.find((item) => item.value === checkedValue)
                                     ?.label || 'Nenhum item selecionado'}
-                            </Label>
-                        </BtnNeutral>
-                    </div>
-                </>
+                            </span>
+                        </Label>
+                    </BtnNeutral>
+                </div>
             )}
             <Modal onClose={() => closeModal()} open={open}>
-                <div className={divClassName}>
+                <div>
                     <Label
                         label={label}
                         required={required}
