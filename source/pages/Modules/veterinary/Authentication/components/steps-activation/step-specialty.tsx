@@ -3,7 +3,6 @@ import { useFormikContext } from 'formik'
 import { useMemo } from 'react'
 
 import { BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import { sub_specialty } from '~/constants/sub-specialtys'
 
 import { specialty_validation, type ActivateAccount } from '~/validations/activate'
@@ -11,6 +10,8 @@ import type { StepProps } from './types'
 
 import * as Yup from 'yup'
 import CheckboxIsMultiModalGroup from '~/Components/organism/checkbox-is-multi-modal-group'
+import CheckboxModalGroup from '~/Components/organism/checkbox-modal-group'
+
 import { pets } from '~/constants/pets'
 
 const options = sub_specialty.map((item) => ({
@@ -34,6 +35,15 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
 
     return (
         <div className="flex flex-col flex-1 gap-1">
+            <CheckboxModalGroup
+                ctx={values}
+                label="Especialidade Principal"
+                required
+                className="my-4"
+                name="specialty"
+                items={options}
+            />
+
             <CheckboxIsMultiModalGroup
                 ctx={values}
                 label="Tipo de Atendimento"
@@ -68,7 +78,6 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                         value: 'ambulatory',
                     },
                 ]}
-                divClassName="mobile:col-span-full col-span-full "
                 required
             />
             <CheckboxIsMultiModalGroup
@@ -105,7 +114,6 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                         value: 'aquatic',
                     },
                 ]}
-                divClassName="mobile:col-span-full col-span-full "
                 required
             />
             <CheckboxIsMultiModalGroup
@@ -113,25 +121,17 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                 label="Animais que Atende a domicílio"
                 required
                 items={pets}
-                divClassName="mobile:col-span-full col-span-full"
                 name="types_animals"
             />
 
-            <FieldControlSelect
-                ctx={values}
-                label="Especialidade Principal"
-                required
-                name="specialty"
-                options={options}
-            />
             <CheckboxIsMultiModalGroup
                 ctx={values}
                 required
                 label="Outras Especialidades"
                 name="list_specialty"
                 items={options}
-                divClassName="mobile:col-span-full col-span-full"
             />
+
             <div className="flex items-center justify-center gap-2 mt-1 col-span-full">
                 <BtnNeutral
                     outline
