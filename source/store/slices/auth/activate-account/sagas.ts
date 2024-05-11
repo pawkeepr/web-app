@@ -1,7 +1,7 @@
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
 
 //Include Both Helper File with needed methods
-import { PayloadAction } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 // Login Redux States
 import {
     activateAccountError,
@@ -12,7 +12,7 @@ import {
 import {
     ACTION_ACTIVATE_ACCOUNT,
     ACTION_RESEND_CONFIRMATION_CODE,
-    ActivateAccount,
+    type ActivateAccount,
 } from './types'
 
 import { confirmSignUp, resendConfirmationCode } from '~/services/helpers/auth'
