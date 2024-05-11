@@ -19,9 +19,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
     const { values, setFieldValue } = useFormikContext<ActivateAccount>()
 
     const requiredValid = useMemo((): boolean => {
-        const isValid = validatePerson.isValidSync(values)
-
-        return isValid
+        return validatePerson.isValidSync(values)
     }, [values])
 
     useNextStep(nextStep, requiredValid)
@@ -99,16 +97,16 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                     />
                 </div>
             </div>
-            <div className="flex flex-grow w-full justify-center items-center">
+            <div className="flex items-center justify-center flex-grow w-full">
                 <ControlSwitch onChange={copyPhoneToWhatsApp}>
-                    <p className="text-xs font-semibold flex flex-row justify-center items-center gap-1">
+                    <p className="flex flex-row items-center justify-center gap-1 text-xs font-semibold">
                         Clique aqui para duplicar o telefone no campo ao lado:
-                        <FaWhatsapp className="text-green-600 text-xl" />
+                        <FaWhatsapp className="text-xl text-green-600" />
                     </p>
                 </ControlSwitch>
             </div>
 
-            <div className="flex items-center justify-end mt-1 w-full">
+            <div className="flex items-center justify-end w-full mt-1">
                 <div className="flex-1" />
                 <BtnPrimary
                     className="flex-1"
