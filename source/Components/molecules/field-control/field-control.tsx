@@ -112,15 +112,14 @@ const FieldControl = <T, Ctx = any>({
                     onChange={onChange}
                 />
                 {endIcon && (
-                    <div className="absolute top-1/2 transform -translate-y-1/2 right-0 mr-2">
+                    <div className="absolute right-0 mr-2 transform -translate-y-1/2 top-1/2">
                         {endIcon}
                     </div>
                 )}
             </div>
-            
 
-            {meta.error && visibleError && (
-                <div className="w-full text-xs text-center text-secondary-500 font-semibold">
+            {meta.error && meta.touched && visibleError && (
+                <div className="w-full text-xs font-semibold text-center text-secondary-500">
                     {meta.error}
                 </div>
             )}
