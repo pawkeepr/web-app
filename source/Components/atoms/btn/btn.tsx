@@ -25,7 +25,7 @@ export const button = tv({
             primary: 'bg-primary-500',
             secondary: 'bg-secondary-500 text-gray-500 ',
             confirm: 'bg-confirm-500',
-            neutral: 'bg-gray-500 text-gray-500',
+            neutral: 'bg-gray-500 text-gray-50',
         },
         text: {
             true: 'bg-transparent border-2 border-secondary-500 text-secondary-500 hover:!bg-gray-100',
