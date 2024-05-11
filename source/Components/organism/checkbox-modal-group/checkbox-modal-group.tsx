@@ -29,10 +29,11 @@ export default function CheckboxModal<Ctx>({
     const [checkedValue, setCheckedValue] = useState<string>()
 
     function onChangeCheckbox(name: string) {
-        return setCheckedValue(() => {
+        setCheckedValue(() => {
             setValue(name)
             return name
         })
+        closeModal()
     }
 
     return (
