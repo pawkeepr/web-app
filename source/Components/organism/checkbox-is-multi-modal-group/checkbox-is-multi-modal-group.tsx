@@ -129,45 +129,47 @@ export default function CheckboxIsMultiModal<Ctx>({
                     </div>
                 </>
             )}
-            <Modal onClose={() => closeModal()} open={open}>
-                <div>
+            <Modal onClose={() => closeModal()} open={open} mobilePage={false}>
+                <section className="overflow-hidden">
                     <Label
                         label={label}
                         required={required}
                         id={id}
                         separator=":"
                     />
-                    <ul className="flex flex-col flex-wrap items-center justify-around gap-1 w-80">
-                        {items.map((item, index) => (
-                            <li
-                                className={`flex ${styles['li-option-checkbox']} w-full flex-row items-center mobile:flex-grow justify-center`}
-                                key={`${item.value}-${index}`}
-                            >
-                                <button
-                                    type="button"
-                                    className={option()}
-                                    onClick={() =>
-                                        onChangeCheckbox(item.value as string)
-                                    }
+                    <div className="overflow-x-hidden overflow-y-auto web:h-60">
+                        <ul className="flex flex-col flex-wrap items-center justify-around gap-1 w-80 ">
+                            {items.map((item, index) => (
+                                <li
+                                    className={`flex ${styles['li-option-checkbox']} w-full flex-row items-center mobile:flex-grow justify-center`}
+                                    key={`${item.value}-${index}`}
                                 >
-                                    <span className="flex-1">
-                                        <CheckboxIcon
-                                            id={item.value as string}
-                                            type="checkbox"
-                                            checked={checkedValues.includes(
-                                                item.value as string,
-                                            )}
-                                            {...field}
-                                        />
-                                    </span>
-                                    <strong className="text-center flex-[3] text-xs font-semibold">
-                                        {item.label}
-                                    </strong>
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                                    <button
+                                        type="button"
+                                        className={option()}
+                                        onClick={() =>
+                                            onChangeCheckbox(item.value as string)
+                                        }
+                                    >
+                                        <span className="flex-1">
+                                            <CheckboxIcon
+                                                id={item.value as string}
+                                                type="checkbox"
+                                                checked={checkedValues.includes(
+                                                    item.value as string,
+                                                )}
+                                                {...field}
+                                            />
+                                        </span>
+                                        <strong className="text-center flex-[3] text-xs font-semibold">
+                                            {item.label}
+                                        </strong>
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </section>
             </Modal>
         </>
     )
