@@ -10,7 +10,7 @@ import { specialty_validation, type ActivateAccount } from '~/validations/activa
 import type { StepProps } from './types'
 
 import * as Yup from 'yup'
-import CheckboxModalGroup from '~/Components/organism/checkbox-modal-group'
+import CheckboxIsMultiModalGroup from '~/Components/organism/checkbox-is-multi-modal-group'
 import { pets } from '~/constants/pets'
 
 const options = sub_specialty.map((item) => ({
@@ -34,7 +34,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
 
     return (
         <div className="flex flex-col flex-1 gap-1">
-            <CheckboxModalGroup
+            <CheckboxIsMultiModalGroup
                 ctx={values}
                 label="Tipo de Atendimento"
                 name="types_service"
@@ -71,7 +71,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                 divClassName="mobile:col-span-full col-span-full "
                 required
             />
-            <CheckboxModalGroup
+            <CheckboxIsMultiModalGroup
                 ctx={values}
                 label="Tipo de Animais Atendidos"
                 name="list_service_type"
@@ -108,7 +108,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                 divClassName="mobile:col-span-full col-span-full "
                 required
             />
-            <CheckboxModalGroup
+            <CheckboxIsMultiModalGroup
                 ctx={values}
                 label="Animais que Atende a domicílio"
                 required
@@ -124,13 +124,13 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                 name="specialty"
                 options={options}
             />
-            <FieldControlSelect
+            <CheckboxIsMultiModalGroup
                 ctx={values}
-                isMulti
                 required
                 label="Outras Especialidades"
                 name="list_specialty"
-                options={options}
+                items={options}
+                divClassName="mobile:col-span-full col-span-full"
             />
             <div className="flex items-center justify-center gap-2 mt-1 col-span-full">
                 <BtnNeutral
