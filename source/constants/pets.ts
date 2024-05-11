@@ -80,3 +80,23 @@ export const pets = [
         color: 'rgb(255 200 107);',
     },
 ]
+
+export const Pets = {
+    dog: 'Cachorro',
+    cat: 'Gato',
+    bird: 'Pássaro',
+    fish: 'Peixe',
+    rodent: 'Roedor',
+    reptile: 'Réptil',
+    equine: 'Equino',
+    bovine: 'Bovino',
+    goat: 'Caprino',
+    sheep: 'Ovino',
+    swine: 'Suíno',
+    gecko: 'Lagartixa',
+    arachnid: 'Aranha',
+    insect: 'Inseto',
+    amphibian: 'Anfíbio',
+    primate: 'Primata',
+} as const
+export type KeysPets = keyof typeof Pets
