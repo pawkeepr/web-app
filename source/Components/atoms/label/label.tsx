@@ -15,6 +15,7 @@ type LabelProps = {
     name?: string
     label?: string
     separator?: string
+    endChildren?: boolean
 } & LabelHTMLAttributes<HTMLLabelElement>
 
 const Label = ({
@@ -23,6 +24,7 @@ const Label = ({
     required,
     separator = '',
     className,
+    endChildren = false,
     children,
     ...props
 }: LabelProps) => {
@@ -34,9 +36,10 @@ const Label = ({
             className={labelStyled({ className })}
             data-testid={`label-${id}`}
         >
-            {!!children && children}
+            {!!children && !endChildren && children}
             {label.trim() ? label + separator : ''}
-            {required && <abbr className="text-secondary-500 font-bold">*</abbr>}
+            {!!children && endChildren && children}
+            {required && <abbr className="font-bold text-secondary-500">*</abbr>}
         </label>
     )
 }
