@@ -1,6 +1,6 @@
 import { IoCloseOutline } from 'react-icons/io5'
 import { withFor } from '~/utils/for-control-statements'
-import type { Item } from './checkbox-modal-group'
+import type { Item } from './checkbox-is-multi-modal-group'
 
 type ItemCheckboxProps = {
     item?: string
@@ -15,7 +15,7 @@ function ItemCheckbox(props: ItemCheckboxProps) {
     return (
         <li
             key={item}
-            className="flex items-center justify-center h-8 px-2 py-1 text-xs text-gray-500 rounded-full bg-secondary-300 "
+            className="flex items-center justify-center h-6 px-2 py-1 text-xs text-gray-500 rounded-full bg-secondary-300 "
         >
             {options.find((option) => option.value === item)?.label}
             <button

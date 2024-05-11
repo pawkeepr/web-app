@@ -1,5 +1,5 @@
 import { useField } from 'formik'
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import Modal from '~/Components/organism/modal'
 
 import { tv } from 'tailwind-variants'
@@ -56,7 +56,7 @@ export default function CheckboxModal<Ctx>({
     const [field, _meta, helpers] = useField(name)
     const { closeModal, open, showModal } = useModal()
     const { setValue } = helpers
-
+    const idLabel = useId()
     const [checkedValues, setCheckedValues] = useState<string[]>([])
 
     function addItem(name: string) {
@@ -89,8 +89,16 @@ export default function CheckboxModal<Ctx>({
                             outline
                             type="button"
                             onClick={showModal}
-                            label={label}
-                        />
+                            className="h-8"
+                            id={idLabel}
+                        >
+                            <Label
+                                className="hover:cursor-pointer"
+                                label={label}
+                                required={required}
+                                htmlFor={idLabel}
+                            />
+                        </BtnNeutral>
                         {/* Badge da contagem dos checkboxes selecionados */}
                         {
                             <span className="flex items-center justify-center w-8 h-8 px-2 py-1 ml-2 text-xs text-white rounded-full bg-primary-500">
@@ -99,7 +107,7 @@ export default function CheckboxModal<Ctx>({
                         }
                         {/* Badge dos items dos checkboxes selecionados */}
                     </div>
-                    <div className="h-10 mt-1">
+                    <div className="h-6">
                         {
                             <ul className="flex gap-1">
                                 <ItemCheckbox
