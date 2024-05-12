@@ -1,4 +1,5 @@
 export const sub_specialty = [
+    { label: 'Clinica Geral', value: 'general_clinic' },
     {
         label: 'Anestesiologia e controle da dor',
         value: 'anesthesiology_and_pain_control',
@@ -22,7 +23,6 @@ export const sub_specialty = [
     { label: 'Ortopedia', value: 'orthopedics' },
     { label: 'Pneumologia', value: 'pneumology' },
     { label: 'Reprodução e Neonatologia', value: 'reproduction_and_neonatology' },
-    { label: 'Clinica Geral', value: 'general_clinic' },
 ]
 
 export const Specialty = {
