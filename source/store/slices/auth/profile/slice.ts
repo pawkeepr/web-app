@@ -26,10 +26,9 @@ const profileSlice = createSlice({
         [ADD_NEW]: (state) => {
             state.isLoading = LOADING.PENDING
         },
-        [ADD_SUCCESS]: (state, action) => {
+        [ADD_SUCCESS]: (state) => {
             state.error = null
             state.isLoading = LOADING.SUCCESS
-            state.user = action.payload.data
         },
         [ADD_FAIL]: (state, action) => {
             state.error = action.payload
