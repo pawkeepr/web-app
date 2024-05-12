@@ -2,7 +2,7 @@ import cn from 'classnames'
 import { useField } from 'formik'
 import { useEffect } from 'react'
 import { tv } from 'tailwind-variants'
-import SwitchV2 from '~/Components/atoms/switch-v2'
+import Switch from '~/Components/atoms/switch'
 import type { ObjPaths } from '~/types/helpers'
 import { ModeInput } from '../field-control/field-control'
 
@@ -57,7 +57,7 @@ const ControlToggle = <Ctx,>({
     const hasTitle = mode === ModeInput.readonly
     return (
         <div className={divSwitch({ className: divClassName })}>
-            <div className="flex justify-between items-center gap-2 mb-2">
+            <div className="flex items-center justify-between gap-2 mb-2">
                 <span className="font-semibold text-gray-600">{label}</span>
                 <div className="flex items-center gap-2">
                     <span
@@ -67,13 +67,11 @@ const ControlToggle = <Ctx,>({
                     >
                         Não
                     </span>
-                    <SwitchV2
+                    <Switch
                         onChange={() => toggleStatus()}
                         checked={field.value}
-                        className="group inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition data-[checked]:bg-primary-500"
-                    >
-                        <span className="size-4 translate-x-1 rounded-full bg-white transition group-data-[checked]:translate-x-6" />
-                    </SwitchV2>
+                        size="md"
+                    />
                     <span
                         className={cn('text-gray-400', {
                             hidden: !legend,
