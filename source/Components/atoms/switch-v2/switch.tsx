@@ -1,7 +1,7 @@
 import { Switch } from '@headlessui/react'
-import { ComponentProps, useState } from 'react'
+import { useState, type ComponentProps } from 'react'
 
-import { VariantProps, tv } from 'tailwind-variants'
+import { tv, type VariantProps } from 'tailwind-variants'
 
 const switchStyled = tv({
     base: `
@@ -35,13 +35,20 @@ const circleStyled = tv({
 })
 
 type SwitchProps = {
-    onChange?: (checked: boolean) => void
+    onChange: (checked: boolean) => void
+    checked: boolean
     label?: string
 } & Omit<ComponentProps<'input'>, 'onChange'> &
     VariantProps<typeof switchStyled>
 
-const ControlSwitch = ({ className, children, onChange, ...rest }: SwitchProps) => {
-    const [enabled, setEnabled] = useState<boolean>(false)
+const ControlSwitch = ({
+    className,
+    checked = false,
+    children,
+    onChange,
+    ...rest
+}: SwitchProps) => {
+    const [enabled, setEnabled] = useState<boolean>(checked)
 
     const handleChange = () => {
         setEnabled((state) => {
@@ -53,11 +60,14 @@ const ControlSwitch = ({ className, children, onChange, ...rest }: SwitchProps) 
     return (
         <div className="w-full flex justify-center items-center gap-2">
             <Switch
+                className={switchStyled({ className, enabled })}
                 checked={enabled}
                 onChange={handleChange}
-                className={switchStyled({ className, enabled })}
             >
-                <span aria-hidden="true" className={circleStyled({ enabled })} />
+                <span
+                    aria-hidden="true"
+                    className={circleStyled({ enabled, className })}
+                />
             </Switch>
             {children}
         </div>
