@@ -1,4 +1,4 @@
-import AuthLayout from '../../_layouts/auth/auth_layout'
+import AuthLayout from '../../../_layouts/auth/auth_layout'
 
 import { useEffect, useState } from 'react'
 
@@ -23,7 +23,7 @@ import { BtnLink } from '~/Components/atoms/btn'
 
 import { layoutModeTypes } from '~/constants/layout'
 import type { ActivateAccountVeterinary } from '~/types/activate-account-veterinary'
-import { TypeProfile, type Location } from '~/types/profile'
+import { TypeProfile } from '~/types/profile'
 import StepActivationAddress from './components/steps-activation/step-address'
 import StepActivationFinally from './components/steps-activation/step-finally'
 import StepActivationPerson from './components/steps-activation/step-person'
@@ -31,7 +31,7 @@ import StepActivationSchedule from './components/steps-activation/step-schedule'
 import StepActivationSpecialty from './components/steps-activation/step-specialty'
 import type { StepProps } from './components/steps-activation/types'
 
-const initialValues = (email: string): ActivateAccount => ({
+export const makeInitialValues = (email: string): ActivateAccount => ({
     email,
     contact: {
         email,
@@ -192,7 +192,7 @@ const ActivationAccount = () => {
             <Formik
                 enableReinitialize
                 validationSchema={validate}
-                initialValues={initialValues(email)}
+                initialValues={makeInitialValues(email)}
                 onSubmit={onSubmit}
                 initialErrors={{}}
             >
