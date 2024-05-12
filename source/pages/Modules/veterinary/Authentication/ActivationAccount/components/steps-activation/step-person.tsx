@@ -7,7 +7,7 @@ import FieldControl from '~/Components/molecules/field-control'
 import validatePerson from '~/validations/person'
 
 import { FaWhatsapp } from 'react-icons/fa'
-import ControlSwitch from '~/Components/atoms/switch-v2/switch'
+import SwitchControl from '~/Components/atoms/switch-control/switch'
 import FieldCrmv from '~/Components/molecules/field-crmv'
 import FieldDocument from '~/Components/molecules/field-document'
 import FieldPhone from '~/Components/molecules/field-phone'
@@ -98,12 +98,12 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                 </div>
             </div>
             <div className="flex items-center justify-center flex-grow w-full">
-                <ControlSwitch onChange={copyPhoneToWhatsApp}>
+                <SwitchControl onChange={copyPhoneToWhatsApp} size="sm">
                     <p className="flex flex-row items-center justify-center gap-1 text-xs font-semibold">
                         Clique aqui para duplicar o telefone no campo ao lado:
                         <FaWhatsapp className="text-xl text-green-600" />
                     </p>
-                </ControlSwitch>
+                </SwitchControl>
             </div>
 
             <div className="flex items-center justify-end w-full mt-1">
