@@ -3,18 +3,23 @@ import { useState, type ComponentProps } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
 import { ModeInput } from '~/Components/molecules/field-control/field-control'
 
-const controlSwitch = tv({
+const toggle = tv({
     base: `
-    relative inline-flex h-6 w-11 shrink-0 
-    cursor-pointer rounded-full border-2 border-transparent 
-    transition-colors duration-200 ease-in-out focus:outline-none 
-    focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75
+    group inline-flex h-6 w-11 
+    items-center rounded-full 
+    bg-gray-200 transition 
     `,
     variants: {
         color: {
             primary: 'bg-primary-500',
             secondary: 'bg-secondary-500',
             null: 'bg-gray-400',
+        },
+        size: {
+            sm: 'h-6 w-12',
+            md: 'h-8 w-14',
+            lg: 'h-10 w-16',
+            xl: 'h-12 w-20',
         },
         checked: {
             true: 'bg-opacity-100',
@@ -28,36 +33,62 @@ const controlSwitch = tv({
     defaultVariants: {
         color: 'primary',
         mode: ModeInput.editable,
+        size: 'md',
     },
 })
 
-const pointerSwitch = tv({
+const pointer = tv({
     base: `
-        pointer-events-none inline-block size-4
-        transform rounded-full 
-        bg-white shadow-lg ring-0 transition duration-200 ease-in-out
+        translate-x-1 rounded-full bg-white transition 
     `,
     variants: {
-        translateClass: {
-            true: 'translate-x-9',
-            false: 'translate-x-0',
-            null: 'translate-x-[50%]',
+        size: {
+            sm: 'size-4',
+            md: 'size-6',
+            lg: 'size-8',
+            xl: 'size-10',
         },
+        translateClass: {
+            true: 'translate-x-7',
+            false: 'translate-x-1',
+        },
+    },
+    compoundVariants: [
+        {
+            size: 'sm',
+            translateClass: true,
+            className: 'translate-x-7',
+        },
+        {
+            size: 'lg',
+            translateClass: true,
+            className: 'translate-x-7',
+        },
+        {
+            size: 'xl',
+            translateClass: true,
+            className: 'translate-x-9',
+        },
+    ],
+    defaultVariants: {
+        size: 'md',
     },
 })
 
-export type SwitchProps = {
+export type SwitchToggleProps = {
     onChange?: (enabled: boolean) => void
-} & ComponentProps<'input'> &
-    VariantProps<typeof controlSwitch> &
-    VariantProps<typeof pointerSwitch>
+    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+} & Omit<ComponentProps<'input'>, 'onChange' | 'size'> &
+    VariantProps<typeof toggle> &
+    VariantProps<typeof pointer>
 
-const ControlSwitch = ({
+const SwitchToggle = ({
     className,
     mode = ModeInput.editable,
+    size = 'md',
     color,
     onChange,
-}: SwitchProps) => {
+}: SwitchToggleProps) => {
     const [enabled, setEnabled] = useState<boolean>(true)
 
     const handleChange = () => {
@@ -72,19 +103,21 @@ const ControlSwitch = ({
             disabled={mode === ModeInput.readonly}
             onClick={() => handleChange()}
             checked={enabled}
-            className={controlSwitch({
+            className={toggle({
                 mode,
                 checked: enabled,
                 color: color,
                 className,
+                size,
             })}
         >
             <span className="sr-only">Use setting</span>
             {/* Adjusted the translate class to center the circle */}
             <span
                 aria-hidden="true"
-                className={pointerSwitch({
+                className={pointer({
                     translateClass: enabled,
+                    size,
                 })}
             />
             {/* Text inside the switch */}
@@ -92,4 +125,4 @@ const ControlSwitch = ({
     )
 }
 
-export default ControlSwitch
+export default SwitchToggle
