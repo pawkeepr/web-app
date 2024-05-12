@@ -1,8 +1,8 @@
-import { Switch } from '@headlessui/react'
 import cn from 'classnames'
 import { useField } from 'formik'
 import { useEffect } from 'react'
 import { tv } from 'tailwind-variants'
+import SwitchV2 from '~/Components/atoms/switch-v2'
 import type { ObjPaths } from '~/types/helpers'
 import { ModeInput } from '../field-control/field-control'
 
@@ -67,13 +67,13 @@ const ControlToggle = <Ctx,>({
                     >
                         Não
                     </span>
-                    <Switch
-                        onClick={() => toggleStatus()}
+                    <SwitchV2
+                        onChange={() => toggleStatus()}
                         checked={field.value}
                         className="group inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition data-[checked]:bg-primary-500"
                     >
                         <span className="size-4 translate-x-1 rounded-full bg-white transition group-data-[checked]:translate-x-6" />
-                    </Switch>
+                    </SwitchV2>
                     <span
                         className={cn('text-gray-400', {
                             hidden: !legend,
