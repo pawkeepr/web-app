@@ -34,7 +34,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
     }
 
     return (
-        <div className="flex flex-row flex-wrap w-full">
+        <section className="flex flex-row flex-wrap w-full">
             <FieldControl
                 ctx={values}
                 initialFocus
@@ -115,7 +115,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                     label="Próximo"
                 />
             </div>
-        </div>
+        </section>
     )
 }
 

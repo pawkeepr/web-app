@@ -60,7 +60,7 @@ const StepFinally = ({ prevStep }: StepProps) => {
     }
 
     return (
-        <div>
+        <section>
             <h4 className="my-2 font-sans text-base font-semibold text-center text-primary-600">
                 Informações Básicas
             </h4>
@@ -163,7 +163,7 @@ const StepFinally = ({ prevStep }: StepProps) => {
                     disabled={!isValid}
                 />
             </div>
-        </div>
+        </section>
     )
 }
 

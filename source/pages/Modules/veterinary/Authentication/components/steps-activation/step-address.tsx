@@ -65,8 +65,8 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
     useNextStep(nextStep, requiredValid, 5000)
 
     return (
-        <div className="flex flex-row flex-wrap w-full">
-            <div className="flex-grow w-1/3 justify-center flex flex-col items-center">
+        <section className="flex flex-row flex-wrap w-full">
+            <div className="flex flex-col items-center justify-center flex-grow w-1/3">
                 <FieldMasked
                     ctx={values}
                     label="CEP"
@@ -76,7 +76,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
                     required
                 />
                 {cpfNotFound && (
-                    <legend className="w-full text-xs text-gray-400 text-center">
+                    <legend className="w-full text-xs text-center text-gray-400">
                         CEP não encontrado, preencha manualmente os campos.
                     </legend>
                 )}
@@ -146,7 +146,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
                 }
             />
 
-            <div className="mt-1 gap-2 flex justify-center items-center w-full">
+            <div className="flex items-center justify-center w-full gap-2 mt-1">
                 <BtnNeutral
                     outline
                     className="border-none"
@@ -159,7 +159,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
                     label="Próximo"
                 />
             </div>
-        </div>
+        </section>
     )
 }
 

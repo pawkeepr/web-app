@@ -22,7 +22,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
     }, [values])
 
     return (
-        <div className="flex flex-col flex-1 gap-1">
+        <section className="flex flex-col flex-1 gap-1">
             <CheckboxModalGroup
                 ctx={values}
                 label="Especialidade Principal"
@@ -73,7 +73,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                     label="Próximo"
                 />
             </div>
-        </div>
+        </section>
     )
 }
 
