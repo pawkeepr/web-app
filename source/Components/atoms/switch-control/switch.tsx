@@ -1,0 +1,15 @@
+import { useId } from 'react'
+import Switch, { type SwitchToggleProps } from '../switch'
+
+const ControlSwitch = ({ children, ...props }: SwitchToggleProps) => {
+    const createId = useId()
+    const id = props?.id || createId
+    return (
+        <div className="flex items-center justify-center w-full gap-2">
+            <Switch {...props} id={id} />
+            <label htmlFor={id}>{children}</label>
+        </div>
+    )
+}
+
+export default ControlSwitch
