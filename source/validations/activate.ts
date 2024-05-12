@@ -16,7 +16,7 @@ export type UserInformation = {
 }
 
 export const specialty_validation = {
-    types_animals: Yup.array().of(Yup.string()),
+    types_animals: Yup.array().of(Yup.string()).optional(),
     specialty: Yup.string().required('O campo especialidade é obrigatório'),
     list_service_type: Yup.array()
         .of(Yup.string())
@@ -25,10 +25,7 @@ export const specialty_validation = {
     types_service: Yup.array()
         .min(1, 'Selecione pelo menos um tipo de serviço de atendimento')
         .required(),
-    list_specialty: Yup.array()
-        .min(1, 'Selecione pelo menos uma especialidade')
-        .of(Yup.string())
-        .required(),
+    list_specialty: Yup.array().of(Yup.string()).optional(),
 }
 
 const validate = Yup.object().shape({
