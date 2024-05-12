@@ -1,8 +1,3 @@
-export type Specialty = {
-    type: string
-    name_specialty: string
-}
-
 export type Contact = {
     email: string | null
     phone: string | null
@@ -27,7 +22,7 @@ export type Location = {
 
 export type SpecialtyInformation = {
     specialty: string
-    list_specialty: Specialty[]
+    list_specialty: string[]
     list_service_type: string[]
 }
 
