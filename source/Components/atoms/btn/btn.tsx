@@ -106,7 +106,7 @@ const Btn = ({
     )
 }
 
-const BtnCompose = withLoading(withControl(Btn))
+export const BtnCompose = withLoading(withControl(Btn)) as typeof Btn
 
 const BtnPrimary = ({ label = '', ...props }: BtnProps) => {
     return <BtnCompose color="primary" label={label} {...props} />
