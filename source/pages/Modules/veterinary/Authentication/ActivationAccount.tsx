@@ -27,6 +27,7 @@ import { TypeProfile, type Location } from '~/types/profile'
 import StepActivationAddress from './components/steps-activation/step-address'
 import StepActivationFinally from './components/steps-activation/step-finally'
 import StepActivationPerson from './components/steps-activation/step-person'
+import StepActivationSchedule from './components/steps-activation/step-schedule'
 import StepActivationSpecialty from './components/steps-activation/step-specialty'
 import type { StepProps } from './components/steps-activation/types'
 
@@ -45,10 +46,7 @@ const initialValues = (email: string): ActivateAccount => ({
     list_specialty: [],
     types_service: [],
     types_animals: [],
-    specialty: {
-        value: '',
-        label: '',
-    },
+    specialty: '',
     location: {
         country: 'BR',
         street: '',
@@ -72,10 +70,14 @@ const Tabs = [
     },
     {
         id: '3',
-        component: (props: StepProps) => <StepActivationAddress {...props} />,
+        component: (props: StepProps) => <StepActivationSchedule {...props} />,
     },
     {
         id: '4',
+        component: (props: StepProps) => <StepActivationAddress {...props} />,
+    },
+    {
+        id: '5',
         component: (props: StepProps) => <StepActivationFinally {...props} />,
     },
 ]
@@ -113,16 +115,15 @@ const ActivationAccount = () => {
             veterinary_information: {
                 cpf_cnpj: values?.cpf_cnpj,
                 crmv: values?.crmv,
-                list_service_type: values?.list_service_type,
-                specialty: values?.specialty.value,
-                list_specialty: list_specialty.map((item) => ({
-                    name_specialty: item.label,
-                    type: item.value,
-                })),
+                list_service_type: values?.list_service_type as string[],
+                specialty: values?.specialty,
+                list_specialty: list_specialty as string[],
             },
         }
 
-        dispatch(addNew(profile))
+        await new Promise((resolve) => {
+            resolve(dispatch(addNew(profile)))
+        })
     }
 
     useEffect(() => {
@@ -170,9 +171,9 @@ const ActivationAccount = () => {
             >
                 <ArrowLeftCircleIcon />
             </BtnLink>
-            <div className="flex flex-col items-center justify-center relative ">
-                <div className="text-center font-sans text-gray-600 gap-1">
-                    <h5 className="text-secondary-500 uppercase font-bold font-sans p-2">
+            <div className="relative flex flex-col items-center justify-center ">
+                <div className="gap-1 font-sans text-center text-gray-600">
+                    <h5 className="p-2 font-sans font-bold uppercase text-secondary-500">
                         Olá, Seja Bem-Vindo(a)!
                     </h5>
                     <p>
