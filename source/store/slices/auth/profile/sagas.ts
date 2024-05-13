@@ -40,13 +40,18 @@ function* onGetProfile({
     payload: { has_profile, type_profile },
 }: PayloadAction<AttributesProfile>) {
     const link =
-        type_profile === '1' ? '/veterinary/activation' : '/tutor/activation'
+        type_profile === AttributeTypeProfile.VETERINARY
+            ? '/veterinary/activation'
+            : '/tutor/activation'
 
     try {
         if (has_profile === 'no') {
             yield call([Router, Router.push], link)
         } else {
-            const getVet = type_profile === '1' ? getVetProfile : getTutorProfile
+            const getVet =
+                type_profile === AttributeTypeProfile.VETERINARY
+                    ? getVetProfile
+                    : getTutorProfile
             const { data } = yield call(getVet)
             yield setCookie(cookies.profile.name, data)
             yield put(editProfileSuccess(data))
