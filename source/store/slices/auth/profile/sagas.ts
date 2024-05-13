@@ -9,6 +9,7 @@ import {
     addSuccess,
     editProfileError,
     editProfileSuccess,
+    getProfileSession,
 } from './actions'
 import {
     ACTION_ADD_NEW,
@@ -26,7 +27,10 @@ import {
     updateProfileVet,
 } from '~/services/helpers'
 import { updateHasProfile } from '~/services/helpers/auth'
-import type { AttributesProfile } from '~/services/helpers/types'
+import {
+    AttributeTypeProfile,
+    type AttributesProfile,
+} from '~/services/helpers/types'
 import { errorToast, successToast } from '~/store/helpers/toast'
 import type { IProfile } from '~/types/profile'
 import { setCookie } from '~/utils/cookies-utils'
@@ -62,10 +66,18 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
         const path = window.location.pathname
         const isVeterinary = /veterinary/.test(path)
         const createProfile = isVeterinary ? createProfileVet : createProfileTutor
+        const type_profile = isVeterinary
+            ? AttributeTypeProfile.VETERINARY
+            : AttributeTypeProfile.TUTOR
         yield call(createProfile, profile)
         yield call(updateHasProfile, 'yes')
         yield put(addSuccess())
-
+        yield put(
+            getProfileSession({
+                type_profile,
+                has_profile: 'yes',
+            }),
+        )
         yield delay(1000)
         successToast('Perfil ativado com sucesso!')
         yield call([Router, Router.push], '/dashboard')
@@ -109,9 +121,9 @@ export function* onUpdateProfile({ payload: user }: PayloadAction<IProfile>) {
         yield put(editProfileSuccess(data))
         successToast('Perfil atualizado com sucesso!')
     } catch (error) {
-        console.log(error)
+        console.error('🚀 ~ function*onUpdateProfile ~ line 121 ~ error:', error)
         errorToast('Erro ao atualizar perfil!')
-        yield put(editProfileError((error as any).message))
+        yield put(editProfileError())
     }
 }
 
