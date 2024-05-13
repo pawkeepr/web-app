@@ -1,3 +1,5 @@
+import type { AttributeTypeProfile } from '~/services/helpers/types'
+
 export type Contact = {
     email: string | null
     phone: string | null
@@ -60,7 +62,7 @@ export type IProfile = {
     id?: string
     veterinary_information?: IVeterinaryInformation
     user_information: ProfileUserInformation
-    type_profile?: TypeProfile
+    type_profile?: AttributeTypeProfile
 }
 
 export type DTOProfile = ProfileUserInformation & {

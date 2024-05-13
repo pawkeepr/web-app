@@ -37,8 +37,16 @@ export interface UserData {
     signInUserSession: SignInUserSession
 }
 
+export const AttributeTypeProfile = {
+    VETERINARY: '1',
+    TUTOR: '2',
+    NONE: null,
+} as const
+export type AttributeTypeProfile =
+    (typeof AttributeTypeProfile)[keyof typeof AttributeTypeProfile]
+
 export interface AttributesProfile {
-    type_profile: '1' | '2'
+    type_profile: AttributeTypeProfile
     has_profile: 'yes' | 'no'
 }
 // Example usage:
