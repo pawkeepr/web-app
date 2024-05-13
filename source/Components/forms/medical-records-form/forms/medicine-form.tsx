@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
-import ControlSwitchDiv from '~/Components/molecules/control-switch-div'
+import ControlToggle3States from '~/Components/molecules/control-toggle-3-states'
 import FieldControl from '~/Components/molecules/field-control'
 import FieldNumber from '~/Components/molecules/field-number'
 import FieldTextArea from '~/Components/molecules/field-text-area'
@@ -73,7 +73,7 @@ const HospitalizationForm = ({
                         minDate={values?.date_init}
                         name="date_end"
                     />
-                    <ControlSwitchDiv
+                    <ControlToggle3States
                         ctx={values}
                         name="continuous_use"
                         label="Uso Contínuo"
@@ -87,7 +87,7 @@ const HospitalizationForm = ({
                         divClassName="col-span-full"
                     />
 
-                    <div className="flex flex-1 justify-end col-span-full">
+                    <div className="flex justify-end flex-1 col-span-full">
                         <BtnCancel
                             className="flex-1"
                             label="Cancelar"

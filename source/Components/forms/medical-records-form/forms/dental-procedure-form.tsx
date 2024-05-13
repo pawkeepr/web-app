@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
-import ControlSwitch from '~/Components/molecules/control-switch-div/switch'
+import ControlToggle3States from '~/Components/molecules/control-toggle-3-states'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import RadioGroup from '~/Components/molecules/radio-group'
 import type { DentalProcedure } from '~/types/medical-records'
@@ -61,19 +61,19 @@ const DentalProcedureForm = ({
                         ]}
                     />
 
-                    <ControlSwitch
+                    <ControlToggle3States
                         ctx={values}
                         name="follow_up_required"
                         label="Retorno necessário?"
                     />
 
-                    <ControlSwitch
+                    <ControlToggle3States
                         ctx={values}
                         name="anesthesia_required"
                         label="Anestesia necessária?"
                     />
 
-                    <ControlSwitch
+                    <ControlToggle3States
                         ctx={values}
                         name="need_dental_cleaning"
                         label="Necessita de limpeza dentária?"
@@ -85,7 +85,7 @@ const DentalProcedureForm = ({
                         name="notes"
                         divClassName="col-span-full"
                     />
-                    <div className="flex flex-1 justify-end col-span-full">
+                    <div className="flex justify-end flex-1 col-span-full">
                         <BtnCancel
                             className="flex-1"
                             label="Cancelar"

@@ -1,7 +1,7 @@
 import { Switch } from '@headlessui/react'
 import { useField } from 'formik'
 import { useState } from 'react'
-import ControlSwitch from '~/Components/molecules/control-switch-div/switch'
+import ControlToggle3States from '~/Components/molecules/control-toggle-3-states'
 
 type AnswerProps = {
     question: string
@@ -46,7 +46,7 @@ const AnswerSwitch = ({
     }
 
     return (
-        <ControlSwitch name={name} label={title}>
+        <ControlToggle3States name={name} label={title}>
             <div className="gap-2">
                 {answers.map((answer, index) => (
                     <div
@@ -59,7 +59,7 @@ const AnswerSwitch = ({
                             </strong>
                             {answer.question}
                         </h6>
-                        <div className="flex flex-row gap-1 justify-center items-center">
+                        <div className="flex flex-row items-center justify-center gap-1">
                             <span className="text-xs font-semibold text-gray-500">
                                 Não
                             </span>
@@ -94,7 +94,7 @@ const AnswerSwitch = ({
                     </div>
                 ))}
             </div>
-        </ControlSwitch>
+        </ControlToggle3States>
     )
 }
 

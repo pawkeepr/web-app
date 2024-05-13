@@ -25,7 +25,6 @@ const divSwitch = tv({
 })
 
 const ControlToggle = <Ctx,>({
-    className,
     children,
     label,
     name,

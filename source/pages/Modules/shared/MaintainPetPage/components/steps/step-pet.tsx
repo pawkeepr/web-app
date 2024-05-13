@@ -4,7 +4,7 @@ import { BtnPrimary } from '~/Components/atoms/btn'
 
 import { useMemo } from 'react'
 import * as yup from 'yup'
-import ControlSwitch from '~/Components/molecules/control-switch-div/switch'
+import ControlToggle3States from '~/Components/molecules/control-toggle-3-states'
 import FieldControl from '~/Components/molecules/field-control'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import FieldMasked from '~/Components/molecules/field-masked'
@@ -79,9 +79,9 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     }, [values])
 
     return (
-        <div className="flex relative flex-col card-body shadow-lg mobile:p-0">
+        <div className="relative flex flex-col shadow-lg card-body mobile:p-0">
             <div className="p-1 m-2 mb-4">
-                <h4 className="text-center font-sans font-semibold text-base capitalize">
+                <h4 className="font-sans text-base font-semibold text-center capitalize">
                     Informações do PET
                     <br />
                     <span className="text-sm font-bold text-secondary-500">
@@ -144,8 +144,8 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     mask="_____"
                     placeholder="Digite o número do registro (opcional)"
                 />
-                <div className="col-span-full grid grid-cols-2 gap-3">
-                    <ControlSwitch
+                <div className="grid grid-cols-2 gap-3 col-span-full">
+                    <ControlToggle3States
                         mode={mode}
                         ctx={values}
                         name="castrated"
@@ -153,21 +153,21 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                         divClassName="col-span-1 mobile:col-span-full"
                     />
 
-                    <ControlSwitch
+                    <ControlToggle3States
                         mode={mode}
                         ctx={values}
                         name="organ_donor"
                         label="Doador de órgãos?"
                         divClassName="col-span-1 mobile:col-span-full"
                     />
-                    <ControlSwitch
+                    <ControlToggle3States
                         mode={mode}
                         ctx={values}
                         name="blood_donator"
                         label="Doador de sangue?"
                         divClassName="col-span-1 mobile:col-span-full"
                     />
-                    <ControlSwitch
+                    <ControlToggle3States
                         mode={mode}
                         ctx={values}
                         name="pedigree"
@@ -176,7 +176,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     />
                 </div>
             </div>
-            <div className="flex align-items-center justify-center gap-3 mt-4">
+            <div className="flex justify-center gap-3 mt-4 align-items-center">
                 <BtnPrimary
                     condition={mode === 'editable'}
                     label="Próximo"

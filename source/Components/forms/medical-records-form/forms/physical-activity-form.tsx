@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
-import ControlSwitchDiv from '~/Components/molecules/control-switch-div'
+import ControlToggle3States from '~/Components/molecules/control-toggle-3-states'
 import FieldControl from '~/Components/molecules/field-control'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import type { PhysicalActivity } from '~/types/medical-records'
@@ -55,7 +55,7 @@ const PhysicalActivityForm = ({
                         minDate={values?.date_init}
                     />
 
-                    <ControlSwitchDiv
+                    <ControlToggle3States
                         ctx={values}
                         name="continuously"
                         label="Continuo"
@@ -69,7 +69,7 @@ const PhysicalActivityForm = ({
                         divClassName="col-span-full"
                     />
 
-                    <div className="flex flex-1 justify-end col-span-full">
+                    <div className="flex justify-end flex-1 col-span-full">
                         <BtnCancel
                             className="flex-1"
                             label="Cancelar"

@@ -4,7 +4,7 @@ import type { IconType } from 'react-icons'
 import { FaArrowLeft, FaArrowRight, FaRunning } from 'react-icons/fa'
 import { GiBrain, GiKidneys, GiLungs, GiStomach } from 'react-icons/gi'
 import * as Yup from 'yup'
-import ControlSwitchDiv from '~/Components/molecules/control-switch-div'
+import ControlToggle3States from '~/Components/molecules/control-toggle-3-states'
 import type { OptionSelect } from '~/Components/molecules/field-control'
 import OptionsMenu from '~/Components/molecules/options-menu'
 import { makeTitle } from '~/Components/molecules/options-menu/options-menu'
@@ -43,32 +43,32 @@ const STEPS: {
     value: KeyOfQuestionTypes
     icon?: IconType
 }[] = [
-        {
-            label: 'Sistema Digestivo',
-            value: 'digestive_sys',
-            icon: GiStomach,
-        },
-        {
-            label: 'Sistema Respiratório',
-            value: 'respiratory_sys',
-            icon: GiLungs,
-        },
-        {
-            label: 'Sistema Urinário',
-            value: 'urinary_sys',
-            icon: GiKidneys,
-        },
-        {
-            label: 'Sistema Nervoso',
-            value: 'nervous_sys',
-            icon: GiBrain,
-        },
-        {
-            value: 'locomotive_sys',
-            label: 'Sistema Locomotor',
-            icon: FaRunning,
-        },
-    ]
+    {
+        label: 'Sistema Digestivo',
+        value: 'digestive_sys',
+        icon: GiStomach,
+    },
+    {
+        label: 'Sistema Respiratório',
+        value: 'respiratory_sys',
+        icon: GiLungs,
+    },
+    {
+        label: 'Sistema Urinário',
+        value: 'urinary_sys',
+        icon: GiKidneys,
+    },
+    {
+        label: 'Sistema Nervoso',
+        value: 'nervous_sys',
+        icon: GiBrain,
+    },
+    {
+        value: 'locomotive_sys',
+        label: 'Sistema Locomotor',
+        icon: FaRunning,
+    },
+]
 
 export const makeOptions = (items: Question[], category: KeyOfQuestionTypes) => {
     const filtered = items.reduce(
@@ -137,10 +137,10 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
 
     return (
         <>
-            <h4 className="font-sans mb-2 text-center font-semibold uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
+            <h4 className="mb-2 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
                 {makeTitle(category.label, false)}
             </h4>
-            <div className="flex  flex-row w-full justify-between flex-wrap mb-4">
+            <div className="flex flex-row flex-wrap justify-between w-full mb-4">
                 {STEPS.map((item) => (
                     <OptionsMenu
                         item={item as any}
@@ -162,13 +162,13 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
-                onSubmit={() => { }}
+                onSubmit={() => {}}
             >
                 {({ values }) => (
                     <section className="flex-col flex flex-1 !min-h-[460px] ">
-                        <div className='flex-[3]'>
+                        <div className="flex-[3]">
                             {options.map((item) => (
-                                <ControlSwitchDiv
+                                <ControlToggle3States
                                     initialValue={null}
                                     ctx={values}
                                     onChange={(e) =>
@@ -179,7 +179,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                                             type_anamnesis: item.type,
                                             options_anamnesis:
                                                 OPTION_BOOLEAN[
-                                                String(e) as OPTION_BOOLEAN
+                                                    String(e) as OPTION_BOOLEAN
                                                 ],
                                         })
                                     }
@@ -188,11 +188,11 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                                 />
                             ))}
                         </div>
-                        <div className="flex w-full h-12 justify-between  ">
+                        <div className="flex justify-between w-full h-12 ">
                             <button
                                 onClick={keyPressLeft}
                                 type="button"
-                                className="btn bg-secondary-500 text-gray-500"
+                                className="text-gray-500 btn bg-secondary-500"
                             >
                                 <FaArrowLeft />
                             </button>
@@ -200,7 +200,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                             <button
                                 onClick={keyPressRight}
                                 type="button"
-                                className="btn bg-secondary-500 text-gray-500"
+                                className="text-gray-500 btn bg-secondary-500"
                             >
                                 <FaArrowRight />
                             </button>
