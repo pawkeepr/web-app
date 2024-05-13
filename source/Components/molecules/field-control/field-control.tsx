@@ -1,10 +1,11 @@
 import type { InputControlProps } from './types'
 
-import { useCallback, useMemo, type ChangeEvent } from 'react'
+import type { ChangeEvent } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
 import Input from '~/Components/atoms/input/input'
 import Label from '~/Components/atoms/label'
 import useFieldSafe from '~/hooks/use-field-safe'
+import { useFieldControlClasses } from './use-field-control-classes'
 
 const fieldControlDiv = tv({
     base: 'w-full  p-1',
@@ -81,22 +82,17 @@ const FieldControl = <T, Ctx = any>({
         inputProps.onChange(e)
     }
 
-    const handleValidation = useCallback(
-        (value: unknown) => {
-            if (validateSync) {
-                return validateSync(value)
-            }
-        },
-        [validateSync],
-    )
-
-    const hasValidation = useMemo(() => {
-        if (validateSync) {
-            return required && handleValidation(inputProps.value)
-        }
-
-        return required && isValid
-    }, [required, isValid, inputProps.value, validateSync])
+    const classes = useFieldControlClasses({
+        validateSync,
+        value: inputProps.value,
+        required,
+        isValid,
+        startIcon,
+        endIcon,
+        mode,
+        className,
+        ...props,
+    })
 
     return (
         <div className={fieldControlDiv({ className: divClassName })}>
@@ -116,17 +112,9 @@ const FieldControl = <T, Ctx = any>({
                     id={id}
                     required={required}
                     data-testid={`input-${id}`}
-                    className={fieldControlInput({
-                        className,
-                        startIcon: !!startIcon,
-                        endIcon: !!endIcon,
-                        mode,
-                        required: required && !hasValidation,
-                        isValid: hasValidation,
-                        ...props,
-                    })}
                     {...inputProps}
                     {...props}
+                    className={classes}
                     onChange={onChange}
                 />
                 {endIcon && (
