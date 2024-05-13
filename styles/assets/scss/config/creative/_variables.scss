@@ -170,15 +170,15 @@ $black: #161616;
 // fusv-disable
 // scss-docs-start gray-colors-map
 $grays: (
-  "100": $gray-100,
-  "200": $gray-200,
-  "300": $gray-300,
-  "400": $gray-400,
-  "500": $gray-500,
-  "600": $gray-600,
-  "700": $gray-700,
-  "800": $gray-800,
-  "900": $gray-900
+    "100": $gray-100,
+    "200": $gray-200,
+    "300": $gray-300,
+    "400": $gray-400,
+    "500": $gray-500,
+    "600": $gray-600,
+    "700": $gray-700,
+    "800": $gray-800,
+    "900": $gray-900
 );
 // scss-docs-end gray-colors-map
 // fusv-enable
@@ -200,21 +200,21 @@ $orange-yellow: #FFC86B;
 
 // scss-docs-start colors-map
 $colors: (
-  "blue": $blue,
-  "indigo": $indigo,
-  "purple": $purple,
-  "pink": $pink,
-  "red": $red,
-  "orange": $orange,
-  "yellow": $yellow,
-  "green": $green,
-  "teal": $teal,
-  "cyan": $cyan,
-  "white": $white,
-  "gray": $gray-600,
-  "gray-dark": $gray-800,
-  "munsell-green": $munsell-green,
-  "orange-yellow": $orange-yellow
+    "blue": $blue,
+    "indigo": $indigo,
+    "purple": $purple,
+    "pink": $pink,
+    "red": $red,
+    "orange": $orange,
+    "yellow": $yellow,
+    "green": $green,
+    "teal": $teal,
+    "cyan": $cyan,
+    "white": $white,
+    "gray": $gray-600,
+    "gray-dark": $gray-800,
+    "munsell-green": $munsell-green,
+    "orange-yellow": $orange-yellow
 );
 // scss-docs-end colors-map
 
@@ -232,15 +232,15 @@ $dark: $black;
 
 // scss-docs-start theme-colors-map
 $theme-colors: (
-  "primary": $primary,
-  "secondary": $secondary,
-  "third": $third,
-  "success": $success,
-  "info": $info,
-  "warning": $warning,
-  "danger": $danger,
-  "light": $light,
-  "dark": $dark
+    "primary": $primary,
+    "secondary": $secondary,
+    "third": $third,
+    "success": $success,
+    "info": $info,
+    "warning": $warning,
+    "danger": $danger,
+    "light": $light,
+    "dark": $dark
 );
 // scss-docs-end theme-colors-map
 
@@ -368,146 +368,146 @@ $orange-yellow-800: shade-color($orange-yellow, 60%);
 $orange-yellow-900: shade-color($orange-yellow, 80%);
 
 $blues: (
-  "blue-100": $blue-100,
-  "blue-200": $blue-200,
-  "blue-300": $blue-300,
-  "blue-400": $blue-400,
-  "blue-500": $blue-500,
-  "blue-600": $blue-600,
-  "blue-700": $blue-700,
-  "blue-800": $blue-800,
-  "blue-900": $blue-900
+    "blue-100": $blue-100,
+    "blue-200": $blue-200,
+    "blue-300": $blue-300,
+    "blue-400": $blue-400,
+    "blue-500": $blue-500,
+    "blue-600": $blue-600,
+    "blue-700": $blue-700,
+    "blue-800": $blue-800,
+    "blue-900": $blue-900
 );
 
 $indigos: (
-  "indigo-100": $indigo-100,
-  "indigo-200": $indigo-200,
-  "indigo-300": $indigo-300,
-  "indigo-400": $indigo-400,
-  "indigo-500": $indigo-500,
-  "indigo-600": $indigo-600,
-  "indigo-700": $indigo-700,
-  "indigo-800": $indigo-800,
-  "indigo-900": $indigo-900
+    "indigo-100": $indigo-100,
+    "indigo-200": $indigo-200,
+    "indigo-300": $indigo-300,
+    "indigo-400": $indigo-400,
+    "indigo-500": $indigo-500,
+    "indigo-600": $indigo-600,
+    "indigo-700": $indigo-700,
+    "indigo-800": $indigo-800,
+    "indigo-900": $indigo-900
 );
 
 $purples: (
-  "purple-100": $purple-200,
-  "purple-200": $purple-100,
-  "purple-300": $purple-300,
-  "purple-400": $purple-400,
-  "purple-500": $purple-500,
-  "purple-600": $purple-600,
-  "purple-700": $purple-700,
-  "purple-800": $purple-800,
-  "purple-900": $purple-900
+    "purple-100": $purple-200,
+    "purple-200": $purple-100,
+    "purple-300": $purple-300,
+    "purple-400": $purple-400,
+    "purple-500": $purple-500,
+    "purple-600": $purple-600,
+    "purple-700": $purple-700,
+    "purple-800": $purple-800,
+    "purple-900": $purple-900
 );
 
 $pinks: (
-  "pink-100": $pink-100,
-  "pink-200": $pink-200,
-  "pink-300": $pink-300,
-  "pink-400": $pink-400,
-  "pink-500": $pink-500,
-  "pink-600": $pink-600,
-  "pink-700": $pink-700,
-  "pink-800": $pink-800,
-  "pink-900": $pink-900
+    "pink-100": $pink-100,
+    "pink-200": $pink-200,
+    "pink-300": $pink-300,
+    "pink-400": $pink-400,
+    "pink-500": $pink-500,
+    "pink-600": $pink-600,
+    "pink-700": $pink-700,
+    "pink-800": $pink-800,
+    "pink-900": $pink-900
 );
 
 $reds: (
-  "red-100": $red-100,
-  "red-200": $red-200,
-  "red-300": $red-300,
-  "red-400": $red-400,
-  "red-500": $red-500,
-  "red-600": $red-600,
-  "red-700": $red-700,
-  "red-800": $red-800,
-  "red-900": $red-900
+    "red-100": $red-100,
+    "red-200": $red-200,
+    "red-300": $red-300,
+    "red-400": $red-400,
+    "red-500": $red-500,
+    "red-600": $red-600,
+    "red-700": $red-700,
+    "red-800": $red-800,
+    "red-900": $red-900
 );
 
 $oranges: (
-  "orange-100": $orange-100,
-  "orange-200": $orange-200,
-  "orange-300": $orange-300,
-  "orange-400": $orange-400,
-  "orange-500": $orange-500,
-  "orange-600": $orange-600,
-  "orange-700": $orange-700,
-  "orange-800": $orange-800,
-  "orange-900": $orange-900
+    "orange-100": $orange-100,
+    "orange-200": $orange-200,
+    "orange-300": $orange-300,
+    "orange-400": $orange-400,
+    "orange-500": $orange-500,
+    "orange-600": $orange-600,
+    "orange-700": $orange-700,
+    "orange-800": $orange-800,
+    "orange-900": $orange-900
 );
 
 $yellows: (
-  "yellow-100": $yellow-100,
-  "yellow-200": $yellow-200,
-  "yellow-300": $yellow-300,
-  "yellow-400": $yellow-400,
-  "yellow-500": $yellow-500,
-  "yellow-600": $yellow-600,
-  "yellow-700": $yellow-700,
-  "yellow-800": $yellow-800,
-  "yellow-900": $yellow-900
+    "yellow-100": $yellow-100,
+    "yellow-200": $yellow-200,
+    "yellow-300": $yellow-300,
+    "yellow-400": $yellow-400,
+    "yellow-500": $yellow-500,
+    "yellow-600": $yellow-600,
+    "yellow-700": $yellow-700,
+    "yellow-800": $yellow-800,
+    "yellow-900": $yellow-900
 );
 
 $greens: (
-  "green-100": $green-100,
-  "green-200": $green-200,
-  "green-300": $green-300,
-  "green-400": $green-400,
-  "green-500": $green-500,
-  "green-600": $green-600,
-  "green-700": $green-700,
-  "green-800": $green-800,
-  "green-900": $green-900
+    "green-100": $green-100,
+    "green-200": $green-200,
+    "green-300": $green-300,
+    "green-400": $green-400,
+    "green-500": $green-500,
+    "green-600": $green-600,
+    "green-700": $green-700,
+    "green-800": $green-800,
+    "green-900": $green-900
 );
 
 $teals: (
-  "teal-100": $teal-100,
-  "teal-200": $teal-200,
-  "teal-300": $teal-300,
-  "teal-400": $teal-400,
-  "teal-500": $teal-500,
-  "teal-600": $teal-600,
-  "teal-700": $teal-700,
-  "teal-800": $teal-800,
-  "teal-900": $teal-900
+    "teal-100": $teal-100,
+    "teal-200": $teal-200,
+    "teal-300": $teal-300,
+    "teal-400": $teal-400,
+    "teal-500": $teal-500,
+    "teal-600": $teal-600,
+    "teal-700": $teal-700,
+    "teal-800": $teal-800,
+    "teal-900": $teal-900
 );
 
 $cyans: (
-  "cyan-100": $cyan-100,
-  "cyan-200": $cyan-200,
-  "cyan-300": $cyan-300,
-  "cyan-400": $cyan-400,
-  "cyan-500": $cyan-500,
-  "cyan-600": $cyan-600,
-  "cyan-700": $cyan-700,
-  "cyan-800": $cyan-800,
-  "cyan-900": $cyan-900
+    "cyan-100": $cyan-100,
+    "cyan-200": $cyan-200,
+    "cyan-300": $cyan-300,
+    "cyan-400": $cyan-400,
+    "cyan-500": $cyan-500,
+    "cyan-600": $cyan-600,
+    "cyan-700": $cyan-700,
+    "cyan-800": $cyan-800,
+    "cyan-900": $cyan-900
 );
 
 $orange-yellow: (
-  "orange-yellow-100": $orange-yellow-100,
-  "orange-yellow-200": $orange-yellow-200,
-  "orange-yellow-300": $orange-yellow-300,
-  "orange-yellow-400": $orange-yellow-400,
-  "orange-yellow-500": $orange-yellow-500,
-  "orange-yellow-600": $orange-yellow-600,
-  "orange-yellow-700": $orange-yellow-700,
-  "orange-yellow-800": $orange-yellow-800,
-  "orange-yellow-900": $orange-yellow-900
+    "orange-yellow-100": $orange-yellow-100,
+    "orange-yellow-200": $orange-yellow-200,
+    "orange-yellow-300": $orange-yellow-300,
+    "orange-yellow-400": $orange-yellow-400,
+    "orange-yellow-500": $orange-yellow-500,
+    "orange-yellow-600": $orange-yellow-600,
+    "orange-yellow-700": $orange-yellow-700,
+    "orange-yellow-800": $orange-yellow-800,
+    "orange-yellow-900": $orange-yellow-900
 );
 
 // fusv-enable
 
 // Characters which are escaped by the escape-svg function
 $escaped-characters: (
-  ("<", "%3c"),
-  (">", "%3e"),
-  ("#", "%23"),
-  ("(", "%28"),
-  (")", "%29"),
+    ("<", "%3c"),
+    (">", "%3e"),
+    ("#", "%23"),
+    ("(", "%28"),
+    (")", "%29"),
 );
 
 // Options
@@ -548,12 +548,12 @@ $gradient: linear-gradient(180deg, rgba($white, .15), rgba($white, 0));
 // scss-docs-start spacer-variables-maps
 $spacer: 1rem;
 $spacers: (
-  0: 0,
-  1: $spacer * .25,
-  2: $spacer * .5,
-  3: $spacer,
-  4: $spacer * 1.5,
-  5: $spacer * 3,
+    0: 0,
+    1: $spacer * .25,
+    2: $spacer * .5,
+    3: $spacer,
+    4: $spacer * 1.5,
+    5: $spacer * 3,
 );
 
 $negative-spacers: if($enable-negative-margins, negativify-map($spacers), null);
@@ -565,9 +565,9 @@ $negative-spacers: if($enable-negative-margins, negativify-map($spacers), null);
 
 // scss-docs-start position-map
 $position-values: (
-  0: 0,
-  50: 50%,
-  100: 100%
+    0: 0,
+    50: 50%,
+    100: 100%
 );
 // scss-docs-end position-map
 
@@ -583,10 +583,10 @@ $body-text-align: null;
 //
 // Style anchor elements.
 
-$link-color: var(--#{$prefix}link-color);
+$link-color: #007bff;
 $link-decoration: underline;
 $link-shade-percentage: 20%;
-$link-hover-color: var(--#{$prefix}link-hover-color);
+$link-hover-color: #007bff;
 $link-hover-decoration: null;
 
 $stretched-link-pseudo-element: after;
@@ -606,12 +606,12 @@ $paragraph-margin-bottom: 1rem;
 
 // scss-docs-start grid-breakpoints
 $grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
 );
 // scss-docs-end grid-breakpoints
 
@@ -625,11 +625,11 @@ $grid-breakpoints: (
 
 // scss-docs-start container-max-widths
 $container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 960px,
-  xl: 1140px,
-  xxl: 1320px
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1320px
 );
 // scss-docs-end container-max-widths
 
@@ -656,11 +656,11 @@ $container-padding-x: $grid-gutter-width * 1;
 // scss-docs-start border-variables
 $border-width: 1px;
 $border-widths: (
-  1: 1px,
-  2: 2px,
-  3: 3px,
-  4: 4px,
-  5: 5px
+    1: 1px,
+    2: 2px,
+    3: 3px,
+    4: 4px,
+    5: 5px
 );
 
 $border-style: solid;
@@ -704,10 +704,10 @@ $transition-collapse-width: width .35s ease;
 // stylelint-disable function-disallowed-list
 // scss-docs-start aspect-ratios
 $aspect-ratios: (
-  "1x1": 100%,
-  "4x3": calc(3 / 4 * 100%),
-  "16x9": calc(9 / 16 * 100%),
-  "21x9": calc(9 / 21 * 100%)
+    "1x1": 100%,
+    "4x3": calc(3 / 4 * 100%),
+    "16x9": calc(9 / 16 * 100%),
+    "21x9": calc(9 / 21 * 100%)
 );
 // scss-docs-end aspect-ratios
 // stylelint-enable function-disallowed-list
@@ -754,12 +754,12 @@ $h6-font-size: $font-size-base;
 
 // scss-docs-start font-sizes
 $font-sizes: (
-  1: $h1-font-size,
-  2: $h2-font-size,
-  3: $h3-font-size,
-  4: $h4-font-size,
-  5: $h5-font-size,
-  6: $h6-font-size
+    1: $h1-font-size,
+    2: $h2-font-size,
+    3: $h3-font-size,
+    4: $h4-font-size,
+    5: $h5-font-size,
+    6: $h6-font-size
 );
 // scss-docs-end font-sizes
 
@@ -774,12 +774,12 @@ $headings-color: null;
 
 // scss-docs-start display-headings
 $display-font-sizes: (
-  1: 5rem,
-  2: 4.5rem,
-  3: 4rem,
-  4: 3.5rem,
-  5: 3rem,
-  6: 2.5rem
+    1: 5rem,
+    2: 4.5rem,
+    3: 4rem,
+    4: 3.5rem,
+    5: 3rem,
+    6: 2.5rem
 );
 
 $display-font-family: null;
@@ -875,14 +875,14 @@ $table-bg-scale: -80%;
 
 // scss-docs-start table-loop
 $table-variants: (
-  "primary": shift-color($primary, $table-bg-scale),
-  "secondary": shift-color($secondary, $table-bg-scale),
-  "success": shift-color($success, $table-bg-scale),
-  "info": shift-color($info, $table-bg-scale),
-  "warning": shift-color($warning, $table-bg-scale),
-  "danger": shift-color($danger, $table-bg-scale),
-  "light": $light,
-  "dark": $dark,
+    "primary": shift-color($primary, $table-bg-scale),
+    "secondary": shift-color($secondary, $table-bg-scale),
+    "success": shift-color($success, $table-bg-scale),
+    "info": shift-color($info, $table-bg-scale),
+    "warning": shift-color($warning, $table-bg-scale),
+    "danger": shift-color($danger, $table-bg-scale),
+    "light": $light,
+    "dark": $dark,
 );
 // scss-docs-end table-loop
 
@@ -1199,10 +1199,10 @@ $form-feedback-icon-invalid: url("data:image/svg+xml,<svg xmlns='http://www.w3.o
 
 // scss-docs-start form-validation-states
 $form-validation-states: (
-  "valid": ("color": $form-feedback-valid-color,
-    "icon": $form-feedback-icon-valid ),
-  "invalid": ("color": $form-feedback-invalid-color,
-    "icon": $form-feedback-icon-invalid )
+    "valid": ("color": $form-feedback-valid-color,
+        "icon": $form-feedback-icon-valid ),
+    "invalid": ("color": $form-feedback-invalid-color,
+        "icon": $form-feedback-icon-invalid )
 );
 // scss-docs-end form-validation-states
 
@@ -1264,7 +1264,7 @@ $navbar-brand-font-size: $font-size-lg;
 $nav-link-height: $font-size-base * $line-height-base + $nav-link-padding-y * 2;
 $navbar-brand-height: $navbar-brand-font-size * $line-height-base;
 $navbar-brand-padding-y: (
-  $nav-link-height - $navbar-brand-height) * .5;
+    $nav-link-height - $navbar-brand-height) * .5;
 $navbar-brand-margin-end: 1rem;
 
 $navbar-toggler-padding-y: .25rem;
