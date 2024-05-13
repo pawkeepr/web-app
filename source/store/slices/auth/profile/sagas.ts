@@ -31,9 +31,10 @@ import {
     AttributeTypeProfile,
     type AttributesProfile,
 } from '~/services/helpers/types'
-import { errorToast, successToast } from '~/store/helpers/toast'
+import { errorToast, infoToast, successToast } from '~/store/helpers/toast'
 import type { IProfile } from '~/types/profile'
 import { setCookie } from '~/utils/cookies-utils'
+import { signOutUser } from '../login/actions'
 
 function* onGetProfile({
     payload: { has_profile, type_profile },
@@ -79,8 +80,11 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
             }),
         )
         yield delay(1000)
-        successToast('Perfil ativado com sucesso!')
-        yield call([Router, Router.push], '/dashboard')
+        infoToast(
+            'Você será deslogado, logue novamente para ter acesso a plataforma e todas as suas funcionalidades!',
+            'Perfil ativado com sucesso!',
+        )
+        yield put(signOutUser())
     } catch (error) {
         if (!(typeof error === 'object') || !error) return
         if (!('response' in error)) return
