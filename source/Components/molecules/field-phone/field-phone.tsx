@@ -1,32 +1,12 @@
-import { useFormikContext } from 'formik'
-import { useMemo } from 'react'
+import type { InputControlProps } from '~/Components/molecules/field-control'
 
-import { InputControlProps } from '~/Components/molecules/field-control'
-
+import type { InputMaskProps } from '@react-input/mask'
 import FieldMasked from '../field-masked'
 
-type FieldDocumentProps<T> = Omit<InputControlProps<T>, 'ref'>
+const FieldPhone = <Ctx,>({ ...props }: InputControlProps<InputMaskProps, Ctx>) => {
+    const mask = '+55 (__) _ ____-____'
 
-const FieldPhone = <T,>({ ...props }: FieldDocumentProps<T>) => {
-    const { values } = useFormikContext()
-
-    const phone = (values as any)[props.name] || ''
-
-    const mask = useMemo(() => {
-        // somente os números
-        const numbers = phone.replace(/\D/g, '')
-
-        return '+55 (__) _ ____-____'
-    }, [phone])
-
-    return (
-        <FieldMasked
-            {...props}
-            name={props.name}
-            mask={mask}
-            replacement={{ _: /\d/ }}
-        />
-    )
+    return <FieldMasked {...props} mask={mask} replacement={{ _: /\d/ }} />
 }
 
 export default FieldPhone

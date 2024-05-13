@@ -1,10 +1,11 @@
 import type { InputControlProps } from '~/Components/molecules/field-control'
 
+import type { InputMaskProps } from '@react-input/mask'
 import FieldMasked from '../field-masked'
 
-type FieldDocumentProps<T, Ctx> = Omit<InputControlProps<T, Ctx>, 'ref'>
-
-const FieldCRMV = <T, Ctx = unknown>({ ...props }: FieldDocumentProps<T, Ctx>) => {
+const FieldCRMV = <T, Ctx = unknown>({
+    ...props
+}: InputControlProps<InputMaskProps, Ctx>) => {
     return (
         <FieldMasked
             {...props}

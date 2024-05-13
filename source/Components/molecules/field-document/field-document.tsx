@@ -1,3 +1,4 @@
+import type { InputMaskProps } from '@react-input/mask'
 import { cpf } from 'cpf-cnpj-validator'
 import { useFormikContext } from 'formik'
 import { useMemo, useState } from 'react'
@@ -5,7 +6,7 @@ import { twMerge } from 'tailwind-merge'
 import type { InputControlProps } from '~/Components/molecules/field-control'
 import FieldMasked from '../field-masked'
 
-type FieldDocumentProps<T, Ctx = any> = InputControlProps<T, Ctx> & {
+type FieldDocumentProps<Ctx = unknown> = InputControlProps<InputMaskProps, Ctx> & {
     typeDocument?: 'all' | 'cpf' | 'cnpj'
     classNames?: {
         input?: string
@@ -17,7 +18,7 @@ const FieldDocument = <T, Ctx>({
     className,
     classNames,
     ...props
-}: FieldDocumentProps<T, Ctx>) => {
+}: FieldDocumentProps<Ctx>) => {
     const { values } = useFormikContext()
     const [isValid, setIsValid] = useState(false)
 
@@ -38,7 +39,7 @@ const FieldDocument = <T, Ctx>({
     }, [document, typeDocument])
 
     return (
-        <div className={twMerge("relative w-full", className)}>
+        <div className={twMerge('relative w-full', className)}>
             <FieldMasked
                 {...props}
                 name={props.name}
@@ -47,7 +48,7 @@ const FieldDocument = <T, Ctx>({
                 replacement={{ _: /\d/ }}
             />
             {!isValid && document.length > 0 && (
-                <p className="absolute bottom-0 flex w-full justify-center font-semibold text-secondary-500 items-center text-xs">
+                <p className="absolute bottom-0 flex items-center justify-center w-full text-xs font-semibold text-secondary-500">
                     CPF/CNPJ inválido!
                 </p>
             )}
