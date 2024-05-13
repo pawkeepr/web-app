@@ -9,7 +9,6 @@ import validatePerson, {
     validateCRMV,
     validateFirstName,
     validateLastName,
-    validatePhone,
 } from '~/validations/person'
 
 import { FaWhatsapp } from 'react-icons/fa'
@@ -19,6 +18,7 @@ import FieldDocument from '~/Components/molecules/field-document'
 import FieldPhone from '~/Components/molecules/field-phone'
 import useNextStep from '~/hooks/use-next-step'
 import type { ActivateAccount } from '~/validations/activate'
+import { validatePhone } from '~/validations/contact'
 import type { StepProps } from './types'
 
 const StepSignUpPerson = ({ nextStep }: StepProps) => {
