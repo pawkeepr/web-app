@@ -16,6 +16,7 @@ export type InputControlProps<T, Ctx = undefined> = FieldHookConfig<string> &
         isValid?: boolean
         condition?: boolean
         isLoading?: boolean
+        validateSync?: (value: unknown) => boolean
         visibleError?: boolean
         pattern?: string
         mask?: string | Array<string | RegExp>

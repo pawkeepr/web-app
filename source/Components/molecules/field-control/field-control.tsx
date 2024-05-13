@@ -1,6 +1,6 @@
 import type { InputControlProps } from './types'
 
-import type { ChangeEvent } from 'react'
+import { useCallback, useMemo, type ChangeEvent } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
 import Input from '~/Components/atoms/input/input'
 import Label from '~/Components/atoms/label'
@@ -67,6 +67,7 @@ const FieldControl = <T, Ctx = any>({
     mode = 'editable',
     isValid = false,
     visibleError = true,
+    validateSync,
     onChange: onChangeDefault,
     ...props
 }: InputControlProps<T, Ctx> & FieldControlInput) => {
@@ -79,6 +80,23 @@ const FieldControl = <T, Ctx = any>({
         onChangeDefault?.(e)
         inputProps.onChange(e)
     }
+
+    const handleValidation = useCallback(
+        (value: unknown) => {
+            if (validateSync) {
+                return validateSync(value)
+            }
+        },
+        [validateSync],
+    )
+
+    const hasValidation = useMemo(() => {
+        if (validateSync) {
+            return required && handleValidation(inputProps.value)
+        }
+
+        return required && isValid
+    }, [required, isValid, inputProps.value, validateSync])
 
     return (
         <div className={fieldControlDiv({ className: divClassName })}>
@@ -103,8 +121,8 @@ const FieldControl = <T, Ctx = any>({
                         startIcon: !!startIcon,
                         endIcon: !!endIcon,
                         mode,
-                        required: required && !isValid,
-                        isValid: required && isValid,
+                        required: required && !hasValidation,
+                        isValid: hasValidation,
                         ...props,
                     })}
                     {...inputProps}
