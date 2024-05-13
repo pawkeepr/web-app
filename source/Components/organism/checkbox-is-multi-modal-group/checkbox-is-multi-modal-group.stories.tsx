@@ -29,7 +29,7 @@ type Story = StoryObj<typeof Template>
 export const Default: Story = {
     args: {
         name: 'toggle',
-        label: 'Toggle',
+        label: 'Select an items',
         required: true,
         disabledError: false,
         items: [
