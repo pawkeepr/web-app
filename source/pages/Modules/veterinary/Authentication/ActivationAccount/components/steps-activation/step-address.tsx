@@ -140,7 +140,9 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
                 name="location.number"
                 aria-label="number"
                 disabled={loading}
+                validateSync={(value) => locationValidation.isValidSync(value)}
                 placeholder="N°"
+                required
             />
 
             <FieldControl
