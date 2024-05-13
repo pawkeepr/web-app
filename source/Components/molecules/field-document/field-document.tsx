@@ -26,7 +26,7 @@ const FieldDocument = <T, Ctx>({
 
     const mask = useMemo(() => {
         // somente os números
-        const numbers = document.replace(/\D/g, '')
+        const numbers = document?.replace(/\D/g, '')
         setIsValid(cpf.isValid(numbers))
 
         if (typeDocument === 'cpf') return '___.___.___-__'
