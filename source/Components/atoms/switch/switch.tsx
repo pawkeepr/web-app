@@ -5,7 +5,7 @@ import { ModeInput } from '~/Components/molecules/field-control/field-control'
 
 const toggle = tv({
     base: `
-    group inline-flex h-6 w-11 
+    group inline-flex
     items-center rounded-full 
     bg-gray-200 transition 
     `,
@@ -35,9 +35,31 @@ const toggle = tv({
         mode: ModeInput.editable,
         size: 'md',
     },
+    compoundVariants: [
+        {
+            checked: true,
+            color: 'primary',
+            className: 'bg-primary-500',
+        },
+        {
+            checked: false,
+            color: 'primary',
+            className: 'bg-secondary-500',
+        },
+        {
+            checked: true,
+            color: 'secondary',
+            className: 'bg-secondary-500',
+        },
+        {
+            checked: false,
+            color: 'secondary',
+            className: 'bg-primary-500',
+        },
+    ],
 })
 
-const pointer = tv({
+export const pointer = tv({
     base: `
         translate-x-1 rounded-full bg-white transition 
     `,
@@ -51,6 +73,7 @@ const pointer = tv({
         translateClass: {
             true: 'translate-x-7',
             false: 'translate-x-1',
+            null: 'translate-x-4',
         },
     },
     compoundVariants: [
@@ -70,6 +93,7 @@ const pointer = tv({
             className: 'translate-x-9',
         },
     ],
+
     defaultVariants: {
         size: 'md',
     },
@@ -86,10 +110,10 @@ const SwitchToggle = ({
     className,
     mode = ModeInput.editable,
     size = 'md',
-    color,
+    color = 'primary',
     onChange,
 }: SwitchToggleProps) => {
-    const [enabled, setEnabled] = useState<boolean>(true)
+    const [enabled, setEnabled] = useState<boolean>(false)
 
     const handleChange = () => {
         setEnabled((state) => {
