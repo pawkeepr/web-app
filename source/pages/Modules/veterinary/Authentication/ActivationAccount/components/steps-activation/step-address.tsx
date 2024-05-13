@@ -1,6 +1,10 @@
 import { useCallback, useMemo, useState } from 'react'
 
-import validateLocation from '~/validations/address'
+import validateLocation, {
+    locationState,
+    locationValidation,
+    locationZipCode,
+} from '~/validations/address'
 
 import { BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control/field-control'
@@ -70,6 +74,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
                 <FieldMasked
                     ctx={values}
                     label="CEP"
+                    validateSync={(value) => locationZipCode.isValidSync(value)}
                     name="location.zipCode"
                     placeholder="Digite o CEP"
                     mask={'_____-___'}
@@ -84,6 +89,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
             <FieldControl
                 ctx={values}
                 divClassName="flex-grow w-1/3 "
+                validateSync={(value) => locationState.isValidSync(value)}
                 type="text"
                 label="Estado"
                 name="location.state"
@@ -94,6 +100,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
             <FieldControl
                 ctx={values}
                 type="text"
+                validateSync={(value) => locationValidation.isValidSync(value)}
                 label="Cidade"
                 name="location.city"
                 disabled={disabledInputs.city || loading}
@@ -104,6 +111,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
             <FieldControl
                 ctx={values}
                 type="text"
+                validateSync={(value) => locationValidation.isValidSync(value)}
                 label="Bairro"
                 name="location.neighborhood"
                 disabled={loading}
@@ -116,6 +124,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
                 ctx={values}
                 divClassName="flex-grow w-1/3 "
                 label="Rua"
+                validateSync={(value) => locationValidation.isValidSync(value)}
                 name="location.street"
                 aria-label="street"
                 disabled={loading}
