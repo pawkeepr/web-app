@@ -1,4 +1,5 @@
 import { InputMask, type InputMaskProps } from '@react-input/mask'
+import { useMemo } from 'react'
 import { input } from '~/Components/atoms/input'
 import FieldControl, {
     useFieldControlClasses,
@@ -13,9 +14,19 @@ const FieldMasked = <Ctx,>({
     ...props
 }: InputControlProps<InputMaskProps, Ctx>) => {
     const { values } = useFormikContextSafe()
+
+    const value = useMemo(() => {
+        const splitNames = name?.split('.')
+        let value = values
+        for (const splitName of splitNames) {
+            value = value?.[splitName]
+        }
+        return value
+    }, [values, name])
+
     const classes = useFieldControlClasses({
         ...props,
-        value: values?.[name] as string,
+        value: value as string,
     })
 
     return (
