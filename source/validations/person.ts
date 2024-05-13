@@ -1,4 +1,5 @@
 import * as Yup from 'yup'
+import { validateEmail, validatePhone } from './contact'
 
 export const validateFirstName = Yup.string()
     .trim()
@@ -15,23 +16,11 @@ export const validateCRMV = Yup.string()
     .min(6, 'O CRMV deve ter pelo menos 6 caracteres')
     .transform((value) => value.toUpperCase())
 
-export const validateEmail = Yup.string().email('E-mail inválido')
-
-export const validatePhone = Yup.string().test(
-    'whatsapp-validator',
-    'Número de telefone inválido',
-    (value) => {
-        if (!value) return false
-        const phone = value.replace(/\D/g, '')
-        return phone.length >= 12
-    },
-)
-
 export const validateCPF_CNPJ = Yup.string()
     .required('Este campo é obrigatório')
     .transform((value) => value.replace(/[^\d]/g, ''))
 
-const validate = Yup.object().shape({
+export const validatePerson = {
     firstName: validateFirstName.required('Este campo é obrigatório'),
     lastName: validateLastName.required('Este campo é obrigatório'),
     crmv: validateCRMV.required('Este campo é obrigatório'),
@@ -47,7 +36,9 @@ const validate = Yup.object().shape({
     //     if (!value) return false;
     //     return cpf.isValid(value) || cnpj.isValid(value);
     // })
-})
+}
+
+const validate = Yup.object().shape(validatePerson)
 
 export type Person = Yup.InferType<typeof validate>
 
