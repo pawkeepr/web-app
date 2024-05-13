@@ -1,8 +1,9 @@
 import { Switch } from '@headlessui/react'
 import cn from 'classnames'
 import { useField } from 'formik'
-import { type MouseEvent, useEffect } from 'react'
-import { type VariantProps, tv } from 'tailwind-variants'
+import { useEffect, type MouseEvent } from 'react'
+import { tv, type VariantProps } from 'tailwind-variants'
+import { pointer } from '~/Components/atoms/switch'
 import type { ObjPaths } from '~/types/helpers'
 import { ModeInput } from '../field-control/field-control'
 
@@ -22,60 +23,75 @@ type SwitchProps<Ctx = undefined> = {
 
 const controlSwitch = tv({
     base: `
-    relative inline-flex h-full w-full shrink-0 
-    cursor-pointer rounded-full border-2 border-transparent 
-    transition-colors duration-200 ease-in-out focus:outline-none 
-    focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75
+        group inline-flex h-6 w-11 
+        items-center rounded-full 
+        transition 
     `,
     variants: {
+        size: {
+            sm: 'h-6 w-12',
+            md: 'h-8 w-14',
+            lg: 'h-10 w-16',
+            xl: 'h-12 w-20',
+        },
+        color: {
+            primary: 'bg-primary-500',
+            secondary: 'bg-secondary-500',
+        },
         checked: {
             true: 'bg-opacity-100',
             false: 'bg-opacity-50',
-        },
-        primary: {
-            true: 'bg-primary-500',
-            false: 'bg-secondary-400',
-            null: 'bg-gray-400',
-        },
-        secondary: {
-            true: 'bg-secondary-500',
-            false: 'bg-primary-400',
-            null: 'bg-gray-400',
+            null: 'bg-gray-400 bg-opacity-50',
         },
         mode: {
             [ModeInput.readonly]: 'hidden',
             [ModeInput.editable]: '',
         },
     },
-    defaultVariants: {
-        checked: false,
-        primary: false,
-        secondary: true,
-    },
-})
-
-const pointerSwitch = tv({
-    base: `
-        pointer-events-none inline-block h-[2rem] w-[2rem]
-        transform rounded-full 
-        bg-white shadow-lg ring-0 transition duration-200 ease-in-out
-    `,
-    variants: {
-        translateClass: {
-            true: 'translate-x-9',
-            false: 'translate-x-0',
-            null: 'translate-x-[50%]',
+    compoundVariants: [
+        {
+            checked: true,
+            color: 'primary',
+            className: 'bg-primary-500',
         },
+        {
+            checked: false,
+            color: 'primary',
+            className: 'bg-secondary-500',
+        },
+        {
+            checked: 'null',
+            color: 'primary',
+            className: 'bg-gray-400',
+        },
+        {
+            checked: true,
+            color: 'secondary',
+            className: 'bg-secondary-500',
+        },
+        {
+            checked: false,
+            color: 'secondary',
+            className: 'bg-primary-500',
+        },
+        {
+            checked: 'null',
+            color: 'secondary',
+            className: 'bg-gray-400',
+        },
+    ],
+    defaultVariants: {
+        color: 'primary',
+        checked: false,
+        mode: 'editable',
+        size: 'md',
     },
 })
 
-const divSwitch = tv({
-    base: 'mb-2 mobile:my-6',
-})
+export type ControlToggle3StatesProps<Ctx> = SwitchProps<Ctx> &
+    VariantProps<typeof controlSwitch>
 
-type ControlSwitchTailwind = VariantProps<typeof controlSwitch>
-
-const ControlSwitch = <Ctx,>({
+const ControlToggle3States = <Ctx,>({
     className,
     children,
     label,
@@ -84,9 +100,10 @@ const ControlSwitch = <Ctx,>({
     onClick,
     initialValue = false,
     legend = true,
+    size = 'md',
     mode = ModeInput.editable,
     onChange = () => {},
-}: SwitchProps<Ctx> & ControlSwitchTailwind) => {
+}: ControlToggle3StatesProps<Ctx>) => {
     const [field, _meta, helpers] = useField(name)
 
     useEffect(() => {
@@ -117,9 +134,10 @@ const ControlSwitch = <Ctx,>({
     const hasInd = field.value === null || field.value === undefined
     const title = hasInd ? 'Ind.' : field.value ? 'Sim' : 'Não'
     const hasTitle = mode === ModeInput.readonly
+
     return (
-        <div className={divSwitch({ className: divClassName })}>
-            <div className="flex justify-between items-center gap-2 mb-2">
+        <div className={divClassName}>
+            <div className="flex items-center justify-between gap-2 mb-2">
                 <span className="font-semibold text-gray-600">{label}</span>
                 <div className="flex items-center gap-2">
                     <span
@@ -129,30 +147,29 @@ const ControlSwitch = <Ctx,>({
                     >
                         Não
                     </span>
-                    <div className="w-[72px] max-h-max relative">
-                        <Switch
-                            disabled={mode === ModeInput.readonly}
-                            onClick={(e) => handleClick(e)}
-                            checked={field.value === true}
-                            className={controlSwitch({
-                                mode,
-                                checked: hasInd ? false : field.value,
-                                primary: hasInd ? 'null' : field.value,
-                                secondary: hasInd ? 'null' : !field.value,
-                                className,
+                    <Switch
+                        disabled={mode === ModeInput.readonly}
+                        onClick={(e) => handleClick(e)}
+                        checked={field.value === true}
+                        className={controlSwitch({
+                            mode,
+                            color: 'primary',
+                            checked: hasInd ? 'null' : field.value,
+                            className,
+                            size,
+                        })}
+                    >
+                        <span className="sr-only">Use setting</span>
+                        {/* Adjusted the translate class to center the circle */}
+                        <span
+                            aria-hidden="true"
+                            className={pointer({
+                                size,
+                                translateClass: hasInd ? 'null' : field.value,
                             })}
-                        >
-                            <span className="sr-only">Use setting</span>
-                            {/* Adjusted the translate class to center the circle */}
-                            <span
-                                aria-hidden="true"
-                                className={pointerSwitch({
-                                    translateClass: hasInd ? 'null' : field.value,
-                                })}
-                            />
-                            {/* Text inside the switch */}
-                        </Switch>
-                    </div>
+                        />
+                        {/* Text inside the switch */}
+                    </Switch>
                     <span
                         className={cn('text-gray-400', {
                             hidden: !legend,
@@ -168,4 +185,4 @@ const ControlSwitch = <Ctx,>({
     )
 }
 
-export default ControlSwitch
+export default ControlToggle3States
