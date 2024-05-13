@@ -1,9 +1,10 @@
 import { InputMask, type InputMaskProps } from '@react-input/mask'
+import { input } from '~/Components/atoms/input'
 import FieldControl, {
+    useFieldControlClasses,
     type InputControlProps,
 } from '~/Components/molecules/field-control'
-
-import { input } from '~/Components/atoms/input'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 
 const FieldMasked = <Ctx,>({
     placeholder,
@@ -11,6 +12,12 @@ const FieldMasked = <Ctx,>({
     replacement = { _: /\d/ },
     ...props
 }: InputControlProps<InputMaskProps, Ctx>) => {
+    const { values } = useFormikContextSafe()
+    const classes = useFieldControlClasses({
+        ...props,
+        value: values?.[name] as string,
+    })
+
     return (
         <FieldControl
             {...props}
@@ -18,10 +25,7 @@ const FieldMasked = <Ctx,>({
             name={name}
             replacement={replacement}
             component={InputMask}
-            className={input({
-                className: props.className,
-                required: props.required,
-            })}
+            className={input({ className: classes })}
         />
     )
 }
