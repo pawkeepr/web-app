@@ -4,7 +4,14 @@ import { useMemo } from 'react'
 
 import { BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control'
-import validatePerson from '~/validations/person'
+import validatePerson, {
+    validateCPF_CNPJ,
+    validateCRMV,
+    validateFirstName,
+    validateLastName,
+    validatePhone,
+    validateWhatsApp,
+} from '~/validations/person'
 
 import { FaWhatsapp } from 'react-icons/fa'
 import SwitchControl from '~/Components/atoms/switch-control/switch'
@@ -43,6 +50,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                 divClassName="flex-grow w-1/5 "
                 aria-label="firstName"
                 placeholder="Nome"
+                validateSync={(value) => validateFirstName.isValidSync(value)}
                 required
                 disabledError
             />
@@ -53,6 +61,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                 divClassName="flex-grow w-1/2 "
                 required
                 separator={''}
+                validateSync={(value) => validateLastName.isValidSync(value)}
                 name="lastName"
                 aria-label="lastName"
                 placeholder="Sobrenome"
@@ -63,6 +72,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                     ctx={values}
                     divClassName="flex-grow"
                     label="CPF/CNPJ"
+                    validateSync={(value) => validateCPF_CNPJ.isValidSync(value)}
                     name="cpf_cnpj"
                     aria-label="cpf_cnpj"
                     placeholder="CPF/CNPJ"
@@ -73,6 +83,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                 <FieldCrmv
                     ctx={values}
                     label="CRMV"
+                    validateSync={(value) => validateCRMV.isValidSync(value)}
                     name="crmv"
                     placeholder="Digite o seu CRMV"
                     required
@@ -83,6 +94,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                     <FieldPhone
                         label="Telefone/Celular"
                         name="contact.phone"
+                        validateSync={(value) => validatePhone.isValidSync(value)}
                         placeholder="Digite o seu Número de Telefone"
                         required
                     />
@@ -91,6 +103,9 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                 <div className="w-1/2">
                     <FieldPhone
                         label="WhatsApp Comercial"
+                        validateSync={(value) =>
+                            validateWhatsApp.isValidSync(value)
+                        }
                         name="contact.whatsapp"
                         placeholder="Digite o seu Número do WhatsApp"
                         required
