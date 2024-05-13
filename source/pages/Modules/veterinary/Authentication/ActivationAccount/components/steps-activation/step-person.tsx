@@ -10,7 +10,6 @@ import validatePerson, {
     validateFirstName,
     validateLastName,
     validatePhone,
-    validateWhatsApp,
 } from '~/validations/person'
 
 import { FaWhatsapp } from 'react-icons/fa'
@@ -93,10 +92,9 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                 <div className="w-1/2">
                     <FieldPhone
                         ctx={values}
+                        validateSync={(value) => validatePhone.isValidSync(value)}
                         label="Telefone/Celular"
                         name="contact.phone"
-                        validateSync={(value) => validatePhone.isValidSync(value)}
-                        placeholder="Digite o seu Número de Telefone"
                         required
                     />
                 </div>
@@ -105,9 +103,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                     <FieldPhone
                         ctx={values}
                         label="WhatsApp Comercial"
-                        validateSync={(value) =>
-                            validateWhatsApp.isValidSync(value)
-                        }
+                        validateSync={(value) => validatePhone.isValidSync(value)}
                         name="contact.whatsapp"
                         placeholder="Digite o seu Número do WhatsApp"
                         required
