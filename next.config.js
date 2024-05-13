@@ -1,11 +1,8 @@
 require('dotenv').config()
 
 /**@type {import('next').NextConfig} */
-const nextConfig = ((phase) => {
-    const isProduction = phase === 'production'
-
-    const _currentURL =
-        'https://z4etzps20a.execute-api.us-east-1.amazonaws.com/development'
+const nextConfig = ((_phase) => {
+    // const isProduction = phase === 'production'        
 
     return {
         publicRuntimeConfig: {
@@ -36,7 +33,7 @@ const nextConfig = ((phase) => {
             ignoreBuildErrors: true,
         },
         env: {
-            API_URL: _currentURL,
+            API_URL: process.env.REACT_APP_API_URL ,
             SECRET_KEY: process.env.SECRET_KEY,
             REGION: process.env.REGION,
             USER_POOL_ID: process.env.USER_POOL_ID,
