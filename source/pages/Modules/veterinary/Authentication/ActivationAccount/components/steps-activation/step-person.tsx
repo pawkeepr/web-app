@@ -92,6 +92,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
             <div className="flex flex-row flex-grow w-full">
                 <div className="w-1/2">
                     <FieldPhone
+                        ctx={values}
                         label="Telefone/Celular"
                         name="contact.phone"
                         validateSync={(value) => validatePhone.isValidSync(value)}
@@ -102,6 +103,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
 
                 <div className="w-1/2">
                     <FieldPhone
+                        ctx={values}
                         label="WhatsApp Comercial"
                         validateSync={(value) =>
                             validateWhatsApp.isValidSync(value)
