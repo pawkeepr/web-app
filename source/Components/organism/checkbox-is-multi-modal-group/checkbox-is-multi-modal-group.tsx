@@ -11,6 +11,7 @@ import useModal from '~/hooks/use-modal'
 import type { ObjPaths } from '~/types/helpers'
 import styles from './checkbox-is-multi-modal-group.module.scss'
 import ItemCheckbox from './item-checkbox'
+import { useFieldControlClasses } from './use-field-checkbox-classes'
 
 export type Item<T = unknown> = {
     label: string
@@ -33,6 +34,8 @@ export const option = tv({
     },
 })
 
+
+
 export interface CheckboxIsMultiModalProps<Ctx> {
     items: Item[]
     ctx?: Ctx extends undefined ? never : Ctx
@@ -43,6 +46,7 @@ export interface CheckboxIsMultiModalProps<Ctx> {
     className?: string
     id?: string
     children?: (props: { showModal: () => void }) => JSX.Element
+    validateSync?: (value: unknown) => boolean
 }
 
 export default function CheckboxIsMultiModal<Ctx>({
@@ -53,6 +57,7 @@ export default function CheckboxIsMultiModal<Ctx>({
     id,
     className,
     children,
+    validateSync,
 }: CheckboxIsMultiModalProps<Ctx>) {
     const [field, _meta, helpers] = useField(name)
     const { closeModal, open, showModal } = useModal()
@@ -81,6 +86,14 @@ export default function CheckboxIsMultiModal<Ctx>({
         return removeItem(name)
     }
 
+ const classes = useFieldControlClasses({
+        value: checkedValues,
+        required,
+        validateSync,
+        mode: 'editable',
+        className,
+    })
+
     return (
         <>
             {children?.({ showModal }) || (
@@ -95,7 +108,7 @@ export default function CheckboxIsMultiModal<Ctx>({
                             outline
                             type="button"
                             onClick={showModal}
-                            className="h-8"
+                            className={classes}
                             id={idLabel}
                         >
                             <Label
@@ -113,7 +126,7 @@ export default function CheckboxIsMultiModal<Ctx>({
                         }
                         {/* Badge dos items dos checkboxes selecionados */}
                     </div>
-                    <div className="h-6 overflow-x-auto scrollable-x">
+                    <div className="h-6 mt-1 overflow-x-auto scrollable-x">
                         {
                             <ul className="flex gap-1 ">
                                 <ItemCheckbox

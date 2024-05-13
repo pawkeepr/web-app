@@ -9,6 +9,7 @@ import Label from '~/Components/atoms/label'
 import useModal from '~/hooks/use-modal'
 import {
     option,
+    useFieldControlClasses,
     type CheckboxIsMultiModalProps,
 } from '../checkbox-is-multi-modal-group'
 import styles from '../checkbox-is-multi-modal-group/checkbox-is-multi-modal-group.module.scss'
@@ -21,6 +22,7 @@ export default function CheckboxModal<Ctx>({
     id,
     className,
     children,
+    validateSync,
 }: CheckboxIsMultiModalProps<Ctx>) {
     const [field, _meta, helpers] = useField(name)
     const { closeModal, open, showModal } = useModal()
@@ -36,6 +38,14 @@ export default function CheckboxModal<Ctx>({
         closeModal()
     }
 
+    const classes = useFieldControlClasses({
+        value: checkedValue,
+        required,
+        validateSync,
+        mode: 'editable',
+        className,
+    })
+
     return (
         <>
             {children?.({ showModal }) || (
@@ -49,7 +59,7 @@ export default function CheckboxModal<Ctx>({
                         outline
                         type="button"
                         onClick={showModal}
-                        className="h-8"
+                        className={classes}
                         id={idLabel}
                     >
                         <Label
