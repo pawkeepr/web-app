@@ -53,9 +53,26 @@ export type ProfileUserInformation = {
     address: Location
 }
 
+const TypeSchedule = {
+    online: 'online',
+    home: 'home',
+    clinic: 'clinic',
+    other: 'other',
+} as const
+type TypeSchedule = (typeof TypeSchedule)[keyof typeof TypeSchedule]
+
+export type ScheduleDays = {
+    type_schedule: TypeSchedule
+    day: string
+    hour_start: string
+    hour_end: string
+    out_of_hours_service: string
+}
+
 export type IVeterinaryInformation = {
     crmv: string
     cpf_cnpj: string
+    opening_days_times: ScheduleDays[]
 } & SpecialtyInformation
 
 export type IProfile = {
