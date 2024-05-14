@@ -33,6 +33,25 @@ const validate = Yup.object().shape({
     ...validatePerson,
     contact: contactValidationSchema,
     location: Address,
+    opening_days_times: Yup.array()
+        .of(
+            Yup.object().shape({
+                type_schedule: Yup.string().required(
+                    'O campo tipo de atendimento é obrigatório',
+                ),
+                day: Yup.string().required('O campo dia é obrigatório'),
+                hour_start: Yup.string().required(
+                    'O campo hora de início é obrigatório',
+                ),
+                hour_end: Yup.string().required(
+                    'O campo hora de término é obrigatório',
+                ),
+                out_of_hours_service: Yup.string().required(
+                    'O campo atendimento fora do horário é obrigatório',
+                ),
+            }),
+        )
+        .optional(),
     ...specialty_validation,
 })
 
