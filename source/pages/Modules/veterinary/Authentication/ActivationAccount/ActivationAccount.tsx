@@ -23,7 +23,7 @@ import { BtnLink } from '~/Components/atoms/btn'
 
 import { layoutModeTypes } from '~/constants/layout'
 import type { ActivateAccountVeterinary } from '~/types/activate-account-veterinary'
-import { TypeProfile } from '~/types/profile'
+import { TypeProfile, type ScheduleDays } from '~/types/profile'
 import StepActivationAddress from './components/steps-activation/step-address'
 import StepActivationFinally from './components/steps-activation/step-finally'
 import StepActivationPerson from './components/steps-activation/step-person'
@@ -112,8 +112,12 @@ const ActivationAccount = () => {
                 name: `${values?.firstName} ${values?.lastName}`,
                 url_img: '',
             },
+
             veterinary_information: {
                 cpf_cnpj: values?.cpf_cnpj,
+                opening_days_times: values?.opening_days_times?.filter(
+                    (item) => item !== null,
+                ) as ScheduleDays[],
                 crmv: values?.crmv,
                 list_service_type: values?.list_service_type as string[],
                 specialty: values?.specialty,
