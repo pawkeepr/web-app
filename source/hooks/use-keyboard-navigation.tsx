@@ -33,6 +33,16 @@ type KeyboardNavigation = Partial<Record<KeyboardKey, (...args: unknown[]) => vo
 
 const useKeyboardNavigation = (props: KeyboardNavigation) => {
     useEffect(() => {
+        const activeElement = document.activeElement
+        const isInput =
+            activeElement &&
+            (activeElement.tagName === 'INPUT' ||
+                activeElement.tagName === 'TEXTAREA' ||
+                activeElement.tagName === 'SELECT')
+
+        if (isInput) {
+            return
+        }
         const handleKeyDown = (event: KeyboardEvent) => {
             const { key } = event
             const callback = props[key as KeyboardKey]
