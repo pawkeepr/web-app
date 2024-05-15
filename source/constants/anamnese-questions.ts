@@ -6,6 +6,10 @@ const QuestionTypes = {
     locomotive_sys: 'locomotive_sys',
     others: 'others',
     general_information: 'general_information',
+    lymphatic_sys: 'lymphatic_sys',
+    // player_sys: 'player_sys',
+    visual_sys: 'visual_sys',
+    reproductive_sys: 'reproductive_sys',
 } as const
 
 export type KeyOfQuestionTypes = keyof typeof QuestionTypes
@@ -111,5 +115,20 @@ export const questions: Question[] = [
         id: 20,
         question: 'O Animal pratica alguma atividade física?',
         type: 'locomotive_sys',
+    },
+    {
+        id: 21,
+        question: 'Sistema Linfático',
+        type: 'lymphatic_sys',
+    },
+    {
+        id: 22,
+        question: 'Sistema Reprodutor',
+        type: 'reproductive_sys',
+    },
+    {
+        id: 23,
+        question: 'Sistema Visual',
+        type: 'visual_sys',
     },
 ]
