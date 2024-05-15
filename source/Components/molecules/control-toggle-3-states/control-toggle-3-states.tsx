@@ -138,7 +138,14 @@ const ControlToggle3States = <Ctx,>({
     return (
         <div className={divClassName}>
             <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="font-semibold text-gray-600">{label}</span>
+                <span
+                    className={cn('font-semibold ', {
+                        'text-gray-600': field.value,
+                        'text-gray-400': !field.value,
+                    })}
+                >
+                    {label}
+                </span>
                 <div className="flex items-center gap-2">
                     <span
                         className={cn('text-gray-400', {

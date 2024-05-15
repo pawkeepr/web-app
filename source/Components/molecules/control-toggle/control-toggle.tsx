@@ -51,13 +51,19 @@ const ControlToggle = <Ctx,>({
         onClick?.()
     }
 
-    const hasInd = field.value === null || field.value === undefined
-    const title = hasInd ? 'Ind.' : field.value ? 'Sim' : 'Não'
+    const title = field.value ? 'Sim' : 'Não'
     const hasTitle = mode === ModeInput.readonly
     return (
         <div className={divSwitch({ className: divClassName })}>
             <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="font-semibold text-gray-600">{label}</span>
+                <span
+                    className={cn('font-semibold ', {
+                        'text-gray-600': field.value,
+                        'text-gray-400': !field.value,
+                    })}
+                >
+                    {label}
+                </span>
                 <div className="flex items-center gap-2">
                     <span
                         className={cn('text-gray-400', {
