@@ -48,18 +48,7 @@ const CanceledScheduledModal = ({
                     <button
                         type="button"
                         onClick={showModal}
-                        className="
-                                rounded-md 
-                                bg-secondary-500 bg-opacity-20 
-                                px-4 py-2 text-sm 
-                                font-medium 
-                                text-white 
-                                hover:bg-opacity-30 
-                                focus:outline-none 
-                                focus-visible:ring-2 
-                                focus-visible:ring-white 
-                                focus-visible:ring-opacity-75
-                            "
+                        className="px-4 py-2 text-sm font-medium text-white rounded-md bg-secondary-500 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
                     >
                         Cancelar Agendamento
                     </button>
@@ -67,19 +56,10 @@ const CanceledScheduledModal = ({
             )}
 
             <Modal
-                onOpen={() => showModal}
+                open={isOpen as boolean}
                 onClose={() => closeModal()}
-                modal
-                nested
-                open={isOpen}
-                lockScroll
-                className=" 
-                    h-fit
-                    min-w-fit
-                    flex
-                    flex-col
-                    w-fit     
-                "
+                mobilePage={false}
+                className="w-fit h-fit"
             >
                 <Formik
                     initialValues={item}
@@ -88,10 +68,10 @@ const CanceledScheduledModal = ({
                 >
                     {({ isValid, isSubmitting, handleSubmit, values }) => (
                         <Form
-                            className="w-full h-full flex flex-col "
+                            className="flex flex-col w-full h-full "
                             onSubmit={handleSubmit}
                         >
-                            <div className="flex flex-col min-h-full items-center justify-center p-4 text-center">
+                            <div className="flex flex-col items-center justify-center min-h-full p-4 text-center">
                                 <h2 className="text-xl font-semibold leading-6 text-gray-600 dark:!text-gray-200 text-center">
                                     {'Cancelar Agendamento'}
                                 </h2>
@@ -112,7 +92,7 @@ const CanceledScheduledModal = ({
                                     name="appointment_status.reason_canceled"
                                 />
 
-                                <div className="mt-2 gap-2 w-full flex justify-center items-center">
+                                <div className="flex items-center justify-center w-full gap-2 mt-2">
                                     <BtnCancel
                                         type="button"
                                         onClick={closeModal}

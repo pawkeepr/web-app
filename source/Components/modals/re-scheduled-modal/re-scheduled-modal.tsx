@@ -45,7 +45,11 @@ const ReScheduledModal = ({
         <>
             {children?.({ showModal })}
 
-            <Modal open={isOpen as boolean} onClose={() => closeModal()}>
+            <Modal
+                open={isOpen as boolean}
+                onClose={() => closeModal()}
+                mobilePage={false}
+            >
                 <Formik
                     initialValues={item}
                     validationSchema={validationSchema}
@@ -56,7 +60,7 @@ const ReScheduledModal = ({
                             className="w-full h-full flex flex-col min-w-[500px]"
                             onSubmit={handleSubmit}
                         >
-                            <div className="flex flex-col min-h-full items-center justify-center p-4 text-center">
+                            <div className="flex flex-col items-center justify-center min-h-full p-4 text-center">
                                 <h2 className="text-xl font-semibold leading-6 text-gray-600 dark:!text-gray-200 text-center">
                                     {'Reagendar Consulta'}
                                 </h2>
@@ -65,9 +69,9 @@ const ReScheduledModal = ({
                                     pet={values.tutor_pet_vet?.pet}
                                     tutor={values.tutor_pet_vet?.tutor}
                                 />
-                                <section className="flex flex-col  mt-2 justify-start px-4 w-full">
-                                    <div className="gap-2 flex-wrap flex flex-col w-full justify-between ">
-                                        <p className="text-gray-500 flex justify-between">
+                                <section className="flex flex-col justify-start w-full px-4 mt-2">
+                                    <div className="flex flex-col flex-wrap justify-between w-full gap-2 ">
+                                        <p className="flex justify-between text-gray-500">
                                             <strong className="mr-2">
                                                 Tipo da Consulta:
                                             </strong>
@@ -76,12 +80,12 @@ const ReScheduledModal = ({
                                                     ?.type_consultation
                                             }
                                         </p>
-                                        <p className="text-gray-500 flex justify-between">
+                                        <p className="flex justify-between text-gray-500">
                                             <strong className="mr-2">
                                                 Razão da Consulta:
                                             </strong>
                                         </p>
-                                        <p className="text-gray-500 text-center flex justify-between">
+                                        <p className="flex justify-between text-center text-gray-500">
                                             {
                                                 item?.dates_consults
                                                     ?.reason_consultation
@@ -90,7 +94,7 @@ const ReScheduledModal = ({
                                     </div>
                                 </section>
 
-                                <section className="my-2 flex gap-3 w-full">
+                                <section className="flex w-full gap-3 my-2">
                                     <FieldControl
                                         ctx={values}
                                         label="Data da consulta"
@@ -110,7 +114,7 @@ const ReScheduledModal = ({
                                     />
                                 </section>
 
-                                <div className="mt-1 flex gap-2 w-full justify-center items-center">
+                                <div className="flex items-center justify-center w-full gap-2 mt-1">
                                     <BtnCancel
                                         type="button"
                                         onClick={closeModal}

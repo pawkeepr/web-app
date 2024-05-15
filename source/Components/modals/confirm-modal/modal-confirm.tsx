@@ -42,18 +42,7 @@ const ModalConfirm = ({
                     <button
                         type="button"
                         onClick={() => showModal()}
-                        className="
-                                rounded-md 
-                                bg-secondary-500 bg-opacity-20 
-                                px-4 py-2 text-sm 
-                                font-medium 
-                                text-white 
-                                hover:bg-opacity-30 
-                                focus:outline-none 
-                                focus-visible:ring-2 
-                                focus-visible:ring-white 
-                                focus-visible:ring-opacity-75
-                            "
+                        className="px-4 py-2 text-sm font-medium text-white rounded-md  bg-secondary-500 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
                     >
                         {label}
                     </button>
@@ -61,21 +50,17 @@ const ModalConfirm = ({
             )}
 
             <Modal
-                onOpen={() => showModal}
                 onClose={() => closeModal()}
-                modal
-                nested
                 open={open}
-                lockScroll
                 mobilePage={false}
-                className="w-fit h-fit m-2"
+                className="m-2 w-fit h-fit"
             >
                 <div className="flex justify-center items-center flex-col max-w-[480px] ">
                     <h2 className="text-xl mb-1 font-semibold leading-6 text-gray-900 dark:!text-gray-200 text-center">
                         {title}
                     </h2>
 
-                    <legend className="col-span-full text-sm text-gray-500 text-center">
+                    <legend className="text-sm text-center text-gray-500 col-span-full">
                         {description}
                     </legend>
 
@@ -83,7 +68,7 @@ const ModalConfirm = ({
                         {message}
                     </p>
 
-                    <div className="mt-4 flex justify-center items-center">
+                    <div className="flex items-center justify-center mt-4">
                         <BtnCancel type="button" onClick={handleCancel} />
 
                         <BtnPrimary
