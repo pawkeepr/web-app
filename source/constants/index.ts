@@ -1,3 +1,4 @@
+export * from './exams-questions'
 export * from './pets'
 export * from './sub-specialtys'
 export * from './treatment-items'
