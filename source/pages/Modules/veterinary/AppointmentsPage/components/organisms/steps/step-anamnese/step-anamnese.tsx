@@ -25,7 +25,7 @@ const StepAnamnese = () => {
     return (
         <>
             <CardSimplePet />
-            <h4 className="text-center font-sans font-semibold text-base capitalize">
+            <h4 className="font-sans text-base font-semibold text-center capitalize">
                 Anamnese
             </h4>
             <div className={screen()}>

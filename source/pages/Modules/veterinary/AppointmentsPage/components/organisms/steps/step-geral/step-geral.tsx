@@ -11,7 +11,7 @@ const StepGeral = () => {
     return (
         <>
             <CardSimplePet />
-            <h4 className="text-center font-sans font-semibold text-base capitalize">
+            <h4 className="font-sans text-base font-semibold text-center capitalize">
                 Pré-Anamnese
                 <br />
                 <span className="text-xs font-bold text-secondary-500">
@@ -37,43 +37,9 @@ const StepGeral = () => {
                     divClassName="col-span-full"
                     name="details_pet_consultation.weight"
                 />
-                <legend className="col-span-full text-xs text-gray-400 text-center">
+                <legend className="text-xs text-center text-gray-400 col-span-full">
                     Peso do pet em quilos, exemplo = 0.5 (500 gramas)
                 </legend>
-
-                <div className="flex flex-1 flex-row gap-2 mobile:!flex-col mobile:gap-0">
-                    <div className="mobile:w-full web:w-[50%]">
-                        <FieldNumber
-                            ctx={values}
-                            label="Altura"
-                            name="details_pet_consultation.height"
-                        />
-                        <legend className="col-span-3 text-xs text-gray-400 text-center">
-                            Altura do pet em centímetros, exemplo = 32
-                        </legend>
-                    </div>
-
-                    <div className="mobile:w-full web:w-[50%]">
-                        <FieldNumber
-                            ctx={values}
-                            label="Comprimento"
-                            name="details_pet_consultation.length"
-                        />
-
-                        <legend className="col-span-3 text-xs text-gray-400 text-center">
-                            Comprimento do pet em centímetros
-                        </legend>
-                    </div>
-                </div>
-
-                <div>
-                    {values.details_pet_consultation?.imc > 0 && (
-                        <h2 className="m-4 font-bold">
-                            O IMC do animal é:{' '}
-                            {values.details_pet_consultation?.imc?.toFixed(2)}
-                        </h2>
-                    )}
-                </div>
             </div>
         </>
     )
