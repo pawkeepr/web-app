@@ -102,6 +102,7 @@ export const pointer = tv({
 export type SwitchToggleProps = {
     onChange?: (enabled: boolean) => void
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+    checked?: boolean
 } & Omit<ComponentProps<'input'>, 'onChange' | 'size'> &
     VariantProps<typeof toggle> &
     VariantProps<typeof pointer>
@@ -111,9 +112,10 @@ const SwitchToggle = ({
     mode = ModeInput.editable,
     size = 'md',
     color = 'primary',
+    checked = false,
     onChange,
 }: SwitchToggleProps) => {
-    const [enabled, setEnabled] = useState<boolean>(false)
+    const [enabled, setEnabled] = useState<boolean>(checked)
 
     const handleChange = () => {
         setEnabled((state) => {
