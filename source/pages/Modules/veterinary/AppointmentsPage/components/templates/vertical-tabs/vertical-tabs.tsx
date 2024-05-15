@@ -14,6 +14,7 @@ import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { StepProps, Tabs } from '~/types/helpers'
 import StepAnamneses from '../../organisms/steps/step-anamnese'
 import StepDiagnosis from '../../organisms/steps/step-diagnosis'
+import stepExams from '../../organisms/steps/step-exams'
 import StepGeral from '../../organisms/steps/step-geral'
 import StepPayment from '../../organisms/steps/step-payment'
 import StepTreatment from '../../organisms/steps/step-treatment'
@@ -40,18 +41,24 @@ const items: TabItem[] = [
     },
     {
         id: 2,
+        title: 'Exames',
+        href: '#Exams',
+        Component: stepExams,
+    },
+    {
+        id: 3,
         title: 'Diagnóstico',
         href: '#Diagnostic',
         Component: StepDiagnosis,
     },
     {
-        id: 3,
+        id: 4,
         title: 'Tratamento',
         href: '#Treatment',
         Component: StepTreatment,
     },
     {
-        id: 4,
+        id: 5,
         title: 'Finalizar',
         href: '#Finalizar',
         Component: StepPayment,
