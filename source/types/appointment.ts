@@ -28,6 +28,12 @@ export type AppointmentStatus = {
     is_possible_action: On_Off
 }
 
+export type ComplementaryExam = {
+    type_exam: string
+    list_exams: string[]
+    notes: string
+}
+
 export interface ISignatureAppointment {
     signature_data: string
     date_signature: string
