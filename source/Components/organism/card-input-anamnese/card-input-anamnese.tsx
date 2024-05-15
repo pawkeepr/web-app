@@ -9,6 +9,7 @@ import type { OptionSelect } from '~/Components/molecules/field-control'
 import OptionsMenu from '~/Components/molecules/options-menu'
 import { makeTitle } from '~/Components/molecules/options-menu/options-menu'
 import type { KeyOfQuestionTypes, Question } from '~/constants/anamnese-questions'
+import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
 import {
     OPTION_BOOLEAN,
     type QuestionAnamnesis,
@@ -67,6 +68,21 @@ const STEPS: {
         value: 'locomotive_sys',
         label: 'Sistema Locomotor',
         icon: FaRunning,
+    },
+    {
+        value: 'reproductive_sys',
+        label: 'Sistema Reprodutor',
+        icon: GiBrain,
+    },
+    {
+        value: 'lymphatic_sys',
+        label: 'Sistema Linfático',
+        icon: GiBrain,
+    },
+    {
+        value: 'visual_sys',
+        label: 'Sistema Visual',
+        icon: GiBrain,
     },
 ]
 
@@ -135,6 +151,11 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
         })
     }
 
+    useKeyboardNavigation({
+        ArrowLeft: keyPressLeft,
+        ArrowRight: keyPressRight,
+    })
+
     return (
         <>
             <h4 className="mb-2 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
@@ -143,6 +164,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
             <div className="flex flex-row flex-wrap justify-between w-full mb-4">
                 {STEPS.map((item) => (
                     <OptionsMenu
+                        key={item.value}
                         item={item as any}
                         option={category}
                         classNames={{
@@ -169,6 +191,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                         <div className="flex-[3]">
                             {options.map((item) => (
                                 <ControlToggle3States
+                                    key={item.value}
                                     initialValue={null}
                                     ctx={values}
                                     onChange={(e) =>
@@ -188,19 +211,18 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                                 />
                             ))}
                         </div>
-                        <div className="flex justify-between w-full h-12 ">
+                        <div className="flex justify-between mt-6">
                             <button
-                                onClick={keyPressLeft}
                                 type="button"
-                                className="text-gray-500 btn bg-secondary-500"
+                                onClick={keyPressLeft}
+                                className="px-4 py-2 rounded-full bg-secondary-500 hover:bg-secondary-600"
                             >
                                 <FaArrowLeft />
                             </button>
-
                             <button
                                 onClick={keyPressRight}
                                 type="button"
-                                className="text-gray-500 btn bg-secondary-500"
+                                className="px-4 py-2 rounded-full bg-secondary-500 hover:bg-secondary-600"
                             >
                                 <FaArrowRight />
                             </button>
