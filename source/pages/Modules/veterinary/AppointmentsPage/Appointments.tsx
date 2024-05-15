@@ -14,8 +14,8 @@ import type { DTOProfile } from '~/types/profile'
 import { geolocation } from '~/utils/geolocation'
 import VerticalTabs from './components/templates/vertical-tabs'
 import {
-    type SchemaYupAppointment,
     schemaStepAppointment,
+    type SchemaYupAppointment,
 } from './components/validations.yup'
 
 type AppointmentsPageProps = {
@@ -24,7 +24,7 @@ type AppointmentsPageProps = {
     appointment_id: string
 }
 
-const initialValues = (
+export const makeInitialValues = (
     data: IPetV2,
     profile: DTOProfile,
     appointment_id: string | null = null,
@@ -115,7 +115,7 @@ const AppointmentsPage = ({
     })
 
     const values = useMemo(
-        () => initialValues(activeData as IPetV2, profile, appointment_id),
+        () => makeInitialValues(activeData as IPetV2, profile, appointment_id),
         [activeData, profile, appointment_id],
     )
 

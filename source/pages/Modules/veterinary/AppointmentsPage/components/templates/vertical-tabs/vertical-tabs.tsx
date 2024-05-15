@@ -12,11 +12,11 @@ import { tv } from 'tailwind-variants'
 import withLoading from '~/Components/helpers/with-loading'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { StepProps, Tabs } from '~/types/helpers'
-import StepAnamneses from '../organisms/steps/step-anamnese'
-import StepDiagnosis from '../organisms/steps/step-diagnosis'
-import StepGeral from '../organisms/steps/step-geral'
-import StepPayment from '../organisms/steps/step-payment'
-import StepTreatment from '../organisms/steps/step-treatment'
+import StepAnamneses from '../../organisms/steps/step-anamnese'
+import StepDiagnosis from '../../organisms/steps/step-diagnosis'
+import StepGeral from '../../organisms/steps/step-geral'
+import StepPayment from '../../organisms/steps/step-payment'
+import StepTreatment from '../../organisms/steps/step-treatment'
 
 type TabItem = {
     id: Tabs
@@ -82,11 +82,12 @@ const tab = tv({
 
 const VerticalTabs = () => {
     const [activeIndex, setActiveIndex] = useState(0)
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const [swipperController, setSwipperController] = useState<any>()
     const { isMobile } = useResizeMobile()
 
     return (
-        <section className="bg-white mt-1">
+        <section className="mt-1 bg-white">
             <div
                 className={cn(
                     `   
@@ -101,6 +102,7 @@ const VerticalTabs = () => {
                 {items.map((item) => {
                     return (
                         <button
+                            key={item.id}
                             type="button"
                             // href={item.href}
                             id="steparrow-gen-info-tab"
@@ -133,9 +135,14 @@ const VerticalTabs = () => {
             >
                 {items.map(({ id, Component }, index) => {
                     return (
-                        <SwiperSlide key={`${id}-${index}`}>
+                        <SwiperSlide
+                            key={`${id}-${
+                                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                index
+                            }`}
+                        >
                             <div
-                                className="flex flex-1 flex-col "
+                                className="flex flex-col flex-1 "
                                 style={{
                                     height: 'calc(100vh - 120px)',
                                 }}
