@@ -11,6 +11,7 @@ import FieldTextArea from '~/Components/molecules/field-text-area'
 import OptionsMenu from '~/Components/molecules/options-menu'
 import { makeTitle } from '~/Components/molecules/options-menu/options-menu'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
 import type { CtxStepTreatment } from '~/pages/Modules/veterinary/AppointmentsPage/components/validations.yup'
 import type { QuestionTreatment } from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
@@ -96,32 +97,37 @@ const CardInputTreatment = ({
         })
     }
 
+    useKeyboardNavigation({
+        ArrowLeft: keyPressLeft,
+        ArrowRight: keyPressRight,
+    })
+
     const Items = useMemo(
         () =>
             filteredItemsSelects?.map((treatment, index) => (
                 <div
                     key={`treatment-${index}`}
-                    className="w-full  rounded-md text-xs py-1 px-2"
+                    className="w-full px-2 py-1 text-xs rounded-md"
                 >
-                    <div className="w-full flex flex-row px-2 rounded-sm border-dashed border border-primary">
-                        <div className="grid grid-cols-12 w-full">
-                            <h6 className="col-span-3 font-mono font-semibold  capitalize ">
+                    <div className="flex flex-row w-full px-2 border border-dashed rounded-sm border-primary">
+                        <div className="grid w-full grid-cols-12">
+                            <h6 className="col-span-3 font-mono font-semibold capitalize ">
                                 {treatment.name_treatment}
                             </h6>
 
-                            <h6 className="col-span-3 font-mono font-semibold  capitalize">
+                            <h6 className="col-span-3 font-mono font-semibold capitalize">
                                 {
                                     KeyTreatment[
-                                    treatment.type_treatment as keyof typeof KeyTreatment
+                                        treatment.type_treatment as keyof typeof KeyTreatment
                                     ]
                                 }
                             </h6>
 
-                            <p className="col-span-3 font-mono  capitalize">
+                            <p className="col-span-3 font-mono capitalize">
                                 {treatment.notes_treatment}
                             </p>
 
-                            <p className="col-span-3 font-mono  capitalize">
+                            <p className="col-span-3 font-mono capitalize">
                                 {Intl.NumberFormat('pt-BR', {
                                     style: 'currency',
                                     currency: 'BRL',
@@ -147,12 +153,13 @@ const CardInputTreatment = ({
 
     return (
         <>
-            <h4 className="font-sans  mb-2 text-center font-semibold uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
+            <h4 className="mb-2 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
                 {makeTitle(category.label as string, false)}
             </h4>
-            <div className="flex flex-row w-full justify-between flex-wrap mb-4">
+            <div className="flex flex-row flex-wrap justify-between w-full mb-4">
                 {options.map((item) => (
                     <OptionsMenu
+                        key={item.value}
                         classNames={{
                             label: 'mobile:hidden',
                         }}
@@ -212,24 +219,23 @@ const CardInputTreatment = ({
                         <div className="flex justify-center">
                             <BtnSuccess
                                 disabled={!isValid}
-                                className=" text-white w-full"
+                                className="w-full text-white "
                                 label="Adicionar"
                                 type="submit"
                             />
                         </div>
-                        <div className="flex w-full justify-between mt-4">
+                        <div className="flex justify-between mt-6">
                             <button
-                                onClick={keyPressLeft}
                                 type="button"
-                                className="btn bg-secondary-500 text-gray-500"
+                                onClick={keyPressLeft}
+                                className="px-4 py-2 rounded-full bg-secondary-500 hover:bg-secondary-600"
                             >
                                 <FaArrowLeft />
                             </button>
-
                             <button
                                 onClick={keyPressRight}
                                 type="button"
-                                className="btn bg-secondary-500 text-gray-500"
+                                className="px-4 py-2 rounded-full bg-secondary-500 hover:bg-secondary-600"
                             >
                                 <FaArrowRight />
                             </button>
