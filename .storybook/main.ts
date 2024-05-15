@@ -1,6 +1,6 @@
 import type { StorybookConfig } from '@storybook/nextjs'
 
-import { dirname, join } from 'path'
+import { dirname, join } from 'node:path'
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -21,9 +21,6 @@ const config: StorybookConfig = {
     framework: {
         name: getAbsolutePath('@storybook/nextjs'),
         options: {},
-    },
-    docs: {
-        autodocs: 'tag',
     },
     staticDirs: ['../public'],
 }
