@@ -2,7 +2,7 @@ import CardInputExams from '~/Components/organism/card-input-exams'
 import { exams } from '~/constants/exams-questions'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { QuestionAnamnesis } from '~/types/appointment'
-import CardSimplePet from '../../../molecules/card-simple-pet'
+import CardSimplePet from '../../molecules/card-simple-pet'
 import { screen } from '../styles'
 
 const StepExams = () => {

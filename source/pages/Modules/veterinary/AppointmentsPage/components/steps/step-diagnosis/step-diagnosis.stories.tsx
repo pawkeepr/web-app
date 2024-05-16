@@ -6,7 +6,7 @@ import StepDiagnosis from './step-diagnosis'
 const meta: Meta<typeof StepDiagnosis> = {
     tags: ['autodocs'],
     component: StepDiagnosis,
-    title: 'Modules/Veterinary/AppointmentsPage/Components/Organisms/Steps/StepDiagnosis',
+    title: 'Modules/Veterinary/AppointmentsPage/Components/Steps/StepDiagnosis',
     decorators: [
         (Story) => (
             <Formik enableReinitialize initialValues={[]} onSubmit={() => {}}>

@@ -6,7 +6,7 @@ import StepGeral from './step-geral'
 const meta: Meta<typeof StepGeral> = {
     tags: ['autodocs'],
     component: StepGeral,
-    title: 'Modules/Veterinary/AppointmentsPage/Components/Organisms/Steps/StepGeral',
+    title: 'Modules/Veterinary/AppointmentsPage/Components/Steps/StepGeral',
     decorators: [
         (Story) => (
             <Formik enableReinitialize initialValues={[]} onSubmit={() => {}}>

@@ -6,7 +6,7 @@ import StepPayment from './step-payment'
 const meta: Meta<typeof StepPayment> = {
     tags: ['autodocs'],
     component: StepPayment,
-    title: 'Modules/Veterinary/AppointmentsPage/Components/Organisms/Steps/StepPayment',
+    title: 'Modules/Veterinary/AppointmentsPage/Components/Steps/StepPayment',
     decorators: [
         (Story) => (
             <Formik

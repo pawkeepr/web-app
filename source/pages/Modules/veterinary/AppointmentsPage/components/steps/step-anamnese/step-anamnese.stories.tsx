@@ -6,7 +6,7 @@ import StepAnamnese from './step-anamnese'
 const meta: Meta<typeof StepAnamnese> = {
     tags: ['autodocs'],
     component: StepAnamnese,
-    title: 'Modules/Veterinary/AppointmentsPage/Components/Organisms/Steps/StepAnamnese',
+    title: 'Modules/Veterinary/AppointmentsPage/Components/Steps/StepAnamnese',
     decorators: [
         (Story) => (
             <Formik enableReinitialize initialValues={[]} onSubmit={() => {}}>

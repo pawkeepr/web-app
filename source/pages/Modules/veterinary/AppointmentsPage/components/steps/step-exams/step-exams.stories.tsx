@@ -6,7 +6,7 @@ import StepExams from './step-exams'
 const meta: Meta<typeof StepExams> = {
     tags: ['autodocs'],
     component: StepExams,
-    title: 'Modules/Veterinary/AppointmentsPage/Components/Organisms/Steps/StepExams',
+    title: 'Modules/Veterinary/AppointmentsPage/Components/Steps/StepExams',
     decorators: [
         (Story) => (
             <Formik enableReinitialize initialValues={[]} onSubmit={() => {}}>

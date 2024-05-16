@@ -4,7 +4,7 @@ import { FaCapsules, FaFileMedical, FaSyringe, FaUtensils } from 'react-icons/fa
 import type { OptionSelect } from '~/Components/molecules/field-control'
 import CardInputTreatment from '~/Components/organism/card-input-treatment'
 import { MEDICAL_RECORDS } from '~/types/medical-records'
-import CardSimplePet from '../../../molecules/card-simple-pet'
+import CardSimplePet from '../../molecules/card-simple-pet'
 import { screen } from '../styles'
 
 const items: OptionSelect[] = [
@@ -39,7 +39,7 @@ const StepTreatment = () => {
     return (
         <>
             <CardSimplePet />
-            <h4 className="text-center font-sans font-semibold text-base capitalize">
+            <h4 className="font-sans text-base font-semibold text-center capitalize">
                 Tratamento
             </h4>
             <div className={screen()}>

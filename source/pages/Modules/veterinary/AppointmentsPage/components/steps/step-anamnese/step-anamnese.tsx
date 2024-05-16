@@ -9,8 +9,8 @@ import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import { errorToast } from '~/store/helpers/toast'
 import { OPTION_BOOLEAN, type QuestionAnamnesis } from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
-import CardSimplePet from '../../../molecules/card-simple-pet'
-import type { CtxStepAnamnese } from '../../../validations.yup'
+import CardSimplePet from '../../molecules/card-simple-pet'
+import type { CtxStepAnamnese } from '../../validations.yup'
 import { screen } from '../styles'
 
 const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionAnamnesis>>({
