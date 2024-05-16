@@ -39,7 +39,10 @@ const StepDiagnosis = () => {
                                     (anamnesis, index) => (
                                         <ModalConfirm
                                             onConfirm={() => remove(index)}
-                                            key={`anamnesis-${index}`}
+                                            key={`anamnesis-${
+                                                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                                index
+                                            }`}
                                             title="Deseja remover a seguinte questão?"
                                             description={`
                                                     As questões de anamnese caso
@@ -50,10 +53,10 @@ const StepDiagnosis = () => {
                                                     novamente na seção de anamnese.
                                             `}
                                             message={`${
-                                                anamnesis.name_anamnesis
+                                                anamnesis?.name_anamnesis
                                             } - ${
                                                 TRADUCTION[
-                                                    anamnesis.options_anamnesis as
+                                                    anamnesis?.options_anamnesis as
                                                         | 'yes'
                                                         | 'no'
                                                 ]
@@ -63,21 +66,24 @@ const StepDiagnosis = () => {
                                                 <button
                                                     onClick={showModal}
                                                     type="button"
-                                                    key={`anamnesis-${index}`}
+                                                    key={`anamnesis-${
+                                                        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                                        index
+                                                    }`}
                                                     className="w-full px-2 py-1 text-xs rounded-md"
                                                 >
                                                     <div className="flex flex-row w-full px-2 bg-white border border-dashed rounded-sm border-primary">
                                                         <div className="flex flex-wrap w-full">
                                                             <h6 className="flex-[2] font-mono font-semibold text-left capitalize">
                                                                 {
-                                                                    anamnesis.name_anamnesis
+                                                                    anamnesis?.name_anamnesis
                                                                 }
                                                             </h6>
 
                                                             <p className="flex-1 font-mono capitalize">
                                                                 {
                                                                     TRADUCTION[
-                                                                        anamnesis.options_anamnesis as
+                                                                        anamnesis?.options_anamnesis as
                                                                             | 'yes'
                                                                             | 'no'
                                                                     ]
