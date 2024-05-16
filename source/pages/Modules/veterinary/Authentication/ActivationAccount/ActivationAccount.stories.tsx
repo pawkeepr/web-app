@@ -31,6 +31,7 @@ const RootTemplate = () => {
 }
 
 const meta: Meta<typeof Template> = {
+    tags: ['autodocs'],
     component: RootTemplate,
     title: 'Modules/Veterinary/Authentication/ActivationAccount',
 }

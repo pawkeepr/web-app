@@ -7,25 +7,30 @@ import type { DTOProfile } from '~/types/profile'
 import { makeInitialValues } from '../../../Appointments'
 import { schemaStepAppointment } from '../../validations.yup'
 
-const Template = () => (
-    <Formik
-        enableReinitialize
-        validationSchema={schemaStepAppointment}
-        initialValues={makeInitialValues({} as IPetV2, {} as DTOProfile, 'id')}
-        onSubmit={() => {}}
-        initialErrors={{}}
-    >
-        <VerticalTabs />
-    </Formik>
-)
-
-const meta: Meta<typeof Template> = {
-    component: Template,
+const meta: Meta<typeof VerticalTabs> = {
+    component: VerticalTabs,
     title: 'Modules/Veterinary/AppointmentsPage/Components/Templates/VerticalTabs',
+    decorators: [
+        (Story) => (
+            <Formik
+                enableReinitialize
+                validationSchema={schemaStepAppointment}
+                initialValues={makeInitialValues(
+                    {} as IPetV2,
+                    {} as DTOProfile,
+                    'id',
+                )}
+                onSubmit={() => {}}
+                initialErrors={{}}
+            >
+                <Story />
+            </Formik>
+        ),
+    ],
 }
 
 export default meta
-type Story = StoryObj<typeof Template>
+type Story = StoryObj<typeof VerticalTabs>
 
 export const Default: Story = {
     args: {},

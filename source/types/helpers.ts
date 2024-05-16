@@ -14,10 +14,24 @@ export type Nullable<T> = {
 }
 
 export type ObjPaths<T, Prefix extends string = ''> = T extends object
+    ? T extends Array<infer U>
+        ? `${Prefix}${Prefix extends '' ? '' : '.'}${number}${ObjPaths<U> extends ''
+              ? ''
+              : `.${ObjPaths<U>}`}`
+        : {
+              [K in keyof T]-?: K extends string
+                  ? `${Prefix}${K}${ObjPaths<T[K]> extends ''
+                        ? ''
+                        : `.${ObjPaths<T[K], ''>}`}`
+                  : never
+          }[keyof T]
+    : ''
+
+export type ArrayPaths<T, Prefix extends string = ''> = T extends object
     ? {
-          [K in keyof T]-?: K extends string
-              ? `${Prefix}${K}` | ObjPaths<T[K], `${Prefix}${K}.`>
-              : never
+          [K in keyof T]-?: T[K] extends Array<any>
+              ? `${Prefix}${K}`
+              : ArrayPaths<T[K], `${Prefix}${K}.`>
       }[keyof T]
     : ''
 

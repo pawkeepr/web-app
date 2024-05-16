@@ -99,6 +99,7 @@ export interface QuestionAnamnesis {
     name_anamnesis: string // Pergunta "Ele nadou?"
     notes_anamnesis: string // Observação
     options_anamnesis: OPTION_BOOLEAN
+    checked?: boolean
 }
 
 export interface Treatments {

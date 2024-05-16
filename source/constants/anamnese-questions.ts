@@ -1,4 +1,4 @@
-const QuestionTypes = {
+export const QuestionTypes = {
     digestive_sys: 'digestive_sys',
     respiratory_sys: 'respiratory_sys',
     urinary_sys: 'urinary_sys',
@@ -11,8 +11,21 @@ const QuestionTypes = {
     visual_sys: 'visual_sys',
     reproductive_sys: 'reproductive_sys',
 } as const
-
 export type KeyOfQuestionTypes = keyof typeof QuestionTypes
+
+export const TKeysOfQuestionTypes = {
+    digestive_sys: 'Sistema Digestivo',
+    respiratory_sys: 'Sistema Respiratório',
+    urinary_sys: 'Sistema Urinário',
+    nervous_sys: 'Sistema Nervoso',
+    locomotive_sys: 'Sistema Locomotor',
+    others: 'Outros',
+    general_information: 'Informações Gerais',
+    lymphatic_sys: 'Sistema Linfático',
+    // player_sys: 'player_sys',
+    visual_sys: 'Sistema Visual',
+    reproductive_sys: 'Sistema Reprodutor',
+} as const
 
 export type Question = {
     id: number
@@ -115,20 +128,5 @@ export const questions: Question[] = [
         id: 20,
         question: 'O Animal pratica alguma atividade física?',
         type: 'locomotive_sys',
-    },
-    {
-        id: 21,
-        question: 'Sistema Linfático',
-        type: 'lymphatic_sys',
-    },
-    {
-        id: 22,
-        question: 'Sistema Reprodutor',
-        type: 'reproductive_sys',
-    },
-    {
-        id: 23,
-        question: 'Sistema Visual',
-        type: 'visual_sys',
     },
 ]

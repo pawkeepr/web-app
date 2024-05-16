@@ -3,7 +3,7 @@ import {
     type FormikContextType,
     type FormikErrors,
 } from 'formik'
-import type { ObjPaths } from '~/types/helpers'
+import type { ArrayPaths, ObjPaths } from '~/types/helpers'
 
 // Modify FormikContextTypeSafe to ensure setFieldValue uses keys from type T
 type FormikContextTypeSafe<T = unknown> = Omit<
@@ -11,7 +11,7 @@ type FormikContextTypeSafe<T = unknown> = Omit<
     'setFieldValue'
 > & {
     setFieldValue: (
-        field: ObjPaths<T>, // use ObjPaths to get the string paths of the object T
+        field: ObjPaths<T> | ArrayPaths<T>,
         value: unknown,
         shouldValidate?: boolean | undefined,
     ) => Promise<unknown | FormikErrors<T>>
