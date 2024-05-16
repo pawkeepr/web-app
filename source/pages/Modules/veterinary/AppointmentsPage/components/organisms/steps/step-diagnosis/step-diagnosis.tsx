@@ -17,7 +17,7 @@ const StepDiagnosis = () => {
     return (
         <>
             <div className="h-10" />
-            <h4 className="text-center font-sans font-semibold text-base capitalize">
+            <h4 className="font-sans text-base font-semibold text-center capitalize">
                 Diagnostico
                 <br />
                 <span className="text-xs font-bold text-secondary-500">
@@ -34,8 +34,8 @@ const StepDiagnosis = () => {
                         name="anamnesis.questions_anamnesis"
                     >
                         {({ remove }) => (
-                            <div className="h-44 overflow-auto scroll-smooth scroll-width-thin mine-scroll-bar flex flex-1 w-full flex-col gap-1">
-                                {values.anamnesis?.questions_anamnesis?.map(
+                            <div className="flex flex-col flex-1 w-full gap-1 overflow-auto h-44 scroll-smooth scroll-width-thin mine-scroll-bar">
+                                {values?.anamnesis?.questions_anamnesis?.map(
                                     (anamnesis, index) => (
                                         <ModalConfirm
                                             onConfirm={() => remove(index)}
@@ -64,9 +64,9 @@ const StepDiagnosis = () => {
                                                     onClick={showModal}
                                                     type="button"
                                                     key={`anamnesis-${index}`}
-                                                    className="w-full rounded-md text-xs py-1 px-2"
+                                                    className="w-full px-2 py-1 text-xs rounded-md"
                                                 >
-                                                    <div className="w-full flex flex-row bg-white px-2 rounded-sm border-dashed border border-primary">
+                                                    <div className="flex flex-row w-full px-2 bg-white border border-dashed rounded-sm border-primary">
                                                         <div className="flex flex-wrap w-full">
                                                             <h6 className="flex-[2] font-mono font-semibold text-left capitalize">
                                                                 {
@@ -99,14 +99,14 @@ const StepDiagnosis = () => {
                             </div>
                         )}
                     </FieldArraySafe>
-                    <legend className="col-span-full text-xs text-gray-400 text-center">
+                    <legend className="text-xs text-center text-gray-400 col-span-full">
                         As questões de anamnese caso sejam removidas, não serão
                         enviadas ao relatório final. Caso tenha as removido por
                         engano, basta respondê-la novamente na seção de anamnese.
                     </legend>
                 </section>
                 <FieldTextArea
-                    isValid={values.anamnesis.note.length > 0}
+                    isValid={values?.anamnesis?.note.length > 0}
                     ctx={values}
                     label="Diagnóstico"
                     required

@@ -9,7 +9,7 @@ import { schemaStepAppointment } from '../../validations.yup'
 
 const meta: Meta<typeof VerticalTabs> = {
     component: VerticalTabs,
-    title: 'Modules/Veterinary/AppointmentsPage/Components/Templates/VerticalTabs',
+    title: 'Modules/Veterinary/AppointmentsPage/Page',
     decorators: [
         (Story) => (
             <Formik

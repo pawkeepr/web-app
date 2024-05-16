@@ -8,9 +8,9 @@ import FieldCurrency from '~/Components/molecules/field-currency'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import {
-    type GenericObject,
     PAYMENTS_OPTIONS,
     PAYMENTS_OPTIONS_INSTALLMENTS,
+    type GenericObject,
 } from '~/types/helpers'
 import type { GenericSelect } from '~/types/pet-v2'
 import { screen } from '../styles'
@@ -46,7 +46,7 @@ const StepPayment = () => {
     }, [values.treatments?.questions_treatment])
 
     useEffect(() => {
-        if (form_payment.value !== 'credit_card') {
+        if (form_payment?.value !== 'credit_card') {
             setFieldValue(
                 'appointment_details.payment.number_installments',
                 PAYMENTS_OPTIONS_INSTALLMENTS[0],
@@ -57,7 +57,7 @@ const StepPayment = () => {
     return (
         <Form onSubmit={handleSubmit}>
             <div className="h-10" />
-            <h4 className="text-center font-sans font-semibold text-base capitalize">
+            <h4 className="font-sans text-base font-semibold text-center capitalize">
                 Pagamento
                 <br />
                 <span className="text-xs font-bold text-secondary-500">
@@ -66,15 +66,15 @@ const StepPayment = () => {
             </h4>
             <div className={screen()}>
                 <CardTutor
-                    tutor={values.tutor_pet_vet?.tutor}
-                    pet={values.tutor_pet_vet?.pet}
+                    tutor={values?.tutor_pet_vet?.tutor}
+                    pet={values?.tutor_pet_vet?.pet}
                 />
 
-                <div className="grid grid-cols-3 mobile:grid-cols-2 gap-2 z-50">
+                <div className="z-50 grid grid-cols-3 gap-2 mobile:grid-cols-2">
                     <SelectModal
                         value={
-                            values.appointment_details.payment
-                                .form_payment as unknown as GenericObject
+                            values?.appointment_details?.payment
+                                ?.form_payment as unknown as GenericObject
                         }
                         onChange={(item) => {
                             setFieldValue(
@@ -82,7 +82,7 @@ const StepPayment = () => {
                                 item,
                             )
                         }}
-                        isValid={!!form_payment.value}
+                        isValid={!!form_payment?.value}
                         title="Selecione a Forma de Pagamento"
                         required
                         divClassName="col-span-1"
@@ -91,10 +91,10 @@ const StepPayment = () => {
                         items={PAYMENTS_OPTIONS}
                     />
                     <SelectModal
-                        disabled={form_payment.value !== 'credit_card'}
+                        disabled={form_payment?.value !== 'credit_card'}
                         value={
-                            values.appointment_details.payment
-                                .number_installments as unknown as GenericObject
+                            values?.appointment_details?.payment
+                                ?.number_installments as unknown as GenericObject
                         }
                         onChange={(item) => {
                             setFieldValue(
@@ -112,7 +112,7 @@ const StepPayment = () => {
                     <FieldCurrency
                         isValid={
                             Number(
-                                values.appointment_details.payment.value_payment?.replace(
+                                values?.appointment_details?.payment?.value_payment?.replace(
                                     ',',
                                     '.',
                                 ),
@@ -124,7 +124,7 @@ const StepPayment = () => {
                         name="appointment_details.payment.value_payment"
                     />
 
-                    <legend className="col-span-3 text-xs text-gray-400 text-center">
+                    <legend className="col-span-3 text-xs text-center text-gray-400">
                         Informações de pagamento apenas para efeito de relatório
                     </legend>
                 </div>

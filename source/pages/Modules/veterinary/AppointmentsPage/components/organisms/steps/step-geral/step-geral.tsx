@@ -20,7 +20,7 @@ const StepGeral = () => {
             </h4>
             <div className={screen()}>
                 <FieldTextArea
-                    isValid={values.dates_consults.reason_consultation.length > 0}
+                    isValid={values.dates_consults?.reason_consultation.length > 0}
                     ctx={values}
                     label="Motivo da Consulta"
                     required

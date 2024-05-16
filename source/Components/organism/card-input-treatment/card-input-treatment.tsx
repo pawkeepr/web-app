@@ -73,7 +73,7 @@ const CardInputTreatment = ({
                 (item) => item.type_treatment === category.value,
             ) || []
         )
-    }, [values.treatments.questions_treatment, category.value])
+    }, [values.treatments?.questions_treatment, category?.value])
 
     const keyPressLeft = () => {
         setCategory((prev) => {
@@ -154,10 +154,10 @@ const CardInputTreatment = ({
     return (
         <>
             <h4 className="mb-2 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
-                {makeTitle(category.label as string, false)}
+                {makeTitle(category?.label as string, false)}
             </h4>
             <div className="flex flex-row flex-wrap justify-between w-full mb-4">
-                {options.map((item) => (
+                {options?.map((item) => (
                     <OptionsMenu
                         key={item.value}
                         classNames={{
