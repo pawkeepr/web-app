@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-import ListSwitch from '~/Components/organism/list-switch'
+import ListSwitch from '~/Components/organism/list-vertical-switch'
 import {
     QuestionTypes,
     questions,
@@ -17,6 +17,7 @@ const validationSchema = Yup.object().shape<RecordsShapeYup<QuestionAnamnesis>>(
     name_anamnesis: Yup.string().optional(),
     type_anamnesis: Yup.string().required('Campo obrigatório'),
     notes_anamnesis: Yup.string().optional(),
+    checked: Yup.boolean().required('Campo obrigatório'),
     options_anamnesis: Yup.string()
         .oneOf(['no', 'yes', 'other'])
         .required('Campo obrigatório'),

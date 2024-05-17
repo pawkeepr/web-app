@@ -59,7 +59,7 @@ function makeOptions<T>(
 }
 
 // biome-ignore lint/complexity/noBannedTypes: <explanation>
-const ListSwitch = <T extends object = {}>({
+const ListVerticalSwitch = <T extends object = {}>({
     items,
     name,
     categories,
@@ -105,4 +105,4 @@ const ListSwitch = <T extends object = {}>({
     )
 }
 
-export default ListSwitch
+export default ListVerticalSwitch

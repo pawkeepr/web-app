@@ -7,12 +7,12 @@ import {
     questions,
     type KeyOfQuestionTypes,
 } from '~/constants/anamnese-questions'
-import ListSwitch, { type ListInputProps } from './list-switch'
+import ListVerticalSwitch, { type ListInputProps } from './list-vertical-switch'
 
-const meta: Meta<typeof ListSwitch> = {
+const meta: Meta<typeof ListVerticalSwitch> = {
     tags: ['autodocs'],
-    component: ListSwitch,
-    title: 'Components/Organism/ListSwitch',
+    component: ListVerticalSwitch,
+    title: 'Components/Organism/ListVerticalSwitch',
     args: { onChange: fn() },
     decorators: [
         (Story) => (
@@ -21,11 +21,11 @@ const meta: Meta<typeof ListSwitch> = {
             </Formik>
         ),
     ],
-} satisfies Meta<typeof ListSwitch>
+} satisfies Meta<typeof ListVerticalSwitch>
 
 export default meta
 
-const Template: StoryFn<ListInputProps> = (args) => <ListSwitch {...args} />
+const Template: StoryFn<ListInputProps> = (args) => <ListVerticalSwitch {...args} />
 
 export const Anamnese = Template.bind({})
 Anamnese.args = {
