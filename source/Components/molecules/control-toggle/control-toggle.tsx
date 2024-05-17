@@ -1,6 +1,5 @@
 import cn from 'classnames'
 import { useField } from 'formik'
-import { useEffect } from 'react'
 import { tv } from 'tailwind-variants'
 import Switch from '~/Components/atoms/switch'
 import type { ObjPaths } from '~/types/helpers'
@@ -13,7 +12,7 @@ export type ToggleProps<Ctx = undefined> = {
     children?: React.ReactNode
     label: string
     onClick?: () => void
-    initialValue?: boolean | null
+    initialValue?: boolean
     onChange?: (e: boolean) => void
     divClassName?: string
     legend?: boolean
@@ -29,17 +28,11 @@ const ControlToggle = <Ctx,>({
     label,
     name,
     divClassName,
-    onClick,
-    initialValue = false,
     legend = true,
     mode = ModeInput.editable,
     onChange = () => {},
 }: ToggleProps<Ctx>) => {
     const [field, _meta, helpers] = useField(name)
-
-    useEffect(() => {
-        helpers.setValue(initialValue)
-    }, [])
 
     const handleChange = (e: boolean) => {
         helpers.setValue(e)
@@ -48,7 +41,6 @@ const ControlToggle = <Ctx,>({
 
     const toggleStatus = () => {
         handleChange(!field.value)
-        onClick?.()
     }
 
     const title = field.value ? 'Sim' : 'Não'
