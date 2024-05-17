@@ -8,7 +8,7 @@ import FieldControl, {
 } from '~/Components/molecules/field-control'
 
 const InputPassword = <T, Ctx = undefined>({
-    name = 'password',
+    name = 'password' as any,
     label = 'Senha',
     ...rest
 }: InputControlProps<T, Ctx>) => {
