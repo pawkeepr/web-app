@@ -14,14 +14,15 @@ export type Question = {
 }
 
 // biome-ignore lint/complexity/noBannedTypes: <explanation>
-export type ListInputProps<T extends object = {}> = {
-    ctx: T
+export type ListInputProps<Ctx extends object = {}, T = unknown> = {
+    ctx: Ctx
     items: Option<T>[]
-    name: T extends object ? ArrayPaths<T> : string
+    name: Ctx extends object ? ArrayPaths<Ctx> : string
     categories: { label: string; value: string }[]
     onChange: (
         props: FieldArrayRenderProps & {
             checked: boolean
+            step: string
             option: Option<T>
         },
     ) => void
@@ -79,6 +80,7 @@ const ListHorizontalSwitch = <T extends object = {}>({
         ArrowLeft: keyPressLeft,
         ArrowRight: keyPressRight,
     })
+
     return (
         <FieldArray name={name}>
             {(arrayProps) => (
@@ -115,6 +117,7 @@ const ListHorizontalSwitch = <T extends object = {}>({
                                         onChange?.({
                                             ...arrayProps,
                                             option,
+                                            step: category.value,
                                             checked: e,
                                         })
                                     }

@@ -2,7 +2,6 @@ import { FieldArray, type FieldArrayRenderProps } from 'formik'
 import { useMemo } from 'react'
 import ControlToggle3States from '~/Components/molecules/control-toggle-3-states'
 
-import type { VeterinaryConsultation } from '~/types/appointment'
 import type { ArrayPaths } from '~/types/helpers'
 
 export type Question = {
@@ -10,11 +9,6 @@ export type Question = {
     question: string
     type: string
 }
-
-export type CtxStepAnamnese = Pick<
-    VeterinaryConsultation,
-    'anamnesis' | 'details_pet_consultation' | 'dates_consults'
->
 
 // biome-ignore lint/complexity/noBannedTypes: <explanation>
 export type ListInputProps<T extends object = {}> = {
