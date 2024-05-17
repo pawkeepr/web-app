@@ -2,6 +2,7 @@ import { FieldArray, type FieldArrayRenderProps } from 'formik'
 import { useMemo, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import ControlToggle from '~/Components/molecules/control-toggle'
+import FieldTextArea from '~/Components/molecules/field-text-area'
 import OptionsMenu from '~/Components/molecules/options-menu'
 import { makeTitle } from '~/Components/molecules/options-menu/options-menu'
 import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
@@ -111,23 +112,40 @@ const ListHorizontalSwitch = <T extends object = {}>({
                     <section className="flex-col flex flex-1 !min-h-[460px] ">
                         <div className="flex-[3]">
                             {list.map((option) => (
-                                <ControlToggle
+                                <details
+                                    // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
+                                    tabIndex={0}
+                                    className="w-full collapse collapse-arrow"
                                     key={option.value}
-                                    onChange={(e) =>
-                                        onChange?.({
-                                            ...arrayProps,
-                                            option,
-                                            step: category.value,
-                                            checked: e,
-                                        })
-                                    }
-                                    name={
-                                        `${name}.${
-                                            option.value as number
-                                        }.checked` as ''
-                                    }
-                                    label={option.label}
-                                />
+                                >
+                                    <summary className="w-full collapse-title">
+                                        <ControlToggle
+                                            key={option.value}
+                                            onChange={(e) =>
+                                                onChange?.({
+                                                    ...arrayProps,
+                                                    option,
+                                                    step: category.value,
+                                                    checked: e,
+                                                })
+                                            }
+                                            name={
+                                                `${name}.${
+                                                    option.value as number
+                                                }.checked` as ''
+                                            }
+                                            label={option.label}
+                                        />
+                                    </summary>
+                                    <div className="collapse-content">
+                                        <FieldTextArea
+                                            label="Observações"
+                                            name={
+                                                `${name}.${option.value}.note` as ''
+                                            }
+                                        />
+                                    </div>
+                                </details>
                             ))}
                         </div>
                         <div className="flex justify-between mt-6">
