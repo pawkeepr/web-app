@@ -171,11 +171,11 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                             {options.map((item) => (
                                 <ControlToggle
                                     key={item.value}
-                                    initialValue={null}
                                     ctx={values}
                                     onChange={(e) =>
                                         handleChange?.({
                                             id: item.value,
+                                            checked: e,
                                             name_anamnesis: item.label,
                                             notes_anamnesis: '',
                                             type_anamnesis: item.type,

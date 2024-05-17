@@ -23,7 +23,7 @@ const optionMenu = tv({
 })
 
 type OptionsMenuProps = {
-    item: OptionSelect & { icon: React.ElementType }
+    item: OptionSelect & { icon?: React.ElementType }
     option: OptionSelect
     onChangeOption: (item: OptionSelect) => void
     classNames?: {
@@ -49,7 +49,7 @@ const OptionsMenu = ({
             key={item.value}
             className={optionMenu({ active: item.value === option.value })}
         >
-            <div className="flex w-full items-center justify-center gap-2">
+            <div className="flex items-center justify-center w-full gap-2">
                 {Icon && (
                     <span className={classNames?.icon}>
                         <Icon className="w-4 h-4 mobile:underline" />
