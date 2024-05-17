@@ -1,9 +1,9 @@
 import { FieldArray, type FieldArrayRenderProps } from 'formik'
 import { useMemo } from 'react'
 import ControlToggle3States from '~/Components/molecules/control-toggle-3-states'
+import FieldTextArea from '~/Components/molecules/field-text-area'
 
 import type { ArrayPaths } from '~/types/helpers'
-
 export type Question = {
     id: number
     question: string
@@ -71,23 +71,40 @@ const ListVerticalSwitch = <T extends object = {}>({
                                     {category}
                                 </h1>
                                 {options.map((option) => (
-                                    <ControlToggle3States
+                                    <details
+                                        // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
+                                        tabIndex={0}
+                                        className="w-full collapse collapse-arrow"
                                         key={option.value}
-                                        initialValue={option.checked}
-                                        onChange={(checked) => {
-                                            onChange({
-                                                checked,
-                                                option: option as Option<T>,
-                                                ...arrayProps,
-                                            })
-                                        }}
-                                        name={
-                                            `${name}.${
-                                                option.value as number
-                                            }.checked` as ''
-                                        }
-                                        label={option.label}
-                                    />
+                                    >
+                                        <summary className="w-full collapse-title">
+                                            <ControlToggle3States
+                                                key={option.value}
+                                                initialValue={option.checked}
+                                                onChange={(checked) => {
+                                                    onChange({
+                                                        checked,
+                                                        option: option as Option<T>,
+                                                        ...arrayProps,
+                                                    })
+                                                }}
+                                                name={
+                                                    `${name}.${
+                                                        option.value as number
+                                                    }.checked` as ''
+                                                }
+                                                label={option.label}
+                                            />
+                                        </summary>
+                                        <div className="collapse-content">
+                                            <FieldTextArea
+                                                label="Observações"
+                                                name={
+                                                    `${name}.${option.value}.note` as ''
+                                                }
+                                            />
+                                        </div>
+                                    </details>
                                 ))}
                             </section>
                         ))}
