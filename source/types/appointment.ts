@@ -13,6 +13,10 @@ export interface VeterinaryConsultation {
     tutor_pet_vet: TutorPetVet
     details_pet_consultation: DetailsPetConsultation
     anamnesis: Anamnesis
+    exams_anamnesis: {
+        physical_exam: PhysicalExam
+        complementary_exams: ComplementaryExam[]
+    }
     treatments: Treatments
     appointment_details: AppointmentDetails
     appointment_status?: AppointmentStatus
@@ -75,6 +79,19 @@ export interface DetailsPetConsultation {
     weight: string
     type_weight: string
     imc: number
+}
+
+interface PhysicalExam {
+    diet: string
+    fc: string // Frequência Cardíaca
+    fr: string // Frequência Respiratória
+    tpc: string // Tempo de Preenchimento Capilar
+    hydration: string
+    pa: string // Pressão Arterial
+    behavior: string
+    mucous_membranes: string // Mucosas
+    body_state: string // Estado Corporal
+    other_finds: string[] // Outros Achados
 }
 
 export interface Anamnesis {
