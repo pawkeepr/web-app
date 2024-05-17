@@ -11,6 +11,7 @@ import ListHorizontalSwitch from '~/Components/organism/list-horizontal-switch'
 import type { KeyOfExamsTypes } from '~/constants'
 import { exams } from '~/constants/exams-questions'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import type { ComplementaryExam } from '~/types/appointment'
 import CardSimplePet from '../../molecules/card-simple-pet'
 import type { CtxStepAnamnese } from '../../validations.yup'
 import { screen } from '../styles'
@@ -39,8 +40,7 @@ const STEPS: {
 ]
 
 const StepExams = () => {
-    const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>()
-
+    const { values } = useFormikContextSafe<CtxStepAnamnese>()
     return (
         <>
             <CardSimplePet />
@@ -52,29 +52,22 @@ const StepExams = () => {
                     ctx={values}
                     items={exams.map((item) => ({
                         ...item,
+                        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
                         type: item.type as any,
                         value: item.id,
                         checked: false,
                     }))}
                     name="exams_anamnesis.complementary_exams"
                     categories={STEPS}
-                    onChange={({ option, step }) => {
-                        // const index =
-                        //     values.exams_anamnesis?.complementary_exams?.findIndex(
-                        //         (item) => item.type_exam === step,
-                        //     )
-                        // if (index === -1) {
-                        //     const item = {
-                        //         list_exams: [option.value],
-                        //         notes: '',
-                        //         type_exam: step as KeyOfExamsTypes,
-                        //     } as ComplementaryExam
-                        //     setFieldValue('exams_anamnesis.complementary_exams', [
-                        //         ...(values?.exams_anamnesis?.complementary_exams ??
-                        //             {}),
-                        //         item,
-                        //     ])
-                        // }
+                    onChange={({ option, step, checked, replace }) => {
+                        const item = {
+                            id: option.value,
+                            name_exam: option.label,
+                            notes: '',
+                            type_exam: step,
+                            checked,
+                        } as ComplementaryExam & { id: number; checked: boolean }
+                        replace?.(option.value as number, item)
                     }}
                 />
             </div>

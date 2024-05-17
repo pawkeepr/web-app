@@ -141,7 +141,7 @@ const ListHorizontalSwitch = <T extends object = {}>({
                                         <FieldTextArea
                                             label="Observações"
                                             name={
-                                                `${name}.${option.value}.note` as ''
+                                                `${name}.${option.value}.notes` as ''
                                             }
                                         />
                                     </div>

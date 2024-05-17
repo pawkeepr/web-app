@@ -34,7 +34,7 @@ export type AppointmentStatus = {
 
 export type ComplementaryExam = {
     type_exam: string
-    list_exams: string[]
+    name_exam: string
     notes: string
 }
 
