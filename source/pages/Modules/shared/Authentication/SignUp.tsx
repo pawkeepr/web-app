@@ -89,11 +89,11 @@ const CoverSignUp = ({ mode, bgImage }: CoverSignInProps) => {
             >
                 {({ values, isValid, isSubmitting, handleSubmit }) => (
                     <Form onSubmit={handleSubmit}>
-                        <div className="flex flex-col w-full items-center mt-2">
+                        <div className="flex flex-col items-center w-full mt-2">
                             <p className="text-sm font-bold text-secondary-500">
                                 Crie uma Conta
                             </p>
-                            <p className="text-gray-400 text-xs">
+                            <p className="text-xs text-gray-400">
                                 Aproveite todos os Benefícios Agora!
                             </p>
                             <p className="text-xs font-bold text-secondary-500">
@@ -106,57 +106,54 @@ const CoverSignUp = ({ mode, bgImage }: CoverSignInProps) => {
                             initialFocus
                             name="email"
                             type="email"
-                            className=" "
+                            className=""
                             aria-label="email"
                             placeholder="Digite seu email"
                             required
                             disabledError
                         />
-                        <div className="grid grid-cols-2 mobile:grid-cols-1 gap-2">
-                            <FieldPassword
-                                ctx={values}
-                                required
-                                label="Senha"
-                                name="password"
-                                placeholder="Digite sua senha"
-                                aria-label="password"
-                                disabledError
-                            />
-
-                            <FieldPassword
-                                ctx={values}
-                                required
-                                label="Repita a senha"
-                                name="passwordConfirm"
-                                placeholder="Repita a senha"
-                                aria-label="password-confirm"
-                                disabledError
-                            />
-                        </div>
+                        <FieldPassword
+                            ctx={values}
+                            required
+                            label="Senha"
+                            name="password"
+                            placeholder="Digite sua senha"
+                            aria-label="password"
+                            disabledError
+                        />
+                        <FieldPassword
+                            ctx={values}
+                            required
+                            label="Repita a senha"
+                            name="passwordConfirm"
+                            placeholder="Repita a senha"
+                            aria-label="password-confirm"
+                            disabledError
+                        />
 
                         <PasswordRules value={values.password} />
-                        <div className="flex flex-col justify-start items-start">
+                        <div className="flex flex-col items-start justify-start">
                             <FieldCheckbox ctx={values} name="termsOfUse">
-                                <p className="italic text-xs text-justify">
+                                <p className="text-xs italic text-justify">
                                     {
                                         'Você se registrando aceita os termos de uso da plataforma: '
                                     }
                                     <Link
                                         href="/service-terms"
-                                        className="text-primary no-underline fst-normal fw-medium"
+                                        className="no-underline text-primary fst-normal fw-medium"
                                     >
                                         Termos de Uso.{' '}
                                     </Link>
                                 </p>
                             </FieldCheckbox>
                             <FieldCheckbox ctx={values} name="privacyPolicy">
-                                <p className="italic text-xs text-justify">
+                                <p className="text-xs italic text-justify">
                                     {
                                         'Você se registrando aceita a política de privacidade da plataforma: '
                                     }
                                     <Link
                                         href="/privacy-policy"
-                                        className="text-primary no-underline fst-normal fw-medium"
+                                        className="no-underline text-primary fst-normal fw-medium"
                                     >
                                         Política de Privacidade
                                     </Link>
@@ -164,7 +161,7 @@ const CoverSignUp = ({ mode, bgImage }: CoverSignInProps) => {
                             </FieldCheckbox>
                         </div>
 
-                        <div className="flex  items-center justify-center">
+                        <div className="flex items-center justify-center">
                             <BtnPrimary
                                 label={
                                     isLoading === LOADING.PENDING
@@ -189,7 +186,7 @@ const CoverSignUp = ({ mode, bgImage }: CoverSignInProps) => {
             </div>
             <BtnLink
                 message="Voltar"
-                className="hidden mobile:flex max-w-fit absolute top-2 left-2  items-center justify-start"
+                className="absolute items-center justify-start hidden mobile:flex max-w-fit top-2 left-2"
                 href={link}
             >
                 <ArrowLeftCircleIcon />

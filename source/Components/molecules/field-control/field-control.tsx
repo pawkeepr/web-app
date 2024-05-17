@@ -102,7 +102,7 @@ const FieldControl = <T, Ctx = any>({
                 id={id as string}
                 separator={separator as string}
             />
-            <div className="relative ">
+            <div className="relative">
                 {startIcon && (
                     <div className="absolute inset-y-0 flex items-center pl-1 text-sm text-gray-400 pointer-events-none left-1">
                         {startIcon}
