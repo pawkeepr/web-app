@@ -48,9 +48,9 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
     }, [values])
 
     return (
-        <div className="flex relative flex-col card-body shadow-lg mobile:p-0">
+        <div className="relative flex flex-col shadow-lg card-body mobile:p-0">
             <div className="p-1 m-2 mb-4">
-                <h4 className="text-center font-sans font-semibold text-base capitalize">
+                <h4 className="font-sans text-base font-semibold text-center capitalize">
                     Informações do Tutor
                     <br />
                     <span className="text-sm font-bold text-secondary-500">
@@ -84,7 +84,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                         disabledError
                     />
                 </div>
-                <div className="grid grid-cols-3 mobile:grid-cols-1 gap-2">
+                <div className="grid grid-cols-3 gap-2 mobile:grid-cols-1">
                     <FieldDocument
                         mode={mode}
                         ctx={values}
@@ -98,6 +98,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                     />
 
                     <FieldPhone
+                        ctx={values}
                         mode={mode}
                         label="Telefone/Celular"
                         name="ownerEmergencyContact.phone"
@@ -117,7 +118,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                         name="ownerEmergencyContact.email"
                         aria-label="email"
                         disabled={isPending || tutorExist}
-                        className=" "
+                        className=""
                         placeholder="Digite o email do tutor"
                         required
                         disabledError
@@ -125,7 +126,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                     <AddressTutor disabled={tutorExist} mode={mode} />
                 </div>
             </div>
-            <div className="flex align-items-center justify-center gap-3 mt-4">
+            <div className="flex justify-center gap-3 mt-4 align-items-center">
                 <BtnCancel
                     condition={mode === 'editable'}
                     label="Voltar"

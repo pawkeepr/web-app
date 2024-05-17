@@ -74,7 +74,7 @@ const styledIcon = tv({
 
 export type BtnProps = {
     icon?: React.ReactNode | string | JSX.Element | JSX.ElementType | null
-    label?: string
+    label: string
     iconStyle?: string
     children?: React.ReactNode
     isLoading?: boolean

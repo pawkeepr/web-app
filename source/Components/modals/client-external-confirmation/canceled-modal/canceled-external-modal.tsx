@@ -59,18 +59,7 @@ const CanceledExternalModal = ({
                     <button
                         type="button"
                         onClick={showModal}
-                        className="
-                                rounded-md 
-                                bg-secondary-500 bg-opacity-20 
-                                px-4 py-2 text-sm 
-                                font-medium 
-                                text-white 
-                                hover:bg-opacity-30 
-                                focus:outline-none 
-                                focus-visible:ring-2 
-                                focus-visible:ring-white 
-                                focus-visible:ring-opacity-75
-                            "
+                        className="px-4 py-2 text-sm font-medium text-white rounded-md  bg-secondary-500 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
                     >
                         {label}
                     </button>
@@ -101,7 +90,7 @@ const CanceledExternalModal = ({
                                 className="fixed inset-0 overflow-y-auto"
                                 onSubmit={handleSubmit}
                             >
-                                <div className="flex min-h-full items-center justify-center p-4 text-center">
+                                <div className="flex items-center justify-center min-h-full p-4 text-center">
                                     <Transition.Child
                                         as={Fragment}
                                         enter="ease-out duration-300"
@@ -136,7 +125,7 @@ const CanceledExternalModal = ({
                                                 {title}
                                             </Dialog.Title>
 
-                                            <div className="mt-3 p-1">
+                                            <div className="p-1 mt-3">
                                                 <p className="text-sm text-gray-500 dark:!text-gray-300 leading-6">
                                                     Está ação não poderá ser
                                                     desfeita.
@@ -150,10 +139,11 @@ const CanceledExternalModal = ({
                                                 name="appointment_status.reason_canceled"
                                             />
 
-                                            <div className="mt-4 flex justify-center items-center">
+                                            <div className="flex items-center justify-center mt-4">
                                                 <BtnCancel
                                                     condition={!isLoading}
                                                     type="button"
+                                                    label="Voltar"
                                                     onClick={closeModal}
                                                 />
 

@@ -2,8 +2,8 @@ import { Form } from 'formik'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import type { InitialValues } from '~/pages/NewPetPage'
 import type { StepProps, Tabs } from '~/types/helpers'
+import type { InitialValues } from '../../MaintainPetPage'
 import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
 
 type StepHealthInsuranceKeys = Pick<InitialValues, 'health_insurance' | 'id'>
@@ -19,13 +19,13 @@ export default function StepHealthInsurance({
 
     return (
         <Form
-            className="flex relative flex-col card-body shadow-lg mobile:p-0"
+            className="relative flex flex-col shadow-lg card-body mobile:p-0"
             onSubmit={handleSubmit}
         >
             <div className="flex justify-center mb-2">
                 Preencha as Informações do plano de saúde do Pet
             </div>
-            <div className="grid grid-cols-2 mobile:grid-cols-1 gap-3 m-2 p-2">
+            <div className="grid grid-cols-2 gap-3 p-2 m-2 mobile:grid-cols-1">
                 <FieldControl
                     mode={mode}
                     ctx={values}
@@ -56,7 +56,7 @@ export default function StepHealthInsurance({
                     type="date"
                 />
             </div>
-            <div className="flex align-items-center justify-center gap-3 mt-4">
+            <div className="flex justify-center gap-3 mt-4 align-items-center">
                 <BtnCancel
                     condition={!isPending && !isSubmitting && mode === 'editable'}
                     label="Voltar"

@@ -168,15 +168,15 @@ const CreateOrUpdatePetPage = ({
                     description="Importante!"
                     message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
                 >
-                    {({ onChangeOpen }) => {
+                    {(openModal) => {
                         return (
-                            <div className="w-full flex mobile:justify-center mobile:items-center">
+                            <div className="flex w-full mobile:justify-center mobile:items-center">
                                 <BtnCancel
                                     disabled={mode !== 'editable'}
                                     type="button"
                                     className="mobile:w-96"
                                     label="Cancelar"
-                                    onClick={() => onChangeOpen(true)}
+                                    onClick={openModal}
                                 />
                             </div>
                         )
