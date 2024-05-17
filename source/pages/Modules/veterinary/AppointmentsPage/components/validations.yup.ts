@@ -1,14 +1,17 @@
 import * as yup from 'yup'
 import { schemaTutorPetVetValidation } from '~/Components/modals/scheduled-v2-modal/components/steps/validation.yup'
-import type { CtxStepAnamnese } from '~/Components/organism/card-input-anamnese/card-input-anamnese'
 import type {
     AppointmentDetails,
     VeterinaryConsultation,
 } from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
 
+export type CtxStepAnamnese = Pick<
+    VeterinaryConsultation,
+    'anamnesis' | 'details_pet_consultation' | 'dates_consults' | 'exams_anamnesis'
+>
+
 export type CtxStepTreatment = Pick<VeterinaryConsultation, 'treatments'>
-export type { CtxStepAnamnese }
 export const schemaValidationDetailsPetConsultation = yup
     .object()
     .shape<RecordsShapeYup<VeterinaryConsultation['details_pet_consultation']>>({
@@ -33,6 +36,7 @@ export const schemaStepAnamneseValidation = yup
     .shape<RecordsShapeYup<CtxStepAnamnese>>({
         details_pet_consultation: schemaValidationDetailsPetConsultation,
         anamnesis: yup.object().optional(),
+        exams_anamnesis: yup.array().optional(),
         dates_consults: yup.object().optional(),
     })
 
@@ -87,6 +91,7 @@ export const schemaStepAppointment = yup
         anamnesis: yup.object().optional(),
         treatments: schemaStepTreatmentValidation.optional().nullable(),
         appointment_details: schemaStepAppointmentDetails,
+        exams_anamnesis: yup.array().optional(),
         appointment_status: yup.string().optional(),
     })
 
