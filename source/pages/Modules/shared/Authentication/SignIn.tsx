@@ -54,16 +54,16 @@ const CoverSignIn = ({ mode, bgImage }: CoverSignInProps) => {
             hasImage
             loading={LOADING.SUCCESS === isLoading}
         >
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col items-center justify-center">
                 <p className="text-sm font-bold text-secondary-500">
                     Seja Bem-vindo(a)!
                 </p>
             </div>
-            <div className="mobile:!mt-0 mobile:p-0 web:p-4">
+            <div className="mobile:!mt-0 mobile:p-0 web:p-1">
                 {loading && (
                     <div className="flex justify-center item-center web:min-h-[236px]">
                         <div
-                            className="spinner-border text-primary-500 w-44 h-44 my-4"
+                            className="my-4 spinner-border text-primary-500 w-44 h-44"
                             role="status"
                         >
                             <span className="visually-hidden">Loading...</span>
@@ -72,14 +72,14 @@ const CoverSignIn = ({ mode, bgImage }: CoverSignInProps) => {
                 )}
 
                 {!loading && (
-                    <div className="web:max-h-[236px]">
+                    <div className="web:max-h-[236px] p-2">
                         <AuthInputs />
                     </div>
                 )}
             </div>
 
-            <div className="w-full flex flex-col justify-center items-center ">
-                <p className="-mb-2 text-gray-400 font-normal">
+            <div className="flex flex-col items-center justify-center w-full ">
+                <p className="-mb-2 font-normal text-gray-400">
                     Você não tem uma conta ?
                 </p>
                 <BtnLink message="Criar Conta" href={link} />

@@ -57,7 +57,7 @@ const Auth = () => {
     return (
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
             {({ handleSubmit }) => (
-                <Form onSubmit={handleSubmit} className="w-full">
+                <Form onSubmit={handleSubmit} className="w-full p-2">
                     <FieldControl
                         ctx={{} as CtxSchema}
                         label="Email"
@@ -71,9 +71,10 @@ const Auth = () => {
                         disabledError
                     />
 
-                    <div className="position-relative mb-3 w-full flex flex-col justify-center items-end">
+                    <div className="flex flex-col items-end justify-center w-full mb-3 position-relative">
                         <FieldPassword
                             label="Senha"
+                            ctx={{} as CtxSchema}
                             placeholder="Digite sua senha"
                             name="password"
                             data-testid="password-input"
@@ -84,19 +85,7 @@ const Auth = () => {
                         <BtnLink
                             message="Esqueceu a senha?"
                             href="/forgot-password"
-                            className="
-                                    h-fit
-                                    w-fit
-                                    content-end
-                                    text-xs
-                                    flex
-                                    items-center
-                                    justify-end
-                                    z-10
-                                    font-semibold
-                                    p-0
-                                    m-0
-                                "
+                            className="z-10 flex items-center content-end justify-end p-0 m-0 text-xs font-semibold h-fit w-fit"
                         />
                     </div>
                     <BtnPrimary
