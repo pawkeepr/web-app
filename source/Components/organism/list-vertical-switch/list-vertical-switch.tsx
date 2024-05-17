@@ -1,13 +1,15 @@
 import { FieldArray, type FieldArrayRenderProps } from 'formik'
 import { useMemo } from 'react'
 import ControlToggle3States from '~/Components/molecules/control-toggle-3-states'
-import {
-    TKeysOfQuestionTypes,
-    type KeyOfQuestionTypes,
-    type Question,
-} from '~/constants/anamnese-questions'
+
 import type { VeterinaryConsultation } from '~/types/appointment'
 import type { ArrayPaths } from '~/types/helpers'
+
+export type Question = {
+    id: number
+    question: string
+    type: string
+}
 
 export type CtxStepAnamnese = Pick<
     VeterinaryConsultation,
@@ -38,11 +40,11 @@ type Option<T> = {
 function makeOptions<T>(
     items: Question[],
     categories: string[],
-): [KeyOfQuestionTypes, Option<T>[]][] {
+): [string, Option<T>[]][] {
     return categories
         .map((category) => {
             const filteredItems = items
-                .filter((item: Question) => item.type.includes(category))
+                .filter((item: Question) => item.type === category)
                 .map((item: Question) => ({
                     ...item,
                     value: item.id,
@@ -52,10 +54,7 @@ function makeOptions<T>(
                 }))
             return [category, filteredItems]
         })
-        .filter(([, options]) => options.length > 0) as [
-        KeyOfQuestionTypes,
-        Option<T>[],
-    ][]
+        .filter(([, options]) => options.length > 0) as [string, Option<T>[]][]
 }
 
 // biome-ignore lint/complexity/noBannedTypes: <explanation>
@@ -75,7 +74,7 @@ const ListVerticalSwitch = <T extends object = {}>({
                         {list.map(([category, options]) => (
                             <section key={category} className="my-1">
                                 <h1 className="mb-2 font-sans text-base font-semibold text-gray-500">
-                                    {TKeysOfQuestionTypes[category]}
+                                    {category}
                                 </h1>
                                 {options.map((option) => (
                                     <ControlToggle3States
