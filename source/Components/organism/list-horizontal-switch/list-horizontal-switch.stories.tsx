@@ -59,8 +59,8 @@ const Template: StoryFn<ListInputProps> = (args) => (
     <ListHorizontalSwitch {...args} />
 )
 
-export const Anamnese = Template.bind({})
-Anamnese.args = {
+export const Exams = Template.bind({})
+Exams.args = {
     ctx: {
         exams: [],
     },
