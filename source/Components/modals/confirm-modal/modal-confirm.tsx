@@ -42,7 +42,7 @@ const ModalConfirm = ({
                     <button
                         type="button"
                         onClick={() => showModal()}
-                        className="px-4 py-2 text-sm font-medium text-white rounded-md  bg-secondary-500 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                        className="px-4 py-2 text-sm font-medium text-white rounded-md bg-secondary-500 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
                     >
                         {label}
                     </button>
@@ -68,8 +68,12 @@ const ModalConfirm = ({
                         {message}
                     </p>
 
-                    <div className="flex items-center justify-center mt-4">
-                        <BtnCancel type="button" onClick={handleCancel} />
+                    <div className="flex items-center justify-center gap-1 mt-4">
+                        <BtnCancel
+                            type="button"
+                            onClick={handleCancel}
+                            label="Cancelar"
+                        />
 
                         <BtnPrimary
                             type="button"

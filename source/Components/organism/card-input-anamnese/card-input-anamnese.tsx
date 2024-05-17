@@ -200,6 +200,7 @@ const CardInputAnamnese = ({ items, handleChange }: CardInputProps) => {
                                             name_anamnesis: item.label,
                                             notes_anamnesis: '',
                                             type_anamnesis: item.type,
+                                            checked: e,
                                             options_anamnesis:
                                                 OPTION_BOOLEAN[
                                                     String(e) as OPTION_BOOLEAN

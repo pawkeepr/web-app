@@ -1,5 +1,5 @@
+import { useMemo } from 'react'
 import ModalConfirm from '~/Components/modals/confirm-modal/modal-confirm'
-import FieldArraySafe from '~/Components/molecules/field-array-safe'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import CardSimplePet from '../../molecules/card-simple-pet'
@@ -12,7 +12,16 @@ const TRADUCTION = {
 }
 
 const StepDiagnosis = () => {
-    const { values } = useFormikContextSafe<CtxStepAnamnese>()
+    const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>()
+
+    const questions_answered = useMemo(
+        () =>
+            values?.anamnesis?.questions_anamnesis?.filter(
+                (question) =>
+                    question?.checked !== null && question?.checked !== undefined,
+            ) ?? [],
+        [values?.anamnesis?.questions_anamnesis],
+    )
 
     return (
         <>
@@ -29,22 +38,28 @@ const StepDiagnosis = () => {
                     <CardSimplePet />
                 </div>
                 <section className="col-span-full ">
-                    <FieldArraySafe
-                        ctx={values}
-                        name="anamnesis.questions_anamnesis"
-                    >
-                        {({ remove }) => (
-                            <div className="flex flex-col flex-1 w-full gap-1 overflow-auto h-44 scroll-smooth scroll-width-thin mine-scroll-bar">
-                                {values?.anamnesis?.questions_anamnesis?.map(
-                                    (anamnesis, index) => (
-                                        <ModalConfirm
-                                            onConfirm={() => remove(index)}
-                                            key={`anamnesis-${
-                                                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                                                index
-                                            }`}
-                                            title="Deseja remover a seguinte questão?"
-                                            description={`
+                    <div className="flex flex-col flex-1 w-full gap-1 overflow-auto h-44 scroll-smooth scroll-width-thin mine-scroll-bar">
+                        {questions_answered?.map((anamnesis, index) => (
+                            <ModalConfirm
+                                onConfirm={() => {
+                                    const items =
+                                        values?.anamnesis?.questions_anamnesis
+                                    items[anamnesis.id as number] = {
+                                        ...items[anamnesis.id as number],
+                                        checked: null,
+                                    }
+
+                                    setFieldValue(
+                                        'anamnesis.questions_anamnesis',
+                                        items,
+                                    )
+                                }}
+                                key={`anamnesis-${
+                                    // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                    index
+                                }`}
+                                title="Deseja remover a seguinte questão?"
+                                description={`
                                                     As questões de anamnese caso
                                                     sejam removidas, não serão
                                                     enviadas ao relatório final.
@@ -52,59 +67,50 @@ const StepDiagnosis = () => {
                                                     engano, basta respondê-la
                                                     novamente na seção de anamnese.
                                             `}
-                                            message={`${
-                                                anamnesis?.name_anamnesis
-                                            } - ${
-                                                TRADUCTION[
-                                                    anamnesis?.options_anamnesis as
-                                                        | 'yes'
-                                                        | 'no'
-                                                ]
-                                            }`}
-                                        >
-                                            {(showModal) => (
-                                                <button
-                                                    onClick={showModal}
-                                                    type="button"
-                                                    key={`anamnesis-${
-                                                        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                                                        index
-                                                    }`}
-                                                    className="w-full px-2 py-1 text-xs rounded-md"
-                                                >
-                                                    <div className="flex flex-row w-full px-2 bg-white border border-dashed rounded-sm border-primary">
-                                                        <div className="flex flex-wrap w-full">
-                                                            <h6 className="flex-[2] font-mono font-semibold text-left capitalize">
-                                                                {
-                                                                    anamnesis?.name_anamnesis
-                                                                }
-                                                            </h6>
+                                message={`${anamnesis?.name_anamnesis} - ${
+                                    TRADUCTION[
+                                        anamnesis?.options_anamnesis as 'yes' | 'no'
+                                    ]
+                                }`}
+                            >
+                                {(showModal) => (
+                                    <button
+                                        onClick={showModal}
+                                        type="button"
+                                        key={`anamnesis-${
+                                            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                            index
+                                        }`}
+                                        className="w-full px-2 py-1 text-xs rounded-md"
+                                    >
+                                        <div className="flex flex-row w-full px-2 bg-white border border-dashed rounded-sm border-primary">
+                                            <div className="flex flex-wrap w-full">
+                                                <h6 className="flex-[2] font-mono font-semibold text-left capitalize">
+                                                    {anamnesis?.name_anamnesis}
+                                                </h6>
 
-                                                            <p className="flex-1 font-mono capitalize">
-                                                                {
-                                                                    TRADUCTION[
-                                                                        anamnesis?.options_anamnesis as
-                                                                            | 'yes'
-                                                                            | 'no'
-                                                                    ]
-                                                                }
-                                                            </p>
-                                                            <button
-                                                                type="button"
-                                                                className="text-red-500"
-                                                            >
-                                                                X
-                                                            </button>
-                                                        </div>
-                                                    </div>
+                                                <p className="flex-1 font-mono capitalize">
+                                                    {
+                                                        TRADUCTION[
+                                                            anamnesis?.options_anamnesis as
+                                                                | 'yes'
+                                                                | 'no'
+                                                        ]
+                                                    }
+                                                </p>
+                                                <button
+                                                    type="button"
+                                                    className="text-red-500"
+                                                >
+                                                    X
                                                 </button>
-                                            )}
-                                        </ModalConfirm>
-                                    ),
+                                            </div>
+                                        </div>
+                                    </button>
                                 )}
-                            </div>
-                        )}
-                    </FieldArraySafe>
+                            </ModalConfirm>
+                        ))}
+                    </div>
                     <legend className="text-xs text-center text-gray-400 col-span-full">
                         As questões de anamnese caso sejam removidas, não serão
                         enviadas ao relatório final. Caso tenha as removido por

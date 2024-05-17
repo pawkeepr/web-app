@@ -13,7 +13,6 @@ type SwitchProps<Ctx = undefined> = {
     name: Ctx extends undefined ? string : ObjPaths<Ctx>
     children?: React.ReactNode
     label: string
-    onClick?: () => void
     initialValue?: boolean | null
     onChange?: (e: boolean) => void
     divClassName?: string
@@ -97,7 +96,6 @@ const ControlToggle3States = <Ctx,>({
     label,
     name,
     divClassName,
-    onClick,
     initialValue = false,
     legend = true,
     size = 'md',
@@ -128,7 +126,6 @@ const ControlToggle3States = <Ctx,>({
         const clickPosition = event.clientX - switchRect.left
         const newValue = clickPosition > switchRect.width / 2
         handleChange(!!newValue)
-        onClick?.()
     }
 
     const hasInd = field.value === null || field.value === undefined

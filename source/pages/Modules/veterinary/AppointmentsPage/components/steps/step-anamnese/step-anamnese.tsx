@@ -48,6 +48,7 @@ const StepAnamnese = () => {
                                 OPTION_BOOLEAN[String(checked) as OPTION_BOOLEAN],
                         }
                         const isValid = validationSchema.isValidSync(item)
+
                         if (!isValid) return errorToast('Erro ao adicionar item')
                         replace?.(option.value as number, item)
                     }}

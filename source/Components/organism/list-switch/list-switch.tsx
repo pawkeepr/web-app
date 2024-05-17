@@ -69,7 +69,7 @@ const ListSwitch = <T extends object = {}>({
 
     return (
         <FieldArray name={name}>
-            {(props) => (
+            {(arrayProps) => (
                 <section className="flex-col flex flex-1 !min-h-[460px] ">
                     <div className="flex-[3]">
                         {list.map(([category, options]) => (
@@ -81,13 +81,13 @@ const ListSwitch = <T extends object = {}>({
                                     <ControlToggle3States
                                         key={option.value}
                                         initialValue={option.checked}
-                                        onChange={(checked) =>
-                                            onChange.bind(null, {
+                                        onChange={(checked) => {
+                                            onChange({
                                                 checked,
                                                 option: option as Option<T>,
-                                                ...props,
+                                                ...arrayProps,
                                             })
-                                        }
+                                        }}
                                         name={
                                             `${name}.${
                                                 option.value as number
