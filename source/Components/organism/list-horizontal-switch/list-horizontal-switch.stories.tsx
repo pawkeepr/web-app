@@ -7,9 +7,7 @@ import ListHorizontalSwitch, { type ListInputProps } from './list-horizontal-swi
 
 import type { IconType } from 'react-icons'
 import {
-    GiBodyBalance,
     GiChemicalDrop,
-    GiHealthNormal,
     GiRadiations,
     GiShieldBash,
     GiTestTubes,
@@ -26,16 +24,10 @@ const STEPS: {
     { label: 'Parasitologia', value: 'parasitology', icon: GiChemicalDrop },
     { label: 'Imunologia', value: 'immunology', icon: GiShieldBash },
     { label: 'Urinálise', value: 'urinalysis', icon: GiChemicalDrop },
-    { label: 'Local da Lesão', value: 'lesion_location', icon: GiBodyBalance },
     {
         label: 'Ultrassonografia / Radiologia',
         value: 'ultrasound_radiology',
         icon: GiRadiations,
-    },
-    {
-        label: 'Descrição de Lesões',
-        value: 'lesion_description',
-        icon: GiHealthNormal,
     },
 ]
 

@@ -97,7 +97,7 @@ const ListSwitch = <T,>({
                     />
                 ))}
             </div>
-            <section className="mt-2 w-full">
+            <section className="w-full mt-2">
                 {options.map((option) => (
                     <ControlToggle
                         content={
@@ -164,7 +164,7 @@ const ListHorizontalSwitch = <T extends object = {}>({
                     <h4 className="flex-1 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
                         {makeTitle(category.label, false)}
                     </h4>
-                    <section className="flex flex-row flex-wrap justify-between  w-full h-[72vh] overflow-y-auto scroll">
+                    <section className="flex flex-row flex-wrap justify-between  w-full h-[70vh] overflow-y-auto scroll">
                         {list.map(([key, options]) => (
                             <ListSwitchControl
                                 condition={category.value === key}
