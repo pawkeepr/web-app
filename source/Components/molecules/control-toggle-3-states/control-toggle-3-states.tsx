@@ -1,7 +1,8 @@
 import { Switch } from '@headlessui/react'
 import cn from 'classnames'
 import { useField } from 'formik'
-import { useEffect, type MouseEvent } from 'react'
+import { useEffect, useState, type MouseEvent } from 'react'
+import { GrDown } from 'react-icons/gr'
 import { tv, type VariantProps } from 'tailwind-variants'
 import { pointer } from '~/Components/atoms/switch'
 import type { ObjPaths } from '~/types/helpers'
@@ -12,6 +13,7 @@ type SwitchProps<Ctx = undefined> = {
     ctx?: Ctx extends undefined ? never : Ctx
     name: Ctx extends undefined ? string : ObjPaths<Ctx>
     children?: React.ReactNode
+    content?: React.ReactNode
     label: string
     initialValue?: boolean | null
     onChange?: (e: boolean) => void
@@ -94,8 +96,8 @@ const ControlToggle3States = <Ctx,>({
     className,
     children,
     label,
+    content = null,
     name,
-    divClassName,
     initialValue = false,
     legend = true,
     size = 'md',
@@ -103,6 +105,7 @@ const ControlToggle3States = <Ctx,>({
     onChange = () => {},
 }: ControlToggle3StatesProps<Ctx>) => {
     const [field, _meta, helpers] = useField(name)
+    const [openAccordion, setOpenAccordion] = useState(false)
 
     useEffect(() => {
         helpers.setValue(initialValue)
@@ -133,58 +136,94 @@ const ControlToggle3States = <Ctx,>({
     const hasTitle = mode === ModeInput.readonly
 
     return (
-        <div className={divClassName}>
-            <div className="flex items-center justify-between gap-2 mb-2">
-                <span
-                    className={cn('font-semibold ', {
-                        'text-gray-600': field.value,
-                        'text-gray-400': !field.value,
-                    })}
-                >
-                    {label}
-                </span>
-                <div className="flex items-center gap-1 text-xs">
-                    <span
-                        className={cn('text-gray-400', {
-                            hidden: !legend,
+        <div
+            // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
+            tabIndex={0}
+            className={cn('w-full', {
+                collapse: !!content,
+                '!no-underline': !content,
+                'collapse-open': openAccordion,
+                'collapse-close': !openAccordion,
+            })}
+        >
+            <summary
+                style={{ listStyle: 'none' }}
+                className={cn('w-full !py-0 px-1 mb-0', {
+                    'collapse-title': !!content,
+                })}
+            >
+                <div className="flex items-center justify-between gap-2 mb-2">
+                    <h1
+                        onKeyDown={() => {}}
+                        onClick={() => setOpenAccordion((state) => !state)}
+                        className={cn('font-semibold flex flex-row gap-1 w-fit', {
+                            'text-gray-600': field.value,
+                            'text-gray-400': !field.value,
                         })}
                     >
-                        Não
-                    </span>
-                    <Switch
-                        disabled={mode === ModeInput.readonly}
-                        onClick={(e) => handleClick(e)}
-                        checked={field.value === true}
-                        className={controlSwitch({
-                            mode,
-                            color: 'primary',
-                            checked: hasInd ? 'null' : field.value,
-                            className,
-                            size,
-                        })}
-                    >
-                        <span className="sr-only">Use setting</span>
-                        {/* Adjusted the translate class to center the circle */}
+                        {label}
+                        {content && (
+                            <GrDown
+                                className={cn(
+                                    'ml-4 w-4 h-4 transform transition-transform',
+                                    {
+                                        'rotate-180': openAccordion,
+                                        'rotate-0': !openAccordion,
+                                    },
+                                )}
+                            />
+                        )}
+                    </h1>
+                    <div className="flex items-center gap-1 text-xs">
                         <span
-                            aria-hidden="true"
-                            className={pointer({
-                                size,
-                                translateClass: hasInd ? 'null' : field.value,
+                            className={cn('text-gray-400', {
+                                hidden: !legend,
                             })}
-                        />
-                        {/* Text inside the switch */}
-                    </Switch>
-                    <span
-                        className={cn('text-gray-400 text-xs', {
-                            hidden: !legend,
-                        })}
-                    >
-                        Sim
-                    </span>
+                        >
+                            Não
+                        </span>
+                        <Switch
+                            disabled={mode === ModeInput.readonly}
+                            onClick={(e) => handleClick(e)}
+                            checked={field.value === true}
+                            className={controlSwitch({
+                                mode,
+                                color: 'primary',
+                                checked: hasInd ? 'null' : field.value,
+                                className,
+                                size,
+                            })}
+                        >
+                            <span className="sr-only">Use setting</span>
+                            {/* Adjusted the translate class to center the circle */}
+                            <span
+                                aria-hidden="true"
+                                className={pointer({
+                                    size,
+                                    translateClass: hasInd ? 'null' : field.value,
+                                })}
+                            />
+                            {/* Text inside the switch */}
+                        </Switch>
+                        <span
+                            className={cn('text-gray-400 text-xs', {
+                                hidden: !legend,
+                            })}
+                        >
+                            Sim
+                        </span>
+                    </div>
+                    {hasTitle && (
+                        <span className={cn('text-gray-400')}>{title}</span>
+                    )}
                 </div>
-                {hasTitle && <span className={cn('text-gray-400')}>{title}</span>}
-            </div>
-            {field.value && children}
+                {field.value && children}
+            </summary>
+            {content && (
+                <div className={cn('px-1 collapse-content py-0 mt-0')}>
+                    {content}
+                </div>
+            )}
         </div>
     )
 }
