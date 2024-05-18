@@ -43,7 +43,7 @@ const StepExams = () => {
             <h4 className="font-sans text-base font-semibold text-center capitalize">
                 Exams
             </h4>
-            <div className={screen()}>
+            <div className={screen({ className: '!px-0 !py-0 w-full ' })}>
                 <ListHorizontalSwitch
                     ctx={values}
                     items={exams.map((item) => ({
@@ -55,7 +55,6 @@ const StepExams = () => {
                     }))}
                     name="exams_anamnesis.complementary_exams"
                     categories={STEPS}
-                    specialCategory={['']}
                     onChange={({ option, step, checked, replace }) => {
                         const item = {
                             id: option.value,

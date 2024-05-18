@@ -150,7 +150,7 @@ const VerticalTabs = () => {
                             }`}
                         >
                             <div
-                                className="flex flex-col flex-1 overflow-y-auto scroll"
+                                className="flex flex-col flex-1 w-full overflow-y-auto scroll"
                                 style={{
                                     height: 'calc(100vh - 120px)',
                                 }}

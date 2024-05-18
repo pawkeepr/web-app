@@ -54,6 +54,10 @@ export const makeInitialValues = (
         type_weight: '',
         weight: '',
     },
+    exams_anamnesis: {
+        complementary_exams: [],
+        physical_exam: {} as any,
+    },
     appointment_details: {
         appointment_geolocation: {
             latitude: '',

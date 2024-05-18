@@ -103,10 +103,10 @@ const ListSwitch = <T,>({
                         <details
                             // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
                             tabIndex={0}
-                            className="w-full collapse collapse-arrow"
+                            className="w-full my-1 collapse collapse-arrow"
                             key={option.value}
                         >
-                            <summary className="w-full collapse-title">
+                            <summary className="w-full p-0 !pr-4 collapse-title">
                                 <ControlToggle
                                     key={option.value}
                                     onChange={(e) => onChange.call(null, e, option)}
@@ -118,7 +118,7 @@ const ListSwitch = <T,>({
                                     label={option.label}
                                 />
                             </summary>
-                            <div className="collapse-content">
+                            <div className="px-1 collapse-content">
                                 <FieldTextArea
                                     label="Observações"
                                     name={`${name}.${option.value}.notes` as ''}
