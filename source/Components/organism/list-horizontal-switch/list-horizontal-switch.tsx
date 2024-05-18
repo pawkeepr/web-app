@@ -175,31 +175,32 @@ const ListHorizontalSwitch = <T extends object = {}>({
     return (
         <FieldArray name={name}>
             {(arrayProps) => (
-                <>
-                    <h4 className="mb-2 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
+                <section className="flex flex-col flex-1">
+                    <h4 className="flex-1 mb-2 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
                         {makeTitle(category.label, false)}
                     </h4>
-
-                    {list.map(([key, options]) => (
-                        <ListSwitchControl
-                            condition={category.value === key}
-                            key={key}
-                            name={name}
-                            categories={steps}
-                            category={category}
-                            options={options}
-                            onChange={(e, option) =>
-                                onChange?.({
-                                    ...arrayProps,
-                                    option,
-                                    step: category.value,
-                                    checked: e,
-                                })
-                            }
-                            onChangeCategory={setCategory}
-                        />
-                    ))}
-                    <div className="flex justify-between mt-6">
+                    <section className="flex flex-row flex-wrap justify-between w-full overflow-y-auto flex-2 flex-grow h-[60vh] scroll">
+                        {list.map(([key, options]) => (
+                            <ListSwitchControl
+                                condition={category.value === key}
+                                key={key}
+                                name={name}
+                                categories={steps}
+                                category={category}
+                                options={options}
+                                onChange={(e, option) =>
+                                    onChange?.({
+                                        ...arrayProps,
+                                        option,
+                                        step: category.value,
+                                        checked: e,
+                                    })
+                                }
+                                onChangeCategory={setCategory}
+                            />
+                        ))}
+                    </section>
+                    <div className="flex justify-between flex-1 mt-6">
                         <button
                             type="button"
                             onClick={keyPressLeft}
@@ -215,7 +216,7 @@ const ListHorizontalSwitch = <T extends object = {}>({
                             <FaArrowRight />
                         </button>
                     </div>
-                </>
+                </section>
             )}
         </FieldArray>
     )
