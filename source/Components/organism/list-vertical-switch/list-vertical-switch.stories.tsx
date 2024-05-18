@@ -4,6 +4,7 @@ import { fn } from '@storybook/test'
 import { Formik } from 'formik'
 import {
     QuestionTypes,
+    TKeysOfQuestionTypes,
     questions,
     type KeyOfQuestionTypes,
 } from '~/constants/anamnese-questions'
@@ -35,5 +36,11 @@ Anamnese.args = {
     name: 'anamnesis' as any,
     items: questions,
     onChange: fn(),
-    categories: Object.keys(QuestionTypes) as KeyOfQuestionTypes[],
+    categories: Object.keys(QuestionTypes).map((key) => {
+        const type = key as KeyOfQuestionTypes
+        return {
+            value: type,
+            label: TKeysOfQuestionTypes[type],
+        }
+    }),
 }

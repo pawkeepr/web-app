@@ -43,7 +43,7 @@ const StepExams = () => {
             <h4 className="font-sans text-base font-semibold text-center capitalize">
                 Exames
             </h4>
-            <div className={screen({ className: 'px-1 w-full ' })}>
+            <div className={screen({ className: 'px-1 w-full overflow-y-hidden' })}>
                 <ListHorizontalSwitch
                     ctx={values}
                     items={exams.map((item) => ({

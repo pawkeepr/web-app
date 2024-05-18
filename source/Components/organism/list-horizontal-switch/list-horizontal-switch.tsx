@@ -97,35 +97,22 @@ const ListSwitch = <T,>({
                     />
                 ))}
             </div>
-            <>
+            <section className="mt-2 w-full">
                 {options.map((option) => (
-                    <details
-                        // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
-                        tabIndex={0}
-                        className="w-full flex justify-start items-center !px-1 collapse collapse-arrow !py-0 my-1  "
-                        key={option.value}
-                    >
-                        <summary className="w-full !py-0 px-1 collapse-title ">
-                            <ControlToggle
-                                key={option.value}
-                                onChange={(e) => onChange.call(null, e, option)}
-                                name={
-                                    `${name}.${
-                                        option.value as number
-                                    }.checked` as ''
-                                }
-                                label={option.label}
-                            />
-                        </summary>
-                        <div className="px-1 py-0 collapse-content">
+                    <ControlToggle
+                        content={
                             <FieldTextArea
                                 label="Observações"
                                 name={`${name}.${option.value}.notes` as ''}
                             />
-                        </div>
-                    </details>
+                        }
+                        key={option.value}
+                        onChange={(e) => onChange.call(null, e, option)}
+                        name={`${name}.${option.value as number}.checked` as ''}
+                        label={option.label}
+                    />
                 ))}
-            </>
+            </section>
         </>
     )
 }
@@ -177,7 +164,7 @@ const ListHorizontalSwitch = <T extends object = {}>({
                     <h4 className="flex-1 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
                         {makeTitle(category.label, false)}
                     </h4>
-                    <section className="flex flex-row flex-wrap justify-between  w-full h-[72vh] overflow-y-auto scroll ">
+                    <section className="flex flex-row flex-wrap justify-between  w-full h-[72vh] overflow-y-auto scroll">
                         {list.map(([key, options]) => (
                             <ListSwitchControl
                                 condition={category.value === key}
