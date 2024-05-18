@@ -28,7 +28,7 @@ const StepDiagnosis = () => {
                     <CardSimplePet />
                 </div>
                 <section className="col-span-full ">
-                    <div className="flex flex-col flex-1 w-full gap-1 overflow-auto h-44 scroll-smooth scroll-width-thin mine-scroll-bar">
+                    <div className="flex flex-col flex-1 w-full gap-1 overflow-auto h-[40vh] scroll-smooth scroll-width-thin mine-scroll-bar">
                         {values?.anamnesis?.questions_anamnesis
                             ?.filter(
                                 (question) =>

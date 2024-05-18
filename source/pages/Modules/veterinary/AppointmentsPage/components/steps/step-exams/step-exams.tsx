@@ -41,9 +41,9 @@ const StepExams = () => {
         <>
             <CardSimplePet />
             <h4 className="font-sans text-base font-semibold text-center capitalize">
-                Exams
+                Exames
             </h4>
-            <div className={screen({ className: '!px-0 !py-0 w-full ' })}>
+            <div className={screen({ className: 'px-1 w-full ' })}>
                 <ListHorizontalSwitch
                     ctx={values}
                     items={exams.map((item) => ({

@@ -32,7 +32,7 @@ const StepAnamnese = () => {
             <h4 className="font-sans text-base font-semibold text-center capitalize">
                 Anamnese
             </h4>
-            <div className={screen()}>
+            <div className={screen({ className: 'px-1' })}>
                 <ListSwitch
                     name="anamnesis.questions_anamnesis"
                     ctx={values}

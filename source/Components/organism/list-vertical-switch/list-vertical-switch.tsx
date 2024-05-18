@@ -77,7 +77,7 @@ const ListVerticalSwitch = <T extends object = {}>({
                                         className="w-full collapse collapse-arrow"
                                         key={option.value}
                                     >
-                                        <summary className="w-full p-0 !pr-4 collapse-title">
+                                        <summary className="w-full !p-0 px-1 collapse-title">
                                             <ControlToggle3States
                                                 key={option.value}
                                                 initialValue={option.checked}

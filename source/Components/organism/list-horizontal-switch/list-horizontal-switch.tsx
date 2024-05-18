@@ -78,7 +78,7 @@ const ListSwitch = <T,>({
 }: ListSwitchProps<T>) => {
     return (
         <>
-            <div className="flex flex-row flex-wrap justify-between w-full mb-4">
+            <div className="flex flex-row flex-wrap justify-between w-full">
                 {categories.map((item) => (
                     <OptionsMenu
                         key={item.value}
@@ -97,37 +97,35 @@ const ListSwitch = <T,>({
                     />
                 ))}
             </div>
-            <section className="flex-col flex flex-1 !min-h-[460px] ">
-                <div className="flex-[3]">
-                    {options.map((option) => (
-                        <details
-                            // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
-                            tabIndex={0}
-                            className="w-full my-1 collapse collapse-arrow"
-                            key={option.value}
-                        >
-                            <summary className="w-full p-0 !pr-4 collapse-title">
-                                <ControlToggle
-                                    key={option.value}
-                                    onChange={(e) => onChange.call(null, e, option)}
-                                    name={
-                                        `${name}.${
-                                            option.value as number
-                                        }.checked` as ''
-                                    }
-                                    label={option.label}
-                                />
-                            </summary>
-                            <div className="px-1 collapse-content">
-                                <FieldTextArea
-                                    label="Observações"
-                                    name={`${name}.${option.value}.notes` as ''}
-                                />
-                            </div>
-                        </details>
-                    ))}
-                </div>
-            </section>
+            <>
+                {options.map((option) => (
+                    <details
+                        // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
+                        tabIndex={0}
+                        className="w-full flex justify-start items-center !px-1 collapse !py-0 my-1  "
+                        key={option.value}
+                    >
+                        <summary className="w-full !py-0 px-1 collapse-title">
+                            <ControlToggle
+                                key={option.value}
+                                onChange={(e) => onChange.call(null, e, option)}
+                                name={
+                                    `${name}.${
+                                        option.value as number
+                                    }.checked` as ''
+                                }
+                                label={option.label}
+                            />
+                        </summary>
+                        <div className="px-1 py-0 collapse-content">
+                            <FieldTextArea
+                                label="Observações"
+                                name={`${name}.${option.value}.notes` as ''}
+                            />
+                        </div>
+                    </details>
+                ))}
+            </>
         </>
     )
 }
@@ -176,10 +174,10 @@ const ListHorizontalSwitch = <T extends object = {}>({
         <FieldArray name={name}>
             {(arrayProps) => (
                 <section className="flex flex-col flex-1">
-                    <h4 className="flex-1 mb-2 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
+                    <h4 className="flex-1 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
                         {makeTitle(category.label, false)}
                     </h4>
-                    <section className="flex flex-row flex-wrap justify-between w-full overflow-y-auto flex-2 flex-grow h-[60vh] scroll">
+                    <section className="flex flex-row flex-wrap justify-between  w-full h-[72vh] overflow-y-auto scroll ">
                         {list.map(([key, options]) => (
                             <ListSwitchControl
                                 condition={category.value === key}
@@ -200,7 +198,7 @@ const ListHorizontalSwitch = <T extends object = {}>({
                             />
                         ))}
                     </section>
-                    <div className="flex justify-between flex-1 mt-6">
+                    <div className="flex justify-between flex-1 p-1 mt-0 bg-transparent h-fit">
                         <button
                             type="button"
                             onClick={keyPressLeft}
