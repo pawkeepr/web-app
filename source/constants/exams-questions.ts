@@ -1,15 +1,15 @@
-const ExamsTypes = {
+export const ExamsTypes = {
     hematology: 'hematology',
     biochemistry: 'biochemistry',
     parasitology: 'parasitology',
     immunology: 'immunology',
     urinalysis: 'urinalysis',
-    lesion_location: 'lesion location',
-    ultrasound_radiology: 'ultrasound/radiology',
-    lesion_description: 'lesion description',
+    lesion_location: 'lesion_location',
+    ultrasound_radiology: 'ultrasound_radiology',
+    lesion_description: 'lesion_description',
 } as const
-
 export type KeyOfExamsTypes = keyof typeof ExamsTypes
+export type ExamsTypes = (typeof ExamsTypes)[keyof typeof ExamsTypes]
 export type Exams = {
     id: number
     label: string
