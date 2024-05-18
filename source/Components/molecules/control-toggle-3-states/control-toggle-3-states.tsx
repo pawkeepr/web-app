@@ -143,7 +143,7 @@ const ControlToggle3States = <Ctx,>({
                 >
                     {label}
                 </span>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 text-xs">
                     <span
                         className={cn('text-gray-400', {
                             hidden: !legend,
@@ -175,7 +175,7 @@ const ControlToggle3States = <Ctx,>({
                         {/* Text inside the switch */}
                     </Switch>
                     <span
-                        className={cn('text-gray-400', {
+                        className={cn('text-gray-400 text-xs', {
                             hidden: !legend,
                         })}
                     >

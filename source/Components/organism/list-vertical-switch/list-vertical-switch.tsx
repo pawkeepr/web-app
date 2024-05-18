@@ -15,7 +15,7 @@ export type ListInputProps<T extends object = {}> = {
     ctx: T
     items: Question[]
     name: T extends object ? ArrayPaths<T> : string
-    categories: string[]
+    categories: { label: string; value: string }[]
     onChange: (
         props: FieldArrayRenderProps & {
             checked: boolean
@@ -33,20 +33,20 @@ type Option<T> = {
 
 function makeOptions<T>(
     items: Question[],
-    categories: string[],
+    categories: { label: string; value: string }[],
 ): [string, Option<T>[]][] {
     return categories
         .map((category) => {
             const filteredItems = items
-                .filter((item: Question) => item.type === category)
+                .filter((item: Question) => item.type === category.value)
                 .map((item: Question) => ({
                     ...item,
                     value: item.id,
                     label: item.question,
                     checked: null,
-                    type: category,
+                    type: category.value,
                 }))
-            return [category, filteredItems]
+            return [category.label, filteredItems]
         })
         .filter(([, options]) => options.length > 0) as [string, Option<T>[]][]
 }

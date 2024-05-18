@@ -1,7 +1,8 @@
 import * as Yup from 'yup'
-import ListSwitch from '~/Components/organism/list-vertical-switch'
+import ListVerticalSwitch from '~/Components/organism/list-vertical-switch'
 import {
     QuestionTypes,
+    TKeysOfQuestionTypes,
     questions,
     type KeyOfQuestionTypes,
 } from '~/constants/anamnese-questions'
@@ -33,10 +34,16 @@ const StepAnamnese = () => {
                 Anamnese
             </h4>
             <div className={screen({ className: 'px-1' })}>
-                <ListSwitch
+                <ListVerticalSwitch
                     name="anamnesis.questions_anamnesis"
                     ctx={values}
-                    categories={Object.keys(QuestionTypes) as KeyOfQuestionTypes[]}
+                    categories={Object.keys(QuestionTypes).map((key) => {
+                        const type = key as KeyOfQuestionTypes
+                        return {
+                            value: type,
+                            label: TKeysOfQuestionTypes[type],
+                        }
+                    })}
                     items={questions}
                     onChange={({ checked, replace, option }) => {
                         const item = {

@@ -102,10 +102,10 @@ const ListSwitch = <T,>({
                     <details
                         // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
                         tabIndex={0}
-                        className="w-full flex justify-start items-center !px-1 collapse !py-0 my-1  "
+                        className="w-full flex justify-start items-center !px-1 collapse collapse-arrow !py-0 my-1  "
                         key={option.value}
                     >
-                        <summary className="w-full !py-0 px-1 collapse-title">
+                        <summary className="w-full !py-0 px-1 collapse-title ">
                             <ControlToggle
                                 key={option.value}
                                 onChange={(e) => onChange.call(null, e, option)}
