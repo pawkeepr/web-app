@@ -21,12 +21,11 @@ const modal = tv({
 type ModalProps = {
     open?: boolean
     onClose?: () => void
-    className?: string
     children?: React.ReactNode
     mobilePage?: boolean
 } & ModalResponsiveProps
 
-const Modal = ({ className, mobilePage = true, ...props }: ModalProps) => {
+const Modal = ({ mobilePage = true, ...props }: ModalProps) => {
     useKeyboardNavigation({
         Escape: () => props.onClose?.(),
     })
@@ -38,7 +37,14 @@ const Modal = ({ className, mobilePage = true, ...props }: ModalProps) => {
             closeOnOverlayClick
             center
             classNames={{
-                modal: modal({ className, mobilePage }),
+                modal: modal({
+                    className: props.classNames?.modal,
+                    mobilePage,
+                }),
+                modalContainer:
+                    'mobile:flex mobile:flex-1 mobile:justify-center mobile:items-center',
+                root: 'mobile:bg-primary-500 mobile:bg-opacity-60',
+                ...props.classNames,
             }}
         >
             {props.children}
