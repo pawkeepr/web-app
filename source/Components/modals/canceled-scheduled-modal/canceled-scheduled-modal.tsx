@@ -59,7 +59,6 @@ const CanceledScheduledModal = ({
                 open={isOpen as boolean}
                 onClose={() => closeModal()}
                 mobilePage={false}
-                className="w-fit h-fit"
             >
                 <Formik
                     initialValues={item}
@@ -81,6 +80,12 @@ const CanceledScheduledModal = ({
                                 </p>
 
                                 <CardTutor
+                                    date_consultation={
+                                        values.dates_consults?.date_consultation
+                                    }
+                                    time_consultation={
+                                        values.dates_consults?.time_consultation
+                                    }
                                     pet={values.tutor_pet_vet?.pet}
                                     tutor={values.tutor_pet_vet?.tutor}
                                 />
