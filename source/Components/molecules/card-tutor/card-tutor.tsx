@@ -38,13 +38,13 @@ const CardTutor = ({
     )
 
     const dateFormatted = useMemo(() => {
-        const date = Intl.DateTimeFormat('pt-BR').format(
-            new Date(date_consultation),
-        )
+        const date =
+            date_consultation &&
+            Intl.DateTimeFormat('pt-BR').format(new Date(date_consultation))
         const hour = time_consultation
         const dateAndHour = `${date} às ${hour}`
         return dateAndHour
-    }, [date_consultation, time_consultation])
+    }, [])
 
     const specie = Species[pet?.specie as Species]
 
