@@ -69,7 +69,7 @@ const ConfirmedScheduledModal = ({
                             className="flex flex-col w-full h-full "
                             onSubmit={handleSubmit}
                         >
-                            <div className="flex flex-col items-center justify-center min-h-full p-4 text-center">
+                            <div className="flex flex-col items-center justify-center min-h-full text-center web:p-4 mobile:p-0">
                                 <h2 className="text-xl font-semibold leading-6 text-gray-600 dark:!text-gray-200 text-center">
                                     {'Confirmar Agendamento'}
                                 </h2>
@@ -81,9 +81,15 @@ const ConfirmedScheduledModal = ({
                                 <CardTutor
                                     pet={values.tutor_pet_vet?.pet}
                                     tutor={values?.tutor_pet_vet?.tutor}
+                                    date_consultation={
+                                        values.dates_consults.date_consultation
+                                    }
+                                    time_consultation={
+                                        values.dates_consults.time_consultation
+                                    }
                                 />
 
-                                <div className="flex items-center justify-center gap-2 mt-1">
+                                <div className="flex items-center justify-center w-full gap-2 mt-2">
                                     <BtnNeutral
                                         outline
                                         type="button"

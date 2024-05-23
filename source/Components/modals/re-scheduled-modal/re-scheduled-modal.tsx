@@ -3,7 +3,7 @@ import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import Modal from '~/Components/organism/modal'
 
 import * as Yup from 'yup'
-import CardTutor from '~/Components/molecules/card-tutor'
+import CardTutor, { ItemCard } from '~/Components/molecules/card-tutor'
 import FieldControl from '~/Components/molecules/field-control'
 import { usePlusModal } from '~/contexts/setters-status-appointments-modals-context'
 import useListAppointments from '~/store/hooks/list-appointments'
@@ -57,10 +57,10 @@ const ReScheduledModal = ({
                 >
                     {({ isValid, isSubmitting, handleSubmit, values }) => (
                         <Form
-                            className="w-full h-full flex flex-col min-w-[500px]"
+                            className="w-full h-full flex flex-col web:min-w-[500px]"
                             onSubmit={handleSubmit}
                         >
-                            <div className="flex flex-col items-center justify-center min-h-full p-4 text-center">
+                            <div className="flex flex-col items-center justify-center min-h-full text-center web:p-4 mobile:px-2">
                                 <h2 className="text-xl font-semibold leading-6 text-gray-600 dark:!text-gray-200 text-center">
                                     {'Reagendar Consulta'}
                                 </h2>
@@ -68,33 +68,30 @@ const ReScheduledModal = ({
                                 <CardTutor
                                     pet={values.tutor_pet_vet?.pet}
                                     tutor={values.tutor_pet_vet?.tutor}
+                                    date_consultation={
+                                        values.dates_consults.date_consultation
+                                    }
+                                    time_consultation={
+                                        values.dates_consults.time_consultation
+                                    }
                                 />
-                                <section className="flex flex-col justify-start w-full px-4 mt-2">
-                                    <div className="flex flex-col flex-wrap justify-between w-full gap-2 ">
-                                        <p className="flex justify-between text-gray-500">
-                                            <strong className="mr-2">
-                                                Tipo da Consulta:
-                                            </strong>
-                                            {
-                                                item?.dates_consults
-                                                    ?.type_consultation
-                                            }
-                                        </p>
-                                        <p className="flex justify-between text-gray-500">
-                                            <strong className="mr-2">
-                                                Razão da Consulta:
-                                            </strong>
-                                        </p>
-                                        <p className="flex justify-between text-center text-gray-500">
-                                            {
-                                                item?.dates_consults
-                                                    ?.reason_consultation
-                                            }
-                                        </p>
-                                    </div>
+                                <section className="flex flex-col justify-start w-full gap-1 px-2 mt-1">
+                                    <ItemCard
+                                        label="Tipo da Consulta"
+                                        value={
+                                            item?.dates_consults
+                                                ?.reason_consultation
+                                        }
+                                    />
+                                    <ItemCard
+                                        label="Motivo"
+                                        value={
+                                            item?.dates_consults?.type_consultation
+                                        }
+                                    />
                                 </section>
 
-                                <section className="flex w-full gap-3 my-2">
+                                <section className="flex w-full my-2 web:gap-3 phone:gap-0 phone:flex-col">
                                     <FieldControl
                                         ctx={values}
                                         label="Data da consulta"
@@ -119,8 +116,9 @@ const ReScheduledModal = ({
                                         type="button"
                                         onClick={closeModal}
                                         label="Cancelar"
+                                        outline
                                         condition={!isSubmitting && !isLoading}
-                                        className="text-gray-600"
+                                        className="border-none"
                                     />
 
                                     <BtnPrimary
