@@ -5,10 +5,11 @@ import type {
     GetServerSidePropsContext,
     PreviewData,
 } from 'next'
-import type { ParsedUrlQuery } from 'querystring'
+import type { ParsedUrlQuery } from 'node:querystring'
 import { PUBLIC_ROUTES } from '~/common/public-routes'
 import cookies from '~/constants/cookies'
 import { getCookie } from '~/utils/cookies-utils'
+
 export type Context =
     | GetServerSidePropsContext<ParsedUrlQuery, PreviewData>
     | undefined

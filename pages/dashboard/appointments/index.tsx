@@ -2,8 +2,10 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { LayoutVeterinary } from '~/Layouts'
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-veterinary-privates'
 import AppointmentsPage from '~/pages/Modules/veterinary/AppointmentsPage/Appointments'
+import { getPet } from '~/services/helpers'
 
-const AppointmentsNext = () => {
+const AppointmentsNext = ({ data, status }) => {
+    console.log('🚀 ~ AppointmentsNext ~ { data, status }:', { data, status })
     const search = useSearchParams()
     const document = search.get('document') || ''
     const pet = search.get('pet') || ''
@@ -25,4 +27,17 @@ const AppointmentsNext = () => {
 }
 
 export default AppointmentsNext
-export const getServerSideProps = getServerSidePropsPagesPrivates()
+export const getServerSideProps = getServerSidePropsPagesPrivates(
+    async ({ query }) => {
+        const { document, pet } = query
+
+        const { data, status } = await getPet(document as string, pet as string)
+
+        return {
+            props: {
+                data,
+                status,
+            },
+        }
+    },
+)

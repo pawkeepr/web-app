@@ -16,7 +16,7 @@ import Footer from '~/Layouts/Footer'
 export const ButtonsNavBar = () => {
     const { isMobile } = useResizeMobile()
     return (
-        <div className="flex gap-2 w-full items-center justify-center">
+        <div className="flex items-center justify-center w-full gap-2">
             <BtnLink
                 message="Saiba + Tutor"
                 className={cn(
@@ -52,11 +52,11 @@ const HomePage = () => {
     return (
         <>
             <NavbarHome />
-            <section className="section bg-primary-500 min-h-screen" id="hero">
+            <section className="min-h-screen section bg-primary-500" id="hero">
                 <HeaderTitle title="Bem Vindo" />
                 <div className="bg-overlay bg-overlay-pattern" />
 
-                <div className="grid grid-cols-1  mt-5 web:grid-cols-2 p-4">
+                <div className="grid grid-cols-1 p-4 mt-5 web:grid-cols-2">
                     <Slide left>
                         <div className="col-span-1">
                             <img
@@ -67,8 +67,8 @@ const HomePage = () => {
                         </div>
                     </Slide>
                     <Zoom>
-                        <div className="text-center mt-lg-5 pt-5 col-span-1">
-                            <p className="text-lg lg:text-2xl font-semibold font-sans p-4 text-white">
+                        <div className="col-span-1 pt-5 text-center mt-lg-5">
+                            <p className="p-4 font-sans text-lg font-semibold text-white lg:text-2xl">
                                 {`
                                     Imagine realizar uma consulta completa em no máximo 5 minutos, 
                                     sem sacrificar a qualidade do atendimento. 
@@ -76,7 +76,6 @@ const HomePage = () => {
                                     na palma da sua mão.
                                 `}
                             </p>
-                            <ButtonsNavBar />
                         </div>
                     </Zoom>
                 </div>
