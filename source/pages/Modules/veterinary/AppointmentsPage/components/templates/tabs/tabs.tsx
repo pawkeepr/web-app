@@ -1,4 +1,3 @@
-import cn from 'classnames'
 import { useState } from 'react'
 
 // Import Swiper styles
@@ -9,7 +8,6 @@ import 'swiper/css/scrollbar'
 //
 import { A11y, Controller, Navigation, Pagination, Scrollbar } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { tv } from 'tailwind-variants'
 import withLoading from '~/Components/helpers/with-loading'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { StepProps, TabsOptions } from '~/types/helpers'
@@ -18,6 +16,7 @@ import StepDiagnosis from '../../steps/step-diagnosis'
 import StepExams from '../../steps/step-exams'
 import StepGeral from '../../steps/step-geral'
 
+import MenuHorizontalTabs from '~/Components/organism/menu-horizontal-tabs/menu-horizontal-tabs'
 import StepTreatment from '../../steps/step-treatment'
 
 type TabItem = {
@@ -88,28 +87,6 @@ const items: TabItem[] = [
     // },
 ]
 
-const tab = tv({
-    // Ajuste os estilos base e variantes conforme necessário
-    base: `
-        w-full flex-1 mobile:!py-4 py-2
-        font-bold text-gray-600
-        mobile:text-xs
-        border border-secondary-500
-        text-sm flex web:flex-row items-center justify-center
-        mobile:flex-col gap-2 !rounded-none
-        mobile:border  hover:bg-gray-100 
-        `,
-    // Ajustes adicionais para os estilos mobile
-    variants: {
-        selected: {
-            true: '!bg-secondary-500 !text-gray-600 shadow',
-        },
-        disabled: {
-            true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
-        },
-    },
-})
-
 const Tabs = () => {
     const [activeIndex, setActiveIndex] = useState(0)
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -118,37 +95,14 @@ const Tabs = () => {
 
     return (
         <section className="mt-1 bg-white">
-            <div
-                className={cn(
-                    `   
-                        flex flex-row justify-center
-                        mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0
-                        mobile:p-0 
-                        h-fit z-[100] bg-white mobile:border-t-2 border-primary-500
-                        nav-pills nav-justified
-                    `,
-                )}
-            >
-                {items.map((item) => {
-                    return (
-                        <button
-                            key={item.id}
-                            type="button"
-                            // href={item.href}
-                            id="steparrow-gen-info-tab"
-                            className={tab({
-                                selected: activeIndex === item.id,
-                            })}
-                            onClick={() => {
-                                swipperController?.slideTo(item.id)
-                                setActiveIndex(item.id)
-                            }}
-                        >
-                            {item.title}
-                        </button>
-                    )
-                })}
-            </div>
+            <MenuHorizontalTabs
+                items={items}
+                onClick={(item) => {
+                    swipperController?.slideTo(item.id)
+                    setActiveIndex(item.id)
+                }}
+                activeIndex={activeIndex}
+            />
             <Swiper
                 // install Swiper modules
                 modules={[Navigation, Pagination, Scrollbar, A11y, Controller]}

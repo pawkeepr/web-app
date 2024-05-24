@@ -26,10 +26,10 @@ const tab = tv({
     // Ajustes adicionais para os estilos mobile
     variants: {
         mobile: {
-            true: 'mobile:flex-col mobile:text-xs mobile:h-20 mobile:!max-w-[80px]'
+            true: 'mobile:flex-col mobile:text-xs mobile:h-20 mobile:!max-w-[80px]',
         },
         web: {
-            true: 'web:py-2 web:!w-full'
+            true: 'web:py-2 web:!w-full',
         },
         selected: {
             true: '!text-white shadow',
@@ -39,7 +39,7 @@ const tab = tv({
         },
         menu: {
             true: 'mobile:mb-5',
-        }
+        },
     },
     defaultVariants: {
         mobile: true,
@@ -50,8 +50,8 @@ const tab = tv({
             selected: true,
             menu: true,
             className: 'mobile:!rounded-full bg-primary-500',
-        }
-    ]
+        },
+    ],
 })
 
 const tabList = tv({
@@ -104,7 +104,10 @@ const HorizontalTabs = ({
                 })}
             >
                 {categories.map((category) => (
-                    <div className='flex-grow w-1/3 flex items-center justify-center'>
+                    <div
+                        key={category.id}
+                        className="flex items-center justify-center flex-grow w-1/3"
+                    >
                         <Tab
                             key={category.id}
                             disabled={category.disabled}
