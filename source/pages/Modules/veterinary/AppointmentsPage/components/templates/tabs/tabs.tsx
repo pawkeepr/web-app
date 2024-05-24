@@ -12,25 +12,29 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { tv } from 'tailwind-variants'
 import withLoading from '~/Components/helpers/with-loading'
 import useResizeMobile from '~/hooks/use-resize-mobile'
-import type { StepProps, Tabs } from '~/types/helpers'
+import type { StepProps, TabsOptions } from '~/types/helpers'
 import StepAnamneses from '../../steps/step-anamnese'
 import StepDiagnosis from '../../steps/step-diagnosis'
-import stepExams from '../../steps/step-exams'
+import StepExams from '../../steps/step-exams'
 import StepGeral from '../../steps/step-geral'
-import StepPayment from '../../steps/step-payment'
+
 import StepTreatment from '../../steps/step-treatment'
 
 type TabItem = {
-    id: Tabs
+    id: TabsOptions
     title: string
     href: string
     Component: (props: StepProps) => JSX.Element
 }
 
+// Pre anaminese/ Anaminese / exames realizados
+// solicitar exames / Vacinação  e Vermefugo /  Medicação
+// Demais Tratamento / diagnóstico / finalizar
+
 const items: TabItem[] = [
     {
         id: 0,
-        title: 'Inicio',
+        title: 'Pré-Anamnese',
         href: '#Inicio',
         Component: StepGeral,
     },
@@ -42,28 +46,46 @@ const items: TabItem[] = [
     },
     {
         id: 2,
-        title: 'Exames',
+        title: 'Exames Realizados',
         href: '#Exams',
-        Component: stepExams,
+        Component: StepExams,
     },
     {
         id: 3,
-        title: 'Diagnóstico',
-        href: '#Diagnostic',
-        Component: StepDiagnosis,
+        title: 'Solicitar Exames',
+        href: '#Exams',
+        Component: StepExams,
     },
     {
         id: 4,
-        title: 'Tratamento',
+        title: 'Vacinação  e Vermefugo',
         href: '#Treatment',
         Component: StepTreatment,
     },
     {
         id: 5,
-        title: 'Finalizar',
-        href: '#Finalizar',
-        Component: StepPayment,
+        title: 'Medicação',
+        href: '#Treatment',
+        Component: StepTreatment,
     },
+    {
+        id: 6,
+        title: 'Demais Tratamentos',
+        href: '#Treatment',
+        Component: StepTreatment,
+    },
+    {
+        id: 7,
+        title: 'Diagnóstico',
+        href: '#Diagnostic',
+        Component: StepDiagnosis,
+    },
+    // {
+    //     id: 8,
+    //     title: 'Finalizar',
+    //     href: '#Finalizar',
+    //     Component: StepPayment,
+    // },
 ]
 
 const tab = tv({
@@ -88,7 +110,7 @@ const tab = tv({
     },
 })
 
-const VerticalTabs = () => {
+const Tabs = () => {
     const [activeIndex, setActiveIndex] = useState(0)
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const [swipperController, setSwipperController] = useState<any>()
@@ -169,4 +191,4 @@ const VerticalTabs = () => {
     )
 }
 
-export default withLoading(VerticalTabs)
+export default withLoading(Tabs)

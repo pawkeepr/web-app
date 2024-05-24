@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import VerticalTabs from './vertical-tabs'
+import VerticalTabs from './tabs'
 
 import { Formik } from 'formik'
 import type { IPetV2 } from '~/types/pet-v2'

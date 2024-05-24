@@ -3,8 +3,7 @@ import { LayoutVeterinary } from '~/Layouts'
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-veterinary-privates'
 import AppointmentsPage from '~/pages/Modules/veterinary/AppointmentsPage/Appointments'
 
-const AppointmentsNext = ({ data, status }) => {
-    console.log('🚀 ~ AppointmentsNext ~ { data, status }:', { data, status })
+const AppointmentsNext = () => {
     const search = useSearchParams()
     const document = search.get('document') || ''
     const pet = search.get('pet') || ''

@@ -12,7 +12,7 @@ import type { VeterinaryConsultation } from '~/types/appointment'
 import type { IPetV2 } from '~/types/pet-v2'
 import type { DTOProfile } from '~/types/profile'
 import { geolocation } from '~/utils/geolocation'
-import VerticalTabs from './components/templates/vertical-tabs'
+import Tabs from './components/templates/tabs'
 import {
     schemaStepAppointment,
     type SchemaYupAppointment,
@@ -163,7 +163,7 @@ const AppointmentsPage = ({
             validationSchema={schemaStepAppointment}
         >
             <DashboardLayouts title="Nova Consulta" searchBlock={false}>
-                <VerticalTabs isLoading={isLoadingPet} />
+                <Tabs isLoading={isLoadingPet} />
                 <RouteConfirmationModal
                     title="Cancelar Consulta!"
                     description="Importante!"
