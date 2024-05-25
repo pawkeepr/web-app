@@ -2,11 +2,12 @@ import { useMemo } from 'react'
 import { TiArrowBack, TiArrowForward } from 'react-icons/ti'
 import { tv } from 'tailwind-variants'
 import useResizeMobile from '~/hooks/use-resize-mobile'
+import Dots from './dots'
 
 const tab = tv({
     base: `
         flex items-center justify-center flex-grow w-1/3 transition-transform
-        bg-transparent 
+        bg-transparent h-full
     `,
     variants: {
         selected: {
@@ -23,8 +24,8 @@ const buttonTab = tv({
     base: `
         rounded-none 
         focus:outline-none focus:ring-0
-        focus:ring-primary-600 
-        font-bold text-gray-500 
+         web:h-12 
+        font-bold text-gray-500 py-2
         text-sm flex web:flex-row items-center justify-center
         gap-1 flex-grow 
         transition-transform duration-300 ease-in-out
@@ -38,8 +39,8 @@ const buttonTab = tv({
             true: 'web:py-2 web:!w-full',
         },
         selected: {
-            true: 'text-gray-100 bg-primary-500 bg-opacity-100 shadow-2xl mobile:mb-16 transform mobile:scale-105 web:scale-105 focus:ring-1',
-            false: 'bg-opacity-0',
+            true: 'text-gray-100 bg-primary-500  shadow-2xl  mobile:translate-y-[-25%] transform mobile:scale-105 ',
+            false: '',
         },
         disabled: {
             true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
@@ -60,7 +61,7 @@ const buttonTab = tv({
 const menu = tv({
     base: `
         relative
-        p-0  w-full
+        w-full 
         mobile:bg-[#f6dda3] mobile:rounded-t-full shadow-2xl mobile:h-16 mobile:!overflow-visible 
         web:bg-white
         web:rounded-md
@@ -193,6 +194,12 @@ const MenuHorizontalTabs = ({
 
     return (
         <>
+            <div className="hidden w-full mobile:block mobile:fixed top-1 ">
+                <Dots
+                    total={items.length}
+                    activeIndex={items.findIndex((i) => i.id === activeItem.id)}
+                />
+            </div>
             <div
                 className={menu({
                     bottomNavigation: true,
@@ -206,6 +213,7 @@ const MenuHorizontalTabs = ({
                 <div
                     className={menuOptions({
                         direction: 'center',
+                        className: 'gap-1',
                     })}
                 >
                     {itemsMenu.map((item, index) => {
