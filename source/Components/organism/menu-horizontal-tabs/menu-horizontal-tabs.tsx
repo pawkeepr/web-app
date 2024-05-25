@@ -1,14 +1,30 @@
-import cn from 'classnames'
 import { useMemo } from 'react'
 import { TiArrowBack, TiArrowForward } from 'react-icons/ti'
 import { tv } from 'tailwind-variants'
+import useResizeMobile from '~/hooks/use-resize-mobile'
 
 const tab = tv({
+    base: `
+        flex items-center justify-center flex-grow w-1/3 transition-transform
+        bg-transparent mobile:mb-5
+    `,
+    variants: {
+        selected: {
+            true: 'text-primary-500  web:mb-0',
+        },
+        hidden: {
+            true: 'mobile:hidden',
+        },
+    },
+})
+
+const buttonTab = tv({
     // Ajuste os estilos base e variantes conforme necessário
     base: `
         rounded-none 
-        ring-white/60 ring-offset-2 focus:outline-none focus:ring-2
-        leading-1 font-bold text-gray-500 bg-transparent
+        focus:outline-none focus:ring-1
+        focus:ring-primary-600 
+        font-bold text-gray-500 bg-transparent
         text-sm flex web:flex-row items-center justify-center
         gap-1 flex-grow 
         transition-transform duration-300 ease-in-out
@@ -16,19 +32,16 @@ const tab = tv({
     // Ajustes adicionais para os estilos mobile
     variants: {
         mobile: {
-            true: 'mobile:flex-col mobile:text-xs mobile:h-20 mobile:!max-w-[80px]',
+            true: 'mobile:flex-col mobile:text-xs mobile:h-[88px] mobile:!max-w-[88px]',
         },
         web: {
             true: 'web:py-2 web:!w-full',
         },
         selected: {
-            true: 'text-primary-500 shadow transform scale-125',
+            true: 'text-gray-100 bg-primary-500 shadow-2xl transform mobile:scale-105 web:scale-105  ',
         },
         disabled: {
             true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
-        },
-        menu: {
-            true: 'mobile:mb-5',
         },
     },
     defaultVariants: {
@@ -38,7 +51,6 @@ const tab = tv({
     compoundVariants: [
         {
             selected: true,
-            menu: true,
             className: 'mobile:!rounded-full',
         },
     ],
@@ -47,7 +59,7 @@ const tab = tv({
 const menu = tv({
     base: `
         p-0  w-full
-        mobile:bg-[#f6dda3] mobile:rounded-t-full mobile:shadow-md mobile:h-16 mobile:overflow-visible 
+        mobile:bg-[#f6dda3] mobile:rounded-t-full shadow-2xl mobile:h-16 mobile:!overflow-visible 
         web:bg-white
         web:rounded-md
         flex items-center justify-center overflow-hidden
@@ -117,7 +129,11 @@ const MenuHorizontalTabs = ({
     onClick,
     activeItem,
 }: MenuHorizontalTabsProps) => {
+    const { isMobile } = useResizeMobile()
+
     const itemsMenu = useMemo(() => {
+        if (!isMobile) return items
+
         const index = items.findIndex((i) => i.id === activeItem)
         if (items.length < 3) {
             return items
@@ -131,62 +147,57 @@ const MenuHorizontalTabs = ({
     const handleNext = () => {
         const index = items.findIndex((i) => i.id === activeItem)
         const newIndex = (index + 1) % items.length
-        selectMiddle(items, items[newIndex])
+        isMobile && selectMiddle(items, items[newIndex])
         onClick(items[newIndex])
     }
 
     const handlePrev = () => {
         const index = items.findIndex((i) => i.id === activeItem)
         const newIndex = (index - 1 + items.length) % items.length
-        selectMiddle(items, items[newIndex])
+        isMobile && selectMiddle(items, items[newIndex])
         onClick(items[newIndex])
     }
 
     return (
-        <div className="flex flex-row w-100">
-            <div className="flex items-center justify-center flex-grow w-1/5">
+        <div
+            className={menu({
+                bottomNavigation: true,
+            })}
+        >
+            <div className="flex items-center justify-center flex-grow w-fit web:hidden">
                 <button type="button" onClick={handlePrev}>
                     <TiArrowForward className="w-5 h-5 transform rotate-[240deg] text-primary-500 " />
                 </button>
             </div>
-            <div
-                className={menu({
-                    bottomNavigation: true,
-                })}
-            >
-                {itemsMenu.map((item, index) => {
-                    const min = middle - 1
-                    const max = middle + 1
+            {itemsMenu.map((item, index) => {
+                const min = middle - 1
+                const max = middle + 1
 
-                    return (
-                        <div
-                            key={item.id}
-                            className={cn(
-                                'flex items-center justify-center flex-grow w-1/5 transition-transform',
-                                {
-                                    hidden: index < min || index > max,
-                                },
-                            )}
+                return (
+                    <div
+                        key={item.id}
+                        className={tab({
+                            selected: activeItem === item.id,
+                            hidden: index < min || index > max,
+                        })}
+                    >
+                        <button
+                            type="button"
+                            onClick={() => {
+                                onClick(item)
+                                selectMiddle(items, item)
+                            }}
+                            id="steparrow-gen-info-tab"
+                            className={buttonTab({
+                                selected: activeItem === item.id,
+                            })}
                         >
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    onClick(item)
-                                    selectMiddle(items, item)
-                                }}
-                                id="steparrow-gen-info-tab"
-                                className={tab({
-                                    selected: middle === index,
-                                    menu: true,
-                                })}
-                            >
-                                {item.title}
-                            </button>
-                        </div>
-                    )
-                })}
-            </div>
-            <div className="flex items-center justify-center flex-grow w-1/5">
+                            {item.title}
+                        </button>
+                    </div>
+                )
+            })}
+            <div className="flex items-center justify-center flex-grow w-fit web:hidden ">
                 <button type="button" onClick={handleNext}>
                     <TiArrowBack className="w-5 h-5 transform rotate-[110deg] text-primary-500" />
                 </button>
