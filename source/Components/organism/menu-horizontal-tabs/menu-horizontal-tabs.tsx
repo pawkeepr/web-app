@@ -6,11 +6,11 @@ import useResizeMobile from '~/hooks/use-resize-mobile'
 const tab = tv({
     base: `
         flex items-center justify-center flex-grow w-1/3 transition-transform
-        bg-transparent mobile:mb-5
+        bg-transparent 
     `,
     variants: {
         selected: {
-            true: 'text-primary-500  web:mb-0',
+            true: 'text-primary-500',
         },
         hidden: {
             true: 'mobile:hidden',
@@ -38,7 +38,7 @@ const buttonTab = tv({
             true: 'web:py-2 web:!w-full',
         },
         selected: {
-            true: 'text-gray-100 bg-primary-500 shadow-2xl transform mobile:scale-105 web:scale-105  ',
+            true: 'text-gray-100 bg-primary-500 shadow-2xl mobile:mb-16 transform mobile:scale-105 web:scale-105',
         },
         disabled: {
             true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
@@ -68,7 +68,6 @@ const menu = tv({
     variants: {
         hidden: {
             true: 'hidden',
-            false: 'flex flex-row',
         },
         bottomNavigation: {
             true: 'mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:z-10',
@@ -187,7 +186,6 @@ const MenuHorizontalTabs = ({
                                 onClick(item)
                                 selectMiddle(items, item)
                             }}
-                            id="steparrow-gen-info-tab"
                             className={buttonTab({
                                 selected: activeItem === item.id,
                             })}

@@ -13,7 +13,7 @@ type TabItem = {
 const items: TabItem[] = [
     {
         id: 0,
-        title: 'Pré-Anamnese',
+        title: 'Início',
         href: '#Inicio',
         Component: <></>,
     },
