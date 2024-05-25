@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 
-export const MOBILE_SIZE = 767
+export const MOBILE_SIZE = 1024
+export const TABLET_SIZE_MIN = 768
+export const TABLET_SIZE_MAX = 1023
+export const PHONE_SIZE = 767
 
 const useResizeMobile = () => {
     const [sizeScreen, setSizeScreen] = useState({
@@ -29,6 +32,10 @@ const useResizeMobile = () => {
 
     return {
         isMobile: sizeScreen.width < MOBILE_SIZE,
+        isTablet:
+            sizeScreen.width >= TABLET_SIZE_MIN &&
+            sizeScreen.width <= TABLET_SIZE_MAX,
+        isPhone: sizeScreen.width <= PHONE_SIZE,
         sizeScreen,
     }
 }
