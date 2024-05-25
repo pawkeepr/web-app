@@ -73,16 +73,16 @@ const meta: Meta<typeof MenuHorizontalTabs> = {
     title: 'Components/Organism/MenuHorizontalTabs',
     decorators: [
         (Story) => {
-            const [activeIndex, setActiveIndex] = useState(0)
+            const [activeItem, setActiveItem] = useState<ItemTab>(items[0])
             const onTabClick = (index: ItemTab) => {
-                const newIndex = items.findIndex((i) => i.id === index.id)
-                setActiveIndex(newIndex)
+                const newIndex = items.find((i) => i.id === index.id) as ItemTab
+                setActiveItem(newIndex)
             }
 
             return (
                 <Story
                     args={{
-                        activeItem: activeIndex,
+                        activeItem: activeItem,
                         onClick: onTabClick,
                         items: items,
                     }}
@@ -101,5 +101,5 @@ const Template: StoryFn<typeof MenuHorizontalTabs> = (args) => (
 export const Default = Template.bind({})
 Default.args = {
     items: items,
-    activeItem: 0,
+    activeItem: items[0],
 }
