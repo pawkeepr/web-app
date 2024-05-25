@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { TiArrowBack, TiArrowForward } from 'react-icons/ti'
 import { tv } from 'tailwind-variants'
 import useResizeMobile from '~/hooks/use-resize-mobile'
@@ -86,19 +86,6 @@ const menu = tv({
     },
 })
 
-const menuOptions = tv({
-    base: `
-      flex w-full transition-transform duration-300 ease-in-out
-    `,
-    variants: {
-        direction: {
-            left: 'mobile:transform mobile:translate-x-[-30%]',
-            right: 'mobile:transform mobile:translate-x-[30%]',
-            center: 'mobile:transform mobile:translate-x-[0%]',
-        },
-    },
-})
-
 export type ItemTab = {
     id: number
     title: string
@@ -144,12 +131,9 @@ const MenuHorizontalTabs = ({
     onClick,
     activeItem,
 }: MenuHorizontalTabsProps) => {
-    // Sem Utilidade Aparente
-    // const [direction, setDirection] = useState<'left' | 'right' | 'center'>(
-    //     'center',
-    // )
-
     const { isMobile } = useResizeMobile()
+    const middle = Math.floor(items.length / 2)
+    const [currentIndex, setCurrentIndex] = useState(isMobile ? middle : 0)
 
     const itemsMenu = useMemo(() => {
         if (!isMobile) return items
@@ -160,12 +144,17 @@ const MenuHorizontalTabs = ({
         }
 
         return selectMiddle(items, items[index]) as ItemTab[]
-    }, [items, activeItem])
+    }, [items])
 
-    const middle = Math.floor(itemsMenu.length / 2)
+    useEffect(() => {
+        if (isMobile) {
+            const index = itemsMenu.findIndex((i) => i.id === activeItem.id)
+            setCurrentIndex(index)
+        }
+    }, [activeItem])
 
     const handleNext = () => {
-        //setDirection('right')
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length)
         const index = items.findIndex((i) => i.id === activeItem.id)
         const newIndex = (index + 1) % items.length
         isMobile && selectMiddle(items, items[newIndex])
@@ -173,24 +162,19 @@ const MenuHorizontalTabs = ({
     }
 
     const handlePrev = () => {
-        //setDirection('left')
+        setCurrentIndex((prevIndex) =>
+            prevIndex === 0 ? items.length - 1 : prevIndex - 1,
+        )
         const index = items.findIndex((i) => i.id === activeItem.id)
         const newIndex = (index - 1 + items.length) % items.length
         isMobile && selectMiddle(items, items[newIndex])
         onClick(items[newIndex])
     }
 
-    // const getDirection = (previous: ItemTab, next: ItemTab) => {
-    //     const indexPrevious = items.findIndex((i) => i.id === previous.id)
-    //     const indexNext = items.findIndex((i) => i.id === next.id)
-
-    //     if (indexPrevious < indexNext) {
-    //         setDirection('right')
-    //         return
-    //     }
-
-    //     setDirection('left')
-    // }
+    const visibleItems = useMemo(() => {
+        if (!isMobile) return itemsMenu
+        return itemsMenu.concat(itemsMenu)
+    }, [itemsMenu])
 
     return (
         <>
@@ -205,54 +189,58 @@ const MenuHorizontalTabs = ({
                     bottomNavigation: true,
                 })}
             >
-                <div className="flex items-center justify-center flex-grow w-fit web:hidden">
-                    <button type="button" onClick={handlePrev}>
-                        <TiArrowForward className="w-5 h-5 transform rotate-[240deg] text-primary-500 " />
-                    </button>
-                </div>
-                <div
-                    className={menuOptions({
-                        direction: 'center',
-                        className: 'gap-1',
-                    })}
+                <button
+                    type="button"
+                    onClick={handlePrev}
+                    className="absolute z-10 left-5 web:hidden "
                 >
-                    {itemsMenu.map((item, index) => {
-                        // const minRight = direction === 'right' ? 2 : 1
-                        // const maxLeft = direction === 'left' ? 2 : 1
-                        const min = middle - 1
-                        const max = middle + 1
-
-                        return (
-                            <div
-                                key={item.id}
-                                className={tab({
-                                    selected: activeItem.id === item.id,
-                                    hidden: index < min || index > max,
-                                })}
-                            >
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        if (item.id === activeItem.id) return
-                                        // getDirection(activeItem, item)
-                                        onClick(item)
-                                        selectMiddle(items, item)
-                                    }}
-                                    className={buttonTab({
+                    <TiArrowForward className="w-5 h-5 transform rotate-[240deg] text-primary-500 " />
+                </button>
+                <div className="w-full">
+                    <div
+                        className="flex transition-transform duration-500"
+                        style={{
+                            transform: `translateX(-${
+                                (100 / 3) * ((currentIndex - 1) % items.length)
+                            }%)`,
+                        }}
+                    >
+                        {visibleItems.map((item) => {
+                            return (
+                                <div
+                                    key={item.id}
+                                    className={tab({
                                         selected: activeItem.id === item.id,
+                                        className:
+                                            'mobile:flex-shrink-0 mobile:w-1/3',
                                     })}
                                 >
-                                    {item.title}
-                                </button>
-                            </div>
-                        )
-                    })}
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            if (item.id === activeItem.id) return
+                                            // getDirection(activeItem, item)
+                                            onClick(item)
+                                            selectMiddle(items, item)
+                                        }}
+                                        className={buttonTab({
+                                            selected: activeItem.id === item.id,
+                                        })}
+                                    >
+                                        {item.title}
+                                    </button>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
-                <div className="flex items-center justify-center flex-grow w-fit web:hidden ">
-                    <button type="button" onClick={handleNext}>
-                        <TiArrowBack className="w-5 h-5 transform rotate-[110deg] text-primary-500" />
-                    </button>
-                </div>
+                <button
+                    type="button"
+                    onClick={handleNext}
+                    className="absolute right-5 web:hidden"
+                >
+                    <TiArrowBack className="w-5 h-5 transform rotate-[110deg] text-primary-500" />
+                </button>
             </div>
         </>
     )
