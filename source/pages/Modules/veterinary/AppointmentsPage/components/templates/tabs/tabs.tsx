@@ -107,7 +107,7 @@ const Tabs = () => {
             <Swiper
                 // install Swiper modules
                 modules={[Navigation, Pagination, Scrollbar, A11y, Controller]}
-                spaceBetween={50}
+                spaceBetween={0}
                 slidesPerView={1}
                 onSwiper={(swiper) => {
                     setSwipperController(swiper)
