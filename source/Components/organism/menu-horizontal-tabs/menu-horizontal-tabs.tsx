@@ -24,7 +24,7 @@ const buttonTab = tv({
     base: `
         rounded-none 
         focus:outline-none focus:ring-0
-         web:h-12 
+        web:h-12 
         font-bold text-gray-500 py-2
         text-sm flex web:flex-row items-center justify-center
         gap-1 flex-grow 
