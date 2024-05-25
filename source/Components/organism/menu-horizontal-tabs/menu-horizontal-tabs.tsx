@@ -178,7 +178,7 @@ const MenuHorizontalTabs = ({
 
     return (
         <>
-            <div className="hidden w-full mobile:block mobile:fixed top-1 ">
+            <div className="w-full ">
                 <Dots
                     total={items.length}
                     activeIndex={items.findIndex((i) => i.id === activeItem.id)}
@@ -192,7 +192,7 @@ const MenuHorizontalTabs = ({
                 <button
                     type="button"
                     onClick={handlePrev}
-                    className="absolute z-10 left-5 web:hidden "
+                    className="absolute z-10 left-1 web:hidden "
                 >
                     <TiArrowForward className="w-5 h-5 transform rotate-[240deg] text-primary-500 " />
                 </button>
@@ -237,7 +237,7 @@ const MenuHorizontalTabs = ({
                 <button
                     type="button"
                     onClick={handleNext}
-                    className="absolute right-5 web:hidden"
+                    className="absolute right-1 web:hidden"
                 >
                     <TiArrowBack className="w-5 h-5 transform rotate-[110deg] text-primary-500" />
                 </button>

@@ -22,6 +22,7 @@ const tab = tv({
         leading-1 font-bold text-gray-500 bg-transparent
         text-sm flex web:flex-row items-center justify-center
         gap-1 flex-grow 
+        transition-transform duration-300 ease-in-out
     `,
     // Ajustes adicionais para os estilos mobile
     variants: {
@@ -32,13 +33,13 @@ const tab = tv({
             true: 'web:py-2 web:!w-full',
         },
         selected: {
-            true: '!text-white shadow',
+            true: '!text-white shadow transform scale-105 translate-y-[-15%]',
         },
         disabled: {
             true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
         },
         menu: {
-            true: 'mobile:mb-5',
+            true: 'mobile:mb-0',
         },
     },
     defaultVariants: {
