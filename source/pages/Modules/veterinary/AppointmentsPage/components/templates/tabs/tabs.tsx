@@ -88,7 +88,7 @@ const items: TabItem[] = [
 ]
 
 const Tabs = () => {
-    const [activeIndex, setActiveIndex] = useState(0)
+    const [activeItem, setActiveItem] = useState(0)
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const [swipperController, setSwipperController] = useState<any>()
     const { isMobile } = useResizeMobile()
@@ -98,10 +98,11 @@ const Tabs = () => {
             <MenuHorizontalTabs
                 items={items}
                 onClick={(item) => {
-                    swipperController?.slideTo(item.id)
-                    setActiveIndex(item.id)
+                    const findItem = items.find((i) => i.id === item.id) || items[0]
+                    swipperController?.slideTo(findItem?.id as number)
+                    setActiveItem(findItem.id)
                 }}
-                activeIndex={activeIndex}
+                activeItem={activeItem}
             />
             <Swiper
                 // install Swiper modules
@@ -113,7 +114,7 @@ const Tabs = () => {
                 }}
                 // pagination={{ clickable: true, }}
                 onSlideChange={(swiper) => {
-                    setActiveIndex(swiper.activeIndex)
+                    setActiveItem(swiper.activeIndex)
                 }}
                 scrollbar={isMobile ? false : { draggable: false }}
             >
@@ -133,8 +134,8 @@ const Tabs = () => {
                                 id="Inicio"
                             >
                                 <Component
-                                    activeTab={activeIndex}
-                                    toggleTab={setActiveIndex}
+                                    activeTab={activeItem}
+                                    toggleTab={setActiveItem}
                                 />
                             </div>
                         </SwiperSlide>
