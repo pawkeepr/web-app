@@ -88,7 +88,7 @@ const items: TabItem[] = [
 ]
 
 const Tabs = () => {
-    const [activeItem, setActiveItem] = useState(0)
+    const [activeItem, setActiveItem] = useState(items[0])
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const [swipperController, setSwipperController] = useState<any>()
     const { isMobile } = useResizeMobile()
@@ -100,7 +100,7 @@ const Tabs = () => {
                 onClick={(item) => {
                     const findItem = items.find((i) => i.id === item.id) || items[0]
                     swipperController?.slideTo(findItem?.id as number)
-                    setActiveItem(findItem.id)
+                    setActiveItem(findItem)
                 }}
                 activeItem={activeItem}
             />
@@ -114,7 +114,9 @@ const Tabs = () => {
                 }}
                 // pagination={{ clickable: true, }}
                 onSlideChange={(swiper) => {
-                    setActiveItem(swiper.activeIndex)
+                    const findItem =
+                        items.find((i) => i.id === swiper.activeIndex) || items[0]
+                    setActiveItem(findItem)
                 }}
                 scrollbar={isMobile ? false : { draggable: false }}
             >
@@ -127,14 +129,14 @@ const Tabs = () => {
                             }`}
                         >
                             <div
-                                className="flex flex-col flex-1 w-full overflow-y-auto scroll"
+                                className="flex flex-col flex-1 w-full overflow-y-auto scroll mobile:pb-[80px]"
                                 style={{
                                     height: 'calc(100vh - 100px)',
                                 }}
                                 id="Inicio"
                             >
                                 <Component
-                                    activeTab={activeItem}
+                                    activeTab={activeItem.id}
                                     toggleTab={setActiveItem}
                                 />
                             </div>
