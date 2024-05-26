@@ -25,7 +25,6 @@ const ControlToggle = <Ctx,>({
     label,
     name,
     content,
-    legend = true,
     mode = ModeInput.editable,
     onChange = () => {},
 }: ToggleProps<Ctx>) => {
@@ -82,27 +81,13 @@ const ControlToggle = <Ctx,>({
                             />
                         )}
                     </h1>
-                    <div className="flex items-center gap-1">
-                        <span
-                            className={cn('text-gray-400 text-xs', {
-                                hidden: !legend,
-                            })}
-                        >
-                            Não
-                        </span>
-                        <Switch
-                            onChange={() => toggleStatus()}
-                            checked={field.value}
-                            size="md"
-                        />
-                        <span
-                            className={cn('text-gray-400 text-xs', {
-                                hidden: !legend,
-                            })}
-                        >
-                            Sim
-                        </span>
-                    </div>
+
+                    <Switch
+                        onChange={() => toggleStatus()}
+                        checked={field.value}
+                        size="md"
+                    />
+
                     {hasTitle && (
                         <span className={cn('text-gray-400')}>{title}</span>
                     )}

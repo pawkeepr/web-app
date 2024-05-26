@@ -5,7 +5,7 @@ import { ModeInput } from '~/Components/molecules/field-control/field-control'
 
 const toggle = tv({
     base: `
-    group inline-flex
+    group inline-flex relative
     items-center rounded-full 
     bg-gray-200 transition 
     `,
@@ -137,6 +137,17 @@ const SwitchToggle = ({
                 size,
             })}
         >
+            {!enabled && (
+                <span className="absolute font-sans text-[10px] text-gray-500 capitalize right-2">
+                    Não
+                </span>
+            )}
+            {enabled && (
+                <span className="absolute font-sans text-[10px] text-gray-100 capitalize left-2">
+                    Sim
+                </span>
+            )}
+
             <span className="sr-only">Use setting</span>
             {/* Adjusted the translate class to center the circle */}
             <span
