@@ -144,14 +144,13 @@ const MenuHorizontalTabs = ({
         }
 
         return selectMiddle(items, items[index]) as ItemTab[]
-    }, [items])
+    }, [items, isMobile])
 
     useEffect(() => {
-        if (isMobile) {
-            const index = itemsMenu.findIndex((i) => i.id === activeItem.id)
-            setCurrentIndex(index)
-        }
-    }, [activeItem])
+        if (!isMobile) return
+        const index = itemsMenu.findIndex((i) => i.id === activeItem.id)
+        setCurrentIndex(index)
+    }, [activeItem, itemsMenu])
 
     const handleNext = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length)
@@ -172,9 +171,9 @@ const MenuHorizontalTabs = ({
     }
 
     const visibleItems = useMemo(() => {
-        if (!isMobile) return itemsMenu
+        if (!isMobile) return items
         return itemsMenu.concat(itemsMenu)
-    }, [itemsMenu])
+    }, [itemsMenu, isMobile, items])
 
     return (
         <>
@@ -201,7 +200,10 @@ const MenuHorizontalTabs = ({
                         className="flex transition-transform duration-500"
                         style={{
                             transform: `translateX(-${
-                                (100 / 3) * ((currentIndex - 1) % items.length)
+                                isMobile
+                                    ? (100 / 3) *
+                                      ((currentIndex - 1) % items.length)
+                                    : 0
                             }%)`,
                         }}
                     >
