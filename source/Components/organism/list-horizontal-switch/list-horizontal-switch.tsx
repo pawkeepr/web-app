@@ -77,8 +77,8 @@ const ListSwitch = <T,>({
     name,
 }: ListSwitchProps<T>) => {
     return (
-        <>
-            <div className="flex flex-row flex-wrap justify-between w-full">
+        <section className="w-full">
+            <div className="flex flex-row flex-wrap justify-between w-full ">
                 {categories.map((item) => (
                     <OptionsMenu
                         key={item.value}
@@ -97,7 +97,7 @@ const ListSwitch = <T,>({
                     />
                 ))}
             </div>
-            <section className="w-full mt-2">
+            <section className="w-full mt-2 h-[80vh] overflow-y-auto scroll pb-[160px] z-10">
                 {options.map((option) => (
                     <ControlToggle
                         content={
@@ -113,7 +113,7 @@ const ListSwitch = <T,>({
                     />
                 ))}
             </section>
-        </>
+        </section>
     )
 }
 
@@ -160,11 +160,11 @@ const ListHorizontalSwitch = <T extends object = {}>({
     return (
         <FieldArray name={name}>
             {(arrayProps) => (
-                <section className="flex flex-col flex-1">
-                    <h4 className="flex-1 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
+                <section className="flex flex-col flex-1 !overflow-hidden">
+                    <h4 className="flex-1 mb-1 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
                         {makeTitle(category.label, false)}
                     </h4>
-                    <section className="flex flex-row flex-wrap justify-between  w-full h-[70vh] overflow-y-auto scroll">
+                    <section className="flex flex-row flex-wrap justify-between w-full">
                         {list.map(([key, options]) => (
                             <ListSwitchControl
                                 condition={category.value === key}
@@ -185,7 +185,7 @@ const ListHorizontalSwitch = <T extends object = {}>({
                             />
                         ))}
                     </section>
-                    <div className="flex justify-between flex-1 p-1 mt-0 bg-transparent h-fit">
+                    <div className="fixed flex justify-between flex-1 w-full px-1 mt-0 bg-transparent bottom-4 h-fit">
                         <button
                             type="button"
                             onClick={keyPressLeft}

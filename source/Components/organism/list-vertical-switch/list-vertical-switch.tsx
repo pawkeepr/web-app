@@ -67,35 +67,36 @@ const ListVerticalSwitch = <T extends object = {}>({
                     <div className="flex-[3]">
                         {list.map(([category, options]) => (
                             <section key={category} className="my-1">
-                                <h1 className="mb-2 font-sans text-base font-semibold text-gray-500">
+                                <h1 className="px-1 mb-2 font-sans text-base font-semibold text-gray-500">
                                     {category}
                                 </h1>
                                 {options.map((option) => (
-                                    <ControlToggle3States
-                                        content={
-                                            <FieldTextArea
-                                                label="Observações"
-                                                name={
-                                                    `${name}.${option.value}.note` as ''
-                                                }
-                                            />
-                                        }
-                                        key={option.value}
-                                        initialValue={option.checked}
-                                        onChange={(checked) => {
-                                            onChange({
-                                                checked,
-                                                option: option as Option<T>,
-                                                ...arrayProps,
-                                            })
-                                        }}
-                                        name={
-                                            `${name}.${
-                                                option.value as number
-                                            }.checked` as ''
-                                        }
-                                        label={option.label}
-                                    />
+                                    <div key={option.value} className="px-2">
+                                        <ControlToggle3States
+                                            content={
+                                                <FieldTextArea
+                                                    label="Observações"
+                                                    name={
+                                                        `${name}.${option.value}.note` as ''
+                                                    }
+                                                />
+                                            }
+                                            initialValue={option.checked}
+                                            onChange={(checked) => {
+                                                onChange({
+                                                    checked,
+                                                    option: option as Option<T>,
+                                                    ...arrayProps,
+                                                })
+                                            }}
+                                            name={
+                                                `${name}.${
+                                                    option.value as number
+                                                }.checked` as ''
+                                            }
+                                            label={option.label}
+                                        />
+                                    </div>
                                 ))}
                             </section>
                         ))}
