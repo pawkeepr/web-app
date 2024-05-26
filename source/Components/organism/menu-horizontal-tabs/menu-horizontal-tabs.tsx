@@ -178,7 +178,7 @@ const MenuHorizontalTabs = ({
 
     return (
         <>
-            <div className="w-full ">
+            <div className="w-full web:hidden">
                 <Dots
                     total={items.length}
                     activeIndex={items.findIndex((i) => i.id === activeItem.id)}

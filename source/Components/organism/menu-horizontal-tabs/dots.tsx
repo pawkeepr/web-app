@@ -19,7 +19,7 @@ type DotsProps = {
 
 const Dots = ({ total, activeIndex }: DotsProps) => {
     return (
-        <div className="flex items-center justify-center w-full space-x-2">
+        <div className="flex items-center justify-center w-full my-1 space-x-2">
             {Array.from({ length: total }).map((_, index) => (
                 <div
                     // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>

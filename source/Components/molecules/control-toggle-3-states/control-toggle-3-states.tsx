@@ -24,7 +24,7 @@ type SwitchProps<Ctx = undefined> = {
 
 const controlSwitch = tv({
     base: `
-        group inline-flex h-6 w-11 
+        group inline-flex h-6 w-11  relative
         items-center rounded-full 
         transition 
     `,
@@ -99,7 +99,6 @@ const ControlToggle3States = <Ctx,>({
     content = null,
     name,
     initialValue = false,
-    legend = true,
     size = 'md',
     mode = ModeInput.editable,
     onChange = () => {},
@@ -174,45 +173,45 @@ const ControlToggle3States = <Ctx,>({
                             />
                         )}
                     </h1>
-                    <div className="flex items-center gap-1 text-xs">
+
+                    <Switch
+                        disabled={mode === ModeInput.readonly}
+                        onClick={(e) => handleClick(e)}
+                        checked={field.value === true}
+                        className={controlSwitch({
+                            mode,
+                            color: 'primary',
+                            checked: hasInd ? 'null' : field.value,
+                            className,
+                            size,
+                        })}
+                    >
+                        {/* 
+                            Esta comparação é necessário pois há 3 estados, sendo um null, que seria considerado
+                            se colocasse apenas !field.value, pois o null é considerado false.
+                        */}
+                        {field.value === false && (
+                            <span className="absolute font-sans text-[10px] text-gray-500 capitalize right-2">
+                                Não
+                            </span>
+                        )}
+                        {field.value && (
+                            <span className="absolute font-sans text-[10px] text-gray-100 capitalize left-2">
+                                Sim
+                            </span>
+                        )}
+                        <span className="sr-only">Use setting</span>
+                        {/* Adjusted the translate class to center the circle */}
                         <span
-                            className={cn('text-gray-400', {
-                                hidden: !legend,
-                            })}
-                        >
-                            Não
-                        </span>
-                        <Switch
-                            disabled={mode === ModeInput.readonly}
-                            onClick={(e) => handleClick(e)}
-                            checked={field.value === true}
-                            className={controlSwitch({
-                                mode,
-                                color: 'primary',
-                                checked: hasInd ? 'null' : field.value,
-                                className,
+                            aria-hidden="true"
+                            className={pointer({
                                 size,
+                                translateClass: hasInd ? 'null' : field.value,
                             })}
-                        >
-                            <span className="sr-only">Use setting</span>
-                            {/* Adjusted the translate class to center the circle */}
-                            <span
-                                aria-hidden="true"
-                                className={pointer({
-                                    size,
-                                    translateClass: hasInd ? 'null' : field.value,
-                                })}
-                            />
-                            {/* Text inside the switch */}
-                        </Switch>
-                        <span
-                            className={cn('text-gray-400 text-xs', {
-                                hidden: !legend,
-                            })}
-                        >
-                            Sim
-                        </span>
-                    </div>
+                        />
+                        {/* Text inside the switch */}
+                    </Switch>
+
                     {hasTitle && (
                         <span className={cn('text-gray-400')}>{title}</span>
                     )}

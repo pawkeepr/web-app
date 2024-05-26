@@ -129,10 +129,7 @@ const Tabs = () => {
                             }`}
                         >
                             <div
-                                className="flex flex-col flex-1 w-full overflow-y-auto scroll mobile:pb-[80px]"
-                                style={{
-                                    height: 'calc(100vh - 100px)',
-                                }}
+                                className="flex flex-col flex-1 w-full overflow-y-auto scroll mobile:pb-[120px]"
                                 id="Inicio"
                             >
                                 <Component
