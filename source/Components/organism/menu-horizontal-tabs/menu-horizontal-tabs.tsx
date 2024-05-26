@@ -172,10 +172,10 @@ const MenuHorizontalTabs = ({
     }
 
     const visibleItems = useMemo(() => {
-        if (!isMobile) return items
-        const cpItems = cloneDeep(items)
+        if (!isMobile) return itemsMenu
+        const cpItems = cloneDeep(itemsMenu)
         return cpItems.concat(cpItems)
-    }, [itemsMenu, isMobile, items])
+    }, [isMobile, itemsMenu])
 
     return (
         <>
