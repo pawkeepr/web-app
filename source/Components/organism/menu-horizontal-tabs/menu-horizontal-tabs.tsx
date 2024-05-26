@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash'
 import { useEffect, useMemo, useState } from 'react'
 import { TiArrowBack, TiArrowForward } from 'react-icons/ti'
 import { tv } from 'tailwind-variants'
@@ -172,7 +173,8 @@ const MenuHorizontalTabs = ({
 
     const visibleItems = useMemo(() => {
         if (!isMobile) return items
-        return itemsMenu.concat(itemsMenu)
+        const cpItems = cloneDeep(items)
+        return cpItems.concat(cpItems)
     }, [itemsMenu, isMobile, items])
 
     return (
