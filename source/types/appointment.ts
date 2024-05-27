@@ -17,6 +17,11 @@ export interface VeterinaryConsultation {
         physical_exam: PhysicalExam
         complementary_exams: ComplementaryExam[]
     }
+    diagnosis: {
+        prognosis: string
+        prescription: string
+        notes: string
+    }
     treatments: Treatments
     appointment_details: AppointmentDetails
     appointment_status?: AppointmentStatus

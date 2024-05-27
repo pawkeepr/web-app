@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
-import Modal from '~/Components/organism/modal'; // Adapte este importe ao seu caminho real do componente Modal
-import { BtnCancel, BtnPrimary } from '../../atoms/btn';
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useState } from 'react'
+import Modal from '~/Components/organism/modal' // Adapte este importe ao seu caminho real do componente Modal
+import { BtnCancel, BtnPrimary } from '../../atoms/btn'
 
 type RouteConfirmationModalProps = {
     title?: string
@@ -19,7 +19,6 @@ const RouteConfirmationModal = ({
     const [nextRoute, setNextRoute] = useState('')
     const [confirmNavigation, setConfirmNavigation] = useState(false)
     const router = useRouter()
-
 
     useEffect(() => {
         const handleBeforeUnload = (event) => {
@@ -69,13 +68,13 @@ const RouteConfirmationModal = ({
     }
 
     return (
-        <Modal open={isOpen} onClose={cancelNavigation} className="w-fit h-fit m-2">
+        <Modal open={isOpen} onClose={cancelNavigation} className="m-2 w-fit h-fit">
             <div className="flex justify-center items-center flex-col max-w-[480px] ">
                 <h2 className="text-xl mb-1 font-semibold leading-6 text-gray-900 dark:!text-gray-200 text-center">
                     {title}
                 </h2>
 
-                <legend className="col-span-full text-sm text-gray-500 text-center">
+                <legend className="text-sm text-center text-gray-500 col-span-full">
                     {description}
                 </legend>
 
@@ -83,8 +82,12 @@ const RouteConfirmationModal = ({
                     {message}
                 </p>
 
-                <div className="mt-4 flex justify-center items-center">
-                    <BtnCancel type="button" onClick={cancelNavigation} />
+                <div className="flex items-center justify-center gap-1 mt-4">
+                    <BtnCancel
+                        type="button"
+                        onClick={cancelNavigation}
+                        label="Desistir"
+                    />
 
                     <BtnPrimary
                         type="button"

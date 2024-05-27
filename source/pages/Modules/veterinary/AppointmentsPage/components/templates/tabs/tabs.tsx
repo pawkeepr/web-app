@@ -14,7 +14,6 @@ import type { StepProps, TabsOptions } from '~/types/helpers'
 import StepAnamneses from '../../steps/step-anamnese'
 import StepDiagnosis from '../../steps/step-diagnosis'
 import StepExams from '../../steps/step-exams'
-import StepGeral from '../../steps/step-geral'
 
 import MenuHorizontalTabs from '~/Components/organism/menu-horizontal-tabs/menu-horizontal-tabs'
 import StepTreatment from '../../steps/step-treatment'
@@ -33,48 +32,36 @@ type TabItem = {
 const items: TabItem[] = [
     {
         id: 0,
-        title: 'Pré-Anamnese',
-        href: '#Inicio',
-        Component: StepGeral,
-    },
-    {
-        id: 1,
         title: 'Anamnese',
         href: '#Anamnese',
         Component: StepAnamneses,
     },
     {
+        id: 1,
+        title: 'Exames',
+        href: '#Exams',
+        Component: StepExams,
+    },
+    {
         id: 2,
-        title: 'Exames Realizados',
-        href: '#Exams',
-        Component: StepExams,
-    },
-    {
-        id: 3,
-        title: 'Solicitar Exames',
-        href: '#Exams',
-        Component: StepExams,
-    },
-    {
-        id: 4,
         title: 'Vacinação  e Vermefugo',
         href: '#Treatment',
         Component: StepTreatment,
     },
     {
-        id: 5,
+        id: 3,
         title: 'Medicação',
         href: '#Treatment',
         Component: StepTreatment,
     },
     {
-        id: 6,
-        title: 'Demais Tratamentos',
+        id: 4,
+        title: 'Alimentação e Suplementação',
         href: '#Treatment',
         Component: StepTreatment,
     },
     {
-        id: 7,
+        id: 5,
         title: 'Diagnóstico',
         href: '#Diagnostic',
         Component: StepDiagnosis,

@@ -11,6 +11,8 @@ export type CtxStepAnamnese = Pick<
     'anamnesis' | 'details_pet_consultation' | 'dates_consults' | 'exams_anamnesis'
 >
 
+export type CtxStepDiagnostic = Pick<VeterinaryConsultation, 'diagnosis'>
+
 export type CtxStepTreatment = Pick<VeterinaryConsultation, 'treatments'>
 export const schemaValidationDetailsPetConsultation = yup
     .object()
@@ -81,6 +83,12 @@ export const schemaStepAppointmentDetails = yup
         payment: schemaPayment,
     })
 
+export const schemaStepDiagnostic = {
+    prescription: yup.string().required(),
+    prognosis: yup.string().optional(),
+    note: yup.string().optional(),
+}
+
 export const schemaStepAppointment = yup
     .object()
     .shape<RecordsShapeYup<VeterinaryConsultation>>({
@@ -93,6 +101,7 @@ export const schemaStepAppointment = yup
         appointment_details: schemaStepAppointmentDetails,
         exams_anamnesis: yup.array().optional(),
         appointment_status: yup.string().optional(),
+        diagnosis: yup.object().shape(schemaStepDiagnostic),
     })
 
 export type SchemaYupAppointment = yup.InferType<typeof schemaStepAppointment>

@@ -2,7 +2,7 @@ import ModalConfirm from '~/Components/modals/confirm-modal/modal-confirm'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import CardSimplePet from '../../molecules/card-simple-pet'
-import type { CtxStepAnamnese } from '../../validations.yup'
+import type { CtxStepDiagnostic } from '../../validations.yup'
 import { screen } from '../styles'
 
 const TRADUCTION = {
@@ -11,7 +11,7 @@ const TRADUCTION = {
 }
 
 const StepDiagnosis = () => {
-    const { values, setFieldValue } = useFormikContextSafe<CtxStepAnamnese>()
+    const { values, setFieldValue } = useFormikContextSafe<CtxStepDiagnostic>()
 
     return (
         <>
@@ -28,7 +28,10 @@ const StepDiagnosis = () => {
                     <CardSimplePet />
                 </div>
                 <section className="col-span-full ">
-                    <div className="flex flex-col flex-1 w-full gap-1 overflow-auto h-[40vh] scroll-smooth scroll-width-thin mine-scroll-bar">
+                    <legend className="text-xs text-center text-gray-400 col-span-full">
+                        Respostas da Anamnese
+                    </legend>
+                    <div className="flex flex-col flex-1 w-full gap-1 overflow-auto h-[20vh] scroll-smooth scroll-width-thin mine-scroll-bar">
                         {values?.anamnesis?.questions_anamnesis
                             ?.filter(
                                 (question) =>
@@ -117,11 +120,23 @@ const StepDiagnosis = () => {
                     </legend>
                 </section>
                 <FieldTextArea
-                    isValid={values?.anamnesis?.note.length > 0}
                     ctx={values}
-                    label="Diagnóstico"
+                    label="Prognóstico"
+                    name="diagnosis.prognosis"
+                    divClassName="col-span-full"
+                />
+                <FieldTextArea
+                    isValid={values?.diagnosis?.prescription.length > 0}
+                    ctx={values}
+                    label="Prescrição"
                     required
-                    name="anamnesis.note"
+                    name="diagnosis.prescription"
+                    divClassName="col-span-full"
+                />
+                <FieldTextArea
+                    ctx={values}
+                    label="Observações"
+                    name="diagnosis.notes"
                     divClassName="col-span-full"
                 />
             </div>

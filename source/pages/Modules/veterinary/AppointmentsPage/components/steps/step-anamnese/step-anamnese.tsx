@@ -1,4 +1,6 @@
 import * as Yup from 'yup'
+import FieldNumber from '~/Components/molecules/field-number'
+import FieldTextArea from '~/Components/molecules/field-text-area'
 import ListVerticalSwitch from '~/Components/organism/list-vertical-switch'
 import {
     QuestionTypes,
@@ -30,38 +32,75 @@ const StepAnamnese = () => {
     return (
         <>
             <CardSimplePet />
-            <h4 className="font-sans text-base font-semibold text-center capitalize">
-                Anamnese
-            </h4>
-            <div className={screen({ className: 'px-1' })}>
-                <ListVerticalSwitch
-                    name="anamnesis.questions_anamnesis"
-                    ctx={values}
-                    categories={Object.keys(QuestionTypes).map((key) => {
-                        const type = key as KeyOfQuestionTypes
-                        return {
-                            value: type,
-                            label: TKeysOfQuestionTypes[type],
+            <section className={screen()}>
+                <h4 className="font-sans text-base font-semibold text-center capitalize">
+                    Pré-Anamnese
+                    <br />
+                    <span className="text-xs font-bold text-secondary-500">
+                        Obrigatório (*)
+                    </span>
+                </h4>
+                <div>
+                    <FieldTextArea
+                        isValid={
+                            values.dates_consults?.reason_consultation.length > 0
                         }
-                    })}
-                    items={questions}
-                    onChange={({ checked, replace, option }) => {
-                        const item = {
-                            id: option.value,
-                            name_anamnesis: option.label,
-                            notes_anamnesis: '',
-                            type_anamnesis: option.type,
-                            checked,
-                            options_anamnesis:
-                                OPTION_BOOLEAN[String(checked) as OPTION_BOOLEAN],
-                        }
-                        const isValid = validationSchema.isValidSync(item)
+                        ctx={values}
+                        label="Motivo da Consulta"
+                        required
+                        name="dates_consults.reason_consultation"
+                        divClassName="col-span-full"
+                    />
 
-                        if (!isValid) return errorToast('Erro ao adicionar item')
-                        replace?.(option.value as number, item)
-                    }}
-                />
-            </div>
+                    <FieldNumber
+                        ctx={values}
+                        label="Peso"
+                        required
+                        isValid={values.details_pet_consultation?.weight.length > 0}
+                        visibleError={false}
+                        divClassName="col-span-full"
+                        name="details_pet_consultation.weight"
+                    />
+                    <legend className="text-xs text-center text-gray-400 col-span-full">
+                        Peso do pet em quilos, exemplo = 0.5 (500 gramas)
+                    </legend>
+                </div>
+                <h4 className="font-sans text-base font-semibold text-center capitalize">
+                    Anamnese
+                </h4>
+                <div>
+                    <ListVerticalSwitch
+                        name="anamnesis.questions_anamnesis"
+                        ctx={values}
+                        categories={Object.keys(QuestionTypes).map((key) => {
+                            const type = key as KeyOfQuestionTypes
+                            return {
+                                value: type,
+                                label: TKeysOfQuestionTypes[type],
+                            }
+                        })}
+                        items={questions}
+                        onChange={({ checked, replace, option }) => {
+                            const item = {
+                                id: option.value,
+                                name_anamnesis: option.label,
+                                notes_anamnesis: '',
+                                type_anamnesis: option.type,
+                                checked,
+                                options_anamnesis:
+                                    OPTION_BOOLEAN[
+                                        String(checked) as OPTION_BOOLEAN
+                                    ],
+                            }
+                            const isValid = validationSchema.isValidSync(item)
+
+                            if (!isValid)
+                                return errorToast('Erro ao adicionar item')
+                            replace?.(option.value as number, item)
+                        }}
+                    />
+                </div>
+            </section>
         </>
     )
 }

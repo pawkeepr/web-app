@@ -86,6 +86,11 @@ export const makeInitialValues = (
             value_payment: '',
         },
     },
+    diagnosis: {
+        notes: '',
+        prescription: '',
+        prognosis: '',
+    },
     tutor_pet_vet: {
         pet: {
             ...data?.pet_information,
