@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import TabsFinished from './tabs-finished'
+import Tabs from './tabs'
 
 import { Formik } from 'formik'
 import type { IPetV2 } from '~/types/pet-v2'
@@ -7,9 +7,9 @@ import type { DTOProfile } from '~/types/profile'
 import { makeInitialValues } from '../../../Appointments'
 import { schemaStepAppointment } from '../../validations.yup'
 
-const meta: Meta<typeof TabsFinished> = {
-    component: TabsFinished,
-    title: 'Modules/Veterinary/AppointmentsPage/Components/Templates/TabsFinished',
+const meta: Meta<typeof Tabs> = {
+    component: Tabs,
+    title: 'Modules/Veterinary/AppointmentsPage/Components/Tabs',
     tags: ['autodocs'],
     decorators: [
         (Story) => (
@@ -31,7 +31,7 @@ const meta: Meta<typeof TabsFinished> = {
 }
 
 export default meta
-type Story = StoryObj<typeof TabsFinished>
+type Story = StoryObj<typeof Tabs>
 
 export const Default: Story = {
     args: {},

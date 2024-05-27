@@ -8,13 +8,13 @@ import ContextSettersStatusAppointmentsModals from '~/contexts/setters-status-ap
 
 type DashboardLayoutsSearch =
     | {
-        searchBlock: true
-        name: 'appointments' | 'veterinary' | 'tutor' | 'pet' | 'historic'
-    }
+          searchBlock: true
+          name: 'appointments' | 'veterinary' | 'tutor' | 'pet' | 'historic'
+      }
     | {
-        searchBlock?: false
-        name?: never
-    }
+          searchBlock?: false
+          name?: never
+      }
 
 type DashboardLayoutsProps = {
     children: React.ReactNode
@@ -30,9 +30,7 @@ const DashboardLayouts = ({
     return (
         <main>
             <HeaderTitle title={title} />
-            {searchBlock && (
-                <BlockSearchAndInputDocument name={name as string} title={title} />
-            )}
+            {searchBlock && <BlockSearchAndInputDocument name={name as string} />}
             {children}
             <ContextSettersStatusAppointmentsModals />
         </main>
