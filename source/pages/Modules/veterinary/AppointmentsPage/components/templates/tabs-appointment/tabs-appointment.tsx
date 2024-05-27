@@ -25,9 +25,9 @@ type TabItem = {
     Component: (props: StepProps) => JSX.Element
 }
 
-// Pre anaminese/ Anaminese / exames realizados
-// solicitar exames / Vacinação  e Vermefugo /  Medicação
-// Demais Tratamento / diagnóstico / finalizar
+// Pre anaminese/ Anaminese / Exames
+// Vacinação  e Vermefugo /  Medicação
+// Alimentação e Suplementação / Diagnóstico
 
 const items: TabItem[] = [
     {
@@ -44,7 +44,7 @@ const items: TabItem[] = [
     },
     {
         id: 2,
-        title: 'Vacinação  e Vermefugo',
+        title: 'Vacinação  e Vermifugo',
         href: '#Treatment',
         Component: StepTreatment,
     },
@@ -66,15 +66,9 @@ const items: TabItem[] = [
         href: '#Diagnostic',
         Component: StepDiagnosis,
     },
-    // {
-    //     id: 8,
-    //     title: 'Finalizar',
-    //     href: '#Finalizar',
-    //     Component: StepPayment,
-    // },
 ]
 
-const Tabs = () => {
+const TabsAppointments = () => {
     const [activeItem, setActiveItem] = useState(items[0])
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const [swipperController, setSwipperController] = useState<any>()
@@ -135,4 +129,4 @@ const Tabs = () => {
     )
 }
 
-export default withLoading(Tabs)
+export default withLoading(TabsAppointments)

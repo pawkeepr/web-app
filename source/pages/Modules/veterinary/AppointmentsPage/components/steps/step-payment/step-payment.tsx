@@ -17,7 +17,7 @@ import { screen } from '../styles'
 
 type CtxStepPayment = Pick<
     VeterinaryConsultation,
-    'appointment_details' | 'tutor_pet_vet' | 'treatments'
+    'appointment_details' | 'tutor_pet_vet' | 'treatments' | 'dates_consults'
 > & {}
 
 const StepPayment = () => {
@@ -66,6 +66,8 @@ const StepPayment = () => {
             </h4>
             <div className={screen()}>
                 <CardTutor
+                    date_consultation={values?.dates_consults?.date_consultation}
+                    time_consultation={values?.dates_consults?.time_consultation}
                     tutor={values?.tutor_pet_vet?.tutor}
                     pet={values?.tutor_pet_vet?.pet}
                 />

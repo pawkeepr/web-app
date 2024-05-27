@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import VerticalTabs from './tabs'
+import VerticalTabs from './tabs-finished'
 
 import { Formik } from 'formik'
 import type { IPetV2 } from '~/types/pet-v2'
@@ -9,7 +9,7 @@ import { schemaStepAppointment } from '../../validations.yup'
 
 const meta: Meta<typeof VerticalTabs> = {
     component: VerticalTabs,
-    title: 'Modules/Veterinary/AppointmentsPage/Page',
+    title: 'Modules/Veterinary/AppointmentsPage/Components/Templates/TabsFinished',
     tags: ['autodocs'],
     decorators: [
         (Story) => (

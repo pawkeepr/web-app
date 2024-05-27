@@ -12,7 +12,7 @@ import type { VeterinaryConsultation } from '~/types/appointment'
 import type { IPetV2 } from '~/types/pet-v2'
 import type { DTOProfile } from '~/types/profile'
 import { geolocation } from '~/utils/geolocation'
-import Tabs from './components/templates/tabs'
+import Tabs from './components/templates/tabs-appointment'
 import {
     schemaStepAppointment,
     type SchemaYupAppointment,
