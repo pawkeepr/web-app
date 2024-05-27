@@ -63,7 +63,7 @@ const ListVerticalSwitch = <T extends object = {}>({
     return (
         <FieldArray name={name}>
             {(arrayProps) => (
-                <section className="flex-col flex flex-1 !min-h-[460px] ">
+                <section className="flex-col flex flex-1 !min-h-[460px] mobile:pb-[140px]">
                     <div className="flex-[3]">
                         {list.map(([category, options]) => (
                             <section key={category} className="my-1">
