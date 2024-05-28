@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/navigation'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { FaCheckCircle, FaEdit, FaPlayCircle } from 'react-icons/fa'
 import { MdClose } from 'react-icons/md'
 import {
@@ -14,6 +14,7 @@ import {
     ModalPlus,
     usePlusModal,
 } from '~/contexts/setters-status-appointments-modals-context'
+import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { VeterinaryConsultation } from '~/types/appointment'
 
 type BoxButtonsProps = {
@@ -23,6 +24,8 @@ type BoxButtonsProps = {
 
 const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
     const router = useRouter()
+    const [isStarting, setIsStarting] = useState(false)
+    const { isMobile } = useResizeMobile()
     const { setItem, open, close } = usePlusModal()
 
     const onClickCancel = useCallback(() => {
@@ -44,9 +47,13 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
     }, [])
 
     const startAppointment = useCallback(() => {
-        router.push(
-            `/dashboard/appointments?appointment_id=${item.id}&document=${item.tutor_pet_vet?.tutor?.cpf_cnpj}&pet=${item.tutor_pet_vet?.pet?.id_pet}`,
-        )
+        setIsStarting(true)
+        const route = `/dashboard/appointments?appointment_id=${item.id}&document=${item.tutor_pet_vet?.tutor?.cpf_cnpj}&pet=${item.tutor_pet_vet?.pet?.id_pet}`
+        router.prefetch(route)
+        setTimeout(() => {
+            setIsStarting(false)
+            router.push(route)
+        }, 1000)
     }, [item])
 
     return (
@@ -65,6 +72,11 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.canceled === 'no' &&
                     item.appointment_status?.done === 'no'
                 }
+                isLoading={true}
+                sizeLoading={isMobile ? 96 : 48}
+                disabled={isStarting}
+                messageLoading="Iniciando consulta... Em instantes você será redirecionado."
+                typeLoading="Hearts"
                 label="Iniciar Consulta"
                 aria-label="Iniciar consulta"
                 className="border-none mobile:!w-full w-full "
@@ -78,6 +90,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.canceled === 'no' &&
                     item.appointment_status?.done === 'no'
                 }
+                disabled={isStarting}
                 label="Cancelar"
                 aria-label="Cancelar consulta"
                 onClick={onClickCancel}
@@ -92,6 +105,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.done === 'no' &&
                     item.appointment_status?.canceled === 'no'
                 }
+                disabled={isStarting}
                 label="Reagendar"
                 aria-label="Reagendar consulta"
                 outline
@@ -107,6 +121,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.canceled === 'no' &&
                     item.appointment_status?.done === 'no'
                 }
+                disabled={isStarting}
                 label="Confirmar"
                 aria-label="Confirmar consulta"
                 outline
