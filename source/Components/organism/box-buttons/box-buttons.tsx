@@ -53,7 +53,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
         setTimeout(() => {
             setIsStarting(false)
             router.push(route)
-        }, 1000)
+        }, 2000)
     }, [item])
 
     return (
@@ -87,6 +87,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
             <BtnNeutral
                 condition={
                     !isLoading &&
+                    !isStarting &&
                     item.appointment_status?.canceled === 'no' &&
                     item.appointment_status?.done === 'no'
                 }
@@ -102,6 +103,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
             <BtnSecondary
                 condition={
                     !isLoading &&
+                    !isStarting &&
                     item.appointment_status?.done === 'no' &&
                     item.appointment_status?.canceled === 'no'
                 }
@@ -117,6 +119,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
             <BtnConfirm
                 condition={
                     !isLoading &&
+                    !isStarting &&
                     item.appointment_status?.confirmed === 'no' &&
                     item.appointment_status?.canceled === 'no' &&
                     item.appointment_status?.done === 'no'
