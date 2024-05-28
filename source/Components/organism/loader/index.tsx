@@ -24,7 +24,7 @@ export type KeysLoading =
 
 export type ReactLoaderGeneric = { [keyof in KeysLoading]: JSX.ElementType }
 
-type LoadingProps = {
+export type LoadingProps = {
     size?: string | number
     type?: KeysLoading
     color?: string
@@ -32,6 +32,7 @@ type LoadingProps = {
     width?: number
     barColor?: string
     borderColor?: string
+    message?: string
 }
 
 const Loader = ({
@@ -45,13 +46,18 @@ const Loader = ({
     const Component = (ReactLoader as unknown as ReactLoaderGeneric)[type]
 
     return (
-        <div className="flex flex-col w-full justify-center items-center">
+        <div className="flex flex-col items-center justify-center w-full">
             <Component
                 color={color}
                 height={height || size}
                 width={width || size}
                 {...props}
             />
+            {props.message && (
+                <p className="text-sm text-gray-500 transition-all duration-300 animate-pulse">
+                    {props.message}
+                </p>
+            )}
         </div>
     )
 }
