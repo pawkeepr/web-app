@@ -72,7 +72,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                     item.appointment_status?.canceled === 'no' &&
                     item.appointment_status?.done === 'no'
                 }
-                isLoading={true}
+                isLoading={isStarting}
                 sizeLoading={isMobile ? 96 : 48}
                 disabled={isStarting}
                 messageLoading="Iniciando consulta... Em instantes você será redirecionado."
