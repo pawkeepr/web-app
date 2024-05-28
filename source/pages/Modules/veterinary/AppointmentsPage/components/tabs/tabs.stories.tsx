@@ -4,8 +4,8 @@ import Tabs from './tabs'
 import { Formik } from 'formik'
 import type { IPetV2 } from '~/types/pet-v2'
 import type { DTOProfile } from '~/types/profile'
-import { makeInitialValues } from '../../../Appointments'
-import { schemaStepAppointment } from '../../validations.yup'
+import { makeInitialValues } from '../../Appointments'
+import { schemaStepAppointment } from '../validations.yup'
 
 const meta: Meta<typeof Tabs> = {
     component: Tabs,

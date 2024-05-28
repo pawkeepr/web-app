@@ -10,8 +10,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { tv } from 'tailwind-variants'
 import withLoading from '~/Components/helpers/with-loading'
 import type { StepProps, TabsOptions } from '~/types/helpers'
-import TabsAppointments from '../tabs-appointment'
-import TabsFinished from '../tabs-finished'
+import TabsAppointments from './tabs-appointment'
+import TabsFinished from './tabs-finished'
 
 type TabItem = {
     id: TabsOptions

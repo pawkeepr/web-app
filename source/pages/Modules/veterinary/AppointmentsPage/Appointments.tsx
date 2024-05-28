@@ -12,7 +12,7 @@ import type { VeterinaryConsultation } from '~/types/appointment'
 import type { IPetV2 } from '~/types/pet-v2'
 import type { DTOProfile } from '~/types/profile'
 import { geolocation } from '~/utils/geolocation'
-import Tabs from './components/templates/tabs'
+import Tabs from './components/tabs'
 import {
     schemaStepAppointment,
     type SchemaYupAppointment,
@@ -56,7 +56,18 @@ export const makeInitialValues = (
     },
     exams_anamnesis: {
         complementary_exams: [],
-        physical_exam: {} as any,
+        physical_exam: {
+            behavior: '',
+            body_state: '',
+            diet: '',
+            fc: '',
+            fr: '',
+            hydration: '',
+            mucous_membranes: '',
+            pa: '',
+            tpc: '',
+            other_finds: [],
+        },
     },
     appointment_details: {
         appointment_geolocation: {

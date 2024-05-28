@@ -7,7 +7,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 //
 import { A11y, Controller, Navigation, Pagination, Scrollbar } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper, SwiperSlide, type SwiperClass } from 'swiper/react'
 import withLoading from '~/Components/helpers/with-loading'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { StepProps, TabsOptions } from '~/types/helpers'
@@ -25,8 +25,8 @@ type TabItem = {
     Component: (props: StepProps) => JSX.Element
 }
 
-// Pre anaminese/ Anaminese / Exames
-// Vacinação  e Vermefugo /  Medicação
+// Anamnese / Exames
+// Vacinação  e Vermifugo /  Medicação
 // Alimentação e Suplementação / Diagnóstico
 
 const items: TabItem[] = [
@@ -70,8 +70,9 @@ const items: TabItem[] = [
 
 const TabsAppointments = () => {
     const [activeItem, setActiveItem] = useState(items[0])
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    const [swipperController, setSwipperController] = useState<any>()
+    const [swipperController, setSwipperController] = useState<SwiperClass | null>(
+        null,
+    )
     const { isMobile } = useResizeMobile()
 
     return (
