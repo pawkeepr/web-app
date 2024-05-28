@@ -53,7 +53,9 @@ const ModalConfirm = ({
                 onClose={() => closeModal()}
                 open={open}
                 mobilePage={false}
-                className="m-2 w-fit h-fit"
+                classNames={{
+                    modal: 'w-fit h-fit p-4',
+                }}
             >
                 <div className="flex justify-center items-center flex-col max-w-[480px] ">
                     <h2 className="text-xl mb-1 font-semibold leading-6 text-gray-900 dark:!text-gray-200 text-center">
