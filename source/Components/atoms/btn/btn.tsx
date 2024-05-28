@@ -73,14 +73,14 @@ const styledIcon = tv({
 })
 
 export type BtnProps = {
-    icon?: React.ReactNode | string | JSX.Element | JSX.ElementType | null
+    icon?: React.ReactNode
     label: string
     iconStyle?: string
     children?: React.ReactNode
     isLoading?: boolean
     condition?: boolean
 } & ComponentProps<'button'> &
-    VariantProps<typeof button> &
+    Omit<VariantProps<typeof button>, 'icon'> &
     VariantProps<typeof styledIcon>
 
 const Btn = ({

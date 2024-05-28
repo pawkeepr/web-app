@@ -69,9 +69,9 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                 aria-label="Iniciar consulta"
                 className="border-none mobile:!w-full w-full "
                 onClick={startAppointment}
-            >
-                <FaPlayCircle />
-            </BtnPrimary>
+                icon={<FaPlayCircle />}
+            />
+
             <BtnNeutral
                 condition={
                     !isLoading &&
@@ -83,11 +83,8 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                 onClick={onClickCancel}
                 outline
                 className="!w-1/5"
-
-
-            >
-                <MdClose className="h-6 w-6" />
-            </BtnNeutral>
+                icon={<MdClose />}
+            />
 
             <BtnSecondary
                 condition={
@@ -100,9 +97,8 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                 outline
                 onClick={onClickReScheduled}
                 className="!w-1/5"
-            >
-                <FaEdit />
-            </BtnSecondary>
+                icon={<FaEdit />}
+            />
 
             <BtnConfirm
                 condition={
@@ -116,11 +112,8 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                 outline
                 className="!w-1/5"
                 onClick={onClickConfirmed}
-            >
-                <FaCheckCircle />
-            </BtnConfirm>
-
-
+                icon={<FaCheckCircle />}
+            />
         </div>
     )
 }

@@ -17,7 +17,7 @@ export const card = tv({
     },
     defaultVariants: {
         mobile: true,
-    }
+    },
 })
 
 export type ModalBoxButtonsProps<T> = {
@@ -50,8 +50,12 @@ const Card = <T,>({
             {({ showModal }) => (
                 <div
                     key={(item as any)?.id || id}
-                    onClick={isMobile ? showModal : () => { }}
-                    onKeyUp={() => { }}
+                    onClick={() => {
+                        if (isMobile) {
+                            showModal()
+                        }
+                    }}
+                    onKeyUp={() => {}}
                     style={{
                         cursor: isMobile ? 'pointer' : 'default',
                         outline: 'none',
