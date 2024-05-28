@@ -5,7 +5,9 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import BtnAvatar from './btn-avatar'
 
 import withControl from '~/Components/helpers/with-control'
-import withLoading from '~/Components/helpers/with-loading'
+import withLoading, {
+    type LoadingControlProps,
+} from '~/Components/helpers/with-loading'
 
 export const button = tv({
     base: `
@@ -77,11 +79,11 @@ export type BtnProps = {
     label: string
     iconStyle?: string
     children?: React.ReactNode
-    isLoading?: boolean
     condition?: boolean
 } & ComponentProps<'button'> &
     Omit<VariantProps<typeof button>, 'icon'> &
-    VariantProps<typeof styledIcon>
+    VariantProps<typeof styledIcon> &
+    LoadingControlProps
 
 const Btn = ({
     label,
