@@ -7,6 +7,7 @@ const toggle = tv({
     base: `
     group inline-flex relative
     items-center rounded-full 
+    disabled:cursor-not-allowed disabled:opacity-50
     bg-gray-200 transition 
     `,
     variants: {
@@ -114,6 +115,7 @@ const SwitchToggle = ({
     color = 'primary',
     checked = false,
     onChange,
+    ...props
 }: SwitchToggleProps) => {
     const [enabled, setEnabled] = useState<boolean>(checked)
 
@@ -126,7 +128,8 @@ const SwitchToggle = ({
 
     return (
         <Switch
-            disabled={mode === ModeInput.readonly}
+            {...props as any}
+            disabled={mode === ModeInput.readonly || props.disabled}
             onClick={() => handleChange()}
             checked={enabled}
             className={toggle({
@@ -136,6 +139,7 @@ const SwitchToggle = ({
                 className,
                 size,
             })}
+            
         >
             {!enabled && (
                 <span className="absolute font-sans text-[10px] text-gray-500 capitalize right-2">

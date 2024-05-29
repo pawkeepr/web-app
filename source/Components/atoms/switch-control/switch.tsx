@@ -1,4 +1,5 @@
 import { useId } from 'react'
+import withControl from '~/Components/helpers/with-control'
 import Switch, { type SwitchToggleProps } from '../switch'
 
 const ControlSwitch = ({ children, ...props }: SwitchToggleProps) => {
@@ -12,4 +13,4 @@ const ControlSwitch = ({ children, ...props }: SwitchToggleProps) => {
     )
 }
 
-export default ControlSwitch
+export default withControl(ControlSwitch)
