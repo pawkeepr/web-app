@@ -23,6 +23,7 @@ export type ListInputProps<Ctx extends object = {}, T = unknown> = {
     categories: { label: string; value: string }[]
     specialCategory?: { label: string; value: string }[]
     specialItems?: React.ReactNode[]
+    content?: (params: { label: string; name: string; option: Option<T> }) => React.ReactNode
     onChange: (
         props: FieldArrayRenderProps & {
             checked: boolean
@@ -66,16 +67,22 @@ type ListSwitchProps<T> = {
     onChangeCategory: (category: { label: string; value: string }) => void
     category: { label: string; value: string }
     categories: { label: string; value: string }[]
+    content?: (params: { label: string; name: string; option: Option<T> }) => React.ReactNode
     name: string
 }
+
 const ListSwitch = <T,>({
     categories,
     category,
     options,
     onChange,
     onChangeCategory,
+    content = ({ label, name }) => (
+        <FieldTextArea label={label} name={name as ''} />
+    ),
     name,
 }: ListSwitchProps<T>) => {
+    const Content = content
     return (
         <section className="w-full">
             <div className="flex flex-row flex-wrap justify-between w-full ">
@@ -100,12 +107,18 @@ const ListSwitch = <T,>({
             <section className="w-full mt-2 h-[80vh] overflow-y-auto scroll pb-[160px] z-10">
                 {options.map((option) => (
                     <ControlToggle
-                        content={
-                            <FieldTextArea
+                        content={({ checked, name }) => (
+                            <Content
                                 label="Observações"
-                                name={`${name}.${option.value}.notes` as ''}
+                                name={`${name}.${option.value as number}` as ''}
+                                option={{
+                                    ...option,
+                                    value: option.value,
+                                    label: option.label,
+                                    checked,
+                                }}
                             />
-                        }
+                        )}
                         key={option.value}
                         onChange={(e) => onChange.call(null, e, option)}
                         name={`${name}.${option.value as number}.checked` as ''}
@@ -124,6 +137,7 @@ const ListHorizontalSwitch = <T extends object = {}>({
     items,
     name,
     categories: steps,
+    content,
     onChange,
 }: ListInputProps<T>) => {
     const [category, setCategory] = useState(steps[0])
@@ -170,6 +184,7 @@ const ListHorizontalSwitch = <T extends object = {}>({
                                 condition={category.value === key}
                                 key={key}
                                 name={name}
+                                content={content}
                                 categories={steps}
                                 category={category}
                                 options={options}

@@ -11,7 +11,10 @@ export type ToggleProps<Ctx = undefined> = {
     ctx?: Ctx extends undefined ? never : Ctx
     name: Ctx extends undefined ? string : ObjPaths<Ctx>
     children?: React.ReactNode
-    content?: React.ReactNode
+    content?: ({
+        checked,
+        name,
+    }: { checked: boolean; name: string }) => React.ReactNode
     label: string
     onClick?: () => void
     onChange?: (e: boolean) => void
@@ -30,6 +33,7 @@ const ControlToggle = <Ctx,>({
 }: ToggleProps<Ctx>) => {
     const [field, _meta, helpers] = useField(name)
     const [openAccordion, setOpenAccordion] = useState(false)
+    const Content = content
 
     const handleChange = (e: boolean) => {
         helpers.setValue(e)
@@ -94,9 +98,9 @@ const ControlToggle = <Ctx,>({
                 </div>
                 {field.value && children}
             </summary>
-            {content && (
+            {Content && (
                 <div className={cn('px-1 collapse-content py-0 mt-0')}>
-                    {content}
+                    <Content checked={field.value} name={name as string} />
                 </div>
             )}
         </div>

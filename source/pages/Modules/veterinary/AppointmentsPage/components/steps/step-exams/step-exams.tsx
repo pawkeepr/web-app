@@ -11,6 +11,8 @@ import { exams } from '~/constants/exams-questions'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { ComplementaryExam } from '~/types/appointment'
 import CardSimplePet from '../../molecules/card-simple-pet'
+import ContentActionExam from '../../molecules/content-action-exam'
+import type { ItemExam } from '../../molecules/content-action-exam/content-action-exam'
 import type { CtxStepAnamnese } from '../../validations.yup'
 import { screen } from '../styles'
 
@@ -46,13 +48,28 @@ const StepExams = () => {
             <div className={screen({ className: 'px-1 w-full overflow-y-hidden' })}>
                 <ListHorizontalSwitch
                     ctx={values}
-                    items={exams.map((item) => ({
-                        ...item,
-                        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-                        type: item.type as any,
-                        value: item.id,
-                        checked: false,
-                    }))}
+                    content={({ label, name, option }) => (
+                        <ContentActionExam
+                            option={{
+                                ...option,
+                                type: option.type as ExamsTypes,
+                                type_action: null,
+                            }}
+                            name={name}
+                            label={label}
+                        />
+                    )}
+                    items={exams.map(
+                        (item) =>
+                            ({
+                                ...item,
+                                // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+                                type: item.type as any,
+                                value: item.id,
+                                type_action: null,
+                                checked: false,
+                            }) as ItemExam,
+                    )}
                     name="exams_anamnesis.complementary_exams"
                     categories={STEPS}
                     onChange={({ option, step, checked, replace }) => {
