@@ -53,6 +53,7 @@
         }
     },
     "formatter": {
+        "formatWithErrors": true,
         "ignore": [
             "node_modules",
             "coverage",
