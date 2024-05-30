@@ -1,3 +1,4 @@
+import { XMarkIcon } from '@heroicons/react/24/solid'
 import { tv } from 'tailwind-variants'
 import withControl from '~/Components/helpers/with-control'
 
@@ -11,7 +12,7 @@ type TagProps = {
 
 const tag = {
     button: tv({
-        base: 'px-2 py-1 border rounded transition-colors',
+        base: 'px-2 py-1 border rounded transition-colors flex items-center gap-1',
         variants: {
             selected: {
                 true: 'bg-primary-500 text-white',
@@ -32,7 +33,7 @@ const tag = {
         },
     }),
     icon: tv({
-        base: 'absolute left-2 text-xm',
+        base: 'absolute left-1 text-xm ',
         variants: {
             selected: {
                 true: 'text-gray-100',
@@ -62,13 +63,13 @@ const Tag: React.FC<TagProps> = ({
             onClick={onClick}
         >
             {selected && (
-                <span
+                <div
                     className={tag.icon({
                         selected,
                     })}
                 >
-                    x
-                </span>
+                    <XMarkIcon className="w-4 h-4" />
+                </div>
             )}
             <label
                 className={tag.label({
