@@ -37,9 +37,17 @@ export type AppointmentStatus = {
     is_possible_action: On_Off
 }
 
+export const TypeAction = {
+    collect: 'collect',
+    perform: 'perform',
+    request: 'request',
+} as const
+export type TypeAction = (typeof TypeAction)[keyof typeof TypeAction]
+
 export type ComplementaryExam = {
     type_exam: string
     name_exam: string
+    type_action: TypeAction
     notes: string
 }
 
