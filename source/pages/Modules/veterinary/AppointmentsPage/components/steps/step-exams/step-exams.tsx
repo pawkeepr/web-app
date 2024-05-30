@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import type { IconType } from 'react-icons'
 import {
     GiChemicalDrop,
@@ -9,7 +10,7 @@ import ListHorizontalSwitch from '~/Components/organism/list-horizontal-switch'
 import { ExamsTypes, type KeyOfExamsTypes } from '~/constants'
 import { exams } from '~/constants/exams-questions'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import type { ComplementaryExam } from '~/types/appointment'
+import type { ComplementaryExam, TypeAction } from '~/types/appointment'
 import CardSimplePet from '../../molecules/card-simple-pet'
 import ContentActionExam from '../../molecules/content-action-exam'
 import type { ItemExam } from '../../molecules/content-action-exam/content-action-exam'
@@ -39,6 +40,21 @@ const STEPS: {
 
 const StepExams = () => {
     const { values } = useFormikContextSafe<CtxStepAnamnese>()
+
+    const examsItems = useMemo(() => {
+        return exams.map(
+            (item) =>
+                ({
+                    ...item,
+                    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+                    type: item.type as any,
+                    value: item.id,
+                    type_action: null,
+                    checked: false,
+                }) as ItemExam,
+        )
+    }, [])
+
     return (
         <>
             <CardSimplePet />
@@ -48,28 +64,22 @@ const StepExams = () => {
             <div className={screen({ className: 'px-1 w-full overflow-y-hidden' })}>
                 <ListHorizontalSwitch
                     ctx={values}
-                    content={({ label, name, option }) => (
+                    onChangeContent={({ option, replace }) => {
+                        replace?.(option.value as number, option)
+                    }}
+                    content={({ label, name, option, onChange }) => (
                         <ContentActionExam
+                            onChange={(option) => onChange?.(option)}
                             option={{
                                 ...option,
                                 type: option.type as ExamsTypes,
-                                type_action: null,
+                                type_action: option.type_action as TypeAction,
                             }}
                             name={name}
                             label={label}
                         />
                     )}
-                    items={exams.map(
-                        (item) =>
-                            ({
-                                ...item,
-                                // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-                                type: item.type as any,
-                                value: item.id,
-                                type_action: null,
-                                checked: false,
-                            }) as ItemExam,
-                    )}
+                    items={examsItems}
                     name="exams_anamnesis.complementary_exams"
                     categories={STEPS}
                     onChange={({ option, step, checked, replace }) => {
@@ -78,6 +88,7 @@ const StepExams = () => {
                             name_exam: option.label,
                             notes: '',
                             type_exam: step,
+                            type_action: option.type_action as TypeAction,
                             checked,
                         } as ComplementaryExam & { id: number; checked: boolean }
                         replace?.(option.value as number, item)

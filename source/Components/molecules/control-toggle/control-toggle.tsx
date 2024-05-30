@@ -14,7 +14,12 @@ export type ToggleProps<Ctx = undefined> = {
     content?: ({
         checked,
         name,
-    }: { checked: boolean; name: string }) => React.ReactNode
+        onChange,
+    }: {
+        checked: boolean
+        name: string
+        onChange?: (e: any) => void
+    }) => React.ReactNode
     label: string
     onClick?: () => void
     onChange?: (e: boolean) => void

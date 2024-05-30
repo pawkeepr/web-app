@@ -1,13 +1,15 @@
-import { useState, useTransition } from 'react'
-import SwitchControl from '~/Components/atoms/switch-control'
+import Tag from '~/Components/atoms/tag'
 import FieldTextArea from '~/Components/molecules/field-text-area/field-text-area'
 import type { ExamsTypes } from '~/constants'
+import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { TypeAction } from '~/types/appointment'
+import type { CtxStepAnamnese } from '../../validations.yup'
 
 export type ItemExam = {
     type: ExamsTypes
     value: number | string
+    type_action: TypeAction | null
     label: string
-    type_action: null | 'collect' | 'perform' | 'request'
     checked: boolean
 }
 
@@ -15,55 +17,54 @@ type ContentActionExamProps = {
     option: ItemExam
     name: string
     label: string
+    onChange: (option: ItemExam) => void
 }
 
-const TypeAction = {
-    collect: 'collect',
-    perform: 'perform',
-    request: 'request',
-} as const
-type TypeAction = (typeof TypeAction)[keyof typeof TypeAction]
+const ContentActionExam = ({
+    name,
+    label,
+    option,
+    onChange,
+}: ContentActionExamProps) => {
+    const { values } = useFormikContextSafe<CtxStepAnamnese>()
 
-const ContentActionExam = ({ option, name, label }: ContentActionExamProps) => {
-    const [type, setType] = useState<TypeAction | null>(option?.type_action)
-    const [loading, startTransition] = useTransition()
+    const item =
+        values.exams_anamnesis?.complementary_exams?.[option.value as number]
 
     const onChangeTypeAction = (type: TypeAction) => {
-        startTransition(() => setType(type))
+        onChange({
+            ...option,
+            type_action: type,
+        })
     }
 
     return (
         <section className="p-4">
-            {String(option?.checked)} {option && JSON.stringify(option)}
-            <div className="flex gap-1 font-sans text-xs text-gray-500 uppercase">
-                <SwitchControl
-                    condition={!loading}
+            <div className="flex w-full gap-1 font-sans text-xs text-gray-500 uppercase justify-evenly">
+                <Tag
                     name={name as ''}
                     disabled={!option?.checked}
-                    checked={type === TypeAction.collect}
-                    onChange={() => onChangeTypeAction(TypeAction.collect)}
+                    selected={item?.type_action === TypeAction.collect}
+                    onClick={() => onChangeTypeAction(TypeAction.collect)}
                 >
                     Coletar
-                </SwitchControl>
-                <SwitchControl
-                    condition={!loading}
+                </Tag>
+                <Tag
                     name={name as ''}
                     disabled={!option?.checked}
-                    checked={type === TypeAction.perform}
-                    onChange={() => onChangeTypeAction(TypeAction.perform)}
+                    selected={item?.type_action === TypeAction.perform}
+                    onClick={() => onChangeTypeAction(TypeAction.perform)}
                 >
                     Realizar
-                </SwitchControl>
-                <SwitchControl
-                    condition={!loading}
+                </Tag>
+                <Tag
                     name={name as ''}
                     disabled={!option?.checked}
-                    checked={type === TypeAction.request}
-                    onChange={() => onChangeTypeAction(TypeAction.request)}
+                    selected={item?.type_action === TypeAction.request}
+                    onClick={() => onChangeTypeAction(TypeAction.request)}
                 >
                     Solicitar
-                </SwitchControl>
-                {loading && <div className="w-10 h-10 " />}
+                </Tag>
             </div>
             <FieldTextArea
                 label={label}
