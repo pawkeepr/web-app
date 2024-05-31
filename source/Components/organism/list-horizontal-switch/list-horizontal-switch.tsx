@@ -1,16 +1,30 @@
 import { FieldArray, type FieldArrayRenderProps } from 'formik'
 import { useMemo, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import ControlToggle from '~/Components/molecules/control-toggle'
+import OptionsMenu from '~/Components/molecules/options-menu'
 import { makeTitle } from '~/Components/molecules/options-menu/options-menu'
 import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
 import type { ArrayPaths } from '~/types/helpers'
-import ListSwitchControl, { type Option } from './list-switch'
 
 export type Question = {
     id: number | string
     question: string
     type: string
 }
+
+export type Option<T> = {
+    value: string | number
+    label: string
+    checked: boolean
+    type: string
+    type_action?: string | null
+} & T
+
+type ContentProps<T> = {
+    option: Option<T>
+    index: number
+} & FieldArrayRenderProps
 
 // biome-ignore lint/complexity/noBannedTypes: <explanation>
 export type ListInputProps<Ctx extends object = {}, T = unknown> = {
@@ -20,13 +34,7 @@ export type ListInputProps<Ctx extends object = {}, T = unknown> = {
     categories: { label: string; value: string }[]
     specialCategory?: { label: string; value: string }[]
     specialItems?: React.ReactNode[]
-    onChangeContent?: (props: FieldArrayRenderProps & { option: Option<T> }) => void
-    content?: (props: {
-        label: string
-        name: string
-        option: Option<T>
-        onChange?: (option: Option<T>) => void
-    }) => React.ReactNode
+    content?: (props: ContentProps<T>) => React.ReactNode
     onChange: (
         props: FieldArrayRenderProps & {
             checked: boolean
@@ -66,7 +74,6 @@ const ListHorizontalSwitch = <T extends object = {}>({
     categories: steps,
     content,
     onChange,
-    onChangeContent,
 }: ListInputProps<T>) => {
     const [category, setCategory] = useState(steps[0])
 
@@ -108,33 +115,53 @@ const ListHorizontalSwitch = <T extends object = {}>({
                     </h4>
                     <section className="flex flex-row flex-wrap justify-between w-full">
                         {list.map(([key, options]) => (
-                            <ListSwitchControl
-                                condition={category.value === key}
-                                key={key}
-                                name={name}
-                                content={(props) =>
-                                    content?.({
-                                        ...props,
-                                        onChange: (option) =>
-                                            onChangeContent?.({
-                                                ...arrayProps,
+                            <section className="w-full" key={key}>
+                                <div className="flex flex-row flex-wrap justify-between w-full ">
+                                    {steps.map((item) => (
+                                        <OptionsMenu
+                                            key={item.value}
+                                            item={item}
+                                            option={category}
+                                            classNames={{
+                                                label: 'mobile:hidden',
+                                            }}
+                                            onChangeOption={(item) =>
+                                                setCategory({
+                                                    ...item,
+                                                    label: item.label,
+                                                    value: item.value as string,
+                                                })
+                                            }
+                                        />
+                                    ))}
+                                </div>
+                                <section className="w-full mt-2 h-[80vh] overflow-y-auto scroll pb-[160px] z-10">
+                                    {options.map((option, index) => (
+                                        <ControlToggle
+                                            key={option.value}
+                                            content={content?.({
                                                 option,
-                                            }),
-                                    })
-                                }
-                                categories={steps}
-                                category={category}
-                                options={options}
-                                onChange={(e, option) =>
-                                    onChange?.({
-                                        ...arrayProps,
-                                        option,
-                                        step: category.value,
-                                        checked: e,
-                                    })
-                                }
-                                onChangeCategory={setCategory}
-                            />
+                                                index,
+                                                ...arrayProps,
+                                            })}
+                                            onChange={(e) =>
+                                                onChange?.({
+                                                    ...arrayProps,
+                                                    option,
+                                                    step: category.value,
+                                                    checked: e,
+                                                })
+                                            }
+                                            name={
+                                                `${name}.${
+                                                    option.value as number
+                                                }.checked` as ''
+                                            }
+                                            label={option.label}
+                                        />
+                                    ))}
+                                </section>
+                            </section>
                         ))}
                     </section>
                     <div className="fixed flex justify-between flex-1 w-full px-1 mt-0 bg-transparent bottom-4 h-fit">

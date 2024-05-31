@@ -13,7 +13,6 @@ import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { ComplementaryExam, TypeAction } from '~/types/appointment'
 import CardSimplePet from '../../molecules/card-simple-pet'
 import ContentActionExam from '../../molecules/content-action-exam'
-import type { ItemExam } from '../../molecules/content-action-exam/content-action-exam'
 import type { CtxStepAnamnese } from '../../validations.yup'
 import { screen } from '../styles'
 
@@ -42,17 +41,14 @@ const StepExams = () => {
     const { values } = useFormikContextSafe<CtxStepAnamnese>()
 
     const examsItems = useMemo(() => {
-        return exams.map(
-            (item) =>
-                ({
-                    ...item,
-                    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-                    type: item.type as any,
-                    value: item.id,
-                    type_action: null,
-                    checked: false,
-                }) as ItemExam,
-        )
+        return exams.map((item) => ({
+            ...item,
+            // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+            type: item.type as any,
+            value: item.id,
+            type_action: null,
+            checked: false,
+        }))
     }, [])
 
     return (
@@ -64,19 +60,17 @@ const StepExams = () => {
             <div className={screen({ className: 'px-1 w-full overflow-y-hidden' })}>
                 <ListHorizontalSwitch
                     ctx={values}
-                    onChangeContent={({ option, replace }) => {
-                        replace?.(option.value as number, option)
-                    }}
-                    content={({ label, name, option, onChange }) => (
+                    content={({ option, index, replace }) => (
                         <ContentActionExam
-                            onChange={(option) => onChange?.(option)}
-                            option={{
-                                ...option,
-                                type: option.type as ExamsTypes,
-                                type_action: option.type_action as TypeAction,
+                            index={index}
+                            option={option}
+                            onChangeTypeAction={({ index, option, type }) => {
+                                const item = {
+                                    ...option,
+                                    type_action: type,
+                                }
+                                replace?.(index, item)
                             }}
-                            name={name}
-                            label={label}
                         />
                     )}
                     items={examsItems}

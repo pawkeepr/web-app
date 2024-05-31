@@ -48,6 +48,8 @@ export type ComplementaryExam = {
     type_exam: string
     name_exam: string
     type_action: TypeAction
+    checked: boolean
+    id: number
     notes: string
 }
 

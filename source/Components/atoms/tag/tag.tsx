@@ -6,7 +6,7 @@ type TagProps = {
     name: string
     disabled: boolean
     selected: boolean
-    onClick: () => void
+    onClick?: () => void
     children: React.ReactNode
 }
 
