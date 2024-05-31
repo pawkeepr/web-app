@@ -1,5 +1,5 @@
 import { FieldArray } from 'formik'
-import { FaCapsules } from 'react-icons/fa'
+import { FaUtensils } from 'react-icons/fa'
 import type { OptionSelect } from '~/Components/molecules/field-control'
 import CardInputTreatment from '~/Components/organism/card-input-treatment'
 import { MEDICAL_RECORDS } from '~/types/medical-records'
@@ -7,17 +7,17 @@ import CardSimplePet from '../../molecules/card-simple-pet'
 import { screen } from '../styles'
 
 const category: OptionSelect = {
-    value: MEDICAL_RECORDS.MEDICINES,
-    label: 'Medicamentos',
-    icon: FaCapsules,
+    value: MEDICAL_RECORDS.NUTRITIONS,
+    label: 'Alimentação',
+    icon: FaUtensils,
 }
 
-const StepTreatment = () => {
+const StepSupplementation = () => {
     return (
         <>
             <CardSimplePet />
             <h4 className="font-sans text-base font-semibold text-center capitalize">
-                Medicação
+                Alimentação e Suplementação
             </h4>
             <div className={screen()}>
                 <FieldArray name="treatments.questions_treatment">
@@ -39,4 +39,4 @@ const StepTreatment = () => {
     )
 }
 
-export default StepTreatment
+export default StepSupplementation

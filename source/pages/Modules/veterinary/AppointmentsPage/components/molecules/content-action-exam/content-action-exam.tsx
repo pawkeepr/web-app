@@ -25,10 +25,8 @@ const ContentActionExam = <T,>({
         (item) => item?.id === option.value,
     )
 
-    const item = values.exams_anamnesis?.complementary_exams?.[index]
+    const item = values.exams_anamnesis?.complementary_exams?.[index] ?? {}
     const name = `exams_anamnesis.complementary_exams.${index}`
-
-    if (!item) return null
 
     return (
         <section className="px-4 py-2">
