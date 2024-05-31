@@ -49,7 +49,7 @@ const StepExams = () => {
             type_action: null,
             checked: false,
         }))
-    }, [])
+    }, [exams])
 
     return (
         <>

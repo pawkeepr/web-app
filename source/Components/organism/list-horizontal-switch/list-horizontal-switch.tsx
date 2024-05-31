@@ -1,11 +1,10 @@
 import { FieldArray, type FieldArrayRenderProps } from 'formik'
 import { useMemo, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
-import ControlToggle from '~/Components/molecules/control-toggle'
-import OptionsMenu from '~/Components/molecules/options-menu'
 import { makeTitle } from '~/Components/molecules/options-menu/options-menu'
 import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
 import type { ArrayPaths } from '~/types/helpers'
+import ListControl from './list'
 
 export type Question = {
     id: number | string
@@ -21,7 +20,7 @@ export type Option<T> = {
     type_action?: string | null
 } & T
 
-type ContentProps<T> = {
+export type ContentProps<T> = {
     option: Option<T>
     index: number
 } & FieldArrayRenderProps
@@ -114,54 +113,27 @@ const ListHorizontalSwitch = <T extends object = {}>({
                         {makeTitle(category.label, false)}
                     </h4>
                     <section className="flex flex-row flex-wrap justify-between w-full">
-                        {list.map(([key, options]) => (
-                            <section className="w-full" key={key}>
-                                <div className="flex flex-row flex-wrap justify-between w-full ">
-                                    {steps.map((item) => (
-                                        <OptionsMenu
-                                            key={item.value}
-                                            item={item}
-                                            option={category}
-                                            classNames={{
-                                                label: 'mobile:hidden',
-                                            }}
-                                            onChangeOption={(item) =>
-                                                setCategory({
-                                                    ...item,
-                                                    label: item.label,
-                                                    value: item.value as string,
-                                                })
-                                            }
-                                        />
-                                    ))}
-                                </div>
-                                <section className="w-full mt-2 h-[80vh] overflow-y-auto scroll pb-[160px] z-10">
-                                    {options.map((option, index) => (
-                                        <ControlToggle
-                                            key={option.value}
-                                            content={content?.({
-                                                option,
-                                                index,
-                                                ...arrayProps,
-                                            })}
-                                            onChange={(e) =>
-                                                onChange?.({
-                                                    ...arrayProps,
-                                                    option,
-                                                    step: category.value,
-                                                    checked: e,
-                                                })
-                                            }
-                                            name={
-                                                `${name}.${
-                                                    option.value as number
-                                                }.checked` as ''
-                                            }
-                                            label={option.label}
-                                        />
-                                    ))}
-                                </section>
-                            </section>
+                        {list.map(([key, options], index) => (
+                            <ListControl
+                                arrayProps={arrayProps}
+                                index={index}
+                                condition={category.value === key}
+                                key={key}
+                                name={name}
+                                content={content}
+                                categories={steps}
+                                category={category}
+                                options={options}
+                                onChange={(e, option) =>
+                                    onChange?.({
+                                        ...arrayProps,
+                                        option,
+                                        step: category.value,
+                                        checked: e,
+                                    })
+                                }
+                                onChangeCategory={setCategory}
+                            />
                         ))}
                     </section>
                     <div className="fixed flex justify-between flex-1 w-full px-1 mt-0 bg-transparent bottom-4 h-fit">
