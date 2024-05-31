@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import { useField } from 'formik'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GrDown } from 'react-icons/gr'
 import Switch from '~/Components/atoms/switch'
 import type { ObjPaths } from '~/types/helpers'
@@ -30,6 +30,16 @@ const ControlToggle = <Ctx,>({
 }: ToggleProps<Ctx>) => {
     const [field, _meta, helpers] = useField(name)
     const [openAccordion, setOpenAccordion] = useState(false)
+
+    useEffect(() => {
+        if (field.value) {
+            setOpenAccordion(true)
+        }
+
+        if (!field.value) {
+            setOpenAccordion(false)
+        }
+    }, [field.value])
 
     const handleChange = (e: boolean) => {
         helpers.setValue(e)
