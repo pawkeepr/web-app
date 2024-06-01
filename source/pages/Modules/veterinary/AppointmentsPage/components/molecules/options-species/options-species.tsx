@@ -1,15 +1,10 @@
 import { tv } from 'tailwind-variants'
-import { SpeciesType, species } from '~/types/speciesType'
-
-enum EmojiPet {
-    cat = '🐱',
-    dog = '🐶',
-    rabbit = '🐰',
-    fish = '🐠',
-    bird = '🐦',
-    reptile = '🦎',
-    horse = '🐴',
-}
+import {
+    EmojiPet,
+    species,
+    type KeysEmojiPet,
+    type SpeciesType,
+} from '~/types/speciesType'
 
 export const option = tv({
     base: `
@@ -46,7 +41,7 @@ const OptionsSpecies = ({ onChange }: MedicalRecordFormProps) => {
                     <div className="flex justify-center flex-1 gap-2">
                         <div className="flex flex-row items-center justify-center gap-2 w-60">
                             <span className="items-center justify-center flex-1">
-                                {EmojiPet[item.value as keyof typeof EmojiPet]}
+                                {EmojiPet[item.value as KeysEmojiPet]}
                             </span>
                             <span className=" flex-[2] items-center justify-center">
                                 {item.label}

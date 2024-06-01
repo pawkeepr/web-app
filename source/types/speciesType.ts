@@ -108,3 +108,14 @@ export type SpeciesType =
     | typeof reptile
 
 export const species = [dog, cat, horse, rabbit, bird, fish, reptile]
+
+export const EmojiPet = {
+    cat: '🐱',
+    dog: '🐶',
+    rabbit: '🐰',
+    fish: '🐠',
+    bird: '🐦',
+    reptile: '🦎',
+    horse: '🐴',
+} as const
+export type KeysEmojiPet = keyof typeof EmojiPet
