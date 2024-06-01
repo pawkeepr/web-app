@@ -12,12 +12,15 @@ export const useZustandBtnFloating = create<ButtonFloatingContext>((set) => ({
     setHasButtonFloating: (hasButtonFloating) => set({ hasButtonFloating }),
 }))
 
+const list = ['/dashboard/appointments', '/feedback']
+
 export const useBtnFloating = () => {
     const pathname = usePathname()
     const { hasButtonFloating, setHasButtonFloating } = useZustandBtnFloating()
 
     useEffect(() => {
-        if (pathname.startsWith('/dashboard/appointments')) {
+        const permission = list.some((item) => pathname.startsWith(item))
+        if (permission) {
             setHasButtonFloating(false)
         } else {
             setHasButtonFloating(true)
