@@ -10,8 +10,10 @@ import Header from './Header'
 //import actions
 
 import cn from 'classnames'
+import { Suspense } from 'react'
 import FieldDocumentAppointment from '~/Components/molecules/field-appointment-vet/field-appointment-vet.mobile'
 import { useBtnFloating } from '~/contexts/button-floating'
+import LoadingPage from '~/pages/Modules/shared/LoadingPage'
 import useHookLayout from './use-hook'
 
 type LayoutProps = {
@@ -38,15 +40,13 @@ const LayoutMain = ({ children }: LayoutProps) => {
                     backgroundRepeat: 'no-repeat',
                 }}
             >
-                {children}
+                <Suspense fallback={<LoadingPage />}>{children}</Suspense>
                 <FieldDocumentAppointment
                     condition={hasButtonFloating}
                     selectedTabInitial={0}
                 />
-                
             </div>
-            {hasButtonFloating && <div className="h-36 web:hidden w-full " />}
-            
+            {hasButtonFloating && <div className="w-full h-36 web:hidden " />}
         </div>
     )
 }
