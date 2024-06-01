@@ -18,7 +18,9 @@ import StepExams from '../../steps/step-exams'
 import MenuHorizontalTabs from '~/Components/organism/menu-horizontal-tabs'
 import StepSupplementation from '../../steps/step-supplementation'
 import StepTreatment from '../../steps/step-treatment'
+import StepVaccination from '../../steps/step-vaccination'
 import StepVermifuge from '../../steps/step-vermifuge'
+
 
 type TabItem = {
     id: TabsOptions
@@ -46,24 +48,30 @@ const items: TabItem[] = [
     },
     {
         id: 2,
-        title: 'Vacinação  e Vermifugo',
-        href: '#Treatment',
+        title: 'Vacinação',
+        href: '#Vaccination',
+        Component: StepVaccination,
+    },
+      {
+        id: 3,
+        title: 'Vermifugo',
+        href: '#Vermifuge',
         Component: StepVermifuge,
     },
     {
-        id: 3,
+        id: 4,
         title: 'Medicação',
-        href: '#Treatment',
+        href: '#Medication',
         Component: StepTreatment,
     },
     {
-        id: 4,
-        title: 'Alimentação/Suplementação',
+        id: 5,
+        title: 'Suplementação',
         href: '#Treatment',
         Component: StepSupplementation,
     },
     {
-        id: 5,
+        id: 6,
         title: 'Diagnóstico',
         href: '#Diagnostic',
         Component: StepDiagnosis,
