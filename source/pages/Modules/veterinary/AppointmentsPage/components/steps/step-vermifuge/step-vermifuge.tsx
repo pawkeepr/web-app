@@ -12,12 +12,12 @@ const category: OptionSelect = {
     icon: FaUtensils,
 }
 
-const StepSupplementation = () => {
+const StepVermifuge = () => {
     return (
         <>
             <CardSimplePet />
             <h4 className="font-sans text-base font-semibold text-center capitalize">
-                Alimentação e Suplementação
+                Plano de Vermifugação
             </h4>
             <div className={screen()}>
                 <FieldArray name="treatments.questions_treatment">
@@ -39,4 +39,4 @@ const StepSupplementation = () => {
     )
 }
 
-export default StepSupplementation
+export default StepVermifuge
