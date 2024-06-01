@@ -7,8 +7,8 @@ import 'swiper/css/scrollbar'
 //
 import { A11y, Controller } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { tv } from 'tailwind-variants'
 import withLoading from '~/Components/helpers/with-loading'
+import BtnFloating from '~/Components/molecules/btn-floating'
 import type { StepProps, TabsOptions } from '~/types/helpers'
 import TabsAppointments from './tabs-appointment'
 import TabsFinished from './tabs-finished'
@@ -34,32 +34,6 @@ const items: TabItem[] = [
         Component: TabsFinished,
     },
 ]
-
-const buttonFloating = {
-    button: tv({
-        base: `
-        fixed z-50 flex flex-col items-center justify-center 
-        transition duration-500 ease-in-out mobile:opacity-100 
-        bottom-4 mobile:bottom-24 right-5 opacity-40 
-        hover:opacity-100
-    `,
-    }),
-    title: tv({
-        base: `
-     mb-1 text-xs font-bold text-gray-600
-    `,
-    }),
-    containerIcon: tv({
-        base: `
-        p-3 rounded-full shadow-2xl bg-secondary-500
-    `,
-    }),
-    icon: tv({
-        base: `
-        w-6 h-6 text-gray-500
-    `,
-    }),
-}
 
 const Tabs = () => {
     const [activeItem, setActiveItem] = useState(items[0])
@@ -100,31 +74,19 @@ const Tabs = () => {
                     </SwiperSlide>
                 )
             })}
-            {activeItem === items[0] && (
-                <button
-                    type="button"
-                    onClick={() => swipperController.slideTo(1)}
-                    className={buttonFloating.button()}
-                >
-                    <h6 className={buttonFloating.title()}>Ir Para Pagamentos</h6>
-                    <div className={buttonFloating.containerIcon()}>
-                        <BsCashCoin className={buttonFloating.icon()} />
-                    </div>
-                </button>
-            )}
+            <BtnFloating
+                condition={activeItem === items[0]}
+                onClick={() => swipperController.slideTo(1)}
+                icon={BsCashCoin}
+                title="Ir Para Pagamentos"
+            />
 
-            {activeItem === items[1] && (
-                <button
-                    type="button"
-                    onClick={() => swipperController.slideTo(0)}
-                    className={buttonFloating.button()}
-                >
-                    <h6 className={buttonFloating.title()}>Voltar para Consulta</h6>
-                    <div className={buttonFloating.containerIcon()}>
-                        <BsArrowLeft className={buttonFloating.icon()} />
-                    </div>
-                </button>
-            )}
+            <BtnFloating
+                condition={activeItem === items[1]}
+                onClick={() => swipperController.slideTo(0)}
+                icon={BsArrowLeft}
+                title="Voltar Para Inicio"
+            />
         </Swiper>
     )
 }
