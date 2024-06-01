@@ -18,7 +18,6 @@ const Day = ({
                 return (
                     <li className="flex justify-between gap-1 text-xs font-semibold text-gray-500 mobile:w-full">
                         <ControlToggle
-                            initialValue={null}
                             ctx={values}
                             divClassName="w-full"
                             onChange={(e) => {

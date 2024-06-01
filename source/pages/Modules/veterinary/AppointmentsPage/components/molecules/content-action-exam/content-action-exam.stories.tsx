@@ -31,6 +31,4 @@ Default.args = {
         type_action: null,
         checked: true,
     },
-    name: 'exams_anamnesis.complementary_exams',
-    label: 'Ultrassonografia / Radiologia',
 }

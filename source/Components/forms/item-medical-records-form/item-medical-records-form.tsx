@@ -77,21 +77,21 @@ const ItemMedicalRecordsForm = ({
                         type="button"
                         label="Voltar"
                         onClick={onChangeSelectedTab?.bind(null, 0)}
-                        className="w-fit text-gray-400 hover:text-gray-600"
+                        className="text-gray-400 w-fit hover:text-gray-600"
                     />
                 </div>
             )}
-            <section className="flex flex-1 relative flex-col">
+            <section className="relative flex flex-col flex-1">
                 <Tab.Group
                     selectedIndex={selectedTab}
                     onChange={onChangeSelectedTab}
                 >
-                    <Tab.List className="flex flex-row w-full justify-between">
+                    <Tab.List className="flex flex-row justify-between w-full">
                         {STEPS.map((item) => (
                             <Tab key={item.id} className="hidden" />
                         ))}
                     </Tab.List>
-                    <div className="flex flex-row w-full justify-between">
+                    <div className="flex flex-row justify-between w-full">
                         {STEPS.slice(1, STEPS.length - 2).map((item) => (
                             <div
                                 key={item.id}
@@ -108,7 +108,7 @@ const ItemMedicalRecordsForm = ({
                         ))}
                     </div>
 
-                    <Tab.Panels className="w-full h-full relative ">
+                    <Tab.Panels className="relative w-full h-full ">
                         {STEPS.map((Step) => (
                             <Tab.Panel key={Step.id}>
                                 <Step.component

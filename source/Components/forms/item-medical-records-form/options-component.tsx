@@ -1,7 +1,7 @@
 import {
+    MedicalRecordOptions,
     type MEDICAL_RECORDS,
     type MedicalRecordEntry,
-    MedicalRecordOptions,
 } from '~/types/medical-records'
 import { option } from '../../modals/scheduled-v2-modal/components/helpers'
 
@@ -11,10 +11,10 @@ export type Option = {
 }
 
 export type MedicalRecordFormProps = {
-    type: MEDICAL_RECORDS
-    item: MedicalRecordEntry | null
-    cpf_cnpj: string
-    id_pet: string
+    type?: MEDICAL_RECORDS
+    item?: MedicalRecordEntry | null
+    cpf_cnpj?: string
+    id_pet?: string
     condition?: boolean
     handleClose?: () => void
     onChange: (type: Option) => void
@@ -31,9 +31,9 @@ const OptionsComponent = ({ onChange }: MedicalRecordFormProps) => {
                     onClick={onChange.bind(null, item)}
                     className={option()}
                 >
-                    <div className="flex flex-1 justify-center gap-2">
-                        <div className="w-60 flex flex-row gap-2 justify-center items-center">
-                            <span className="flex-1  items-center justify-center">
+                    <div className="flex justify-center flex-1 gap-2">
+                        <div className="flex flex-row items-center justify-center gap-2 w-60">
+                            <span className="items-center justify-center flex-1">
                                 <item.icon />
                             </span>
                             <span className=" flex-[2] items-center justify-center">
