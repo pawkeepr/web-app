@@ -1,4 +1,5 @@
 import { startTransition, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { Breed } from '~/types/breedType'
@@ -14,7 +15,7 @@ type Item = {
 const StepListBreeds = ({ nextStep, previousStep }: StepProps) => {
     const [breeds, setBreeds] = useState<Item[]>([])
     const { values, setFieldValue } = useFormikContextSafe<CtxSimplifiedPeTFields>()
-
+    const { t } = useTranslation()
     const handleSelectBreed = (breed: Breed) => {
         setFieldValue('race', breed)
         nextStep()
@@ -33,7 +34,7 @@ const StepListBreeds = ({ nextStep, previousStep }: StepProps) => {
 
     return (
         <div className="flex-1 flex mobile:h-[90vh] h-[75vh]  w-full  justify-between items-center flex-col">
-            <div className="overflow-auto flex flex-1 gap-2 justify-start items-center flex-col w-full py-1">
+            <div className="flex flex-col items-center justify-start flex-1 w-full gap-2 py-1 overflow-auto scroll">
                 {breeds.map((breed) => (
                     <button
                         key={breed.value}
@@ -43,9 +44,9 @@ const StepListBreeds = ({ nextStep, previousStep }: StepProps) => {
                             selected: values.race === breed.value,
                         })}
                     >
-                        <div className="flex flex-1 justify-center items-center">
+                        <div className="flex items-center justify-center flex-1">
                             <span className="align-middle col-span-full">
-                                {breed.label}
+                                {t(breed.label)}
                             </span>
                         </div>
                     </button>

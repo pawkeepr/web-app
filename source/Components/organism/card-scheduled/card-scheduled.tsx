@@ -7,15 +7,12 @@ import {
     IoMdFemale,
     IoMdMale,
 } from 'react-icons/io'
+import ptBr from '~/common/languages/pt-BR/common.json'
+
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import { BreedNames } from '~/types/breedType'
-import {
-    GenderBR,
-    MapOptionSpecies,
-    Species,
-    type Gender,
-} from '~/types/speciesType'
+import { GenderBR, MapOptionSpecies, type Gender } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import BoxButtons from '../box-buttons'
@@ -89,8 +86,8 @@ const CardScheduled = ({ appointment }: CardScheduledProps) => {
     const pet = useMemo(
         () => ({
             ...appointment.tutor_pet_vet.pet,
-            specie: Species[
-                appointment.tutor_pet_vet?.pet?.specie as keyof typeof Species
+            specie: ptBr[
+                appointment.tutor_pet_vet?.pet?.specie as keyof typeof ptBr
             ],
             race: BreedNames[
                 appointment.tutor_pet_vet?.pet?.race as keyof typeof BreedNames
@@ -124,17 +121,17 @@ const CardScheduled = ({ appointment }: CardScheduledProps) => {
                         name_pet={pet?.name_pet}
                         specie={
                             MapOptionSpecies[
-                            pet.specie as keyof typeof MapOptionSpecies
-                            ] as Species
+                                pet.specie as keyof typeof MapOptionSpecies
+                            ]
                         }
                     />
                     <div className="flex flex-row gap-1">
-                        <h1 className="text-center font-bold text-lg mobile:text-sm text-gray-500">
+                        <h1 className="text-lg font-bold text-center text-gray-500 mobile:text-sm">
                             {`${pet?.name_pet}`}
                         </h1>
                         <Gender />
                     </div>
-                    <h2 className="text-center text-gray-500 text-xs">
+                    <h2 className="text-xs text-center text-gray-500">
                         {calcAge(pet?.date_birth)} ano(s)
                     </h2>
                 </>
@@ -154,7 +151,7 @@ const CardScheduled = ({ appointment }: CardScheduledProps) => {
                         <p>{formattedDateAndHours}</p>
                     </div>
                 </div>
-                <span className="flex flex-row w-fit items-center justify-center gap-2  pt-2 absolute top-0 right-0 web:mr-32  mr-4 mobile:text-xs text-sm text-gray-400">
+                <span className="absolute top-0 right-0 flex flex-row items-center justify-center gap-2 pt-2 mr-4 text-sm text-gray-400 w-fit web:mr-32 mobile:text-xs">
                     <Icon.icon className={Icon.className} title={Icon.title} />
                     {Icon.title}
                 </span>

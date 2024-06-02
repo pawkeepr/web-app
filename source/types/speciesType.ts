@@ -11,6 +11,7 @@ import {
     PiPiggyBankDuotone,
     PiRabbitDuotone,
 } from 'react-icons/pi'
+import ptBr from '~/common/languages/pt-BR/common.json'
 import {
     BirdBloodType,
     CatBloodType,
@@ -36,24 +37,6 @@ import {
     TurtleBreed,
     type ObjectBreed,
 } from './breedType'
-
-export const Species = {
-    dog: 'Cachorro',
-    cat: 'Gato',
-    horse: 'Cavalo',
-    rabbit: 'Coelho',
-    bird: 'Pássaro',
-    fish: 'Peixe',
-    turtle: 'Quelônios',
-    chicken: 'Galinha',
-    snake: 'Cobra',
-    lizard: 'Lagarto',
-    cow: 'Vaca',
-    pig: 'Porco',
-    unknown: 'Desconhecido',
-} as const
-
-export type Species = keyof typeof Species
 
 export const Gender = {
     male: 'male',
@@ -102,20 +85,24 @@ export const MapOptionSpecies = {
 export type KeyOfMapOptionSpecies = keyof typeof MapOptionSpecies
 
 const makeSpecie = (
-    specie: Species,
+    specie: string,
     bloodType: ObjectBloodType,
     breedType: ObjectBreed,
 ) => ({
-    label: Species[specie],
+    label: ptBr[specie as keyof typeof ptBr],
     value: specie,
-    bloodType: Object.entries(bloodType).map(([key, name]) => ({
-        label: name,
-        value: key,
-    })),
-    breedType: Object.entries(breedType).map(([key, name]) => ({
-        label: name,
-        value: key,
-    })),
+    bloodType: Object.entries(bloodType)
+        .map(([key, name]) => ({
+            label: name,
+            value: key,
+        }))
+        .sort((a, b) => a.label.localeCompare(b.label)),
+    breedType: Object.entries(breedType)
+        .map(([key, name]) => ({
+            label: ptBr[name],
+            value: key,
+        }))
+        .sort((a, b) => a.label.localeCompare(b.label)),
 })
 
 export const dog = makeSpecie('dog', DogBloodType, DogBreed)
@@ -169,7 +156,7 @@ export const species = [
     cow,
     pig,
     chicken,
-]
+].sort((a, b) => a.label.localeCompare(b.label))
 
 type RecordIconPets = {
     [key in SpeciesType['value']]: IconType
