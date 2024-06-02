@@ -90,6 +90,37 @@ export const TurtleBreed = {
 export type LizardBreedKeys = (typeof LizardBreed)[keyof typeof LizardBreed]
 export type SnakeBreedKeys = (typeof SnakeBreed)[keyof typeof SnakeBreed]
 export type TurtleBreedKeys = (typeof TurtleBreed)[keyof typeof TurtleBreed]
+
+export const CowBreed = {
+    holstein: 'holstein',
+    angus: 'angus',
+    hereford: 'hereford',
+    simmental: 'simmental',
+    jersey: 'jersey',
+    guernsey: 'guernsey',
+    brown_swiss: 'brown_swiss',
+    shorthorn: 'shorthorn',
+    brahman: 'brahman',
+    galloway: 'galloway',
+    longhorn: 'longhorn',
+    other: 'other',
+} as const
+export type CowBreedKeys = (typeof CowBreed)[keyof typeof CowBreed]
+
+export const PigBreed = {
+    yorkshire: 'yorkshire',
+    berkshire: 'berkshire',
+    duroc: 'duroc',
+    hampshire: 'hampshire',
+    landrace: 'landrace',
+    poland_china: 'poland_china',
+    spotted: 'spotted',
+    tamworth: 'tamworth',
+    large_black: 'large_black',
+    other: 'other',
+} as const
+export type PigBreedKeys = (typeof PigBreed)[keyof typeof PigBreed]
+
 export const BirdBreed = {
     belgian_canary: 'belgian_canary',
     budgerigar: 'budgerigar',
@@ -155,6 +186,8 @@ export type ObjectBreed =
     | typeof BirdBreed
     | typeof ChickenBreed
     | typeof RabbitBreed
+    | typeof CowBreed
+    | typeof PigBreed
 
 export type Breed =
     | DogBreedKeys
@@ -167,6 +200,8 @@ export type Breed =
     | BirdBreedKeys
     | RabbitBreedKeys
     | ChickenBreedKeys
+    | CowBreedKeys
+    | PigBreedKeys
     | 'unknown'
 
 export const BreedNames = {
@@ -180,5 +215,7 @@ export const BreedNames = {
     ...BirdBreed,
     ...RabbitBreed,
     ...ChickenBreed,
+    ...CowBreed,
+    ...PigBreed,
 } as const
 export type BreedNames = (typeof BreedNames)[keyof typeof BreedNames]
