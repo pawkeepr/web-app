@@ -1,4 +1,5 @@
 import type { UseMutationResult } from '@tanstack/react-query'
+import type { AxiosResponse } from 'axios'
 import { errorToast } from './toast'
 
 type GenericObject = {
@@ -25,11 +26,15 @@ export const handleSubmitHelper = async <T,>({
 
         if (newData.id) {
             return await updateMutation.mutateAsync(newData, {
-                onSuccess: onSubmit,
+                onSuccess: (data: AxiosResponse<unknown>, variables, context) =>
+                    onSubmit?.(data.data, variables, context),
             })
         }
 
-        return await createMutation.mutateAsync(newData, { onSuccess: onSubmit })
+        return await createMutation.mutateAsync(newData, {
+            onSuccess: (data: AxiosResponse<unknown>, variables, context) =>
+                onSubmit?.(data.data, variables, context),
+        })
     } catch (error) {
         if (!error) return errorToast('Erro')
         if (error instanceof Error) return errorToast(error.message, 'Erro')

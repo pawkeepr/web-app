@@ -53,38 +53,25 @@ export const GenderBR = {
 
 export type KeyOfGender = keyof typeof Gender
 
-export const MapOptionSpecies = {
+export const Species = {
     dog: 'dog',
     cat: 'cat',
-    horse: 'horse',
     rabbit: 'rabbit',
-    bird: 'bird',
     fish: 'fish',
+    bird: 'bird',
+    chicken: 'chicken',
+    horse: 'horse',
+    cow: 'cow',
     chelonians: 'chelonians',
     snake: 'snake',
     lizard: 'lizard',
-    cow: 'cow',
     pig: 'pig',
-    chicken: 'chicken',
-    Cachorro: 'dog',
-    Gato: 'cat',
-    Cavalo: 'horse',
-    Coelho: 'rabbit',
-    Pássaro: 'bird',
-    Peixe: 'fish',
-    Tartaruga: 'turtle',
-    Cobra: 'snake',
-    Lagarto: 'lizard',
-    Galinha: 'chicken',
-    Vaca: 'cow',
-    Porco: 'pig',
     unknown: 'unknown',
 } as const
-
-export type KeyOfMapOptionSpecies = keyof typeof MapOptionSpecies
+export type Species = (typeof Species)[keyof typeof Species]
 
 const makeSpecie = (
-    specie: string,
+    specie: Species,
     bloodType: ObjectBloodType,
     breedType: ObjectBreed,
 ) => ({

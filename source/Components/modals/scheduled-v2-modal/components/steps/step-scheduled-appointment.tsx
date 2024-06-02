@@ -10,9 +10,8 @@ import BoxButtons from '~/Components/molecules/box-buttons'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import { handleSubmitTypeAppointments } from '~/store/hooks/list-appointments/use-list-appointments'
-import type { VeterinaryConsultation } from '~/types/appointment'
+import type { AppointmentStatus, VeterinaryConsultation } from '~/types/appointment'
 import type { Breed } from '~/types/breedType'
-import type { Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import { geolocation } from '~/utils/geolocation'
 import type { StepProps } from '../../types'
@@ -22,7 +21,6 @@ import { schemaStepAppointmentSchedule } from './validation.yup'
 
 const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) => {
     const veterinary = useProfileVeterinary()
-
     const initialValues: VeterinaryConsultation = useMemo(
         () => ({
             id: '',
@@ -86,9 +84,31 @@ const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) 
                 tutor: pet.main_responsible_guardian,
                 veterinary,
             },
+            diagnosis: {
+                prognosis: '',
+                prescription: '',
+                notes: '',
+            },
+            exams_anamnesis: {
+                complementary_exams: [],
+                physical_exam: {
+                    behavior: '',
+                    body_state: '',
+                    diet: '',
+                    fc: '',
+                    fr: '',
+                    hydration: '',
+                    mucous_membranes: '',
+                    pa: '',
+                    tpc: '',
+                    other_finds: [],
+                },
+            },
+            appointment_status: {} as AppointmentStatus,
         }),
         [pet, veterinary],
     )
+
     const handleSubmit = handleSubmitTypeAppointments({
         mode: 'scheduled',
         handleClose: closeModal,
@@ -129,8 +149,7 @@ const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) 
                                     name_pet ||
                                     (values.tutor_pet_vet?.pet?.name_pet as string),
                                 race: values.tutor_pet_vet?.pet?.race as Breed,
-                                specie: values.tutor_pet_vet?.pet
-                                    ?.specie as Species,
+                                specie: values.tutor_pet_vet?.pet?.specie,
                             }}
                         />
                         <CardTutor
