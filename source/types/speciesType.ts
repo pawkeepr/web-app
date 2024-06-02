@@ -1,3 +1,15 @@
+import { BsThreeDots } from 'react-icons/bs'
+import { GiChicken, GiReptileTail, GiSnakeTongue, GiTurtle } from 'react-icons/gi'
+import {
+    PiBirdDuotone,
+    PiCatDuotone,
+    PiCowDuotone,
+    PiDogDuotone,
+    PiFishDuotone,
+    PiHorseDuotone,
+    PiPiggyBankDuotone,
+    PiRabbitDuotone,
+} from 'react-icons/pi'
 import {
     BirdBloodType,
     CatBloodType,
@@ -11,11 +23,14 @@ import {
 import {
     BirdBreed,
     CatBreed,
+    ChickenBreed,
     DogBreed,
     FishBreed,
     HorseBreed,
+    LizardBreed,
     RabbitBreed,
-    ReptileBreed,
+    SnakeBreed,
+    TurtleBreed,
     type ObjectBreed,
 } from './breedType'
 
@@ -26,7 +41,12 @@ export const Species = {
     rabbit: 'Coelho',
     bird: 'Pássaro',
     fish: 'Peixe',
-    reptile: 'Réptil',
+    turtle: 'Tartaruga',
+    chicken: 'Galinha',
+    snake: 'Cobra',
+    lizard: 'Lagarto',
+    cow: 'Vaca',
+    pig: 'Porco',
     unknown: 'Desconhecido',
 } as const
 
@@ -55,14 +75,25 @@ export const MapOptionSpecies = {
     rabbit: 'rabbit',
     bird: 'bird',
     fish: 'fish',
-    reptile: 'reptile',
+    turtle: 'turtle',
+    snake: 'snake',
+    lizard: 'lizard',
+    cow: 'cow',
+    pig: 'pig',
+    chicken: 'chicken',
     Cachorro: 'dog',
     Gato: 'cat',
     Cavalo: 'horse',
     Coelho: 'rabbit',
     Pássaro: 'bird',
     Peixe: 'fish',
-    Réptil: 'reptile',
+    Tartaruga: 'turtle',
+    Cobra: 'snake',
+    Lagarto: 'lizard',
+    Galinha: 'chicken',
+    Vaca: 'cow',
+    Porco: 'pig',
+    unknown: 'unknown',
 } as const
 
 export type KeyOfMapOptionSpecies = keyof typeof MapOptionSpecies
@@ -96,7 +127,17 @@ export const bird = makeSpecie('bird', BirdBloodType, BirdBreed)
 
 export const fish = makeSpecie('fish', FishBloodType, FishBreed)
 
-export const reptile = makeSpecie('reptile', ReptileBloodType, ReptileBreed)
+export const turtle = makeSpecie('turtle', ReptileBloodType, TurtleBreed)
+
+export const snake = makeSpecie('snake', ReptileBloodType, SnakeBreed)
+
+export const lizard = makeSpecie('lizard', ReptileBloodType, LizardBreed)
+
+export const cow = makeSpecie('cow', ReptileBloodType, LizardBreed)
+
+export const pig = makeSpecie('pig', ReptileBloodType, LizardBreed)
+
+export const chicken = makeSpecie('chicken', ReptileBloodType, ChickenBreed)
 
 export type SpeciesType =
     | typeof dog
@@ -105,17 +146,45 @@ export type SpeciesType =
     | typeof rabbit
     | typeof bird
     | typeof fish
-    | typeof reptile
+    | typeof turtle
+    | typeof snake
+    | typeof lizard
+    | typeof cow
+    | typeof pig
+    | typeof chicken
 
-export const species = [dog, cat, horse, rabbit, bird, fish, reptile]
+export const species = [
+    dog,
+    cat,
+    horse,
+    rabbit,
+    bird,
+    fish,
+    turtle,
+    snake,
+    lizard,
+    cow,
+    pig,
+    chicken,
+]
 
-export const EmojiPet = {
-    cat: '🐱',
-    dog: '🐶',
-    rabbit: '🐰',
-    fish: '🐠',
-    bird: '🐦',
-    reptile: '🦎',
-    horse: '🐴',
+type RecordIconPets = {
+    [key in SpeciesType['value']]: React.FC
+}
+
+export const IconPets: RecordIconPets = {
+    dog: PiDogDuotone,
+    cat: PiCatDuotone,
+    rabbit: PiRabbitDuotone,
+    fish: PiFishDuotone,
+    bird: PiBirdDuotone,
+    chicken: GiChicken,
+    horse: PiHorseDuotone,
+    cow: PiCowDuotone,
+    turtle: GiTurtle,
+    snake: GiSnakeTongue,
+    lizard: GiReptileTail,
+    pig: PiPiggyBankDuotone,
+    unknown: BsThreeDots,
 } as const
-export type KeysEmojiPet = keyof typeof EmojiPet
+export type KeysIconPets = keyof typeof IconPets

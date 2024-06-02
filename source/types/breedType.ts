@@ -1,120 +1,146 @@
 export const DogBreed = {
-    LabradorRetriever: 'Labrador Retriever',
-    GoldenRetriever: 'Golden Retriever',
-    PastorAlemao: 'Pastor Alemão',
-    BulldogFrances: 'Buldogue Francês',
-    Poodle: 'Poodle',
-    ShihTzu: 'Shih Tzu',
-    YorkshireTerrier: 'Yorkshire Terrier',
-    LhasaApso: 'Lhasa Apso',
-    Rottweiler: 'Rottweiler',
-    Beagle: 'Beagle',
-    Dachshund: 'Dachshund',
-    BorderCollie: 'Border Collie',
-    BichonFrise: 'Bichon Frisé',
-    Pitbull: 'Pitbull',
-    Boxer: 'Boxer',
-    Pug: 'Pug',
-    CockerSpaniel: 'Cocker Spaniel',
-    Chihuahua: 'Chihuahua',
-    Maltes: 'Maltês',
-    SRD: 'Sem Raça Definida',
-    Outro: 'Outro',
+    labrador_retriever: 'labrador_retriever',
+    golden_retriever: 'golden_retriever',
+    german_shepherd: 'german_shepherd',
+    french_bulldog: 'french_bulldog',
+    poodle: 'poodle',
+    shih_tzu: 'shih_tzu',
+    yorkshire_terrier: 'yorkshire_terrier',
+    lhasa_apso: 'lhasa_apso',
+    rottweiler: 'rottweiler',
+    beagle: 'beagle',
+    dachshund: 'dachshund',
+    border_collie: 'border_collie',
+    bichon_frise: 'bichon_frise',
+    pitbull: 'pitbull',
+    boxer: 'boxer',
+    pug: 'pug',
+    cocker_spaniel: 'cocker_spaniel',
+    chihuahua: 'chihuahua',
+    maltese: 'maltese',
+    mixed_breed: 'mixed_breed',
+    other: 'other',
 } as const
 export type DogBreedKeys = keyof typeof DogBreed
 
 export const CatBreed = {
-    SRD: 'Sem Raça Definida',
-    Persa: 'Persa',
-    Siames: 'Siamês',
-    MaineCoon: 'Maine Coon',
-    Ragdoll: 'Ragdoll',
-    Sphynx: 'Sphynx',
-    Angora: 'Angorá',
-    Bengal: 'Bengal',
-    Siberiano: 'Siberiano',
-    Burmes: 'Burmês',
-    Exotico: 'Exótico',
-    DevonRex: 'Devon Rex',
-    Himalaia: 'Himalaia',
-    NorueguesDaFloresta: 'Norueguês da Floresta',
-    Ocicat: 'Ocicat',
-    Outro: 'Outro',
+    mixed_breed: 'mixed_breed',
+    persian: 'persian',
+    siamese: 'siamese',
+    maine_coon: 'maine_coon',
+    ragdoll: 'ragdoll',
+    sphynx: 'sphynx',
+    angora: 'angora',
+    bengal: 'bengal',
+    siberian: 'siberian',
+    burmese: 'burmese',
+    exotic: 'exotic',
+    devon_rex: 'devon_rex',
+    himalayan: 'himalayan',
+    norwegian_forest: 'norwegian_forest',
+    ocicat: 'ocicat',
+    other: 'other',
 } as const
 export type CatBreedKeys = (typeof CatBreed)[keyof typeof CatBreed]
 
 export const HorseBreed = {
-    MangalargaMarchador: 'Mangalarga Marchador',
-    Crioulo: 'Crioulo',
-    Campolina: 'Campolina',
-    QuartoDeMilha: 'Quarto de Milha',
-    BrasileiroDeHipismo: 'Brasileiro de Hipismo',
-    Outros: 'Outros',
-    SRD: 'Sem Raça Definida',
-    Outro: 'Outro',
+    mangalarga_marchador: 'mangalarga_marchador',
+    crioulo: 'crioulo',
+    campolina: 'campolina',
+    quarter_horse: 'quarter_horse',
+    brazilian_sport_horse: 'brazilian_sport_horse',
+    other: 'other',
+    mixed_breed: 'mixed_breed',
 } as const
 export type HorseBreedKeys = (typeof HorseBreed)[keyof typeof HorseBreed]
 
 export const FishBreed = {
-    Betta: 'Betta',
-    NeonCardinal: 'Neon Cardinal',
-    AcaraDisco: 'Acará Disco',
-    Kinguio: 'Kinguio',
-    Molly: 'Molly',
-    Outros: 'Outros',
-    SRD: 'Sem Raça Definida',
-    Outro: 'Outro',
+    betta: 'betta',
+    neon_tetra: 'neon_tetra',
+    discus: 'discus',
+    goldfish: 'goldfish',
+    molly: 'molly',
+    other: 'other',
+    mixed_breed: 'mixed_breed',
 } as const
 export type FishBreedKeys = (typeof FishBreed)[keyof typeof FishBreed]
 
-export const ReptileBreed = {
-    Iguana: 'Iguana',
-    Jabuti: 'Jabuti',
-    Gecko: 'Gecko',
-    Teiu: 'Teiú',
-    Jiboia: 'Jiboia',
-    Outros: 'Outros',
+export const LizardBreed = {
+    iguana: 'iguana',
+    gecko: 'gecko',
+    tegu: 'tegu',
+    bearded_dragon: 'bearded_dragon',
+    leopard_gecko: 'leopard_gecko',
+    other: 'other',
 } as const
-export type ReptileBreedKeys = (typeof ReptileBreed)[keyof typeof ReptileBreed]
 
+export const SnakeBreed = {
+    boa: 'boa',
+    corn_snake: 'corn_snake',
+    king_snake: 'king_snake',
+    other: 'other',
+} as const
+
+export const TurtleBreed = {
+    cagado: 'cagado',
+    turtle: 'turtle',
+    other: 'other',
+} as const
+
+export type LizardBreedKeys = (typeof LizardBreed)[keyof typeof LizardBreed]
+export type SnakeBreedKeys = (typeof SnakeBreed)[keyof typeof SnakeBreed]
+export type TurtleBreedKeys = (typeof TurtleBreed)[keyof typeof TurtleBreed]
 export const BirdBreed = {
-    CanarioBelga: 'Canário Belga',
-    PeriquitoAustraliano: 'Periquito Australiano',
-    Calopsita: 'Calopsita',
-    Agapornis: 'Agapornis',
-    Cacatua: 'Cacatua',
-    Papagaio: 'Papagaio',
-    Outros: 'Outros',
+    belgian_canary: 'belgian_canary',
+    budgerigar: 'budgerigar',
+    cockatiel: 'cockatiel',
+    lovebird: 'lovebird',
+    cockatoo: 'cockatoo',
+    parrot: 'parrot',
+    other: 'other',
 } as const
 export type BirdBreedKeys = (typeof BirdBreed)[keyof typeof BirdBreed]
 
+export const ChickenBreed = {
+    rhode_island_red: 'rhode_island_red',
+    leghorn: 'leghorn',
+    sussex: 'sussex',
+    plymouth_rock: 'plymouth_rock',
+    orpington: 'orpington',
+    wyandotte: 'wyandotte',
+    marans: 'marans',
+    silkie: 'silkie',
+    other: 'other',
+} as const
+export type ChickenBreedKeys = (typeof ChickenBreed)[keyof typeof ChickenBreed]
+
 export const RabbitBreed = {
-    AngoraIngles: 'Angorá Inglês',
-    AngoraFrances: 'Angorá Francês',
-    AngoraGigante: 'Angorá Gigante',
-    Argente: 'Argente',
-    BelgianHare: 'Belgian Hare',
-    Californiano: 'Californiano',
-    CabeçaDeLeão: 'Cabeça de Leão',
-    CastorRex: 'Castor Rex',
-    Chinchila: 'Chinchila',
-    CoelhoHolandes: 'Coelho Holandês',
-    CoelhoLebreBelga: 'Coelho Lebre Belga',
-    CoelhoLebreEuropeu: 'Coelho Lebre Europeu',
-    FlemishGiant: 'Flemish Giant',
-    Hotot: 'Hotot',
-    LopIngles: 'Lop Inglês',
-    LopFrances: 'Lop Francês',
-    LopHolland: 'Lop Holland',
-    MiniLop: 'Mini Lop',
-    MiniRex: 'Mini Rex',
-    NetherlandDwarf: 'Netherland Dwarf',
-    NovaZelandia: 'Nova Zelândia',
-    Polish: 'Polish',
-    Silver: 'Silver',
-    SilverFox: 'Silver Fox',
-    SRD: 'Sem Raça Definida',
-    Outro: 'Outro',
+    english_angora: 'english_angora',
+    french_angora: 'french_angora',
+    giant_angora: 'giant_angora',
+    argente: 'argente',
+    belgian_hare: 'belgian_hare',
+    californian: 'californian',
+    lionhead: 'lionhead',
+    castor_rex: 'castor_rex',
+    chinchilla: 'chinchilla',
+    dutch_rabbit: 'dutch_rabbit',
+    belgian_hare_rabbit: 'belgian_hare_rabbit',
+    european_hare_rabbit: 'european_hare_rabbit',
+    flemish_giant: 'flemish_giant',
+    hotot: 'hotot',
+    english_lop: 'english_lop',
+    french_lop: 'french_lop',
+    holland_lop: 'holland_lop',
+    mini_lop: 'mini_lop',
+    mini_rex: 'mini_rex',
+    netherland_dwarf: 'netherland_dwarf',
+    new_zealand: 'new_zealand',
+    polish: 'polish',
+    silver: 'silver',
+    silver_fox: 'silver_fox',
+    mixed_breed: 'mixed_breed',
+    other: 'other',
 } as const
 export type RabbitBreedKeys = (typeof RabbitBreed)[keyof typeof RabbitBreed]
 
@@ -123,8 +149,11 @@ export type ObjectBreed =
     | typeof CatBreed
     | typeof HorseBreed
     | typeof FishBreed
-    | typeof ReptileBreed
+    | typeof LizardBreed
+    | typeof SnakeBreed
+    | typeof TurtleBreed
     | typeof BirdBreed
+    | typeof ChickenBreed
     | typeof RabbitBreed
 
 export type Breed =
@@ -132,9 +161,12 @@ export type Breed =
     | CatBreedKeys
     | HorseBreedKeys
     | FishBreedKeys
-    | ReptileBreedKeys
+    | LizardBreedKeys
+    | SnakeBreedKeys
+    | TurtleBreedKeys
     | BirdBreedKeys
     | RabbitBreedKeys
+    | ChickenBreedKeys
     | 'unknown'
 
 export const BreedNames = {
@@ -142,8 +174,11 @@ export const BreedNames = {
     ...CatBreed,
     ...HorseBreed,
     ...FishBreed,
-    ...ReptileBreed,
+    ...LizardBreed,
+    ...SnakeBreed,
+    ...TurtleBreed,
     ...BirdBreed,
     ...RabbitBreed,
+    ...ChickenBreed,
 } as const
 export type BreedNames = (typeof BreedNames)[keyof typeof BreedNames]
