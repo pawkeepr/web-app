@@ -2,13 +2,13 @@
 
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FaWhatsapp } from 'react-icons/fa'
 import { BtnCancel, BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import CanceledExternalModal from '~/Components/modals/client-external-confirmation/canceled-modal/canceled-external-modal'
 import ConfirmedExternalModal from '~/Components/modals/client-external-confirmation/confirmed-modal/confirmed-external-modal'
 import Loader from '~/Components/organism/loader'
 import useAppointmentExternal from '~/store/hooks/appointment-external/use-appointment-external'
-import { Species } from '~/types/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import AuthLayout from '../../_layouts/auth/auth_layout'
 
@@ -19,6 +19,8 @@ const ConfirmationPage = () => {
         id: query.id as string,
         mode: 'confirmed',
     })
+
+    const { t } = useTranslation('common')
 
     const pet = activeData?.tutor_pet_vet?.pet
     const name_tutor = getNameTutor(activeData?.tutor_pet_vet?.tutor)
@@ -43,8 +45,8 @@ const ConfirmationPage = () => {
     return (
         <AuthLayout title="Confirmação de Agendamento">
             {!isPossibleAction && !isLoading && (
-                <div className="w-full flex flex-col justify-center items-center my-4 ">
-                    <p className="text-gray-600 font-normal text-xl ">
+                <div className="flex flex-col items-center justify-center w-full my-4 ">
+                    <p className="text-xl font-normal text-gray-600 ">
                         Este agendamento não está mais disponível para confirmação
                         ou cancelamento. Pois uma ação já foi tomada.
                     </p>
@@ -55,49 +57,49 @@ const ConfirmationPage = () => {
 
             {activeData && isPossibleAction && (
                 <>
-                    <div className="flex flex-col justify-center items-center gap-3 lg:mt-5">
+                    <div className="flex flex-col items-center justify-center gap-3 lg:mt-5">
                         <p className="text-sm font-bold text-secondary-500">
                             Seja Bem-vindo(a)!
                         </p>
-                        <h2 className="text-xl font-semibold leading-6 text-gray-600  text-center">
+                        <h2 className="text-xl font-semibold leading-6 text-center text-gray-600">
                             {'Confirmar Agendamento'}
                         </h2>
 
-                        <p className="text-xs font-bold text-primary-500 text-center mb-2">
+                        <p className="mb-2 text-xs font-bold text-center text-primary-500">
                             {'Esta ação não poderá ser desfeita.'}
                         </p>
                     </div>
-                    <section className="flex flex-col justify-start p-4 w-full">
-                        <div className="gap-2 flex-wrap flex flex-col mt-2 w-full justify-between ">
+                    <section className="flex flex-col justify-start w-full p-4">
+                        <div className="flex flex-col flex-wrap justify-between w-full gap-2 mt-2 ">
                             {name_tutor && (
-                                <p className="text-gray-500 flex justify-between">
+                                <p className="flex justify-between text-gray-500">
                                     <strong className="mr-2">Tutor:</strong>
                                     {name_tutor}
                                 </p>
                             )}
                             {pet && (
-                                <p className="text-gray-500 flex justify-between">
+                                <p className="flex justify-between text-gray-500">
                                     <strong className="mr-2">Pet:</strong>
                                     <span>
-                                        {`${pet.name_pet}, ${
-                                            Species[pet.specie as Species]
-                                        }, ${pet.race as string}`}
+                                        {`${pet.name_pet}, ${t(pet.specie)}, ${t(
+                                            pet.race as string,
+                                        )}`}
                                     </span>
                                 </p>
                             )}
 
                             {cpf_tutor && (
-                                <p className="text-gray-500 flex justify-between">
+                                <p className="flex justify-between text-gray-500">
                                     <strong className="mr-2">CPF:</strong>
                                     {cpf_tutor}
                                 </p>
                             )}
                             {whatsapp_tutor && (
-                                <p className="text-gray-500 flex justify-between">
+                                <p className="flex justify-between text-gray-500">
                                     <strong className="mr-2">WhatsApp:</strong>
-                                    <span className="w-fit flex flex-row gap-2 ">
+                                    <span className="flex flex-row gap-2 w-fit ">
                                         {whatsapp_tutor}
-                                        <FaWhatsapp className="text-green-600 text-xl" />
+                                        <FaWhatsapp className="text-xl text-green-600" />
                                     </span>
                                 </p>
                             )}
@@ -105,7 +107,7 @@ const ConfirmationPage = () => {
                             <hr className="w-full border-gray-600 dark:border-gray-700" />
 
                             {name_veterinary && (
-                                <p className="text-gray-500 flex justify-between">
+                                <p className="flex justify-between text-gray-500">
                                     <strong className="mr-2">
                                         Veterinário(a):
                                     </strong>
@@ -114,24 +116,24 @@ const ConfirmationPage = () => {
                             )}
 
                             {crmv && (
-                                <p className="text-gray-500 flex justify-between">
+                                <p className="flex justify-between text-gray-500">
                                     <strong className="mr-2">CRMV:</strong>
                                     {crmv}
                                 </p>
                             )}
 
                             {whatsapp_veterinary && (
-                                <p className="text-gray-500 flex justify-between">
+                                <p className="flex justify-between text-gray-500">
                                     <strong className="mr-2">WhatsApp:</strong>
-                                    <span className="w-fit flex flex-row gap-2 ">
+                                    <span className="flex flex-row gap-2 w-fit ">
                                         {whatsapp_veterinary}
-                                        <FaWhatsapp className="text-green-600 text-xl" />
+                                        <FaWhatsapp className="text-xl text-green-600" />
                                     </span>
                                 </p>
                             )}
 
                             {formattedDateAndHours && (
-                                <p className="text-gray-500 flex justify-between">
+                                <p className="flex justify-between text-gray-500">
                                     <strong className="mr-2">
                                         Data e Horário:
                                     </strong>
@@ -141,7 +143,7 @@ const ConfirmationPage = () => {
                         </div>
                     </section>
 
-                    <div className="flex flex-row justify-center items-center">
+                    <div className="flex flex-row items-center justify-center">
                         <CanceledExternalModal
                             title="Cancelar Agendamento"
                             item={activeData}
@@ -169,8 +171,8 @@ const ConfirmationPage = () => {
                     </div>
                 </>
             )}
-            <div className="w-full flex flex-col justify-center items-center ">
-                <p className="-mb-2 text-gray-400 font-normal">
+            <div className="flex flex-col items-center justify-center w-full ">
+                <p className="-mb-2 font-normal text-gray-400">
                     Você não tem uma conta? Crie agora mesmo e obtenha todos os
                     benefícios da plataforma
                 </p>

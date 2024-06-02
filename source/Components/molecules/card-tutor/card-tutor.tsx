@@ -1,8 +1,7 @@
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FaWhatsapp } from 'react-icons/fa'
-import { BreedNames } from '~/types/breedType'
 import type { IMainResponsibleGuardian, PetData } from '~/types/pet-v2'
-import { Species } from '~/types/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
 
 type CardPetProps = {
@@ -31,11 +30,9 @@ const CardTutor = ({
     const phone_tutor = tutor?.contact?.phone || 'Não informado'
     const whatsapp_tutor = tutor?.contact?.whatsapp || 'Não informado'
     const date_birth = pet?.date_birth || 'Não informado'
+    const { t } = useTranslation('common')
 
-    const race = useMemo(
-        () => BreedNames[pet?.race as keyof typeof BreedNames],
-        [pet?.race],
-    )
+    const race = useMemo(() => t(pet?.race as any), [pet?.race])
 
     const dateFormatted = useMemo(() => {
         const date =
@@ -46,8 +43,6 @@ const CardTutor = ({
         return dateAndHour
     }, [])
 
-    const specie = Species[pet?.specie as Species]
-
     return (
         <section className="flex flex-col justify-start w-full gap-1 px-2">
             <div className="w-full mt-2 mb-2 text-center text-gray-500">
@@ -55,7 +50,7 @@ const CardTutor = ({
                 <p>{dateFormatted}</p>
             </div>
             <ItemCard label="Nome" value={pet?.name_pet || 'Não informado'} />
-            <ItemCard label="Pet" value={`${specie}, ${race}`} />
+            <ItemCard label="Pet" value={`${t(pet.specie)}, ${race}`} />
             <ItemCard label="Aniversário" value={date_birth} />
             <ItemCard label="Tutor" value={name_tutor} />
             <ItemCard label="CPF" value={cpf_tutor} />

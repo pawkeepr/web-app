@@ -11,7 +11,6 @@ import {
     PiPiggyBankDuotone,
     PiRabbitDuotone,
 } from 'react-icons/pi'
-import ptBr from '~/common/languages/pt-BR/common.json'
 import {
     BirdBloodType,
     CatBloodType,
@@ -61,7 +60,7 @@ export const MapOptionSpecies = {
     rabbit: 'rabbit',
     bird: 'bird',
     fish: 'fish',
-    turtle: 'turtle',
+    chelonians: 'chelonians',
     snake: 'snake',
     lizard: 'lizard',
     cow: 'cow',
@@ -89,7 +88,7 @@ const makeSpecie = (
     bloodType: ObjectBloodType,
     breedType: ObjectBreed,
 ) => ({
-    label: ptBr[specie as keyof typeof ptBr],
+    label: specie,
     value: specie,
     bloodType: Object.entries(bloodType)
         .map(([key, name]) => ({
@@ -99,7 +98,7 @@ const makeSpecie = (
         .sort((a, b) => a.label.localeCompare(b.label)),
     breedType: Object.entries(breedType)
         .map(([key, name]) => ({
-            label: ptBr[name],
+            label: name,
             value: key,
         }))
         .sort((a, b) => a.label.localeCompare(b.label)),
@@ -117,7 +116,7 @@ export const bird = makeSpecie('bird', BirdBloodType, BirdBreed)
 
 export const fish = makeSpecie('fish', FishBloodType, FishBreed)
 
-export const turtle = makeSpecie('turtle', ReptileBloodType, TurtleBreed)
+export const chelonians = makeSpecie('chelonians', ReptileBloodType, TurtleBreed)
 
 export const snake = makeSpecie('snake', ReptileBloodType, SnakeBreed)
 
@@ -136,7 +135,7 @@ export type SpeciesType =
     | typeof rabbit
     | typeof bird
     | typeof fish
-    | typeof turtle
+    | typeof chelonians
     | typeof snake
     | typeof lizard
     | typeof cow
@@ -150,7 +149,7 @@ export const species = [
     rabbit,
     bird,
     fish,
-    turtle,
+    chelonians,
     snake,
     lizard,
     cow,
@@ -171,7 +170,7 @@ export const IconPets: RecordIconPets = {
     chicken: GiChicken,
     horse: PiHorseDuotone,
     cow: PiCowDuotone,
-    turtle: GiTurtle,
+    chelonians: GiTurtle,
     snake: GiSnakeTongue,
     lizard: GiReptileTail,
     pig: PiPiggyBankDuotone,

@@ -7,8 +7,8 @@ import {
     IoMdFemale,
     IoMdMale,
 } from 'react-icons/io'
-import ptBr from '~/common/languages/pt-BR/common.json'
 
+import { useTranslation } from 'react-i18next'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import { BreedNames } from '~/types/breedType'
@@ -82,13 +82,12 @@ export const IconGender = {
 
 const CardScheduled = ({ appointment }: CardScheduledProps) => {
     const name = getNameTutor(appointment?.tutor_pet_vet.tutor)
+    const { t } = useTranslation('common')
 
     const pet = useMemo(
         () => ({
             ...appointment.tutor_pet_vet.pet,
-            specie: ptBr[
-                appointment.tutor_pet_vet?.pet?.specie as keyof typeof ptBr
-            ],
+            specie: t(appointment.tutor_pet_vet?.pet?.specie),
             race: BreedNames[
                 appointment.tutor_pet_vet?.pet?.race as keyof typeof BreedNames
             ],

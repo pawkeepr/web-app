@@ -14,7 +14,6 @@ import '~/aws'
 import { appWithTranslation } from 'next-i18next'
 import ErrorBoundary from '~/contexts/error-boundary'
 
-
 function App({ Component, pageProps }: AppProps) {
     return (
         <ErrorBoundary>

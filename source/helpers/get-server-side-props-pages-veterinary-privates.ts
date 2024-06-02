@@ -5,6 +5,7 @@ import type {
     GetServerSidePropsContext,
     PreviewData,
 } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import type { ParsedUrlQuery } from 'node:querystring'
 import { PUBLIC_ROUTES } from '~/common/public-routes'
 import cookies from '~/constants/cookies'
@@ -27,7 +28,7 @@ export const fetchProfile = (ctx: Context) => {
 }
 
 const getServerSidePropsPagesVeterinaryPrivates =
-    (callback?: GetServerSideProps) => (ctx: Context) => {
+    (callback?: GetServerSideProps) => async (ctx: Context) => {
         if (!ctx) {
             return {
                 redirect: {
@@ -84,8 +85,13 @@ const getServerSidePropsPagesVeterinaryPrivates =
 
         if (callback) return callback(ctx)
 
+        const lg = ctx.locale || 'pt'
+        const locale = await serverSideTranslations(lg, ['common'])
+
         return {
-            props: {},
+            props: {
+                ...locale,
+            },
         }
     }
 

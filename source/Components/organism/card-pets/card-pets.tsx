@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import AvatarPet from '~/Components/molecules/avatar-pet'
-import ptBr from '~/common/languages/pt-BR/common.json'
 import { BreedNames } from '~/types/breedType'
 import type { IPetV2Data } from '~/types/pet-v2'
-import { GenderBR, MapOptionSpecies, type Gender } from '~/types/speciesType'
+import { GenderBR, type Gender } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import BoxButtonsPets from '../box-buttons-pets'
 import ModalBoxButtonsPet from '../box-buttons-pets/modal-box-buttons-pets'
@@ -16,10 +16,12 @@ type CardPetProps = {
 }
 
 const CardPet = ({ pet }: CardPetProps) => {
+    const { t } = useTranslation('common')
+
     const item = useMemo(
         () => ({
             ...pet,
-            specie: ptBr[pet?.specie as keyof typeof ptBr],
+            specie: t(pet?.specie),
             race: BreedNames[pet?.race as keyof typeof BreedNames],
             sex: GenderBR[pet?.sex as Gender],
         }),
@@ -36,14 +38,7 @@ const CardPet = ({ pet }: CardPetProps) => {
             className="mobile:!px-2 mobile:!py-2 px-4 py-4 "
             sectionAvatar={() => (
                 <>
-                    <AvatarPet
-                        name_pet={pet?.name_pet}
-                        specie={
-                            MapOptionSpecies[
-                                pet.specie as keyof typeof MapOptionSpecies
-                            ] as Species
-                        }
-                    />
+                    <AvatarPet name_pet={pet?.name_pet} specie={t(pet.specie)} />
                     <div className="flex flex-row gap-1">
                         <h1 className="text-lg font-bold text-center text-gray-400 mobile:text-sm">
                             {`${pet?.name_pet}`}

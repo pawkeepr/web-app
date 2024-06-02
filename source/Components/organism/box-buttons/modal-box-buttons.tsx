@@ -2,12 +2,12 @@ import { forwardRef, useImperativeHandle, useMemo } from 'react'
 import { FaWhatsapp } from 'react-icons/fa'
 import withControl from '~/Components/helpers/with-control'
 import AvatarPet from '~/Components/molecules/avatar-pet'
-import ptBr from '~/common/languages/pt-BR/common.json'
 import useModal from '~/hooks/use-modal'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import { BreedNames } from '~/types/breedType'
 import { GenderBR, type Gender } from '~/types/speciesType'
 
+import { useTranslation } from 'react-i18next'
 import { calcAge } from '~/utils/calc-age'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import Modal from '../modal'
@@ -34,10 +34,12 @@ const ModalBoxButtons = forwardRef(
             [open, closeModal, showModal],
         )
 
+        const { t } = useTranslation('common')
+
         const pet = useMemo(
             () => ({
                 ...item.tutor_pet_vet.pet,
-                specie: ptBr[item.tutor_pet_vet?.pet?.specie as keyof typeof ptBr],
+                specie: t(item.tutor_pet_vet?.pet?.specie),
                 gender: GenderBR[item.tutor_pet_vet?.pet?.sex as Gender],
                 race: BreedNames[
                     item.tutor_pet_vet?.pet?.race as keyof typeof BreedNames

@@ -1,4 +1,5 @@
 import { useFormikContext } from 'formik'
+import { useTranslation } from 'react-i18next'
 import IconSpecie from '~/Components/atoms/icon-specie'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import { species, type KeysIconPets } from '~/types/speciesType'
@@ -7,6 +8,7 @@ import { option } from '../helpers'
 
 const StepListSpecies = ({ nextStep, previousStep }: StepProps) => {
     const { setFieldValue, values } = useFormikContext<InitialValues>()
+    const { t, ...rest } = useTranslation()
 
     const handleSelectedSpecie = (specie: string) => {
         setFieldValue('specie', specie)
@@ -30,7 +32,7 @@ const StepListSpecies = ({ nextStep, previousStep }: StepProps) => {
                                 <IconSpecie specie={specie.value as KeysIconPets} />
                             </span>
                             <span className="col-span-2 align-middle">
-                                {specie.label}
+                                {t(specie.label)}
                             </span>
                         </div>
                     </button>

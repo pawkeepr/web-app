@@ -4,11 +4,12 @@ import {
     type ForwardRefExoticComponent,
     type RefAttributes,
 } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FaWhatsapp } from 'react-icons/fa'
 import type { IHookModal } from '~/hooks/use-modal'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { VeterinaryConsultation } from '~/types/appointment'
-import { Gender, GenderBR, Species } from '~/types/speciesType'
+import { Gender, GenderBR } from '~/types/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import BoxButtons from '../box-buttons'
 import { card } from '../card'
@@ -31,13 +32,12 @@ const CardMedicalRecord = ({
     const BoxButtons = boxButtons
     const name = getNameTutor(appointment?.tutor_pet_vet.tutor)
     const { isMobile } = useResizeMobile()
+    const { t } = useTranslation('common')
 
     const pet = useMemo(
         () => ({
             ...appointment.tutor_pet_vet.pet,
-            specie: Species[
-                appointment.tutor_pet_vet?.pet?.specie as keyof typeof Species
-            ],
+            specie: t(appointment.tutor_pet_vet?.pet?.specie),
             gender: Gender[appointment.tutor_pet_vet?.pet?.sex as Gender],
         }),
         [appointment],

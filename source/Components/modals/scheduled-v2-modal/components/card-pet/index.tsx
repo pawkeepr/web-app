@@ -1,21 +1,22 @@
-import { BreedNames } from '~/types/breedType'
+import { useTranslation } from 'react-i18next'
 import type { IPet } from '~/types/pet'
-import { Species } from '~/types/speciesType'
 
 type CardPetProps = {
     pet: Pick<IPet, 'name' | 'race' | 'specie'>
 }
 
 const CardPet = ({ pet }: CardPetProps) => {
+    const { t } = useTranslation('common')
+
     return (
         <section className="flex flex-col justify-center mb-2">
-            <div className="gap-2 flex-wrap flex flex-col w-full justify-between">
-                <p className="text-gray-500 flex justify-between">
+            <div className="flex flex-col flex-wrap justify-between w-full gap-2">
+                <p className="flex justify-between text-gray-500">
                     <strong className="mr-2">Pet:</strong>
                     <span>
-                        {`${pet?.name}, ${
-                            Species[pet?.specie as keyof typeof Species]
-                        }, ${BreedNames[pet?.race as keyof typeof BreedNames]}`}
+                        {`${pet?.name}, ${t(pet?.specie)}, ${t(
+                            pet?.race as string,
+                        )}`}
                     </span>
                 </p>
             </div>
