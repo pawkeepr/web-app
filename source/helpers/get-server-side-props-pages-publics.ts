@@ -5,7 +5,7 @@ import type {
     GetServerSidePropsContext,
     PreviewData,
 } from 'next'
-import type { ParsedUrlQuery } from 'querystring'
+import type { ParsedUrlQuery } from 'node:querystring'
 import { getCookie } from '~/utils/cookies-utils'
 
 const getServerSidePropsPagesPublics =

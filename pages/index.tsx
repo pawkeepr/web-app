@@ -1,7 +1,17 @@
-import HomePage from '~/pages/Home'
+'use client'
 
-const HomePageNext = () => {
-    return <HomePage />
+import LayoutAuth from '~/Layouts/LayoutAuth'
+import getServerSidePropsPagesPublics from '~/helpers/get-server-side-props-pages-publics'
+import SignInPage from '~/pages/Modules/shared/Authentication/SignIn'
+
+const SignInPageNext = () => {
+    return (
+        <LayoutAuth>
+            <SignInPage mode="veterinary" bgImage="/bg-sign-in.webp" />
+        </LayoutAuth>
+    )
 }
 
-export default HomePageNext
+export default SignInPageNext
+
+export const getServerSideProps = getServerSidePropsPagesPublics()
