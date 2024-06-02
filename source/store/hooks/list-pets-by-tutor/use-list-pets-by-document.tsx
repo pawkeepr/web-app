@@ -1,7 +1,9 @@
 import type { BuilderEntity } from '~/entities/BuilderEntity'
 import { Pet } from '~/entities/Pet'
 import { PetSimplified } from '~/entities/PetSimplified'
+import useMutationHelper from '~/hooks/use-mutation-helper'
 import { createPet, createPetSimplified, getAllPets } from '~/services/helpers'
+import { handleSubmitHelper } from '~/store/helpers/handle-submit-helper'
 import type { IPet } from '~/types/pet'
 import type { IPetV2 } from '~/types/pet-v2'
 import useAppStore from '../use-app-store'
@@ -60,3 +62,35 @@ const useListPetsByDocument = ({
 }
 
 export default useListPetsByDocument
+
+type IUseCreateSimplePetMutation = Pick<IUseListPetsByDocument, 'document'>
+
+export const useCreateSimplePetMutation = ({
+    document,
+}: IUseCreateSimplePetMutation) => {
+    return useMutationHelper({
+        mutationFn: async (data: IPetV2) => createPetSimplified(data),
+        mutationKey: [document, NAME],
+    })
+}
+type IUseHandleSubmitPetSimplified = Pick<IUseListPetsByDocument, 'document'> & {
+    finallySubmit?: (data?: IPetV2) => void
+}
+
+export const handleSubmitPetSimplified = ({
+    document,
+    finallySubmit,
+}: IUseHandleSubmitPetSimplified) => {
+    const createdMutation = useCreateSimplePetMutation({ document })
+    const updatedMutation = useCreateSimplePetMutation({ document })
+
+    return (data: IPet) => {
+        return handleSubmitHelper({
+            createMutation: createdMutation,
+            updateMutation: updatedMutation,
+            data,
+            entity: PetSimplified,
+            onSubmit: (data) => finallySubmit?.(data as IPetV2),
+        })
+    }
+}

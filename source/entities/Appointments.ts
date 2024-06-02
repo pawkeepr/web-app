@@ -1,12 +1,15 @@
 import type {
     Anamnesis,
     AppointmentDetails,
+    AppointmentStatus,
+    ComplementaryExam,
     DateConsults,
     DetailsPetConsultation,
     IGeolocationAppointment,
     IPayment,
     ISignatureAppointment,
     PaymentForm,
+    PhysicalExam,
     Treatments,
     TutorPetVet,
     VeterinaryConsultation,
@@ -22,6 +25,12 @@ export class Appointments implements VeterinaryConsultation {
     details_pet_consultation: DetailsPetConsultation
     anamnesis: Anamnesis
     treatments: Treatments
+    exams_anamnesis: {
+        physical_exam: PhysicalExam
+        complementary_exams: ComplementaryExam[]
+    }
+    diagnosis: { prognosis: string; prescription: string; notes: string }
+    appointment_status?: AppointmentStatus | undefined
 
     constructor() {
         this.id = ''
@@ -115,6 +124,26 @@ export class Appointments implements VeterinaryConsultation {
             payment: {
                 number_installments: '0',
             } as IPayment,
+        }
+        this.exams_anamnesis = {
+            physical_exam: {
+                behavior: '',
+                body_state: '',
+                diet: '',
+                fc: '',
+                fr: '',
+                hydration: '',
+                mucous_membranes: '',
+                other_finds: [],
+                pa: '',
+                tpc: '',
+            },
+            complementary_exams: [],
+        }
+        this.diagnosis = {
+            prognosis: '',
+            prescription: '',
+            notes: '',
         }
     }
 

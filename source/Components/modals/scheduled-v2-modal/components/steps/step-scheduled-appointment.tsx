@@ -108,6 +108,11 @@ const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) 
         [handleSubmit],
     )
 
+    const name_pet = useMemo(
+        () => pet.pet_information?.name_pet,
+        [pet.pet_information],
+    )
+
     return (
         <Formik
             initialValues={initialValues}
@@ -116,11 +121,13 @@ const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) 
             enableReinitialize
         >
             {({ isValid, handleSubmit, values, isSubmitting }) => (
-                <div >
+                <div>
                     <div className="gap-1">
                         <CardPet
                             pet={{
-                                name: values.tutor_pet_vet?.pet?.name_pet as string,
+                                name:
+                                    name_pet ||
+                                    (values.tutor_pet_vet?.pet?.name_pet as string),
                                 race: values.tutor_pet_vet?.pet?.race as Breed,
                                 specie: values.tutor_pet_vet?.pet
                                     ?.specie as Species,

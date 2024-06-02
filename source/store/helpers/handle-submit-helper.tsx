@@ -16,18 +16,20 @@ export const handleSubmitHelper = async <T,>({
     entity?: {
         build: (data: T) => any
     }
-    onSubmit?: () => void
+    onSubmit?: (data: unknown, variables: unknown, context: unknown) => void
     createMutation: UseMutationResult<any, unknown, any, unknown>
     updateMutation: UseMutationResult<any, unknown, any, unknown>
 }) => {
     try {
         const newData: GenericObject = entity ? entity.build(data) : data
+
         if (newData.id) {
-            await updateMutation.mutateAsync(newData)
-            return onSubmit?.()
+            return await updateMutation.mutateAsync(newData, {
+                onSuccess: onSubmit,
+            })
         }
-        await createMutation.mutateAsync(newData)
-        return onSubmit?.()
+
+        return await createMutation.mutateAsync(newData, { onSuccess: onSubmit })
     } catch (error) {
         if (!error) return errorToast('Erro')
         if (error instanceof Error) return errorToast(error.message, 'Erro')

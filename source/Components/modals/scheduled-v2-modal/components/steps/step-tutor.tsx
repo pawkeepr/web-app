@@ -24,8 +24,8 @@ const StepTutor = ({ previousStep, isLoading }: StepProps) => {
             className="flex-1 flex mobile:h-[90vh] web:h-full  w-full  justify-between items-center flex-col"
             onSubmit={handleSubmit}
         >
-            <div className="overflow-auto flex flex-1 gap-2 justify-center items-center flex-col w-full py-1">
-                <div className="grid grid-cols-3 gap-2 mobile:gap-0 mobile:grid-cols-1 w-full">
+            <div className="flex flex-col items-center justify-center flex-1 w-full gap-2 py-1 overflow-auto">
+                <div className="grid w-full grid-cols-3 gap-2 mobile:gap-0 mobile:grid-cols-1">
                     <FieldControl
                         ctx={values}
                         required
@@ -72,8 +72,13 @@ const StepTutor = ({ previousStep, isLoading }: StepProps) => {
                 success={({ disabled }) => (
                     <BtnPrimary
                         isLoading={isSubmitting || isLoading}
-                        label="Concluir"
+                        label="Cadastrar Pet"
                         type="submit"
+                        onClick={() => {
+                            if (isValid) {
+                                handleSubmit()
+                            }
+                        }}
                         disabled={disabled || isSubmitting || isLoading}
                     />
                 )}

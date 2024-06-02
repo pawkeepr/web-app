@@ -1,13 +1,13 @@
 import { Tab } from '@headlessui/react'
 import cn from 'classnames'
 import { Formik } from 'formik'
-import { startTransition, useCallback, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import useSteps from '~/hooks/use-steps'
-import useListPetsOfTutor from '~/store/hooks/list-pets-by-tutor'
 import useListPetsByTutor from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
+import { handleSubmitPetSimplified } from '~/store/hooks/list-pets-by-tutor/use-list-pets-by-document'
 import type { IPet } from '~/types/pet'
 import type { IPetV2 } from '~/types/pet-v2'
 import StepChoice from './components/steps/step-choice'
@@ -99,9 +99,12 @@ const ModalListPets = ({
         setPet(pet)
     }
 
-    const { handleSubmit } = useListPetsOfTutor({
+    const handleSubmit = handleSubmitPetSimplified({
         document,
-        strategy: 'simple',
+        finallySubmit: (data) => {
+            onChangePet(data as IPetV2)
+            onChangeSelectedTab(NUMBER_STEPS.CHOICE)
+        },
     })
 
     const { data: pets, isPending } = useListPetsByTutor({ document })
@@ -146,19 +149,6 @@ const ModalListPets = ({
         setDocument(doc)
     }
 
-    const onSubmit = useCallback(
-        async (values: IPet) => {
-            const pet = await handleSubmit(values)
-
-            if (!pet) return
-            startTransition(() => {
-                onChangePet(pet as IPetV2)
-                onChangeSelectedTab(NUMBER_STEPS.CHOICE)
-            })
-        },
-        [handleSubmit, closeModal],
-    )
-
     const hasVisibleStep = useMemo(() => {
         return (
             selectedTab >= NUMBER_STEPS.SPECIES && selectedTab < NUMBER_STEPS.CHOICE
@@ -173,18 +163,7 @@ const ModalListPets = ({
                     <button
                         type="button"
                         onClick={() => showModal()}
-                        className="
-                                rounded-md 
-                                bg-secondary-500 bg-opacity-20 
-                                px-4 py-2 text-sm 
-                                font-medium 
-                                text-white 
-                                hover:bg-opacity-30 
-                                focus:outline-none 
-                                focus-visible:ring-2 
-                                focus-visible:ring-white 
-                                focus-visible:ring-opacity-75
-                            "
+                        className="px-4 py-2 text-sm font-medium text-white rounded-md bg-secondary-500 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
                     >
                         {label}
                     </button>
@@ -212,7 +191,7 @@ const ModalListPets = ({
                         onChange={onChangeSelectedTab}
                         defaultIndex={selectedTabInitial}
                     >
-                        <Tab.List className="flex flex-row w-full justify-between">
+                        <Tab.List className="flex flex-row justify-between w-full">
                             {STEPS.map((item) => (
                                 <Tab key={item.id} className="hidden" />
                             ))}
@@ -240,7 +219,7 @@ const ModalListPets = ({
                         <Formik
                             initialValues={initialValues as IPet}
                             enableReinitialize
-                            onSubmit={onSubmit}
+                            onSubmit={handleSubmit}
                         >
                             <Tab.Panels>
                                 {STEPS.map(

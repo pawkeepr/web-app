@@ -105,7 +105,7 @@ export interface DetailsPetConsultation {
     imc: number
 }
 
-interface PhysicalExam {
+export interface PhysicalExam {
     diet: string
     fc: string // Frequência Cardíaca
     fr: string // Frequência Respiratória
