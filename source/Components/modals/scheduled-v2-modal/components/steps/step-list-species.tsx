@@ -1,11 +1,7 @@
 import { useFormikContext } from 'formik'
+import IconSpecie from '~/Components/atoms/icon-specie'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
-import {
-    EmojiPet,
-    species,
-    type KeysEmojiPet,
-    type Species,
-} from '~/types/speciesType'
+import { species, type KeysIconPets, type Species } from '~/types/speciesType'
 import type { InitialValues, StepProps } from '../../types'
 import { option } from '../helpers'
 
@@ -33,7 +29,7 @@ const StepListSpecies = ({ nextStep, previousStep }: StepProps) => {
                     >
                         <div className="flex items-center justify-center w-full gap-2">
                             <span className="col-span-1 align-middle">
-                                {EmojiPet[specie.value as KeysEmojiPet]}
+                                <IconSpecie specie={specie.value as KeysIconPets} />
                             </span>
                             <span className="col-span-2 align-middle">
                                 {specie.label}

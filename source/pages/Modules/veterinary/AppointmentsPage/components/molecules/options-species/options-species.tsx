@@ -1,11 +1,7 @@
 import { tv } from 'tailwind-variants'
+import IconSpecie from '~/Components/atoms/icon-specie/icon-specie'
 import withControl from '~/Components/helpers/with-control'
-import {
-    EmojiPet,
-    species,
-    type KeysEmojiPet,
-    type SpeciesType,
-} from '~/types/speciesType'
+import { species, type KeysIconPets, type SpeciesType } from '~/types/speciesType'
 
 export const option = tv({
     base: `
@@ -42,7 +38,7 @@ const OptionsSpecies = ({ onChange }: MedicalRecordFormProps) => {
                     <div className="flex justify-center flex-1 gap-2">
                         <div className="flex flex-row items-center justify-center gap-2 w-60">
                             <span className="items-center justify-center flex-1">
-                                {EmojiPet[item.value as KeysEmojiPet]}
+                                <IconSpecie specie={item.value as KeysIconPets} />
                             </span>
                             <span className=" flex-[2] items-center justify-center">
                                 {item.label}
