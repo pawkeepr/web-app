@@ -11,8 +11,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import type { VeterinaryConsultation } from '~/types/appointment'
-import { BreedNames } from '~/types/breedType'
-import { GenderBR, MapOptionSpecies, type Gender } from '~/types/speciesType'
+import { GenderBR, type Gender, type Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import BoxButtons from '../box-buttons'
@@ -87,10 +86,8 @@ const CardScheduled = ({ appointment }: CardScheduledProps) => {
     const pet = useMemo(
         () => ({
             ...appointment.tutor_pet_vet.pet,
-            specie: t(appointment.tutor_pet_vet?.pet?.specie),
-            race: BreedNames[
-                appointment.tutor_pet_vet?.pet?.race as keyof typeof BreedNames
-            ],
+            specie: t(appointment.tutor_pet_vet?.pet?.specie as Species),
+            race: t(appointment.tutor_pet_vet?.pet?.race as string),
             sex: GenderBR[appointment.tutor_pet_vet?.pet?.sex as Gender],
         }),
         [appointment],
@@ -118,11 +115,7 @@ const CardScheduled = ({ appointment }: CardScheduledProps) => {
                 <>
                     <AvatarPet
                         name_pet={pet?.name_pet}
-                        specie={
-                            MapOptionSpecies[
-                                pet.specie as keyof typeof MapOptionSpecies
-                            ]
-                        }
+                        specie={pet.specie as Species}
                     />
                     <div className="flex flex-row gap-1">
                         <h1 className="text-lg font-bold text-center text-gray-500 mobile:text-sm">
