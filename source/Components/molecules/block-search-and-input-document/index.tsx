@@ -18,7 +18,7 @@ const BlockSearchAndInputDocument = ({
             className={`
                 mobile:px-2 w-full 
                 web:gap-2 flex mobile:flex-col
-                justify-end items-center 
+                justify-end items-center web:mb-2
             `}
         >
             <SearchInput placeholder="Digite sua busca" name={name} />
