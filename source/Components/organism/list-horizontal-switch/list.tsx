@@ -20,6 +20,7 @@ type ListSwitchProps<T> = {
     content?: (props: ContentProps<T>) => React.ReactNode
     name: string
     arrayProps: FieldArrayRenderProps
+    visibleMenu?: boolean
 }
 
 const List = <T,>({
@@ -30,29 +31,32 @@ const List = <T,>({
     onChangeCategory,
     content,
     arrayProps,
+    visibleMenu = true,
     name,
 }: ListSwitchProps<T>) => {
     return (
         <section className="w-full">
-            <div className="flex flex-row flex-wrap justify-between w-full ">
-                {categories.map((item) => (
-                    <OptionsMenu
-                        key={item.value}
-                        item={item}
-                        option={category}
-                        classNames={{
-                            label: 'mobile:hidden',
-                        }}
-                        onChangeOption={(item) =>
-                            onChangeCategory({
-                                ...item,
-                                label: item.label,
-                                value: item.value as string,
-                            })
-                        }
-                    />
-                ))}
-            </div>
+            {visibleMenu && (
+                <div className="flex flex-row flex-wrap justify-between w-full ">
+                    {categories.map((item) => (
+                        <OptionsMenu
+                            key={item.value}
+                            item={item}
+                            option={category}
+                            classNames={{
+                                label: 'mobile:hidden',
+                            }}
+                            onChangeOption={(item) =>
+                                onChangeCategory({
+                                    ...item,
+                                    label: item.label,
+                                    value: item.value as string,
+                                })
+                            }
+                        />
+                    ))}
+                </div>
+            )}
             <section className="w-full mt-2 h-[80vh] overflow-y-auto scroll pb-[160px] z-10">
                 {options.map((option, index) => (
                     <ControlToggle

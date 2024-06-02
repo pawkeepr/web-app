@@ -28,6 +28,7 @@ export type ContentProps<T> = {
 // biome-ignore lint/complexity/noBannedTypes: <explanation>
 export type ListInputProps<Ctx extends object = {}, T = unknown> = {
     ctx: Ctx
+    visibleMenu?: boolean
     items: Option<T>[]
     name: Ctx extends object ? ArrayPaths<Ctx> : string
     categories: { label: string; value: string }[]
@@ -73,6 +74,7 @@ const ListHorizontalSwitch = <T extends object = {}>({
     categories: steps,
     content,
     onChange,
+    visibleMenu = true,
 }: ListInputProps<T>) => {
     const [category, setCategory] = useState(steps[0])
 
@@ -109,14 +111,16 @@ const ListHorizontalSwitch = <T extends object = {}>({
         <FieldArray name={name}>
             {(arrayProps) => (
                 <section className="flex flex-col flex-1 !overflow-hidden">
-                    <h4 className="flex-1 mb-1 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
-                        {makeTitle(category.label, false)}
-                    </h4>
+                    {visibleMenu && (
+                        <h4 className="flex-1 mb-1 font-sans font-semibold text-center uppercase mobile:underline mobile:text-primary-500 mobile:font-bold">
+                            {makeTitle(category.label, false)}
+                        </h4>
+                    )}
                     <section className="flex flex-row flex-wrap justify-between w-full">
-                        {list.map(([key, options], index) => (
+                        {list.map(([key, options]) => (
                             <ListControl
+                                visibleMenu={visibleMenu}
                                 arrayProps={arrayProps}
-                                index={index}
                                 condition={category.value === key}
                                 key={key}
                                 name={name}
@@ -136,22 +140,24 @@ const ListHorizontalSwitch = <T extends object = {}>({
                             />
                         ))}
                     </section>
-                    <div className="fixed flex justify-between flex-1 w-full px-1 mt-0 bg-transparent bottom-4 h-fit">
-                        <button
-                            type="button"
-                            onClick={keyPressLeft}
-                            className="px-4 py-2 rounded-full bg-secondary-500 hover:bg-secondary-600"
-                        >
-                            <FaArrowLeft />
-                        </button>
-                        <button
-                            onClick={keyPressRight}
-                            type="button"
-                            className="px-4 py-2 rounded-full bg-secondary-500 hover:bg-secondary-600"
-                        >
-                            <FaArrowRight />
-                        </button>
-                    </div>
+                    {visibleMenu && (
+                        <div className="fixed flex justify-between flex-1 w-full px-1 mt-0 bg-transparent bottom-4 h-fit">
+                            <button
+                                type="button"
+                                onClick={keyPressLeft}
+                                className="px-4 py-2 rounded-full bg-secondary-500 hover:bg-secondary-600"
+                            >
+                                <FaArrowLeft />
+                            </button>
+                            <button
+                                onClick={keyPressRight}
+                                type="button"
+                                className="px-4 py-2 rounded-full bg-secondary-500 hover:bg-secondary-600"
+                            >
+                                <FaArrowRight />
+                            </button>
+                        </div>
+                    )}
                 </section>
             )}
         </FieldArray>
