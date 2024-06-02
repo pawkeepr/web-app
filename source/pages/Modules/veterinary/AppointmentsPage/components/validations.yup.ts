@@ -13,7 +13,10 @@ export type CtxStepAnamnese = Pick<
 
 export type CtxStepDiagnostic = Pick<VeterinaryConsultation, 'diagnosis'>
 
-export type CtxStepTreatment = Pick<VeterinaryConsultation, 'treatments'>
+export type CtxStepTreatment = Pick<
+    VeterinaryConsultation,
+    'treatments' | 'tutor_pet_vet'
+>
 export const schemaValidationDetailsPetConsultation = yup
     .object()
     .shape<RecordsShapeYup<VeterinaryConsultation['details_pet_consultation']>>({

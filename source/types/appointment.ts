@@ -44,6 +44,15 @@ export const TypeAction = {
 } as const
 export type TypeAction = (typeof TypeAction)[keyof typeof TypeAction]
 
+export const TypeDosage = {
+    first: 'first',
+    second: 'second',
+    third: 'third',
+    fourth: 'fourth',
+    n_th: 'n_th',
+} as const
+export type TypeDosage = (typeof TypeDosage)[keyof typeof TypeDosage]
+
 export type ComplementaryExam = {
     type_exam: string
     name_exam: string

@@ -1,4 +1,5 @@
 import { tv } from 'tailwind-variants'
+import withControl from '~/Components/helpers/with-control'
 import {
     EmojiPet,
     species,
@@ -54,4 +55,4 @@ const OptionsSpecies = ({ onChange }: MedicalRecordFormProps) => {
     )
 }
 
-export default OptionsSpecies
+export default withControl(OptionsSpecies)
