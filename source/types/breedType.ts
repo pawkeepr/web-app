@@ -82,8 +82,9 @@ export const SnakeBreed = {
 } as const
 
 export const TurtleBreed = {
-    cagado: 'cagado',
+    tortoise: 'tortoise',
     turtle: 'turtle',
+    terrapin: 'terrapin',
     other: 'other',
 } as const
 

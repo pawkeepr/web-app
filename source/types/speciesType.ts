@@ -44,7 +44,7 @@ export const Species = {
     rabbit: 'Coelho',
     bird: 'Pássaro',
     fish: 'Peixe',
-    turtle: 'Tartaruga',
+    turtle: 'Quelônios',
     chicken: 'Galinha',
     snake: 'Cobra',
     lizard: 'Lagarto',
