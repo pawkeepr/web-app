@@ -1,3 +1,4 @@
+import type { IconType } from 'react-icons'
 import { BsThreeDots } from 'react-icons/bs'
 import { GiChicken, GiReptileTail, GiSnakeTongue, GiTurtle } from 'react-icons/gi'
 import {
@@ -169,7 +170,7 @@ export const species = [
 ]
 
 type RecordIconPets = {
-    [key in SpeciesType['value']]: React.FC
+    [key in SpeciesType['value']]: IconType
 }
 
 export const IconPets: RecordIconPets = {
