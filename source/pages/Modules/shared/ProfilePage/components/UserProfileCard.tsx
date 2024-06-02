@@ -1,7 +1,7 @@
 import { CameraIcon } from '@heroicons/react/24/solid'
 import { Input, Label } from 'reactstrap'
 import AvatarPet from '~/Components/molecules/avatar-pet'
-import { MapOptionSpecies, type Species } from '~/types/speciesType'
+import type { Species } from '~/types/speciesType'
 import CardContainer from './CardContainer'
 
 type UserProfileCardProps = {
@@ -23,17 +23,13 @@ const UserProfileCard = ({
         <CardContainer>
             <div className="p-1">
                 <div className="text-center">
-                    <div className="profile-user position-relative d-inline-block mx-auto  mb-4">
+                    <div className="mx-auto mb-4 profile-user position-relative d-inline-block">
                         <AvatarPet
                             src={avatar}
                             name_pet={name as string}
-                            specie={
-                                MapOptionSpecies[
-                                    specie as keyof typeof MapOptionSpecies
-                                ] as Species
-                            }
+                            specie={specie as Species}
                         />
-                        <div className="avatar-xs p-0 rounded-circle profile-photo-edit">
+                        <div className="p-0 avatar-xs rounded-circle profile-photo-edit">
                             <Input
                                 disabled
                                 id="profile-img-file-input"
@@ -53,10 +49,10 @@ const UserProfileCard = ({
                             </Label>
                         </div>
                     </div>
-                    <h5 className="text-gray-700 mb-2 text-center w-full mt-1 capitalize">
+                    <h5 className="w-full mt-1 mb-2 text-center text-gray-700 capitalize">
                         <strong>{title}</strong>
                     </h5>
-                    <p className="text-muted mb-0">{subtitle}</p>
+                    <p className="mb-0 text-muted">{subtitle}</p>
                 </div>
             </div>
         </CardContainer>

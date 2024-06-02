@@ -2,7 +2,7 @@ import withCompose from '~/Components/helpers/with-compose'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import useModal from '~/hooks/use-modal'
 import type { IPetV2Data } from '~/types/pet-v2'
-import { MapOptionSpecies, type Species } from '~/types/speciesType'
+import type { Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import type { ModalBoxButtonsProps } from '../box-buttons/modal-box-buttons'
 import Modal from '../modal'
@@ -21,32 +21,28 @@ const ModalBoxButtonsPet = ({
                 <div className="flex flex-col justify-between items-center w-full h-[90%] p-4">
                     <AvatarPet
                         name_pet={pet?.name_pet}
-                        specie={
-                            MapOptionSpecies[
-                            pet.specie as keyof typeof MapOptionSpecies
-                            ] as Species
-                        }
+                        specie={pet.specie as Species}
                     />
-                    <section className="w-full grid grid-cols-2 mt-4">
+                    <section className="grid w-full grid-cols-2 mt-4">
                         <div className="col-span-1">
-                            <div className="text-gray-500 mb-2">
+                            <div className="mb-2 text-gray-500">
                                 <h3 className="font-bold">Pet:</h3>
                                 <p>{`${pet?.name_pet}, ${pet?.specie}, ${pet?.race}`}</p>
                             </div>
 
-                            <div className="text-gray-500 mb-2">
+                            <div className="mb-2 text-gray-500">
                                 <h3 className="font-bold">Idade do Pet:</h3>
                                 <p>{calcAge(pet?.date_birth)} Anos</p>
                             </div>
 
-                            <div className="text-gray-500 mb-2">
+                            <div className="mb-2 text-gray-500">
                                 <h3 className="font-bold">Sexo do Pet:</h3>
                                 <p>{pet?.sex}</p>
                             </div>
                         </div>
                     </section>
 
-                    <div className="w-full mt-4 self-end">
+                    <div className="self-end w-full mt-4">
                         <BoxButtonsPets item={pet} />
                     </div>
                 </div>

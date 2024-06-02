@@ -4,7 +4,7 @@ import { FaCat, FaDog } from 'react-icons/fa'
 import ListHorizontalSwitch from '~/Components/organism/list-horizontal-switch'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import type { ComplementaryExam, TypeAction } from '~/types/appointment'
-import { MapOptionSpecies, type KeyOfMapOptionSpecies } from '~/types/speciesType'
+import { Species } from '~/types/speciesType'
 import CardSimplePet from '../../molecules/card-simple-pet'
 import ContentActionVaccination from '../../molecules/content-action-vaccination'
 import OptionsSpecies from '../../molecules/options-species'
@@ -13,21 +13,21 @@ import { screen } from '../styles'
 
 const STEPS: {
     label: string
-    value: KeyOfMapOptionSpecies
+    value: Species
     icon?: IconType
 }[] = [
-    { label: 'Cachorro', value: MapOptionSpecies.dog, icon: FaDog },
-    { label: 'Gato', value: MapOptionSpecies.cat, icon: FaCat },
+    { label: 'Cachorro', value: Species.dog, icon: FaDog },
+    { label: 'Gato', value: Species.cat, icon: FaCat },
 ]
 
 const StepVaccination = () => {
-    const [specie, setSpecie] = useState<KeyOfMapOptionSpecies | null>(null)
+    const [specie, setSpecie] = useState<Species | null>(null)
     const { values } = useFormikContextSafe<CtxStepTreatment>()
 
     useEffect(() => {
         const specie = values.tutor_pet_vet?.pet?.specie
         if (specie) {
-            setSpecie(specie as KeyOfMapOptionSpecies)
+            setSpecie(specie as Species)
         }
     }, [values.tutor_pet_vet?.pet?.specie])
 
@@ -41,7 +41,7 @@ const StepVaccination = () => {
                 <OptionsSpecies
                     condition={!specie}
                     onChange={(item) => {
-                        setSpecie(item.value as KeyOfMapOptionSpecies)
+                        setSpecie(item.value as Species)
                     }}
                 />
                 <ListHorizontalSwitch
@@ -65,7 +65,7 @@ const StepVaccination = () => {
                             checked: false,
                             label: 'Gripe',
                             type_action: 'vaccination',
-                            type: MapOptionSpecies[specie as KeyOfMapOptionSpecies],
+                            type: specie as string,
                             value: 1,
                         },
                     ]}
