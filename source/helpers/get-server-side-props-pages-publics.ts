@@ -5,12 +5,16 @@ import type {
     GetServerSidePropsContext,
     PreviewData,
 } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import type { ParsedUrlQuery } from 'node:querystring'
 import { getCookie } from '~/utils/cookies-utils'
 
 const getServerSidePropsPagesPublics =
     (callback?: GetServerSideProps) =>
     async (ctx: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
+        const lg = ctx.locale || 'pt'
+        const locale = await serverSideTranslations(lg, ['common'])
+
         return new Promise((resolve) => {
             const name = optionsCookies.token.name
             const token = getCookie(name, ctx)
@@ -28,8 +32,10 @@ const getServerSidePropsPagesPublics =
                 resolve(callback(ctx))
             }
 
-            resolve({
-                props: {},
+            return resolve({
+                props: {
+                    ...locale,
+                },
             })
         })
     }

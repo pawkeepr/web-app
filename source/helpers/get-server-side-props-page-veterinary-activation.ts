@@ -1,6 +1,7 @@
 import optionsCookies from '~/constants/cookies'
 
 import type { GetServerSideProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getCookie } from '~/utils/cookies-utils'
 import {
     fetchProfile,
@@ -8,7 +9,7 @@ import {
 } from './get-server-side-props-pages-veterinary-privates'
 
 const getServerSidePropsPageActivation =
-    (callback?: GetServerSideProps) => (ctx: Context) => {
+    (callback?: GetServerSideProps) => async (ctx: Context) => {
         if (!ctx) {
             return {
                 redirect: {
@@ -54,8 +55,13 @@ const getServerSidePropsPageActivation =
 
         if (callback) return callback(ctx)
 
+        const lg = ctx.locale || 'pt'
+        const locale = await serverSideTranslations(lg, ['common'])
+
         return {
-            props: {},
+            props: {
+                ...locale,
+            },
         }
     }
 
