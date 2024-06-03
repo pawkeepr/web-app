@@ -1,47 +1,82 @@
 import { useField } from 'formik'
 
+import type { ChangeEvent, ComponentProps } from 'react'
 import InputCode from '~/Components/atoms/input-code'
 
-import { FieldHookConfig } from 'formik'
+import type { InputCodeProps } from '~/Components/atoms/input-code/input-code'
 
-type InputFieldProps<T> = FieldHookConfig<string> &
+type InputFieldProps<T> = ComponentProps<'input'> &
     T & {
-        [key: string]: any
         label?: string
         name: string
+        position: number
         required?: boolean
-        moveToNext?: (index: number) => void
-        component?: (...args: any[]) => JSX.Element
+        moveToNext?: () => void
+        component?: (props: InputCodeProps) => JSX.Element
         onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
     }
 
 const FieldCode = <T,>({
     label,
     required = false,
-    component = InputCode as any,
+    component = InputCode,
     className,
-    moveToNext,
+    position,
     ...props
 }: InputFieldProps<T>) => {
-    const [inputProps, meta] = useField(props)
+    const [inputProps, _meta] = useField(props)
     const id = props.name || props.id
 
-    const InputComponent = component as any
+    const InputComponent = component
 
-    const onChange = (e: any) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        // ultimo elemento
+        if (e.target.value.length > 1) {
+            e.target.value = e.target.value[e.target.value.length - 1]
+        }
+
         props.onChange?.(e)
         inputProps.onChange(e)
     }
 
+    const getInputElement = (index: number) => {
+        return document.getElementById(`digit${index}`)
+    }
+
+    const moveToNext = (index: number) => {
+        const element = getInputElement(index + 1)
+        element?.focus()
+        getInputElement(index)?.blur()
+    }
+
+    // const onPaste = (e: ClipboardEvent<HTMLInputElement>) => {
+    //     e.preventDefault()
+    //     const paste = e.clipboardData.getData('text')
+
+    //     const pasteArray = paste.split('')
+
+    //     for (let i = 0; i < pasteArray.length; i++) {
+    //         const element = getInputElement(i)
+
+    //         if (element !== null) {
+
+    //         }
+    //     }
+
+    //     // Trigger the onChange handler after setting the new value
+    // }
+
     return (
         <InputComponent
+            {...inputProps}
+            {...props}
             id={id}
             required={required}
             data-testid={`input-code-${id}`}
-            moveToNext={moveToNext}
-            {...inputProps}
-            {...props}
+            moveToNext={() => moveToNext?.(position)}
             onChange={onChange}
+            // onPaste={onPaste}
         />
     )
 }

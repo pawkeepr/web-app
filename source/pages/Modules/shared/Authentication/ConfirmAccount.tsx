@@ -51,7 +51,9 @@ const validationSchema = Yup.object({
 export type SchemaConfirmAccount = Yup.InferType<typeof validationSchema>
 
 const ConfirmAccount = () => {
-    const { email, password } = useAppSelector((state) => state.ActivateAccount)
+    const { email, password, isLoading } = useAppSelector(
+        (state) => state.ActivateAccount,
+    )
 
     const dispatch = useAppDispatch()
     const router = useRouter()
@@ -103,9 +105,9 @@ const ConfirmAccount = () => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                <ConfirmAccountForm />
+                <ConfirmAccountForm isLoading={isLoading} />
             </Formik>
-            <div className="mt-4 text-center w-full flex items-center justify-center flex-col">
+            <div className="flex flex-col items-center justify-center w-full mt-4 text-center">
                 <p className="mb-0 text-xs text-gray-500">
                     Você não recebeu o código?
                 </p>
@@ -117,7 +119,7 @@ const ConfirmAccount = () => {
             </div>
             <BtnLink
                 message="Voltar"
-                className="hidden mobile:flex max-w-fit absolute top-2 left-2  items-center justify-start"
+                className="absolute items-center justify-start hidden mobile:flex max-w-fit top-2 left-2"
                 href="/sign-in"
             >
                 <ArrowLeftCircleIcon />

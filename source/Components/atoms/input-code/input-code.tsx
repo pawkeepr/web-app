@@ -1,6 +1,6 @@
-import { InputProps, input } from '../input'
+import { input, type InputProps } from '../input'
 
-type InputCodeProps = {
+export type InputCodeProps = {
     moveToNext: () => void
 } & InputProps
 
@@ -24,7 +24,6 @@ const InputCode = ({
                     center: true,
                 })}
                 id={id}
-                maxLength={1}
                 onKeyUp={() => moveToNext()}
                 {...rest}
             />
