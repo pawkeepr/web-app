@@ -1,6 +1,13 @@
 import type { IconType } from 'react-icons'
 import { BsThreeDots } from 'react-icons/bs'
-import { GiChicken, GiReptileTail, GiSnakeTongue, GiTurtle } from 'react-icons/gi'
+import {
+    GiChicken,
+    GiGoat,
+    GiReptileTail,
+    GiSeatedMouse,
+    GiSnakeTongue,
+    GiTurtle,
+} from 'react-icons/gi'
 import {
     PiBirdDuotone,
     PiCatDuotone,
@@ -61,11 +68,13 @@ export const Species = {
     bird: 'bird',
     chicken: 'chicken',
     horse: 'horse',
-    cow: 'cow',
+    bovine: 'bovine',
     chelonians: 'chelonians',
-    snake: 'snake',
+    serpent: 'serpent',
     lizard: 'lizard',
     pig: 'pig',
+    caprine: 'caprine',
+    rodent: 'rodent',
     unknown: 'unknown',
 } as const
 export type Species = (typeof Species)[keyof typeof Species]
@@ -105,11 +114,11 @@ export const fish = makeSpecie('fish', FishBloodType, FishBreed)
 
 export const chelonians = makeSpecie('chelonians', ReptileBloodType, TurtleBreed)
 
-export const snake = makeSpecie('snake', ReptileBloodType, SnakeBreed)
+export const serpent = makeSpecie('serpent', ReptileBloodType, SnakeBreed)
 
 export const lizard = makeSpecie('lizard', ReptileBloodType, LizardBreed)
 
-export const cow = makeSpecie('cow', ReptileBloodType, CowBreed)
+export const bovine = makeSpecie('bovine', ReptileBloodType, CowBreed)
 
 export const pig = makeSpecie('pig', ReptileBloodType, PigBreed)
 
@@ -123,9 +132,9 @@ export type SpeciesType =
     | typeof bird
     | typeof fish
     | typeof chelonians
-    | typeof snake
+    | typeof serpent
     | typeof lizard
-    | typeof cow
+    | typeof bovine
     | typeof pig
     | typeof chicken
 
@@ -137,9 +146,9 @@ export const species = [
     bird,
     fish,
     chelonians,
-    snake,
+    serpent,
     lizard,
-    cow,
+    bovine,
     pig,
     chicken,
 ].sort((a, b) => a.label.localeCompare(b.label))
@@ -156,11 +165,13 @@ export const IconPets: RecordIconPets = {
     bird: PiBirdDuotone,
     chicken: GiChicken,
     horse: PiHorseDuotone,
-    cow: PiCowDuotone,
+    bovine: PiCowDuotone,
     chelonians: GiTurtle,
-    snake: GiSnakeTongue,
+    serpent: GiSnakeTongue,
     lizard: GiReptileTail,
     pig: PiPiggyBankDuotone,
     unknown: BsThreeDots,
+    caprine: GiGoat,
+    rodent: GiSeatedMouse,
 } as const
 export type KeysIconPets = keyof typeof IconPets

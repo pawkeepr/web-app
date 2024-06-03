@@ -176,6 +176,33 @@ export const RabbitBreed = {
 } as const
 export type RabbitBreedKeys = (typeof RabbitBreed)[keyof typeof RabbitBreed]
 
+export const GoatBreed = {
+    boer: 'boer',
+    alpine: 'alpine',
+    saanen: 'saanen',
+    nubian: 'nubian',
+    toggenburg: 'toggenburg',
+    la_mancha: 'la_mancha',
+    kiko: 'kiko',
+    pygmy: 'pygmy',
+    other: 'other',
+} as const
+
+export type GoatBreedKeys = (typeof GoatBreed)[keyof typeof GoatBreed]
+
+export const RodentBreed = {
+    guinea_pig: 'guinea_pig',
+    hamster: 'hamster',
+    gerbil: 'gerbil',
+    chinchilla: 'chinchilla',
+    rat: 'rat',
+    mouse: 'mouse',
+    degu: 'degu',
+    other: 'other',
+} as const
+
+export type RodentBreedKeys = (typeof RodentBreed)[keyof typeof RodentBreed]
+
 export type ObjectBreed =
     | typeof DogBreed
     | typeof CatBreed
@@ -189,6 +216,8 @@ export type ObjectBreed =
     | typeof RabbitBreed
     | typeof CowBreed
     | typeof PigBreed
+    | typeof GoatBreed
+    | typeof RodentBreed
 
 export type Breed =
     | DogBreedKeys
@@ -203,6 +232,8 @@ export type Breed =
     | ChickenBreedKeys
     | CowBreedKeys
     | PigBreedKeys
+    | GoatBreedKeys
+    | RodentBreedKeys
     | 'unknown'
 
 export const BreedNames = {
@@ -218,5 +249,7 @@ export const BreedNames = {
     ...ChickenBreed,
     ...CowBreed,
     ...PigBreed,
+    ...GoatBreed,
+    ...RodentBreed,
 } as const
 export type BreedNames = (typeof BreedNames)[keyof typeof BreedNames]
