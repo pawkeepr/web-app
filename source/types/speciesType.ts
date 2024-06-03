@@ -67,7 +67,7 @@ export const Species = {
     fish: 'fish',
     bird: 'bird',
     chicken: 'chicken',
-    horse: 'horse',
+    equine: 'equine',
     bovine: 'bovine',
     chelonians: 'chelonians',
     serpent: 'serpent',
@@ -104,7 +104,7 @@ export const dog = makeSpecie('dog', DogBloodType, DogBreed)
 
 export const cat = makeSpecie('cat', CatBloodType, CatBreed)
 
-export const horse = makeSpecie('horse', HorseBloodType, HorseBreed)
+export const equine = makeSpecie('equine', HorseBloodType, HorseBreed)
 
 export const rabbit = makeSpecie('rabbit', RabbitBloodType, RabbitBreed)
 
@@ -124,10 +124,14 @@ export const pig = makeSpecie('pig', ReptileBloodType, PigBreed)
 
 export const chicken = makeSpecie('chicken', ReptileBloodType, ChickenBreed)
 
+export const caprine = makeSpecie('caprine', ReptileBloodType, ChickenBreed)
+
+export const rodent = makeSpecie('rodent', ReptileBloodType, ChickenBreed)
+
 export type SpeciesType =
     | typeof dog
     | typeof cat
-    | typeof horse
+    | typeof equine
     | typeof rabbit
     | typeof bird
     | typeof fish
@@ -137,11 +141,13 @@ export type SpeciesType =
     | typeof bovine
     | typeof pig
     | typeof chicken
+    | typeof caprine
+    | typeof rodent
 
 export const species = [
     dog,
     cat,
-    horse,
+    equine,
     rabbit,
     bird,
     fish,
@@ -151,6 +157,8 @@ export const species = [
     bovine,
     pig,
     chicken,
+    caprine,
+    rodent,
 ].sort((a, b) => a.label.localeCompare(b.label))
 
 type RecordIconPets = {
@@ -164,7 +172,7 @@ export const IconPets: RecordIconPets = {
     fish: PiFishDuotone,
     bird: PiBirdDuotone,
     chicken: GiChicken,
-    horse: PiHorseDuotone,
+    equine: PiHorseDuotone,
     bovine: PiCowDuotone,
     chelonians: GiTurtle,
     serpent: GiSnakeTongue,
