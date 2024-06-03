@@ -6,8 +6,7 @@ import LOADING from '~/constants/loading'
 import ConfirmAccountForm from './confirm-account-form'
 
 const validationSchema = Yup.object({
-    email: Yup.string().email().required('Campo obrigatório'),
-    password: Yup.string().required('Campo obrigatório'),
+    email: Yup.string().required('Campo obrigatório'),
     digit0: Yup.string()
         .required('Campo obrigatório')
         .min(1, 'Campo obrigatório')
@@ -44,7 +43,6 @@ const meta: Meta<typeof ConfirmAccountForm> = {
                 validationSchema={validationSchema}
                 initialValues={{
                     email: 'teste@teste.com',
-                    password: 'teste@teste',
                     digit0: '',
                     digit1: '',
                     digit2: '',
@@ -53,7 +51,9 @@ const meta: Meta<typeof ConfirmAccountForm> = {
                     digit5: '',
                 }}
                 onSubmit={(data) => {
+                    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
                     console.log(data)
+                    return Promise.resolve()
                 }}
             >
                 <Story />
