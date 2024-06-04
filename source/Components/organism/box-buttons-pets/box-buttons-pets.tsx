@@ -25,6 +25,8 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
         )
     }, [item])
 
+    const hasPermission = profile?.type_profile === TypeProfile.VETERINARY
+
     return (
         <div className="flex flex-wrap items-center justify-center w-full gap-1 px-2 overflow-hidden ">
             <BtnLink
@@ -38,17 +40,12 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
                 <FaEdit />
             </BtnLink>
             <BtnPrimary
-                condition={
-                    !isLoading &&
-                    profile?.user_information?.type_profile ===
-                        TypeProfile.VETERINARY
-                }
+                condition={!isLoading && hasPermission}
                 label="Iniciar Consulta"
                 className="mobile:!w-full w-1/4 max-w-[33%] "
                 onClick={startAppointment}
-            >
-                <FaPlayCircle />
-            </BtnPrimary>
+                icon={<FaPlayCircle />}
+            />
         </div>
     )
 }

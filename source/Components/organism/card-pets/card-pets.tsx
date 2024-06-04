@@ -58,11 +58,11 @@ const CardPet = ({ pet }: CardPetProps) => {
                 <div className="space-y-1 text-gray-500">
                     <div className="text-gray-500 ">
                         <h3 className="font-bold">Pet:</h3>
-                        <p>{`${item?.specie}, ${item?.race}`}</p>
+                        <p>{`${t(item?.specie)}, ${t(item?.race)}`}</p>
                     </div>
                     <div className="text-gray-500 ">
                         <h3 className="font-bold ">Sexo:</h3>
-                        <p>{item.sex}</p>
+                        <p>{t(item.sex)}</p>
                     </div>
                 </div>
             </>
