@@ -15,7 +15,7 @@ const PetsTab = () => {
     if (isPending) return <div>Loading...</div>
 
     return (
-        <section className="w-full px-4 mobile:!px-2  ">
+        <section className="w-full px-4 mobile:!px-2">
             {pets?.map((pet) => (
                 <CardPets
                     key={pet?.id}

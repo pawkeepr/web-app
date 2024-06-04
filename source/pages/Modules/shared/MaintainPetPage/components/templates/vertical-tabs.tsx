@@ -1,10 +1,9 @@
-import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
 //Import images
 
-import cn from 'classnames'
 import { useEffect, useState } from 'react'
 
-import useResizeMobile from '~/hooks/use-resize-mobile'
+import { Tab } from '@headlessui/react'
+import { tv } from 'tailwind-variants'
 import type { StepProps } from '~/types/helpers'
 import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
 import { StepHealthInsurance, StepPet, StepTutor } from '../steps'
@@ -45,8 +44,52 @@ type VerticalTabsProps = {
     hasPet: boolean
 }
 
+const tab = tv({
+    base: `
+        flex items-center justify-center flex-grow w-1/3 transition-transform
+        bg-transparent h-full
+    `,
+    variants: {
+        selected: {
+            true: 'text-primary-500',
+        },
+    },
+})
+
+const buttonTab = tv({
+    // Ajuste os estilos base e variantes conforme necessário
+    base: `
+        rounded-none  flex-grow w-1/3 
+        focus:outline-none focus:ring-0
+        font-bold text-gray-500 py-2
+        text-sm flex web:flex-row items-center justify-center
+        gap-1 flex-grow 
+        transition-transform duration-300 ease-in-out
+    `,
+    // Ajustes adicionais para os estilos mobile
+    variants: {
+        selected: {
+            true: 'text-gray-100 bg-primary-500  shadow-2xl transform mobile:scale-105 ',
+            false: '',
+        },
+        disabled: {
+            true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
+        },
+    },
+})
+
+const menu = tv({
+    base: `
+        relative
+        w-full 
+        bg-[#f6dda3] shadow-2xl mobile:!overflow-visible 
+        rounded-md
+        flex items-center justify-between overflow-hidden
+        transition-transform duration-500 ease-in-out
+    `,
+})
+
 const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
-    const { isMobile } = useResizeMobile()
     const [activeVerticalTab, setActiveVerticalTab] = useState(1)
     const [passedVerticalSteps, setPassedVerticalSteps] = useState([1])
     const { mode } = useModeEditablePet()
@@ -67,8 +110,8 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
             return
         }
 
-        setActiveVerticalTab(1)
-        setPassedVerticalSteps([1])
+        setActiveVerticalTab(0)
+        setPassedVerticalSteps([0])
     }, [mode])
 
     return (
@@ -79,62 +122,47 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
                 tablet:!w-full tablet:!m-0 tablet:!p-0 tablet:!flex-col
                 "
         >
-            <div className="w-full flex justify-center items-center">
-                <h4 className="card-title mb-2 !text-center font-semibold font-sans">
-                    {hasPet ? 'Atualizar Pet' : 'Novo Pet'}
+            <div className="flex items-center justify-center w-full">
+                <h4 className="text-lg text-gray-600 my-2 !text-center font-bold font-sans">
+                    {hasPet ? 'Editar Pet' : 'Novo Pet'}
                 </h4>
             </div>
-
-            <div
-                style={{ marginTop: isMobile ? '70px' : 0 }}
-                className={cn(
-                    'mb-4 step-arrow-nav',
-                    {
-                        'fixed top-0 left-0 right-0 z-[100] bg-white': isMobile,
-                    },
-                    'md:static',
-                )}
+            <Tab.Group
+                selectedIndex={activeVerticalTab}
+                onChange={setActiveVerticalTab}
             >
-                <Nav className="nav-pills custom-nav nav-justified" role="tablist">
-                    {items.map((item) => {
-                        return (
-                            <NavItem key={item.id}>
-                                <NavLink
-                                    href={item.href}
+                <div className={menu()}>
+                    <Tab.List className={tab()}>
+                        {items.map((item, index) => {
+                            return (
+                                <Tab
+                                    key={item.id}
                                     disabled={!hasPet || mode !== 'readonly'}
                                     id="steparrow-gen-info-tab"
-                                    className={cn({
-                                        active: activeVerticalTab === item.id,
-                                        done:
-                                            activeVerticalTab <= items.length &&
-                                            activeVerticalTab === item.id,
+                                    className={buttonTab({
+                                        selected: activeVerticalTab === index,
                                     })}
-                                    onClick={() => {
-                                        toggleVerticalTab(item.id)
-                                    }}
                                 >
                                     {item.title}
-                                </NavLink>
-                            </NavItem>
-                        )
-                    })}
-                </Nav>
-            </div>
+                                </Tab>
+                            )
+                        })}
+                    </Tab.List>
+                </div>
 
-            <TabContent activeTab={activeVerticalTab}>
                 {items.map(({ id, Component }) => {
                     return (
-                        <TabPane tabId={id} key={id}>
+                        <Tab.Panel key={id}>
                             <Component
                                 activeTab={activeVerticalTab}
                                 toggleTab={toggleVerticalTab}
                                 isPending={isPending}
                                 tutorExist={hasTutor}
                             />
-                        </TabPane>
+                        </Tab.Panel>
                     )
                 })}
-            </TabContent>
+            </Tab.Group>
         </div>
     )
 }

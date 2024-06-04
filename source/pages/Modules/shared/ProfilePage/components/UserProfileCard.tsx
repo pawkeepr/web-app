@@ -20,7 +20,7 @@ const UserProfileCard = ({
     title,
 }: UserProfileCardProps) => {
     return (
-        <CardContainer>
+        <CardContainer className="mt-2 bg-white">
             <div className="p-1">
                 <div className="text-center">
                     <div className="mx-auto mb-4 profile-user position-relative d-inline-block">

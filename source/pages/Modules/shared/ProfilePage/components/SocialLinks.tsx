@@ -16,9 +16,9 @@ type SocialLinksProps = {
 
 const SocialLinks = ({ whatsapp }: SocialLinksProps) => {
     return (
-        <CardContainer>
+        <CardContainer className="mt-2 bg-white">
             {/* <div className="flex items-center mb-3">
-                <FaFacebook className="text-blue-600 w-6 h-6 mr-3" />
+                <FaFacebook className="w-6 h-6 mr-3 text-blue-600" />
                 <Input
                     type="text"
                     className="form-control"
@@ -28,7 +28,7 @@ const SocialLinks = ({ whatsapp }: SocialLinksProps) => {
                 />
             </div>
             <div className="flex items-center mb-3">
-                <FaEnvelope className="text-red-500 w-6 h-6 mr-3" />
+                <FaEnvelope className="w-6 h-6 mr-3 text-red-500" />
                 <Input
                     type="email"
                     className="form-control"
@@ -40,7 +40,7 @@ const SocialLinks = ({ whatsapp }: SocialLinksProps) => {
             <div className="flex items-center mb-3">
                 <FieldControl
                     text_align="right"
-                    startIcon={<FaWhatsapp className="text-green-500 w-5 h-5" />}
+                    startIcon={<FaWhatsapp className="w-5 h-5 text-green-500" />}
                     ctx={{ whatsapp: '' }}
                     name="whatsapp"
                     mode="readonly"
@@ -48,7 +48,7 @@ const SocialLinks = ({ whatsapp }: SocialLinksProps) => {
                 />
             </div>
             {/* <div className="flex items-center mb-3">
-                <FaInstagram className="text-pink-500 w-6 h-6 mr-3" />
+                <FaInstagram className="w-6 h-6 mr-3 text-pink-500" />
                 <Input
                     type="text"
                     className="form-control"
@@ -58,7 +58,7 @@ const SocialLinks = ({ whatsapp }: SocialLinksProps) => {
                 />
             </div>
             <div className="flex items-center mb-3">
-                <FaTiktok className="text-black w-6 h-6 mr-3" />
+                <FaTiktok className="w-6 h-6 mr-3 text-black" />
                 <Input
                     type="text"
                     className="form-control"

@@ -5,8 +5,7 @@ import Tabs from './components/templates/vertical-tabs'
 
 import cn from 'classnames'
 import { FaEdit, FaEye } from 'react-icons/fa'
-import { BtnCancel, BtnIcon } from '~/Components/atoms/btn'
-import ModalConfirm from '~/Components/modals/confirm-modal'
+import { BtnIcon } from '~/Components/atoms/btn'
 import { ModeInput } from '~/Components/molecules/field-control/field-control'
 import type { Veterinary } from '~/entities/Veterinary'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
@@ -162,26 +161,6 @@ const CreateOrUpdatePetPage = ({
                 tablet:py-0 tablet:items-center tablet:flex tablet:!h-fit tablet:flex-col
               "
             >
-                <ModalConfirm
-                    title="Cancelar Novo Pet!"
-                    onConfirm={() => router.back()}
-                    description="Importante!"
-                    message="Esta ação irá cancelar todas as operações realizadas até o momento, deseja continuar?"
-                >
-                    {(openModal) => {
-                        return (
-                            <div className="flex w-full mobile:justify-center mobile:items-center">
-                                <BtnCancel
-                                    disabled={mode !== 'editable'}
-                                    type="button"
-                                    className="mobile:w-96"
-                                    label="Cancelar"
-                                    onClick={openModal}
-                                />
-                            </div>
-                        )
-                    }}
-                </ModalConfirm>
                 <BtnIcon
                     icon={
                         mode === 'editable' ? (
@@ -198,9 +177,10 @@ const CreateOrUpdatePetPage = ({
                     type="button"
                     className={cn(
                         `
-                        web:absolute web:right-0 web:top-0 web:w-32 web:p-1 web:m-0 web:h-fit 
-                        web:text-gray-400 web:border-none mobile:w-40
-                    `,
+                            m-2 z-10
+                            web:absolute web:right-0 web:top-0 web:w-32 web:p-1 web:m-0 web:h-fit 
+                            web:text-gray-400 web:border-none mobile:w-40
+                        `,
                         {
                             'bg-confirm-500 hover:bg-confirm-600 text-white':
                                 mode === 'editable',
