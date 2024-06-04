@@ -57,7 +57,7 @@ export const buildToast = (
 
     return toast.info(msg, {
         ...optionsDefault,
-        className: `!bg-confirm-500 !text-gray-500 ${textStyle}`,
+        className: `!bg-confirm-500 !text-gray-200 ${textStyle}`,
     })
 }
 
