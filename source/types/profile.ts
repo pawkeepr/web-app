@@ -1,4 +1,5 @@
 import type { AttributeTypeProfile } from '~/services/helpers/types'
+import type { On_Off } from './pet-v2'
 
 export type Contact = {
     email: string | null
@@ -79,7 +80,23 @@ export type IProfile = {
     id?: string
     veterinary_information?: IVeterinaryInformation
     user_information: ProfileUserInformation
-    type_profile?: AttributeTypeProfile
+    type_profile?: TypeProfile
+}
+
+export type IProfileCognito = {
+    'cognito:username'?: string
+    'custom:has_profile'?: On_Off
+    'custom:type_profile'?: AttributeTypeProfile
+    email?: string
+    email_verified?: boolean
+    event_id?: string
+    exp?: number
+    iat?: number
+    iss?: string
+    jti?: string
+    origin_jti?: string
+    sub?: string
+    token_use?: string
 }
 
 export type DTOProfile = ProfileUserInformation & {

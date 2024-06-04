@@ -1,6 +1,6 @@
 import type LOADING from '~/constants/loading'
 import { ADD_FAIL, ADD_NEW, ADD_SUCCESS } from '~/store/helpers/constants'
-import type { IProfile } from '~/types/profile'
+import type { IProfileCognito } from '~/types/profile'
 
 export const name = 'profile'
 
@@ -31,5 +31,5 @@ export enum RULES {
 export type InitialStateProfile = {
     isLoading: LOADING
     error?: string | null
-    user: IProfile | null
+    user: IProfileCognito | null
 }
