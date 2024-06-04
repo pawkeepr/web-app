@@ -1,32 +1,31 @@
 import Tag from '~/Components/atoms/tag'
 import FieldTextArea from '~/Components/molecules/field-text-area'
-import type { Option } from '~/Components/organism/list-horizontal-switch'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { TypeDosage } from '~/types/appointment'
-import type { CtxStepAnamnese } from '../../validations.yup'
+import { TypeDosage, type QuestionVaccination } from '~/types/appointment'
+import type { CtxVaccination } from '../../steps/step-vaccination/step-vaccination'
 
-type ContentActionExamProps<T> = {
+type ContentActionExamProps = {
     index: number
-    option: Option<T>
+    option: QuestionVaccination
     onChangeTypeAction: (props: {
         index: number
-        type: TypeDosage
-        option: Option<T>
+        dose: TypeDosage
+        option: QuestionVaccination
     }) => void
 }
 
-const ContentActionVaccination = <T,>({
+const ContentActionVaccination = ({
     option,
     onChangeTypeAction,
-}: ContentActionExamProps<T>) => {
-    const { values } = useFormikContextSafe<CtxStepAnamnese>()
+}: ContentActionExamProps) => {
+    const { values } = useFormikContextSafe<CtxVaccination>()
 
-    const index = values.exams_anamnesis?.complementary_exams?.findIndex(
-        (item) => item?.id === option.value,
+    const index = values.vaccinations?.findIndex(
+        (item) => item?.value === option.value,
     )
 
-    const item = values.exams_anamnesis?.complementary_exams?.[index] ?? {}
-    const name = `exams_anamnesis.complementary_exams.${index}`
+    const item = values.vaccinations?.[index] ?? {}
+    const name = `vaccinations.${index}`
 
     return (
         <section className="px-4 py-2">
@@ -34,12 +33,12 @@ const ContentActionVaccination = <T,>({
                 <Tag
                     name={`${name}.type_action`}
                     disabled={!item?.checked}
-                    selected={item?.type_action === TypeDosage.first}
+                    selected={item?.dose === TypeDosage.first}
                     onClick={() =>
                         onChangeTypeAction({
                             index,
-                            type: TypeDosage.first,
-                            option: item as any,
+                            dose: TypeDosage.first,
+                            option: item,
                         })
                     }
                 >
@@ -48,12 +47,12 @@ const ContentActionVaccination = <T,>({
                 <Tag
                     name={`${name}.type_action`}
                     disabled={!item?.checked}
-                    selected={item?.type_action === TypeDosage.second}
+                    selected={item?.dose === TypeDosage.second}
                     onClick={() =>
                         onChangeTypeAction({
                             index,
-                            type: TypeDosage.second,
-                            option: item as any,
+                            dose: TypeDosage.second,
+                            option: item,
                         })
                     }
                 >
@@ -62,12 +61,12 @@ const ContentActionVaccination = <T,>({
                 <Tag
                     name={`${name}.type_action`}
                     disabled={!item?.checked}
-                    selected={item?.type_action === TypeDosage.third}
+                    selected={item?.dose === TypeDosage.third}
                     onClick={() =>
                         onChangeTypeAction({
                             index,
-                            type: TypeDosage.third,
-                            option: item as any,
+                            dose: TypeDosage.third,
+                            option: item,
                         })
                     }
                 >
@@ -76,12 +75,12 @@ const ContentActionVaccination = <T,>({
                 <Tag
                     name={`${name}.type_action`}
                     disabled={!item?.checked}
-                    selected={item?.type_action === TypeDosage.fourth}
+                    selected={item?.dose === TypeDosage.fourth}
                     onClick={() =>
                         onChangeTypeAction({
                             index,
-                            type: TypeDosage.fourth,
-                            option: item as any,
+                            dose: TypeDosage.fourth,
+                            option: item,
                         })
                     }
                 >
@@ -90,12 +89,12 @@ const ContentActionVaccination = <T,>({
                 <Tag
                     name={`${name}.type_action`}
                     disabled={!item?.checked}
-                    selected={item?.type_action === TypeDosage.n_th}
+                    selected={item?.dose === TypeDosage.n_th}
                     onClick={() =>
                         onChangeTypeAction({
                             index,
-                            type: TypeDosage.n_th,
-                            option: item as any,
+                            dose: TypeDosage.n_th,
+                            option: item,
                         })
                     }
                 >
