@@ -63,6 +63,11 @@ function* onGetProfile({
         if (!('status' in error.response) || !error.response.status) return
 
         switch (error.response.status) {
+            case 404: // Not Found
+                yield call(updateHasProfile, 'no')
+                errorToast('Perfil não encontrado!')
+                yield call([Router, Router.push], link)
+                break
         }
     }
 }
