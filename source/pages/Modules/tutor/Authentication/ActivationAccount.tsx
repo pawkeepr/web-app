@@ -6,9 +6,6 @@ import { useAppSelector } from '~/store/hooks'
 
 //formik
 import { Formik } from 'formik'
-import TabContainer from 'react-bootstrap/TabContainer'
-import TabContent from 'react-bootstrap/TabContent'
-import TabPane from 'react-bootstrap/TabPane'
 
 import validate, { type ActivateAccount } from './activate'
 
@@ -21,6 +18,7 @@ import { useAppDispatch } from '~/store/hooks'
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 import { BtnLink } from '~/Components/atoms/btn'
 
+import { Tab } from '@headlessui/react'
 import { layoutModeTypes } from '~/constants/layout'
 import type { ActivateAccountTutor } from '~/types/activate-account-tutor'
 import { TypeProfile, type Location } from '~/types/profile'
@@ -68,8 +66,7 @@ const Tabs = [
 const ActivationAccount = () => {
     const email = useAppSelector((state) => state.Login.username)
 
-    const [tab, setTab] = useState('1')
-
+    const [selectedIndex, setSelectedIndex] = useState(0)
     const dispatch = useAppDispatch()
 
     const onSubmit = (values: ActivateAccount) => {
@@ -111,34 +108,34 @@ const ActivationAccount = () => {
     }, [email])
 
     const onChangeNextStep = () => {
-        setTab((state) => {
+        setSelectedIndex((state) => {
             const stateNumber = Number(state)
 
             if (stateNumber === Tabs.length) {
                 return state
             }
 
-            return (stateNumber + 1).toString()
+            return stateNumber + 1
         })
     }
 
     const onChangePrevStep = () => {
-        setTab((state) => {
+        setSelectedIndex((state) => {
             const stateNumber = Number(state)
 
             if (stateNumber === 1) {
                 return state
             }
 
-            return (stateNumber - 1).toString()
+            return stateNumber - 1
         })
     }
 
     return (
         <AuthLayout title="Activation Profile">
             <div className="flex flex-col items-center justify-center ">
-                <div className="text-center font-sans text-gray-600 gap-1">
-                    <h5 className="text-secondary-500 uppercase font-bold font-sans p-2">
+                <div className="gap-1 font-sans text-center text-gray-600">
+                    <h5 className="p-2 font-sans font-bold uppercase text-secondary-500">
                         Olá, Seja Bem-Vindo(a)!
                     </h5>
                     <p>
@@ -154,29 +151,34 @@ const ActivationAccount = () => {
                     </p>
                 </div>
             </div>
-            <Formik
-                enableReinitialize
-                validationSchema={validate}
-                initialValues={initialValues(email)}
-                onSubmit={onSubmit}
-                initialErrors={{}}
-            >
-                <TabContainer activeKey={tab}>
+            <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
+                <Tab.List className="hidden">
                     {Tabs.map((tab) => (
-                        <TabContent key={tab.id}>
-                            <TabPane
-                                eventKey={tab.id}
+                        <Tab key={tab.id}>{tab.id}</Tab>
+                    ))}
+                </Tab.List>
+                <Formik
+                    enableReinitialize
+                    validationSchema={validate}
+                    initialValues={initialValues(email)}
+                    onSubmit={onSubmit}
+                    initialErrors={{}}
+                >
+                    <>
+                        {Tabs.map((tab) => (
+                            <Tab.Panel
+                                key={tab.id}
                                 data-testid={`step-${tab.id.padStart(2, '0')}`}
                             >
                                 {tab.component({
                                     prevStep: onChangePrevStep,
                                     nextStep: onChangeNextStep,
                                 })}
-                            </TabPane>
-                        </TabContent>
-                    ))}
-                </TabContainer>
-            </Formik>
+                            </Tab.Panel>
+                        ))}
+                    </>
+                </Formik>
+            </Tab.Group>
 
             <BtnLink
                 message="Sair"

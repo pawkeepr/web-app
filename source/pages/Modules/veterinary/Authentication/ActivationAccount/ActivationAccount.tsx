@@ -2,13 +2,10 @@ import AuthLayout from '../../../_layouts/auth/auth_layout'
 
 import { useEffect, useState } from 'react'
 
-import { useAppSelector } from '~/store/hooks'
-
+import { Tab } from '@headlessui/react'
 //formik
 import { Formik } from 'formik'
-import TabContainer from 'react-bootstrap/TabContainer'
-import TabContent from 'react-bootstrap/TabContent'
-import TabPane from 'react-bootstrap/TabPane'
+import { useAppSelector } from '~/store/hooks'
 
 import validate, { type ActivateAccount } from '~/validations/activate'
 
@@ -85,7 +82,7 @@ const Tabs = [
 const ActivationAccount = () => {
     const email = useAppSelector((state) => state.Login.username)
 
-    const [tab, setTab] = useState('1')
+    const [selectedIndex, setSelectedIndex] = useState(0)
 
     const dispatch = useAppDispatch()
 
@@ -143,26 +140,26 @@ const ActivationAccount = () => {
     }, [email])
 
     const onChangeNextStep = () => {
-        setTab((state) => {
+        setSelectedIndex((state) => {
             const stateNumber = Number(state)
 
             if (stateNumber === Tabs.length) {
                 return state
             }
 
-            return (stateNumber + 1).toString()
+            return stateNumber + 1
         })
     }
 
     const onChangePrevStep = () => {
-        setTab((state) => {
+        setSelectedIndex((state) => {
             const stateNumber = Number(state)
 
             if (stateNumber === 1) {
                 return state
             }
 
-            return (stateNumber - 1).toString()
+            return stateNumber - 1
         })
     }
 
@@ -193,29 +190,36 @@ const ActivationAccount = () => {
                     </p>
                 </div>
             </div>
-            <Formik
-                enableReinitialize
-                validationSchema={validate}
-                initialValues={makeInitialValues(email)}
-                onSubmit={onSubmit}
-                initialErrors={{}}
-            >
-                <TabContainer activeKey={tab}>
+            <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
+                <Tab.List className="hidden">
                     {Tabs.map((tab) => (
-                        <TabContent key={tab.id}>
-                            <TabPane
-                                eventKey={tab.id}
-                                data-testid={`step-${tab.id.padStart(2, '0')}`}
-                            >
-                                {tab.component({
-                                    prevStep: onChangePrevStep,
-                                    nextStep: onChangeNextStep,
-                                })}
-                            </TabPane>
-                        </TabContent>
+                        <Tab key={tab.id}>{tab.id}</Tab>
                     ))}
-                </TabContainer>
-            </Formik>
+                </Tab.List>
+                <Tab.Panels>
+                    <Formik
+                        enableReinitialize
+                        validationSchema={validate}
+                        initialValues={makeInitialValues(email)}
+                        onSubmit={onSubmit}
+                        initialErrors={{}}
+                    >
+                        <>
+                            {Tabs.map((tab) => (
+                                <Tab.Panel
+                                    key={tab.id}
+                                    data-testid={`step-${tab.id.padStart(2, '0')}`}
+                                >
+                                    {tab.component({
+                                        prevStep: onChangePrevStep,
+                                        nextStep: onChangeNextStep,
+                                    })}
+                                </Tab.Panel>
+                            ))}
+                        </>
+                    </Formik>
+                </Tab.Panels>
+            </Tab.Group>
         </AuthLayout>
     )
 }
