@@ -25,7 +25,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
 
     return (
         <div className="container grid grid-cols-2 gap-1 mobile:grid-cols-1">
-            <div className="col-span-2 mobile:col-span-2 grid grid-cols-2 gap-1">
+            <div className="grid grid-cols-2 col-span-2 gap-1 mobile:col-span-2">
                 <FieldControl
                     ctx={values}
                     initialFocus
@@ -58,6 +58,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                 required
             />
             <FieldPhone
+                ctx={values}
                 divClassName="col-span-1 mobile:col-span-full"
                 label="WhatsApp"
                 name="contact.whatsapp"

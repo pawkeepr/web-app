@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import { BreedNames } from '~/types/breedType'
 import type { IPetV2Data } from '~/types/pet-v2'
-import { GenderBR, type Gender } from '~/types/speciesType'
+import { GenderBR, type Gender, type Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import BoxButtonsPets from '../box-buttons-pets'
 import ModalBoxButtonsPet from '../box-buttons-pets/modal-box-buttons-pets'
@@ -38,7 +38,10 @@ const CardPet = ({ pet }: CardPetProps) => {
             className="mobile:!px-2 mobile:!py-2 px-4 py-4 "
             sectionAvatar={() => (
                 <>
-                    <AvatarPet name_pet={pet?.name_pet} specie={t(pet.specie)} />
+                    <AvatarPet
+                        name_pet={pet?.name_pet}
+                        specie={pet.specie as Species}
+                    />
                     <div className="flex flex-row gap-1">
                         <h1 className="text-lg font-bold text-center text-gray-400 mobile:text-sm">
                             {`${pet?.name_pet}`}

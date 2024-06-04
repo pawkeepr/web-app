@@ -155,7 +155,7 @@ type BtnLinkProps = {
 } & VariantProps<typeof button> &
     LinkProps
 
-const BtnLink = ({
+const BtnPureLink = ({
     href,
     children,
     link = true,
@@ -176,6 +176,8 @@ const BtnLink = ({
         </Link>
     )
 }
+
+const BtnLink = withControl(BtnPureLink)
 
 export {
     Btn,

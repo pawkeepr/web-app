@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 import { useCallback } from 'react'
 import { FaEdit, FaPlayCircle } from 'react-icons/fa'
-import { BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
+import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import withCompose from '~/Components/helpers/with-compose'
+import useProfile from '~/store/hooks/profile/use-profile'
 import type { IPetV2Data } from '~/types/pet-v2'
+import { TypeProfile } from '~/types/profile'
 
 type BoxButtonsPetsProps = {
     isLoading?: boolean
@@ -14,12 +16,8 @@ type BoxButtonsPetsProps = {
 
 const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
     const router = useRouter()
-
+    const { data: profile } = useProfile()
     // const { setItem, open, close } = usePlusModal()
-
-    const onClickEdit = useCallback(() => {
-        router.push(`/profile/pet?document=${item.cpf_cnpj}&id_pet=${item.id_pet}`)
-    }, [item])
 
     const startAppointment = useCallback(() => {
         router.push(
@@ -28,26 +26,23 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
     }, [item])
 
     return (
-        <div
-            className="
-                items-center justify-center
-                w-full gap-1 flex 
-                overflow-hidden 
-                flex-wrap
-                px-2
-            "
-        >
-            <BtnNeutral
+        <div className="flex flex-wrap items-center justify-center w-full gap-1 px-2 overflow-hidden ">
+            <BtnLink
                 condition={!isLoading}
-                label="Visualizar Histórico"
+                message="Visualizar Histórico"
                 outline
+                color="neutral"
+                href={`/profile/pet?document=${item.cpf_cnpj}&id_pet=${item.id_pet}`}
                 className=" !w-1/4  max-w-[33%] "
-                onClick={onClickEdit}
             >
                 <FaEdit />
-            </BtnNeutral>
+            </BtnLink>
             <BtnPrimary
-                condition={!isLoading}
+                condition={
+                    !isLoading &&
+                    profile?.user_information?.type_profile ===
+                        TypeProfile.VETERINARY
+                }
                 label="Iniciar Consulta"
                 className="mobile:!w-full w-1/4 max-w-[33%] "
                 onClick={startAppointment}
