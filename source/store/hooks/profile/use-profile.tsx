@@ -10,10 +10,10 @@ const useProfile = () => {
     const { user } = useAppSelector((state) => state.Profile)
     const superKeys = [NAME, document]
 
+    const type = user?.['custom:type_profile']
+
     const getProfile =
-        user?.type_profile === AttributeTypeProfile.VETERINARY
-            ? getVetProfile
-            : getTutorProfile
+        type === AttributeTypeProfile.VETERINARY ? getVetProfile : getTutorProfile
 
     return useAppQuery<IProfile>(superKeys, getProfile.bind(null), {
         enabled: !!user,
