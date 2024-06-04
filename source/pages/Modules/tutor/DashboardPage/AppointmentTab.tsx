@@ -1,6 +1,6 @@
 import { FaCalendarCheck, FaStethoscope } from 'react-icons/fa'
 import { MdPets } from 'react-icons/md'
-import HorizontalTabs from '~/Components/organism/horizontal-list/horizontal-list'
+import HorizontalTabs from '~/Components/organism/horizontal-list'
 import DefaultLayout from '../../_layouts/dashboard/dashboard'
 import PetsTab from '../../tutor/PetsAndVets/components/organisms/PetsTab'
 import VetsTab from '../../tutor/PetsAndVets/components/organisms/VetsTab'
@@ -30,11 +30,11 @@ const Tabs = () => [
     },
 ]
 
-const AppointmentsTabs = <T,>() => {
+const AppointmentsTabs = () => {
     const tabs = Tabs()
     return (
         <DefaultLayout title="Tutor-Dashboard" name="appointments" searchBlock>
-            <HorizontalTabs categories={tabs} />
+            <HorizontalTabs categories={tabs} menu />
         </DefaultLayout>
     )
 }

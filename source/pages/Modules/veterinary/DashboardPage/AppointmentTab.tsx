@@ -1,7 +1,7 @@
 import { FaCalendarCheck } from 'react-icons/fa'
 import { HiUserGroup } from 'react-icons/hi2'
 import { MdOutlinePets } from 'react-icons/md'
-import HorizontalTabs from '~/Components/organism/horizontal-list/horizontal-list'
+import HorizontalTabs from '~/Components/organism/horizontal-list'
 import DefaultLayout from '../../_layouts/dashboard/dashboard'
 import PetsTab from './components/organisms/steps/step-pets'
 import StepScheduledAll from './components/organisms/steps/step-scheduled-all'

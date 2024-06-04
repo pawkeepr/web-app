@@ -51,20 +51,19 @@ const Profile: React.FC = () => {
         <DashboardLayouts title="Perfil" searchBlock={false}>
             <div className="container mx-auto mt-2">
                 <div className="flex flex-wrap flex-1 mobile:flex-col">
-                    <div className="w-full flex flex-1 flex-col border border-gray-200 m-1 ">
+                    <div className="flex flex-col flex-1 w-full m-1 border border-gray-200 ">
                         <UserProfileCard />
                         <SocialLinks />
                     </div>
                     <div className="w-full flex flex-[3] web:mt-0 mobile:!flex-1 overflow-hidden">
                         <HorizontalTabs
+                            menu
                             categories={tabs}
                             classNames={{
-                                panel: "bg-white p-6 mt-2 mb-8",
-                                tab: "mobile:p-4",
+                                panel: 'bg-white p-6 mt-2 mb-8',
+                                tab: 'mobile:p-4',
                             }}
-                        >
-
-                        </HorizontalTabs>
+                        />
                     </div>
                 </div>
             </div>
