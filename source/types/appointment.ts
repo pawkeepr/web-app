@@ -2,6 +2,7 @@ import type { OptionSelect } from '~/Components/molecules/field-control'
 import type { MEDICAL_RECORDS } from './medical-records'
 import type { IMainResponsibleGuardian, On_Off, PetData } from './pet-v2'
 import type { DTOProfile } from './profile'
+import type { Species } from './speciesType'
 
 export interface VeterinaryConsultation {
     id?: string | null
@@ -154,6 +155,23 @@ export interface QuestionTreatment {
     notes_treatment: string
     value_coin_treatment: string
     coin_treatment: string
+    sub_type_treatment: string
+    dosage_treatment: string
+    frequency_treatment: string
+    administration_route: string
+}
+
+export interface QuestionVaccination {
+    label: string
+    value: string | number
+    type: Species
+    checked: boolean
+    batch: string
+    brand: string
+    date_next_application: string
+    dose: string | null
+    notes: string
+    revaccination_annual: boolean
 }
 
 export interface AppointmentDetails {
