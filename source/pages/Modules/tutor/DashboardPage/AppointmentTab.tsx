@@ -9,7 +9,7 @@ import StepScheduledAll from './components/organisms/steps/step-scheduled-all'
 const Tabs = () => [
     {
         id: 1,
-        title: 'Todos os agendamentos',
+        title: 'Agendamentos',
         href: '#scheduled',
         icon: <FaCalendarCheck className="w-6 h-4" />,
         tab: <StepScheduledAll />,
