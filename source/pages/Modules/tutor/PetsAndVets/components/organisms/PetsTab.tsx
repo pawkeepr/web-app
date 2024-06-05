@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { MdPets } from 'react-icons/md'
 import { BtnLinkFloating } from '~/Components/molecules/btn-floating/btn-floating'
 import CardPets from '~/Components/organism/card-pets'
@@ -10,7 +9,6 @@ import type { Species } from '~/types/speciesType'
 
 const PetsTab = () => {
     const { data } = useProfile()
-    const router = useRouter()
 
     const { data: pets, isPending } = useListPetsFromTutor()
 

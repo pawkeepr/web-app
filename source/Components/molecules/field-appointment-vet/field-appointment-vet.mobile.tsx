@@ -75,41 +75,35 @@ const FieldDocumentAppointmentMobile = ({
                                     onChangeOpen,
                                     onChangeDocument,
                                 }) || (
-                                        <div
-                                            className={`
+                                    <div
+                                        className={`
                                                 fixed flex flex-row items-center 
                                                 justify-end opacity-100 z-50 
                                                 bottom-[68px] right-2 web:bottom-0
-                                                w-[95vw] mb-2
+                                                mb-2
                                                 transition-all duration-300
                                                 ${styles['field-document']}
                                     `}
+                                    >
+                                        <FieldDocument
+                                            ctx={values}
+                                            name="cpf_tutor"
+                                            placeholder="Agendar/Nova Consulta"
+                                            className="!w-[70vw] mr-2 web:hidden"
+                                            label="CPF do Tutor para"
+                                            classNames={{
+                                                input: 'rounded-full shadow-md overflow-visible border border-secondary-500',
+                                            }}
+                                            onlyCPF
+                                        />
+                                        <button
+                                            type="submit"
+                                            className="flex items-center justify-center p-3 mt-3 transition duration-500 ease-in-out rounded-full shadow-2xl  bg-primary-500 opacity-70 hover:opacity-100"
                                         >
-                                            <FieldDocument
-                                                ctx={values}
-                                                name="cpf_tutor"
-                                                placeholder="Agendar/Nova Consulta"
-                                                className='!w-[70vw] mr-2 web:hidden'
-                                                label='CPF do Tutor para'
-                                                classNames={{
-                                                    input: 'rounded-full shadow-md overflow-visible border border-secondary-500'
-                                                }}
-                                                onlyCPF
-                                            />
-                                            <button
-                                                type="submit"
-                                                className="
-                                                        bg-primary-500 p-3 rounded-full 
-                                                        shadow-2xl mt-3
-                                                        transition duration-500 ease-in-out
-                                                        opacity-70 hover:opacity-100  
-                                                        flex items-center justify-center
-                                                    "
-                                            >
-                                                <PlusIcon className="w-5 h-5 text-white" />
-                                            </button>
-                                        </div>
-                                    )}
+                                            <PlusIcon className="w-5 h-5 text-white" />
+                                        </button>
+                                    </div>
+                                )}
                             </Form>
                         )}
                     </Formik>

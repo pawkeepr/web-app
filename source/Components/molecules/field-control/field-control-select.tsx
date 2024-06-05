@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { Props } from 'react-select'
 import Label from '~/Components/atoms/label'
@@ -53,6 +53,33 @@ const FieldControlSelect = <Ctx,>({
         [setFieldValue],
     )
 
+    const value = useMemo(() => {
+        if (props.value)
+            return {
+                ...props.value,
+                label: t(props.value.label),
+            }
+
+        if (!values?.[name]) return null
+
+        if (typeof values?.[name] === 'string') {
+            return options.find((option) => option.value === values?.[name])
+        }
+
+        const item = values?.[name] as unknown
+
+        if (typeof item !== 'object' || !item) return null
+        if (!item) return null
+        if (!('label' in item)) return null
+
+        const label = item?.label as string
+
+        return {
+            ...item,
+            label: t(label),
+        }
+    }, [props.value, values?.[name]])
+
     return (
         <div className={divClassName}>
             <Label label={label} required={required} id={name} separator={':'} />
@@ -67,7 +94,7 @@ const FieldControlSelect = <Ctx,>({
                 }))}
                 name={name}
                 onChange={onChange}
-                value={props.value ?? values?.[name]}
+                value={value}
             />
         </div>
     )

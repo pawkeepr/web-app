@@ -1,5 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 
+import { BtnPrimary } from '~/Components/atoms/btn'
+
 import { useMemo } from 'react'
 import * as yup from 'yup'
 import ControlToggle3States from '~/Components/molecules/control-toggle-3-states'
@@ -175,11 +177,12 @@ const StepPet = ({ nextStep }: StepProps) => {
                 </div>
             </div>
             <div className="flex justify-end w-full mobile:justify-center">
-                {/* <BtnPrimary
+                <BtnPrimary
+                    condition={mode === 'editable'}
                     label="Próximo"
                     disabled={!isValid}
                     onClick={nextStep}
-                /> */}
+                />
             </div>
         </section>
     )

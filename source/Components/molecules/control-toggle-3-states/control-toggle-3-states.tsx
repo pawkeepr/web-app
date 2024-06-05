@@ -1,7 +1,7 @@
 import { Switch } from '@headlessui/react'
 import cn from 'classnames'
 import { useField } from 'formik'
-import { useEffect, useState, type MouseEvent } from 'react'
+import { useState, type MouseEvent } from 'react'
 import { GrDown } from 'react-icons/gr'
 import { tv, type VariantProps } from 'tailwind-variants'
 import { pointer } from '~/Components/atoms/switch'
@@ -98,17 +98,12 @@ const ControlToggle3States = <Ctx,>({
     label,
     content = null,
     name,
-    initialValue = false,
     size = 'md',
     mode = ModeInput.editable,
     onChange = () => {},
 }: ControlToggle3StatesProps<Ctx>) => {
     const [field, _meta, helpers] = useField(name)
     const [openAccordion, setOpenAccordion] = useState(false)
-
-    useEffect(() => {
-        helpers.setValue(initialValue)
-    }, [])
 
     const handleChange = (e: boolean) => {
         helpers.setValue(e)

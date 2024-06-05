@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { TabItem } from '~/Components/organism/horizontal-list'
 import HorizontalTabs from '~/Components/organism/horizontal-list'
 import { infoToast } from '~/store/helpers/toast'
 import usePetById from '~/store/hooks/pet-by-id/use-pets'
-import { GenderBR } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import DefaultLayout from '../../_layouts/dashboard/dashboard'
 import MaintainPetPage from '../MaintainPetPage/MaintainPetPage'
@@ -42,6 +42,7 @@ type HistoricPetPageProps = {
 const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
     const tabs = Tabs(document, id_pet)
     const router = useRouter()
+    const { t } = useTranslation('common')
     const {
         activeData: pet,
         isLoading,
@@ -81,15 +82,12 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
                         <UserProfileCard
                             name={pet?.pet_information?.name_pet}
                             specie={pet?.pet_information?.specie as string}
-                            subtitle={`${
-                                GenderBR[
-                                    pet?.pet_information
-                                        ?.sex as keyof typeof GenderBR
-                                ]
-                            },
+                            subtitle={`${t(pet?.pet_information?.sex as string)},
                                 ${calcAge(pet?.pet_information?.date_birth)} ano(s)
                                 `}
-                            title={`${pet?.pet_information?.name_pet}, ${pet?.pet_information?.specie}, ${pet?.pet_information?.race}`}
+                            title={`${pet?.pet_information?.name_pet}, ${t(
+                                pet?.pet_information?.specie as string,
+                            )}, ${t(pet?.pet_information?.race as string)}`}
                         />
                         <SocialLinks
                             whatsapp={

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { LayoutVeterinary } from '~/Layouts'
+import { LayoutTutor } from '~/Layouts'
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-tutor-privates'
 import HistoricPetPage from '~/pages/Modules/shared/HistoricPetPage'
 import { useModeEditablePet } from '~/pages/Modules/shared/MaintainPetPage/components/hooks/use-mode-editable-pet'
@@ -14,12 +14,12 @@ const PetsPage = ({ id }: { id: string }) => {
     }, [])
 
     return (
-        <LayoutVeterinary>
+        <LayoutTutor>
             <HistoricPetPage
                 document={profile?.user_information?.cpf_cnpj}
                 id_pet={id}
             />
-        </LayoutVeterinary>
+        </LayoutTutor>
     )
 }
 

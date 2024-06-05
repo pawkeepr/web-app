@@ -3,6 +3,7 @@ import useGetAllAppointments from './hook'
 
 const StepAll = () => {
     const { confirmedData, data, isLoading } = useGetAllAppointments()
+
     if (isLoading) return <div>Loading...</div>
 
     return (
@@ -19,7 +20,7 @@ const StepAll = () => {
                 )}
             </section>
 
-            <section className="w-full space-y-10 mt-4">
+            <section className="w-full mt-4 space-y-10">
                 <h1 className="text-2xl font-bold">Agendadas</h1>
                 {data?.map((appointment) => (
                     <CardScheduled key={appointment.id} appointment={appointment} />

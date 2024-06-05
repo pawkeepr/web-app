@@ -158,7 +158,7 @@ const CreateOrUpdatePetPage = ({
         return makeInitialValues({
             id_pet,
             pet_information: pet?.pet_information,
-            veterinary,
+            veterinary: veterinary || {},
             ...tutorInformation,
         })
     }, [pet, document, veterinary, id_pet]) as IPet
@@ -167,6 +167,7 @@ const CreateOrUpdatePetPage = ({
     const onSubmit = useCallback(
         async (values: IPet) => {
             try {
+                router.prefetch('/dashboard')
                 const data = await handleSubmit(values)
                 if (data) router.push('/dashboard')
             } catch (_) {
@@ -187,7 +188,7 @@ const CreateOrUpdatePetPage = ({
     }
 
     const isRouteCreate = useMemo(
-        () => pathname === '/dashboard/pet' || '/tutor/pet',
+        () => pathname === '/dashboard/pet' || pathname === '/tutor/pet',
         [pathname],
     )
 

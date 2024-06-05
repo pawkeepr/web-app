@@ -1,6 +1,6 @@
 //Import images
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { Tab } from '@headlessui/react'
 import { tv } from 'tailwind-variants'
@@ -8,12 +8,6 @@ import useProfile from '~/store/hooks/profile/use-profile'
 import type { StepProps, TabsOptions } from '~/types/helpers'
 import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
 import { StepHealthInsurance, StepPet, StepTutor } from '../steps'
-
-// Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import { TypeProfile } from '~/types/profile'
 
 type TabItem = {
     id: TabsOptions
@@ -112,6 +106,7 @@ const menu = tv({
 const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
     const [selectedIndex, setSelectedIndex] = useState(0)
     const { mode } = useModeEditablePet()
+    const [fistRender, setFirstRender] = useState(true)
 
     const { data: profile, isPending: profilePending } = useProfile()
 
@@ -119,7 +114,7 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
         if (profilePending) {
             return []
         }
-        return profile?.type_profile === TypeProfile.TUTOR ? itemsTutor : itemsVet
+        return profile?.type_profile === 2 ? itemsTutor : itemsVet
     }, [profile, profilePending])
 
     const nextStep = () => {
@@ -129,6 +124,17 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
     const prevStep = () => {
         setSelectedIndex((prev) => Math.max(prev - 1, 0))
     }
+
+    useEffect(() => {
+        if (mode === 'readonly') {
+            return
+        }
+
+        if (fistRender) {
+            setFirstRender(false)
+            setSelectedIndex(0)
+        }
+    }, [mode])
 
     return (
         <div

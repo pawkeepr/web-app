@@ -18,9 +18,18 @@ const strategiesAvatar = new Map<Species, string>([
     ['cat', '/icon-pet/cat_primary.png'],
     ['dog', '/icon-pet/dog_primary.png'],
     ['fish', '/icon-pet/fish_primary.png'],
-    ['horse', '/icon-pet/horse_primary.png'],
+    ['equine', '/icon-pet/horse_primary.png'],
     ['rabbit', '/icon-pet/rabbit_primary.png'],
-    ['reptile', '/icon-pet/reptile_primary.png'],
+    ['lizard', '/icon-pet/reptile_primary.png'],
+    ['rodent', '/icon-pet/rodent_primary.png'],
+    ['pig', '/icon-pet/pig_primary.png'],
+    ['bovine', '/icon-pet/cow_primary.png'],
+    ['chicken', '/icon-pet/chicken_primary.png'],
+    ['bovine', '/icon-pet/bovine_primary.png'],
+    ['caprine', '/icon-pet/caprine_primary.png'],
+    ['equine', '/icon-pet/equine_primary.png'],
+    ['canine', '/icon-pet/canine_primary.png'],
+    ['unknown', '/icon-pet/other_primary.png'],
 ])
 
 const AvatarPet = ({
@@ -37,16 +46,14 @@ const AvatarPet = ({
     }, [src, specie])
 
     return (
-        <figure className={twMerge("", className, classNames?.figure)}>
+        <figure className={twMerge('', className, classNames?.figure)}>
             <MyImage
                 src={link}
                 alt={`Avatar do pet ${name_pet}`}
-                className={
-                    twMerge(
-                        "rounded-full w-32 h-32 mobile:w-16 mobile:h-16 object-cover",
-                        classNames?.img
-                    )
-                }
+                className={twMerge(
+                    'rounded-full w-32 h-32 mobile:w-16 mobile:h-16 object-cover',
+                    classNames?.img,
+                )}
             />
         </figure>
     )
