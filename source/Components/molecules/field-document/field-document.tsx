@@ -1,7 +1,7 @@
 import type { InputMaskProps } from '@react-input/mask'
 import { cpf } from 'cpf-cnpj-validator'
 import { useFormikContext } from 'formik'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import type { InputControlProps } from '~/Components/molecules/field-control'
 import FieldMasked from '../field-masked'
@@ -20,14 +20,12 @@ const FieldDocument = <T, Ctx>({
     ...props
 }: FieldDocumentProps<Ctx>) => {
     const { values } = useFormikContext()
-    const [isValid, setIsValid] = useState(false)
 
     const document = (values as any)[props.name] || ''
 
     const mask = useMemo(() => {
         // somente os números
         const numbers = document?.replace(/\D/g, '')
-        setIsValid(cpf.isValid(numbers))
 
         if (typeDocument === 'cpf') return '___.___.___-__'
         if (typeDocument === 'cnpj') return '__.___.___/____-__'
@@ -47,12 +45,6 @@ const FieldDocument = <T, Ctx>({
                 mask={mask}
                 replacement={{ _: /\d/ }}
             />
-            {!isValid && document.length > 0 && (
-                <p className="absolute bottom-0 flex items-center justify-center w-full text-xs font-semibold text-secondary-500">
-                    CPF/CNPJ inválido!
-                </p>
-            )}
-            <div className="pb-2" />
         </div>
     )
 }
