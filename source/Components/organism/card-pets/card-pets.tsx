@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 import AvatarPet from '~/Components/molecules/avatar-pet'
+import { useTranslations } from '~/hooks/use-translations'
 import { BreedNames } from '~/types/breedType'
 import type { IPetV2Data } from '~/types/pet-v2'
 import { GenderBR, type Gender, type Species } from '~/types/speciesType'
@@ -16,7 +16,7 @@ type CardPetProps = {
 }
 
 const CardPet = ({ pet }: CardPetProps) => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslations('common')
 
     const item = useMemo(
         () => ({

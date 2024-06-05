@@ -2,12 +2,12 @@
 
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 import { FaWhatsapp } from 'react-icons/fa'
 import { BtnCancel, BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import CanceledExternalModal from '~/Components/modals/client-external-confirmation/canceled-modal/canceled-external-modal'
 import ConfirmedExternalModal from '~/Components/modals/client-external-confirmation/confirmed-modal/confirmed-external-modal'
 import Loader from '~/Components/organism/loader'
+import { useTranslations } from '~/hooks/use-translations'
 import useAppointmentExternal from '~/store/hooks/appointment-external/use-appointment-external'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import AuthLayout from '../../_layouts/auth/auth_layout'
@@ -20,7 +20,7 @@ const ConfirmationPage = () => {
         mode: 'confirmed',
     })
 
-    const { t } = useTranslation('common')
+    const { t } = useTranslations('common')
 
     const pet = activeData?.tutor_pet_vet?.pet
     const name_tutor = getNameTutor(activeData?.tutor_pet_vet?.tutor)

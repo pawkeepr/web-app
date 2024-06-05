@@ -19,7 +19,6 @@ const ConfirmAccountForm = ({
     const {
         values: { email },
         handleSubmit,
-        isSubmitting,
         isValid,
     } = useFormikContext<SchemaConfirmAccount>()
 
@@ -61,7 +60,7 @@ const ConfirmAccountForm = ({
                     className="!w-full"
                     type="submit"
                     isLoading={isLoading === LOADING.PENDING}
-                    disabled={isSubmitting || !isValid}
+                    disabled={!isValid}
                 />
             </div>
         </Form>

@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from '~/hooks/use-translations'
 import type { IPet } from '~/types/pet'
 
 type CardPetProps = {
@@ -6,7 +6,7 @@ type CardPetProps = {
 }
 
 const CardPet = ({ pet }: CardPetProps) => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslations('common')
 
     return (
         <section className="flex flex-col justify-center mb-2">

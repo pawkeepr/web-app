@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
 import type { TabItem } from '~/Components/organism/horizontal-list'
 import HorizontalTabs from '~/Components/organism/horizontal-list'
+import { useTranslations } from '~/hooks/use-translations'
 import { infoToast } from '~/store/helpers/toast'
 import usePetById from '~/store/hooks/pet-by-id/use-pets'
 import { calcAge } from '~/utils/calc-age'
@@ -42,7 +42,7 @@ type HistoricPetPageProps = {
 const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
     const tabs = Tabs(document, id_pet)
     const router = useRouter()
-    const { t } = useTranslation('common')
+    const { t } = useTranslations('common')
     const {
         activeData: pet,
         isLoading,

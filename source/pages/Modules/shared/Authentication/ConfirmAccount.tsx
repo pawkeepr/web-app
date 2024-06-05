@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
-import { Formik } from 'formik'
+import { Formik, type FormikHelpers } from 'formik'
 
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 import { BtnCancel, BtnLink } from '~/Components/atoms/btn'
@@ -74,15 +74,19 @@ const ConfirmAccount = () => {
         dispatch(resendConfirmationCode({ username: email }))
     }
 
-    const handleSubmit = (values: SchemaConfirmAccount) => {
+    const handleSubmit = async (
+        values: SchemaConfirmAccount,
+        { setSubmitting }: FormikHelpers<SchemaConfirmAccount>,
+    ) => {
         const code = `${values.digit0}${values.digit1}${values.digit2}${values.digit3}${values.digit4}${values.digit5}`
-        dispatch(
+        await dispatch(
             activateAccount({
                 username: values.email,
                 code,
                 password: values.password,
             }),
         )
+        setSubmitting(false)
     }
 
     return (

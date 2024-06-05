@@ -1,14 +1,14 @@
 import { useFormikContext } from 'formik'
-import { useTranslation } from 'react-i18next'
 import IconSpecie from '~/Components/atoms/icon-specie'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
+import { useTranslations } from '~/hooks/use-translations'
 import { species, type KeysIconPets } from '~/types/speciesType'
 import type { InitialValues, StepProps } from '../../types'
 import { option } from '../helpers'
 
 const StepListSpecies = ({ nextStep, previousStep }: StepProps) => {
     const { setFieldValue, values } = useFormikContext<InitialValues>()
-    const { t, ...rest } = useTranslation()
+    const { t } = useTranslations()
 
     const handleSelectedSpecie = (specie: string) => {
         setFieldValue('specie', specie)

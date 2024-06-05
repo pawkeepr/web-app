@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 import type { Props } from 'react-select'
 import Label from '~/Components/atoms/label'
 import Select from '~/Components/atoms/select'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { useTranslations } from '~/hooks/use-translations'
 import type { ObjPaths } from '~/types/helpers'
 import type { InputControlProps, OptionSelect } from './types'
 
@@ -33,7 +33,7 @@ const FieldControlSelect = <Ctx,>({
     ...props
 }: FieldSelectControl<Ctx>) => {
     const { values: defaultValues, setFieldValue } = useFormikContextSafe<Ctx>()
-    const { t } = useTranslation('common')
+    const { t } = useTranslations('common')
     const values = defaultValues as Ctx & { [key: string]: unknown }
 
     useEffect(() => {

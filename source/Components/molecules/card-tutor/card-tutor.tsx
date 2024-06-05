@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 import { FaWhatsapp } from 'react-icons/fa'
+import { useTranslations } from '~/hooks/use-translations'
 import type { IMainResponsibleGuardian, PetData } from '~/types/pet-v2'
 import { getNameTutor } from '~/utils/get-name-tutors'
 
@@ -30,7 +30,7 @@ const CardTutor = ({
     const phone_tutor = tutor?.contact?.phone || 'Não informado'
     const whatsapp_tutor = tutor?.contact?.whatsapp || 'Não informado'
     const date_birth = pet?.date_birth || 'Não informado'
-    const { t } = useTranslation('common')
+    const { t } = useTranslations('common')
 
     const race = useMemo(() => t(pet?.race as any), [pet?.race])
 

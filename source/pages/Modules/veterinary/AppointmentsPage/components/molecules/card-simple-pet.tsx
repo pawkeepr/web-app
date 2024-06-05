@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { useTranslations } from '~/hooks/use-translations'
 import type { VeterinaryConsultation } from '~/types/appointment'
 
 const CardSimplePet = () => {
     const { values } = useFormikContextSafe<VeterinaryConsultation>()
-    const { t } = useTranslation('common')
+    const { t } = useTranslations('common')
     const specie = useMemo(
         () => t(values.tutor_pet_vet?.pet?.specie),
         [values.tutor_pet_vet?.pet?.specie],

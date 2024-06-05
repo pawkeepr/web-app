@@ -8,8 +8,8 @@ import {
     IoMdMale,
 } from 'react-icons/io'
 
-import { useTranslation } from 'react-i18next'
 import AvatarPet from '~/Components/molecules/avatar-pet'
+import { useTranslations } from '~/hooks/use-translations'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import { GenderBR, type Gender, type Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
@@ -81,7 +81,7 @@ export const IconGender = {
 
 const CardScheduled = ({ appointment }: CardScheduledProps) => {
     const name = getNameTutor(appointment?.tutor_pet_vet.tutor)
-    const { t } = useTranslation('common')
+    const { t } = useTranslations('common')
 
     const pet = useMemo(
         () => ({

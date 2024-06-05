@@ -4,10 +4,10 @@ import {
     type ForwardRefExoticComponent,
     type RefAttributes,
 } from 'react'
-import { useTranslation } from 'react-i18next'
 import { FaWhatsapp } from 'react-icons/fa'
 import type { IHookModal } from '~/hooks/use-modal'
 import useResizeMobile from '~/hooks/use-resize-mobile'
+import { useTranslations } from '~/hooks/use-translations'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import { Gender, GenderBR } from '~/types/speciesType'
 import { getNameTutor } from '~/utils/get-name-tutors'
@@ -32,7 +32,7 @@ const CardMedicalRecord = ({
     const BoxButtons = boxButtons
     const name = getNameTutor(appointment?.tutor_pet_vet.tutor)
     const { isMobile } = useResizeMobile()
-    const { t } = useTranslation('common')
+    const { t } = useTranslations('common')
 
     const pet = useMemo(
         () => ({

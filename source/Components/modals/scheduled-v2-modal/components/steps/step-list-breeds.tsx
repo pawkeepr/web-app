@@ -1,7 +1,7 @@
 import { startTransition, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { useTranslations } from '~/hooks/use-translations'
 import type { Breed } from '~/types/breedType'
 import { species } from '~/types/speciesType'
 import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
@@ -15,7 +15,7 @@ type Item = {
 const StepListBreeds = ({ nextStep, previousStep }: StepProps) => {
     const [breeds, setBreeds] = useState<Item[]>([])
     const { values, setFieldValue } = useFormikContextSafe<CtxSimplifiedPeTFields>()
-    const { t } = useTranslation()
+    const { t } = useTranslations()
     const handleSelectBreed = (breed: Breed) => {
         setFieldValue('race', breed)
         nextStep()

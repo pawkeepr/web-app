@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import FieldArraySafe from '~/Components/molecules/field-array-safe'
 import ListControl from '~/Components/organism/list-horizontal-switch/list'
 import { VaccinationsItems } from '~/constants/vaccinations'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import { useTranslations } from '~/hooks/use-translations'
 import type {
     QuestionVaccination,
     VeterinaryConsultation,
@@ -41,7 +41,7 @@ export type CtxVaccination = {
 const StepVaccination = () => {
     const [specie, setSpecie] = useState<Species | null>(null)
     const { values } = useFormikContextSafe<CtxVaccination>()
-    const { t } = useTranslation('common')
+    const { t } = useTranslations('common')
 
     useEffect(() => {
         const specie = values.tutor_pet_vet?.pet?.specie

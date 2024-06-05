@@ -7,7 +7,7 @@ import type { VeterinaryConsultation } from '~/types/appointment'
 import { BreedNames } from '~/types/breedType'
 import { GenderBR, type Gender } from '~/types/speciesType'
 
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from '~/hooks/use-translations'
 import { calcAge } from '~/utils/calc-age'
 import { getNameTutor } from '~/utils/get-name-tutors'
 import Modal from '../modal'
@@ -34,7 +34,7 @@ const ModalBoxButtons = forwardRef(
             [open, closeModal, showModal],
         )
 
-        const { t } = useTranslation('common')
+        const { t } = useTranslations('common')
 
         const pet = useMemo(
             () => ({
