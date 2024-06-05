@@ -9,7 +9,6 @@ import useFetchAddress from '~/hooks/use-fetch-address'
 
 import FieldMasked from '~/Components/molecules/field-masked'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import useNextStep from '~/hooks/use-next-step'
 import type { ActivateAccount } from '~/validations/activate'
 import type { StepProps } from './types'
 
@@ -51,22 +50,19 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
         [setFieldValue],
     )
 
-    const { cepInvalid, loading } = useFetchAddress({
+    const { loading } = useFetchAddress({
         onChangeAddress: updateAddressFields,
         zipCode: zipCode as string,
     })
 
     const requiredValid = useMemo((): boolean => {
-        const isValid =
-            validateLocation.isValidSync(values?.location) && !cepInvalid
+        const isValid = validateLocation.isValidSync(values?.location)
 
         return isValid
-    }, [cepInvalid, values?.location])
-
-    useNextStep(nextStep, requiredValid, 1000)
+    }, [values?.location])
 
     return (
-        <div className="container grid grid-cols-2 mobile:grid-cols-1 gap-1">
+        <div className="container grid grid-cols-2 gap-1 mobile:grid-cols-1">
             <FieldMasked
                 ctx={values}
                 label="CEP"
@@ -78,7 +74,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
 
             <FieldControl
                 ctx={values}
-                className=" "
+                className=""
                 type="text"
                 label="Estado"
                 name="location.state"
@@ -105,7 +101,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
                 required
             />
 
-            <div className="grid grid-cols-4 mobile:grid-cols-1 col-span-full w-full gap-1">
+            <div className="grid w-full grid-cols-4 gap-1 mobile:grid-cols-1 col-span-full">
                 <FieldControl
                     ctx={values}
                     divClassName="col-span-3"
@@ -144,7 +140,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
                 />
             </div>
 
-            <div className="mt-1 flex justify-center items-center col-span-full">
+            <div className="flex items-center justify-center mt-1 col-span-full">
                 <BtnCancel onClick={prevStep} label="Voltar" />
                 <BtnPrimary
                     onClick={nextStep}

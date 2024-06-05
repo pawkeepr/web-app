@@ -8,7 +8,6 @@ import validatePerson from '~/validations/tutor'
 
 import FieldDocument from '~/Components/molecules/field-document'
 import FieldPhone from '~/Components/molecules/field-phone'
-import useNextStep from '~/hooks/use-next-step'
 import type { ActivateAccount } from '../../activate'
 import type { StepProps } from './types'
 
@@ -20,8 +19,6 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
 
         return isValid
     }, [values])
-
-    useNextStep(nextStep, requiredValid)
 
     return (
         <div className="container grid grid-cols-2 gap-1 mobile:grid-cols-1">

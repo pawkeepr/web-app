@@ -13,7 +13,6 @@ import useFetchAddress from '~/hooks/use-fetch-address'
 
 import FieldMasked from '~/Components/molecules/field-masked'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import useNextStep from '~/hooks/use-next-step'
 import type { ActivateAccount } from '~/validations/activate'
 import type { StepProps } from './types'
 
@@ -65,8 +64,6 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
 
         return isValid
     }, [values?.location])
-
-    useNextStep(nextStep, requiredValid, 5000)
 
     return (
         <section className="flex flex-row flex-wrap w-full">
