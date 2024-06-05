@@ -1,5 +1,5 @@
 import CardPets from '~/Components/organism/card-pets'
-import useListPetsByTutor from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
+import { useListPetsFromTutor } from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
 import useProfile from '~/store/hooks/profile/use-profile'
 import type { Breed } from '~/types/breedType'
 import type { On_Off } from '~/types/pet-v2'
@@ -8,9 +8,7 @@ import type { Species } from '~/types/speciesType'
 const PetsTab = () => {
     const { data } = useProfile()
 
-    const { data: pets, isPending } = useListPetsByTutor({
-        document: data?.user_information?.cpf_cnpj || '',
-    })
+    const { data: pets, isPending } = useListPetsFromTutor()
 
     if (isPending) return <div>Loading...</div>
 
