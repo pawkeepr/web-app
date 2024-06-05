@@ -82,12 +82,7 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
             : AttributeTypeProfile.TUTOR
 
         if (profile.id) {
-            yield put(
-                editProfile({
-                    ...profile,
-                    owner: profile.owner,
-                }),
-            )
+            yield call(updateProfileTutor, profile, profile.id as string)
         } else {
             yield call(createProfile, profile)
         }
