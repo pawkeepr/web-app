@@ -1,5 +1,5 @@
 import useAppQuery from '~/hooks/use-app-query'
-import { getAllPets } from '~/services/helpers'
+import { getAllPets, getAllPetsTutor } from '~/services/helpers'
 import type { IPetV2 } from '~/types/pet-v2'
 
 type UseListPetsByTutorProps = {
@@ -17,3 +17,13 @@ const useListPetsByTutor = ({ document }: UseListPetsByTutorProps) => {
 }
 
 export default useListPetsByTutor
+
+export const useListPetsFromTutor = () => {
+    return useAppQuery<IPetV2[]>(
+        ['listPetsByTutor', document],
+        () => getAllPetsTutor(),
+        {
+            enabled: !!document,
+        },
+    )
+}

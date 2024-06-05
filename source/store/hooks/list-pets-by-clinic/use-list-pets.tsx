@@ -8,7 +8,7 @@ const useListPets = () => {
     const superKeys = [NAME]
 
     return useAppQuery<IPetV2Data[]>(superKeys, getAllPetsOfClinic, {
-        initialData: [],
+        staleTime: 1000,
     })
 }
 
