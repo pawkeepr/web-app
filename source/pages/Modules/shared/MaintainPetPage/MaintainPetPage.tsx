@@ -86,7 +86,11 @@ export const makeInitialValues: MakeInitialValues = ({
             first_name: first_name || '',
         },
         name: pet_information?.name_pet || '',
-        veterinary,
+        veterinary: {
+            ...veterinary,
+            specialty: veterinary?.specialty || 'sem_especialidade',
+            crmv: veterinary?.crmv || 'se0000',
+        },
     }
 }
 

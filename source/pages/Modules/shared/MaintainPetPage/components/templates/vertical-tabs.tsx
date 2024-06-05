@@ -1,6 +1,6 @@
 //Import images
 
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { Tab } from '@headlessui/react'
 import { tv } from 'tailwind-variants'
@@ -8,6 +8,12 @@ import useProfile from '~/store/hooks/profile/use-profile'
 import type { StepProps, TabsOptions } from '~/types/helpers'
 import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
 import { StepHealthInsurance, StepPet, StepTutor } from '../steps'
+
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import { TypeProfile } from '~/types/profile'
 
 type TabItem = {
     id: TabsOptions
@@ -104,27 +110,25 @@ const menu = tv({
 })
 
 const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
-    const [activeVerticalTab, setActiveVerticalTab] = useState(0)
+    const [selectedIndex, setSelectedIndex] = useState(0)
     const { mode } = useModeEditablePet()
 
-    const { data: profile } = useProfile()
+    const { data: profile, isPending: profilePending } = useProfile()
 
-    const items = profile?.type_profile === 2 ? itemsTutor : itemsVet
-
-    function toggleVerticalTab(tab: TabsOptions) {
-        if (activeVerticalTab !== tab) {
-            if (tab >= 0 && tab <= items.length) {
-            }
+    const items = useMemo(() => {
+        if (profilePending) {
+            return []
         }
+        return profile?.type_profile === TypeProfile.TUTOR ? itemsTutor : itemsVet
+    }, [profile, profilePending])
+
+    const nextStep = () => {
+        setSelectedIndex((prev) => Math.min(prev + 1, items.length - 1))
     }
 
-    useEffect(() => {
-        if (mode === 'readonly') {
-            return
-        }
-
-        setActiveVerticalTab(0)
-    }, [mode])
+    const prevStep = () => {
+        setSelectedIndex((prev) => Math.max(prev - 1, 0))
+    }
 
     return (
         <div
@@ -139,20 +143,16 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
                     {hasPet ? 'Editar Pet' : 'Novo Pet'}
                 </h4>
             </div>
-            <Tab.Group
-                selectedIndex={activeVerticalTab}
-                onChange={setActiveVerticalTab}
-            >
+            <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
                 <div className={menu()}>
                     <Tab.List className={tab()}>
                         {items.map((item, index) => {
                             return (
                                 <Tab
                                     key={item.id}
-                                    disabled={!hasPet || mode !== 'readonly'}
                                     id="steparrow-gen-info-tab"
                                     className={buttonTab({
-                                        selected: activeVerticalTab === index,
+                                        selected: selectedIndex === index,
                                     })}
                                 >
                                     {item.title}
@@ -166,8 +166,9 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
                         return (
                             <Tab.Panel key={id}>
                                 <Component
-                                    activeTab={activeVerticalTab}
-                                    toggleTab={toggleVerticalTab}
+                                    activeTab={selectedIndex}
+                                    nextStep={nextStep}
+                                    prevStep={prevStep}
                                     isPending={isPending}
                                     tutorExist={hasTutor}
                                 />

@@ -1,7 +1,5 @@
 /* eslint-disable react/jsx-no-undef */
 
-import { BtnPrimary } from '~/Components/atoms/btn'
-
 import { useMemo } from 'react'
 import * as yup from 'yup'
 import ControlToggle3States from '~/Components/molecules/control-toggle-3-states'
@@ -10,7 +8,7 @@ import FieldControlSelect from '~/Components/molecules/field-control/field-contr
 import FieldMasked from '~/Components/molecules/field-masked'
 import SelectsSpecies from '~/Components/organism/selects/selects-species'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import type { RecordsShapeYup, StepProps, TabsOptions } from '~/types/helpers'
+import type { RecordsShapeYup, StepProps } from '~/types/helpers'
 import { genderValues } from '~/types/sexType'
 import type { InitialValues } from '../../index'
 import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
@@ -70,7 +68,7 @@ const schema = yup.object().shape<StepPetSchema>({
         .nullable(),
 })
 
-const StepPet = ({ toggleTab }: StepProps) => {
+const StepPet = ({ nextStep }: StepProps) => {
     const { values, initialValues } = useFormikContextSafe<StepPetKeys>()
     const { mode } = useModeEditablePet()
 
@@ -121,7 +119,7 @@ const StepPet = ({ toggleTab }: StepProps) => {
                     disabled={!!values.id && !!initialValues.date_birth}
                     label="Data de nascimento"
                     required
-                    name="date_birth"
+                    name={'date_birth' as any}
                     type="date"
                 />
 
@@ -176,14 +174,13 @@ const StepPet = ({ toggleTab }: StepProps) => {
                     />
                 </div>
             </div>
-            <BtnPrimary
-                condition={mode === 'editable'}
-                label="Próximo"
-                disabled={!isValid}
-                onClick={() => {
-                    toggleTab(1 as TabsOptions)
-                }}
-            />
+            <div className="flex justify-end w-full mobile:justify-center">
+                {/* <BtnPrimary
+                    label="Próximo"
+                    disabled={!isValid}
+                    onClick={nextStep}
+                /> */}
+            </div>
         </section>
     )
 }

@@ -3,10 +3,12 @@ import type * as Yup from 'yup'
 export type TabsOptions = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
 
 export type StepProps = {
-    toggleTab: (tab: TabsOptions) => void
+    toggleTab?: (tab: TabsOptions) => void
     activeTab: number
     isPending?: boolean
     tutorExist?: boolean
+    nextStep?: () => void
+    prevStep?: () => void
 }
 
 export type Nullable<T> = {

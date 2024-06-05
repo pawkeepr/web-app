@@ -2,17 +2,13 @@ import { Form } from 'formik'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import type { StepProps, Tabs } from '~/types/helpers'
+import type { StepProps } from '~/types/helpers'
 import type { InitialValues } from '../../MaintainPetPage'
 import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
 
 type StepHealthInsuranceKeys = Pick<InitialValues, 'health_insurance' | 'id'>
 
-export default function StepHealthInsurance({
-    toggleTab,
-    activeTab,
-    isPending,
-}: StepProps) {
+export default function StepHealthInsurance({ prevStep, isPending }: StepProps) {
     const { mode } = useModeEditablePet()
     const { handleSubmit, values, isSubmitting } =
         useFormikContextSafe<StepHealthInsuranceKeys>()
@@ -60,9 +56,7 @@ export default function StepHealthInsurance({
                 <BtnCancel
                     condition={!isPending && !isSubmitting && mode === 'editable'}
                     label="Voltar"
-                    onClick={() => {
-                        toggleTab((activeTab - 1) as Tabs)
-                    }}
+                    onClick={prevStep}
                 />
                 <BtnPrimary
                     condition={mode === 'editable'}
