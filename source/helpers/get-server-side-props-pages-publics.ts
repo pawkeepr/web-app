@@ -12,7 +12,7 @@ import { getCookie } from '~/utils/cookies-utils'
 const getServerSidePropsPagesPublics =
     (callback?: GetServerSideProps) =>
     async (ctx: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
-        const lg = ctx.locale || 'pt'
+        const lg = ctx.locale || 'pt-br'
         const locale = await serverSideTranslations(lg, ['common'])
 
         return new Promise((resolve) => {

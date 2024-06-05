@@ -72,7 +72,7 @@ const getServerSidePropsPagesTutorPrivates =
 
         if (callback) return callback(ctx)
 
-        const lg = ctx.locale || 'pt'
+        const lg = ctx.locale || 'pt-br'
         const locale = await serverSideTranslations(lg, ['common'])
 
         return {
