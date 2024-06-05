@@ -21,13 +21,15 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
     const nutritions = data?.list_nutritions
 
     return (
-        <article>
-            <section>
-                <h2 className="card-title">Evolução Corporal</h2>
+        <article className="gap-2 p-2 font-sans text-xs bg-white">
+            <section className="my-2">
+                <h2 className="text-base font-bold text-gray-500">
+                    Evolução Corporal
+                </h2>
                 {body_evolution?.map((item) => (
                     <div
                         key={item.id as string}
-                        className="bg-white flex h-10 card card-bordered card-compact flex-row justify-between items-center"
+                        className="flex flex-row items-center justify-between h-10 bg-white"
                     >
                         <p className="text-gray-500">
                             <strong>Idade:</strong>
@@ -49,12 +51,14 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
                     </div>
                 ))}
             </section>
-            <section>
-                <h2 className="card-title">Procedimentos Dentários</h2>
+            <section className="my-2">
+                <h2 className="text-base font-bold text-gray-500">
+                    Procedimentos Dentários
+                </h2>
                 {list_dental_procedures?.map((item) => (
                     <div
                         key={item.id as string}
-                        className="bg-white flex h-10 card card-bordered card-compact flex-row justify-between items-center"
+                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
                     >
                         <p className="text-gray-500">
                             <strong>Procedimento:</strong>
@@ -70,12 +74,14 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
                     </div>
                 ))}
             </section>
-            <section>
-                <h2 className="card-title">Exames e Testes</h2>
+            <section className="my-2">
+                <h2 className="text-base font-bold text-gray-500">
+                    Exames e Testes
+                </h2>
                 {exams?.map((item) => (
                     <div
                         key={item.id as string}
-                        className="bg-white flex h-10 card card-bordered card-compact flex-row justify-between items-center"
+                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
                     >
                         <p className="text-gray-500">
                             <strong>Exame:</strong>
@@ -84,12 +90,14 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
                     </div>
                 ))}
             </section>
-            <section>
-                <h2 className="card-title">Atividade Física</h2>
+            <section className="my-2">
+                <h2 className="text-base font-bold text-gray-500">
+                    Atividade Física
+                </h2>
                 {physical_activities?.map((item) => (
                     <div
                         key={item.id as string}
-                        className="bg-white flex h-10 card card-bordered card-compact flex-row justify-between items-center"
+                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
                     >
                         <p className="text-gray-500">
                             <strong>Atividade:</strong>
@@ -99,12 +107,14 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
                 ))}
             </section>
 
-            <section>
-                <h2 className="card-title">Hospitalizações</h2>
+            <section className="my-2">
+                <h2 className="text-base font-bold text-gray-500">
+                    Hospitalizações
+                </h2>
                 {hospitalizations?.map((item) => (
                     <div
                         key={item.id as string}
-                        className="bg-white flex h-10 card card-bordered card-compact flex-row justify-between items-center"
+                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
                     >
                         <p className="text-gray-500">
                             <strong>Atividade:</strong>
@@ -114,12 +124,12 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
                 ))}
             </section>
 
-            <section>
-                <h2 className="card-title">Doenças</h2>
+            <section className="my-2">
+                <h2 className="text-base font-bold text-gray-500">Doenças</h2>
                 {diseases?.map((item) => (
                     <div
                         key={item.id as string}
-                        className="bg-white flex h-10 card card-bordered card-compact flex-row justify-between items-center"
+                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
                     >
                         <p className="text-gray-500">
                             <strong>Doença:</strong>
@@ -129,12 +139,12 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
                 ))}
             </section>
 
-            <section>
-                <h2 className="card-title">Alergias</h2>
+            <section className="my-2">
+                <h2 className="text-base font-bold text-gray-500">Alergias</h2>
                 {allergies?.map((item) => (
                     <div
                         key={item.id as string}
-                        className="bg-white flex h-10 card card-bordered card-compact flex-row justify-between items-center"
+                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
                     >
                         <p className="text-gray-500">
                             <strong>Alergia:</strong>
@@ -144,12 +154,12 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
                 ))}
             </section>
 
-            <section>
-                <h2 className="card-title">Internações</h2>
+            <section className="my-2">
+                <h2 className="text-base font-bold text-gray-500">Internações</h2>
                 {internment?.map((item) => (
                     <div
                         key={item.id as string}
-                        className="bg-white flex h-10 card card-bordered card-compact flex-row justify-between items-center"
+                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
                     >
                         <p className="text-gray-500">
                             <strong>Internação:</strong>
@@ -159,12 +169,12 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
                 ))}
             </section>
 
-            <section>
-                <h2 className="card-title">Cirurgias</h2>
+            <section className="my-2">
+                <h2 className="text-base font-bold text-gray-500">Cirurgias</h2>
                 {surgeries?.map((item) => (
                     <div
                         key={item.id as string}
-                        className="bg-white flex h-10 card card-bordered card-compact flex-row justify-between items-center"
+                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
                     >
                         <p className="text-gray-500">
                             <strong>Cirurgia:</strong>
@@ -174,12 +184,12 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
                 ))}
             </section>
 
-            <section>
-                <h2 className="card-title">Lesões</h2>
+            <section className="my-2">
+                <h2 className="text-base font-bold text-gray-500">Lesões</h2>
                 {injuries?.map((item) => (
                     <div
                         key={item.id as string}
-                        className="bg-white flex h-10 card card-bordered card-compact flex-row justify-between items-center"
+                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
                     >
                         <p className="text-gray-500">
                             <strong>Lesão:</strong>
@@ -189,12 +199,12 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
                 ))}
             </section>
 
-            <section>
-                <h2 className="card-title">Medicamentos</h2>
+            <section className="my-2">
+                <h2 className="text-base font-bold text-gray-500">Medicamentos</h2>
                 {medicines?.map((item) => (
                     <div
                         key={item.id as string}
-                        className="bg-white flex h-10 card card-bordered card-compact flex-row justify-between items-center"
+                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
                     >
                         <p className="text-gray-500">
                             <strong>Medicamento:</strong>
@@ -204,12 +214,12 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
                 ))}
             </section>
 
-            <section>
-                <h2 className="card-title">Vacinas</h2>
+            <section className="my-2">
+                <h2 className="text-base font-bold text-gray-500">Vacinas</h2>
                 {vaccines?.map((item) => (
                     <div
                         key={item.id as string}
-                        className="bg-white flex h-10 card card-bordered card-compact flex-row justify-between items-center"
+                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
                     >
                         <p className="text-gray-500">
                             <strong>Vacina:</strong>
@@ -219,12 +229,12 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
                 ))}
             </section>
 
-            <section>
-                <h2 className="card-title">Nutrição</h2>
+            <section className="my-2">
+                <h2 className="text-base font-bold text-gray-500">Nutrição</h2>
                 {nutritions?.map((item) => (
                     <div
                         key={item.id as string}
-                        className="bg-white flex h-10 card card-bordered card-compact flex-row justify-between items-center"
+                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
                     >
                         <p className="text-gray-500">
                             <strong>Nutrição:</strong>
