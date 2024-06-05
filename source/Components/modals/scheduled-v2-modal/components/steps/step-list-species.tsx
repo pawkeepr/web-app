@@ -8,7 +8,7 @@ import { option } from '../helpers'
 
 const StepListSpecies = ({ nextStep, previousStep }: StepProps) => {
     const { setFieldValue, values } = useFormikContext<InitialValues>()
-    const { t } = useTranslations()
+    const { t } = useTranslations('common')
 
     const handleSelectedSpecie = (specie: string) => {
         setFieldValue('specie', specie)

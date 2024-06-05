@@ -196,5 +196,7 @@
     "vaccination_history": "Histórico de Vacinação",
     "vaccination_status": "Status de Vacinação",
     "vaccination_certificate": "Certificado de Vacinação",
-    "bovine": "Bovino"
+    "bovine": "Bovino",
+    "serpent": "Cobras",
+    "equine": "Equino"
 }
