@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 
 import validateLocation from '~/validations/address'
 
-import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import { BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control/field-control'
 import type { IAddress } from '~/helpers/fetch-address-by-cep'
 import useFetchAddress from '~/hooks/use-fetch-address'
@@ -139,9 +139,13 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
                     }
                 />
             </div>
-
-            <div className="flex items-center justify-center mt-1 col-span-full">
-                <BtnCancel onClick={prevStep} label="Voltar" />
+            <div className="flex items-center justify-center w-full gap-2 mt-1 col-span-full">
+                <BtnNeutral
+                    outline
+                    className="border-none"
+                    onClick={prevStep}
+                    label="Voltar"
+                />
                 <BtnPrimary
                     onClick={nextStep}
                     disabled={!requiredValid || loading}

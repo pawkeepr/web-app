@@ -29,9 +29,6 @@ const validate = Yup.object().shape({
                 .required(),
         })
         .required(),
-    cpf_cnpj: Yup.string()
-        .required('Este campo é obrigatório')
-        .transform((value) => value.replace(/[^\d]/g, '')),
 })
 
 export type Tutor = Yup.InferType<typeof validate>

@@ -23,8 +23,10 @@ import { layoutModeTypes } from '~/constants/layout'
 import type { ActivateAccountTutor } from '~/types/activate-account-tutor'
 import { TypeProfile, type Location } from '~/types/profile'
 import StepActivationAddress from './components/steps-activation/step-address'
+import StepActivationDocument from './components/steps-activation/step-document'
 import StepActivationFinally from './components/steps-activation/step-finally'
 import StepActivationPerson from './components/steps-activation/step-person'
+
 import type { StepProps } from './components/steps-activation/types'
 
 const initialValues = (email: string): ActivateAccount => ({
@@ -50,21 +52,25 @@ const initialValues = (email: string): ActivateAccount => ({
 
 const Tabs = [
     {
-        id: '1',
+        id: 0,
+        component: (props: StepProps) => <StepActivationDocument {...props} />,
+    },
+    {
+        id: 1,
         component: (props: StepProps) => <StepActivationPerson {...props} />,
     },
     {
-        id: '2',
+        id: 2,
         component: (props: StepProps) => <StepActivationAddress {...props} />,
     },
     {
-        id: '3',
+        id: 3,
         component: (props: StepProps) => <StepActivationFinally {...props} />,
     },
 ]
 
 const ActivationAccount = () => {
-    const email = useAppSelector((state) => state.Login.username)
+    const { username: email } = useAppSelector((state) => state.Login)
 
     const [selectedIndex, setSelectedIndex] = useState(0)
     const dispatch = useAppDispatch()
@@ -166,10 +172,7 @@ const ActivationAccount = () => {
                 >
                     <>
                         {Tabs.map((tab) => (
-                            <Tab.Panel
-                                key={tab.id}
-                                data-testid={`step-${tab.id.padStart(2, '0')}`}
-                            >
+                            <Tab.Panel key={tab.id}>
                                 {tab.component({
                                     prevStep: onChangePrevStep,
                                     nextStep: onChangeNextStep,

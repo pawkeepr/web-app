@@ -1,5 +1,5 @@
 import { useFormikContext } from 'formik'
-import { BtnLabel, BtnPrimary } from '~/Components/atoms/btn'
+import { BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
 import LOADING from '~/constants/loading'
 import { useAppSelector } from '~/store/hooks'
 import type { ActivateAccount } from '../../activate'
@@ -25,7 +25,7 @@ const StepFinally = ({ prevStep }: StepProps) => {
 
     return (
         <div>
-            <h4 className="font-semibold font-sans text-base my-2 text-center text-primary-600">
+            <h4 className="my-2 font-sans text-base font-semibold text-center text-primary-600">
                 Informações de Cadastro
             </h4>
 
@@ -54,7 +54,7 @@ const StepFinally = ({ prevStep }: StepProps) => {
                 </li>
             </ul>
 
-            <h4 className="font-semibold font-sans text-base mb-2 text-center text-primary-600">
+            <h4 className="mb-2 font-sans text-base font-semibold text-center text-primary-600">
                 Endereço
             </h4>
 
@@ -113,25 +113,22 @@ const StepFinally = ({ prevStep }: StepProps) => {
                     </p>
                 </li>
             </ul>
-
-            <div className="flex gap-2 justify-center items-center mt-2">
-                <div>
-                    <BtnLabel
-                        condition={!isLoading}
-                        disabled={isLoading}
-                        onClick={prevStep}
-                        label="Anterior"
-                    />
-                </div>
-                <div>
-                    <BtnPrimary
-                        isLoading={isLoading}
-                        label="Cadastrar"
-                        type="submit"
-                        onClick={handleClick}
-                        disabled={!isValid}
-                    />
-                </div>
+            <div className="flex items-center justify-center w-full gap-2 mt-1 col-span-full">
+                <BtnNeutral
+                    outline
+                    className="border-none"
+                    condition={!isLoading}
+                    disabled={isLoading}
+                    onClick={prevStep}
+                    label="Anterior"
+                />
+                <BtnPrimary
+                    isLoading={isLoading}
+                    label="Cadastrar"
+                    type="submit"
+                    onClick={handleClick}
+                    disabled={!isValid}
+                />
             </div>
         </div>
     )

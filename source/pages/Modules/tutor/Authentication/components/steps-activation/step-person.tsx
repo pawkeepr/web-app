@@ -2,16 +2,15 @@ import { useFormikContext } from 'formik'
 
 import { useMemo } from 'react'
 
-import { BtnPrimary } from '~/Components/atoms/btn'
+import { BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control'
 import validatePerson from '~/validations/tutor'
 
-import FieldDocument from '~/Components/molecules/field-document'
 import FieldPhone from '~/Components/molecules/field-phone'
 import type { ActivateAccount } from '../../activate'
 import type { StepProps } from './types'
 
-const StepSignUpPerson = ({ nextStep }: StepProps) => {
+const StepSignUpPerson = ({ nextStep, prevStep }: StepProps) => {
     const { values } = useFormikContext<ActivateAccount>()
 
     const requiredValid = useMemo((): boolean => {
@@ -45,15 +44,7 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                     disabledError
                 />
             </div>
-            <FieldDocument
-                ctx={values}
-                divClassName="col-span-1 mobile:col-span-full"
-                label="CPF/CNPJ"
-                name="cpf_cnpj"
-                aria-label="cpf_cnpj"
-                placeholder="CPF/CNPJ"
-                required
-            />
+
             <FieldPhone
                 ctx={values}
                 divClassName="col-span-1 mobile:col-span-full"
@@ -63,7 +54,13 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
                 required
             />
 
-            <div className="flex items-center justify-center mt-1 col-span-full">
+            <div className="flex items-center justify-center w-full gap-2 mt-1 col-span-full">
+                <BtnNeutral
+                    outline
+                    className="border-none"
+                    onClick={prevStep}
+                    label="Voltar"
+                />
                 <BtnPrimary
                     onClick={nextStep}
                     disabled={!requiredValid}
