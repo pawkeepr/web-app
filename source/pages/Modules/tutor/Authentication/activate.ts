@@ -16,6 +16,7 @@ export type UserInformation = {
 }
 
 const validate = Yup.object().shape({
+    id: Yup.string().nullable().optional(),
     email: Yup.string()
         .email('O email deve ser válido')
         .required('O campo de email é obrigatório'),
