@@ -17,8 +17,8 @@ const useFetchAddress = ({
     const [cpfNotFound, setCpfNotFound] = useState(false)
     useEffect(() => {
         if (initialValue === zipCode) return
-
-        if (zipCode.replace(/\D/g, '').length === 8) {
+        if (!zipCode) return
+        if (zipCode?.replace(/\D/g, '').length === 8) {
             setLoading(true)
             fetchAddressByCep(zipCode)
                 .then((data) => {
