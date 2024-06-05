@@ -77,7 +77,8 @@ export type IVeterinaryInformation = {
 } & SpecialtyInformation
 
 export type IProfile = {
-    id?: string
+    id?: string | null
+    owner: string
     veterinary_information?: IVeterinaryInformation
     user_information: ProfileUserInformation
     type_profile?: TypeProfile

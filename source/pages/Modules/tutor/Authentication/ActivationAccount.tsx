@@ -19,6 +19,7 @@ import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 import { BtnLink } from '~/Components/atoms/btn'
 
 import { Tab } from '@headlessui/react'
+import * as Yup from 'yup'
 import { layoutModeTypes } from '~/constants/layout'
 import type { ActivateAccountTutor } from '~/types/activate-account-tutor'
 import { TypeProfile, type Location } from '~/types/profile'
@@ -30,6 +31,7 @@ import StepActivationPerson from './components/steps-activation/step-person'
 import type { StepProps } from './components/steps-activation/types'
 
 const initialValues = (email: string): ActivateAccount => ({
+    id: null,
     email,
     contact: {
         email,
@@ -77,6 +79,8 @@ const ActivationAccount = () => {
 
     const onSubmit = (values: ActivateAccount) => {
         const profile: ActivateAccountTutor = {
+            id: values?.id,
+            owner: values?.email,
             user_information: {
                 type_profile: TypeProfile.VETERINARY,
                 cpf_cnpj: values?.cpf_cnpj,
@@ -107,7 +111,7 @@ const ActivationAccount = () => {
     }, [])
 
     useEffect(() => {
-        if (!email) {
+        if (!Yup.string().email().isValidSync(email)) {
             dispatch(signOutUser())
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -117,11 +121,7 @@ const ActivationAccount = () => {
         setSelectedIndex((state) => {
             const stateNumber = Number(state)
 
-            if (stateNumber === Tabs.length) {
-                return state
-            }
-
-            return stateNumber + 1
+            return Math.min(Tabs.length - 1, stateNumber + 1)
         })
     }
 
@@ -129,11 +129,7 @@ const ActivationAccount = () => {
         setSelectedIndex((state) => {
             const stateNumber = Number(state)
 
-            if (stateNumber === 1) {
-                return state
-            }
-
-            return stateNumber - 1
+            return Math.max(0, stateNumber - 1)
         })
     }
 

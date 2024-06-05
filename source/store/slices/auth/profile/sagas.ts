@@ -3,20 +3,6 @@ import { all, call, delay, fork, put, takeEvery } from 'redux-saga/effects'
 //Include Both Helper File with needed methods
 import type { PayloadAction } from '@reduxjs/toolkit'
 import Router from 'next/router'
-// Login Redux States
-import {
-    addFail,
-    addSuccess,
-    editProfileError,
-    editProfileSuccess,
-    getProfileSession,
-} from './actions'
-import {
-    ACTION_ADD_NEW,
-    ACTION_EDIT_PROFILE,
-    ACTION_GET_PROFILE_SESSION,
-} from './types'
-
 import cookies from '~/constants/cookies'
 import {
     createProfileTutor,
@@ -35,6 +21,20 @@ import { errorToast, infoToast, successToast } from '~/store/helpers/toast'
 import type { IProfile } from '~/types/profile'
 import { setCookie } from '~/utils/cookies-utils'
 import { signOutUser } from '../login/actions'
+// Login Redux States
+import {
+    addFail,
+    addSuccess,
+    editProfile,
+    editProfileError,
+    editProfileSuccess,
+    getProfileSession,
+} from './actions'
+import {
+    ACTION_ADD_NEW,
+    ACTION_EDIT_PROFILE,
+    ACTION_GET_PROFILE_SESSION,
+} from './types'
 
 function* onGetProfile({
     payload: { has_profile, type_profile },
@@ -66,7 +66,7 @@ function* onGetProfile({
             case 404: // Not Found
                 yield call(updateHasProfile, 'no')
                 errorToast('Perfil não encontrado!')
-                yield call([Router, Router.push], link)
+                yield put(signOutUser())
                 break
         }
     }
@@ -80,7 +80,18 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
         const type_profile = isVeterinary
             ? AttributeTypeProfile.VETERINARY
             : AttributeTypeProfile.TUTOR
-        yield call(createProfile, profile)
+
+        if (profile.id) {
+            yield put(
+                editProfile({
+                    ...profile,
+                    owner: profile.owner,
+                }),
+            )
+        } else {
+            yield call(createProfile, profile)
+        }
+
         yield call(updateHasProfile, 'yes')
         yield put(addSuccess())
         yield put(
@@ -103,11 +114,8 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
 
         switch (error.response.status) {
             case 409:
-                errorToast(
-                    'Já existe um usuário com este cpf/cnpj para este tipo de perfil',
-                )
+                yield put(editProfile(profile))
                 yield call(updateHasProfile, 'yes')
-                yield call([Router, Router.push], '/logout')
                 break
             default:
                 yield call(updateHasProfile, 'no')
