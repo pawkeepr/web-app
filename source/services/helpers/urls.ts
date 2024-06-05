@@ -19,7 +19,7 @@ export const VET_UPDATE_PROFILE = () => '/api-user/update-user-vet'
 // Profile Tutor
 
 export const TUTOR_CREATE_PROFILE = () => '/api-user/create-user-tutor'
-export const TUTOR_GET_PROFILE = () => '/api-user/search-user/2'
+export const TUTOR_GET_PROFILE = () => '/api-user/search-user/tutor'
 export const TUTOR_UPDATE_PROFILE = () => '/api-user/update-user/tutor'
 
 export const TUTOR_HAS_PROFILE_FROM_VETERINARY = () => '/api-user/search-user-tutor'

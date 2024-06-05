@@ -9,7 +9,7 @@ type State = {
 
 export const useSpecies = create<State>((set) => ({
     specie: {
-        label: 'Desconhecido',
+        label: 'unknown',
         value: 'unknown',
         breedType: [],
         bloodType: [],

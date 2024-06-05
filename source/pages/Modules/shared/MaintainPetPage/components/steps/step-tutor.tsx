@@ -5,7 +5,7 @@ import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
 import FieldControl from '~/Components/molecules/field-control/field-control'
 
-import type { RecordsShapeYup, StepProps, Tabs } from '~/types/helpers'
+import type { RecordsShapeYup, StepProps, TabsOptions } from '~/types/helpers'
 import type { InitialValues } from '../../index'
 import AddressTutor from '../molecules/address-tutor'
 
@@ -131,7 +131,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                     condition={mode === 'editable'}
                     label="Voltar"
                     onClick={() => {
-                        toggleTab((activeTab - 1) as Tabs)
+                        toggleTab((activeTab - 1) as TabsOptions)
                     }}
                 />
                 <BtnPrimary
@@ -139,7 +139,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                     disabled={!isValid}
                     label="Próximo"
                     onClick={() => {
-                        toggleTab((activeTab + 1) as Tabs)
+                        toggleTab((activeTab + 1) as TabsOptions)
                     }}
                 />
             </div>

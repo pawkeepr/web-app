@@ -32,6 +32,9 @@ export const updateProfileTutor = async (data: IProfile, user_id: string) =>
     api.post(urls.TUTOR_UPDATE_PROFILE(), data, { params: { user_id } })
 export const getTutorProfile = async () => api.get(urls.TUTOR_GET_PROFILE())
 
+export const updateProfileTutorV2 = async (data: IProfile) =>
+    api.put(urls.TUTOR_UPDATE_PROFILE(), data, { params: { user_id: data.id } })
+
 export const getAllPets = async (cpf_cnpj: string) =>
     api.get(urls.PET_FETCH_ALL(), { params: { cpf_cnpj } })
 export const getAllAppointmentsDonePet = async (id_pet: string) =>

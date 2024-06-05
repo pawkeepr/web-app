@@ -10,7 +10,7 @@ import FieldControlSelect from '~/Components/molecules/field-control/field-contr
 import FieldMasked from '~/Components/molecules/field-masked'
 import SelectsSpecies from '~/Components/organism/selects/selects-species'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import type { RecordsShapeYup, StepProps, Tabs } from '~/types/helpers'
+import type { RecordsShapeYup, StepProps, TabsOptions } from '~/types/helpers'
 import { genderValues } from '~/types/sexType'
 import type { InitialValues } from '../../index'
 import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
@@ -70,7 +70,7 @@ const schema = yup.object().shape<StepPetSchema>({
         .nullable(),
 })
 
-const StepPet = ({ toggleTab, activeTab }: StepProps) => {
+const StepPet = ({ toggleTab }: StepProps) => {
     const { values, initialValues } = useFormikContextSafe<StepPetKeys>()
     const { mode } = useModeEditablePet()
 
@@ -79,7 +79,7 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
     }, [values])
 
     return (
-        <div className="relative flex flex-col shadow-lg card-body mobile:p-0">
+        <section className="relative flex flex-col shadow-lg card-body mobile:p-0">
             <div className="p-1 m-2 mb-4">
                 <h4 className="font-sans text-base font-semibold text-center capitalize">
                     Informações do PET
@@ -176,17 +176,15 @@ const StepPet = ({ toggleTab, activeTab }: StepProps) => {
                     />
                 </div>
             </div>
-            <div className="flex justify-center gap-3 mt-4 align-items-center">
-                <BtnPrimary
-                    condition={mode === 'editable'}
-                    label="Próximo"
-                    disabled={!isValid}
-                    onClick={() => {
-                        toggleTab((activeTab + 1) as Tabs)
-                    }}
-                />
-            </div>
-        </div>
+            <BtnPrimary
+                condition={mode === 'editable'}
+                label="Próximo"
+                disabled={!isValid}
+                onClick={() => {
+                    toggleTab(1 as TabsOptions)
+                }}
+            />
+        </section>
     )
 }
 

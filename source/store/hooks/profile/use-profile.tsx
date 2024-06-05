@@ -23,7 +23,6 @@ const useProfile = () => {
 
     return useAppQuery<IProfile>(superKeys, getProfile.bind(null), {
         enabled: !!user,
-        staleTime: 1000 * 60 * 60,
     })
 }
 

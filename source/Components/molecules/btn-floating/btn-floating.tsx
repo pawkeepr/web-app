@@ -72,4 +72,32 @@ const BtnFloating = ({
     )
 }
 
+type BtnLinkFloatingProps = {
+    icon: IconType
+    title: string
+} & VariantProps<typeof buttonFloating.button> &
+    ComponentProps<'a'>
+
+export const BtnLinkFloating = ({
+    href,
+    icon: Icon,
+    title,
+    ...props
+}: BtnLinkFloatingProps) => {
+    return (
+        <a
+            {...props}
+            title={title}
+            type="button"
+            href={href}
+            className={buttonFloating.button({ ...props })}
+        >
+            <h6 className={buttonFloating.title()}>{title}</h6>
+            <div className={buttonFloating.containerIcon()}>
+                <Icon className={buttonFloating.icon()} />
+            </div>
+        </a>
+    )
+}
+
 export default withControl(BtnFloating)

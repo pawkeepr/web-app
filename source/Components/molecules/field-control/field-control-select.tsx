@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { Props } from 'react-select'
 import Label from '~/Components/atoms/label'
 import Select from '~/Components/atoms/select'
@@ -32,6 +33,7 @@ const FieldControlSelect = <Ctx,>({
     ...props
 }: FieldSelectControl<Ctx>) => {
     const { values: defaultValues, setFieldValue } = useFormikContextSafe<Ctx>()
+    const { t } = useTranslation('common')
     const values = defaultValues as Ctx & { [key: string]: unknown }
 
     useEffect(() => {
@@ -59,7 +61,10 @@ const FieldControlSelect = <Ctx,>({
                 id={name}
                 required={required}
                 className={required ? 'border-secondary-500' : ''}
-                options={options}
+                options={options.map((option) => ({
+                    ...option,
+                    label: t(option.label),
+                }))}
                 name={name}
                 onChange={onChange}
                 value={props.value ?? values?.[name]}

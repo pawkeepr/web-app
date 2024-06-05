@@ -1,3 +1,6 @@
+import { useRouter } from 'next/router'
+import { MdPets } from 'react-icons/md'
+import { BtnLinkFloating } from '~/Components/molecules/btn-floating/btn-floating'
 import CardPets from '~/Components/organism/card-pets'
 import { useListPetsFromTutor } from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
 import useProfile from '~/store/hooks/profile/use-profile'
@@ -7,6 +10,7 @@ import type { Species } from '~/types/speciesType'
 
 const PetsTab = () => {
     const { data } = useProfile()
+    const router = useRouter()
 
     const { data: pets, isPending } = useListPetsFromTutor()
 
@@ -37,6 +41,11 @@ const PetsTab = () => {
                     <span>Não há Pets Cadastrados</span>
                 </div>
             )}
+            <BtnLinkFloating
+                icon={() => <MdPets className="w-6 h-4" />}
+                title="Novo Pet"
+                href="/tutor/pet"
+            />
         </section>
     )
 }

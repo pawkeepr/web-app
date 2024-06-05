@@ -10,6 +10,7 @@ import {
     getTutorProfile,
     getVetProfile,
     updateProfileTutor,
+    updateProfileTutorV2,
     updateProfileVet,
 } from '~/services/helpers'
 import { updateHasProfile } from '~/services/helpers/auth'
@@ -82,7 +83,7 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
             : AttributeTypeProfile.TUTOR
 
         if (profile.id) {
-            yield call(updateProfileTutor, profile, profile.id as string)
+            yield call(updateProfileTutorV2, profile)
         } else {
             yield call(createProfile, profile)
         }

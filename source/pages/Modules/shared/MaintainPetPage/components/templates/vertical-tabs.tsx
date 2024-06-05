@@ -4,34 +4,48 @@ import { useEffect, useState } from 'react'
 
 import { Tab } from '@headlessui/react'
 import { tv } from 'tailwind-variants'
-import type { StepProps } from '~/types/helpers'
+import useProfile from '~/store/hooks/profile/use-profile'
+import type { StepProps, TabsOptions } from '~/types/helpers'
 import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
 import { StepHealthInsurance, StepPet, StepTutor } from '../steps'
 
-type Tabs = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
-
 type TabItem = {
-    id: Tabs
+    id: TabsOptions
     title: string
     href: string
     Component: (props: StepProps) => JSX.Element
 }
 
-const items: TabItem[] = [
+const itemsVet: TabItem[] = [
     {
-        id: 1,
+        id: 0,
         title: 'Pet',
         href: '#NewPet',
         Component: StepPet,
     },
     {
-        id: 2,
+        id: 1,
         title: 'Tutor',
         href: '#NewTutor',
         Component: StepTutor,
     },
     {
-        id: 3,
+        id: 2,
+        title: 'Planos de Saúde',
+        href: '#NewHealthInsurance',
+        Component: StepHealthInsurance,
+    },
+]
+
+const itemsTutor: TabItem[] = [
+    {
+        id: 0,
+        title: 'Pet',
+        href: '#NewPet',
+        Component: StepPet,
+    },
+    {
+        id: 1,
         title: 'Planos de Saúde',
         href: '#NewHealthInsurance',
         Component: StepHealthInsurance,
@@ -90,17 +104,16 @@ const menu = tv({
 })
 
 const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
-    const [activeVerticalTab, setActiveVerticalTab] = useState(1)
-    const [passedVerticalSteps, setPassedVerticalSteps] = useState([1])
+    const [activeVerticalTab, setActiveVerticalTab] = useState(0)
     const { mode } = useModeEditablePet()
 
-    function toggleVerticalTab(tab: Tabs) {
-        if (activeVerticalTab !== tab) {
-            const modifiedSteps = [...passedVerticalSteps, tab]
+    const { data: profile } = useProfile()
 
-            if (tab >= 1 && tab <= items.length) {
-                setActiveVerticalTab(tab)
-                setPassedVerticalSteps(modifiedSteps)
+    const items = profile?.type_profile === 2 ? itemsTutor : itemsVet
+
+    function toggleVerticalTab(tab: TabsOptions) {
+        if (activeVerticalTab !== tab) {
+            if (tab >= 0 && tab <= items.length) {
             }
         }
     }
@@ -111,7 +124,6 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
         }
 
         setActiveVerticalTab(0)
-        setPassedVerticalSteps([0])
     }, [mode])
 
     return (
@@ -149,19 +161,20 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
                         })}
                     </Tab.List>
                 </div>
-
-                {items.map(({ id, Component }) => {
-                    return (
-                        <Tab.Panel key={id}>
-                            <Component
-                                activeTab={activeVerticalTab}
-                                toggleTab={toggleVerticalTab}
-                                isPending={isPending}
-                                tutorExist={hasTutor}
-                            />
-                        </Tab.Panel>
-                    )
-                })}
+                <Tab.Panels>
+                    {items.map(({ id, Component }) => {
+                        return (
+                            <Tab.Panel key={id}>
+                                <Component
+                                    activeTab={activeVerticalTab}
+                                    toggleTab={toggleVerticalTab}
+                                    isPending={isPending}
+                                    tutorExist={hasTutor}
+                                />
+                            </Tab.Panel>
+                        )
+                    })}
+                </Tab.Panels>
             </Tab.Group>
         </div>
     )

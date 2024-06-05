@@ -195,5 +195,6 @@
     "vaccination_protocol": "Protocolo de Vacinação",
     "vaccination_history": "Histórico de Vacinação",
     "vaccination_status": "Status de Vacinação",
-    "vaccination_certificate": "Certificado de Vacinação"
+    "vaccination_certificate": "Certificado de Vacinação",
+    "bovine": "Bovino"
 }

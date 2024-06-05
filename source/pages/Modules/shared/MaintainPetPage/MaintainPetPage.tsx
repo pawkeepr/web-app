@@ -10,11 +10,12 @@ import { ModeInput } from '~/Components/molecules/field-control/field-control'
 import type { Veterinary } from '~/entities/Veterinary'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import usePetById from '~/store/hooks/pet-by-id/use-pets'
+import useProfile from '~/store/hooks/profile/use-profile'
 import type { BloodType } from '~/types/bloodType'
 import type { Breed } from '~/types/breedType'
 import type { IPet } from '~/types/pet'
 import type { IPetV2 } from '~/types/pet-v2'
-import type { Location } from '~/types/profile'
+import { TypeProfile, type Location } from '~/types/profile'
 import type { Gender, Species } from '~/types/speciesType'
 import { useModeEditablePet } from './components/hooks/use-mode-editable-pet'
 
@@ -94,6 +95,16 @@ type CreateOrUpdatePetPageProps = {
     id_pet?: string
 }
 
+type BasicPetInformation = {
+    email: string
+    phone: string
+    whatsapp: string
+    address: Location
+    first_name: string
+    last_name: string
+    cpf_tutor: string
+}
+
 const CreateOrUpdatePetPage = ({
     document,
     id_pet,
@@ -104,22 +115,47 @@ const CreateOrUpdatePetPage = ({
         handleSubmit,
     } = usePetById(document as string, id_pet as string)
 
+    const { data: profile } = useProfile()
+
     const pathname = usePathname()
     const veterinary = useProfileVeterinary()
     const router = useRouter()
+
+    const tutorInformation: BasicPetInformation = useMemo(() => {
+        if (profile?.type_profile === TypeProfile.VETERINARY) {
+            return {
+                cpf_tutor: document as string,
+                email: pet?.main_responsible_guardian?.contact?.email as string,
+                phone: pet?.main_responsible_guardian?.contact?.phone as string,
+                whatsapp: pet?.main_responsible_guardian?.contact
+                    ?.whatsapp as string,
+                address: pet?.main_responsible_guardian?.address as Location,
+                first_name: pet?.main_responsible_guardian?.first_name as string,
+                last_name: pet?.main_responsible_guardian?.last_name as string,
+            }
+        }
+
+        if (profile?.type_profile === TypeProfile.TUTOR) {
+            return {
+                email: profile?.user_information?.contact?.email as string,
+                phone: profile?.user_information?.contact?.phone as string,
+                whatsapp: profile?.user_information?.contact?.whatsapp as string,
+                address: profile?.user_information?.address as Location,
+                first_name: profile?.user_information?.first_name as string,
+                last_name: profile?.user_information?.last_name as string,
+                cpf_tutor: profile?.user_information?.cpf_cnpj as string,
+            }
+        }
+
+        return {} as BasicPetInformation
+    }, [pet, profile, document])
 
     const initialValues = useMemo(() => {
         return makeInitialValues({
             id_pet,
             pet_information: pet?.pet_information,
-            cpf_tutor: document as string,
-            email: pet?.main_responsible_guardian?.contact?.email as string,
-            phone: pet?.main_responsible_guardian?.contact?.phone as string,
-            whatsapp: pet?.main_responsible_guardian?.contact?.whatsapp as string,
             veterinary,
-            address: pet?.main_responsible_guardian?.address as Location,
-            first_name: pet?.main_responsible_guardian?.first_name as string,
-            last_name: pet?.main_responsible_guardian?.last_name as string,
+            ...tutorInformation,
         })
     }, [pet, document, veterinary, id_pet]) as IPet
 
@@ -146,7 +182,10 @@ const CreateOrUpdatePetPage = ({
         onChangeMode(ModeInput.readonly)
     }
 
-    const isRouteCreate = useMemo(() => pathname === '/dashboard/pet', [pathname])
+    const isRouteCreate = useMemo(
+        () => pathname === '/dashboard/pet' || '/tutor/pet',
+        [pathname],
+    )
 
     return (
         <Formik
