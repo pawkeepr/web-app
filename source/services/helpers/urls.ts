@@ -19,8 +19,10 @@ export const VET_UPDATE_PROFILE = () => '/api-user/update-user-vet'
 // Profile Tutor
 
 export const TUTOR_CREATE_PROFILE = () => '/api-user/create-user-tutor'
-export const TUTOR_GET_PROFILE = () => '/api-user/search-user-tutor'
+export const TUTOR_GET_PROFILE = () => '/api-user/search-user/2'
 export const TUTOR_UPDATE_PROFILE = () => '/api-user/update-user-tutor'
+
+export const TUTOR_HAS_PROFILE_FROM_VETERINARY = () => '/api-user/search-user-tutor'
 
 // Pet
 
@@ -32,6 +34,9 @@ export const PET_CREATE_SIMPLIFIED_PROFILE = () => '/api-pet/create-pet-simplifi
 export const PET_GET_PROFILE = () => '/api-pet/search-pet'
 export const PET_UPDATE_PROFILE = () => '/api-pet/update-pet'
 export const PET_UPDATE_HEALTH = () => '/api-pet/update-pet-health'
+
+export const PET_FETCH_ALL_VET = () => '/api-user/fetch-all-pets/vet'
+export const PET_FETCH_ALL_TUTOR = () => '/api-user/fetch-all-pets/tutor'
 
 // whatsapp
 
