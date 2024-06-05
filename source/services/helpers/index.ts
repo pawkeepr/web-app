@@ -18,6 +18,10 @@ export const createAppointmentVet = async (data: any) =>
     api.post(urls.APPOINTMENT_CREATE(), data)
 export const finishedAppointmentVet = async (id_appointment: string, data: any) =>
     api.put(urls.APPOINTMENT_FINISHED(), data, { params: { id_appointment } })
+export const getTutorProfileFromVet = async (email_tutor: string) =>
+    api.get(urls.TUTOR_HAS_PROFILE_FROM_VETERINARY(), {
+        params: { email_tutor },
+    })
 
 export const createScheduled = async (data: any) =>
     api.post(urls.SCHEDULED_CREATE(), data)
@@ -53,6 +57,8 @@ export const updateHealthPet = async (
     id_pet: string,
 ) => api.post(urls.PET_UPDATE_HEALTH(), data, { params: { id_pet, cpf_cnpj } })
 
+export const getAllPetsTutor = async () => api.get(urls.PET_FETCH_ALL_TUTOR())
+
 export const sendMessageWhatsapp = async (data: any) =>
     api.post(urls.WHATSAPP_SEND_MESSAGE(), data)
 
@@ -85,7 +91,7 @@ export const updateAppointmentRescheduled = async (
 export const createScheduledVet = async (data: any) =>
     api.post(urls.APPOINTMENT_CREATE_SCHEDULED_VET(), data)
 
-export const getAllPetsOfClinic = async () => api.get(urls.PET_FETCH_ALL_CLINIC())
+export const getAllPetsOfClinic = async () => api.get(urls.PET_FETCH_ALL_VET())
 export const getAllTutorsOfClinic = async () =>
     api.get(urls.TUTORS_FETCH_ALL_CLINIC())
 
