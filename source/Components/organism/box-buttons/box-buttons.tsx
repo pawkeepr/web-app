@@ -15,7 +15,9 @@ import {
     usePlusModal,
 } from '~/contexts/setters-status-appointments-modals-context'
 import useResizeMobile from '~/hooks/use-resize-mobile'
+import useProfile from '~/store/hooks/profile/use-profile'
 import type { VeterinaryConsultation } from '~/types/appointment'
+import { TypeProfile } from '~/types/profile'
 
 type BoxButtonsProps = {
     isLoading?: boolean
@@ -26,7 +28,10 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
     const router = useRouter()
     const [isStarting, setIsStarting] = useState(false)
     const { isMobile } = useResizeMobile()
+    const { data: profile } = useProfile()
+
     const { setItem, open, close } = usePlusModal()
+    const hasPermission = profile?.type_profile === TypeProfile.VETERINARY
 
     const onClickCancel = useCallback(() => {
         setItem(item)
@@ -69,6 +74,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
             <BtnPrimary
                 condition={
                     !isLoading &&
+                    hasPermission &&
                     item.appointment_status?.canceled === 'no' &&
                     item.appointment_status?.done === 'no'
                 }

@@ -1,9 +1,8 @@
-import { Form, Formik } from 'formik'
+import { Form, Formik, type FormikHelpers } from 'formik'
 import { HiHome } from 'react-icons/hi'
 import { BtnPrimary } from '~/Components/atoms/btn'
 import BtnFloating from '~/Components/molecules/btn-floating'
 import FieldTextArea from '~/Components/molecules/field-text-area'
-import { successToast } from '~/store/helpers/toast'
 import { useCreateFeedbackMutation } from '~/store/hooks/feedback'
 ;('/api-user/update-feedback-user/{user_type}')
 
@@ -14,16 +13,22 @@ type FormFeedback = {
 const Feedback = () => {
     const { mutateAsync } = useCreateFeedbackMutation()
 
+    const handleSubmit = async (
+        values: FormFeedback,
+        { resetForm }: FormikHelpers<FormFeedback>,
+    ) => {
+        try {
+            await mutateAsync(values)
+            resetForm()
+        } catch (_) {}
+    }
+
     return (
         <section className="p-2 mt-2 bg-white card card-body">
             <Formik
                 initialValues={{ comments: '' }}
-                onSubmit={(values: FormFeedback) => {
-                    mutateAsync(values)
-                    successToast(
-                        'Muito Obrigado! Agradecemos seu tempo e sua mensagem!',
-                    )
-                }}
+                enableReinitialize
+                onSubmit={handleSubmit}
             >
                 {({ values, handleSubmit, isSubmitting }) => (
                     <Form

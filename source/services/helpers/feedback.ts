@@ -20,4 +20,4 @@ export type PostFeedback = {
 export const postFeedback = async (
     data: PostFeedback,
     type_user: KEYS_TYPE_USERS,
-) => api.post(urls.CREATE_FEEDBACK(type_user), data)
+) => api.put(urls.CREATE_FEEDBACK(type_user), data)

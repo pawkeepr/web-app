@@ -5,7 +5,7 @@ import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 
 import FieldControl from '~/Components/molecules/field-control/field-control'
 
-import type { RecordsShapeYup, StepProps, TabsOptions } from '~/types/helpers'
+import type { RecordsShapeYup, StepProps } from '~/types/helpers'
 import type { InitialValues } from '../../index'
 import AddressTutor from '../molecules/address-tutor'
 
@@ -40,7 +40,7 @@ const schema = yup.object().shape<StepTutorSchema>({
         .required('Campo obrigatório'),
 })
 
-const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) => {
+const StepTutor = ({ prevStep, nextStep, isPending, tutorExist }: StepProps) => {
     const { values } = useFormikContextSafe<StepTutorsKeys>()
     const { mode } = useModeEditablePet()
     const isValid = useMemo(() => {
@@ -131,7 +131,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                     condition={mode === 'editable'}
                     label="Voltar"
                     onClick={() => {
-                        toggleTab((activeTab - 1) as TabsOptions)
+                        prevStep?.()
                     }}
                 />
                 <BtnPrimary
@@ -139,7 +139,7 @@ const StepTutor = ({ toggleTab, activeTab, isPending, tutorExist }: StepProps) =
                     disabled={!isValid}
                     label="Próximo"
                     onClick={() => {
-                        toggleTab((activeTab + 1) as TabsOptions)
+                        nextStep?.()
                     }}
                 />
             </div>

@@ -86,8 +86,8 @@ const CardScheduled = ({ appointment }: CardScheduledProps) => {
     const pet = useMemo(
         () => ({
             ...appointment.tutor_pet_vet.pet,
-            specie: t(appointment.tutor_pet_vet?.pet?.specie as Species),
-            race: t(appointment.tutor_pet_vet?.pet?.race as string),
+            specie: appointment.tutor_pet_vet?.pet?.specie as Species,
+            race: appointment.tutor_pet_vet?.pet?.race as string,
             sex: GenderBR[appointment.tutor_pet_vet?.pet?.sex as Gender],
         }),
         [appointment],
@@ -132,7 +132,7 @@ const CardScheduled = ({ appointment }: CardScheduledProps) => {
             <>
                 <div className="text-gray-500">
                     <h3 className="font-bold ">Pet:</h3>
-                    <p>{`${pet?.specie}, ${pet?.race}`}</p>
+                    <p>{`${t(pet?.specie)}, ${t(pet?.race)}`}</p>
 
                     <div>
                         <h3 className="font-bold ">Tutor:</h3>

@@ -5,6 +5,7 @@ import {
     type PostFeedback,
 } from '~/services/helpers/feedback'
 import { AttributeTypeProfile } from '~/services/helpers/types'
+import { successToast } from '~/store/helpers/toast'
 import { useAppSelector } from '~/store/hooks'
 
 const NAME = 'feedback'
@@ -21,7 +22,9 @@ export const useCreateFeedbackMutation = () => {
             : KEYS_TYPE_USERS.tutor
 
     return useMutationHelper({
-        mutationFn: async (data: PostFeedback) => postFeedback(data, type),
+        mutationFn: (data: PostFeedback) => postFeedback(data, type),
         mutationKey: superKeys,
+        onSuccess: () =>
+            successToast('Muito Obrigado! Agradecemos seu tempo e sua mensagem!'),
     })
 }
