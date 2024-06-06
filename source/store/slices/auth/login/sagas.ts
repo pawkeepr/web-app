@@ -27,7 +27,12 @@ import {
 
 import { layoutModeTypes } from '~/constants/layout'
 import { errorToast } from '~/store/helpers/toast'
-import { getCookie, removeCookie, setCookie } from '~/utils/cookies-utils'
+import {
+    deleteCookiesWithPrefix,
+    getCookie,
+    removeCookie,
+    setCookie,
+} from '~/utils/cookies-utils'
 import { getProfileSession, resetProfileFlag, setProfile } from '../profile/actions'
 
 import type { IProfile } from '~/types/profile'
@@ -41,14 +46,16 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
             attributes,
         } = response
 
-        yield call(setCookie,
+        yield call(
+            setCookie,
             cookies.token.name,
             idToken.jwtToken,
             idToken.payload.exp / 1000,
-            { sameSite: 'strict' }
+            { sameSite: 'strict' },
         )
 
-        yield call(setCookie, 
+        yield call(
+            setCookie,
             cookies.cognito_profile.name,
             JSON.stringify(attributes),
             idToken.payload.exp / 1000,
@@ -110,6 +117,7 @@ export function* signOutUserSaga() {
     try {
         yield put(changeLayoutMode(layoutModeTypes.LIGHT_MODE))
         yield call(removeCookie, cookies.token.name)
+        yield call(deleteCookiesWithPrefix, 'pawkeepr')
         yield call(signOut)
         yield put(resetProfileFlag())
         yield put(signOutUserSuccess())

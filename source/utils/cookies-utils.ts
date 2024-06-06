@@ -1,4 +1,5 @@
 import type { CookieSerializeOptions } from 'cookie'
+import Cookies from 'js-cookie'
 import { destroyCookie, parseCookies, setCookie as setCookieWrapper } from 'nookies'
 
 export function setCookie(
@@ -8,6 +9,18 @@ export function setCookie(
     options?: CookieSerializeOptions,
 ) {
     return setCookieWrapper(null, name, value, { ...options, maxAge })
+}
+
+export const deleteCookiesWithPrefix = (prefix: string) => {
+    // Obtém todos os cookies
+    const allCookies = Cookies.get()
+
+    // Filtra e deleta os cookies que começam com o prefixo especificado
+    for (const cookieName of Object.keys(allCookies)) {
+        if (cookieName.startsWith(prefix)) {
+            Cookies.remove(cookieName)
+        }
+    }
 }
 
 export function getCookie(name: string, ctx: any = null) {
