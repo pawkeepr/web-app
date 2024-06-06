@@ -1,8 +1,8 @@
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import LOADING from '~/constants/loading'
 
 import { api } from '~/services/api'
-import { type IUser, type LoginState, name } from './types'
+import { name, type IUser, type LoginState } from './types'
 
 const initialState: LoginState = {
     user: null,

@@ -1,12 +1,8 @@
-import { useEffect } from 'react'
-
 import { LOADING } from '~/constants/loading'
 
-import { useRouter } from 'next/navigation'
 import { BtnLink } from '~/Components/atoms/btn'
 import Loader from '~/Components/organism/loader'
-import { useAppDispatch, useAppSelector } from '~/store/hooks'
-import { resetLoading } from '~/store/slices/auth/login/actions'
+import { useAppSelector } from '~/store/hooks'
 import AuthLayout from '../../_layouts/auth/auth_layout'
 import AuthInputs from './components/organism/auth-inputs'
 
@@ -16,34 +12,11 @@ export type CoverSignInProps = {
 }
 
 const CoverSignIn = ({ mode, bgImage }: CoverSignInProps) => {
-    const router = useRouter()
     const { isLoading } = useAppSelector((state) => state.Login)
-    const dispatch = useAppDispatch()
 
-    const loading = isLoading === LOADING.PENDING
-
-    useEffect(() => {
-        if (loading) {
-            router.prefetch('/dashboard')
-        }
-
-        let timeout: string | number | NodeJS.Timeout | undefined
-        if (isLoading === LOADING.SUCCESS) {
-            timeout = setTimeout(() => {
-                router.push('/dashboard')
-            }, 3000)
-        }
-
-        return () => {
-            clearTimeout(timeout)
-        }
-    }, [isLoading])
-
-    useEffect(() => {
-        return () => {
-            dispatch(resetLoading())
-        }
-    }, [])
+    const isPending = isLoading === LOADING.PENDING
+    const isSuccessful = isLoading === LOADING.SUCCESS
+    const loading = isPending || isSuccessful
 
     const link = mode === 'veterinary' ? '/veterinary/sign-up' : '/tutor/sign-up'
 
@@ -53,7 +26,7 @@ const CoverSignIn = ({ mode, bgImage }: CoverSignInProps) => {
             image={bgImage}
             alt="Imagem"
             hasImage
-            loading={LOADING.SUCCESS === isLoading}
+            loading={loading}
         >
             {!loading && (
                 <div className="flex flex-col items-center justify-center">
