@@ -1,7 +1,7 @@
 import { Form, Formik, type FormikHelpers } from 'formik'
 import { HiHome } from 'react-icons/hi'
 import { BtnPrimary } from '~/Components/atoms/btn'
-import BtnFloating from '~/Components/molecules/btn-floating'
+import { BtnLinkFloating } from '~/Components/molecules/btn-floating'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import { useCreateFeedbackMutation } from '~/store/hooks/feedback'
 ;('/api-user/update-feedback-user/{user_type}')
@@ -50,7 +50,11 @@ const Feedback = () => {
                     </Form>
                 )}
             </Formik>
-            <BtnFloating onClick={() => {}} title="Ir para a Home" icon={HiHome} />
+            <BtnLinkFloating
+                href="/dashboard"
+                title="Ir para a Home"
+                icon={HiHome}
+            />
         </section>
     )
 }
