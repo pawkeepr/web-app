@@ -1,11 +1,14 @@
 import { cnpj, cpf } from 'cpf-cnpj-validator'
 import * as Yup from 'yup'
 import useAppQuery from '~/hooks/use-app-query'
+import useMutationHelper from '~/hooks/use-mutation-helper'
 import {
     getTutorProfile,
     getTutorProfileFromVet,
     getVetProfile,
 } from '~/services/helpers'
+import { KEYS_TYPE_USER_BY_NUMBER } from '~/services/helpers/feedback'
+import { updateProfileV2 } from '~/services/helpers/profile'
 import { AttributeTypeProfile } from '~/services/helpers/types'
 import { useAppSelector } from '~/store/hooks'
 import type { IProfile } from '~/types/profile'
@@ -23,6 +26,20 @@ const useProfile = () => {
 
     return useAppQuery<IProfile>(superKeys, getProfile.bind(null), {
         enabled: !!user,
+    })
+}
+
+export const useUpdateProfileMutation = () => {
+    const { data: profile } = useProfile()
+
+    const type_profile = profile?.type_profile
+
+    const email = profile?.user_information?.contact?.email
+
+    return useMutationHelper({
+        mutationFn: async (data: IProfile) =>
+            updateProfileV2(data, KEYS_TYPE_USER_BY_NUMBER[type_profile || 1]),
+        mutationKey: [NAME, email],
     })
 }
 

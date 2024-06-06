@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/router'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { FaEdit, FaPlayCircle } from 'react-icons/fa'
 import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import withCompose from '~/Components/helpers/with-compose'
@@ -25,7 +25,16 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
         )
     }, [item])
 
-    const hasPermission = profile?.type_profile === TypeProfile.VETERINARY
+    const isVet = profile?.type_profile === TypeProfile.VETERINARY
+    const isTutor = profile?.type_profile === TypeProfile.TUTOR
+
+    const href = useMemo(
+        () =>
+            isTutor
+                ? `/tutor/pet/${item?.id_pet}`
+                : `/profile/pet?document=${item.cpf_cnpj}&id_pet=${item.id_pet}`,
+        [item, isTutor],
+    )
 
     return (
         <div className="flex flex-wrap items-center justify-center w-full gap-1 px-2 overflow-hidden ">
@@ -34,13 +43,13 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
                 message="Visualizar Histórico"
                 outline
                 color="neutral"
-                href={`/profile/pet?document=${item.cpf_cnpj}&id_pet=${item.id_pet}`}
+                href={href}
                 className=" !w-1/4  max-w-[33%] "
             >
                 <FaEdit />
             </BtnLink>
             <BtnPrimary
-                condition={!isLoading && hasPermission}
+                condition={!isLoading && isVet}
                 label="Iniciar Consulta"
                 className="mobile:!w-full w-1/4 max-w-[33%] "
                 onClick={startAppointment}

@@ -39,10 +39,12 @@ export const getAllPets = async (cpf_cnpj: string) =>
     api.get(urls.PET_FETCH_ALL(), { params: { cpf_cnpj } })
 export const getAllAppointmentsDonePet = async (id_pet: string) =>
     api.get(urls.PET_FETCH_ALL_APPOINTMENTS_DONE(), { params: { id_pet } })
-export const getPet = async (cpf_cnpj: string, id_pet: string) =>
-    api.get(urls.PET_GET_PROFILE(), { params: { id_pet, cpf_cnpj } })
+export const getPet = async (_cpf_cnpj: string, id_pet: string) =>
+    api.get(urls.PET_GET_PROFILE(), { params: { id_pet } })
 export const createPet = async (data: any) =>
     api.post(urls.PET_CREATE_PROFILE(), data)
+export const createPetByTutor = async (data: any) =>
+    api.post(urls.PET_CREATE_PROFILE_BY_TUTOR(), data)
 export const createPetSimplified = async (data: any) =>
     api.post(urls.PET_CREATE_SIMPLIFIED_PROFILE(), data)
 export const updatePet = async (

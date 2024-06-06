@@ -18,12 +18,28 @@ const useListPetsByTutor = ({ document }: UseListPetsByTutorProps) => {
 
 export default useListPetsByTutor
 
+interface Pet {
+    approximate_date: string | null
+    blood_donator: string
+    blood_type: string
+    castrated: string
+    color: string
+    date_birth: string
+    date_update: string
+    id_pet: string
+    identification_number: string
+    microchip: string
+    name_pet: string
+    organ_donor: string
+    pedigree: string
+    pedigree_registry: string
+    race: string
+    sex: string
+    size: string
+    specie: string
+    weight: string
+}
+
 export const useListPetsFromTutor = () => {
-    return useAppQuery<IPetV2[]>(
-        ['listPetsByTutor', document],
-        () => getAllPetsTutor(),
-        {
-            enabled: !!document,
-        },
-    )
+    return useAppQuery<Pet[]>(['listPetsByTutor'], () => getAllPetsTutor())
 }

@@ -30,8 +30,10 @@ export const PET_FETCH_ALL = () => '/api-pet/fetch-all-pets-tutor'
 export const PET_FETCH_ALL_APPOINTMENTS_DONE = () =>
     '/api-appointment-pet/fetch-all-appointment-done-pet'
 export const PET_CREATE_PROFILE = () => '/api-pet/create-pet'
+export const PET_CREATE_PROFILE_BY_TUTOR = () => '/api-pet/create-pet-tutor'
+
 export const PET_CREATE_SIMPLIFIED_PROFILE = () => '/api-pet/create-pet-simplified'
-export const PET_GET_PROFILE = () => '/api-pet/search-pet'
+export const PET_GET_PROFILE = () => '/api-pet/search-pet-by-id'
 export const PET_UPDATE_PROFILE = () => '/api-pet/update-pet'
 export const PET_UPDATE_HEALTH = () => '/api-pet/update-pet-health'
 
