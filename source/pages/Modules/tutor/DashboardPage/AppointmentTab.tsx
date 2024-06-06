@@ -33,7 +33,7 @@ const Tabs = () => [
 const AppointmentsTabs = () => {
     const tabs = Tabs()
     return (
-        <DefaultLayout title="Tutor-Dashboard" name="appointments" searchBlock>
+        <DefaultLayout title="Dashboard" name="appointments" searchBlock>
             <HorizontalTabs categories={tabs} menu />
         </DefaultLayout>
     )

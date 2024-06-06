@@ -50,7 +50,7 @@ type BtnFloatingProps = {
 } & VariantProps<typeof buttonFloating.button> &
     ComponentProps<'button'>
 
-const BtnFloating = ({
+export const BtnFloating = ({
     onClick,
     icon: Icon,
     title,
