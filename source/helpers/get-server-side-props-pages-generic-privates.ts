@@ -51,15 +51,6 @@ const getServerSidePropsPagesGenericsPrivates =
 
         const hasProfile = attr?.['custom:has_profile'] === 'yes'
 
-        if (!hasProfile) {
-            return {
-                redirect: {
-                    destination: '/tutor/activation',
-                    permanent: false,
-                },
-            }
-        }
-
         if (callback) return callback(ctx)
 
         const lg = ctx.locale || 'pt-br'

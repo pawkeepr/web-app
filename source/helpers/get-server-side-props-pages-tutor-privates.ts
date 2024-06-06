@@ -61,15 +61,6 @@ const getServerSidePropsPagesTutorPrivates =
             }
         }
 
-        if (!hasProfile) {
-            return {
-                redirect: {
-                    destination: '/tutor/activation',
-                    permanent: false,
-                },
-            }
-        }
-
         if (callback) return callback(ctx)
 
         const lg = ctx.locale || 'pt-br'

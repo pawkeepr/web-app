@@ -74,15 +74,6 @@ const getServerSidePropsPagesVeterinaryPrivates =
             }
         }
 
-        if (!hasProfile) {
-            return {
-                redirect: {
-                    destination: '/veterinary/activation',
-                    permanent: false,
-                },
-            }
-        }
-
         if (callback) return callback(ctx)
 
         const lg = ctx.locale || 'pt-br'
