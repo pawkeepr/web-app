@@ -4,6 +4,7 @@ import { call, delay, put, takeLatest } from 'redux-saga/effects'
 import cookies from '~/constants/cookies'
 
 import {
+    resetLoading,
     setAuthorization,
     signInFailed,
     signInSuccess,
@@ -74,6 +75,7 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
                 type_profile: attributes['custom:type_profile'],
             }),
         )
+        yield call([Router, Router.push], '/dashboard')
     } catch (error) {
         switch ((error as any)?.code) {
             case 'UserNotConfirmedException':
@@ -87,6 +89,8 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
                 yield put(signInFailed((error as any).message))
                 break
         }
+    } finally {
+        yield put(resetLoading())
     }
 }
 
@@ -129,6 +133,7 @@ export function* signOutUserSaga() {
         yield put(signOutUserFailed((error as any).message))
     } finally {
         delay(1000)
+        yield put(resetLoading())
         yield call([Router, Router.push], '/sign-in')
     }
 }
