@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import { Formik } from 'formik'
+import { Formik, type FormikHelpers } from 'formik'
 import { useCallback } from 'react'
 import Form from 'react-bootstrap/Form'
 import { FaEdit, FaEye } from 'react-icons/fa'
@@ -18,13 +18,18 @@ const PersonalData = ({ data }: PersonalDataProps) => {
     const { mode, toggleMode } = useModeEditablePet()
     const { mutateAsync } = useUpdateProfileMutation()
 
-    const handleSubmit = useCallback((values: IProfile) => {
-        try {
-            mutateAsync(values)
-        } catch (error) {
-            console.error(error)
-        }
-    }, [])
+    const handleSubmit = useCallback(
+        async (values: IProfile, { setSubmitting }: FormikHelpers<IProfile>) => {
+            try {
+                await mutateAsync(values)
+            } catch (error) {
+                console.error(error)
+            } finally {
+                setSubmitting(false)
+            }
+        },
+        [],
+    )
 
     return (
         <Formik initialValues={data} onSubmit={handleSubmit}>

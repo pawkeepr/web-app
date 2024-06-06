@@ -10,6 +10,7 @@ import {
 import { KEYS_TYPE_USER_BY_NUMBER } from '~/services/helpers/feedback'
 import { updateProfileV2 } from '~/services/helpers/profile'
 import { AttributeTypeProfile } from '~/services/helpers/types'
+import { errorToast, infoToast } from '~/store/helpers/toast'
 import { useAppSelector } from '~/store/hooks'
 import type { IProfile } from '~/types/profile'
 
@@ -37,9 +38,11 @@ export const useUpdateProfileMutation = () => {
     const email = profile?.user_information?.contact?.email
 
     return useMutationHelper({
-        mutationFn: async (data: IProfile) =>
+        mutationFn: (data: IProfile) =>
             updateProfileV2(data, KEYS_TYPE_USER_BY_NUMBER[type_profile || 1]),
         mutationKey: [NAME, email],
+        onSuccess: () => infoToast('Perfil atualizado com sucesso'),
+        onError: () => errorToast('Erro ao atualizar perfil'),
     })
 }
 
