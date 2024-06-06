@@ -30,6 +30,7 @@ const DashboardLayouts = ({
         <main>
             <HeaderTitle title={title} />
             {/* {searchBlock && <BlockSearchAndInputDocument name={name as string} />} */}
+            <div className="block h-6 web:hidden" />
             {children}
             <ContextSettersStatusAppointmentsModals />
         </main>
