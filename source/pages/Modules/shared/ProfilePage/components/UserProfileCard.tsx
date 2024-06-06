@@ -25,6 +25,9 @@ const UserProfileCard = ({
                 <div className="text-center">
                     <div className="mx-auto mb-4 profile-user position-relative d-inline-block">
                         <AvatarPet
+                            classNames={{
+                                img: '!w-32 !h-32',
+                            }}
                             src={avatar}
                             name_pet={name as string}
                             specie={specie as Species}
