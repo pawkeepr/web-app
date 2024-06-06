@@ -19,7 +19,7 @@ const InputCode = ({
             <input
                 type="text"
                 className={input({
-                    className,
+                    className: `${className} !px-0 `,
                     required,
                     center: true,
                 })}

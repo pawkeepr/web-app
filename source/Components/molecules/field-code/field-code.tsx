@@ -76,6 +76,7 @@ const FieldCode = <T,>({
             data-testid={`input-code-${id}`}
             moveToNext={() => moveToNext?.(position)}
             onChange={onChange}
+            className="!px-0"
             // onPaste={onPaste}
         />
     )
