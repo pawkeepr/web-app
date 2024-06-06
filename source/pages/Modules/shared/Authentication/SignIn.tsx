@@ -4,6 +4,7 @@ import { LOADING } from '~/constants/loading'
 
 import { useRouter } from 'next/navigation'
 import { BtnLink } from '~/Components/atoms/btn'
+import Loader from '~/Components/organism/loader'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import { resetLoading } from '~/store/slices/auth/login/actions'
 import AuthLayout from '../../_layouts/auth/auth_layout'
@@ -19,7 +20,7 @@ const CoverSignIn = ({ mode, bgImage }: CoverSignInProps) => {
     const { isLoading } = useAppSelector((state) => state.Login)
     const dispatch = useAppDispatch()
 
-    const loading = isLoading === LOADING.PENDING || isLoading === LOADING.SUCCESS
+    const loading = isLoading === LOADING.PENDING
 
     useEffect(() => {
         if (loading) {
@@ -54,22 +55,19 @@ const CoverSignIn = ({ mode, bgImage }: CoverSignInProps) => {
             hasImage
             loading={LOADING.SUCCESS === isLoading}
         >
-            <div className="flex flex-col items-center justify-center">
-                <p className="text-sm font-bold text-secondary-500">
-                    Seja Bem-vindo(a)!
-                </p>
-            </div>
+            {!loading && (
+                <div className="flex flex-col items-center justify-center">
+                    <p className="text-sm font-bold text-secondary-500">
+                        Seja Bem-vindo(a)!
+                    </p>
+                </div>
+            )}
             <div className="mobile:!mt-0 mobile:p-0 web:p-1">
-                {loading && (
-                    <div className="flex justify-center item-center web:min-h-[236px]">
-                        <div
-                            className="my-4 spinner-border text-primary-500 w-44 h-44"
-                            role="status"
-                        >
-                            <span className="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
-                )}
+                <Loader
+                    condition={loading}
+                    message="Aguarde um momento..."
+                    type="TailSpin"
+                />
 
                 {!loading && (
                     <div className="web:max-h-[236px] p-2">
@@ -78,12 +76,14 @@ const CoverSignIn = ({ mode, bgImage }: CoverSignInProps) => {
                 )}
             </div>
 
-            <div className="flex flex-col items-center justify-center w-full ">
-                <p className="-mb-2 font-normal text-gray-400">
-                    Você não tem uma conta ?
-                </p>
-                <BtnLink message="Criar Conta" href={link} />
-            </div>
+            {!loading && (
+                <div className="flex flex-col items-center justify-center w-full ">
+                    <p className="-mb-2 font-normal text-gray-400">
+                        Você não tem uma conta ?
+                    </p>
+                    <BtnLink message="Criar Conta" href={link} />
+                </div>
+            )}
         </AuthLayout>
     )
 }
