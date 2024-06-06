@@ -1,7 +1,7 @@
 import Feedback from '~/pages/Modules/shared/Feedback'
 
 import { LayoutVeterinary } from '~/Layouts'
-import getServerSidePropsPagesVeterinaryPrivates from '~/helpers/get-server-side-props-pages-veterinary-privates'
+import getServerSidePropsPagesGenericsPrivates from '~/helpers/get-server-side-props-pages-generic-privates'
 
 const FeedbackPageNext = () => {
     return (
@@ -13,4 +13,4 @@ const FeedbackPageNext = () => {
 
 export default FeedbackPageNext
 
-export const getServerSideProps = getServerSidePropsPagesVeterinaryPrivates()
+export const getServerSideProps = getServerSidePropsPagesGenericsPrivates()
