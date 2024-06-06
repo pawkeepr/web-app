@@ -9,13 +9,6 @@ import StepScheduledAll from './components/organisms/steps/step-scheduled-all'
 const Tabs = () => [
     {
         id: 1,
-        title: 'Agendamentos',
-        href: '#scheduled',
-        icon: <FaCalendarCheck className="w-6 h-4" />,
-        tab: <StepScheduledAll />,
-    },
-    {
-        id: 1,
         title: 'Meus Pets',
         icon: <MdPets className="w-6 h-4" />,
         href: '#pets',
@@ -23,7 +16,14 @@ const Tabs = () => [
     },
     {
         id: 2,
-        title: 'Veterinários',
+        title: 'Consultas',
+        href: '#scheduled',
+        icon: <FaCalendarCheck className="w-6 h-4" />,
+        tab: <StepScheduledAll />,
+    },
+    {
+        id: 2,
+        title: 'Meus Vets',
         icon: <FaStethoscope className="w-6 h-4" />,
         href: '#veterinarians',
         tab: <VetsTab />,
