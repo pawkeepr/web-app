@@ -3,7 +3,7 @@ import { Formik } from 'formik'
 import { useCallback } from 'react'
 import Form from 'react-bootstrap/Form'
 import { FaEdit, FaEye } from 'react-icons/fa'
-import { BtnIcon, BtnPrimary, BtnSecondary } from '~/Components/atoms/btn'
+import { BtnIcon, BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control'
 import { useModeEditablePet } from '~/pages/Modules/shared/MaintainPetPage/components/hooks/use-mode-editable-pet'
 import { useUpdateProfileMutation } from '~/store/hooks/profile/use-profile'
@@ -28,8 +28,8 @@ const PersonalData = ({ data }: PersonalDataProps) => {
 
     return (
         <Formik initialValues={data} onSubmit={handleSubmit}>
-            {({ values }) => (
-                <Form className="pb-4">
+            {({ values, isSubmitting, handleSubmit }) => (
+                <Form className="pb-4" onSubmit={handleSubmit}>
                     <div className="flex justify-end w-full">
                         <BtnIcon
                             icon={
@@ -46,7 +46,7 @@ const PersonalData = ({ data }: PersonalDataProps) => {
                             type="button"
                             className={cn(
                                 `
-                                flex justify-center items-center w-32 h-10 rounded-md
+                                flex justify-center items-center web:!w-32 h-10 rounded-md
                             `,
                                 {
                                     'bg-confirm-500 hover:bg-confirm-600 text-white':
@@ -97,8 +97,17 @@ const PersonalData = ({ data }: PersonalDataProps) => {
                             <AddressTutor mode={mode} />
                         </div>
                         <div className="flex items-end justify-end mobile:justify-center">
-                            <BtnSecondary label="Cancelar" />
-                            <BtnPrimary label="Salvar" type="submit" />
+                            <BtnNeutral
+                                outline
+                                label="Cancelar"
+                                condition={!isSubmitting}
+                                className="border-none"
+                            />
+                            <BtnPrimary
+                                label="Salvar"
+                                type="submit"
+                                isLoading={isSubmitting}
+                            />
                         </div>
                     </div>
                 </Form>
