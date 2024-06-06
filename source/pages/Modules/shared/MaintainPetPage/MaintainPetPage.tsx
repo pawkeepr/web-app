@@ -200,6 +200,7 @@ const CreateOrUpdatePetPage = ({
         >
             <div
                 className="
+                px-2
                 gap-2 mt-2 relative bg-white w-full
                 mobile:py-6 mobile:items-center mobile:flex mobile:!h-fit mobile:flex-col
                 tablet:py-0 tablet:items-center tablet:flex tablet:!h-fit tablet:flex-col

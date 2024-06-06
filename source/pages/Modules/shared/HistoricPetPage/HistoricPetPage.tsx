@@ -76,9 +76,9 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
 
     return (
         <DefaultLayout title="Histórico do Pet" searchBlock={false}>
-            <div className="container mx-auto">
+            <div className="container mx-auto mobile:pb-24">
                 <div className="flex flex-wrap flex-1 mobile:flex-col tablet:flex-col">
-                    <div className="flex flex-col flex-1 w-full px-4">
+                    <div className="flex flex-col flex-1 w-full px-2">
                         <UserProfileCard
                             name={pet?.pet_information?.name_pet}
                             specie={pet?.pet_information?.specie as string}
@@ -96,7 +96,7 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
                             }
                         />
                     </div>
-                    <div className="w-full flex flex-[3]  px-4 web:my-2 mobile:!flex-1 overflow-hidden">
+                    <div className="w-full flex flex-[3]  px-2 web:my-2 mobile:!flex-1 overflow-hidden">
                         <HorizontalTabs categories={tabs} menu />
                     </div>
                 </div>

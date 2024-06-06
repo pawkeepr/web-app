@@ -1,6 +1,7 @@
 import withCompose from '~/Components/helpers/with-compose'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import useModal from '~/hooks/use-modal'
+import { useTranslations } from '~/hooks/use-translations'
 import type { IPetV2Data } from '~/types/pet-v2'
 import type { Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
@@ -13,6 +14,7 @@ const ModalBoxButtonsPet = ({
     children,
 }: ModalBoxButtonsProps<IPetV2Data>) => {
     const { closeModal, open, showModal } = useModal()
+    const { t } = useTranslations('common')
 
     return (
         <>
@@ -20,6 +22,9 @@ const ModalBoxButtonsPet = ({
             <Modal onClose={() => closeModal()} open={open}>
                 <div className="flex flex-col justify-between items-center w-full h-[90%] p-4">
                     <AvatarPet
+                        classNames={{
+                            img: '!w-32 !h-32',
+                        }}
                         name_pet={pet?.name_pet}
                         specie={pet.specie as Species}
                     />
@@ -27,7 +32,9 @@ const ModalBoxButtonsPet = ({
                         <div className="col-span-1">
                             <div className="mb-2 text-gray-500">
                                 <h3 className="font-bold">Pet:</h3>
-                                <p>{`${pet?.name_pet}, ${pet?.specie}, ${pet?.race}`}</p>
+                                <p>{`${pet?.name_pet}, ${t(pet?.specie)}, ${t(
+                                    pet?.race,
+                                )}`}</p>
                             </div>
 
                             <div className="mb-2 text-gray-500">
@@ -37,7 +44,7 @@ const ModalBoxButtonsPet = ({
 
                             <div className="mb-2 text-gray-500">
                                 <h3 className="font-bold">Sexo do Pet:</h3>
-                                <p>{pet?.sex}</p>
+                                <p>{t(pet?.sex)}</p>
                             </div>
                         </div>
                     </section>
