@@ -16,6 +16,7 @@ export const useListUberVet = () => {
         () => getAllUberVets(location),
         {
             enabled: !!profile?.user_information?.address?.city,
+            initialData: [],
         },
     )
 }

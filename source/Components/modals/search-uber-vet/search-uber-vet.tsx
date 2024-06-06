@@ -55,7 +55,7 @@ const ModalSearchUberVet = () => {
                     </p>
                     <Loader
                         message="Buscando Veterinários na sua região"
-                        condition={isPending}
+                        condition={isPending && !data}
                         type="ThreeDots"
                     />
 
