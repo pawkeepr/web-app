@@ -144,7 +144,7 @@ const StepPet = ({ nextStep }: StepProps) => {
                     mask="_____"
                     placeholder="Digite o número do registro (opcional)"
                 />
-                <div className="grid grid-cols-2 gap-3 col-span-full">
+                <div className="grid grid-cols-2 gap-3 mobile:grid-cols-1 col-span-full">
                     <ControlToggle3States
                         mode={mode}
                         ctx={values}
