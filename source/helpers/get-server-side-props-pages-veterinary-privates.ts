@@ -62,13 +62,22 @@ const getServerSidePropsPagesVeterinaryPrivates =
             }
         }
 
-        const hasProfile = attr?.['custom:has_profile'] === 'yes'
+        const notHasProfile = attr?.['custom:has_profile'] === 'no'
         const typeProfile = attr?.['custom:type_profile']
 
         if (typeProfile && typeProfile !== '1') {
             return {
                 redirect: {
                     destination: '/tutor/dashboard',
+                    permanent: false,
+                },
+            }
+        }
+
+        if (notHasProfile) {
+            return {
+                redirect: {
+                    destination: '/veterinary/activation',
                     permanent: false,
                 },
             }
