@@ -43,7 +43,7 @@ const getServerSidePropsPagesTutorPrivates =
         if (PUBLIC_ROUTES.includes(route)) {
             return {
                 redirect: {
-                    destination: '/dashboard',
+                    destination: '/tutor/dashboard',
                     permanent: false,
                 },
             }

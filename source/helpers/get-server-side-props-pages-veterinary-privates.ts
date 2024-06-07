@@ -56,7 +56,7 @@ const getServerSidePropsPagesVeterinaryPrivates =
         if (PUBLIC_ROUTES.includes(route)) {
             return {
                 redirect: {
-                    destination: '/dashboard',
+                    destination: '/veterinary/dashboard',
                     permanent: false,
                 },
             }

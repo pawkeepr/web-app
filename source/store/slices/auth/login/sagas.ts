@@ -73,7 +73,9 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
             }),
         )
         delay(250)
-        yield call([Router, Router.push], '/dashboard')
+        const partial_route =
+            NameFullProfile[attributes['custom:type_profile'] || 2]
+        yield call([Router, Router.push], `/${partial_route}/dashboard`)
     } catch (error) {
         switch ((error as any)?.code) {
             case 'UserNotConfirmedException':
