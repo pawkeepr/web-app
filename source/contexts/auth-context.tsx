@@ -72,13 +72,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
             return
         }
 
-        const partialRoute = type_profile === 1 ? 'veterinary' : 'tutor'
-
-        if (!user) {
-            router.push(`/${partialRoute}/activation`)
-            return
-        }
-
         dispatch(recoverUserByToken(token))
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
