@@ -18,18 +18,23 @@ export const NAME = 'profile'
 
 const staleTime = 1000 * 60 * 60 * 24 // 24 hours
 
+const makeFetchProfile = (type?: AttributeTypeProfile) => {
+    return type === AttributeTypeProfile.VETERINARY
+        ? getVetProfile
+        : getTutorProfile
+}
+
 const useProfile = () => {
     const { user } = useAppSelector((state) => state.Profile)
     const superKeys = [NAME, user?.email]
 
     const type = user?.['custom:type_profile']
 
-    const getProfile =
-        type === AttributeTypeProfile.VETERINARY ? getVetProfile : getTutorProfile
+    const getProfile = makeFetchProfile(type)
 
     return useAppQuery<IProfile>(superKeys, getProfile.bind(null), {
         enabled: !!user,
-        staleTime,
+        staleTime: user ? staleTime : 0,
     })
 }
 
