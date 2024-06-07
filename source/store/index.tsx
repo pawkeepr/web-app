@@ -5,6 +5,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import { configureStore } from '@reduxjs/toolkit'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import rootReducer from './reducers'
@@ -42,9 +43,12 @@ const ProviderClient = ({ children }: ProviderClientProps) => {
             <PersistGate loading={null} persistor={persistor}>
                 <QueryClientProvider client={queryClient}>
                     {children}
-                    {/* {process.env.NODE_ENV !== 'production' && (
-                        <ReactQueryDevtools initialIsOpen />
-                    )} */}
+                    {process.env.NODE_ENV !== 'production' && (
+                        <ReactQueryDevtools
+                            buttonPosition="bottom-left"
+                            initialIsOpen
+                        />
+                    )}
                 </QueryClientProvider>
             </PersistGate>
         </Provider>
