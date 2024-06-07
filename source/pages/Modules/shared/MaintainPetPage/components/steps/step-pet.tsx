@@ -22,6 +22,7 @@ type KeysInitial =
     | 'microchip'
     | 'identification_number'
     | 'id'
+    | 'date_approximate_birth'
     | 'race'
     | 'specie'
     | 'castrated'
@@ -56,6 +57,7 @@ const schema = yup.object().shape<StepPetSchema>({
         })
         .required('Campo obrigatório'),
     date_birth: yup.string().nullable().required('Campo obrigatório'),
+    date_approximate_birth: yup.boolean(),
     castrated: yup.boolean(),
     identification_number: yup.string().nullable(),
     microchip: yup.string().nullable(),
@@ -114,16 +116,23 @@ const StepPet = ({ nextStep }: StepProps) => {
                     label="Sexo do Pet"
                     placeholder="Macho/Fêmea..."
                 />
-
-                <FieldControl
-                    mode={mode}
-                    ctx={values}
-                    disabled={!!values.id && !!initialValues.date_birth}
-                    label="Data de nascimento"
-                    required
-                    name={'date_birth' as any}
-                    type="date"
-                />
+                <div>
+                    <FieldControl
+                        mode={mode}
+                        ctx={values}
+                        disabled={!!values.id && !!initialValues.date_birth}
+                        label="Data de nascimento"
+                        required
+                        name={'date_birth' as any}
+                        type="date"
+                    />
+                    <ControlToggle3States
+                        mode={mode}
+                        ctx={values}
+                        name="date_approximate_birth"
+                        label="Data de nascimento aproximada?"
+                    />
+                </div>
 
                 <FieldMasked
                     mode={mode}

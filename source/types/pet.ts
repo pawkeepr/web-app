@@ -16,6 +16,7 @@ export type IPet = {
     health_insurance?: IHealthInsurance
     chip_number?: string
     date_birth: string | Date
+    date_approximate_birth?: boolean
     blood_type?: BloodType
     blood_donator?: On_Off | null | boolean
     color?: string

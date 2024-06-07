@@ -19,7 +19,7 @@ const ModalBoxButtonsPet = ({
     return (
         <>
             {children?.({ showModal })}
-            <Modal onClose={() => closeModal()} open={open}>
+            <Modal onClose={() => closeModal()} open={open} mobilePage={false}>
                 <div className="flex flex-col justify-between items-center w-full h-[90%] p-4">
                     <AvatarPet
                         classNames={{
