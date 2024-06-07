@@ -25,7 +25,7 @@ export interface PetData {
     blood_donator?: On_Off | null | boolean
     sex?: Gender | null | GenericSelect
     organ_donor?: On_Off | null | boolean
-    date_approximate_birth?: On_Off | null | boolean
+    approximate_date?: boolean
     date_birth: string | null
     color?: string | null
     size?: string | null
