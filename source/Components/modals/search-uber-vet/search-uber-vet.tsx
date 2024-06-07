@@ -41,9 +41,9 @@ const ModalSearchUberVet = () => {
                 onClose={() => {
                     closeModal()
                 }}
-                mobilePage
+                mobilePage={false}
                 classNames={{
-                    modal: '!min-w-[600px]',
+                    modal: '!w-3/4',
                 }}
                 open={open}
             >
