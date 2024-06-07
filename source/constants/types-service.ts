@@ -1,6 +1,6 @@
 export const types_service = [
     {
-        label: 'Online',
+        label: 'Telemedicina',
         value: 'online',
     },
     {
@@ -72,7 +72,7 @@ export const SpecialtyAnimals = {
 export type KeysSpecialtyAnimals = keyof typeof SpecialtyAnimals
 
 export const Services = {
-    online: 'Consulta Online',
+    online: 'Telemedicina',
     clinic: 'Consulta Clínica',
     domiciliary: 'Consulta Domiciliar',
     emergency: 'Consulta Emergencial',
