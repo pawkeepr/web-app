@@ -1,7 +1,7 @@
+import withControl from '~/Components/helpers/with-control'
 import SearchInput from '~/Components/molecules/search-input'
-import { AttributeTypeProfile } from '~/services/helpers/types'
 import useProfile from '~/store/hooks/profile/use-profile'
-import FieldAppointmentTutor from '../field-appointment-tutor'
+import { TypeProfile } from '~/types/profile'
 import FieldAppointmentVet from '../field-appointment-vet'
 
 type BlockSearchAndInputDocumentProps = {
@@ -23,15 +23,10 @@ const BlockSearchAndInputDocument = ({
         >
             <SearchInput placeholder="Digite sua busca" name={name} />
             <FieldAppointmentVet
-                condition={
-                    profile?.type_profile === AttributeTypeProfile.VETERINARY
-                }
-            />
-            <FieldAppointmentTutor
-                condition={profile?.type_profile === AttributeTypeProfile.TUTOR}
+                condition={profile?.type_profile === TypeProfile.VETERINARY}
             />
         </div>
     )
 }
 
-export default BlockSearchAndInputDocument
+export default withControl(BlockSearchAndInputDocument)

@@ -26,7 +26,7 @@ const makeFetchProfile = (type?: AttributeTypeProfile) => {
 
 const useProfile = () => {
     const { user } = useAppSelector((state) => state.Profile)
-    const superKeys = [NAME, user?.email]
+    const superKeys = [NAME]
 
     const type = user?.['custom:type_profile']
 

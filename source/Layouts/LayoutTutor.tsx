@@ -13,7 +13,6 @@ import Header from './Header'
 import cn from 'classnames'
 import { Suspense } from 'react'
 import Drawer from '~/Components/organism/drawer'
-import { useBtnFloating } from '~/contexts/button-floating'
 import LoadingPage from '~/pages/Modules/shared/LoadingPage'
 import useHookLayout from './use-hook'
 
@@ -23,7 +22,6 @@ type LayoutProps = {
 
 const LayoutTutor = ({ children }: LayoutProps) => {
     useHookLayout()
-    const { hasButtonFloating } = useBtnFloating()
 
     return (
         <div id="relative">
