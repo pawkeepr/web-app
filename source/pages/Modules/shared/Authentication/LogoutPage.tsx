@@ -4,15 +4,22 @@ import { useAppDispatch } from '~/store/hooks'
 
 import { useEffect } from 'react'
 import { BtnLink } from '~/Components/atoms/btn'
+import useProfile from '~/store/hooks/profile/use-profile'
 import { resetLoading, signOutUser } from '~/store/slices/auth/login/actions'
+import type { TypeProfile } from '~/types/profile'
 import AuthLayout from '../../_layouts/auth/auth_layout'
 
 const LogoutPage = () => {
     const dispatch = useAppDispatch()
+    const { data: profile } = useProfile()
 
     useEffect(() => {
         setTimeout(() => {
-            dispatch(signOutUser())
+            dispatch(
+                signOutUser({
+                    type_profile: profile?.type_profile as TypeProfile,
+                }),
+            )
         }, 1000)
         dispatch(resetLoading())
     }, [])
@@ -21,7 +28,7 @@ const LogoutPage = () => {
         <AuthLayout title="Sair">
             <div className="flex flex-col items-center justify-center">
                 {/* icon de um emoji chorando */}
-                <div className="mt-4 pt-2 text-center">
+                <div className="pt-2 mt-4 text-center">
                     <h4>Você acabou de sair 😭</h4>
                     <p className="text-gray-400">
                         Obrigado por usar a{' '}

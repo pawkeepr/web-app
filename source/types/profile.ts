@@ -43,6 +43,12 @@ export const NameProfile = {
 } as const
 export type NameProfile = (typeof NameProfile)[keyof typeof NameProfile]
 
+export const NameFullProfile = {
+    '1': 'veterinary',
+    '2': 'tutor',
+} as const
+export type NameFullProfile = (typeof NameFullProfile)[keyof typeof NameFullProfile]
+
 export type ProfileUserInformation = {
     first_name: string
     last_name: string

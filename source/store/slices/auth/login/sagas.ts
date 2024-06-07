@@ -36,7 +36,7 @@ import {
 } from '~/utils/cookies-utils'
 import { getProfileSession, resetProfileFlag, setProfile } from '../profile/actions'
 
-import type { IProfile } from '~/types/profile'
+import { NameFullProfile, TypeProfile, type IProfile } from '~/types/profile'
 import { setEmailAccount, setPasswordAccount } from '../activate-account/actions'
 
 export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
@@ -113,11 +113,17 @@ export function* recoverUserByTokenSaga() {
         yield put(setAuthorization({ token: access_token }))
         yield put(setProfile(userData as IProfile))
     } catch (_error) {
-        yield put(signOutUser())
+        yield put(
+            signOutUser({
+                type_profile: TypeProfile.TUTOR,
+            }),
+        )
     }
 }
 
-export function* signOutUserSaga() {
+export function* signOutUserSaga({
+    payload,
+}: PayloadAction<{ type_profile: TypeProfile }>) {
     try {
         yield put(changeLayoutMode(layoutModeTypes.LIGHT_MODE))
         yield call(removeCookie, cookies.token.name)
@@ -134,7 +140,9 @@ export function* signOutUserSaga() {
     } finally {
         delay(1000)
         yield put(resetLoading())
-        yield call([Router, Router.push], '/sign-in')
+        const partial_route = NameFullProfile[payload.type_profile as 1 | 2]
+
+        yield call([Router, Router.push], `/${partial_route}/sign-in`)
     }
 }
 
