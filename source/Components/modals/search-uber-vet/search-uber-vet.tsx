@@ -30,8 +30,8 @@ const ModalSearchUberVet = () => {
     return (
         <>
             <BtnFloating
-                icon={() => <FaStethoscope className="w-6 h-4" />}
-                title="Buscar Veterinários"
+                icon={(props) => <FaStethoscope {...props} />}
+                title="Buscar Veterinário"
                 onClick={() => {
                     showModal()
                 }}

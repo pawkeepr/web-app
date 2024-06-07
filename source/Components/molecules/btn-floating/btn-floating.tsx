@@ -9,7 +9,7 @@ const buttonFloating = {
         fixed z-50 flex flex-col items-center justify-center 
         transition duration-500 ease-in-out mobile:opacity-100 
         bottom-4 mobile:bottom-24 right-5 opacity-40 
-        hover:opacity-100
+        hover:opacity-100 
     `,
         variants: {
             'position-x': {
@@ -28,12 +28,12 @@ const buttonFloating = {
     }),
     title: tv({
         base: `
-     mb-1 text-xs font-bold text-gray-600
+     mb-1 text-xs font-bold text-gray-600 wrap w-20 text-center
     `,
     }),
     containerIcon: tv({
         base: `
-        p-3 rounded-full shadow-2xl bg-secondary-500
+        p-3 rounded-full bg-secondary-500 !shadow-2xl
     `,
     }),
     icon: tv({
