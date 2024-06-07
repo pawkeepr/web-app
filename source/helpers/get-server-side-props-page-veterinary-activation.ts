@@ -32,6 +32,7 @@ const getServerSidePropsPageActivation =
         }
 
         const attr = fetchProfile(ctx)
+
         const hasProfile = attr?.['custom:has_profile'] === 'yes'
         const typeProfile = attr?.['custom:type_profile']
 

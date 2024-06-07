@@ -15,7 +15,7 @@ const LogoutNextPage = () => {
 export default LogoutNextPage
 
 export const getServerSideProps = (ctx: GetServerSidePropsContext) => {
-    setCookie(optionsCookies.token.name, null, 0)
+    setCookie(optionsCookies.token.name, null, 0, ctx)
     removeCookie(optionsCookies.token.name, ctx)
 
     return {

@@ -1,14 +1,16 @@
 import type { CookieSerializeOptions } from 'cookie'
 import Cookies from 'js-cookie'
+import type { GetServerSidePropsContext } from 'next'
 import { destroyCookie, parseCookies, setCookie as setCookieWrapper } from 'nookies'
 
 export function setCookie(
     name: string,
-    value: string | null,
+    value: string,
     maxAge?: number,
+    ctx: GetServerSidePropsContext | null = null,
     options?: CookieSerializeOptions,
 ) {
-    return setCookieWrapper(null, name, value, { ...options, maxAge })
+    return setCookieWrapper(ctx, name, value, { ...options, maxAge })
 }
 
 export const deleteCookiesWithPrefix = (prefix: string) => {
