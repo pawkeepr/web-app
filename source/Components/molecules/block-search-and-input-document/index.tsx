@@ -21,7 +21,11 @@ const BlockSearchAndInputDocument = ({
                 justify-end items-center web:mb-2
             `}
         >
-            <SearchInput placeholder="Digite sua busca" name={name} />
+            <SearchInput
+                condition={profile?.type_profile === TypeProfile.VETERINARY}
+                placeholder="Digite sua busca"
+                name={name}
+            />
             <FieldAppointmentVet
                 condition={profile?.type_profile === TypeProfile.VETERINARY}
             />
