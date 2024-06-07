@@ -56,6 +56,7 @@ export const makeInitialValues: MakeInitialValues = ({
         identification_number: pet_information?.identification_number || '',
         pedigree: pet_information?.pedigree === 'yes',
         pedigree_registry: pet_information?.pedigree_registry || '',
+        date_approximate_birth: pet_information?.date_approximate_birth || false,
         microchip: pet_information?.microchip || '',
         name_pet: pet_information?.name_pet || '',
         organ_donor: pet_information?.organ_donor === 'yes',

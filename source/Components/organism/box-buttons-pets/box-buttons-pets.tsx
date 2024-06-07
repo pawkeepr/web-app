@@ -44,14 +44,14 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
                 outline
                 color="neutral"
                 href={href}
-                className=" !w-1/4  max-w-[33%] "
+                className=" !w-1/3   "
             >
                 <FaEdit />
             </BtnLink>
             <BtnPrimary
                 condition={!isLoading && isVet}
                 label="Iniciar Consulta"
-                className="mobile:!w-full w-1/4 max-w-[33%] "
+                className="!w-1/3 "
                 onClick={startAppointment}
                 icon={<FaPlayCircle />}
             />
