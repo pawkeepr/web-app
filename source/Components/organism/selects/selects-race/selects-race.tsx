@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import type { FieldSelectControl } from '~/Components/molecules/field-control/field-control-select'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import useProfile from '~/store/hooks/profile/use-profile'
 import type { IPet } from '~/types/pet'
+import { TypeProfile } from '~/types/profile'
 import { useSpecies } from '../use-species'
 
 type AuxSpeciesFormikProps = Pick<
@@ -20,12 +22,15 @@ const SelectsRace = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => {
         if (firstLoad) return setFirstLoad(false)
         setFieldValue('race', null, true)
     }, [specie])
+    const { data: profile } = useProfile()
+    const hasTutor = profile?.type_profile === TypeProfile.TUTOR
+    const hasPet = !!values.id && !hasTutor
 
     return (
         <FieldControlSelect
             {...props}
             label="Raça"
-            isDisabled={!!values.id && !!initialValues.race}
+            isDisabled={hasPet && !!initialValues.race}
             ctx={values}
             name="race"
             options={specie.breedType}

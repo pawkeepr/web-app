@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import type { FieldSelectControl } from '~/Components/molecules/field-control/field-control-select'
 import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import useProfile from '~/store/hooks/profile/use-profile'
 import type { IPet } from '~/types/pet'
+import { TypeProfile } from '~/types/profile'
 import SelectsBlood from '../selects-blood'
 import SelectsRace from '../selects-race'
 import { useSpecies } from '../use-species'
@@ -16,6 +18,9 @@ const SelectsSpecies = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) =
     const [firstLoad, setFirstLoad] = useState(true)
     const { specie, optionsSpecies, onChangeSpecie } = useSpecies()
     const { values, initialValues } = useFormikContextSafe<AuxSpeciesFormikProps>()
+    const { data: profile } = useProfile()
+    const hasTutor = profile?.type_profile === TypeProfile.TUTOR
+    const hasPet = !!values.id && !hasTutor
 
     useEffect(() => {
         const specie = optionsSpecies.find(
@@ -33,7 +38,7 @@ const SelectsSpecies = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) =
                 ctx={values}
                 name="specie"
                 required
-                isDisabled={!!values.id && !!initialValues.specie}
+                isDisabled={hasPet && !!initialValues.specie}
                 options={optionsSpecies}
                 error={props.error && !firstLoad}
                 onChangeValue={(value) => {
