@@ -35,24 +35,6 @@ const getServerSidePropsPageActivation =
         const hasProfile = attr?.['custom:has_profile'] === 'yes'
         const typeProfile = attr?.['custom:type_profile']
 
-        if (typeProfile && typeProfile !== '2') {
-            return {
-                redirect: {
-                    destination: '/veterinary/dashboard',
-                    permanent: false,
-                },
-            }
-        }
-
-        if (hasProfile) {
-            return {
-                redirect: {
-                    destination: '/dashboard',
-                    permanent: false,
-                },
-            }
-        }
-
         if (callback) return callback(ctx)
 
         const lg = ctx.locale || 'pt-br'

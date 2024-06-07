@@ -61,7 +61,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         if (pathname === '/logout') return
 
         if (!token) {
-            dispatch(signOutUser())
+            dispatch(
+                signOutUser({
+                    type_profile: Number(user?.['custom:type_profile'] || 1),
+                }),
+            )
             router.prefetch('/sign-in')
             return
         }
