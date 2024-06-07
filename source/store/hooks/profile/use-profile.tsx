@@ -16,6 +16,8 @@ import type { IProfile } from '~/types/profile'
 
 export const NAME = 'profile'
 
+const staleTime = 1000 * 60 * 60 * 24 // 24 hours
+
 const useProfile = () => {
     const { user } = useAppSelector((state) => state.Profile)
     const superKeys = [NAME, user?.email]
@@ -27,6 +29,7 @@ const useProfile = () => {
 
     return useAppQuery<IProfile>(superKeys, getProfile.bind(null), {
         enabled: !!user,
+        staleTime,
     })
 }
 
