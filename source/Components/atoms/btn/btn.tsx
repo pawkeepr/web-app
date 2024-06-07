@@ -169,10 +169,12 @@ const BtnPureLink = ({
             className={button({ ...props, link, className })}
             {...(props as any)}
         >
-            {children && (
-                <span className={styledIcon({ ...props })}>{children}</span>
-            )}
-            {message}
+            <div className="flex flex-row items-center justify-center ml-2 ">
+                {children && (
+                    <span className={styledIcon({ ...props })}>{children}</span>
+                )}
+                {message}
+            </div>
         </Link>
     )
 }
