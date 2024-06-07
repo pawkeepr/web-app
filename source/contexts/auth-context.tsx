@@ -66,7 +66,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         if (!token) {
             dispatch(
                 signOutUser({
-                    type_profile: type_profile || 1,
+                    type_profile,
                 }),
             )
             return
