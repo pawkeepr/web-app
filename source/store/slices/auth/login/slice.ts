@@ -2,7 +2,8 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import LOADING from '~/constants/loading'
 
 import { api } from '~/services/api'
-import { name, type IUser, type LoginState } from './types'
+import type { IProfileCognito } from '~/types/profile'
+import { name, type LoginState } from './types'
 
 const initialState: LoginState = {
     user: null,
@@ -71,7 +72,7 @@ const loginSlice = createSlice({
         },
         recoverUserByTokenSuccess: (
             state,
-            action: PayloadAction<{ user: IUser; access_token: string }>,
+            action: PayloadAction<{ user: IProfileCognito; access_token: string }>,
         ) => {
             state.token = action.payload.access_token
             state.isAuthenticated = true

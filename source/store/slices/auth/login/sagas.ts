@@ -30,7 +30,6 @@ import { layoutModeTypes } from '~/constants/layout'
 import { errorToast } from '~/store/helpers/toast'
 import {
     deleteCookiesWithPrefix,
-    getCookie,
     removeCookie,
     setCookie,
 } from '~/utils/cookies-utils'
@@ -48,14 +47,19 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
             attributes,
         } = response
 
+        const mode = layoutModeTypes.LIGHT_MODE
+        const token = idToken.jwtToken
         yield call(
             setCookie,
             cookies.token.name,
             idToken.jwtToken,
             idToken.payload.exp / 1000,
-            null,
-            { sameSite: 'strict' },
         )
+        yield put(changeLayoutMode(mode))
+
+        delay(250)
+        yield put(setAuthorization({ token }))
+        yield put(signInSuccess({ token }))
 
         yield call(
             setCookie,
@@ -63,20 +67,13 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
             JSON.stringify(attributes),
             idToken.payload.exp / 1000,
         )
-
-        const mode =
-            getCookie(cookies.layoutMode.name) || layoutModeTypes.LIGHT_MODE
-        const token = idToken.jwtToken
-
-        yield put(changeLayoutMode(mode))
-        yield put(setAuthorization({ token }))
-        yield put(signInSuccess({ token }))
         yield put(
             getProfileSession({
                 has_profile: attributes['custom:has_profile'],
                 type_profile: attributes['custom:type_profile'],
             }),
         )
+        delay(250)
         yield call([Router, Router.push], '/dashboard')
     } catch (error) {
         switch ((error as any)?.code) {

@@ -39,6 +39,16 @@ const getServerSidePropsPagesGenericsPrivates =
 
         const route = ctx.resolvedUrl
         const attr = fetchProfile(ctx)
+        const has_profile = attr?.['custom:has_profile'] === 'yes'
+
+        if (!has_profile) {
+            return {
+                redirect: {
+                    destination: '/tutor/activation',
+                    permanent: false,
+                },
+            }
+        }
 
         if (PUBLIC_ROUTES.includes(route)) {
             return {
@@ -48,8 +58,6 @@ const getServerSidePropsPagesGenericsPrivates =
                 },
             }
         }
-
-        const hasProfile = attr?.['custom:has_profile'] === 'yes'
 
         if (callback) return callback(ctx)
 
