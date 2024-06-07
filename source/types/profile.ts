@@ -112,4 +112,5 @@ export type DTOProfile = ProfileUserInformation & {
     crmv: string
     specialty: string
     cpf_cnpj: string
+    'custom:type_profile'?: TypeProfile
 }

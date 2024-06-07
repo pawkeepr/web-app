@@ -15,6 +15,7 @@ import {
     onChangeRememberMe,
     type LoginState,
 } from '~/store/slices/auth/login/slice'
+import type { TypeProfile } from '~/types/profile'
 import { getCookie } from '~/utils/cookies-utils'
 
 interface SignInData {
@@ -61,9 +62,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         if (pathname === '/logout') return
 
         if (!token) {
+            const type_profile = user?.['custom:type_profile'] as TypeProfile
             dispatch(
                 signOutUser({
-                    type_profile: Number(user?.['custom:type_profile'] || 1),
+                    type_profile: type_profile || 1,
                 }),
             )
             router.prefetch('/sign-in')
