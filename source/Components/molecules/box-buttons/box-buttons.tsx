@@ -60,7 +60,9 @@ const BoxButtons = ({
     className,
 }: BoxButtonsProps) => {
     return (
-        <div className={twMerge('gap-1 justify-center flex w-full ', className)}>
+        <div
+            className={twMerge('mt-2 gap-1 justify-center flex w-full ', className)}
+        >
             {cancel?.({ onClick: onClickCancel as Fn, isLoading })}
 
             {success?.({
