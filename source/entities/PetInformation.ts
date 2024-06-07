@@ -11,6 +11,7 @@ export class PetInformation implements PetData {
     race: Breed | null
     castrated: On_Off | null
     blood_type: string | null
+    approximate_date: boolean
     blood_donator: On_Off | null
     sex: Gender | null
     organ_donor: On_Off | null
@@ -30,6 +31,7 @@ export class PetInformation implements PetData {
         this.blood_donator = 'no'
         this.blood_type = ''
         this.castrated = 'no'
+        this.approximate_date = false
         this.color = ''
         this.date_birth = ''
         this.organ_donor = 'no'
@@ -53,6 +55,11 @@ export class PetInformation implements PetData {
 
     defineIdentificationNumber(identificationNumber: string): PetInformation {
         this.identification_number = identificationNumber
+        return this
+    }
+
+    defineApproximateDate(approximateDate = false): PetInformation {
+        this.approximate_date = approximateDate
         return this
     }
 
@@ -157,6 +164,7 @@ export class PetInformation implements PetData {
             .defineName(params.name_pet)
             .defineOrganDonor(params.organ_donor || 'no')
             .definePedigree(params.pedigree || 'no')
+            .defineApproximateDate(params.approximate_date || false)
             .definePedigreeRegistry(params.pedigree_registry || '')
             .defineSize(params.size || 'unknown')
             .defineSpecie(params.specie || 'unknown')

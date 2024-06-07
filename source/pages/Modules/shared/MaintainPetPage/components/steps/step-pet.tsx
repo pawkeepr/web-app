@@ -10,7 +10,9 @@ import FieldControlSelect from '~/Components/molecules/field-control/field-contr
 import FieldMasked from '~/Components/molecules/field-masked'
 import SelectsSpecies from '~/Components/organism/selects/selects-species'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
+import useProfile from '~/store/hooks/profile/use-profile'
 import type { RecordsShapeYup, StepProps } from '~/types/helpers'
+import { TypeProfile } from '~/types/profile'
 import { genderValues } from '~/types/sexType'
 import type { InitialValues } from '../../index'
 import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
@@ -73,12 +75,16 @@ const schema = yup.object().shape<StepPetSchema>({
 })
 
 const StepPet = ({ nextStep }: StepProps) => {
+    const { data: profile } = useProfile()
+    const hasTutor = profile?.type_profile === TypeProfile.TUTOR
     const { values, initialValues } = useFormikContextSafe<StepPetKeys>()
     const { mode } = useModeEditablePet()
 
     const isValid = useMemo(() => {
         return schema.isValidSync(values)
     }, [values])
+
+    const hasPet = !!values.id && !hasTutor
 
     return (
         <section className="relative flex flex-col shadow-lg card-body mobile:p-0">
@@ -97,7 +103,7 @@ const StepPet = ({ nextStep }: StepProps) => {
                     mode={mode}
                     ctx={values}
                     label="Nome do PET"
-                    disabled={!!values.id && !!initialValues.name}
+                    disabled={hasPet && !!initialValues.name}
                     required
                     name="name"
                     placeholder="Digite o nome do PET"
@@ -110,7 +116,7 @@ const StepPet = ({ nextStep }: StepProps) => {
                     mode={mode}
                     ctx={values}
                     options={genderValues}
-                    isDisabled={!!values.id && !!initialValues.sex}
+                    isDisabled={hasPet && !!initialValues.sex}
                     name="sex"
                     required
                     label="Sexo do Pet"
@@ -120,7 +126,7 @@ const StepPet = ({ nextStep }: StepProps) => {
                     <FieldControl
                         mode={mode}
                         ctx={values}
-                        disabled={!!values.id && !!initialValues.date_birth}
+                        disabled={hasPet && !!initialValues.date_birth}
                         label="Data de nascimento"
                         required
                         name={'date_birth' as any}
@@ -137,7 +143,7 @@ const StepPet = ({ nextStep }: StepProps) => {
                 <FieldMasked
                     mode={mode}
                     ctx={values}
-                    disabled={!!values.id && !!initialValues.microchip}
+                    disabled={hasPet && !!initialValues.microchip}
                     label="Número do microchip"
                     name="microchip"
                     mask="_____"
@@ -147,7 +153,7 @@ const StepPet = ({ nextStep }: StepProps) => {
                 <FieldMasked
                     mode={mode}
                     ctx={values}
-                    disabled={!!values.id && !!initialValues.identification_number}
+                    disabled={hasPet && !!initialValues.identification_number}
                     label={'Número de registro cartório'}
                     name="identification_number"
                     mask="_____"
