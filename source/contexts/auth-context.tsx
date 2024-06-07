@@ -61,14 +61,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
         if (!token && isPublicRoute) return
         if (pathname === '/logout') return
 
+        const type_profile = user?.['custom:type_profile'] as TypeProfile
         if (!token) {
-            const type_profile = user?.['custom:type_profile'] as TypeProfile
             dispatch(
                 signOutUser({
                     type_profile: type_profile || 1,
                 }),
             )
             router.prefetch('/sign-in')
+            return
+        }
+
+        const partialRoute = type_profile === 1 ? 'veterinary' : 'tutor'
+
+        if (!user) {
+            router.push(`/${partialRoute}/activation`)
             return
         }
 
