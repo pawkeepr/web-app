@@ -18,10 +18,10 @@ const tab = tv({
     // Ajuste os estilos base e variantes conforme necessário
     base: `
         rounded-none 
-        ring-white/60 ring-offset-2 focus:outline-none focus:ring-2
+        focus:outline-none focus:ring-none
         leading-1 font-bold text-gray-500 bg-transparent
         text-sm flex web:flex-row items-center justify-center
-        gap-1 flex-grow 
+        gap-1 flex-grow  
         transition-transform duration-300 ease-in-out
     `,
     // Ajustes adicionais para os estilos mobile
@@ -33,7 +33,7 @@ const tab = tv({
             true: 'web:py-2 web:!w-full',
         },
         selected: {
-            true: '!text-white shadow transform scale-105 mobile:translate-y-[-15%]',
+            true: '!text-white !shadow-2xl transform scale-105 mobile:translate-y-[-20%]',
         },
         disabled: {
             true: '!text-gray-600 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
@@ -58,8 +58,9 @@ const tab = tv({
 const tabList = tv({
     base: `
         p-0 
-        mobile:bg-[#f6dda3] mobile:rounded-t-full mobile:shadow-md mobile:h-16 mobile:overflow-visible 
-        web:bg-white
+        mobile:bg-[#f6dda3] 
+        mobile:rounded-t-full mobile:h-16 mobile:overflow-visible 
+        web:bg-white !shadow-2xl
         web:rounded-md
     `,
     variants: {
@@ -96,7 +97,7 @@ const HorizontalTabs = ({
     menu = false,
 }: HorizontalTabsProps) => {
     return (
-        <Tab.Group as="section" className="flex flex-col w-full">
+        <Tab.Group as="section" className="flex flex-col w-full ">
             <Tab.List
                 className={tabList({
                     hidden: categories.length === 1,

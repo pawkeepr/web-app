@@ -30,8 +30,8 @@ const PetsTab = () => {
             ))}
 
             <BtnLinkFloating
-                icon={() => <MdPets className="w-6 h-4" />}
-                title="Novo Pet"
+                icon={(props) => <MdPets {...props} />}
+                title="Adicionar Pet"
                 href="/tutor/pet"
             />
         </section>
