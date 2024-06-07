@@ -140,7 +140,7 @@ export function* signOutUserSaga({
     } finally {
         delay(1000)
         yield put(resetLoading())
-        const partial_route = NameFullProfile[payload.type_profile as 1 | 2]
+        const partial_route = NameFullProfile[(payload.type_profile as 1 | 2) || 2]
 
         yield call([Router, Router.push], `/${partial_route}/sign-in`)
     }
