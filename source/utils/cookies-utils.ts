@@ -1,42 +1,63 @@
 import type { CookieSerializeOptions } from 'cookie'
-import Cookies from 'js-cookie'
-import { destroyCookie, parseCookies, setCookie as setCookieWrapper } from 'nookies'
+import * as cookies from 'cookies-next'
+import type { GetServerSidePropsContext } from 'next'
 
 export function setCookie(
     name: string,
     value: string | null,
     maxAge?: number,
+    ctx: GetServerSidePropsContext | null = null,
     options?: CookieSerializeOptions,
 ) {
-    return setCookieWrapper(null, name, value, { ...options, maxAge })
+    const expires = maxAge ? new Date(Date.now() + maxAge * 1000) : undefined
+    return cookies.setCookie(name, value, {
+        expires,
+        req: ctx?.req,
+        res: ctx?.res,
+        ...options,
+    })
 }
 
 export const deleteCookiesWithPrefix = (prefix: string) => {
     // Obtém todos os cookies
-    const allCookies = Cookies.get()
+    const allCookies = cookies.getCookies()
 
     // Filtra e deleta os cookies que começam com o prefixo especificado
     for (const cookieName of Object.keys(allCookies)) {
         if (cookieName.startsWith(prefix)) {
-            Cookies.remove(cookieName)
+            cookies.deleteCookie(cookieName)
         }
     }
 }
 
-export function getCookie(name: string, ctx: any = null) {
-    const cookie = parseCookies(ctx)[name]
+export function getCookie(
+    name: string,
+    ctx: GetServerSidePropsContext | null = null,
+) {
+    const cookie = cookies.getCookie(name, {
+        req: ctx?.req,
+        res: ctx?.res,
+    })
 
     if (!cookie) {
         return null
     }
 
     try {
+        // Tenta fazer o parse do cookie
         return JSON.parse(cookie)
-    } catch (e) {
+    } catch (_) {
+        // Se não conseguir fazer o parse, retorna o cookie como string
         return cookie
     }
 }
 
-export function removeCookie(name: string, ctx: any = null) {
-    return destroyCookie(ctx, name)
+export function removeCookie(
+    name: string,
+    ctx: GetServerSidePropsContext | null = null,
+) {
+    return cookies.deleteCookie(name, {
+        req: ctx?.req,
+        res: ctx?.res,
+    })
 }

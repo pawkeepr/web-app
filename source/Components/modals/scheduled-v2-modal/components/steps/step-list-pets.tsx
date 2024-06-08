@@ -3,7 +3,7 @@ import IconSpecie from '~/Components/atoms/icon-specie'
 import BoxButtons from '~/Components/molecules/box-buttons/box-buttons'
 import FieldControl from '~/Components/molecules/field-control/field-control'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
-import { type KeysIconPets } from '~/types/speciesType'
+import type { KeysIconPets } from '~/types/speciesType'
 import { NUMBER_STEPS } from '../../modal-list-pets'
 import type { CtxSimplifiedPeTFields, StepProps } from '../../types'
 import { option } from '../helpers'
@@ -72,7 +72,7 @@ const StepListPets = ({
                         <BtnLink
                             {...(props as any)}
                             message="Cadastro Completo"
-                            href={`/dashboard/pet?document=${values?.ownerEmergencyContact?.cpf_cnpj}`}
+                            href={`/veterinary/pet?document=${values?.ownerEmergencyContact?.cpf_cnpj}`}
                         />
                     )}
                     success={(props) => (

@@ -43,19 +43,28 @@ const getServerSidePropsPagesTutorPrivates =
         if (PUBLIC_ROUTES.includes(route)) {
             return {
                 redirect: {
-                    destination: '/dashboard',
+                    destination: '/tutor/dashboard',
                     permanent: false,
                 },
             }
         }
 
-        const hasProfile = attr?.['custom:has_profile'] === 'yes'
         const typeProfile = attr?.['custom:type_profile']
+        const notHasProfile = attr?.['custom:has_profile'] === 'no'
 
         if (typeProfile && typeProfile !== '2') {
             return {
                 redirect: {
                     destination: '/veterinary/dashboard',
+                    permanent: false,
+                },
+            }
+        }
+
+        if (notHasProfile) {
+            return {
+                redirect: {
+                    destination: '/tutor/activation',
                     permanent: false,
                 },
             }

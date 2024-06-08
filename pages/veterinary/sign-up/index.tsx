@@ -5,7 +5,7 @@ import SignUpPage from '~/pages/Modules/shared/Authentication/SignUp'
 const SignUpPageNext = () => {
     return (
         <LayoutAuth>
-            <SignUpPage mode="veterinary" bgImage="/bg-sign-up.webp" />
+            <SignUpPage mode="vet" bgImage="/bg-sign-up.webp" />
         </LayoutAuth>
     )
 }

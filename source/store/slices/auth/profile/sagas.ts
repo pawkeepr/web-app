@@ -40,19 +40,14 @@ import {
 function* onGetProfile({
     payload: { has_profile, type_profile },
 }: PayloadAction<AttributesProfile>) {
-    const link =
-        type_profile === AttributeTypeProfile.VETERINARY
-            ? '/veterinary/activation'
-            : '/tutor/activation'
+    const isVeterinary = type_profile === AttributeTypeProfile.VETERINARY
+    const link = isVeterinary ? '/veterinary/activation' : '/tutor/activation'
 
     try {
         if (has_profile === 'no') {
             yield call([Router, Router.push], link)
         } else {
-            const getVet =
-                type_profile === AttributeTypeProfile.VETERINARY
-                    ? getVetProfile
-                    : getTutorProfile
+            const getVet = isVeterinary ? getVetProfile : getTutorProfile
             const { data } = yield call(getVet)
             yield setCookie(cookies.profile.name, data)
             yield put(editProfileSuccess(data))
@@ -67,7 +62,11 @@ function* onGetProfile({
             case 404: // Not Found
                 yield call(updateHasProfile, 'no')
                 errorToast('Perfil não encontrado!')
-                yield put(signOutUser())
+                yield put(
+                    signOutUser({
+                        type_profile: 2,
+                    }),
+                )
                 break
         }
     }
@@ -101,7 +100,11 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
             'Você será deslogado, logue novamente para ter acesso a plataforma e todas as suas funcionalidades!',
             'Perfil ativado com sucesso!',
         )
-        yield put(signOutUser())
+        yield put(
+            signOutUser({
+                type_profile: 2,
+            }),
+        )
     } catch (error) {
         if (!(typeof error === 'object') || !error) return
         if (!('response' in error)) return

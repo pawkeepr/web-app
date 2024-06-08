@@ -1,8 +1,8 @@
 const routes = {
     dashboard: {
-        root: '/dashboard',
+        root: '/veterinary/dashboard',
         new: {
-            appointments: '/dashboard/appointments',
+            appointments: '/veterinary/dashboard/appointments',
         },
     },
     signIn: '/sign-in',
