@@ -10,21 +10,11 @@ import Router from 'next/router'
 import type { AccountSignUp } from './types'
 
 import { errorToast, infoToast, successToast } from '~/store/helpers/toast'
-import { TypeProfile } from '~/types/profile'
 
 // Is user register successful then direct plot user in redux.
 function* registerUserSaga({ payload: user }: PayloadAction<AccountSignUp>) {
-    // pegar o path da url
-    const path = window.location.pathname
-    const isVeterinary = /veterinary/.test(path)
-    const type_profile = isVeterinary ? TypeProfile.VETERINARY : TypeProfile.TUTOR
-
     try {
-        yield call(singUpAws, {
-            ...user,
-            type_profile,
-            has_profile: 'no',
-        })
+        yield call(singUpAws, user)
         successToast(
             'Um e-mail de confirmação foi enviado para o seu e-mail.',
             'Registro realizado com sucesso!',

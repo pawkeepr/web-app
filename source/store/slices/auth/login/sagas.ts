@@ -30,13 +30,12 @@ import { layoutModeTypes } from '~/constants/layout'
 import { errorToast } from '~/store/helpers/toast'
 import {
     deleteCookiesWithPrefix,
-    getCookie,
     removeCookie,
     setCookie,
 } from '~/utils/cookies-utils'
-import { getProfileSession, resetProfileFlag, setProfile } from '../profile/actions'
+import { resetProfileFlag, setProfile } from '../profile/actions'
 
-import type { IProfile } from '~/types/profile'
+import { NameFullProfile, TypeProfile, type IProfile } from '~/types/profile'
 import { setEmailAccount, setPasswordAccount } from '../activate-account/actions'
 
 export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
@@ -47,13 +46,19 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
             attributes,
         } = response
 
+        const mode = layoutModeTypes.LIGHT_MODE
+        const token = idToken.jwtToken
         yield call(
             setCookie,
             cookies.token.name,
             idToken.jwtToken,
             idToken.payload.exp / 1000,
-            { sameSite: 'strict' },
         )
+        yield put(changeLayoutMode(mode))
+
+        delay(100)
+        yield put(setAuthorization({ token }))
+        yield put(signInSuccess({ token }))
 
         yield call(
             setCookie,
@@ -62,19 +67,8 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
             idToken.payload.exp / 1000,
         )
 
-        const mode =
-            getCookie(cookies.layoutMode.name) || layoutModeTypes.LIGHT_MODE
-        const token = idToken.jwtToken
+        delay(100)
 
-        yield put(changeLayoutMode(mode))
-        yield put(setAuthorization({ token }))
-        yield put(signInSuccess({ token }))
-        yield put(
-            getProfileSession({
-                has_profile: attributes['custom:has_profile'],
-                type_profile: attributes['custom:type_profile'],
-            }),
-        )
         yield call([Router, Router.push], '/dashboard')
     } catch (error) {
         switch ((error as any)?.code) {
@@ -85,8 +79,9 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
                 yield put(signInFailed((error as any).message))
                 break
             default:
-                errorToast('Não foi possível realizar o login.', 'Falha!')
+                yield put(resetLoading())
                 yield put(signInFailed((error as any).message))
+                errorToast('Não foi possível realizar o login.', 'Falha!')
                 break
         }
     } finally {
@@ -113,14 +108,22 @@ export function* recoverUserByTokenSaga() {
         yield put(setAuthorization({ token: access_token }))
         yield put(setProfile(userData as IProfile))
     } catch (_error) {
-        yield put(signOutUser())
+        yield put(
+            signOutUser({
+                type_profile: TypeProfile.TUTOR,
+            }),
+        )
     }
 }
 
-export function* signOutUserSaga() {
+export function* signOutUserSaga({
+    payload,
+}: PayloadAction<{ type_profile: TypeProfile }>) {
     try {
         yield put(changeLayoutMode(layoutModeTypes.LIGHT_MODE))
         yield call(removeCookie, cookies.token.name)
+        yield call(removeCookie, cookies.cognito_profile.name)
+        yield call(removeCookie, cookies.profile.name)
         yield call(deleteCookiesWithPrefix, 'pawkeepr')
         yield call(signOut)
         yield put(resetProfileFlag())
@@ -134,7 +137,9 @@ export function* signOutUserSaga() {
     } finally {
         delay(1000)
         yield put(resetLoading())
-        yield call([Router, Router.push], '/sign-in')
+        const partial_route = NameFullProfile[(payload.type_profile as 1 | 2) || 2]
+
+        yield call([Router, Router.push], `/${partial_route}/sign-in`)
     }
 }
 

@@ -1,5 +1,6 @@
 import { createAction } from '@reduxjs/toolkit'
 
+import type { TypeProfile } from '~/types/profile'
 import { name } from './types'
 
 export const setAuthorization = createAction<{ token: string }>(
@@ -20,7 +21,9 @@ export const recoverUserByTokenFailed = createAction<string>(
     `${name}/recoverUserByTokenFailed`,
 )
 
-export const signOutUser = createAction(`${name}/signOutUser`)
+export const signOutUser = createAction<{ type_profile: TypeProfile }>(
+    `${name}/signOutUser`,
+)
 export const signOutUserSuccess = createAction(`${name}/signOutUserSuccess`)
 export const signOutUserFailed = createAction(`${name}/signOutUserFailed`)
 

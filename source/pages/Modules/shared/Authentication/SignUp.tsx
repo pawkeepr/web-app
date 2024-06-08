@@ -23,6 +23,7 @@ import {
     resetRegisterFlag,
 } from '~/store/slices/auth/register/actions'
 import type { AccountSignUp } from '~/store/slices/auth/register/types'
+import { CodeProfile } from '~/types/profile'
 import AuthLayout from '../../_layouts/auth/auth_layout'
 import type { CoverSignInProps } from './SignIn'
 
@@ -50,14 +51,18 @@ const validationSchema = Yup.object({
     //person: validatePerson,
     //address: validateAddress,
 })
+type ModeKey = 'vet' | 'tutor'
 
-const initialValues: AccountSignUp = {
-    email: '',
-    password: '',
-    passwordConfirm: '',
-    termsOfUse: false,
-    privacyPolicy: false,
-}
+const makeInitialValues = (mode: ModeKey) =>
+    ({
+        email: '',
+        password: '',
+        passwordConfirm: '',
+        termsOfUse: false,
+        privacyPolicy: false,
+        has_profile: 'no',
+        type_profile: CodeProfile[mode],
+    }) as AccountSignUp
 
 const CoverSignUp = ({ mode, bgImage }: CoverSignInProps) => {
     const dispatch = useAppDispatch()
@@ -74,7 +79,8 @@ const CoverSignUp = ({ mode, bgImage }: CoverSignInProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const link = mode === 'veterinary' ? '/veterinary/sign-in' : '/tutor/sign-in'
+    const link = mode === 'vet' ? '/veterinary/sign-in' : '/tutor/sign-in'
+    const initialValues = makeInitialValues(mode)
 
     return (
         <AuthLayout

@@ -50,7 +50,7 @@ const veterinaryItems: Item[] = [
         name: 'Inicio',
         visible: true,
         icon: <DashboardIcon className="w-5 h-5" />,
-        href: '/dashboard',
+        href: '/veterinary/dashboard',
     },
     {
         name: 'Perfil',
@@ -63,7 +63,7 @@ const veterinaryItems: Item[] = [
         name: 'Histórico',
         visible: true,
         icon: <HistoricIcon className="w-5 h-5" />,
-        href: '/dashboard/historic',
+        href: '/veterinary/dashboard/historic',
     },
 ];
 
@@ -76,10 +76,10 @@ const tutorsItems: Item[] = [
     },
     {
         name: 'Perfil',
-        visible: false,
-        disabled: true,
+        visible: true,
+        disabled: false,
         icon: <UserCircleIcon className="w-5 h-5" />,
-        href: '/tutor/profile',
+        href: '/profile',
     },
     {
         name: 'Histórico',

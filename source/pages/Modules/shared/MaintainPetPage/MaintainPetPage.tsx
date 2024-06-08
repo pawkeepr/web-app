@@ -189,7 +189,7 @@ const CreateOrUpdatePetPage = ({
     }
 
     const isRouteCreate = useMemo(
-        () => pathname === '/dashboard/pet' || pathname === '/tutor/pet',
+        () => pathname === '/veterinary/dashboard/pet' || pathname === '/tutor/pet',
         [pathname],
     )
 

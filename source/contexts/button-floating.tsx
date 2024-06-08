@@ -12,7 +12,7 @@ export const useZustandBtnFloating = create<ButtonFloatingContext>((set) => ({
     setHasButtonFloating: (hasButtonFloating) => set({ hasButtonFloating }),
 }))
 
-const list = ['/dashboard/appointments', '/feedback']
+const list = ['/veterinary/dashboard/appointments', '/feedback']
 
 export const useBtnFloating = () => {
     const pathname = usePathname()
