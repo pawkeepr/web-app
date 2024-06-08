@@ -27,6 +27,7 @@ const NameKeys = {
     warning: 'warning',
     alert: 'alert',
     custom: 'custom',
+    drawer: 'drawer',
 } as const
 type NameKeys = (typeof NameKeys)[keyof typeof NameKeys]
 

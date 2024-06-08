@@ -25,10 +25,10 @@ const LayoutTutor = ({ children }: LayoutProps) => {
 
     return (
         <div id="relative">
-            <Header drawer={(props) => <Drawer {...props} mode="TUTOR" />} />
+            <Header />
             <div className="block h-4 web:hidden" />
             {/* <Sidebar layoutType={layoutType} /> */}
-
+            <Drawer mode="TUTOR" />
             <div
                 className={cn(
                     'px-24 mobile:px-0 relative tablet:px-0 min-h-full pt-2',
