@@ -53,7 +53,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
 
     const startAppointment = useCallback(() => {
         setIsStarting(true)
-        const route = `/dashboard/appointments?appointment_id=${item.id}&document=${item.tutor_pet_vet?.tutor?.cpf_cnpj}&pet=${item.tutor_pet_vet?.pet?.id_pet}`
+        const route = `/veterinary/dashboard/appointments?appointment_id=${item.id}&document=${item.tutor_pet_vet?.tutor?.cpf_cnpj}&pet=${item.tutor_pet_vet?.pet?.id_pet}`
         router.prefetch(route)
         setTimeout(() => {
             setIsStarting(false)
