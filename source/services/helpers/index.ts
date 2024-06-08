@@ -7,8 +7,7 @@ import * as urls from './urls'
 
 export const createProfileVet = async (data: IProfile) =>
     api.post(urls.VET_CREATE_PROFILE(), data)
-export const updateProfileVet = async (data: IProfile, user_id: string) =>
-    api.put(urls.VET_UPDATE_PROFILE(), data, { params: { user_id } })
+
 export const getVetProfile = async (app = api) => app.get(urls.VET_GET_PROFILE())
 
 export const getAllAppointmentsVet = async () => api.get(urls.APPOINTMENT_GET_ALL())
@@ -28,12 +27,13 @@ export const createScheduled = async (data: any) =>
 
 export const createProfileTutor = async (data: IProfile) =>
     api.post(urls.TUTOR_CREATE_PROFILE(), data)
-export const updateProfileTutor = async (data: IProfile, user_id: string) =>
-    api.post(urls.TUTOR_UPDATE_PROFILE(), data, { params: { user_id } })
+
 export const getTutorProfile = async () => api.get(urls.TUTOR_GET_PROFILE())
 
-export const updateProfileTutorV2 = async (data: IProfile) =>
-    api.put(urls.TUTOR_UPDATE_PROFILE(), data, { params: { user_id: data.id } })
+export const updateProfileTutorPawkeepr = async (data: IProfile, owner: string) =>
+    api.put(urls.TUTOR_UPDATE_PROFILE_PAWKEEPR(), data, {
+        params: { user_id: data.id, owner },
+    })
 
 export const getAllPets = async (cpf_cnpj: string) =>
     api.get(urls.PET_FETCH_ALL(), { params: { cpf_cnpj } })

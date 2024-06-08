@@ -39,7 +39,7 @@ const Feedback = () => {
                             ctx={values}
                             label="Feedback"
                             name="comments"
-                            placeholder="Deixe seu feedback... ele é de suma importância para que possamos melhorar e atender as suas necessidades e não se esqueça beba água, seu pet quer um dono hidratado e feliz!"
+                            placeholder="Deixe seu feedback... ele é de suma importância para que possamos melhorar e atender as suas necessidades!"
                             divClassName="mb-2"
                         />
                         <BtnPrimary

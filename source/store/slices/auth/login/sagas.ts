@@ -41,6 +41,7 @@ import { setEmailAccount, setPasswordAccount } from '../activate-account/actions
 export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
     try {
         const response: UserData = yield call(signInAws, action.payload)
+
         const {
             signInUserSession: { idToken },
             attributes,
@@ -137,7 +138,7 @@ export function* signOutUserSaga({
     } finally {
         delay(1000)
         yield put(resetLoading())
-        const partial_route = NameFullProfile[(payload.type_profile as 1 | 2) || 2]
+        const partial_route = NameFullProfile[(payload?.type_profile as 1 | 2) || 2]
 
         yield call([Router, Router.push], `/${partial_route}/sign-in`)
     }

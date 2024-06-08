@@ -12,6 +12,7 @@ import Header from './Header'
 import cn from 'classnames'
 import { Suspense } from 'react'
 import FieldDocumentAppointment from '~/Components/molecules/field-appointment-vet/field-appointment-vet.mobile'
+import Drawer from '~/Components/organism/drawer'
 import { useBtnFloating } from '~/contexts/button-floating'
 import LoadingPage from '~/pages/Modules/shared/LoadingPage'
 import useHookLayout from './use-hook'
@@ -27,7 +28,7 @@ const LayoutMain = ({ children }: LayoutProps) => {
         <div className="relative">
             <Header />
             <div className="h-[48px] block w-full web:hidden" />
-
+            <Drawer mode="VETERINARY" />
             <div
                 className={cn(
                     'px-24 mobile:px-0 relative tablet:px-0 min-h-full',

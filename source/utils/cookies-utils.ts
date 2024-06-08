@@ -4,7 +4,7 @@ import type { GetServerSidePropsContext } from 'next'
 
 export function setCookie(
     name: string,
-    value: string | null,
+    value: string,
     maxAge?: number,
     ctx: GetServerSidePropsContext | null = null,
     options?: CookieSerializeOptions,
