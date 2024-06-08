@@ -16,6 +16,8 @@ export default LogoutNextPage
 
 export const getServerSideProps = (ctx: GetServerSidePropsContext) => {
     removeCookie(optionsCookies.token.name, ctx)
+    removeCookie(optionsCookies.profile.name, ctx)
+    removeCookie(optionsCookies.cognito_profile.name, ctx)
 
     return {
         props: {},

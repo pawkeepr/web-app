@@ -2,6 +2,7 @@ import optionsCookies from '~/constants/cookies'
 
 import type { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { AttributeTypeProfile } from '~/services/helpers/types'
 import { getCookie } from '~/utils/cookies-utils'
 import {
     fetchProfile,
@@ -44,7 +45,7 @@ const getServerSidePropsPageActivation =
             }
         }
 
-        if (typeProfile && typeProfile !== '1') {
+        if (typeProfile && typeProfile !== AttributeTypeProfile.VETERINARY) {
             return {
                 redirect: {
                     destination: '/tutor/dashboard',

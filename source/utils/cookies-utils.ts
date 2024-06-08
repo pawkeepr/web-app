@@ -44,10 +44,11 @@ export function getCookie(
     }
 
     try {
+        // Tenta fazer o parse do cookie
+        return JSON.parse(cookie)
+    } catch (_) {
+        // Se não conseguir fazer o parse, retorna o cookie como string
         return cookie
-    } catch (e) {
-        console.error(e)
-        return ''
     }
 }
 

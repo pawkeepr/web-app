@@ -39,9 +39,14 @@ export type TypeProfile = (typeof TypeProfile)[keyof typeof TypeProfile]
 export const NameProfile = {
     '1': 'vet',
     '2': 'tutor',
-    NONE: null,
 } as const
 export type NameProfile = (typeof NameProfile)[keyof typeof NameProfile]
+
+export const CodeProfile = {
+    vet: 1,
+    tutor: 2,
+} as const
+export type CodeProfile = (typeof CodeProfile)[keyof typeof CodeProfile]
 
 export const NameFullProfile = {
     '1': 'veterinary',

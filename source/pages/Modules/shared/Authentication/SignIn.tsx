@@ -3,11 +3,12 @@ import { LOADING } from '~/constants/loading'
 import { BtnLink } from '~/Components/atoms/btn'
 import Loader from '~/Components/organism/loader'
 import { useAppSelector } from '~/store/hooks'
+import type { NameProfile } from '~/types/profile'
 import AuthLayout from '../../_layouts/auth/auth_layout'
 import AuthInputs from './components/organism/auth-inputs'
 
 export type CoverSignInProps = {
-    mode: 'veterinary' | 'tutor'
+    mode: NameProfile
     bgImage: '/bg-sign-in.webp' | '/bg-three.jpg' | '/bg-sign-up.webp'
 }
 
@@ -18,7 +19,7 @@ const CoverSignIn = ({ mode, bgImage }: CoverSignInProps) => {
     const isSuccessful = isLoading === LOADING.SUCCESS
     const loading = isPending || isSuccessful
 
-    const link = mode === 'veterinary' ? '/veterinary/sign-up' : '/tutor/sign-up'
+    const link = mode === 'vet' ? '/veterinary/sign-up' : '/tutor/sign-up'
 
     return (
         <AuthLayout
