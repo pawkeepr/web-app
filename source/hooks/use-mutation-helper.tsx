@@ -5,6 +5,7 @@ import {
     type UseMutationOptions,
 } from '@tanstack/react-query'
 import { createErrorToast, createSuccessToast } from '~/store/helpers/toast'
+import useProfile from '~/store/hooks/profile/use-profile'
 
 type UseMutation = <
     TData = unknown,
@@ -23,12 +24,16 @@ const useMutationHelper: UseMutation = ({
     ...options
 }) => {
     const queryClient = useQueryClient()
+    const { data: profile } = useProfile()
+
+    const email = profile?.user_information?.contact?.email
+    const keys = Array.isArray(mutationKey) ? mutationKey : [mutationKey]
 
     const onSettledCallback =
         onSettled ||
         (() => {
             return queryClient.invalidateQueries({
-                queryKey: [...mutationKey],
+                queryKey: [email, ...keys],
             })
         })
 

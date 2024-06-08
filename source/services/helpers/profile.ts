@@ -1,5 +1,3 @@
-// Profile Vet
-
 import type { IProfile } from '~/types/profile'
 import { api } from '../api'
 import type { KEYS_TYPE_USERS } from './feedback'

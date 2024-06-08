@@ -13,7 +13,6 @@ import Header from './Header'
 import cn from 'classnames'
 import { Suspense } from 'react'
 import Drawer from '~/Components/organism/drawer'
-import { useBtnFloating } from '~/contexts/button-floating'
 import LoadingPage from '~/pages/Modules/shared/LoadingPage'
 import useHookLayout from './use-hook'
 
@@ -23,14 +22,13 @@ type LayoutProps = {
 
 const LayoutTutor = ({ children }: LayoutProps) => {
     useHookLayout()
-    const { hasButtonFloating } = useBtnFloating()
 
     return (
         <div id="relative">
-            <Header drawer={(props) => <Drawer {...props} mode="TUTOR" />} />
+            <Header />
             <div className="block h-4 web:hidden" />
             {/* <Sidebar layoutType={layoutType} /> */}
-
+            <Drawer mode="TUTOR" />
             <div
                 className={cn(
                     'px-24 mobile:px-0 relative tablet:px-0 min-h-full pt-2',

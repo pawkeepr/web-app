@@ -9,17 +9,16 @@ import {
     createProfileVet,
     getTutorProfile,
     getVetProfile,
-    updateProfileTutor,
-    updateProfileTutorV2,
-    updateProfileVet,
+    updateProfileTutorPawkeepr,
 } from '~/services/helpers'
 import { updateHasProfile } from '~/services/helpers/auth'
+import { updateProfileV2 } from '~/services/helpers/profile'
 import {
     AttributeTypeProfile,
     type AttributesProfile,
 } from '~/services/helpers/types'
 import { errorToast, infoToast, successToast } from '~/store/helpers/toast'
-import type { IProfile } from '~/types/profile'
+import { NameProfile, type IProfile } from '~/types/profile'
 import { setCookie } from '~/utils/cookies-utils'
 import { signOutUser } from '../login/actions'
 // Login Redux States
@@ -82,7 +81,9 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
             : AttributeTypeProfile.TUTOR
 
         if (profile.id) {
-            yield call(updateProfileTutorV2, profile)
+            const document = profile.user_information?.cpf_cnpj?.replace(/\D/g, '')
+            const owner = `${document}@pawkeepr.com.br`
+            yield call(updateProfileTutorPawkeepr, profile, owner)
         } else {
             yield call(createProfile, profile)
         }
@@ -133,10 +134,11 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
 
 export function* onUpdateProfile({ payload: user }: PayloadAction<IProfile>) {
     try {
-        const path = window.location.pathname
-        const isVeterinary = /veterinary/.test(path)
-        const updateProfile = isVeterinary ? updateProfileVet : updateProfileTutor
-        const { data } = yield call(updateProfile, user, user.id as string)
+        const { data } = yield call(
+            updateProfileV2,
+            user,
+            NameProfile[user.type_profile as 1 | 2],
+        )
 
         yield call(updateHasProfile, 'yes')
         yield put(editProfileSuccess(data))
