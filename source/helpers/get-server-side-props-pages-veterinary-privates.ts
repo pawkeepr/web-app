@@ -23,7 +23,6 @@ export type AttributesCognito = {
 }
 export const fetchProfile = (ctx: Context) => {
     const attr: AttributesCognito = getCookie(cookies.cognito_profile.name, ctx)
-
     return attr
 }
 
@@ -68,7 +67,7 @@ const getServerSidePropsPagesVeterinaryPrivates =
         if (typeProfile && typeProfile !== '1') {
             return {
                 redirect: {
-                    destination: '/tutor/dashboard',
+                    destination: '/dashboard',
                     permanent: false,
                 },
             }

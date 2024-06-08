@@ -21,7 +21,7 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
 
     const startAppointment = useCallback(() => {
         router.push(
-            `/dashboard/appointments?document=${item?.cpf_cnpj}&pet=${item?.id_pet}`,
+            `/veterinary/dashboard/appointments?document=${item?.cpf_cnpj}&pet=${item?.id_pet}`,
         )
     }, [item])
 
@@ -32,7 +32,7 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
         () =>
             isTutor
                 ? `/tutor/pet/${item?.id_pet}`
-                : `/profile/pet?document=${item.cpf_cnpj}&id_pet=${item.id_pet}`,
+                : `/pet?document=${item.cpf_cnpj}&id_pet=${item.id_pet}`,
         [item, isTutor],
     )
 
