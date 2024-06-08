@@ -43,12 +43,10 @@ export const useUpdateProfileMutation = () => {
 
     const type_profile = profile?.type_profile
 
-    const email = profile?.user_information?.contact?.email
-
     return useMutationHelper({
         mutationFn: (data: IProfile) =>
             updateProfileV2(data, KEYS_TYPE_USER_BY_NUMBER[type_profile || 1]),
-        mutationKey: [NAME, email],
+        mutationKey: [NAME],
         onSuccess: () => infoToast('Perfil atualizado com sucesso'),
         onError: () => errorToast('Erro ao atualizar perfil'),
     })
