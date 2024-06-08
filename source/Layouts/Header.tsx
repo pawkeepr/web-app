@@ -1,39 +1,45 @@
-import Image from 'next/image'
+import Image from 'next/image';
 /* eslint-disable @next/next/no-img-element */
-import Link from 'next/link'
-import { TbLogout } from 'react-icons/tb'
+import Link from 'next/link';
+import { TbLogout } from 'react-icons/tb';
 
 //import Components
-import { useEffect, useRef, useState } from 'react'
-import { changeHeaderSize } from '~/store/actions'
-import { useAppDispatch } from '~/store/hooks'
-import lightLogo from '../../public/logo-light.png'
-import FullScreenDropdown from '../common/full-screen-dropdown'
-import LightDark from '../common/light-dark'
+import { useEffect, useRef, useState } from 'react';
+import { changeHeaderSize } from '~/store/actions';
+import { useAppDispatch } from '~/store/hooks';
+import lightLogo from '../../public/logo-light.png';
+import FullScreenDropdown from '../common/full-screen-dropdown';
+import LightDark from '../common/light-dark';
 
-import Bars3CenterLeftIcon from '@heroicons/react/24/solid/Bars3CenterLeftIcon'
+import Bars3CenterLeftIcon from '@heroicons/react/24/solid/Bars3CenterLeftIcon';
 
-import { BtnLink } from '~/Components/atoms/btn'
-import { ProfileButton } from '~/Components/molecules/profile-dropdown/profile-dropdown'
-import DrawerVet from '~/Components/organism/drawer'
-import type { ModeDrawerItems } from '~/Components/organism/drawer/drawer'
+import { BtnLink } from '~/Components/atoms/btn';
+import { ProfileButton } from '~/Components/molecules/profile-dropdown/profile-dropdown';
+import DrawerVet from '~/Components/organism/drawer';
+import type { ModeDrawerItems } from '~/Components/organism/drawer/drawer';
 
 type HeaderProps = {
     drawer?: (props: {
-        closeDrawer: () => void
-        visibleDrawer: boolean
-        mode: ModeDrawerItems
-    }) => JSX.Element
-}
+        open: boolean;
+        closeDrawer: () => void;
+        // visibleDrawer: boolean;
+        mode: ModeDrawerItems;
+    }) => JSX.Element;
+};
 
 const Header = ({
-    drawer: Drawer = (props) => <DrawerVet {...props} mode="VETERINARY" />,
+    drawer: CustomDrawer = (props) => (
+        <DrawerVet {...props} mode="VETERINARY" />
+    ),
 }: HeaderProps) => {
-    const [show, setShow] = useState<boolean>(false)
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleDrawer = () => {
+        setIsOpen((prevState) => !prevState);
+    };
 
-    const divRef = useRef<HTMLDivElement>(null)
+    const divRef = useRef<HTMLDivElement>(null);
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (divRef?.current) {
@@ -42,33 +48,31 @@ const Header = ({
                     width: divRef.current.offsetWidth,
                     height: divRef.current.offsetHeight,
                 }),
-            )
+            );
         }
-    }, [dispatch])
-
-    const handleShow = () => setShow(!show)
-    const handleClose = () => setShow(false)
+    }, [dispatch]);
 
     return (
         <header
-            className='!bg-primary-500 mobile:fixed mobile:z-50 w-full z-10 h-12 flex items-center'
+            className="!bg-primary-500 mobile:fixed mobile:z-50 w-full z-10 h-12 flex items-center"
             ref={divRef}
         >
-            <div className="flex w-full justify-between items-center px-4">
+            <div className="flex w-full !z-50 justify-between items-center px-4">
                 <button
-                    onClick={handleShow}
+                    onClick={toggleDrawer}
                     type="button"
-                    className="px-2 header-item topnav-hamburger"
+                    className="header-item topnav-hamburger"
                     id="topnav-hamburger-icon"
                 >
+                    <div className="ml-56">
+                        <CustomDrawer
+                            open={isOpen}
+                            closeDrawer={toggleDrawer}
+                            mode="VETERINARY"
+                        />
+                    </div>
                     <Bars3CenterLeftIcon className="h-6 w-6 text-white " />
                 </button>
-
-                <Drawer
-                    closeDrawer={handleClose}
-                    visibleDrawer={show}
-                    mode="VETERINARY"
-                />
                 <div className="flex items-center justify-center">
                     <Link
                         href="/dashboard"
@@ -127,7 +131,7 @@ const Header = ({
                 {/* <SearchOption /> */}
             </div>
         </header>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;
