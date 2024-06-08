@@ -1,6 +1,7 @@
 import cn from 'classnames'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import getServerSidePropsPagesGenericsPrivates from '~/helpers/get-server-side-props-pages-generic-privates'
 import LoadingPage from '~/pages/Modules/shared/LoadingPage'
 import { AttributeTypeProfile } from '~/services/helpers/types'
 import { useAppSelector } from '~/store/hooks'
@@ -11,10 +12,6 @@ const Dashboard = () => {
     const type_profile = user?.['custom:type_profile']
 
     useEffect(() => {
-        if (!user) {
-            router.push('/sign-in')
-        }
-
         if (type_profile === AttributeTypeProfile.TUTOR) {
             router.push('/tutor/dashboard')
         }
@@ -36,3 +33,5 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
+export const getServerSideProps = getServerSidePropsPagesGenericsPrivates()

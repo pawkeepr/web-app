@@ -33,7 +33,7 @@ import {
     removeCookie,
     setCookie,
 } from '~/utils/cookies-utils'
-import { getProfileSession, resetProfileFlag, setProfile } from '../profile/actions'
+import { resetProfileFlag, setProfile } from '../profile/actions'
 
 import { NameFullProfile, TypeProfile, type IProfile } from '~/types/profile'
 import { setEmailAccount, setPasswordAccount } from '../activate-account/actions'
@@ -56,7 +56,7 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
         )
         yield put(changeLayoutMode(mode))
 
-        delay(250)
+        delay(100)
         yield put(setAuthorization({ token }))
         yield put(signInSuccess({ token }))
 
@@ -66,16 +66,10 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
             JSON.stringify(attributes),
             idToken.payload.exp / 1000,
         )
-        yield put(
-            getProfileSession({
-                has_profile: attributes['custom:has_profile'],
-                type_profile: attributes['custom:type_profile'],
-            }),
-        )
-        delay(250)
-        const partial_route =
-            NameFullProfile[attributes['custom:type_profile'] || 2]
-        yield call([Router, Router.push], `/${partial_route}/dashboard`)
+
+        delay(100)
+
+        yield call([Router, Router.push], '/dashboard')
     } catch (error) {
         switch ((error as any)?.code) {
             case 'UserNotConfirmedException':
@@ -85,8 +79,9 @@ export function* signInUserSaga(action: PayloadAction<SignInCredentials>) {
                 yield put(signInFailed((error as any).message))
                 break
             default:
-                errorToast('Não foi possível realizar o login.', 'Falha!')
+                yield put(resetLoading())
                 yield put(signInFailed((error as any).message))
+                errorToast('Não foi possível realizar o login.', 'Falha!')
                 break
         }
     } finally {
@@ -127,6 +122,8 @@ export function* signOutUserSaga({
     try {
         yield put(changeLayoutMode(layoutModeTypes.LIGHT_MODE))
         yield call(removeCookie, cookies.token.name)
+        yield call(removeCookie, cookies.cognito_profile.name)
+        yield call(removeCookie, cookies.profile.name)
         yield call(deleteCookiesWithPrefix, 'pawkeepr')
         yield call(signOut)
         yield put(resetProfileFlag())
