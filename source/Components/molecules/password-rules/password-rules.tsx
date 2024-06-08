@@ -1,14 +1,15 @@
 import cn from 'classnames'
+import {
+    rulePassLength,
+    rulePassLower,
+    rulePassNumber,
+    rulePassSpecial,
+    rulePassUpper,
+} from '~/validations/password'
 
 type PasswordRulesProps = {
     value: string
 }
-
-const rulePassLength = RegExp('(.{8,})')
-const rulePassLower = RegExp('(.*[a-z].*)')
-const rulePassUpper = RegExp('(.*[A-Z].*)')
-const rulePassNumber = RegExp('(.*[0-9].*)')
-const rulePassSpecial = RegExp('(.*[!@#$%^&*()_+].*)')
 
 const rules = [
     {
@@ -43,14 +44,18 @@ const PasswordRules = ({ value }: PasswordRulesProps) => {
         <div className="mt-1">
             <h4 className="text-xs italic font-semibold">Senha deve conter:</h4>
             <div className="text-center">
-                {rules.map((rule, index) => (
+                {rules.map((rule) => (
                     <span
-                        key={index}
+                        key={rule.name}
                         data-testid={rule.name}
                         id={rule.name}
                         className={cn('text-xs font-sans font-semibold mr-1', {
-                            'text-primary-500': rule.condition.test(value.trim()),
-                            'text-gray-500': !rule.condition.test(value.trim()),
+                            'text-primary-500': rule.condition.isValidSync(
+                                value.trim(),
+                            ),
+                            'text-gray-500': !rule.condition.isValidSync(
+                                value.trim(),
+                            ),
                         })}
                     >
                         {rule.text}

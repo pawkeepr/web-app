@@ -16,17 +16,25 @@ import type { IProfile } from '~/types/profile'
 
 export const NAME = 'profile'
 
+const staleTime = 1000 * 60 * 60 * 24 // 24 hours
+
+const makeFetchProfile = (type?: AttributeTypeProfile) => {
+    return type === AttributeTypeProfile.VETERINARY
+        ? getVetProfile
+        : getTutorProfile
+}
+
 const useProfile = () => {
     const { user } = useAppSelector((state) => state.Profile)
-    const superKeys = [NAME, user?.email]
+    const superKeys = [NAME]
 
     const type = user?.['custom:type_profile']
 
-    const getProfile =
-        type === AttributeTypeProfile.VETERINARY ? getVetProfile : getTutorProfile
+    const getProfile = makeFetchProfile(type)
 
     return useAppQuery<IProfile>(superKeys, getProfile.bind(null), {
         enabled: !!user,
+        staleTime: user ? staleTime : 0,
     })
 }
 
@@ -35,12 +43,10 @@ export const useUpdateProfileMutation = () => {
 
     const type_profile = profile?.type_profile
 
-    const email = profile?.user_information?.contact?.email
-
     return useMutationHelper({
         mutationFn: (data: IProfile) =>
             updateProfileV2(data, KEYS_TYPE_USER_BY_NUMBER[type_profile || 1]),
-        mutationKey: [NAME, email],
+        mutationKey: [NAME],
         onSuccess: () => infoToast('Perfil atualizado com sucesso'),
         onError: () => errorToast('Erro ao atualizar perfil'),
     })

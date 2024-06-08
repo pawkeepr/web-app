@@ -2,6 +2,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 import { Formik } from 'formik'
 import { FaSearch } from 'react-icons/fa'
 import { create } from 'zustand'
+import withControl from '~/Components/helpers/with-control'
 import FieldControl from '../field-control'
 
 type SearchInputProps = {
@@ -33,7 +34,7 @@ const KeySearch = {
     pet: 'pet',
     appointment: 'appointment',
 }
-type KeySearch = typeof KeySearch[keyof typeof KeySearch]
+type KeySearch = (typeof KeySearch)[keyof typeof KeySearch]
 
 export const useSearch = (name: KeySearch) => {
     const { search, onChangeSearch } = useZustandSearch()
@@ -67,7 +68,7 @@ const SearchInput = ({ name }: SearchInputProps) => {
                                 onClick={() => onChangeSearch('')}
                                 className="flex items-center justify-center"
                             >
-                                <XMarkIcon className="text-red-300 w-6 h-6" />
+                                <XMarkIcon className="w-6 h-6 text-red-300" />
                             </button>
                         }
                     />
@@ -77,4 +78,4 @@ const SearchInput = ({ name }: SearchInputProps) => {
     )
 }
 
-export default SearchInput
+export default withControl(SearchInput)
