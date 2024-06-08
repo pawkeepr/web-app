@@ -67,7 +67,7 @@ const getServerSidePropsPagesVeterinaryPrivates =
         if (typeProfile && typeProfile !== '1') {
             return {
                 redirect: {
-                    destination: '/dashboard',
+                    destination: '/tutor/dashboard',
                     permanent: false,
                 },
             }
