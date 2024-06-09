@@ -12,13 +12,12 @@ const Dashboard = () => {
     const type_profile = user?.['custom:type_profile']
 
     useEffect(() => {
-        if (type_profile === AttributeTypeProfile.TUTOR) {
-            router.push('/tutor/dashboard')
-        }
-
         if (type_profile === AttributeTypeProfile.VETERINARY) {
             router.push('/veterinary/dashboard')
+            return
         }
+
+        router.push('/tutor/dashboard')
     }, [type_profile])
 
     return (
