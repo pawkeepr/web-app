@@ -5,11 +5,13 @@ import getServerSidePropsPagesGenericsPrivates from '~/helpers/get-server-side-p
 import LoadingPage from '~/pages/Modules/shared/LoadingPage'
 import { AttributeTypeProfile } from '~/services/helpers/types'
 import { useAppSelector } from '~/store/hooks'
+import useProfile from '~/store/hooks/profile/use-profile'
 
 const Dashboard = () => {
     const router = useRouter()
     const { user } = useAppSelector((state) => state.Profile)
     const type_profile = user?.['custom:type_profile']
+    useProfile()
 
     useEffect(() => {
         if (type_profile === AttributeTypeProfile.VETERINARY) {
