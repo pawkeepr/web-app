@@ -118,6 +118,7 @@ const StepSignUpAddress = ({ nextStep, prevStep }: StepProps) => {
                     ctx={values}
                     divClassName="col-span-1"
                     label="N°"
+                    required
                     name="location.number"
                     aria-label="number"
                     disabled={loading}

@@ -19,7 +19,7 @@ import {
 } from '~/services/helpers/types'
 import { errorToast, infoToast, successToast } from '~/store/helpers/toast'
 import { NameProfile, type IProfile } from '~/types/profile'
-import { setCookie } from '~/utils/cookies-utils'
+import { getCookie, setCookie } from '~/utils/cookies-utils'
 import { signOutUser } from '../login/actions'
 // Login Redux States
 import {
@@ -36,20 +36,33 @@ import {
     ACTION_GET_PROFILE_SESSION,
 } from './types'
 
+const LINK_ACTIVATION_TYPES = {
+    [AttributeTypeProfile.TUTOR]: '/tutor/activation',
+    [AttributeTypeProfile.VETERINARY]: '/veterinary/activation',
+} as const
+
+const GET_PROFILE = {
+    [AttributeTypeProfile.TUTOR]: getTutorProfile,
+    [AttributeTypeProfile.VETERINARY]: getVetProfile,
+} as const
+
 function* onGetProfile({
     payload: { has_profile, type_profile },
 }: PayloadAction<AttributesProfile>) {
-    const isVeterinary = type_profile === AttributeTypeProfile.VETERINARY
-    const link = isVeterinary ? '/veterinary/activation' : '/tutor/activation'
-
+    const link = LINK_ACTIVATION_TYPES[type_profile as '1' | '2']
     try {
         if (has_profile === 'no') {
             yield call([Router, Router.push], link)
         } else {
-            const getVet = isVeterinary ? getVetProfile : getTutorProfile
-            const { data } = yield call(getVet)
+            const get = GET_PROFILE[type_profile as '1' | '2']
+            const { data } = yield call(get)
             yield setCookie(cookies.profile.name, data)
-            yield put(editProfileSuccess(data))
+            yield put(
+                editProfileSuccess({
+                    ...data,
+                    'custom:type_profile': type_profile as '1' | '2',
+                }),
+            )
         }
     } catch (error) {
         if (!(typeof error === 'object') || !error) return
@@ -71,14 +84,15 @@ function* onGetProfile({
     }
 }
 
+const CreateProfiles = {
+    [AttributeTypeProfile.TUTOR]: createProfileTutor,
+    [AttributeTypeProfile.VETERINARY]: createProfileVet,
+}
+
 function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
     try {
-        const path = window.location.pathname
-        const isVeterinary = /veterinary/.test(path)
-        const createProfile = isVeterinary ? createProfileVet : createProfileTutor
-        const type_profile = isVeterinary
-            ? AttributeTypeProfile.VETERINARY
-            : AttributeTypeProfile.TUTOR
+        const type_profile = profile.user_information?.type_profile as 1 | 2
+        const createProfile = CreateProfiles[type_profile]
 
         if (profile.id) {
             const document = profile.user_information?.cpf_cnpj?.replace(/\D/g, '')
@@ -87,25 +101,31 @@ function* onAddProfile({ payload: profile }: PayloadAction<IProfile>) {
         } else {
             yield call(createProfile, profile)
         }
-
         yield call(updateHasProfile, 'yes')
-        yield put(addSuccess())
+        const profile_cognito = getCookie(cookies.cognito_profile.name)
+        yield call(
+            setCookie,
+            cookies.cognito_profile.name,
+            JSON.stringify({
+                ...profile_cognito,
+                'custom:has_profile': 'yes',
+            }),
+        )
         yield put(
             getProfileSession({
-                type_profile,
+                type_profile: type_profile as unknown as AttributeTypeProfile,
                 has_profile: 'yes',
             }),
         )
-        yield delay(1000)
+        yield put(addSuccess())
+
         infoToast(
-            'Você será deslogado, logue novamente para ter acesso a plataforma e todas as suas funcionalidades!',
+            'Aproveite agora todas as funcionalidades da Pawkeepr!',
             'Perfil ativado com sucesso!',
         )
-        yield put(
-            signOutUser({
-                type_profile: 2,
-            }),
-        )
+        yield delay(1000)
+
+        yield call([Router, Router.push], '/dashboard')
     } catch (error) {
         if (!(typeof error === 'object') || !error) return
         if (!('response' in error)) return
