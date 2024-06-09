@@ -12,12 +12,12 @@ export const SCHEDULED_CREATE = () => '/api-appointment/create-schedule'
 
 // Profile Vet
 
-export const VET_CREATE_PROFILE = () => '/api-user/create-user-vet'
+export const VET_CREATE_PROFILE = () => '/api-user/create-user/vet'
+export const TUTOR_CREATE_PROFILE = () => '/api-user/create-user/tutor'
 export const VET_GET_PROFILE = () => '/api-user/search-user-vet'
 
 // Profile Tutor
 
-export const TUTOR_CREATE_PROFILE = () => '/api-user/create-user-tutor'
 export const TUTOR_GET_PROFILE = () => '/api-user/search-user/tutor'
 export const TUTOR_UPDATE_PROFILE_PAWKEEPR = () => '/api-user/update-user-tutor'
 

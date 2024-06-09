@@ -82,7 +82,7 @@ const ActivationAccount = () => {
             id: values?.id,
             owner: values?.email,
             user_information: {
-                type_profile: TypeProfile.VETERINARY,
+                type_profile: TypeProfile.TUTOR,
                 cpf_cnpj: values?.cpf_cnpj,
                 address: { ...(values?.location as Location) },
                 first_name: values?.firstName,
@@ -112,7 +112,11 @@ const ActivationAccount = () => {
 
     useEffect(() => {
         if (!Yup.string().email().isValidSync(email)) {
-            dispatch(signOutUser())
+            dispatch(
+                signOutUser({
+                    type_profile: TypeProfile.TUTOR,
+                }),
+            )
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [email])
