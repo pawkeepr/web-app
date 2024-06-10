@@ -2,9 +2,8 @@ import AvatarPet from '~/Components/molecules/avatar-pet'
 import type { IPetV2Data } from '~/types/pet-v2'
 import type { Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
-import BoxButtonsPets from '../box-buttons-pets'
 import ModalBoxButtonsPet from '../box-buttons-pets/modal-box-buttons-pets'
-import Card from '../card'
+import { card } from '../card'
 import { IconGender, iconGender } from '../card-scheduled'
 
 type CardFeedPetProps = {
@@ -17,31 +16,40 @@ const CardFeedPet = ({ pet }: CardFeedPetProps) => {
     const Gender = IconGender[sex]
 
     return (
-        <Card
-            boxButtons={() => <BoxButtonsPets item={pet} />}
-            item={pet}
-            modal={ModalBoxButtonsPet}
-            className="mobile:!px-2 mobile:!py-2 px-4 py-4 "
-            sectionAvatar={() => (
-                <>
+        <ModalBoxButtonsPet item={pet}>
+            {({ showModal }) => (
+                <button
+                    onClick={showModal}
+                    type="button"
+                    className={card({
+                        className:
+                            'px-4 py-2 w-28 flex flex-col items-center justify-center',
+                    })}
+                >
                     <AvatarPet
                         name_pet={pet?.name_pet}
                         specie={pet.specie as Species}
+                        classNames={{
+                            img: 'w-20 h-20',
+                        }}
                     />
                     <div className="flex flex-row gap-1">
                         <h1 className="text-lg font-bold text-center text-gray-400 mobile:text-sm">
                             {`${pet?.name_pet}`}
                         </h1>
-                        <Gender className={iconGender({ sex })} />
+                        <Gender
+                            className={iconGender({
+                                sex,
+                                className: 'mobile:relative bottom-0 right-0',
+                            })}
+                        />
                     </div>
                     <h2 className="text-xs text-center">
                         {calcAge(pet?.date_birth)} ano(s)
                     </h2>
-                </>
+                </button>
             )}
-        >
-            <div />
-        </Card>
+        </ModalBoxButtonsPet>
     )
 }
 
