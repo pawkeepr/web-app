@@ -8,7 +8,11 @@ import {
     getVetProfile,
 } from '~/services/helpers'
 import { KEYS_TYPE_USER_BY_NUMBER } from '~/services/helpers/feedback'
-import { updateProfileV2 } from '~/services/helpers/profile'
+import {
+    fetchProfilePhoto,
+    updateProfilePicture,
+    updateProfileV2,
+} from '~/services/helpers/profile'
 import { AttributeTypeProfile } from '~/services/helpers/types'
 import { errorToast, infoToast } from '~/store/helpers/toast'
 import { useAppSelector } from '~/store/hooks'
@@ -70,6 +74,25 @@ export const useTutorProfileFromVet = ({ cpf_cnpj }: { cpf_cnpj: string }) => {
         {
             enabled: !!number && validationDocument.isValidSync(number),
         },
+    )
+}
+
+export const useMutationUpdateProfilePhoto = () => {
+    return useMutationHelper({
+        mutationFn: (data: FormData) => updateProfilePicture(data),
+        mutationKey: [NAME, 'photo'],
+        onSuccess: () => infoToast('Foto de perfil atualizada com sucesso'),
+        onError: () => errorToast('Erro ao atualizar foto de perfil.'),
+    })
+}
+
+export const useProfilePhoto = () => {
+    const superKeys = [NAME, 'photo']
+
+    return useAppQuery<string>(superKeys, () =>
+        fetchProfilePhoto({
+            key: 'logo-pawkeepr.png',
+        }),
     )
 }
 

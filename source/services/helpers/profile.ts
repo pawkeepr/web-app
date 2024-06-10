@@ -22,3 +22,13 @@ export const updateProfilePicture = (formData: FormData) =>
             'Content-Type': 'multipart/form-data',
         },
     })
+
+type FetchProfileImg = {
+    key: string
+}
+export const fetchProfilePhoto = (data: FetchProfileImg) =>
+    api.post(urls.FETCH_PROFILE_IMG(), data, {
+        params: {
+            type_doc: 1,
+        },
+    })
