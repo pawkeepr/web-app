@@ -5,11 +5,20 @@ import type { KEYS_TYPE_USERS } from './feedback'
 const urls = {
     UPDATE_PROFILE: (type_user: KEYS_TYPE_USERS) =>
         `/api-user/update-user/${type_user}`,
+    UPDATE_PROFILE_PICTURE: () => '/docs_medical',
+    FETCH_PROFILE_IMG: () => '/api-s3handler/get-object/',
 }
 
 export const updateProfileV2 = async (data: IProfile, type_user: KEYS_TYPE_USERS) =>
     api.put(urls.UPDATE_PROFILE(type_user), data, {
         params: {
             user_id: data.id,
+        },
+    })
+
+export const updateProfilePicture = (formData: FormData) =>
+    api.post(urls.UPDATE_PROFILE_PICTURE(), formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
         },
     })
