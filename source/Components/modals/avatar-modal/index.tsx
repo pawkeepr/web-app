@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react'
-import Avatar from '~/Components/atoms/avatar'
 import { BtnCancel, BtnSuccess } from '~/Components/atoms/btn'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import type { AvatarPetProps } from '~/Components/molecules/avatar-pet/avatar-pet'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
+import { useProfilePhoto } from '~/store/hooks/profile/use-profile'
 import ProfileEditor from './profile-editor'
 
 const AvatarModal = ({
@@ -25,9 +25,11 @@ const AvatarModal = ({
     const [file, setFile] = useState<File | undefined>()
     const { closeModal, open, showModal } = useModal()
 
+    const { data: sourceImg } = useProfilePhoto()
+
     const handleSave = async () => {
         if (!editorRef.current) return
-        const dataUrl = editorRef.current.getImage().toDataURL()
+        const dataUrl = editorRef.current?.getImage()?.toDataURL()
         const result = await fetch(dataUrl)
         const blob = await result.blob()
         const file = new File([blob], 'file')
@@ -45,18 +47,14 @@ const AvatarModal = ({
         <>
             <button
                 type="button"
-                title={
-                    disabled
-                        ? 'Finalize a criação para personalizar o avatar'
-                        : 'Editar foto'
-                }
+                title="Editar foto"
                 disabled={disabled}
                 className="disabled:cursor-default"
                 onClick={showModal}
             >
-                <AvatarPet src={oldImageSrc} name_pet="profile" {...props} />
+                <AvatarPet src={sourceImg} {...props} />
             </button>
-            <Modal onClose={closeModal} open={open}>
+            <Modal onClose={closeModal} open={open} mobilePage={false}>
                 <div>
                     <h1 className="mb-5 text-lg font-semibold text-center">
                         Editar foto de perfil
@@ -72,7 +70,7 @@ const AvatarModal = ({
                             editorRef={editorRef}
                             file={file}
                         />
-                        <Avatar
+                        <AvatarPet
                             condition={!file}
                             src={oldImageSrc}
                             alt="Previous profile pic"
