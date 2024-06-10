@@ -8,6 +8,7 @@ import {
     IoMdMale,
 } from 'react-icons/io'
 
+import { tv } from 'tailwind-variants'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import { useTranslations } from '~/hooks/use-translations'
 import type { VeterinaryConsultation } from '~/types/appointment'
@@ -67,16 +68,23 @@ const getIconStatus = (status: VeterinaryConsultation['appointment_status']) => 
     return IconStatus.scheduled
 }
 
+export const iconGender = tv({
+    base: `
+        w-4 h-4  mobile:absolute bottom-1 right-2
+    `,
+    variants: {
+        sex: {
+            male: 'text-blue-400',
+            female: 'text-pink-400',
+            unknown: 'text-purple-400',
+        },
+    },
+})
+
 export const IconGender = {
-    male: IoMdMale.bind(null, {
-        className: 'text-blue-400 w-4 h-4 mobile:absolute bottom-1 right-2',
-    }),
-    female: IoMdFemale.bind(null, {
-        className: 'text-pink-400 w-4 h-4 mobile:absolute bottom-1 right-2',
-    }),
-    unknown: FaTransgenderAlt.bind(null, {
-        className: 'text-purple-400 w-4 h-4 mobile:absolute bottom-1 right-2',
-    }),
+    male: IoMdMale,
+    female: IoMdFemale,
+    unknown: FaTransgenderAlt,
 }
 
 const CardScheduled = ({ appointment }: CardScheduledProps) => {
@@ -102,8 +110,8 @@ const CardScheduled = ({ appointment }: CardScheduledProps) => {
         return dateAndHour
     }, [appointment])
 
-    const Gender =
-        IconGender[appointment.tutor_pet_vet?.pet?.sex as keyof typeof IconGender]
+    const sex = appointment.tutor_pet_vet?.pet?.sex as keyof typeof IconGender
+    const Gender = IconGender[sex]
     const Icon = getIconStatus(appointment.appointment_status)
 
     return (
@@ -121,7 +129,11 @@ const CardScheduled = ({ appointment }: CardScheduledProps) => {
                         <h1 className="text-lg font-bold text-center text-gray-500 mobile:text-sm">
                             {`${pet?.name_pet}`}
                         </h1>
-                        <Gender />
+                        <Gender
+                            className={iconGender({
+                                sex,
+                            })}
+                        />
                     </div>
                     <h2 className="text-xs text-center text-gray-500">
                         {calcAge(pet?.date_birth)} ano(s)

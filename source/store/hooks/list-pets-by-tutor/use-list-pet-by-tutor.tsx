@@ -18,7 +18,7 @@ const useListPetsByTutor = ({ document }: UseListPetsByTutorProps) => {
 
 export default useListPetsByTutor
 
-interface Pet {
+export interface Pet {
     approximate_date: string | null
     blood_donator: string
     blood_type: string
