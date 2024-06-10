@@ -1,6 +1,6 @@
 import { CameraIcon } from '@heroicons/react/24/solid'
 import { Input, Label } from 'reactstrap'
-import AvatarPet from '~/Components/molecules/avatar-pet'
+import AvatarModal from '~/Components/modals/avatar-modal'
 import type { Species } from '~/types/speciesType'
 import CardContainer from './CardContainer'
 
@@ -24,7 +24,7 @@ const UserProfileCard = ({
             <div className="p-1">
                 <div className="text-center">
                     <div className="mx-auto mb-4 profile-user position-relative d-inline-block">
-                        <AvatarPet
+                        <AvatarModal
                             classNames={{
                                 img: '!w-32 !h-32',
                             }}
