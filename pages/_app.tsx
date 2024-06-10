@@ -14,6 +14,8 @@ import '~/aws'
 import { appWithTranslation } from 'next-i18next'
 import ErrorBoundary from '~/contexts/error-boundary'
 
+import pg from '../package.json'
+
 function App({ Component, pageProps }: AppProps) {
     return (
         <ErrorBoundary>
@@ -26,6 +28,9 @@ function App({ Component, pageProps }: AppProps) {
                     />
                     <Component {...pageProps} />
                 </AuthProvider>
+                <div className="fixed text-xs text-center text-gray-500 bottom-1 right-1">
+                    <p>{`v${pg.version} - `}</p>
+                </div>
             </Provider>
         </ErrorBoundary>
     )
