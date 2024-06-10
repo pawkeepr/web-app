@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import MyImage from '~/Components/atoms/my-image'
+import withControl from '~/Components/helpers/with-control'
 import type { Species } from '~/types/speciesType'
 
 export type AvatarPetProps = {
@@ -60,4 +61,4 @@ const AvatarPet = ({
     )
 }
 
-export default AvatarPet
+export default withControl(AvatarPet)
