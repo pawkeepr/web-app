@@ -1,6 +1,6 @@
 {
     "name": "pawkeepr",
-    "version": "0.2.1",
+    "version": "0.3.1",
     "private": true,
     "engines": {
         "node": ">=20",
@@ -64,6 +64,7 @@
         "react-reveal": "^1.2.2",
         "react-scrollspy": "^3.4.3",
         "react-select": "^5.8.0",
+        "react-to-print": "^2.15.1",
         "react-toastify": "^10.0.5",
         "reactstrap": "^9.2.2",
         "redux": "^4.1.2",
