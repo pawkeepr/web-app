@@ -128,10 +128,13 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
                             </p>
                             <div className="flex flex-col items-center justify-center w-full">
                                 <strong> TagPkeepr</strong>
-                                <QrCodePet id_pet={id_pet as string} />
-                                <p className="mb-1 text-xs text-center text-gray-500">
-                                    Clique na TagPkeepr para baixar
-                                </p>
+                                <QrCodePet
+                                    id_pet={id_pet as string}
+                                    name_pet={
+                                        pet?.pet_information?.name_pet as string
+                                    }
+                                />
+
                                 <p className="text-xs text-center text-gray-500">
                                     Não se preocupe, os seus dados pessoais estarão
                                     seguros.
