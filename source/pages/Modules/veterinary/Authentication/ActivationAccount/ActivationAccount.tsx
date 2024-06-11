@@ -134,7 +134,11 @@ const ActivationAccount = () => {
 
     useEffect(() => {
         if (!email) {
-            dispatch(signOutUser())
+            dispatch(
+                signOutUser({
+                    type_profile: TypeProfile.VETERINARY,
+                }),
+            )
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [email])
@@ -143,11 +147,7 @@ const ActivationAccount = () => {
         setSelectedIndex((state) => {
             const stateNumber = Number(state)
 
-            if (stateNumber === Tabs.length) {
-                return state
-            }
-
-            return stateNumber + 1
+            return Math.min(Tabs.length - 1, stateNumber + 1)
         })
     }
 
@@ -155,14 +155,9 @@ const ActivationAccount = () => {
         setSelectedIndex((state) => {
             const stateNumber = Number(state)
 
-            if (stateNumber === 1) {
-                return state
-            }
-
-            return stateNumber - 1
+            return Math.max(0, stateNumber - 1)
         })
     }
-
     return (
         <AuthLayout title="Activation Profile">
             <BtnLink
