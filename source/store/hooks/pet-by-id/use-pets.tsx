@@ -1,5 +1,7 @@
 import { Pet } from '~/entities/Pet'
+import useAppQuery from '~/hooks/use-app-query'
 import { createPet, createPetByTutor, getPet, updatePet } from '~/services/helpers'
+import { fetchPublicPet } from '~/services/helpers/pet'
 import type { IPetV2 } from '~/types/pet-v2'
 import { TypeProfile } from '~/types/profile'
 import useProfile from '../profile/use-profile'
@@ -23,6 +25,14 @@ const usePetById = (document: string, id_pet: string) => {
         name: NAME,
         enabled: !!document,
         update: updatePet.bind(null, document),
+    })
+}
+
+export const usePetPublic = (id_pet: string) => {
+    const superKeys = [NAME, id_pet, 'public']
+
+    return useAppQuery<IPetV2>(superKeys, () => fetchPublicPet(id_pet), {
+        enabled: !!id_pet,
     })
 }
 

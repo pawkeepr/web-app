@@ -64,7 +64,7 @@ const ModalSearchUberVet = () => {
                             <article
                                 key={vet.veterinary_information?.crmv}
                                 className={card({
-                                    className: 'py-4 px-2 gap-2',
+                                    className: 'py-4 px-2 gap-2 flex-wrap',
                                 })}
                             >
                                 <section className="flex items-center justify-center ">

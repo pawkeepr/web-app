@@ -16,7 +16,7 @@ type SocialLinksProps = {
 
 const SocialLinks = ({ whatsapp }: SocialLinksProps) => {
     return (
-        <CardContainer className="mt-2 bg-white">
+        <CardContainer className="bg-white ">
             {/* <div className="flex items-center mb-3">
                 <FaFacebook className="w-6 h-6 mr-3 text-blue-600" />
                 <Input
