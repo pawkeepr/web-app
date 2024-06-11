@@ -25,6 +25,11 @@ const CardFeedPet = ({ pet }: CardFeedPetProps) => {
                         className:
                             'px-2 py-2 w-28 !h-36 flex flex-col items-center justify-center',
                     })}
+                    style={{
+                        minWidth: '7rem ',
+                        minHeight: '9rem',
+                        maxWidth: '7rem',
+                    }} // fix width and height
                 >
                     <AvatarPet
                         name_pet={pet?.name_pet}
