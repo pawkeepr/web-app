@@ -2,7 +2,7 @@ import { HiUserGroup } from 'react-icons/hi2'
 import { MdOutlinePets } from 'react-icons/md'
 import HorizontalTabs, { type TabItem } from '~/Components/organism/horizontal-list'
 import DefaultLayout from '../../_layouts/dashboard/dashboard'
-import PetsTab from './components/organisms/PetsTab'
+import PetsTab from './components/organisms/PetsTab-legado'
 import VetsTab from './components/organisms/VetsTab'
 
 const Tabs = (): TabItem[] => [
