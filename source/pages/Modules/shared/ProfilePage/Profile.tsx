@@ -51,7 +51,7 @@ const Profile: React.FC = () => {
         <DashboardLayouts title="Perfil" searchBlock={false}>
             <div className="container mx-auto mt-2">
                 <div className="flex flex-wrap flex-1 mobile:flex-col">
-                    <div className="flex flex-col flex-1 w-full m-1 border border-gray-200 ">
+                    <div className="flex flex-col flex-1 w-full gap-1 m-1 border border-gray-200 ">
                         <UserProfileCard />
                         <SocialLinks />
                     </div>
