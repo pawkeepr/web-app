@@ -88,6 +88,7 @@ const Tabs = () => [
         ),
     },
 ]
+
 const PetsTab = () => {
     const { data: pets, isPending, isFetching } = useListPetsFromTutor()
     const categories = useMemo(() => Tabs(), [])
