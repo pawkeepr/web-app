@@ -18,7 +18,10 @@ type PetWasFoundProps = {
 const PetWasFound = ({ id_pet }: PetWasFoundProps) => {
     const { data, isPending } = usePetPublic(id_pet)
 
-    const name_tutor = `${data?.main_responsible_guardian?.first_name} ${data?.main_responsible_guardian?.last_name}`
+    const name_tutor =
+        data?.main_responsible_guardian?.name ||
+        data?.main_responsible_guardian?.first_name
+
     const whatsapp_tutor = data?.main_responsible_guardian?.contact?.whatsapp
 
     const { t } = useTranslations('common')
