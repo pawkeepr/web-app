@@ -1,3 +1,4 @@
+import cn from 'classnames'
 import { useRef, useState } from 'react'
 import { BtnCancel, BtnSuccess } from '~/Components/atoms/btn'
 import AvatarPet from '~/Components/molecules/avatar-pet'
@@ -24,6 +25,7 @@ const AvatarModal = ({
     const editorRef = useRef(null)
     const [file, setFile] = useState<File | undefined>()
     const { closeModal, open, showModal } = useModal()
+    const FLAG = process.env.FLAG_LIST === 'true'
 
     const { data: sourceImg } = useProfilePhoto()
 
@@ -49,12 +51,15 @@ const AvatarModal = ({
                 type="button"
                 title="Editar foto"
                 disabled={disabled}
-                className="disabled:cursor-default"
+                className={cn({
+                    '!cursor-default': !disabled || !FLAG,
+                    'opacity-50': disabled,
+                })}
                 onClick={showModal}
             >
                 <AvatarPet src={sourceImg} {...props} />
             </button>
-            <Modal onClose={closeModal} open={open} mobilePage={false}>
+            <Modal onClose={closeModal} open={open && FLAG} mobilePage={false}>
                 <div>
                     <h1 className="mb-5 text-lg font-semibold text-center">
                         Editar foto de perfil
