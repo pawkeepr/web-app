@@ -1,7 +1,11 @@
+import { Tab } from '@headlessui/react'
+import { useMemo } from 'react'
 import { MdPets } from 'react-icons/md'
 import { BtnLinkFloating } from '~/Components/molecules/btn-floating/btn-floating'
 import { card } from '~/Components/organism/card'
 import CardFeedPets from '~/Components/organism/card-feed-pets'
+import ItemsList from '~/Components/organism/horizontal-list/items-list'
+import MenuList from '~/Components/organism/horizontal-list/menu-list'
 
 import {
     useListPetsFromTutor,
@@ -62,11 +66,37 @@ const MapCardFeedPets = ({ pets, isPending, isLoading }: MapCardFeedPetsProps) =
     )
 }
 
+const Tabs = () => [
+    {
+        id: 1,
+        title: 'Para Você',
+        href: '#ForYou',
+        tab: (
+            <section className="flex items-center justify-center flex-1 min-h-[30vh] text-center text-xs font-sans">
+                Estamos Trabalhando no seu Feed de Amigos. Confie em nós. Beba água!
+            </section>
+        ),
+    },
+    {
+        id: 2,
+        title: 'Seguindo',
+        href: '#Following',
+        tab: (
+            <section className="flex items-center justify-center flex-1 min-h-[30vh] text-center text-xs font-sans">
+                Estamos Trabalhando no seu Feed Global. Confie em nós. Beba água!
+            </section>
+        ),
+    },
+]
 const PetsTab = () => {
     const { data: pets, isPending, isFetching } = useListPetsFromTutor()
-
+    const categories = useMemo(() => Tabs(), [])
     return (
-        <section className="flex flex-1 flex-col w-full px-4 mobile:!px-2">
+        <Tab.Group
+            as="section"
+            className="flex flex-1 flex-col w-full px-4 mobile:!px-2 mt-1"
+        >
+            <MenuList categories={categories} mobile={false} mode="simple" />
             {pets?.length === 0 && (
                 <div className="flex items-center justify-center h-32 text-center">
                     <span>Não há Pets Cadastrados</span>
@@ -78,15 +108,15 @@ const PetsTab = () => {
                 isPending={isPending}
                 isLoading={isFetching}
             />
-            <section className="flex items-center justify-center flex-1 min-h-[50vh] ">
-                Estamos Trabalhando no seu Feed. Confie em nós. Beba água!
-            </section>
+
+            <ItemsList categories={categories} />
+
             <BtnLinkFloating
                 icon={(props) => <MdPets {...props} />}
                 title="Adicionar Pet"
                 href="/tutor/pet"
             />
-        </section>
+        </Tab.Group>
     )
 }
 

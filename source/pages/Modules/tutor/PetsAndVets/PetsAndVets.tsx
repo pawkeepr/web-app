@@ -22,7 +22,7 @@ const Tabs = (): TabItem[] => [
     },
 ]
 
-const PetAndTutors = <T,>() => {
+const PetAndTutors = () => {
     const tabs = Tabs()
     return (
         <DefaultLayout title="Tutor-Dashboard" searchBlock={false}>
