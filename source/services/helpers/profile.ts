@@ -6,7 +6,7 @@ const urls = {
     UPDATE_PROFILE: (type_user: KEYS_TYPE_USERS) =>
         `/api-user/update-user/${type_user}`,
     UPDATE_PROFILE_PICTURE: () => '/docs_medical',
-    FETCH_PROFILE_IMG: () => '/api-s3handler/get-object',
+    FETCH_PROFILE_IMG: () => '/api-s3handler/get-object-s3',
 }
 
 export const updateProfileV2 = async (data: IProfile, type_user: KEYS_TYPE_USERS) =>
