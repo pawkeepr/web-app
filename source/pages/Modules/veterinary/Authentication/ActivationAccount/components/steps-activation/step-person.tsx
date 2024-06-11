@@ -16,7 +16,6 @@ import SwitchControl from '~/Components/atoms/switch-control/switch'
 import FieldCrmv from '~/Components/molecules/field-crmv'
 import FieldDocument from '~/Components/molecules/field-document'
 import FieldPhone from '~/Components/molecules/field-phone'
-import useNextStep from '~/hooks/use-next-step'
 import type { ActivateAccount } from '~/validations/activate'
 import { validatePhone } from '~/validations/contact'
 import type { StepProps } from './types'
@@ -27,8 +26,6 @@ const StepSignUpPerson = ({ nextStep }: StepProps) => {
     const requiredValid = useMemo((): boolean => {
         return validatePerson.isValidSync(values)
     }, [values])
-
-    useNextStep(nextStep, requiredValid)
 
     const copyPhoneToWhatsApp = (checked: boolean) => {
         if (!checked) {

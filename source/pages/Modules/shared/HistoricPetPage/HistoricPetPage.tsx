@@ -113,14 +113,32 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
                             </div>
                         </CardContainer>
                         <CardContainer className="flex items-center justify-center w-full bg-white">
-                            <p className="text-sm text-center text-gray-500">
-                                Traga mais segurança para seu pet, imprima o QR Code
-                                e cole na coleira,caso ele se perca, quem encontrar
-                                poderá ter acesso aos dados do pet e entrar em
-                                contato com você.
+                            <p className="text-xs text-center text-gray-500">
+                                Traga mais segurança para o seu pet!
                             </p>
-                            <div className="flex items-center justify-center w-full">
-                                <QrCodePet id_pet={id_pet as string} />
+                            <p className="text-xs text-center text-gray-500">
+                                Imprima a TagPkeepr e use-o em sua coleira.
+                            </p>
+                            <br />
+
+                            <p className="text-xs text-center text-gray-500">
+                                Caso ele se perca, quem o encontrar poderá escanear
+                                o código, acessar as informações do seu pet e entrar
+                                em contato com você rapidamente.
+                            </p>
+                            <div className="flex flex-col items-center justify-center w-full">
+                                <strong> TagPkeepr</strong>
+                                <QrCodePet
+                                    id_pet={id_pet as string}
+                                    name_pet={
+                                        pet?.pet_information?.name_pet as string
+                                    }
+                                />
+
+                                <p className="text-xs text-center text-gray-500">
+                                    Não se preocupe, os seus dados pessoais estarão
+                                    seguros.
+                                </p>
                             </div>
                         </CardContainer>
                     </div>

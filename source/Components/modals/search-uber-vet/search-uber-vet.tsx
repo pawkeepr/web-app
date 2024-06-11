@@ -43,7 +43,7 @@ const ModalSearchUberVet = () => {
                 }}
                 mobilePage={false}
                 classNames={{
-                    modal: '!w-3/4',
+                    modal: 'w-full',
                 }}
                 open={open}
             >
@@ -64,22 +64,26 @@ const ModalSearchUberVet = () => {
                             <article
                                 key={vet.veterinary_information?.crmv}
                                 className={card({
-                                    className: 'py-4 px-2 gap-2 flex-wrap',
+                                    className:
+                                        'py-4 px-2 gap-2 text-xs flex-wrap items-center ',
                                 })}
                             >
-                                <section className="flex items-center justify-center ">
-                                    <UserIcon className="w-24 h-16 text-gray-500" />
+                                <section className="flex items-center justify-center flex-1 ">
+                                    <UserIcon className="w-20 h-12 text-gray-500" />
                                 </section>
-                                <section className="flex items-center justify-center gap-2 ">
-                                    <h2 className="text-base font-bold text-gray-600">
-                                        {vet.name_vet}
+                                <section className="flex  mobile:!flex-col items-center justify-between flex-[4] w-full gap-2 ">
+                                    <h2 className="font-bold text-gray-600">
+                                        <strong className="mr-2">
+                                            {vet.name_vet}
+                                        </strong>
+                                        <span className="text-gray-500">
+                                            {t(
+                                                vet.veterinary_information
+                                                    ?.specialty,
+                                            )}
+                                        </span>
                                     </h2>
-                                    <span className="text-sm text-gray-500">
-                                        {t(vet.veterinary_information?.specialty)}
-                                    </span>
-                                </section>
 
-                                <section className="flex items-end justify-end flex-1 h-full ">
                                     <button
                                         type="button"
                                         onClick={() =>
@@ -87,7 +91,7 @@ const ModalSearchUberVet = () => {
                                                 vet.contact_vet?.whatsapp,
                                             )
                                         }
-                                        className="flex flex-row gap-1 text-sm text-gray-500"
+                                        className="flex flex-row gap-1 text-gray-500"
                                     >
                                         <PiWhatsappLogo className="w-5 h-5 text-primary-500" />
                                         {vet.contact_vet?.whatsapp}
