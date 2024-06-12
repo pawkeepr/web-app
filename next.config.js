@@ -13,6 +13,7 @@ const nextConfig = ((_phase) => {
                 '/forget-password',
                 '/reset-password',
                 '/',
+                '/search',
                 '/client/confirmation/[id]',
             ],
         },

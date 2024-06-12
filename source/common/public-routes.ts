@@ -14,4 +14,12 @@ export const PUBLIC_ROUTES = [
     '/confirm-account',
     '/privacy-policy',
     '/service-terms',
+    '/pet-was-found',
+]
+
+export const PUBLIC_ROUTES_GENERAL = [
+    '/privacy-policy',
+    '/service-terms',
+    '/pet-was-found',
+    '/search',
 ]
