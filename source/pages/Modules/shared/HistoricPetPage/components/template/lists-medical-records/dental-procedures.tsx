@@ -2,6 +2,7 @@ import { format } from 'date-fns'
 import { tv } from 'tailwind-variants'
 import { useTranslations } from '~/hooks/use-translations'
 import type { DentalProcedure as IDentalProcedure } from '~/types/medical-records'
+import { itemStyle } from './styles'
 
 type ItemProps = {
     item: IDentalProcedure
@@ -23,7 +24,7 @@ const DentalProcedure = ({ item }: ItemProps) => {
     const { t } = useTranslations('common')
 
     return (
-        <li className="flex flex-row items-center justify-between h-10 ">
+        <li className={itemStyle.container()}>
             <p>
                 <strong className="mr-2">Saúde:</strong>
                 <span className={status_dental({ status: item.status_dental })}>

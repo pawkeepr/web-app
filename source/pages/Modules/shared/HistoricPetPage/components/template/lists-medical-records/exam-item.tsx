@@ -1,6 +1,7 @@
 import { format } from 'date-fns'
 import { useTranslations } from '~/hooks/use-translations'
 import type { ExamTest } from '~/types/medical-records'
+import { itemStyle } from './styles'
 
 type ExamItemProps = {
     item: ExamTest
@@ -12,7 +13,7 @@ const ExamItem = ({ item }: ExamItemProps) => {
     const { t } = useTranslations('common')
 
     return (
-        <li className="flex flex-row items-center justify-between h-10 ">
+        <li className={itemStyle.container()}>
             <p>
                 <strong className="mr-2">Exame:</strong>
                 <span>{item.name || 0}</span>

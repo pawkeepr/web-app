@@ -5,6 +5,7 @@ import { FaArrowLeft } from 'react-icons/fa'
 import { BtnIcon } from '~/Components/atoms/btn'
 
 import type { MEDICAL_RECORDS, MedicalRecordEntry } from '~/types/medical-records'
+import type { PetData } from '~/types/pet-v2'
 import OptionsComponent, {
     type MedicalRecordFormProps,
     type Option,
@@ -13,6 +14,7 @@ import OptionsComponent, {
 type ItemMedicalRecordsFormProps = {
     cpf_cnpj: string
     id_pet: string
+    pet: PetData | null
     item?: MedicalRecordEntry | null
     handleCancel: () => void
     form: (props: MedicalRecordFormProps) => JSX.Element

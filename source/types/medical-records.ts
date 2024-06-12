@@ -153,6 +153,7 @@ export interface MedicalRecordEntry {
     id?: string
     type: MEDICAL_RECORDS
     name: string
+    age?: number
     cpf_cnpj_who_applied: string
     id_appointment: string | null
     who_applied: string
@@ -169,7 +170,7 @@ export interface BodyEvolution
     extends Omit<MedicalRecordEntry, 'date_application'> {
     id?: string
     type: 'body-evolution'
-    age: string
+    age: number
     date_register_log: string
     notes_consults: string
     type_weight: 'kg' | 'g'
@@ -195,6 +196,7 @@ export interface Disease extends MedicalRecordEntry {
     when_agreements_date: string
     appointment_date: string
     type_object: string
+    severity?: string
 }
 
 // Procedimentos Dentários
@@ -234,7 +236,10 @@ export interface Medicine extends MedicalRecordEntry {
     type: 'medicines'
     brand: string
     continuous_use: 'yes' | 'no'
+    administration_route: string
     amount: string
+    dosage: string
+    frequency: string
     type_object: string
     interval: string
     period: string

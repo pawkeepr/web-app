@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import type { PhysicalActivity } from '~/types/medical-records'
+import { itemStyle } from './styles'
 
 type PhysicalActivityItemProps = {
     item: PhysicalActivity
@@ -9,7 +10,7 @@ const PhysicalActivityItem = ({ item }: PhysicalActivityItemProps) => {
     const date_log = format(new Date(item.date_register_log), 'dd/MM/yyyy')
 
     return (
-        <li className="flex flex-row items-center justify-between h-10 ">
+        <li className={itemStyle.container()}>
             <p>
                 <strong className="mr-2">Exame:</strong>
                 <span>{item.name || 0}</span>

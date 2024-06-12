@@ -11,6 +11,7 @@ import InjuriesItem from './injuries-item'
 import MedicationsItem from './medications-item'
 import NutritionItem from './nutritions-item'
 import PhysicalActivityItem from './physical-activity-item'
+import { itemStyle } from './styles'
 import SurgeriesItem from './surgeries-item'
 import VaccineItem from './vaccines-item'
 
@@ -41,7 +42,7 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
     return (
         <article className="gap-2 p-2 font-sans text-xs bg-white">
             <Accordion title="Evolução Corporal" classNames={classNames}>
-                <ul>
+                <ul className={itemStyle.ul()}>
                     {body_evolution?.map((item) => (
                         <BodyEvolutionItem key={item.id as string} item={item} />
                     ))}
@@ -49,7 +50,7 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
             </Accordion>
 
             <Accordion title="Procedimentos Dentários" classNames={classNames}>
-                <ul>
+                <ul className={itemStyle.ul()}>
                     {list_dental_procedures?.map((item) => (
                         <DentalProcedure item={item} key={item.id as string} />
                     ))}
@@ -57,7 +58,7 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
             </Accordion>
 
             <Accordion title="Exames e Testes" classNames={classNames}>
-                <ul>
+                <ul className={itemStyle.ul()}>
                     {exams?.map((item) => (
                         <ExamItem key={item.id as string} item={item} />
                     ))}
@@ -65,7 +66,7 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
             </Accordion>
 
             <Accordion title="Atividade Física" classNames={classNames}>
-                <ul>
+                <ul className={itemStyle.ul()}>
                     {physical_activities?.map((item) => (
                         <PhysicalActivityItem key={item.id as string} item={item} />
                     ))}
@@ -73,7 +74,7 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
             </Accordion>
 
             <Accordion title="Hospitalizações" classNames={classNames}>
-                <ul>
+                <ul className={itemStyle.ul()}>
                     {hospitalizations?.map((item) => (
                         <HospitalizationsItem key={item.id as string} item={item} />
                     ))}
@@ -81,7 +82,7 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
             </Accordion>
 
             <Accordion title="Doenças" classNames={classNames}>
-                <ul>
+                <ul className={itemStyle.ul()}>
                     {diseases?.map((item) => (
                         <DiseaseItem key={item.id as string} item={item} />
                     ))}
@@ -89,7 +90,7 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
             </Accordion>
 
             <Accordion title="Alergias" classNames={classNames}>
-                <ul>
+                <ul className={itemStyle.ul()}>
                     {allergies?.map((item) => (
                         <AllergiesItem key={item.id as string} item={item} />
                     ))}
@@ -97,7 +98,7 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
             </Accordion>
 
             <Accordion title="Internações" classNames={classNames}>
-                <ul>
+                <ul className={itemStyle.ul()}>
                     {internment?.map((item) => (
                         <HospitalizationsItem key={item.id as string} item={item} />
                     ))}
@@ -105,7 +106,7 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
             </Accordion>
 
             <Accordion title="Cirurgias" classNames={classNames}>
-                <ul>
+                <ul className={itemStyle.ul()}>
                     {surgeries?.map((item) => (
                         <SurgeriesItem key={item.id as string} item={item} />
                     ))}
@@ -113,7 +114,7 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
             </Accordion>
 
             <Accordion title="Lesões" classNames={classNames}>
-                <ul>
+                <ul className={itemStyle.ul()}>
                     {injuries?.map((item) => (
                         <InjuriesItem key={item.id as string} item={item} />
                     ))}
@@ -121,7 +122,7 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
             </Accordion>
 
             <Accordion title="Medicamentos" classNames={classNames}>
-                <ul>
+                <ul className={itemStyle.ul()}>
                     {medicines?.map((item) => (
                         <MedicationsItem key={item.id as string} item={item} />
                     ))}
@@ -129,7 +130,7 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
             </Accordion>
 
             <Accordion title="Vacinas" classNames={classNames}>
-                <ul>
+                <ul className={itemStyle.ul()}>
                     {vaccines?.map((item) => (
                         <VaccineItem key={item.id as string} item={item} />
                     ))}
@@ -137,7 +138,7 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
             </Accordion>
 
             <Accordion title="Nutrição" classNames={classNames}>
-                <ul>
+                <ul className={itemStyle.ul()}>
                     {nutritions?.map((item) => (
                         <NutritionItem key={item.id as string} item={item} />
                     ))}

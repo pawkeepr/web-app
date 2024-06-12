@@ -10,6 +10,7 @@ import HorizontalTabs from '~/Components/organism/horizontal-list'
 import { useTranslations } from '~/hooks/use-translations'
 import { infoToast } from '~/store/helpers/toast'
 import usePetById from '~/store/hooks/pet-by-id/use-pets'
+import type { PetData } from '~/types/pet-v2'
 import { calcAge } from '~/utils/calc-age'
 import DefaultLayout from '../../_layouts/dashboard/dashboard'
 import MaintainPetPage from '../MaintainPetPage/MaintainPetPage'
@@ -150,6 +151,10 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
                 </div>
                 <AddMedicalRecords
                     item={null}
+                    pet={{
+                        ...(pet?.pet_information as PetData),
+                        id_pet: id_pet as string,
+                    }}
                     cpf_cnpj={document as string}
                     id_pet={id_pet as string}
                 >

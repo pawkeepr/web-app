@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import type { BodyEvolution } from '~/types/medical-records'
+import { itemStyle } from './styles'
 type BodyEvolutionItemProps = {
     item: BodyEvolution
 }
@@ -8,7 +9,7 @@ const BodyEvolutionItem = ({ item }: BodyEvolutionItemProps) => {
     const date = format(new Date(item.date_register_log), 'dd/MM/yyyy')
 
     return (
-        <li className="flex flex-row items-center justify-between h-10 ">
+        <li className={itemStyle.container()}>
             <p>
                 <strong className="mr-2">Idade:</strong>
                 <span>{item.age || 0}</span>

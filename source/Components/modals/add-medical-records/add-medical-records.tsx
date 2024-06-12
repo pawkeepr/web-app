@@ -8,11 +8,13 @@ import ItemMedicalRecordsForm from '~/Components/forms/item-medical-records-form
 import MedicalRecordsForm from '~/Components/forms/medical-records-form'
 import withControl from '~/Components/helpers/with-control'
 import type { MedicalRecordEntry } from '~/types/medical-records'
+import type { PetData } from '~/types/pet-v2'
 
 type AddModalProps = {
     children?: (showModal: () => void) => JSX.Element
     cpf_cnpj: string
     id_pet: string
+    pet: PetData | null
     item?: MedicalRecordEntry | null
 }
 
@@ -21,6 +23,7 @@ const AddMedicalRecordsModal = ({
     item = null,
     cpf_cnpj,
     id_pet,
+    pet = null,
 }: AddModalProps) => {
     const { closeModal, open, showModal } = useModal()
 
@@ -50,6 +53,7 @@ const AddMedicalRecordsModal = ({
                 </div>
 
                 <ItemMedicalRecordsForm
+                    pet={pet}
                     form={(props) => <MedicalRecordsForm {...props} />}
                     id_pet={id_pet}
                     handleCancel={closeModal}

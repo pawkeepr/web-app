@@ -3,10 +3,12 @@ import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldNumber from '~/Components/molecules/field-number'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import type { BodyEvolution } from '~/types/medical-records'
+import { calcAge } from '~/utils/calc-age'
 import type { OptionFormsProps } from '../medical-records-form'
 
 const BodyEvolutionForm = ({
     item = {} as BodyEvolution,
+    pet,
     handleSubmit,
     handleClose,
 }: OptionFormsProps<BodyEvolution>) => {
@@ -15,7 +17,7 @@ const BodyEvolutionForm = ({
             initialValues={
                 {
                     weight: 0,
-                    age: 0,
+                    age: calcAge(pet?.date_birth).toString(),
                     coin: '',
                     cpf_cnpj_who_applied: '',
                     date_application: new Date().toISOString(),
@@ -69,7 +71,7 @@ const BodyEvolutionForm = ({
                         name="notes"
                         divClassName="col-span-full"
                     />
-                    <div className="flex flex-1 justify-end col-span-full">
+                    <div className="flex justify-end flex-1 col-span-full">
                         <BtnCancel
                             className="flex-1"
                             label="Cancelar"
