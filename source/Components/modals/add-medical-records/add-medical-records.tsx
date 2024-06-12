@@ -6,6 +6,7 @@ import useModal from '~/hooks/use-modal'
 
 import ItemMedicalRecordsForm from '~/Components/forms/item-medical-records-form'
 import MedicalRecordsForm from '~/Components/forms/medical-records-form'
+import withControl from '~/Components/helpers/with-control'
 import type { MedicalRecordEntry } from '~/types/medical-records'
 
 type AddModalProps = {
@@ -41,17 +42,7 @@ const AddMedicalRecordsModal = ({
                     label="Adicionar Registro Médico"
                 />
             )}
-            <Modal
-                onOpen={() => {
-                    showModal()
-                }}
-                onClose={() => closeModal()}
-                modal
-                nested
-                open={open}
-                lockScroll
-                className="pb-0 w-[750px] h-fit py-4 min-h-96"
-            >
+            <Modal onClose={() => closeModal()} open={open}>
                 <div className="w-full">
                     <h6 className="mb-4 font-semibold text-center uppercase">
                         {title}
@@ -70,4 +61,4 @@ const AddMedicalRecordsModal = ({
     )
 }
 
-export default AddMedicalRecordsModal
+export default withControl(AddMedicalRecordsModal)

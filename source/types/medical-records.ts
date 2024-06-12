@@ -129,19 +129,19 @@ export interface PetMedicalRecords {
     list_vaccines: Vaccine[]
     list_medicines: Medicine[]
     list_hospital_information: {
-        list_surgeries: Hospitalization[]
-        list_allergies: Disease[]
-        list_diseases: Disease[]
-        list_injuries: Disease[]
-        list_internment: Hospitalization[]
-        list_hospitalizations: Hospitalization[]
+        surgeries: Hospitalization[]
+        allergies: Disease[]
+        diseases: Disease[]
+        injuries: Disease[]
+        internment: Hospitalization[]
+        hospitalizations: Hospitalization[]
     }
     list_anamnesis: {
-        list_digestive_sys: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema digestivo
-        list_respiratory_sys: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema respiratório
-        list_locomotor_sys: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema locomotor
-        list_urinary_system: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema urinário
-        list_nervous_sys: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema nervoso
+        digestive_sys: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema digestivo
+        respiratory_sys: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema respiratório
+        locomotor_sys: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema locomotor
+        urinary_system: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema urinário
+        nervous_sys: unknown[] // Pode ser especificado se houver um formato padrão para informações do sistema nervoso
     }
     list_others: unknown[] // Pode ser especificado se houver um formato padrão para outras informações
     date_register: string
@@ -154,25 +154,26 @@ export interface MedicalRecordEntry {
     type: MEDICAL_RECORDS
     name: string
     cpf_cnpj_who_applied: string
+    id_appointment: string | null
     who_applied: string
     type_profile: number
     notes: string
-    date_application: string
+    date_register_log: string
+    info_register_log: string
     value: string
     coin: string
 }
 
 // Evolução Corporal
-export interface BodyEvolution extends MedicalRecordEntry {
+export interface BodyEvolution
+    extends Omit<MedicalRecordEntry, 'date_application'> {
     id?: string
     type: 'body-evolution'
     age: string
-    height: string
-    length: string
-    weight: string
-    type_weight: string
-    imc: string
+    date_register_log: string
     notes_consults: string
+    type_weight: 'kg' | 'g'
+    weight: string
 }
 
 // Hospitalizações, Internações e Cirurgias
@@ -199,8 +200,7 @@ export interface Disease extends MedicalRecordEntry {
 // Procedimentos Dentários
 export interface DentalProcedure extends MedicalRecordEntry {
     type: 'dental-procedures'
-    status_dental: string
-    need_dental_cleaning: 'yes' | 'no'
+    status_dental: 'good' | 'regular' | 'bad'
     recommended_treatment: string
     anesthesia_required: boolean
     follow_up_required: boolean
@@ -210,12 +210,13 @@ export interface DentalProcedure extends MedicalRecordEntry {
 // Alimentação
 export interface Nutrition extends MedicalRecordEntry {
     type: 'nutritions'
-    start_time: string
-    amount: string
-    measure: string
+    frequency: string
     interval: string
-    period: string
+    measure: string
+    amount: string
+    start_time: string
     starting_date: string
+    type_nutrition: string | null
     type_object: string
 }
 
