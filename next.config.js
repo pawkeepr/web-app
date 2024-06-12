@@ -14,6 +14,7 @@ const nextConfig = ((_phase) => {
                 '/reset-password',
                 '/',
                 '/client/confirmation/[id]',
+                '/pet-was-found/[id_pet]',
             ],
         },
         images: {
