@@ -1,6 +1,7 @@
 import { FaCalendarCheck, FaStethoscope } from 'react-icons/fa'
 import { MdPets } from 'react-icons/md'
 import HorizontalTabs from '~/Components/organism/horizontal-list'
+import { Env } from '~/env'
 import DefaultLayout from '../../_layouts/dashboard/dashboard'
 import PetsTab from '../PetsAndVets/components/organisms/PetsTab'
 import PetsTabLegado from '../PetsAndVets/components/organisms/PetsTab-legado'
@@ -32,7 +33,7 @@ const Tabs = (flag: boolean) => [
 ]
 
 const DashboardPage = () => {
-    const FLAG = process.env.FLAG_LIST === 'true'
+    const FLAG = Env().get('FLAG_DEV') as boolean
     const tabs = Tabs(FLAG)
     return (
         <DefaultLayout title="Dashboard" name="appointments" searchBlock>
