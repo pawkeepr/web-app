@@ -4,6 +4,7 @@ import withControl from '~/Components/helpers/with-control'
 import { useUpdateMedicalRecordsMutation } from '~/store/hooks/medical-records'
 import useProfile from '~/store/hooks/profile/use-profile'
 import { MEDICAL_RECORDS, type MedicalRecordEntry } from '~/types/medical-records'
+import type { PetData } from '~/types/pet-v2'
 import { NameProfile } from '~/types/profile'
 import BodyEvolutionForm from './forms/body-evolution-form'
 import DentalProcedureForm from './forms/dental-procedure-form'
@@ -17,6 +18,7 @@ import VaccinesForm from './forms/vaccines-form'
 
 export type OptionFormsProps<T> = {
     item: T | null
+    pet: PetData | null
     handleSubmit: (
         data: MedicalRecordEntry,
         formikHelpers: FormikHelpers<T>,
@@ -50,6 +52,7 @@ type MedicalRecordForm = {
     cpf_cnpj: string
     id_pet: string
     handleClose?: () => void
+    pet: PetData | null
     onChangeIndex?: (index: number) => void
 }
 
@@ -57,6 +60,7 @@ const MedicalRecordsForm = ({
     cpf_cnpj,
     id_pet,
     item,
+    pet,
     type,
     handleClose,
     onChangeIndex,
@@ -89,6 +93,7 @@ const MedicalRecordsForm = ({
                     ...item,
                 } as MedicalRecordEntry
             }
+            pet={pet}
             handleSubmit={handleSubmit}
             handleClose={handleClose}
         />

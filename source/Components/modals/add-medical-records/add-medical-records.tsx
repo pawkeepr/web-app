@@ -6,12 +6,15 @@ import useModal from '~/hooks/use-modal'
 
 import ItemMedicalRecordsForm from '~/Components/forms/item-medical-records-form'
 import MedicalRecordsForm from '~/Components/forms/medical-records-form'
+import withControl from '~/Components/helpers/with-control'
 import type { MedicalRecordEntry } from '~/types/medical-records'
+import type { PetData } from '~/types/pet-v2'
 
 type AddModalProps = {
     children?: (showModal: () => void) => JSX.Element
     cpf_cnpj: string
     id_pet: string
+    pet: PetData | null
     item?: MedicalRecordEntry | null
 }
 
@@ -20,6 +23,7 @@ const AddMedicalRecordsModal = ({
     item = null,
     cpf_cnpj,
     id_pet,
+    pet = null,
 }: AddModalProps) => {
     const { closeModal, open, showModal } = useModal()
 
@@ -41,17 +45,7 @@ const AddMedicalRecordsModal = ({
                     label="Adicionar Registro Médico"
                 />
             )}
-            <Modal
-                onOpen={() => {
-                    showModal()
-                }}
-                onClose={() => closeModal()}
-                modal
-                nested
-                open={open}
-                lockScroll
-                className="pb-0 w-[750px] h-fit py-4 min-h-96"
-            >
+            <Modal onClose={() => closeModal()} open={open}>
                 <div className="w-full">
                     <h6 className="mb-4 font-semibold text-center uppercase">
                         {title}
@@ -59,6 +53,7 @@ const AddMedicalRecordsModal = ({
                 </div>
 
                 <ItemMedicalRecordsForm
+                    pet={pet}
                     form={(props) => <MedicalRecordsForm {...props} />}
                     id_pet={id_pet}
                     handleCancel={closeModal}
@@ -70,4 +65,4 @@ const AddMedicalRecordsModal = ({
     )
 }
 
-export default AddMedicalRecordsModal
+export default withControl(AddMedicalRecordsModal)

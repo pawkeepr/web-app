@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { FaWhatsapp } from 'react-icons/fa'
+import { FaPlusCircle, FaWhatsapp } from 'react-icons/fa'
+import AddMedicalRecords from '~/Components/modals/add-medical-records'
+import BtnFloating from '~/Components/molecules/btn-floating'
 import FieldControl from '~/Components/molecules/field-control'
 import QrCodePet from '~/Components/molecules/qr-code-pet'
 import type { TabItem } from '~/Components/organism/horizontal-list'
@@ -8,6 +10,7 @@ import HorizontalTabs from '~/Components/organism/horizontal-list'
 import { useTranslations } from '~/hooks/use-translations'
 import { infoToast } from '~/store/helpers/toast'
 import usePetById from '~/store/hooks/pet-by-id/use-pets'
+import type { PetData } from '~/types/pet-v2'
 import { calcAge } from '~/utils/calc-age'
 import DefaultLayout from '../../_layouts/dashboard/dashboard'
 import MaintainPetPage from '../MaintainPetPage/MaintainPetPage'
@@ -18,22 +21,22 @@ import MedicalRecords from './components/template/MedicalRecords'
 
 const Tabs = (document?: string, id_pet?: string): TabItem[] => [
     {
-        id: 2,
+        id: 1,
         title: 'Dados do Pet',
         href: '#tutors',
         tab: <MaintainPetPage document={document} id_pet={id_pet} />,
     },
     {
-        id: 1,
-        title: 'Consultas Anteriores',
-        href: '#before-consults',
-        tab: <HistoricPet document={document} id_pet={id_pet} />,
-    },
-    {
-        id: 1,
+        id: 2,
         title: 'Prontuário',
         href: '#chart',
         tab: <MedicalRecords document={document} id_pet={id_pet} />,
+    },
+    {
+        id: 3,
+        title: 'Consultas Anteriores',
+        href: '#before-consults',
+        tab: <HistoricPet document={document} id_pet={id_pet} />,
     },
 ]
 
@@ -146,6 +149,23 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
                         <HorizontalTabs categories={tabs} menu />
                     </div>
                 </div>
+                <AddMedicalRecords
+                    item={null}
+                    pet={{
+                        ...(pet?.pet_information as PetData),
+                        id_pet: id_pet as string,
+                    }}
+                    cpf_cnpj={document as string}
+                    id_pet={id_pet as string}
+                >
+                    {(showModal) => (
+                        <BtnFloating
+                            title="Adicionar Registro"
+                            onClick={showModal}
+                            icon={FaPlusCircle}
+                        />
+                    )}
+                </AddMedicalRecords>
             </div>
         </DefaultLayout>
     )

@@ -1,8 +1,27 @@
 import withControl from '~/Components/helpers/with-control'
+import Accordion from '~/Components/molecules/accordion'
 import type { PetMedicalRecords } from '~/types/medical-records'
+import AllergiesItem from './allergies-item'
+import BodyEvolutionItem from './body-evolution-item'
+import DentalProcedure from './dental-procedures'
+import DiseaseItem from './diseases-item'
+import ExamItem from './exam-item'
+import HospitalizationsItem from './hospitalizations-item'
+import InjuriesItem from './injuries-item'
+import MedicationsItem from './medications-item'
+import NutritionItem from './nutritions-item'
+import PhysicalActivityItem from './physical-activity-item'
+import { itemStyle } from './styles'
+import SurgeriesItem from './surgeries-item'
+import VaccineItem from './vaccines-item'
 
 type ListMedicalRecordsProps = {
     data?: PetMedicalRecords
+}
+
+const classNames = {
+    title: 'text-base font-bold text-gray-600',
+    content: 'text-gray-500 text-sm',
 }
 
 const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
@@ -10,239 +29,121 @@ const ListMedicalRecords = ({ data }: ListMedicalRecordsProps) => {
     const list_dental_procedures = data?.list_dental_procedures
     const exams = data?.list_exams_tests
     const physical_activities = data?.list_well_being?.physical_activities
-    const hospitalizations = data?.list_hospital_information?.list_hospitalizations
-    const surgeries = data?.list_hospital_information?.list_surgeries
-    const diseases = data?.list_hospital_information?.list_diseases
-    const injuries = data?.list_hospital_information?.list_injuries
-    const internment = data?.list_hospital_information?.list_internment
-    const allergies = data?.list_hospital_information?.list_allergies
+    const hospitalizations = data?.list_hospital_information?.hospitalizations
+    const surgeries = data?.list_hospital_information?.surgeries
+    const diseases = data?.list_hospital_information?.diseases
+    const injuries = data?.list_hospital_information?.injuries
+    const internment = data?.list_hospital_information?.internment
+    const allergies = data?.list_hospital_information?.allergies
     const medicines = data?.list_medicines
     const vaccines = data?.list_vaccines
     const nutritions = data?.list_nutritions
 
     return (
         <article className="gap-2 p-2 font-sans text-xs bg-white">
-            <section className="my-2">
-                <h2 className="text-base font-bold text-gray-500">
-                    Evolução Corporal
-                </h2>
-                {body_evolution?.map((item) => (
-                    <div
-                        key={item.id as string}
-                        className="flex flex-row items-center justify-between h-10 bg-white"
-                    >
-                        <p className="text-gray-500">
-                            <strong>Idade:</strong>
-                            <span>{item.age || 0}</span>
-                        </p>
-                        <p className="text-gray-500 ">
-                            <strong>Peso:</strong>
-                            <span>{item.weight || 0}</span>
-                        </p>
+            <Accordion title="Evolução Corporal" classNames={classNames}>
+                <ul className={itemStyle.ul()}>
+                    {body_evolution?.map((item) => (
+                        <BodyEvolutionItem key={item.id as string} item={item} />
+                    ))}
+                </ul>
+            </Accordion>
 
-                        <p className="text-gray-500 ">
-                            <strong>Altura:</strong>
-                            <span>{item.height || 0}</span>
-                        </p>
-                        <p className="text-gray-500 ">
-                            <strong>Data:</strong>
-                            <span>{item.date_application || 'Não Definido'}</span>
-                        </p>
-                    </div>
-                ))}
-            </section>
-            <section className="my-2">
-                <h2 className="text-base font-bold text-gray-500">
-                    Procedimentos Dentários
-                </h2>
-                {list_dental_procedures?.map((item) => (
-                    <div
-                        key={item.id as string}
-                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
-                    >
-                        <p className="text-gray-500">
-                            <strong>Procedimento:</strong>
-                            <span>{item.name}</span>
-                        </p>
-                        {/* <p className="text-gray-500 ">
-                        <strong>Data:</strong>
-                        <span>
-                            {format(item.date_application, 'dd/MM/yyyy') ||
-                                'Não Definida'}
-                        </span>
-                    </p> */}
-                    </div>
-                ))}
-            </section>
-            <section className="my-2">
-                <h2 className="text-base font-bold text-gray-500">
-                    Exames e Testes
-                </h2>
-                {exams?.map((item) => (
-                    <div
-                        key={item.id as string}
-                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
-                    >
-                        <p className="text-gray-500">
-                            <strong>Exame:</strong>
-                            <span>{item.name}</span>
-                        </p>
-                    </div>
-                ))}
-            </section>
-            <section className="my-2">
-                <h2 className="text-base font-bold text-gray-500">
-                    Atividade Física
-                </h2>
-                {physical_activities?.map((item) => (
-                    <div
-                        key={item.id as string}
-                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
-                    >
-                        <p className="text-gray-500">
-                            <strong>Atividade:</strong>
-                            <span>{item.name}</span>
-                        </p>
-                    </div>
-                ))}
-            </section>
+            <Accordion title="Procedimentos Dentários" classNames={classNames}>
+                <ul className={itemStyle.ul()}>
+                    {list_dental_procedures?.map((item) => (
+                        <DentalProcedure item={item} key={item.id as string} />
+                    ))}
+                </ul>
+            </Accordion>
 
-            <section className="my-2">
-                <h2 className="text-base font-bold text-gray-500">
-                    Hospitalizações
-                </h2>
-                {hospitalizations?.map((item) => (
-                    <div
-                        key={item.id as string}
-                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
-                    >
-                        <p className="text-gray-500">
-                            <strong>Atividade:</strong>
-                            <span>{item.name}</span>
-                        </p>
-                    </div>
-                ))}
-            </section>
+            <Accordion title="Exames e Testes" classNames={classNames}>
+                <ul className={itemStyle.ul()}>
+                    {exams?.map((item) => (
+                        <ExamItem key={item.id as string} item={item} />
+                    ))}
+                </ul>
+            </Accordion>
 
-            <section className="my-2">
-                <h2 className="text-base font-bold text-gray-500">Doenças</h2>
-                {diseases?.map((item) => (
-                    <div
-                        key={item.id as string}
-                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
-                    >
-                        <p className="text-gray-500">
-                            <strong>Doença:</strong>
-                            <span>{item.name}</span>
-                        </p>
-                    </div>
-                ))}
-            </section>
+            <Accordion title="Atividade Física" classNames={classNames}>
+                <ul className={itemStyle.ul()}>
+                    {physical_activities?.map((item) => (
+                        <PhysicalActivityItem key={item.id as string} item={item} />
+                    ))}
+                </ul>
+            </Accordion>
 
-            <section className="my-2">
-                <h2 className="text-base font-bold text-gray-500">Alergias</h2>
-                {allergies?.map((item) => (
-                    <div
-                        key={item.id as string}
-                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
-                    >
-                        <p className="text-gray-500">
-                            <strong>Alergia:</strong>
-                            <span>{item.name}</span>
-                        </p>
-                    </div>
-                ))}
-            </section>
+            <Accordion title="Hospitalizações" classNames={classNames}>
+                <ul className={itemStyle.ul()}>
+                    {hospitalizations?.map((item) => (
+                        <HospitalizationsItem key={item.id as string} item={item} />
+                    ))}
+                </ul>
+            </Accordion>
 
-            <section className="my-2">
-                <h2 className="text-base font-bold text-gray-500">Internações</h2>
-                {internment?.map((item) => (
-                    <div
-                        key={item.id as string}
-                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
-                    >
-                        <p className="text-gray-500">
-                            <strong>Internação:</strong>
-                            <span>{item.name}</span>
-                        </p>
-                    </div>
-                ))}
-            </section>
+            <Accordion title="Doenças" classNames={classNames}>
+                <ul className={itemStyle.ul()}>
+                    {diseases?.map((item) => (
+                        <DiseaseItem key={item.id as string} item={item} />
+                    ))}
+                </ul>
+            </Accordion>
 
-            <section className="my-2">
-                <h2 className="text-base font-bold text-gray-500">Cirurgias</h2>
-                {surgeries?.map((item) => (
-                    <div
-                        key={item.id as string}
-                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
-                    >
-                        <p className="text-gray-500">
-                            <strong>Cirurgia:</strong>
-                            <span>{item.name}</span>
-                        </p>
-                    </div>
-                ))}
-            </section>
+            <Accordion title="Alergias" classNames={classNames}>
+                <ul className={itemStyle.ul()}>
+                    {allergies?.map((item) => (
+                        <AllergiesItem key={item.id as string} item={item} />
+                    ))}
+                </ul>
+            </Accordion>
 
-            <section className="my-2">
-                <h2 className="text-base font-bold text-gray-500">Lesões</h2>
-                {injuries?.map((item) => (
-                    <div
-                        key={item.id as string}
-                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
-                    >
-                        <p className="text-gray-500">
-                            <strong>Lesão:</strong>
-                            <span>{item.name}</span>
-                        </p>
-                    </div>
-                ))}
-            </section>
+            <Accordion title="Internações" classNames={classNames}>
+                <ul className={itemStyle.ul()}>
+                    {internment?.map((item) => (
+                        <HospitalizationsItem key={item.id as string} item={item} />
+                    ))}
+                </ul>
+            </Accordion>
 
-            <section className="my-2">
-                <h2 className="text-base font-bold text-gray-500">Medicamentos</h2>
-                {medicines?.map((item) => (
-                    <div
-                        key={item.id as string}
-                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
-                    >
-                        <p className="text-gray-500">
-                            <strong>Medicamento:</strong>
-                            <span>{item.name}</span>
-                        </p>
-                    </div>
-                ))}
-            </section>
+            <Accordion title="Cirurgias" classNames={classNames}>
+                <ul className={itemStyle.ul()}>
+                    {surgeries?.map((item) => (
+                        <SurgeriesItem key={item.id as string} item={item} />
+                    ))}
+                </ul>
+            </Accordion>
 
-            <section className="my-2">
-                <h2 className="text-base font-bold text-gray-500">Vacinas</h2>
-                {vaccines?.map((item) => (
-                    <div
-                        key={item.id as string}
-                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
-                    >
-                        <p className="text-gray-500">
-                            <strong>Vacina:</strong>
-                            <span>{item.name}</span>
-                        </p>
-                    </div>
-                ))}
-            </section>
+            <Accordion title="Lesões" classNames={classNames}>
+                <ul className={itemStyle.ul()}>
+                    {injuries?.map((item) => (
+                        <InjuriesItem key={item.id as string} item={item} />
+                    ))}
+                </ul>
+            </Accordion>
 
-            <section className="my-2">
-                <h2 className="text-base font-bold text-gray-500">Nutrição</h2>
-                {nutritions?.map((item) => (
-                    <div
-                        key={item.id as string}
-                        className="flex flex-row items-center justify-between h-10 bg-white card card-bordered card-compact"
-                    >
-                        <p className="text-gray-500">
-                            <strong>Nutrição:</strong>
-                            <span>{item.name}</span>
-                        </p>
-                    </div>
-                ))}
-            </section>
+            <Accordion title="Medicamentos" classNames={classNames}>
+                <ul className={itemStyle.ul()}>
+                    {medicines?.map((item) => (
+                        <MedicationsItem key={item.id as string} item={item} />
+                    ))}
+                </ul>
+            </Accordion>
+
+            <Accordion title="Vacinas" classNames={classNames}>
+                <ul className={itemStyle.ul()}>
+                    {vaccines?.map((item) => (
+                        <VaccineItem key={item.id as string} item={item} />
+                    ))}
+                </ul>
+            </Accordion>
+
+            <Accordion title="Nutrição" classNames={classNames}>
+                <ul className={itemStyle.ul()}>
+                    {nutritions?.map((item) => (
+                        <NutritionItem key={item.id as string} item={item} />
+                    ))}
+                </ul>
+            </Accordion>
         </article>
     )
 }
