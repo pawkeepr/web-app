@@ -1,7 +1,11 @@
 import { Pet } from '~/entities/Pet'
 import useAppQuery from '~/hooks/use-app-query'
 import { createPet, createPetByTutor, getPet, updatePet } from '~/services/helpers'
-import { fetchPublicMedicalRecords, fetchPublicPet } from '~/services/helpers/pet'
+import {
+    fetchPublicMedicalRecords,
+    fetchPublicPet,
+    fetchPublicPetVerify,
+} from '~/services/helpers/pet'
 import type { PetMedicalRecords } from '~/types/medical-records'
 import type { IMainResponsibleGuardian, IPetV2, PetData } from '~/types/pet-v2'
 import { TypeProfile } from '~/types/profile'
@@ -33,6 +37,14 @@ export const usePetPublic = (id_pet: string) => {
     const superKeys = [NAME, id_pet, 'public']
 
     return useAppQuery<IPetV2>(superKeys, () => fetchPublicPet(id_pet), {
+        enabled: !!id_pet,
+    })
+}
+
+export const usePetVerifyPublic = (id_pet: string) => {
+    const superKeys = [NAME, id_pet, 'verify']
+
+    return useAppQuery<IPetV2>(superKeys, () => fetchPublicPetVerify(id_pet), {
         enabled: !!id_pet,
     })
 }
