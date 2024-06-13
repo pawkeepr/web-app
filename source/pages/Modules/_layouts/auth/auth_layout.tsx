@@ -44,12 +44,12 @@ const AuthLayout = ({
     }
 
     return (
-        <div className="min-h-screen auth-bg-cover flex flex-col ">
+        <div className="flex flex-col min-h-screen auth-bg-cover ">
             <HeaderTitle title={title} />
             <div className="bg-overlay" />
             <main
                 className={cn(
-                    'flex flex-1 content-center mobile:content-start items-center justify-center mobile:items-start mobile:justify-start mobile:overflow-hidden',
+                    'flex flex-1 content-center mobile:content-start items-center justify-center mobile:items-start mobile:justify-start mobile:overflow-hidden mt-2',
                 )}
             >
                 <section
@@ -71,7 +71,7 @@ const AuthLayout = ({
                             <Img
                                 src={image as string}
                                 alt={alt}
-                                className="hidden mobile:block absolute inset-0 w-full h-full object-fill"
+                                className="absolute inset-0 hidden object-fill w-full h-full mobile:block"
                             />
                         </picture>
                     )}

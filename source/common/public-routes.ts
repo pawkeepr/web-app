@@ -22,4 +22,5 @@ export const PUBLIC_ROUTES_GENERAL = [
     '/service-terms',
     '/pet-was-found',
     '/search',
+    '/pet/medical-records',
 ]
