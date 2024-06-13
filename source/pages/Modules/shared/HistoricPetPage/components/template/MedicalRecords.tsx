@@ -15,16 +15,7 @@ const MedicalRecords = ({ id_pet, document }: HistoricPetProps) => {
     if (error) return <div>Erro ao carregar prontuário</div>
 
     return (
-        <section className="relative gap-2">
-            <div className="web:flex web:flex-1 web:justify-end">
-                {/* <AddMedicalRecordsModal
-                    item={null}
-                    cpf_cnpj={document as string}
-                    id_pet={id_pet as string}
-                /> */}
-            </div>
-
-            {/* <VisualizationMode /> */}
+        <section className="relative gap-2 mt-2">
             <ListsMedicalRecords condition={!isLoading} data={data} />
         </section>
     )
