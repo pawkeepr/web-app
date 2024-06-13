@@ -18,7 +18,7 @@ const Search = () => {
         if (!values.search) return
 
         const encodeSearch = encodeBase64(values.search)
-        router.push(`/pet-was-found/${encodeSearch}`)
+        router.push(`/pet-was-verify/${encodeSearch}`)
     }
 
     return (

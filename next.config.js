@@ -16,6 +16,7 @@ const nextConfig = ((_phase) => {
                 '/search',
                 '/client/confirmation/[id]',
                 '/pet-was-found/[id_pet]',
+                '/pet-was-verify/[id_pet]',
             ],
         },
         images: {
