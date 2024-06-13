@@ -15,6 +15,8 @@ import FieldDocumentAppointment from '~/Components/molecules/field-appointment-v
 import Drawer from '~/Components/organism/drawer'
 import { useBtnFloating } from '~/contexts/button-floating'
 import LoadingPage from '~/pages/Modules/shared/LoadingPage'
+import useProfile from '~/store/hooks/profile/use-profile'
+import { TypeProfile } from '~/types/profile'
 import useHookLayout from './use-hook'
 
 type LayoutProps = {
@@ -23,7 +25,11 @@ type LayoutProps = {
 
 const LayoutMain = ({ children }: LayoutProps) => {
     useHookLayout()
+    const { data: profile } = useProfile()
     const { hasButtonFloating } = useBtnFloating()
+
+    const hasVet = profile?.type_profile === TypeProfile.VETERINARY
+
     return (
         <div className="relative">
             <Header />
@@ -43,7 +49,7 @@ const LayoutMain = ({ children }: LayoutProps) => {
             >
                 <Suspense fallback={<LoadingPage />}>{children}</Suspense>
                 <FieldDocumentAppointment
-                    condition={hasButtonFloating}
+                    condition={hasButtonFloating && hasVet}
                     selectedTabInitial={0}
                 />
             </div>

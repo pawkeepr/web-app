@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import { createContext, useEffect } from 'react'
-import { PUBLIC_ROUTES } from '~/common/public-routes'
+import { PUBLIC_ROUTES, PUBLIC_ROUTES_GENERAL } from '~/common/public-routes'
 import type LOADING from '~/constants/loading'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import {
@@ -58,6 +58,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
             return pathname?.startsWith(route)
         })
 
+        const isPublicRoutePossible = !!PUBLIC_ROUTES_GENERAL.find((route) => {
+            if (typeof pathname !== 'string') return true
+
+            return pathname?.startsWith(route)
+        })
+
+        if (isPublicRoutePossible) return
         if (!token && isPublicRoute) return
         if (pathname === '/logout') return
 
