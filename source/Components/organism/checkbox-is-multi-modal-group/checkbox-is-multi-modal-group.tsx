@@ -3,6 +3,7 @@ import { useId, useState } from 'react'
 import Modal from '~/Components/organism/modal'
 
 import cn from 'classnames'
+import type { IconType } from 'react-icons'
 import { tv } from 'tailwind-variants'
 import { BtnNeutral } from '~/Components/atoms/btn'
 import CheckboxIcon from '~/Components/atoms/checkbox-icon'
@@ -16,6 +17,7 @@ import { useFieldControlClasses } from './use-field-checkbox-classes'
 export type Item<T = unknown> = {
     label: string
     value: T
+    icon?: IconType
 }
 
 export const option = tv({
@@ -175,6 +177,9 @@ export default function CheckboxIsMultiModal<Ctx>({
                                         </span>
                                         <strong className="text-center flex-[3] text-xs font-semibold">
                                             {item.label}
+                                            {item.icon && (
+                                                <item.icon className="ml-2" />
+                                            )}
                                         </strong>
                                     </button>
                                 </li>

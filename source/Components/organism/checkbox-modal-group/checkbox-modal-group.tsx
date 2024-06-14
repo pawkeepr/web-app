@@ -77,12 +77,16 @@ export default function CheckboxModal<Ctx>({
                     <BtnNeutral
                         outline
                         type="button"
-                        label={t(selected ? selected.label : label)}
                         disabled={isDisabled || mode === ModeView.readonly}
                         onClick={showModal}
                         className={classes}
                         id={idLabel}
-                    />
+                    >
+                        {t(selected ? selected.label : label)}
+                        {selected?.icon && (
+                            <selected.icon className="w-5 h-5 ml-2" />
+                        )}
+                    </BtnNeutral>
                 </div>
             )}
             <Modal onClose={() => closeModal()} open={open} mobilePage={false}>
@@ -118,8 +122,11 @@ export default function CheckboxModal<Ctx>({
                                                 {...field}
                                             />
                                         </span>
-                                        <strong className="text-center flex-[3] text-xs font-semibold">
+                                        <strong className="text-center flex flex-row justify-center items-center flex-[3] text-xs font-semibold">
                                             {t(item.label)}
+                                            {item.icon && (
+                                                <item.icon className="w-5 h-5 ml-2" />
+                                            )}
                                         </strong>
                                     </button>
                                 </li>

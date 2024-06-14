@@ -196,12 +196,12 @@ const StepPet = (_props: StepProps) => {
                     />
                 </div>
             </div>
-            <div className="flex justify-end w-full mobile:justify-center">
+            <div className="flex self-end justify-end w-1/3 mt-2 mobile:justify-center">
                 <BtnPrimary
                     disabled={!isValid || isSubmitting || mode !== 'editable'}
                     isLoading={isSubmitting}
                     label="Salvar"
-                    className="!w-60"
+                    className="w-1/2"
                     type="submit"
                 />
             </div>
