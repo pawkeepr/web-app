@@ -2,14 +2,9 @@
 'use client'
 
 import Link from 'next/link'
-import type { KeysProfile } from '~/types/profile'
 import { ButtonsNavBar } from '../nav-bar-landing'
 
-type NavbarServiceTermsProps = {
-    mode?: KeysProfile
-}
-
-const NavbarServiceTerms = ({ mode }: NavbarServiceTermsProps) => {
+const NavbarServiceTerms = () => {
     return (
         <header className="!bg-primary-500 shadow-2xl mobile:fixed mobile:z-50 w-full z-10 h-10 flex items-center">
             <div className="flex items-center justify-between w-full px-4">
@@ -21,7 +16,7 @@ const NavbarServiceTerms = ({ mode }: NavbarServiceTermsProps) => {
                     />
                 </Link>
 
-                <ButtonsNavBar mode={mode} />
+                <ButtonsNavBar />
             </div>
         </header>
     )

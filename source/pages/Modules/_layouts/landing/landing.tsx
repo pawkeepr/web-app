@@ -6,22 +6,19 @@ import { FaWhatsapp } from 'react-icons/fa'
 import HeaderTitle from '~/Components/atoms/header-title'
 import NavbarLanding from '~/Components/molecules/nav-bar-landing'
 import Footer from '~/Layouts/Footer'
-import type { KeysProfile } from '~/types/profile'
 
 // https://api.whatsapp.com/send/?phone=5511934463021&text&type=phone_number&app_absent=0
 
 type LandingLayoutProps = {
     children: React.ReactNode
     title?: string
-    navBar?: (props: { mode: KeysProfile }) => JSX.Element
-    mode?: KeysProfile
+    navBar?: () => JSX.Element
 }
 
 const LandingLayout = ({
     children,
     navBar: NabBar = NavbarLanding,
     title,
-    mode = 'tutor',
 }: LandingLayoutProps) => {
     useEffect(() => {
         window.onscroll = () => {
@@ -58,7 +55,7 @@ const LandingLayout = ({
         <React.Fragment>
             <HeaderTitle title={title || ''} />
             <div className="layout-wrapper landing !bg-primary-500 min-h-screen">
-                <NabBar mode={mode} />
+                <NabBar />
                 {children}
                 <Footer bg="primary" />
             </div>

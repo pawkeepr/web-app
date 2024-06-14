@@ -6,16 +6,14 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { FiLogIn } from 'react-icons/fi' // Ícone de Login
 import { BtnLink } from '~/Components/atoms/btn'
-import { KeysProfile } from '~/types/profile'
+import useModeProfile from '~/hooks/use-mode'
+import { ModeProfile } from '~/types/profile'
 
-type ButtonsNavBarProps = {
-    mode?: KeysProfile
-}
-
-export const ButtonsNavBar = ({ mode }: ButtonsNavBarProps) => {
+export const ButtonsNavBar = () => {
+    const { mode } = useModeProfile()
     const hrefSignIn =
-        mode === KeysProfile.tutor ? '/tutor/sign-in' : '/veterinary/sign-in'
-    const hrefSignUp = KeysProfile.vet ? '/tutor/sign-up' : '/veterinary/sign-up'
+        mode === ModeProfile.tutor ? '/tutor/sign-in' : '/veterinary/sign-in'
+    const hrefSignUp = ModeProfile.vet ? '/tutor/sign-up' : '/veterinary/sign-up'
 
     return (
         <div className="z-50 flex gap-2">

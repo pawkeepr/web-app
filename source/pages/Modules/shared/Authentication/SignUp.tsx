@@ -17,13 +17,14 @@ import FieldControl from '~/Components/molecules/field-control'
 import FieldPassword from '~/Components/molecules/field-password'
 import PasswordRules from '~/Components/molecules/password-rules'
 import LOADING from '~/constants/loading'
+import useModeProfile from '~/hooks/use-mode'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import {
     registerUser,
     resetRegisterFlag,
 } from '~/store/slices/auth/register/actions'
 import type { AccountSignUp } from '~/store/slices/auth/register/types'
-import { CodeProfile } from '~/types/profile'
+import { CodeProfile, ModeProfile } from '~/types/profile'
 import AuthLayout from '../../_layouts/auth/auth_layout'
 import type { CoverSignInProps } from './SignIn'
 
@@ -51,9 +52,8 @@ const validationSchema = Yup.object({
     //person: validatePerson,
     //address: validateAddress,
 })
-type ModeKey = 'vet' | 'tutor'
 
-const makeInitialValues = (mode: ModeKey) =>
+const makeInitialValues = (mode: ModeProfile) =>
     ({
         email: '',
         password: '',
@@ -64,9 +64,10 @@ const makeInitialValues = (mode: ModeKey) =>
         type_profile: CodeProfile[mode],
     }) as AccountSignUp
 
-const CoverSignUp = ({ mode, bgImage }: CoverSignInProps) => {
+const CoverSignUp = ({ bgImage }: CoverSignInProps) => {
     const dispatch = useAppDispatch()
     const isLoading = useAppSelector((state) => state.Login.isLoading)
+    const { mode } = useModeProfile()
 
     const onSubmit = (values: AccountSignUp) => {
         dispatch(registerUser(values))
@@ -79,7 +80,7 @@ const CoverSignUp = ({ mode, bgImage }: CoverSignInProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const link = mode === 'vet' ? '/veterinary/sign-in' : '/tutor/sign-in'
+    const link = mode === ModeProfile.vet ? '/veterinary/sign-in' : '/tutor/sign-in'
     const initialValues = makeInitialValues(mode)
 
     return (
