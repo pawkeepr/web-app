@@ -1,13 +1,12 @@
-import Link, { type LinkProps } from 'next/link'
 import type React from 'react'
 import { useId, type ComponentProps } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
-import BtnAvatar from './btn-avatar'
-
 import withControl from '~/Components/helpers/with-control'
 import withLoading, {
     type LoadingControlProps,
 } from '~/Components/helpers/with-loading'
+import BtnAvatar from './btn-avatar'
+import BtnLink from './btn-link'
 
 export const button = tv({
     base: `
@@ -33,7 +32,7 @@ export const button = tv({
             true: 'bg-transparent border-2 border-secondary-500 text-secondary-500 hover:!bg-gray-100',
         },
         link: {
-            true: 'text-secondary-500 dark:text-primary-600 hover:no-underline w-fit',
+            true: 'text-secondary-500 dark:text-primary-600 hover:no-underline',
         },
         icon: {
             true: 'w-fit p-1 m-0 h-fit text-gray-400 border-none hover:!bg-transparent',
@@ -67,7 +66,7 @@ export const button = tv({
     ],
 })
 
-const styledIcon = tv({
+export const styledIcon = tv({
     base: `
         flex justify-center items-center
         w-6 h-6
@@ -147,39 +146,6 @@ const BtnIcon = ({
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     return <BtnCompose icon={icon as any} {...props} />
 }
-
-type BtnLinkProps = {
-    message?: string
-    children?: React.ReactNode
-    className?: string
-} & VariantProps<typeof button> &
-    LinkProps
-
-const BtnPureLink = ({
-    href,
-    children,
-    link = true,
-    message,
-    className,
-    ...props
-}: BtnLinkProps) => {
-    return (
-        <Link
-            href={href}
-            className={button({ ...props, link, className })}
-            {...(props as any)}
-        >
-            <div className="flex flex-row items-center justify-center ml-2 ">
-                {children && (
-                    <span className={styledIcon({ ...props })}>{children}</span>
-                )}
-                {message}
-            </div>
-        </Link>
-    )
-}
-
-const BtnLink = withControl(BtnPureLink)
 
 export {
     Btn,
