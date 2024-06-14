@@ -2,12 +2,13 @@
 
 import { BtnPrimary } from '~/Components/atoms/btn'
 
+import { Form } from 'formik'
 import { useMemo } from 'react'
 import * as yup from 'yup'
 import ControlToggle3States from '~/Components/molecules/control-toggle-3-states'
 import FieldControl from '~/Components/molecules/field-control'
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import FieldMasked from '~/Components/molecules/field-masked'
+import CheckboxModalGroup from '~/Components/organism/checkbox-modal-group'
 import SelectsSpecies from '~/Components/organism/selects/selects-species'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import useProfile from '~/store/hooks/profile/use-profile'
@@ -74,10 +75,11 @@ const schema = yup.object().shape<StepPetSchema>({
         .nullable(),
 })
 
-const StepPet = ({ nextStep }: StepProps) => {
+const StepPet = (_props: StepProps) => {
     const { data: profile } = useProfile()
     const hasTutor = profile?.type_profile === TypeProfile.TUTOR
-    const { values, initialValues } = useFormikContextSafe<StepPetKeys>()
+    const { values, initialValues, handleSubmit, isSubmitting } =
+        useFormikContextSafe<StepPetKeys>()
     const { mode } = useModeEditablePet()
 
     const isValid = useMemo(() => {
@@ -87,7 +89,10 @@ const StepPet = ({ nextStep }: StepProps) => {
     const hasPet = !!values.id && !hasTutor
 
     return (
-        <section className="relative flex flex-col shadow-lg card-body mobile:p-0">
+        <Form
+            onSubmit={handleSubmit}
+            className="relative flex flex-col shadow-lg card-body mobile:p-0"
+        >
             <div className="p-1 m-2 mb-4">
                 <h4 className="font-sans text-base font-semibold text-center capitalize">
                     Informações do PET
@@ -98,7 +103,7 @@ const StepPet = ({ nextStep }: StepProps) => {
                 </h4>
             </div>
             <h1 className="font-semibold">Preencha as Informações do PET</h1>
-            <div className="grid grid-cols-2 gap-4 mt-4 mobile:grid-cols-1 mobile:gap-2">
+            <div className="grid grid-cols-2 gap-2 mt-4 mobile:grid-cols-1 mobile:gap-2">
                 <FieldControl
                     mode={mode}
                     ctx={values}
@@ -112,16 +117,16 @@ const StepPet = ({ nextStep }: StepProps) => {
 
                 <SelectsSpecies mode={mode} />
 
-                <FieldControlSelect
-                    mode={mode}
+                <CheckboxModalGroup
                     ctx={values}
-                    options={genderValues}
-                    isDisabled={hasPet && !!initialValues.sex}
-                    name="sex"
+                    label="Sexo"
                     required
-                    label="Sexo do Pet"
-                    placeholder="Macho/Fêmea..."
+                    mode={mode}
+                    name="sex"
+                    isDisabled={hasPet && !!initialValues.sex}
+                    items={genderValues}
                 />
+
                 <div>
                     <FieldControl
                         mode={mode}
@@ -193,13 +198,14 @@ const StepPet = ({ nextStep }: StepProps) => {
             </div>
             <div className="flex justify-end w-full mobile:justify-center">
                 <BtnPrimary
-                    condition={mode === 'editable'}
-                    label="Próximo"
-                    disabled={!isValid}
-                    onClick={nextStep}
+                    disabled={!isValid || isSubmitting || mode !== 'editable'}
+                    isLoading={isSubmitting}
+                    label="Salvar"
+                    className="!w-60"
+                    type="submit"
                 />
             </div>
-        </section>
+        </Form>
     )
 }
 

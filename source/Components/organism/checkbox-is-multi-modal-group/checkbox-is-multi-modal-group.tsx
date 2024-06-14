@@ -34,8 +34,6 @@ export const option = tv({
     },
 })
 
-
-
 export interface CheckboxIsMultiModalProps<Ctx> {
     items: Item[]
     ctx?: Ctx extends undefined ? never : Ctx
@@ -44,6 +42,9 @@ export interface CheckboxIsMultiModalProps<Ctx> {
     required?: boolean
     disabledError?: boolean
     className?: string
+    mode?: 'editable' | 'readonly'
+    isDisabled?: boolean
+    onChangeValue?: (value: unknown) => void
     id?: string
     children?: (props: { showModal: () => void }) => JSX.Element
     validateSync?: (value: unknown) => boolean
@@ -86,7 +87,7 @@ export default function CheckboxIsMultiModal<Ctx>({
         return removeItem(name)
     }
 
- const classes = useFieldControlClasses({
+    const classes = useFieldControlClasses({
         value: checkedValues,
         required,
         validateSync,
