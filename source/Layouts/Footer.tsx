@@ -51,6 +51,7 @@ const Footer = ({ bg = 'transparent' }: FooterProps) => {
                 </div>
                 <div className="flex flex-row h-full gap-4 ">
                     <BtnLink
+                        target="_blank"
                         href={hrefPrivacyPolicy}
                         className="w-20 text-xs font-semibold text-gray-600 hover:text-secondary-500"
                     >
@@ -58,6 +59,7 @@ const Footer = ({ bg = 'transparent' }: FooterProps) => {
                     </BtnLink>
 
                     <BtnLink
+                        target="_blank"
                         href={hrefServiceTerms}
                         className="w-20 text-xs font-semibold text-gray-600 hover:text-secondary-500"
                     >

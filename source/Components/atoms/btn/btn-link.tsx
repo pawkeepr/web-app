@@ -1,5 +1,6 @@
-import Link, { type LinkProps } from 'next/link'
+import Link from 'next/link'
 import type React from 'react'
+import type { ComponentProps } from 'react'
 import type { VariantProps } from 'tailwind-variants'
 import { tv } from 'tailwind-variants'
 import withControl from '~/Components/helpers/with-control'
@@ -23,7 +24,7 @@ type BtnLinkProps = {
     children?: React.ReactNode
     className?: string
 } & VariantProps<typeof buttonLink> &
-    LinkProps
+    ComponentProps<typeof Link>
 
 const BtnPureLink = ({
     href,
