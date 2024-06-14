@@ -2,8 +2,6 @@
 import Link from 'next/link'
 
 import { FaInstagram } from 'react-icons/fa'
-import { GrFacebookOption } from 'react-icons/gr'
-import { RiLinkedinFill } from 'react-icons/ri'
 import type { VariantProps } from 'tailwind-variants'
 import { tv } from 'tailwind-variants'
 import { BtnLink } from '~/Components/atoms/btn'
@@ -51,31 +49,32 @@ const Footer = ({ bg = 'transparent' }: FooterProps) => {
                         Rua Riachuelo, 1200, São José, 49015-160 Aracaju.
                     </p>
                 </div>
-                <div className="flex flex-row h-full p-2">
+                <div className="flex flex-row h-full gap-4 ">
                     <BtnLink
                         href={hrefPrivacyPolicy}
-                        className="w-40 text-xs font-semibold text-gray-600 hover:text-secondary-500"
+                        className="w-20 text-xs font-semibold text-gray-600 hover:text-secondary-500"
                     >
                         Política de Privacidade
                     </BtnLink>
 
                     <BtnLink
                         href={hrefServiceTerms}
-                        className="w-40 text-xs font-semibold text-gray-600 hover:text-secondary-500"
+                        className="w-20 text-xs font-semibold text-gray-600 hover:text-secondary-500"
                     >
                         Termos de Uso
                     </BtnLink>
                 </div>
                 <div className="flex items-center">
                     <Link
-                        href="#"
+                        target="_blank"
+                        href="https://www.instagram.com/pawkeepr_smartcare/"
                         className="mx-2 text-gray-600 transition-colors duration-300 hover:text-primary-600"
                         aria-label="Instagram"
                     >
                         <FaInstagram size={20} />
                     </Link>
 
-                    <Link
+                    {/* <Link
                         href="#"
                         className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-primary-600"
                         aria-label="Facebook"
@@ -89,7 +88,7 @@ const Footer = ({ bg = 'transparent' }: FooterProps) => {
                         aria-label="Github"
                     >
                         <RiLinkedinFill size={20} />
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
         </footer>
