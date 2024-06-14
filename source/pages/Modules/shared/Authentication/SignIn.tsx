@@ -2,24 +2,26 @@ import { LOADING } from '~/constants/loading'
 
 import { BtnLink } from '~/Components/atoms/btn'
 import Loader from '~/Components/organism/loader'
+import useModeProfile from '~/hooks/use-mode'
 import { useAppSelector } from '~/store/hooks'
-import type { NameProfile } from '~/types/profile'
+import { ModeProfile } from '~/types/profile'
 import AuthLayout from '../../_layouts/auth/auth_layout'
 import AuthInputs from './components/organism/auth-inputs'
 
 export type CoverSignInProps = {
-    mode: NameProfile
     bgImage: '/bg-sign-in.webp' | '/bg-three.jpg' | '/bg-sign-up.webp'
 }
 
-const CoverSignIn = ({ mode, bgImage }: CoverSignInProps) => {
+const CoverSignIn = ({ bgImage }: CoverSignInProps) => {
+    const { mode } = useModeProfile()
+
     const { isLoading } = useAppSelector((state) => state.Login)
 
     const isPending = isLoading === LOADING.PENDING
     const isSuccessful = isLoading === LOADING.SUCCESS
     const loading = isPending || isSuccessful
 
-    const link = mode === 'vet' ? '/veterinary/sign-up' : '/tutor/sign-up'
+    const link = mode === ModeProfile.vet ? '/veterinary/sign-up' : '/tutor/sign-up'
 
     return (
         <AuthLayout

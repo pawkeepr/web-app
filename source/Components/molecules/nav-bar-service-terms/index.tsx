@@ -6,21 +6,18 @@ import { ButtonsNavBar } from '../nav-bar-landing'
 
 const NavbarServiceTerms = () => {
     return (
-        <header>
-            <nav className="fixed z-50 left-0 right-0 mobile:p-2 px-4 py-2 transition-colors bg-primary shadow-md">
-                <div className="container flex flex-wrap justify-center gap-2 web:gap-0 web:justify-between">
-                    <Link href="/">
-                        <img
-                            src="/logo-rgb-04.png"
-                            className=" h-12 w-40"
-                            alt="logo light"
-                        />
-                    </Link>
+        <header className="!bg-primary-500 shadow-2xl mobile:fixed mobile:z-50 w-full z-10 h-10 flex items-center">
+            <div className="flex items-center justify-between w-full px-4">
+                <Link href="/">
+                    <img
+                        src="/logo-rgb-04.png"
+                        className="h-8 w-28 "
+                        alt="logo light"
+                    />
+                </Link>
 
-                    <ButtonsNavBar />
-                    {/* </Collapse> */}
-                </div>
-            </nav>
+                <ButtonsNavBar />
+            </div>
         </header>
     )
 }

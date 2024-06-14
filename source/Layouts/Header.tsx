@@ -88,7 +88,7 @@ const Header = () => {
                     {/* <NotificationDropdown /> */}
                     <BtnLink
                         href="/logout"
-                        className="hover:!text-secondary-500 mobile:hidden"
+                        className="hover:!text-secondary-500 mobile:hidden w-fit"
                     >
                         <div>
                             <TbLogout

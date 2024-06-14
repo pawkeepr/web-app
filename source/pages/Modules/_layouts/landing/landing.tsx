@@ -57,12 +57,6 @@ const LandingLayout = ({
             <div className="layout-wrapper landing !bg-primary-500 min-h-screen">
                 <NabBar />
                 {children}
-                {/* <WorkProcess /> */}
-                {/* <Plans /> */}
-                {/* <Reviews />
-                <Teams />
-                <FAQ />
-                <Contact /> */}
                 <Footer bg="primary" />
             </div>
             <button
