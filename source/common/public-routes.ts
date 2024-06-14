@@ -21,6 +21,7 @@ export const PUBLIC_ROUTES_GENERAL = [
     '/privacy-policy',
     '/service-terms',
     '/pet-was-found',
+    '/pet-was-verify',
     '/search',
     '/pet/medical-records',
 ]

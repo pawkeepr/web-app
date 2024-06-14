@@ -15,6 +15,8 @@ const nextConfig = ((_phase) => {
                 '/',
                 '/search',
                 '/client/confirmation/[id]',
+                '/pet-was-found/[id_pet]',
+                '/pet-was-verify/[id_pet]',
             ],
         },
         images: {
@@ -40,6 +42,7 @@ const nextConfig = ((_phase) => {
             REGION: process.env.REGION,
             USER_POOL_ID: process.env.USER_POOL_ID,
             USER_POOL_WEB_CLIENT_ID: process.env.USER_POOL_WEB_CLIENT_ID,
+            FLAG_LIST: process.env.FLAG_LIST,
         },
         i18n,
     }

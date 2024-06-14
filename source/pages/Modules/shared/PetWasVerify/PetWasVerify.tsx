@@ -1,44 +1,35 @@
 'use client'
 
 import cn from 'classnames'
-import { BsFillSendExclamationFill } from 'react-icons/bs'
-import { FaWhatsapp } from 'react-icons/fa'
 import { BtnLink } from '~/Components/atoms/btn'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import { useTranslations } from '~/hooks/use-translations'
-import { usePetPublic } from '~/store/hooks/pet-by-id'
+import { usePetVerifyPublic } from '~/store/hooks/pet-by-id'
 import type { Species } from '~/types/speciesType'
 import AuthLayout from '../../_layouts/auth/auth_layout'
 import LoadingPage from '../LoadingPage'
 
-type PetWasFoundProps = {
+type PetWasVerifyProps = {
     id_pet: string
 }
 
-const PetWasFound = ({ id_pet }: PetWasFoundProps) => {
-    const { data, isPending } = usePetPublic(id_pet)
+const PetWasVerify = ({ id_pet }: PetWasVerifyProps) => {
+    const { data, isPending } = usePetVerifyPublic(id_pet)
 
     const name_tutor =
         data?.main_responsible_guardian?.name ||
         data?.main_responsible_guardian?.first_name
-
-    const whatsapp_tutor = data?.main_responsible_guardian?.contact?.whatsapp
 
     const { t } = useTranslations('common')
 
     const pet = data?.pet_information
     const specie = (pet?.specie as string)?.toLowerCase()
     const race = (pet?.race as string)?.toLowerCase()
-
-    const handleOpenWhatsapp = () => {
-        const numberPhone = whatsapp_tutor?.replace(/\D/g, '')
-
-        const defaultMessage =
-            'Olá, encontrei seu pet perdido e gostaria de avisar você. Podemos conversar?'
-        const encodedMessage = encodeURIComponent(defaultMessage)
-        const url = `https://api.whatsapp.com/send/?phone=${numberPhone}&text=${encodedMessage}&type=phone_number&app_absent=0`
-        window.open(url, '_blank')
-    }
+    const date_of_birth = pet?.date_birth
+    const color = pet?.color
+    const castrated = pet?.castrated as string
+    const size = pet?.size
+    const sex = pet?.sex as string
 
     if (isPending) {
         return (
@@ -75,23 +66,44 @@ const PetWasFound = ({ id_pet }: PetWasFoundProps) => {
                         <p className="flex justify-between text-gray-500">
                             <strong className="mr-2">Pet:</strong>
                             <span>
-                                {`${pet.name_pet}, ${t(specie)}, ${t(race)}`}
+                                {`${pet.name_pet}, ${t(specie as string)}, ${t(
+                                    race,
+                                )}`}
                             </span>
                         </p>
                     )}
-
-                    {whatsapp_tutor && (
+                    {
                         <p className="flex justify-between text-gray-500">
-                            <strong className="mr-2">Whatsapp:</strong>
-                            <button
-                                type="button"
-                                onClick={() => handleOpenWhatsapp()}
-                                className="flex flex-row gap-1 text-sm text-gray-500"
-                            >
-                                <FaWhatsapp className="text-xl text-green-600" />
-                                {whatsapp_tutor}
-                                <BsFillSendExclamationFill className="w-5 h-5 ml-2" />
-                            </button>
+                            <strong className="mr-2">Data de Nascimento:</strong>
+                            {date_of_birth}
+                        </p>
+                    }
+
+                    {color && (
+                        <p className="flex justify-between text-gray-500">
+                            <strong className="mr-2">Cor:</strong>
+                            {t(color?.toLowerCase() || 'unknown')}
+                        </p>
+                    )}
+
+                    {size && (
+                        <p className="flex justify-between text-gray-500">
+                            <strong className="mr-2">Tamanho:</strong>
+                            {t(size?.toLowerCase() || 'unknown')}
+                        </p>
+                    )}
+
+                    {
+                        <p className="flex justify-between text-gray-500">
+                            <strong className="mr-2">Sexo:</strong>
+                            {t(sex?.toLowerCase() || 'unknown')}
+                        </p>
+                    }
+
+                    {castrated && (
+                        <p className="flex justify-between text-gray-500">
+                            <strong className="mr-2">Castrado:</strong>
+                            {t(castrated || 'unknown')}
                         </p>
                     )}
 
@@ -109,4 +121,4 @@ const PetWasFound = ({ id_pet }: PetWasFoundProps) => {
     )
 }
 
-export default PetWasFound
+export default PetWasVerify
