@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
+import type { ModeView } from '~/Components/molecules/field-control'
 import type { FieldSelectControl } from '~/Components/molecules/field-control/field-control-select'
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import useProfile from '~/store/hooks/profile/use-profile'
 import type { IPet } from '~/types/pet'
 import { TypeProfile } from '~/types/profile'
+import CheckboxModalGroup from '../../checkbox-modal-group'
 import { useSpecies } from '../use-species'
 
 type AuxSpeciesFormikProps = Pick<
@@ -13,8 +14,9 @@ type AuxSpeciesFormikProps = Pick<
 >
 
 const SelectsBlood = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => {
-    const [firstLoad, setFirstLoad] = useState(true)
     const { specie } = useSpecies()
+    const [firstLoad, setFirstLoad] = useState(true)
+
     const { values, setFieldValue, initialValues } =
         useFormikContextSafe<AuxSpeciesFormikProps>()
 
@@ -28,14 +30,15 @@ const SelectsBlood = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => 
     const hasPet = !!values.id && !hasTutor
 
     return (
-        <FieldControlSelect
+        <CheckboxModalGroup
             {...props}
-            label="Tipo de sanguíneo"
             ctx={values}
-            isDisabled={hasPet && !!initialValues.blood_type}
+            label="Tipo de sanguíneo"
+            required
+            mode={props.mode as ModeView}
             name="blood_type"
-            options={specie.bloodType}
-            error={props.error && !firstLoad}
+            isDisabled={hasPet && !!initialValues.blood_type}
+            items={specie.bloodType}
         />
     )
 }

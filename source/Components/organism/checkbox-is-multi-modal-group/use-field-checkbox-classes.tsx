@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from 'react'
 import { tv } from 'tailwind-variants'
-import { CheckboxIsMultiModalProps } from './checkbox-is-multi-modal-group'
+import type { CheckboxIsMultiModalProps } from './checkbox-is-multi-modal-group'
 
 export const checkboxButton = tv({
-    base: "h-8",
+    base: 'h-8 w-full',
     variants: {
         isValid: {
             true: '!border-primary-500',
@@ -11,13 +11,18 @@ export const checkboxButton = tv({
         required: {
             true: '!border-secondary-500',
         },
+        mode: {
+            editable: 'border-2',
+            readonly:
+                'border-0 text-gray-500 font-semibold text-xs opacity-100  items-center justify-start px-4',
+        },
     },
 })
 
 type UseFieldControlClassesProps<Ctx> = Pick<
     CheckboxIsMultiModalProps<Ctx>,
-    'validateSync' | 'required'  
->  & {
+    'validateSync' | 'required'
+> & {
     value: unknown
     mode?: 'readonly' | 'editable'
     className?: string
@@ -52,6 +57,7 @@ export const useFieldControlClasses = <Ctx,>({
         className,
         required: required && !hasValidation,
         isValid: hasValidation,
+        mode,
         ...props,
     })
 

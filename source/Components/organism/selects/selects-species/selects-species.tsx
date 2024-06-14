@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import type { ModeView } from '~/Components/molecules/field-control'
 import type { FieldSelectControl } from '~/Components/molecules/field-control/field-control-select'
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import useProfile from '~/store/hooks/profile/use-profile'
 import type { IPet } from '~/types/pet'
 import { TypeProfile } from '~/types/profile'
+import CheckboxModalGroup from '../../checkbox-modal-group'
 import SelectsBlood from '../selects-blood'
 import SelectsRace from '../selects-race'
 import { useSpecies } from '../use-species'
@@ -15,7 +16,6 @@ type AuxSpeciesFormikProps = Pick<
 >
 
 const SelectsSpecies = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => {
-    const [firstLoad, setFirstLoad] = useState(true)
     const { specie, optionsSpecies, onChangeSpecie } = useSpecies()
     const { values, initialValues } = useFormikContextSafe<AuxSpeciesFormikProps>()
     const { data: profile } = useProfile()
@@ -28,24 +28,20 @@ const SelectsSpecies = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) =
         )
         if (!specie) return
         onChangeSpecie(specie)
-    }, [])
+    }, [values.specie])
 
     return (
         <>
-            <FieldControlSelect
-                {...props}
-                label="Espécie"
+            <CheckboxModalGroup
                 ctx={values}
-                name="specie"
+                label="Espécie"
                 required
+                mode={props.mode as ModeView}
+                name="specie"
                 isDisabled={hasPet && !!initialValues.specie}
-                options={optionsSpecies}
-                error={props.error && !firstLoad}
-                onChangeValue={(value) => {
-                    onChangeSpecie(value)
-                    setFirstLoad(false)
-                }}
+                items={optionsSpecies}
             />
+
             {specie?.breedType?.length > 0 && (
                 <SelectsRace mode={props.mode} required />
             )}

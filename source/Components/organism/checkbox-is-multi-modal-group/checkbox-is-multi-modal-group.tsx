@@ -3,6 +3,7 @@ import { useId, useState } from 'react'
 import Modal from '~/Components/organism/modal'
 
 import cn from 'classnames'
+import type { IconType } from 'react-icons'
 import { tv } from 'tailwind-variants'
 import { BtnNeutral } from '~/Components/atoms/btn'
 import CheckboxIcon from '~/Components/atoms/checkbox-icon'
@@ -16,6 +17,7 @@ import { useFieldControlClasses } from './use-field-checkbox-classes'
 export type Item<T = unknown> = {
     label: string
     value: T
+    icon?: IconType
 }
 
 export const option = tv({
@@ -34,8 +36,6 @@ export const option = tv({
     },
 })
 
-
-
 export interface CheckboxIsMultiModalProps<Ctx> {
     items: Item[]
     ctx?: Ctx extends undefined ? never : Ctx
@@ -44,6 +44,9 @@ export interface CheckboxIsMultiModalProps<Ctx> {
     required?: boolean
     disabledError?: boolean
     className?: string
+    mode?: 'editable' | 'readonly'
+    isDisabled?: boolean
+    onChangeValue?: (value: unknown) => void
     id?: string
     children?: (props: { showModal: () => void }) => JSX.Element
     validateSync?: (value: unknown) => boolean
@@ -86,7 +89,7 @@ export default function CheckboxIsMultiModal<Ctx>({
         return removeItem(name)
     }
 
- const classes = useFieldControlClasses({
+    const classes = useFieldControlClasses({
         value: checkedValues,
         required,
         validateSync,
@@ -174,6 +177,9 @@ export default function CheckboxIsMultiModal<Ctx>({
                                         </span>
                                         <strong className="text-center flex-[3] text-xs font-semibold">
                                             {item.label}
+                                            {item.icon && (
+                                                <item.icon className="ml-2" />
+                                            )}
                                         </strong>
                                     </button>
                                 </li>

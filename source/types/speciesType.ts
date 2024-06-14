@@ -79,13 +79,45 @@ export const Species = {
 } as const
 export type Species = (typeof Species)[keyof typeof Species]
 
+type RecordIconPets = {
+    [key in SpeciesType['value']]: IconType
+}
+
+export const IconPets: RecordIconPets = {
+    dog: PiDogDuotone,
+    cat: PiCatDuotone,
+    rabbit: PiRabbitDuotone,
+    fish: PiFishDuotone,
+    bird: PiBirdDuotone,
+    chicken: GiChicken,
+    equine: PiHorseDuotone,
+    bovine: PiCowDuotone,
+    chelonians: GiTurtle,
+    serpent: GiSnakeTongue,
+    lizard: GiReptileTail,
+    pig: PiPiggyBankDuotone,
+    unknown: BsThreeDots,
+    caprine: GiGoat,
+    rodent: GiSeatedMouse,
+} as const
+export type KeysIconPets = keyof typeof IconPets
+
+type FabricSpecies = {
+    label: string
+    value: Species
+    icon?: IconType
+    bloodType: { label: string; value: string }[]
+    breedType: { label: string; value: string }[]
+}
+
 const makeSpecie = (
     specie: Species,
     bloodType: ObjectBloodType,
     breedType: ObjectBreed,
-) => ({
+): FabricSpecies => ({
     label: specie,
     value: specie,
+    icon: IconPets[specie],
     bloodType: Object.entries(bloodType)
         .map(([key, name]) => ({
             label: name,
@@ -160,26 +192,3 @@ export const species = [
     caprine,
     rodent,
 ].sort((a, b) => a.label.localeCompare(b.label))
-
-type RecordIconPets = {
-    [key in SpeciesType['value']]: IconType
-}
-
-export const IconPets: RecordIconPets = {
-    dog: PiDogDuotone,
-    cat: PiCatDuotone,
-    rabbit: PiRabbitDuotone,
-    fish: PiFishDuotone,
-    bird: PiBirdDuotone,
-    chicken: GiChicken,
-    equine: PiHorseDuotone,
-    bovine: PiCowDuotone,
-    chelonians: GiTurtle,
-    serpent: GiSnakeTongue,
-    lizard: GiReptileTail,
-    pig: PiPiggyBankDuotone,
-    unknown: BsThreeDots,
-    caprine: GiGoat,
-    rodent: GiSeatedMouse,
-} as const
-export type KeysIconPets = keyof typeof IconPets
