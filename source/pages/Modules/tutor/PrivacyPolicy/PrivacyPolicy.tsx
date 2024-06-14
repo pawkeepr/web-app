@@ -1,8 +1,8 @@
 const PrivacyPolicy = () => {
     return (
-        <div className="bg-gray-100 min-h-screen p-8">
-            <article className="max-w-2xl mt-10 mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6">
-                <header className="text-center mb-6">
+        <div className="min-h-screen p-8 bg-gray-100">
+            <article className="max-w-2xl p-6 mx-auto mt-10 overflow-hidden bg-white rounded-lg shadow-lg">
+                <header className="mb-6 text-center">
                     <h1 className="text-3xl font-bold text-gray-800">
                         Política de Privacidade - App Pawkeeper
                     </h1>
@@ -10,7 +10,7 @@ const PrivacyPolicy = () => {
 
                 <dl>
                     <div className="mb-6">
-                        <dt className="text-xl font-semibold mb-2">
+                        <dt className="mb-2 text-xl font-semibold">
                             1. Introdução
                         </dt>
                         <dd className="text-gray-700">
@@ -22,7 +22,7 @@ const PrivacyPolicy = () => {
                     </div>
 
                     <div className="mb-6">
-                        <dt className="text-xl font-semibold mb-2">
+                        <dt className="mb-2 text-xl font-semibold">
                             2. Informações Coletadas
                         </dt>
                         <dd className="text-gray-700">
@@ -34,7 +34,7 @@ const PrivacyPolicy = () => {
                     </div>
 
                     <div className="mb-6">
-                        <dt className="text-xl font-semibold mb-2">
+                        <dt className="mb-2 text-xl font-semibold">
                             3. Uso das Informações
                         </dt>
                         <dd className="text-gray-700">
@@ -46,7 +46,7 @@ const PrivacyPolicy = () => {
                     </div>
 
                     <div className="mb-6">
-                        <dt className="text-xl font-semibold mb-2">
+                        <dt className="mb-2 text-xl font-semibold">
                             4. Compartilhamento de Informações
                         </dt>
                         <dd className="text-gray-700">
@@ -58,7 +58,7 @@ const PrivacyPolicy = () => {
                     </div>
 
                     <div className="mb-6">
-                        <dt className="text-xl font-semibold mb-2">
+                        <dt className="mb-2 text-xl font-semibold">
                             5. Segurança dos Dados
                         </dt>
                         <dd className="text-gray-700">
@@ -69,7 +69,7 @@ const PrivacyPolicy = () => {
                     </div>
 
                     <div className="mb-6">
-                        <dt className="text-xl font-semibold mb-2">
+                        <dt className="mb-2 text-xl font-semibold">
                             6. Alterações na Política
                         </dt>
                         <dd className="text-gray-700">
@@ -80,7 +80,7 @@ const PrivacyPolicy = () => {
                     </div>
 
                     <div className="mb-0">
-                        <dt className="text-xl font-semibold mb-2">7. Contato</dt>
+                        <dt className="mb-2 text-xl font-semibold">7. Contato</dt>
                         <dd className="text-gray-700">
                             Se você tiver perguntas sobre esta Política de
                             Privacidade, entre em contato conosco através das

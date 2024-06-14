@@ -4,7 +4,11 @@ import TermsOfUse from '~/pages/Modules/tutor/TermsOfUse'
 
 const ServiceTerms = () => {
     return (
-        <LandingLayout navBar={NavbarServiceTerms} title="Termos de Uso">
+        <LandingLayout
+            navBar={NavbarServiceTerms}
+            title="Termos de Uso"
+            mode="tutor"
+        >
             <TermsOfUse />
         </LandingLayout>
     )

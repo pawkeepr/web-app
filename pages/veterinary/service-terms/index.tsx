@@ -4,7 +4,7 @@ import TermsOfUse from '~/pages/Modules/veterinary/TermsOfUse'
 
 const ServiceTerms = () => {
     return (
-        <LandingLayout navBar={NavbarServiceTerms} title="Termos de Uso">
+        <LandingLayout navBar={NavbarServiceTerms} title="Termos de Uso" mode="vet">
             <TermsOfUse />
         </LandingLayout>
     )

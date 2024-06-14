@@ -4,7 +4,11 @@ import PrivacyPolicy from '~/pages/Modules/veterinary/PrivacyPolicy'
 
 const ServiceTerms = () => {
     return (
-        <LandingLayout navBar={NavbarServiceTerms} title="Política de Privacidade">
+        <LandingLayout
+            navBar={NavbarServiceTerms}
+            title="Política de Privacidade"
+            mode="vet"
+        >
             <PrivacyPolicy />
         </LandingLayout>
     )

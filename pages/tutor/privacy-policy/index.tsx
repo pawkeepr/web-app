@@ -4,7 +4,11 @@ import PrivacyPolicy from '~/pages/Modules/tutor/PrivacyPolicy'
 
 const ServiceTerms = () => {
     return (
-        <LandingLayout navBar={NavbarServiceTerms} title="Política de Privacidade">
+        <LandingLayout
+            navBar={NavbarServiceTerms}
+            title="Política de Privacidade"
+            mode="tutor"
+        >
             <PrivacyPolicy />
         </LandingLayout>
     )

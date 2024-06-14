@@ -42,6 +42,12 @@ export const NameProfile = {
 } as const
 export type NameProfile = (typeof NameProfile)[keyof typeof NameProfile]
 
+export const KeysProfile = {
+    vet: 'vet',
+    tutor: 'tutor',
+} as const
+export type KeysProfile = (typeof KeysProfile)[keyof typeof KeysProfile]
+
 export const CodeProfile = {
     vet: 1,
     tutor: 2,
