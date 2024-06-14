@@ -19,6 +19,7 @@ import type { TypeProfile } from '~/types/profile'
 interface SignInData {
     username: string
     password: string
+    mode: 'vet' | 'tutor'
 }
 
 interface AuthContextType {

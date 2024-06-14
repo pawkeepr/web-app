@@ -45,7 +45,7 @@ const CoverSignIn = ({ mode, bgImage }: CoverSignInProps) => {
 
                 {!loading && (
                     <div className="web:max-h-[236px] p-2">
-                        <AuthInputs />
+                        <AuthInputs mode={mode} />
                     </div>
                 )}
             </div>
