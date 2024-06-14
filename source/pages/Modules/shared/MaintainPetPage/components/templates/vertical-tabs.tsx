@@ -44,12 +44,12 @@ const itemsTutor: TabItem[] = [
         href: '#NewPet',
         Component: StepPet,
     },
-    {
-        id: 1,
-        title: 'Planos de Saúde',
-        href: '#NewHealthInsurance',
-        Component: StepHealthInsurance,
-    },
+    // {
+    //     id: 1,
+    //     title: 'Planos de Saúde',
+    //     href: '#NewHealthInsurance',
+    //     Component: StepHealthInsurance,
+    // },
 ]
 
 type VerticalTabsProps = {
@@ -146,7 +146,7 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
         >
             <div className="flex items-center justify-center w-full">
                 <h4 className="text-lg text-gray-600 my-2 !text-center font-bold font-sans">
-                    {hasPet ? 'Editar Pet' : 'Novo Pet'}
+                    {hasPet ? 'Perfil Pet' : 'Novo Pet'}
                 </h4>
             </div>
             <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
@@ -159,6 +159,7 @@ const VerticalTabs = ({ isPending, hasTutor, hasPet }: VerticalTabsProps) => {
                                     id="steparrow-gen-info-tab"
                                     className={buttonTab({
                                         selected: selectedIndex === index,
+                                        className: 'hidden',
                                     })}
                                 >
                                     {item.title}

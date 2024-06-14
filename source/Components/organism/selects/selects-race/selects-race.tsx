@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
+import type { ModeView } from '~/Components/molecules/field-control'
 import type { FieldSelectControl } from '~/Components/molecules/field-control/field-control-select'
-import FieldControlSelect from '~/Components/molecules/field-control/field-control-select'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import useProfile from '~/store/hooks/profile/use-profile'
 import type { IPet } from '~/types/pet'
 import { TypeProfile } from '~/types/profile'
+import CheckboxModalGroup from '../../checkbox-modal-group'
 import { useSpecies } from '../use-species'
 
 type AuxSpeciesFormikProps = Pick<
@@ -22,19 +23,21 @@ const SelectsRace = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => {
         if (firstLoad) return setFirstLoad(false)
         setFieldValue('race', null, true)
     }, [specie])
+
     const { data: profile } = useProfile()
     const hasTutor = profile?.type_profile === TypeProfile.TUTOR
     const hasPet = !!values.id && !hasTutor
 
     return (
-        <FieldControlSelect
+        <CheckboxModalGroup
             {...props}
-            label="Raça"
-            isDisabled={hasPet && !!initialValues.race}
             ctx={values}
+            label="Raça"
+            required
+            mode={props.mode as ModeView}
             name="race"
-            options={specie.breedType}
-            error={props.error && !firstLoad}
+            isDisabled={hasPet && !!initialValues.race}
+            items={specie.breedType}
         />
     )
 }

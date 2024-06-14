@@ -6,7 +6,9 @@ import cn from 'classnames'
 import { BtnNeutral } from '~/Components/atoms/btn'
 import CheckboxIcon from '~/Components/atoms/checkbox-icon'
 import Label from '~/Components/atoms/label'
+import { ModeView } from '~/Components/molecules/field-control'
 import useModal from '~/hooks/use-modal'
+import { useTranslations } from '~/hooks/use-translations'
 import {
     option,
     useFieldControlClasses,
@@ -23,15 +25,23 @@ export default function CheckboxModal<Ctx>({
     className,
     children,
     validateSync,
+    isDisabled,
+    mode,
+    onChangeValue,
 }: CheckboxIsMultiModalProps<Ctx>) {
     const [field, _meta, helpers] = useField(name)
+
     const { closeModal, open, showModal } = useModal()
     const { setValue } = helpers
     const idLabel = useId()
     const [checkedValue, setCheckedValue] = useState<string>()
-
+    const { t } = useTranslations('common')
+    const selected = items.find(
+        (item) => item.value === field?.value || item?.value === checkedValue,
+    )
     function onChangeCheckbox(name: string) {
         setCheckedValue(() => {
+            onChangeValue?.(name)
             setValue(name)
             return name
         })
@@ -42,7 +52,7 @@ export default function CheckboxModal<Ctx>({
         value: checkedValue,
         required,
         validateSync,
-        mode: 'editable',
+        mode,
         className,
     })
 
@@ -51,30 +61,31 @@ export default function CheckboxModal<Ctx>({
             {children?.({ showModal }) || (
                 <div
                     className={cn(
-                        'flex items-center justify-center overflow-visible ',
+                        'flex flex-col items-start justify-center overflow-visible w-full px-2',
                         className,
                     )}
                 >
+                    <Label
+                        endChildren
+                        className="hover:cursor-pointer"
+                        label={t(label)}
+                        required={required}
+                        htmlFor={idLabel}
+                        separator=""
+                    />
+
                     <BtnNeutral
                         outline
                         type="button"
+                        disabled={isDisabled || mode === ModeView.readonly}
                         onClick={showModal}
                         className={classes}
                         id={idLabel}
                     >
-                        <Label
-                            endChildren
-                            className="hover:cursor-pointer"
-                            label={label}
-                            required={required}
-                            htmlFor={idLabel}
-                            separator=":"
-                        >
-                            <span className="ml-1 font-bold text-primary">
-                                {items.find((item) => item.value === checkedValue)
-                                    ?.label || 'Nenhum item selecionado'}
-                            </span>
-                        </Label>
+                        {t(selected ? selected.label : label)}
+                        {selected?.icon && (
+                            <selected.icon className="w-5 h-5 ml-2" />
+                        )}
                     </BtnNeutral>
                 </div>
             )}
@@ -111,8 +122,11 @@ export default function CheckboxModal<Ctx>({
                                                 {...field}
                                             />
                                         </span>
-                                        <strong className="text-center flex-[3] text-xs font-semibold">
-                                            {item.label}
+                                        <strong className="text-center flex flex-row justify-center items-center flex-[3] text-xs font-semibold">
+                                            {t(item.label)}
+                                            {item.icon && (
+                                                <item.icon className="w-5 h-5 ml-2" />
+                                            )}
                                         </strong>
                                     </button>
                                 </li>

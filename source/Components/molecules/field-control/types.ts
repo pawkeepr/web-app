@@ -2,6 +2,12 @@ import type { FieldHookConfig } from 'formik'
 import type { DetailedHTMLProps, HTMLAttributes } from 'react'
 import type { ObjPaths } from '~/types/helpers'
 
+export const ModeView = {
+    editable: 'editable',
+    readonly: 'readonly',
+} as const
+export type ModeView = (typeof ModeView)[keyof typeof ModeView]
+
 export type InputControlProps<T, Ctx = undefined> = FieldHookConfig<string> &
     T & {
         [key: string]: unknown
@@ -10,7 +16,7 @@ export type InputControlProps<T, Ctx = undefined> = FieldHookConfig<string> &
         ctx?: Ctx extends undefined ? never : Ctx
         name: Ctx extends undefined ? string : ObjPaths<Ctx>
         input?: Omit<React.ElementType, 'name'> | 'input'
-        mode?: 'editable' | 'readonly'
+        mode?: ModeView
         startIcon?: React.ReactNode
         required?: boolean
         isValid?: boolean

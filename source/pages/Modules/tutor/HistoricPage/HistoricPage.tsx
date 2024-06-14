@@ -8,7 +8,7 @@ import StepScheduledDone from './components/organisms/steps/step-scheduled-done'
 const Tabs = () => [
     {
         id: 3,
-        title: 'Consultas Canceladas',
+        title: 'Canceladas',
         href: '#canceled',
         icon: (
             <MdCancel className="w-6 h-6" />
@@ -30,14 +30,14 @@ const Tabs = () => [
     },
     {
         id: 5,
-        title: 'Consultas Finalizadas',
+        title: 'Finalizadas',
         href: '#done',
         icon: <MdCheckCircle className="w-6 h-6" />,
         tab: <StepScheduledDone />,
     },
 ]
 
-const HistoricPage = <T,>() => {
+const HistoricPage = () => {
     const categories = Tabs()
 
     return (
