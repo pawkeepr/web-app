@@ -10,6 +10,14 @@ export const setAuthorization = createAction<{ token: string }>(
 export const signInUser = createAction<{ username: string; password: string }>(
     `${name}/signInUser`,
 )
+
+export const signInTutor = createAction<{ username: string; password: string }>(
+    `${name}/signInTutor`,
+)
+export const signInVet = createAction<{ username: string; password: string }>(
+    `${name}/signInVet`,
+)
+
 export const signInSuccess = createAction<{ token: any }>(`${name}/signInSuccess`)
 export const signInFailed = createAction<string>(`${name}/signInFailed`)
 

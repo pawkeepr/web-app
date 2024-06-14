@@ -25,7 +25,11 @@ const validationSchema = Yup.object({
 
 type CtxSchema = Yup.InferType<typeof validationSchema>
 
-const Auth = () => {
+type AuthProps = {
+    mode: 'vet' | 'tutor'
+}
+
+const Auth = ({ mode }: AuthProps) => {
     const dispatch = useAppDispatch()
 
     const { signIn, password, username, isAuthenticated, isLoading } = useAuth()
@@ -34,6 +38,7 @@ const Auth = () => {
         signIn({
             username,
             password,
+            mode,
         })
     }
 
