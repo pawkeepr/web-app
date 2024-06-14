@@ -17,6 +17,12 @@ const nextConfig = ((_phase) => {
                 '/client/confirmation/[id]',
                 '/pet-was-found/[id_pet]',
                 '/pet-was-verify/[id_pet]',
+                '/tutor/privacy-policy',
+                '/tutor/service-terms',
+                // '/tutor/cookie-policy',
+                '/veterinary/privacy-policy',
+                '/veterinary/service-terms',
+                // '/veterinary/cookie-policy',
             ],
         },
         images: {

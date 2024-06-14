@@ -78,7 +78,6 @@ const AuthLayout = ({
                     <div
                         className={cn(
                             `
-                                
                                 !overflow-hidden relative mobile:rounded-r-none 
                                 mobile:rounded-none grid grid-cols-1 mobile:!w-full 
                                 mobile:!min-h-full py-4 px-12 

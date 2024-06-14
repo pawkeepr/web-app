@@ -2,43 +2,34 @@
 'use client'
 
 import { UserPlusIcon } from '@heroicons/react/24/solid'
-import cn from 'classnames'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { FiLogIn } from 'react-icons/fi' // Ícone de Login
 import { BtnLink } from '~/Components/atoms/btn'
-import useResizeMobile from '~/hooks/use-resize-mobile'
+import useModeProfile from '~/hooks/use-mode'
+import { ModeProfile } from '~/types/profile'
 
 export const ButtonsNavBar = () => {
-    const { isMobile } = useResizeMobile()
+    const { mode } = useModeProfile()
+    const hrefSignIn =
+        mode === ModeProfile.tutor ? '/tutor/sign-in' : '/veterinary/sign-in'
+    const hrefSignUp = ModeProfile.vet ? '/tutor/sign-up' : '/veterinary/sign-up'
+
     return (
         <div className="z-50 flex gap-2">
             <BtnLink
-                message="Entrar"
-                className={cn(
-                    'text-gray-500 hover:!bg-secondary-500 !border-secondary-500 border-0 ',
-                    {
-                        // 'border-2 border-solid w-40': !isMobile,
-                        'border-0': isMobile,
-                    },
-                )}
-                href="/veterinary/sign-in"
+                message="Criar Conta"
+                className="border-0 border-primary-600"
+                href={hrefSignUp}
             >
-                <FiLogIn className="w-6 h-6" />
+                <UserPlusIcon className="w-6 h-6" />
             </BtnLink>
             <BtnLink
-                message="Criar Conta"
-                className={cn(
-                    'border-primary-600 hover:!bg-secondary-500 border-0',
-                    {
-                        // 'border-2 border-solid w-40': !isMobile,
-                        'border-0 ': isMobile,
-                    },
-                )}
-                href="/veterinary/sign-up"
+                message="Entrar"
+                className="text-gray-500 border-0"
+                href={hrefSignIn}
             >
-                {/* icon de cadastro */}
-                <UserPlusIcon className="w-6 h-6" />
+                <FiLogIn className="w-6 h-6" />
             </BtnLink>
         </div>
     )
@@ -67,26 +58,26 @@ const NavbarLanding = () => {
     return (
         <header>
             <nav
-                className="fixed z-50 left-0 right-0 mobile:p-2 px-4 py-2 transition-colors data-[scroll-action=true]:bg-white shadow-md"
+                className="fixed z-50 left-0 right-0 mobile:p-2 px-4 py-0 transition-colors data-[scroll-action=true]:bg-white shadow-md"
                 data-scroll-action={actionScroll}
             >
                 <div className="container flex flex-wrap justify-center gap-2 md:gap-0 md:justify-between">
                     <Link href="/">
                         <img
                             src="/logo-rgb-04.png"
-                            className="hidden h-12 w-40  data-[logo-light=false]:flex"
+                            className="hidden h-10 w-32  data-[logo-light=false]:flex"
                             data-logo-light={actionScroll}
                             alt="logo light"
                         />
                         <img
                             src="/logo-rgb-21.png"
-                            className="hidden h-12 w-40 data-[logo-light=true]:flex"
+                            className="hidden h-10 w-32 data-[logo-light=true]:flex"
                             data-logo-light={actionScroll}
                             alt="logo dark"
                         />
                     </Link>
-                    <ButtonsNavBar />
 
+                    <ButtonsNavBar />
                     {/* </Collapse> */}
                 </div>
             </nav>
