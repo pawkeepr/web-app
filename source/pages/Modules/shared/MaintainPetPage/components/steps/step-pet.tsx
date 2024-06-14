@@ -38,27 +38,9 @@ type StepPetSchema = RecordsShapeYup<StepPetKeys>
 
 const schema = yup.object().shape<StepPetSchema>({
     name: yup.string().required('Campo obrigatório'),
-    sex: yup
-        .object()
-        .shape({
-            label: yup.string().required('Campo obrigatório'),
-            value: yup.string().required('Campo obrigatório'),
-        })
-        .required('Campo obrigatório'),
-    race: yup
-        .object()
-        .shape({
-            label: yup.string().required('Campo obrigatório'),
-            value: yup.string().required('Campo obrigatório'),
-        })
-        .required('Campo obrigatório'),
-    specie: yup
-        .object()
-        .shape({
-            label: yup.string().required('Campo obrigatório'),
-            value: yup.string().required('Campo obrigatório'),
-        })
-        .required('Campo obrigatório'),
+    sex: yup.string().required('Campo obrigatório'),
+    race: yup.string().required('Campo obrigatório'),
+    specie: yup.string().required('Campo obrigatório'),
     date_birth: yup.string().nullable().required('Campo obrigatório'),
     approximate_date: yup.boolean(),
     castrated: yup.boolean(),
@@ -66,13 +48,7 @@ const schema = yup.object().shape<StepPetSchema>({
     microchip: yup.string().nullable(),
     organ_donor: yup.boolean(),
     blood_donator: yup.boolean(),
-    blood_type: yup
-        .object()
-        .shape({
-            label: yup.string().required('Campo obrigatório'),
-            value: yup.string().required('Campo obrigatório'),
-        })
-        .nullable(),
+    blood_type: yup.string().required('Campo obrigatório'),
 })
 
 const StepPet = (_props: StepProps) => {
