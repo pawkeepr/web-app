@@ -6,10 +6,13 @@ import { GrFacebookOption } from 'react-icons/gr'
 import { RiLinkedinFill } from 'react-icons/ri'
 import type { VariantProps } from 'tailwind-variants'
 import { tv } from 'tailwind-variants'
+import { BtnLink } from '~/Components/atoms/btn'
 import withControl from '~/Components/helpers/with-control'
+import useModeProfile from '~/hooks/use-mode'
+import { ModeProfile } from '~/types/profile'
 
 const footer = tv({
-    base: 'w-full py-2 mobile:hidden',
+    base: 'w-full py-2 mobile:hidden z-50',
     variants: {
         bg: {
             transparent: 'bg-transparent',
@@ -25,32 +28,43 @@ const footer = tv({
 type FooterProps = VariantProps<typeof footer>
 
 const Footer = ({ bg = 'transparent' }: FooterProps) => {
+    const { mode } = useModeProfile()
+
+    const hrefPrivacyPolicy =
+        mode === ModeProfile.tutor
+            ? '/tutor/privacy-policy'
+            : '/veterinary/privacy-policy'
+    const hrefServiceTerms =
+        mode === ModeProfile.tutor
+            ? '/tutor/service-terms'
+            : '/veterinary/service-terms'
+
     return (
         <footer className={footer({ bg })}>
-            <div className="flex items-center justify-between px-6 flex-row mobile:flex-col">
+            <div className="flex flex-row items-center justify-between px-6 mobile:flex-col">
                 <div>
-                    <p className="text-xs text-gray-600 font-semibold">
+                    <p className="text-xs font-semibold text-gray-200">
                         {new Date().getFullYear()} © PawKeepr Sistema Inteligente
                         para Pets Inova Simples LTDA. 49.173.821/0001-19
                     </p>
-                    <p className="text-xs mt-2 text-gray-600 font-semibold">
+                    <p className="mt-2 text-xs font-semibold text-gray-200">
                         Rua Riachuelo, 1200, São José, 49015-160 Aracaju.
                     </p>
                 </div>
-                <div className="gap-2 p-2 h-full">
-                    <Link
-                        href="/privacy-policy"
-                        className="text-xs text-gray-600 font-semibold mx-1 hover:text-secondary-500"
+                <div className="flex flex-row h-full p-2">
+                    <BtnLink
+                        href={hrefPrivacyPolicy}
+                        className="w-40 text-xs font-semibold text-gray-600 hover:text-secondary-500"
                     >
                         Política de Privacidade
-                    </Link>
-                    {' - '}
-                    <Link
-                        href="/service-terms"
-                        className="text-xs text-gray-600 font-semibold mx-1 hover:text-secondary-500"
+                    </BtnLink>
+
+                    <BtnLink
+                        href={hrefServiceTerms}
+                        className="w-40 text-xs font-semibold text-gray-600 hover:text-secondary-500"
                     >
                         Termos de Uso
-                    </Link>
+                    </BtnLink>
                 </div>
                 <div className="flex items-center">
                     <Link
