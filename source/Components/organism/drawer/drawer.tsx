@@ -11,11 +11,13 @@ import lightLogo from '../../../../public/logo-light.png'
 
 import { button } from '~/Components/atoms/btn'
 
+import { useSpring, animated } from '@react-spring/web'
+import { useDrag } from '@use-gesture/react'
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import cn from 'classnames'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { FaComment } from 'react-icons/fa'
 import { tv } from 'tailwind-variants'
 import MyImage from '~/Components/atoms/my-image'
@@ -25,6 +27,7 @@ import useResizeMobile from '~/hooks/use-resize-mobile'
 import useProfile from '~/store/hooks/profile/use-profile'
 
 import 'react-modern-drawer/dist/index.css'
+import { set } from 'lodash'
 
 export const ModeDrawerItems = {
     VETERINARY: 'VETERINARY',
@@ -126,6 +129,7 @@ const strategies = new Map<ModeDrawerItems, Item[]>([
     [ModeDrawerItems.TUTOR, tutorsItems],
 ])
 
+
 const CustomDrawer = ({
     // visibleDrawer,
     mode: drawerItems = 'VETERINARY',
@@ -137,6 +141,7 @@ const CustomDrawer = ({
     const { isMobile } = useResizeMobile()
     const { data: profile } = useProfile()
     const { open, closeModal } = useModal({ name: 'drawer' })
+    // const [open, setOpen] = useState(true)
     const options = useMemo(
         () =>
             items.filter((item) => {
@@ -145,13 +150,17 @@ const CustomDrawer = ({
         [isMobile],
     )
 
+    const [{ x, y }, api] = useSpring(() => ({ x: 245, y: 0 }))
+    const bind = useDrag(({ down, offset: [ox, oy] }) => api.start({ x: ox, y: oy, immediate: down }), {
+      bounds: { left: 0, right: 245, top: -50, bottom: 50 }})
+
     return (
-        <Drawer open={open} onClose={closeModal} direction="left">
-            <div
+        <Drawer open={open} style={{left: -245}} onClose={closeModal} direction="left">
+            <animated.div {...bind()} style={{ x }}
                 className={cn(
                     `
-                        flex flex-col
-                        h-full py-8 border-gray-200 dark:border-dark-600 
+                        flex flex-col left-245
+                        h-full py-8 border-gray-200 dark:border-dark-600
                         overflow-y-auto bg-white dark:!bg-dark-500
                         overflow-x-hidden
                     `,
@@ -172,7 +181,6 @@ const CustomDrawer = ({
                         onClick={closeModal}
                     />
                 </div>
-
                 <div className="flex flex-col items-center w-full mt-6 -mx-2">
                     <div className="flex items-center self-center justify-center flex-1">
                         <MyImage
@@ -221,7 +229,7 @@ const CustomDrawer = ({
                         </div>
                     </nav>
                 </div>
-            </div>
+            </animated.div>
         </Drawer>
     )
 }

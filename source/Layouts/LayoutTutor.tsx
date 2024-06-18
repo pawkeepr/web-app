@@ -28,7 +28,7 @@ const LayoutTutor = ({ children }: LayoutProps) => {
             <Header />
             <div className="block h-4 web:hidden" />
             {/* <Sidebar layoutType={layoutType} /> */}
-            <Drawer mode="TUTOR" />
+            <Drawer mode="TUTOR"/>
             <div
                 className={cn(
                     'px-24 mobile:px-0 relative tablet:px-0 min-h-full pt-2',
