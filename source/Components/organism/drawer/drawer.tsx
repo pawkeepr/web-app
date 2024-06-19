@@ -24,8 +24,6 @@ import useModal from '~/hooks/use-modal'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import useProfile from '~/store/hooks/profile/use-profile'
 
-import 'react-modern-drawer/dist/index.css'
-
 export const ModeDrawerItems = {
     VETERINARY: 'VETERINARY',
     TUTOR: 'TUTOR',

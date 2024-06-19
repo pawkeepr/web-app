@@ -9,6 +9,7 @@ import { AuthProvider } from '~/contexts/auth-context'
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import '~/Components/organism/drawer/react-modern-drawer.css'
 import '~/aws'
 
 import { appWithTranslation } from 'next-i18next'
