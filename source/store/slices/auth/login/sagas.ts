@@ -158,7 +158,6 @@ export function* signInVetSaga(action: PayloadAction<SignInCredentials>) {
 export function* signInUserSaga(
     action: PayloadAction<SignInCredentials & { mode: 'vet' | 'tutor' }>,
 ) {
-    console.log(action.payload)
     if (action.payload.mode === 'vet') {
         yield put(signInVet(action.payload))
     } else {
