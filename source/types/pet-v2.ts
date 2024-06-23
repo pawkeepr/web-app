@@ -106,8 +106,8 @@ export type IPetV2Data = {
     specie: string
     race: string
     blood_type?: string | null
-    blood_donator?: string | null
-    organ_donor?: string | null
+    blood_donator?: boolean | null
+    organ_donor?: boolean | null
     sex: string
     castrated?: boolean | null
     date_birth?: string | null
