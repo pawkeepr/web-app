@@ -25,4 +25,5 @@ export const PUBLIC_ROUTES_GENERAL = [
     '/tutor/service-terms',
     '/veterinary/landing-page',
     '/tutor/landing-page',
+    '/qrcode',
 ]
