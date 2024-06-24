@@ -4,11 +4,12 @@ import { QRCode } from 'react-qrcode-logo'
 import { useReactToPrint } from 'react-to-print'
 import { BtnNeutral } from '~/Components/atoms/btn'
 import { encodeBase64 } from '~/utils/encode-base-64'
-import type { QrCodePetProps } from './qr-code-pet'
+import { QrCodePetProps } from './types'
 
 const QrCodePet = ({ id_pet, name_pet }: QrCodePetProps) => {
     const currentUrl = `${window.location.protocol}//${window.location.host}`
     const componentRef = useRef()
+    const qrCodeRef = useRef<HTMLDivElement>(null)
 
     const handlePrint = useReactToPrint({
         content: () => componentRef?.current,
@@ -27,7 +28,7 @@ const QrCodePet = ({ id_pet, name_pet }: QrCodePetProps) => {
             }
     `,
     })
-    const qrCodeRef = useRef<HTMLDivElement>(null)
+
     const handleDownload = () => {
         if (qrCodeRef.current) {
             const canvas = qrCodeRef.current.querySelector('canvas')
@@ -62,6 +63,7 @@ const QrCodePet = ({ id_pet, name_pet }: QrCodePetProps) => {
                     />
                 </div>
             </div>
+           
             <BtnNeutral
                 label="Baixar TagPkeepr"
                 type="button"
