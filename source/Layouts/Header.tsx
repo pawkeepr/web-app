@@ -87,18 +87,11 @@ const Header = () => {
                     {/* NotificationDropdown */}
                     {/* <NotificationDropdown /> */}
                     <BtnLink
+                        message="Sair"
                         href="/logout"
-                        className="hover:!text-secondary-500 mobile:hidden w-fit"
+                        className="hover:!text-secondary-500 mobile:hidden w-fit h-12 text-white "
                     >
-                        <div>
-                            <TbLogout
-                                className="w-6 h-6 text-cyan-50"
-                                viewBox="0 0 24 24"
-                            />
-                            <span className="text-xs font-medium text-white">
-                                Sair
-                            </span>
-                        </div>
+                        <TbLogout className="!w-6 !h-6 text-cyan-50" />
                     </BtnLink>
                 </div>
 
