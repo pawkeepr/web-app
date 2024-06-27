@@ -204,7 +204,7 @@ const CustomDrawer = ({
                                     disabled: item.disabled,
                                     selected: pathname === item.href,
                                 })}
-                                href={item.disabled ? '#' : item.href}
+                                href={item.disabled || !open ? '#' : item.href}
                             >
                                 {item.icon}
 
