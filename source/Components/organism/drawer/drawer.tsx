@@ -1,7 +1,9 @@
+'use client'
+
 import ModernDrawer from 'react-modern-drawer'
 
-import { useGesture } from '@use-gesture/react'
 import cn from 'classnames'
+import { useEffect, useRef } from 'react'
 import useModal from '~/hooks/use-modal'
 import type { DrawerProps } from './drawer-utils'
 import MenuDrawer from './menu-drawer'
@@ -12,20 +14,38 @@ const Drawer = ({
 }: DrawerProps) => {
     const { closeModal, open, showModal } = useModal({ name: 'drawer' })
 
-    const bind = useGesture({
-        onDrag: ({ movement: [mx] }) => {
-            if (mx > 100) {
-                setTimeout(() => {
-                    showModal()
-                }, 100)
+    const divRef = useRef(null)
+
+    useEffect(() => {
+        if (!window || !divRef.current) {
+            return
+        }
+        const Hammer = require('hammerjs')
+
+        const hammer = new Hammer(divRef.current)
+
+        hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL })
+        hammer.on('swipeleft swiperight swipeup swipedown', (event) => {
+            if (event.type === 'swipeleft') {
+                closeModal()
             }
-        },
-    })
+
+            if (event.type === 'swiperight') {
+                showModal()
+            }
+        })
+
+        // Cleanup the Hammer instance on component unmount
+        return () => {
+            hammer.stop(false)
+            hammer.destroy()
+        }
+    }, [])
 
     return (
         <ModernDrawer open={open} onClose={closeModal} direction="left">
             <div
-                {...bind()}
+                ref={divRef}
                 className={cn(
                     `
                         flex flex-col
