@@ -14,8 +14,8 @@
 
 .EZDrawer .EZDrawer__overlay {
     display: none;
-    height: 100vh;
-    left: 0;
+    /* height: 50vh !important;
+    left: 245; */
     position: fixed;
     top: 0;
     width: 100%;
@@ -23,8 +23,8 @@
 
 .EZDrawer .EZDrawer__container {
     position: fixed;
-    visibility: hidden;
-    background: white;
+    visibility: visible;
+    transform: translate3d(0, 0, 0) !important;
     transition: all;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
 }
