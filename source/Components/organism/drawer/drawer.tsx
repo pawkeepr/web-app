@@ -31,7 +31,7 @@ const Drawer = ({
                         flex flex-col
                         h-full py-8 border-gray-200 dark:border-dark-600
                         overflow-y-auto bg-transparent dark:!bg-dark-500
-                        overflow-x-hidden
+                        overflow-x-hidden select-none
                     `,
                 )}
             >

@@ -60,7 +60,11 @@ const AvatarModal = ({
             >
                 <AvatarPet src={sourceImg} {...props} />
             </button>
-            <Modal onClose={closeModal} open={open && FLAG} mobilePage={false}>
+            <Modal
+                onClose={closeModal}
+                open={!!(open && FLAG_DEV)}
+                mobilePage={false}
+            >
                 <div>
                     <h1 className="mb-5 text-lg font-semibold text-center">
                         Editar foto de perfil
