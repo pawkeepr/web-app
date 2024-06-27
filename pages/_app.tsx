@@ -7,12 +7,12 @@ import type { AppProps } from 'next/app'
 
 import { AuthProvider } from '~/contexts/auth-context'
 
+import { appWithTranslation } from 'next-i18next'
+import Head from 'next/head'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '~/Components/organism/drawer/react-modern-drawer.css'
 import '~/aws'
-
-import { appWithTranslation } from 'next-i18next'
 import ErrorBoundary from '~/contexts/error-boundary'
 
 import pg from '../package.json'
@@ -20,6 +20,12 @@ import pg from '../package.json'
 function App({ Component, pageProps }: AppProps) {
     return (
         <ErrorBoundary>
+            <Head>
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+            </Head>
             <Provider>
                 <AuthProvider>
                     <ToastContainer
