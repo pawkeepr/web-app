@@ -215,7 +215,9 @@ const CustomDrawer = ({
                         ))}
                         <div className="absolute bottom-0 w-full mb-2 ">
                             <Link
-                                className={drawerBtn.container()}
+                                className={drawerBtn.container({
+                                    disabled: !open,
+                                })}
                                 href="/feedback"
                             >
                                 <FaComment className="w-5 h-5 mt-1" />
@@ -223,7 +225,12 @@ const CustomDrawer = ({
                                     Ajude-nos a melhorar
                                 </span>
                             </Link>
-                            <Link className={drawerBtn.container()} href="/logout">
+                            <Link
+                                className={drawerBtn.container({
+                                    disabled: !open,
+                                })}
+                                href="/logout"
+                            >
                                 <ArrowLeftCircleIcon className="w-5 h-5 mt-1" />
                                 <span className={drawerBtn.title()}>Sair</span>
                             </Link>
