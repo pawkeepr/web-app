@@ -201,7 +201,7 @@ const CustomDrawer = ({
                             <Link
                                 key={index.toString()}
                                 className={drawerBtn.container({
-                                    disabled: item.disabled,
+                                    disabled: item.disabled || !open,
                                     selected: pathname === item.href,
                                 })}
                                 href={item.disabled || !open ? '#' : item.href}
