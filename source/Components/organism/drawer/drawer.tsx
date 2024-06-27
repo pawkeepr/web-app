@@ -11,11 +11,13 @@ import lightLogo from '../../../../public/logo-light.png'
 
 import { button } from '~/Components/atoms/btn'
 
+import { useSpring, animated } from '@react-spring/web'
+import { useDrag, useGesture } from '@use-gesture/react'
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import cn from 'classnames'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { FaComment } from 'react-icons/fa'
 import { tv } from 'tailwind-variants'
 import MyImage from '~/Components/atoms/my-image'
@@ -23,6 +25,7 @@ import useChangeLayoutMode from '~/hooks/use-change-layout-mode'
 import useModal from '~/hooks/use-modal'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import useProfile from '~/store/hooks/profile/use-profile'
+import { set } from 'lodash'
 
 export const ModeDrawerItems = {
     VETERINARY: 'VETERINARY',
@@ -124,6 +127,7 @@ const strategies = new Map<ModeDrawerItems, Item[]>([
     [ModeDrawerItems.TUTOR, tutorsItems],
 ])
 
+
 const CustomDrawer = ({
     // visibleDrawer,
     mode: drawerItems = 'VETERINARY',
@@ -134,7 +138,7 @@ const CustomDrawer = ({
     const isLightMode = mode === layoutModeTypes.LIGHT_MODE
     const { isMobile } = useResizeMobile()
     const { data: profile } = useProfile()
-    const { open, closeModal } = useModal({ name: 'drawer' })
+    const { showModal, closeModal, open } = useModal({ name: 'drawer' })
     const options = useMemo(
         () =>
             items.filter((item) => {
@@ -143,13 +147,38 @@ const CustomDrawer = ({
         [isMobile],
     )
 
+
+    //  const [{ x, y }, api] = useSpring(() => ({ x: 245, y: 0 }))
+    //  const bind = useDrag(({ down, offset: [ox, oy] }) => api.start({ x: ox, y: oy, immediate: down }), {
+    //      bounds: { left: 0, right: 240, top: -50, bottom: 50 }
+    //    })
+
+    //  const closeModal2 = () => {
+    //      api.start({ x: 5 } );
+    //      closeModal();
+    //  };
+
+    //  const openModal = () => {
+    //      api.start({ x:  245} );
+    //      showModal();
+    //  };
+
+      const bind = useGesture({
+          onDrag: ({down, movement: [mx]}) => {
+             if (down && mx > 100) {
+                 showModal();
+         }
+     }
+     })
+
+
     return (
         <Drawer open={open} onClose={closeModal} direction="left">
-            <div
+            <div {...bind()}
                 className={cn(
                     `
                         flex flex-col
-                        h-full py-8 border-gray-200 dark:border-dark-600 
+                        h-full py-8 border-gray-200 dark:border-dark-600
                         overflow-y-auto bg-white dark:!bg-dark-500
                         overflow-x-hidden
                     `,
@@ -170,7 +199,6 @@ const CustomDrawer = ({
                         onClick={closeModal}
                     />
                 </div>
-
                 <div className="flex flex-col items-center w-full mt-6 -mx-2">
                     <div className="flex items-center self-center justify-center flex-1">
                         <MyImage
