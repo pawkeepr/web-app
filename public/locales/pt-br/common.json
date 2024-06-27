@@ -216,5 +216,19 @@
     "bovine": "Bovino",
     "serpent": "Cobras",
     "equine": "Equino",
-    "general_clinic": "Clínico Geral"
+    "general_clinic": "Clínico Geral",
+    "ferret": "Furão",
+    "squirrel": "Esquilo",
+    "chipmunk": "Esquilo Terrestre",
+    "prairie_dog": "Cão da Pradaria",
+    "hedgehog": "Porco-espinho",
+    "skunk": "Gambá",
+    "raccoon": "Guaxinim",
+    "sugar_glider": "Petauro-do-Açúcar",
+    "capybara": "Capivara",
+    "opossum": "Gambá",
+    "kangaroo": "Canguru",
+    "marmot": "Marmota",
+    "beaver": "Castor",
+    "otter": "Lontra"
 }
