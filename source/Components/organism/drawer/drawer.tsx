@@ -145,9 +145,11 @@ const CustomDrawer = ({
     )
 
     const bind = useGesture({
-        onDrag: ({ down, movement: [mx] }) => {
-            if (down && mx > 100) {
-                showModal()
+        onDrag: ({ movement: [mx] }) => {
+            if (mx > 100) {
+                setTimeout(() => {
+                    showModal()
+                }, 100)
             }
         },
     })
@@ -160,7 +162,7 @@ const CustomDrawer = ({
                     `
                         flex flex-col
                         h-full py-8 border-gray-200 dark:border-dark-600
-                        overflow-y-auto bg-white dark:!bg-dark-500
+                        overflow-y-auto bg-transparent dark:!bg-dark-500
                         overflow-x-hidden
                     `,
                 )}

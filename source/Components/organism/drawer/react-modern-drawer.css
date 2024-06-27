@@ -7,7 +7,12 @@
 }
 .EZDrawer .EZDrawer__checkbox:checked ~ .EZDrawer__container {
     visibility: visible;
-    transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0,0) !important;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+    transition: all;
+    opacity: 100%;
+    left: 0px !important;
+    background-color: white;
 }
 .EZDrawer .EZDrawer__overlay {
     display: none;
@@ -19,8 +24,7 @@
 }
 .EZDrawer .EZDrawer__container {
     position: fixed;
-    visibility: hidden;
-    background: white;
-    transition: all;
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+    background: transparent;
+    opacity: 0%;
+    left: 24px !important;
 }
