@@ -35,10 +35,10 @@ import {
     removeCookie,
     setCookie,
 } from '~/utils/cookies-utils'
-import { resetProfileFlag, setProfile } from '../profile/actions'
+import { resetProfileFlag } from '../profile/actions'
 
 import { AttributeTypeProfile } from '~/services/helpers/types'
-import { NameFullProfile, TypeProfile, type IProfile } from '~/types/profile'
+import { NameFullProfile, TypeProfile } from '~/types/profile'
 import { setEmailAccount, setPasswordAccount } from '../activate-account/actions'
 
 export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
@@ -171,16 +171,17 @@ const checkTokenExpiration = (exp: number, iat: number) => {
 
 export function* recoverUserByTokenSaga() {
     try {
-        const session = yield call(getUser)
-        const access_token = session.getIdToken().getJwtToken()
-        const userData = session.getIdToken().payload
+        const session: SignInResponse = yield call(getUser)
+        const access_token = session.tokens?.accessToken?.toString() as string
+        const userData = session.tokens?.idToken?.payload
 
-        if (checkTokenExpiration(userData.exp, userData.iat)) {
+        if (
+            checkTokenExpiration(userData?.exp as number, userData?.iat as number)
+        ) {
             throw new TokenExpiredErr()
         }
 
         yield put(setAuthorization({ token: access_token }))
-        yield put(setProfile(userData as IProfile))
     } catch (_error) {
         yield put(
             signOutUser({

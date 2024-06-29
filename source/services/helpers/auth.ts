@@ -70,8 +70,13 @@ export const signOut = async () => {
     return await Auth.signOut()
 }
 
-export async function getUser(): Promise<unknown> {
-    return await Auth.fetchUserAttributes()
+export async function getUser(): Promise<SignInResponse> {
+    const attr = await Auth.fetchUserAttributes()
+    const credentials = await Auth.fetchAuthSession()
+    return {
+        ...attr,
+        ...credentials,
+    } as SignInResponse
 }
 
 export type CurrentUserCognito = {
