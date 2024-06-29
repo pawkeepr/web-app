@@ -1,6 +1,4 @@
-import type { CognitoUserSession } from 'amazon-cognito-identity-js'
-import { Auth } from 'aws-amplify'
-
+import Auth from 'aws-amplify/auth'
 import type { AccountSignUp } from '~/store/slices/auth/register/types'
 import type { UserData } from './types'
 
@@ -10,7 +8,9 @@ export type SignInCredentials = {
 }
 
 export async function resendConfirmationCode(username: string) {
-    return await Auth.resendSignUp(username)
+    return await Auth.resendSignUpCode({
+        username,
+    })
 }
 
 export const singUpAws = async (data: AccountSignUp) => {
@@ -18,29 +18,37 @@ export const singUpAws = async (data: AccountSignUp) => {
     return await Auth.signUp({
         username: email,
         password,
-        attributes: {
-            email,
-            'custom:type_profile': `${type_profile}`,
-            'custom:has_profile': has_profile,
+        options: {
+            userAttributes: {
+                email,
+                'custom:type_profile': `${type_profile}`,
+                'custom:has_profile': has_profile,
+            },
         },
     })
 }
 
 // Login Method
-export const signInAws = async (data: SignInCredentials): Promise<UserData> => {
-    return await Auth.signIn(data.username, data.password)
+export const signInAws = async (data: SignInCredentials): Promise<unknown> => {
+    return await Auth.signIn({
+        username: data.username,
+        password: data.password,
+    })
 }
 
 export const confirmSignUp = async (username: string, code: string) => {
-    return await Auth.confirmSignUp(username, code)
+    return await Auth.confirmSignUp({
+        confirmationCode: code,
+        username,
+    })
 }
 
 export const signOut = async () => {
     return await Auth.signOut()
 }
 
-export async function getUser(): Promise<CognitoUserSession> {
-    return await Auth.currentSession()
+export async function getUser(): Promise<unknown> {
+    return await Auth.fetchUserAttributes()
 }
 
 export type CurrentUserCognito = {
@@ -54,12 +62,12 @@ export type CurrentUserCognito = {
     }
 }
 
-export async function getCurrentUser(): Promise<CurrentUserCognito> {
-    return await Auth.currentAuthenticatedUser()
+export async function getCurrentUser(): Promise<unknown> {
+    return await Auth.fetchAuthSession()
 }
 
 export async function forgetPwd(email: string) {
-    return await Auth.forgotPassword(email)
+    return
 }
 
 export async function forgotPasswordSubmit(
@@ -67,20 +75,25 @@ export async function forgotPasswordSubmit(
     code: string,
     newPassword: string,
 ) {
-    return await Auth.forgotPasswordSubmit(email, code, newPassword)
+    return await Auth.confirmResetPassword({
+        username: email,
+        newPassword,
+        confirmationCode: code,
+    })
 }
 
 export async function updatePassword(oldPassword: string, newPassword: string) {
-    return getCurrentUser().then((user) => {
-        return Auth.changePassword(user, oldPassword, newPassword)
+    return Auth.updatePassword({
+        oldPassword,
+        newPassword,
     })
 }
 
 export async function updateHasProfile(has_profile: 'yes' | 'no') {
-    return getCurrentUser().then((user) => {
-        return Auth.updateUserAttributes(user, {
+    return Auth.updateUserAttributes({
+        userAttributes: {
             'custom:has_profile': has_profile,
-        })
+        },
     })
 }
 
