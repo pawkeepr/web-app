@@ -1,5 +1,7 @@
 import * as Auth from 'aws-amplify/auth'
 import type { AccountSignUp } from '~/store/slices/auth/register/types'
+import type { On_Off } from '~/types/pet-v2'
+import type { AttrTypeProfile } from '~/types/profile'
 import type { UserData } from './types'
 
 export type SignInCredentials = {
@@ -28,15 +30,32 @@ export const singUpAws = async (data: AccountSignUp) => {
     })
 }
 
+export type SignInResponse = {
+    'custom:has_profile': On_Off
+    'custom:type_profile': AttrTypeProfile
+    email: string
+    email_verified: 'true' | 'false'
+    sub: string
+} & Auth.AuthSession
+
 // Login Method
-export const signInAws = async (data: SignInCredentials): Promise<unknown> => {
+export const signInAws = async (
+    data: SignInCredentials,
+): Promise<SignInResponse> => {
     try {
-        return await Auth.signIn({
+        await Auth.signIn({
             username: data.username,
             password: data.password,
         })
+        const attr = await Auth.fetchUserAttributes()
+        const credentials = await Auth.fetchAuthSession()
+        return {
+            ...attr,
+            ...credentials,
+        } as SignInResponse
     } catch (error) {
         console.error('signInAws', error)
+        throw error
     }
 }
 

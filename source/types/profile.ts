@@ -41,6 +41,7 @@ export const NameProfile = {
     '2': 'tutor',
 } as const
 export type NameProfile = (typeof NameProfile)[keyof typeof NameProfile]
+export type AttrTypeProfile = keyof typeof NameProfile
 
 export const ModeProfile = {
     vet: 'vet',
