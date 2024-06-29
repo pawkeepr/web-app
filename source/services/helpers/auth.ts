@@ -1,4 +1,4 @@
-import Auth from 'aws-amplify/auth'
+import * as Auth from 'aws-amplify/auth'
 import type { AccountSignUp } from '~/store/slices/auth/register/types'
 import type { UserData } from './types'
 
@@ -30,10 +30,14 @@ export const singUpAws = async (data: AccountSignUp) => {
 
 // Login Method
 export const signInAws = async (data: SignInCredentials): Promise<unknown> => {
-    return await Auth.signIn({
-        username: data.username,
-        password: data.password,
-    })
+    try {
+        return await Auth.signIn({
+            username: data.username,
+            password: data.password,
+        })
+    } catch (error) {
+        console.error('signInAws', error)
+    }
 }
 
 export const confirmSignUp = async (username: string, code: string) => {
@@ -67,7 +71,9 @@ export async function getCurrentUser(): Promise<unknown> {
 }
 
 export async function forgetPwd(email: string) {
-    return
+    return await Auth.resetPassword({
+        username: email,
+    })
 }
 
 export async function forgotPasswordSubmit(
