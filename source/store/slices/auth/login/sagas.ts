@@ -1,5 +1,4 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { CognitoUserSession } from 'amazon-cognito-identity-js'
 import { call, delay, put, takeLatest } from 'redux-saga/effects'
 import cookies from '~/constants/cookies'
 
@@ -44,6 +43,7 @@ import { setEmailAccount, setPasswordAccount } from '../activate-account/actions
 export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
     try {
         const response: UserData = yield call(signInAws, action.payload)
+        console.log('🚀 ~ function*signInTutorSaga ~ response:', response)
 
         const {
             signInUserSession: { idToken },
@@ -173,7 +173,7 @@ const checkTokenExpiration = (exp: number, iat: number) => {
 
 export function* recoverUserByTokenSaga() {
     try {
-        const session: CognitoUserSession = yield call(getUser)
+        const session = yield call(getUser)
         const access_token = session.getIdToken().getJwtToken()
         const userData = session.getIdToken().payload
 
