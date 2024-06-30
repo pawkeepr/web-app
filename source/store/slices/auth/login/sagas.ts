@@ -44,7 +44,6 @@ import { setEmailAccount, setPasswordAccount } from '../activate-account/actions
 export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
     try {
         const attr: SignInResponse = yield call(signInAws, action.payload)
-
         if (attr['custom:type_profile'] !== AttributeTypeProfile.TUTOR) {
             yield call(signOut)
             throw new Error('Você não tem permissão para acessar essa página.')
@@ -52,6 +51,7 @@ export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
 
         const mode = layoutModeTypes.LIGHT_MODE
         const token = attr.tokens?.idToken?.toString() as string
+
         const idToken = attr.tokens?.idToken
         yield call(
             setCookie,
