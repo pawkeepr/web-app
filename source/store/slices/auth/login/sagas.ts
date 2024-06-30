@@ -1,5 +1,4 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { CognitoUserSession } from 'amazon-cognito-identity-js'
 import { call, delay, put, takeLatest } from 'redux-saga/effects'
 import cookies from '~/constants/cookies'
 
@@ -25,6 +24,7 @@ import {
     signInAws,
     signOut,
     type SignInCredentials,
+    type SignInResponse,
     type UserData,
 } from '~/services/helpers/auth'
 
@@ -35,33 +35,29 @@ import {
     removeCookie,
     setCookie,
 } from '~/utils/cookies-utils'
-import { resetProfileFlag, setProfile } from '../profile/actions'
+import { resetProfileFlag } from '../profile/actions'
 
 import { AttributeTypeProfile } from '~/services/helpers/types'
-import { NameFullProfile, TypeProfile, type IProfile } from '~/types/profile'
+import { NameFullProfile, TypeProfile } from '~/types/profile'
 import { setEmailAccount, setPasswordAccount } from '../activate-account/actions'
 
 export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
     try {
-        const response: UserData = yield call(signInAws, action.payload)
-
-        const {
-            signInUserSession: { idToken },
-            attributes,
-        } = response
-
-        if (attributes['custom:type_profile'] !== AttributeTypeProfile.TUTOR) {
+        const attr: SignInResponse = yield call(signInAws, action.payload)
+        if (attr['custom:type_profile'] !== AttributeTypeProfile.TUTOR) {
             yield call(signOut)
             throw new Error('Você não tem permissão para acessar essa página.')
         }
 
         const mode = layoutModeTypes.LIGHT_MODE
-        const token = idToken.jwtToken
+        const token = attr.tokens?.idToken?.toString() as string
+
+        const idToken = attr.tokens?.idToken
         yield call(
             setCookie,
             cookies.token.name,
-            idToken.jwtToken,
-            idToken.payload.exp / 1000,
+            token,
+            (idToken?.payload.exp as number) / 1000,
         )
         yield put(changeLayoutMode(mode))
 
@@ -72,8 +68,8 @@ export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
         yield call(
             setCookie,
             cookies.cognito_profile.name,
-            JSON.stringify(attributes),
-            idToken.payload.exp / 1000,
+            JSON.stringify(attr),
+            (idToken?.payload.exp as number) / 1000,
         )
 
         delay(100)
@@ -158,6 +154,8 @@ export function* signInVetSaga(action: PayloadAction<SignInCredentials>) {
 export function* signInUserSaga(
     action: PayloadAction<SignInCredentials & { mode: 'vet' | 'tutor' }>,
 ) {
+    yield call(signOut)
+
     if (action.payload.mode === 'vet') {
         yield put(signInVet(action.payload))
     } else {
@@ -173,16 +171,17 @@ const checkTokenExpiration = (exp: number, iat: number) => {
 
 export function* recoverUserByTokenSaga() {
     try {
-        const session: CognitoUserSession = yield call(getUser)
-        const access_token = session.getIdToken().getJwtToken()
-        const userData = session.getIdToken().payload
+        const session: SignInResponse = yield call(getUser)
+        const access_token = session.tokens?.accessToken?.toString() as string
+        const userData = session.tokens?.idToken?.payload
 
-        if (checkTokenExpiration(userData.exp, userData.iat)) {
+        if (
+            checkTokenExpiration(userData?.exp as number, userData?.iat as number)
+        ) {
             throw new TokenExpiredErr()
         }
 
         yield put(setAuthorization({ token: access_token }))
-        yield put(setProfile(userData as IProfile))
     } catch (_error) {
         yield put(
             signOutUser({
