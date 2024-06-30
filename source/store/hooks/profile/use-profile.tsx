@@ -89,10 +89,15 @@ export const useMutationUpdateProfilePhoto = () => {
 export const useProfilePhoto = () => {
     const superKeys = [NAME, 'photo']
 
-    return useAppQuery<string>(superKeys, () =>
-        fetchProfilePhoto({
-            key: 'logo-pawkeepr.png',
-        }),
+    return useAppQuery<string>(
+        superKeys,
+        () =>
+            fetchProfilePhoto({
+                key: 'logo-pawkeepr.png',
+            }),
+        {
+            enabled: false,
+        },
     )
 }
 
