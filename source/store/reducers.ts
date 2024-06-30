@@ -10,6 +10,7 @@ import Layout from './slices/layouts/slice'
 import ActivateAccount from './slices/auth/activate-account/slice'
 import ForgetPassword from './slices/auth/forget-pwd/slice'
 import Login from './slices/auth/login/slice'
+import Profile from './slices/auth/profile/slice'
 import Account from './slices/auth/register/slice'
 
 const persistConfig = {
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     Layout,
     Login: persistedReducersSession,
     Account,
+    Profile,
     ForgetPassword,
     ActivateAccount,
 })
