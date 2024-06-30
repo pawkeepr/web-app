@@ -1,6 +1,7 @@
 import { createAction } from '@reduxjs/toolkit'
 
-import type { TypeProfile } from '~/types/profile'
+import type { SignInResponse } from '~/services/helpers/auth'
+import type { AttrTypeProfile } from '~/types/profile'
 import { name } from './types'
 
 export const setAuthorization = createAction<{ token: string }>(
@@ -18,7 +19,9 @@ export const signInVet = createAction<{ username: string; password: string }>(
     `${name}/signInVet`,
 )
 
-export const signInSuccess = createAction<{ token: any }>(`${name}/signInSuccess`)
+export const signInSuccess = createAction<{ token: any; user: SignInResponse }>(
+    `${name}/signInSuccess`,
+)
 export const signInFailed = createAction<string>(`${name}/signInFailed`)
 
 export const recoverUserByToken = createAction<string>(`${name}/recoverUserByToken`)
@@ -29,7 +32,7 @@ export const recoverUserByTokenFailed = createAction<string>(
     `${name}/recoverUserByTokenFailed`,
 )
 
-export const signOutUser = createAction<{ type_profile: TypeProfile }>(
+export const signOutUser = createAction<{ type_profile: AttrTypeProfile }>(
     `${name}/signOutUser`,
 )
 export const signOutUserSuccess = createAction(`${name}/signOutUserSuccess`)

@@ -35,7 +35,6 @@ import {
     removeCookie,
     setCookie,
 } from '~/utils/cookies-utils'
-import { resetProfileFlag } from '../profile/actions'
 
 import { AttributeTypeProfile } from '~/services/helpers/types'
 import { NameFullProfile, TypeProfile } from '~/types/profile'
@@ -43,16 +42,16 @@ import { setEmailAccount, setPasswordAccount } from '../activate-account/actions
 
 export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
     try {
-        const attr: SignInResponse = yield call(signInAws, action.payload)
-        if (attr['custom:type_profile'] !== AttributeTypeProfile.TUTOR) {
+        const user: SignInResponse = yield call(signInAws, action.payload)
+        if (user['custom:type_profile'] !== AttributeTypeProfile.TUTOR) {
             yield call(signOut)
             throw new Error('Você não tem permissão para acessar essa página.')
         }
 
         const mode = layoutModeTypes.LIGHT_MODE
-        const token = attr.tokens?.idToken?.toString() as string
+        const token = user.tokens?.idToken?.toString() as string
 
-        const idToken = attr.tokens?.idToken
+        const idToken = user.tokens?.idToken
         yield call(
             setCookie,
             cookies.token.name,
@@ -63,12 +62,12 @@ export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
 
         delay(100)
         yield put(setAuthorization({ token }))
-        yield put(signInSuccess({ token }))
+        yield put(signInSuccess({ token, user }))
 
         yield call(
             setCookie,
             cookies.cognito_profile.name,
-            JSON.stringify(attr),
+            JSON.stringify(user),
             (idToken?.payload.exp as number) / 1000,
         )
 
@@ -201,7 +200,6 @@ export function* signOutUserSaga({
         yield call(removeCookie, cookies.profile.name)
         yield call(deleteCookiesWithPrefix, 'pawkeepr')
         yield call(signOut)
-        yield put(resetProfileFlag())
         yield put(signOutUserSuccess())
     } catch (error) {
         if ((error as string) === 'No current user') {

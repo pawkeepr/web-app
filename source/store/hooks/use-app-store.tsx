@@ -9,6 +9,7 @@ import { useCallback, useMemo } from 'react'
 import type { BuilderEntity } from '~/entities/BuilderEntity'
 import useAppQuery, { type Fn } from '~/hooks/use-app-query'
 import { errorToast, successToast } from '../helpers/toast'
+import { useAppSelector } from '../hooks'
 
 export type FAxiosPost<G = undefined> = (data: G) => Promise<AxiosResponse<G>>
 export type FAxiosUpdate<G = unknown> = (
@@ -45,15 +46,16 @@ const useAppStore = <T, G = unknown>({
     name,
     initialData,
 }: Stores<T, G>) => {
+    const token = useAppSelector((state) => state.Login.token)
     const superKeys = ['active', ...keys]
 
-    const { isLoading, data, error, isError } = useAppQuery<T>(
+    const { isPending, data, error, isError } = useAppQuery<T>(
         superKeys,
         get?.bind(null) as Fn<T>,
         {
             ...options,
             staleTime: TIME, // 1 min
-            enabled: !!get && enabled,
+            enabled: !!get && enabled && !!token,
             placeholderData: keepPreviousData,
         },
     )
@@ -144,7 +146,7 @@ const useAppStore = <T, G = unknown>({
     )
 
     return {
-        isLoading,
+        isLoading: isPending,
         activeData: data ?? initialData,
         error,
         addData,
