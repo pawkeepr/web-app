@@ -7,7 +7,7 @@ export const input = tv({
         w-full px-4 py-2 rounded-md
         transition-all duration-100 ease-in-out transition-shadow 
         disabled:opacity-70 text-gray-600 disabled:bg-gray-200
-        text-sm h-10 
+        text-base h-11 
         invalid:!shadow-outline-secondary-500 invalid:!text-secondary-500 
         invalid:border-secondary-500 invalid:focus:border-gray-300
         border 
