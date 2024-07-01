@@ -20,9 +20,9 @@ export default useListPetsByTutor
 
 export interface Pet {
     approximate_date: string | null
-    blood_donator: string
+    blood_donator: boolean
     blood_type: string
-    castrated: string
+    castrated: boolean
     color: string
     date_birth: string
     date_update: string
@@ -30,8 +30,8 @@ export interface Pet {
     identification_number: string
     microchip: string
     name_pet: string
-    organ_donor: string
-    pedigree: string
+    organ_donor: boolean
+    pedigree: boolean
     pedigree_registry: string
     race: string
     sex: string

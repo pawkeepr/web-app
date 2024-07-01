@@ -25,8 +25,8 @@ const rootReducer = combineReducers({
     Layout,
     Login: persistedReducersSession,
     Account,
-    ForgetPassword,
     Profile,
+    ForgetPassword,
     ActivateAccount,
 })
 

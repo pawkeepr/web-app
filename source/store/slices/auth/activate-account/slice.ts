@@ -5,11 +5,11 @@ import {
     ACTIVATE_ACCOUNT,
     ACTIVATE_ACCOUNT_ERROR,
     ACTIVATE_ACCOUNT_SUCCESS,
-    InitialStateProfile,
     RESET_PROFILE_FLAG,
     SET_EMAIL_ACCOUNT,
     SET_PASSWORD_ACCOUNT,
     name,
+    type InitialStateProfile,
 } from './types'
 
 const initialState: InitialStateProfile = {

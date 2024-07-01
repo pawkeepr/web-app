@@ -1,4 +1,4 @@
-import LOADING from '~/constants/loading'
+import type LOADING from '~/constants/loading'
 
 export const name = 'activate'
 

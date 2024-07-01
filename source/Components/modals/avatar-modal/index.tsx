@@ -4,7 +4,7 @@ import { BtnCancel, BtnSuccess } from '~/Components/atoms/btn'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import type { AvatarPetProps } from '~/Components/molecules/avatar-pet/avatar-pet'
 import Modal from '~/Components/organism/modal'
-import { Env } from '~/env'
+import Env from '~/env'
 import useModal from '~/hooks/use-modal'
 import { useProfilePhoto } from '~/store/hooks/profile/use-profile'
 import ProfileEditor from './profile-editor'
@@ -60,7 +60,11 @@ const AvatarModal = ({
             >
                 <AvatarPet src={sourceImg} {...props} />
             </button>
-            <Modal onClose={closeModal} open={open && FLAG} mobilePage={false}>
+            <Modal
+                onClose={closeModal}
+                open={!!(open && FLAG_DEV)}
+                mobilePage={false}
+            >
                 <div>
                     <h1 className="mb-5 text-lg font-semibold text-center">
                         Editar foto de perfil
