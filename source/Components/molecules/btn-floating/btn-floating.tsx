@@ -1,25 +1,30 @@
-import type { ComponentProps } from 'react'
+import React, { useEffect, useRef, useState, type ComponentProps } from 'react'
 import type { IconType } from 'react-icons'
 import { tv, type VariantProps } from 'tailwind-variants'
 import withControl from '~/Components/helpers/with-control'
+import { useSpring, animated } from '@react-spring/web'
+import { createUseGesture, dragAction, pinchAction, useDrag } from '@use-gesture/react'
+// import styles from './styles.module.css'
+
+const useGesture = createUseGesture([dragAction, pinchAction])
 
 const buttonFloating = {
     button: tv({
         base: `
         fixed z-50 flex flex-col items-center justify-center 
-        transition duration-500 ease-in-out mobile:opacity-100 
-        bottom-4 mobile:bottom-24 right-5 opacity-40 
+        transition duration-500 ease-in-out mobile:opacity-100
+        opacity-40
         hover:opacity-100 
     `,
         variants: {
             'position-x': {
-                right: 'right-5',
-                left: 'left-5',
+                right: 'right-1',
+                left: 'left-1',
             },
-            'position-y': {
-                top: 'top-5',
-                bottom: 'bottom-5',
-            },
+             'position-y': {
+                 top: 'top-5',
+                 bottom: 'bottom',
+             },
         },
         defaultVariants: {
             'position-x': 'right',
@@ -38,10 +43,12 @@ const buttonFloating = {
     }),
     icon: tv({
         base: `
-        w-6 h-6 text-gray-500
+        w-8 h-8 text-gray-500
     `,
     }),
 }
+
+
 
 type BtnFloatingProps = {
     onClick: () => void
@@ -61,6 +68,7 @@ export const BtnFloating = ({
             title={title}
             type="button"
             onClick={onClick}
+            id='myButton'
             className={buttonFloating.button({ ...props })}
             {...props}
         >
@@ -78,26 +86,53 @@ type BtnLinkFloatingProps = {
 } & VariantProps<typeof buttonFloating.button> &
     ComponentProps<'a'>
 
-export const BtnLinkFloating = ({
-    href,
-    icon: Icon,
-    title,
-    ...props
-}: BtnLinkFloatingProps) => {
-    return (
-        <a
-            {...props}
-            title={title}
-            type="button"
-            href={href}
-            className={buttonFloating.button({ ...props })}
-        >
-            <h6 className={buttonFloating.title()}>{title}</h6>
-            <div className={buttonFloating.containerIcon()}>
-                <Icon className={buttonFloating.icon()} />
+    export const BtnLinkFloating = ({
+        href,
+        icon: Icon,
+        title,
+        onClick,
+        ...props
+    }: BtnLinkFloatingProps) => {
+    
+         const [{ x, y }, api] = useSpring(() => ({ x: 85, y: 180 }))
+         const [isDragging, setIsDragging] = useState(true);
+         const bind = useDrag(({ down, offset: [ox, oy]}) => {
+                setTimeout(() => {
+                   setIsDragging(down);
+                }, 100);        
+             api.start({ x: ox, y: oy, immediate: down });
+             console.log(isDragging);
+             
+         });
+         
+        const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+            if (isDragging) {
+                e.preventDefault(); 
+            } else if (onClick) {
+                onClick(e); 
+            }
+        };
+         
+        return (
+            <animated.div {...bind()} style={{ x, y }}>
+            <div>
+            <a
+                {...props}
+                title={title}
+                type="button"
+                href={isDragging ? undefined : href}
+                onClick={handleClick}
+                className={buttonFloating.button({ ...props })}
+            >
+                <h6 className={buttonFloating.title()}>{title}</h6>
+                <div className={buttonFloating.containerIcon()}>
+                    <Icon className={buttonFloating.icon()} />
+                </div>
+            </a>
             </div>
-        </a>
-    )
-}
+            </animated.div>
+        )
+    }
+    
 
 export default withControl(BtnFloating)
