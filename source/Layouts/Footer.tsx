@@ -69,7 +69,7 @@ const Footer = ({ bg = 'transparent' }: FooterProps) => {
                 <div className="flex items-center">
                     <Link
                         target="_blank"
-                        href="https://www.instagram.com/pawkeepr_smartcare/"
+                        href="https://www.instagram.com/pawkeepr.app/"
                         className="mx-2 text-gray-600 transition-colors duration-300 hover:text-primary-600"
                         aria-label="Instagram"
                     >
