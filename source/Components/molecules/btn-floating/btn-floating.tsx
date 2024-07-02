@@ -94,12 +94,12 @@ type BtnLinkFloatingProps = {
         ...props
     }: BtnLinkFloatingProps) => {
     
-         const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }))
-         const [isDragging, setIsDragging] = useState(false);
-         const bind = useDrag(({ down, offset: [ox, oy]}) => {    
-             setTimeout(() => {
-                setIsDragging(down);
-             }, 100);        
+         const [{ x, y }, api] = useSpring(() => ({ x: 85, y: 180 }))
+         const [isDragging, setIsDragging] = useState(true);
+         const bind = useDrag(({ down, offset: [ox, oy]}) => {
+                setTimeout(() => {
+                   setIsDragging(down);
+                }, 100);        
              api.start({ x: ox, y: oy, immediate: down });
              console.log(isDragging);
              
