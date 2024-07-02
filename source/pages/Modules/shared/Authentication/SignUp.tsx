@@ -80,7 +80,8 @@ const CoverSignUp = ({ bgImage }: CoverSignInProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const link = mode === ModeProfile.vet ? '/veterinary/sign-in' : '/tutor/sign-in'
+    const modeProfile = mode === ModeProfile.vet ? 'veterinary' : 'tutor'
+
     const initialValues = makeInitialValues(mode)
 
     return (
@@ -146,7 +147,7 @@ const CoverSignUp = ({ bgImage }: CoverSignInProps) => {
                                         'Você se registrando aceita os termos de uso da plataforma: '
                                     }
                                     <Link
-                                        href="/service-terms"
+                                        href={`/${modeProfile}/terms-of-use`}
                                         className="no-underline text-primary fst-normal fw-medium"
                                     >
                                         Termos de Uso.{' '}
@@ -159,7 +160,7 @@ const CoverSignUp = ({ bgImage }: CoverSignInProps) => {
                                         'Você se registrando aceita a política de privacidade da plataforma: '
                                     }
                                     <Link
-                                        href="/privacy-policy"
+                                        href={`/${modeProfile}/privacy-policy`}
                                         className="no-underline text-primary fst-normal fw-medium"
                                     >
                                         Política de Privacidade
@@ -189,12 +190,16 @@ const CoverSignUp = ({ bgImage }: CoverSignInProps) => {
             </Formik>
             <div className="mobile:hidden w-full flex flex-col justify-center items-center !h-fit">
                 <p className="text-xs">Você já tem uma conta ?</p>
-                <BtnLink className="p-0 h-fit" href={link} message="Entrar" />
+                <BtnLink
+                    className="p-0 h-fit"
+                    href={`/${modeProfile}/sign-in`}
+                    message="Entrar"
+                />
             </div>
             <BtnLink
                 message="Voltar"
                 className="absolute items-center justify-start hidden mobile:flex max-w-fit top-2 left-2"
-                href={link}
+                href={`/${modeProfile}/sign-in`}
             >
                 <ArrowLeftCircleIcon />
             </BtnLink>
