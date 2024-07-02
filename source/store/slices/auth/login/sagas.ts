@@ -25,7 +25,6 @@ import {
     signOut,
     type SignInCredentials,
     type SignInResponse,
-    type UserData,
 } from '~/services/helpers/auth'
 
 import { layoutModeTypes } from '~/constants/layout'
@@ -37,7 +36,7 @@ import {
 } from '~/utils/cookies-utils'
 
 import { AttributeTypeProfile } from '~/services/helpers/types'
-import { NameFullProfile, TypeProfile } from '~/types/profile'
+import { NameFullProfile, type TypeProfile } from '~/types/profile'
 import { setEmailAccount, setPasswordAccount } from '../activate-account/actions'
 
 export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
@@ -95,37 +94,34 @@ export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
 
 export function* signInVetSaga(action: PayloadAction<SignInCredentials>) {
     try {
-        const response: UserData = yield call(signInAws, action.payload)
+        const user: SignInResponse = yield call(signInAws, action.payload)
 
-        const {
-            signInUserSession: { idToken },
-            attributes,
-        } = response
-
-        if (attributes['custom:type_profile'] !== AttributeTypeProfile.VETERINARY) {
+        if (user['custom:type_profile'] !== AttributeTypeProfile.VETERINARY) {
             yield call(signOut)
             throw new Error('Você não tem permissão para acessar essa página.')
         }
 
         const mode = layoutModeTypes.LIGHT_MODE
-        const token = idToken.jwtToken
+        const token = user.tokens?.idToken?.toString() as string
+
+        const idToken = user.tokens?.idToken
         yield call(
             setCookie,
             cookies.token.name,
-            idToken.jwtToken,
-            idToken.payload.exp / 1000,
+            token,
+            (idToken?.payload.exp as number) / 1000,
         )
         yield put(changeLayoutMode(mode))
 
         delay(100)
         yield put(setAuthorization({ token }))
-        yield put(signInSuccess({ token }))
+        yield put(signInSuccess({ token, user }))
 
         yield call(
             setCookie,
             cookies.cognito_profile.name,
-            JSON.stringify(attributes),
-            idToken.payload.exp / 1000,
+            JSON.stringify(user),
+            (idToken?.payload.exp as number) / 1000,
         )
 
         delay(100)
@@ -184,7 +180,7 @@ export function* recoverUserByTokenSaga() {
     } catch (_error) {
         yield put(
             signOutUser({
-                type_profile: TypeProfile.TUTOR,
+                type_profile: AttributeTypeProfile.TUTOR,
             }),
         )
     }
