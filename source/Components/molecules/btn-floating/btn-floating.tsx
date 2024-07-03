@@ -1,9 +1,15 @@
-import React, { useEffect, useRef, useState, type ComponentProps } from 'react'
+import { animated, useSpring } from '@react-spring/web'
+import {
+    createUseGesture,
+    dragAction,
+    pinchAction,
+    useDrag,
+} from '@use-gesture/react'
+import type React from 'react'
+import { useState, type ComponentProps } from 'react'
 import type { IconType } from 'react-icons'
 import { tv, type VariantProps } from 'tailwind-variants'
 import withControl from '~/Components/helpers/with-control'
-import { useSpring, animated } from '@react-spring/web'
-import { createUseGesture, dragAction, pinchAction, useDrag } from '@use-gesture/react'
 // import styles from './styles.module.css'
 
 const useGesture = createUseGesture([dragAction, pinchAction])
@@ -21,10 +27,10 @@ const buttonFloating = {
                 right: 'right-1',
                 left: 'left-1',
             },
-             'position-y': {
-                 top: 'top-5',
-                 bottom: 'bottom',
-             },
+            'position-y': {
+                top: 'top-0',
+                bottom: 'bottom-0',
+            },
         },
         defaultVariants: {
             'position-x': 'right',
@@ -48,8 +54,6 @@ const buttonFloating = {
     }),
 }
 
-
-
 type BtnFloatingProps = {
     onClick: () => void
     icon: IconType
@@ -68,7 +72,7 @@ export const BtnFloating = ({
             title={title}
             type="button"
             onClick={onClick}
-            id='myButton'
+            id="myButton"
             className={buttonFloating.button({ ...props })}
             {...props}
         >
@@ -86,53 +90,49 @@ type BtnLinkFloatingProps = {
 } & VariantProps<typeof buttonFloating.button> &
     ComponentProps<'a'>
 
-    export const BtnLinkFloating = ({
-        href,
-        icon: Icon,
-        title,
-        onClick,
-        ...props
-    }: BtnLinkFloatingProps) => {
-    
-         const [{ x, y }, api] = useSpring(() => ({ x: 85, y: 180 }))
-         const [isDragging, setIsDragging] = useState(true);
-         const bind = useDrag(({ down, offset: [ox, oy]}) => {
-                setTimeout(() => {
-                   setIsDragging(down);
-                }, 100);        
-             api.start({ x: ox, y: oy, immediate: down });
-             console.log(isDragging);
-             
-         });
-         
-        const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-            if (isDragging) {
-                e.preventDefault(); 
-            } else if (onClick) {
-                onClick(e); 
-            }
-        };
-         
-        return (
-            <animated.div {...bind()} style={{ x, y }}>
-            <div>
-            <a
-                {...props}
-                title={title}
-                type="button"
-                href={isDragging ? undefined : href}
-                onClick={handleClick}
-                className={buttonFloating.button({ ...props })}
-            >
-                <h6 className={buttonFloating.title()}>{title}</h6>
-                <div className={buttonFloating.containerIcon()}>
-                    <Icon className={buttonFloating.icon()} />
-                </div>
-            </a>
-            </div>
-            </animated.div>
-        )
+export const BtnLinkFloating = ({
+    href,
+    icon: Icon,
+    title,
+    onClick,
+    ...props
+}: BtnLinkFloatingProps) => {
+    const [{ x, y }, api] = useSpring(() => ({ x: 85, y: 180 }))
+    const [isDragging, setIsDragging] = useState(true)
+    const bind = useDrag(({ down, offset: [ox, oy] }) => {
+        setTimeout(() => {
+            setIsDragging(down)
+        }, 100)
+        api.start({ x: ox, y: oy, immediate: down })
+    })
+
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (isDragging) {
+            e.preventDefault()
+        } else if (onClick) {
+            onClick(e)
+        }
     }
-    
+
+    return (
+        <animated.div {...bind()} style={{ x, y }}>
+            <div>
+                <a
+                    {...props}
+                    title={title}
+                    type="button"
+                    href={isDragging ? undefined : href}
+                    onClick={handleClick}
+                    className={buttonFloating.button({ ...props })}
+                >
+                    <h6 className={buttonFloating.title()}>{title}</h6>
+                    <div className={buttonFloating.containerIcon()}>
+                        <Icon className={buttonFloating.icon()} />
+                    </div>
+                </a>
+            </div>
+        </animated.div>
+    )
+}
 
 export default withControl(BtnFloating)

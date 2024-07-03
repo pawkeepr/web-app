@@ -47,14 +47,14 @@ const LayoutTutor = ({ children }: LayoutProps) => {
     }, [])
 
     return (
-        <div id="relative">
+        <main id="relative" className="relative flex flex-col flex-1 h-screen ">
             <Header />
             <div className="block h-4 web:hidden" />
             {/* <Sidebar layoutType={layoutType} /> */}
             <Drawer mode="TUTOR" />
             <div
                 className={cn(
-                    'px-24 mobile:px-0 relative tablet:px-0 min-h-full pt-2',
+                    'px-24 mobile:px-0 relative tablet:px-0  pt-2 ',
                     'z-[1]',
                     // 'bg-cover bg-no-repeat bg-fixed',
                 )}
@@ -66,7 +66,7 @@ const LayoutTutor = ({ children }: LayoutProps) => {
             >
                 <Suspense fallback={<LoadingPage />}>{children}</Suspense>
             </div>
-        </div>
+        </main>
     )
 }
 

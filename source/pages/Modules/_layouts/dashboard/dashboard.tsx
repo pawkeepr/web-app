@@ -28,7 +28,7 @@ const DashboardLayouts = ({
     name,
 }: DashboardLayoutsProps) => {
     return (
-        <main>
+        <>
             <HeaderTitle title={title} />
             <BlockSearchAndInputDocument
                 condition={searchBlock}
@@ -37,7 +37,7 @@ const DashboardLayouts = ({
             <div className="block h-6 web:hidden" />
             {children}
             <ContextSettersStatusAppointmentsModals />
-        </main>
+        </>
     )
 }
 
