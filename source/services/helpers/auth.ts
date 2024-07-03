@@ -42,21 +42,16 @@ export type SignInResponse = {
 export const signInAws = async (
     data: SignInCredentials,
 ): Promise<SignInResponse> => {
-    try {
-        await Auth.signIn({
-            username: data.username,
-            password: data.password,
-        })
-        const attr = await Auth.fetchUserAttributes()
-        const credentials = await Auth.fetchAuthSession()
-        return {
-            ...attr,
-            ...credentials,
-        } as SignInResponse
-    } catch (error) {
-        console.error('signInAws', error)
-        throw error
-    }
+    await Auth.signIn({
+        username: data.username,
+        password: data.password,
+    })
+    const attr = await Auth.fetchUserAttributes()
+    const credentials = await Auth.fetchAuthSession()
+    return {
+        ...attr,
+        ...credentials,
+    } as SignInResponse
 }
 
 export const confirmSignUp = async (username: string, code: string) => {

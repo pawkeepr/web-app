@@ -98,8 +98,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         router.push(`/${partial_route}/activation`)
     }, [user])
 
-    function signIn({ username, password }: SignInData) {
-        return dispatch(signInUser({ username, password }))
+    function signIn({ username, password, mode }: SignInData) {
+        return dispatch(signInUser({ username, password, mode }))
     }
 
     const onToggleRememberMe = () => {
