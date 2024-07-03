@@ -8,9 +8,11 @@ export const setAuthorization = createAction<{ token: string }>(
     `${name}/setAuthorization`,
 )
 
-export const signInUser = createAction<{ username: string; password: string }>(
-    `${name}/signInUser`,
-)
+export const signInUser = createAction<{
+    username: string
+    password: string
+    mode: string
+}>(`${name}/signInUser`)
 
 export const signInTutor = createAction<{ username: string; password: string }>(
     `${name}/signInTutor`,
