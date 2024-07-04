@@ -49,7 +49,7 @@ const AuthLayout = ({
             <div className="bg-overlay" />
             <main
                 className={cn(
-                    'flex flex-1 content-center mobile:content-start items-center justify-center mobile:items-start mobile:justify-start mobile:overflow-hidden mt-2',
+                    'flex flex-1 content-center mobile:content-start items-center justify-center mobile:items-start mobile:justify-start mobile:overflow-hidden',
                 )}
             >
                 <section

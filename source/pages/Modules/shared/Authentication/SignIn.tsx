@@ -53,8 +53,8 @@ const CoverSignIn = ({ bgImage }: CoverSignInProps) => {
             </div>
 
             {!loading && (
-                <div className="flex flex-col items-center justify-center w-full ">
-                    <p className="-mb-2 font-normal text-gray-400">
+                <div className="flex flex-col items-center justify-center w-full mt-4 ">
+                    <p className="font-normal text-gray-400 ">
                         Você não tem uma conta ?
                     </p>
                     <BtnLink message="Criar Conta" href={link} />
