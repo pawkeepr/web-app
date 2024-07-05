@@ -1,6 +1,6 @@
 import withCompose from '~/Components/helpers/with-compose'
 import AvatarPet from '~/Components/molecules/avatar-pet'
-import { Env } from '~/env'
+import Env from '~/env'
 import useModal from '~/hooks/use-modal'
 import { useTranslations } from '~/hooks/use-translations'
 import type { IPetV2Data } from '~/types/pet-v2'
@@ -50,10 +50,12 @@ const ModalBoxButtonsPet = ({
                                 <p>{t(pet?.sex)}</p>
                             </div>
 
-                            {FLAG_DEV && (<div className="mb-2 text-gray-500">
-                                <h3 className="font-bold">Matricula:</h3>
-                                <p>{encodeBase64(pet.id_pet)}</p>
-                            </div>)}
+                            {FLAG_DEV && (
+                                <div className="mb-2 text-gray-500">
+                                    <h3 className="font-bold">Matricula:</h3>
+                                    <p>{encodeBase64(pet.id_pet)}</p>
+                                </div>
+                            )}
                         </div>
                     </section>
 

@@ -9,8 +9,8 @@ import {
     ACTION_RESEND_CONFIRMATION_CODE_SUCCESS,
     ACTION_SET_EMAIL_ACCOUNT,
     ACTION_SET_PASSWORD_ACCOUNT,
-    ActivateAccount,
     RESET_PROFILE_FLAG,
+    type ActivateAccount,
 } from './types'
 
 export const activateAccount = createAction<ActivateAccount>(

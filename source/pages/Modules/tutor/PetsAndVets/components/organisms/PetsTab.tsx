@@ -39,7 +39,7 @@ const MapCardFeedPets = ({ pets, isPending, isLoading }: MapCardFeedPetsProps) =
                         pet={{
                             ...pet,
                             cpf_cnpj: profile?.user_information?.cpf_cnpj as string,
-                            castrated: pet?.castrated === 'yes',
+                            castrated: pet?.castrated,
                         }}
                     />
                 ))}

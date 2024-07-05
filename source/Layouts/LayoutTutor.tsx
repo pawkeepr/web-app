@@ -11,9 +11,10 @@ import Header from './Header'
 
 //redux
 import cn from 'classnames'
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
 import Drawer from '~/Components/organism/drawer'
 import LoadingPage from '~/pages/Modules/shared/LoadingPage'
+import { api } from '~/services/api'
 import useHookLayout from './use-hook'
 
 type LayoutProps = {
@@ -22,6 +23,28 @@ type LayoutProps = {
 
 const LayoutTutor = ({ children }: LayoutProps) => {
     useHookLayout()
+    useEffect(() => {
+        // Configura um interceptador para verificar o token de autorização
+        const requestInterceptor = api.interceptors.request.use(
+            (config) => {
+                // Verifica se o cabeçalho 'Authorization' está presente
+                const token = config.headers.Authorization
+                if (!token) {
+                    return Promise.reject(new Error('No Authorization token found'))
+                }
+                return config
+            },
+            (error) => {
+                // Lida com erros
+                return Promise.reject(error)
+            },
+        )
+
+        // Limpa o interceptador quando o componente é desmontado
+        return () => {
+            api.interceptors.request.eject(requestInterceptor)
+        }
+    }, [])
 
     return (
         <div id="relative">

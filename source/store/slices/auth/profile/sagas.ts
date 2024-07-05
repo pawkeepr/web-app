@@ -76,7 +76,7 @@ function* onGetProfile({
                 errorToast('Perfil não encontrado!')
                 yield put(
                     signOutUser({
-                        type_profile: 2,
+                        type_profile: '2',
                     }),
                 )
                 break

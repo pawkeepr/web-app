@@ -9,7 +9,7 @@ import useProfile from '~/store/hooks/profile/use-profile'
 
 const Dashboard = () => {
     const router = useRouter()
-    const { user } = useAppSelector((state) => state.Profile)
+    const { user } = useAppSelector((state) => state.Login)
     const type_profile = user?.['custom:type_profile']
     useProfile()
 
