@@ -89,6 +89,15 @@ module.exports = {
                 none: 0, // Adiciona um utilitário `text-none` para definir o tamanho da fonte como 0
             },
         },
+        keyframes: {
+            zoom: {
+                '0%': { transform: 'scale(0)' },
+                '100%': { transform: 'scale(1)' },
+              },
+            },
+            animation: {
+              'zoom-in': 'zoom 0.2s ease-in-out forwards',
+            },
     },
     plugins: [require('daisyui'), require('./deps/@tailwindcss/forms')],
     daisyui: {

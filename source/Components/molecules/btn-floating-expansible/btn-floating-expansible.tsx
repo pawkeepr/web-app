@@ -112,13 +112,13 @@ export const BtnFloatingExpansible = ({
                 {isChildrenVisible &&
                     childLinks.map((childLink: BtnChildLinkProps) => {
                         return (
-                            <Zoom duration={300}>
+                            <span className="animate-zoom-in">
                                 <ChildLink
                                     title={childLink.title}
                                     icon={childLink.icon}
                                     href={childLink.href}
                                 />
-                            </Zoom>
+                            </span>
                         )
                     })}
             </div>
