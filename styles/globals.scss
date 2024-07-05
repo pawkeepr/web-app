@@ -4,7 +4,13 @@ html {
     overflow: -moz-scrollbars-vertical;
     overflow-y: scroll;
     -webkit-tap-highlight-color: transparent;
-    font-size: 16px;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 1028px) {
+    html {
+        font-size: 16px;
+    }
 }
 
 

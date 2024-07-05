@@ -39,101 +39,110 @@ import { AttributeTypeProfile } from '~/services/helpers/types'
 import { NameFullProfile, type TypeProfile } from '~/types/profile'
 import { setEmailAccount, setPasswordAccount } from '../activate-account/actions'
 
-export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
-    const user: SignInResponse = yield call(signInAws, action.payload)
-    if (user['custom:type_profile'] !== AttributeTypeProfile.TUTOR) {
-        yield call(signOut)
-        throw new Error('Você não tem permissão para acessar essa página.')
+function* ErrLogin(action: PayloadAction<SignInCredentials>, error: unknown) {
+    const code = (error as any)?.code || (error as any)?.name
+
+    switch (code) {
+        case 'UserUnAuthenticatedException':
+        case 'UserNotConfirmedException':
+            yield put(setEmailAccount(action.payload.username))
+            yield put(setPasswordAccount(action.payload.password))
+            yield call([Router, Router.push], '/confirm-account')
+            yield put(signInFailed((error as any).message))
+            break
+        default:
+            yield put(resetLoading())
+            yield put(signInFailed((error as any).message))
+            errorToast('Não foi possível realizar o login.', 'Falha!')
+            break
     }
+}
 
-    const token = user.tokens?.idToken?.toString() as string
+export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
+    try {
+        const user: SignInResponse = yield call(signInAws, action.payload)
+        if (user['custom:type_profile'] !== AttributeTypeProfile.TUTOR) {
+            yield call(signOut)
+            throw new Error('Você não tem permissão para acessar essa página.')
+        }
 
-    const idToken = user.tokens?.idToken
-    yield call(
-        setCookie,
-        cookies.token.name,
-        token,
-        (idToken?.payload.exp as number) / 1000,
-    )
+        const token = user.tokens?.idToken?.toString() as string
 
-    delay(100)
-    yield put(setAuthorization({ token }))
-    yield put(signInSuccess({ token, user }))
+        const idToken = user.tokens?.idToken
+        yield call(
+            setCookie,
+            cookies.token.name,
+            token,
+            (idToken?.payload.exp as number) / 1000,
+        )
 
-    yield call(
-        setCookie,
-        cookies.cognito_profile.name,
-        JSON.stringify(user),
-        (idToken?.payload.exp as number) / 1000,
-    )
+        delay(100)
+        yield put(setAuthorization({ token }))
+        yield put(signInSuccess({ token, user }))
 
-    delay(100)
+        yield call(
+            setCookie,
+            cookies.cognito_profile.name,
+            JSON.stringify(user),
+            (idToken?.payload.exp as number) / 1000,
+        )
+
+        delay(100)
+    } catch (error) {
+        yield ErrLogin(action, error)
+    }
 }
 
 export function* signInVetSaga(action: PayloadAction<SignInCredentials>) {
-    const user: SignInResponse = yield call(signInAws, action.payload)
+    try {
+        const user: SignInResponse = yield call(signInAws, action.payload)
 
-    if (user['custom:type_profile'] !== AttributeTypeProfile.VETERINARY) {
-        yield call(signOut)
-        throw new Error('Você não tem permissão para acessar essa página.')
+        if (user['custom:type_profile'] !== AttributeTypeProfile.VETERINARY) {
+            yield call(signOut)
+            throw new Error('Você não tem permissão para acessar essa página.')
+        }
+
+        const token = user.tokens?.idToken?.toString() as string
+
+        const idToken = user.tokens?.idToken
+        yield call(
+            setCookie,
+            cookies.token.name,
+            token,
+            (idToken?.payload.exp as number) / 1000,
+        )
+
+        delay(100)
+        yield put(setAuthorization({ token }))
+        yield put(signInSuccess({ token, user }))
+
+        yield call(
+            setCookie,
+            cookies.cognito_profile.name,
+            JSON.stringify(user),
+            (idToken?.payload.exp as number) / 1000,
+        )
+
+        delay(100)
+    } catch (error) {
+        yield ErrLogin(action, error)
     }
-
-    const token = user.tokens?.idToken?.toString() as string
-
-    const idToken = user.tokens?.idToken
-    yield call(
-        setCookie,
-        cookies.token.name,
-        token,
-        (idToken?.payload.exp as number) / 1000,
-    )
-
-    delay(100)
-    yield put(setAuthorization({ token }))
-    yield put(signInSuccess({ token, user }))
-
-    yield call(
-        setCookie,
-        cookies.cognito_profile.name,
-        JSON.stringify(user),
-        (idToken?.payload.exp as number) / 1000,
-    )
-
-    delay(100)
 }
 
 export function* signInUserSaga(
     action: PayloadAction<SignInCredentials & { mode: 'vet' | 'tutor' }>,
 ) {
     const mode = layoutModeTypes.LIGHT_MODE
-
     yield call(signOut)
-    yield put(changeLayoutMode(mode))
 
-    try {
-        if (action.payload.mode === 'vet') {
-            yield put(signInVet(action.payload))
-        } else {
-            yield put(signInTutor(action.payload))
-        }
-        yield call([Router, Router.push], '/dashboard')
-    } catch (error) {
-        switch ((error as any)?.name) {
-            case 'UserNotConfirmedException':
-                yield put(setEmailAccount(action.payload.username))
-                yield put(setPasswordAccount(action.payload.password))
-                yield call([Router, Router.push], '/confirm-account')
-                yield put(signInFailed((error as any).message))
-                break
-            default:
-                yield put(resetLoading())
-                yield put(signInFailed((error as any).message))
-                errorToast('Não foi possível realizar o login.', 'Falha!')
-                break
-        }
-    } finally {
-        yield put(resetLoading())
+    yield put(changeLayoutMode(mode))
+    if (action.payload.mode === 'vet') {
+        yield put(signInVet(action.payload))
+    } else {
+        yield put(signInTutor(action.payload))
     }
+    yield call([Router, Router.push], '/dashboard')
+    yield put(resetLoading())
 }
 
 const checkTokenExpiration = (exp: number, iat: number) => {

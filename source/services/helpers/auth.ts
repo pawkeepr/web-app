@@ -62,7 +62,11 @@ export const confirmSignUp = async (username: string, code: string) => {
 }
 
 export const signOut = async () => {
-    return await Auth.signOut()
+    try {
+        return await Auth.signOut()
+    } catch (error) {
+        return error
+    }
 }
 
 export async function getUser(): Promise<SignInResponse> {
