@@ -6,18 +6,22 @@ import Env from '~/env'
 import getServerSidePropsPagesPublics from '~/helpers/get-server-side-props-pages-publics'
 import useModeProfile from '~/hooks/use-mode'
 import SignInPage from '~/pages/Modules/shared/Authentication/SignIn'
-import type { ModeProfile } from '~/types/profile'
+import { ModeProfile } from '~/types/profile'
 
 const SignInPageNext = () => {
     const { onChangeModeProfile } = useModeProfile()
+    const modeProfile = Env().get('MODE_PROFILE') as ModeProfile
 
     useEffect(() => {
-        onChangeModeProfile(Env().get('MODE_PROFILE') as ModeProfile)
-    }, [])
+        onChangeModeProfile(modeProfile)
+    }, [modeProfile])
+
+    const bgImage =
+        modeProfile === ModeProfile.tutor ? '/bg-three.jpg' : '/bg-sign-in.webp'
 
     return (
         <LayoutAuth>
-            <SignInPage bgImage="/bg-sign-in.webp" />
+            <SignInPage bgImage={bgImage} />
         </LayoutAuth>
     )
 }
