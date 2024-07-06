@@ -95,6 +95,15 @@ module.exports = {
                 xl: ['1.5rem', { lineHeight: '2rem' }],
             },
         },
+        keyframes: {
+            zoom: {
+                '0%': { transform: 'scale(0)' },
+                '100%': { transform: 'scale(1)' },
+              },
+            },
+            animation: {
+              'zoom-in': 'zoom 0.2s ease-in-out forwards',
+            },
     },
     plugins: [require('daisyui'), require('./deps/@tailwindcss/forms')],
     daisyui: {

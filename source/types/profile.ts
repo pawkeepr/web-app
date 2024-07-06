@@ -49,6 +49,12 @@ export const ModeProfile = {
 } as const
 export type ModeProfile = (typeof ModeProfile)[keyof typeof ModeProfile]
 
+export const ModeProfile = {
+    vet: 'vet',
+    tutor: 'tutor',
+} as const
+export type ModeProfile = (typeof ModeProfile)[keyof typeof ModeProfile]
+
 export const CodeProfile = {
     vet: 1,
     tutor: 2,
