@@ -2,20 +2,20 @@ import { useState, type ComponentProps } from "react"
 import type { IconType } from "react-icons"
 import { tv, type VariantProps } from "tailwind-variants"
 import withControl from "~/Components/helpers/with-control"
-import Zoom from "react-reveal/Zoom"
+import { BsPlus } from "react-icons/bs"
 
 const buttonFloatingExpansible = {
     button: tv({
         base: `
-            flex flex-col justify-center items-center mt-2 
+            flex justify-center items-center mt-2 
             mobile:opacity-100 opacity-40 hover:opacity-100 
-            transition duration-300 ease-in-out
+            transition duration-300 ease-in-out mb-1
         `,
     }),
     buttonContainer: tv({
         base: `
             fixed z-50 flex flex-col items-center justify-center 
-            bottom-4 mobile:bottom-24 right-5 
+            bottom-4 mobile:bottom-24 right-5
         `,
         variants: {
             "position-x": {
@@ -33,7 +33,7 @@ const buttonFloatingExpansible = {
         },
     }),
     childrenContainer: tv({
-        base: `flex flex-col items-center justify-center gap-2`
+        base: `flex flex-col items-center justify-center gap-2`,
     }),
     childrenContainerIcon: tv({
         base: `
@@ -49,7 +49,7 @@ const buttonFloatingExpansible = {
     }),
     title: tv({
         base: `
-            mb-1 text-xs font-bold text-gray-600 wrap w-20 text-center
+            mb-1 text-xs font-bold text-gray-600 wrap text-center w-20
         `,
     }),
     containerIcon: tv({
@@ -59,7 +59,12 @@ const buttonFloatingExpansible = {
     }),
     icon: tv({
         base: `
-            w-6 h-6 text-gray-500
+            transition duration-300 linear w-6 h-6 text-gray-500
+        `,
+    }),
+    chieldVisibleIcon: tv({
+        base: `
+            transition duration-300 linear w-6 h-6 text-gray-500 rotate-45
         `,
     }),
 }
@@ -73,6 +78,7 @@ type BtnChildLinkProps = {
 export const ChildLink = ({
     title,
     href,
+    onClick,
     icon: Icon,
     ...props
 }: BtnChildLinkProps) => {
@@ -81,6 +87,7 @@ export const ChildLink = ({
             title={title}
             type="button"
             href={href}
+            onClick={onClick}
             className={buttonFloatingExpansible.button({ ...props })}
         >
             <h6 className={buttonFloatingExpansible.title()}>{title}</h6>
@@ -100,7 +107,6 @@ export type BtnFloatingExpansibleProps = {
 
 export const BtnFloatingExpansible = ({
     icon: Icon,
-    title,
     childLinks,
     ...props
 }: BtnFloatingExpansibleProps) => {
@@ -116,6 +122,7 @@ export const BtnFloatingExpansible = ({
                                 <ChildLink
                                     title={childLink.title}
                                     icon={childLink.icon}
+                                    onClick={childLink.onClick}
                                     href={childLink.href}
                                 />
                             </span>
@@ -124,15 +131,20 @@ export const BtnFloatingExpansible = ({
             </div>
 
             <button
-                title={title}
                 type="button"
                 onClick={() => setIsChildrenVisible(!isChildrenVisible)}
                 className={buttonFloatingExpansible.button({ ...props })}
                 {...props}
             >
-                <h6 className={buttonFloatingExpansible.title()}>{title}</h6>
+                <span className={buttonFloatingExpansible.title()}></span>
                 <div className={buttonFloatingExpansible.containerIcon()}>
-                    <Icon className={buttonFloatingExpansible.icon()} />
+                    <BsPlus
+                        className={
+                            isChildrenVisible
+                                ? buttonFloatingExpansible.chieldVisibleIcon()
+                                : buttonFloatingExpansible.icon()
+                        }
+                    />
                 </div>
             </button>
         </div>
