@@ -1,4 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
+import type { CognitoUserSession } from 'amazon-cognito-identity-js'
 import { call, delay, put, takeLatest } from 'redux-saga/effects'
 import cookies from '~/constants/cookies'
 
@@ -24,7 +25,7 @@ import {
     signInAws,
     signOut,
     type SignInCredentials,
-    type SignInResponse,
+    type UserData,
 } from '~/services/helpers/auth'
 
 import { layoutModeTypes } from '~/constants/layout'
@@ -34,9 +35,10 @@ import {
     removeCookie,
     setCookie,
 } from '~/utils/cookies-utils'
+import { resetProfileFlag, setProfile } from '../profile/actions'
 
 import { AttributeTypeProfile } from '~/services/helpers/types'
-import { NameFullProfile, type TypeProfile } from '~/types/profile'
+import { NameFullProfile, TypeProfile, type IProfile } from '~/types/profile'
 import { setEmailAccount, setPasswordAccount } from '../activate-account/actions'
 
 function* ErrLogin(action: PayloadAction<SignInCredentials>, error: unknown) {
@@ -60,67 +62,74 @@ function* ErrLogin(action: PayloadAction<SignInCredentials>, error: unknown) {
 
 export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
     try {
-        const user: SignInResponse = yield call(signInAws, action.payload)
-        if (user['custom:type_profile'] !== AttributeTypeProfile.TUTOR) {
+        const user: UserData = yield call(signInAws, action.payload)
+
+        const {
+            signInUserSession: { idToken },
+            attributes,
+        } = user
+
+        if (attributes['custom:type_profile'] !== AttributeTypeProfile.TUTOR) {
             yield call(signOut)
             throw new Error('Você não tem permissão para acessar essa página.')
         }
 
-        const token = user.tokens?.idToken?.toString() as string
-
-        const idToken = user.tokens?.idToken
+        const token = idToken.jwtToken
         yield call(
             setCookie,
             cookies.token.name,
-            token,
-            (idToken?.payload.exp as number) / 1000,
+            idToken.jwtToken,
+            idToken.payload.exp / 1000,
         )
 
         delay(100)
         yield put(setAuthorization({ token }))
-        yield put(signInSuccess({ token, user }))
+        yield put(signInSuccess({ token, user: attributes }))
 
         yield call(
             setCookie,
             cookies.cognito_profile.name,
-            JSON.stringify(user),
-            (idToken?.payload.exp as number) / 1000,
+            JSON.stringify(attributes),
+            idToken.payload.exp / 1000,
         )
 
         delay(100)
     } catch (error) {
-        yield ErrLogin(action, error)
+      yield ErrLogin(action, error)
     }
 }
 
 export function* signInVetSaga(action: PayloadAction<SignInCredentials>) {
     try {
-        const user: SignInResponse = yield call(signInAws, action.payload)
+        const response: UserData = yield call(signInAws, action.payload)
 
-        if (user['custom:type_profile'] !== AttributeTypeProfile.VETERINARY) {
+        const {
+            signInUserSession: { idToken },
+            attributes,
+        } = response
+
+        if (attributes['custom:type_profile'] !== AttributeTypeProfile.VETERINARY) {
             yield call(signOut)
             throw new Error('Você não tem permissão para acessar essa página.')
         }
 
-        const token = user.tokens?.idToken?.toString() as string
-
-        const idToken = user.tokens?.idToken
+        const token = idToken.jwtToken
         yield call(
             setCookie,
             cookies.token.name,
-            token,
-            (idToken?.payload.exp as number) / 1000,
+            idToken.jwtToken,
+            idToken.payload.exp / 1000,
         )
 
         delay(100)
         yield put(setAuthorization({ token }))
-        yield put(signInSuccess({ token, user }))
+        yield put(signInSuccess({ token, user: attributes }))
 
         yield call(
             setCookie,
             cookies.cognito_profile.name,
-            JSON.stringify(user),
-            (idToken?.payload.exp as number) / 1000,
+            JSON.stringify(attributes),
+            idToken.payload.exp / 1000,
         )
 
         delay(100)
@@ -153,21 +162,20 @@ const checkTokenExpiration = (exp: number, iat: number) => {
 
 export function* recoverUserByTokenSaga() {
     try {
-        const session: SignInResponse = yield call(getUser)
-        const access_token = session.tokens?.accessToken?.toString() as string
-        const userData = session.tokens?.idToken?.payload
+        const session: CognitoUserSession = yield call(getUser)
+        const access_token = session.getIdToken().getJwtToken()
+        const userData = session.getIdToken().payload
 
-        if (
-            checkTokenExpiration(userData?.exp as number, userData?.iat as number)
-        ) {
+        if (checkTokenExpiration(userData.exp, userData.iat)) {
             throw new TokenExpiredErr()
         }
 
         yield put(setAuthorization({ token: access_token }))
+        yield put(setProfile(userData as IProfile))
     } catch (_error) {
         yield put(
             signOutUser({
-                type_profile: AttributeTypeProfile.TUTOR,
+                type_profile: TypeProfile.TUTOR,
             }),
         )
     }
@@ -183,6 +191,7 @@ export function* signOutUserSaga({
         yield call(removeCookie, cookies.profile.name)
         yield call(deleteCookiesWithPrefix, 'pawkeepr')
         yield call(signOut)
+        yield put(resetProfileFlag())
         yield put(signOutUserSuccess())
     } catch (error) {
         if ((error as string) === 'No current user') {
