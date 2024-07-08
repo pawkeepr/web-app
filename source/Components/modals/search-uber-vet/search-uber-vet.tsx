@@ -11,8 +11,15 @@ import { useTranslations } from '~/hooks/use-translations'
 import useProfile from '~/store/hooks/profile/use-profile'
 import { useListUberVet } from '~/store/hooks/uber-vet'
 
-const ModalSearchUberVet = () => {
-    const { closeModal, open, showModal } = useModal()
+type ModalSearchUberVetProps = {
+    children?: (props: {
+        showModal: () => void
+        closeModal: () => void
+    }) => JSX.Element
+}
+
+const ModalSearchUberVet = ({ children }: ModalSearchUberVetProps) => {
+    const { closeModal, open, showModal } = useModal({ name: 'search' })
     const { data, isPending } = useListUberVet()
     const { data: profile } = useProfile()
     const { t } = useTranslations()
@@ -29,13 +36,16 @@ const ModalSearchUberVet = () => {
 
     return (
         <>
-            <BtnFloating
-                icon={(props) => <FaStethoscope {...props} />}
-                title="Buscar Veterinário"
-                onClick={() => {
-                    showModal()
-                }}
-            />
+            {children?.({ showModal, closeModal })}
+            {!children && (
+                <BtnFloating
+                    icon={(props) => <FaStethoscope {...props} />}
+                    title="Buscar Veterinário"
+                    onClick={() => {
+                        showModal()
+                    }}
+                />
+            )}
 
             <Modal
                 onClose={() => {
