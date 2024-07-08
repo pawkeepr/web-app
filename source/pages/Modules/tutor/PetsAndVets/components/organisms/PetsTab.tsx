@@ -1,11 +1,13 @@
 import { Tab } from '@headlessui/react'
 import { useMemo } from 'react'
+import { FaStethoscope } from 'react-icons/fa'
 import { MdPets } from 'react-icons/md'
-import { BtnLinkFloating } from '~/Components/molecules/btn-floating/btn-floating'
+import BtnFloatingExpansible from '~/Components/molecules/btn-floating-expansible'
 import { card } from '~/Components/organism/card'
 import CardFeedPets from '~/Components/organism/card-feed-pets'
 import ItemsList from '~/Components/organism/horizontal-list/items-list'
 import MenuList from '~/Components/organism/horizontal-list/menu-list'
+import useModal from '~/hooks/use-modal'
 
 import {
     useListPetsFromTutor,
@@ -22,7 +24,7 @@ type MapCardFeedPetsProps = {
 const MapCardFeedPets = ({ pets, isPending, isLoading }: MapCardFeedPetsProps) => {
     const { data: profile } = useProfile()
 
-    if (!pets) {
+    if (!pets?.length) {
         return (
             <div className="text-center w-full !h-32 flex items-center justify-center">
                 <span>Não há Pets Cadastrados</span>
@@ -91,6 +93,7 @@ const Tabs = () => [
 
 const PetsTab = () => {
     const { data: pets, isPending, isFetching } = useListPetsFromTutor()
+    const { showModal } = useModal({ name: 'search' })
     const categories = useMemo(() => Tabs(), [])
     return (
         <Tab.Group
@@ -98,11 +101,6 @@ const PetsTab = () => {
             className="flex flex-1 flex-col w-full px-4 mobile:!px-2 mt-1"
         >
             <MenuList categories={categories} mobile={false} mode="simple" />
-            {pets?.length === 0 && (
-                <div className="flex items-center justify-center h-32 text-center">
-                    <span>Não há Pets Cadastrados</span>
-                </div>
-            )}
 
             <MapCardFeedPets
                 pets={pets as Pet[]}
@@ -112,10 +110,21 @@ const PetsTab = () => {
 
             <ItemsList categories={categories} />
 
-            <BtnLinkFloating
-                icon={(props) => <MdPets {...props} />}
-                title="Adicionar Pet"
-                href="/tutor/pet"
+            <BtnFloatingExpansible
+                childLinks={[
+                    {
+                        icon: MdPets,
+                        title: 'Adicionar Pet',
+                        href: '/tutor/pet',
+                    },
+                    {
+                        icon: FaStethoscope,
+                        title: 'Buscar Veterinário',
+                        onClick: () => {
+                            showModal()
+                        },
+                    },
+                ]}
             />
         </Tab.Group>
     )

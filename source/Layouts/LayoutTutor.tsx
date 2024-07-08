@@ -12,6 +12,8 @@ import Header from './Header'
 //redux
 import cn from 'classnames'
 import { Suspense, useEffect } from 'react'
+import ModalSearchUberVet from '~/Components/modals/search-uber-vet/search-uber-vet'
+import { useBtnFloatingExpansible } from '~/Components/molecules/btn-floating-expansible'
 import Drawer from '~/Components/organism/drawer'
 import LoadingPage from '~/pages/Modules/shared/LoadingPage'
 import { api } from '~/services/api'
@@ -22,6 +24,7 @@ type LayoutProps = {
 }
 
 const LayoutTutor = ({ children }: LayoutProps) => {
+    const { isChildrenVisible } = useBtnFloatingExpansible()
     useHookLayout()
     useEffect(() => {
         // Configura um interceptador para verificar o token de autorização
@@ -64,6 +67,10 @@ const LayoutTutor = ({ children }: LayoutProps) => {
                     backgroundRepeat: 'no-repeat',
                 }}
             >
+                {isChildrenVisible && (
+                    <div className="absolute top-0 left-0 z-[10] w-full h-screen bg-black opacity-50" />
+                )}
+                <ModalSearchUberVet>{() => <div />}</ModalSearchUberVet>
                 <Suspense fallback={<LoadingPage />}>{children}</Suspense>
             </div>
         </main>
