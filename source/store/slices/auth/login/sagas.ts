@@ -66,7 +66,7 @@ export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
             throw new Error('Você não tem permissão para acessar essa página.')
         }
 
-        const token = user.tokens?.idToken?.toString() as string
+        const token = user.tokens?.accessToken?.toString() as string
 
         const idToken = user.tokens?.idToken
         yield call(
@@ -102,7 +102,7 @@ export function* signInVetSaga(action: PayloadAction<SignInCredentials>) {
             throw new Error('Você não tem permissão para acessar essa página.')
         }
 
-        const token = user.tokens?.idToken?.toString() as string
+        const token = user.tokens?.accessToken?.toString() as string
 
         const idToken = user.tokens?.idToken
         yield call(
