@@ -58,7 +58,7 @@ const childrenMock = [
     {
         title: "Title 1",
         icon: () => <MdPets />,
-        href: "/tutor/pet",
+        onClick: () => {},
     },
     {
         title: "Title 2",
