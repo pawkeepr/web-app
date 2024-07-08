@@ -1,39 +1,46 @@
-import { useState, type ComponentProps } from "react"
-import type { IconType } from "react-icons"
-import { tv, type VariantProps } from "tailwind-variants"
-import withControl from "~/Components/helpers/with-control"
-import { BsPlus } from "react-icons/bs"
+import type { ComponentProps } from 'react'
+import type { IconType } from 'react-icons'
+import { BsPlus } from 'react-icons/bs'
+import { tv, type VariantProps } from 'tailwind-variants'
+import { create } from 'zustand'
+import withControl from '~/Components/helpers/with-control'
 
 const buttonFloatingExpansible = {
     button: tv({
         base: `
             flex justify-center items-center mt-2 
-            mobile:opacity-100 opacity-40 hover:opacity-100 
+            mobile:opacity-100 opacity-80 hover:opacity-100 
             transition duration-300 ease-in-out mb-1
         `,
     }),
     buttonContainer: tv({
         base: `
-            fixed z-50 flex flex-col items-center justify-center 
-            bottom-4 mobile:bottom-24 right-5
+            fixed z-[999] flex flex-col items-end justify-end 
+            bottom-4 mobile:bottom-24 
         `,
         variants: {
-            "position-x": {
-                right: "right-5",
-                left: "left-5",
+            'position-x': {
+                right: 'right-5',
+                left: 'left-5',
             },
-            "position-y": {
-                top: "top-5",
-                bottom: "bottom-5",
+            'position-y': {
+                top: 'top-5',
+                bottom: 'bottom-5',
             },
         },
         defaultVariants: {
-            "position-x": "right",
-            "position-y": "bottom",
+            'position-x': 'right',
+            'position-y': 'bottom',
         },
     }),
     childrenContainer: tv({
-        base: `flex flex-col items-center justify-center gap-2`,
+        base: 'flex flex-col items-center justify-center gap-2 transition duration-300 ease-in-out',
+        variants: {
+            visible: {
+                true: 'translate-y-0',
+                false: 'translate-y-12',
+            },
+        },
     }),
     childrenContainerIcon: tv({
         base: `
@@ -49,7 +56,7 @@ const buttonFloatingExpansible = {
     }),
     title: tv({
         base: `
-            mb-1 text-xs font-bold text-gray-600 wrap text-center w-20
+            mb-1 text-xs font-bold text-gray-600 wrap text-center w-28 mr-2
         `,
     }),
     containerIcon: tv({
@@ -59,13 +66,14 @@ const buttonFloatingExpansible = {
     }),
     icon: tv({
         base: `
-            transition duration-300 linear w-6 h-6 text-gray-500
+            transition duration-300 linear w-8 h-8 text-gray-500
         `,
-    }),
-    chieldVisibleIcon: tv({
-        base: `
-            transition duration-300 linear w-6 h-6 text-gray-500 rotate-45
-        `,
+        variants: {
+            visible: {
+                true: 'rotate-45',
+                false: 'rotate-0',
+            },
+        },
     }),
 }
 
@@ -73,7 +81,7 @@ type BtnChildLinkProps = {
     title: string
     icon: IconType
 } & VariantProps<typeof buttonFloatingExpansible.button> &
-    ComponentProps<"a">
+    ComponentProps<'a'>
 
 export const ChildLink = ({
     title,
@@ -98,27 +106,42 @@ export const ChildLink = ({
     )
 }
 
+type UseBtnFloatingExpansible = {
+    isChildrenVisible: boolean
+    onChangeChildrenVisible: (isChildrenVisible: boolean) => void
+}
+
+export const useBtnFloatingExpansible = create<UseBtnFloatingExpansible>((set) => ({
+    isChildrenVisible: false,
+    onChangeChildrenVisible: (isChildrenVisible: boolean) =>
+        set(() => ({ isChildrenVisible })),
+}))
+
 export type BtnFloatingExpansibleProps = {
-    icon: IconType
-    title: string
+    icon?: IconType
     childLinks: Array<BtnChildLinkProps>
 } & VariantProps<typeof buttonFloatingExpansible.buttonContainer> &
-    ComponentProps<"button">
+    ComponentProps<'button'>
 
 export const BtnFloatingExpansible = ({
     icon: Icon,
     childLinks,
     ...props
 }: BtnFloatingExpansibleProps) => {
-    const [isChildrenVisible, setIsChildrenVisible] = useState<boolean>(false)
+    const { isChildrenVisible, onChangeChildrenVisible } =
+        useBtnFloatingExpansible()
 
     return (
         <div className={buttonFloatingExpansible.buttonContainer({ ...props })}>
-            <div className={buttonFloatingExpansible.childrenContainer()}>
+            <div
+                className={buttonFloatingExpansible.childrenContainer({
+                    visible: isChildrenVisible,
+                })}
+            >
                 {isChildrenVisible &&
                     childLinks.map((childLink: BtnChildLinkProps) => {
                         return (
-                            <span className="animate-zoom-in">
+                            <span key={childLink.href} className="animate-zoom-in ">
                                 <ChildLink
                                     title={childLink.title}
                                     icon={childLink.icon}
@@ -132,18 +155,15 @@ export const BtnFloatingExpansible = ({
 
             <button
                 type="button"
-                onClick={() => setIsChildrenVisible(!isChildrenVisible)}
+                onClick={() => onChangeChildrenVisible(!isChildrenVisible)}
                 className={buttonFloatingExpansible.button({ ...props })}
                 {...props}
             >
-                <span className={buttonFloatingExpansible.title()}></span>
                 <div className={buttonFloatingExpansible.containerIcon()}>
                     <BsPlus
-                        className={
-                            isChildrenVisible
-                                ? buttonFloatingExpansible.chieldVisibleIcon()
-                                : buttonFloatingExpansible.icon()
-                        }
+                        className={buttonFloatingExpansible.icon({
+                            visible: isChildrenVisible,
+                        })}
                     />
                 </div>
             </button>
