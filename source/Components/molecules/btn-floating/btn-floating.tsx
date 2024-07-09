@@ -1,20 +1,26 @@
-import React, { useEffect, useRef, useState, type ComponentProps } from 'react'
+import React, { useEffect, useState, type ComponentProps } from 'react'
 import type { IconType } from 'react-icons'
 import { tv, type VariantProps } from 'tailwind-variants'
 import withControl from '~/Components/helpers/with-control'
-import { useSpring, animated } from '@react-spring/web'
-import { createUseGesture, dragAction, pinchAction, useDrag } from '@use-gesture/react'
-// import styles from './styles.module.css'
+import Hammer from 'react-hammerjs'
+import { i } from 'vitest/dist/reporters-yx5ZTtEV'
+import { isClickableInput } from '@testing-library/user-event/dist/types/utils'
 
-const useGesture = createUseGesture([dragAction, pinchAction])
+type PanEvent = {
+    deltaX: number;
+    deltaY: number;
+    type: string;
+    // Adicione outras propriedades conforme necessário
+};
+
 
 const buttonFloating = {
     button: tv({
         base: `
-        fixed z-50 flex flex-col items-center justify-center 
-        transition duration-500 ease-in-out mobile:opacity-100
+        fixed z-50 flex flex-col items-center justify-center
+        transition duration-500 ease-in-out mobile:opacity-100 bottom-5 right-1
         opacity-40
-        hover:opacity-100 
+        hover:opacity-100
     `,
         variants: {
             'position-x': {
@@ -63,6 +69,8 @@ export const BtnFloating = ({
     title,
     ...props
 }: BtnFloatingProps) => {
+    
+    
     return (
         <button
             title={title}
@@ -93,35 +101,59 @@ type BtnLinkFloatingProps = {
         onClick,
         ...props
     }: BtnLinkFloatingProps) => {
-    
-         const [{ x, y }, api] = useSpring(() => ({ x: 85, y: 180 }))
-         const [isDragging, setIsDragging] = useState(true);
-         const bind = useDrag(({ down, offset: [ox, oy]}) => {
-                setTimeout(() => {
-                   setIsDragging(down);
-                }, 100);        
-             api.start({ x: ox, y: oy, immediate: down });
-             console.log(isDragging);
-             
-         });
-         
-        const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-            if (isDragging) {
-                e.preventDefault(); 
-            } else if (onClick) {
-                onClick(e); 
-            }
-        };
-         
+            const [position, setPosition] = useState({ x: 0, y: 0 });
+            const [isCLick, setisCLick] = useState(true);
+
+
+            useEffect(() => {
+                const Hammer = require('hammerjs');
+                const buttonFloat = document.getElementById('myButton');
+                if (!buttonFloat) return;
+        
+                const hammer = new Hammer(buttonFloat);
+        
+                hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+        
+                hammer.on('pan', (event) => {
+                    const newX = position.x + event.deltaX;
+                    const newY = position.y + event.deltaY;
+
+                    if (buttonFloat) {
+                        buttonFloat.style.transform = `translate(${newX}px, ${newY}px)`;
+                        buttonFloat.style.transition = '0.2s';
+                        
+                    }
+                    if(event.srcEvent.type === 'pointerup') {
+                        setTimeout(() => {
+                            setisCLick(false);
+                        }, 2000);
+                    }
+                });
+                
+                hammer.on('panend', (event) => {
+                    setPosition({
+                        x: position.x + event.deltaX,
+                        y: position.y + event.deltaY,
+                    });
+                   
+                    
+                });
+                
+                
+                return () => {
+                    hammer.stop(false);
+                    hammer.destroy();
+                };
+            }, [position]);
+        
         return (
-            <animated.div {...bind()} style={{ x, y }}>
-            <div>
             <a
+                id='myButton'
+                onClick={isCLick ? () => {} : onClick}
                 {...props}
                 title={title}
                 type="button"
-                href={isDragging ? undefined : href}
-                onClick={handleClick}
+                href={isCLick ? '#': href}
                 className={buttonFloating.button({ ...props })}
             >
                 <h6 className={buttonFloating.title()}>{title}</h6>
@@ -129,8 +161,7 @@ type BtnLinkFloatingProps = {
                     <Icon className={buttonFloating.icon()} />
                 </div>
             </a>
-            </div>
-            </animated.div>
+            // </Hammer>
         )
     }
     
