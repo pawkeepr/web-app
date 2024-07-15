@@ -70,7 +70,11 @@ function* onGetProfile({
                 }),
             )
 
-            yield call([Router, Router.push], dashboard)
+            // verifica a rota atual
+            const currentPath = Router.asPath
+            if (currentPath === '/dashboard') {
+                yield call([Router, Router.push], dashboard)
+            }
         }
     } catch (error) {
         if (!(typeof error === 'object') || !error) return
