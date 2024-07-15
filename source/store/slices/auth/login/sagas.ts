@@ -38,7 +38,7 @@ import {
 import { resetProfileFlag, setProfile } from '../profile/actions'
 
 import { AttributeTypeProfile } from '~/services/helpers/types'
-import { NameFullProfile, TypeProfile, type IProfile } from '~/types/profile'
+import { NameFullProfile, type IProfile, type TypeProfile } from '~/types/profile'
 import { setEmailAccount, setPasswordAccount } from '../activate-account/actions'
 
 function* ErrLogin(action: PayloadAction<SignInCredentials>, error: unknown) {
@@ -95,7 +95,7 @@ export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
 
         delay(100)
     } catch (error) {
-      yield ErrLogin(action, error)
+        yield ErrLogin(action, error)
     }
 }
 
@@ -150,6 +150,7 @@ export function* signInUserSaga(
     } else {
         yield put(signInTutor(action.payload))
     }
+
     yield call([Router, Router.push], '/dashboard')
     yield put(resetLoading())
 }
@@ -175,7 +176,7 @@ export function* recoverUserByTokenSaga() {
     } catch (_error) {
         yield put(
             signOutUser({
-                type_profile: TypeProfile.TUTOR,
+                type_profile: AttributeTypeProfile.TUTOR,
             }),
         )
     }

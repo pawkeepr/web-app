@@ -20,7 +20,6 @@ import {
 import { errorToast, infoToast, successToast } from '~/store/helpers/toast'
 import { NameProfile, type IProfile } from '~/types/profile'
 import { getCookie, setCookie } from '~/utils/cookies-utils'
-import { signOutUser } from '../login/actions'
 // Login Redux States
 import {
     addFail,
@@ -46,16 +45,23 @@ const GET_PROFILE = {
     [AttributeTypeProfile.VETERINARY]: getVetProfile,
 } as const
 
+const DASHBOARD_PROFILE = {
+    [AttributeTypeProfile.TUTOR]: '/tutor/dashboard',
+    [AttributeTypeProfile.VETERINARY]: '/vet/dashboard',
+} as const
+
 function* onGetProfile({
     payload: { has_profile, type_profile },
 }: PayloadAction<AttributesProfile>) {
     const link = LINK_ACTIVATION_TYPES[type_profile as '1' | '2']
+    const dashboard = DASHBOARD_PROFILE[type_profile as '1' | '2']
     try {
         if (has_profile === 'no') {
             yield call([Router, Router.push], link)
         } else {
             const get = GET_PROFILE[type_profile as '1' | '2']
             const { data } = yield call(get)
+
             yield setCookie(cookies.profile.name, data)
             yield put(
                 editProfileSuccess({
@@ -63,6 +69,8 @@ function* onGetProfile({
                     'custom:type_profile': type_profile as '1' | '2',
                 }),
             )
+
+            yield call([Router, Router.push], dashboard)
         }
     } catch (error) {
         if (!(typeof error === 'object') || !error) return
@@ -74,11 +82,8 @@ function* onGetProfile({
             case 404: // Not Found
                 yield call(updateHasProfile, 'no')
                 errorToast('Perfil não encontrado!')
-                yield put(
-                    signOutUser({
-                        type_profile: '2',
-                    }),
-                )
+                yield call([Router, Router.push], link)
+
                 break
         }
     }

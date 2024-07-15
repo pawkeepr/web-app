@@ -1,26 +1,25 @@
 import cn from 'classnames'
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import getServerSidePropsPagesGenericsPrivates from '~/helpers/get-server-side-props-pages-generic-privates'
 import LoadingPage from '~/pages/Modules/shared/LoadingPage'
-import { AttributeTypeProfile } from '~/services/helpers/types'
-import { useAppSelector } from '~/store/hooks'
+import { getProfileSession } from '~/store/actions'
+import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import useProfile from '~/store/hooks/profile/use-profile'
 
 const Dashboard = () => {
-    const router = useRouter()
+    const dispatch = useAppDispatch()
     const { user } = useAppSelector((state) => state.Login)
     const type_profile = user?.['custom:type_profile']
     useProfile()
 
     useEffect(() => {
-        if (type_profile === AttributeTypeProfile.VETERINARY) {
-            router.push('/veterinary/dashboard')
-            return
-        }
-
-        router.push('/tutor/dashboard')
-    }, [type_profile])
+        dispatch(
+            getProfileSession({
+                type_profile,
+                has_profile: user?.['custom:has_profile'],
+            }),
+        )
+    }, [])
 
     return (
         <main
