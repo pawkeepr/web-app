@@ -44,6 +44,7 @@ const nextConfig = ((_phase) => {
         },
         env: {
             API_URL: process.env.REACT_APP_API_URL,
+            API_FILE_URL: process.env.REACT_APP_API_FILE_URL,
             SECRET_KEY: process.env.SECRET_KEY,
             REGION: process.env.REGION,
             USER_POOL_ID: process.env.USER_POOL_ID,

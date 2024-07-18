@@ -8,7 +8,11 @@ import {
     getVetProfile,
 } from '~/services/helpers'
 import { KEYS_TYPE_USER_BY_NUMBER } from '~/services/helpers/feedback'
-import { updateProfilePicture, updateProfileV2 } from '~/services/helpers/profile'
+import {
+    getSignedUrl,
+    updateProfilePicture,
+    updateProfileV2,
+} from '~/services/helpers/profile'
 import { AttributeTypeProfile } from '~/services/helpers/types'
 import { errorToast, infoToast } from '~/store/helpers/toast'
 import { useAppSelector } from '~/store/hooks'
@@ -81,6 +85,10 @@ export const useMutationUpdateProfilePhoto = () => {
         onSuccess: () => infoToast('Foto de perfil atualizada com sucesso'),
         onError: () => errorToast('Erro ao atualizar foto de perfil.'),
     })
+}
+
+export const useGetSignedUrl = () => {
+    return useAppQuery<string>([NAME, 'signed-url'], getSignedUrl)
 }
 
 export const useProfilePhoto = () => {
