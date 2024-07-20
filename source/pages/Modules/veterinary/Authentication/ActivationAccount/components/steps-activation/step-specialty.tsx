@@ -27,7 +27,7 @@ const StepActivationSpecialty = ({ nextStep, prevStep }: StepProps) => {
                 ctx={values}
                 label="Especialidade Principal"
                 required
-                className="my-4"
+                className="mb-2"
                 name="specialty"
                 items={sub_specialty}
             />
