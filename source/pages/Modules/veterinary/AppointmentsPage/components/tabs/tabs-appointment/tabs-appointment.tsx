@@ -21,7 +21,6 @@ import StepTreatment from '../../steps/step-treatment'
 import StepVaccination from '../../steps/step-vaccination'
 import StepVermifuge from '../../steps/step-vermifuge'
 
-
 type TabItem = {
     id: TabsOptions
     title: string
@@ -52,7 +51,7 @@ const items: TabItem[] = [
         href: '#Vaccination',
         Component: StepVaccination,
     },
-      {
+    {
         id: 3,
         title: 'Vermifugo',
         href: '#Vermifuge',
@@ -86,7 +85,7 @@ const TabsAppointments = () => {
     const { isMobile } = useResizeMobile()
 
     return (
-        <section className="mt-1 bg-white">
+        <section className="bg-white ">
             <MenuHorizontalTabs
                 items={items}
                 onClick={(item) => {
