@@ -1,5 +1,3 @@
-import DashboardLayouts from '../../_layouts/dashboard'
-
 import { format } from 'date-fns'
 import { Formik } from 'formik'
 import { useRouter } from 'next/router'
@@ -178,14 +176,14 @@ const AppointmentsPage = ({
             initialValues={values}
             validationSchema={schemaStepAppointment}
         >
-            <DashboardLayouts title="Nova Consulta" searchBlock={false}>
+            <>
                 <Tabs isLoading={isLoadingPet} />
                 <RouteConfirmationModal
                     title="Cancelar Consulta!"
                     description="Importante!"
                     message="Esta ação irá cancelará todas as operações realizadas até o momento, deseja continuar?"
                 />
-            </DashboardLayouts>
+            </>
         </Formik>
     )
 }
