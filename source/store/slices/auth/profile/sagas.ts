@@ -47,7 +47,7 @@ const GET_PROFILE = {
 
 const DASHBOARD_PROFILE = {
     [AttributeTypeProfile.TUTOR]: '/tutor/dashboard',
-    [AttributeTypeProfile.VETERINARY]: '/vet/dashboard',
+    [AttributeTypeProfile.VETERINARY]: '/veterinary/dashboard',
 } as const
 
 function* onGetProfile({
