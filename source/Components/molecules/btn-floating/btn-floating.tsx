@@ -29,7 +29,7 @@ const buttonFloating = {
             },
             'position-y': {
                 top: 'top-0',
-                bottom: 'bottom-0',
+                bottom: 'bottom-10',
             },
         },
         defaultVariants: {
