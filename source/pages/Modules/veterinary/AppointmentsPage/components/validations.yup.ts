@@ -92,19 +92,23 @@ export const schemaStepDiagnostic = {
     note: yup.string().optional(),
 }
 
+export const partialOneValidation = {
+    id: yup.string().optional(),
+    dates_consults: yup.object().optional(),
+    tutor_pet_vet: schemaTutorPetVetValidation,
+    details_pet_consultation: schemaValidationDetailsPetConsultation,
+    anamnesis: yup.object().optional(),
+    treatments: schemaStepTreatmentValidation.optional().nullable(),
+    exams_anamnesis: yup.array().optional(),
+    appointment_status: yup.string().optional(),
+    diagnosis: yup.object().shape(schemaStepDiagnostic),
+}
+
 export const schemaStepAppointment = yup
     .object()
     .shape<RecordsShapeYup<VeterinaryConsultation>>({
-        id: yup.string().optional(),
-        dates_consults: yup.object().optional(),
-        tutor_pet_vet: schemaTutorPetVetValidation,
-        details_pet_consultation: schemaValidationDetailsPetConsultation,
-        anamnesis: yup.object().optional(),
-        treatments: schemaStepTreatmentValidation.optional().nullable(),
+        ...partialOneValidation,
         appointment_details: schemaStepAppointmentDetails,
-        exams_anamnesis: yup.array().optional(),
-        appointment_status: yup.string().optional(),
-        diagnosis: yup.object().shape(schemaStepDiagnostic),
     })
 
 export type SchemaYupAppointment = yup.InferType<typeof schemaStepAppointment>
