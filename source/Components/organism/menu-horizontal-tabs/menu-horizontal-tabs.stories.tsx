@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/react'
 
 import { useState } from 'react'
-import MenuHorizontalTabs, { type ItemTab } from './menu-horizontal-tabs'
+import MenuHorizontalTabs, { type ItemTab } from './menu-horizontal-tabs.mobile'
 
 type TabItem = {
     id: number
