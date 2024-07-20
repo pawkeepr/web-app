@@ -12,7 +12,7 @@ import withLoading from '~/Components/helpers/with-loading'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { StepProps, TabsOptions } from '~/types/helpers'
 
-import MenuHorizontalTabs from '~/Components/organism/menu-horizontal-tabs/menu-horizontal-tabs'
+import MenuHorizontalTabs from '~/Components/organism/menu-horizontal-tabs'
 import StepPayment from '../../steps/step-payment'
 
 type TabItem = {
@@ -41,15 +41,18 @@ const TabsFinished = () => {
 
     return (
         <section className="mt-1 bg-white">
-            <MenuHorizontalTabs
-                items={items}
-                onClick={(item) => {
-                    const findItem = items.find((i) => i.id === item.id) || items[0]
-                    swipperController?.slideTo(findItem?.id as number)
-                    setActiveItem(findItem)
-                }}
-                activeItem={activeItem}
-            />
+            <div className="hidden">
+                <MenuHorizontalTabs
+                    items={items}
+                    onClick={(item) => {
+                        const findItem =
+                            items.find((i) => i.id === item.id) || items[0]
+                        swipperController?.slideTo(findItem?.id as number)
+                        setActiveItem(findItem)
+                    }}
+                    activeItem={activeItem}
+                />
+            </div>
             <Swiper
                 // install Swiper modules
                 modules={[Navigation, Pagination, Scrollbar, A11y, Controller]}
