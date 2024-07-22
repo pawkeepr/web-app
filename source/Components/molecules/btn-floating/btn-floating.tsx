@@ -24,12 +24,12 @@ const buttonFloating = {
     `,
         variants: {
             'position-x': {
-                right: 'right-1',
-                left: 'left-1',
+                right: 'right-3',
+                left: 'left-3',
             },
             'position-y': {
                 top: 'top-0',
-                bottom: 'bottom-0',
+                bottom: 'bottom-10',
             },
         },
         defaultVariants: {
@@ -44,12 +44,12 @@ const buttonFloating = {
     }),
     containerIcon: tv({
         base: `
-        p-3 rounded-full bg-secondary-500 !shadow-2xl
+        p-2 rounded-full bg-secondary-500 !shadow-2xl
     `,
     }),
     icon: tv({
         base: `
-        w-8 h-8 text-gray-500
+        w-6 h-6 text-gray-500
     `,
     }),
 }

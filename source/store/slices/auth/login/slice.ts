@@ -2,7 +2,6 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import LOADING from '~/constants/loading'
 
 import { api } from '~/services/api'
-import type { SignInResponse } from '~/services/helpers/auth'
 import type { IProfileCognito } from '~/types/profile'
 import { name, type LoginState } from './types'
 
@@ -57,11 +56,15 @@ const loginSlice = createSlice({
                 api.defaults.headers.Authorization = `${action.payload.token}`
             }
 
+            // if (apiFile.defaults.headers) {
+            //     apiFile.defaults.headers.Authorization = `${action.payload.token}`
+            // }
+
             state.token = action.payload.token
         },
         signInSuccess: (
             state,
-            action: PayloadAction<{ token: string; user: SignInResponse }>,
+            action: PayloadAction<{ token: string; user: unknown }>,
         ) => {
             state.token = action.payload.token
             state.user = action.payload.user
@@ -73,7 +76,7 @@ const loginSlice = createSlice({
             state.error = action.payload
             state.isLoading = LOADING.FAILED
         },
-        recoverUserByToken: (state, action: PayloadAction<string>) => {
+        recoverUserByToken: (state) => {
             state.isLoading = LOADING.PENDING
         },
         recoverUserByTokenSuccess: (

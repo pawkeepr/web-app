@@ -1,9 +1,8 @@
-import DashboardLayouts from '../../_layouts/dashboard'
-
 import { format } from 'date-fns'
 import { Formik } from 'formik'
 import { useRouter } from 'next/router'
-import { useCallback, useEffect, useMemo } from 'react'
+import { startTransition, useCallback, useEffect, useMemo, useState } from 'react'
+import HeaderTitle from '~/Components/atoms/header-title'
 import RouteConfirmationModal from '~/Components/modals/route-confirmation-modal'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import { handleSubmitAppointments } from '~/store/hooks/appointment-id/use-appointment'
@@ -122,6 +121,7 @@ const AppointmentsPage = ({
     appointment_id,
 }: AppointmentsPageProps) => {
     const router = useRouter()
+    const [isSuccess, setIsSuccess] = useState(false)
 
     const {
         activeData,
@@ -130,9 +130,7 @@ const AppointmentsPage = ({
     } = usePetById(document, pet)
     const profile = useProfileVeterinary()
 
-    const handleSubmit = handleSubmitAppointments(() => {
-        router.push('/dashboard')
-    })
+    const handleSubmit = handleSubmitAppointments()
 
     const values = useMemo(
         () => makeInitialValues(activeData as IPetV2, profile, appointment_id),
@@ -150,18 +148,30 @@ const AppointmentsPage = ({
             const [appointment_geolocation, appointment_signature] =
                 await geolocation()
 
-            await handleSubmit({
-                ...values,
-                tutor_pet_vet: {
-                    ...(values.tutor_pet_vet as VeterinaryConsultation['tutor_pet_vet']),
-                    veterinary,
-                },
-                appointment_details: {
-                    ...(values.appointment_details as VeterinaryConsultation['appointment_details']),
-                    appointment_geolocation,
-                    appointment_signature,
-                },
-            } as VeterinaryConsultation)
+            try {
+                await handleSubmit({
+                    ...values,
+                    tutor_pet_vet: {
+                        ...(values.tutor_pet_vet as VeterinaryConsultation['tutor_pet_vet']),
+                        veterinary,
+                    },
+                    appointment_details: {
+                        ...(values.appointment_details as VeterinaryConsultation['appointment_details']),
+                        appointment_geolocation,
+                        appointment_signature,
+                    },
+                } as VeterinaryConsultation)
+
+                startTransition(() => {
+                    setIsSuccess(true)
+                })
+
+                setTimeout(() => {
+                    router.push('/veterinary/dashboard')
+                }, 2000)
+            } catch (err) {
+                console.error(err)
+            }
         },
         [handleSubmit, veterinary],
     )
@@ -178,14 +188,16 @@ const AppointmentsPage = ({
             initialValues={values}
             validationSchema={schemaStepAppointment}
         >
-            <DashboardLayouts title="Nova Consulta" searchBlock={false}>
+            <>
+                <HeaderTitle title="Consulta" />
                 <Tabs isLoading={isLoadingPet} />
                 <RouteConfirmationModal
+                    condition={!isSuccess}
                     title="Cancelar Consulta!"
                     description="Importante!"
                     message="Esta ação irá cancelará todas as operações realizadas até o momento, deseja continuar?"
                 />
-            </DashboardLayouts>
+            </>
         </Formik>
     )
 }
