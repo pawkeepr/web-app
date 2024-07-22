@@ -1,14 +1,12 @@
 import { useState } from 'react'
 
 // Import Swiper styles
-import { BsArrowLeft, BsCashCoin } from 'react-icons/bs'
 import 'swiper/css'
 import 'swiper/css/scrollbar'
 //
 import { A11y, Controller } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import withLoading from '~/Components/helpers/with-loading'
-import BtnFloating from '~/Components/molecules/btn-floating'
 import type { StepProps, TabsOptions } from '~/types/helpers'
 import TabsAppointments from './tabs-appointment'
 import TabsFinished from './tabs-finished'
@@ -69,24 +67,13 @@ const Tabs = () => {
                     >
                         <Component
                             activeTab={activeItem.id}
-                            toggleTab={setActiveItem}
+                            toggleTab={(tab: number) =>
+                                swipperController.slideTo(tab)
+                            }
                         />
                     </SwiperSlide>
                 )
             })}
-            <BtnFloating
-                condition={activeItem === items[0]}
-                onClick={() => swipperController.slideTo(1)}
-                icon={BsCashCoin}
-                title="Ir Para Pagamentos"
-            />
-
-            <BtnFloating
-                condition={activeItem === items[1]}
-                onClick={() => swipperController.slideTo(0)}
-                icon={BsArrowLeft}
-                title="Voltar Para Inicio"
-            />
         </Swiper>
     )
 }

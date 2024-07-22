@@ -12,6 +12,9 @@ import withLoading from '~/Components/helpers/with-loading'
 import useResizeMobile from '~/hooks/use-resize-mobile'
 import type { StepProps, TabsOptions } from '~/types/helpers'
 
+import BtnFloating from '~/Components/molecules/btn-floating'
+
+import { BsArrowLeft } from 'react-icons/bs'
 import MenuHorizontalTabs from '~/Components/organism/menu-horizontal-tabs'
 import StepPayment from '../../steps/step-payment'
 
@@ -33,67 +36,76 @@ const items: TabItem[] = [
     },
 ]
 
-const TabsFinished = () => {
+const TabsFinished = ({ toggleTab }: StepProps) => {
     const [activeItem, setActiveItem] = useState(items[0])
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const [swipperController, setSwipperController] = useState<any>()
     const { isMobile } = useResizeMobile()
 
     return (
-        <section className="mt-1 bg-white">
-            <div className="hidden">
-                <MenuHorizontalTabs
-                    items={items}
-                    onClick={(item) => {
+        <>
+            <section className="mt-1 bg-white">
+                <div className="hidden">
+                    <MenuHorizontalTabs
+                        items={items}
+                        onClick={(item) => {
+                            const findItem =
+                                items.find((i) => i.id === item.id) || items[0]
+                            swipperController?.slideTo(findItem?.id as number)
+                            setActiveItem(findItem)
+                        }}
+                        activeItem={activeItem}
+                    />
+                </div>
+                <Swiper
+                    // install Swiper modules
+                    modules={[Navigation, Pagination, Scrollbar, A11y, Controller]}
+                    spaceBetween={0}
+                    slidesPerView={1}
+                    onSwiper={(swiper) => {
+                        setSwipperController(swiper)
+                    }}
+                    // pagination={{ clickable: true, }}
+                    onSlideChange={(swiper) => {
                         const findItem =
-                            items.find((i) => i.id === item.id) || items[0]
-                        swipperController?.slideTo(findItem?.id as number)
+                            items.find((i) => i.id === swiper.activeIndex) ||
+                            items[0]
                         setActiveItem(findItem)
                     }}
-                    activeItem={activeItem}
-                />
-            </div>
-            <Swiper
-                // install Swiper modules
-                modules={[Navigation, Pagination, Scrollbar, A11y, Controller]}
-                spaceBetween={0}
-                slidesPerView={1}
-                onSwiper={(swiper) => {
-                    setSwipperController(swiper)
-                }}
-                // pagination={{ clickable: true, }}
-                onSlideChange={(swiper) => {
-                    const findItem =
-                        items.find((i) => i.id === swiper.activeIndex) || items[0]
-                    setActiveItem(findItem)
-                }}
-                scrollbar={isMobile ? false : { draggable: false }}
-            >
-                {items.map(({ id, Component }, index) => {
-                    return (
-                        <SwiperSlide
-                            key={`${id}-${
-                                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                                index
-                            }`}
-                        >
-                            <div
-                                className="flex flex-col flex-1 w-full overflow-y-auto scroll"
-                                style={{
-                                    height: 'calc(100vh - 120px)',
-                                }}
-                                id="Inicio"
+                    scrollbar={isMobile ? false : { draggable: false }}
+                >
+                    {items.map(({ id, Component }, index) => {
+                        return (
+                            <SwiperSlide
+                                key={`${id}-${
+                                    // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                    index
+                                }`}
                             >
-                                <Component
-                                    activeTab={activeItem.id}
-                                    toggleTab={setActiveItem}
-                                />
-                            </div>
-                        </SwiperSlide>
-                    )
-                })}
-            </Swiper>
-        </section>
+                                <div
+                                    className="flex flex-col flex-1 w-full overflow-y-auto scroll"
+                                    style={{
+                                        height: 'calc(100vh - 120px)',
+                                    }}
+                                    id="Inicio"
+                                >
+                                    <Component
+                                        activeTab={activeItem.id}
+                                        toggleTab={setActiveItem}
+                                    />
+                                </div>
+                            </SwiperSlide>
+                        )
+                    })}
+                </Swiper>
+            </section>
+            <BtnFloating
+                onClick={() => toggleTab?.(0)}
+                icon={BsArrowLeft}
+                position-y="top"
+                title="Voltar"
+            />
+        </>
     )
 }
 
