@@ -32,7 +32,7 @@ const tab = tv({
             true: 'web:py-2 web:!w-full',
         },
         selected: {
-            true: 'text-gray-600 transform scale-105',
+            true: '!text-primary-500 transform scale-105',
         },
         disabled: {
             true: '!text-gray-200 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',
