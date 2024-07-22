@@ -2,6 +2,7 @@ import * as yup from 'yup'
 import { schemaTutorPetVetValidation } from '~/Components/modals/scheduled-v2-modal/components/steps/validation.yup'
 import type {
     AppointmentDetails,
+    ExamsAnamnesis,
     VeterinaryConsultation,
 } from '~/types/appointment'
 import type { RecordsShapeYup } from '~/types/helpers'
@@ -48,7 +49,7 @@ export const schemaStepAnamneseValidation = yup
 export type ShapeTreatments = RecordsShapeYup<CtxStepTreatment['treatments']>
 
 export const schemaStepTreatmentValidation = yup.object().shape<ShapeTreatments>({
-    questions_treatment: yup.array().min(1).required(),
+    questions_treatment: yup.array().optional().nullable(),
     note: yup.string().optional(),
 })
 
@@ -56,6 +57,30 @@ export type ShapeAppointmentDetails = RecordsShapeYup<AppointmentDetails>
 export type ShapeAppointmentDetailsPayment = RecordsShapeYup<
     AppointmentDetails['payment']
 >
+
+export type ShapeAppointmentExams = RecordsShapeYup<
+    CtxStepAnamnese['exams_anamnesis']
+>
+
+export type ShapeAppointmentsPhysicalExam = RecordsShapeYup<
+    ExamsAnamnesis['physical_exam']
+>
+
+export const schemaExamsAnamnesis = yup.object().shape<ShapeAppointmentExams>({
+    complementary_exams: yup.array().optional(),
+    physical_exam: yup.object().shape<ShapeAppointmentsPhysicalExam>({
+        behavior: yup.string().optional(),
+        body_state: yup.string().optional(),
+        diet: yup.string().optional(),
+        fc: yup.string().optional(),
+        fr: yup.string().optional(),
+        hydration: yup.string().optional(),
+        mucous_membranes: yup.string().optional(),
+        other_finds: yup.array().optional(),
+        pa: yup.string().optional(),
+        tpc: yup.string().optional(),
+    }),
+})
 
 export const schemaPayment = yup
     .object()
@@ -87,7 +112,7 @@ export const schemaStepAppointmentDetails = yup
     })
 
 export const schemaStepDiagnostic = {
-    prescription: yup.string().required(),
+    prescription: yup.string().required('A prescrição é obrigatória'),
     prognosis: yup.string().optional(),
     note: yup.string().optional(),
 }
@@ -99,7 +124,7 @@ export const partialOneValidation = {
     details_pet_consultation: schemaValidationDetailsPetConsultation,
     anamnesis: yup.object().optional(),
     treatments: schemaStepTreatmentValidation.optional().nullable(),
-    exams_anamnesis: yup.array().optional(),
+    exams_anamnesis: schemaExamsAnamnesis.optional().nullable(),
     appointment_status: yup.string().optional(),
     diagnosis: yup.object().shape(schemaStepDiagnostic),
 }
