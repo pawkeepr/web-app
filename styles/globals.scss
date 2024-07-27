@@ -167,6 +167,13 @@ textarea {
     font-size: 16px;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+    appearance: none !important;
+}
+
 
 .outline-primary:focus {
     outline: 3px solid #09b285 !important;
