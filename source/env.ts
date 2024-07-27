@@ -7,7 +7,8 @@ const Env = () => {
 
     const FLAG_DEV =
         window?.location?.host?.startsWith('development') ||
-        window?.location?.host?.startsWith('localhost')
+        window?.location?.host?.startsWith('localhost') ||
+        process.env.FLAG_DEV
 
     const keys = {
         FLAG_DEV,
