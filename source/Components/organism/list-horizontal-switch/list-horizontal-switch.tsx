@@ -141,7 +141,7 @@ const ListHorizontalSwitch = <T extends object = {}>({
                         ))}
                     </section>
                     {visibleMenu && (
-                        <div className="fixed flex justify-between flex-1 w-full px-1 mt-0 bg-transparent bottom-4 h-fit">
+                        <div className="fixed flex justify-center flex-1 w-full gap-4 px-1 mt-0 bg-transparent bottom-4 h-fit">
                             <button
                                 type="button"
                                 onClick={keyPressLeft}

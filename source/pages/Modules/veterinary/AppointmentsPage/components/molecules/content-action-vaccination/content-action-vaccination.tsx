@@ -1,4 +1,5 @@
 import Tag from '~/Components/atoms/tag'
+import FieldControl from '~/Components/molecules/field-control'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import { TypeDosage, type QuestionVaccination } from '~/types/appointment'
@@ -101,6 +102,7 @@ const ContentActionVaccination = ({
                     Nª Dose
                 </Tag>
             </div>
+            <FieldControl name={`${name}.batch`} label="Lote" />
             <FieldTextArea
                 label="Observações"
                 name={`${name}.notes` as ''}
