@@ -38,24 +38,42 @@ import {
 import { resetProfileFlag, setProfile } from '../profile/actions'
 
 import { AttributeTypeProfile } from '~/services/helpers/types'
-import { NameFullProfile, TypeProfile, type IProfile } from '~/types/profile'
+import { NameFullProfile, type IProfile, type TypeProfile } from '~/types/profile'
 import { setEmailAccount, setPasswordAccount } from '../activate-account/actions'
+
+function* ErrLogin(action: PayloadAction<SignInCredentials>, error: unknown) {
+    const code = (error as any)?.code || (error as any)?.name
+
+    switch (code) {
+        case 'UserUnAuthenticatedException':
+        case 'UserNotConfirmedException':
+            yield put(setEmailAccount(action.payload.username))
+            yield put(setPasswordAccount(action.payload.password))
+            yield call([Router, Router.push], '/confirm-account')
+            yield put(signInFailed((error as any).message))
+            break
+        default:
+            yield put(resetLoading())
+            yield put(signInFailed((error as any).message))
+            errorToast('Não foi possível realizar o login.', 'Falha!')
+            break
+    }
+}
 
 export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
     try {
-        const response: UserData = yield call(signInAws, action.payload)
+        const user: UserData = yield call(signInAws, action.payload)
 
         const {
             signInUserSession: { idToken },
             attributes,
-        } = response
+        } = user
 
         if (attributes['custom:type_profile'] !== AttributeTypeProfile.TUTOR) {
             yield call(signOut)
             throw new Error('Você não tem permissão para acessar essa página.')
         }
 
-        const mode = layoutModeTypes.LIGHT_MODE
         const token = idToken.jwtToken
         yield call(
             setCookie,
@@ -63,11 +81,10 @@ export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
             idToken.jwtToken,
             idToken.payload.exp / 1000,
         )
-        yield put(changeLayoutMode(mode))
 
         delay(100)
         yield put(setAuthorization({ token }))
-        yield put(signInSuccess({ token }))
+        yield put(signInSuccess({ token, user: attributes }))
 
         yield call(
             setCookie,
@@ -77,24 +94,8 @@ export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
         )
 
         delay(100)
-
-        yield call([Router, Router.push], '/dashboard')
     } catch (error) {
-        switch ((error as any)?.code) {
-            case 'UserNotConfirmedException':
-                yield put(setEmailAccount(action.payload.username))
-                yield put(setPasswordAccount(action.payload.password))
-                yield call([Router, Router.push], '/confirm-account')
-                yield put(signInFailed((error as any).message))
-                break
-            default:
-                yield put(resetLoading())
-                yield put(signInFailed((error as any).message))
-                errorToast('Não foi possível realizar o login.', 'Falha!')
-                break
-        }
-    } finally {
-        yield put(resetLoading())
+        yield ErrLogin(action, error)
     }
 }
 
@@ -112,7 +113,6 @@ export function* signInVetSaga(action: PayloadAction<SignInCredentials>) {
             throw new Error('Você não tem permissão para acessar essa página.')
         }
 
-        const mode = layoutModeTypes.LIGHT_MODE
         const token = idToken.jwtToken
         yield call(
             setCookie,
@@ -120,11 +120,10 @@ export function* signInVetSaga(action: PayloadAction<SignInCredentials>) {
             idToken.jwtToken,
             idToken.payload.exp / 1000,
         )
-        yield put(changeLayoutMode(mode))
 
         delay(100)
         yield put(setAuthorization({ token }))
-        yield put(signInSuccess({ token }))
+        yield put(signInSuccess({ token, user: attributes }))
 
         yield call(
             setCookie,
@@ -134,35 +133,26 @@ export function* signInVetSaga(action: PayloadAction<SignInCredentials>) {
         )
 
         delay(100)
-
-        yield call([Router, Router.push], '/dashboard')
     } catch (error) {
-        switch ((error as any)?.code) {
-            case 'UserNotConfirmedException':
-                yield put(setEmailAccount(action.payload.username))
-                yield put(setPasswordAccount(action.payload.password))
-                yield call([Router, Router.push], '/confirm-account')
-                yield put(signInFailed((error as any).message))
-                break
-            default:
-                yield put(resetLoading())
-                yield put(signInFailed((error as any).message))
-                errorToast('Não foi possível realizar o login.', 'Falha!')
-                break
-        }
-    } finally {
-        yield put(resetLoading())
+        yield ErrLogin(action, error)
     }
 }
 
 export function* signInUserSaga(
     action: PayloadAction<SignInCredentials & { mode: 'vet' | 'tutor' }>,
 ) {
+    const mode = layoutModeTypes.LIGHT_MODE
+    yield call(signOut)
+
+    yield put(changeLayoutMode(mode))
     if (action.payload.mode === 'vet') {
         yield put(signInVet(action.payload))
     } else {
         yield put(signInTutor(action.payload))
     }
+
+    yield call([Router, Router.push], '/dashboard')
+    yield put(resetLoading())
 }
 
 const checkTokenExpiration = (exp: number, iat: number) => {
@@ -186,7 +176,7 @@ export function* recoverUserByTokenSaga() {
     } catch (_error) {
         yield put(
             signOutUser({
-                type_profile: TypeProfile.TUTOR,
+                type_profile: AttributeTypeProfile.TUTOR,
             }),
         )
     }

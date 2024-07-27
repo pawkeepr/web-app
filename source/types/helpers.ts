@@ -77,50 +77,50 @@ export const PAYMENTS_OPTIONS = [
 export const PAYMENTS_OPTIONS_INSTALLMENTS = [
     {
         label: '1x',
-        value: 1,
+        value: '1',
     },
     {
         label: '2x',
-        value: 2,
+        value: '2',
     },
     {
         label: '3x',
-        value: 3,
+        value: '3',
     },
     {
         label: '4x',
-        value: 4,
+        value: '4',
     },
     {
         label: '5x',
-        value: 5,
+        value: '5',
     },
     {
         label: '6x',
-        value: 6,
+        value: '6',
     },
     {
         label: '7x',
-        value: 7,
+        value: '7',
     },
     {
         label: '8x',
-        value: 8,
+        value: '8',
     },
     {
         label: '9x',
-        value: 9,
+        value: '9',
     },
     {
         label: '10x',
-        value: 10,
+        value: '10',
     },
     {
         label: '11x',
-        value: 11,
+        value: '11',
     },
     {
         label: '12x',
-        value: 12,
+        value: '12',
     },
 ]

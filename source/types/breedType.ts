@@ -212,7 +212,18 @@ export const RodentBreed = {
     rat: 'rat',
     mouse: 'mouse',
     degu: 'degu',
+    ferret: 'ferret',
+    squirrel: 'squirrel',
+    prairie_dog: 'prairie_dog',
+    chipmunk: 'chipmunk', // esquilo terrestre
+    capybara: 'capybara', // capivara
     other: 'other',
+    hedgehog: 'hedgehog', // porco-espinho
+    opossum: 'opossum', // gambá
+    raccoon: 'raccoon', // guaxinim
+    marmot: 'marmot', // marmota
+    beaver: 'beaver', // castor
+    otter: 'otter', // lontra
 } as const
 
 export type RodentBreedKeys = (typeof RodentBreed)[keyof typeof RodentBreed]

@@ -12,9 +12,12 @@ const Env = () => {
     const keys = {
         FLAG_DEV,
         API_URL: process.env.REACT_APP_API_URL || '',
+        API_FILE_URL: process.env.REACT_APP_API_FILE_URL || '',
         SECRET_KEY: process.env.SECRET_KEY || '',
+        IDENTITY_POOL_ID: process.env.IDENTITY_POOL_ID || '',
         REGION: process.env.REGION || '',
         USER_POOL_ID: process.env.USER_POOL_ID || '',
+        MODE_PROFILE: process.env.MODE_PROFILE || 'tutor',
         USER_POOL_WEB_CLIENT_ID: process.env.USER_POOL_WEB_CLIENT_ID || '',
         WEBVIEW: isView,
     } as const

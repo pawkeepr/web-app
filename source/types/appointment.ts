@@ -4,6 +4,11 @@ import type { IMainResponsibleGuardian, On_Off, PetData } from './pet-v2'
 import type { DTOProfile } from './profile'
 import type { Species } from './speciesType'
 
+export type ExamsAnamnesis = {
+    physical_exam: PhysicalExam
+    complementary_exams: ComplementaryExam[]
+}
+
 export interface VeterinaryConsultation {
     id?: string | null
     // id_pet: string
@@ -14,10 +19,7 @@ export interface VeterinaryConsultation {
     tutor_pet_vet: TutorPetVet
     details_pet_consultation: DetailsPetConsultation
     anamnesis: Anamnesis
-    exams_anamnesis: {
-        physical_exam: PhysicalExam
-        complementary_exams: ComplementaryExam[]
-    }
+    exams_anamnesis: ExamsAnamnesis
     diagnosis: {
         prognosis: string
         prescription: string

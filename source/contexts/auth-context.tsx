@@ -14,7 +14,7 @@ import {
     onChangeRememberMe,
     type LoginState,
 } from '~/store/slices/auth/login/slice'
-import type { TypeProfile } from '~/types/profile'
+import type { AttrTypeProfile } from '~/types/profile'
 
 interface SignInData {
     username: string
@@ -45,7 +45,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const { isAuthenticated, isLoading, password, rememberMe, username, token } =
         useAppSelector((state) => state.Login as LoginState)
 
-    const { user } = useAppSelector((state) => state.Profile)
+    const user = useAppSelector((state) => state.Login.user)
 
     const router = useRouter()
     const pathname = usePathname()
@@ -69,7 +69,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         if (!token && isPublicRoute) return
         if (pathname === '/logout') return
 
-        const type_profile = user?.['custom:type_profile'] as TypeProfile
+        const type_profile = user?.['custom:type_profile'] as AttrTypeProfile
 
         if (!token) {
             dispatch(
@@ -90,16 +90,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     useEffect(() => {
         const has_profile = user?.['custom:has_profile']
-        const type_profile = user?.['custom:type_profile'] as TypeProfile
+        const type_profile = user?.['custom:type_profile'] as AttrTypeProfile
 
         if (!has_profile || has_profile === 'yes') return
 
-        const partial_route = type_profile === 1 ? 'veterinary' : 'tutor'
+        const partial_route = type_profile === '1' ? 'veterinary' : 'tutor'
         router.push(`/${partial_route}/activation`)
     }, [user])
 
-    function signIn({ username, password }: SignInData) {
-        return dispatch(signInUser({ username, password }))
+    function signIn({ username, password, mode }: SignInData) {
+        return dispatch(signInUser({ username, password, mode }))
     }
 
     const onToggleRememberMe = () => {

@@ -68,39 +68,32 @@ const FieldDocumentAppointment = ({
                     >
                         {({ handleSubmit, values }) => (
                             <Form
-                                className=" flex flex-row items-center justify-end"
+                                className="flex flex-row items-center justify-end "
                                 onSubmit={handleSubmit}
                             >
                                 {children?.({
                                     onChangeOpen,
                                     onChangeDocument,
                                 }) || (
-                                        <div className="flex items-center">
-                                            <FieldDocument
-                                                ctx={values}
-                                                name="cpf_tutor"
-                                                placeholder="Nova Consulta"
-                                                divClassName="!w-96 mobile:hidden"
-                                                className={` ${styles['field-document']} `}
-                                                onlyCPF
-                                                required={false}
-                                                label="Insira o CPF do tutor para agendar ou iniciar uma consulta"
-                                            />
-                                            <button
-                                                type="submit"
-                                                className="
-                                                        web:block hidden
-                                                        bg-secondary-500 p-1 m-1 rounded-full 
-                                                        shadow-2xl
-                                                        transition duration-500 ease-in-out
-                                                        opacity-70 hover:opacity-100 items-center justify-center
-                                                        mt-2
-                                                    "
-                                            >
-                                                <PlusIcon className="w-4 h-4 text-white" />
-                                            </button>
-                                        </div>
-                                    )}
+                                    <div className="flex items-center">
+                                        <FieldDocument
+                                            ctx={values}
+                                            name="cpf_tutor"
+                                            placeholder="Agendar/Nova consulta"
+                                            divClassName="!w-96 mobile:hidden"
+                                            className={` ${styles['field-document']} text-xs`}
+                                            onlyCPF
+                                            required={false}
+                                            label="CPF do tutor para"
+                                        />
+                                        <button
+                                            type="submit"
+                                            className="items-center justify-center hidden p-1 m-1 mt-2 transition duration-500 ease-in-out rounded-full shadow-2xl web:block bg-secondary-500 opacity-70 hover:opacity-100"
+                                        >
+                                            <PlusIcon className="w-4 h-4 text-white" />
+                                        </button>
+                                    </div>
+                                )}
                             </Form>
                         )}
                     </Formik>

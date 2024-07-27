@@ -20,17 +20,17 @@ export interface PetData {
     identification_number?: string | null
     specie: Species | null | GenericSelect
     race: Breed | null | GenericSelect
-    castrated?: On_Off | null | boolean
+    castrated?: boolean
     blood_type?: string | null | GenericSelect
-    blood_donator?: On_Off | null | boolean
+    blood_donator?: boolean
     sex?: Gender | null | GenericSelect
-    organ_donor?: On_Off | null | boolean
+    organ_donor?: boolean
     approximate_date?: boolean
     date_birth: string | null
     color?: string | null
     size?: string | null
     weight?: string | null
-    pedigree?: On_Off | null | boolean
+    pedigree?: boolean
     pedigree_registry?: string | null
 }
 

@@ -2,7 +2,7 @@ import type { Location } from './profile'
 
 export type ITutor = {
     id?: string
-    first_name?: string
+    first_name?: string | null
     last_name: string
     email: string
     cpf_cnpj: string

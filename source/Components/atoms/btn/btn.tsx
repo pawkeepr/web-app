@@ -11,7 +11,7 @@ import BtnLink from './btn-link'
 export const button = tv({
     base: `
         mobile:p-4 mobile:w-full w-40 flex-grow
-        px-2 h-10 py-1
+        px-2 h-11 py-1
         text-sm font-semibold rounded-md text-center
         leading-1 hover:brightness-90
         transition duration-100 ease-in-out

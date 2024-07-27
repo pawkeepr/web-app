@@ -13,7 +13,7 @@ const useAppQuery = <T,>(
     fn: Fn<T>,
     options?: Omit<UseQueryOptions<T>, 'queryKey'>,
 ) => {
-    const { user } = useAppSelector((state) => state.Profile)
+    const { user } = useAppSelector((state) => state.Login)
 
     const Fn = () => fn?.()
 

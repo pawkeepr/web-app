@@ -14,8 +14,8 @@ export default function* rootSaga() {
         fork(LayoutSaga),
         fork(AccountSaga),
         fork(ForgetSaga),
-        fork(ProfileSaga),
         fork(ActivateAccountSaga),
         fork(LoginSagas),
+        fork(ProfileSaga),
     ])
 }

@@ -35,10 +35,12 @@ import {
     CowBreed,
     DogBreed,
     FishBreed,
+    GoatBreed,
     HorseBreed,
     LizardBreed,
     PigBreed,
     RabbitBreed,
+    RodentBreed,
     SnakeBreed,
     TurtleBreed,
     type ObjectBreed,
@@ -156,9 +158,9 @@ export const pig = makeSpecie('pig', ReptileBloodType, PigBreed)
 
 export const chicken = makeSpecie('chicken', ReptileBloodType, ChickenBreed)
 
-export const caprine = makeSpecie('caprine', ReptileBloodType, ChickenBreed)
+export const caprine = makeSpecie('caprine', ReptileBloodType, GoatBreed)
 
-export const rodent = makeSpecie('rodent', ReptileBloodType, ChickenBreed)
+export const rodent = makeSpecie('rodent', ReptileBloodType, RodentBreed)
 
 export type SpeciesType =
     | typeof dog

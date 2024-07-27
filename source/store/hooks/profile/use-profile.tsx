@@ -9,7 +9,7 @@ import {
 } from '~/services/helpers'
 import { KEYS_TYPE_USER_BY_NUMBER } from '~/services/helpers/feedback'
 import {
-    fetchProfilePhoto,
+    getSignedUrl,
     updateProfilePicture,
     updateProfileV2,
 } from '~/services/helpers/profile'
@@ -29,7 +29,8 @@ const makeFetchProfile = (type?: AttributeTypeProfile) => {
 }
 
 const useProfile = () => {
-    const { user } = useAppSelector((state) => state.Profile)
+    const { user } = useAppSelector((state) => state.Login)
+
     const superKeys = [NAME]
 
     const type = user?.['custom:type_profile']
@@ -86,13 +87,23 @@ export const useMutationUpdateProfilePhoto = () => {
     })
 }
 
+export const useGetSignedUrl = () => {
+    return useAppQuery<string>([NAME, 'signed-url'], getSignedUrl)
+}
+
 export const useProfilePhoto = () => {
     const superKeys = [NAME, 'photo']
 
-    return useAppQuery<string>(superKeys, () =>
-        fetchProfilePhoto({
-            key: 'logo-pawkeepr.png',
-        }),
+    return useAppQuery<string>(
+        superKeys,
+        () => {
+            return {
+                data: '',
+            }
+        },
+        {
+            enabled: false,
+        },
     )
 }
 

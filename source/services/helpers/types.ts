@@ -40,7 +40,6 @@ export interface UserData {
 export const AttributeTypeProfile = {
     VETERINARY: '1',
     TUTOR: '2',
-    NONE: null,
 } as const
 export type AttributeTypeProfile =
     (typeof AttributeTypeProfile)[keyof typeof AttributeTypeProfile]

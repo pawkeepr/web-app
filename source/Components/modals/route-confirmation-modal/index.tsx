@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
+import withControl from '~/Components/helpers/with-control'
 import Modal from '~/Components/organism/modal' // Adapte este importe ao seu caminho real do componente Modal
 import { BtnCancel, BtnPrimary } from '../../atoms/btn'
 
@@ -100,4 +101,4 @@ const RouteConfirmationModal = ({
     )
 }
 
-export default RouteConfirmationModal
+export default withControl(RouteConfirmationModal)
