@@ -72,6 +72,7 @@ const StepListPets = ({
                         <BtnLink
                             {...(props as any)}
                             message="Cadastro Completo"
+                            className="flex items-center justify-center w-1/2 h-11"
                             href={`/veterinary/pet?document=${values?.ownerEmergencyContact?.cpf_cnpj}`}
                         />
                     )}
