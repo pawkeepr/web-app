@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { FaStethoscope } from 'react-icons/fa'
 import { MdPerson } from 'react-icons/md'
 import Slide from 'react-reveal/Slide'
@@ -8,8 +9,11 @@ import { BtnLink } from '~/Components/atoms/btn'
 import HeaderTitle from '~/Components/atoms/header-title'
 import Footer from '~/Layouts/Footer'
 import LayoutAuth from '~/Layouts/LayoutAuth'
+import Env from '~/env'
 import getServerSidePropsPagesPublics from '~/helpers/get-server-side-props-pages-publics'
+import useModeProfile from '~/hooks/use-mode'
 import SignInPage from '~/pages/Modules/shared/Authentication/SignIn'
+import { ModeProfile } from '~/types/profile'
 
 export const ButtonsNavBar = () => {
     return (
@@ -34,9 +38,19 @@ export const ButtonsNavBar = () => {
 }
 
 const SignInPageNext = () => {
+    const { onChangeModeProfile, mode } = useModeProfile()
+    const modeProfile = Env().get('MODE_PROFILE') as ModeProfile
+
+    useEffect(() => {
+        onChangeModeProfile(modeProfile)
+    }, [modeProfile])
+
+    const bgImage =
+        mode === ModeProfile.tutor ? '/bg-three.jpg' : '/bg-sign-in.webp'
+
     return (
         <LayoutAuth>
-            <SignInPage mode="tutor" bgImage="/bg-three.jpg" />
+            <SignInPage bgImage={bgImage} />
         </LayoutAuth>
     )
 }
