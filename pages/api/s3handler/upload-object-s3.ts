@@ -1,24 +1,30 @@
-import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { apiFile } from '~/services/api'
 import { GetSignedUrl } from '~/services/helpers/profile'
 
 type ResponseData = {
-    message: string
+    filename: string | null
+    message?: string
 }
 
 const uploadToS3 = async (img: string) => {
     const { data } = await apiFile.get<GetSignedUrl>('/api/get-file-signed-url/')
 
     const image = Buffer.from(img, 'base64')
-
-    return await axios.put(data.url, image, {
-        headers: {
-            Accept: 'application/json',
+    
+    await fetch(data.url, {
+        method: 'PUT',
+        body: image,
+        headers: { 
+            Accept: 'application/json, text/plain, */*',
             'Content-Type': 'image/jpeg',
-            'Content-Length': image.length,
-        },
+            'Content-Length': image.length.toString(),
+        }
     })
+
+    return { status: 200, message: {
+        filename: data.filename
+    } }
 }
 
 export default async function handler(
@@ -26,24 +32,26 @@ export default async function handler(
     res: NextApiResponse<ResponseData>,
 ) {
     switch (req.method) {
-        case 'GET':
-            return res.status(200).json({ message: 'Health Check!' })
         case 'PUT':
             try {
-                await uploadToS3(req.body)
-                return res.status(200).json({ message: 'Success!' })
+                const response = await uploadToS3(req.body)
+
+                return res.status(response.status).json(response.message)
             } catch (err) {
-                return res.status(500).json(err as ResponseData)
+                return res.status(err.status).json(err as ResponseData)
             }
         default:
-            return res.status(405).json({ message: 'Method not allowed' })
+            return res.status(405).json({ message: 'Method not allowed', filename: null })
     }
 }
 
 export const config = {
     api: {
+        externalResolver: true,
         bodyParser: {
             sizeLimit: '10mb',
         },
+        responseLimit: false,
+        timeout: false,
     },
 }
