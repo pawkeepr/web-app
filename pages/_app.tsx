@@ -5,6 +5,7 @@ import Provider from '~/store'
 
 import type { AppProps } from 'next/app'
 
+import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { appWithTranslation } from 'next-i18next'
 import Head from 'next/head'
@@ -14,13 +15,13 @@ import '~/Components/organism/drawer/react-modern-drawer.css'
 import '~/aws'
 import { AuthProvider } from '~/contexts/auth-context'
 import ErrorBoundary from '~/contexts/error-boundary'
-
 import pg from '../package.json'
 
 function App({ Component, pageProps }: AppProps) {
     return (
         <ErrorBoundary>
             <SpeedInsights />
+            <Analytics />
             <Head>
                 <meta
                     name="viewport"
