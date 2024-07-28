@@ -1,6 +1,7 @@
 import cn from 'classnames'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import HeaderTitle from '~/Components/atoms/header-title'
 import getServerSidePropsPagesGenericsPrivates from '~/helpers/get-server-side-props-pages-generic-privates'
 import LoadingPage from '~/pages/Modules/shared/LoadingPage'
 import { getProfileSession } from '~/store/actions'
@@ -39,6 +40,7 @@ const Dashboard = () => {
                 'flex flex-1 content-center mobile:content-start items-center justify-center mobile:items-start mobile:justify-start mobile:overflow-hidden',
             )}
         >
+            <HeaderTitle title="Dashboard" />
             <LoadingPage />
         </main>
     )
