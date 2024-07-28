@@ -71,6 +71,7 @@ const AvatarModal = ({
                     </h1>
                     <input
                         type="file"
+                        accept="image/jpg, image/jpeg, image/png"
                         onChange={(e) => setFileData(e)}
                         multiple={false}
                     />
