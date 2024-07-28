@@ -78,17 +78,26 @@ export const useTutorProfileFromVet = ({ cpf_cnpj }: { cpf_cnpj: string }) => {
     )
 }
 
-export const useMutationUpdateProfilePhoto = () => {
-    return useMutationHelper({
-        mutationFn: (data: FormData) => updateProfilePicture(data),
-        mutationKey: [NAME, 'photo'],
-        onSuccess: () => infoToast('Foto de perfil atualizada com sucesso'),
-        onError: () => errorToast('Erro ao atualizar foto de perfil.'),
-    })
+type GetSignedUrl = {
+    url: string
+    filename: string
 }
 
 export const useGetSignedUrl = () => {
-    return useAppQuery<string>([NAME, 'signed-url'], getSignedUrl)
+    return useAppQuery<GetSignedUrl>([NAME, 'signed-url'], getSignedUrl)
+}
+
+export const useMutationUpdateProfilePhoto = () => {
+    const { data } = useGetSignedUrl()
+
+    const url = data?.url || ''
+
+    return useMutationHelper({
+        mutationFn: (data: FormData) => updateProfilePicture(data, url),
+        mutationKey: [NAME, 'photo', url],
+        onSuccess: () => infoToast('Foto de perfil atualizada com sucesso'),
+        onError: () => errorToast('Erro ao atualizar foto de perfil.'),
+    })
 }
 
 export const useProfilePhoto = () => {
