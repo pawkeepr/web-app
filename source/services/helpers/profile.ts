@@ -1,12 +1,14 @@
+import axios from 'axios'
+import cookies from '~/constants/cookies'
 import type { IProfile } from '~/types/profile'
+import { getCookie } from '~/utils/cookies-utils'
 import { api, apiFile } from '../api'
 import type { KEYS_TYPE_USERS } from './feedback'
 
 const urls = {
     UPDATE_PROFILE: (type_user: KEYS_TYPE_USERS) =>
         `/api-user/update-user/${type_user}`,
-    UPDATE_PROFILE_PICTURE: () => '/api/get-signed-url',
-    GET_SIGNED_URL: () => '/api/get-signed-url',
+    GET_SIGNED_URL: () => '/api/get-file-signed-url/',
     FETCH_PROFILE_IMG: () => '/api-s3handler/get-object-s3',
 }
 
@@ -19,12 +21,15 @@ export const updateProfileV2 = async (data: IProfile, type_user: KEYS_TYPE_USERS
 
 export const getSignedUrl = () => apiFile.get(urls.GET_SIGNED_URL())
 
-export const updateProfilePicture = (formData: FormData) =>
-    apiFile.post(urls.UPDATE_PROFILE_PICTURE(), formData, {
+export const updateProfilePicture = (formData: FormData, urlSigned: string) => {
+    const token = getCookie(cookies.token.name)
+    return axios.post(urlSigned, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `${token}`,
         },
     })
+}
 
 type FetchProfileImg = {
     key: string

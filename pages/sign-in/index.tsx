@@ -9,7 +9,7 @@ import SignInPage from '~/pages/Modules/shared/Authentication/SignIn'
 import { ModeProfile } from '~/types/profile'
 
 const SignInPageNext = () => {
-    const { onChangeModeProfile } = useModeProfile()
+    const { onChangeModeProfile, mode } = useModeProfile()
     const modeProfile = Env().get('MODE_PROFILE') as ModeProfile
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const SignInPageNext = () => {
     }, [modeProfile])
 
     const bgImage =
-        modeProfile === ModeProfile.tutor ? '/bg-three.jpg' : '/bg-sign-in.webp'
+        mode === ModeProfile.tutor ? '/bg-three.jpg' : '/bg-sign-in.webp'
 
     return (
         <LayoutAuth>
