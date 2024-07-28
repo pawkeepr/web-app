@@ -5,14 +5,14 @@ import Provider from '~/store'
 
 import type { AppProps } from 'next/app'
 
-import { AuthProvider } from '~/contexts/auth-context'
-
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { appWithTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '~/Components/organism/drawer/react-modern-drawer.css'
 import '~/aws'
+import { AuthProvider } from '~/contexts/auth-context'
 import ErrorBoundary from '~/contexts/error-boundary'
 
 import pg from '../package.json'
@@ -20,6 +20,7 @@ import pg from '../package.json'
 function App({ Component, pageProps }: AppProps) {
     return (
         <ErrorBoundary>
+            <SpeedInsights />
             <Head>
                 <meta
                     name="viewport"
