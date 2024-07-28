@@ -48,8 +48,7 @@ export default async function handler(
             const response = await uploadToS3(req.body)
             return res.status(response.status).json(response.message)
         } catch (err) {
-            console.log(err)
-            return res.status(err.status).json(err as ResponseData)
+            return res.status(500).json(err as ResponseData)
         }
     }
 }
