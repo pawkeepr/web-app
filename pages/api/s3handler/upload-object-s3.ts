@@ -1,13 +1,14 @@
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getSignedUrl } from '~/services/helpers/profile'
+import { apiFile } from '~/services/api'
+import { GetSignedUrl } from '~/services/helpers/profile'
 
 type ResponseData = {
     message: string
 }
 
 const uploadToS3 = async (img: string) => {
-    const { data } = await getSignedUrl()
+    const { data } = await apiFile.get<GetSignedUrl>('/api/get-file-signed-url/')
 
     const image = Buffer.from(img, 'base64')
 
@@ -25,6 +26,8 @@ export default async function handler(
     res: NextApiResponse<ResponseData>,
 ) {
     switch (req.method) {
+        case 'GET':
+            return res.status(200).json({ message: 'Health Check!' })
         case 'PUT':
             try {
                 await uploadToS3(req.body)
