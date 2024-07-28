@@ -1,7 +1,7 @@
 import { CameraIcon } from '@heroicons/react/24/solid'
 import { Input, Label } from 'reactstrap'
 import AvatarModal from '~/Components/modals/avatar-modal'
-import { useGetSignedUrl } from '~/store/hooks/profile/use-profile'
+import { useMutationUpdateProfilePhoto } from '~/store/hooks/profile/use-profile'
 import type { Species } from '~/types/speciesType'
 import CardContainer from './CardContainer'
 
@@ -20,8 +20,8 @@ const UserProfileCard = ({
     subtitle,
     title,
 }: UserProfileCardProps) => {
-    const { data } = useGetSignedUrl()
-    
+    const { mutateAsync } = useMutationUpdateProfilePhoto()
+
     return (
         <CardContainer className="mt-2 bg-white">
             <div className="p-1">
@@ -34,6 +34,7 @@ const UserProfileCard = ({
                             onSave={async (file) => {
                                 const formData = new FormData()
                                 formData.append('file', file)
+                                await mutateAsync(formData)
                                 //
                             }}
                             src={avatar}
