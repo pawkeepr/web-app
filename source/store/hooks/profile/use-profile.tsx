@@ -8,11 +8,7 @@ import {
     getVetProfile,
 } from '~/services/helpers'
 import { KEYS_TYPE_USER_BY_NUMBER } from '~/services/helpers/feedback'
-import {
-    getSignedUrl,
-    updateProfilePicture,
-    updateProfileV2,
-} from '~/services/helpers/profile'
+import { updateProfilePicture, updateProfileV2 } from '~/services/helpers/profile'
 import { AttributeTypeProfile } from '~/services/helpers/types'
 import { errorToast, infoToast } from '~/store/helpers/toast'
 import { useAppSelector } from '~/store/hooks'
@@ -78,23 +74,10 @@ export const useTutorProfileFromVet = ({ cpf_cnpj }: { cpf_cnpj: string }) => {
     )
 }
 
-type GetSignedUrl = {
-    url: string
-    filename: string
-}
-
-export const useGetSignedUrl = () => {
-    return useAppQuery<GetSignedUrl>([NAME, 'signed-url'], getSignedUrl)
-}
-
 export const useMutationUpdateProfilePhoto = () => {
-    const { data } = useGetSignedUrl()
-
-    const url = data?.url || ''
-
     return useMutationHelper({
-        mutationFn: (data: FormData) => updateProfilePicture(data, url),
-        mutationKey: [NAME, 'photo', url],
+        mutationFn: (data: FormData) => updateProfilePicture(data),
+        mutationKey: [NAME, 'photo'],
         onSuccess: () => infoToast('Foto de perfil atualizada com sucesso'),
         onError: () => errorToast('Erro ao atualizar foto de perfil.'),
     })

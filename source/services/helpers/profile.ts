@@ -19,14 +19,18 @@ export const updateProfileV2 = async (data: IProfile, type_user: KEYS_TYPE_USERS
         },
     })
 
-export const getSignedUrl = () => apiFile.get(urls.GET_SIGNED_URL())
+export type GetSignedUrl = {
+    url: string
+    filename: string
+}
 
-export const updateProfilePicture = (formData: FormData, urlSigned: string) => {
-    const token = getCookie(cookies.token.name)
-    return axios.post(urlSigned, formData, {
+export const getSignedUrl = () => apiFile.get<GetSignedUrl>(urls.GET_SIGNED_URL())
+
+export const updateProfilePicture = (formData: FormData) => {
+    return axios.put('/api/s3handler/upload-object-s3', formData, {
         headers: {
+            Authorization: `Bearer ${getCookie(cookies.token.name)}`,
             'Content-Type': 'multipart/form-data',
-            Authorization: `${token}`,
         },
     })
 }
