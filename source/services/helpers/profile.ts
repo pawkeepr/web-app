@@ -6,7 +6,7 @@ const urls = {
     UPDATE_PROFILE: (type_user: KEYS_TYPE_USERS) =>
         `/api-user/update-user/${type_user}`,
     UPDATE_PROFILE_PICTURE: () => '/api/get-signed-url',
-    GET_SIGNED_URL: () => '/api/get-signed-url',
+    GET_SIGNED_URL: () => '/api/get-file-signed-url/',
     FETCH_PROFILE_IMG: () => '/api-s3handler/get-object-s3',
 }
 
