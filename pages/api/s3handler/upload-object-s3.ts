@@ -11,17 +11,13 @@ const uploadToS3 = async (img: string) => {
 
     const image = Buffer.from(img, 'base64')
 
-    try {
-        return await axios.put(data.url, image, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'image/jpeg',
-                'Content-Length': image.length,
-            },
-        })
-    } catch (e) {
-        console.log(e)
-    }
+    return await axios.put(data.url, image, {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'image/jpeg',
+            'Content-Length': image.length,
+        },
+    })
 }
 
 export default async function handler(
@@ -30,8 +26,12 @@ export default async function handler(
 ) {
     switch (req.method) {
         case 'PUT':
-            await uploadToS3(req.body)
-            return res.status(200).json({ message: 'Success!' })
+            try {
+                await uploadToS3(req.body)
+                return res.status(200).json({ message: 'Success!' })
+            } catch (err) {
+                return res.status(500).json(err as ResponseData)
+            }
         default:
             return res.status(405).json({ message: 'Method not allowed' })
     }
