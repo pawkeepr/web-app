@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextResponse, type NextRequest } from 'next/server'
 import { apiFile } from '~/services/api'
 import type { GetSignedUrl } from '~/services/helpers/profile'
 
@@ -30,6 +31,10 @@ const uploadToS3 = async (img: string) => {
     }
 }
 
+export async function GET(_request: NextRequest) {
+    return NextResponse.json({ filename: 'Health Check!' })
+}
+
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<ResponseData>,
@@ -43,6 +48,7 @@ export default async function handler(
             const response = await uploadToS3(req.body)
             return res.status(response.status).json(response.message)
         } catch (err) {
+            console.log(err)
             return res.status(err.status).json(err as ResponseData)
         }
     }
