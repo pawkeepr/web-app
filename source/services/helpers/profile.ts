@@ -27,7 +27,7 @@ export type GetSignedUrl = {
 export const getSignedUrl = () => apiFile.get<GetSignedUrl>(urls.GET_SIGNED_URL())
 
 export const updateProfilePicture = (formData: FormData) => {
-    return axios.put('/api/s3handler/upload-object-s3', formData, {
+    return axios.post('/api/s3handler/upload-object-s3', formData, {
         headers: {
             Authorization: `Bearer ${getCookie(cookies.token.name)}`,
             'Content-Type': 'multipart/form-data',
