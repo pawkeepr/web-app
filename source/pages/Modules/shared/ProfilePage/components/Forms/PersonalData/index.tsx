@@ -35,7 +35,7 @@ const PersonalData = ({ data }: PersonalDataProps) => {
         <Formik initialValues={data} onSubmit={handleSubmit}>
             {({ values, isSubmitting, handleSubmit }) => (
                 <Form className="pb-4" onSubmit={handleSubmit}>
-                    <div className="flex justify-end w-full">
+                    <div className="flex justify-end w-32">
                         <BtnIcon
                             icon={
                                 mode === 'editable' ? (
@@ -51,8 +51,8 @@ const PersonalData = ({ data }: PersonalDataProps) => {
                             type="button"
                             className={cn(
                                 `
-                                flex justify-center items-center web:!w-32 h-10 rounded-md
-                            `,
+                                    flex justify-center items-center w-32 h-10 rounded-md
+                                `,
                                 {
                                     'bg-confirm-500 hover:bg-confirm-600 text-white':
                                         mode === 'editable',
