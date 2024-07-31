@@ -10,8 +10,7 @@ const urls = {
         `/api-user/update-user/${type_user}`,
     GET_SIGNED_URL: () => '/api/get-file-signed-url/',
     FETCH_PROFILE_IMG: () => '/api-s3handler/get-object-s3',
-    POST_PROFILE: (type_user: KEYS_TYPE_USERS) =>
-        `/api/s3handler/upload-object-s3/${type_user}`,
+    POST_PROFILE: () => '/api/s3handler/upload-object-s3',
     UPDATE_PROFILE_PICTURE: (type_user: KEYS_TYPE_USERS) =>
         `api-user/update-file-user/${type_user}`,
 }
@@ -25,7 +24,7 @@ export const updateProfileV2 = async (data: IProfile, type_user: KEYS_TYPE_USERS
 
 export type GetSignedUrl = {
     url: string
-    filename: string
+    fileName: string
 }
 
 export const getSignedUrl = () => apiFile.get<GetSignedUrl>(urls.GET_SIGNED_URL())
@@ -46,16 +45,17 @@ export const updateProfilePictureV2 = (
 
 export const updateProfilePicture = (
     formData: FormData,
-    type_user: KEYS_TYPE_USERS,
+    user_type: KEYS_TYPE_USERS,
     user_id: string,
 ) => {
-    return axios.put(urls.POST_PROFILE(type_user), formData, {
+    return axios.post(urls.POST_PROFILE(), formData, {
         headers: {
-            Authorization: `Bearer ${getCookie(cookies.token.name)}`,
+            Authorization: `${getCookie(cookies.token.name)}`,
             'Content-Type': 'multipart/form-data',
         },
         params: {
             user_id: user_id,
+            user_type: user_type,
         },
     })
 }
@@ -86,7 +86,7 @@ export const uploadToS3 = async (img: string) => {
     return {
         status: 200,
         message: {
-            filename: data.filename,
+            fileName: data.fileName,
         },
     }
 }

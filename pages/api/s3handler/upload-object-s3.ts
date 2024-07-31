@@ -3,13 +3,14 @@ import type { KEYS_TYPE_USERS } from '~/services/helpers/feedback'
 import { updateProfilePictureV2, uploadToS3 } from '~/services/helpers/profile'
 
 type ResponseData = {
-    filename: string | null
+    fileName: string | null
     message?: string
 }
 
 const POST = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
     try {
         const response = await uploadToS3(req.body)
+
         const { user_id, user_type } = req.query as {
             user_id: string
             user_type: KEYS_TYPE_USERS
@@ -19,9 +20,9 @@ const POST = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => 
             return res.status(response.status).json(response.message)
         }
 
-        const { filename } = response.message
+        const { fileName } = response.message
 
-        if (!filename) {
+        if (!fileName) {
             return res
                 .status(500)
                 .json({ message: 'Something went wrong' } as ResponseData)
@@ -29,7 +30,7 @@ const POST = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => 
 
         const responseProfile = await updateProfilePictureV2(
             {
-                object_name: filename,
+                object_name: fileName,
             },
             user_type,
             user_id,
