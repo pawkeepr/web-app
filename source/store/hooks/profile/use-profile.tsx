@@ -9,7 +9,10 @@ import {
 } from '~/services/helpers'
 import { KEYS_TYPE_USER_BY_NUMBER } from '~/services/helpers/feedback'
 import { updateProfilePicture, updateProfileV2 } from '~/services/helpers/profile'
-import { AttributeTypeProfile } from '~/services/helpers/types'
+import {
+    AttributeTypeProfile,
+    EnumerateTypeProfile,
+} from '~/services/helpers/types'
 import { errorToast, infoToast } from '~/store/helpers/toast'
 import { useAppSelector } from '~/store/hooks'
 import type { IProfile } from '~/types/profile'
@@ -75,9 +78,17 @@ export const useTutorProfileFromVet = ({ cpf_cnpj }: { cpf_cnpj: string }) => {
 }
 
 export const useMutationUpdateProfilePhoto = () => {
+    const { data: user } = useProfile()
+    AttributeTypeProfile
+    const type =
+        EnumerateTypeProfile[
+            user?.type_profile as keyof typeof EnumerateTypeProfile
+        ]
+
     return useMutationHelper({
-        mutationFn: (data: FormData) => updateProfilePicture(data),
-        mutationKey: [NAME, 'photo'],
+        mutationFn: (data: FormData) =>
+            updateProfilePicture(data, type, user?.id as string),
+        mutationKey: [NAME, user?.id, 'picture'],
         onSuccess: () => infoToast('Foto de perfil atualizada com sucesso'),
         onError: () => errorToast('Erro ao atualizar foto de perfil.'),
     })
