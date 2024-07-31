@@ -1,56 +1,67 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { NextResponse, type NextRequest } from 'next/server'
-import { apiFile } from '~/services/api'
-import type { GetSignedUrl } from '~/services/helpers/profile'
+import type { KEYS_TYPE_USERS } from '~/services/helpers/feedback'
+import { updateProfilePictureV2, uploadToS3 } from '~/services/helpers/profile'
 
 type ResponseData = {
     filename: string | null
     message?: string
 }
 
-const uploadToS3 = async (img: string) => {
-    const { data } = await apiFile.get<GetSignedUrl>('/api/get-file-signed-url/')
+const POST = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
+    try {
+        const response = await uploadToS3(req.body)
+        const { user_id, user_type } = req.query as {
+            user_id: string
+            user_type: KEYS_TYPE_USERS
+        }
 
-    const image = Buffer.from(img, 'base64')
+        if (response.status !== 200) {
+            return res.status(response.status).json(response.message)
+        }
 
-    await fetch(data.url, {
-        method: 'PUT',
-        body: image,
-        headers: {
-            Accept: 'application/json, text/plain, */*',
-            'Content-Type': 'image/jpeg',
-            'Content-Length': image.length.toString(),
-        },
-    })
+        const { filename } = response.message
 
-    return {
-        status: 200,
-        message: {
-            filename: data.filename,
-        },
+        if (!filename) {
+            return res
+                .status(500)
+                .json({ message: 'Something went wrong' } as ResponseData)
+        }
+
+        const responseProfile = await updateProfilePictureV2(
+            {
+                object_name: filename,
+            },
+            user_type,
+            user_id,
+        )
+
+        if (responseProfile.status !== 200) {
+            return res.status(responseProfile.status).json(responseProfile.data)
+        }
+
+        return res.status(response.status).json(response.message)
+    } catch (err) {
+        return res.status(500).json(err as ResponseData)
     }
 }
 
-export async function GET(_request: NextRequest) {
-    return NextResponse.json({ filename: 'Health Check!' })
+const HTTP_REQUEST = {
+    POST,
 }
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<ResponseData>,
 ) {
-    if (req.method === 'GET') {
-        return res.status(200).json({ filename: 'Health Check!' })
+    const fn = HTTP_REQUEST[req.method as keyof typeof HTTP_REQUEST]
+
+    if (!fn) {
+        return res
+            .status(405)
+            .json({ message: 'Method not allowed' } as ResponseData)
     }
 
-    if (req.method === 'POST') {
-        try {
-            const response = await uploadToS3(req.body)
-            return res.status(response.status).json(response.message)
-        } catch (err) {
-            return res.status(500).json(err as ResponseData)
-        }
-    }
+    return fn(req, res)
 }
 
 export const config = {
