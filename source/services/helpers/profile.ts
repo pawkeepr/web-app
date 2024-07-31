@@ -32,23 +32,23 @@ export const getSignedUrl = () => apiFile.get<GetSignedUrl>(urls.GET_SIGNED_URL(
 type UpdateProfilePicture = {
     object_name: string
 }
-export const updateProfilePictureV2 = (
+export const updateProfilePicture = (
     data: UpdateProfilePicture,
     type_user: KEYS_TYPE_USERS,
     user_id: string,
 ) =>
-    api.post<GetSignedUrl>(urls.UPDATE_PROFILE_PICTURE(type_user), data, {
+    api.put<GetSignedUrl>(urls.UPDATE_PROFILE_PICTURE(type_user), data, {
         params: {
             user_id: user_id,
         },
     })
 
-export const updateProfilePicture = (
+export const postProfilePicture = (
     formData: FormData,
     user_type: KEYS_TYPE_USERS,
     user_id: string,
 ) => {
-    return axios.post(urls.POST_PROFILE(), formData, {
+    return axios.post<{ fileName: string }>(urls.POST_PROFILE(), formData, {
         headers: {
             Authorization: `${getCookie(cookies.token.name)}`,
             'Content-Type': 'multipart/form-data',

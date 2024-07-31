@@ -8,7 +8,11 @@ import {
     getVetProfile,
 } from '~/services/helpers'
 import { KEYS_TYPE_USER_BY_NUMBER } from '~/services/helpers/feedback'
-import { updateProfilePicture, updateProfileV2 } from '~/services/helpers/profile'
+import {
+    postProfilePicture,
+    updateProfilePicture,
+    updateProfileV2,
+} from '~/services/helpers/profile'
 import {
     AttributeTypeProfile,
     EnumerateTypeProfile,
@@ -86,8 +90,30 @@ export const useMutationUpdateProfilePhoto = () => {
         ]
 
     return useMutationHelper({
-        mutationFn: (data: FormData) =>
-            updateProfilePicture(data, type, user?.id as string),
+        mutationFn: async (data: FormData) => {
+            const response = await postProfilePicture(
+                data,
+                type,
+                user?.id as string,
+            )
+
+            if (response instanceof Error) {
+                console.log(response)
+            }
+
+            const {
+                data: { fileName },
+            } = response
+
+            return await updateProfilePicture(
+                {
+                    object_name: fileName,
+                },
+                type,
+                user?.id as string,
+            )
+        },
+
         mutationKey: [NAME, user?.id, 'picture'],
         onSuccess: () => infoToast('Foto de perfil atualizada com sucesso'),
         onError: () => errorToast('Erro ao atualizar foto de perfil.'),
