@@ -53,6 +53,30 @@ const nextConfig = ((_phase) => {
             FLAG_DEV: process.env.FLAG_DEV,
         },
         i18n,
+        async rewrites() {
+            return [
+                {
+                    source: '/api/:path*',
+                    has: [
+                        {
+                            type: 'header',
+                            key: 'Authorization'
+                        }
+                    ],
+                    destination: 'https://wqwkbo2249.execute-api.us-east-1.amazonaws.com/testdevelopment/:path*'
+                },
+                {
+                    source: '/api-file/:path*',
+                    has: [
+                        {
+                            type: 'header',
+                            key: 'Authorization'
+                        }
+                    ],
+                    destination: 'https://pljngximqe.execute-api.us-east-1.amazonaws.com/development/:path*',
+                },
+            ]
+        }
     }
 })(process.env.NODE_ENV)
 
