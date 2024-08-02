@@ -69,24 +69,3 @@ export const fetchProfilePhoto = (data: FetchProfileImg) =>
             type_doc: 1,
         },
     })
-
-export const uploadToS3 = async (img: string) => {
-    const { data } = await getSignedUrl()
-
-    const image = Buffer.from(img, 'base64')
-
-    await axios.put(data.url, image, {
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'image/jpeg',
-            'Content-Length': image.length.toString(),
-        },
-    })
-
-    return {
-        status: 200,
-        message: {
-            fileName: data.fileName,
-        },
-    }
-}

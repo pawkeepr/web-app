@@ -1,59 +1,71 @@
+import formidable from 'formidable'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { uploadToS3 } from '~/services/helpers/profile'
+import { createRouter } from 'next-connect'
+import { uploadToS3 } from '~/api/services/upload-to-s3'
 
 type ResponseData = {
     fileName: string | null
     message?: string
 }
 
+type ResponseFormidable = {
+    fields: formidable.Fields
+    files: formidable.Files
+    err: any
+}
+
 const POST = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
     try {
-        const response = await uploadToS3(req.body)
+        const form = formidable({ uploadDir: '/tmp/' })
 
-        if (response.status !== 200) {
-            return res.status(response.status).json(response.message)
+        const response: ResponseFormidable = await new Promise((resolve) => {
+            form.parse(req, (err, fields, files) => {
+                resolve({ err, fields, files })
+            })
+        })
+
+        if (response.err) {
+            return res.status(500).json({ fileName: null, message: response.err })
         }
 
-        const { fileName } = response.message
-
-        if (!fileName) {
+        if (!response.files.file) {
             return res
-                .status(500)
-                .json({ message: 'Something went wrong' } as ResponseData)
+                .status(400)
+                .json({ fileName: null, message: 'File not found' })
         }
 
-        return res.status(response.status).json(response.message)
+        const { message, status } = await uploadToS3({
+            fileName: response.files.file[0].newFilename,
+            filePath: response.files.file[0].filepath,
+            size: response.files.file[0].size,
+        })
+
+        return res.status(status).json({
+            fileName: message.fileName,
+            message: 'File uploaded successfully',
+        })
     } catch (err) {
         return res.status(500).json(err as ResponseData)
     }
 }
 
-const HTTP_REQUEST = {
-    POST,
-}
+const router = createRouter<NextApiRequest, NextApiResponse>()
 
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse<ResponseData>,
-) {
-    const fn = HTTP_REQUEST[req.method as keyof typeof HTTP_REQUEST]
-
-    if (!fn) {
-        return res
-            .status(405)
-            .json({ message: 'Method not allowed' } as ResponseData)
-    }
-
-    return fn(req, res)
-}
-
+router.post((req, res) => POST(req, res))
 export const config = {
     api: {
         externalResolver: true,
-        bodyParser: {
-            sizeLimit: '10mb',
-        },
+        bodyParser: false,
         responseLimit: false,
         timeout: false,
     },
 }
+
+export default router.handler({
+    onError: (err, _req, res) => {
+        console.error(err?.stack)
+        res.status(err?.statusCode || 500).end(
+            err?.message || 'Internal Server Error',
+        )
+    },
+})
