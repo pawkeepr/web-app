@@ -63,7 +63,7 @@ const nextConfig = ((_phase) => {
                             key: 'Authorization'
                         }
                     ],
-                    destination: 'https://wqwkbo2249.execute-api.us-east-1.amazonaws.com/testdevelopment/:path*'
+                    destination: `${process.env.API_URL}`
                 },
                 {
                     source: '/api-file/:path*',
@@ -73,7 +73,7 @@ const nextConfig = ((_phase) => {
                             key: 'Authorization'
                         }
                     ],
-                    destination: 'https://pljngximqe.execute-api.us-east-1.amazonaws.com/development/:path*',
+                    destination: `${process.env.API_FILE_URL}`,
                 },
             ]
         }
