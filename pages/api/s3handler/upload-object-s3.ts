@@ -2,6 +2,7 @@ import formidable from 'formidable'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { createRouter } from 'next-connect'
 import { uploadToS3 } from '~/api/services/upload-to-s3'
+import type { FileTypePossible } from '~/services/helpers/profile'
 
 type ResponseData = {
     fileName: string | null
@@ -28,16 +29,20 @@ const POST = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => 
             return res.status(500).json({ fileName: null, message: response.err })
         }
 
-        if (!response.files.file) {
+        if (!response.files.file || response.files.file.length === 0) {
             return res
                 .status(400)
                 .json({ fileName: null, message: 'File not found' })
         }
 
+        const [file] = response.files.file
+        const { mimeType } = response.fields as { mimeType: string[] }
+
         const { message, status } = await uploadToS3({
-            fileName: response.files.file[0].newFilename,
-            filePath: response.files.file[0].filepath,
-            size: response.files.file[0].size,
+            fileName: file.newFilename,
+            filePath: file.filepath,
+            mimeType: mimeType[0] as FileTypePossible,
+            size: file.size,
         })
 
         return res.status(status).json({

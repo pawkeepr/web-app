@@ -1,4 +1,5 @@
 import { cnpj, cpf } from 'cpf-cnpj-validator'
+import { useState } from 'react'
 import * as Yup from 'yup'
 import useAppQuery from '~/hooks/use-app-query'
 import useMutationHelper from '~/hooks/use-mutation-helper'
@@ -82,19 +83,27 @@ export const useTutorProfileFromVet = ({ cpf_cnpj }: { cpf_cnpj: string }) => {
 }
 
 export const useMutationUpdateProfilePhoto = () => {
+    const [onProgress, setOnProgress] = useState(0)
+    const { refetch } = useProfile()
     const { data: user } = useProfile()
     AttributeTypeProfile
+
+    const onProgressCallback = (value: number) => {
+        setOnProgress(value)
+    }
+
     const type =
         EnumerateTypeProfile[
             user?.type_profile as keyof typeof EnumerateTypeProfile
         ]
 
-    return useMutationHelper({
+    const mutation = useMutationHelper({
         mutationFn: async (data: FormData) => {
             const response = await postProfilePicture(
                 data,
                 type,
                 user?.id as string,
+                onProgressCallback,
             )
 
             if (response instanceof Error) {
@@ -115,9 +124,21 @@ export const useMutationUpdateProfilePhoto = () => {
         },
 
         mutationKey: [NAME, user?.id, 'picture'],
-        onSuccess: () => infoToast('Foto de perfil atualizada com sucesso'),
-        onError: () => errorToast('Erro ao atualizar foto de perfil.'),
+        onSuccess: () => {
+            refetch()
+            onProgressCallback(0)
+            infoToast('Foto de perfil atualizada com sucesso')
+        },
+        onError: () => {
+            onProgressCallback(0)
+            errorToast('Erro ao atualizar foto de perfil.')
+        },
     })
+
+    return {
+        ...mutation,
+        onProgress,
+    }
 }
 
 export const useProfilePhoto = () => {
