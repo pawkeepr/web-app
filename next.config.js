@@ -63,7 +63,7 @@ const nextConfig = ((_phase) => {
                             key: 'Authorization'
                         }
                     ],
-                    destination: `${process.env.API_URL}`
+                    destination: `${process.env.REACT_APP_API_URL}`
                 },
                 {
                     source: '/api-file/:path*',
@@ -73,7 +73,7 @@ const nextConfig = ((_phase) => {
                             key: 'Authorization'
                         }
                     ],
-                    destination: `${process.env.API_FILE_URL}`,
+                    destination: `${process.env.REACT_APP_API_FILE_URL}`,
                 },
             ]
         }
