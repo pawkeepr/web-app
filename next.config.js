@@ -56,7 +56,7 @@ const nextConfig = ((_phase) => {
         async rewrites() {
             return [
                 {
-                    source: '/api/:path*',
+                    source: '/api/proxy/:path*',
                     has: [
                         {
                             type: 'header',
@@ -66,7 +66,7 @@ const nextConfig = ((_phase) => {
                     destination: `${process.env.REACT_APP_API_URL}`
                 },
                 {
-                    source: '/api-file/:path*',
+                    source: '/api-file/proxy/:path*',
                     has: [
                         {
                             type: 'header',
