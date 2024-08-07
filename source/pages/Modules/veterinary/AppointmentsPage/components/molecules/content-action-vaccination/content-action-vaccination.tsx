@@ -103,6 +103,13 @@ const ContentActionVaccination = ({
                 </Tag>
             </div>
             <FieldControl name={`${name}.batch`} label="Lote" />
+            <FieldControl name={`${name}.brand`} label="Fabricante" />
+            <FieldControl
+                type="date"
+                name={`${name}.date_next_application`}
+                label="Data da proxima aplicação"
+            />
+
             <FieldTextArea
                 label="Observações"
                 name={`${name}.notes` as ''}
