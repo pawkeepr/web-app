@@ -57,26 +57,14 @@ const nextConfig = ((_phase) => {
             return [
                 {
                     source: '/api/proxy/:path*',
-                    has: [
-                        {
-                            type: 'header',
-                            key: 'Authorization'
-                        }
-                    ],
-                    destination: `${process.env.REACT_APP_API_URL}`
+                    destination: `${process.env.REACT_APP_API_URL}/:path*`,
                 },
                 {
                     source: '/api-file/proxy/:path*',
-                    has: [
-                        {
-                            type: 'header',
-                            key: 'Authorization'
-                        }
-                    ],
-                    destination: `${process.env.REACT_APP_API_FILE_URL}`,
+                    destination: `${process.env.REACT_APP_API_FILE_URL}/:path*`,
                 },
             ]
-        }
+        },
     }
 })(process.env.NODE_ENV)
 
