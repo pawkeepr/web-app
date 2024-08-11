@@ -11,6 +11,7 @@ type UploadToS3 = {
 
 export const uploadToS3 = async (img: UploadToS3) => {
     const { data } = await getSignedUrl(img.mimeType)
+
     const image = fs.readFileSync(img.filePath)
 
     await axios.put(data.url, image, {

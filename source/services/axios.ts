@@ -6,7 +6,7 @@ export function getAPIClient(ctx?: any) {
     const token = getCookie(optionsCookies.token.name, ctx)
 
     const api = axios.create({
-        baseURL: '/api/proxy', 
+        baseURL: '/api/proxy',
     })
 
     api.defaults.headers['Content-Type'] = 'application/json'
@@ -21,13 +21,13 @@ export function getAPIFileClient(ctx?: any) {
     const token = getCookie(optionsCookies.token.name, ctx)
 
     const api = axios.create({
-        baseURL: '/api-file/proxy', 
+        baseURL: process.env.REACT_APP_API_FILE_URL,
     })
 
     api.defaults.headers['Content-Type'] = 'application/json'
-    // if (token) {
-    //     api.defaults.headers.Authorization = `${token}`
-    // }
+    if (token) {
+        api.defaults.headers.Authorization = `${token}`
+    }
 
     return api
 }
