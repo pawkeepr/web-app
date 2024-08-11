@@ -50,9 +50,21 @@ const nextConfig = ((_phase) => {
             REGION: process.env.REGION,
             USER_POOL_ID: process.env.USER_POOL_ID,
             USER_POOL_WEB_CLIENT_ID: process.env.USER_POOL_WEB_CLIENT_ID,
-            FLAG_LIST: process.env.FLAG_LIST,
+            FLAG_DEV: process.env.FLAG_DEV,
         },
         i18n,
+        async rewrites() {
+            return [
+                {
+                    source: '/api/proxy/:path*',
+                    destination: `${process.env.REACT_APP_API_URL}/:path*`,
+                },
+                {
+                    source: '/api-file/proxy/:path*',
+                    destination: `${process.env.REACT_APP_API_FILE_URL}/:path*`,
+                },
+            ]
+        },
     }
 })(process.env.NODE_ENV)
 

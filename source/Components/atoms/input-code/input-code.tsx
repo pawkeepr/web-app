@@ -17,15 +17,15 @@ const InputCode = ({
                 {id}
             </label>
             <input
-                type="text"
+                {...rest}
+                type="number"
                 className={input({
-                    className: `${className} !px-0 `,
+                    className: `${className} !px-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`,
                     required,
                     center: true,
                 })}
                 id={id}
                 onKeyUp={() => moveToNext()}
-                {...rest}
             />
         </div>
     )

@@ -11,6 +11,7 @@ import ProfileEditor from './profile-editor'
 
 const AvatarModal = ({
     oldImageSrc = '',
+    progress = 0,
     modalButtonSize = 'large',
     disabled = false,
     isLoading,
@@ -20,8 +21,9 @@ const AvatarModal = ({
     oldImageSrc?: string
     isLoading?: boolean
     disabled?: boolean
+    progress?: number
     modalButtonSize?: 'small' | 'medium' | 'large'
-    onSave?: (file: File) => Promise<void>
+    onSave?: (file: FormData) => Promise<void>
 } & AvatarPetProps) => {
     const editorRef = useRef(null)
     const [file, setFile] = useState<File | undefined>()
@@ -33,10 +35,16 @@ const AvatarModal = ({
     const handleSave = async () => {
         if (!editorRef.current) return
         const dataUrl = editorRef.current?.getImage()?.toDataURL()
+
         const result = await fetch(dataUrl)
+
         const blob = await result.blob()
         const file = new File([blob], 'file')
-        await onSave?.(file)
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('mimeType', blob.type)
+
+        await onSave?.(formData)
         closeModal()
     }
 
@@ -71,6 +79,7 @@ const AvatarModal = ({
                     </h1>
                     <input
                         type="file"
+                        accept="image/jpg, image/jpeg, image/png"
                         onChange={(e) => setFileData(e)}
                         multiple={false}
                     />
@@ -98,6 +107,28 @@ const AvatarModal = ({
                             onClick={handleSave}
                             isLoading={isLoading}
                         />
+                    </div>
+                    <div
+                        className="relative flex flex-col w-full mt-1 overflow-hidden transition-all duration-300 "
+                        style={{ opacity: progress / 100 }}
+                    >
+                        <progress
+                            id="progressBar"
+                            className="transition-all progress progress-primary w-(100% - 32px) "
+                            value={progress}
+                            max="100"
+                        />
+                        <label
+                            className="w-full px-2 text-gray-500 "
+                            htmlFor="progressBar"
+                            style={{
+                                transform: `translateX(calc(${progress}% - ${
+                                    progress < 50 ? -0 : 10
+                                }%))`,
+                            }}
+                        >
+                            <span className="label-text">{progress}%</span>
+                        </label>
                     </div>
                 </div>
             </Modal>

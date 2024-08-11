@@ -43,7 +43,7 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
                 message="Visualizar Históricos"
                 color="neutral"
                 href={href}
-                className=" !w-1/3 border-none web:w-fit flex justify-center items-center "
+                className=" !w-1/2 h-11 border-none web:w-fit flex justify-center items-center "
             >
                 <FaEdit />
             </BtnLink>

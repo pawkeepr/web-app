@@ -45,7 +45,7 @@ const GET_PROFILE = {
     [AttributeTypeProfile.VETERINARY]: getVetProfile,
 } as const
 
-const DASHBOARD_PROFILE = {
+export const DASHBOARD_PROFILE = {
     [AttributeTypeProfile.TUTOR]: '/tutor/dashboard',
     [AttributeTypeProfile.VETERINARY]: '/veterinary/dashboard',
 } as const

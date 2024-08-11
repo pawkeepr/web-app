@@ -6,8 +6,8 @@ const ProfileEditor = ({ editorRef, file }) => {
         <AvatarEditor
             ref={editorRef}
             image={file}
-            width={250}
-            height={250}
+            width={360}
+            height={360}
             borderRadius={250}
             scale={1.2}
             border={50}

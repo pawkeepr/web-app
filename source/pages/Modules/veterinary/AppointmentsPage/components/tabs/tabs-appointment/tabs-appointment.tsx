@@ -18,6 +18,7 @@ import StepExams from '../../steps/step-exams'
 
 import AppointmentsErrsModal from '~/Components/modals/appointments-errs-modal'
 import MenuHorizontalTabs from '~/Components/organism/menu-horizontal-tabs'
+import StepPhysicalExam from '../../steps/step-physical-exam'
 import StepSupplementation from '../../steps/step-supplementation'
 import StepTreatment from '../../steps/step-treatment'
 import StepVaccination from '../../steps/step-vaccination'
@@ -43,36 +44,42 @@ const items: TabItem[] = [
     },
     {
         id: 1,
+        title: 'Exame Físico',
+        href: '#PhysicalExam',
+        Component: StepPhysicalExam,
+    },
+    {
+        id: 2,
         title: 'Exames',
         href: '#Exams',
         Component: StepExams,
     },
     {
-        id: 2,
+        id: 3,
         title: 'Vacinação',
         href: '#Vaccination',
         Component: StepVaccination,
     },
     {
-        id: 3,
+        id: 4,
         title: 'Vermifugo',
         href: '#Vermifuge',
         Component: StepVermifuge,
     },
     {
-        id: 4,
+        id: 5,
         title: 'Medicação',
         href: '#Medication',
         Component: StepTreatment,
     },
     {
-        id: 5,
+        id: 6,
         title: 'Suplementação',
         href: '#Treatment',
         Component: StepSupplementation,
     },
     {
-        id: 6,
+        id: 7,
         title: 'Diagnóstico',
         href: '#Diagnostic',
         Component: StepDiagnosis,
