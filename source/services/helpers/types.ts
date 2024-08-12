@@ -40,10 +40,16 @@ export interface UserData {
 export const AttributeTypeProfile = {
     VETERINARY: '1',
     TUTOR: '2',
-    NONE: null,
 } as const
 export type AttributeTypeProfile =
     (typeof AttributeTypeProfile)[keyof typeof AttributeTypeProfile]
+
+export const EnumerateTypeProfile = {
+    1: 'vet',
+    2: 'tutor',
+} as const
+
+export type EnumerateTypeProfile = keyof typeof EnumerateTypeProfile
 
 export interface AttributesProfile {
     type_profile: AttributeTypeProfile

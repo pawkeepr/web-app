@@ -11,7 +11,7 @@ import { useAppSelector } from '~/store/hooks'
 const NAME = 'feedback'
 
 export const useCreateFeedbackMutation = () => {
-    const { user } = useAppSelector((state) => state.Profile)
+    const { user } = useAppSelector((state) => state.Login)
     const superKeys = [NAME, user?.email]
 
     const type_profile = user?.['custom:type_profile']

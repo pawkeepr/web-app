@@ -87,8 +87,23 @@ module.exports = {
             },
             fontSize: {
                 none: 0, // Adiciona um utilitário `text-none` para definir o tamanho da fonte como 0
+                xxs: ['0.625rem', { lineHeight: '0.75rem' }],
+                xs: ['0.875rem', { lineHeight: '1rem' }],
+                sm: ['1rem', { lineHeight: '1.25rem' }],
+                base: ['1.125rem', { lineHeight: '1.75rem' }],
+                lg: ['1.25rem', { lineHeight: '1.75rem' }],
+                xl: ['1.5rem', { lineHeight: '2rem' }],
             },
         },
+        keyframes: {
+            zoom: {
+                '0%': { transform: 'scale(0)' },
+                '100%': { transform: 'scale(1)' },
+              },
+            },
+            animation: {
+              'zoom-in': 'zoom 0.2s ease-in-out forwards',
+            },
     },
     plugins: [require('daisyui'), require('./deps/@tailwindcss/forms')],
     daisyui: {

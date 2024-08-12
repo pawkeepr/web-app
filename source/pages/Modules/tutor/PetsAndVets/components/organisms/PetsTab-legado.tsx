@@ -1,5 +1,5 @@
 import { MdPets } from 'react-icons/md'
-import { BtnLinkFloating } from '~/Components/molecules/btn-floating/btn-floating'
+import BtnFloating from '~/Components/molecules/btn-floating-expansible'
 import CardPets from '~/Components/organism/card-pets'
 import { useListPetsFromTutor } from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
 import useProfile from '~/store/hooks/profile/use-profile'
@@ -23,15 +23,19 @@ const PetsTab = () => {
                         pet={{
                             ...pet,
                             cpf_cnpj: profile?.user_information?.cpf_cnpj as string,
-                            castrated: pet.castrated === 'yes',
+                            castrated: pet.castrated,
                         }}
                     />
                 ))}
 
-            <BtnLinkFloating
-                icon={(props) => <MdPets {...props} />}
-                title="Adicionar Pet"
-                href="/tutor/pet"
+            <BtnFloating
+                childLinks={[
+                    {
+                        icon: MdPets,
+                        title: 'Adicionar Pet',
+                        href: '/pets-and-vets/add-pet',
+                    },
+                ]}
             />
         </section>
     )

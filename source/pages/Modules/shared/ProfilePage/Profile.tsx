@@ -52,7 +52,9 @@ const Profile: React.FC = () => {
             <div className="container mx-auto mt-2">
                 <div className="flex flex-wrap flex-1 mobile:flex-col">
                     <div className="flex flex-col flex-1 w-full gap-1 m-1 border border-gray-200 ">
-                        <UserProfileCard />
+                        <UserProfileCard
+                            avatar={profile?.user_information?.url_img}
+                        />
                         <SocialLinks />
                     </div>
                     <div className="w-full flex flex-[3] web:mt-0 mobile:!flex-1 overflow-hidden">

@@ -40,11 +40,10 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
         <div className="flex flex-wrap items-center justify-end w-full gap-1 px-2 overflow-hidden ">
             <BtnLink
                 condition={!isLoading}
-                message="Visualizar Histórico"
-                outline
+                message="Visualizar Históricos"
                 color="neutral"
                 href={href}
-                className=" !w-1/3 border-none web:max-w-[200px]   "
+                className=" !w-1/2 h-11 border-none web:w-fit flex justify-center items-center "
             >
                 <FaEdit />
             </BtnLink>

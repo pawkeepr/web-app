@@ -20,7 +20,7 @@ const tab = tv({
         focus:outline-none focus:ring-none
         leading-1 font-bold text-gray-400 bg-transparent
         text-sm flex web:flex-row items-center justify-center
-        gap-1 flex-grow  
+        gap-1 flex-grow
         transition-transform duration-300 ease-in-out
     `,
     // Ajustes adicionais para os estilos mobile
@@ -32,7 +32,7 @@ const tab = tv({
             true: 'web:py-2 web:!w-full',
         },
         selected: {
-            true: 'text-gray-600 transform scale-105',
+            true: 'text-primary-500 transform scale-105',
         },
         disabled: {
             true: '!text-gray-200 cursor-not-allowed bg-transparent hover:bg-transparent hover:text-gray-600',

@@ -10,7 +10,6 @@ import { useAppSelector } from '~/store/hooks'
 import validate, { type ActivateAccount } from '~/validations/activate'
 
 import { signOutUser } from '~/store/slices/auth/login/actions'
-import { addNew } from '~/store/slices/auth/profile/actions'
 import { changeLayoutMode } from '~/store/slices/layouts/actions'
 
 import { useAppDispatch } from '~/store/hooks'
@@ -19,6 +18,8 @@ import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 import { BtnLink } from '~/Components/atoms/btn'
 
 import { layoutModeTypes } from '~/constants/layout'
+import { AttributeTypeProfile } from '~/services/helpers/types'
+import { addNew } from '~/store/slices/auth/profile/actions'
 import type { ActivateAccountVeterinary } from '~/types/activate-account-veterinary'
 import { TypeProfile, type ScheduleDays } from '~/types/profile'
 import StepActivationAddress from './components/steps-activation/step-address'
@@ -136,7 +137,7 @@ const ActivationAccount = () => {
         if (!email) {
             dispatch(
                 signOutUser({
-                    type_profile: TypeProfile.VETERINARY,
+                    type_profile: AttributeTypeProfile.VETERINARY,
                 }),
             )
         }

@@ -56,10 +56,19 @@ const loginSlice = createSlice({
                 api.defaults.headers.Authorization = `${action.payload.token}`
             }
 
+            // if (apiFile.defaults.headers) {
+            //     apiFile.defaults.headers.Authorization = `${action.payload.token}`
+            // }
+
             state.token = action.payload.token
         },
-        signInSuccess: (state, action: PayloadAction<{ token: string }>) => {
+        signInSuccess: (
+            state,
+            action: PayloadAction<{ token: string; user: unknown }>,
+        ) => {
             state.token = action.payload.token
+            state.user = action.payload.user
+            state.password = ''
             state.isAuthenticated = true
             state.isLoading = LOADING.SUCCESS
         },
@@ -67,7 +76,7 @@ const loginSlice = createSlice({
             state.error = action.payload
             state.isLoading = LOADING.FAILED
         },
-        recoverUserByToken: (state, action: PayloadAction<string>) => {
+        recoverUserByToken: (state) => {
             state.isLoading = LOADING.PENDING
         },
         recoverUserByTokenSuccess: (

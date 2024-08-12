@@ -22,14 +22,14 @@ const StepDocument = ({ nextStep, onChangeDocument, onChangeStep }: StepProps) =
 
     return (
         <div className="gap-2">
-            <h5 className="text-center font-semibold text-gray-500 mb-2">
-                Insira o CPF do tutor para agendar ou iniciar uma consulta
+            <h5 className="mb-2 font-semibold text-center text-gray-500">
+                Insira o CPF do tutor para agendar/iniciar uma consulta
             </h5>
             <FieldDocument
                 ctx={values}
                 required
                 name="ownerEmergencyContact.cpf_cnpj"
-                className="w-full flex-1 mt-2"
+                className="flex-1 w-full mt-2"
                 placeholder="CPF/CNPJ"
                 onChange={(e: { target: { value: string } }) =>
                     onChangeDocument?.(e.target.value)

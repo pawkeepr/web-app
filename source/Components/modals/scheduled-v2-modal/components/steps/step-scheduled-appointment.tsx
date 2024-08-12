@@ -201,7 +201,6 @@ const StepScheduledAppointment = ({ previousStep, pet, closeModal }: StepProps) 
                         />
                         <FieldTextArea
                             ctx={values}
-                            required
                             label="Motivo da Consulta"
                             className="form-control"
                             component="textarea"

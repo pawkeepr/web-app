@@ -144,7 +144,9 @@ const MenuHorizontalTabs = ({
             return items
         }
 
-        return selectMiddle(items, items[index]) as ItemTab[]
+        const middleArray = selectMiddle(items, items[index]) as ItemTab[]
+
+        return middleArray
     }, [items, isMobile])
 
     useEffect(() => {
@@ -172,14 +174,17 @@ const MenuHorizontalTabs = ({
     }
 
     const visibleItems = useMemo(() => {
-        if (!isMobile) return itemsMenu
+        if (!isMobile) return items
+
         const cpItems = cloneDeep(itemsMenu)
-        return cpItems.concat(cpItems)
-    }, [isMobile, itemsMenu])
+        const concat = cpItems.concat(cpItems)
+
+        return concat
+    }, [isMobile, items, itemsMenu])
 
     return (
         <>
-            <div className="w-full web:hidden">
+            <div className="w-full web:hidden mobile:pt-2">
                 <Dots
                     total={items.length}
                     activeIndex={items.findIndex((i) => i.id === activeItem.id)}

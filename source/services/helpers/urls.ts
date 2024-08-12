@@ -14,7 +14,7 @@ export const SCHEDULED_CREATE = () => '/api-appointment/create-schedule'
 
 export const VET_CREATE_PROFILE = () => '/api-user/create-user/vet'
 export const TUTOR_CREATE_PROFILE = () => '/api-user/create-user/tutor'
-export const VET_GET_PROFILE = () => '/api-user/search-user-vet'
+export const VET_GET_PROFILE = () => '/api-user/search-user/vet'
 
 // Profile Tutor
 
