@@ -91,6 +91,14 @@ const PersonalData = ({ data }: PersonalDataProps) => {
                                 placeholder="Digite seu telefone"
                             />
                             <FieldControl
+                                mode={mode}
+                                label="Instagram"
+                                type="text"
+                                ctx={values}
+                                name="user_information.contact.instagram"
+                                placeholder="Digite seu @ do instagram"
+                            />
+                            <FieldControl
                                 mode="readonly"
                                 ctx={values}
                                 label="Email"

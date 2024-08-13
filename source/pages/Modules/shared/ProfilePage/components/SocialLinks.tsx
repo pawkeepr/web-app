@@ -3,7 +3,7 @@
 import {
     // FaEnvelope,
     // FaFacebook,
-    // FaInstagram,
+    FaInstagram,
     // FaTiktok,
     FaWhatsapp,
 } from 'react-icons/fa'
@@ -11,10 +11,11 @@ import FieldControl from '~/Components/molecules/field-control'
 import CardContainer from './CardContainer'
 
 type SocialLinksProps = {
-    whatsapp?: string
+    whatsapp?: string,
+    instagram?: string | null,
 }
 
-const SocialLinks = ({ whatsapp }: SocialLinksProps) => {
+const SocialLinks = ({ whatsapp, instagram }: SocialLinksProps) => {
     return (
         <CardContainer className="bg-white ">
             {/* <div className="flex items-center mb-3">
@@ -47,17 +48,17 @@ const SocialLinks = ({ whatsapp }: SocialLinksProps) => {
                     value={whatsapp || 'Não Informado'}
                 />
             </div>
-            {/* <div className="flex items-center mb-3">
-                <FaInstagram className="w-6 h-6 mr-3 text-pink-500" />
-                <Input
-                    type="text"
-                    className="form-control"
-                    id="instagramUsername"
-                    placeholder="Instagram Username"
-                    defaultValue="@daveadame"
+            <div className="flex items-center mb-3">
+                <FieldControl
+                    text_align="right"
+                    startIcon={<FaInstagram className="w-6 h-6 mr-3 text-pink-500" />}
+                    ctx={{ instagram: '' }}
+                    name="instagram"
+                    mode="readonly"
+                    value={`@${instagram}` || 'Não Informado'}
                 />
             </div>
-            <div className="flex items-center mb-3">
+            {/* <div className="flex items-center mb-3">
                 <FaTiktok className="w-6 h-6 mr-3 text-black" />
                 <Input
                     type="text"
