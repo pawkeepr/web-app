@@ -141,20 +141,4 @@ export const useMutationUpdateProfilePhoto = () => {
     }
 }
 
-export const useProfilePhoto = () => {
-    const superKeys = [NAME, 'photo']
-
-    return useAppQuery<string>(
-        superKeys,
-        () => {
-            return {
-                data: '',
-            }
-        },
-        {
-            enabled: false,
-        },
-    )
-}
-
 export default useProfile
