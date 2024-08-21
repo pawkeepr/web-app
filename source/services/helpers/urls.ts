@@ -19,6 +19,7 @@ export const VET_GET_PROFILE = () => '/api-user/search-user/vet'
 // Profile Tutor
 
 export const TUTOR_GET_PROFILE = () => '/api-user/search-user/tutor'
+export const TUTOR_VET_GET_BY_ID = (id_tutor: string) => `/api-external/search-vet?user_id=${id_tutor}`
 export const TUTOR_UPDATE_PROFILE_PAWKEEPR = () => '/api-user/update-user-tutor'
 
 export const TUTOR_HAS_PROFILE_FROM_VETERINARY = () => '/api-user/search-user-tutor'

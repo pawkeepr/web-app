@@ -6,22 +6,16 @@ import BoxButtonsTutors from '../box-buttons-tutors'
 import ModalBoxButtonsTutors from '../box-buttons-tutors/modal-box-buttons-tutors'
 import Card from '../card'
 import Link from 'next/link'
-import { useCallback } from 'react'
-import { useRouter } from 'next/router'
 
 type CardTutorsProps = {
     tutor: IMainResponsibleGuardian
 }
 
 const CardTutor = ({ tutor }: CardTutorsProps) => {
-    
-    const router = useRouter()
 
-    const goToTutorProfile = useCallback(() => {
-        router.push(
-            `/public-profile/${tutor.cpf_cnpj as string}`,
-        )
-    }, [tutor])
+    const getUrlPublicProfile = () => {
+        return `/public-profile-tutor/${tutor.id as string}`
+    }
     
     return (
         <Card
@@ -57,7 +51,7 @@ const CardTutor = ({ tutor }: CardTutorsProps) => {
                 </div>
                 <div className="text-gray-500">
                     <Link
-                        href={'/profile'}
+                        href={getUrlPublicProfile()}
                     >
                         <span className="font-bold mb-1 align-middle">
                             Ver Perfil

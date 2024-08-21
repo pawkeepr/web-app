@@ -42,6 +42,7 @@ export type IHealthInsurance = {
 }
 
 export type ITutor = {
+    id: string
     cpf_cnpj: string
     first_name: string | null
     last_name: string | null

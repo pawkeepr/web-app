@@ -29,6 +29,7 @@ export const createProfileTutor = async (data: IProfile) =>
     api.post(urls.TUTOR_CREATE_PROFILE(), data)
 
 export const getTutorProfile = async () => api.get(urls.TUTOR_GET_PROFILE())
+export const getTutorById = async (id_tutor: string) => api.get(urls.TUTOR_VET_GET_BY_ID(id_tutor))
 
 export const updateProfileTutorPawkeepr = async (data: IProfile, owner: string) =>
     api.put(urls.TUTOR_UPDATE_PROFILE_PAWKEEPR(), data, {
