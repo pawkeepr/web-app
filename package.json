@@ -7,12 +7,14 @@
         "npm": ">= 9",
         "yarn": ">= 1.22"
     },
+    "packageManager": "yarn@1.22.22",
     "scripts": {
         "test": "cross-env NODE_ENV=test vitest --ui --watch --t Unit",
         "coverage": "vitest run --coverage",
         "dev": "next dev -p 3001",
         "prebuild": "npx tailwindcss -o build.css --minify",
         "build": "next build",
+        "turbo": "turbo run build",
         "start": "next start -p 3001",
         "lint": "npx @biomejs/biome check --apply-unsafe ./source",
         "format": "npx @biomejs/biome format --write ./source",
