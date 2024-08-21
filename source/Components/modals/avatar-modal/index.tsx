@@ -6,7 +6,6 @@ import type { AvatarPetProps } from '~/Components/molecules/avatar-pet/avatar-pe
 import Modal from '~/Components/organism/modal'
 import Env from '~/env'
 import useModal from '~/hooks/use-modal'
-import { useProfilePhoto } from '~/store/hooks/profile/use-profile'
 import ProfileEditor from './profile-editor'
 
 const AvatarModal = ({
@@ -29,8 +28,6 @@ const AvatarModal = ({
     const [file, setFile] = useState<File | undefined>()
     const { closeModal, open, showModal } = useModal()
     const FLAG_DEV = Env().get('FLAG_DEV')
-
-    const { data: sourceImg } = useProfilePhoto()
 
     const handleSave = async () => {
         if (!editorRef.current) return
@@ -66,7 +63,7 @@ const AvatarModal = ({
                 })}
                 onClick={showModal}
             >
-                <AvatarPet src={sourceImg} {...props} />
+                <AvatarPet src={oldImageSrc} {...props} />
             </button>
             <Modal
                 onClose={closeModal}

@@ -1,8 +1,6 @@
-import { cloneDeep } from 'lodash'
 import { useEffect, useMemo, useState } from 'react'
 import { TiArrowBack, TiArrowForward } from 'react-icons/ti'
 import { tv } from 'tailwind-variants'
-import useResizeMobile from '~/hooks/use-resize-mobile'
 import Dots from './dots'
 
 const tab = tv({
@@ -40,7 +38,7 @@ const buttonTab = tv({
             true: 'web:py-2 web:!w-full',
         },
         selected: {
-            true: 'text-gray-100 bg-primary-500  shadow-2xl  mobile:translate-y-[-25%] transform mobile:scale-105 ',
+            true: 'text-gray-100 bg-primary-500 shadow-2xl mobile:translate-y-[-25%] transform mobile:scale-105',
             false: '',
         },
         disabled: {
@@ -132,25 +130,19 @@ const MenuHorizontalTabs = ({
     onClick,
     activeItem,
 }: MenuHorizontalTabsProps) => {
-    const { isMobile } = useResizeMobile()
     const middle = Math.floor(items.length / 2)
-    const [currentIndex, setCurrentIndex] = useState(isMobile ? middle : 0)
+    const [currentIndex, setCurrentIndex] = useState(middle)
 
     const itemsMenu = useMemo(() => {
-        if (!isMobile) return items
-
         const index = items.findIndex((i) => i.id === activeItem.id)
         if (items.length < 3) {
             return items
         }
 
-        const middleArray = selectMiddle(items, items[index]) as ItemTab[]
-
-        return middleArray
-    }, [items, isMobile])
+        return selectMiddle(items, items[index]) as ItemTab[]
+    }, [items])
 
     useEffect(() => {
-        if (!isMobile) return
         const index = itemsMenu.findIndex((i) => i.id === activeItem.id)
         setCurrentIndex(index)
     }, [activeItem, itemsMenu])
@@ -159,7 +151,7 @@ const MenuHorizontalTabs = ({
         setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length)
         const index = items.findIndex((i) => i.id === activeItem.id)
         const newIndex = (index + 1) % items.length
-        isMobile && selectMiddle(items, items[newIndex])
+        selectMiddle(items, items[newIndex])
         onClick(items[newIndex])
     }
 
@@ -169,18 +161,9 @@ const MenuHorizontalTabs = ({
         )
         const index = items.findIndex((i) => i.id === activeItem.id)
         const newIndex = (index - 1 + items.length) % items.length
-        isMobile && selectMiddle(items, items[newIndex])
+        selectMiddle(items, items[newIndex])
         onClick(items[newIndex])
     }
-
-    const visibleItems = useMemo(() => {
-        if (!isMobile) return items
-
-        const cpItems = cloneDeep(itemsMenu)
-        const concat = cpItems.concat(cpItems)
-
-        return concat
-    }, [isMobile, items, itemsMenu])
 
     return (
         <>
@@ -202,46 +185,37 @@ const MenuHorizontalTabs = ({
                 >
                     <TiArrowForward className="w-5 h-5 transform rotate-[240deg] text-primary-500 " />
                 </button>
-                <div className="w-full">
-                    <div
-                        className="flex transition-transform duration-500"
-                        style={{
-                            transform: `translateX(-${
-                                isMobile
-                                    ? (100 / 3) *
-                                      ((currentIndex - 1) % items.length)
-                                    : 0
-                            }%)`,
-                        }}
-                    >
-                        {visibleItems.map((item) => {
-                            return (
-                                <div
-                                    key={item.id}
-                                    className={tab({
+                <div
+                    className="flex transition-transform duration-500"
+                    style={{
+                        transform: `translateX(-${(100 / 3) * currentIndex}%)`,
+                    }}
+                >
+                    {itemsMenu.map((item) => {
+                        return (
+                            <div
+                                key={item.id}
+                                className={tab({
+                                    selected: activeItem.id === item.id,
+                                    className: 'mobile:flex-shrink-0 mobile:w-1/3',
+                                })}
+                            >
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        if (item.id === activeItem.id) return
+                                        onClick(item)
+                                        selectMiddle(items, item)
+                                    }}
+                                    className={buttonTab({
                                         selected: activeItem.id === item.id,
-                                        className:
-                                            'mobile:flex-shrink-0 mobile:w-1/3',
                                     })}
                                 >
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            if (item.id === activeItem.id) return
-                                            // getDirection(activeItem, item)
-                                            onClick(item)
-                                            selectMiddle(items, item)
-                                        }}
-                                        className={buttonTab({
-                                            selected: activeItem.id === item.id,
-                                        })}
-                                    >
-                                        {item.title}
-                                    </button>
-                                </div>
-                            )
-                        })}
-                    </div>
+                                    {item.title}
+                                </button>
+                            </div>
+                        )
+                    })}
                 </div>
                 <button
                     type="button"
