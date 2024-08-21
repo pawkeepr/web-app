@@ -1,65 +1,76 @@
+import formidable from 'formidable'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { NextResponse, type NextRequest } from 'next/server'
-import { apiFile } from '~/services/api'
-import type { GetSignedUrl } from '~/services/helpers/profile'
+import { createRouter } from 'next-connect'
+import { uploadToS3 } from '~/api/services/upload-to-s3'
+import type { FileTypePossible } from '~/services/helpers/profile'
 
 type ResponseData = {
-    filename: string | null
+    fileName: string | null
     message?: string
 }
 
-const uploadToS3 = async (img: string) => {
-    const { data } = await apiFile.get<GetSignedUrl>('/api/get-file-signed-url/')
-
-    const image = Buffer.from(img, 'base64')
-
-    await fetch(data.url, {
-        method: 'PUT',
-        body: image,
-        headers: {
-            Accept: 'application/json, text/plain, */*',
-            'Content-Type': 'image/jpeg',
-            'Content-Length': image.length.toString(),
-        },
-    })
-
-    return {
-        status: 200,
-        message: {
-            filename: data.filename,
-        },
-    }
+type ResponseFormidable = {
+    fields: formidable.Fields
+    files: formidable.Files
+    err: any
 }
 
-export async function GET(_request: NextRequest) {
-    return NextResponse.json({ filename: 'Health Check!' })
-}
+const POST = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
+    try {
+        const form = formidable({ uploadDir: '/tmp/' })
 
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse<ResponseData>,
-) {
-    if (req.method === 'GET') {
-        return res.status(200).json({ filename: 'Health Check!' })
-    }
+        const response: ResponseFormidable = await new Promise((resolve) => {
+            form.parse(req, (err, fields, files) => {
+                resolve({ err, fields, files })
+            })
+        })
 
-    if (req.method === 'POST') {
-        try {
-            const response = await uploadToS3(req.body)
-            return res.status(response.status).json(response.message)
-        } catch (err) {
-            return res.status(500).json(err as ResponseData)
+        if (response.err) {
+            return res.status(500).json({ fileName: null, message: response.err })
         }
+
+        if (!response.files.file || response.files.file.length === 0) {
+            return res
+                .status(400)
+                .json({ fileName: null, message: 'File not found' })
+        }
+
+        const [file] = response.files.file
+        const { mimeType } = response.fields as { mimeType: string[] }
+
+        const { message, status } = await uploadToS3({
+            fileName: file.newFilename,
+            filePath: file.filepath,
+            mimeType: mimeType[0] as FileTypePossible,
+            size: file.size,
+        })
+
+        return res.status(status).json({
+            fileName: message.fileName,
+            message: 'File uploaded successfully',
+        })
+    } catch (err) {
+        return res.status(500).json(err as ResponseData)
     }
 }
 
+const router = createRouter<NextApiRequest, NextApiResponse>()
+
+router.post((req, res) => POST(req, res))
 export const config = {
     api: {
         externalResolver: true,
-        bodyParser: {
-            sizeLimit: '10mb',
-        },
+        bodyParser: false,
         responseLimit: false,
         timeout: false,
     },
 }
+
+export default router.handler({
+    onError: (err, _req, res) => {
+        console.error(err?.stack)
+        res.status(err?.statusCode || 500).end(
+            err?.message || 'Internal Server Error',
+        )
+    },
+})

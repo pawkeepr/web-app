@@ -15,28 +15,22 @@ const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
-    const isPublicImage = typeof src === 'string' && src.startsWith('/')
-
     return (
         <>
-            {src && <img
-                {...rest}
-                src={src as string}
-                onError={() => setError(true)}
-                onLoadedData={() => setLoading(false)}
-                onLoadStart={() => setLoading(true)}
-                alt={alt}
-                className={className}
-                style={{
-                    display:
-                        !isPublicImage && (error || loading) ? 'none' : 'block',
-                    ...style,
-                }}
-            />}
+            {src && (
+                <img
+                    {...rest}
+                    src={src as string}
+                    onError={() => setError(true)}
+                    onLoadedData={() => setLoading(false)}
+                    onLoadStart={() => setLoading(true)}
+                    alt={alt}
+                    className={className}
+                    style={style}
+                />
+            )}
             {!src && (error || loading) && (
-                <IoPersonCircle className={
-                    twMerge('text-white', className)
-                } />
+                <IoPersonCircle className={twMerge('text-white', className)} />
             )}
         </>
     )

@@ -53,6 +53,18 @@ const nextConfig = ((_phase) => {
             FLAG_DEV: process.env.FLAG_DEV,
         },
         i18n,
+        async rewrites() {
+            return [
+                {
+                    source: '/api/proxy/:path*',
+                    destination: `${process.env.REACT_APP_API_URL}/:path*`,
+                },
+                {
+                    source: '/api-file/proxy/:path*',
+                    destination: `${process.env.REACT_APP_API_FILE_URL}/:path*`,
+                },
+            ]
+        },
     }
 })(process.env.NODE_ENV)
 

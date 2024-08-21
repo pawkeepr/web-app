@@ -20,7 +20,7 @@ const UserProfileCard = ({
     subtitle,
     title,
 }: UserProfileCardProps) => {
-    const { mutateAsync } = useMutationUpdateProfilePhoto()
+    const { mutateAsync, onProgress, isPending } = useMutationUpdateProfilePhoto()
 
     return (
         <CardContainer className="mt-2 bg-white">
@@ -28,15 +28,14 @@ const UserProfileCard = ({
                 <div className="text-center">
                     <div className="mx-auto mb-4 profile-user position-relative d-inline-block">
                         <AvatarModal
+                            progress={onProgress}
                             classNames={{
-                                img: '!w-32 !h-32',
+                                img: '!w-40 !h-40',
                             }}
                             onSave={async (file) => {
-                                const formData = new FormData()
-                                formData.append('file', file)
-                                await mutateAsync(formData)
-                                //
+                                await mutateAsync(file)
                             }}
+                            isLoading={isPending}
                             src={avatar}
                             name_pet={name as string}
                             specie={specie as Species}

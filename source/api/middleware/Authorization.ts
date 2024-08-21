@@ -1,5 +1,6 @@
-import type { NextRequest } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 
 export default function Authorization(request: NextRequest) {
-    return
+    // Caso a requisição esteja autorizada, permita a continuidade
+    return NextResponse.next()
 }

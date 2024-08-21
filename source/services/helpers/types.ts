@@ -44,6 +44,13 @@ export const AttributeTypeProfile = {
 export type AttributeTypeProfile =
     (typeof AttributeTypeProfile)[keyof typeof AttributeTypeProfile]
 
+export const EnumerateTypeProfile = {
+    1: 'vet',
+    2: 'tutor',
+} as const
+
+export type EnumerateTypeProfile = keyof typeof EnumerateTypeProfile
+
 export interface AttributesProfile {
     type_profile: AttributeTypeProfile
     has_profile: 'yes' | 'no'

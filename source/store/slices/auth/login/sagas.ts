@@ -94,6 +94,7 @@ export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
         )
 
         delay(100)
+        yield call([Router, Router.push], '/tutor/dashboard')
     } catch (error) {
         yield ErrLogin(action, error)
     }
@@ -133,6 +134,7 @@ export function* signInVetSaga(action: PayloadAction<SignInCredentials>) {
         )
 
         delay(100)
+        yield call([Router, Router.push], '/veterinary/dashboard')
     } catch (error) {
         yield ErrLogin(action, error)
     }
@@ -145,13 +147,13 @@ export function* signInUserSaga(
     yield call(signOut)
 
     yield put(changeLayoutMode(mode))
+
     if (action.payload.mode === 'vet') {
         yield put(signInVet(action.payload))
     } else {
         yield put(signInTutor(action.payload))
     }
 
-    yield call([Router, Router.push], '/dashboard')
     yield put(resetLoading())
 }
 

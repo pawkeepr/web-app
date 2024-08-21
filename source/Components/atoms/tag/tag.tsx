@@ -4,7 +4,7 @@ import withControl from '~/Components/helpers/with-control'
 
 type TagProps = {
     name: string
-    disabled: boolean
+    disabled?: boolean
     selected: boolean
     onClick?: () => void
     children: React.ReactNode
@@ -12,7 +12,7 @@ type TagProps = {
 
 const tag = {
     button: tv({
-        base: 'px-2 py-1 border rounded transition-colors flex items-center gap-1',
+        base: 'px-2 py-1 border rounded transition-colors flex items-center gap-1 ',
         variants: {
             selected: {
                 true: 'bg-primary-500 text-white',
@@ -24,7 +24,7 @@ const tag = {
         },
     }),
     label: tv({
-        base: 'text-sm font-semibold border-l border-secondary-200 pl-2',
+        base: 'text-sm font-semibold border-l border-secondary-200 pl-2 cursor-pointer',
         variants: {
             selected: {
                 true: 'text-gray-50',

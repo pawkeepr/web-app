@@ -1,4 +1,5 @@
 import { cnpj, cpf } from 'cpf-cnpj-validator'
+import { useState } from 'react'
 import * as Yup from 'yup'
 import useAppQuery from '~/hooks/use-app-query'
 import useMutationHelper from '~/hooks/use-mutation-helper'
@@ -8,8 +9,15 @@ import {
     getVetProfile,
 } from '~/services/helpers'
 import { KEYS_TYPE_USER_BY_NUMBER } from '~/services/helpers/feedback'
-import { updateProfilePicture, updateProfileV2 } from '~/services/helpers/profile'
-import { AttributeTypeProfile } from '~/services/helpers/types'
+import {
+    postProfilePicture,
+    updateProfilePicture,
+    updateProfileV2,
+} from '~/services/helpers/profile'
+import {
+    AttributeTypeProfile,
+    EnumerateTypeProfile,
+} from '~/services/helpers/types'
 import { errorToast, infoToast } from '~/store/helpers/toast'
 import { useAppSelector } from '~/store/hooks'
 import type { IProfile } from '~/types/profile'
@@ -75,12 +83,62 @@ export const useTutorProfileFromVet = ({ cpf_cnpj }: { cpf_cnpj: string }) => {
 }
 
 export const useMutationUpdateProfilePhoto = () => {
-    return useMutationHelper({
-        mutationFn: (data: FormData) => updateProfilePicture(data),
-        mutationKey: [NAME, 'photo'],
-        onSuccess: () => infoToast('Foto de perfil atualizada com sucesso'),
-        onError: () => errorToast('Erro ao atualizar foto de perfil.'),
+    const [onProgress, setOnProgress] = useState(0)
+    const { refetch } = useProfile()
+    const { data: user } = useProfile()
+    AttributeTypeProfile
+
+    const onProgressCallback = (value: number) => {
+        setOnProgress(value)
+    }
+
+    const type =
+        EnumerateTypeProfile[
+            user?.type_profile as keyof typeof EnumerateTypeProfile
+        ]
+
+    const mutation = useMutationHelper({
+        mutationFn: async (data: FormData) => {
+            const response = await postProfilePicture(
+                data,
+                type,
+                user?.id as string,
+                onProgressCallback,
+            )
+
+            if (response instanceof Error) {
+                console.log(response)
+            }
+
+            const {
+                data: { fileName },
+            } = response
+
+            return await updateProfilePicture(
+                {
+                    object_name: fileName,
+                },
+                type,
+                user?.id as string,
+            )
+        },
+
+        mutationKey: [NAME, user?.id, 'picture'],
+        onSuccess: () => {
+            refetch()
+            onProgressCallback(0)
+            infoToast('Foto de perfil atualizada com sucesso')
+        },
+        onError: () => {
+            onProgressCallback(0)
+            errorToast('Erro ao atualizar foto de perfil.')
+        },
     })
+
+    return {
+        ...mutation,
+        onProgress,
+    }
 }
 
 export const useProfilePhoto = () => {
