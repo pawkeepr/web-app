@@ -5,6 +5,7 @@ import { createContext, useEffect } from 'react'
 import { PUBLIC_ROUTES, PUBLIC_ROUTES_GENERAL } from '~/common/public-routes'
 import type LOADING from '~/constants/loading'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
+import useProfile from '~/store/hooks/profile/use-profile'
 import {
     recoverUserByToken,
     signInUser,
@@ -41,6 +42,7 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
     const dispatch = useAppDispatch()
+    const { data: profile, isLoading: isProfileLoading } = useProfile()
 
     const { isAuthenticated, isLoading, password, rememberMe, username, token } =
         useAppSelector((state) => state.Login as LoginState)
@@ -89,10 +91,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }, [token])
 
     useEffect(() => {
+        if (isProfileLoading) return
+        if (profile) return
         const has_profile = user?.['custom:has_profile']
-        const type_profile = user?.['custom:type_profile'] as AttrTypeProfile
-
         if (!has_profile || has_profile === 'yes') return
+
+        const type_profile = user?.['custom:type_profile'] as AttrTypeProfile
 
         const partial_route = type_profile === '1' ? 'veterinary' : 'tutor'
         router.push(`/${partial_route}/activation`)

@@ -170,7 +170,12 @@ export function* onUpdateProfile({ payload: user }: PayloadAction<IProfile>) {
         )
 
         yield call(updateHasProfile, 'yes')
-        yield put(editProfileSuccess(data))
+        yield put(
+            editProfileSuccess({
+                ...data,
+                'custom:has_profile': 'yes',
+            }),
+        )
         successToast('Perfil atualizado com sucesso!')
     } catch (error) {
         console.error('🚀 ~ function*onUpdateProfile ~ line 121 ~ error:', error)
