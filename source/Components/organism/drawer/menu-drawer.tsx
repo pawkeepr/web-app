@@ -3,7 +3,8 @@ import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useMemo } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useMemo } from 'react'
 import { FaComment } from 'react-icons/fa'
 import MyImage from '~/Components/atoms/my-image'
 import withControl from '~/Components/helpers/with-control'
@@ -27,6 +28,7 @@ const MenuDrawer = ({
     const { closeModal, open } = useModal({ name: 'drawer' })
     const { isMobile } = useResizeMobile()
     const items = strategies.get(drawerItems) || []
+    const router = useRouter()
 
     const options = useMemo(
         () =>
@@ -35,6 +37,20 @@ const MenuDrawer = ({
             }),
         [isMobile],
     )
+
+    // Fechar o drawer ao completar a navegação
+    useEffect(() => {
+        const handleRouteChangeComplete = () => {
+            closeModal()
+        }
+
+        router.events.on('routeChangeComplete', handleRouteChangeComplete)
+
+        return () => {
+            router.events.off('routeChangeComplete', handleRouteChangeComplete)
+        }
+    }, [router.events, closeModal])
+
     return (
         <>
             <div className="flex justify-between px-4">
