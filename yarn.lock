@@ -5678,6 +5678,13 @@
   dependencies:
     mini-svg-data-uri "^1.2.3"
 
+"@tanstack/query-async-storage-persister@^5.52.0":
+  version "5.52.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-async-storage-persister/-/query-async-storage-persister-5.52.0.tgz#aae0efc2ae0bea92bff32f044aa13a7e9ea0d92a"
+  integrity sha512-XxZE4VPTpDbW9+Lyl47cqITfBRMZhpn0yq9yVkLATHPmleV3EdYIHj0vNuply5XcduFmCSE1z9zjBD4R6ZfCeQ==
+  dependencies:
+    "@tanstack/query-persist-client-core" "5.52.0"
+
 "@tanstack/query-core@5.52.0":
   version "5.52.0"
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.52.0.tgz#44070b2d6eb58c3a5ce2788471d842e932294a87"
@@ -5688,12 +5695,34 @@
   resolved "https://registry.yarnpkg.com/@tanstack/query-devtools/-/query-devtools-5.51.16.tgz#d855d00e7939c1a442c2e8ae3ad1a5bd603d003b"
   integrity sha512-ajwuq4WnkNCMj/Hy3KR8d3RtZ6PSKc1dD2vs2T408MdjgKzQ3klVoL6zDgVO7X+5jlb5zfgcO3thh4ojPhfIaw==
 
+"@tanstack/query-persist-client-core@5.52.0":
+  version "5.52.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-persist-client-core/-/query-persist-client-core-5.52.0.tgz#3d8f37af5c97162174da613417196d76c3e5a049"
+  integrity sha512-D6Ppz4/ofmcA7h/vksaYUVuMSlFRfBBWGE7JSa6AATy6JDO3cXhJoCXOHVRDEK0ScxV93A/wZ1fzawfIDHR6SQ==
+  dependencies:
+    "@tanstack/query-core" "5.52.0"
+
+"@tanstack/query-sync-storage-persister@^5.52.0":
+  version "5.52.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-sync-storage-persister/-/query-sync-storage-persister-5.52.0.tgz#500e0dbe0d319679993228790efe3e8ac66adc42"
+  integrity sha512-hBomSeMz4jHr+Y8R0OMzYY2admlehx5BiNLRLzTfiI2VWIwDgs7lzz9UI8iCjot54gvFCVp8jolVW2jVAfwADw==
+  dependencies:
+    "@tanstack/query-core" "5.52.0"
+    "@tanstack/query-persist-client-core" "5.52.0"
+
 "@tanstack/react-query-devtools@^5.52.1":
   version "5.52.1"
   resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-5.52.1.tgz#5c15eef755a76ce45099206e0448cd120b3af9dc"
   integrity sha512-6KwSm9vcIIK26osQJtT52Gyccz/DyHPT216B7kt4ihg22G2rtGZ7sCXYQO25XEHyVwVingwHdZ7auj+ydgg4Zg==
   dependencies:
     "@tanstack/query-devtools" "5.51.16"
+
+"@tanstack/react-query-persist-client@^5.52.1":
+  version "5.52.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-persist-client/-/react-query-persist-client-5.52.1.tgz#e6459c7f48ca914f9cf48fcc832d5d7e58ebf148"
+  integrity sha512-Wy6+Fd8rq1OuGd6CoL3LWKCtBWCad2kcwvd5gxpxSFkGEbirMiJo03xp38nK5/D4BPYxIhjMqsJcxMQ5En8DPQ==
+  dependencies:
+    "@tanstack/query-persist-client-core" "5.52.0"
 
 "@tanstack/react-query@^5.52.1":
   version "5.52.1"
@@ -9877,6 +9906,11 @@ image-size@^1.0.0:
   dependencies:
     queue "6.0.2"
 
+immediate@~3.0.5:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
+  integrity sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==
+
 immer@9.0.6:
   version "9.0.6"
   resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.6.tgz#7a96bf2674d06c8143e327cbf73539388ddf1a73"
@@ -10560,6 +10594,13 @@ leven@^3.1.0:
   resolved "https://registry.yarnpkg.com/leven/-/leven-3.1.0.tgz#77891de834064cccba82ae7842bb6b14a13ed7f2"
   integrity sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==
 
+lie@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/lie/-/lie-3.1.1.tgz#9a436b2cc7746ca59de7a41fa469b3efb76bd87e"
+  integrity sha512-RiNhHysUjhrDQntfYSfY4MU24coXXdEOgw9WGcKHNeEwffDYbF//u87M1EWaMGzuFoSbqW0C9C6lEEhDOAswfw==
+  dependencies:
+    immediate "~3.0.5"
+
 lilconfig@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.1.0.tgz#78e23ac89ebb7e1bfbf25b18043de756548e7f52"
@@ -10614,6 +10655,13 @@ local-pkg@^0.5.0:
   dependencies:
     mlly "^1.4.2"
     pkg-types "^1.0.3"
+
+localforage@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/localforage/-/localforage-1.10.0.tgz#5c465dc5f62b2807c3a84c0c6a1b1b3212781dd4"
+  integrity sha512-14/H1aX7hzBBmmh7sGPd+AOMkkIrHM3Z1PAyGgZigA1H1p5O5ANnMyWzvpAETtG68/dC4pC0ncy3+PPGzXZHPg==
+  dependencies:
+    lie "3.1.1"
 
 locate-path@^3.0.0:
   version "3.0.0"
