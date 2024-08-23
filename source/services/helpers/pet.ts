@@ -1,10 +1,9 @@
 import { api } from '../api'
 
 const urls = {
-    FETCH_PROFILE_PET: () => '/api-pet/pet-was-found',
-    FETCH_PROFILE_VERIFY: () => '/api-pet/pet-was-verify',
-    FETCH_PROFILE_MEDICAL_RECORDS: () =>
-        '/api-medical-external/search-medical-pet-external',
+    FETCH_PROFILE_PET: () => '/api-external/pet-was-found',
+    FETCH_PROFILE_VERIFY: () => '/api-external/pet-was-verify',
+    FETCH_PROFILE_MEDICAL_RECORDS: () => '/api-external/search-medical-pet',
 }
 
 export const fetchPublicPet = async (id_pet: string) =>
