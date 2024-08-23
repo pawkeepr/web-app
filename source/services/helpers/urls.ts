@@ -79,11 +79,11 @@ export const TUTORS_FETCH_ALL_CLINIC = () => '/api-user/fetch-all-tutors-vet'
 // External Appointment
 
 export const APPOINTMENT_GET_BY_ID_EXTERNAL = () =>
-    '/api-appointment-external/search-appointment-external'
+    '/api-external/search-appointment'
 export const APPOINTMENT_CONFIRMED_EXTERNAL = () =>
-    '/api-appointment-external/confirmed-appointment-tutor-external'
+    '/api-external/confirmed-appointment-tutor'
 export const APPOINTMENT_CANCELED_EXTERNAL = () =>
-    '/api-appointment-external/canceled-appointment-tutor-external'
+    '/api-external/canceled-appointment-tutor'
 
 // Tutors
 export const VET_FETCH_ALL_TUTORS = () => '/api-user-vet/fetch-all-tutors-vet'
