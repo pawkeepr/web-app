@@ -1,6 +1,10 @@
 require('dotenv').config()
 const { i18n } = require('./next-i18next.config')
 
+const withPWA = require('next-pwa')({
+    dest: 'public',
+})
+
 /**@type {import('next').NextConfig} */
 const nextConfig = ((_phase) => {
     // const isProduction = phase === 'production'
@@ -68,4 +72,4 @@ const nextConfig = ((_phase) => {
     }
 })(process.env.NODE_ENV)
 
-module.exports = nextConfig
+module.exports = withPWA(nextConfig)
