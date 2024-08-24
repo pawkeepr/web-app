@@ -8,7 +8,7 @@ import QrCodePet from '~/Components/molecules/qr-code-pet'
 import type { TabItem } from '~/Components/organism/horizontal-list'
 import HorizontalTabs from '~/Components/organism/horizontal-list'
 import { infoToast } from '~/store/helpers/toast'
-import usePetById from '~/store/hooks/pet-by-id/use-pets'
+import { usePetByIdV2 } from '~/store/hooks/pet-by-id/use-pets'
 import type { IMainResponsibleGuardian, PetData } from '~/types/pet-v2'
 import DefaultLayout from '../../_layouts/dashboard'
 import MaintainPetPage from '../MaintainPetPage/MaintainPetPage'
@@ -47,10 +47,10 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
     const tabs = Tabs(document, id_pet)
     const router = useRouter()
     const {
-        activeData: pet,
-        isLoading,
+        data: pet,
+        isPending,
         error,
-    } = usePetById(document as string, id_pet as string)
+    } = usePetByIdV2(document as string, id_pet as string)
 
     useEffect(() => {
         if (!error) return
@@ -75,7 +75,7 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
         }
     }, [error])
 
-    if (isLoading) return <div>Carregando...</div>
+    if (isPending) return <div>Carregando...</div>
 
     return (
         <DefaultLayout title="Histórico do Pet" searchBlock={false}>

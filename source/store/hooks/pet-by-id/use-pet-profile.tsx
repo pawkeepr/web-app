@@ -9,6 +9,7 @@ import {
 import { errorToast, infoToast } from '~/store/helpers/toast'
 import type { IPetV2 } from '~/types/pet-v2'
 import useProfile from '../profile/use-profile'
+import { usePetByIdV2 } from './use-pets'
 
 export const NAME_PROFILE = 'pet-profile'
 
@@ -16,7 +17,11 @@ export const useMutationUpdateProfilePhoto = (
     pet: Pick<IPetV2, 'id' | 'main_responsible_guardian'>,
 ) => {
     const [onProgress, setOnProgress] = useState(0)
-    const { refetch } = useProfile()
+    const { refetch } = usePetByIdV2(
+        pet.main_responsible_guardian?.cpf_cnpj,
+        pet.id as string,
+    )
+
     const { data: user } = useProfile()
     AttributeTypeProfile
 
@@ -50,11 +55,10 @@ export const useMutationUpdateProfilePhoto = (
                 {
                     object_name: fileName,
                 },
-                type,
-                user?.id as string,
+                pet?.id as string,
+                user?.user_information?.cpf_cnpj as string,
             )
         },
-
         mutationKey: [NAME_PROFILE, pet?.id, 'picture'],
         onSuccess: () => {
             refetch()
