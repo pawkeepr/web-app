@@ -65,7 +65,7 @@ const AvatarModal = ({
                 onClick={showModal}
             >
                 <AvatarPet src={oldImageSrc} {...props} />
-                <CameraIcon className="absolute bottom-0 right-0 w-8 h-8 transform -translate-x-1/2 -translate-y-1/2 text-secondary" />
+                <CameraIcon className="absolute bottom-0 right-0 w-8 h-8 transform -translate-x-1/2 -translate-y-1/2 shadow-2xl text-secondary" />
             </button>
             <Modal onClose={closeModal} open={open} mobilePage={false}>
                 <div>

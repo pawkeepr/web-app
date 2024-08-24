@@ -89,7 +89,7 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
                             pet_information={pet?.pet_information as PetData}
                             id={pet?.id}
                         />
-                        <CardContainer className="bg-white">
+                        <CardContainer className="bg-white rounded-2xl">
                             <h1 className="text-xs font-semibold text-gray-500">
                                 Entre em contato com o responsável
                             </h1>
