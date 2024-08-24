@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import useMutationHelper from '~/hooks/use-mutation-helper'
-import {
-    postProfilePicture,
-    updateProfilePicture,
-} from '~/services/helpers/profile'
+import { putPhotoProfilePet } from '~/services/helpers/pet'
+import { postProfilePicture } from '~/services/helpers/profile'
 import {
     AttributeTypeProfile,
     EnumerateTypeProfile,
@@ -14,7 +12,9 @@ import useProfile from '../profile/use-profile'
 
 export const NAME_PROFILE = 'pet-profile'
 
-export const useMutationUpdateProfilePhoto = (pet: IPetV2) => {
+export const useMutationUpdateProfilePhoto = (
+    pet: Pick<IPetV2, 'id' | 'main_responsible_guardian'>,
+) => {
     const [onProgress, setOnProgress] = useState(0)
     const { refetch } = useProfile()
     const { data: user } = useProfile()
@@ -46,7 +46,7 @@ export const useMutationUpdateProfilePhoto = (pet: IPetV2) => {
                 data: { fileName },
             } = response
 
-            return await updateProfilePicture(
+            return await putPhotoProfilePet(
                 {
                     object_name: fileName,
                 },

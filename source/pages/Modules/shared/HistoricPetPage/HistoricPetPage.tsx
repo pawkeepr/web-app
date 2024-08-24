@@ -7,11 +7,9 @@ import FieldControl from '~/Components/molecules/field-control'
 import QrCodePet from '~/Components/molecules/qr-code-pet'
 import type { TabItem } from '~/Components/organism/horizontal-list'
 import HorizontalTabs from '~/Components/organism/horizontal-list'
-import { useTranslations } from '~/hooks/use-translations'
 import { infoToast } from '~/store/helpers/toast'
 import usePetById from '~/store/hooks/pet-by-id/use-pets'
-import type { PetData } from '~/types/pet-v2'
-import { calcAge } from '~/utils/calc-age'
+import type { IMainResponsibleGuardian, PetData } from '~/types/pet-v2'
 import DefaultLayout from '../../_layouts/dashboard'
 import MaintainPetPage from '../MaintainPetPage/MaintainPetPage'
 import CardContainer from '../ProfilePage/components/CardContainer'
@@ -48,7 +46,6 @@ type HistoricPetPageProps = {
 const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
     const tabs = Tabs(document, id_pet)
     const router = useRouter()
-    const { t } = useTranslations('common')
     const {
         activeData: pet,
         isLoading,
@@ -86,14 +83,11 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
                 <div className="flex flex-wrap flex-1 mobile:flex-col tablet:flex-col">
                     <div className="flex flex-col flex-1 w-full gap-1 px-2">
                         <PetProfileCard
-                            name={pet?.pet_information?.name_pet}
-                            specie={pet?.pet_information?.specie as string}
-                            subtitle={`${t(pet?.pet_information?.sex as string)},
-                                ${calcAge(pet?.pet_information?.date_birth)} ano(s)
-                                `}
-                            title={`${pet?.pet_information?.name_pet}, ${t(
-                                pet?.pet_information?.specie as string,
-                            )}, ${t(pet?.pet_information?.race as string)}`}
+                            main_responsible_guardian={
+                                pet?.main_responsible_guardian as IMainResponsibleGuardian
+                            }
+                            pet_information={pet?.pet_information as PetData}
+                            id={pet?.id}
                         />
                         <CardContainer className="bg-white">
                             <h1 className="text-xs font-semibold text-gray-500">
