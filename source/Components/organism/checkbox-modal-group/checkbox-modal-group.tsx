@@ -51,6 +51,7 @@ export default function CheckboxModal<Ctx>({
     const classes = useFieldControlClasses({
         value: checkedValue,
         required,
+        selected: !!selected,
         validateSync,
         mode,
         className,

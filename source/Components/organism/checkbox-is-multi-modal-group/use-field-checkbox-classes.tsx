@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants'
 import type { CheckboxIsMultiModalProps } from './checkbox-is-multi-modal-group'
 
 export const checkboxButton = tv({
-    base: 'h-8 w-full',
+    base: 'h-11 w-full justify-start px-4',
     variants: {
         isValid: {
             true: '!border-primary-500',
@@ -16,7 +16,17 @@ export const checkboxButton = tv({
             readonly:
                 'border-0 text-gray-500 font-semibold text-xs opacity-100  items-center justify-start px-4',
         },
+        selected: {
+            true: '',
+        },
     },
+    compoundVariants: [
+        // {
+        //     selected: true,
+        //     mode: 'readonly',
+        //     className: 'px-4 justify-start',
+        // },
+    ],
 })
 
 type UseFieldControlClassesProps<Ctx> = Pick<
@@ -26,6 +36,7 @@ type UseFieldControlClassesProps<Ctx> = Pick<
     value: unknown
     mode?: 'readonly' | 'editable'
     className?: string
+    selected?: boolean
 }
 
 export const useFieldControlClasses = <Ctx,>({
@@ -33,6 +44,7 @@ export const useFieldControlClasses = <Ctx,>({
     value,
     required,
     mode,
+    selected,
     className,
     ...props
 }: UseFieldControlClassesProps<Ctx>) => {
@@ -58,6 +70,7 @@ export const useFieldControlClasses = <Ctx,>({
         required: required && !hasValidation,
         isValid: hasValidation,
         mode,
+        selected,
         ...props,
     })
 
