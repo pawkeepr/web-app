@@ -6,8 +6,9 @@ const ProfileEditor = ({ editorRef, file }) => {
         <AvatarEditor
             ref={editorRef}
             image={file}
-            width={360}
-            height={360}
+            className="border-2"
+            width={320}
+            height={320}
             borderRadius={250}
             scale={1.2}
             border={50}
