@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import * as yup from 'yup'
 import type { ModeView } from '~/Components/molecules/field-control'
 import type { FieldSelectControl } from '~/Components/molecules/field-control/field-control-select'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
@@ -9,7 +10,6 @@ import CheckboxModalGroup from '../../checkbox-modal-group'
 import SelectsBlood from '../selects-blood'
 import SelectsRace from '../selects-race'
 import { useSpecies } from '../use-species'
-
 type AuxSpeciesFormikProps = Pick<
     IPet,
     'id' | 'sex' | 'race' | 'specie' | 'blood_type'
@@ -36,6 +36,7 @@ const SelectsSpecies = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) =
                 ctx={values}
                 label="Espécie"
                 required
+                validateSync={(value) => yup.string().isValidSync(value)}
                 mode={props.mode as ModeView}
                 name="specie"
                 isDisabled={hasPet && !!initialValues.specie}
@@ -43,7 +44,13 @@ const SelectsSpecies = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) =
             />
 
             {specie?.breedType?.length > 0 && (
-                <SelectsRace mode={props.mode} required />
+                <SelectsRace
+                    mode={props.mode}
+                    required
+                    validateSync={(value: string) =>
+                        yup.string().isValidSync(value)
+                    }
+                />
             )}
             {specie?.bloodType?.length > 0 && <SelectsBlood mode={props.mode} />}
         </>
