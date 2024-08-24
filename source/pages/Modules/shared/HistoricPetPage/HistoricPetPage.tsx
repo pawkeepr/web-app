@@ -12,10 +12,10 @@ import { infoToast } from '~/store/helpers/toast'
 import usePetById from '~/store/hooks/pet-by-id/use-pets'
 import type { PetData } from '~/types/pet-v2'
 import { calcAge } from '~/utils/calc-age'
-import DefaultLayout from '../../_layouts/dashboard/dashboard'
+import DefaultLayout from '../../_layouts/dashboard'
 import MaintainPetPage from '../MaintainPetPage/MaintainPetPage'
 import CardContainer from '../ProfilePage/components/CardContainer'
-import UserProfileCard from '../ProfilePage/components/UserProfileCard'
+import PetProfileCard from './components/organisms/pet-profile-card'
 import HistoricPet from './components/template/HistoricPet'
 import MedicalRecords from './components/template/MedicalRecords'
 
@@ -85,7 +85,7 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
             <div className="container mx-auto mobile:pb-24">
                 <div className="flex flex-wrap flex-1 mobile:flex-col tablet:flex-col">
                     <div className="flex flex-col flex-1 w-full gap-1 px-2">
-                        <UserProfileCard
+                        <PetProfileCard
                             name={pet?.pet_information?.name_pet}
                             specie={pet?.pet_information?.specie as string}
                             subtitle={`${t(pet?.pet_information?.sex as string)},

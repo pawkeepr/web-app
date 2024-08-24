@@ -5,7 +5,6 @@ import { BtnCancel, BtnSuccess } from '~/Components/atoms/btn'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import type { AvatarPetProps } from '~/Components/molecules/avatar-pet/avatar-pet'
 import Modal from '~/Components/organism/modal'
-import Env from '~/env'
 import useModal from '~/hooks/use-modal'
 import FileUpload from '~/ui/file-upload'
 import ProfileEditor from './profile-editor'
@@ -29,7 +28,6 @@ const AvatarModal = ({
     const editorRef = useRef(null)
     const [file, setFile] = useState<File | null>(null)
     const { closeModal, open, showModal } = useModal()
-    const FLAG_DEV = Env().get('FLAG_DEV')
 
     useEffect(() => {
         if (!open) {
