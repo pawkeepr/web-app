@@ -1,7 +1,13 @@
+import type { MutableRefObject } from 'react'
 import AvatarEditor from 'react-avatar-editor'
 import withControl from '~/Components/helpers/with-control'
 
-const ProfileEditor = ({ editorRef, file }) => {
+type ProfileEditorProps = {
+    editorRef: MutableRefObject<AvatarEditor>
+    file: File
+}
+
+const ProfileEditor = ({ editorRef, file }: ProfileEditorProps) => {
     return (
         <AvatarEditor
             ref={editorRef}

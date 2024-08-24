@@ -67,7 +67,7 @@ const AvatarModal = ({
                 onClick={showModal}
             >
                 <AvatarPet src={oldImageSrc} {...props} />
-                <CameraIcon className="absolute bottom-0 right-0 w-8 h-8 text-white transform -translate-x-1/2 -translate-y-1/2" />
+                <CameraIcon className="absolute bottom-0 right-0 w-8 h-8 transform -translate-x-1/2 -translate-y-1/2 text-secondary" />
             </button>
             <Modal onClose={closeModal} open={open} mobilePage={false}>
                 <div>
@@ -90,8 +90,8 @@ const AvatarModal = ({
                     <div className="flex justify-center my-2">
                         <ProfileEditor
                             condition={!!file}
-                            editorRef={editorRef}
-                            file={file}
+                            editorRef={editorRef as any}
+                            file={file as File}
                         />
                     </div>
                     <div className="flex justify-end gap-2">
