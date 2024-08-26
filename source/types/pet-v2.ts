@@ -13,8 +13,19 @@ export const On_Off = {
 } as const
 export type On_Off = (typeof On_Off)[keyof typeof On_Off]
 
-export interface PetData {
-    id_pet: string | null
+type SaleAdoptionInfo = {
+    value: string
+    coin: string
+    vaccination_status: string
+    deworming_status: string
+    health_certificate: string
+    parent_details: string
+    training_status: string
+    special_care: string
+    seller_contact: string
+}
+
+type PetData = {
     name_pet: string
     name_img?: string
     microchip?: string | null
@@ -34,6 +45,14 @@ export interface PetData {
     url_img?: string | null
     pedigree?: boolean
     pedigree_registry?: string | null
+    put_adoption?: boolean | null
+    age?: string
+    type_weight?: string
+    put_on_sale?: boolean | null
+    veterinary_edit?: boolean | null
+    sale_adoption_info?: SaleAdoptionInfo
+    date_update?: string
+    url_profile?: string
 }
 
 export type IHealthInsurance = {
