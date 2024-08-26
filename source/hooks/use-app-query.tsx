@@ -19,6 +19,8 @@ const useAppQuery = <T,>(
 
     return useQuery<T>({
         queryKey: [user?.email, ...key],
+        networkMode: 'offlineFirst',
+
         queryFn: async () => {
             const res = await Fn()
             return res.data

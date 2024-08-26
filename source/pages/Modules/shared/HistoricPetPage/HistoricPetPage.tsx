@@ -7,15 +7,13 @@ import FieldControl from '~/Components/molecules/field-control'
 import QrCodePet from '~/Components/molecules/qr-code-pet'
 import type { TabItem } from '~/Components/organism/horizontal-list'
 import HorizontalTabs from '~/Components/organism/horizontal-list'
-import { useTranslations } from '~/hooks/use-translations'
 import { infoToast } from '~/store/helpers/toast'
-import usePetById from '~/store/hooks/pet-by-id/use-pets'
-import type { PetData } from '~/types/pet-v2'
-import { calcAge } from '~/utils/calc-age'
-import DefaultLayout from '../../_layouts/dashboard/dashboard'
+import { usePetByIdV2 } from '~/store/hooks/pet-by-id/use-pets'
+import type { IMainResponsibleGuardian, PetData } from '~/types/pet-v2'
+import DefaultLayout from '../../_layouts/dashboard'
 import MaintainPetPage from '../MaintainPetPage/MaintainPetPage'
 import CardContainer from '../ProfilePage/components/CardContainer'
-import UserProfileCard from '../ProfilePage/components/UserProfileCard'
+import PetProfileCard from './components/organisms/pet-profile-card'
 import HistoricPet from './components/template/HistoricPet'
 import MedicalRecords from './components/template/MedicalRecords'
 
@@ -48,12 +46,11 @@ type HistoricPetPageProps = {
 const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
     const tabs = Tabs(document, id_pet)
     const router = useRouter()
-    const { t } = useTranslations('common')
     const {
-        activeData: pet,
-        isLoading,
+        data: pet,
+        isPending,
         error,
-    } = usePetById(document as string, id_pet as string)
+    } = usePetByIdV2(document as string, id_pet as string)
 
     useEffect(() => {
         if (!error) return
@@ -78,24 +75,21 @@ const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
         }
     }, [error])
 
-    if (isLoading) return <div>Carregando...</div>
+    if (isPending) return <div>Carregando...</div>
 
     return (
         <DefaultLayout title="Histórico do Pet" searchBlock={false}>
             <div className="container mx-auto mobile:pb-24">
                 <div className="flex flex-wrap flex-1 mobile:flex-col tablet:flex-col">
                     <div className="flex flex-col flex-1 w-full gap-1 px-2">
-                        <UserProfileCard
-                            name={pet?.pet_information?.name_pet}
-                            specie={pet?.pet_information?.specie as string}
-                            subtitle={`${t(pet?.pet_information?.sex as string)},
-                                ${calcAge(pet?.pet_information?.date_birth)} ano(s)
-                                `}
-                            title={`${pet?.pet_information?.name_pet}, ${t(
-                                pet?.pet_information?.specie as string,
-                            )}, ${t(pet?.pet_information?.race as string)}`}
+                        <PetProfileCard
+                            main_responsible_guardian={
+                                pet?.main_responsible_guardian as IMainResponsibleGuardian
+                            }
+                            pet_information={pet?.pet_information as PetData}
+                            id={pet?.id}
                         />
-                        <CardContainer className="bg-white">
+                        <CardContainer className="bg-white rounded-2xl">
                             <h1 className="text-xs font-semibold text-gray-500">
                                 Entre em contato com o responsável
                             </h1>

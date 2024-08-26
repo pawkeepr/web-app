@@ -1,11 +1,12 @@
+import { CameraIcon } from '@heroicons/react/24/solid'
 import cn from 'classnames'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { BtnCancel, BtnSuccess } from '~/Components/atoms/btn'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import type { AvatarPetProps } from '~/Components/molecules/avatar-pet/avatar-pet'
 import Modal from '~/Components/organism/modal'
-import Env from '~/env'
 import useModal from '~/hooks/use-modal'
+import FileUpload from '~/ui/file-upload'
 import ProfileEditor from './profile-editor'
 
 const AvatarModal = ({
@@ -25,9 +26,14 @@ const AvatarModal = ({
     onSave?: (file: FormData) => Promise<void>
 } & AvatarPetProps) => {
     const editorRef = useRef(null)
-    const [file, setFile] = useState<File | undefined>()
+    const [file, setFile] = useState<File | null>(null)
     const { closeModal, open, showModal } = useModal()
-    const FLAG_DEV = Env().get('FLAG_DEV')
+
+    useEffect(() => {
+        if (!open) {
+            setFile(null)
+        }
+    }, [open])
 
     const handleSave = async () => {
         if (!editorRef.current) return
@@ -45,52 +51,45 @@ const AvatarModal = ({
         closeModal()
     }
 
-    const setFileData = (e: React.ChangeEvent<HTMLInputElement> | null) => {
-        if (e?.target?.files && e.target.files.length > 0) {
-            setFile(e.target.files[0])
-        }
-    }
-
     return (
         <>
             <button
                 type="button"
                 title="Editar foto"
-                disabled={disabled}
-                className={cn({
-                    '!cursor-default': !disabled || !FLAG_DEV,
-                    'opacity-50': disabled,
-                })}
+                className={cn(
+                    {
+                        'opacity-50': disabled,
+                    },
+                    'relative border border-opacity-10  rounded-full border-black hover:border-secondary hover:shadow-lg transition duration-100 ease-in-out',
+                )}
                 onClick={showModal}
             >
                 <AvatarPet src={oldImageSrc} {...props} />
+                <CameraIcon className="absolute bottom-0 right-0 w-8 h-8 transform -translate-x-1/2 -translate-y-1/2 shadow-2xl text-secondary" />
             </button>
-            <Modal
-                onClose={closeModal}
-                open={!!(open && FLAG_DEV)}
-                mobilePage={false}
-            >
+            <Modal onClose={closeModal} open={open} mobilePage={false}>
                 <div>
-                    <h1 className="mb-5 text-lg font-semibold text-center">
-                        Editar foto de perfil
-                    </h1>
-                    <input
-                        type="file"
+                    <FileUpload
+                        onChange={(files) => setFile(files[0])}
                         accept="image/jpg, image/jpeg, image/png"
-                        onChange={(e) => setFileData(e)}
+                        acceptDragDrop={{
+                            'image/*': ['.jpg', '.jpeg', '.png'],
+                        }}
+                        disabled={disabled}
                         multiple={false}
-                    />
-                    <div className="flex justify-center my-2">
-                        <ProfileEditor
-                            condition={!!file}
-                            editorRef={editorRef}
-                            file={file}
-                        />
+                    >
                         <AvatarPet
+                            specie="human"
                             condition={!file}
                             src={oldImageSrc}
                             alt="Previous profile pic"
-                            size="veryLarge"
+                        />
+                    </FileUpload>
+                    <div className="flex justify-center my-2">
+                        <ProfileEditor
+                            condition={!!file}
+                            editorRef={editorRef as any}
+                            file={file as File}
                         />
                     </div>
                     <div className="flex justify-end gap-2">

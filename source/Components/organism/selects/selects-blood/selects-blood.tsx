@@ -34,7 +34,6 @@ const SelectsBlood = <Ctx,>(props: Omit<FieldSelectControl<Ctx>, 'options'>) => 
             {...props}
             ctx={values}
             label="Tipo de sanguíneo"
-            required
             mode={props.mode as ModeView}
             name="blood_type"
             isDisabled={hasPet && !!initialValues.blood_type}

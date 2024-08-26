@@ -42,19 +42,19 @@ const schema = yup.object().shape<StepPetSchema>({
     race: yup.string().required('Campo obrigatório'),
     specie: yup.string().required('Campo obrigatório'),
     date_birth: yup.string().nullable().required('Campo obrigatório'),
-    approximate_date: yup.boolean(),
-    castrated: yup.boolean(),
+    approximate_date: yup.boolean().nullable(),
+    castrated: yup.boolean().nullable(),
     identification_number: yup.string().nullable(),
     microchip: yup.string().nullable(),
-    organ_donor: yup.boolean(),
-    blood_donator: yup.boolean(),
-    blood_type: yup.string().required('Campo obrigatório'),
+    organ_donor: yup.boolean().nullable(),
+    blood_donator: yup.boolean().nullable(),
+    blood_type: yup.string().nullable(),
 })
 
 const StepPet = (_props: StepProps) => {
     const { data: profile } = useProfile()
     const hasTutor = profile?.type_profile === TypeProfile.TUTOR
-    const { values, initialValues, handleSubmit, isSubmitting } =
+    const { values, initialValues, handleSubmit, isSubmitting, errors } =
         useFormikContextSafe<StepPetKeys>()
     const { mode } = useModeEditablePet()
 
@@ -79,13 +79,14 @@ const StepPet = (_props: StepProps) => {
                 </h4>
             </div>
             <h1 className="font-semibold">Preencha as Informações do PET</h1>
-            <div className="grid grid-cols-2 gap-2 mt-4 mobile:grid-cols-1 mobile:gap-2">
+            <div className="grid grid-cols-2 gap-1 mt-4 mobile:grid-cols-1 mobile:gap-2">
                 <FieldControl
                     mode={mode}
                     ctx={values}
                     label="Nome do PET"
                     disabled={hasPet && !!initialValues.name}
                     required
+                    validateSync={(value) => yup.string().isValidSync(value)}
                     name="name"
                     placeholder="Digite o nome do PET"
                     divClassName="col-span-full"
@@ -97,6 +98,7 @@ const StepPet = (_props: StepProps) => {
                     ctx={values}
                     label="Sexo"
                     required
+                    validateSync={(value) => yup.string().isValidSync(value)}
                     mode={mode}
                     name="sex"
                     isDisabled={hasPet && !!initialValues.sex}
@@ -110,6 +112,7 @@ const StepPet = (_props: StepProps) => {
                         disabled={hasPet && !!initialValues.date_birth}
                         label="Data de nascimento"
                         required
+                        validateSync={(value) => yup.string().isValidSync(value)}
                         name={'date_birth' as any}
                         type="date"
                     />
