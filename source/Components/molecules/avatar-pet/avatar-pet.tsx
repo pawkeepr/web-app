@@ -51,7 +51,8 @@ const AvatarPet = ({
     classNames,
 }: AvatarPetProps) => {
     const link = useMemo(() => {
-        if (src) return src
+        const castedSrc = src?.replaceAll('*', '').trim().length
+        if (castedSrc && castedSrc > 0) return src
         if (!specie) return '/icon-pet/other_primary.png'
         return (
             strategiesAvatar.get(specie as Species) ?? '/icon-pet/other_primary.png'

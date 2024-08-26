@@ -11,7 +11,7 @@ import { handleSubmitHelper } from '~/store/helpers/handle-submit-helper'
 import type { PetMedicalRecords } from '~/types/medical-records'
 import type { IPet } from '~/types/pet'
 import type { IMainResponsibleGuardian, IPetV2, PetData } from '~/types/pet-v2'
-import { TypeProfile } from '~/types/profile'
+import { TypeProfile, type Contact } from '~/types/profile'
 import useProfile from '../profile/use-profile'
 import useAppStore from '../use-app-store'
 
@@ -87,10 +87,22 @@ export const handleSubmitAppointments = ({
     }
 }
 
+type PetPublic = {
+    id: string
+    pet_information: Pick<
+        PetData,
+        'name_pet' | 'specie' | 'race' | 'url_img' | 'name_img'
+    >
+    main_responsible_guardian: {
+        first_name: string
+        contact: Pick<Contact, 'instagram' | 'phone' | 'whatsapp'>
+    }
+}
+
 export const usePetPublic = (id_pet: string) => {
     const superKeys = [NAME, id_pet, 'public']
 
-    return useAppQuery<IPetV2>(superKeys, () => fetchPublicPet(id_pet), {
+    return useAppQuery<PetPublic>(superKeys, () => fetchPublicPet(id_pet), {
         enabled: !!id_pet,
     })
 }
