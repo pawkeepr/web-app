@@ -26,7 +26,7 @@ const CardFeedPet = ({ pet }: CardFeedPetProps) => {
                             'px-2 py-2 w-28 !h-36 flex flex-col items-center justify-center',
                     })}
                     style={{
-                        minWidth: '7rem ',
+                        minWidth: '7rem',
                         minHeight: '9rem',
                         maxWidth: '7rem',
                     }} // fix width and height
@@ -39,9 +39,9 @@ const CardFeedPet = ({ pet }: CardFeedPetProps) => {
                         }}
                     />
                     <div className="flex flex-row gap-1">
-                        <h1 className="text-lg font-bold text-center text-gray-400 mobile:text-sm">
+                        <h2 className="text-sm font-bold text-center text-gray-400 ">
                             {`${pet?.name_pet}`}
-                        </h1>
+                        </h2>
                         <Gender
                             className={iconGender({
                                 sex,

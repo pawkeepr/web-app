@@ -6,7 +6,7 @@ import HeaderTitle from '~/Components/atoms/header-title'
 import RouteConfirmationModal from '~/Components/modals/route-confirmation-modal'
 import useProfileVeterinary from '~/hooks/use-profile-veterinary'
 import { handleSubmitAppointments } from '~/store/hooks/appointment-id/use-appointment'
-import usePetById from '~/store/hooks/pet-by-id/use-pets'
+import { usePetByIdV2 } from '~/store/hooks/pet-by-id/use-pets'
 import type { VeterinaryConsultation } from '~/types/appointment'
 import type { IPetV2 } from '~/types/pet-v2'
 import type { DTOProfile } from '~/types/profile'
@@ -123,11 +123,7 @@ const AppointmentsPage = ({
     const router = useRouter()
     const [isSuccess, setIsSuccess] = useState(false)
 
-    const {
-        activeData,
-        isLoading: isLoadingPet,
-        isError,
-    } = usePetById(document, pet)
+    const { data: activeData, isPending, isError } = usePetByIdV2(document, pet)
     const profile = useProfileVeterinary()
 
     const handleSubmit = handleSubmitAppointments()
@@ -190,7 +186,7 @@ const AppointmentsPage = ({
         >
             <>
                 <HeaderTitle title="Consulta" />
-                <Tabs isLoading={isLoadingPet} />
+                <Tabs isLoading={isPending} />
                 <RouteConfirmationModal
                     condition={!isSuccess}
                     title="Cancelar Consulta!"

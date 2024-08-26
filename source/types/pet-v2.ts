@@ -16,6 +16,7 @@ export type On_Off = (typeof On_Off)[keyof typeof On_Off]
 export interface PetData {
     id_pet: string | null
     name_pet: string
+    name_img?: string
     microchip?: string | null
     identification_number?: string | null
     specie: Species | null | GenericSelect
@@ -30,6 +31,7 @@ export interface PetData {
     color?: string | null
     size?: string | null
     weight?: string | null
+    url_img?: string | null
     pedigree?: boolean
     pedigree_registry?: string | null
 }

@@ -51,6 +51,7 @@ export default function CheckboxModal<Ctx>({
     const classes = useFieldControlClasses({
         value: checkedValue,
         required,
+        selected: !!selected,
         validateSync,
         mode,
         className,
@@ -61,7 +62,7 @@ export default function CheckboxModal<Ctx>({
             {children?.({ showModal }) || (
                 <div
                     className={cn(
-                        'flex flex-col items-start justify-center overflow-visible w-full px-2',
+                        'flex flex-col items-start justify-center overflow-visible w-full px-1',
                         className,
                     )}
                 >

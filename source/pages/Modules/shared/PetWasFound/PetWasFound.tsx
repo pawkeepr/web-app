@@ -2,7 +2,7 @@
 
 import cn from 'classnames'
 import { BsFillSendExclamationFill } from 'react-icons/bs'
-import { FaWhatsapp } from 'react-icons/fa'
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa'
 import { BtnLink } from '~/Components/atoms/btn'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import { useTranslations } from '~/hooks/use-translations'
@@ -18,11 +18,11 @@ type PetWasFoundProps = {
 const PetWasFound = ({ id_pet }: PetWasFoundProps) => {
     const { data, isPending } = usePetPublic(id_pet)
 
-    const name_tutor =
-        data?.main_responsible_guardian?.name ||
-        data?.main_responsible_guardian?.first_name
+    const name_tutor = data?.main_responsible_guardian?.first_name
 
     const whatsapp_tutor = data?.main_responsible_guardian?.contact?.whatsapp
+    const instagram_tutor = data?.main_responsible_guardian?.contact?.instagram
+    const phone_tutor = data?.main_responsible_guardian?.contact?.phone
 
     const { t } = useTranslations('common')
 
@@ -38,6 +38,11 @@ const PetWasFound = ({ id_pet }: PetWasFoundProps) => {
         const encodedMessage = encodeURIComponent(defaultMessage)
         const url = `https://api.whatsapp.com/send/?phone=${numberPhone}&text=${encodedMessage}&type=phone_number&app_absent=0`
         window.open(url, '_blank')
+    }
+
+    const handleInstagram = () => {
+        const site_instagram = `https://www.instagram.com/${instagram_tutor}`
+        window.open(site_instagram, '_blank')
     }
 
     if (isPending) {
@@ -60,6 +65,7 @@ const PetWasFound = ({ id_pet }: PetWasFoundProps) => {
                         classNames={{
                             img: 'mobile:!w-32 mobile:!h-32',
                         }}
+                        src={pet?.url_img as string}
                         name_pet={pet?.name_pet as string}
                         specie={specie as Species}
                     />
@@ -92,6 +98,28 @@ const PetWasFound = ({ id_pet }: PetWasFoundProps) => {
                                 {whatsapp_tutor}
                                 <BsFillSendExclamationFill className="w-5 h-5 ml-2" />
                             </button>
+                        </p>
+                    )}
+
+                    {instagram_tutor && (
+                        <p className="flex justify-between text-gray-500">
+                            <strong className="mr-2">Instagram:</strong>
+                            <button
+                                type="button"
+                                onClick={() => handleInstagram()}
+                                className="flex flex-row gap-1 text-sm text-gray-500"
+                            >
+                                <FaInstagram className="text-xl text-green-600" />
+                                {instagram_tutor}
+                                <BsFillSendExclamationFill className="w-5 h-5 ml-2" />
+                            </button>
+                        </p>
+                    )}
+
+                    {phone_tutor && (
+                        <p className="flex justify-between text-gray-500">
+                            <strong className="mr-2">Telefone:</strong>
+                            <span>{phone_tutor}</span>
                         </p>
                     )}
 
