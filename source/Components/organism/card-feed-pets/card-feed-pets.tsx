@@ -1,5 +1,5 @@
 import AvatarPet from '~/Components/molecules/avatar-pet'
-import type { IPetV2Data } from '~/types/pet-v2'
+import type { PetData } from '~/types/pet-v2'
 import type { Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import ModalBoxButtonsPet from '../box-buttons-pets/modal-box-buttons-pets'
@@ -7,7 +7,7 @@ import { card } from '../card'
 import { IconGender, iconGender } from '../card-scheduled'
 
 type CardFeedPetProps = {
-    pet: IPetV2Data
+    pet: PetData
     hasButtons?: boolean
 }
 
@@ -34,6 +34,7 @@ const CardFeedPet = ({ pet }: CardFeedPetProps) => {
                     <AvatarPet
                         name_pet={pet?.name_pet}
                         specie={pet.specie as Species}
+                        src={pet.url_img as string}
                         classNames={{
                             img: 'w-20 h-20',
                         }}

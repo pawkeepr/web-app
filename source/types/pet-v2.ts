@@ -25,7 +25,7 @@ type SaleAdoptionInfo = {
     seller_contact: string
 }
 
-type PetData = {
+export type PetData = {
     name_pet: string
     name_img?: string
     microchip?: string | null
@@ -116,22 +116,4 @@ export interface IPetV2Simplified {
     pet_information: PetDataSimplified
     main_responsible_guardian: IMainResponsibleGuardianSimplified
     veterinary: DTOProfile
-}
-
-export type IPetV2Data = {
-    id?: string
-    id_pet: string
-    name_pet: string
-    microchip?: string | null
-    identification_number?: string | null
-    specie: string
-    race: string
-    blood_type?: string | null
-    blood_donator?: boolean | null
-    organ_donor?: boolean | null
-    sex: string
-    castrated?: boolean | null
-    date_birth?: string | null
-    cpf_cnpj: string
-    color?: string | null
 }

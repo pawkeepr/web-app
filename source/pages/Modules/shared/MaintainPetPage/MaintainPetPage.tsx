@@ -48,7 +48,7 @@ export const makeInitialValues: MakeInitialValues = ({
     last_name = null,
 }) => {
     return {
-        id: id_pet || pet_information?.id_pet || null,
+        id: id_pet || null,
         cpf_tutor,
         blood_donator: pet_information?.blood_donator,
         blood_type: (pet_information?.blood_type as BloodType) || null,
@@ -65,6 +65,7 @@ export const makeInitialValues: MakeInitialValues = ({
         specie: (pet_information?.specie as Species) || null,
         date_birth: pet_information?.date_birth || null,
         cpf_cnpj: cpf_tutor,
+
         phone_tutor: phone,
         ownerEmergencyContact: {
             cpf_cnpj: cpf_tutor,
