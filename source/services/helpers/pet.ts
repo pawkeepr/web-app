@@ -1,3 +1,4 @@
+import type { IGeolocationAppointment } from '~/types/appointment'
 import { api } from '../api'
 import type { UpdateProfilePicture } from './profile'
 
@@ -17,7 +18,11 @@ const urls = {
     /**
      * URL para atualizar a foto de perfil de um pet
      */
-    PUT_PROFILE_PHOTO_PET: () => 'api-pet/update-file-pet',
+    PUT_PROFILE_PHOTO_PET: () => '/api-pet/update-file-pet',
+    /**
+     * URL para enviar a geolocalização do Pet encontrado
+     */
+    PUT_PROFILE_PET_LOCATION: () => '/api-external/pet-location-qr-code',
 }
 
 /**
@@ -61,3 +66,18 @@ export const fetchPublicPetVerify = async (id_pet: string) =>
     api.get(urls.FETCH_PROFILE_VERIFY(), {
         params: { id_pet },
     })
+
+/**
+ * Função para enviar a geolocalização do Pet encontrado
+ * @param id_pet id do pet perdido que se deseja enviar a geolocalização
+ * @param geolocation dados da geolocalização
+ */
+export const putPetLocation = async (
+    id_pet: string,
+    geolocation: IGeolocationAppointment,
+) =>
+    api.put(
+        urls.PUT_PROFILE_PET_LOCATION(),
+        { ...geolocation },
+        { params: { id_pet } },
+    )

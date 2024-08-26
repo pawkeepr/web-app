@@ -6,8 +6,10 @@ import {
     fetchPublicMedicalRecords,
     fetchPublicPet,
     fetchPublicPetVerify,
+    putPetLocation,
 } from '~/services/helpers/pet'
 import { handleSubmitHelper } from '~/store/helpers/handle-submit-helper'
+import type { IGeolocationAppointment } from '~/types/appointment'
 import type { PetMedicalRecords } from '~/types/medical-records'
 import type { IPet } from '~/types/pet'
 import type { IMainResponsibleGuardian, IPetV2, PetData } from '~/types/pet-v2'
@@ -112,6 +114,23 @@ export const usePetVerifyPublic = (id_pet: string) => {
 
     return useAppQuery<IPetV2>(superKeys, () => fetchPublicPetVerify(id_pet), {
         enabled: !!id_pet,
+    })
+}
+
+export const useGeolocationFoundPet = (id_pet: string) => {
+    const superKeys = [NAME, id_pet, 'geolocation']
+
+    const put = putPetLocation.bind(null, id_pet)
+
+    return useMutationHelper({
+        mutationKey: superKeys,
+        mutationFn: async (location: IGeolocationAppointment) => {
+            return put(location)
+        },
+        retry: 0,
+        meta: { type: 'geolocation' },
+        onSuccess: () => {},
+        networkMode: 'always',
     })
 }
 

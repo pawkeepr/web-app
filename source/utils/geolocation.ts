@@ -4,7 +4,7 @@ import type {
 } from '~/types/appointment'
 import { browser } from './navigator.utils'
 
-type Geolocation = [IGeolocationAppointment, ISignatureAppointment]
+export type Geolocation = [IGeolocationAppointment, ISignatureAppointment]
 
 export const geolocation = (): Promise<Geolocation> => {
     return new Promise((resolve, reject) => {
