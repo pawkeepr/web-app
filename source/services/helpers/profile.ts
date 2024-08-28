@@ -26,6 +26,7 @@ const urls = {
      * Envia a imagem de perfil do usuário para o S3
      */
     POST_PROFILE: () => '/api/s3handler/upload-object-s3',
+    FETCH_PUBLIC_PROFILE_BY_ID: () => '/api-external/search-vet-by',
     /**
      * Atualiza a imagem de perfil do usuário
      */
@@ -131,6 +132,12 @@ export const postProfilePicture = (
 type FetchProfileImg = {
     key: string
 }
+
+export const fetchPublicProfileById = async (user_id: string) =>
+    api.get(urls.FETCH_PUBLIC_PROFILE_BY_ID(), {
+        params: { user_id },
+    })
+
 export const fetchProfilePhoto = (data: FetchProfileImg) =>
     api.post(urls.FETCH_PROFILE_IMG(), data, {
         params: {

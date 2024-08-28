@@ -18,6 +18,10 @@ type OptionTab = {
     tab: JSX.Element
 }
 
+type InstagramProfilePreviewProps = {
+    username: string
+}
+
 const makeTabs = (profile: IProfile): OptionTab[] => {
     return [
         {
@@ -33,6 +37,18 @@ const makeTabs = (profile: IProfile): OptionTab[] => {
             tab: <FormChangePass />,
         },
     ]
+}
+
+const InstagramProfilePreview = ({username}: InstagramProfilePreviewProps) => {
+    return (
+        <>
+            { username && 
+                <div className='flex justify-center'>
+                    <iframe id="frame" width="380" height="550" src={`https://www.instagram.com/${username}/embed`}></iframe>
+                </div>
+            }
+        </>
+    )
 }
 
 const Profile: React.FC = () => {
@@ -55,7 +71,10 @@ const Profile: React.FC = () => {
                         <UserProfileCard
                             avatar={profile?.user_information?.url_img}
                         />
-                        <SocialLinks />
+                        <SocialLinks instagram={profile?.user_information?.contact?.instagram} />
+                        { profile?.user_information?.contact?.instagram &&
+                            <InstagramProfilePreview username={profile.user_information.contact.instagram}/>
+                        }
                     </div>
                     <div className="w-full flex flex-[3] web:mt-0 mobile:!flex-1 overflow-hidden">
                         <HorizontalTabs
