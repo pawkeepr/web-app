@@ -23,7 +23,7 @@ const CardFeedPet = ({ pet }: CardFeedPetProps) => {
                     type="button"
                     className={card({
                         className:
-                            'px-2 py-2 w-28 !h-36 flex flex-col items-center justify-center !shadow-theme-3',
+                            'px-2 rounded-xl py-2 w-28 !h-36 flex flex-col items-center justify-center !shadow-theme-3',
                     })}
                     style={{
                         minWidth: '7rem',
