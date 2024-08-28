@@ -34,7 +34,7 @@ const PetProfileCard = ({
                                 await mutateAsync(file)
                             }}
                             isLoading={isPending}
-                            src={'' as string}
+                            src={pet_information?.url_img as string}
                             name_pet={pet_information?.name_pet}
                             specie={pet_information?.specie as Species}
                         />

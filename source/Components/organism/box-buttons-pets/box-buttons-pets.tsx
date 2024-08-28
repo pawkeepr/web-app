@@ -5,12 +5,12 @@ import { FaEdit, FaPlayCircle } from 'react-icons/fa'
 import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import withCompose from '~/Components/helpers/with-compose'
 import useProfile from '~/store/hooks/profile/use-profile'
-import type { IPetV2Data } from '~/types/pet-v2'
+import type { Pet } from '~/types/pet-v2'
 import { TypeProfile } from '~/types/profile'
 
 type BoxButtonsPetsProps = {
     isLoading?: boolean
-    item: IPetV2Data
+    item: Pet
     condition?: boolean
 }
 
@@ -32,7 +32,7 @@ const BoxButtonsPets = ({ isLoading = false, item }: BoxButtonsPetsProps) => {
         () =>
             isTutor
                 ? `/tutor/pet/${item?.id_pet}`
-                : `/pet?document=${item.cpf_cnpj}&id_pet=${item.id_pet}`,
+                : `/veterinary/pet?document=${item.cpf_cnpj}&id_pet=${item.id_pet}`,
         [item, isTutor],
     )
 

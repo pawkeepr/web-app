@@ -48,7 +48,7 @@ export const makeInitialValues: MakeInitialValues = ({
     last_name = null,
 }) => {
     return {
-        id: id_pet || pet_information?.id_pet || null,
+        id: id_pet || null,
         cpf_tutor,
         blood_donator: pet_information?.blood_donator,
         blood_type: (pet_information?.blood_type as BloodType) || null,
@@ -65,6 +65,7 @@ export const makeInitialValues: MakeInitialValues = ({
         specie: (pet_information?.specie as Species) || null,
         date_birth: pet_information?.date_birth || null,
         cpf_cnpj: cpf_tutor,
+
         phone_tutor: phone,
         ownerEmergencyContact: {
             cpf_cnpj: cpf_tutor,
@@ -224,13 +225,14 @@ const CreateOrUpdatePetPage = ({
                     className={cn(
                         `
                             m-2 z-10
+                            gap-1
                             web:absolute web:right-0 web:top-0 web:w-32 web:p-1 web:m-0 web:h-fit 
-                            web:text-gray-400 web:border-none mobile:w-40
+                            web:text-gray-400 web:border-none mobile:w-40 bg-transparent border-none 
                         `,
                         {
-                            'bg-confirm-500 hover:bg-confirm-600 text-white':
+                            'text-confirm-500 hover:text-confirm-600 ':
                                 mode === 'editable',
-                            'bg-primary-500 hover:bg-primary-600 text-white':
+                            'text-primary-500 hover:text-primary-600':
                                 mode !== 'editable',
                         },
                     )}

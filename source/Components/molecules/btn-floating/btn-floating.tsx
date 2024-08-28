@@ -1,10 +1,5 @@
 import { animated, useSpring } from '@react-spring/web'
-import {
-    createUseGesture,
-    dragAction,
-    pinchAction,
-    useDrag,
-} from '@use-gesture/react'
+import { useDrag } from '@use-gesture/react'
 import type React from 'react'
 import { useState, type ComponentProps } from 'react'
 import type { IconType } from 'react-icons'
@@ -12,12 +7,10 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import withControl from '~/Components/helpers/with-control'
 // import styles from './styles.module.css'
 
-const useGesture = createUseGesture([dragAction, pinchAction])
-
 const buttonFloating = {
     button: tv({
         base: `
-        fixed z-50 flex flex-col items-center justify-center 
+        fixed z-50 flex flex-col items-center justify-center
         transition duration-500 ease-in-out mobile:opacity-100
         opacity-40
         hover:opacity-100 
@@ -39,13 +32,13 @@ const buttonFloating = {
     }),
     title: tv({
         base: `
-     mb-1 text-xs font-bold text-gray-600 wrap w-20 text-center
-    `,
+            mb-1 text-xs font-bold text-gray-600 wrap w-20 text-center
+        `,
     }),
     containerIcon: tv({
         base: `
-        p-2 rounded-full bg-secondary-500 !shadow-2xl
-    `,
+            p-2 w-fit rounded-full bg-secondary-500 !shadow-theme-5
+        `,
     }),
     icon: tv({
         base: `

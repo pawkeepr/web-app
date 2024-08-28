@@ -1,8 +1,8 @@
 import type { ImageProps, StaticImageData } from 'next/image'
 import { useState } from 'react'
-
 import { IoPersonCircle } from 'react-icons/io5'
 import { twMerge } from 'tailwind-merge'
+import { cn } from '~/ui/lib/utils'
 
 type MyImageProps = {
     width?: number
@@ -25,7 +25,7 @@ const MyImage = ({ src, alt, style, className, ...rest }: MyImageProps) => {
                     onLoadedData={() => setLoading(false)}
                     onLoadStart={() => setLoading(true)}
                     alt={alt}
-                    className={className}
+                    className={cn(className)}
                     style={style}
                 />
             )}

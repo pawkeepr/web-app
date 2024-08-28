@@ -22,7 +22,7 @@ const ItemsList = ({
     return (
         <Tab.Panels
             className=" 
-                    relative w-full web:px-2 mobile:px-0
+                    relative w-full web:px-2 mobile:px-0 mt-2
                     mobile:items-center mobile:flex mobile:!h-fit mobile:flex-col mobile:w-full
                     tablet:py-0 tablet:items-center tablet:flex tablet:!h-fit tablet:flex-col
                 "

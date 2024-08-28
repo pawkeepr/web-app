@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import AvatarPet from '~/Components/molecules/avatar-pet'
 import { useTranslations } from '~/hooks/use-translations'
 import { BreedNames } from '~/types/breedType'
-import type { IPetV2Data } from '~/types/pet-v2'
+import type { PetData } from '~/types/pet-v2'
 import { GenderBR, type Gender, type Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import BoxButtonsPets from '../box-buttons-pets'
@@ -11,7 +11,7 @@ import Card from '../card'
 import { IconGender } from '../card-scheduled'
 
 type CardPetProps = {
-    pet: IPetV2Data
+    pet: PetData
     hasButtons?: boolean
 }
 
@@ -21,7 +21,7 @@ const CardPet = ({ pet }: CardPetProps) => {
     const item = useMemo(
         () => ({
             ...pet,
-            specie: t(pet?.specie),
+            specie: t(pet?.specie as string),
             race: BreedNames[pet?.race as keyof typeof BreedNames],
             sex: GenderBR[pet?.sex as Gender],
         }),
