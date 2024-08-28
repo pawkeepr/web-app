@@ -26,7 +26,7 @@ const ModalBoxButtonsPet = ({
                 <div className="flex flex-col justify-between items-center w-full h-[90%] p-4">
                     <AvatarPet
                         classNames={{
-                            img: '!w-32 !h-32',
+                            img: '!w-32 !h-32 shadow-theme-4',
                         }}
                         src={pet?.url_img as string}
                         name_pet={pet?.name_pet}
