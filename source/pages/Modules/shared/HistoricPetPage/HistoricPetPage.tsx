@@ -46,6 +46,7 @@ type HistoricPetPageProps = {
 const HistoricPetPage = ({ document, id_pet }: HistoricPetPageProps) => {
     const tabs = Tabs(document, id_pet)
     const router = useRouter()
+
     const {
         data: pet,
         isPending,

@@ -33,7 +33,7 @@ const MapCardFeedPets = ({ pets, isPending, isLoading }: MapCardFeedPetsProps) =
     }
 
     return (
-        <div className="gap-1 mt-1 !overflow-x-auto flex flex-row w-full scrollable-x">
+        <div className="gap-1 mt-1 !overflow-x-auto flex flex-row w-full scrollable-x px-1">
             {!isPending &&
                 pets?.map((pet) => (
                     <CardFeedPets
