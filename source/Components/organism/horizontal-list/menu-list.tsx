@@ -26,7 +26,7 @@ const tab = tv({
     // Ajustes adicionais para os estilos mobile
     variants: {
         mobile: {
-            true: 'mobile:flex-col mobile:text-xs mobile:h-20 mobile:!max-w-[80px]',
+            true: 'mobile:flex-col mobile:text-xs mobile:h-20 mobile:!max-w-[80px] ',
         },
         web: {
             true: 'web:py-2 web:!w-full',
@@ -54,12 +54,18 @@ const tab = tv({
         {
             selected: true,
             menu: true,
-            className: 'mobile:!rounded-full bg-primary-500',
+            className: 'mobile:!rounded-full mobile:shadow-theme-1 bg-primary-500 ',
         },
         {
             selected: true,
             mode: 'default',
-            className: 'text-white !shadow-2xl  mobile:translate-y-[-30%]',
+            className: 'text-white mobile:translate-y-[-30%]',
+        },
+        {
+            selected: true,
+            mobile: true,
+            mode: 'default',
+            className: '',
         },
     ],
 })
@@ -68,8 +74,8 @@ const tabList = tv({
     base: `
         p-0 
         mobile:overflow-visible 
-        web:bg-white !shadow-2xl
-        web:rounded-md mobile:h-10
+        web:bg-white
+        web:rounded-md mobile:h-10 shadow-theme-3
     `,
     variants: {
         hidden: {
@@ -77,10 +83,10 @@ const tabList = tv({
             false: 'flex flex-row',
         },
         bottomNavigation: {
-            true: 'mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:z-10',
+            true: 'mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:z-10 shadow-theme-1',
         },
         mobile: {
-            true: 'mobile:rounded-t-full ',
+            true: 'mobile:rounded-t-full  mobile:h-14 mobile:!overflow-visible',
         },
         mode: {
             simple: 'mobile:bg-white ',
@@ -126,7 +132,7 @@ const MenuList = ({
             {categories.map((category) => (
                 <div
                     key={category.id}
-                    className="flex items-center justify-center flex-grow w-1/3"
+                    className="flex items-center justify-center flex-grow w-1/3 h-full transition-transform bg-transparent"
                 >
                     <Tab
                         key={category.id}
