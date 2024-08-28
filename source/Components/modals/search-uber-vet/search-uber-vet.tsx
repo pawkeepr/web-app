@@ -41,6 +41,7 @@ const ModalSearchUberVet = ({ children }: ModalSearchUberVetProps) => {
                 <BtnFloating
                     icon={(props) => <FaStethoscope {...props} />}
                     title="Buscar Veterinário"
+                    className="fixed flex flex-col items-center justify-center bottom-20 right-5"
                     onClick={() => {
                         showModal()
                     }}
