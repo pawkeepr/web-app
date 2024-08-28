@@ -68,7 +68,7 @@ const BoxButtons = ({ isLoading = false, item }: BoxButtonsProps) => {
                 w-full gap-1 flex 
                 overflow-hidden 
                 flex-wrap
-                px-2 !py-0
+                px-2 !py-1
             "
         >
             <BtnPrimary

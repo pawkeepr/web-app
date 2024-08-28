@@ -23,7 +23,7 @@ export const usePetByIdV2 = (document: string, id_pet: string) => {
     const superKeys = [NAME, document, id_pet]
 
     return useAppQuery<IPetV2>(superKeys, () => getPet(document, id_pet), {
-        enabled: !!document && !!id_pet,
+        enabled: !!document,
     })
 }
 

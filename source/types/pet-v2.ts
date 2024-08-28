@@ -55,6 +55,11 @@ export type PetData = {
     url_profile?: string
 }
 
+export type Pet = PetData & {
+    cpf_cnpj?: string
+    id_pet?: string
+}
+
 export type IHealthInsurance = {
     name: string | null
     type_health: string | null
