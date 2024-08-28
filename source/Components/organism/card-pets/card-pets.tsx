@@ -21,7 +21,7 @@ const CardPet = ({ pet }: CardPetProps) => {
     const item = useMemo(
         () => ({
             ...pet,
-            specie: t(pet?.specie),
+            specie: t(pet?.specie as string),
             race: BreedNames[pet?.race as keyof typeof BreedNames],
             sex: GenderBR[pet?.sex as Gender],
         }),

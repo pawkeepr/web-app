@@ -67,7 +67,7 @@ const StepPet = (_props: StepProps) => {
     return (
         <Form
             onSubmit={handleSubmit}
-            className="relative flex flex-col shadow-lg card-body mobile:p-0"
+            className="relative flex flex-col pb-4 border-t-0 shadow-lg card-body mobile:p-0"
         >
             <div className="p-1 m-2 mb-4">
                 <h4 className="font-sans text-base font-semibold text-center capitalize">

@@ -225,13 +225,14 @@ const CreateOrUpdatePetPage = ({
                     className={cn(
                         `
                             m-2 z-10
+                            gap-1
                             web:absolute web:right-0 web:top-0 web:w-32 web:p-1 web:m-0 web:h-fit 
-                            web:text-gray-400 web:border-none mobile:w-40
+                            web:text-gray-400 web:border-none mobile:w-40 bg-transparent border-none 
                         `,
                         {
-                            'bg-confirm-500 hover:bg-confirm-600 text-white':
+                            'text-confirm-500 hover:text-confirm-600 ':
                                 mode === 'editable',
-                            'bg-primary-500 hover:bg-primary-600 text-white':
+                            'text-primary-500 hover:text-primary-600':
                                 mode !== 'editable',
                         },
                     )}

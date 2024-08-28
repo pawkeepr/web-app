@@ -9,12 +9,14 @@ import type { RecordsShapeYup, StepProps } from '~/types/helpers'
 import type { InitialValues } from '../../index'
 import AddressTutor from '../molecules/address-tutor'
 
-import { useMemo } from 'react'
 import * as yup from 'yup'
 import useFormikContextSafe from '~/hooks/use-formik-context-safe'
 import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
 
-type StepTutorsKeys = Pick<InitialValues, 'ownerEmergencyContact' | 'cpf_cnpj'>
+type StepTutorsKeys = Pick<
+    InitialValues,
+    'ownerEmergencyContact' | 'cpf_cnpj' | 'id'
+>
 
 type StepTutorSchema = RecordsShapeYup<StepTutorsKeys>
 
@@ -40,12 +42,9 @@ const schema = yup.object().shape<StepTutorSchema>({
         .required('Campo obrigatório'),
 })
 
-const StepTutor = ({ prevStep, nextStep, isPending, tutorExist }: StepProps) => {
-    const { values } = useFormikContextSafe<StepTutorsKeys>()
+const StepTutor = ({ prevStep, isPending, tutorExist }: StepProps) => {
+    const { values, isSubmitting, isValid } = useFormikContextSafe<StepTutorsKeys>()
     const { mode } = useModeEditablePet()
-    const isValid = useMemo(() => {
-        return schema.isValidSync(values)
-    }, [values])
 
     return (
         <div className="relative flex flex-col shadow-lg card-body mobile:p-0">
@@ -128,19 +127,16 @@ const StepTutor = ({ prevStep, nextStep, isPending, tutorExist }: StepProps) => 
             </div>
             <div className="flex justify-center gap-3 mt-4 align-items-center">
                 <BtnCancel
-                    condition={mode === 'editable'}
+                    condition={!isPending && !isSubmitting && mode === 'editable'}
                     label="Voltar"
-                    onClick={() => {
-                        prevStep?.()
-                    }}
+                    onClick={prevStep}
                 />
                 <BtnPrimary
                     condition={mode === 'editable'}
-                    disabled={!isValid}
-                    label="Próximo"
-                    onClick={() => {
-                        nextStep?.()
-                    }}
+                    disabled={isSubmitting || mode !== 'editable' || !isValid}
+                    isLoading={isSubmitting}
+                    label={values.id ? 'Atualizar' : 'Cadastrar'}
+                    type="submit"
                 />
             </div>
         </div>
