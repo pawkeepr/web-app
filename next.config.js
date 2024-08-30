@@ -1,5 +1,7 @@
 require('dotenv').config()
+
 const { i18n } = require('./next-i18next.config')
+const webpack = require('webpack')
 
 const withPWA = require('next-pwa')({
     dest: 'public',
@@ -29,6 +31,62 @@ const nextConfig = ((_phase) => {
                 // '/veterinary/cookie-policy',
             ],
         },
+        redirects: () => {
+            // Redirect para dashboard de tutor e veterinário
+            const typeProfile = process.env.MODE_PROFILE
+
+            if (!typeProfile) return []
+
+            const destination = typeProfile === 'tutor' ? '/tutor' : '/veterinary'
+
+            return [
+                {
+                    source: '/dashboard',
+                    destination: `${destination}/dashboard`,
+                    permanent: true,
+                },
+                {
+                    source: '/logout',
+                    destination: `${destination}/logout`,
+                    permanent: true,
+                },
+                {
+                    source: '/profile',
+                    destination: `${destination}/profile`,
+                    permanent: true,
+                },
+                {
+                    source: '/forgot-password',
+                    destination: `${destination}/forgot-password`,
+                    permanent: true,
+                },
+                {
+                    source: '/confirm-account',
+                    destination: `${destination}/confirm-account`,
+                    permanent: true,
+                },
+                {
+                    source: '/',
+                    destination: `${destination}/sign-in`,
+                    permanent: true,
+                },
+                {
+                    source: '/feedback',
+                    destination: `${destination}/feedback`,
+                    permanent: true,
+                },
+                {
+                    source: '/privacy-policy',
+                    destination: `${destination}/privacy-policy`,
+                    permanent: true,
+                },
+                {
+                    source: '/service-terms',
+                    destination: `${destination}/service-terms`,
+                    permanent: true,
+                },
+            ]
+        },
         images: {
             remotePatterns: [
                 { hostname: 'loremflickr.com' },
@@ -39,12 +97,34 @@ const nextConfig = ((_phase) => {
             ],
         },
         reactStrictMode: true,
-        swcMinify: true,
         eslint: {
             ignoreDuringBuilds: true,
         },
         typescript: {
             ignoreBuildErrors: true,
+        },
+        webpack: (config) => {
+            switch (process.env.MODE_PROFILE) {
+                case 'tutor':
+                    config.plugins.push(
+                        new webpack.IgnorePlugin({
+                            resourceRegExp: /^private-next-pages\/tutor(\/.*)?$/,
+                        }),
+                    )
+                    break
+                case 'vet':
+                    config.plugins.push(
+                        new webpack.IgnorePlugin({
+                            resourceRegExp:
+                                /^private-next-pages\/veterinary(\/.*)?$/,
+                        }),
+                    )
+                    break
+                default:
+                    break
+            }
+
+            return config
         },
         env: {
             API_URL: process.env.REACT_APP_API_URL,
@@ -57,6 +137,7 @@ const nextConfig = ((_phase) => {
             FLAG_DEV: process.env.FLAG_DEV,
         },
         i18n,
+
         async rewrites() {
             return [
                 {
