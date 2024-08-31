@@ -85,6 +85,36 @@ const nextConfig = ((_phase) => {
                     destination: `${destination}/service-terms`,
                     permanent: true,
                 },
+                {
+                    source: '/client',
+                    destination: '/external/client',
+                    permanent: true,
+                },
+                {
+                    source: '/pet-was-found/:path*',
+                    destination: '/external/pet-was-found/:path*',
+                    permanent: true,
+                },
+                {
+                    source: '/pet-was-verify/:path*',
+                    destination: '/external/pet-was-verify/:path*',
+                    permanent: true,
+                },
+                {
+                    source: '/qrcode/:path*',
+                    destination: '/external/qrcode/:path*',
+                    permanent: true,
+                },
+                {
+                    source: '/search',
+                    destination: '/external/search',
+                    permanent: true,
+                },
+                {
+                    source: '/pet/medical-history/:path*',
+                    destination: '/external/pet/medical-history/:path*',
+                    permanent: true,
+                },
             ]
         },
         images: {
@@ -108,11 +138,34 @@ const nextConfig = ((_phase) => {
                 case 'tutor':
                     config.plugins.push(
                         new webpack.IgnorePlugin({
-                            resourceRegExp: /^private-next-pages\/tutor(\/.*)?$/,
+                            resourceRegExp:
+                                /^private-next-pages\/veterinary(\/.*)?$/,
+                        }),
+                    )
+                    config.plugins.push(
+                        new webpack.IgnorePlugin({
+                            resourceRegExp: /^private-next-pages\/external(\/.*)?$/,
                         }),
                     )
                     break
                 case 'vet':
+                    config.plugins.push(
+                        new webpack.IgnorePlugin({
+                            resourceRegExp: /^private-next-pages\/tutor(\/.*)?$/,
+                        }),
+                    )
+                    config.plugins.push(
+                        new webpack.IgnorePlugin({
+                            resourceRegExp: /^private-next-pages\/external(\/.*)?$/,
+                        }),
+                    )
+                    break
+                case 'external':
+                    config.plugins.push(
+                        new webpack.IgnorePlugin({
+                            resourceRegExp: /^private-next-pages\/tutor(\/.*)?$/,
+                        }),
+                    )
                     config.plugins.push(
                         new webpack.IgnorePlugin({
                             resourceRegExp:
