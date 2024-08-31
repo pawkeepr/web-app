@@ -42,3 +42,7 @@ html
 cypress/examples
 
 *storybook.log
+pages-backup
+public/sw.js
+public/fallback*
+public/workbox-*
