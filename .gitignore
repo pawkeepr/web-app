@@ -44,5 +44,6 @@ cypress/examples
 *storybook.log
 pages-backup
 public/sw.js
+public/sw.js.map
 public/fallback*
 public/workbox-*
