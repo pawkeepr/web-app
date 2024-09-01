@@ -5,8 +5,8 @@ const fs = require('node:fs')
  * @typedef {string[]} Mode
  */
 const mode = /** @type {Mode} */ (require('./mode'))
-console.log(mode)
-for (let i = 0; i < mode.length; i++) {
+
+for (let i = 0; i < mode?.length; i++) {
     const modeName = mode[i]
     const pagesDir = path.join(__dirname, '..', 'pages', modeName)
     const backupDir = path.join(__dirname, '..', 'pages-backup', modeName)

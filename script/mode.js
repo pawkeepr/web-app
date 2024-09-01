@@ -14,6 +14,8 @@ const MODE_PROFILE = {
     vet: ['tutor', 'external'],
 }
 
+console.log(process.env.MODE_PROFILE)
+
 /**
  * @typedef {string[]} Mode
  */
