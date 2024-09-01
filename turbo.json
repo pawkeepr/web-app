@@ -1,5 +1,8 @@
 {
     "$schema": "https://turbo.build/schema.json",
+    "globalDependencies": [
+        ".env"
+    ],
     "tasks": {
         "build": {
             "dependsOn": [
@@ -8,6 +11,16 @@
             "outputs": [
                 ".next/**",
                 "!.next/cache/**"
+            ],
+            "env": [
+                "MODE_PROFILE"
+            ],
+            "inputs": [
+                "$TURBO_DEFAULT$",
+                ".env.production.local",
+                ".env.local",
+                ".env.production",
+                ".env"
             ]
         },
         "dev": {
