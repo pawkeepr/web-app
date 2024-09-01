@@ -3,5 +3,37 @@
         "deploymentEnabled": {
             "develop": false
         }
-    }
+    },
+    "rewrites": [
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "homolog.vet.pawkeepr.app.br"
+                }
+            ],
+            "destination": "/veterinary"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "homolog.tutor.pawkeepr.app.br"
+                }
+            ],
+            "destination": "/tutor"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "homolog.external.pawkeepr.app.br"
+                }
+            ],
+            "destination": "/external"
+        }
+    ]
 }
