@@ -3,11 +3,12 @@ import { FaDownload, FaPrint } from 'react-icons/fa'
 import { QRCode } from 'react-qrcode-logo'
 import { useReactToPrint } from 'react-to-print'
 import { BtnNeutral } from '~/Components/atoms/btn'
+import Env from '~/env'
 import { encodeBase64 } from '~/utils/encode-base-64'
 import type { QrCodePetProps } from './types'
 
 const QrCodePetWeb = ({ id_pet, name_pet }: QrCodePetProps) => {
-    const currentUrl = `${window.location.protocol}//${window.location.host}`
+    const currentUrl = Env().get('EXTERNAL_URL')
     const componentRef = useRef()
     const qrCodeRef = useRef<HTMLDivElement>(null)
 
@@ -49,7 +50,7 @@ const QrCodePetWeb = ({ id_pet, name_pet }: QrCodePetProps) => {
             >
                 <div ref={qrCodeRef}>
                     <QRCode
-                        value={`${currentUrl}/pet-was-found/${encodeBase64(
+                        value={`${currentUrl}/external/pet-was-found/${encodeBase64(
                             id_pet,
                         )}`}
                         logoImage="/logo-sm-qr-code.png"

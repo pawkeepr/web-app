@@ -34,12 +34,12 @@ const nextConfig = ((_phase) => {
         redirects: () => {
             // Redirect para dashboard de tutor e veterinário
             const typeProfile = process.env.MODE_PROFILE
-
+            console.log('🚀 ~ nextConfig ~ typeProfile:', typeProfile)
             if (!typeProfile) return []
 
             const destination = typeProfile === 'tutor' ? '/tutor' : '/veterinary'
 
-            return [
+            const redirectsDefault = [
                 {
                     source: '/dashboard',
                     destination: `${destination}/dashboard`,
@@ -63,11 +63,6 @@ const nextConfig = ((_phase) => {
                 {
                     source: '/confirm-account',
                     destination: `${destination}/confirm-account`,
-                    permanent: true,
-                },
-                {
-                    source: '/',
-                    destination: `${destination}/sign-in`,
                     permanent: true,
                 },
                 {
@@ -116,6 +111,22 @@ const nextConfig = ((_phase) => {
                     permanent: true,
                 },
             ]
+
+            if (process.env.MODE_PROFILE === 'external') {
+                redirectsDefault.push({
+                    source: '/',
+                    destination: 'https://www.pawkeepr.com/',
+                    permanent: true,
+                })
+            } else {
+                redirectsDefault.push({
+                    source: '/',
+                    destination: `${destination}/sign-in`,
+                    permanent: true,
+                })
+            }
+
+            return redirectsDefault
         },
         images: {
             remotePatterns: [
@@ -182,6 +193,7 @@ const nextConfig = ((_phase) => {
         env: {
             API_URL: process.env.REACT_APP_API_URL,
             API_FILE_URL: process.env.REACT_APP_API_FILE_URL,
+            EXTERNAL_URL: process.env.REACT_APP_EXTERNAL_URL,
             SECRET_KEY: process.env.SECRET_KEY,
             MODE_PROFILE: process.env.MODE_PROFILE,
             REGION: process.env.REGION,
@@ -190,9 +202,8 @@ const nextConfig = ((_phase) => {
             FLAG_DEV: process.env.FLAG_DEV,
         },
         i18n,
-
-        async rewrites() {
-            return [
+        rewrites: async () => {
+            const defaultRewrites = [
                 {
                     source: '/api/proxy/:path*',
                     destination: `${process.env.REACT_APP_API_URL}/:path*`,
@@ -202,6 +213,15 @@ const nextConfig = ((_phase) => {
                     destination: `${process.env.REACT_APP_API_FILE_URL}/:path*`,
                 },
             ]
+
+            if (process.env.MODE_PROFILE === 'external') {
+                defaultRewrites.push({
+                    source: '/',
+                    destination: 'https://www.pawkeepr.com/',
+                })
+            }
+
+            return defaultRewrites
         },
     }
 })(process.env.NODE_ENV)
