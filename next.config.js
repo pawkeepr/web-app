@@ -7,6 +7,8 @@ const withPWA = require('next-pwa')({
     dest: 'public',
 })
 
+console.log(process.env)
+
 /**@type {import('next').NextConfig} */
 const nextConfig = ((_phase) => {
     // const isProduction = phase === 'production'
