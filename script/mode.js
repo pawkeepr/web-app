@@ -17,4 +17,6 @@ const MODE_PROFILE = {
 /**
  * @typedef {string[]} Mode
  */
-module.exports = /** @type {ModeProfile} */ (MODE_PROFILE[process.env.MODE_PROFILE])
+module.exports = /** @type {ModeProfile} */ (
+    MODE_PROFILE[process.env.MODE_PROFILE || 'tutor']
+)
