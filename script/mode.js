@@ -14,11 +14,12 @@ const MODE_PROFILE = {
     vet: ['tutor', 'external'],
 }
 
-console.log(process.env.MODE_PROFILE)
-
 /**
  * @typedef {string[]} Mode
  */
-module.exports = /** @type {ModeProfile} */ (
-    MODE_PROFILE[process.env.MODE_PROFILE || 'tutor']
-)
+
+if (!process.env.MODE_PROFILE) {
+    throw new Error('MODE_PROFILE is required')
+}
+
+module.exports = /** @type {ModeProfile} */ (MODE_PROFILE[process.env.MODE_PROFILE])
