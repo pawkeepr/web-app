@@ -20,6 +20,7 @@ const Env = () => {
         USER_POOL_ID: process.env.USER_POOL_ID || '',
         MODE_PROFILE: process.env.MODE_PROFILE || 'tutor',
         USER_POOL_WEB_CLIENT_ID: process.env.USER_POOL_WEB_CLIENT_ID || '',
+        EXTERNAL_URL: process.env.EXTERNAL_URL || '',
         WEBVIEW: isView,
     } as const
     type Keys = keyof typeof keys

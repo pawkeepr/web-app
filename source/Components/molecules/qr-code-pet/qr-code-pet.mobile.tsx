@@ -5,15 +5,16 @@ import { encodeBase64 } from '~/utils/encode-base-64'
 import type { QrCodePetProps } from './types'
 
 import { WhatsappShareButton } from 'react-share'
+import Env from '~/env'
 
 const QrCodePetMobile = ({ id_pet }: QrCodePetProps) => {
-    const currentUrl = `${window.location.protocol}//${window.location.host}`
+    const currentUrl = Env().get('EXTERNAL_URL')
 
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="flex items-center justify-center flex-1 w-full bg-white">
                 <QRCode
-                    value={`${currentUrl}/pet-was-found/${encodeBase64(id_pet)}`}
+                    value={`${currentUrl}/external/pet-was-found/${encodeBase64(id_pet)}`}
                     logoImage="/logo-sm-qr-code.png"
                     logoWidth={30}
                     logoHeight={30}

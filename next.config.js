@@ -193,6 +193,7 @@ const nextConfig = ((_phase) => {
         env: {
             API_URL: process.env.REACT_APP_API_URL,
             API_FILE_URL: process.env.REACT_APP_API_FILE_URL,
+            EXTERNAL_URL: process.env.REACT_APP_EXTERNAL_URL,
             SECRET_KEY: process.env.SECRET_KEY,
             MODE_PROFILE: process.env.MODE_PROFILE,
             REGION: process.env.REGION,
