@@ -31,6 +31,7 @@ const nextConfig = ((_phase) => {
                 // '/v/cookie-policy',
             ],
         },
+        compress: true,
         redirects: () => {
             // Redirect para dashboard de tutor e veterinário
             const typeProfile = process.env.MODE_PROFILE
@@ -137,43 +138,47 @@ const nextConfig = ((_phase) => {
             }
 
             if (typeProfile === 'tutor') {
-                redirectsDefault.push([
-                    {
-                        source: '/tutor/:path*',
-                        destination: '/t/:path*',
-                        permanent: true,
-                    },
-                    {
-                        source: '/veterinary/:path*',
-                        destination: '/t/:path*',
-                        permanent: true,
-                    },
-                    {
-                        source: '/v/:path*',
-                        destination: '/t/:path*',
-                        permanent: true,
-                    },
-                ])
+                redirectsDefault.push(
+                    ...[
+                        {
+                            source: '/tutor/:path*',
+                            destination: '/t/:path*',
+                            permanent: true,
+                        },
+                        {
+                            source: '/veterinary/:path*',
+                            destination: '/t/:path*',
+                            permanent: true,
+                        },
+                        {
+                            source: '/v/:path*',
+                            destination: '/t/:path*',
+                            permanent: true,
+                        },
+                    ],
+                )
             }
 
             if (typeProfile === 'vet') {
-                redirectsDefault.push([
-                    {
-                        source: '/tutor/:path*',
-                        destination: '/v/:path*',
-                        permanent: true,
-                    },
-                    {
-                        source: '/veterinary/:path*',
-                        destination: '/v/:path*',
-                        permanent: true,
-                    },
-                    {
-                        source: '/t/:path*',
-                        destination: '/v/:path*',
-                        permanent: true,
-                    },
-                ])
+                redirectsDefault.push(
+                    ...[
+                        {
+                            source: '/tutor/:path*',
+                            destination: '/v/:path*',
+                            permanent: true,
+                        },
+                        {
+                            source: '/veterinary/:path*',
+                            destination: '/v/:path*',
+                            permanent: true,
+                        },
+                        {
+                            source: '/t/:path*',
+                            destination: '/v/:path*',
+                            permanent: true,
+                        },
+                    ],
+                )
             }
 
             return redirectsDefault
@@ -271,6 +276,8 @@ const nextConfig = ((_phase) => {
 
             return defaultRewrites
         },
+        swcMinify: true,
+        optimizeFonts: true,
     }
 })(process.env.NODE_ENV)
 
