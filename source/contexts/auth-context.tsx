@@ -98,7 +98,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
         const type_profile = user?.['custom:type_profile'] as AttrTypeProfile
 
-        const partial_route = type_profile === '1' ? 'veterinary' : 'tutor'
+        const partial_route = type_profile === '1' ? 'v' : 't'
         router.push(`/${partial_route}/activation`)
     }, [user])
 
