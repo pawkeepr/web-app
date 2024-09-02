@@ -9,9 +9,9 @@ require('dotenv').config()
  * @typedef {Object.<string, string[]>} ModeProfile
  */
 const MODE_PROFILE = {
-    tutor: ['external', 'veterinary'],
-    external: ['tutor', 'veterinary'],
-    vet: ['tutor', 'external'],
+    tutor: ['e', 'v'],
+    external: ['t', 'v'],
+    vet: ['t', 'e'],
 }
 
 /**

@@ -23,12 +23,12 @@ const nextConfig = ((_phase) => {
                 '/client/confirmation/[id]',
                 '/pet-was-found/[id_pet]',
                 '/pet-was-verify/[id_pet]',
-                '/tutor/privacy-policy',
-                '/tutor/service-terms',
-                // '/tutor/cookie-policy',
-                '/veterinary/privacy-policy',
-                '/veterinary/service-terms',
-                // '/veterinary/cookie-policy',
+                '/t/privacy-policy',
+                '/t/service-terms',
+                // '/t/cookie-policy',
+                '/v/privacy-policy',
+                '/v/service-terms',
+                // '/v/cookie-policy',
             ],
         },
         redirects: () => {
@@ -37,7 +37,7 @@ const nextConfig = ((_phase) => {
             console.log('🚀 ~ nextConfig ~ typeProfile:', typeProfile)
             if (!typeProfile) return []
 
-            const destination = typeProfile === 'tutor' ? '/tutor' : '/veterinary'
+            const destination = typeProfile === 'tutor' ? '/t' : '/v'
 
             const redirectsDefault = [
                 {
@@ -82,37 +82,52 @@ const nextConfig = ((_phase) => {
                 },
                 {
                     source: '/client',
-                    destination: '/external/client',
+                    destination: '/e/client',
                     permanent: true,
                 },
                 {
                     source: '/pet-was-found/:path*',
-                    destination: '/external/pet-was-found/:path*',
+                    destination: '/e/pet-was-found/:path*',
                     permanent: true,
                 },
                 {
                     source: '/pet-was-verify/:path*',
-                    destination: '/external/pet-was-verify/:path*',
+                    destination: '/e/pet-was-verify/:path*',
                     permanent: true,
                 },
                 {
                     source: '/qrcode/:path*',
-                    destination: '/external/qrcode/:path*',
+                    destination: '/e/qrcode/:path*',
                     permanent: true,
                 },
                 {
                     source: '/search',
-                    destination: '/external/search',
+                    destination: '/e/search',
                     permanent: true,
                 },
                 {
                     source: '/pet/medical-history/:path*',
-                    destination: '/external/pet/medical-history/:path*',
+                    destination: '/e/pet/medical-history/:path*',
                     permanent: true,
                 },
                 {
                     source: '/sign-in',
                     destination: `${destination}/sign-in`,
+                    permanent: true,
+                },
+                {
+                    source: '/profile',
+                    destination: `${destination}/profile`,
+                    permanent: true,
+                },
+                {
+                    source: '/tutor/:path*',
+                    destination: '/t/:path*',
+                    permanent: true,
+                },
+                {
+                    source: '/veterinary/:path*',
+                    destination: '/v/:path*',
                     permanent: true,
                 },
             ]
@@ -154,38 +169,36 @@ const nextConfig = ((_phase) => {
                 case 'tutor':
                     config.plugins.push(
                         new webpack.IgnorePlugin({
-                            resourceRegExp:
-                                /^private-next-pages\/veterinary(\/.*)?$/,
+                            resourceRegExp: /^private-next-pages\/v(\/.*)?$/,
                         }),
                     )
                     config.plugins.push(
                         new webpack.IgnorePlugin({
-                            resourceRegExp: /^private-next-pages\/external(\/.*)?$/,
+                            resourceRegExp: /^private-next-pages\/e(\/.*)?$/,
                         }),
                     )
                     break
                 case 'vet':
                     config.plugins.push(
                         new webpack.IgnorePlugin({
-                            resourceRegExp: /^private-next-pages\/tutor(\/.*)?$/,
+                            resourceRegExp: /^private-next-pages\/t(\/.*)?$/,
                         }),
                     )
                     config.plugins.push(
                         new webpack.IgnorePlugin({
-                            resourceRegExp: /^private-next-pages\/external(\/.*)?$/,
+                            resourceRegExp: /^private-next-pages\/e(\/.*)?$/,
                         }),
                     )
                     break
                 case 'external':
                     config.plugins.push(
                         new webpack.IgnorePlugin({
-                            resourceRegExp: /^private-next-pages\/tutor(\/.*)?$/,
+                            resourceRegExp: /^private-next-pages\/t(\/.*)?$/,
                         }),
                     )
                     config.plugins.push(
                         new webpack.IgnorePlugin({
-                            resourceRegExp:
-                                /^private-next-pages\/veterinary(\/.*)?$/,
+                            resourceRegExp: /^private-next-pages\/v(\/.*)?$/,
                         }),
                     )
                     break

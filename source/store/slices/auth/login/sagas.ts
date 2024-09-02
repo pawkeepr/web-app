@@ -94,7 +94,7 @@ export function* signInTutorSaga(action: PayloadAction<SignInCredentials>) {
         )
 
         delay(100)
-        yield call([Router, Router.push], '/tutor/dashboard')
+        yield call([Router, Router.push], '/t/dashboard')
     } catch (error) {
         yield ErrLogin(action, error)
     }
@@ -134,7 +134,7 @@ export function* signInVetSaga(action: PayloadAction<SignInCredentials>) {
         )
 
         delay(100)
-        yield call([Router, Router.push], '/veterinary/dashboard')
+        yield call([Router, Router.push], '/v/dashboard')
     } catch (error) {
         yield ErrLogin(action, error)
     }

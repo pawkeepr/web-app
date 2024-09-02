@@ -56,8 +56,8 @@ export const CodeProfile = {
 export type CodeProfile = (typeof CodeProfile)[keyof typeof CodeProfile]
 
 export const NameFullProfile = {
-    '1': 'veterinary',
-    '2': 'tutor',
+    '1': 'v',
+    '2': 't',
 } as const
 export type NameFullProfile = (typeof NameFullProfile)[keyof typeof NameFullProfile]
 
