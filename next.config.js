@@ -120,12 +120,6 @@ const nextConfig = ((_phase) => {
                     destination: `${destination}/profile`,
                     permanent: true,
                 },
-
-                {
-                    source: '/veterinary/:path*',
-                    destination: '/v/:path*',
-                    permanent: true,
-                },
             ]
 
             if (process.env.MODE_PROFILE === 'external') {
