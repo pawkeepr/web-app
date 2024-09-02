@@ -110,6 +110,11 @@ const nextConfig = ((_phase) => {
                     destination: '/external/pet/medical-history/:path*',
                     permanent: true,
                 },
+                {
+                    source: '/sign-in',
+                    destination: `${destination}/sign-in`,
+                    permanent: true,
+                },
             ]
 
             if (process.env.MODE_PROFILE === 'external') {
