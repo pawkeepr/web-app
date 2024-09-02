@@ -120,11 +120,7 @@ const nextConfig = ((_phase) => {
                     destination: `${destination}/profile`,
                     permanent: true,
                 },
-                {
-                    source: '/tutor/:path*',
-                    destination: '/t/:path*',
-                    permanent: true,
-                },
+
                 {
                     source: '/veterinary/:path*',
                     destination: '/v/:path*',
@@ -144,6 +140,46 @@ const nextConfig = ((_phase) => {
                     destination: `${destination}/sign-in`,
                     permanent: true,
                 })
+            }
+
+            if (typeProfile === 'tutor') {
+                redirectsDefault.push([
+                    {
+                        source: '/tutor/:path*',
+                        destination: '/t/:path*',
+                        permanent: true,
+                    },
+                    {
+                        source: '/veterinary/:path*',
+                        destination: '/t/:path*',
+                        permanent: true,
+                    },
+                    {
+                        source: '/v/:path*',
+                        destination: '/t/:path*',
+                        permanent: true,
+                    },
+                ])
+            }
+
+            if (typeProfile === 'vet') {
+                redirectsDefault.push([
+                    {
+                        source: '/tutor/:path*',
+                        destination: '/v/:path*',
+                        permanent: true,
+                    },
+                    {
+                        source: '/veterinary/:path*',
+                        destination: '/v/:path*',
+                        permanent: true,
+                    },
+                    {
+                        source: '/t/:path*',
+                        destination: '/v/:path*',
+                        permanent: true,
+                    },
+                ])
             }
 
             return redirectsDefault
