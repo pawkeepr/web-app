@@ -1,6 +1,6 @@
 import type React from 'react'
 import type { ReactNode } from 'react'
-import Card from 'react-bootstrap/Card'
+import { cn } from '~/ui/lib/utils'
 
 interface CardContainerProps {
     className?: string
@@ -14,14 +14,12 @@ const CardContainer: React.FC<CardContainerProps> = ({
     title,
 }) => {
     return (
-        <Card className={className}>
-            <Card.Body>
-                {title && (
-                    <Card.Title className="mb-4 fw-normal">{title}</Card.Title>
-                )}
+        <div className={cn('card', className)}>
+            <div className="card-body">
+                {title && <h2 className="mb-4 fw-normal card-title">{title}</h2>}
                 {children}
-            </Card.Body>
-        </Card>
+            </div>
+        </div>
     )
 }
 

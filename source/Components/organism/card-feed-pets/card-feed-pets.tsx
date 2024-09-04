@@ -9,10 +9,11 @@ import { IconGender, iconGender } from '../card-scheduled'
 type CardFeedPetProps = {
     pet: Pet
     hasButtons?: boolean
+    selected?: boolean
     onClick?: (pet: Pet) => void
 }
 
-const CardFeedPet = ({ pet, onClick }: CardFeedPetProps) => {
+const CardFeedPet = ({ pet, onClick, selected }: CardFeedPetProps) => {
     const sex = pet?.sex as keyof typeof IconGender
     const Gender = IconGender[sex]
 
@@ -29,6 +30,7 @@ const CardFeedPet = ({ pet, onClick }: CardFeedPetProps) => {
                     }}
                     type="button"
                     className={card({
+                        selected,
                         className:
                             'px-2 rounded-xl py-2 w-28 !h-36 flex flex-col items-center justify-center !shadow-theme-3',
                     })}

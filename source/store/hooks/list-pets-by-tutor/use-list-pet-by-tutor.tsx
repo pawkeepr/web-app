@@ -43,5 +43,8 @@ export interface Pet {
 }
 
 export const useListPetsFromTutor = () => {
-    return useAppQuery<Pet[]>(['listPetsByTutor'], () => getAllPetsTutor())
+    return useAppQuery<Pet[]>(['listPetsByTutor'], () => getAllPetsTutor(), {
+        staleTime: 1000 * 60 * 60 * 24,
+        gcTime: Number.POSITIVE_INFINITY,
+    })
 }

@@ -1,7 +1,6 @@
 import cn from 'classnames'
-import { Formik, type FormikHelpers } from 'formik'
+import { Form, Formik, type FormikHelpers } from 'formik'
 import { useCallback } from 'react'
-import Form from 'react-bootstrap/Form'
 import { FaEdit, FaEye } from 'react-icons/fa'
 import { BtnIcon, BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control'

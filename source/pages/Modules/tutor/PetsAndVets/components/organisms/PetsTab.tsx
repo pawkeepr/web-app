@@ -18,6 +18,7 @@ export type MapCardFeedPetsProps = {
     isLoading: boolean
     onClick?: (pet: Pet) => void
     isPending: boolean
+    selected?: Pet | null
 }
 
 const Tabs = () => [

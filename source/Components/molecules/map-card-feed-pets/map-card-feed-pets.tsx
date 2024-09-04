@@ -8,6 +8,7 @@ const MapCardFeedPets = ({
     isPending,
     isLoading,
     onClick,
+    selected,
 }: MapCardFeedPetsProps) => {
     const { data: profile } = useProfile()
 
@@ -20,10 +21,11 @@ const MapCardFeedPets = ({
     }
 
     return (
-        <div className="gap-1 mt-1 !overflow-x-auto flex flex-row w-full scrollable-x px-1">
+        <div className="gap-1 mt-1 !overflow-x-auto flex flex-row w-full scrollable-x px-1 mobile:px-2">
             {!isPending &&
                 pets?.map((pet) => (
                     <CardFeedPets
+                        selected={selected?.id_pet === pet?.id_pet}
                         key={pet?.id_pet}
                         onClick={onClick}
                         pet={{
