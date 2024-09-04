@@ -37,11 +37,11 @@ const Alt404 = () => {
                                             </h4>
 
                                             <Link
-                                                href="/sign-in"
+                                                href="/dashboard"
                                                 className="btn btn-success"
                                             >
                                                 <i className="mdi mdi-home me-1" />
-                                                Voltar para o Login
+                                                Voltar
                                             </Link>
                                         </div>
                                     </CardBody>
