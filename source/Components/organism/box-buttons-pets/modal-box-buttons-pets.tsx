@@ -3,7 +3,7 @@ import AvatarPet from '~/Components/molecules/avatar-pet'
 import Env from '~/env'
 import useModal from '~/hooks/use-modal'
 import { useTranslations } from '~/hooks/use-translations'
-import type { PetData } from '~/types/pet-v2'
+import type { Pet } from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
 import type { Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import { encodeBase64 } from '~/utils/encode-base-64'
@@ -11,10 +11,7 @@ import type { ModalBoxButtonsProps } from '../box-buttons/modal-box-buttons'
 import Modal from '../modal'
 import BoxButtonsPets from './box-buttons-pets'
 
-const ModalBoxButtonsPet = ({
-    item: pet,
-    children,
-}: ModalBoxButtonsProps<PetData>) => {
+const ModalBoxButtonsPet = ({ item: pet, children }: ModalBoxButtonsProps<Pet>) => {
     const { closeModal, open, showModal } = useModal()
     const { t } = useTranslations('common')
     const FLAG_DEV = Env().get('FLAG_DEV')

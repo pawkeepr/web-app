@@ -28,6 +28,8 @@ export interface Pet {
     date_update: string
     id_pet: string
     identification_number: string
+    cpf_cnpj: string
+    url_img: string
     microchip: string
     name_pet: string
     organ_donor: boolean
