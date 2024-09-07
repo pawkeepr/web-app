@@ -75,7 +75,7 @@ const tabList = tv({
         p-0 
         mobile:overflow-visible 
         web:bg-white
-        web:rounded-md mobile:h-10 shadow-theme-3
+        web:rounded-lg mobile:h-10 shadow-theme-3 web:overflow-hidden
     `,
     variants: {
         hidden: {
@@ -83,7 +83,7 @@ const tabList = tv({
             false: 'flex flex-row',
         },
         bottomNavigation: {
-            true: 'mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:z-10 shadow-theme-1',
+            true: 'mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:z-10 mobile:shadow-theme-1',
         },
         mobile: {
             true: 'mobile:rounded-t-full  mobile:h-14 mobile:!overflow-visible',

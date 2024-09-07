@@ -14,20 +14,25 @@ const nextConfig = ((_phase) => {
     return {
         publicRuntimeConfig: {
             publicRoutes: [
-                '/sign-in',
-                '/sign-up',
-                '/forget-password',
-                '/reset-password',
+                '/t/sign-in',
+                '/t/sign-up',
+                '/t/forget-password',
+                '/t/reset-password',
                 '/',
-                '/search',
-                '/client/confirmation/[id]',
-                '/pet-was-found/[id_pet]',
-                '/pet-was-verify/[id_pet]',
+                '/e/search',
+                '/e/client/confirmation/[id]',
+                '/e/pet-was-found/[id_pet]',
+                '/e/pet-was-verify/[id_pet]',
                 '/t/privacy-policy',
                 '/t/service-terms',
                 // '/t/cookie-policy',
                 '/v/privacy-policy',
                 '/v/service-terms',
+                '/v/sign-in',
+                '/v/sign-up',
+                '/v/forget-password',
+                '/v/reset-password',
+                '/v/search',
                 // '/v/cookie-policy',
             ],
         },
@@ -35,7 +40,6 @@ const nextConfig = ((_phase) => {
         redirects: () => {
             // Redirect para dashboard de tutor e veterinário
             const typeProfile = process.env.MODE_PROFILE
-            console.log('🚀 ~ nextConfig ~ typeProfile:', typeProfile)
             if (!typeProfile) return []
 
             const destination = typeProfile === 'tutor' ? '/t' : '/v'
