@@ -1,36 +1,34 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import { Col, Container, Row } from 'reactstrap';
+import Link from 'next/link'
+import React from 'react'
 
 // Import Images
-import error500 from "~/assets/images/error500.png";
 
 const Error500 = () => {
-
     return (
         <React.Fragment>
-            <div className="auth-page-wrapper py-5 d-flex justify-content-center align-items-center min-vh-100">
-                <div className="auth-page-content overflow-hidden p-0">
-                    <Container fluid={true}>
-                        <Row className="justify-content-center">
-                            <Col xl={4} className="text-center">
-                                <div className="error-500 position-relative">
-                                    <Image src={error500} alt="" className="img-fluid error-500-img error-img" />
-                                    <h1 className="title text-muted">500</h1>
-                                </div>
-                                <div>
-                                    <h3>Internal Server Error!</h3>
-                                    <p className="text-muted w-75 mx-auto">Server Error 500. We're not exactly sure what happened, but our servers say something is wrong.</p>
-                                    <Link href="/dashboard" className="btn btn-success"><i className="mdi mdi-home me-1"></i>Back to home</Link>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Container>
+            <div className="py-5 auth-page-wrapper d-flex justify-content-center align-items-center min-vh-100">
+                <div className="p-0 overflow-hidden auth-page-content">
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="text-center">
+                                <h1 className="mb-4 text-primary">Oops !</h1>
+                                <h4 className="mb-2 text-uppercase">
+                                    Desculpe, página não encontrada 😭
+                                    <br />
+                                    <strong>{window.location.pathname}</strong>
+                                </h4>
+
+                                <Link href="/sign-in" className="btn btn-success">
+                                    <i className="mdi mdi-home me-1" />
+                                    Voltar para o Login
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </React.Fragment>
-    );
-};
+    )
+}
 
-export default Error500;
+export default Error500
