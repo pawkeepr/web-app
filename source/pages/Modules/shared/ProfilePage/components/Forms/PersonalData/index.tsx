@@ -3,6 +3,7 @@ import { Form, Formik, type FormikHelpers } from 'formik'
 import { useCallback } from 'react'
 import { FaEdit, FaEye } from 'react-icons/fa'
 import { BtnIcon, BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
+import ModalConfirm from '~/Components/modals/confirm-modal/modal-confirm'
 import FieldControl from '~/Components/molecules/field-control'
 import { useModeEditablePet } from '~/pages/Modules/shared/MaintainPetPage/components/hooks/use-mode-editable-pet'
 import { useUpdateProfileMutation } from '~/store/hooks/profile/use-profile'
@@ -32,7 +33,7 @@ const PersonalData = ({ data }: PersonalDataProps) => {
 
     return (
         <Formik initialValues={data} onSubmit={handleSubmit}>
-            {({ values, isSubmitting, handleSubmit }) => (
+            {({ values, isSubmitting, handleSubmit, resetForm }) => (
                 <Form className="pb-4" onSubmit={handleSubmit}>
                     <div className="flex justify-end w-32">
                         <BtnIcon
@@ -50,12 +51,15 @@ const PersonalData = ({ data }: PersonalDataProps) => {
                             type="button"
                             className={cn(
                                 `
-                                    flex justify-center items-center w-32 h-10 rounded-md
-                                `,
+                            m-2 z-10
+                            gap-1
+                            web:absolute web:right-0 web:top-0 web:w-32 web:p-1 web:m-0 web:h-fit 
+                            web:text-gray-400 web:border-none mobile:w-40 bg-transparent border-none 
+                        `,
                                 {
-                                    'bg-confirm-500 hover:bg-confirm-600 text-white':
+                                    'text-confirm-500 hover:text-confirm-600 ':
                                         mode === 'editable',
-                                    'bg-primary-500 hover:bg-primary-600 text-white':
+                                    'text-primary-500 hover:text-primary-600':
                                         mode !== 'editable',
                                 },
                             )}
@@ -101,12 +105,23 @@ const PersonalData = ({ data }: PersonalDataProps) => {
                             <AddressTutor mode={mode} />
                         </div>
                         <div className="flex items-end justify-end mobile:justify-center">
-                            <BtnNeutral
-                                outline
-                                label="Cancelar"
-                                condition={!isSubmitting}
-                                className="border-none"
-                            />
+                            <ModalConfirm
+                                title="Tem certeza que deseja reiniciar as alterações?"
+                                description="Ao continuar, as alterações feitas neste perfil serão perdidas."
+                                onConfirm={() => resetForm()}
+                            >
+                                {(showModal) => {
+                                    return (
+                                        <BtnNeutral
+                                            outline
+                                            label="Cancelar"
+                                            condition={!isSubmitting}
+                                            onClick={showModal}
+                                            className="border-none"
+                                        />
+                                    )
+                                }}
+                            </ModalConfirm>
                             <BtnPrimary
                                 label="Salvar"
                                 type="submit"

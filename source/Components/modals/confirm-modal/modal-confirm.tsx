@@ -54,11 +54,11 @@ const ModalConfirm = ({
                 open={open}
                 mobilePage={false}
                 classNames={{
-                    modal: 'w-fit h-fit p-4',
+                    modal: 'w-fit h-fit rounded-3xl',
                 }}
             >
-                <div className="flex justify-center items-center flex-col max-w-[480px] ">
-                    <h2 className="text-xl mb-1 font-semibold leading-6 text-gray-900 dark:!text-gray-200 text-center">
+                <div className="flex justify-center items-center flex-col space-y-4 max-w-[480px] p-4  ">
+                    <h2 className="text-xl mb-1 font-semibold leading-6 text-gray-800 dark:!text-gray-200 text-center">
                         {title}
                     </h2>
 
