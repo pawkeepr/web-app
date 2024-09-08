@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { FaHeartbeat } from 'react-icons/fa'
 import MapCardFeedPets from '~/Components/molecules/map-card-feed-pets'
 import {
     useListPetsFromTutor,
@@ -11,6 +10,7 @@ import type { IMainResponsibleGuardian, PetData } from '~/types/pet-v2'
 import DefaultLayout from '../../_layouts/dashboard'
 import PetProfileCard from '../../shared/HistoricPetPage/components/organisms/pet-profile-card'
 import CardContainer from '../../shared/ProfilePage/components/CardContainer'
+import ContainerHealthPlans from './components/container-health-plans'
 
 const HealthPlan = () => {
     const [selected, setSelected] = useState<Pet | null>(null)
@@ -54,28 +54,17 @@ const HealthPlan = () => {
                             pet_information={pet?.pet_information as PetData}
                             id={pet?.id}
                         />
-                        {!selected && (
-                            <p className="text-center">
-                                Selecione um Pet para ver os Dados
-                            </p>
-                        )}
                     </div>
-                    <div className="w-full flex flex-[3] px-2 web:my-2 mobile:!flex-1 overflow-hidden">
+                    <div className="w-full flex flex-[3] flex-col px-2 web:my-2 mobile:!flex-1 overflow-hidden">
                         <CardContainer className="w-full bg-white">
-                            <div className="flex items-center w-full p-6 bg-white rounded-lg shadow-md">
-                                <div className="p-4 bg-blue-100 rounded-full">
-                                    <FaHeartbeat className="text-3xl text-blue-500" />
-                                </div>
-                                <div className="ml-4">
-                                    <h2 className="text-xl font-semibold text-gray-800">
-                                        Plano de Saúde
-                                    </h2>
-                                    <p className="text-gray-600">
-                                        Proteja sua saúde com nossos planos
-                                        personalizados.
-                                    </p>
-                                </div>
-                            </div>
+                            {selected && (
+                                <ContainerHealthPlans id_pet={selected.id_pet} />
+                            )}
+                            {!selected && (
+                                <p className="text-base font-semibold text-center text-gray-600">
+                                    Selecione um Pet para ver os Dados
+                                </p>
+                            )}
                         </CardContainer>
                     </div>
                 </div>
