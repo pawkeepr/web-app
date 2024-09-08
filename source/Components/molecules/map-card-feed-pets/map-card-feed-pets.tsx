@@ -12,7 +12,7 @@ const MapCardFeedPets = ({
 }: MapCardFeedPetsProps) => {
     const { data: profile } = useProfile()
 
-    if (!pets?.length) {
+    if (pets?.length === 0 && !isPending && !isLoading) {
         return (
             <div className="text-center w-full !h-32 flex items-center justify-center">
                 <span>Não há Pets Cadastrados</span>
