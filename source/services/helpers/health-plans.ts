@@ -7,13 +7,23 @@ const urls = {
     UPDATE_HEALTH_PLANS: () => '/api-pet/update-health_insurance-pet',
 }
 
+export type IHealthPlan = {
+    id: string
+    name: string
+    type_health: string
+    number_health: string
+    validity: string
+    dat_ini: string
+    dat_end: string
+}
+
 export const getAllHealthPlans = async (id_pet: string, cpf_cnpj: string) =>
-    api.get(urls.FETCH_HEALTH_PLANS(), {
+    api.get<IHealthPlan[]>(urls.FETCH_HEALTH_PLANS(), {
         params: { id_pet, cpf_cnpj },
     })
 
 export const updateHealthPlans = async (
-    data: unknown,
+    data: IHealthPlan,
     id_pet: string,
     cpf_cnpj: string,
 ) =>
