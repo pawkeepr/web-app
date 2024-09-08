@@ -1,4 +1,3 @@
-import ModalSearchUberVet from '~/Components/modals/search-uber-vet/search-uber-vet'
 import CardVets from '~/Components/organism/card-tutors'
 
 import useListVets from '~/store/hooks/list-vets-by-tutor/use-list-vets'
@@ -23,8 +22,6 @@ const VetsTab = () => {
                     </span>
                 </div>
             )}
-
-            <ModalSearchUberVet />
         </>
     )
 }

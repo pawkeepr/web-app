@@ -1,6 +1,8 @@
 import { FaCalendarCheck, FaStethoscope } from 'react-icons/fa'
 import { MdPets } from 'react-icons/md'
+import BtnFloatingExpansible from '~/Components/molecules/btn-floating-expansible'
 import HorizontalTabs from '~/Components/organism/horizontal-list'
+import useModal from '~/hooks/use-modal'
 import DefaultLayout from '../../_layouts/dashboard/dashboard'
 import PetsTab from '../PetsAndVets/components/organisms/PetsTab'
 import VetsTab from '../PetsAndVets/components/organisms/VetsTab'
@@ -32,9 +34,27 @@ const Tabs = () => [
 
 const DashboardPage = () => {
     const tabs = Tabs()
+    const { showModal } = useModal({ name: 'search' })
+
     return (
         <DefaultLayout title="Dashboard" name="appointments" searchBlock>
             <HorizontalTabs categories={tabs} menu />
+            <BtnFloatingExpansible
+                childLinks={[
+                    {
+                        icon: MdPets,
+                        title: 'Adicionar Pet',
+                        href: '/tutor/pet',
+                    },
+                    {
+                        icon: FaStethoscope,
+                        title: 'Buscar Veterinário',
+                        onClick: () => {
+                            showModal()
+                        },
+                    },
+                ]}
+            />
         </DefaultLayout>
     )
 }
