@@ -3,6 +3,7 @@ import { Form, Formik, type FormikHelpers } from 'formik'
 import { useCallback } from 'react'
 import { FaEdit, FaEye } from 'react-icons/fa'
 import { BtnIcon, BtnNeutral, BtnPrimary } from '~/Components/atoms/btn'
+import ModalConfirm from '~/Components/modals/confirm-modal/modal-confirm'
 import FieldControl from '~/Components/molecules/field-control'
 import { useModeEditablePet } from '~/pages/Modules/shared/MaintainPetPage/components/hooks/use-mode-editable-pet'
 import { useUpdateProfileMutation } from '~/store/hooks/profile/use-profile'
@@ -104,13 +105,23 @@ const PersonalData = ({ data }: PersonalDataProps) => {
                             <AddressTutor mode={mode} />
                         </div>
                         <div className="flex items-end justify-end mobile:justify-center">
-                            <BtnNeutral
-                                outline
-                                label="Cancelar"
-                                condition={!isSubmitting}
-                                onClick={() => resetForm()}
-                                className="border-none"
-                            />
+                            <ModalConfirm
+                                title="Tem certeza que deseja reiniciar as alterações?"
+                                description="Ao continuar, as alterações feitas neste perfil serão perdidas."
+                                onConfirm={() => resetForm()}
+                            >
+                                {(showModal) => {
+                                    return (
+                                        <BtnNeutral
+                                            outline
+                                            label="Cancelar"
+                                            condition={!isSubmitting}
+                                            onClick={showModal}
+                                            className="border-none"
+                                        />
+                                    )
+                                }}
+                            </ModalConfirm>
                             <BtnPrimary
                                 label="Salvar"
                                 type="submit"
