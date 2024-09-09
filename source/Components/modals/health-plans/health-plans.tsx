@@ -1,5 +1,6 @@
 import { Form, Formik } from 'formik'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
+import { InputDate } from '~/Components/atoms/input-date'
 import withCompose from '~/Components/helpers/with-compose'
 import FieldControl from '~/Components/molecules/field-control'
 import Modal from '~/Components/organism/modal'
@@ -34,7 +35,7 @@ const ModalHealthPlans = ({ children, healthPlan }: ModalHealthPlansProps) => {
                 open={open}
                 mobilePage={false}
                 classNames={{
-                    modal: 'w-fit h-fit rounded-3xl',
+                    modal: 'w-fit h-fit rounded-3xl overflow-visible',
                 }}
             >
                 <Formik
@@ -74,11 +75,14 @@ const ModalHealthPlans = ({ children, healthPlan }: ModalHealthPlansProps) => {
                             label="Número do Plano"
                             placeholder="Digite o número do plano"
                         />
-                        <FieldControl
-                            ctx={healthPlan}
+                        <InputDate
+                            onChange={
+                                (date: Date) => {
+                                    console.log(date)
+                                }
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            }
                             name="validity"
-                            label="Validade"
-                            type="date"
                         />
                         <FieldControl
                             ctx={healthPlan}

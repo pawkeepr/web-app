@@ -9,6 +9,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { appWithTranslation } from 'next-i18next'
 import Head from 'next/head'
+import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '~/Components/organism/drawer/react-modern-drawer.css'
@@ -18,6 +19,10 @@ import ErrorBoundary from '~/contexts/error-boundary'
 import pg from '../package.json'
 
 function App({ Component, pageProps }: AppProps) {
+    useEffect(() => {
+        import('../styles/react-datepicker.css')
+    }, [])
+
     return (
         <ErrorBoundary>
             <SpeedInsights />
