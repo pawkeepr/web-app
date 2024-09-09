@@ -1,10 +1,9 @@
 import { ArrowLeftIcon, CalendarIcon } from '@heroicons/react/24/solid'
-import { getMonth, getYear } from 'date-fns'
+import { format, getMonth, getYear } from 'date-fns'
 import { ptBR } from 'date-fns/locale/pt-BR'
 import { range } from 'lodash'
 import { forwardRef, useState, type ComponentProps } from 'react'
 import ReactDatePicker, { type ReactDatePickerProps } from 'react-datepicker'
-
 import { input } from '../input'
 
 export type InputDateProps = {
@@ -14,10 +13,13 @@ export type InputDateProps = {
 } & ReactDatePickerProps
 
 // props de button
-
+type InputLabelDateProps = {
+    value: Date
+} & Omit<ComponentProps<'button'>, 'value'>
 export const InputLabelDate = forwardRef(
-    ({ value, onClick, ...props }: ComponentProps<'button'>, ref) => {
+    ({ value, onClick, ...props }: InputLabelDateProps, ref) => {
         const placeholder = props['aria-placeholder'] || 'Selecione uma data'
+        const date = value ? format(value, 'dd/MM/yyyy') : placeholder
         return (
             <button
                 {...props}
@@ -28,7 +30,7 @@ export const InputLabelDate = forwardRef(
                 onClick={onClick}
                 ref={ref}
             >
-                {value || placeholder}
+                {date}
                 <CalendarIcon className="absolute top-0 w-6 h-6 text-gray-500 translate-y-[40%] right-4" />
             </button>
         )
