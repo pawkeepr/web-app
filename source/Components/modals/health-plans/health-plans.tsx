@@ -1,8 +1,8 @@
 import { Form, Formik } from 'formik'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
-import { InputDate } from '~/Components/atoms/input-date'
 import withCompose from '~/Components/helpers/with-compose'
 import FieldControl from '~/Components/molecules/field-control'
+import FieldDate from '~/Components/molecules/field-date'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
 import type { IHealthPlan } from '~/services/helpers/health-plans'
@@ -75,26 +75,21 @@ const ModalHealthPlans = ({ children, healthPlan }: ModalHealthPlansProps) => {
                             label="Número do Plano"
                             placeholder="Digite o número do plano"
                         />
-                        <InputDate
-                            onChange={
-                                (date: Date) => {
-                                    console.log(date)
-                                }
-                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                            }
+                        <FieldDate
+                            ctx={healthPlan}
                             name="validity"
+                            label="Data de Validade"
                         />
-                        <FieldControl
+
+                        <FieldDate
                             ctx={healthPlan}
                             name="dat_ini"
                             label="Data de Início"
-                            type="date"
                         />
-                        <FieldControl
+                        <FieldDate
                             ctx={healthPlan}
                             name="dat_end"
                             label="Data de Fim"
-                            type="date"
                         />
                         <div className="flex items-center justify-center gap-2 mt-4">
                             <BtnCancel
