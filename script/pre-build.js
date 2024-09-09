@@ -1,5 +1,5 @@
 const path = require('node:path')
-const fs = require('fs')
+const fs = require('node:fs')
 /**
  * @typedef {string[]} Mode
  */
