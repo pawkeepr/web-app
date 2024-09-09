@@ -81,7 +81,7 @@ const ConfirmationPage = () => {
                                 <p className="flex justify-between text-gray-500">
                                     <strong className="mr-2">Pet:</strong>
                                     <span>
-                                        {`${pet.name_pet}, ${t(pet.specie)}, ${t(
+                                        {`${pet.name_pet}, ${t(pet.specie as string)}, ${t(
                                             pet.race as string,
                                         )}`}
                                     </span>
@@ -143,7 +143,7 @@ const ConfirmationPage = () => {
                         </div>
                     </section>
 
-                    <div className="flex flex-row items-center justify-center">
+                    <div className="flex flex-row items-center justify-center gap-2">
                         <CanceledExternalModal
                             title="Cancelar Agendamento"
                             item={activeData}

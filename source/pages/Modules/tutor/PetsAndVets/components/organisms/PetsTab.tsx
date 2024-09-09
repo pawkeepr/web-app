@@ -1,13 +1,9 @@
 import { Tab } from '@headlessui/react'
 import { useMemo } from 'react'
-import { FaStethoscope } from 'react-icons/fa'
-import { MdPets } from 'react-icons/md'
-import BtnFloatingExpansible from '~/Components/molecules/btn-floating-expansible'
 import { card } from '~/Components/organism/card'
 import CardFeedPets from '~/Components/organism/card-feed-pets'
 import ItemsList from '~/Components/organism/horizontal-list/items-list'
 import MenuList from '~/Components/organism/horizontal-list/menu-list'
-import useModal from '~/hooks/use-modal'
 
 import {
     useListPetsFromTutor,
@@ -93,7 +89,6 @@ const Tabs = () => [
 
 const PetsTab = () => {
     const { data: pets, isPending, isFetching } = useListPetsFromTutor()
-    const { showModal } = useModal({ name: 'search' })
     const categories = useMemo(() => Tabs(), [])
     return (
         <Tab.Group
@@ -109,23 +104,6 @@ const PetsTab = () => {
             />
 
             <ItemsList categories={categories} />
-
-            <BtnFloatingExpansible
-                childLinks={[
-                    {
-                        icon: MdPets,
-                        title: 'Adicionar Pet',
-                        href: '/tutor/pet',
-                    },
-                    {
-                        icon: FaStethoscope,
-                        title: 'Buscar Veterinário',
-                        onClick: () => {
-                            showModal()
-                        },
-                    },
-                ]}
-            />
         </Tab.Group>
     )
 }
