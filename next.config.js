@@ -27,6 +27,8 @@ const nextConfig = ((_phase) => {
                 '/t/service-terms',
                 // '/t/cookie-policy',
                 '/v/privacy-policy',
+                '/service-terms',
+                '/privacy-policy',
                 '/v/service-terms',
                 '/v/sign-in',
                 '/v/sign-up',
@@ -73,16 +75,6 @@ const nextConfig = ((_phase) => {
                 {
                     source: '/feedback',
                     destination: `${destination}/feedback`,
-                    permanent: true,
-                },
-                {
-                    source: '/privacy-policy',
-                    destination: `${destination}/privacy-policy`,
-                    permanent: true,
-                },
-                {
-                    source: '/service-terms',
-                    destination: `${destination}/service-terms`,
                     permanent: true,
                 },
                 {
