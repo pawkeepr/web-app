@@ -3,8 +3,9 @@ import useMutationHelper from '~/hooks/use-mutation-helper'
 import {
     getAllHealthPlans,
     updateHealthPlans,
-    type IHealthPlan,
 } from '~/services/helpers/health-plans'
+import { handleSubmitHelper } from '~/store/helpers/handle-submit-helper'
+import type { IHealthPlan } from '~/validations/health-plans'
 import useProfile from '../profile/use-profile'
 
 type UseHookHealthPlans = {
@@ -17,7 +18,7 @@ export const useHealthPlans = ({ id_pet }: UseHookHealthPlans) => {
     const cpf_cnpj = data?.user_information?.cpf_cnpj as string
     return useAppQuery<IHealthPlan[]>(
         [NAME, id_pet, cpf_cnpj],
-        getAllHealthPlans.bind(null, cpf_cnpj, id_pet),
+        getAllHealthPlans.bind(null, id_pet, cpf_cnpj),
     )
 }
 
@@ -30,4 +31,26 @@ export const useUpdateHealthPlansMutation = (id_pet: string) => {
         mutationFn: async (data: IHealthPlan) =>
             updateHealthPlans(data, id_pet, cpf_cnpj),
     })
+}
+
+type HandleSubmitHealthPlans = {
+    id_pet: string
+    finallySubmit?: () => unknown
+}
+
+export const handleSubmitHealthPlans = ({
+    id_pet,
+    finallySubmit,
+}: HandleSubmitHealthPlans) => {
+    const createdMutation = useUpdateHealthPlansMutation(id_pet)
+    const updatedMutation = useUpdateHealthPlansMutation(id_pet)
+
+    return (data: IHealthPlan) => {
+        return handleSubmitHelper({
+            createMutation: createdMutation,
+            updateMutation: updatedMutation,
+            data,
+            onSubmit: finallySubmit,
+        })
+    }
 }

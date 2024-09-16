@@ -1,20 +1,23 @@
 import { FaHeartbeat, FaPlus } from 'react-icons/fa'
 import ModalHealthPlans from '~/Components/modals/health-plans'
-import type { IHealthPlan } from '~/services/helpers/health-plans'
 import { useHealthPlans } from '~/store/hooks/health-plans'
-
-const CardHealthPlans = () => {
+import type { IHealthPlan } from '~/validations/health-plans'
+const CardHealthPlans = ({ healthPlan }: { healthPlan: IHealthPlan }) => {
     return (
         <div className="flex items-center w-full p-6 bg-white rounded-lg shadow-theme-3">
             <div className="p-4 bg-blue-100 rounded-full">
                 <FaHeartbeat className="text-4xl text-blue-500" />
             </div>
             <div className="ml-4">
-                <h2 className="text-xl font-semibold text-gray-800">
-                    Plano de Saúde
+                <h2 className="text-lg font-bold text-gray-700">
+                    {healthPlan.name}
                 </h2>
+                <p className="text-gray-600">{healthPlan.type_health}</p>
                 <p className="text-gray-600">
-                    Proteja sua saúde com nossos planos personalizados.
+                    <strong>Validade:</strong>{' '}
+                    {Intl.DateTimeFormat('pt-BR').format(
+                        new Date(healthPlan.validity),
+                    )}
                 </p>
             </div>
         </div>
@@ -31,7 +34,7 @@ const ContainerHealthPlans = ({ id_pet }: ContainerHealthPlansProps) => {
 
     return (
         <>
-            <ModalHealthPlans>
+            <ModalHealthPlans id_pet={id_pet}>
                 {(showModal) => (
                     <button
                         type="button"
@@ -64,7 +67,7 @@ const ContainerHealthPlans = ({ id_pet }: ContainerHealthPlansProps) => {
             {data && data?.length > 0 && (
                 <div>
                     {data?.map((plan: IHealthPlan) => (
-                        <CardHealthPlans key={plan.id} />
+                        <CardHealthPlans key={plan.id} healthPlan={plan} />
                     ))}
                 </div>
             )}

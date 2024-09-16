@@ -1,4 +1,4 @@
-import { InputDate } from '~/Components/atoms/input-date'
+import { InputDate, type InputDateProps } from '~/Components/atoms/input-date'
 import Label from '~/Components/atoms/label'
 import useFieldSafe from '~/hooks/use-field-safe'
 import { useFieldControlClasses, type InputControlProps } from '../field-control'
@@ -9,7 +9,7 @@ type FieldDateProps<T, Ctx> = FieldControlProps<T, Ctx> & {
     startIcon?: never
     endIcon?: never
     onChange?: (date: Date) => void
-}
+} & Omit<InputDateProps, 'onChange'>
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const FieldDate = <T, Ctx = any>({

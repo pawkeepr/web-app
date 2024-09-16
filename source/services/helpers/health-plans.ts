@@ -1,20 +1,12 @@
 // Profile Vet
 
+import type { IHealthPlan } from '~/validations/health-plans'
 import { api } from '../api'
 
 const urls = {
     FETCH_HEALTH_PLANS: () => '/api-pet/list-health-insurance',
     UPDATE_HEALTH_PLANS: () => '/api-pet/update-health_insurance-pet',
-}
-
-export type IHealthPlan = {
-    id: string
-    name: string
-    type_health: string
-    number_health: string
-    validity: string
-    dat_ini: string
-    dat_end: string
+    CREATE_HEALTH_PLANS: () => '/api-pet/update-health_insurance-pet',
 }
 
 export const getAllHealthPlans = async (id_pet: string, cpf_cnpj: string) =>
@@ -28,5 +20,14 @@ export const updateHealthPlans = async (
     cpf_cnpj: string,
 ) =>
     api.put(urls.UPDATE_HEALTH_PLANS(), data, {
+        params: { id_pet, cpf_cnpj },
+    })
+
+export const createHealthPlans = async (
+    data: IHealthPlan,
+    id_pet: string,
+    cpf_cnpj: string,
+) =>
+    api.post(urls.CREATE_HEALTH_PLANS(), data, {
         params: { id_pet, cpf_cnpj },
     })
