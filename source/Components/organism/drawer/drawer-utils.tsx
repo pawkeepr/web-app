@@ -2,6 +2,7 @@ import { UserCircleIcon } from '@heroicons/react/24/solid'
 import HistoricIcon from '@heroicons/react/24/solid/ArchiveBoxXMarkIcon'
 import DashboardIcon from '@heroicons/react/24/solid/HomeIcon'
 import { FaMapSigns } from 'react-icons/fa'
+import { GiHealthNormal } from 'react-icons/gi'
 import { tv } from 'tailwind-variants'
 import { button } from '~/Components/atoms/btn'
 
@@ -65,7 +66,7 @@ const tutorsItems: Item[] = [
     {
         name: 'Planos de Saúde',
         visible: true,
-        icon: <FaMapSigns className="w-5 h-5" />,
+        icon: <GiHealthNormal className="w-5 h-5" />,
         href: '/t/pet/health-plans',
     },
     {
