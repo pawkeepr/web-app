@@ -7,7 +7,7 @@ import { tv } from 'tailwind-variants'
 import useProfile from '~/store/hooks/profile/use-profile'
 import type { StepProps, TabsOptions } from '~/types/helpers'
 import { useModeEditablePet } from '../hooks/use-mode-editable-pet'
-import { StepHealthInsurance, StepPet, StepTutor } from '../steps'
+import { StepPet, StepTutor } from '../steps'
 
 type TabItem = {
     id: TabsOptions
@@ -29,12 +29,6 @@ const itemsVet: TabItem[] = [
         href: '#NewTutor',
         Component: StepTutor,
     },
-    {
-        id: 2,
-        title: 'Planos de Saúde',
-        href: '#NewHealthInsurance',
-        Component: StepHealthInsurance,
-    },
 ]
 
 const itemsTutor: TabItem[] = [
@@ -44,12 +38,6 @@ const itemsTutor: TabItem[] = [
         href: '#NewPet',
         Component: StepPet,
     },
-    // {
-    //     id: 1,
-    //     title: 'Planos de Saúde',
-    //     href: '#NewHealthInsurance',
-    //     Component: StepHealthInsurance,
-    // },
 ]
 
 type VerticalTabsProps = {

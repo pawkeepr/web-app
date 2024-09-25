@@ -1,5 +1,5 @@
 import AvatarPet from '~/Components/molecules/avatar-pet'
-import type { PetData } from '~/types/pet-v2'
+import type { Pet } from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
 import type { Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import ModalBoxButtonsPet from '../box-buttons-pets/modal-box-buttons-pets'
@@ -7,11 +7,13 @@ import { card } from '../card'
 import { IconGender, iconGender } from '../card-scheduled'
 
 type CardFeedPetProps = {
-    pet: PetData
+    pet: Pet
     hasButtons?: boolean
+    selected?: boolean
+    onClick?: (pet: Pet) => void
 }
 
-const CardFeedPet = ({ pet }: CardFeedPetProps) => {
+const CardFeedPet = ({ pet, onClick, selected }: CardFeedPetProps) => {
     const sex = pet?.sex as keyof typeof IconGender
     const Gender = IconGender[sex]
 
@@ -19,9 +21,16 @@ const CardFeedPet = ({ pet }: CardFeedPetProps) => {
         <ModalBoxButtonsPet item={pet}>
             {({ showModal }) => (
                 <button
-                    onClick={showModal}
+                    onClick={() => {
+                        if (onClick) {
+                            onClick(pet)
+                        } else {
+                            showModal()
+                        }
+                    }}
                     type="button"
                     className={card({
+                        selected,
                         className:
                             'px-2 rounded-xl py-2 w-28 !h-36 flex flex-col items-center justify-center !shadow-theme-3',
                     })}

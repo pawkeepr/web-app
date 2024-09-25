@@ -4,8 +4,8 @@ import { useCallback, useMemo } from 'react'
 import { FaEdit, FaPlayCircle } from 'react-icons/fa'
 import { BtnLink, BtnPrimary } from '~/Components/atoms/btn'
 import withCompose from '~/Components/helpers/with-compose'
+import type { Pet } from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
 import useProfile from '~/store/hooks/profile/use-profile'
-import type { Pet } from '~/types/pet-v2'
 import { TypeProfile } from '~/types/profile'
 
 type BoxButtonsPetsProps = {
