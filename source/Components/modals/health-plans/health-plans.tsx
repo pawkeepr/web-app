@@ -1,3 +1,4 @@
+import { TrashIcon } from '@heroicons/react/24/solid'
 import { Form, Formik } from 'formik'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import withCompose from '~/Components/helpers/with-compose'
@@ -5,12 +6,16 @@ import FieldControl from '~/Components/molecules/field-control'
 import FieldDate from '~/Components/molecules/field-date'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
-import { handleSubmitHealthPlans } from '~/store/hooks/health-plans'
+import {
+    handleSubmitHealthPlans,
+    useDeleteHealthPlansMutation,
+} from '~/store/hooks/health-plans'
 import { validationSchema, type IHealthPlan } from '~/validations/health-plans'
+import ConfirmModal from '../confirm-modal'
 
 type ModalHealthPlansProps = {
     children?: (showModal: () => void) => JSX.Element
-    healthPlan?: IHealthPlan
+    healthPlan?: IHealthPlan | null
     id_pet: string
 }
 
@@ -20,7 +25,20 @@ const ModalHealthPlans = ({
     id_pet,
 }: ModalHealthPlansProps) => {
     const { closeModal, open, showModal } = useModal()
-    const handleSubmit = handleSubmitHealthPlans({ id_pet })
+    const { mutateAsync, isPending } = useDeleteHealthPlansMutation(
+        id_pet,
+        healthPlan?.number_health as string,
+    )
+    const handleSubmit = handleSubmitHealthPlans({
+        id_pet,
+        number_health: healthPlan?.number_health,
+    })
+
+    const handleDelete = async () => {
+        await mutateAsync()
+        closeModal()
+    }
+
     return (
         <>
             {children?.(showModal)}
@@ -47,7 +65,6 @@ const ModalHealthPlans = ({
                 <Formik
                     enableReinitialize
                     initialValues={{
-                        id: healthPlan?.id || '',
                         name: healthPlan?.name || '',
                         type_health: healthPlan?.type_health || '',
                         number_health: healthPlan?.number_health || '',
@@ -58,7 +75,7 @@ const ModalHealthPlans = ({
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
                 >
-                    {({ values, isSubmitting, isValid }) => (
+                    {({ values, isSubmitting, isValid, initialValues }) => (
                         <Form className="flex flex-col p-4 space-y-1">
                             <h2 className="text-xl font-semibold text-center text-gray-800">
                                 {values
@@ -93,28 +110,47 @@ const ModalHealthPlans = ({
                                 <FieldDate
                                     ctx={values}
                                     name="dat_ini"
+                                    placeholderText="dd/mm/aaaa"
                                     label="Data de Início"
                                 />
                                 <FieldDate
                                     ctx={values}
                                     name="dat_end"
+                                    placeholderText="dd/mm/aaaa"
                                     label="Data de Fim"
                                     minDate={values?.dat_ini as unknown as Date}
                                 />
                             </div>
-                            <div className="flex items-center justify-center gap-2 mt-4">
-                                <BtnCancel
-                                    disabled={isSubmitting || !isValid}
-                                    condition={!isSubmitting}
-                                    type="button"
-                                    onClick={() => closeModal()}
-                                    label="Cancelar"
-                                />
+                            <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
+                                <ConfirmModal
+                                    onConfirm={handleDelete}
+                                    title="Deletar Plano"
+                                >
+                                    {(showModal) => (
+                                        <BtnCancel
+                                            disabled={isSubmitting || !isValid}
+                                            condition={
+                                                !isSubmitting &&
+                                                !!initialValues?.number_health &&
+                                                !isPending
+                                            }
+                                            type="button"
+                                            outline
+                                            // icone de lixeira
+                                            icon={<TrashIcon className="w-5 h-5" />}
+                                            className="flex-1 flex-grow w-full text-red-400 border-red-400 hover:text-red-500 hover:border-red-500"
+                                            onClick={showModal}
+                                            label="Deletar"
+                                        />
+                                    )}
+                                </ConfirmModal>
+
                                 <BtnPrimary
                                     type="submit"
                                     label="Salvar"
+                                    className="flex-1 flex-grow w-full"
                                     disabled={isSubmitting || !isValid}
-                                    isLoading={isSubmitting}
+                                    isLoading={isSubmitting || isPending}
                                 />
                             </div>
                         </Form>
