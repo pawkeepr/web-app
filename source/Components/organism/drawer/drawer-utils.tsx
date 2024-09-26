@@ -1,7 +1,9 @@
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import HistoricIcon from '@heroicons/react/24/solid/ArchiveBoxXMarkIcon'
 import DashboardIcon from '@heroicons/react/24/solid/HomeIcon'
+import { FaMapSigns } from 'react-icons/fa'
 import { GiHealthNormal } from 'react-icons/gi'
+import { PiDogFill } from 'react-icons/pi'
 import { tv } from 'tailwind-variants'
 import { button } from '~/Components/atoms/btn'
 
@@ -56,16 +58,21 @@ const tutorsItems: Item[] = [
         icon: <UserCircleIcon className="w-5 h-5" />,
         href: '/t/profile',
     },
-    // {
-    //     name: 'PetMaps',
-    //     visible: true,
-    //     icon: <FaMapSigns className="w-5 h-5" />,
-    //     href: '/t/pet/maps',
-    // },
+    {
+        name: 'PetMaps',
+        visible: true,
+        icon: <FaMapSigns className="w-5 h-5" />,
+        href: '/t/pet/maps',
+    },
     {
         name: 'Planos de Saúde',
         visible: true,
-        icon: <GiHealthNormal className="w-5 h-5" />,
+        icon: (
+            <div className="relative w-fit">
+                <PiDogFill className="w-5 h-5" />
+                <GiHealthNormal className="absolute bottom-0 right-0 w-2 h-2 bg-white" />
+            </div>
+        ),
         href: '/t/pet/health-plans',
     },
     {
