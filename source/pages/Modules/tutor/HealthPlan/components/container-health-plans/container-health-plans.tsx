@@ -65,10 +65,10 @@ const ContainerHealthPlans = ({ id_pet }: ContainerHealthPlansProps) => {
             {isError && <div>Error, tente novamente</div>}
 
             {data && data?.length > 0 && (
-                <div>
+                <div className="space-y-4">
                     {data?.map((plan: IHealthPlan) => (
                         <ModalHealthPlans
-                            key={plan.id}
+                            key={plan.number_health}
                             id_pet={id_pet}
                             healthPlan={plan}
                         >
@@ -79,7 +79,7 @@ const ContainerHealthPlans = ({ id_pet }: ContainerHealthPlansProps) => {
                                     className="w-full rounded-lg bg-gray-50 shadow-theme-7 hover:bg-gray-100"
                                 >
                                     <CardHealthPlans
-                                        key={plan.id}
+                                        key={plan.number_health}
                                         healthPlan={plan}
                                     />
                                 </button>
