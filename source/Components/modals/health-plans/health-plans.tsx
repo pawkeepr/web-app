@@ -32,6 +32,7 @@ const ModalHealthPlans = ({
     const handleSubmit = handleSubmitHealthPlans({
         id_pet,
         number_health: healthPlan?.number_health,
+        finallySubmit: closeModal,
     })
 
     const handleDelete = async () => {

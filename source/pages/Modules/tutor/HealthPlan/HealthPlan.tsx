@@ -1,11 +1,6 @@
-import { useState } from 'react'
 import MapCardFeedPets from '~/Components/molecules/map-card-feed-pets'
-import {
-    useListPetsFromTutor,
-    type Pet,
-} from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
-import { usePetByIdV2 } from '~/store/hooks/pet-by-id'
-import useProfile from '~/store/hooks/profile/use-profile'
+import useSelectedPet from '~/hooks/use-selected-pet'
+import type { Pet } from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
 import type { IMainResponsibleGuardian, PetData } from '~/types/pet-v2'
 import DefaultLayout from '../../_layouts/dashboard'
 import PetProfileCard from '../../shared/HistoricPetPage/components/organisms/pet-profile-card'
@@ -13,31 +8,19 @@ import CardContainer from '../../shared/ProfilePage/components/CardContainer'
 import ContainerHealthPlans from './components/container-health-plans'
 
 const HealthPlan = () => {
-    const [selected, setSelected] = useState<Pet | null>(null)
     const {
-        data: pets,
-        isPending: listPetsPending,
-        isFetching: listPetsIsFetching,
-    } = useListPetsFromTutor()
-    const { data: profile } = useProfile()
-
-    const {
-        data: pet,
-        isPending: petPending,
-        error: petError,
-    } = usePetByIdV2(
-        profile?.user_information?.cpf_cnpj as string,
-        selected?.id_pet as string,
-    )
-
-    const handleClick = (pet: Pet) => {
-        setSelected(pet)
-    }
+        onChangeSelectedPet,
+        listPetsIsFetching,
+        listPetsPending,
+        pet,
+        pets,
+        selected,
+    } = useSelectedPet()
 
     return (
         <DefaultLayout title="Planos de Saúde" searchBlock={false}>
             <MapCardFeedPets
-                onClick={handleClick}
+                onClick={onChangeSelectedPet}
                 pets={pets as Pet[]}
                 selected={selected}
                 isPending={listPetsPending}
