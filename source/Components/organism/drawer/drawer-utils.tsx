@@ -1,9 +1,11 @@
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import HistoricIcon from '@heroicons/react/24/solid/ArchiveBoxXMarkIcon'
 import DashboardIcon from '@heroicons/react/24/solid/HomeIcon'
+import { FaMapSigns } from 'react-icons/fa'
+import { GiHealthNormal, GiSittingDog } from 'react-icons/gi'
+import { PiDogFill } from 'react-icons/pi'
 import { tv } from 'tailwind-variants'
 import { button } from '~/Components/atoms/btn'
-
 export const ModeDrawerItems = {
     VETERINARY: 'VETERINARY',
     TUTOR: 'TUTOR',
@@ -25,20 +27,20 @@ const veterinaryItems: Item[] = [
         name: 'Inicio',
         visible: true,
         icon: <DashboardIcon className="w-5 h-5" />,
-        href: '/veterinary/dashboard',
+        href: '/v/dashboard',
     },
     {
         name: 'Perfil',
         visible: true,
         disabled: false,
         icon: <UserCircleIcon className="w-5 h-5" />,
-        href: '/profile',
+        href: '/v/profile',
     },
     {
         name: 'Histórico',
         visible: true,
         icon: <HistoricIcon className="w-5 h-5" />,
-        href: '/veterinary/dashboard/historic',
+        href: '/v/dashboard/historic',
     },
 ]
 const tutorsItems: Item[] = [
@@ -46,20 +48,42 @@ const tutorsItems: Item[] = [
         name: 'Início',
         visible: true,
         icon: <DashboardIcon className="w-5 h-5" />,
-        href: '/tutor/dashboard',
+        href: '/t/dashboard',
     },
     {
         name: 'Perfil',
         visible: true,
         disabled: false,
         icon: <UserCircleIcon className="w-5 h-5" />,
-        href: '/profile',
+        href: '/t/profile',
+    },
+    {
+        name: 'PetMaps',
+        visible: true,
+        icon: (
+            <div className="relative w-fit">
+                <GiSittingDog className="z-0 w-5 h-5" />
+                <FaMapSigns className="absolute bottom-0 right-0 z-50 mobile:w-2 mobile:h-2 web:w-3 web:h-3" />
+            </div>
+        ),
+        href: '/t/pet/maps',
+    },
+    {
+        name: 'Planos de Saúde',
+        visible: true,
+        icon: (
+            <div className="relative w-fit">
+                <PiDogFill className="w-5 h-5" />
+                <GiHealthNormal className="absolute bottom-0 right-0 bg-white mobile:w-2 mobile:h-2 web:w-3 web:h-3" />
+            </div>
+        ),
+        href: '/t/pet/health-plans',
     },
     {
         name: 'Histórico',
         visible: true,
         icon: <HistoricIcon className="w-5 h-5" />,
-        href: '/tutor/dashboard/historic',
+        href: '/t/dashboard/historic',
     },
 ]
 

@@ -7,7 +7,7 @@ import Label from '~/Components/atoms/label'
 import useFieldSafe from '~/hooks/use-field-safe'
 import { useFieldControlClasses } from './use-field-control-classes'
 
-const fieldControlDiv = tv({
+export const fieldControlDiv = tv({
     base: 'w-full  p-1',
 })
 
