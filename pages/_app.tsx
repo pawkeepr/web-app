@@ -16,7 +16,7 @@ import '~/aws'
 import { AuthProvider } from '~/contexts/auth-context'
 import ErrorBoundary from '~/contexts/error-boundary'
 import pg from '../package.json'
-
+import '../styles/react-datepicker.css'
 function App({ Component, pageProps }: AppProps) {
     return (
         <ErrorBoundary>

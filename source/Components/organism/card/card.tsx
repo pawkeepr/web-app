@@ -4,7 +4,7 @@ import useResizeMobile from '~/hooks/use-resize-mobile'
 
 export const card = tv({
     base: `
-        card card-side shadow-xl border border-gray-200 my-2 w-full justify-start items-center text-left
+        card card-side shadow-xl  my-2 w-full justify-start items-center text-left
         bg-white rounded-3xl !h-fit max-h-[232px] overflow-hidden
     `,
     variants: {
@@ -13,6 +13,10 @@ export const card = tv({
         },
         isMobile: {
             true: 'hover:bg-gray-100 hover:bg-opacity-50 cursor-pointer',
+        },
+        selected: {
+            true: '!border-2 !border-secondary-500',
+            false: 'border border-gray-200',
         },
     },
     defaultVariants: {

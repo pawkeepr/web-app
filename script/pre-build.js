@@ -11,7 +11,7 @@ for (let i = 0; i < mode?.length; i++) {
     const backupDir = path.join(__dirname, '..', 'pages-backup', modeName)
     try {
         fs.cpSync(pagesDir, backupDir, { recursive: true })
-        fs.rmSync(backupDir, { recursive: true, force: true })
+        fs.rmSync(pagesDir, { recursive: true, force: true })
     } catch (error) {
         if (error.code === 'ENOENT') {
             console.log(`Diretório ${pagesDir} não encontrado`)

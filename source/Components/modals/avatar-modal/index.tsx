@@ -9,22 +9,25 @@ import useModal from '~/hooks/use-modal'
 import FileUpload from '~/ui/file-upload'
 import ProfileEditor from './profile-editor'
 
+type AvatarModalProps = {
+    oldImageSrc?: string
+    isLoading?: boolean
+    disabled?: boolean
+    disabledChangePhoto?: boolean
+    progress?: number
+    modalButtonSize?: 'small' | 'medium' | 'large'
+    onSave?: (file: FormData) => Promise<void>
+} & AvatarPetProps
 const AvatarModal = ({
     oldImageSrc = '',
     progress = 0,
+    disabledChangePhoto = false,
     modalButtonSize = 'large',
     disabled = false,
     isLoading,
     onSave,
     ...props
-}: {
-    oldImageSrc?: string
-    isLoading?: boolean
-    disabled?: boolean
-    progress?: number
-    modalButtonSize?: 'small' | 'medium' | 'large'
-    onSave?: (file: FormData) => Promise<void>
-} & AvatarPetProps) => {
+}: AvatarModalProps) => {
     const editorRef = useRef(null)
     const [file, setFile] = useState<File | null>(null)
     const { closeModal, open, showModal } = useModal()
@@ -56,16 +59,19 @@ const AvatarModal = ({
             <button
                 type="button"
                 title="Editar foto"
+                disabled={disabled}
                 className={cn(
                     {
-                        'opacity-50': disabled,
+                        'opacity-90': disabled,
                     },
                     'relative border border-opacity-10  rounded-full border-black hover:border-secondary hover:shadow-lg transition duration-100 ease-in-out',
                 )}
                 onClick={showModal}
             >
                 <AvatarPet src={oldImageSrc} {...props} />
-                <CameraIcon className="absolute bottom-0 right-0 w-8 h-8 transform -translate-x-1/2 -translate-y-1/2 shadow-2xl text-secondary" />
+                {!disabled && (
+                    <CameraIcon className="absolute bottom-0 right-0 w-8 h-8 transform -translate-x-1/2 -translate-y-1/2 shadow-2xl text-secondary" />
+                )}
             </button>
             <Modal onClose={closeModal} open={open} mobilePage={false}>
                 <div>

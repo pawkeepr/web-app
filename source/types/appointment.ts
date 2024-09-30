@@ -76,6 +76,7 @@ export interface ISignatureAppointment {
 }
 
 export interface IGeolocationAppointment {
+    address_complete?: string
     latitude: string
     longitude: string
     precision: string
