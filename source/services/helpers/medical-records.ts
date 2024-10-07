@@ -83,6 +83,16 @@ export const getAllMedicalRecordsByPet = async (cpf_cnpj: string, id_pet: string
 export const getMedicalRecordsByTutor = async (cpf_cnpj: string) =>
     api.get(urls.MEDICAL_RECORDS_GET_BY_TUTOR(), { params: { cpf_cnpj } })
 
+export const insertBodyEvolution = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.post(urls.bodyEvolution.insert(user), data, {
+        params: { cpf_cnpj, id_pet },
+    })
+
 export const updateBodyEvolution = async (
     data: unknown,
     cpf_cnpj: string,
@@ -92,6 +102,24 @@ export const updateBodyEvolution = async (
     api.put(urls.bodyEvolution.update(user), data, {
         params: { cpf_cnpj, id_pet },
     })
+
+export const deleteBodyEvolution = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) => api.delete(urls.bodyEvolution.delete(user))
+
+export const insertHospitalizations = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.post(urls.hospitalizations.insert(user, 'hospitalizations'), data, {
+        params: { cpf_cnpj, id_pet },
+    })
+
 export const updateHospitalizations = async (
     data: unknown,
     cpf_cnpj: string,
@@ -101,6 +129,28 @@ export const updateHospitalizations = async (
     api.put(urls.hospitalizations.update(user, 'hospitalizations'), data, {
         params: { cpf_cnpj, id_pet },
     })
+
+export const deleteHospitalizations = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.delete(urls.hospitalizations.delete(user, 'hospitalizations'), {
+        data,
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const insertVaccines = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.post(urls.vaccines.insert(user), data, {
+        params: { cpf_cnpj, id_pet },
+    })
+
 export const updateVaccines = async (
     data: unknown,
     cpf_cnpj: string,
@@ -108,6 +158,27 @@ export const updateVaccines = async (
     user: TYPE_USER,
 ) =>
     api.put(urls.vaccines.update(user), data, {
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const deleteVaccines = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.delete(urls.vaccines.delete(user), {
+        data,
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const insertMedicines = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.post(urls.medicines.insert(user), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateMedicines = async (
@@ -119,6 +190,27 @@ export const updateMedicines = async (
     api.put(urls.medicines.update(user), data, {
         params: { cpf_cnpj, id_pet },
     })
+
+export const deleteMedicines = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.delete(urls.medicines.delete(user), {
+        data,
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const insertSurgeries = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.post(urls.hospitalizations.insert(user, 'surgeries'), data, {
+        params: { cpf_cnpj, id_pet },
+    })
 export const updateSurgeries = async (
     data: unknown,
     cpf_cnpj: string,
@@ -126,6 +218,27 @@ export const updateSurgeries = async (
     user: TYPE_USER,
 ) =>
     api.put(urls.hospitalizations.update(user, 'surgeries'), data, {
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const deleteSurgeries = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.delete(urls.hospitalizations.delete(user, 'surgeries'), {
+        data,
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const insertExams = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.post(urls.exams.insert(user), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateExams = async (
@@ -137,6 +250,28 @@ export const updateExams = async (
     api.put(urls.exams.update(user), data, {
         params: { cpf_cnpj, id_pet },
     })
+
+export const deleteExams = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.delete(urls.exams.delete(user), {
+        data,
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const insertInternments = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.post(urls.hospitalizations.insert(user, 'internments'), data, {
+        params: { cpf_cnpj, id_pet },
+    })
+
 export const updateInternments = async (
     data: unknown,
     cpf_cnpj: string,
@@ -144,6 +279,27 @@ export const updateInternments = async (
     user: TYPE_USER,
 ) =>
     api.put(urls.hospitalizations.update(user, 'internments'), data, {
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const deleteInternments = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.delete(urls.hospitalizations.delete(user, 'internments'), {
+        data,
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const insertInjuries = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.post(urls.diseases.insert(user, 'injuries'), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateInjuries = async (
@@ -155,6 +311,28 @@ export const updateInjuries = async (
     api.put(urls.diseases.update(user, 'injuries'), data, {
         params: { cpf_cnpj, id_pet },
     })
+
+export const deleteInjuries = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.delete(urls.diseases.delete(user, 'injuries'), {
+        data,
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const insertAllergies = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.post(urls.diseases.insert(user, 'allergies'), data, {
+        params: { cpf_cnpj, id_pet },
+    })
+
 export const updateAllergies = async (
     data: unknown,
     cpf_cnpj: string,
@@ -164,6 +342,28 @@ export const updateAllergies = async (
     api.put(urls.diseases.update(user, 'allergies'), data, {
         params: { cpf_cnpj, id_pet },
     })
+
+export const deleteAllergies = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.delete(urls.diseases.delete(user, 'allergies'), {
+        data,
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const insertDiseases = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.post(urls.diseases.insert(user, 'diseases'), data, {
+        params: { cpf_cnpj, id_pet },
+    })
+
 export const updateDiseases = async (
     data: unknown,
     cpf_cnpj: string,
@@ -171,6 +371,27 @@ export const updateDiseases = async (
     user: TYPE_USER,
 ) =>
     api.put(urls.diseases.update(user, 'diseases'), data, {
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const deleteDiseases = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.delete(urls.diseases.delete(user, 'diseases'), {
+        data,
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const insertDentalProcedures = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.post(urls.dental_procedures.insert(user), data, {
         params: { cpf_cnpj, id_pet },
     })
 export const updateDentalProcedures = async (
@@ -182,6 +403,27 @@ export const updateDentalProcedures = async (
     api.put(urls.dental_procedures.update(user), data, {
         params: { cpf_cnpj, id_pet },
     })
+
+export const deleteDentalProcedures = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.delete(urls.dental_procedures.delete(user), {
+        data,
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const insertNutritions = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.post(urls.nutritions.insert(user), data, {
+        params: { cpf_cnpj, id_pet },
+    })
 export const updateNutritions = async (
     data: unknown,
     cpf_cnpj: string,
@@ -191,6 +433,28 @@ export const updateNutritions = async (
     api.put(urls.nutritions.update(user), data, {
         params: { cpf_cnpj, id_pet },
     })
+
+export const deleteNutritions = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.delete(urls.nutritions.delete(user), {
+        data,
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const insertPhysicalActivities = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.post(urls.physical_activities.insert(user), data, {
+        params: { cpf_cnpj, id_pet },
+    })
+
 export const updatePhysicalActivities = async (
     data: unknown,
     cpf_cnpj: string,
@@ -198,5 +462,16 @@ export const updatePhysicalActivities = async (
     user: TYPE_USER,
 ) =>
     api.put(urls.physical_activities.update(user), data, {
+        params: { cpf_cnpj, id_pet },
+    })
+
+export const deletePhysicalActivities = async (
+    data: unknown,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) =>
+    api.delete(urls.physical_activities.delete(user), {
+        data,
         params: { cpf_cnpj, id_pet },
     })
