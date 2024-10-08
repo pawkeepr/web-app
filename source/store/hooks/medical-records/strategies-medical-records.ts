@@ -1,5 +1,18 @@
 import type { AxiosResponse } from 'axios'
 import {
+    deleteAllergies,
+    deleteBodyEvolution,
+    deleteDentalProcedures,
+    deleteDiseases,
+    deleteExams,
+    deleteHospitalizations,
+    deleteInjuries,
+    deleteInternments,
+    deleteMedicines,
+    deleteNutritions,
+    deletePhysicalActivities,
+    deleteSurgeries,
+    deleteVaccines,
     insertAllergies,
     insertBodyEvolution,
     insertDentalProcedures,
@@ -44,32 +57,61 @@ export type FAxiosInsert<G = unknown> = (
     user: TYPE_USER,
 ) => Promise<AxiosResponse<G>>
 
+export type FAxiosDelete = (
+    id_object: string,
+    cpf_cnpj: string,
+    id_pet: string,
+    user: TYPE_USER,
+) => Promise<AxiosResponse<unknown>>
+
 export type StrategiesMedicalRecordsType = Map<
     MEDICAL_RECORDS,
-    [FAxiosUpdate, FAxiosInsert]
+    [FAxiosUpdate, FAxiosInsert, FAxiosDelete]
 >
 
 export const StrategiesMedicalRecords = new Map([
-    [MEDICAL_RECORDS.ALLERGIES, [updateAllergies, insertAllergies]],
-    [MEDICAL_RECORDS.BODY_EVOLUTION, [updateBodyEvolution, insertBodyEvolution]],
+    [
+        MEDICAL_RECORDS.ALLERGIES,
+        [updateAllergies, insertAllergies, deleteAllergies],
+    ],
+    [
+        MEDICAL_RECORDS.BODY_EVOLUTION,
+        [updateBodyEvolution, insertBodyEvolution, deleteBodyEvolution],
+    ],
     [
         MEDICAL_RECORDS.DENTAL_PROCEDURES,
-        [updateDentalProcedures, insertDentalProcedures],
+        [updateDentalProcedures, insertDentalProcedures, deleteDentalProcedures],
     ],
-    [MEDICAL_RECORDS.DISEASES, [updateDiseases, insertDiseases]],
-    [MEDICAL_RECORDS.EXAMS, [updateExams, insertExams]],
-    [MEDICAL_RECORDS.INJURIES, [updateInjuries, insertInjuries]],
-    [MEDICAL_RECORDS.INTERNMENTS, [updateInternments, insertInternments]],
+    [MEDICAL_RECORDS.DISEASES, [updateDiseases, insertDiseases, deleteDiseases]],
+    [MEDICAL_RECORDS.EXAMS, [updateExams, insertExams, deleteExams]],
+    [MEDICAL_RECORDS.INJURIES, [updateInjuries, insertInjuries, deleteInjuries]],
+    [
+        MEDICAL_RECORDS.INTERNMENTS,
+        [updateInternments, insertInternments, deleteInternments],
+    ],
     [
         MEDICAL_RECORDS.HOSPITALIZATIONS,
-        [updateHospitalizations, insertHospitalizations],
+        [updateHospitalizations, insertHospitalizations, deleteHospitalizations],
     ],
-    [MEDICAL_RECORDS.NUTRITIONS, [updateNutritions, insertNutritions]],
-    [MEDICAL_RECORDS.MEDICINES, [updateMedicines, insertMedicines]],
-    [MEDICAL_RECORDS.SURGERIES, [updateSurgeries, insertSurgeries]],
-    [MEDICAL_RECORDS.VACCINES, [updateVaccines, insertVaccines]],
+    [
+        MEDICAL_RECORDS.NUTRITIONS,
+        [updateNutritions, insertNutritions, deleteNutritions],
+    ],
+    [
+        MEDICAL_RECORDS.MEDICINES,
+        [updateMedicines, insertMedicines, deleteMedicines],
+    ],
+    [
+        MEDICAL_RECORDS.SURGERIES,
+        [updateSurgeries, insertSurgeries, deleteSurgeries],
+    ],
+    [MEDICAL_RECORDS.VACCINES, [updateVaccines, insertVaccines, deleteVaccines]],
     [
         MEDICAL_RECORDS.PHYSICAL_ACTIVITIES,
-        [updatePhysicalActivities, insertPhysicalActivities],
+        [
+            updatePhysicalActivities,
+            insertPhysicalActivities,
+            deletePhysicalActivities,
+        ],
     ],
 ]) as StrategiesMedicalRecordsType
