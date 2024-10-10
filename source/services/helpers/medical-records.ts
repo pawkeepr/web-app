@@ -22,14 +22,14 @@ type ENUM_DISEASES = 'diseases' | 'allergies' | 'injuries'
 
 const urls = {
     vaccines: {
-        update: (user: TYPE_USER) => `/api-medical/update-list-vacine/${user}`,
-        insert: (user: TYPE_USER) => `/api-medical/insert-list-vaccine/${user}`,
-        delete: (user: TYPE_USER) => `/api-medical/delete-list-vaccine/${user}`,
+        update: (user: TYPE_USER) => `/api-medical/update-list-vaccines/${user}`,
+        insert: (user: TYPE_USER) => `/api-medical/insert-list-vaccines/${user}`,
+        delete: (user: TYPE_USER) => `/api-medical/delete-list-vaccines/${user}`,
     },
     medicines: {
         update: (user: TYPE_USER) => `/api-medical/update-list-medicines/${user}`,
-        insert: (user: TYPE_USER) => `/api-medical/insert-list-medicine/${user}`,
-        delete: (user: TYPE_USER) => `/api-medical/delete-list-medicine/${user}`,
+        insert: (user: TYPE_USER) => `/api-medical/insert-list-medicines/${user}`,
+        delete: (user: TYPE_USER) => `/api-medical/delete-list-medicines/${user}`,
     },
     nutritions: {
         update: (user: TYPE_USER) => `/api-medical/update-list-nutritions/${user}`,
