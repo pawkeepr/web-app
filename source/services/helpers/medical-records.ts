@@ -287,7 +287,7 @@ export const updateInternments = async (
     id_pet: string,
     user: TYPE_USER,
 ) =>
-    api.put(urls.hospitalizations.update(user, 'internments'), data, {
+    api.put(urls.hospitalizations.update(user, 'internment'), data, {
         params: { cpf_cnpj, id_pet, id_object: data.id },
     })
 
@@ -297,7 +297,7 @@ export const deleteInternments = async (
     id_pet: string,
     user: TYPE_USER,
 ) =>
-    api.delete(urls.hospitalizations.delete(user, 'internments'), {
+    api.delete(urls.hospitalizations.delete(user, 'internment'), {
         params: { cpf_cnpj, id_pet, id_object },
     })
 

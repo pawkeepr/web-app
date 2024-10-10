@@ -8,6 +8,7 @@ import DiseaseItem from './diseases-item'
 import ExamItem from './exam-item'
 import HospitalizationsItem from './hospitalizations-item'
 import InjuriesItem from './injuries-item'
+import InternmentsItem from './internments-item'
 import MedicationsItem from './medications-item'
 import NutritionItem from './nutritions-item'
 import PhysicalActivityItem from './physical-activity-item'
@@ -141,7 +142,7 @@ const ListMedicalRecords = ({
             <Accordion title="Internações" classNames={classNames}>
                 <ul className={itemStyle.ul()}>
                     {internment?.map((item) => (
-                        <HospitalizationsItem
+                        <InternmentsItem
                             key={item.id as string}
                             item={item}
                             document={document}
