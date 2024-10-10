@@ -17,7 +17,7 @@ const TYPE_USER = {
 } as const
 export type TYPE_USER = (typeof TYPE_USER)[keyof typeof TYPE_USER]
 
-type ENUM_HOSPITALIZATIONS = 'hospitalizations' | 'internments' | 'surgeries'
+type ENUM_HOSPITALIZATIONS = 'hospitalizations' | 'internment' | 'surgeries'
 type ENUM_DISEASES = 'diseases' | 'allergies' | 'injuries'
 
 const urls = {
@@ -277,7 +277,7 @@ export const insertInternments = async (
     id_pet: string,
     user: TYPE_USER,
 ) =>
-    api.post(urls.hospitalizations.insert(user, 'internments'), data, {
+    api.post(urls.hospitalizations.insert(user, 'internment'), data, {
         params: { cpf_cnpj, id_pet },
     })
 
