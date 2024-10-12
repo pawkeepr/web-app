@@ -1,18 +1,16 @@
-import type { Preview } from '@storybook/react'
-
-// CSS imports
-import '~/globals.scss'
-import '~/tailwind.css'
+import type { Preview } from "@storybook/react";
 
 const preview: Preview = {
-    parameters: {
-        controls: {
-            matchers: {
-                color: /(background|color)$/i,
-                date: /Date$/i,
-            },
-        },
+  parameters: {
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/i,
+      },
     },
-}
+  },
 
-export default preview
+  tags: ["autodocs"]
+};
+
+export default preview;
