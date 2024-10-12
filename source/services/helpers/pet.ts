@@ -22,7 +22,11 @@ const urls = {
     /**
      * URL para enviar a geolocalização do Pet encontrado
      */
-    PUT_PROFILE_PET_LOCATION: () => '/api-external/pet-location-qr-code',
+    PUT_PET_LOCATION: () => '/api-external/pet-location-qr-code',
+    /**
+     * URL para listar localizações de leitura do qrcode do pet
+     */
+    GET_PET_LOCATION: () => '/api-pet/list-location-qr-code',
 }
 
 /**
@@ -75,9 +79,11 @@ export const fetchPublicPetVerify = async (id_pet: string) =>
 export const putPetLocation = async (
     id_pet: string,
     geolocation: IGeolocationAppointment,
-) =>
-    api.put(
-        urls.PUT_PROFILE_PET_LOCATION(),
-        { ...geolocation },
-        { params: { id_pet } },
-    )
+) => api.put(urls.PUT_PET_LOCATION(), { ...geolocation }, { params: { id_pet } })
+
+/**
+ * Função para buscar todas as localizações de leitura do qr code do pet
+ * @param id_pet id do pet que se deseja buscar a localização
+ */
+export const getPetLocation = async (id_pet: string, cpf_cnpj: string) =>
+    api.get(urls.GET_PET_LOCATION(), { params: { id_pet, cpf_cnpj } })

@@ -28,6 +28,8 @@ export interface Pet {
     date_update: string
     id_pet: string
     identification_number: string
+    cpf_cnpj: string
+    url_img: string
     microchip: string
     name_pet: string
     organ_donor: boolean
@@ -41,5 +43,8 @@ export interface Pet {
 }
 
 export const useListPetsFromTutor = () => {
-    return useAppQuery<Pet[]>(['listPetsByTutor'], () => getAllPetsTutor())
+    return useAppQuery<Pet[]>(['listPetsByTutor'], () => getAllPetsTutor(), {
+        staleTime: 1000 * 60 * 60 * 24,
+        gcTime: Number.POSITIVE_INFINITY,
+    })
 }

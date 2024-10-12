@@ -24,6 +24,8 @@ export const usePetByIdV2 = (document: string, id_pet: string) => {
 
     return useAppQuery<IPetV2>(superKeys, () => getPet(document, id_pet), {
         enabled: !!document,
+        staleTime: 1000 * 60 * 60 * 24,
+        gcTime: Number.POSITIVE_INFINITY,
     })
 }
 

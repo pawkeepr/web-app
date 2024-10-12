@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+
 import { FaPlusCircle, FaWhatsapp } from 'react-icons/fa'
 import AddMedicalRecords from '~/Components/modals/add-medical-records'
 import BtnFloating from '~/Components/molecules/btn-floating'
@@ -28,7 +29,12 @@ const Tabs = (document?: string, id_pet?: string): TabItem[] => [
         id: 2,
         title: 'Prontuário',
         href: '#chart',
-        tab: <MedicalRecords document={document} id_pet={id_pet} />,
+        tab: (
+            <MedicalRecords
+                document={document as string}
+                id_pet={id_pet as string}
+            />
+        ),
     },
     {
         id: 3,

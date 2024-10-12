@@ -1,7 +1,6 @@
 import { ptBR } from 'date-fns/locale/pt-BR'
 import { useState } from 'react'
 import ReactDatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 import { InputLabelDate, type InputDateProps } from './input-date'
 // props de button
 

@@ -107,8 +107,8 @@ export const MedicalRecordOptions: MedicalRecordOption[] = [
         icon: FaFileMedical,
     },
     {
-        value: MEDICAL_RECORDS.OTHERS,
-        label: 'Outros',
+        value: MEDICAL_RECORDS.NUTRITIONS,
+        label: 'Nutrições',
         icon: BsThreeDotsVertical,
     },
 ].sort((a, b) => a.label.localeCompare(b.label))

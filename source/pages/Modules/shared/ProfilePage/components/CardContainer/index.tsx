@@ -16,7 +16,7 @@ const CardContainer: React.FC<CardContainerProps> = ({
     return (
         <div className={cn('card', className)}>
             <div className="card-body">
-                {title && <h1 className="mb-4 card-title fw-normal">{title}</h1>}
+                {title && <h2 className="mb-4 fw-normal card-title">{title}</h2>}
                 {children}
             </div>
         </div>

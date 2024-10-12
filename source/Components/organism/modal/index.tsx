@@ -1,8 +1,8 @@
+import cn from 'classnames'
 import {
     Modal as ModalResponsive,
     type ModalProps as ModalResponsiveProps,
 } from 'react-responsive-modal'
-import 'react-responsive-modal/styles.css'
 import { tv } from 'tailwind-variants'
 import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
 
@@ -25,7 +25,7 @@ type ModalProps = {
     mobilePage?: boolean
 } & ModalResponsiveProps
 
-const Modal = ({ mobilePage = true, ...props }: ModalProps) => {
+const Modal = ({ mobilePage = true, classNames, ...props }: ModalProps) => {
     useKeyboardNavigation({
         Escape: () => props.onClose?.(),
     })
@@ -35,16 +35,26 @@ const Modal = ({ mobilePage = true, ...props }: ModalProps) => {
             {...props}
             onEscKeyDown={props.onClose}
             closeOnOverlayClick
+            container={document?.body}
             center
             classNames={{
-                modal: modal({
-                    className: props.classNames?.modal,
-                    mobilePage,
-                }),
-                modalContainer:
-                    'mobile:flex mobile:flex-1 mobile:justify-center mobile:items-center',
-                root: 'mobile:bg-primary-500 mobile:bg-opacity-60',
-                ...props.classNames,
+                ...classNames,
+                modal: cn(
+                    `
+                      rounded-2xl min-w-[400px] overflow-visible max-h-[90vh] bg-white
+                      mobile:!w-screen mobile:!h-screen mobile:!rounded-none mobile:!py-1 mobile:!m-0
+                      mobile:flex mobile:flex-1 scroll scroll-1
+                      scrollbar !scrollbar-thumb-primary !scrollbar-track-neutral !scrollbar-rounded-full
+                    `,
+                    classNames?.modal,
+                    modal({
+                        mobilePage,
+                    }),
+                ),
+
+                modalContainer: `
+                  ${classNames?.modalContainer}
+           `,
             }}
         >
             {props.children}

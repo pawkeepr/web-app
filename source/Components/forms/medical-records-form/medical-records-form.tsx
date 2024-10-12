@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 import type { FormikHelpers } from 'formik'
 import withControl from '~/Components/helpers/with-control'
-import { useUpdateMedicalRecordsMutation } from '~/store/hooks/medical-records'
+import { useHandleMedicalRecordsMutation } from '~/store/hooks/medical-records'
 import useProfile from '~/store/hooks/profile/use-profile'
 import { MEDICAL_RECORDS, type MedicalRecordEntry } from '~/types/medical-records'
 import type { PetData } from '~/types/pet-v2'
@@ -65,7 +65,7 @@ const MedicalRecordsForm = ({
     handleClose,
     onChangeIndex,
 }: MedicalRecordForm) => {
-    const updateMutation = useUpdateMedicalRecordsMutation({
+    const handleSubmitHelper = useHandleMedicalRecordsMutation({
         cpf_cnpj,
         id_pet,
         name: type,
@@ -75,7 +75,7 @@ const MedicalRecordsForm = ({
     const { data } = useProfile()
 
     const handleSubmit = async (data: MedicalRecordEntry) => {
-        await updateMutation.mutateAsync({ data })
+        await handleSubmitHelper(data)
         onChangeIndex?.(0)
     }
 
@@ -83,6 +83,8 @@ const MedicalRecordsForm = ({
         <FormComponent
             item={
                 {
+                    id: '',
+                    id_appointment: '',
                     coin: 'BRL',
                     date_application: format(new Date(), 'dd-MM-yyyy'),
                     type_profile:
