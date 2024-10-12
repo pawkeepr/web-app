@@ -1,23 +1,22 @@
-import { Tab } from '@headlessui/react'
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import cn from 'classnames'
 import { useEffect, useMemo, useState } from 'react'
 import { FaArrowLeft } from 'react-icons/fa'
 import { BtnIcon } from '~/Components/atoms/btn'
 
+import MedicalRecordsForm from '~/Components/forms/medical-records-form'
 import type { MEDICAL_RECORDS, MedicalRecordEntry } from '~/types/medical-records'
 import type { PetData } from '~/types/pet-v2'
 import OptionsComponent, {
     type MedicalRecordFormProps,
     type Option,
 } from '../../forms/item-medical-records-form/options-component'
-
 type ItemMedicalRecordsFormProps = {
     cpf_cnpj: string
     id_pet: string
     pet: PetData | null
     item?: MedicalRecordEntry | null
     handleCancel: () => void
-    form: (props: MedicalRecordFormProps) => JSX.Element
 }
 
 export const NUMBER_STEPS = {
@@ -45,10 +44,10 @@ const makeSteps = (
 
 const ItemMedicalRecordsForm = ({
     item,
+    pet,
     cpf_cnpj,
     id_pet,
     handleCancel,
-    form: FormComponent,
 }: ItemMedicalRecordsFormProps) => {
     const [selectedTab, setSelectedTab] = useState(0)
 
@@ -68,7 +67,20 @@ const ItemMedicalRecordsForm = ({
         setSelectedTab(NUMBER_STEPS.MEDICAL_RECORDS)
     }
 
-    const STEPS = useMemo(() => makeSteps(FormComponent), [FormComponent])
+    const STEPS = useMemo(
+        () =>
+            makeSteps(() => (
+                <MedicalRecordsForm
+                    pet={pet}
+                    cpf_cnpj={cpf_cnpj}
+                    id_pet={id_pet}
+                    type={type?.value as MEDICAL_RECORDS}
+                    item={item as MedicalRecordEntry}
+                    onChangeIndex={onChangeSelectedTab}
+                />
+            )),
+        [item, type, pet, cpf_cnpj, id_pet],
+    )
 
     return (
         <>
@@ -84,15 +96,15 @@ const ItemMedicalRecordsForm = ({
                 </div>
             )}
             <section className="relative flex flex-col flex-1">
-                <Tab.Group
+                <TabGroup
                     selectedIndex={selectedTab}
                     onChange={onChangeSelectedTab}
                 >
-                    <Tab.List className="flex flex-row justify-between w-full">
+                    <TabList className="flex flex-row justify-between w-full">
                         {STEPS.map((item) => (
                             <Tab key={item.id} className="hidden" />
                         ))}
-                    </Tab.List>
+                    </TabList>
                     <div className="flex flex-row justify-between w-full">
                         {STEPS.slice(1, STEPS.length - 2).map((item) => (
                             <div
@@ -110,9 +122,9 @@ const ItemMedicalRecordsForm = ({
                         ))}
                     </div>
 
-                    <Tab.Panels className="relative w-full h-full ">
+                    <TabPanels className="relative w-full h-full ">
                         {STEPS.map((Step) => (
-                            <Tab.Panel key={Step.id}>
+                            <TabPanel key={Step.id}>
                                 <Step.component
                                     condition={!!type}
                                     type={type?.value as MEDICAL_RECORDS}
@@ -123,10 +135,10 @@ const ItemMedicalRecordsForm = ({
                                     handleClose={handleCancel}
                                     onChangeIndex={onChangeSelectedTab}
                                 />
-                            </Tab.Panel>
+                            </TabPanel>
                         ))}
-                    </Tab.Panels>
-                </Tab.Group>
+                    </TabPanels>
+                </TabGroup>
             </section>
         </>
     )

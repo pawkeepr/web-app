@@ -5,7 +5,6 @@ import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
 
 import ItemMedicalRecordsForm from '~/Components/forms/item-medical-records-form'
-import MedicalRecordsForm from '~/Components/forms/medical-records-form'
 import withControl from '~/Components/helpers/with-control'
 import type { MedicalRecordEntry } from '~/types/medical-records'
 import type { PetData } from '~/types/pet-v2'
@@ -27,7 +26,7 @@ const AddMedicalRecordsModal = ({
 }: AddModalProps) => {
     const { closeModal, open, showModal } = useModal()
 
-    const title = item ? 'Editar Registro Médico' : 'Adicionar Registro Médico'
+    const title = item ? 'Editar Registro' : 'Adicionar Registro'
 
     return (
         <>
@@ -42,7 +41,7 @@ const AddMedicalRecordsModal = ({
                         web:text-gray-400 web:border-none bg-confirm-500 hover:bg-confirm-600 text-white
                     `,
                     )}
-                    label="Adicionar Registro Médico"
+                    label="Adicionar Registro"
                 />
             )}
             <Modal onClose={() => closeModal()} open={open}>
@@ -54,7 +53,6 @@ const AddMedicalRecordsModal = ({
 
                 <ItemMedicalRecordsForm
                     pet={pet}
-                    form={(props) => <MedicalRecordsForm {...props} />}
                     id_pet={id_pet}
                     handleCancel={closeModal}
                     cpf_cnpj={cpf_cnpj}

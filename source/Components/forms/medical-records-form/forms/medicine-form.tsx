@@ -29,7 +29,7 @@ const HospitalizationForm = ({
                     value: '',
                     amount: '',
                     brand: '',
-                    continuous_use: false,
+                    continuous_use: 'no',
                     date_end: new Date().toISOString(),
                     date_init: new Date().toISOString(),
                     interval: '',
