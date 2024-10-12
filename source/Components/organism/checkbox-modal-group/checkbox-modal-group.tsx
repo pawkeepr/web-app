@@ -31,9 +31,10 @@ export default function CheckboxModal<Ctx>({
 }: CheckboxIsMultiModalProps<Ctx>) {
     const [field, _meta, helpers] = useField(name)
 
-    const { closeModal, open, showModal } = useModal()
-    const { setValue } = helpers
     const idLabel = useId()
+
+    const { closeModal, open, showModal } = useModal({ name: idLabel as any })
+    const { setValue } = helpers
     const [checkedValue, setCheckedValue] = useState<string>()
     const { t } = useTranslations('common')
     const selected = items.find(
@@ -102,7 +103,7 @@ export default function CheckboxModal<Ctx>({
                         <ul className="flex flex-col flex-wrap items-center justify-around gap-1 w-80 ">
                             {items.map((item, index) => (
                                 <li
-                                    className={`flex ${styles['li-option-checkbox']}  pr-4 w-full flex-row items-center mobile:flex-grow justify-center`}
+                                    className={`flex ${styles['li-option-checkbox']} pr-4 w-full flex-row items-center mobile:flex-grow justify-center`}
                                     key={`${item.value}-${index}`}
                                 >
                                     <button
