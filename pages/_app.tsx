@@ -1,3 +1,4 @@
+import 'react-responsive-modal/styles.css'
 import '~/globals.scss'
 import '~/tailwind.css'
 
@@ -37,7 +38,7 @@ function App({ Component, pageProps }: AppProps) {
                     />
                     <Component {...pageProps} />
                 </AuthProvider>
-                <div className="fixed text-base text-center text-gray-500 bottom-1 right-1">
+                <div className="fixed z-50 text-base text-center text-gray-500 bottom-1 right-1">
                     <p>{`v${pg.version} - `}</p>
                 </div>
             </Provider>

@@ -28,7 +28,7 @@ const ExamTestForm = ({
                     status_exam: 'not_applicable',
                     time_date: '',
                     name: '',
-                    value: 0,
+                    value: '0',
                     type_object: '',
                     url_document: '',
                     ...item,
@@ -94,7 +94,7 @@ const ExamTestForm = ({
                         name="notes"
                         divClassName="col-span-full"
                     />
-                    <div className="flex flex-1 justify-end col-span-full">
+                    <div className="flex justify-end flex-1 col-span-full">
                         <BtnCancel
                             className="flex-1"
                             label="Cancelar"

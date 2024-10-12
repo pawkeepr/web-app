@@ -1,16 +1,17 @@
 import { Form, Formik } from 'formik'
+import { memo } from 'react'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldNumber from '~/Components/molecules/field-number'
 import FieldTextArea from '~/Components/molecules/field-text-area'
+import CheckboxModalGroup from '~/Components/organism/checkbox-modal-group'
 import type { BodyEvolution } from '~/types/medical-records'
 import { calcAge } from '~/utils/calc-age'
-import type { OptionFormsProps } from '../medical-records-form'
+import type { OptionFormsProps } from '../../medical-records-form'
 
-const BodyEvolutionForm = ({
+const BodyEvolutionFormik = ({
     item = {} as BodyEvolution,
     pet,
     handleSubmit,
-    handleClose,
 }: OptionFormsProps<BodyEvolution>) => {
     return (
         <Formik
@@ -39,16 +40,55 @@ const BodyEvolutionForm = ({
         >
             {({ values, handleSubmit, isValid }) => (
                 <Form
-                    className="grid grid-cols-3 gap-1 mobile:grid-cols-1"
+                    className="flex flex-col items-center justify-center flex-1 w-full gap-1"
                     onSubmit={handleSubmit}
                 >
-                    <FieldNumber
-                        ctx={values}
-                        label="Peso"
-                        placeholder="Peso do pet em quilos, exemplo = 0.5 (500 gramas)"
-                        required
-                        name="weight"
-                    />
+                    <div className="z-10 flex">
+                        <FieldNumber
+                            ctx={values}
+                            label="Peso"
+                            placeholder="Peso do pet em quilos, exemplo = 0.5 (500 gramas)"
+                            required
+                            name="weight"
+                        />
+                        <CheckboxModalGroup
+                            mode="editable"
+                            items={[
+                                {
+                                    value: 'g',
+                                    label: 'Gramas',
+                                },
+                                {
+                                    value: 'kg',
+                                    label: 'Quilogramas',
+                                },
+                                {
+                                    value: 'lb',
+                                    label: 'Libras',
+                                },
+                                {
+                                    value: 'oz',
+                                    label: 'Onças',
+                                },
+                                {
+                                    value: 'ar',
+                                    label: 'Arrobas',
+                                },
+                                {
+                                    value: 'q',
+                                    label: 'Quintais',
+                                },
+                                {
+                                    value: 't',
+                                    label: 'Toneladas',
+                                },
+                            ]}
+                            className="border-none"
+                            ctx={values}
+                            label="Tipo de Peso"
+                            name="type_weight"
+                        />
+                    </div>
 
                     <FieldNumber
                         ctx={values}
@@ -71,18 +111,17 @@ const BodyEvolutionForm = ({
                         name="notes"
                         divClassName="col-span-full"
                     />
-                    <div className="flex justify-end flex-1 col-span-full">
+                    <div className="flex justify-end flex-1 gap-1 col-span-full">
                         <BtnCancel
-                            className="flex-1"
+                            outline
+                            className="flex-1 text-gray-400 border-none "
                             label="Cancelar"
-                            onClick={handleClose}
                         />
 
                         <BtnPrimary
                             className="flex-1 text-white"
                             label="Adicionar"
                             type="submit"
-                            disabled={!isValid}
                         />
                     </div>
                 </Form>
@@ -91,4 +130,4 @@ const BodyEvolutionForm = ({
     )
 }
 
-export default BodyEvolutionForm
+export default memo(BodyEvolutionFormik)

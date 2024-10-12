@@ -1,6 +1,6 @@
 {
     "name": "pawkeepr",
-    "version": "0.13.1",
+    "version": "0.14.0",
     "private": true,
     "engines": {
         "node": ">=20",
@@ -31,7 +31,7 @@
     },
     "dependencies": {
         "@djpfs/react-vlibras": "^2.0.2",
-        "@headlessui/react": "^1.7.19",
+        "@headlessui/react": "^2.1.9",
         "@heroicons/react": "^2.1.5",
         "@react-input/mask": "^1.2.5",
         "@react-input/number-format": "^1.0.27",

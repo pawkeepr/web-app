@@ -11,10 +11,10 @@ export type Option = {
 }
 
 export type MedicalRecordFormProps = {
-    type?: MEDICAL_RECORDS
-    item?: MedicalRecordEntry | null
-    cpf_cnpj?: string
-    id_pet?: string
+    type: MEDICAL_RECORDS
+    item: MedicalRecordEntry | null
+    cpf_cnpj: string
+    id_pet: string
     condition?: boolean
     handleClose?: () => void
     onChange: (type: Option) => void
