@@ -117,6 +117,7 @@
         "@storybook/addon-links": "^8.2.9",
         "@storybook/addon-onboarding": "^8.2.9",
         "@storybook/blocks": "^8.2.9",
+        "@storybook/cli": "^^8.2.9",
         "@storybook/nextjs": "^8.2.9",
         "@storybook/react": "^8.2.9",
         "@storybook/test": "^8.2.9",
