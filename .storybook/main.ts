@@ -21,6 +21,7 @@ const config: StorybookConfig = {
         getAbsolutePath('@storybook/addon-a11y'),
         getAbsolutePath('@abcaustralia/storybook-addon-a11ydocs'),
         getAbsolutePath('storybook-addon-performance'),
+        getAbsolutePath('@storybook/addon-viewpor'),
     ],
 
     framework: {
