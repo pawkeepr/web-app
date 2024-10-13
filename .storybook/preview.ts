@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react'
 // CSS imports
 import { initialize, mswLoader } from 'msw-storybook-addon'
+import { withPerformance } from 'storybook-addon-performance'
 import '~/globals.scss'
 import '~/tailwind.css'
 
@@ -19,6 +20,7 @@ const preview: Preview = {
 
     tags: ['autodocs'],
     loaders: [mswLoader],
+    decorators: [withPerformance],
 }
 
 export default preview
