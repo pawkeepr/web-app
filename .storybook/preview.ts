@@ -1,7 +1,7 @@
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react'
 // CSS imports
-import '~/globals.scss';
-import '~/tailwind.css';
+import '~/globals.scss'
+import '~/tailwind.css'
 
 const preview: Preview = {
     parameters: {
@@ -13,9 +13,7 @@ const preview: Preview = {
         },
     },
 
-    tags: ["autodocs"]
-};
-
-
+    tags: ['autodocs'],
+}
 
 export default preview

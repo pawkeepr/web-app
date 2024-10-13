@@ -3904,10 +3904,10 @@
   resolved "https://registry.yarnpkg.com/@biomejs/cli-win32-x64/-/cli-win32-x64-1.8.3.tgz#6a9dc5a4e13357277da43c015cd5cdc374035448"
   integrity sha512-/PJ59vA1pnQeKahemaQf4Nyj7IKUvGQSc3Ze1uIGi+Wvr1xF7rGobSrAAG01T/gUDG21vkDsZYM03NAmPiVkqg==
 
-"@chromatic-com/storybook@^1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@chromatic-com/storybook/-/storybook-1.7.0.tgz#456c614c9bde63240d8d565c4a8cd74bcc2fd719"
-  integrity sha512-0aAkSaNsHaJL37/r+TIbpKjCouIysvoJno61LzUSs1xW4fpxF7gdr8xwIOONQjEsz2Fa0uFHXmzkFYcH6o8kmA==
+"@chromatic-com/storybook@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@chromatic-com/storybook/-/storybook-2.0.2.tgz#3e20de5a328165b66c4587dbed0843c6039400ce"
+  integrity sha512-7bPIliISedeIpnVKbzktysFYW5n56bN91kxuOj1XXKixmjbUHRUMvcXd4K2liN6MiR5ZqJtmtcPsZ6CebbGlEA==
   dependencies:
     chromatic "^11.4.0"
     filesize "^10.0.12"
@@ -5426,7 +5426,7 @@
   dependencies:
     tslib "^2.6.2"
 
-"@storybook/addon-a11y@^8.2.9":
+"@storybook/addon-a11y@^8.3.5":
   version "8.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/addon-a11y/-/addon-a11y-8.3.5.tgz#b40d519013961c87af8c1394253a2651d90793ae"
   integrity sha512-/19UO8IXbyfcYK5K8ejSYF+hC+EK79c0bBPHMNeYSFOHSqQM3KoMo+TLIcLsuhuRClmlM+4Zs+VSIYDwc+d3ig==
@@ -5482,7 +5482,7 @@
     rehype-slug "^6.0.0"
     ts-dedent "^2.0.0"
 
-"@storybook/addon-essentials@^8.2.9":
+"@storybook/addon-essentials@^8.3.5":
   version "8.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/addon-essentials/-/addon-essentials-8.3.5.tgz#59599a75e3f72d1048d715f3ec35a4c07149b2f8"
   integrity sha512-hXTtPuN4/IsXjUrkMPAuz1qKAl8DovdXpjQgjQs7jSAVx3kc4BZaGqJ3gaVenKtO8uDchmA92BoQygpkc8eWhw==
@@ -5505,7 +5505,7 @@
   dependencies:
     "@storybook/global" "^5.0.0"
 
-"@storybook/addon-interactions@^8.2.9":
+"@storybook/addon-interactions@^8.3.5":
   version "8.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/addon-interactions/-/addon-interactions-8.3.5.tgz#c971925937aeb6d66bf108dc27a90a4a9cbbf8f4"
   integrity sha512-GtTy/A+mG7vDOahQr2avT4dpWtCRiFDSYcWyuQOZm10y8VDDw157HQM+FuhxjV9Owrrohy9F24oBUwRG8H3b5A==
@@ -5516,7 +5516,7 @@
     polished "^4.2.2"
     ts-dedent "^2.2.0"
 
-"@storybook/addon-links@^8.2.9":
+"@storybook/addon-links@^8.3.5":
   version "8.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-8.3.5.tgz#1621afd8be06af6de5e942644053d5136cc5bb83"
   integrity sha512-giRCpn6cfJMYPnVJkojoQDO5ae6098fgY9YgAhwaJej/9dufNcioFdbiyfK1vyzbG6TGeTmJ9ncWCXgWRtzxPQ==
@@ -5533,7 +5533,7 @@
     "@storybook/global" "^5.0.0"
     tiny-invariant "^1.3.1"
 
-"@storybook/addon-onboarding@^8.2.9":
+"@storybook/addon-onboarding@^8.3.5":
   version "8.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/addon-onboarding/-/addon-onboarding-8.3.5.tgz#dc1c4098b2df602d8b0cd7b66c3daf4b0d92edb4"
   integrity sha512-QE/+6KEYO5tGziMdo+81oor0KNVnbPsfDpnhtClu+t1XC2F2nKQpDISujwLSYm9voEk1D/NxYWMbQ6eTDR/ViA==
@@ -5560,7 +5560,7 @@
   dependencies:
     memoizerific "^1.11.3"
 
-"@storybook/blocks@8.3.5", "@storybook/blocks@^8.2.9":
+"@storybook/blocks@8.3.5", "@storybook/blocks@^8.3.5":
   version "8.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/blocks/-/blocks-8.3.5.tgz#35e20efb0c13a235832dd945520ff8ac61f40717"
   integrity sha512-8cHTdTywolTHlgwN8I7YH7saWAIjGzV617AwjhJ95AKlC0VtpO1gAFcAgCqr4DU9eMc+LZuvbnaU/RSvA5eCCQ==
@@ -5613,7 +5613,7 @@
     webpack-hot-middleware "^2.25.1"
     webpack-virtual-modules "^0.6.0"
 
-"@storybook/cli@^^8.2.9":
+"@storybook/cli@^8.3.5":
   version "8.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/cli/-/cli-8.3.5.tgz#f9368eacf85474cdb3324d74d4e601cb57787f42"
   integrity sha512-OPGcRzxc3t8c3D4SKiqO672S1YnqD4M2ybJfQivkPhLeRsU//jrysFYieGn/M/Hngw2GqyuSusFPwGmmGjj5ZA==
@@ -5730,7 +5730,7 @@
   resolved "https://registry.yarnpkg.com/@storybook/manager-api/-/manager-api-8.3.5.tgz#73560ffc3774901e503e31aefac91cd4a1579bbb"
   integrity sha512-fEQoKKi7h7pzh2z9RfuzatJxubrsfL/CB99fNXQ0wshMSY/7O4ckd18pK4fzG9ErnCtLAO9qsim4N/4eQC+/8Q==
 
-"@storybook/nextjs@^8.2.9":
+"@storybook/nextjs@^8.3.5":
   version "8.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/nextjs/-/nextjs-8.3.5.tgz#0861d87e5abcb41eddef8b8e7b4e7634bab059ce"
   integrity sha512-YMjDSVd7BHIvj6oLMEFMKRvfZ83INxZinxtrx4ZZXGe+5iP8j7rcV7D67lxKQKWNy36d9Foj4pjT85yYj5s+ZQ==
@@ -5819,7 +5819,7 @@
   resolved "https://registry.yarnpkg.com/@storybook/react-dom-shim/-/react-dom-shim-8.3.5.tgz#dda5356d3bf55623b9b1429fac7bf185e59c58fd"
   integrity sha512-Hf0UitJ/K0C7ajooooUK/PxOR4ihUWqsC7iCV1Gqth8U37dTeLMbaEO4PBwu0VQ+Ufg0N8BJLWfg7o6G4hrODw==
 
-"@storybook/react@8.3.5", "@storybook/react@^8.2.9":
+"@storybook/react@8.3.5", "@storybook/react@^8.3.5":
   version "8.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/react/-/react-8.3.5.tgz#d4e333b09f275f06b38fb1367234ad1619fbe4fa"
   integrity sha512-kuBPe/wBin10SWr4EWPKxiTRGQ4RD2etGEVWVQLqVpOuJp/J2hVvXQHtCfZXU4TZT5x4PBbPRswbr58+XlF+kQ==
@@ -5845,7 +5845,7 @@
     type-fest "~2.19"
     util-deprecate "^1.0.2"
 
-"@storybook/test@8.3.5", "@storybook/test@^8.2.9":
+"@storybook/test@8.3.5", "@storybook/test@^8.3.5":
   version "8.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/test/-/test-8.3.5.tgz#0dffc9d4a1eaa9552e69457b16b5085e36883c8a"
   integrity sha512-1BXWsUGWk9FiKKelZZ55FDJdeoL8uRBHbjTYBRM2xJLhdNSvGzI4Tb3bkmxPpGn72Ua6AyldhlTxr2BpUFKOHA==
@@ -14303,7 +14303,7 @@ stethoskop@1.0.0:
   dependencies:
     node-statsd "0.1.1"
 
-storybook@8.3.5, storybook@^8.2.9:
+storybook@8.3.5, storybook@^8.3.5:
   version "8.3.5"
   resolved "https://registry.yarnpkg.com/storybook/-/storybook-8.3.5.tgz#aef0542c08e245b7ac22742c1e1633a125063b8e"
   integrity sha512-hYQVtP2l+3kO8oKDn4fjXXQYxgTRsj/LaV6lUMJH0zt+OhVmDXKJLxmdUP4ieTm0T8wEbSYosFavgPcQZlxRfw==
