@@ -1,7 +1,11 @@
 import type { Preview } from '@storybook/react'
 // CSS imports
+import { initialize, mswLoader } from 'msw-storybook-addon'
 import '~/globals.scss'
 import '~/tailwind.css'
+
+// Initialize MSW
+initialize()
 
 const preview: Preview = {
     parameters: {
@@ -14,6 +18,7 @@ const preview: Preview = {
     },
 
     tags: ['autodocs'],
+    loaders: [mswLoader],
 }
 
 export default preview

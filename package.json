@@ -27,7 +27,8 @@
         "lint": "npx @biomejs/biome check --apply-unsafe ./source",
         "format": "npx @biomejs/biome format --write ./source",
         "storybook": "storybook dev -p 6006",
-        "build-storybook": "storybook build"
+        "build-storybook": "storybook build",
+        "test-storybook": "test-storybook"
     },
     "dependencies": {
         "@djpfs/react-vlibras": "^2.0.2",
@@ -106,6 +107,8 @@
         "zustand": "^4.5.5"
     },
     "devDependencies": {
+        "@abcaustralia/storybook-addon-a11ydocs": "^4.0.0",
+        "@bbbtech/storybook-formik": "^3.0.0",
         "@biomejs/biome": "^1.8.3",
         "@chromatic-com/storybook": "^2.0.2",
         "@commitlint/cli": "^19.4.1",
@@ -121,6 +124,7 @@
         "@storybook/nextjs": "^8.3.5",
         "@storybook/react": "^8.3.5",
         "@storybook/test": "^8.3.5",
+        "@storybook/test-runner": "^0.19.1",
         "@tanstack/react-query-devtools": "^5.52.1",
         "@testing-library/jest-dom": "^6.4.8",
         "@testing-library/react": "^15.0.7",
@@ -152,10 +156,13 @@
         "cz-conventional-changelog": "^3.3.0",
         "husky": "^9.1.5",
         "jsdom": "^24.1.1",
+        "msw": "^2.4.10",
+        "msw-storybook-addon": "^2.0.3",
         "next-router-mock": "^0.9.13",
         "postcss": "^8.4.41",
         "sinon": "^17.0.2",
         "storybook": "^8.3.5",
+        "storybook-addon-performance": "^0.17.3",
         "tailwindcss": "^3.4.10",
         "typescript": "^5.5.4",
         "vite-plugin-checker": "^0.7.2",
@@ -168,5 +175,10 @@
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
         }
+    },
+    "msw": {
+        "workerDirectory": [
+            "public"
+        ]
     }
 }
