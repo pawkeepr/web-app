@@ -108,7 +108,6 @@
     },
     "devDependencies": {
         "@abcaustralia/storybook-addon-a11ydocs": "^4.0.0",
-        "@bbbtech/storybook-formik": "^3.0.0",
         "@biomejs/biome": "^1.9.3",
         "@chromatic-com/storybook": "^2.0.2",
         "@commitlint/cli": "^19.5.0",
