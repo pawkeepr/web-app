@@ -4,7 +4,6 @@
         "types": [
             "vitest/globals",
             "@testing-library/jest-dom",
-            "cypress"
         ],
         "lib": [
             "dom",
@@ -42,10 +41,12 @@
         "next-env.d.ts",
         "**/*.ts",
         "**/*.tsx",
+        "**/*.cjs",
         "**/*.js",
         "**/*.jsx",
         ".next/types/**/*.ts",
         "source/pages/Modules/shared/ProfilePetPage/components/molecules/address-tutor",
+        "vite.config.mts",
     ],
     "exclude": [
         "node_modules"
