@@ -7,7 +7,7 @@ import PetProfileCard from '../../shared/HistoricPetPage/components/organisms/pe
 import CardContainer from '../../shared/ProfilePage/components/CardContainer'
 import ContainerHealthPlans from './components/container-health-plans'
 
-const HealthPlan = () => {
+const HealthPlanPage = () => {
     const {
         onChangeSelectedPet,
         listPetsIsFetching,
@@ -56,4 +56,4 @@ const HealthPlan = () => {
     )
 }
 
-export default HealthPlan
+export default HealthPlanPage

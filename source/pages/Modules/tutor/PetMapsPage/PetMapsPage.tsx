@@ -7,7 +7,7 @@ import PetProfileCard from '../../shared/HistoricPetPage/components/organisms/pe
 import CardContainer from '../../shared/ProfilePage/components/CardContainer'
 import ContainerLocalizations from './components/container-localizations'
 
-const PetMaps = () => {
+const PetMapsPage = () => {
     const {
         onChangeSelectedPet,
         listPetsIsFetching,
@@ -58,4 +58,4 @@ const PetMaps = () => {
     )
 }
 
-export default PetMaps
+export default PetMapsPage

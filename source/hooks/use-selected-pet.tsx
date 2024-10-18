@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { create } from 'zustand'
 import {
     useListPetsFromTutor,
     type Pet,
@@ -6,8 +6,18 @@ import {
 import { usePetByIdV2 } from '~/store/hooks/pet-by-id'
 import useProfile from '~/store/hooks/profile/use-profile'
 
+interface PetState {
+    selected: Pet | null
+    onChangeSelectedPet: (pet: Pet) => void
+}
+
+const useSelectedPetState = create<PetState>()((set) => ({
+    selected: null,
+    onChangeSelectedPet: (pet: Pet) => set({ selected: pet }),
+}))
+
 const useSelectedPet = () => {
-    const [selected, setSelected] = useState<Pet | null>(null)
+    const { selected, onChangeSelectedPet } = useSelectedPetState()
     const {
         data: pets,
         isPending: listPetsPending,
@@ -24,13 +34,8 @@ const useSelectedPet = () => {
         selected?.id_pet as string,
     )
 
-    const onChangeSelectedPet = (pet: Pet) => {
-        setSelected(pet)
-    }
-
     return {
         selected,
-        setSelected,
         pets,
         listPetsPending,
         listPetsIsFetching,

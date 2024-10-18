@@ -1,6 +1,6 @@
 import { LayoutTutor } from '~/Layouts'
 import getServerSidePropsPagesPrivates from '~/helpers/get-server-side-props-pages-tutor-privates'
-import Page from '~/pages/Modules/tutor/HealthPlan'
+import Page from '~/pages/Modules/tutor/HealthPlanPage'
 
 const HealthPlanPage = () => {
     return (
