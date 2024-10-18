@@ -1,5 +1,6 @@
 import { FaHeartbeat, FaPlus } from 'react-icons/fa'
 import ModalHealthPlans from '~/Components/modals/health-plans'
+import { useSelectedPet } from '~/hooks/use-selected-pet'
 import { useHealthPlans } from '~/store/hooks/health-plans'
 import type { IHealthPlan } from '~/validations/health-plans'
 const CardHealthPlans = ({ healthPlan }: { healthPlan: IHealthPlan }) => {
@@ -24,11 +25,17 @@ const CardHealthPlans = ({ healthPlan }: { healthPlan: IHealthPlan }) => {
     )
 }
 
-type ContainerHealthPlansProps = {
-    id_pet: string
-}
-const ContainerHealthPlans = ({ id_pet }: ContainerHealthPlansProps) => {
-    if (!id_pet) return null
+const ContainerHealthPlans = () => {
+    const { pet } = useSelectedPet()
+
+    const id_pet = pet?.id
+
+    if (!id_pet)
+        return (
+            <p className="text-base font-semibold text-center text-gray-600">
+                Selecione um Pet para ver os Dados
+            </p>
+        )
 
     const { data, isPending, isError } = useHealthPlans({ id_pet })
 

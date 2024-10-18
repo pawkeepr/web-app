@@ -1,4 +1,5 @@
 import { FaMapMarkerAlt } from 'react-icons/fa'
+import { useSelectedPet } from '~/hooks/use-selected-pet'
 import { useGetReadQRCodeLocation } from '~/store/hooks/location'
 import type { IGeolocationAppointment } from '~/types/appointment'
 
@@ -42,13 +43,20 @@ const CardLocalization = ({
     )
 }
 
-type ContainerHealthPlansProps = {
-    id_pet: string
-}
-const ContainerMapPet = ({ id_pet }: ContainerHealthPlansProps) => {
-    if (!id_pet) return null
+const ContainerMapPet = () => {
+    const { pet } = useSelectedPet()
 
-    const { data, isPending, isError } = useGetReadQRCodeLocation({ id_pet })
+    const id_pet = pet?.id
+    if (!id_pet)
+        return (
+            <p className="text-base font-semibold text-center text-gray-600">
+                Selecione um Pet para ver os Dados
+            </p>
+        )
+
+    const { data, isPending, isError } = useGetReadQRCodeLocation({
+        id_pet,
+    })
 
     return (
         <>
