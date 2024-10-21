@@ -9,14 +9,20 @@ type CardButtonProps = {
         textColor: string
         color: string
     }
+    disabled?: boolean
     selectedIndex: number
     onChangeSelectedIndex: (index: number) => void
 }
 
-export const CardButton = ({ record, onChangeSelectedIndex }: CardButtonProps) => {
+export const CardButton = ({
+    record,
+    onChangeSelectedIndex,
+    disabled = false,
+}: CardButtonProps) => {
     return (
         <button
             type="button"
+            disabled={disabled}
             onClick={() => onChangeSelectedIndex(record.id)}
             className={`${record.color} flex flex-col items-center px-4 py-8 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200 ease-in-out grow-0  w-[160px] `}
         >

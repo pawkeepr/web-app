@@ -26,7 +26,10 @@ import {
     TreatmentsForm,
     VaccinesForm,
 } from '~/Components/forms/medical-records-form/forms'
+import { useSelectedPet } from '~/hooks/use-selected-pet'
+import { useGetMedicalRecordsByPet } from '~/store/hooks/medical-records'
 import { CardButton } from './components/card-button'
+import WarningNoHaveSelectPet from './components/warning-no-have-select-pet'
 
 const records = [
     {
@@ -150,6 +153,12 @@ const records = [
 
 const SuSPet = () => {
     const [selectedIndex, setSelectedIndex] = useState(0)
+    const { pet } = useSelectedPet()
+
+    const { data, isPending } = useGetMedicalRecordsByPet({
+        id_pet: pet?.id as string,
+        cpf_cnpj: pet?.main_responsible_guardian?.cpf_cnpj as string,
+    })
 
     const onChangeSelectedIndex = (index: number) => {
         setSelectedIndex(index)
@@ -157,7 +166,7 @@ const SuSPet = () => {
 
     return (
         <TabGroup
-            className="bg-white"
+            className="mb-4 bg-white rounded-lg shadow-lg"
             selectedIndex={selectedIndex}
             onChange={setSelectedIndex}
         >
@@ -176,10 +185,14 @@ const SuSPet = () => {
                     </Tab>
                 ))}
             </TabList>
-            <TabPanels as="section">
+            <TabPanels as="section" className="relative z-0">
+                <WarningNoHaveSelectPet
+                    isPending={isPending && !!pet?.id}
+                    condition={!data?.id}
+                />
                 <TabPanel
                     as="ul"
-                    className="flex flex-wrap items-center justify-start gap-4 px-4 pt-4 pb-[120px] "
+                    className="flex flex-wrap items-center justify-start gap-4 px-4 pt-4 pb-[120px] z-0 "
                 >
                     {records
                         .sort((a, b) => a.type.localeCompare(b.type))
@@ -187,6 +200,8 @@ const SuSPet = () => {
                             <Fade key={record.id} delay={index * 25}>
                                 <li>
                                     <CardButton
+                                        i18nIsDynamicList
+                                        disabled={!pet?.id}
                                         record={record}
                                         selectedIndex={selectedIndex}
                                         onChangeSelectedIndex={
@@ -200,22 +215,14 @@ const SuSPet = () => {
                 {records.map((record) => (
                     <TabPanel key={record.type}>
                         <Fade>
-                            <div className="flex flex-wrap items-center justify-start gap-4 px-4 pt-4 pb-[120px]">
-                                {/* {
-                                    <record.form
-                                        item={
-                                            {
-                                                id: '',
-                                                id_appointment: '',
-                                                coin: 'BRL',
-                                            } as MedicalRecordEntry
-                                        }
-                                        pet={{} as PetData}
-                                        handleSubmit={() => null}
-                                        key={record.type}
-                                    />
-                                } */}
-                            </div>
+                            <strong>
+                                {!pet?.id && (
+                                    <p>
+                                        Você deve selecionar um pet para Selecione
+                                        um pet
+                                    </p>
+                                )}
+                            </strong>
                         </Fade>
                     </TabPanel>
                 ))}
