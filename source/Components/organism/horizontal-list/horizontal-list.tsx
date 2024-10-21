@@ -1,6 +1,6 @@
 'use client'
 
-import { Tab } from '@headlessui/react'
+import { TabGroup } from '@headlessui/react'
 import ItemsList from './items-list'
 import MenuList, {
     type TabItem,
@@ -27,7 +27,7 @@ const HorizontalTabs = ({
     menu = false,
 }: HorizontalTabsProps) => {
     return (
-        <Tab.Group as="section" className="flex flex-col w-full ">
+        <TabGroup as="section" className="flex flex-col w-full ">
             <MenuList
                 categories={categories}
                 bottomNavigation={bottomNavigation}
@@ -37,7 +37,7 @@ const HorizontalTabs = ({
             <ItemsList categories={categories} classNames={classNames}>
                 {children}
             </ItemsList>
-        </Tab.Group>
+        </TabGroup>
     )
 }
 

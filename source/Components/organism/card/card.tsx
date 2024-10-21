@@ -4,7 +4,7 @@ import useResizeMobile from '~/hooks/use-resize-mobile'
 
 export const card = tv({
     base: `
-        card card-side shadow-xl  my-2 w-full justify-start items-center text-left
+        card card-side shadow-xl w-full justify-start items-center text-left
         bg-white rounded-3xl !h-fit max-h-[232px] overflow-hidden
     `,
     variants: {

@@ -32,12 +32,11 @@ const CardFeedPet = ({ pet, onClick, selected }: CardFeedPetProps) => {
                     className={card({
                         selected,
                         className:
-                            'px-2 rounded-xl py-2 w-28 !h-36 flex flex-col items-center justify-center !shadow-theme-3',
+                            'px-2 rounded-xl my-0 py-2 flex-1 h-36 flex flex-row phone:flex-col phone:max-w-[7rem] phone:w-28 items-center justify-center !shadow-theme-3 gap-4',
                     })}
                     style={{
                         minWidth: '7rem',
                         minHeight: '9rem',
-                        maxWidth: '7rem',
                     }} // fix width and height
                 >
                     <AvatarPet
@@ -48,20 +47,22 @@ const CardFeedPet = ({ pet, onClick, selected }: CardFeedPetProps) => {
                             img: 'w-20 h-20 shadow-theme-3  rounded-full',
                         }}
                     />
-                    <div className="flex flex-row gap-1">
-                        <h2 className="text-sm font-bold text-center text-gray-400 ">
-                            {`${pet?.name_pet}`}
+                    <div className="flex flex-col items-center justify-center">
+                        <div className="flex flex-row gap-1">
+                            <h2 className="text-sm font-bold text-center text-gray-400 ">
+                                {`${pet?.name_pet}`}
+                            </h2>
+                            <Gender
+                                className={iconGender({
+                                    sex,
+                                    className: 'mobile:relative bottom-0 right-0',
+                                })}
+                            />
+                        </div>
+                        <h2 className="text-xs text-center">
+                            {calcAge(pet?.date_birth)} ano(s)
                         </h2>
-                        <Gender
-                            className={iconGender({
-                                sex,
-                                className: 'mobile:relative bottom-0 right-0',
-                            })}
-                        />
                     </div>
-                    <h2 className="text-xs text-center">
-                        {calcAge(pet?.date_birth)} ano(s)
-                    </h2>
                 </button>
             )}
         </ModalBoxButtonsPet>

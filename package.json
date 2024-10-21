@@ -76,6 +76,7 @@
         "qrcode.react": "^3.1.0",
         "react": "18.3.1",
         "react-avatar-editor": "^13.0.2",
+        "react-awesome-reveal": "^4.2.14",
         "react-currency-input-field": "^3.8.0",
         "react-datepicker": "^6.9.0",
         "react-dom": "18.3.1",

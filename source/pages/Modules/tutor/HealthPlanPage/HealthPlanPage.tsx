@@ -19,15 +19,17 @@ const HealthPlanPage = () => {
                     pet,
                     selected,
                 }) => (
-                    <>
-                        <MapCardFeedPets
-                            onClick={onChangeSelectedPet}
-                            pets={pets as Pet[]}
-                            selected={selected}
-                            isPending={listPetsPending}
-                            isLoading={listPetsIsFetching}
-                        />
-                        <div className="container mx-auto mobile:pb-24">
+                    <div className="flex phone:flex-col">
+                        <div className="flex-1 w-full">
+                            <MapCardFeedPets
+                                onClick={onChangeSelectedPet}
+                                pets={pets as Pet[]}
+                                selected={selected}
+                                isPending={listPetsPending}
+                                isLoading={listPetsIsFetching}
+                            />
+                        </div>
+                        <div className="w-full flex-[4]">
                             <div className="flex flex-wrap flex-1 mobile:flex-col tablet:flex-col">
                                 <div className="flex flex-col flex-1 w-full gap-1 px-2">
                                     <PetProfileCard
@@ -48,7 +50,7 @@ const HealthPlanPage = () => {
                                 </div>
                             </div>
                         </div>
-                    </>
+                    </div>
                 )}
             </SelectPetProvider>
         </DefaultLayout>
