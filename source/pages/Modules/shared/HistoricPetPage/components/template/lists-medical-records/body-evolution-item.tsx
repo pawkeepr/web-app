@@ -33,8 +33,8 @@ const BodyEvolutionItem = ({ item, document, id_pet }: BodyEvolutionItemProps) =
                     onClick={() => showModal()}
                     className="flex items-center w-full p-6"
                 >
-                    <div className="p-4 bg-green-100 rounded-full">
-                        <FaWeight className="text-4xl text-green-500" />
+                    <div className="p-4 bg-blue-100 rounded-full">
+                        <FaWeight className="text-4xl text-blue-500" />
                     </div>
                     <div className="ml-4 text-start">
                         <h2 className="text-lg font-bold text-gray-700">

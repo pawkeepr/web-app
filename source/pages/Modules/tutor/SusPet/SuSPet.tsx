@@ -1,40 +1,31 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import { useState } from 'react'
 import { Fade } from 'react-awesome-reveal'
-import { BsArrowLeftCircle, BsHospital, BsNutFill } from 'react-icons/bs'
+import { BsArrowLeftCircle, BsHospital } from 'react-icons/bs'
 import {
     FaAllergies,
+    FaAppleAlt,
+    FaBandAid,
     FaCut,
     FaHeartbeat,
     FaPills,
+    FaRunning,
     FaSyringe,
     FaTooth,
     FaWeight,
 } from 'react-icons/fa'
-import { GiHealthNormal } from 'react-icons/gi'
-import { IoIosFitness } from 'react-icons/io'
 import { RiTestTubeFill } from 'react-icons/ri'
-import {
-    BodyEvolutionForm,
-    DentalProcedureForm,
-    DiseaseForm,
-    ExamAndTestForm,
-    HospitalizationForm,
-    MedicineForm,
-    NutritionForm,
-    PhysicalActivityForm,
-    TreatmentsForm,
-    VaccinesForm,
-} from '~/Components/forms/medical-records-form/forms'
 import { useSelectedPet } from '~/hooks/use-selected-pet'
 import { useGetMedicalRecordsByPet } from '~/store/hooks/medical-records'
+import { MEDICAL_RECORDS } from '~/types/medical-records'
 import { CardButton } from './components/card-button'
+import MedicalRecord from './components/medical-records'
 import WarningNoHaveSelectPet from './components/warning-no-have-select-pet'
 
 const records = [
     {
         id: 1,
-        form: BodyEvolutionForm,
+        key: MEDICAL_RECORDS.BODY_EVOLUTION,
         type: 'Evolução Corporal',
         icon: <FaWeight />,
         color: 'bg-blue-50',
@@ -43,7 +34,7 @@ const records = [
     },
     {
         id: 2,
-        form: TreatmentsForm,
+        key: MEDICAL_RECORDS.SURGERIES,
         type: 'Cirurgias',
         icon: <FaCut />,
         color: 'bg-pink-50',
@@ -52,7 +43,7 @@ const records = [
     },
     {
         id: 3,
-        form: MedicineForm,
+        key: MEDICAL_RECORDS.MEDICINES,
         type: 'Medicamentos',
         icon: <FaPills />,
         color: 'bg-purple-50',
@@ -61,7 +52,7 @@ const records = [
     },
     {
         id: 4,
-        form: DiseaseForm,
+        key: MEDICAL_RECORDS.DISEASES,
         type: 'Doenças',
         icon: <FaHeartbeat />,
         color: 'bg-red-50',
@@ -70,7 +61,7 @@ const records = [
     },
     {
         id: 5,
-        form: VaccinesForm,
+        key: MEDICAL_RECORDS.VACCINES,
         type: 'Vacinas',
         icon: <FaSyringe />,
         color: 'bg-green-50',
@@ -79,16 +70,16 @@ const records = [
     },
     {
         id: 6,
-        form: PhysicalActivityForm,
+        key: MEDICAL_RECORDS.PHYSICAL_ACTIVITIES,
         type: 'Atividades Físicas',
-        icon: <IoIosFitness />,
+        icon: <FaRunning />,
         color: 'bg-yellow-50',
         iconBg: 'bg-yellow-100',
         textColor: 'text-yellow-500',
     },
     {
         id: 7,
-        form: DiseaseForm,
+        key: MEDICAL_RECORDS.ALLERGIES,
         type: 'Alergias',
         icon: <FaAllergies />,
         color: 'bg-orange-50',
@@ -97,7 +88,7 @@ const records = [
     },
     {
         id: 8,
-        form: DentalProcedureForm,
+        key: MEDICAL_RECORDS.DENTAL_PROCEDURES,
         type: 'Procedimentos Dentários',
         icon: <FaTooth />,
         color: 'bg-teal-50',
@@ -106,7 +97,7 @@ const records = [
     },
     {
         id: 9,
-        form: ExamAndTestForm,
+        key: MEDICAL_RECORDS.EXAMS,
         type: 'Exames',
         icon: <RiTestTubeFill />,
         color: 'bg-cyan-50',
@@ -115,7 +106,7 @@ const records = [
     },
     {
         id: 10,
-        form: HospitalizationForm,
+        key: MEDICAL_RECORDS.HOSPITALIZATIONS,
         type: 'Hospitalizações',
         icon: <BsHospital />,
         color: 'bg-indigo-50',
@@ -124,27 +115,27 @@ const records = [
     },
     {
         id: 11,
-        form: HospitalizationForm,
+        key: MEDICAL_RECORDS.INTERNMENTS,
         type: 'Internações',
-        icon: <GiHealthNormal />,
+        icon: <BsHospital />,
         color: 'bg-lime-50',
         iconBg: 'bg-lime-100',
         textColor: 'text-lime-500',
     },
     {
         id: 12,
-        form: DiseaseForm,
+        key: MEDICAL_RECORDS.INJURIES,
         type: 'Lesões',
-        icon: <FaHeartbeat />,
+        icon: <FaBandAid />,
         color: 'bg-red-50',
         iconBg: 'bg-red-100',
         textColor: 'text-red-500',
     },
     {
         id: 13,
-        form: NutritionForm,
+        key: MEDICAL_RECORDS.NUTRITIONS,
         type: 'Nutrição',
-        icon: <BsNutFill />,
+        icon: <FaAppleAlt />,
         color: 'bg-amber-50',
         iconBg: 'bg-amber-100',
         textColor: 'text-amber-500',
@@ -173,7 +164,7 @@ const SuSPet = () => {
             <TabList as="aside">
                 <Tab className="text-base font-semibold text-center text-gray-700 data-[selected]:hidden">
                     <Fade>
-                        <span className="flex items-center justify-center gap-2 p-2 text-sm font-semibold text-center text-gray-700 h-fit ">
+                        <span className="flex items-center justify-center gap-2 p-2 m-2 text-sm font-semibold text-center text-gray-700 h-fit ">
                             <BsArrowLeftCircle /> Voltar
                         </span>
                     </Fade>
@@ -194,35 +185,31 @@ const SuSPet = () => {
                     as="ul"
                     className="flex flex-wrap items-center justify-start gap-4 px-4 pt-4 pb-[120px] z-0 "
                 >
-                    {records
-                        .sort((a, b) => a.type.localeCompare(b.type))
-                        .map((record, index) => (
-                            <Fade key={record.id} delay={index * 25}>
-                                <li>
-                                    <CardButton
-                                        i18nIsDynamicList
-                                        disabled={!pet?.id}
-                                        record={record}
-                                        selectedIndex={selectedIndex}
-                                        onChangeSelectedIndex={
-                                            onChangeSelectedIndex
-                                        }
-                                    />
-                                </li>
-                            </Fade>
-                        ))}
+                    {records.map((record, index) => (
+                        <Fade key={record.id} delay={index * 25}>
+                            <li>
+                                <CardButton
+                                    i18nIsDynamicList
+                                    disabled={!pet?.id}
+                                    record={record}
+                                    selectedIndex={selectedIndex}
+                                    onChangeSelectedIndex={onChangeSelectedIndex}
+                                />
+                            </li>
+                        </Fade>
+                    ))}
                 </TabPanel>
                 {records.map((record) => (
                     <TabPanel key={record.type}>
                         <Fade>
-                            <strong>
-                                {!pet?.id && (
-                                    <p>
-                                        Você deve selecionar um pet para Selecione
-                                        um pet
-                                    </p>
-                                )}
-                            </strong>
+                            <MedicalRecord
+                                id_pet={pet?.id as string}
+                                document={
+                                    pet?.main_responsible_guardian
+                                        ?.cpf_cnpj as string
+                                }
+                                type={record.key}
+                            />
                         </Fade>
                     </TabPanel>
                 ))}

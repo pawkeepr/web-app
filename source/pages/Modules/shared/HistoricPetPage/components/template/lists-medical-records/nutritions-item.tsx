@@ -27,14 +27,14 @@ const NutritionItem = ({ item, document, id_pet }: NutritionItemProps) => {
 
     return (
         <>
-            <li className="rounded-lg shadow-theme-3 bg-green-50">
+            <li className="rounded-lg shadow-theme-3 bg-amber-50">
                 <button
                     type="button"
                     onClick={() => showModal()}
                     className="flex items-center w-full p-6"
                 >
-                    <div className="p-4 bg-green-100 rounded-full">
-                        <FaAppleAlt className="text-4xl text-green-500" />
+                    <div className="p-4 rounded-full bg-amber-100">
+                        <FaAppleAlt className="text-4xl text-amber-500" />
                     </div>
                     <div className="ml-4 text-start">
                         <h2 className="text-lg font-bold text-gray-700">
@@ -59,8 +59,8 @@ const NutritionItem = ({ item, document, id_pet }: NutritionItemProps) => {
             </li>
             <Modal onClose={() => closeModal()} open={open} mobilePage={false}>
                 <div className="flex flex-col justify-between items-center w-full h-[90%] p-4">
-                    <div className="p-4 bg-green-100 rounded-full">
-                        <FaAppleAlt className="text-4xl text-green-500" />
+                    <div className="p-4 rounded-full bg-amber-100">
+                        <FaAppleAlt className="text-4xl text-amber-500" />
                     </div>
                     <div className="w-full">
                         <h2 className="text-lg font-bold text-gray-700">

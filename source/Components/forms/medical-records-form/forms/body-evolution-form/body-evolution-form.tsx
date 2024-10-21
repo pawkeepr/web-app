@@ -1,9 +1,12 @@
 import { Form, Formik } from 'formik'
 import { memo } from 'react'
+import { FaWeight } from 'react-icons/fa'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldNumber from '~/Components/molecules/field-number'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import CheckboxModalGroup from '~/Components/organism/checkbox-modal-group'
+import Modal from '~/Components/organism/modal'
+import useModal from '~/hooks/use-modal'
 import type { BodyEvolution } from '~/types/medical-records'
 import { calcAge } from '~/utils/calc-age'
 import type { OptionFormsProps } from '../../medical-records-form'
@@ -131,3 +134,49 @@ const BodyEvolutionFormik = ({
 }
 
 export default memo(BodyEvolutionFormik)
+
+export const BodyEvolutionFormModal = ({
+    item = {} as BodyEvolution,
+    handleSubmit,
+    handleClose,
+    children,
+}: Omit<OptionFormsProps<BodyEvolution>, 'pet'> & {
+    children?: (showModal: () => void) => void
+}) => {
+    const { closeModal, open, showModal } = useModal()
+    const title = 'Adicionar Registro'
+
+    return (
+        <>
+            {children?.(showModal) || (
+                <button
+                    onClick={showModal}
+                    type="button"
+                    className="flex items-center w-full p-6 rounded-lg shadow-theme-3 bg-blue-50"
+                >
+                    <div className="p-4 bg-blue-100 rounded-full">
+                        <FaWeight className="text-4xl text-blue-500" />
+                    </div>
+                    <div className="ml-4 text-start">
+                        <h2 className="text-lg font-bold text-gray-700">
+                            Adicionar Registro
+                        </h2>
+                    </div>
+                </button>
+            )}
+            <Modal onClose={() => closeModal()} open={open}>
+                <div className="w-full">
+                    <h6 className="mb-4 font-semibold text-center uppercase">
+                        {title}
+                    </h6>
+                </div>
+
+                <BodyEvolutionFormik
+                    handleSubmit={handleSubmit}
+                    item={item}
+                    handleClose={handleClose}
+                />
+            </Modal>
+        </>
+    )
+}
