@@ -177,16 +177,23 @@ const SuSPet = () => {
                 ))}
             </TabList>
             <TabPanels as="section">
-                <TabPanel className="flex flex-wrap items-center justify-start gap-4 px-4 pt-4 pb-[120px] ">
+                <TabPanel
+                    as="ul"
+                    className="flex flex-wrap items-center justify-start gap-4 px-4 pt-4 pb-[120px] "
+                >
                     {records
                         .sort((a, b) => a.type.localeCompare(b.type))
                         .map((record, index) => (
                             <Fade key={record.id} delay={index * 25}>
-                                <CardButton
-                                    record={record}
-                                    selectedIndex={selectedIndex}
-                                    onChangeSelectedIndex={onChangeSelectedIndex}
-                                />
+                                <li>
+                                    <CardButton
+                                        record={record}
+                                        selectedIndex={selectedIndex}
+                                        onChangeSelectedIndex={
+                                            onChangeSelectedIndex
+                                        }
+                                    />
+                                </li>
                             </Fade>
                         ))}
                 </TabPanel>
