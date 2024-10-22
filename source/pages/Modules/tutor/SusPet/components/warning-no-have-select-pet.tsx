@@ -4,7 +4,10 @@ import Loader from '~/Components/organism/loader'
 
 const WarningNoHaveSelectPet = ({ isPending = false }) => {
     return (
-        <div className="absolute z-50 flex flex-col items-center justify-start w-full h-full gap-2 pt-10 bg-gray-100 bg-opacity-70 ">
+        <div
+            aria-live="polite"
+            className="absolute z-50 flex flex-col items-center justify-start w-full h-full gap-2 pt-10 bg-gray-100 bg-opacity-70 "
+        >
             <Fade>
                 <h6 className="text-base font-bold text-center text-gray-700 ">
                     Nenhum Pet Selecionado

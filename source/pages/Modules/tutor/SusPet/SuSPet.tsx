@@ -28,8 +28,8 @@ const records = [
         key: MEDICAL_RECORDS.BODY_EVOLUTION,
         type: 'Evolução Corporal',
         icon: <FaWeight />,
-        color: 'bg-blue-50',
-        iconBg: 'bg-blue-100',
+        color: 'bg-blue-100',
+        iconBg: 'bg-blue-200',
         textColor: 'text-blue-500',
     },
     {
@@ -37,8 +37,8 @@ const records = [
         key: MEDICAL_RECORDS.SURGERIES,
         type: 'Cirurgias',
         icon: <FaCut />,
-        color: 'bg-pink-50',
-        iconBg: 'bg-pink-100',
+        color: 'bg-pink-100',
+        iconBg: 'bg-pink-200',
         textColor: 'text-pink-500',
     },
     {
@@ -46,8 +46,8 @@ const records = [
         key: MEDICAL_RECORDS.MEDICINES,
         type: 'Medicamentos',
         icon: <FaPills />,
-        color: 'bg-purple-50',
-        iconBg: 'bg-purple-100',
+        color: 'bg-purple-100',
+        iconBg: 'bg-purple-200',
         textColor: 'text-purple-500',
     },
     {
@@ -55,8 +55,8 @@ const records = [
         key: MEDICAL_RECORDS.DISEASES,
         type: 'Doenças',
         icon: <FaHeartbeat />,
-        color: 'bg-red-50',
-        iconBg: 'bg-red-100',
+        color: 'bg-red-100',
+        iconBg: 'bg-red-200',
         textColor: 'text-red-500',
     },
     {
@@ -64,8 +64,8 @@ const records = [
         key: MEDICAL_RECORDS.VACCINES,
         type: 'Vacinas',
         icon: <FaSyringe />,
-        color: 'bg-green-50',
-        iconBg: 'bg-green-100',
+        color: 'bg-green-100',
+        iconBg: 'bg-green-200',
         textColor: 'text-green-500',
     },
     {
@@ -73,8 +73,8 @@ const records = [
         key: MEDICAL_RECORDS.PHYSICAL_ACTIVITIES,
         type: 'Atividades Físicas',
         icon: <FaRunning />,
-        color: 'bg-yellow-50',
-        iconBg: 'bg-yellow-100',
+        color: 'bg-yellow-100',
+        iconBg: 'bg-yellow-200',
         textColor: 'text-yellow-500',
     },
     {
@@ -82,8 +82,8 @@ const records = [
         key: MEDICAL_RECORDS.ALLERGIES,
         type: 'Alergias',
         icon: <FaAllergies />,
-        color: 'bg-orange-50',
-        iconBg: 'bg-orange-100',
+        color: 'bg-orange-100',
+        iconBg: 'bg-orange-200',
         textColor: 'text-orange-500',
     },
     {
@@ -91,8 +91,8 @@ const records = [
         key: MEDICAL_RECORDS.DENTAL_PROCEDURES,
         type: 'Procedimentos Dentários',
         icon: <FaTooth />,
-        color: 'bg-teal-50',
-        iconBg: 'bg-teal-100',
+        color: 'bg-teal-100',
+        iconBg: 'bg-teal-200',
         textColor: 'text-teal-500',
     },
     {
@@ -100,8 +100,8 @@ const records = [
         key: MEDICAL_RECORDS.EXAMS,
         type: 'Exames',
         icon: <RiTestTubeFill />,
-        color: 'bg-cyan-50',
-        iconBg: 'bg-cyan-100',
+        color: 'bg-cyan-100',
+        iconBg: 'bg-cyan-200',
         textColor: 'text-cyan-500',
     },
     {
@@ -109,8 +109,8 @@ const records = [
         key: MEDICAL_RECORDS.HOSPITALIZATIONS,
         type: 'Hospitalizações',
         icon: <BsHospital />,
-        color: 'bg-indigo-50',
-        iconBg: 'bg-indigo-100',
+        color: 'bg-indigo-100',
+        iconBg: 'bg-indigo-200',
         textColor: 'text-indigo-500',
     },
     {
@@ -118,8 +118,8 @@ const records = [
         key: MEDICAL_RECORDS.INTERNMENTS,
         type: 'Internações',
         icon: <BsHospital />,
-        color: 'bg-lime-50',
-        iconBg: 'bg-lime-100',
+        color: 'bg-lime-100',
+        iconBg: 'bg-lime-200',
         textColor: 'text-lime-500',
     },
     {
@@ -127,8 +127,8 @@ const records = [
         key: MEDICAL_RECORDS.INJURIES,
         type: 'Lesões',
         icon: <FaBandAid />,
-        color: 'bg-red-50',
-        iconBg: 'bg-red-100',
+        color: 'bg-red-100',
+        iconBg: 'bg-red-200',
         textColor: 'text-red-500',
     },
     {
@@ -136,8 +136,8 @@ const records = [
         key: MEDICAL_RECORDS.NUTRITIONS,
         type: 'Nutrição',
         icon: <FaAppleAlt />,
-        color: 'bg-amber-50',
-        iconBg: 'bg-amber-100',
+        color: 'bg-amber-100',
+        iconBg: 'bg-amber-200',
         textColor: 'text-amber-500',
     },
 ]
@@ -162,19 +162,33 @@ const SuSPet = () => {
             onChange={setSelectedIndex}
         >
             <TabList as="aside">
-                <Tab className="text-base font-semibold text-center text-gray-700 data-[selected]:hidden">
-                    <Fade>
-                        <span className="flex items-center justify-center gap-2 p-2 m-2 text-sm font-semibold text-center text-gray-700 h-fit ">
-                            <BsArrowLeftCircle /> Voltar
-                        </span>
-                    </Fade>
-                </Tab>
-
-                {records.map((record) => (
-                    <Tab key={record.id} className="hidden">
-                        {record.type}
+                <ul className="flex flex-col">
+                    <Tab
+                        as="li"
+                        aria-label="Voltar à tela anterior"
+                        className="text-base cursor-pointer font-semibold text-center text-gray-700 data-[selected]:hidden"
+                    >
+                        <Fade>
+                            <span className="flex items-center justify-center gap-2 p-2 m-2 text-sm font-semibold text-center text-gray-700 h-fit w-fit ">
+                                <BsArrowLeftCircle /> Voltar
+                            </span>
+                        </Fade>
                     </Tab>
-                ))}
+
+                    {records.map((record, index) => (
+                        <Tab
+                            as="li"
+                            key={record.id}
+                            className="hidden"
+                            aria-controls={`panel-${record.id}`}
+                            aria-selected={
+                                selectedIndex === index ? 'true' : 'false'
+                            }
+                        >
+                            {record.type}
+                        </Tab>
+                    ))}
+                </ul>
             </TabList>
             <TabPanels as="section" className="relative z-0">
                 <WarningNoHaveSelectPet
@@ -188,6 +202,7 @@ const SuSPet = () => {
                     {records.map((record, index) => (
                         <Fade key={record.id} delay={index * 25}>
                             <li>
+                                <span className="sr-only">{record.type}</span>
                                 <CardButton
                                     i18nIsDynamicList
                                     disabled={!pet?.id}
@@ -200,7 +215,12 @@ const SuSPet = () => {
                     ))}
                 </TabPanel>
                 {records.map((record) => (
-                    <TabPanel key={record.type}>
+                    <TabPanel
+                        key={record.type}
+                        aria-live="polite"
+                        tabIndex={0}
+                        aria-labelledby={`tab-${record.id}`}
+                    >
                         <Fade>
                             <MedicalRecord
                                 id_pet={pet?.id as string}
