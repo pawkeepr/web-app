@@ -7,9 +7,9 @@ import type { Pet } from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor
 
 export type MapCardFeedPetsProps = {
     pets?: Pet[]
-    isLoading: boolean
+    isLoading?: boolean
     onClick?: (pet: Pet) => void
-    isPending: boolean
+    isPending?: boolean
     selected?: Pet | null
 }
 

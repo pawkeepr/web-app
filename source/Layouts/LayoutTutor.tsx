@@ -2,7 +2,6 @@
 
 import PropTypes from 'prop-types'
 import type React from 'react'
-import image from '../../styles/assets/images/landing/bg-pattern.png'
 
 //import Components
 import Header from './Header'
@@ -50,27 +49,21 @@ const LayoutTutor = ({ children }: LayoutProps) => {
     }, [])
 
     return (
-        <main id="relative" className="relative flex flex-col flex-1 h-screen ">
+        <main
+            id="relative"
+            className="relative flex flex-col flex-1 min-h-screen bg-white"
+        >
             <Header />
+
             <div className="block h-4 web:hidden" />
             {/* <Sidebar layoutType={layoutType} /> */}
             <Drawer mode="TUTOR" />
-            <div
-                className={cn(
-                    'px-1  pt-2 ',
-                    'z-[1]',
-                    // 'bg-cover bg-no-repeat bg-fixed',
-                )}
-                style={{
-                    backgroundImage: `url(${image})`,
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                }}
-            >
+            <div className={cn('px-1  pt-2', 'z-[1]', 'mobile:mt-4 mobile:!pb-36')}>
                 {isChildrenVisible && (
                     <div className="absolute top-0 left-0 z-[10] w-full h-screen bg-black opacity-50" />
                 )}
                 <ModalSearchUberVet>{() => <div />}</ModalSearchUberVet>
+
                 <Suspense fallback={<LoadingPage />}>{children}</Suspense>
             </div>
         </main>

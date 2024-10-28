@@ -41,9 +41,9 @@ const BodyEvolutionFormik = ({
             }
             onSubmit={handleSubmit}
         >
-            {({ values, handleSubmit, isValid }) => (
+            {({ values, handleSubmit }) => (
                 <Form
-                    className="flex flex-col items-center justify-center flex-1 w-full gap-1"
+                    className="flex flex-col items-center justify-center flex-1 w-full gap-1 "
                     onSubmit={handleSubmit}
                 >
                     <div className="z-10 flex">
@@ -165,17 +165,19 @@ export const BodyEvolutionFormModal = ({
                 </button>
             )}
             <Modal onClose={() => closeModal()} open={open}>
-                <div className="w-full">
-                    <h6 className="mb-4 font-semibold text-center uppercase">
-                        {title}
-                    </h6>
-                </div>
+                <section className="flex flex-col items-center justify-center flex-1">
+                    <div className="w-full">
+                        <h6 className="mb-4 font-semibold text-center uppercase">
+                            {title}
+                        </h6>
+                    </div>
 
-                <BodyEvolutionFormik
-                    handleSubmit={handleSubmit}
-                    item={item}
-                    handleClose={handleClose}
-                />
+                    <BodyEvolutionFormik
+                        handleSubmit={handleSubmit}
+                        item={item}
+                        handleClose={handleClose}
+                    />
+                </section>
             </Modal>
         </>
     )

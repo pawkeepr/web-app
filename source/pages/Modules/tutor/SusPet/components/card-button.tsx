@@ -24,14 +24,15 @@ export const CardButton = ({
             type="button"
             disabled={disabled}
             onClick={() => onChangeSelectedIndex(record.id)}
-            className={`${record.color} flex flex-col items-center px-4 py-8 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200 ease-in-out grow-0  w-[160px] `}
+            className={`${record.color}  flex flex-col items-center px-2 py-[clamp(0.5rem,1rem,2rem)] bg-opacity-0 
+            shadow-none rounded-lg hover:bg-opacity-100 transition-shadow duration-200 ease-in-out flex-grow`}
         >
-            <div className={`${record.iconBg} p-4 rounded-full mb-2`}>
+            <div className={`${record.iconBg} p-4 rounded-full`}>
                 {React.cloneElement(record.icon, {
-                    className: `text-4xl ${record.textColor}`,
+                    className: `text-3xl ${record.textColor}`,
                 })}
             </div>
-            <span className="flex items-center justify-center h-16 text-base font-semibold text-center text-gray-700 ">
+            <span className="flex items-center justify-center h-12 text-xs font-bold text-center text-gray-600 ">
                 {record.type}
             </span>
         </button>

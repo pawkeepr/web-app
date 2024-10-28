@@ -32,7 +32,10 @@ const ItemsList = ({
             {categories.map((item) => (
                 <TabPanel
                     key={item.id}
-                    className={twMerge('w-full p-0', classNames.panel)}
+                    className={twMerge(
+                        'w-full p-0 mobile:bg-opacity-100 ',
+                        classNames.panel,
+                    )}
                 >
                     <Fade>{item.tab}</Fade>
                 </TabPanel>

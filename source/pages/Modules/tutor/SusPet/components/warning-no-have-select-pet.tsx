@@ -1,8 +1,12 @@
 import { Fade } from 'react-awesome-reveal'
 import withControl from '~/Components/helpers/with-control'
+import BadgesCardPets from '~/Components/molecules/map-card-feed-pets/badges-card-feed-pets'
 import Loader from '~/Components/organism/loader'
+import { useSelectedPet } from '~/hooks/use-selected-pet'
 
 const WarningNoHaveSelectPet = ({ isPending = false }) => {
+    const { onChangeSelectedPet, pets, selected } = useSelectedPet()
+
     return (
         <div
             aria-live="polite"
@@ -16,6 +20,11 @@ const WarningNoHaveSelectPet = ({ isPending = false }) => {
                     </legend>
                     {isPending && <Loader width={32} height={32} type="Circles" />}
                 </h6>
+                <BadgesCardPets
+                    pets={pets}
+                    onClick={onChangeSelectedPet}
+                    selected={selected}
+                />
             </Fade>
         </div>
     )

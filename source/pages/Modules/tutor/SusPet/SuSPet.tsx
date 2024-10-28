@@ -14,6 +14,7 @@ import {
     FaTooth,
     FaWeight,
 } from 'react-icons/fa'
+import { MdHealthAndSafety } from 'react-icons/md'
 import { RiTestTubeFill } from 'react-icons/ri'
 import { useSelectedPet } from '~/hooks/use-selected-pet'
 import { useGetMedicalRecordsByPet } from '~/store/hooks/medical-records'
@@ -157,10 +158,20 @@ const SuSPet = () => {
 
     return (
         <TabGroup
-            className="mb-4 bg-white rounded-lg shadow-lg"
+            className="mobile:rounded-none mobile:bg-opacity-0"
             selectedIndex={selectedIndex}
             onChange={setSelectedIndex}
         >
+            <p className="px-4 pt-2 font-sans text-sm font-semibold text-gray-500 ">
+                Olá,{' '}
+                <b className="text-secondary-500">
+                    {pet?.pet_information?.name_pet}
+                </b>
+            </p>
+            <h1 className="flex items-center gap-2 px-4 mt-2 font-sans text-base font-bold text-gray-500">
+                <MdHealthAndSafety className="w-8 h-8 text-red-400" />
+                Sua Saúde
+            </h1>
             <TabList as="aside">
                 <ul className="flex flex-col">
                     <Tab
@@ -190,29 +201,36 @@ const SuSPet = () => {
                     ))}
                 </ul>
             </TabList>
-            <TabPanels as="section" className="relative z-0">
+            <TabPanels
+                as="section"
+                className="relative z-0 flex flex-wrap items-center justify-start "
+            >
                 <WarningNoHaveSelectPet
                     isPending={isPending && !!pet?.id}
                     condition={!data?.id}
                 />
                 <TabPanel
                     as="ul"
-                    className="flex flex-wrap items-center justify-start gap-4 px-4 pt-4 pb-[120px] z-0 "
+                    className="z-0 flex items-center justify-center flex-1 px-2 "
                 >
-                    {records.map((record, index) => (
-                        <Fade key={record.id} delay={index * 25}>
-                            <li>
-                                <span className="sr-only">{record.type}</span>
-                                <CardButton
-                                    i18nIsDynamicList
-                                    disabled={!pet?.id}
-                                    record={record}
-                                    selectedIndex={selectedIndex}
-                                    onChangeSelectedIndex={onChangeSelectedIndex}
-                                />
-                            </li>
-                        </Fade>
-                    ))}
+                    <div className="grid h-full grid-cols-3 web:gap-4 mobile:gap-2 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 ">
+                        {records.map((record, index) => (
+                            <Fade key={record.id} delay={index * 25}>
+                                <li className="flex flex-grow w-full p-1">
+                                    <span className="sr-only">{record.type}</span>
+                                    <CardButton
+                                        i18nIsDynamicList
+                                        disabled={!pet?.id}
+                                        record={record}
+                                        selectedIndex={selectedIndex}
+                                        onChangeSelectedIndex={
+                                            onChangeSelectedIndex
+                                        }
+                                    />
+                                </li>
+                            </Fade>
+                        ))}
+                    </div>
                 </TabPanel>
                 {records.map((record) => (
                     <TabPanel
@@ -220,16 +238,10 @@ const SuSPet = () => {
                         aria-live="polite"
                         tabIndex={0}
                         aria-labelledby={`tab-${record.id}`}
+                        className="w-full"
                     >
                         <Fade>
-                            <MedicalRecord
-                                id_pet={pet?.id as string}
-                                document={
-                                    pet?.main_responsible_guardian
-                                        ?.cpf_cnpj as string
-                                }
-                                type={record.key}
-                            />
+                            <MedicalRecord type={record.key} />
                         </Fade>
                     </TabPanel>
                 ))}

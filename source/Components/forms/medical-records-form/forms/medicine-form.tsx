@@ -112,7 +112,7 @@ const MedicineForm = ({
 
 export default MedicineForm
 
-export const MedicineFormModal = ({
+export const MedicationsFormModal = ({
     item = {} as Medicine,
     handleSubmit,
     handleClose,

@@ -1,6 +1,5 @@
 import { Slide } from 'react-awesome-reveal'
-import { card } from '~/Components/organism/card'
-import CardFeedPets from '~/Components/organism/card-feed-pets'
+import CardFeedPets, { card } from '~/Components/organism/card-feed-pets'
 import type { MapCardFeedPetsProps } from '~/pages/Modules/tutor/PetsAndVets/components/organisms/PetsTab'
 import useProfile from '~/store/hooks/profile/use-profile'
 const MapCardFeedPets = ({
@@ -47,7 +46,7 @@ const MapCardFeedPets = ({
                             key={index}
                             className={card({
                                 className:
-                                    'px-2 my-2 py-2 flex-1 w-full h-36 bg-gradient-to-r from-white via-gray-200 to-gray-300 animate-pulse',
+                                    'w-full  bg-gradient-to-r from-white via-gray-200 to-gray-300 animate-pulse',
                             })}
                             style={{
                                 minWidth: '7rem ',
