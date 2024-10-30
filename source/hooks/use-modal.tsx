@@ -30,7 +30,7 @@ const NameKeys = {
     drawer: 'drawer',
     search: 'search',
 } as const
-type NameKeys = (typeof NameKeys)[keyof typeof NameKeys]
+export type NameKeys = (typeof NameKeys)[keyof typeof NameKeys]
 
 type UseModalProps = {
     name?: NameKeys

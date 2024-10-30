@@ -1,11 +1,12 @@
+import { useEffect, useRef } from 'react'
 import { tv } from 'tailwind-variants'
 import AvatarPet from '~/Components/molecules/avatar-pet'
+import useModal, { type NameKeys } from '~/hooks/use-modal'
 import type { Pet } from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
 import type { Species } from '~/types/speciesType'
 import { calcAge } from '~/utils/calc-age'
 import ModalBoxButtonsPet from '../box-buttons-pets/modal-box-buttons-pets'
 import { IconGender, iconGender } from '../card-scheduled'
-
 type CardFeedPetProps = {
     pet: Pet
     hasButtons?: boolean
@@ -29,11 +30,38 @@ export const card = tv({
 const CardFeedPet = ({ pet, onClick, selected }: CardFeedPetProps) => {
     const sex = pet?.sex as keyof typeof IconGender
     const Gender = IconGender[sex]
+    const { showModal } = useModal({
+        name: pet.id_pet as NameKeys,
+    })
+    const divRef = useRef(null)
+
+    useEffect(() => {
+        if (!window || !divRef.current) {
+            return
+        }
+        const Hammer = require('hammerjs')
+
+        const hammer = new Hammer(divRef.current)
+
+        hammer.add(new Hammer.Press({ time: 250 }))
+
+        hammer.on('press', () => {
+            showModal()
+        })
+
+        // Cleanup the Hammer instance on component unmount
+        return () => {
+            hammer.stop(false)
+            hammer.destroy()
+        }
+    }, [])
 
     return (
         <ModalBoxButtonsPet item={pet}>
             {({ showModal }) => (
                 <button
+                    ref={divRef}
+                    key={pet.id_pet}
                     onClick={() => {
                         if (onClick) {
                             onClick(pet)
@@ -50,7 +78,8 @@ const CardFeedPet = ({ pet, onClick, selected }: CardFeedPetProps) => {
                         src={pet.url_img as string}
                         classNames={{
                             img: `w-16 h-16 shadow-theme-3 rounded-full p-[2px] transition-all duration-100  ${
-                                selected ? 'border-2 border-secondary-500 ' : ''}`,
+                                selected ? 'border-2 border-secondary-500 ' : ''
+                            }`,
                         }}
                     />
                     <div className="flex flex-col items-center justify-center">
