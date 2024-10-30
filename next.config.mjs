@@ -121,6 +121,16 @@ const nextConfig = ((_phase) => {
                     destination: `${destination}/profile`,
                     permanent: true,
                 },
+                {
+                    source: `${destination}/privacy-policy`,
+                    destination: '/privacy-policy',
+                    permanent: true,
+                },
+                {
+                    source: `${destination}/service-terms`,
+                    destination: '/service-terms',
+                    permanent: true,
+                },
             ]
 
             if (process.env.MODE_PROFILE === 'external') {
