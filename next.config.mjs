@@ -1,8 +1,11 @@
-require('dotenv').config()
+import { config } from 'dotenv'
+config()
 
-const webpack = require('webpack')
+import webpack from 'webpack'
 
-const withPWA = require('next-pwa')({
+import nextPWA from 'next-pwa'
+
+const withPWA = nextPWA({
     dest: 'public',
     disable: process.env.NODE_ENV === 'development',
 })
@@ -14,6 +17,7 @@ const nextConfig = ((_phase) => {
     return {
         publicRuntimeConfig: {
             publicRoutes: [
+                'teams',
                 '/t/sign-in',
                 '/t/sign-up',
                 '/t/forget-password',
@@ -280,4 +284,4 @@ const nextConfig = ((_phase) => {
     }
 })(process.env.NODE_ENV)
 
-module.exports = withPWA(nextConfig)
+export default withPWA(nextConfig)
