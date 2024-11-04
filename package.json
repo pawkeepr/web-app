@@ -1,13 +1,13 @@
 {
     "name": "pawkeepr",
     "version": "0.14.1-beta",
+    "packageManager": "yarn@4.5.1",
     "private": true,
     "engines": {
         "node": ">=20",
         "npm": ">= 9",
         "yarn": ">= 1.22"
     },
-    "packageManager": "yarn@1.22.22",
     "scripts": {
         "prepare": "husky install",
         "commitlint": "commitlint --edit",
@@ -146,7 +146,6 @@
         "@types/react-redux": "^7.1.34",
         "@types/react-scrollspy": "^3.3.9",
         "@types/redux": "^3.6.31",
-        "@types/redux-saga": "^0.10.5",
         "@types/sinon": "^17.0.3",
         "@vitejs/plugin-react-swc": "^3.7.1",
         "@vitest/coverage-istanbul": "^2.1.2",
