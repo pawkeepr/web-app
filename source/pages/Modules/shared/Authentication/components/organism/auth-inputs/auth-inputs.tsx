@@ -2,7 +2,7 @@ import useAuth from '~/hooks/use-auth'
 import { useAppDispatch } from '~/store/hooks'
 import { onChangePassword, onChangeUsername } from '~/store/slices/auth/login/slice'
 
-import { useMemo, type ChangeEvent } from 'react'
+import { type ChangeEvent, useMemo } from 'react'
 import FieldControl from '~/Components/molecules/field-control'
 
 import { Form, Formik } from 'formik'
@@ -35,6 +35,7 @@ const Auth = ({ mode }: AuthProps) => {
     const { signIn, password, username, isAuthenticated, isLoading } = useAuth()
 
     const handleSubmit = () => {
+        console.log('chegou aqui')
         signIn({
             username,
             password,
@@ -75,7 +76,6 @@ const Auth = ({ mode }: AuthProps) => {
                         onChange={handleChangeUsername}
                         disabledError
                     />
-
                     <div className="flex flex-col items-end justify-center w-full mb-3 position-relative">
                         <FieldPassword
                             label="Senha"

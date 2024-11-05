@@ -1,7 +1,7 @@
 import type { ImageProps, StaticImageData } from 'next/image'
-import { useMemo, useRef, useState, type ChangeEvent } from 'react'
+import { type ChangeEvent, useMemo, useRef, useState } from 'react'
 
-import dummyImg from '~/assets/images/users/user-dummy-img.jpg'
+import dummyImg from '../../../../styles/assets/images/users/user-dummy-img.jpg'
 import MyImage from '../my-image/my-image'
 
 import cn from 'classnames'

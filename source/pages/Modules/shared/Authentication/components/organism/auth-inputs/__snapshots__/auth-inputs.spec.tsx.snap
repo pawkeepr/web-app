@@ -1,125 +1,129 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Auth Unit (Unit) > should render without errors 1`] = `
-<body>
-  <div>
-    <form
-      class=""
+exports[`auth-inputs (Unit) > deve corresponder ao snapshot 1`] = `
+<div>
+  <form
+    action="#"
+    class="w-full p-2"
+  >
+    <div
+      class="w-full p-1"
     >
-      <div
-        class="mb-3"
+      <label
+        class="text-xs font-semibold text-gray-500 gap-1 text-start items-center label justify-start pb-1 mb-0 h-fit"
+        data-testid="label-username"
+        for="username"
       >
-        <div>
-          <label
-            class="mb-0 list-group-item fs-12 form-label"
-            data-testid="label-username"
-            for="username"
-          >
-            Email:
-          </label>
-          <div
-            class="position-relative mb-2 input-group"
-          >
-            <input
-              class="
-                     
-                    "
-              data-testid="email-input"
-              id="username"
-              name="username"
-              pattern="[^\\\\s]+"
-              placeholder="Digite seu email"
-              type="text"
-              value=""
-            />
-          </div>
-          <label
-            class="font-bold list-group-item text-danger fs-11 text-center"
-            data-testid="err-username"
-            style="display: none;"
-          />
-        </div>
-      </div>
+        Email:
+      </label>
       <div
-        class="mb-3"
-      >
-        <div
-          class="position-relative auth-pass-inputgroup mb-3"
-        >
-          <div>
-            <label
-              class="mb-0 list-group-item fs-12 form-label"
-              data-testid="label-password"
-              for="password"
-            >
-              Senha
-            </label>
-            <div
-              class="position-relative mb-2 input-group"
-            >
-              <input
-                class="
-                      pe-5 password-input border-end-0
-                    "
-                data-testid="password-input"
-                id="password"
-                name="password"
-                placeholder="Digite sua senha"
-                type="password"
-                value=""
-              />
-              <span
-                class="bg-transparent border-start-0 cursor-pointer input-group-text"
-              >
-                <i
-                  class="ri-eye-fill cursor-pointer"
-                  data-testid="toggle-password"
-                />
-              </span>
-            </div>
-            <label
-              class="font-bold list-group-item text-danger fs-11 text-center"
-              data-testid="err-password"
-              style="display: none;"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        class="w-full form-check"
+        class="relative"
       >
         <input
-          class="form-check-input"
-          id="rememberMe"
-          name="rememberMe"
-          type="checkbox"
+          class="w-full px-4 py-2 duration-100 ease-in-out transition-shadow disabled:opacity-70 text-gray-600 disabled:bg-gray-200 text-base h-11 invalid:!shadow-outline-secondary-500 invalid:!text-secondary-500 invalid:border-secondary-500 invalid:focus:border-gray-300 border font-sans dark:bg-[#292e33] dark:text-gray-200 focus:ring-2 focus:ring-primary-500 bg-white focus:!border-none focus:!ring-2 focus:!ring-primary-500 outline-none rounded-md overflow-visible"
+          ctx="[object Object]"
+          data-testid="email-input"
+          id="username"
+          name="username"
+          pattern="[^\\s]+"
+          placeholder="Digite seu email"
+          type="text"
+          value=""
         />
-        <label
-          class="form-check-label"
-          for="rememberMe"
-          title=""
-        >
-          <p
-            class="mb-0 fs-12 text-muted fst-italic"
-          >
-            Lembrar-me
-          </p>
-        </label>
       </div>
+    </div>
+    <div
+      class="flex flex-col items-end justify-center w-full mb-3 position-relative"
+    >
       <div
-        class="mt-4"
+        class="w-full p-1"
       >
-        <button
-          class="w-full bg-primary-500 btn btn-primary"
-          color="primary"
-          data-testid="submit-button"
-          disabled=""
-          type="submit"
+        <label
+          class="text-xs font-semibold text-gray-500 gap-1 text-start items-center label justify-start pb-1 mb-0 h-fit"
+          data-testid="label-password"
+          for="password"
         >
-          Entrar
-        </button>
+          Senha:
+        </label>
+        <div
+          class="relative"
+        >
+          <div
+            class="absolute inset-y-0 flex items-center pl-1 text-sm text-gray-400 pointer-events-none left-1"
+          >
+            <svg
+              aria-hidden="true"
+              class="w-5 h-5 "
+              data-slot="icon"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <input
+            class="w-full px-4 py-2 duration-100 ease-in-out transition-shadow disabled:opacity-70 text-gray-600 disabled:bg-gray-200 text-base h-11 invalid:!shadow-outline-secondary-500 invalid:!text-secondary-500 invalid:border-secondary-500 invalid:focus:border-gray-300 border font-sans dark:bg-[#292e33] dark:text-gray-200 focus:ring-2 focus:ring-primary-500 bg-white focus:!border-none focus:!ring-2 focus:!ring-primary-500 outline-none rounded-md overflow-visible !pl-8 !pr-8"
+            ctx="[object Object]"
+            data-testid="password-input"
+            id="password"
+            name="password"
+            placeholder="Digite sua senha"
+            position="right"
+            type="password"
+            value=""
+          />
+          <div
+            class="absolute right-0 mr-2 transform -translate-y-1/2 top-1/2"
+          >
+            <button
+              aria-label="toggle password visibility"
+              class="flex items-center justify-center opacity-50"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="w-5 h-5"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
-    </form>
-  </div>
-</body>
+      <a
+        class="rounded-md text-center hover:brightness-90 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed bg-opacity-80 hover:bg-opacity-100 active:opacity-100 hover:transform hover:scale-[101%] disabled:hover:scale-100 text-opacity-100 text-secondary-500 dark:text-primary-600 hover:no-underline z-10 flex items-center content-end justify-end p-0 m-0 text-xs font-semibold h-fit w-fit"
+        href="/forgot-password"
+      >
+        Esqueceu a senha?
+      </a>
+    </div>
+    <button
+      class="mobile:p-4 mobile:w-full w-40 flex-grow px-2 h-11 py-1 text-sm font-semibold rounded-md text-center leading-1 hover:brightness-90 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed bg-opacity-80 hover:bg-opacity-100 active:opacity-100 hover:transform hover:scale-[101%] disabled:hover:scale-100 text-opacity-100 text-gray-50 flex justify-center items-center bg-primary-500 !w-full"
+      color="primary"
+      data-testid="submit-button"
+      disabled=""
+      id=":r0:"
+      type="submit"
+    >
+      Entrar
+    </button>
+  </form>
+</div>
 `;
