@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-const { i18n } = require('./next-i18next.config')
 const webpack = require('webpack')
 
 const withPWA = require('next-pwa')({
@@ -251,7 +250,10 @@ const nextConfig = ((_phase) => {
             USER_POOL_WEB_CLIENT_ID: process.env.USER_POOL_WEB_CLIENT_ID,
             FLAG_DEV: process.env.FLAG_DEV,
         },
-        i18n,
+        i18n: {
+            defaultLocale: 'pt-br',
+            locales: ['en', 'pt-br'],
+        },
         rewrites: async () => {
             const defaultRewrites = [
                 {
