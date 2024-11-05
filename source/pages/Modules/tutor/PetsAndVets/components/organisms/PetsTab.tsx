@@ -1,19 +1,15 @@
-import { Tab } from '@headlessui/react'
+import { TabGroup } from '@headlessui/react'
 import { useMemo } from 'react'
 import ItemsList from '~/Components/organism/horizontal-list/items-list'
 import MenuList from '~/Components/organism/horizontal-list/menu-list'
 
-import MapCardFeedPets from '~/Components/molecules/map-card-feed-pets'
-import {
-    useListPetsFromTutor,
-    type Pet,
-} from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
+import type { Pet } from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
 
 export type MapCardFeedPetsProps = {
     pets?: Pet[]
-    isLoading: boolean
+    isLoading?: boolean
     onClick?: (pet: Pet) => void
-    isPending: boolean
+    isPending?: boolean
     selected?: Pet | null
 }
 
@@ -41,23 +37,16 @@ const Tabs = () => [
 ]
 
 const PetsTab = () => {
-    const { data: pets, isPending, isFetching } = useListPetsFromTutor()
     const categories = useMemo(() => Tabs(), [])
     return (
-        <Tab.Group
+        <TabGroup
             as="section"
             className="flex flex-1 flex-col w-full px-4 mobile:!px-2 mt-1"
         >
             <MenuList categories={categories} mobile={false} mode="simple" />
 
-            <MapCardFeedPets
-                pets={pets as Pet[]}
-                isPending={isPending}
-                isLoading={isFetching}
-            />
-
             <ItemsList categories={categories} />
-        </Tab.Group>
+        </TabGroup>
     )
 }
 

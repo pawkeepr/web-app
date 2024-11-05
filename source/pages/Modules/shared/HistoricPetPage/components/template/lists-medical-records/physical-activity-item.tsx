@@ -31,14 +31,14 @@ const PhysicalActivityItem = ({
 
     return (
         <>
-            <li className="rounded-lg shadow-theme-3 bg-orange-50">
+            <li className="rounded-lg shadow-theme-3 bg-yellow-50">
                 <button
                     type="button"
                     onClick={() => showModal()}
                     className="flex items-center w-full p-6"
                 >
-                    <div className="p-4 bg-orange-100 rounded-full">
-                        <FaRunning className="text-4xl text-orange-500" />
+                    <div className="p-4 bg-yellow-100 rounded-full">
+                        <FaRunning className="text-4xl text-yellow-500" />
                     </div>
                     <div className="ml-4 text-start">
                         <h2 className="text-lg font-bold text-gray-700">
@@ -65,8 +65,8 @@ const PhysicalActivityItem = ({
             </li>
             <Modal onClose={() => closeModal()} open={open} mobilePage={false}>
                 <div className="flex flex-col justify-between items-center w-full h-[90%] p-4">
-                    <div className="p-4 bg-orange-100 rounded-full">
-                        <FaRunning className="text-4xl text-orange-500" />
+                    <div className="p-4 bg-yellow-100 rounded-full">
+                        <FaRunning className="text-4xl text-yellow-500" />
                     </div>
                     <div className="w-full">
                         <h2 className="text-lg font-bold text-gray-700">

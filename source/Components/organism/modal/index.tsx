@@ -9,7 +9,8 @@ import useKeyboardNavigation from '~/hooks/use-keyboard-navigation'
 const modal = tv({
     base: `  
         relative
-        rounded-md
+        rounded-2xl min-w-[400px] min-h-[300px]
+        scroll-1 scrollbar !scrollbar-thumb-primary !scrollbar-track-neutral !scrollbar-rounded-full
     `,
     variants: {
         mobilePage: {
@@ -40,12 +41,6 @@ const Modal = ({ mobilePage = true, classNames, ...props }: ModalProps) => {
             classNames={{
                 ...classNames,
                 modal: cn(
-                    `
-                      rounded-2xl min-w-[400px] overflow-visible max-h-[90vh] bg-white
-                      mobile:!w-screen mobile:!h-screen mobile:!rounded-none mobile:!py-1 mobile:!m-0
-                      mobile:flex mobile:flex-1 scroll scroll-1
-                      scrollbar !scrollbar-thumb-primary !scrollbar-track-neutral !scrollbar-rounded-full
-                    `,
                     classNames?.modal,
                     modal({
                         mobilePage,

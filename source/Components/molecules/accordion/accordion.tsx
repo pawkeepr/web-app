@@ -1,4 +1,5 @@
 import { twMerge } from 'tailwind-merge'
+import withControl from '~/Components/helpers/with-control'
 
 type AccordionProps = {
     title: any
@@ -23,4 +24,4 @@ const Accordion = ({ children, title, classNames = {} }: AccordionProps) => {
     )
 }
 
-export default Accordion
+export default withControl(Accordion)

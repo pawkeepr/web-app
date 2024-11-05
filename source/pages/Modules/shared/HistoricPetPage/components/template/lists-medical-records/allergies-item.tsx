@@ -27,14 +27,14 @@ const AllergyItem = ({ item, document, id_pet }: AllergyItemProps) => {
 
     return (
         <>
-            <li className="rounded-lg shadow-theme-3 bg-purple-50">
+            <li className="rounded-lg shadow-theme-3 bg-orange-50">
                 <button
                     type="button"
                     onClick={() => showModal()}
                     className="flex items-center w-full p-6"
                 >
-                    <div className="p-4 bg-purple-100 rounded-full">
-                        <MdOutlineWarning className="text-4xl text-purple-500" />{' '}
+                    <div className="p-4 bg-orange-100 rounded-full">
+                        <MdOutlineWarning className="text-4xl text-orange-500" />{' '}
                         {/* Substituí o ícone */}
                     </div>
                     <div className="ml-4 text-start">
@@ -54,8 +54,8 @@ const AllergyItem = ({ item, document, id_pet }: AllergyItemProps) => {
             </li>
             <Modal onClose={() => closeModal()} open={open} mobilePage={false}>
                 <div className="flex flex-col justify-between items-center w-full h-[90%] p-4">
-                    <div className="p-4 bg-purple-100 rounded-full">
-                        <MdOutlineWarning className="text-4xl text-purple-500" />{' '}
+                    <div className="p-4 bg-orange-100 rounded-full">
+                        <MdOutlineWarning className="text-4xl text-orange-500" />{' '}
                         {/* Substituí o ícone */}
                     </div>
                     <div className="w-full">

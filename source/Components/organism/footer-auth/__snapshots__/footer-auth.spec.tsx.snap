@@ -3,27 +3,17 @@
 exports[`Test FooterAuth component > should render snap footer auth (Unit) 1`] = `
 <DocumentFragment>
   <footer
-    class="footer"
+    class="p-3 z-0"
   >
-    <div
-      class="container"
-    >
+    <div>
       <div
-        class="row"
+        class="text-center"
       >
-        <div
-          class="col-lg-12"
+        <p
+          class=""
         >
-          <div
-            class="text-center"
-          >
-            <p
-              class="mb-0"
-            >
-              © 2023 PawKeeprs. 
-            </p>
-          </div>
-        </div>
+          © 2023 PawKeeprs. 
+        </p>
       </div>
     </div>
   </footer>

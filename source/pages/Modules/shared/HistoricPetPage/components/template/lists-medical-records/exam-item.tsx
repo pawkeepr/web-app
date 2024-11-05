@@ -27,14 +27,14 @@ const ExamTestItem = ({ item, document, id_pet }: ExamTestItemProps) => {
 
     return (
         <>
-            <li className="rounded-lg shadow-theme-3 bg-gray-50">
+            <li className="rounded-lg shadow-theme-3 bg-cyan-50">
                 <button
                     type="button"
                     onClick={() => showModal()}
                     className="flex items-center w-full p-6"
                 >
-                    <div className="p-4 bg-gray-100 rounded-full">
-                        <FaVial className="text-4xl text-gray-500" />
+                    <div className="p-4 rounded-full bg-cyan-100">
+                        <FaVial className="text-4xl text-cyan-500" />
                     </div>
                     <div className="ml-4 text-start">
                         <h2 className="text-lg font-bold text-gray-700">

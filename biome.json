@@ -30,6 +30,12 @@
             "complexity": {
                 "recommended": true,
                 "noForEach": "warn"
+            },
+            "a11y": {
+                "recommended": true,
+                "useAltText": "error",
+                "useValidAnchor": "error",
+                "noRedundantRoles": "error"
             }
         },
         "ignore": [

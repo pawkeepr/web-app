@@ -3,7 +3,6 @@
 import ArrowUpIcon from '@heroicons/react/24/solid/ArrowUpIcon'
 import React, { useEffect } from 'react'
 import { FaWhatsapp } from 'react-icons/fa'
-import HeaderTitle from '~/Components/atoms/header-title'
 import NavbarLanding from '~/Components/molecules/nav-bar-landing'
 import Footer from '~/Layouts/Footer'
 
@@ -11,14 +10,12 @@ import Footer from '~/Layouts/Footer'
 
 type LandingLayoutProps = {
     children: React.ReactNode
-    title?: string
     navBar?: () => JSX.Element
 }
 
 const LandingLayout = ({
     children,
     navBar: NabBar = NavbarLanding,
-    title,
 }: LandingLayoutProps) => {
     useEffect(() => {
         window.onscroll = () => {
@@ -53,7 +50,6 @@ const LandingLayout = ({
 
     return (
         <React.Fragment>
-            <HeaderTitle title={title || ''} />
             <div className="layout-wrapper landing !bg-primary-500 min-h-screen">
                 <NabBar />
                 {children}
