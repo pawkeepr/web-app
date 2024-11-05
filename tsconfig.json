@@ -45,8 +45,8 @@
         "**/*.js",
         "**/*.jsx",
         ".next/types/**/*.ts",
-        "source/pages/Modules/shared/ProfilePetPage/components/molecules/address-tutor",
         "vite.config.mts",
+        "next.config.mjs",
     ],
     "exclude": [
         "node_modules"

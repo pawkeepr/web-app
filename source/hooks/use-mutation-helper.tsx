@@ -39,6 +39,7 @@ const useMutationHelper: UseMutation = ({
 
     return useMutation({
         ...options,
+        mutationKey: [email, ...keys],
         onError,
         onSuccess,
         onSettled: onSettledCallback,

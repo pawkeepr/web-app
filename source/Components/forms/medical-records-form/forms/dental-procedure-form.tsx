@@ -1,8 +1,11 @@
 import { Form, Formik } from 'formik'
+import { FaTooth } from 'react-icons/fa'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import ControlToggle3States from '~/Components/molecules/control-toggle-3-states'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import RadioGroup from '~/Components/molecules/radio-group'
+import Modal from '~/Components/organism/modal'
+import useModal from '~/hooks/use-modal'
 import type { DentalProcedure } from '~/types/medical-records'
 import type { OptionFormsProps } from '../medical-records-form'
 
@@ -106,3 +109,49 @@ const DentalProcedureForm = ({
 }
 
 export default DentalProcedureForm
+
+export const DentalProcedureFormModal = ({
+    item = {} as DentalProcedure,
+    handleSubmit,
+    handleClose,
+    children,
+}: Omit<OptionFormsProps<DentalProcedure>, 'pet'> & {
+    children?: (showModal: () => void) => void
+}) => {
+    const { closeModal, open, showModal } = useModal()
+    const title = 'Adicionar Registro'
+
+    return (
+        <>
+            {children?.(showModal) || (
+                <button
+                    onClick={showModal}
+                    type="button"
+                    className="flex items-center w-full p-6 rounded-lg shadow-theme-3 bg-teal-50"
+                >
+                    <div className="p-4 bg-teal-100 rounded-full">
+                        <FaTooth className="text-4xl text-teal-500" />
+                    </div>
+                    <div className="ml-4 text-start">
+                        <h2 className="text-lg font-bold text-gray-700">
+                            Adicionar Registro
+                        </h2>
+                    </div>
+                </button>
+            )}
+            <Modal onClose={() => closeModal()} open={open}>
+                <div className="w-full">
+                    <h6 className="mb-4 font-semibold text-center uppercase">
+                        {title}
+                    </h6>
+                </div>
+
+                <DentalProcedureForm
+                    handleSubmit={handleSubmit}
+                    item={item}
+                    handleClose={handleClose}
+                />
+            </Modal>
+        </>
+    )
+}

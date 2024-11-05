@@ -35,32 +35,33 @@ type UseHookMutationsHelpers = {
 }
 
 export const useCreateMedicalRecordsMutation = ({
-    name,
     cpf_cnpj,
     id_pet,
     onAxiosRequest,
     type_user,
-}: Required<UseHookMedicalRecords> & UseHookMutationsHelpers) => {
-    const keys = [name, cpf_cnpj, id_pet, type_user]
+}: Omit<Required<UseHookMedicalRecords>, 'name'> & UseHookMutationsHelpers) => {
+    const { data: profile } = useProfile()
+
+    const mutationKey = [NAME, profile?.id, id_pet, cpf_cnpj]
 
     return useMutationHelper({
-        mutationKey: keys,
+        mutationKey,
         mutationFn: async (data: MedicalRecordEntry) =>
             onAxiosRequest(data, cpf_cnpj, id_pet, type_user as any),
     })
 }
 
 export const useUpdateMedicalRecordsMutation = ({
-    name,
     cpf_cnpj,
     id_pet,
     onAxiosRequest,
     type_user,
-}: Required<UseHookMedicalRecords> & UseHookMutationsHelpers) => {
-    const keys = [name, cpf_cnpj, id_pet, type_user]
+}: Omit<Required<UseHookMedicalRecords>, 'name'> & UseHookMutationsHelpers) => {
+    const { data: profile } = useProfile()
+    const mutationKey = [NAME, profile?.id, id_pet, cpf_cnpj]
 
     return useMutationHelper({
-        mutationKey: keys,
+        mutationKey,
         mutationFn: async (data) =>
             onAxiosRequest(data, cpf_cnpj, id_pet, type_user as any),
     })
@@ -98,7 +99,6 @@ export const useHandleMedicalRecordsMutation = ({
     const createdMutation = useCreateMedicalRecordsMutation({
         cpf_cnpj,
         id_pet,
-        name,
         type_user,
         onAxiosRequest: insert,
     })
@@ -106,7 +106,6 @@ export const useHandleMedicalRecordsMutation = ({
     const updatedMutation = useUpdateMedicalRecordsMutation({
         cpf_cnpj,
         id_pet,
-        name,
         type_user,
         onAxiosRequest: update,
     })
@@ -124,9 +123,9 @@ export const useGetMedicalRecordsByPet = ({
     id_pet,
     cpf_cnpj,
 }: UseHookMedicalRecords) => {
-    const { data } = useProfile()
+    const { data: profile } = useProfile()
     return useAppQuery<PetMedicalRecords>(
-        [NAME, data?.id, id_pet, cpf_cnpj],
+        [NAME, profile?.id, id_pet, cpf_cnpj],
         getAllMedicalRecordsByPet.bind(null, cpf_cnpj, id_pet),
     )
 }
@@ -142,6 +141,7 @@ export const useDeleteMedicalRecords = ({
     }
 
     const [user, setUser] = useState<CurrentUserCognito | null>(null)
+    const { data: profile } = useProfile()
 
     useEffect(() => {
         getCurrentUser().then((res) => {
@@ -162,7 +162,7 @@ export const useDeleteMedicalRecords = ({
         ] || TYPE_USER[1]
 
     return useMutationHelper({
-        mutationKey: [NAME, id_pet, type_user],
+        mutationKey: [NAME, profile?.id, id_pet, cpf_cnpj],
         mutationFn: async () => del(id_object, cpf_cnpj, id_pet, type_user),
     })
 }
