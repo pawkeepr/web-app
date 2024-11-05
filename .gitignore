@@ -6,7 +6,6 @@
 .pnp.js
 .vscode
 .yarn
-.yarnrc.yml
 # testing
 /coverage
 .env
