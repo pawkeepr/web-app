@@ -1,62 +1,72 @@
 import withCompose from '~/Components/helpers/with-compose'
 import AvatarPet from '~/Components/molecules/avatar-pet'
-import Env from '~/env'
-import useModal from '~/hooks/use-modal'
+import useModal, { type NameKeys } from '~/hooks/use-modal'
 import { useTranslations } from '~/hooks/use-translations'
 import type { Pet } from '~/store/hooks/list-pets-by-tutor/use-list-pet-by-tutor'
 import type { Species } from '~/types/speciesType'
-import { calcAge } from '~/utils/calc-age'
-import { encodeBase64 } from '~/utils/encode-base-64'
 import type { ModalBoxButtonsProps } from '../box-buttons/modal-box-buttons'
 import Modal from '../modal'
 import BoxButtonsPets from './box-buttons-pets'
-
 const ModalBoxButtonsPet = ({ item: pet, children }: ModalBoxButtonsProps<Pet>) => {
-    const { closeModal, open, showModal } = useModal()
+    const { closeModal, open, showModal } = useModal({
+        name: pet.id_pet as NameKeys,
+    })
     const { t } = useTranslations('common')
-    const FLAG_DEV = Env().get('FLAG_DEV')
 
     return (
         <>
             {children?.({ showModal })}
             <Modal onClose={() => closeModal()} open={open} mobilePage={false}>
-                <div className="flex flex-col justify-between items-center w-full h-[90%] p-4">
-                    <AvatarPet
-                        classNames={{
-                            img: '!w-32 !h-32 shadow-theme-4',
-                        }}
-                        src={pet?.url_img as string}
-                        name_pet={pet?.name_pet}
-                        specie={pet.specie as Species}
-                    />
-                    <section className="grid w-full grid-cols-2 mt-4">
-                        <div className="col-span-1">
-                            <div className="mb-2 text-gray-500">
-                                <h3 className="font-bold">Pet:</h3>
-                                <p>{`${pet?.name_pet}, ${t(pet?.specie)}, ${t(
-                                    pet?.race,
-                                )}`}</p>
+                <div className="flex flex-col items-center justify-between p-6">
+                    <div className="relative flex flex-col justify-between w-[350px] h-[200px] p-5 bg-gradient-to-r from-primary-400 to-secondary-300 border-2 border-gray-200 shadow-theme-3 rounded-lg">
+                        <div className="flex items-center w-full ">
+                            <div className="flex-1">
+                                <AvatarPet
+                                    classNames={{
+                                        img: ' !h-20 !w-20 shadow-theme-4 rounded-full',
+                                    }}
+                                    src={pet.url_img}
+                                    name_pet={pet.name_pet}
+                                    specie={pet.specie as Species}
+                                />
                             </div>
-
-                            <div className="mb-2 text-gray-500">
-                                <h3 className="font-bold">Idade do Pet:</h3>
-                                <p>{calcAge(pet?.date_birth)} Anos</p>
+                            <div className="flex flex-col flex-[2] w-full tracking-widest text-gray-800 uppercase">
+                                <h3 className="text-lg font-semibold text-gray-900">
+                                    {pet.name_pet}
+                                </h3>
+                                <p className="text-xs text-gray-700">
+                                    {t(pet.specie)}
+                                </p>
+                                <p className="text-xs text-gray-700">
+                                    {t(pet.race)}
+                                </p>
+                                <p className="text-xs text-gray-700">
+                                    {' '}
+                                    {pet.date_birth &&
+                                        Intl.DateTimeFormat().format(
+                                            new Date(
+                                                pet.date_birth as unknown as Date,
+                                            ),
+                                        )}
+                                </p>
+                                <p className="text-xs text-gray-700">
+                                    {t(pet.sex)}
+                                </p>
                             </div>
-
-                            <div className="mb-2 text-gray-500">
-                                <h3 className="font-bold">Sexo do Pet:</h3>
-                                <p>{t(pet?.sex)}</p>
-                            </div>
-
-                            {FLAG_DEV && (
-                                <div className="mb-2 text-gray-500">
-                                    <h3 className="font-bold">Matricula:</h3>
-                                    <p>{encodeBase64(pet.id_pet)}</p>
-                                </div>
-                            )}
                         </div>
-                    </section>
 
+                        <div className="mt-4 text-base tracking-wider text-gray-600 text-start">
+                            <span className="font-semibold">
+                                1114 1111 1111 1114
+                            </span>
+                        </div>
+
+                        <img
+                            src="/logo-default.webp"
+                            alt="Logo"
+                            className="absolute w-32 h-16 bottom-1 right-2 opacity-20"
+                        />
+                    </div>
                     <div className="self-end w-full mt-4">
                         <BoxButtonsPets item={pet} />
                     </div>

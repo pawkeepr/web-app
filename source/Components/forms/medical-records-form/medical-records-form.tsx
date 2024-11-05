@@ -18,7 +18,7 @@ import VaccinesForm from './forms/vaccines-form'
 
 export type OptionFormsProps<T> = {
     item: T | null
-    pet: PetData | null
+    pet?: PetData | null
     handleSubmit: (
         data: MedicalRecordEntry,
         formikHelpers: FormikHelpers<T>,

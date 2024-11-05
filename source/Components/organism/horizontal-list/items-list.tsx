@@ -1,6 +1,7 @@
 'use client'
 
-import { Tab } from '@headlessui/react'
+import { TabPanel, TabPanels } from '@headlessui/react'
+import { Fade } from 'react-awesome-reveal'
 import { twMerge } from 'tailwind-merge'
 import type { TabItem } from './menu-list'
 
@@ -20,7 +21,7 @@ const ItemsList = ({
     classNames = {},
 }: HorizontalTabsProps) => {
     return (
-        <Tab.Panels
+        <TabPanels
             className=" 
                     relative w-full web:px-2 mobile:px-0 mt-2
                     mobile:items-center mobile:flex mobile:!h-fit mobile:flex-col mobile:w-full
@@ -29,14 +30,17 @@ const ItemsList = ({
         >
             {children}
             {categories.map((item) => (
-                <Tab.Panel
+                <TabPanel
                     key={item.id}
-                    className={twMerge('w-full p-0', classNames.panel)}
+                    className={twMerge(
+                        'w-full p-0 mobile:bg-opacity-100 ',
+                        classNames.panel,
+                    )}
                 >
-                    {item.tab}
-                </Tab.Panel>
+                    <Fade>{item.tab}</Fade>
+                </TabPanel>
             ))}
-        </Tab.Panels>
+        </TabPanels>
     )
 }
 

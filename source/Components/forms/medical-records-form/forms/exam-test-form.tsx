@@ -1,8 +1,11 @@
 import { Form, Formik } from 'formik'
+import { FaVial } from 'react-icons/fa'
 import { BtnCancel, BtnPrimary } from '~/Components/atoms/btn'
 import FieldControl from '~/Components/molecules/field-control'
 import FieldTextArea from '~/Components/molecules/field-text-area'
 import RadioGroup from '~/Components/molecules/radio-group'
+import Modal from '~/Components/organism/modal'
+import useModal from '~/hooks/use-modal'
 import type { ExamTest } from '~/types/medical-records'
 import type { OptionFormsProps } from '../medical-records-form'
 
@@ -115,3 +118,49 @@ const ExamTestForm = ({
 }
 
 export default ExamTestForm
+
+export const ExamTestFormModal = ({
+    item = {} as ExamTest,
+    handleSubmit,
+    handleClose,
+    children,
+}: Omit<OptionFormsProps<ExamTest>, 'pet'> & {
+    children?: (showModal: () => void) => void
+}) => {
+    const { closeModal, open, showModal } = useModal()
+    const title = 'Adicionar Registro'
+
+    return (
+        <>
+            {children?.(showModal) || (
+                <button
+                    onClick={showModal}
+                    type="button"
+                    className="flex items-center w-full p-6 rounded-lg shadow-theme-3 bg-cyan-50"
+                >
+                    <div className="p-4 rounded-full bg-cyan-100">
+                        <FaVial className="text-4xl text-cyan-500" />
+                    </div>
+                    <div className="ml-4 text-start">
+                        <h2 className="text-lg font-bold text-gray-700">
+                            Adicionar Registro
+                        </h2>
+                    </div>
+                </button>
+            )}
+            <Modal onClose={() => closeModal()} open={open}>
+                <div className="w-full">
+                    <h6 className="mb-4 font-semibold text-center uppercase">
+                        {title}
+                    </h6>
+                </div>
+
+                <ExamTestForm
+                    handleSubmit={handleSubmit}
+                    item={item}
+                    handleClose={handleClose}
+                />
+            </Modal>
+        </>
+    )
+}

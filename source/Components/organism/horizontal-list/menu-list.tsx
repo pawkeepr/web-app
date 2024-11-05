@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
-import { Tab } from '@headlessui/react'
+import { Tab, TabList } from '@headlessui/react'
 import { tv, type VariantProps } from 'tailwind-variants'
 
 export type TabItem = {
@@ -97,6 +97,7 @@ const tabList = tv({
         mode: 'default',
     },
 })
+
 export type TabListProps = VariantProps<typeof tabList>
 export type TabProps = VariantProps<typeof tab>
 
@@ -120,7 +121,7 @@ const MenuList = ({
     mode = 'default',
 }: MenuListProps) => {
     return (
-        <Tab.List
+        <TabList
             className={tabList({
                 hidden: categories.length === 1,
                 bottomNavigation,
@@ -148,11 +149,11 @@ const MenuList = ({
                         }
                     >
                         {category.icon && <span>{category.icon}</span>}
-                        {category.title}
+                        {category.title && <span>{category.title}</span>}
                     </Tab>
                 </div>
             ))}
-        </Tab.List>
+        </TabList>
     )
 }
 

@@ -31,14 +31,14 @@ const DentalProcedureItem = ({
 
     return (
         <>
-            <li className="rounded-lg shadow-theme-3 bg-orange-50">
+            <li className="rounded-lg shadow-theme-3 bg-teal-50">
                 <button
                     type="button"
                     onClick={() => showModal()}
                     className="flex items-center w-full p-6"
                 >
                     <div className="p-4 bg-orange-100 rounded-full">
-                        <FaTooth className="text-4xl text-orange-500" />
+                        <FaTooth className="text-4xl text-teal-500" />
                     </div>
                     <div className="ml-4 text-start">
                         <h2 className="text-lg font-bold text-gray-700">

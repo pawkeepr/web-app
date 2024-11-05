@@ -27,14 +27,14 @@ const BodyEvolutionItem = ({ item, document, id_pet }: BodyEvolutionItemProps) =
 
     return (
         <>
-            <li className="rounded-lg shadow-theme-3 bg-green-50">
+            <li className="rounded-lg shadow-theme-3 bg-blue-50">
                 <button
                     type="button"
                     onClick={() => showModal()}
                     className="flex items-center w-full p-6"
                 >
-                    <div className="p-4 bg-green-100 rounded-full">
-                        <FaWeight className="text-4xl text-green-500" />
+                    <div className="p-4 bg-blue-100 rounded-full">
+                        <FaWeight className="text-4xl text-blue-500" />
                     </div>
                     <div className="ml-4 text-start">
                         <h2 className="text-lg font-bold text-gray-700">
@@ -54,8 +54,8 @@ const BodyEvolutionItem = ({ item, document, id_pet }: BodyEvolutionItemProps) =
             </li>
             <Modal onClose={() => closeModal()} open={open} mobilePage={false}>
                 <div className="flex flex-col justify-between items-center w-full h-[90%] p-4">
-                    <div className="p-4 bg-green-100 rounded-full">
-                        <FaWeight className="text-4xl text-green-500" />
+                    <div className="p-4 bg-blue-100 rounded-full">
+                        <FaWeight className="text-4xl text-blue-500" />
                     </div>
                     <div className="w-full">
                         <h2 className="text-lg font-bold text-gray-700">
