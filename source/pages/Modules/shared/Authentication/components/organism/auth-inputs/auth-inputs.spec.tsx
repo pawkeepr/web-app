@@ -1,9 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { act } from 'react'
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi, beforeEach } from 'vitest'
 import * as useAuth from '~/hooks/use-auth'
 import ProviderClient from '~/store'
 import AuthInputs from './auth-inputs'
+import { LOADING } from '~/helpers/loading'
 
 const Wrapper = () => (
     <ProviderClient>
@@ -12,6 +13,18 @@ const Wrapper = () => (
 )
 
 describe('auth-inputs (Unit)', () => {
+    beforeEach(() => {
+        vi.spyOn(useAuth, 'default').mockReturnValue({
+            signIn: vi.fn(),
+            password: 'mockPassword',
+            username: 'mockUsername',
+            isAuthenticated: false,
+            isLoading: 1,
+            onToggleRememberMe: () => {},
+            rememberMe: false,
+            user: null,
+        })
+    })
     it('deve corresponder ao snapshot', () => {
         const { container } = render(<Wrapper />)
         expect(container).toMatchSnapshot()
@@ -22,9 +35,9 @@ describe('auth-inputs (Unit)', () => {
         vi.spyOn(useAuth, 'default').mockReturnValue({
             signIn: signInMock,
             password: 'mock@1password',
-            username: 'EMAIL@EXEMPLO.COM',
+            username: 'EMAIL@GMAIL.COM',
             isAuthenticated: false,
-            isLoading: 1,
+            isLoading: LOADING.IDLE,
             onToggleRememberMe: vi.fn(),
             rememberMe: false,
             user: null,
@@ -49,24 +62,25 @@ describe('auth-inputs (Unit)', () => {
         })
 
         expect(signInMock).toHaveBeenCalledWith({
-            username: 'email@exemplo.com',
+            username: 'email@gmail.com',
             password: 'mock@1password',
             mode: 'tutor',
         })
     })
 
-    it('deve renderizar o componente corretamente', () => {
-        vi.spyOn(useAuth, 'default').mockReturnValue({
-            signIn: vi.fn(),
-            password: 'mockPassword',
-            username: 'mockUsername',
-            isAuthenticated: false,
-            isLoading: 1,
-            onToggleRememberMe: () => {},
-            rememberMe: false,
-            user: null,
+    it('deve ter o atributo href para page /forgot-password', async () => {
+        render(<Wrapper />)
+
+        const forgotPasswordButton = screen.getByText('Esqueceu a senha?')
+
+        await act(async () => {
+            fireEvent.click(forgotPasswordButton)
         })
 
+        expect(forgotPasswordButton).toHaveAttribute('href', '/forgot-password')
+    })
+
+    it('deve renderizar o componente corretamente', () => {
         render(<Wrapper />)
 
         expect(screen.getByText('Esqueceu a senha?')).toBeInTheDocument()
