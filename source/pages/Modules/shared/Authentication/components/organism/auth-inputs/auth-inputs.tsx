@@ -35,9 +35,8 @@ const Auth = ({ mode }: AuthProps) => {
     const { signIn, password, username, isAuthenticated, isLoading } = useAuth()
 
     const handleSubmit = () => {
-        console.log('chegou aqui')
         signIn({
-            username,
+            username: username.toLowerCase(),
             password,
             mode,
         })
