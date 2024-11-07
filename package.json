@@ -164,6 +164,7 @@
         "storybook": "^8.4.1",
         "storybook-addon-performance": "^0.17.3",
         "tailwindcss": "^3.4.14",
+        "turbo": "^2.2.3",
         "typescript": "^5.6.3",
         "vite-plugin-checker": "^0.8.0",
         "vitest": "^2.1.4"
