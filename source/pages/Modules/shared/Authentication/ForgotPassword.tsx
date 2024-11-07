@@ -22,7 +22,7 @@ import LOADING from '~/constants/loading'
 import { useAppSelector } from '~/store/hooks'
 import validatePassword from '~/validations/password'
 import AuthLayout from '../../_layouts/auth/auth_layout'
-import type { CoverSignInProps } from './SignIn'
+import type { CoverSignInProps } from './SignIn/SignIn'
 import StepEmail from './components/organism/steps-forget-password/step-email'
 import StepPassword from './components/organism/steps-forget-password/step-password'
 const validationSchema = Yup.object({

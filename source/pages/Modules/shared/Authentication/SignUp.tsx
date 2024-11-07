@@ -26,7 +26,7 @@ import {
 import type { AccountSignUp } from '~/store/slices/auth/register/types'
 import { CodeProfile, ModeProfile } from '~/types/profile'
 import AuthLayout from '../../_layouts/auth/auth_layout'
-import type { CoverSignInProps } from './SignIn'
+import type { CoverSignInProps } from './SignIn/SignIn'
 
 const validationSchema = Yup.object({
     email: validateEmail,

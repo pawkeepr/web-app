@@ -5,8 +5,8 @@ import Loader from '~/Components/organism/loader'
 import useModeProfile from '~/hooks/use-mode'
 import { useAppSelector } from '~/store/hooks'
 import { ModeProfile } from '~/types/profile'
-import AuthLayout from '../../_layouts/auth/auth_layout'
-import AuthInputs from './components/organism/auth-inputs'
+import AuthLayout from '../../../_layouts/auth/auth_layout'
+import AuthInputs from '../components/organism/auth-inputs'
 
 export type CoverSignInProps = {
     bgImage: '/bg-sign-in.webp' | '/bg-three.jpg' | '/bg-sign-up.webp'
