@@ -5,8 +5,8 @@
 /.pnp
 .pnp.js
 .vscode
-.yarn
-.yarnrc.yml
+.yarn/install-state.gz
+
 # testing
 /coverage
 .env
