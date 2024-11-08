@@ -17,6 +17,9 @@ export default defineConfig({
             typescript: false,
         }),
     ],
+    optimizeDeps: {
+        include: ['@headlessui/react', 'tailwind-variants'],
+    },
     test: {
         setupFiles: ['./setupTests.ts', './setupMocks.ts'],
         globals: true,
