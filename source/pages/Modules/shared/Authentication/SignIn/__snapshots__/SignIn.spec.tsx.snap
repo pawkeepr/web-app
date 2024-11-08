@@ -52,7 +52,6 @@ exports[`SignIn (Unit) > deve corresponder ao snapshot 1`] = `
           <div
             class="mobile:!mt-0 mobile:p-0 web:p-1"
           >
-            <div />
             <div
               class="web:max-h-[236px] p-2"
             >

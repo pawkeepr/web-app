@@ -1,7 +1,6 @@
 import { LOADING } from '~/constants/loading'
 
 import { BtnLink } from '~/Components/atoms/btn'
-import Loader from '~/Components/organism/loader'
 import useModeProfile from '~/hooks/use-mode'
 import { useAppSelector } from '~/store/hooks'
 import { ModeProfile } from '~/types/profile'
@@ -33,36 +32,23 @@ const CoverSignIn = ({ bgImage }: CoverSignInProps) => {
             hasImage
             loading={loading}
         >
-            {!loading && (
-                <div className="flex flex-col items-center justify-center">
-                    <p className="text-sm font-bold text-secondary-500">
-                        Seja Bem-vindo(a)!
-                    </p>
-                </div>
-            )}
+            <div className="flex flex-col items-center justify-center">
+                <p className="text-sm font-bold text-secondary-500">
+                    Seja Bem-vindo(a)!
+                </p>
+            </div>
             <div className="mobile:!mt-0 mobile:p-0 web:p-1">
-                <Loader
-                    data-testid="loading-indicator"
-                    condition={loading}
-                    message="Aguarde um momento..."
-                    type="TailSpin"
-                />
-
-                {!loading && (
-                    <div className="web:max-h-[236px] p-2">
-                        <AuthInputs mode={mode} />
-                    </div>
-                )}
+                <div className="web:max-h-[236px] p-2">
+                    <AuthInputs mode={mode} />
+                </div>
             </div>
 
-            {!loading && (
-                <div className="flex flex-col items-center justify-center w-full mt-4 ">
-                    <p className="font-normal text-gray-400 ">
-                        Você não tem uma conta ?
-                    </p>
-                    <BtnLink message="Criar Conta" href={link} />
-                </div>
-            )}
+            <div className="flex flex-col items-center justify-center w-full mt-4 ">
+                <p className="font-normal text-gray-400 ">
+                    Você não tem uma conta ?
+                </p>
+                <BtnLink message="Criar Conta" href={link} />
+            </div>
         </AuthLayout>
     )
 }

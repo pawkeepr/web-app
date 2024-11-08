@@ -1,13 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { act } from 'react'
-import { describe, expect, it, vi, beforeEach } from 'vitest'
-import * as useAuth from '~/hooks/use-auth'
+import { describe, expect, it, vi } from 'vitest'
 import * as useModeProfile from '~/hooks/use-mode'
 import ProviderClient from '~/store'
-import SignIn from './SignIn'
-import { LOADING } from '~/helpers/loading'
 import { ModeProfile } from '~/types/profile'
-import * as selector from '~/store/hooks'
+import SignIn from './SignIn'
 
 const Wrapper = () => (
     <ProviderClient>
@@ -53,15 +50,17 @@ describe('SignIn (Unit)', () => {
         expect(createAccoutButton).toHaveAttribute('href', '/veterinary/sign-up')
     })
 
-    /*it('deve estar carregando durante a execucao do login', async () => {
-        vi.spyOn(selector, 'useAppSelector').mockReturnValue({
-            Login: { isLoading: LOADING.PENDING },
-        })
+    // it('deve estar carregando durante a execucao do login', async () => {
+    //     const spySelector = vi.spyOn(Selector, 'useAppSelector')
 
-        render(<Wrapper />)
+    //     spySelector.mockReturnValue({
+    //         isLoading: LOADING.PENDING,
+    //     })
 
-        const loaderComponent = screen.getByTestId('loading-indicator')
+    //     render(<Wrapper />)
 
-        expect(loaderComponent).toBeInTheDocument()
-    })*/
+    //     const loaderComponent = screen.getByTestId('loading-indicator')
+
+    //     expect(loaderComponent).toBeInTheDocument()
+    // })
 })
