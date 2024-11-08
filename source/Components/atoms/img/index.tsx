@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 
 type ImgProps = ComponentProps<'img'> & { alt: string }
 
