@@ -12,7 +12,7 @@ import validatePerson, {
 } from '~/validations/person'
 
 import { FaWhatsapp } from 'react-icons/fa'
-import SwitchControl from '~/Components/atoms/switch-control/switch'
+import SwitchControl from '~/Components/atoms/switch-control/switch-control'
 import FieldCrmv from '~/Components/molecules/field-crmv'
 import FieldDocument from '~/Components/molecules/field-document'
 import FieldPhone from '~/Components/molecules/field-phone'
