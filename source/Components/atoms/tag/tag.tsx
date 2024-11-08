@@ -68,16 +68,16 @@ const Tag: React.FC<TagProps> = ({
                         selected,
                     })}
                 >
-                    <XMarkIcon className="w-4 h-4" />
+                    <XMarkIcon className="w-4 h-4" data-testid="icon-x" />
                 </div>
             )}
-            <label
+            <span
                 className={tag.label({
                     selected,
                 })}
             >
                 {children}
-            </label>{' '}
+            </span>
         </button>
     )
 }
