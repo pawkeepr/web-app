@@ -51,18 +51,16 @@ const validationSchema = Yup.object({
 export type SchemaConfirmAccount = Yup.InferType<typeof validationSchema>
 
 const ConfirmAccount = () => {
-    const { email, password, isLoading } = useAppSelector(
-        (state) => state.ActivateAccount,
-    )
+    const { username, password, isLoading } = useAppSelector((state) => state.Login)
 
     const dispatch = useAppDispatch()
     const router = useRouter()
 
     useEffect(() => {
-        if (!email?.trim()) {
+        if (!username?.trim()) {
             router.push('/sign-in')
         }
-    }, [email])
+    }, [username])
 
     useEffect(() => {
         return () => {
@@ -71,7 +69,7 @@ const ConfirmAccount = () => {
     }, [])
 
     const handleResend = () => {
-        dispatch(resendConfirmationCode({ username: email }))
+        dispatch(resendConfirmationCode({ username: username }))
     }
 
     const handleSubmit = async (
@@ -97,7 +95,7 @@ const ConfirmAccount = () => {
         >
             <Formik
                 initialValues={{
-                    email: email,
+                    email: username,
                     password: password,
                     digit0: '',
                     digit1: '',

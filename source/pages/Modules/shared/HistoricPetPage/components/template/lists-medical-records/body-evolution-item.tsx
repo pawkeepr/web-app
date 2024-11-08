@@ -5,7 +5,7 @@ import ConfirmModal from '~/Components/modals/confirm-modal'
 import Modal from '~/Components/organism/modal'
 import useModal from '~/hooks/use-modal'
 import { useDeleteMedicalRecords } from '~/store/hooks/medical-records'
-import { MEDICAL_RECORDS, type BodyEvolution } from '~/types/medical-records'
+import { MEDICAL_RECORDS } from '~/types/medical-records'
 import type { ItemProps } from './types'
 
 type BodyEvolutionItemProps = ItemProps<BodyEvolution>
