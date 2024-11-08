@@ -11,6 +11,12 @@ const InputCode = ({
     id,
     ...rest
 }: InputCodeProps) => {
+    // Função que limita o valor a um único caractere
+    const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target
+        event.target.value = value.slice(-1) // mantém apenas o último caractere
+    }
+
     return (
         <div className="mb-3">
             <label htmlFor={id} className="visually-hidden">
@@ -19,6 +25,10 @@ const InputCode = ({
             <input
                 {...rest}
                 type="number"
+                onInput={handleInput}
+                maxLength={1}
+                max={9}
+                min={0}
                 className={input({
                     className: `${className} !px-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`,
                     required,
