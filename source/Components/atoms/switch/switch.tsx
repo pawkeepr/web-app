@@ -1,6 +1,6 @@
 import { Switch } from '@headlessui/react'
-import { useState, type ComponentProps } from 'react'
-import { tv, type VariantProps } from 'tailwind-variants'
+import { useState } from 'react'
+import { VariantProps, tv } from 'tailwind-variants'
 import { ModeInput } from '~/Components/molecules/field-control/field-control'
 
 const toggle = tv({
@@ -128,10 +128,11 @@ const SwitchToggle = ({
 
     return (
         <Switch
-            {...props as any}
+            {...(props as any)}
             disabled={mode === ModeInput.readonly || props.disabled}
             onClick={() => handleChange()}
             checked={enabled}
+            role="switch"
             className={toggle({
                 mode,
                 checked: enabled,
@@ -139,7 +140,6 @@ const SwitchToggle = ({
                 className,
                 size,
             })}
-            
         >
             {!enabled && (
                 <span className="absolute font-sans text-[10px] text-gray-500 capitalize right-2">
