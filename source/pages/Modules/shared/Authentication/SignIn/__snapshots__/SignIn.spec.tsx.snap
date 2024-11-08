@@ -1,0 +1,275 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SignIn (Unit) > deve corresponder ao snapshot 1`] = `
+<div>
+  <div
+    class="flex flex-col min-h-screen auth-bg-cover "
+  >
+    <div
+      class="bg-overlay"
+    />
+    <main
+      class="flex flex-1 content-center mobile:content-start items-center justify-center mobile:items-start mobile:justify-start mobile:overflow-hidden"
+    >
+      <section
+        class="grid mobile:flex-1 mobile:min-h-screen mobile:flex-col mobile:!grid-cols-1 mobile:!h-full mobile:!w-full z-10 shadow-2xl rounded-lg mobile:rounded-none mobile:shadow-none mobile:overflow-hidden mobile:bg-white w-[80%] grid-cols-2"
+      >
+        <picture
+          class="flex mobile:h-64  overflow-hidden !w-full h-full relative rounded-l-xl mobile:rounded-l-none"
+        >
+          <img
+            alt="Imagem"
+            class="flex flex-1 w-full h-full bg-no-repeat !bg-cover mobile:!bg-contain"
+            src="/bg-sign-in.webp"
+          />
+          <img
+            alt="Imagem"
+            class="absolute inset-0 hidden object-fill w-full h-full mobile:block"
+            src="/bg-sign-in.webp"
+          />
+        </picture>
+        <div
+          class="
+                                !overflow-hidden relative mobile:rounded-r-none 
+                                mobile:rounded-none grid grid-cols-1 mobile:!w-full 
+                                mobile:!min-h-full py-4 px-12 
+                                mobile:py-2 mobile:px-4 bg-white
+                             rounded-r-xl"
+        >
+          <div
+            class="flex h-40 mobile:h-36 w-full !bg-contain !bg-no-repeat !bg-center"
+            style="background: url(/logo-default.webp);"
+          />
+          <div
+            class="flex flex-col items-center justify-center"
+          >
+            <p
+              class="text-sm font-bold text-secondary-500"
+            >
+              Seja Bem-vindo(a)!
+            </p>
+          </div>
+          <div
+            class="mobile:!mt-0 mobile:p-0 web:p-1"
+          >
+            <div />
+            <div
+              class="web:max-h-[236px] p-2"
+            >
+              <form
+                action="#"
+                class="w-full p-2"
+              >
+                <div
+                  class="w-full p-1"
+                >
+                  <label
+                    class="text-xs font-semibold text-gray-500 gap-1 text-start items-center label justify-start pb-1 mb-0 h-fit"
+                    data-testid="label-username"
+                    for="username"
+                  >
+                    Email:
+                  </label>
+                  <div
+                    class="relative"
+                  >
+                    <input
+                      class="w-full px-4 py-2 duration-100 ease-in-out transition-shadow disabled:opacity-70 text-gray-600 disabled:bg-gray-200 text-base h-11 invalid:!shadow-outline-secondary-500 invalid:!text-secondary-500 invalid:border-secondary-500 invalid:focus:border-gray-300 border font-sans dark:bg-[#292e33] dark:text-gray-200 focus:ring-2 focus:ring-primary-500 bg-white focus:!border-none focus:!ring-2 focus:!ring-primary-500 outline-none rounded-md overflow-visible"
+                      ctx="[object Object]"
+                      data-testid="email-input"
+                      id="username"
+                      name="username"
+                      pattern="[^\\s]+"
+                      placeholder="Digite seu email"
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                </div>
+                <div
+                  class="flex flex-col items-end justify-center w-full mb-3 position-relative"
+                >
+                  <div
+                    class="w-full p-1"
+                  >
+                    <label
+                      class="text-xs font-semibold text-gray-500 gap-1 text-start items-center label justify-start pb-1 mb-0 h-fit"
+                      data-testid="label-password"
+                      for="password"
+                    >
+                      Senha:
+                    </label>
+                    <div
+                      class="relative"
+                    >
+                      <div
+                        class="absolute inset-y-0 flex items-center pl-1 text-sm text-gray-400 pointer-events-none left-1"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="w-5 h-5 "
+                          data-slot="icon"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </div>
+                      <input
+                        class="w-full px-4 py-2 duration-100 ease-in-out transition-shadow disabled:opacity-70 text-gray-600 disabled:bg-gray-200 text-base h-11 invalid:!shadow-outline-secondary-500 invalid:!text-secondary-500 invalid:border-secondary-500 invalid:focus:border-gray-300 border font-sans dark:bg-[#292e33] dark:text-gray-200 focus:ring-2 focus:ring-primary-500 bg-white focus:!border-none focus:!ring-2 focus:!ring-primary-500 outline-none rounded-md overflow-visible !pl-8 !pr-8"
+                        ctx="[object Object]"
+                        data-testid="password-input"
+                        id="password"
+                        name="password"
+                        placeholder="Digite sua senha"
+                        position="right"
+                        type="password"
+                        value=""
+                      />
+                      <div
+                        class="absolute right-0 mr-2 transform -translate-y-1/2 top-1/2"
+                      >
+                        <button
+                          aria-label="toggle password visibility"
+                          class="flex items-center justify-center opacity-50"
+                          type="button"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="w-5 h-5"
+                            data-slot="icon"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <a
+                    class="rounded-md text-center hover:brightness-90 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed bg-opacity-80 hover:bg-opacity-100 active:opacity-100 hover:transform hover:scale-[101%] disabled:hover:scale-100 text-opacity-100 text-secondary-500 dark:text-primary-600 hover:no-underline z-10 flex items-center content-end justify-end p-0 m-0 text-xs font-semibold h-fit w-fit"
+                    href="/forgot-password"
+                  >
+                    Esqueceu a senha?
+                  </a>
+                </div>
+                <button
+                  class="mobile:p-4 mobile:w-full w-40 flex-grow px-2 h-11 py-1 text-sm font-semibold rounded-md text-center leading-1 hover:brightness-90 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed bg-opacity-80 hover:bg-opacity-100 active:opacity-100 hover:transform hover:scale-[101%] disabled:hover:scale-100 text-opacity-100 text-gray-50 flex justify-center items-center bg-primary-500 !w-full"
+                  color="primary"
+                  data-testid="submit-button"
+                  disabled=""
+                  id=":r0:"
+                  type="submit"
+                >
+                  Entrar
+                </button>
+              </form>
+            </div>
+          </div>
+          <div
+            class="flex flex-col items-center justify-center w-full mt-4 "
+          >
+            <p
+              class="font-normal text-gray-400 "
+            >
+              Você não tem uma conta ?
+            </p>
+            <a
+              class="text-sm font-semibold rounded-md text-center leading-1 hover:brightness-90 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed bg-opacity-80 hover:bg-opacity-100 active:opacity-100 hover:transform hover:scale-[101%] disabled:hover:scale-100 text-opacity-100 text-secondary-500 dark:text-primary-600 hover:no-underline"
+              href="/tutor/sign-up"
+            >
+              Criar Conta
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer
+      class="w-full py-2 mobile:hidden z-50 bg-transparent"
+    >
+      <div
+        class="flex flex-row items-center justify-between px-6 mobile:flex-col"
+      >
+        <div>
+          <p
+            class="text-xs font-semibold text-gray-200"
+          >
+            2024
+             © PawKeepr Sistema Inteligente para Pets Inova Simples LTDA. 49.173.821/0001-19
+          </p>
+          <p
+            class="mt-2 text-xs font-semibold text-gray-200"
+          >
+            Rua Riachuelo, 1200, São José, 49015-160 Aracaju.
+          </p>
+        </div>
+        <div
+          class="flex flex-row h-full gap-4 "
+        >
+          <a
+            class="rounded-md text-center hover:brightness-90 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed bg-opacity-80 hover:bg-opacity-100 active:opacity-100 hover:transform hover:scale-[101%] disabled:hover:scale-100 text-opacity-100 dark:text-primary-600 hover:no-underline w-20 text-xs font-semibold text-gray-600 hover:text-secondary-500"
+            href="/tutor/privacy-policy"
+            target="_blank"
+          >
+            <span
+              class="flex justify-center items-center w-6 h-6"
+            >
+              Política de Privacidade
+            </span>
+          </a>
+          <a
+            class="rounded-md text-center hover:brightness-90 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed bg-opacity-80 hover:bg-opacity-100 active:opacity-100 hover:transform hover:scale-[101%] disabled:hover:scale-100 text-opacity-100 dark:text-primary-600 hover:no-underline w-20 text-xs font-semibold text-gray-600 hover:text-secondary-500"
+            href="/tutor/service-terms"
+            target="_blank"
+          >
+            <span
+              class="flex justify-center items-center w-6 h-6"
+            >
+              Termos de Uso
+            </span>
+          </a>
+        </div>
+        <div
+          class="flex items-center"
+        >
+          <a
+            aria-label="Instagram"
+            class="mx-2 text-gray-600 transition-colors duration-300 hover:text-primary-600"
+            href="https://www.instagram.com/pawkeepr.app/"
+            target="_blank"
+          >
+            <svg
+              fill="currentColor"
+              height="20"
+              stroke="currentColor"
+              stroke-width="0"
+              viewBox="0 0 448 512"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+`;

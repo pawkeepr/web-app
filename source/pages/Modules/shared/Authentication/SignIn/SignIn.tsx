@@ -15,7 +15,9 @@ export type CoverSignInProps = {
 const CoverSignIn = ({ bgImage }: CoverSignInProps) => {
     const { mode } = useModeProfile()
 
-    const { isLoading } = useAppSelector((state) => state.Login)
+    const { isLoading } = useAppSelector((state) => {
+        return state.Login
+    })
 
     const isPending = isLoading === LOADING.PENDING
     const isSuccessful = isLoading === LOADING.SUCCESS
@@ -40,6 +42,7 @@ const CoverSignIn = ({ bgImage }: CoverSignInProps) => {
             )}
             <div className="mobile:!mt-0 mobile:p-0 web:p-1">
                 <Loader
+                    data-testid="loading-indicator"
                     condition={loading}
                     message="Aguarde um momento..."
                     type="TailSpin"

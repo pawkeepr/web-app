@@ -46,7 +46,10 @@ const Loader = ({
     const Component = (ReactLoader as unknown as ReactLoaderGeneric)[type]
 
     return (
-        <div className="flex flex-col items-center justify-center w-full">
+        <div
+            data-testid="loading-indicator"
+            className="flex flex-col items-center justify-center w-full"
+        >
             <Component
                 color={color}
                 height={height || size}
