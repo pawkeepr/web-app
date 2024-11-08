@@ -19,7 +19,12 @@ type CheckboxProps = VariantProps<typeof checkbox> &
     InputHTMLAttributes<HTMLInputElement>
 
 const CheckboxIcon = ({ className, ...props }: CheckboxProps) => {
-    return <RiCheckboxCircleLine className={checkbox({ className, ...props })} />
+    return (
+        <RiCheckboxCircleLine
+            {...(props as any)}
+            className={checkbox({ className, ...props })}
+        />
+    )
 }
 
 export default CheckboxIcon
