@@ -8,17 +8,33 @@ export default defineWorkspace([
     {
         plugins: [react_swc()],
         extends: 'vite.config.mts',
+
         test: {
             name: 'unit',
             setupFiles: ['./setupTests.ts', './setupMocks.ts'],
             globals: true,
-            environment: 'jsdom', // <==
+            testNamePattern: 'Unit', // Não remover, pois é utilizado para identificar os testes unitários e
+            // mesmo que indique erro, ele faz parte da configuração do vitest
+            environment: 'jsdom',
             testTimeout: 5000000,
             exclude: ['**/node_modules/**', '**/.next/**', '**/.docker/**'],
         },
     },
-    // If you want to keep running your existing tests in Node.js, uncomment the next line.
-    // 'vite.config.mts',
+    {
+        plugins: [react_swc()],
+        extends: 'vite.config.mts',
+
+        test: {
+            name: 'integration',
+            setupFiles: ['./setupTests.ts', './setupMocks.ts'],
+            globals: true,
+            testNamePattern: 'Integration', // Não remover, pois é utilizado para identificar os testes unitários e
+            // mesmo que indique erro, ele faz parte da configuração do vitest
+            environment: 'jsdom',
+            testTimeout: 5000000,
+            exclude: ['**/node_modules/**', '**/.next/**', '**/.docker/**'],
+        },
+    },
     {
         plugins: [
             react(),
