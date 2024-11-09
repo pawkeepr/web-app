@@ -12,8 +12,8 @@
     "prepare": "husky install",
     "commitlint": "commitlint --edit",
     "commit": "git-cz",
-    "test": "cross-env NODE_ENV=test vitest --ui --watch --t Unit",
-    "coverage": "vitest run --coverage",
+    "test": "cross-env NODE_ENV=test vitest --project unit --ui --watch --t Unit",
+    "coverage": "vitest run --coverage --project unit",
     "dev:turbo": "next dev -p 3001",
     "dev": "turbo run dev:turbo",
     "prebuild": "node ./script/pre-build.js",
@@ -28,7 +28,8 @@
     "format": "npx @biomejs/biome format --write ./source",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test-storybook": "test-storybook"
+    "test-storybook": "vitest",
+    "test:browser": "vitest --workspace=vitest.workspace.ts"
   },
   "dependencies": {
     "@djpfs/react-vlibras": "^2.0.2",
@@ -123,6 +124,7 @@
     "@storybook/blocks": "^8.4.2",
     "@storybook/cli": "^8.4.2",
     "@storybook/experimental-addon-test": "^8.4.2",
+    "@storybook/experimental-nextjs-vite": "^8.4.2",
     "@storybook/nextjs": "^8.4.2",
     "@storybook/react": "^8.4.2",
     "@storybook/test": "^8.4.2",
@@ -149,7 +151,9 @@
     "@types/react-scrollspy": "^3.3.9",
     "@types/redux": "^3.6.31",
     "@types/sinon": "^17.0.3",
+    "@vitejs/plugin-react": "^4.3.3",
     "@vitejs/plugin-react-swc": "^3.7.1",
+    "@vitest/browser": "^2.1.4",
     "@vitest/coverage-istanbul": "^2.1.4",
     "@vitest/ui": "^2.1.4",
     "autoprefixer": "^10.4.20",
@@ -173,6 +177,7 @@
     "vite": "^5.4.10",
     "vite-plugin-checker": "^0.8.0",
     "vitest": "^2.1.4",
+    "vitest-browser-react": "^0.0.3",
     "webpack": "^5.96.1"
   },
   "resolutions": {

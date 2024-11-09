@@ -23,6 +23,7 @@ const config: StorybookConfig = {
         getAbsolutePath('storybook-addon-performance'),
         getAbsolutePath('@storybook/addon-viewport'),
         getAbsolutePath('@storybook/addon-storysource'),
+        getAbsolutePath('@storybook/experimental-addon-test'),
     ],
 
     framework: {
@@ -33,7 +34,7 @@ const config: StorybookConfig = {
     staticDirs: ['../public'],
 
     docs: {
-        autodocs: true
+        autodocs: true,
     },
 
     typescript: {
