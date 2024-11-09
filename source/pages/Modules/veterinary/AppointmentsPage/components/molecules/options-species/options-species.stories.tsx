@@ -4,8 +4,6 @@ import { fn } from '@storybook/test'
 import { Formik } from 'formik'
 import OptionsSpecies from './options-species'
 
-OptionsSpecies.prototype.displayName = 'OptionsSpecies'
-
 const meta: Meta<typeof OptionsSpecies> = {
     tags: ['autodocs'],
     component: OptionsSpecies,
