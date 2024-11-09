@@ -27,11 +27,17 @@ export default defineConfig({
         coverage: {
             provider: 'istanbul', // or 'c8'
             include: ['source/**/*.{ts,tsx}'],
+            exclude: ['source/**/*.stories.{ts,tsx}'],
             all: true,
         },
         reporters: ['html', 'default'],
         testTimeout: 5000000,
-        exclude: ['**/node_modules/**', '**/.next/**', '**/.docker/**'],
+        exclude: [
+            '**/node_modules/**',
+            '**/.next/**',
+            '**/.docker/**',
+            'source/**/*.stories.{ts,tsx}',
+        ],
     },
     resolve: {
         alias: {
