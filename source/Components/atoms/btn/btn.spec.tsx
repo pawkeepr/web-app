@@ -1,6 +1,18 @@
+import { composeStories } from '@storybook/react'
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 import { Btn } from './btn'
+
+import * as stories from './btn.stories'
+
+const { Primary } = composeStories(stories)
+
+describe('Test Btn component (Storybook)', () => {
+    it('should render the primary button', () => {
+        render(<Primary label="Click me" />)
+        expect(screen.getByText('Click me')).toBeInTheDocument()
+    })
+})
 
 describe('Test Btn component (Unit)', () => {
     it('should render the button with label', () => {
@@ -20,7 +32,7 @@ describe('Test Btn component (Unit)', () => {
 
     it('should call onClick handler when clicked', () => {
         const handleClick = vi.fn()
-        render(<Btn onClick={handleClick} data-testid="btn"/>)
+        render(<Btn onClick={handleClick} data-testid="btn" />)
         screen.getByTestId('btn').click()
         expect(handleClick).toHaveBeenCalled()
     })
