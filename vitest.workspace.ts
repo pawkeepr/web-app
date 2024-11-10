@@ -1,3 +1,4 @@
+// Por mais que indique erro no import, ele é necessário para a configuração do vitest e não deve ser removido ou alterado, contudo, ele existe e o lint acusa erro, mas não é um erro real
 import { storybookTest } from '@storybook/experimental-addon-test/vitest-plugin'
 import { storybookNextJsPlugin } from '@storybook/experimental-nextjs-vite/vite-plugin'
 import react from '@vitejs/plugin-react'
@@ -39,6 +40,10 @@ export default defineWorkspace([
         plugins: [
             react(),
             storybookTest({
+                tags: {
+                    include: ['test'],
+                    exclude: ['experimental'],
+                },
                 storybookScript: 'yarn storybook --ci',
             }),
             storybookNextJsPlugin(),
@@ -47,6 +52,7 @@ export default defineWorkspace([
         test: {
             name: 'storybook',
             include: ['source/**/*.stories.?(m)[jt]s?(x)'],
+
             browser: {
                 enabled: true,
                 name: 'firefox',

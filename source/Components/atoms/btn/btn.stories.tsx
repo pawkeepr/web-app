@@ -1,7 +1,8 @@
-import type { Meta, StoryFn } from '@storybook/react'
-import { fn } from '@storybook/test'
+import type { Meta, StoryObj } from '@storybook/react'
+import { expect, fn, within } from '@storybook/test'
+// import { expect, fn, within } from '@storybook/test'
 
-import { BtnCompose, type BtnProps } from './btn'
+import { BtnCompose } from './btn'
 
 const meta = {
     title: 'Components/Atoms/Button',
@@ -10,7 +11,14 @@ const meta = {
         layout: 'centered',
     },
     args: { onClick: fn() },
-    tags: ['autodocs'],
+    play: ({ canvasElement, args }) => {
+        const canvas = within(canvasElement)
+        const button = canvas.getByRole('button')
+        button.click()
+        expect(button).toHaveTextContent(args.label as string)
+        expect(args.onClick).toHaveBeenCalled()
+    },
+    tags: ['autodocs', 'stable'],
     argTypes: {
         color: {
             description: 'The color of the button',
@@ -32,37 +40,42 @@ const meta = {
         },
     },
 } satisfies Meta<typeof BtnCompose>
+
 export default meta
-const Template: StoryFn<BtnProps> = (args) => <BtnCompose {...args} />
+type Story = StoryObj<typeof BtnCompose>
 
-export const Primary = Template.bind({})
-Primary.args = {
-    color: 'primary',
-    label: 'Primary Button',
-    isLoading: false,
-    condition: true,
+export const Primary: Story = {
+    args: {
+        color: 'primary',
+        label: 'Primary Button',
+        isLoading: false,
+        condition: true,
+    },
 }
 
-export const Secondary = Template.bind({})
-Secondary.args = {
-    color: 'secondary',
-    label: 'Secondary Button',
-    isLoading: false,
-    condition: true,
+export const Secondary: Story = {
+    args: {
+        color: 'secondary',
+        label: 'Secondary Button',
+        isLoading: false,
+        condition: true,
+    },
 }
 
-export const Confirm = Template.bind({})
-Confirm.args = {
-    color: 'confirm',
-    label: 'Confirm Button',
-    isLoading: false,
-    condition: true,
+export const Confirm: Story = {
+    args: {
+        color: 'confirm',
+        label: 'Confirm Button',
+        isLoading: false,
+        condition: true,
+    },
 }
 
-export const Neutral = Template.bind({})
-Neutral.args = {
-    color: 'neutral',
-    label: 'Neutral Button',
-    isLoading: false,
-    condition: true,
+export const Neutral: Story = {
+    args: {
+        color: 'neutral',
+        label: 'Neutral Button',
+        isLoading: false,
+        condition: true,
+    },
 }
