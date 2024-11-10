@@ -9,6 +9,7 @@
     "yarn": ">= 1.22"
   },
   "scripts": {
+    "audit": "yarn npm audit",
     "prepare": "husky install",
     "commitlint": "commitlint --edit",
     "commit": "git-cz",

@@ -49,7 +49,7 @@ export default defineWorkspace([
             include: ['source/**/*.stories.?(m)[jt]s?(x)'],
             browser: {
                 enabled: true,
-                name: 'chromium',
+                name: 'firefox',
                 provider: 'playwright',
                 // https://playwright.dev
                 providerOptions: {},
