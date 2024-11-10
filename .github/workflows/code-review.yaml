@@ -1,7 +1,7 @@
 name: Code Review
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
 
 on:
@@ -11,49 +11,33 @@ on:
     branches: [develop]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 jobs:
-  # chat-gpt-code-review:
-  #   name: ChatGPT Code Review
-  #   runs-on: ubuntu-latest
-  #   environment: deploy
-  #   if: github.event_name == 'pull_request'
-  #   steps:
-  #     - uses: anc95/ChatGPT-CodeReview@v1.0.13
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-  #         # Optional
-  #         LANGUAGE: Portuguese # https://platform.openai.com/docs/api-reference/chat/create#chat/create-language
-  #         OPENAI_API_ENDPOINT: https://api.openai.com/v1
-  #         MODEL: gpt-4-turbo # https://platform.openai.com/docs/models
-  #         PROMPT: # example: Please check if there are any confusions or irregularities in the following code diff:
-  #         top_p: 1 # https://platform.openai.com/docs/api-reference/chat/create#chat/create-top_p
-  #         temperature: 1 # https://platform.openai.com/docs/api-reference/chat/create#chat/create-temperature
-  #         max_tokens: 3500
+#   chat-gpt-code-review:
+#     name: ChatGPT Code Review
+#     runs-on: ubuntu-latest
+#     environment: deploy
+#     if: github.event_name == 'pull_request'
+#     steps:
+#       - uses: anc95/ChatGPT-CodeReview@v1.0.13
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+#           # Optional
+#           LANGUAGE: Portuguese # https://platform.openai.com/docs/api-reference/chat/create#chat/create-language
+#           OPENAI_API_ENDPOINT: https://api.openai.com/v1
+#           MODEL: gpt-4-turbo # https://platform.openai.com/docs/models
+#           PROMPT: # example: Please check if there are any confusions or irregularities in the following code diff:
+#           top_p: 1 # https://platform.openai.com/docs/api-reference/chat/create#chat/create-top_p
+#           temperature: 1 # https://platform.openai.com/docs/api-reference/chat/create#chat/create-temperature
+#           max_tokens: 3500
 
-  #   scanning:
-  #       name: GitGuardian scan
-  #       runs-on: ubuntu-latest
-  #       steps:
-  #         - name: Checkout
-  #           uses: actions/checkout@v4
-  #           with:
-  #             fetch-depth: 0 # fetch all history so multiple commits can be scanned
-  #         - name: GitGuardian scan
-  #           uses: GitGuardian/ggshield-action@v1.27.0
-  #           with:
-  #             args: -v --ignore-known-secrets
-  #           env:
-  #             GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
-  #             GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
-  #             GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-  #             GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
   scanning:
     name: GitGuardian scan
     runs-on: ubuntu-latest
+    environment: deploy
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -68,33 +52,58 @@ jobs:
           GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
 
-  dependency-review:
-    runs-on: ubuntu-latest
+  vunerabilities_security:
+    name: Vulnerabilities Security
+    runs-on: ubuntu-20.04
     steps:
-      - name: "Checkout Repository"
+      - name: Checkout code
         uses: actions/checkout@v4
-      - name: "Dependency Review"
-        uses: actions/dependency-review-action@v4
+
+      - name: Run Trivy vulnerability scanner in repo mode
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: 'fs'
+          vuln-type: 'os,library'
+          ignore-unfixed: true
+          format: 'table'
+          output: trivy-results.txt
+        continue-on-error: true
+
+       # Passo adicional: Publicar resultado no PR
+      - name: "Comment Trivy Scan Result on PR"
+        if: github.event_name == 'pull_request'  # Publica apenas em PRs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+           echo "## Vulnerabilities Found by Trivy" > trivy_report.md
+           echo "<details><summary>Click to expand</summary>" >> trivy_report.md
+           echo "" >> trivy_report.md
+           echo '```' >> trivy_report.md
+           cat trivy-results.txt >> trivy_report.md
+           echo '```' >> trivy_report.md
+           echo "</details>" >> trivy_report.md
+           gh pr comment ${{ github.event.pull_request.number }} -F trivy_report.md
 
   yarn_lock_changes:
-    name: Yarn Dependency Changes
-    runs-on: ubuntu-latest
-    # Permission overwrite is required for Dependabot PRs, see "Common issues" section below.
-    permissions:
-      pull-requests: write
-      contents: read
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      name: Yarn Dependency Changes
+      runs-on: ubuntu-latest
+      environment: deploy
+      # Permission overwrite is required for Dependabot PRs, see "Common issues" section below.
+      permissions:
+        pull-requests: write
+        contents: read
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
 
-      - name: Yarn Lock Changes
+        - name: Yarn Lock Changes
         # Please use `main` as version before the stable release will be published as `v1`.
-        uses: Simek/yarn-lock-changes@main
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          # Optional inputs, can be deleted safely if you are happy with default values.
-          collapsibleThreshold: 25
-          failOnDowngrade: false
-          path: yarn.lock
-          updateComment: true
-          groupByType: false
+          uses: Simek/yarn-lock-changes@main
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            # Optional inputs, can be deleted safely if you are happy with default values.
+            collapsibleThreshold: 25
+            failOnDowngrade: false
+            path: yarn.lock
+            updateComment: true
+            groupByType: false
