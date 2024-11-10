@@ -21,7 +21,7 @@ export default defineConfig({
         coverage: {
             provider: 'istanbul', // or 'c8'
             include: ['source/**/*.{ts,tsx}'],
-            exclude: ['source/**/*.stories.{ts,tsx}'],
+            exclude: [],
             all: true,
         },
         reporters: ['html', 'default'],
