@@ -7,9 +7,13 @@ import * as stories from './btn.stories'
 
 const { Primary } = composeStories(stories)
 
-describe('Test Btn component (Storybook)', () => {
-    it('should render the primary button', () => {
-        render(<Primary label="Click me" />)
+describe('Test Stories Btn component (Unit)', () => {
+    it('should render the primary button', async () => {
+        await Primary.run({
+            args: {
+                label: 'Click me',
+            },
+        })
         expect(screen.getByText('Click me')).toBeInTheDocument()
     })
 })
