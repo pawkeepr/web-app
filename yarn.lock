@@ -6348,21 +6348,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-interactions@npm:^8.4.2":
-  version: 8.4.2
-  resolution: "@storybook/addon-interactions@npm:8.4.2"
-  dependencies:
-    "@storybook/global": "npm:^5.0.0"
-    "@storybook/instrumenter": "npm:8.4.2"
-    "@storybook/test": "npm:8.4.2"
-    polished: "npm:^4.2.2"
-    ts-dedent: "npm:^2.2.0"
-  peerDependencies:
-    storybook: ^8.4.2
-  checksum: 10c0/01e24d66cb925990d4313893e8c8fa1f7a1dac2aab80ae11d2093028fb607313905e6142d5ade8006f9bbe657e350693df32841dfe2a9c8df42f829de6e14826
-  languageName: node
-  linkType: hard
-
 "@storybook/addon-links@npm:^8.4.2":
   version: 8.4.2
   resolution: "@storybook/addon-links@npm:8.4.2"
@@ -16425,7 +16410,6 @@ __metadata:
     "@reduxjs/toolkit": "npm:^1.9.7"
     "@storybook/addon-a11y": "npm:^8.4.2"
     "@storybook/addon-essentials": "npm:^8.4.2"
-    "@storybook/addon-interactions": "npm:^8.4.2"
     "@storybook/addon-links": "npm:^8.4.2"
     "@storybook/addon-onboarding": "npm:^8.4.2"
     "@storybook/addon-storysource": "npm:^8.4.2"

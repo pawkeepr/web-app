@@ -30,7 +30,7 @@
     "format": "npx @biomejs/biome format --write ./source",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test-storybook": "vitest",
+    "test-storybook": "vitest --project storybook --ui --watch",
     "test:browser": "vitest --workspace=vitest.workspace.ts"
   },
   "dependencies": {
@@ -116,7 +116,6 @@
     "@faker-js/faker": "^9.2.0",
     "@storybook/addon-a11y": "^8.4.2",
     "@storybook/addon-essentials": "^8.4.2",
-    "@storybook/addon-interactions": "^8.4.2",
     "@storybook/addon-links": "^8.4.2",
     "@storybook/addon-onboarding": "^8.4.2",
     "@storybook/addon-storysource": "^8.4.2",
