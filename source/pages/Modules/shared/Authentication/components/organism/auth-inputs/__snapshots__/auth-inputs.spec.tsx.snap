@@ -125,5 +125,8 @@ exports[`auth-inputs (Unit) > deve corresponder ao snapshot 1`] = `
       Entrar
     </button>
   </form>
+  <div
+    class="tsqd-parent-container"
+  />
 </div>
 `;

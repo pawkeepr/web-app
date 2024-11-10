@@ -270,5 +270,8 @@ exports[`SignIn (Unit) > deve corresponder ao snapshot 1`] = `
       </div>
     </footer>
   </div>
+  <div
+    class="tsqd-parent-container"
+  />
 </div>
 `;

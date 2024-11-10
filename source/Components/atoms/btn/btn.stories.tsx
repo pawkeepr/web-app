@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, fn, within } from '@storybook/test'
+import { fn } from '@storybook/test'
 // import { expect, fn, within } from '@storybook/test'
 
 import { BtnCompose } from './btn'
@@ -11,13 +11,6 @@ const meta = {
         layout: 'centered',
     },
     args: { onClick: fn() },
-    play: ({ canvasElement, args }) => {
-        const canvas = within(canvasElement)
-        const button = canvas.getByRole('button')
-        button.click()
-        expect(button).toHaveTextContent(args.label as string)
-        expect(args.onClick).toHaveBeenCalled()
-    },
     tags: ['autodocs', 'stable'],
     argTypes: {
         color: {

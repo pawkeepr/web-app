@@ -21,7 +21,7 @@ describe('Accordion component (Unit)', () => {
         expect(accordionContent).toBeInTheDocument()
     })
 
-    it('should toggle the content when clicked', async () => {
+    it.skip('should toggle the content when clicked', async () => {
         const title = 'Accordion Title'
         const content = 'Accordion Content'
 

@@ -50,7 +50,7 @@ const CardTutor = ({
                 <p>{dateFormatted}</p>
             </div>
             <ItemCard label="Nome" value={pet?.name_pet || 'Não informado'} />
-            <ItemCard label="Pet" value={`${t(pet.specie)}, ${race}`} />
+            <ItemCard label="Pet" value={`${t(pet?.specie as string)}, ${race}`} />
             <ItemCard label="Aniversário" value={date_birth} />
             <ItemCard label="Tutor" value={name_tutor} />
             <ItemCard label="CPF" value={cpf_tutor} />
