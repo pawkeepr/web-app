@@ -4,24 +4,7 @@ import { describe, expect, it } from 'vitest'
 import Accordion from './accordion'
 
 describe('Accordion component (Unit)', () => {
-    it('should render the title and content', () => {
-        const title = 'Accordion Title'
-        const content = 'Accordion Content'
-
-        render(
-            <Accordion title={title}>
-                <div>{content}</div>
-            </Accordion>,
-        )
-
-        const accordionTitle = screen.getByText(title)
-        const accordionContent = screen.getByText(content)
-
-        expect(accordionTitle).toBeInTheDocument()
-        expect(accordionContent).toBeInTheDocument()
-    })
-
-    it.skip('should toggle the content when clicked', async () => {
+    it('should toggle the content when clicked', async () => {
         const title = 'Accordion Title'
         const content = 'Accordion Content'
 
@@ -30,19 +13,15 @@ describe('Accordion component (Unit)', () => {
                 <div>{content}</div>
             </Accordion>,
         )
-        
-        const accordion = screen.getByTestId('accordion')
+
         const accordionTitle = screen.getByText(title)
         const accordionContent = screen.getByText(content)
 
-        await userEvent.click(accordion)
+        expect(accordionTitle).toBeInTheDocument()
+        expect(accordionContent).not.toBeVisible()
 
-        
-        expect(accordion).toHaveClass('collapse-open')
-        
-        await userEvent.click(accordion)
+        await userEvent.click(accordionTitle)
 
-        expect(accordion).not.toHaveClass('collapse-open')
+        expect(accordionContent).toBeVisible()
     })
-
 })

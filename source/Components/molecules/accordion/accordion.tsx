@@ -1,8 +1,9 @@
+import type React from 'react'
 import { twMerge } from 'tailwind-merge'
 import withControl from '~/Components/helpers/with-control'
 
 type AccordionProps = {
-    title: any
+    title: React.ReactNode | string
     children: React.ReactNode
     classNames?: {
         title?: string
