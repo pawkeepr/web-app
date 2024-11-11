@@ -1,5 +1,4 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { fn } from "@storybook/test"
 import { MdPets } from "react-icons/md"
 import {
     BtnFloatingExpansible,
@@ -58,7 +57,7 @@ const childrenMock = [
     {
         title: "Title 1",
         icon: () => <MdPets />,
-        onClick: () => {},
+        onClick: () => { },
     },
     {
         title: "Title 2",
