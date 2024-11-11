@@ -17,6 +17,15 @@ const InputCode = ({
         event.target.value = value.slice(-1) // mantém apenas o último caractere
     }
 
+    const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+
+        // verifica se a tecla pressionada é um número
+        if (Number.isNaN(Number.parseInt(event.key))) {
+            return
+        }
+        moveToNext()
+    }
+
     return (
         <div className="mb-3">
             <label htmlFor={id} className="visually-hidden">
@@ -35,7 +44,7 @@ const InputCode = ({
                     center: true,
                 })}
                 id={id}
-                onKeyUp={() => moveToNext()}
+                onKeyUp={handleKeyUp}
             />
         </div>
     )

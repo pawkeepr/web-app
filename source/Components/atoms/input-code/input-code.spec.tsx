@@ -6,12 +6,26 @@ import InputCode from './input-code'
 describe('InputCode component (Unit)', () => {
     it('renders input field with correct props', () => {
         render(
-            <InputCode moveToNext={() => {}} id="code" data-testid="input-code" />,
+            <InputCode moveToNext={() => { }} id="code" data-testid="input-code" />,
         )
         const inputElement = screen.getByTestId('input-code')
         expect(inputElement).toBeInTheDocument()
         expect(inputElement).toHaveAttribute('type', 'number')
         expect(inputElement).toHaveAttribute('id', 'code')
+    })
+
+    it('no calls moveToNext function on key up if key is not a number', async () => {
+        const moveToNextMock = vi.fn()
+        render(
+            <InputCode
+                moveToNext={moveToNextMock}
+                id="code"
+                data-testid="input-code"
+            />,
+        )
+        const inputElement = screen.getByTestId('input-code')
+        await userEvent.type(inputElement, 'a')
+        expect(moveToNextMock).not.toHaveBeenCalled()
     })
 
     it('calls moveToNext function on key up', async () => {
@@ -30,7 +44,7 @@ describe('InputCode component (Unit)', () => {
 
     it('limits input to a single character', async () => {
         render(
-            <InputCode moveToNext={() => {}} id="code" data-testid="input-code" />,
+            <InputCode moveToNext={() => { }} id="code" data-testid="input-code" />,
         )
         const inputElement = screen.getByTestId('input-code') as HTMLInputElement
         await userEvent.type(inputElement, '123')
