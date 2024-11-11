@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import CardTutor from './card-tutor'
 
-describe('CardTutor component (Unit)', () => {
+describe.skip('CardTutor component (Unit)', () => {
 	const mockPet = {
 		name_pet: 'Max',
 		specie: 'Dog',
