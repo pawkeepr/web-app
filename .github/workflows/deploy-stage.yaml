@@ -208,7 +208,7 @@ jobs:
       - name: Install and Build Tutor
         if: github.event.action != 'closed' # You might want to skip the build if the PR has been closed
         run: |
-          yarn build:tutor
+          yarn build
 
   build-vet:
     name: Build
@@ -246,7 +246,7 @@ jobs:
       - name: Install and Build Veterinary
         if: github.event.action != 'closed' # You might want to skip the build if the PR has been closed
         run: |
-          yarn build:vet
+          yarn build
 
   build-external:
     name: Build
@@ -284,4 +284,4 @@ jobs:
       - name: Install and Build External
         if: github.event.action != 'closed' # You might want to skip the build if the PR has been closed
         run: |
-          yarn build:external
+          yarn build
