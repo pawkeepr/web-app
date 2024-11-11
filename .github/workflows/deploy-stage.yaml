@@ -1,0 +1,235 @@
+name: Continuos Integration Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      chosen:
+        required: true
+        type: string
+        description: "Choose the runner to run the workflow"
+
+  workflow_call:
+    inputs:
+      chosen:
+        required: true
+        type: string
+        description: "Choose the runner to run the workflow"
+        default: "develop"
+
+  pull_request:
+    branches: [develop]
+
+permissions: write-all
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  install:
+    timeout-minutes: 10 # Define o tempo limite para 10 minutos para este trabalho
+    name: Installing Packages
+    environment: deploy
+    runs-on: ${{ inputs.chosen || 'develop' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - uses: actions/cache@v2
+        name: Cached node_modules
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            **/.eslintcache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      # - name: Install Yarn
+      #   run: npm install -g yarn
+
+      - name: Install Dependencies
+        run: yarn install --no-immutable
+
+  # testing-e2e:
+  #     name: Run E2E Test Functional Japa Ruuner
+  #     runs-on: ${{ inputs.chosen || 'develop' }}
+  #     environment: deploy
+  #     needs: [install]
+  #     steps:
+  #         - name: Checkout
+  #           uses: actions/checkout@v3
+
+  #         - uses: actions/setup-node@v3
+  #           with:
+  #               node-version: 20
+
+  #         - uses: actions/cache@v2
+  #           name: Restore node_modules
+  #           id: yarn-cache
+  #           with:
+  #               path: |
+  #                   **/node_modules
+  #                   **/.eslintcache
+  #                   ${{ steps.yarn-cache-dir-path.outputs.dir }}
+  #               key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #               restore-keys: |
+  #                   ${{ runner.os }}-yarn-
+
+  #         - name: Install Dependencies
+  #           run: yarn install --immutable
+
+  #         - name: Create .env file
+  #           run: |
+  #            mkdir -p keys
+  #            echo "${{ secrets.ENV }}" > .env
+
+  #         - name: Run Test
+  #           run: yarn test:ci:e2e
+
+  #         - name: Get Values
+  #           id: get-values
+  #           shell: bash
+  #           run: |
+  #            COV=$(node -p 't=require(`./tests/coverage/coverage-summary.json`).total,Math.min(...`lines|statements|functions|branches`.split(`|`).map(k=>t[k].pct))')
+  #            echo "coverage=$COV" >> $GITHUB_OUTPUT
+
+  #         - name: Checkout gh-pages
+  #           uses: actions/checkout@v3
+  #           with:
+  #             ref: gh-pages
+
+  #         - name: Create Badges
+  #           shell: bash
+  #           run: |
+  #             npm i -g badgen-cli
+  #             export COV=${{ steps.get-values.outputs.coverage }}
+  #             COLOR=$(node -p '+process.env.COV >= 95 ? `green` : `orange`')
+  #             mkdir -p badges
+  #             badgen -j coverage -s $COV% -c $COLOR > badges/coverage-e2e.svg
+
+  #         - name: Deploy Badges
+  #           uses: stefanzweifel/git-auto-commit-action@v5.0.1
+  #           with:
+  #               commit_message: "Update badges [skip ci]"
+  #               branch: gh-pages
+  #               skip_fetch: true
+  #               skip_checkout: true
+
+  testing-coverage:
+    name: Run Coverage V8 Test
+    runs-on: ${{ inputs.chosen || 'develop' }}
+    environment: deploy
+    needs: [install]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - uses: actions/cache@v2
+        name: Restore node_modules
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            **/.eslintcache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: Create .env file
+        run: |
+          mkdir -p keys
+          echo "${{ secrets.ENV }}" > .env
+
+      - name: Run Test
+        run: yarn test:ci:coverage
+
+      - name: Get Values
+        id: get-values
+        shell: bash
+        run: |
+          COV=$(node -p 't=require(`./coverage/coverage-summary.json`).total,Math.min(...`lines|statements|functions|branches`.split(`|`).map(k=>t[k].pct))')
+          echo "coverage=$COV" >> $GITHUB_OUTPUT
+
+      - name: Checkout gh-pages
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+
+      - name: Create Badges
+        shell: bash
+        run: |
+          npm i -g badgen-cli
+          export COV=${{ steps.get-values.outputs.coverage }}
+          COLOR=$(node -p '+process.env.COV >= 95 ? `green` : `orange`')
+          mkdir -p badges
+          badgen -j coverage -s $COV% -c $COLOR > badges/coverage.svg
+
+      - name: Deploy Badges
+        uses: stefanzweifel/git-auto-commit-action@v5.0.1
+        with:
+          commit_message: "Update badges [skip ci]"
+          branch: gh-pages
+          skip_fetch: true
+          skip_checkout: true
+
+  build:
+    name: Build
+    runs-on: ${{ inputs.chosen || 'develop'}}
+    needs: [install]
+    environment: deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: actions/cache@v2
+        name: Restore node_modules
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            **/.eslintcache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: Create .env file
+        run: |
+          mkdir -p keys
+          echo "${{ secrets.ENV }}" > .env
+
+      - name: Install and Build Veterinary
+        if: github.event.action != 'closed' # You might want to skip the build if the PR has been closed
+        run: |
+          yarn build:vet
+
+      - name: Install and Build Tutor
+        if: github.event.action != 'closed' # You might want to skip the build if the PR has been closed
+        run: |
+          yarn build:tutor
+
+      - name: Install and Build External
+        if: github.event.action != 'closed' # You might want to skip the build if the PR has been closed
+        run: |
+          yarn build:external
