@@ -1,21 +1,6 @@
 name: Continuos Integration Deploy
 
 on:
-  workflow_dispatch:
-    inputs:
-      chosen:
-        required: true
-        type: string
-        description: "Choose the runner to run the workflow"
-
-  workflow_call:
-    inputs:
-      chosen:
-        required: true
-        type: string
-        description: "Choose the runner to run the workflow"
-        default: "develop"
-
   pull_request:
     branches: [develop]
 
@@ -30,7 +15,7 @@ jobs:
     timeout-minutes: 10 # Define o tempo limite para 10 minutos para este trabalho
     name: Installing Packages
     environment: deploy
-    runs-on: ${{ inputs.chosen || 'develop' }}
+    runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -124,7 +109,7 @@ jobs:
 
   testing-coverage:
     name: Run Coverage V8 Test
-    runs-on: ${{ inputs.chosen || 'develop' }}
+    runs-on: "ubuntu-latest"
     environment: deploy
     needs: [install]
     steps:
@@ -189,7 +174,7 @@ jobs:
 
   build:
     name: Build
-    runs-on: ${{ inputs.chosen || 'develop'}}
+    runs-on: "ubuntu-latest"
     needs: [install]
     environment: deploy
     steps:
