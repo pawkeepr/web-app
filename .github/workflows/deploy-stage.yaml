@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: 20
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Cached node_modules
         id: yarn-cache
         with:
@@ -55,7 +55,7 @@ jobs:
   #           with:
   #               node-version: 20
 
-  #         - uses: actions/cache@v2
+  #         - uses: actions/cache@v4
   #           name: Restore node_modules
   #           id: yarn-cache
   #           with:
@@ -120,7 +120,7 @@ jobs:
         with:
           node-version: 20
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Restore node_modules
         id: yarn-cache
         with:
@@ -141,7 +141,7 @@ jobs:
           echo "${{ secrets.ENV }}" > .env
 
       - name: Run Test
-        run: yarn test:ci:coverage
+        run: yarn coverage
 
       - name: Get Values
         id: get-values
@@ -184,7 +184,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Restore node_modules
         id: yarn-cache
         with:
