@@ -71,6 +71,7 @@ export const Species = {
     chicken: 'chicken',
     equine: 'equine',
     bovine: 'bovine',
+    cow: 'cow',
     chelonians: 'chelonians',
     serpent: 'serpent',
     lizard: 'lizard',
@@ -78,6 +79,7 @@ export const Species = {
     caprine: 'caprine',
     rodent: 'rodent',
     unknown: 'unknown',
+    canine: 'canine',
 } as const
 export type Species = (typeof Species)[keyof typeof Species]
 
