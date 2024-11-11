@@ -23,6 +23,7 @@ export default defineConfig({
             include: ['source/**/*.{ts,tsx}'],
             exclude: [],
             all: true,
+            reporter: ['html', 'text-summary', 'json-summary'],
         },
         reporters: ['html', 'default'],
         testTimeout: 5000000,
