@@ -141,7 +141,7 @@ jobs:
           echo "${{ secrets.ENV }}" > .env
 
       - name: Run Test
-        run: yarn coverage
+        run: yarn test
 
       - name: Get Values
         id: get-values
@@ -173,7 +173,7 @@ jobs:
           skip_checkout: true
 
   build-tutor:
-    name: Build
+    name: Build Tutor
     runs-on: "ubuntu-latest"
     needs: [install]
     environment: deploy
@@ -211,7 +211,7 @@ jobs:
           yarn build
 
   build-vet:
-    name: Build
+    name: Build Veterinary
     runs-on: "ubuntu-latest"
     needs: [install]
     environment: deploy
@@ -249,7 +249,7 @@ jobs:
           yarn build
 
   build-external:
-    name: Build
+    name: Build External
     runs-on: "ubuntu-latest"
     needs: [install]
     environment: deploy
