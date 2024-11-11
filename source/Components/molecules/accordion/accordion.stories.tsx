@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import Accordion from './accordion'
 
@@ -9,13 +9,14 @@ const meta = {
         layout: 'centered',
     },
     tags: ['autodocs'],
-  
+
 } satisfies Meta<typeof Accordion>
 export default meta
-const Template: StoryFn<typeof Accordion> = (args) => <Accordion {...args} />
+type Story = StoryObj<typeof Accordion>
 
-export const Default = Template.bind({})
-Default.args = {
-    title: 'Accordion Title',
-    children: <div>Accordion Content</div>,
+export const Default: Story = {
+    args: {
+        title: 'Accordion Title',
+        children: <div>Accordion Content</div>,
+    }
 }
