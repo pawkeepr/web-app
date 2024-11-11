@@ -172,7 +172,7 @@ jobs:
           skip_fetch: true
           skip_checkout: true
 
-  build:
+  build-tutor:
     name: Build
     runs-on: "ubuntu-latest"
     needs: [install]
@@ -203,16 +203,83 @@ jobs:
         run: |
           mkdir -p keys
           echo "${{ secrets.ENV }}" > .env
+          echo "MODE_PROFILE=external" >> .env
+
+      - name: Install and Build Tutor
+        if: github.event.action != 'closed' # You might want to skip the build if the PR has been closed
+        run: |
+          yarn build:tutor
+
+  build-vet:
+    name: Build
+    runs-on: "ubuntu-latest"
+    needs: [install]
+    environment: deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: actions/cache@v4
+        name: Restore node_modules
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            **/.eslintcache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: Create .env file
+        run: |
+          mkdir -p keys
+          echo "${{ secrets.ENV }}" > .env
+          echo "MODE_PROFILE=vet" >> .env
 
       - name: Install and Build Veterinary
         if: github.event.action != 'closed' # You might want to skip the build if the PR has been closed
         run: |
           yarn build:vet
 
-      - name: Install and Build Tutor
-        if: github.event.action != 'closed' # You might want to skip the build if the PR has been closed
+  build-external:
+    name: Build
+    runs-on: "ubuntu-latest"
+    needs: [install]
+    environment: deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: actions/cache@v4
+        name: Restore node_modules
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            **/.eslintcache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: Create .env file
         run: |
-          yarn build:tutor
+          mkdir -p keys
+          echo "${{ secrets.ENV }}" > .env
+          echo "MODE_PROFILE=external" >> .env
 
       - name: Install and Build External
         if: github.event.action != 'closed' # You might want to skip the build if the PR has been closed
