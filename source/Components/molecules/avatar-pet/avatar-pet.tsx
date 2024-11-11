@@ -13,17 +13,17 @@ export type AvatarPetProps = {
         img?: string
     }
 } & (
-    | {
-          specie: Species
-          name_pet: string
-      }
-    | {
-          name_pet?: never
-          specie?: 'human'
-      }
-)
+        | {
+            specie: Species
+            name_pet: string
+        }
+        | {
+            name_pet?: never
+            specie?: 'human'
+        }
+    )
 
-const strategiesAvatar = new Map<Species, string>([
+export const strategiesAvatar = new Map<Species, string>([
     ['bird', '/icon-pet/bird_primary.png'],
     ['cat', '/icon-pet/cat_primary.png'],
     ['dog', '/icon-pet/dog_primary.png'],
@@ -33,7 +33,7 @@ const strategiesAvatar = new Map<Species, string>([
     ['lizard', '/icon-pet/reptile_primary.png'],
     ['rodent', '/icon-pet/rodent_primary.png'],
     ['pig', '/icon-pet/pig_primary.png'],
-    ['bovine', '/icon-pet/cow_primary.png'],
+    ['cow', '/icon-pet/cow_primary.png'],
     ['chicken', '/icon-pet/chicken_primary.png'],
     ['bovine', '/icon-pet/bovine_primary.png'],
     ['caprine', '/icon-pet/caprine_primary.png'],

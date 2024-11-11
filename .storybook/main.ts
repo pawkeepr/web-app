@@ -16,13 +16,11 @@ const config: StorybookConfig = {
         getAbsolutePath('@storybook/addon-onboarding'),
         getAbsolutePath('@storybook/addon-links'),
         getAbsolutePath('@storybook/addon-essentials'),
-        getAbsolutePath('@chromatic-com/storybook'),
-        getAbsolutePath('@storybook/addon-interactions'),
         getAbsolutePath('@storybook/addon-a11y'),
         getAbsolutePath('@abcaustralia/storybook-addon-a11ydocs'),
-        getAbsolutePath('storybook-addon-performance'),
         getAbsolutePath('@storybook/addon-viewport'),
         getAbsolutePath('@storybook/addon-storysource'),
+        getAbsolutePath('@storybook/experimental-addon-test'),
     ],
 
     framework: {
@@ -32,7 +30,9 @@ const config: StorybookConfig = {
 
     staticDirs: ['../public'],
 
-    docs: {},
+    docs: {
+        autodocs: true,
+    },
 
     typescript: {
         reactDocgen: 'react-docgen-typescript',

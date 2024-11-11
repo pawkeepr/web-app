@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Checkbox component (Unit) > snapshot 1`] = `
+<DocumentFragment>
+  <input
+    class="rounded-sm duration-100 ease-in-out transition-shadow disabled:opacity-70 disabled:bg-gray-200 invalid:!border-red-500 invalid:focus:!border-gray-300 invalid:!shadow-outline-red invalid:!text-red-500 focus:outline-none font-sans dark:bg-[#292e33] dark:text-gray-200 border-primary-500 !w-4 h-4 px-0 py-0 mx-1 focus:!ring-0 border !border-primary-500 active:bg-secondary-500 text-primary-500"
+    type="checkbox"
+  />
+</DocumentFragment>
+`;

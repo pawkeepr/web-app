@@ -18,6 +18,8 @@ const nextConfig = ((_phase) => {
         publicRuntimeConfig: {
             publicRoutes: [
                 'teams',
+                '/v/confirm-account',
+                '/t/confirm-account',
                 '/t/sign-in',
                 '/t/sign-up',
                 '/t/forget-password',

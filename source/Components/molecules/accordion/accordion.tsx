@@ -1,8 +1,9 @@
+import type React from 'react'
 import { twMerge } from 'tailwind-merge'
 import withControl from '~/Components/helpers/with-control'
 
 type AccordionProps = {
-    title: any
+    title: React.ReactNode | string
     children: React.ReactNode
     classNames?: {
         title?: string
@@ -10,10 +11,15 @@ type AccordionProps = {
     }
 }
 
-const Accordion = ({ children, title, classNames = {} }: AccordionProps) => {
+const Accordion = ({
+    children,
+    title,
+    classNames = {},
+    ...props
+}: AccordionProps) => {
     return (
         // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
-        <details tabIndex={0} className="w-full collapse collapse-arrow">
+        <details tabIndex={0} className="w-full collapse collapse-arrow" {...props}>
             <summary className="w-full cursor-pointer collapse-title">
                 <span className={classNames?.title}>{title}</span>
             </summary>

@@ -36,23 +36,36 @@ const CardFeedPet = ({ pet, onClick, selected }: CardFeedPetProps) => {
     const divRef = useRef(null)
 
     useEffect(() => {
-        if (!window || !divRef.current) {
-            return
+        const hammerPress = async () => {
+            if (!window || !divRef.current) {
+                return
+            }
+            const Hammer = (await import('hammerjs')).default
+
+            const hammer = new Hammer(divRef.current)
+
+            hammer.add(new Hammer.Press({ time: 250 }))
+
+            hammer.on('press', () => {
+                showModal()
+            })
         }
-        const Hammer = require('hammerjs')
 
-        const hammer = new Hammer(divRef.current)
-
-        hammer.add(new Hammer.Press({ time: 250 }))
-
-        hammer.on('press', () => {
-            showModal()
-        })
+        hammerPress()
 
         // Cleanup the Hammer instance on component unmount
         return () => {
-            hammer.stop(false)
-            hammer.destroy()
+            const hammerOnMount = async () => {
+                if (!window || !divRef.current) {
+                    return
+                }
+                const Hammer = (await import('hammerjs')).default
+                const hammer = new Hammer(divRef.current)
+                hammer.stop(false)
+                hammer.destroy()
+            }
+
+            hammerOnMount()
         }
     }, [])
 
@@ -77,9 +90,8 @@ const CardFeedPet = ({ pet, onClick, selected }: CardFeedPetProps) => {
                         specie={pet.specie as Species}
                         src={pet.url_img as string}
                         classNames={{
-                            img: `w-16 h-16 shadow-theme-3 rounded-full p-[2px] transition-all duration-100  ${
-                                selected ? 'border-2 border-secondary-500 ' : ''
-                            }`,
+                            img: `w-16 h-16 shadow-theme-3 rounded-full p-[2px] transition-all duration-100  ${selected ? 'border-2 border-secondary-500 ' : ''
+                                }`,
                         }}
                     />
                     <div className="flex flex-col items-center justify-center">

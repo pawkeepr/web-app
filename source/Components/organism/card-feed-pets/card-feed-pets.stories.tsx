@@ -2,8 +2,6 @@ import type { Meta, StoryFn } from '@storybook/react'
 
 import CardFeedPet from './card-feed-pets'
 
-CardFeedPet.prototype.displayName = 'CardFeedPet'
-
 const meta = {
     title: 'Components/Organism/CardFeedPet',
     component: CardFeedPet,

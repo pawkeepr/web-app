@@ -2,8 +2,6 @@ import type { Meta, StoryFn } from '@storybook/react'
 
 import QrCodePet from './qr-code-pet.web'
 
-QrCodePet.prototype.displayName = 'QrCodePet'
-
 const meta = {
     title: 'Components/Molecules/QrCodePet',
     component: QrCodePet,
