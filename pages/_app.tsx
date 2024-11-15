@@ -4,12 +4,12 @@ import '~/tailwind.css'
 
 import Provider from '~/store'
 
-import type { AppProps } from 'next/app'
-
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { appWithTranslation } from 'next-i18next'
+import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import { useReportWebVitals } from 'next/web-vitals'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '~/Components/organism/drawer/react-modern-drawer.css'
@@ -18,7 +18,11 @@ import { AuthProvider } from '~/contexts/auth-context'
 import ErrorBoundary from '~/contexts/error-boundary'
 import pg from '../package.json'
 import '../styles/react-datepicker.css'
+
 function App({ Component, pageProps }: AppProps) {
+    useReportWebVitals((metric) => {
+        console.log(metric)
+    })
     return (
         <ErrorBoundary>
             <SpeedInsights />
