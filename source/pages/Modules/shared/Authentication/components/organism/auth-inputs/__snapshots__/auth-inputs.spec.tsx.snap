@@ -118,7 +118,6 @@ exports[`auth-inputs (Unit) > deve corresponder ao snapshot 1`] = `
       class="mobile:p-4 mobile:w-full w-40 flex-grow px-2 h-11 py-1 text-sm font-semibold rounded-md text-center leading-1 hover:brightness-90 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed bg-opacity-80 hover:bg-opacity-100 active:opacity-100 hover:transform hover:scale-[101%] disabled:hover:scale-100 text-opacity-100 text-gray-50 flex justify-center items-center bg-primary-500 !w-full"
       color="primary"
       data-testid="submit-button"
-      disabled=""
       id=":r0:"
       type="submit"
     >
