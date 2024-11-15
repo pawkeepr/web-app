@@ -12,7 +12,7 @@ export default defineWorkspace([
 
         test: {
             name: 'unit',
-            setupFiles: ['./setupTests.ts', './setupMocks.ts', './setupMocks.tsx'],
+            setupFiles: ['./setupTests.ts', './setupMocks.ts'],
             globals: true,
             testNamePattern: 'Unit', // Não remover, pois é utilizado para identificar os testes unitários e
             // mesmo que indique erro, ele faz parte da configuração do vitest
@@ -27,7 +27,7 @@ export default defineWorkspace([
 
         test: {
             name: 'integration',
-            setupFiles: ['./setupTests.ts', './setupMocks.ts', './setupMocks.tsx'],
+            setupFiles: ['./setupTests.ts', './setupMocks.ts'],
             globals: true,
             testNamePattern: 'Integration', // Não remover, pois é utilizado para identificar os testes unitários e
             // mesmo que indique erro, ele faz parte da configuração do vitest
