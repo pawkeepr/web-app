@@ -32,11 +32,7 @@ type AuthProps = {
 const Auth = ({ mode }: AuthProps) => {
     const dispatch = useAppDispatch()
 
-    const { signIn, password, username, isAuthenticated, isLoading } = useAuth()
-
-    const isValid: boolean = useMemo(() => {
-        return validationSchema.isValidSync({ password, username })
-    }, [password, username])
+    const { signIn, isAuthenticated, isLoading } = useAuth()
 
     const handleSubmit = (values: SignInCredentials) => {
         dispatch(onChangePassword(values.password))
@@ -54,8 +50,12 @@ const Auth = ({ mode }: AuthProps) => {
     )
 
     return (
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-            {({ handleSubmit }) => (
+        <Formik
+            initialValues={initialValues}
+            onSubmit={handleSubmit}
+            validationSchema={validationSchema}
+        >
+            {({ handleSubmit, isValid }) => (
                 <Form onSubmit={handleSubmit} className="w-full p-2">
                     <FieldControl
                         ctx={{} as CtxSchema}
@@ -87,7 +87,7 @@ const Auth = ({ mode }: AuthProps) => {
                         className="!w-full"
                         type="submit"
                         data-testid="submit-button"
-                        disabled={!isValid || loading}
+                        disabled={loading || !isValid}
                     />
                 </Form>
             )}
