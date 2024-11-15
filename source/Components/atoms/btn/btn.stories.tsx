@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 // import { expect, fn, within } from '@storybook/test'
 
-import { BtnCompose } from './btn'
+import { Btn } from './btn'
 
 const meta = {
     title: 'Components/Atoms/Button',
-    component: BtnCompose,
+    component: Btn,
     parameters: {
         layout: 'centered',
     },
@@ -32,10 +32,10 @@ const meta = {
             },
         },
     },
-} satisfies Meta<typeof BtnCompose>
+} satisfies Meta<typeof Btn>
 
 export default meta
-type Story = StoryObj<typeof BtnCompose>
+type Story = StoryObj<typeof Btn>
 
 export const Primary: Story = {
     args: {
