@@ -2,7 +2,7 @@ import useAuth from '~/hooks/use-auth'
 import { useAppDispatch } from '~/store/hooks'
 import { onChangePassword, onChangeUsername } from '~/store/slices/auth/login/slice'
 
-import { type ChangeEvent, useMemo } from 'react'
+import { useMemo } from 'react'
 import FieldControl from '~/Components/molecules/field-control'
 
 import { Form, Formik } from 'formik'
@@ -34,24 +34,18 @@ const Auth = ({ mode }: AuthProps) => {
 
     const { signIn, password, username, isAuthenticated, isLoading } = useAuth()
 
-    const handleSubmit = () => {
-        signIn({
-            username: username.toLowerCase(),
-            password,
-            mode,
-        })
-    }
-
     const isValid: boolean = useMemo(() => {
         return validationSchema.isValidSync({ password, username })
     }, [password, username])
 
-    const handleChangeUsername = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(onChangeUsername(e.target.value))
-    }
-
-    const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(onChangePassword(e.target.value))
+    const handleSubmit = (values: SignInCredentials) => {
+        dispatch(onChangePassword(values.password))
+        dispatch(onChangeUsername(values.username))
+        signIn({
+            username: values.username.toLowerCase(),
+            password: values.password,
+            mode,
+        })
     }
 
     const loading = useMemo(
@@ -71,8 +65,6 @@ const Auth = ({ mode }: AuthProps) => {
                         name="username"
                         placeholder="Digite seu email"
                         data-testid="email-input"
-                        value={username}
-                        onChange={handleChangeUsername}
                         disabledError
                     />
                     <div className="flex flex-col items-end justify-center w-full mb-3 position-relative">
@@ -82,8 +74,6 @@ const Auth = ({ mode }: AuthProps) => {
                             placeholder="Digite sua senha"
                             name="password"
                             data-testid="password-input"
-                            value={password}
-                            onChange={handleChangePassword}
                             disabledError
                         />
                         <BtnLink
