@@ -1,11 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { act } from 'react'
-import { describe, expect, it, vi, beforeEach } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { LOADING } from '~/helpers/loading'
 import * as useAuth from '~/hooks/use-auth'
 import ProviderClient from '~/store'
 import AuthInputs from './auth-inputs'
-import { LOADING } from '~/helpers/loading'
 
 const Wrapper = () => (
     <ProviderClient>
@@ -35,36 +35,27 @@ class ResizeObserverMock {
 global.ResizeObserver = ResizeObserverMock
 
 describe('auth-inputs (Unit)', () => {
+    const signInMock = vi.fn()
     beforeEach(() => {
         vi.spyOn(useAuth, 'default').mockReturnValue({
-            signIn: vi.fn(),
-            password: 'mockPassword',
-            username: 'mockUsername',
-            isAuthenticated: false,
-            isLoading: 1,
-            onToggleRememberMe: () => {},
-            rememberMe: false,
-            user: null,
-        })
-    })
-    it('deve corresponder ao snapshot', () => {
-        const { container } = render(<Wrapper />)
-        expect(container).toMatchSnapshot()
-    })
-
-    it('deve enviar o email em letra minúscula', async () => {
-        const signInMock = vi.fn()
-        vi.spyOn(useAuth, 'default').mockReturnValue({
             signIn: signInMock,
-            password: 'mock@1Password',
-            username: 'EMAIL@EXEMPLO.COM',
+            password: '',
+            username: '',
             isAuthenticated: false,
             isLoading: LOADING.IDLE,
             onToggleRememberMe: vi.fn(),
             rememberMe: false,
             user: null,
         })
+    })
 
+    it('deve corresponder ao snapshot', () => {
+        const { container } = render(<Wrapper />)
+        expect(container).toMatchSnapshot()
+    })
+
+    it('deve enviar o email em letra minúscula', async () => {
+        const user = userEvent.setup()
         render(<Wrapper />)
 
         const usernameInput = screen.getByTestId('email-input')
@@ -77,10 +68,11 @@ describe('auth-inputs (Unit)', () => {
 
         const submitButton = screen.getByTestId('submit-button')
 
-        await userEvent.click(submitButton)
+        await act(async () => {
+            fireEvent.submit(submitButton)
+        })
 
-        /*expect(usernameInput).toHaveValue('EMAIL@EXEMPLO.COM')
-        expect(passwordInput).toHaveValue('mock@1Password')*/
+        await user.click(submitButton)
 
         expect(signInMock).toHaveBeenCalledWith({
             username: 'email@exemplo.com',

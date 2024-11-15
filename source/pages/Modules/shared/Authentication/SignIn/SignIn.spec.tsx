@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { act } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import * as useModeProfile from '~/hooks/use-mode'
@@ -25,13 +26,11 @@ describe('SignIn (Unit)', () => {
 
         render(<Wrapper />)
 
-        const createAccoutButton = screen.getByText('Criar Conta')
+        const createAccountButton = screen.getByText('Criar Conta')
 
-        await act(async () => {
-            fireEvent.click(createAccoutButton)
-        })
+        userEvent.click(createAccountButton)
 
-        expect(createAccoutButton).toHaveAttribute('href', '/tutor/sign-up')
+        expect(createAccountButton).toHaveAttribute('href', '/tutor/sign-up')
     })
 
     it('deve ter o atributo href para page /veterinary/sign-up no modo vet', async () => {
@@ -41,16 +40,16 @@ describe('SignIn (Unit)', () => {
 
         render(<Wrapper />)
 
-        const createAccoutButton = screen.getByText('Criar Conta')
+        const createAccountButton = screen.getByText('Criar Conta')
 
         await act(async () => {
-            fireEvent.click(createAccoutButton)
+            fireEvent.click(createAccountButton)
         })
 
-        expect(createAccoutButton).toHaveAttribute('href', '/veterinary/sign-up')
+        expect(createAccountButton).toHaveAttribute('href', '/veterinary/sign-up')
     })
 
-    // it('deve estar carregando durante a execucao do login', async () => {
+    // it('deve estar carregando durante a execução do login', async () => {
     //     const spySelector = vi.spyOn(Selector, 'useAppSelector')
 
     //     spySelector.mockReturnValue({

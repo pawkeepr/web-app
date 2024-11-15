@@ -9,3 +9,11 @@ import { afterEach } from 'vitest';
 afterEach(() => {
     cleanup();
 });
+
+if (typeof window !== 'undefined') {
+  window.matchMedia = window.matchMedia || (() => ({
+    matches: false,
+    addListener: () => {},
+    removeListener: () => {},
+  }));
+}

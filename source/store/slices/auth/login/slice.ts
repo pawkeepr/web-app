@@ -1,9 +1,9 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 import LOADING from '~/constants/loading'
 
 import { api } from '~/services/api'
 import type { IProfileCognito } from '~/types/profile'
-import { name, type LoginState } from './types'
+import { type LoginState, name } from './types'
 
 const initialState: LoginState = {
     user: null,
@@ -35,7 +35,9 @@ const loginSlice = createSlice({
         signOutUser: (state) => {
             state.isLoading = LOADING.IDLE
         },
+
         signOutUserSuccess: (state) => {
+            state.user = null
             state.isAuthenticated = false
             state.token = ''
             state.error = null
@@ -43,6 +45,7 @@ const loginSlice = createSlice({
             state.password = ''
             state.isLoading = LOADING.IDLE
         },
+        
         signOutUserFailed: (state, action: PayloadAction<string>) => {
             state.error = action.payload
             state.isLoading = LOADING.IDLE
@@ -110,3 +113,4 @@ export const {
 
 export { name }
 export type { LoginState }
+

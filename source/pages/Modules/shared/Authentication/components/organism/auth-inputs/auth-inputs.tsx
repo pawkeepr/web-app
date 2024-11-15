@@ -2,7 +2,7 @@ import useAuth from '~/hooks/use-auth'
 import { useAppDispatch } from '~/store/hooks'
 import { onChangePassword, onChangeUsername } from '~/store/slices/auth/login/slice'
 
-import { type ChangeEvent, useMemo } from 'react'
+import { useMemo } from 'react'
 import FieldControl from '~/Components/molecules/field-control'
 
 import { Form, Formik } from 'formik'
@@ -32,26 +32,16 @@ type AuthProps = {
 const Auth = ({ mode }: AuthProps) => {
     const dispatch = useAppDispatch()
 
-    const { signIn, password, username, isAuthenticated, isLoading } = useAuth()
+    const { signIn, isAuthenticated, isLoading } = useAuth()
 
-    const handleSubmit = () => {
+    const handleSubmit = (values: SignInCredentials) => {
+        dispatch(onChangePassword(values.password))
+        dispatch(onChangeUsername(values.username))
         signIn({
-            username: username.toLowerCase(),
-            password,
+            username: values.username.toLowerCase(),
+            password: values.password,
             mode,
         })
-    }
-
-    const isValid: boolean = useMemo(() => {
-        return validationSchema.isValidSync({ password, username })
-    }, [password, username])
-
-    const handleChangeUsername = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(onChangeUsername(e.target.value))
-    }
-
-    const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(onChangePassword(e.target.value))
     }
 
     const loading = useMemo(
@@ -60,8 +50,12 @@ const Auth = ({ mode }: AuthProps) => {
     )
 
     return (
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-            {({ handleSubmit }) => (
+        <Formik
+            initialValues={initialValues}
+            onSubmit={handleSubmit}
+            validationSchema={validationSchema}
+        >
+            {({ handleSubmit, isValid }) => (
                 <Form onSubmit={handleSubmit} className="w-full p-2">
                     <FieldControl
                         ctx={{} as CtxSchema}
@@ -71,8 +65,6 @@ const Auth = ({ mode }: AuthProps) => {
                         name="username"
                         placeholder="Digite seu email"
                         data-testid="email-input"
-                        value={username}
-                        onChange={handleChangeUsername}
                         disabledError
                     />
                     <div className="flex flex-col items-end justify-center w-full mb-3 position-relative">
@@ -82,8 +74,6 @@ const Auth = ({ mode }: AuthProps) => {
                             placeholder="Digite sua senha"
                             name="password"
                             data-testid="password-input"
-                            value={password}
-                            onChange={handleChangePassword}
                             disabledError
                         />
                         <BtnLink
@@ -97,7 +87,7 @@ const Auth = ({ mode }: AuthProps) => {
                         className="!w-full"
                         type="submit"
                         data-testid="submit-button"
-                        disabled={!isValid || loading}
+                        disabled={loading || !isValid}
                     />
                 </Form>
             )}

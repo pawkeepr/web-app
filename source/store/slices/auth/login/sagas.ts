@@ -21,11 +21,11 @@ import { name } from './types'
 
 import Router from 'next/router'
 import {
+    type SignInCredentials,
+    type UserData,
     getUser,
     signInAws,
     signOut,
-    type SignInCredentials,
-    type UserData,
 } from '~/services/helpers/auth'
 
 import { layoutModeTypes } from '~/constants/layout'
@@ -38,7 +38,7 @@ import {
 import { resetProfileFlag, setProfile } from '../profile/actions'
 
 import { AttributeTypeProfile } from '~/services/helpers/types'
-import { NameFullProfile, type IProfile, type TypeProfile } from '~/types/profile'
+import { type IProfile, NameFullProfile, type TypeProfile } from '~/types/profile'
 import { setEmailAccount, setPasswordAccount } from '../activate-account/actions'
 
 function* ErrLogin(action: PayloadAction<SignInCredentials>, error: unknown) {
@@ -188,6 +188,8 @@ export function* signOutUserSaga({
     payload,
 }: PayloadAction<{ type_profile: TypeProfile }>) {
     try {
+        yield delay(1000)
+        yield put(signOutUserSuccess())
         yield put(changeLayoutMode(layoutModeTypes.LIGHT_MODE))
         yield call(removeCookie, cookies.token.name)
         yield call(removeCookie, cookies.cognito_profile.name)
@@ -195,7 +197,6 @@ export function* signOutUserSaga({
         yield call(deleteCookiesWithPrefix, 'pawkeepr')
         yield call(signOut)
         yield put(resetProfileFlag())
-        yield put(signOutUserSuccess())
     } catch (error) {
         if ((error as string) === 'No current user') {
             yield put(signOutUserSuccess())

@@ -14,13 +14,11 @@ const LogoutPage = () => {
     const { data: profile } = useProfile()
 
     useEffect(() => {
-        setTimeout(() => {
-            dispatch(
-                signOutUser({
-                    type_profile: profile?.type_profile as TypeProfile,
-                }),
-            )
-        }, 1000)
+        dispatch(
+            signOutUser({
+                type_profile: profile?.type_profile as TypeProfile,
+            }),
+        )
         dispatch(resetLoading())
     }, [])
 

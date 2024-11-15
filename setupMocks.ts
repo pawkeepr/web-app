@@ -1,0 +1,7 @@
+import './__mocks__/auth-helpers'
+import './__mocks__/axios'
+import './__mocks__/next-get-config'
+import './__mocks__/next-navigations'
+import './__mocks__/next-router'
+import './__mocks__/react-query-persist-client'
+import './__mocks__/react-query-dev-tools'
