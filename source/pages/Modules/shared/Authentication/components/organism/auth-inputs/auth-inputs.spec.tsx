@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { act } from 'react'
 import { describe, expect, it, vi, beforeEach } from 'vitest'
 import * as useAuth from '~/hooks/use-auth'
@@ -11,6 +12,27 @@ const Wrapper = () => (
         <AuthInputs mode="tutor" />
     </ProviderClient>
 )
+
+if (!window.matchMedia) {
+    window.matchMedia = () => ({
+        matches: false,
+        media: '',
+        onchange: null,
+        addListener: () => {},
+        removeListener: () => {},
+        addEventListener: () => {},
+        removeEventListener: () => {},
+        dispatchEvent: () => false,
+    })
+}
+
+class ResizeObserverMock {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+}
+
+global.ResizeObserver = ResizeObserverMock
 
 describe('auth-inputs (Unit)', () => {
     beforeEach(() => {
@@ -34,8 +56,8 @@ describe('auth-inputs (Unit)', () => {
         const signInMock = vi.fn()
         vi.spyOn(useAuth, 'default').mockReturnValue({
             signIn: signInMock,
-            password: 'mock@1password',
-            username: 'EMAIL@GMAIL.COM',
+            password: 'mock@1Password',
+            username: 'EMAIL@EXEMPLO.COM',
             isAuthenticated: false,
             isLoading: LOADING.IDLE,
             onToggleRememberMe: vi.fn(),
@@ -45,25 +67,24 @@ describe('auth-inputs (Unit)', () => {
 
         render(<Wrapper />)
 
-        /*const usernameInput = screen.getByTestId('email-input')
+        const usernameInput = screen.getByTestId('email-input')
         const passwordInput = screen.getByTestId('password-input')
 
-        await act(async () => {
-            fireEvent.change(usernameInput, {
-                target: { value: 'EMAIL@EXEMPLO.COM' },
-            })
-            fireEvent.change(passwordInput, { target: { value: 'mock@1Password' } })
-        })*/
+        await userEvent.clear(usernameInput)
+        await userEvent.type(usernameInput, 'EMAIL@EXEMPLO.COM')
+        await userEvent.clear(passwordInput)
+        await userEvent.type(passwordInput, 'mock@1Password')
 
         const submitButton = screen.getByTestId('submit-button')
 
-        await act(async () => {
-            fireEvent.submit(submitButton)
-        })
+        await userEvent.click(submitButton)
+
+        /*expect(usernameInput).toHaveValue('EMAIL@EXEMPLO.COM')
+        expect(passwordInput).toHaveValue('mock@1Password')*/
 
         expect(signInMock).toHaveBeenCalledWith({
-            username: 'email@gmail.com',
-            password: 'mock@1password',
+            username: 'email@exemplo.com',
+            password: 'mock@1Password',
             mode: 'tutor',
         })
     })
