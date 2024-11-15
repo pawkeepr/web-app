@@ -12,8 +12,8 @@ import {
     signOutUser,
 } from '~/store/slices/auth/login/actions'
 import {
-    onChangeRememberMe,
     type LoginState,
+    onChangeRememberMe,
 } from '~/store/slices/auth/login/slice'
 import type { AttrTypeProfile } from '~/types/profile'
 
@@ -44,10 +44,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const dispatch = useAppDispatch()
     const { data: profile, isLoading: isProfileLoading } = useProfile()
 
-    const { isAuthenticated, isLoading, password, rememberMe, username, token } =
-        useAppSelector((state) => state.Login as LoginState)
-
-    const user = useAppSelector((state) => state.Login.user)
+    const {
+        user,
+        isAuthenticated,
+        isLoading,
+        password,
+        rememberMe,
+        username,
+        token,
+    } = useAppSelector((state) => state.Login as LoginState)
 
     const router = useRouter()
     const pathname = usePathname()
@@ -81,18 +86,26 @@ export function AuthProvider({ children }: AuthProviderProps) {
             )
             return
         }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname, token, user])
 
     useEffect(() => {
-        if (!token) return
+        if (!token || !isAuthenticated) return
         dispatch(recoverUserByToken(token))
-    }, [token])
+    }, [token, isAuthenticated])
 
+    // TODO: Deve ser removido, pois a lógica de redirecionamento deve ser feita na página de ativação
     useEffect(() => {
         if (isProfileLoading) return
         if (profile) return
+        if (!user) return
+        const isPublicRoute = !!PUBLIC_ROUTES.find((route) => {
+            if (route === '/') return route === pathname
+
+            if (typeof pathname !== 'string') return true
+
+            return pathname?.startsWith(route)
+        })
+        if (isPublicRoute) return
         const has_profile = user?.['custom:has_profile']
         if (!has_profile || has_profile === 'yes') return
 
@@ -100,7 +113,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
         const partial_route = type_profile === '1' ? 'v' : 't'
         router.push(`/${partial_route}/activation`)
-    }, [user])
+    }, [user, profile, isProfileLoading])
 
     function signIn({ username, password, mode }: SignInData) {
         return dispatch(signInUser({ username, password, mode }))
